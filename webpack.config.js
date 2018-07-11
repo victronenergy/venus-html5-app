@@ -5,7 +5,7 @@ module.exports = {
     entry: './src/index.js',
     output: {
         path: path.resolve(__dirname, 'build'),
-        filename: 'app.bundle.js',
+        filename: 'venus-metrics.min.js',
         library: 'Venus'
     },
     module: {
