@@ -3,21 +3,21 @@ export class Metric {
 		this.key = key
 		this.description = description
 		this.unit = unit
-		this.formatter = formatter === undefined ? createDefaultFormatter() : formatter
+		this.formatter = formatter === undefined ? defaultFormatter() : formatter
 		this._rawValue = undefined
 		this.callbacks = []
 	}
 
 	/* Gets the formatted value of the metric */
-	get value () { return this.formatter(this) }
+	get value() { return this.formatter(this) }
 
 	/* Gets the raw value of the metric */
-	get rawValue () { return this._rawValue }
+	get rawValue() { return this._rawValue }
 
 	/* Sets the raw value of the metric
 	 * This will also fire any registered callbacks 
 	 */
-	set rawValue (rawValue) { 
+	set rawValue(rawValue) { 
 		this._rawValue = rawValue
 		this.callbacks.forEach((callback) => { callback(this) })
 	}
@@ -27,7 +27,7 @@ export class Metric {
 	}
 }
 
-export function createDefaultFormatter(defaultValue = '--') {
+export function defaultFormatter(defaultValue = '--') {
 	return (metric) => {
 		if (metric.rawValue === undefined || metric.rawValue === null) {
 			return defaultValue
@@ -36,7 +36,7 @@ export function createDefaultFormatter(defaultValue = '--') {
 	}
 }
 
-export function createNumericFormatter(precision = 0, factor = 1.0, defaultValue = '--') {
+export function numericFormatter(precision = 0, factor = 1.0, defaultValue = '--') {
 	return (metric) => {
 		if (metric.rawValue === undefined || metric.rawValue === null) {
 			return defaultValue

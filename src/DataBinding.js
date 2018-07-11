@@ -1,5 +1,3 @@
-import Metric from './Metric.js'
-
 export class DataBinding {
 	constructor(element, elementProperty, metric, metricProperty) {
 		this.element = element
