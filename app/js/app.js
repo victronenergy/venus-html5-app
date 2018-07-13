@@ -19,9 +19,7 @@ function setupCurrentLimitSelection() {
 
 function createSetInputLimitFunction(limit) {
 	return function() {
-		// todo: needs to write to device
 		metricService.write('Ac/Grid/CurrentLimit', limit);
-		// metricService.metrics['Ac/Grid/CurrentLimit'].rawValue = new Number(limit);
 		hideCurrentLimitSelection();
 	}
 }
@@ -94,7 +92,6 @@ function setupMetrics() {
     // metricService.metrics['System/State'].rawValue = 6;
 
 	metricService.bindElements(document.body);
-	// todo: needs to be enabled
 	metricService.start();
 }
 

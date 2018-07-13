@@ -1,5 +1,3 @@
-const mqtt = require('mqtt')
-
 // /** The MqttInterface class represents the transport layer
 //     for the venus mqtt */
 
@@ -49,30 +47,28 @@ export class MqttInterface {
 			throw 'The mqtt interface is already connected'
 		}
 		this.portalId = undefined
-		this.client = mqtt.connect(this.connection)
+		this.clientId = (new Date()).toJSON().substring(2, 22)
+		// todo: use config
+		this.client = new Paho.MQTT.Client('192.168.3.82', 9001, this.clientId)
 		let ref = this
 
-		this.client.on('connect', () => {
-			ref.client.subscribe('N/#')
-		})
-
-		this.client.on('message', (topic, message) => {
+		this.client.onMessageArrived = function(message) {
 			try {
+				let topic = message.destinationName
 				if (ref.portalId === undefined) {
 					// before the mqtt interface is ready to read or write
 					// metric values it needs to detect its portal id. The 
 					// venus device will publish a message on connect that is
 					// used to extract the portal id.
 					if (topic.startsWith('N/') && topic.endsWith('/system/0/Serial')) {
-						let data = JSON.parse(message.toString())
+						let data = JSON.parse(message.payloadString)
 						ref.portalId = data.value
 						console.log(`portalId: ${ref.portalId}`)
 						for (let path in ref.registeredPaths) {
 							// send read requests for all registered paths
 							// to be able to update the ui with all values
 							// quicker
-							console.log(`initializing: ${path}`)
-							ref.client.publish(`R/${ref.portalId}${path}`, '')
+							ref.client.send(`R/${ref.portalId}${path}`, '')
 						}
 						ref.keepAlive()
 					}
@@ -81,7 +77,7 @@ export class MqttInterface {
 					if (topic.length > prefixLength) {
 						let pathValue = topic.substring(prefixLength)
 						let path = ref.lookupPath(pathValue)
-						let data = JSON.parse(message.toString())
+						let data = JSON.parse(message.payloadString)
 						if (ref.onUpdate !== undefined && path !== undefined && path.isReadable && data.value !== undefined) {
 							ref.onUpdate(path.key, data.value)
 						}
@@ -95,7 +91,11 @@ export class MqttInterface {
 					ref.onError(error)
 				}
 			}
-		})
+		}
+
+		this.client.connect({onSuccess: function(reconnect, uri) {
+			ref.client.subscribe('N/#')
+		}})
 	}
 
 	disconnect() {
@@ -118,7 +118,7 @@ export class MqttInterface {
 		if (!path.isReadable) { 
 			throw `Read failed. The path with key ${key} is not readable`
 		}
-		this.client.publish(`R/${this.portalId}${path.value}`, '')
+		this.client.send(`R/${this.portalId}${path.value}`, '')
 	}
 
 	write(key, value) {
@@ -133,14 +133,14 @@ export class MqttInterface {
 			throw `Write failed. The path with key ${key} is not writable`
 		}
 		let data = JSON.stringify({ value: value})
-		this.client.publish(`W/${this.portalId}${path.value}`, data)
+		this.client.send(`W/${this.portalId}${path.value}`, data);
 	}
 
 	keepAlive() {
 		if (this.portalId === undefined) {
 			return
 		}
-		this.client.publish(`R/${this.portalId}/system/0/Serial`, '')
+		this.client.send(`R/${this.portalId}/system/0/Serial`, '')
 	}
 }
 
