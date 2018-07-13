@@ -32,6 +32,44 @@ function hideCurrentLimitSelection() {
 	document.getElementById("mySidenav").style.width = "0px";
 }
 
+function setMode(mode) {
+	if (mode === 'on') {
+		console.log('setMode: on');
+		metricService.metrics['System/Mode'].rawValue = 0;
+		// metricService.write('System/State', ???);
+	}
+	else if (mode === 'off') {
+		console.log('setMode: off');
+		metricService.metrics['System/Mode'].rawValue = 1;
+		// metricService.write('System/State', 0);
+	}
+	else if (mode === 'charge') {
+		console.log('setMode: charge');
+		metricService.metrics['System/Mode'].rawValue = 2;
+		// metricService.write('System/State', ???);
+	}
+}
+
+function showModeSelection() {
+	document.getElementById('setModeOnButton').classList.remove('modeBtnOn');
+	document.getElementById('setModeOffButton').classList.remove('modeBtnOn');
+	document.getElementById('setModeChargeOnlyButton').classList.remove('modeBtnOn');
+	if (metricService.metrics['System/Mode'].rawValue === 0) {
+		document.getElementById('setModeOnButton').classList.add('modeBtnOn');
+	}
+	else if (metricService.metrics['System/Mode'].rawValue === 1) {
+		document.getElementById('setModeOffButton').classList.add('modeBtnOn');
+	}
+	else if (metricService.metrics['System/Mode'].rawValue === 2) {
+		document.getElementById('setModeChargeOnlyButton').classList.add('modeBtnOn');
+	}
+	document.getElementById("myMultiPlus").style.width = "300px";
+}
+
+function hideModeSelection() {
+	document.getElementById("myMultiPlus").style.width = "0px";
+}
+
 function setupMetrics() {
 	metricService.register('Dc/Battery/Voltage', '/system/0/Dc/Battery/Voltage', 'Voltage', 'V', Venus.numericFormatter(1));
 	metricService.register('Dc/Battery/Current', '/system/0/Dc/Battery/Current', 'Current', 'A', Venus.numericFormatter(1));
@@ -63,6 +101,12 @@ function setupMetrics() {
 		if (metric.rawValue == 257) return 'Sustain';
 		return '--';
 	});
+	metricService.register('System/Mode', undefined, 'System mode', '', function(metric) {
+		if (metric.rawValue == 0) return 'ON';
+		if (metric.rawValue == 1) return 'OFF';
+		if (metric.rawValue == 2) return 'Charge only';
+		return '--';
+	}, 'rw');
 
 	metricService.metrics['Ac/Grid/IsConnected'].addOnChangeCallback(function(metric) {
 		if (metric.rawValue == 1) {
@@ -94,41 +138,7 @@ function setupMetrics() {
 		});
 	})
 
-    // metricService.metrics['Dc/Battery/Voltage'].rawValue = 24.1;
-    // metricService.metrics['Dc/Battery/Current'].rawValue = 0;
-    // metricService.metrics['Dc/Battery/Power'].rawValue = 0;
-    // metricService.metrics['Dc/Battery/Soc'].rawValue = 25;
-    // metricService.metrics['Dc/Loads/Current'].rawValue = 3.234;
-    // metricService.metrics['Dc/Loads/Power'].rawValue = 40;
-    // metricService.metrics['Ac/Loads/Voltage'].rawValue = 229;
-    // metricService.metrics['Ac/Loads/Current'].rawValue = 4;
-    // metricService.metrics['Ac/Loads/Power'].rawValue = 434;
-    // metricService.metrics['Ac/Grid/CurrentLimit'].rawValue = 16;
-    // metricService.metrics['Ac/Grid/Voltage'].rawValue = 230;
-    // metricService.metrics['Ac/Grid/Current'].rawValue = 5;
-    // metricService.metrics['Ac/Grid/Power'].rawValue = 474;
-    // metricService.metrics['System/State'].rawValue = 6;
-
 	metricService.bindElements(document.body);
 	metricService.start();
+	metricService.metrics['System/Mode'].rawValue = 0;
 }
-
-/*
-
-<script>
-function openNav() {
-    document.getElementById("mySidenav").style.width = "300px";
-}
-
-function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-}
-function openNavMultiPlus() {
-    document.getElementById("myMultiPlus").style.width = "300px";
-}
-
-function closeNavMultiPlus() {
-    document.getElementById("myMultiPlus").style.width = "0";
-}
-</script>
-*/

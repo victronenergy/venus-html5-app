@@ -20,17 +20,15 @@
     </div>
   </div>
 
-<div id="myMultiPlus" class="sidenav">
-
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNavMultiPlus()">&times;</a>
-  <div class="modeBtn">
-  <h4>MultiPlus</h4>
-    <a href="#" class="modeBtnOn">ON</a>
-    <a href="#">OFF</a>
-    <a href="#">Charge only</a>
+  <div id="myMultiPlus" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="hideModeSelection();">&times;</a>
+    <div class="modeBtn">
+      <h4>MultiPlus</h4>
+      <a href="#" id="setModeOnButton" onclick="setMode('on'); hideModeSelection();">ON</a>
+      <a href="#" id="setModeOffButton" onclick="setMode('off'); hideModeSelection();">OFF</a>
+      <a href="#" id="setModeChargeOnlyButton" onclick="setMode('charge'); hideModeSelection();">Charge only</a>
+    </div>
   </div>
-</div>
-
 
   <header>
     <img src="images/logo-vic.svg">
@@ -43,11 +41,11 @@
         <span class="voltage"><span data-metric="Ac/Grid/Voltage"></span>V&nbsp;/&nbsp;<span data-metric="Ac/Grid/Current"></span>A&nbsp;/&nbsp;<span data-metric="Ac/Grid/Power"></span>W</br>
     <span class="mode">Input limit: <span data-metric="Ac/Grid/CurrentLimit"></span>A</br>
     </div>
-    <div class="g grid-33 multiPlus buttonCallout" onclick="openNavMultiPlus()">
+    <div class="g grid-33 multiPlus buttonCallout" onclick="showModeSelection()">
         MultiPlus</br>
         <img src="images/ico-multiPlus.png"></br>
         <span class="voltage"><span data-metric="System/State"></span></span></br>
-        <span class="mode">Mode: ON</span>
+        <span class="mode">Mode: <span data-metric="System/Mode"></span></span>
     </div>
     <div class="g grid-33 ACLoads">
         AC Loads</br>

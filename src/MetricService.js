@@ -31,7 +31,9 @@ export class MetricService {
 	register(key, path, description, unit, formatter, access = 'r') {
 		let metric = new Venus.Metric(key, description, unit, formatter)
 		this.metrics[key] = metric
-		this.deviceInterface.register(key, path, access)
+		if (path !== undefined) {
+			this.deviceInterface.register(key, path, access)
+		}
 		return metric
 	}
 
