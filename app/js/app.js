@@ -62,7 +62,7 @@ function setupMetrics() {
 		if (metric.rawValue == 10) return 'Assisting';
 		if (metric.rawValue == 256) return 'Discharging';
 		if (metric.rawValue == 257) return 'Sustain';
-		return 'unknown state: '+rawValue;
+		return '--';
 	});
 
 	metricService.metrics['Dc/Battery/Current'].addOnChangeCallback(function(metric) {
@@ -78,24 +78,24 @@ function setupMetrics() {
 		});
 	})
 
-    metricService.metrics['Dc/Battery/Voltage'].rawValue = 24.1;
-    metricService.metrics['Dc/Battery/Current'].rawValue = 0;
-    metricService.metrics['Dc/Battery/Power'].rawValue = 0;
-    metricService.metrics['Dc/Battery/Soc'].rawValue = 25;
-    metricService.metrics['Dc/Loads/Current'].rawValue = 3.234;
-    metricService.metrics['Dc/Loads/Power'].rawValue = 40;
-    metricService.metrics['Ac/Loads/Voltage'].rawValue = 229;
-    metricService.metrics['Ac/Loads/Current'].rawValue = 4;
-    metricService.metrics['Ac/Loads/Power'].rawValue = 434;
-    metricService.metrics['Ac/Grid/CurrentLimit'].rawValue = 16;
-    metricService.metrics['Ac/Grid/Voltage'].rawValue = 230;
-    metricService.metrics['Ac/Grid/Current'].rawValue = 5;
-    metricService.metrics['Ac/Grid/Power'].rawValue = 474;
-    metricService.metrics['System/State'].rawValue = 6;
+    // metricService.metrics['Dc/Battery/Voltage'].rawValue = 24.1;
+    // metricService.metrics['Dc/Battery/Current'].rawValue = 0;
+    // metricService.metrics['Dc/Battery/Power'].rawValue = 0;
+    // metricService.metrics['Dc/Battery/Soc'].rawValue = 25;
+    // metricService.metrics['Dc/Loads/Current'].rawValue = 3.234;
+    // metricService.metrics['Dc/Loads/Power'].rawValue = 40;
+    // metricService.metrics['Ac/Loads/Voltage'].rawValue = 229;
+    // metricService.metrics['Ac/Loads/Current'].rawValue = 4;
+    // metricService.metrics['Ac/Loads/Power'].rawValue = 434;
+    // metricService.metrics['Ac/Grid/CurrentLimit'].rawValue = 16;
+    // metricService.metrics['Ac/Grid/Voltage'].rawValue = 230;
+    // metricService.metrics['Ac/Grid/Current'].rawValue = 5;
+    // metricService.metrics['Ac/Grid/Power'].rawValue = 474;
+    // metricService.metrics['System/State'].rawValue = 6;
 
 	metricService.bindElements(document.body);
 	// todo: needs to be enabled
-	// metricService.start();
+	metricService.start();
 }
 
 /*
