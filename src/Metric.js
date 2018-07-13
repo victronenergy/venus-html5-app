@@ -41,7 +41,7 @@ export function numericFormatter(precision = 0, factor = 1.0, defaultValue = '--
 		if (metric.rawValue === undefined || metric.rawValue === null) {
 			return defaultValue
 		}
-		var value = Number(metric.rawValue) * factor
+		let value = Number(metric.rawValue) * factor
 		return precision === undefined
 			? value.toString()
 			: value.toFixed(precision)

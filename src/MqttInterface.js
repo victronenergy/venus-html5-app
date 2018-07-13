@@ -63,7 +63,6 @@ export class MqttInterface {
 					if (topic.startsWith('N/') && topic.endsWith('/system/0/Serial')) {
 						let data = JSON.parse(message.payloadString)
 						ref.portalId = data.value
-						console.log(`portalId: ${ref.portalId}`)
 						for (let path in ref.registeredPaths) {
 							// send read requests for all registered paths
 							// to be able to update the ui with all values
@@ -133,7 +132,7 @@ export class MqttInterface {
 			throw `Write failed. The path with key ${key} is not writable`
 		}
 		let data = JSON.stringify({ value: value})
-		this.client.send(`W/${this.portalId}${path.value}`, data);
+		this.client.send(`W/${this.portalId}${path.value}`, data)
 	}
 
 	keepAlive() {
