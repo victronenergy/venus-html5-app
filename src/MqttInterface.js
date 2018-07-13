@@ -6,8 +6,9 @@
 //       onError, onUpdate, onRawUpdate
 
 export class MqttInterface {
-	constructor(connection = 'ws://localhost') {
-		this.connection = connection
+	constructor(host = 'localhost', port = 9001) {
+		this.host = host
+		this.port = port
 		this.registeredPaths = {}
 	}
 
@@ -48,8 +49,7 @@ export class MqttInterface {
 		}
 		this.portalId = undefined
 		this.clientId = (new Date()).toJSON().substring(2, 22)
-		// todo: use config
-		this.client = new Paho.MQTT.Client('192.168.3.82', 9001, this.clientId)
+		this.client = new Paho.MQTT.Client(this.host, this.port, this.clientId)
 		let ref = this
 
 		this.client.onMessageArrived = function(message) {

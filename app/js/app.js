@@ -1,4 +1,4 @@
-var deviceInterface = new Venus.MqttInterface("ws://192.168.3.82:9001/mqtt"); // todo: needs to be localhost when done
+var deviceInterface = new Venus.MqttInterface('192.168.3.82', 9001); // todo: needs to be localhost when done
 var metricService = new Venus.MetricService(deviceInterface);
 
 window.onload = function() {
@@ -140,5 +140,6 @@ function setupMetrics() {
 
 	metricService.bindElements(document.body);
 	metricService.start();
+	// todo: this needs to use real data
 	metricService.metrics['System/Mode'].rawValue = 0;
 }
