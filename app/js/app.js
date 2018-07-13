@@ -42,6 +42,7 @@ function setupMetrics() {
 	metricService.register('Ac/Loads/Voltage', '/vebus/257/Ac/Out/L1/V', 'AC loads voltage', 'V', Venus.numericFormatter());
 	metricService.register('Ac/Loads/Current', '/vebus/257/Ac/Out/L1/I', 'AC loads current', 'A', Venus.numericFormatter(1));
 	metricService.register('Ac/Loads/Power', '/vebus/257/Ac/Out/L1/P', 'AC loads power', 'W', Venus.numericFormatter());
+	metricService.register('Ac/Grid/IsConnected', '/Ac/ActiveIn/Connected', 'Grid is connected', '', Venus.numericFormatter());
 	metricService.register('Ac/Grid/Voltage', '/vebus/257/Ac/ActiveIn/L1/V', 'Grid voltage', 'V', Venus.numericFormatter());
 	metricService.register('Ac/Grid/Current', '/vebus/257/Ac/ActiveIn/L1/I', 'Grid current', 'A', Venus.numericFormatter(1));
 	metricService.register('Ac/Grid/Power', '/vebus/257/Ac/ActiveIn/L1/P', 'Grid power', 'W', Venus.numericFormatter());
@@ -63,8 +64,25 @@ function setupMetrics() {
 		return '--';
 	});
 
+	metricService.metrics['Ac/Grid/IsConnected'].addOnChangeCallback(function(metric) {
+		if (metric.rawValue == 1) {
+			document.getElementById('shorePowerContainer').classList.add('shorePower');
+		}
+		else {
+			document.getElementById('shorePowerContainer').classList.remove('shorePower');
+		}
+	})
+
 	metricService.metrics['Dc/Battery/Current'].addOnChangeCallback(function(metric) {
-		// todo: update arrow
+		var container = document.getElementById('batteryContainer');
+		if (metric.rawValue < 0) {
+			container.classList.add('batteryDischarge')
+			container.classList.remove('batteryCharge')
+		}
+		else {
+			container.classList.add('batteryCharge')
+			container.classList.remove('batteryDischarge')
+		}
 	})
 
 	metricService.metrics['Dc/Battery/Soc'].addOnChangeCallback(function(metric) {

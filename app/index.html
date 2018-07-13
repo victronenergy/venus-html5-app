@@ -37,7 +37,7 @@
   </header>
   <div class="container">
 
-    <div class="g grid-33 shorePower buttonCallout" onclick="showCurrentLimitSelection()">
+    <div id="shorePowerContainer" class="g grid-33 shorePower buttonCallout" onclick="showCurrentLimitSelection()">
         Shore Power</br>
         <img src="images/ico-shore.svg"></br>
         <span class="voltage"><span data-metric="Ac/Grid/Voltage"></span>V&nbsp;/&nbsp;<span data-metric="Ac/Grid/Current"></span>A&nbsp;/&nbsp;<span data-metric="Ac/Grid/Power"></span>W</br>
@@ -54,7 +54,7 @@
         <img src="images/ico-ac.svg"></br>
         <span class="voltage"><span data-metric="Ac/Loads/Voltage"></span>V&nbsp;/&nbsp;<span data-metric="Ac/Loads/Current"></span>A&nbsp;/&nbsp;<span data-metric="Ac/Loads/Power"></span>W</br>
     </div>
-    <div class="g grid-33 batteryDischarge">
+    <div id="batteryContainer" class="g grid-33 batteryDischarge">
         Battery <span data-metric="Dc/Battery/Soc"></span>%</br>
         <div class="batteryProgress"></div></br>
         <span class="voltage"><span data-metric="Dc/Battery/Voltage"></span>V&nbsp;/&nbsp;<span data-metric="Dc/Battery/Current"></span>A&nbsp;/&nbsp;<span data-metric="Dc/Battery/Power"></span>W</br>
