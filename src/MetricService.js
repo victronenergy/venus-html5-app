@@ -54,7 +54,8 @@ export class MetricService {
 
 	bindElements(element) {
 		let ref = this
-		element.childNodes.forEach((childNode) => {
+		for (let i=0; i<element.childNodes.length; i++) {
+			let childNode = element.childNodes[i]
 			if (childNode.attributes !== undefined) {
 				let dataMetricAttribute = childNode.attributes['data-metric']
 				let dataMetricPropertyAttribute = childNode.attributes['data-metric-property']
@@ -78,6 +79,6 @@ export class MetricService {
 				}
 			}
 			ref.bindElements(childNode)
-		})
+		}
 	}
 }
