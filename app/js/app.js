@@ -34,19 +34,13 @@ function hideCurrentLimitSelection() {
 
 function setMode(mode) {
 	if (mode === 'on') {
-		console.log('setMode: on');
-		metricService.metrics['System/Mode'].rawValue = 0;
-		// metricService.write('System/State', ???);
+		metricService.write('System/Mode', 3);
 	}
 	else if (mode === 'off') {
-		console.log('setMode: off');
-		metricService.metrics['System/Mode'].rawValue = 1;
-		// metricService.write('System/State', 0);
+		metricService.write('System/Mode', 4);
 	}
 	else if (mode === 'charge') {
-		console.log('setMode: charge');
-		metricService.metrics['System/Mode'].rawValue = 2;
-		// metricService.write('System/State', ???);
+		metricService.write('System/Mode', 1);
 	}
 }
 
@@ -54,13 +48,13 @@ function showModeSelection() {
 	document.getElementById('setModeOnButton').classList.remove('modeBtnOn');
 	document.getElementById('setModeOffButton').classList.remove('modeBtnOn');
 	document.getElementById('setModeChargeOnlyButton').classList.remove('modeBtnOn');
-	if (metricService.metrics['System/Mode'].rawValue === 0) {
+	if (metricService.metrics['System/Mode'].rawValue === 3) {
 		document.getElementById('setModeOnButton').classList.add('modeBtnOn');
 	}
-	else if (metricService.metrics['System/Mode'].rawValue === 1) {
+	else if (metricService.metrics['System/Mode'].rawValue === 4) {
 		document.getElementById('setModeOffButton').classList.add('modeBtnOn');
 	}
-	else if (metricService.metrics['System/Mode'].rawValue === 2) {
+	else if (metricService.metrics['System/Mode'].rawValue === 1) {
 		document.getElementById('setModeChargeOnlyButton').classList.add('modeBtnOn');
 	}
 	document.getElementById("myMultiPlus").style.width = "300px";
@@ -101,10 +95,11 @@ function setupMetrics() {
 		if (metric.rawValue == 257) return 'Sustain';
 		return '--';
 	});
-	metricService.register('System/Mode', undefined, 'System mode', '', function(metric) {
-		if (metric.rawValue == 0) return 'ON';
-		if (metric.rawValue == 1) return 'OFF';
-		if (metric.rawValue == 2) return 'Charge only';
+	metricService.register('System/Mode', '/vebus/257/Mode', 'System mode', '', function(metric) {
+		if (metric.rawValue == 1) return 'Charger only';
+		if (metric.rawValue == 2) return 'Inverter only';
+		if (metric.rawValue == 3) return 'ON';
+		if (metric.rawValue == 4) return 'OFF';
 		return '--';
 	}, 'rw');
 
@@ -140,6 +135,4 @@ function setupMetrics() {
 
 	metricService.bindElements(document.body);
 	metricService.start();
-	// todo: this needs to use real data
-	metricService.metrics['System/Mode'].rawValue = 0;
 }
