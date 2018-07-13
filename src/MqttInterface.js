@@ -32,8 +32,9 @@ export class MqttInterface {
 	}
 
 	lookupKey(key) {
-		for (let path in this.registeredPaths) {
-			if (path.key === key) {
+		for (let pathValue in this.registeredPaths) {
+			let path = this.registeredPaths[pathValue]
+			if (path !== undefined && path.key === key) {
 				return path
 			}
 		}

@@ -81,4 +81,12 @@ export class MetricService {
 			ref.bindElements(childNode)
 		}
 	}
+
+	read(key) {
+		this.deviceInterface.read(key)
+	}
+
+	write(key, value) {
+		this.deviceInterface.write(key, value)
+	}
 }
