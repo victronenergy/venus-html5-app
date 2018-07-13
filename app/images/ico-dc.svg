@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="256px" height="256px" viewBox="0 0 256 256" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>ico-</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="ico-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="ico-DC" fill="#6F6E6A" fill-rule="nonzero">
+            <path d="M128,256 C57.307552,256 0,198.692448 0,128 C0,57.307552 57.307552,0 128,0 C198.692448,0 256,57.307552 256,128 C256,198.692448 198.692448,256 128,256 Z M128,244.093023 C192.116406,244.093023 244.093023,192.116406 244.093023,128 C244.093023,63.8835937 192.116406,11.9069767 128,11.9069767 C63.8835937,11.9069767 11.9069767,63.8835937 11.9069767,128 C11.9069767,192.116406 63.8835937,244.093023 128,244.093023 Z" id="Oval-Copy"></path>
+            <polygon id="Line-2" points="42 122 42 110 212 110 212 122"></polygon>
+            <polygon id="Line-2-Copy" points="42 149 42 137 84 137 84 149"></polygon>
+            <polygon id="Line-2-Copy-2" points="107 149 107 137 149 137 149 149"></polygon>
+            <polygon id="Line-2-Copy-3" points="170 149 170 137 212 137 212 149"></polygon>
+        </g>
+    </g>
+</svg>

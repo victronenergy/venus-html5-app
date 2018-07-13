@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Victron Venus Status</title>
+  <link rel="stylesheet" href="css/vicWebApp.css">
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!--
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
+    <script src="js/venuslib.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      var interface = new Venus.MqttInterface("192.168.3.82", 9001);
+      var service = new Venus.Service(interface);
+
+      window.onload = function() {
+        service.bindElements(document.body);
+        service.start();
+        service.onUpdate = function(metric) {
+        }
+      }
+    </script>
+-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
+  <script src="js/venuslib.js" type="text/javascript"></script>
+<script type="text/javascript">
+      var interface = new Venus.MqttInterface("192.168.3.82", 9001);
+      var service = new Venus.Service(interface);
+      var soc = 0;
+
+      window.onload = function() {
+        service.bindElements(document.body);
+        service.metrics['Dc/Battery/Voltage'].rawValue = 24.1;
+        service.metrics['Dc/Battery/Current'].rawValue = 0;
+        service.metrics['Dc/Battery/Power'].rawValue = 0;
+        service.metrics['Dc/Battery/Soc'].rawValue = 100;
+        service.metrics['Dc/Vebus/Current'].rawValue = 3.234;
+        service.metrics['Dc/Vebus/Power'].rawValue = 40;
+        service.metrics['Ac/Loads/Voltage'].rawValue = 229;
+        service.metrics['Ac/Loads/Current'].rawValue = 4;
+        service.metrics['Ac/Loads/Power'].rawValue = 434;
+        service.metrics['Ac/Grid/CurrentLimit'].rawValue = 16;
+        service.metrics['Ac/Grid/Voltage'].rawValue = 230;
+        service.metrics['Ac/Grid/Current'].rawValue = 5;
+        service.metrics['Ac/Grid/Power'].rawValue = 474;
+        service.metrics['SystemState/State'].rawValue = 6;
+        // service.start();
+        // service.onUpdate = function(metric) {
+        //   if (metric.definition.key === 'Dc/Battery/Soc') {
+        //     var soc = metric.value;
+        //     [].forEach.call(document.styleSheets[0].cssRules, function(cssRule) {
+        //       if (cssRule.selectorText == '.batteryProgress::after') {
+        //         cssRule.style.top = (73-43*soc/100)+'%';
+        //       }
+        //     });
+        //   }
+        // }
+      }
+    </script>
+</head>
+
+<body>
+  <div id="mySidenav" class="sidenav">
+
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+<div class="amps">
+  <h4>Input Limit</h4>
+  <a href="#">1A</a><a href="#">2A</a><a href="#">3A</a><a href="#">4A</a><a href="#">5A</a><a href="#">6A</a>
+  <a href="#">7A</a><a href="#">8A</a><a href="#">9A</a><a href="#">10A</a><a href="#">11A</a><a href="#">12A</a>
+  <a href="#">13A</a><a href="#">14A</a><a href="#">15A</a><a href="#">16A</a>
+</div>
+</div>
+
+<div id="myMultiPlus" class="sidenav">
+
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNavMultiPlus()">&times;</a>
+  <div class="modeBtn">
+  <h4>MultiPlus</h4>
+    <a href="#" class="modeBtnOn">ON</a>
+    <a href="#">OFF</a>
+    <a href="#">Charge only</a>
+  </div>
+</div>
+
+
+  <header>
+    <img src="images/logo-vic.svg">
+  </header>
+  <div class="container">
+
+    <div class="g grid-33 shorePower buttonCallout" onclick="openNav()">
+        Shore Power</br>
+        <img src="images/ico-shore.svg"></br>
+        <span class="voltage"><span data-binding="Ac/Grid/Voltage"></span>V&nbsp;/&nbsp;<span data-binding="Ac/Grid/Current"></span>A&nbsp;/&nbsp;<span data-binding="Ac/Grid/Power"></span>W</br>
+    <span class="mode">Input limit: <span data-binding="Ac/Grid/CurrentLimit"></span>A</br>
+    </div>
+    <div class="g grid-33 multiPlus buttonCallout" onclick="openNavMultiPlus()">
+        MultiPlus</br>
+        <img src="images/ico-multiPlus.png"></br>
+        <span class="voltage"><span data-binding="SystemState/State"></span></span></br>
+        <span class="mode">Mode: ON</span>
+    </div>
+    <div class="g grid-33 ACLoads">
+        AC Loads</br>
+        <img src="images/ico-ac.svg"></br>
+        <span class="voltage"><span data-binding="Ac/Loads/Voltage"></span>V&nbsp;/&nbsp;<span data-binding="Ac/Loads/Current"></span>A&nbsp;/&nbsp;<span data-binding="Ac/Loads/Power"></span>W</br>
+    </div>
+    <div class="g grid-33 batteryDischarge">
+        Battery <span data-binding="Dc/Battery/Soc"></span>%</br>
+        <div class="batteryProgress"></div></br>
+        <span class="voltage"><span data-binding="Dc/Battery/Voltage"></span>V&nbsp;/&nbsp;<span data-binding="Dc/Battery/Current"></span>A&nbsp;/&nbsp;<span data-binding="Dc/Battery/Power"></span>W</br>
+    </div>
+    <div class="g grid-33 DCLoads">
+        DC Loads</br>
+        <img src="images/ico-dc.svg"></br>
+        <span class="voltage"><span data-binding="Dc/Vebus/Current"></span>A&nbsp;/&nbsp;<span data-binding="Dc/Vebus/Power"></span>W</br>
+    </div>
+</div>
+
+<script>
+function openNav() {
+    document.getElementById("mySidenav").style.width = "300px";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}
+function openNavMultiPlus() {
+    document.getElementById("myMultiPlus").style.width = "300px";
+}
+
+function closeNavMultiPlus() {
+    document.getElementById("myMultiPlus").style.width = "0";
+}
+</script>
+<!--<img src="images/logo-grey-vic.png" style="position: absolute;bottom: 10px;left: 10px;">-->
+</body>
+
+</html>
