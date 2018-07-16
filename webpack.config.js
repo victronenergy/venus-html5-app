@@ -2,7 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 
 module.exports = {
-    entry: './src/index.js',
+    entry: './library/index.js',
     output: {
         path: path.resolve(__dirname, 'build'),
         filename: 'venus-metrics.min.js',
