@@ -1,4 +1,4 @@
-var deviceInterface = new Venus.MqttInterface('192.168.3.52', 9001); // todo: needs to be localhost when done
+var deviceInterface = new Venus.MqttInterface('192.168.3.132', 9001); // todo: needs to be localhost when done
 var metricService = new Venus.MetricService(deviceInterface);
 
 window.onload = function() {
@@ -9,12 +9,12 @@ window.onload = function() {
 // todo: debugging only
 function toggleShorePower() {
 	if (metricService.metrics['Ac/Grid/IsConnected'].rawValue == 0) {
-		metricService.metrics['Dc/Battery/Soc'].rawValue = 100; 
-		metricService.metrics['Ac/Grid/IsConnected'].rawValue = 1; 
-		metricService.metrics['Dc/Battery/Current'].formatter = Venus.numericFormatter(1);		
+		metricService.metrics['Dc/Battery/Soc'].rawValue = 100;
+		metricService.metrics['Ac/Grid/IsConnected'].rawValue = 1;
+		metricService.metrics['Dc/Battery/Current'].formatter = Venus.numericFormatter(1);
 	} else {
-		metricService.metrics['Dc/Battery/Soc'].rawValue = 35; 
-		metricService.metrics['Ac/Grid/IsConnected'].rawValue = 0; 
+		metricService.metrics['Dc/Battery/Soc'].rawValue = 35;
+		metricService.metrics['Ac/Grid/IsConnected'].rawValue = 0;
 		metricService.metrics['Dc/Battery/Current'].formatter = Venus.numericFormatter(1, -1);
 		metricService.metrics['Dc/Battery/Current'].rawValue = metricService.metrics['Dc/Battery/Current'].rawValue + 0.1;
 	}
