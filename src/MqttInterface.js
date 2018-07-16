@@ -1,17 +1,31 @@
-// /** The MqttInterface class represents the transport layer
-//     for the venus mqtt */
-
-// The interface depends on the mqtt.js package for mqtt over websocket implementation
-// todo: describe callbacks and usage
-//       onError, onUpdate, onRawUpdate
-
+/** 
+ * The MqttInterface class represents the transport layer for the venus mqtt metrics.
+ * It depends on paho mqtt that can be found at https://www.eclipse.org/paho/clients/js/
+ *
+ * - Register metrics using the register method.
+ * - Start the interface by calling the connect method.
+ * - Listen to changes of registered metrics using the onUpdate callback (metricKey, rawValue) => {}
+ * - Listen to raw changes using the onRawUpdate callback (path, rawValue) => {}
+ * - Listen to errors using the onError callback (error) => {}
+ */
 export class MqttInterface {
+	/**
+	 * Create a MqttInterface instance.
+	 * @param {string} host - The host name of the mqtt server.
+	 * @param {numeric} port - The port number of the mqtt server.
+	 */
 	constructor(host = 'localhost', port = 9001) {
 		this.host = host
 		this.port = port
 		this.registeredPaths = {}
 	}
 
+	/**
+	 * Register a metric.
+	 * @param {string} key - The metric key.
+	 * @param {string} path - The path (topic) of the metric in the mqtt server.
+	 * @param {string} access - The access of the metric (r/w/rw).
+	 */
 	register(key, path, access = 'r') {
 		if (!path.startsWith('/')) {
 			path = '/' + path
@@ -23,6 +37,10 @@ export class MqttInterface {
 		this.registeredPaths[path] = new MqttInterfacePath(path, key, access)
 	}
 
+	/**
+	 * Unregister a previously registered metric.
+	 * @param {string} key - The metric key.
+	 */
 	unregister(key) {
 		let path = this.lookupKey(key)
 		if (path !== undefined) {
@@ -30,6 +48,10 @@ export class MqttInterface {
 		}
 	}
 
+	/**
+	 * Look up the path of a given metric key.
+	 * @return {MqttInterfacePath} The found path, or undefined if no match was found.
+	 */
 	lookupKey(key) {
 		for (let pathValue in this.registeredPaths) {
 			let path = this.registeredPaths[pathValue]
@@ -39,10 +61,17 @@ export class MqttInterface {
 		}
 	}
 
+	/**
+	 * Look up the path for a given path identifier.
+	 * @return {MqttInterfacePath} The found path, or undefined if no match was found.
+	 */
 	lookupPath(path) {
 		return this.registeredPaths[path]
 	}
 
+	/**
+	 * Connect the mqtt interface.
+	 */
 	connect() {
 		if (this.client !== undefined) {
 			throw 'The mqtt interface is already connected'
@@ -97,6 +126,9 @@ export class MqttInterface {
 		}})
 	}
 
+	/**
+	 * Disconnect the mqtt interface.
+	 */
 	disconnect() {
 		if (this.client === undefined) {
 			return
@@ -106,6 +138,10 @@ export class MqttInterface {
 		this.client.end()
 	}
 
+	/**
+	 * Request reading a metric.
+	 * @param {string} key - The metric key.
+	 */
 	read(key) {
 		if (this.portalId === undefined) { 
 			throw 'Read failed. The mqtt interface has not detected its portal id yet' 
@@ -120,6 +156,11 @@ export class MqttInterface {
 		this.client.send(`R/${this.portalId}${path.value}`, '')
 	}
 
+	/**
+	 * Request writing a metric.
+	 * @param {string} key - The metric key.
+	 * @param {} value - The value to write.
+	 */
 	write(key, value) {
 		if (this.portalId === undefined) { 
 			throw 'Write failed. The mqtt interface has not detected its portal id yet' 
@@ -135,6 +176,9 @@ export class MqttInterface {
 		this.client.send(`W/${this.portalId}${path.value}`, data)
 	}
 
+	/**
+	 * Send a keep alive message to the server.
+	 */
 	keepAlive() {
 		if (this.portalId === undefined) {
 			return
@@ -143,7 +187,17 @@ export class MqttInterface {
 	}
 }
 
+/**
+ * The MqttInterfacePath class represents a cross-reference between 
+ * a metric key and its mqtt path, and also the access of that reference.
+ */
 export class MqttInterfacePath {
+	/**
+	 * Create a MqttInterfacePath instance.
+	 * @param {string} path - The mqtt path of the value.
+	 * @param {string} key - The metric key.
+	 * @param {string} access - The access of the given path (r/w/rw).
+	 */
 	constructor(path, key, access) {
 		this.value = path
 		this.key = key
