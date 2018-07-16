@@ -1,4 +1,4 @@
-var deviceInterface = new Venus.MqttInterface('192.168.3.82', 9001); // todo: needs to be localhost when done
+var deviceInterface = new Venus.MqttInterface('192.168.3.52', 9001); // todo: needs to be localhost when done
 var metricService = new Venus.MetricService(deviceInterface);
 
 window.onload = function() {
