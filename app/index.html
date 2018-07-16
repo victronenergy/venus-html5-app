@@ -26,41 +26,42 @@
       <h4>MultiPlus</h4>
       <a href="#" id="setModeOnButton" onclick="setMode('on'); hideModeSelection();">ON</a>
       <a href="#" id="setModeOffButton" onclick="setMode('off'); hideModeSelection();">OFF</a>
-      <a href="#" id="setModeChargeOnlyButton" onclick="setMode('charge'); hideModeSelection();">Charge only</a>
+      <a href="#" id="setModeChargeOnlyButton" onclick="setMode('charge'); hideModeSelection();">Charger only</a>
     </div>
   </div>
 
   <header>
     <img src="images/logo-vic.svg">
+    <input type="button" value="Toggle shore power" style="float: right;" onclick="toggleShorePower();"></input>
   </header>
   <div class="container">
 
-    <div id="shorePowerContainer" class="g grid-33 shorePower buttonCallout" onclick="showCurrentLimitSelection()">
+    <div id="shorePowerContainer" class="g grid-33 shorePower" onclick="showCurrentLimitSelection()">
         Shore Power</br>
         <img src="images/ico-shore.svg"></br>
-        <span class="voltage"><span data-metric="Ac/Grid/Voltage"></span>V&nbsp;/&nbsp;<span data-metric="Ac/Grid/Current"></span>A&nbsp;/&nbsp;<span data-metric="Ac/Grid/Power"></span>W</br>
-    <span class="mode">Input limit: <span data-metric="Ac/Grid/CurrentLimit"></span>A</br>
+        <span class="voltage"><span data-metric="Ac/Grid/Voltage"></span>V&nbsp;&nbsp;&nbsp;<span data-metric="Ac/Grid/Current"></span>A&nbsp;&nbsp;&nbsp;<span data-metric="Ac/Grid/Power"></span>W</br>
+    <span class="mode bottomBtn"><img src="images/ico-arrow-bot.png" class="bottomImgArrow">&nbsp;Input limit: <span data-metric="Ac/Grid/CurrentLimit"></span>A</br>
     </div>
-    <div class="g grid-33 multiPlus buttonCallout" onclick="showModeSelection()">
+    <div class="g grid-33 multiPlus" onclick="showModeSelection()">
         MultiPlus</br>
         <img src="images/ico-multiPlus.png"></br>
         <span class="voltage"><span data-metric="System/State"></span></span></br>
-        <span class="mode">Mode: <span data-metric="System/Mode"></span></span>
+        <span class="mode bottomBtn"><img src="images/ico-arrow-bot.png" class="bottomImgArrow">&nbsp;Mode:&nbsp;<span data-metric="System/Mode"></span></span>
     </div>
     <div class="g grid-33 ACLoads">
         AC Loads</br>
         <img src="images/ico-ac.svg"></br>
-        <span class="voltage"><span data-metric="Ac/Loads/Voltage"></span>V&nbsp;/&nbsp;<span data-metric="Ac/Loads/Current"></span>A&nbsp;/&nbsp;<span data-metric="Ac/Loads/Power"></span>W</br>
+        <span class="voltage"><span data-metric="Ac/Loads/Voltage"></span>V&nbsp;&nbsp;&nbsp;<span data-metric="Ac/Loads/Current"></span>A&nbsp;&nbsp;&nbsp;<span data-metric="Ac/Loads/Power"></span>W</br>
     </div>
     <div id="batteryContainer" class="g grid-33 batteryDischarge">
         Battery <span data-metric="Dc/Battery/Soc"></span>%</br>
         <div class="batteryProgress"></div></br>
-        <span class="voltage"><span data-metric="Dc/Battery/Voltage"></span>V&nbsp;/&nbsp;<span data-metric="Dc/Battery/Current"></span>A&nbsp;/&nbsp;<span data-metric="Dc/Battery/Power"></span>W</br>
+        <span class="voltage"><span data-metric="Dc/Battery/Voltage"></span>V&nbsp;&nbsp;&nbsp;<span data-metric="Dc/Battery/Current"></span>A&nbsp;&nbsp;&nbsp;<span data-metric="Dc/Battery/Power"></span>W</br>
     </div>
     <div class="g grid-33 DCLoads">
         DC Loads</br>
         <img src="images/ico-dc.svg"></br>
-        <span class="voltage"><span data-metric="Dc/Loads/Current"></span>A&nbsp;/&nbsp;<span data-metric="Dc/Loads/Power"></span>W</br>
+        <span class="voltage"><span data-metric="Dc/Loads/Current"></span>A&nbsp;&nbsp;&nbsp;<span data-metric="Dc/Loads/Power"></span>W</br>
     </div>
 </div>
 <!--<img src="images/logo-grey-vic.png" style="position: absolute;bottom: 10px;left: 10px;">-->

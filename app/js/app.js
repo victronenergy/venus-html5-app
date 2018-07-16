@@ -6,6 +6,20 @@ window.onload = function() {
 	setupMetrics();
 }
 
+// todo: debugging only
+function toggleShorePower() {
+	if (metricService.metrics['Ac/Grid/IsConnected'].rawValue == 0) {
+		metricService.metrics['Dc/Battery/Soc'].rawValue = 100; 
+		metricService.metrics['Ac/Grid/IsConnected'].rawValue = 1; 
+		metricService.metrics['Dc/Battery/Current'].formatter = Venus.numericFormatter(1);		
+	} else {
+		metricService.metrics['Dc/Battery/Soc'].rawValue = 35; 
+		metricService.metrics['Ac/Grid/IsConnected'].rawValue = 0; 
+		metricService.metrics['Dc/Battery/Current'].formatter = Venus.numericFormatter(1, -1);
+		metricService.metrics['Dc/Battery/Current'].rawValue = metricService.metrics['Dc/Battery/Current'].rawValue + 0.1;
+	}
+}
+
 function setupCurrentLimitSelection() {
 	var container = document.getElementById('inputLimitSelection');
 	for (var currentValue=1; currentValue<=16; currentValue++) {
@@ -114,7 +128,7 @@ function setupMetrics() {
 
 	metricService.metrics['Dc/Battery/Current'].addOnChangeCallback(function(metric) {
 		var container = document.getElementById('batteryContainer');
-		if (metric.rawValue < 0) {
+		if (Number(metric.value) < 0) {
 			container.classList.add('batteryDischarge')
 			container.classList.remove('batteryCharge')
 		}
