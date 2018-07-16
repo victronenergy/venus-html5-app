@@ -39,7 +39,7 @@ function createSetInputLimitFunction(limit) {
 }
 
 function showCurrentLimitSelection() {
-	document.getElementById("mySidenav").style.width = "300px";
+	document.getElementById("mySidenav").style.width = "350px";
 }
 
 function hideCurrentLimitSelection() {
@@ -71,7 +71,7 @@ function showModeSelection() {
 	else if (metricService.metrics['System/Mode'].rawValue === 1) {
 		document.getElementById('setModeChargeOnlyButton').classList.add('modeBtnOn');
 	}
-	document.getElementById("myMultiPlus").style.width = "300px";
+	document.getElementById("myMultiPlus").style.width = "350px";
 }
 
 function hideModeSelection() {
