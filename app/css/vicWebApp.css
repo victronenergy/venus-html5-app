@@ -46,7 +46,7 @@ header {
 .sidenav .amps a {
 		padding: 14px 0;
     text-decoration: none;
-    font-size: 2.6vw;
+    font-size: 4vw;
     color: #fff;
     display: inline-block;
     transition: 0.3s;
@@ -145,9 +145,7 @@ header {
  font-weight: bold;
 }
 
-
-
-/* MODULES */
+/*********** MODULES ***********/
 
 .shorePower {
 	-webkit-box-shadow: inset 0 0 0 2px #387DC5;
@@ -168,18 +166,8 @@ header {
   margin-top: -9px;
   z-index: -1;
   margin-left: -5px;
-/*
-	animation-name: shoreArrow;
-  animation-duration: 2s;
-  animation-iteration-count: infinite;
-	*/
 }
-/*
-@keyframes shoreArrow {
-    from {right: 0;}
-    to {right: -40px;}
-}
-*/
+
 .shorePower:before {
   content: none;
   position: absolute;
@@ -323,7 +311,7 @@ header {
   z-index: -1;
 }
 
-/* CHARGING PROGRESS ICON */
+/*********** CHARGING PROGRESS ICON ***********/
 .batteryProgress {
 		display: inline-block;
     width: 30%;
@@ -345,7 +333,7 @@ header {
   background: #6f6e69;
 }
 
-/* LAYOUT */
+/*********** LAYOUT ***********/
 
 .grid-33 {
     width: 100%;
@@ -361,7 +349,7 @@ header {
 }
 
 
-/* Extra Small Devices, Phones */
+/*********** Extra Small Devices, Phones ***********/
 @media only screen and (min-width : 480px) {
   .grid-33 {
       width: 33.3333%;
@@ -383,7 +371,7 @@ header {
 
 }
 
-/* Small Devices, Tablets */
+/*********** Small Devices, Tablets ***********/
 @media only screen and (min-width : 768px) {
 	.g {
 	    font-size: 3.2vw;
@@ -424,10 +412,9 @@ header {
     font-size: 3vw;
 }
 
-
 }
 
-/* Medium Devices, Desktops */
+/*********** Medium Devices, Desktops ***********/
 @media only screen and (min-width : 992px) {
 	.container {
 	    padding: 0 10%;
@@ -456,7 +443,7 @@ header {
 	}
 }
 
-/* Large Devices, Wide Screens */
+/*********** Large Devices, Wide Screens ***********/
 @media only screen and (min-width : 1200px) {
 	.container {
 			padding: 0 10%;
