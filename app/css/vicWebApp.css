@@ -15,7 +15,14 @@ h4 {
   margin-top: 0;
 }
 
-/*SIDE NAV*/
+header {
+  text-align: center;
+  background-color: #387DC5;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+/*********** SIDE FLYOUT NAV ***********/
 .sidenav {
 		height: 100%;
 		width: 0;
@@ -81,6 +88,13 @@ h4 {
 	text-decoration: none;
 }
 
+@media screen and (max-height: 450px) {
+	.sidenav {padding-top: 15px;}
+	.sidenav a {font-size: 18px;}
+}
+
+/*********** END SIDE FLYOUT NAV ***********/
+
 .bottomBtn {
 	background: #F6F6F6;
 	margin: 10px 3px -7px 3px;
@@ -97,44 +111,6 @@ h4 {
     display: inline-block;
 }
 
-@media screen and (max-height: 450px) {
-	.sidenav {padding-top: 15px;}
-	.sidenav a {font-size: 18px;}
-}
-
-
-header {
-  text-align: center;
-  background-color: #387DC5;
-  padding: 10px;
-  margin-bottom: 10px;
-}
-
-.moduleOn {
-
-}
-/* CHARGING PROGRESS ICON */
-.batteryProgress {
-		display: inline-block;
-    width: 30%;
-    padding-bottom: 30%;
-    height: 0;
-		background-size: 100%;
-		background-image: url('../images/ico-battery.png');
-		background-repeat: no-repeat;
-		background-position: center center;
-		position: relative;
-}
-.batteryProgress:after {
-	content: "";
-  position: absolute;
-  top: 43%;
-  left: 1%;
-  bottom: 26%;
-  right: 2%;
-  background: #6f6e69;
-}
-
 .container {
     display: flex;
     flex-wrap: wrap;
@@ -142,6 +118,7 @@ header {
     position: relative;
     z-index: 0;
 }
+
 .g {
     background: #fff;
     border: 10px solid transparent;
@@ -346,6 +323,29 @@ header {
   z-index: -1;
 }
 
+/* CHARGING PROGRESS ICON */
+.batteryProgress {
+		display: inline-block;
+    width: 30%;
+    padding-bottom: 30%;
+    height: 0;
+		background-size: 100%;
+		background-image: url('../images/ico-battery.png');
+		background-repeat: no-repeat;
+		background-position: center center;
+		position: relative;
+}
+.batteryProgress:after {
+	content: "";
+  position: absolute;
+  top: 43%;
+  left: 1%;
+  bottom: 26%;
+  right: 2%;
+  background: #6f6e69;
+}
+
+/* LAYOUT */
 
 .grid-33 {
     width: 100%;
@@ -360,13 +360,7 @@ header {
     width: 100%;
 }
 
-/* Custom, iPhone Retina
-@media only screen and (min-width : 320px) {
-  .grid-33 {
-      width: 100%;
-  }
-}
- */
+
 /* Extra Small Devices, Phones */
 @media only screen and (min-width : 480px) {
   .grid-33 {
