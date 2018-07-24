@@ -15,5 +15,8 @@
     "babel-preset-env": "^1.7.0",
     "webpack": "^4.15.1",
     "webpack-cli": "^3.0.8"
+  },
+  "dependencies": {
+    "mqtt": "^2.18.3"
   }
 }
