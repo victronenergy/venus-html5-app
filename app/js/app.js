@@ -1,4 +1,4 @@
-var deviceInterface = new Venus.MqttInterface('192.168.3.132', 9001); // todo: needs to be localhost when done
+var deviceInterface = new Venus.MqttInterface(window.location.hostname, 9001); // get IP address of venus server
 var metricService = new Venus.MetricService(deviceInterface);
 
 window.onload = function() {
