@@ -96,12 +96,11 @@ header {
 /*********** END SIDE FLYOUT NAV ***********/
 
 .bottomBtn {
-	background: #F6F6F6;
+	background: #387cc6;
 	margin: 10px 3px -7px 3px;
 	display: block;
 	padding: 6px;
 	text-align: center;
-	border-top: 1px solid #CDCDCD;
 	border-radius: 0 0 5px 5px;
 }
 
