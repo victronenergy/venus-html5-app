@@ -5,6 +5,11 @@ window.onload = function() {
 	setupMetrics();
 }
 
+// don't scroll
+window.onscroll = function() {
+  window.scrollTo(0,0);
+}
+
 // todo: debugging only
 function toggleShorePower() {
 	if (metricService.metrics['Ac/Grid/IsConnected'].rawValue == 0) {
