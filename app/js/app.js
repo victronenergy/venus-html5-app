@@ -2,7 +2,6 @@ var deviceInterface = new Venus.MqttInterface(window.location.hostname, 9001); /
 var metricService = new Venus.MetricService(deviceInterface);
 
 window.onload = function() {
-	setupCurrentLimitSelection();
 	setupMetrics();
 }
 
@@ -20,15 +19,40 @@ function toggleShorePower() {
 	}
 }
 
+// todo: debugging only
+function toggleShoreVoltage() {
+  if(metricService.metrics['Ac/Grid/Voltage'].rawValue > 150) {
+    metricService.metrics['Ac/Grid/Voltage'].rawValue = 110;
+  }
+  else {
+    metricService.metrics['Ac/Grid/Voltage'].rawValue = 240;
+  }
+}
+
 function setupCurrentLimitSelection() {
 	var container = document.getElementById('inputLimitSelection');
-	for (var currentValue=1; currentValue<=16; currentValue++) {
+  container.innerHTML = "";
+  selection = document.createElement('h4');
+  selection.innerHTML = "Input Limit";
+  container.appendChild(selection);
+
+  usAmperage = [10,15,20,30,50];
+  europeAmperage = [6,12,16,25,32,64]
+
+  shoreVoltage = metricService.metrics['Ac/Grid/Voltage'].rawValue;
+  // shoreVoltage = 110;
+
+  if (shoreVoltage === undefined) amperage = europeAmperage
+  else if (shoreVoltage > 150) amperage = europeAmperage
+  else amperage = usAmperage;
+
+  amperage.forEach(function(currentValue) {
 		var selection = document.createElement('a');
 		selection.href = '#';
 		selection.innerHTML = currentValue+'A';
 		selection.addEventListener('click', createSetInputLimitFunction(currentValue));
 		container.appendChild(selection);
-	}
+	})
 }
 
 function createSetInputLimitFunction(limit) {
@@ -39,6 +63,7 @@ function createSetInputLimitFunction(limit) {
 }
 
 function showCurrentLimitSelection() {
+  setupCurrentLimitSelection();
 	document.getElementById("mySidenav").style.width = "350px";
 }
 
