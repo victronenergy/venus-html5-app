@@ -5,6 +5,48 @@ The project consist of two main components:
 * Venus metric library `/library`
 * Web app `/app`
 
+## Running the App in a Dev Environment
+
+Since the app is reading MQTT data and runs in a browser, it needs to be able to read MQTT from Venus via WebSocket.
+
+In the current configuration, the Venus paho-mqtt server is not configured for offering MQTT via WebSocket, therefore we provide a small relay, that reads MQTT from the Venus device and relays it to a MQTT broker on localhost.
+
+This could be your development machine as well as e.g. a dedicated RaspberryPi.
+
+Please note, that the MQTT broker the web app connects to has to run on the same IP address as the web server that serves the app: in the end, the app will be run on a Venus device anyway, delivering the data via MQTT(WS) and serve the app from its builtin Hiawatha web server.
+
+### 1. Running the relay
+
+Prerequisite: you need to have an MQTT broker running on localhost, with MQTT over WebSockets configured additionally to the default MQTT transport.
+
+If you don't have one running or don't want to install it, you can run one using docker:
+
+	docker run -ti -p 1883:1883 -p 9001:9001 toke/mosquitto
+
+(which will fail, if you have one already running on ports 1883 and 9001)
+
+In the project's base directory edit 'mqtt-relay.js': in the top, set the IP address and portalID of your Venus device, then run
+
+	node mqtt-relay.js
+
+### 2. Run the web server
+
+In the 'app' directory, run:
+
+	python -m http.server 8080
+
+for Python3, or
+
+	python -m SimpleHTTPServer 8080
+
+for Python2.
+
+### 3. Run the announcer
+
+In the projects base directory, run:
+
+	./service_announcement.sh
+
 ## Development
 
 ### Setup environment
