@@ -1,0 +1,22 @@
+{
+  "name": "victron-venus-metrics",
+  "version": "1.0.0",
+  "description": "Metric framework for Victron VenusOS",
+  "main": "index.js",
+  "scripts": {
+    "webpack": "webpack --mode production",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "webpack": "^4.15.1",
+    "webpack-cli": "^3.0.8"
+  },
+  "dependencies": {
+    "mqtt": "^2.18.3"
+  }
+}
