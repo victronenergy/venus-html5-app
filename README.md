@@ -5,6 +5,18 @@ The project consist of two main components:
 * Venus metric library `/library`
 * Web app `/app`
 
+### Setup environment
+
+	npm install
+
+### Building the Library
+
+To build the metric library run the following command:
+
+	npm run webpack
+
+This will output a `venus-metrics.min.js` file in the build folder which can be used in a browser based web app.
+
 ## Running the App in a Dev Environment
 
 Since the app is reading MQTT data and runs in a browser, it needs to be able to read MQTT from Venus via WebSocket.
@@ -48,20 +60,6 @@ In the projects base directory, run:
 	./service_announcement.sh
 
 ## Development
-
-### Setup environment
-
-	npm install
-
-### Building
-
-To build the metric library run the following command:
-
-	npm run webpack
-
-This will output a `venus-metrics.min.js` file in the build folder which can be used in a browser based web app.
-
-## Usage
 
 ### Setting up a metric service
 
