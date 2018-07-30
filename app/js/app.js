@@ -1,6 +1,8 @@
 var deviceInterface = new Venus.MqttInterface(window.location.hostname, 9001); // get IP address of venus server
 var metricService = new Venus.MetricService(deviceInterface);
 
+window.timeouts = {};
+
 window.onload = function() {
 	setupMetrics();
 }
@@ -9,6 +11,11 @@ window.onload = function() {
 window.onscroll = function() {
   window.scrollTo(0,0);
 }
+
+function toDash(id) {
+  document.getElementById(id).innerHTML="--";
+}
+
 
 // todo: debugging only
 function toggleShorePower() {
@@ -119,7 +126,19 @@ function setupMetrics() {
 	metricService.register('Ac/Loads/Current', '/vebus/257/Ac/Out/L1/I', 'AC loads current', 'A', Venus.numericFormatter(1));
 	metricService.register('Ac/Loads/Power', '/vebus/257/Ac/Out/L1/P', 'AC loads power', 'W', Venus.numericFormatter());
 	metricService.register('Ac/Grid/IsConnected', '/Ac/ActiveIn/Connected', 'Grid is connected', '', Venus.numericFormatter());
-	metricService.register('Ac/Grid/Voltage', '/vebus/257/Ac/ActiveIn/L1/V', 'Grid voltage', 'V', Venus.numericFormatter());
+
+	metricService.register('Ac/Grid/Voltage', '/vebus/257/Ac/ActiveIn/L1/V',
+                         'Grid voltage', 'V',
+                         function(metric) {
+
+                           window.clearTimeout(window.timeouts['xxx']);
+                           window.timeouts['xxx'] = setTimeout(function(){toDash("xxx");}, 20000);
+
+                           outputValue = (metric.rawValue == undefined) ? "--" : metric.rawValue.toFixed(0);
+                           return '<a id="xxx">' + outputValue + '</a>';
+                         }
+  );
+
 	metricService.register('Ac/Grid/Current', '/vebus/257/Ac/ActiveIn/L1/I', 'Grid current', 'A', Venus.numericFormatter(1));
 	metricService.register('Ac/Grid/Power', '/vebus/257/Ac/ActiveIn/L1/P', 'Grid power', 'W', Venus.numericFormatter());
 	metricService.register('Ac/Grid/CurrentLimit', '/vebus/257/Ac/ActiveIn/CurrentLimit', 'Grid input limit', 'V', Venus.numericFormatter(), 'rw');
