@@ -124,7 +124,7 @@ function setupMetrics() {
 	metricService.register('Ac/Grid/Voltage', '/vebus/257/Ac/ActiveIn/L1/V', 'Grid voltage', 'V', Venus.numericFormatter(), 20000);
 	metricService.register('Ac/Grid/Current', '/vebus/257/Ac/ActiveIn/L1/I', 'Grid current', 'A', Venus.numericFormatter(1), 20000);
 	metricService.register('Ac/Grid/Power', '/vebus/257/Ac/ActiveIn/L1/P', 'Grid power', 'W', Venus.numericFormatter(), 20000);
-	metricService.register('Ac/Grid/CurrentLimit', '/vebus/257/Ac/ActiveIn/CurrentLimit', 'Grid input limit', 'A', Venus.numericFormatter(), 'rw');
+	metricService.register('Ac/Grid/CurrentLimit', '/vebus/257/Ac/ActiveIn/CurrentLimit', 'Grid input limit', 'A', Venus.numericFormatter(), 0, 'rw');
 	metricService.register('System/State', '/system/0/SystemState/State', 'System state', '', function(metric) {
 		if (metric.rawValue == 0) return 'Off';
 		if (metric.rawValue == 1) return 'Low power';
@@ -147,7 +147,7 @@ function setupMetrics() {
 		if (metric.rawValue == 3) return 'ON';
 		if (metric.rawValue == 4) return 'OFF';
 		return '--';
-	}, 'rw');
+	}, 0, 'rw');
 
 	metricService.metrics['Ac/Grid/IsConnected'].addOnChangeCallback(function(metric) {
 		if (metric.rawValue == 1) {
