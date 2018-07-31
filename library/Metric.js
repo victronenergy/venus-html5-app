@@ -13,27 +13,38 @@ export class Metric {
 	 * @param {string} description - A text description of the metric.
 	 * @param {string} unit - The unit of the value the metric represents.
 	 * @param {} formatter - The formatter function used to convert the raw value of the metric to a user-friendy display.
+   * @param {number} timeout - The timeout in seconds until the value is
+   * considered stale.
 	 */
-	constructor(key, description, unit, formatter) {
+	constructor(key, description, unit, formatter, timeout) {
 		this.key = key
 		this.description = description
 		this.unit = unit
 		this.formatter = formatter === undefined ? defaultFormatter() : formatter
+    this.timeout = 2000
 		this._rawValue = undefined
 		this.callbacks = []
+    this.timerReference = undefined
 	}
 
 	/**
 	 * Get the formatted value of the metric by calling its formatter.
 	 * @return {string} The formatted value.
 	 */
-	get value() { return this.formatter(this) }
+	get value() {
+    return '<span id=' + this.key + '>' + this.formatter(this) + '</a>';
+  }
 
 	/**
 	 * Get the raw value of the metric.
 	 * @return {} The raw value.
 	 */
 	get rawValue() { return this._rawValue }
+
+  toStale(key) {
+    var entry = document.getElementById(key).innerHTML;
+    document.getElementById(key).innerHTML = "<span style=\"color: #b1b1b1; font-weight: normal\">" + entry + "</span>";
+  }
 
 	/** 
 	 * Set the raw value of the metric.
@@ -42,6 +53,12 @@ export class Metric {
 	 */
 	set rawValue(rawValue) { 
 		this._rawValue = rawValue
+
+    if (this.timeout > 0) {
+      clearTimeout(this.timerReference);
+      this.timerReference = setTimeout(this.toStale.bind(this, this.key), this.timeout);
+    }
+
 		this.callbacks.forEach((callback) => { callback(this) })
 	}
 
@@ -62,9 +79,9 @@ export class Metric {
 export function defaultFormatter(defaultValue = '--') {
 	return (metric) => {
 		if (metric.rawValue === undefined || metric.rawValue === null) {
-			return defaultValue
+			return defaultValue + metric.unit
 		}
-		return metric.rawValue.toString()
+		return metric.rawValue.toString() + metric.unit
 	}
 }
 
@@ -78,11 +95,11 @@ export function defaultFormatter(defaultValue = '--') {
 export function numericFormatter(precision = 0, factor = 1.0, defaultValue = '--') {
 	return (metric) => {
 		if (metric.rawValue === undefined || metric.rawValue === null) {
-			return defaultValue
+			return defaultValue + metric.unit
 		}
 		let value = Number(metric.rawValue) * factor
 		return precision === undefined
-			? value.toString()
-			: value.toFixed(precision)
+			? value.toString() + metric.unit
+			: value.toFixed(precision) + metric.unit
 	}
 }
