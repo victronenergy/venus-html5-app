@@ -171,7 +171,7 @@ function setupMetrics() {
 	})
 
 	metricService.metrics['Dc/Battery/Soc'].addOnChangeCallback(function(metric) {
-		var soc = metric.value;
+		var soc = metric.rawValue;
         [].forEach.call(document.styleSheets[0].cssRules, function(cssRule) {
 			if (cssRule.selectorText == '.batteryProgress::after') {
                 cssRule.style.top = (73-43*soc/100)+'%';
