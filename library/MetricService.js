@@ -60,8 +60,8 @@ export class MetricService {
 	 * @param {string} access - The access of the metric (r/w/rw).
 	 * @return {Metric} The registered metric
 	 */
-	register(key, path, description, unit, formatter, access = 'r') {
-		let metric = new Venus.Metric(key, description, unit, formatter)
+	register(key, path, description, unit, formatter, timeout, access = 'r') {
+		let metric = new Venus.Metric(key, description, unit, formatter, timeout)
 		this.metrics[key] = metric
 		if (path !== undefined) {
 			this.deviceInterface.register(key, path, access)
