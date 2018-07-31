@@ -127,7 +127,7 @@ function setupMetrics() {
 
 	metricService.register('Ac/Grid/Current', '/vebus/257/Ac/ActiveIn/L1/I', 'Grid current', 'A', Venus.numericFormatter(1));
 	metricService.register('Ac/Grid/Power', '/vebus/257/Ac/ActiveIn/L1/P', 'Grid power', 'W', Venus.numericFormatter());
-	metricService.register('Ac/Grid/CurrentLimit', '/vebus/257/Ac/ActiveIn/CurrentLimit', 'Grid input limit', 'V', Venus.numericFormatter(), 'rw');
+	metricService.register('Ac/Grid/CurrentLimit', '/vebus/257/Ac/ActiveIn/CurrentLimit', 'Grid input limit', 'A', Venus.numericFormatter(), 'rw');
 	metricService.register('System/State', '/system/0/SystemState/State', 'System state', '', function(metric) {
 		if (metric.rawValue == 0) return 'Off';
 		if (metric.rawValue == 1) return 'Low power';
