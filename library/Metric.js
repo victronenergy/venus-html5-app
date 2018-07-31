@@ -21,7 +21,7 @@ export class Metric {
 		this.description = description
 		this.unit = unit
 		this.formatter = formatter === undefined ? defaultFormatter() : formatter
-    this.timeout = 2000
+    this.timeout = timeout === undefined ? 0 : timeout
 		this._rawValue = undefined
 		this.callbacks = []
     this.timerReference = undefined
@@ -43,7 +43,7 @@ export class Metric {
 
   toStale(key) {
     var entry = document.getElementById(key).innerHTML;
-    document.getElementById(key).innerHTML = "<span style=\"color: #b1b1b1; font-weight: normal\">" + entry + "</span>";
+    document.getElementById(key).innerHTML = "<span style=\"color: #b1b1b1\">" + entry + "</span>";
   }
 
 	/** 
