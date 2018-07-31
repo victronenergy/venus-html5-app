@@ -147,6 +147,20 @@ header {
 
 /*********** MODULES ***********/
 
+.remoteBtn {
+  line-height: 24px;
+  display: inline-block;
+  background: white;
+  border: none;
+  font-size: 14px;
+  border-radius: 5px;
+  font-weight: bold;
+  padding: 10px 20px;
+  color: #387cc6;
+  position: absolute;
+  right: 10px;
+}
+
 .shorePower {
 	-webkit-box-shadow: inset 0 0 0 2px #387DC5;
 	-moz-box-shadow: inset 0 0 0 2px #387DC5;
