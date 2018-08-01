@@ -15,7 +15,9 @@ To build the metric library run the following command:
 
 	npm run webpack
 
-This will output a `venus-metrics.min.js` file in the build folder which can be used in a browser based web app.
+This will output a `venus-metrics.min.js` file in the build folder which can be used in a browser based web app. In fact, at the moment there is a link in the app/ directory to the file created here in the build folder, which is useful for development to make sure you alway serve the latest version of the library.
+
+For hosting the app, only the app/ directory is nedded, _if_ you _copy_ the `venus-metrics.min.js` into the app/js/directory instead of the link.
 
 ## Running the App in a Dev Environment
 
