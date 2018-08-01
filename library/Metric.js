@@ -43,7 +43,7 @@ export class Metric {
 
   toStale(key) {
     var entry = document.getElementById(key).innerHTML;
-    document.getElementById(key).innerHTML = "<span style=\"color: #b1b1b1\">" + entry + "</span>";
+    document.getElementById(key).innerHTML = "<span class=\"staleValues\">" + entry + "</span>";
   }
 
 	/** 

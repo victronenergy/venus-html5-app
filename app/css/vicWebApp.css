@@ -162,6 +162,10 @@ header {
   font-family: “Handset Condensed”, Helvetica, Arial, Sans-Serif;
 }
 
+.staleValues {
+  color: #b1b1b1;
+}
+
 .shorePower {
 	-webkit-box-shadow: inset 0 0 0 2px #387DC5;
 	-moz-box-shadow: inset 0 0 0 2px #387DC5;
