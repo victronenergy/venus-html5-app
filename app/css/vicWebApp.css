@@ -10,9 +10,9 @@ html, body {
 }
 
 h4 {
-	font-size: 3vw;
+  font-size: 4vw;
   padding-right: 40px;
-  margin-top: 0;
+  margin-top: 10px;
 }
 
 header {
@@ -82,7 +82,8 @@ header {
 	position: absolute;
 	top: 2px;
 	right: 19px;
-	font-size: 46px;
+	font-family: Tahoma;
+	font-size: 56px;
 	margin-left: 50px;
 	color: #FF7427;
 	text-decoration: none;
