@@ -43,15 +43,15 @@ function setupCurrentLimitSelection() {
   selection.innerHTML = "Input Limit";
   container.appendChild(selection);
 
-  usAmperage = [10,15,20,30,50];
-  europeAmperage = [6,12,16,25,32,64]
+  USAmperage = [10,15,20,30,50,100];
+  EUAmperage = [6,10,13,16,25,32,63]
 
   shoreVoltage = metricService.metrics['Ac/Grid/Voltage'].rawValue;
   // shoreVoltage = 110;
 
-  if (shoreVoltage === undefined) amperage = europeAmperage
-  else if (shoreVoltage > 150) amperage = europeAmperage
-  else amperage = usAmperage;
+  if (shoreVoltage === undefined) amperage = EUAmperage
+  else if (shoreVoltage > 150) amperage = EUAmperage
+  else amperage = USAmperage;
 
   amperage.forEach(function(currentValue) {
 		var selection = document.createElement('a');
