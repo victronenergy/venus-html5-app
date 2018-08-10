@@ -1,3 +1,5 @@
+![screenshot](https://raw.githubusercontent.com/victronenergy/venus-webapp/master/victron-webapp-screenshot.png "")
+
 # Venus OS hosted web app
 
 The project consist of two main components:
