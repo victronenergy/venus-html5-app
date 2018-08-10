@@ -465,6 +465,9 @@ header {
 
 /*********** Large Devices, Wide Screens ***********/
 @media only screen and (min-width : 1200px) {
+	.sidenav .amps a, .sidenav .modeBtn a {
+		        font-size: 1.6vw;
+        } 
 	.container {
 			padding: 0 10%;
 	}
