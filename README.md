@@ -29,7 +29,12 @@ In the current configuration, the Venus paho-mqtt server is not configured for o
 
 This could be your development machine as well as e.g. a dedicated RaspberryPi.
 
-Please note, that the MQTT broker the web app connects to has to run on the same IP address as the web server that serves the app: in the end, the app will be run on a Venus device anyway, delivering the data via MQTT(WS) and serve the app from its builtin Hiawatha web server.
+By default, the page will try to connect to the websockified mqtt on the hostname in the url, on port 9001. It is also possible
+to specify a different host and port: use the `host` and `port` query parameters:
+
+	file:///home/matthijs/dev/venus-webapp/app/index.html?host=192.168.178.129&port=1884
+
+This will also change the URL behind the Remote Console button.
 
 ### 1. Running the relay
 

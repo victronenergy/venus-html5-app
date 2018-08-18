@@ -1,4 +1,9 @@
-var deviceInterface = new Venus.MqttInterface(window.location.hostname, 9001); // get IP address of venus server
+var host = getParameterByName('host');
+if (!host) host = window.location.hostname;
+var port = parseInt(getParameterByName('port'));
+if (!port) port = 9001;
+
+var deviceInterface = new Venus.MqttInterface(host, port)
 var metricService = new Venus.MetricService(deviceInterface);
 
 window.timeouts = {};
@@ -10,6 +15,16 @@ window.onload = function() {
 // don't scroll
 window.onscroll = function() {
   window.scrollTo(0,0);
+}
+
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
 // todo: debugging only
