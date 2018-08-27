@@ -20,6 +20,7 @@ header {
   background-color: #387DC5;
   padding: 10px;
   margin-bottom: 10px;
+  position: relative;
 }
 
 /*********** SIDE FLYOUT NAV ***********/
@@ -160,7 +161,9 @@ header {
   color: #387cc6;
   position: absolute;
   right: 10px;
-  font-family: “Handset Condensed”, Helvetica, Arial, Sans-Serif;
+  font-family: "Handset Condensed", Helvetica, Arial, Sans-Serif;
+  top: 50%;
+  margin-top: -22px;
 }
 
 .staleValues {
@@ -492,4 +495,23 @@ header {
 	}
 	.bottomBtn {
     border-radius: 0 0 8px 8px;
+}
+
+/*********** CONNECTION STATUS ***********/
+.connectionStatus {
+    height: 20px;
+    width: 40px;
+    background-color: #2e6bab;
+    border-radius: 7px;
+    border: 2px solid #255a92;
+    position: absolute;
+    top: 50%;
+    margin-top: -10px;
+    margin-left: 20px;
+}
+.connectionOn .connectionStatus {
+    background-color: #8bc964;
+}
+.connectionLost .connectionStatus {
+    background-color: #f35c58;
 }

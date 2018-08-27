@@ -8,8 +8,22 @@ var metricService = new Venus.MetricService(deviceInterface);
 
 window.timeouts = {};
 
+var lastIsAliveState = false;
+
 window.onload = function() {
 	setupMetrics();
+	deviceInterface.connected = function() {
+		document.body.classList.remove('connectionLost');
+		document.body.classList.add('connectionOn');
+	}
+	deviceInterface.lostConnection = function() {
+		document.body.classList.remove('connectionOn');
+		document.body.classList.add('connectionLost');
+		for(var key in metricService.metrics) {
+			var metric = metricService.metrics[key];
+			metric.toStale(metric.key);
+		}
+	}
 }
 
 // don't scroll
@@ -126,19 +140,19 @@ function hideModeSelection() {
 }
 
 function setupMetrics() {
-	metricService.register('Dc/Battery/Voltage', '/system/0/Dc/Battery/Voltage', 'Voltage', 'V', Venus.numericFormatter(1), 20000);
-	metricService.register('Dc/Battery/Current', '/system/0/Dc/Battery/Current', 'Current', 'A', Venus.numericFormatter(1), 20000);
-	metricService.register('Dc/Battery/Power', '/system/0/Dc/Battery/Power', 'Power', 'W', Venus.numericFormatter(), 20000);
-	metricService.register('Dc/Battery/Soc', '/system/0/Dc/Battery/Soc', 'State of charge', '%', Venus.numericFormatter(), 20000);
-	metricService.register('Dc/Loads/Current', '/system/0/Dc/Vebus/Current', 'DC loads current', 'A', Venus.numericFormatter(1), 20000);
-	metricService.register('Dc/Loads/Power', '/system/0/Dc/Vebus/Power', 'DC loads power', 'W', Venus.numericFormatter(), 20000);
-	metricService.register('Ac/Loads/Voltage', '/vebus/257/Ac/Out/L1/V', 'AC loads voltage', 'V', Venus.numericFormatter(), 20000);
-	metricService.register('Ac/Loads/Current', '/vebus/257/Ac/Out/L1/I', 'AC loads current', 'A', Venus.numericFormatter(1), 20000);
-	metricService.register('Ac/Loads/Power', '/vebus/257/Ac/Out/L1/P', 'AC loads power', 'W', Venus.numericFormatter(), 20000);
+	metricService.register('Dc/Battery/Voltage', '/system/0/Dc/Battery/Voltage', 'Voltage', 'V', Venus.numericFormatter(1), 0);
+	metricService.register('Dc/Battery/Current', '/system/0/Dc/Battery/Current', 'Current', 'A', Venus.numericFormatter(1), 0);
+	metricService.register('Dc/Battery/Power', '/system/0/Dc/Battery/Power', 'Power', 'W', Venus.numericFormatter(), 0);
+	metricService.register('Dc/Battery/Soc', '/system/0/Dc/Battery/Soc', 'State of charge', '%', Venus.numericFormatter(), 0);
+	metricService.register('Dc/Loads/Current', '/system/0/Dc/Vebus/Current', 'DC loads current', 'A', Venus.numericFormatter(1), 0);
+	metricService.register('Dc/Loads/Power', '/system/0/Dc/Vebus/Power', 'DC loads power', 'W', Venus.numericFormatter(), 0);
+	metricService.register('Ac/Loads/Voltage', '/vebus/257/Ac/Out/L1/V', 'AC loads voltage', 'V', Venus.numericFormatter(), 0);
+	metricService.register('Ac/Loads/Current', '/vebus/257/Ac/Out/L1/I', 'AC loads current', 'A', Venus.numericFormatter(1), 0);
+	metricService.register('Ac/Loads/Power', '/vebus/257/Ac/Out/L1/P', 'AC loads power', 'W', Venus.numericFormatter(), 0);
 	metricService.register('Ac/Grid/IsConnected', '/Ac/ActiveIn/Connected', 'Grid is connected', '', Venus.numericFormatter());
-	metricService.register('Ac/Grid/Voltage', '/vebus/257/Ac/ActiveIn/L1/V', 'Grid voltage', 'V', Venus.numericFormatter(), 20000);
-	metricService.register('Ac/Grid/Current', '/vebus/257/Ac/ActiveIn/L1/I', 'Grid current', 'A', Venus.numericFormatter(1), 20000);
-	metricService.register('Ac/Grid/Power', '/vebus/257/Ac/ActiveIn/L1/P', 'Grid power', 'W', Venus.numericFormatter(), 20000);
+	metricService.register('Ac/Grid/Voltage', '/vebus/257/Ac/ActiveIn/L1/V', 'Grid voltage', 'V', Venus.numericFormatter(), 0);
+	metricService.register('Ac/Grid/Current', '/vebus/257/Ac/ActiveIn/L1/I', 'Grid current', 'A', Venus.numericFormatter(1), 0);
+	metricService.register('Ac/Grid/Power', '/vebus/257/Ac/ActiveIn/L1/P', 'Grid power', 'W', Venus.numericFormatter(), 0);
 	metricService.register('Ac/Grid/CurrentLimit', '/vebus/257/Ac/ActiveIn/CurrentLimit', 'Grid input limit', 'A', Venus.numericFormatter(), 0, 'rw');
 	metricService.register('System/State', '/system/0/SystemState/State', 'System state', '', function(metric) {
 		if (metric.rawValue == 0) return 'Off';
@@ -155,7 +169,7 @@ function setupMetrics() {
 		if (metric.rawValue == 256) return 'Discharging';
 		if (metric.rawValue == 257) return 'Sustain';
 		return '--';
-	}, 20000);
+	}, 0);
 	metricService.register('System/Mode', '/vebus/257/Mode', 'System mode', '', function(metric) {
 		if (metric.rawValue == 1) return 'Charger only';
 		if (metric.rawValue == 2) return 'Inverter only';
