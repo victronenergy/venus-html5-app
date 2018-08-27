@@ -118,7 +118,7 @@ The easiest way of presenting the metric data is by using html attributes. This 
 ```html
 <div data-metric="dc/battery/power"></div>
 <div data-metric="dc/battery/power" data-property="rawValue"></div>
-<input type="checkbox" data-metric="dc/battery/ischarging" data-binding="checked"></input>
+<input type="checkbox" data-metric="dc/battery/ischarging" data-binding="checked"/>
 ```
 
 To hook up the bindings one must call the `bindElements` method on the metric service:
