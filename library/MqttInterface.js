@@ -13,10 +13,13 @@ export class MqttInterface {
 	 * Create a MqttInterface instance.
 	 * @param {string} host - The host name of the mqtt server.
 	 * @param {numeric} port - The port number of the mqtt server.
+	 * @param {numeric} timeout - The timeout in milliseconds before the interface connection is considered to be lost.
 	 */
-	constructor(host = 'localhost', port = 9001) {
+	constructor(host = 'localhost', port = 9001, timeout = 10000) {
 		this.host = host
 		this.port = port
+		this.timeout = timeout
+		this.isAlive = false
 		this.registeredPaths = {}
 	}
 
@@ -84,6 +87,7 @@ export class MqttInterface {
 		this.client.onMessageArrived = function(message) {
 			try {
 				let topic = message.destinationName
+
 				if (ref.portalId === undefined) {
 					// before the mqtt interface is ready to read or write
 					// metric values it needs to detect its portal id. The 
@@ -101,6 +105,25 @@ export class MqttInterface {
 						ref.keepAlive()
 					}
 				} else {
+					// a message has arrived which means that
+					// the mqtt interface is alive, therefore
+					// we need to reset the is alive timer
+					if (!ref.isAlive) {
+						ref.isAlive = true
+						if (ref.connected != undefined) {
+							ref.connected()
+						}
+					}
+					clearTimeout(ref.isAliveTimerRef)
+					ref.isAliveTimerRef = setTimeout(() => { 
+						ref.isAlive = false
+						if (ref.lostConnection != undefined) {
+							ref.lostConnection()
+						}
+					}, ref.timeout)
+
+					// process the message received and fire
+					// any registered callbacks
 					let prefixLength = ref.portalId.length + 2
 					if (topic.length > prefixLength) {
 						let pathValue = topic.substring(prefixLength)
