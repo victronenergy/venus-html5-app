@@ -371,6 +371,24 @@ header {
     width: 100%;
 }
 
+/*********** CONNECTION STATUS ***********/
+.connectionStatus {
+    height: 20px;
+    width: 40px;
+    background-color: #2e6bab;
+    border-radius: 7px;
+    border: 2px solid #255a92;
+    position: absolute;
+    top: 50%;
+    margin-top: -10px;
+    margin-left: 20px;
+}
+.connectionOn .connectionStatus {
+    background-color: #8bc964;
+}
+.connectionLost .connectionStatus {
+    background-color: #f35c58;
+}
 
 /*********** Extra Small Devices, Phones ***********/
 @media only screen and (min-width : 480px) {
@@ -495,23 +513,4 @@ header {
 	}
 	.bottomBtn {
     border-radius: 0 0 8px 8px;
-}
-
-/*********** CONNECTION STATUS ***********/
-.connectionStatus {
-    height: 20px;
-    width: 40px;
-    background-color: #2e6bab;
-    border-radius: 7px;
-    border: 2px solid #255a92;
-    position: absolute;
-    top: 50%;
-    margin-top: -10px;
-    margin-left: 20px;
-}
-.connectionOn .connectionStatus {
-    background-color: #8bc964;
-}
-.connectionLost .connectionStatus {
-    background-color: #f35c58;
 }

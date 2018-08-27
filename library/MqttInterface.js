@@ -84,6 +84,13 @@ export class MqttInterface {
 		this.client = new Paho.MQTT.Client(this.host, this.port, this.clientId)
 		let ref = this
 
+		ref.isAliveTimerRef = setTimeout(() => { 
+			ref.isAlive = false
+			if (ref.lostConnection != undefined) {
+				ref.lostConnection()
+			}
+		}, ref.timeout)
+
 		this.client.onMessageArrived = function(message) {
 			try {
 				let topic = message.destinationName
