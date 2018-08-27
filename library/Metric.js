@@ -42,8 +42,10 @@ export class Metric {
 	get rawValue() { return this._rawValue }
 
   toStale(key) {
-    var entry = document.getElementById(key).innerHTML;
-    document.getElementById(key).innerHTML = "<span class=\"staleValues\">" + entry + "</span>";
+  	var element = document.getElementById(key);
+  	if (element != undefined && element != null) {
+  		element.innerHTML = '<span class="staleValues">' + element.innerHTML + '</span>';
+  	}
   }
 
 	/** 
