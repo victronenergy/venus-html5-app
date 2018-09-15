@@ -2,73 +2,45 @@
 
 # Venus OS hosted web app
 
-The project consist of two main components:
+The "app" is a simle static html5 application (html/css/js), that communicates to the
+rest of Venus OS via MQTT over websockets.
 
-* Venus metric library `/library`
-* Web app `/app`
+The project consist of four main components:
 
-### Setup environment
+* `/library` -> the metric library sources
+* `/app    ` -> the web app sources, including the compiled version of the metric library
+* `/*      ` -> some nodejs files used to compile the metric library
 
-	npm install
 
-### Building the Library
+### Developing your own custom UI
 
-To build the metric library run the following command:
+The project is set-up such, that you can use the app (html, css) as an example for how
+to implement your own custom user interface. And use the metric library as is. When
+you need changes in the metric library, please put in a Pull Request, so we keep one
+version.
 
-	npm run webpack
 
-This will output a `venus-metrics.min.js` file in the build folder which can be used in a browser based web app. In fact, at the moment there is a link in the app/ directory to the file created here in the build folder, which is useful for development to make sure you alway serve the latest version of the library.
+### Running & developing the app from your computer
 
-For hosting the app, only the app/ directory is nedded, _if_ you _copy_ the `venus-metrics.min.js` into the app/js/directory instead of the link.
+It is not necessary to run it from a webserver; as all files are static. Simply open
+index.html in a browser.
 
-## Running the App in a Dev Environment
+The communicates to the rest of Venus OS, to for example retrieve battery voltages, or
+change input current limit, via the MQTT protocol, over websockets. It connects to the
+MQTT broker running on Venus OS.
 
-Since the app is reading MQTT data and runs in a browser, it needs to be able to read MQTT from Venus via WebSocket.
-
-In the current configuration, the Venus paho-mqtt server is not configured for offering MQTT via WebSocket, therefore we provide a small relay, that reads MQTT from the Venus device and relays it to a MQTT broker on localhost.
-
-This could be your development machine as well as e.g. a dedicated RaspberryPi.
-
-By default, the page will try to connect to the websockified mqtt on the hostname in the url, on port 9001. It is also possible
-to specify a different host and port: use the `host` and `port` query parameters:
+By default, the page expects the broker to listen on the hostname in the url, on port
+9001. It is also possible to specify a different host and port: use the `host` and
+`port` query parameters:
 
 	file:///home/matthijs/dev/venus-webapp/app/index.html?host=192.168.178.129&port=1884
 
-This will also change the URL behind the Remote Console button.
+Tip: enable the Demo mode on the Venus device; see Settings -> General. This allows to
+get useful data if you have only the Venus device and no other Victron devices. without
+requiring various Victron devices to be connected to the Venus device.
 
-### 1. Running the relay
 
-Prerequisite: you need to have an MQTT broker running on localhost, with MQTT over WebSockets configured additionally to the default MQTT transport.
-
-If you don't have one running or don't want to install it, you can run one using docker:
-
-	docker run -ti -p 1883:1883 -p 9001:9001 toke/mosquitto
-
-(which will fail, if you have one already running on ports 1883 and 9001)
-
-In the project's base directory edit 'mqtt-relay.js': in the top, set the IP address and portalID of your Venus device, then run
-
-	node mqtt-relay.js
-
-### 2. Run the web server
-
-In the 'app' directory, run:
-
-	python -m http.server 8080
-
-for Python3, or
-
-	python -m SimpleHTTPServer 8080
-
-for Python2.
-
-### 3. Run the announcer
-
-In the projects base directory, run:
-
-	./service_announcement.sh
-
-## Development
+## Metrics Library documentation
 
 ### Setting up a metric service
 
@@ -79,15 +51,20 @@ var metricService = new Venus.MetricService(deviceInterface);
 
 ### Metrics
 
-When we have the metric service in place we need to setup our metrics. Each metric needs to have a unique key, a path to the device interface, some meta-data and a formatter that turns the raw value into a user-friendy string for display. All metric also has an access specifier that determines read/writeability.
+When we have the metric service in place, we need to setup our metrics. Each metric needs
+to have a unique key, a path to the device interface, some meta-data and a formatter that
+turns the raw value into a user-friendy string for display. All metric also has an access
+specifier that determines read/writeability.
 
 NOTE: A metric needs to have the correct access for read/write to work as expected. `'r', 'w' or 'rw'`
 
-The available VenusOS dbus paths can be found at: <https://github.com/victronenergy/venus/wiki/dbus>
+The available Venus OS dbus paths can be found at: <https://github.com/victronenergy/venus/wiki/dbus>
 
 #### Defining metrics
 
-The following line will register a metric `dc/battery/voltage` that will update using the `/system/0/Dc/Battery/Voltage` dbus path. The display is then formatted with 1 decimal point. The `'r'` represents the access specifier.
+The following line will register a metric `dc/battery/voltage` that will update using the
+`/system/0/Dc/Battery/Voltage` dbus path. The display is then formatted with 1 decimal
+point. The `'r'` represents the access specifier.
 
 	metricService.register('dc/battery/voltage', '/system/0/Dc/Battery/Voltage', 'Voltage', 'V', Venus.numericFormatter(1), 'r');
 
@@ -109,7 +86,8 @@ metricService.register('system/mode', '/vebus/257/Mode', 'System mode', '', func
 
 ### Data binding using HTML
 
-The easiest way of presenting the metric data is by using html attributes. This method simply uses a property on the metric to update a property of a HTML element.
+The easiest way of presenting the metric data is by using html attributes. This method
+simply uses a property on the metric to update a property of a HTML element.
 
 * `data-metric` contains the metric key to bind and is required.
 * `data-metric-property` contains the property on the metric to display and is optional (defaults to `value`).
@@ -129,7 +107,8 @@ metricService.bindElements();
 
 ### Custom data binding
 
-Sometimes the simple property binding is not enough. Maybe you need to use some script that is more complex. In those cases subscribe to the metrics on change callback:
+Sometimes the simple property binding is not enough. Maybe you need to use some script that
+is more complex. In those cases subscribe to the metrics on change callback:
 
 ```javascript
 metric.addOnChangeCallback(function(metric) {
@@ -140,7 +119,8 @@ metric.addOnChangeCallback(function(metric) {
 
 ## Metric service callbacks
 
-You can also subscribe to metric changes using callbacks and implement a completely custom data binding.
+You can also subscribe to metric changes using callbacks and implement a completely custom
+data binding.
 
 ### Registered metric data
 
@@ -161,3 +141,18 @@ metricService.onRawUpdate = function(path, value) {
   console.log(path + '=' + value);
 };
 ```
+
+### Building the Library
+
+First setup the build environment:
+
+	npm install
+
+To build the metric library run the following command:
+
+	npm run webpack
+
+This will output a `venus-metrics.min.js` file in the build folder.
+
+Make sure to copy it to `/app/library` when making a release.
+
