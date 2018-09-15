@@ -5,6 +5,15 @@
 The "app" is a simle static html5 application (html/css/js), that communicates to the
 rest of Venus OS via MQTT over websockets.
 
+Its primary purpose is to be a simple to use and nice looking UI for a Victron system on
+marine Multi Functional Displays, such as the ones from Garmin, Simrad and others.
+
+Which then removes the need for a Victron panel at the helm: less clutter on the
+dashboard.
+
+The secondary purpose is to help OEMs, boat builders and motorhome builders for example,
+make their own custom UI.
+
 The project consist of four main components:
 
 * `/library` -> the metric library sources
