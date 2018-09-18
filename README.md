@@ -1,4 +1,4 @@
-![screenshot](https://raw.githubusercontent.com/victronenergy/venus-webapp/master/victron-webapp-screenshot.png "")
+![screenshot](/victron-webapp-screenshot.png?raw=true "")
 
 # Venus OS hosted web app
 
