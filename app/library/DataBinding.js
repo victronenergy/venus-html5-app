@@ -4,8 +4,7 @@
  * a callback by calling addOnChangeCallback on the metric, which will
  * then be responsible for updating the element when the metric value changes.
  */
-export class DataBinding
-{
+class DataBinding {
 	/** 
 	 * Create a data binding. 
 	 * @param {HTMLElement} element - The HTML element that displays the metric.
