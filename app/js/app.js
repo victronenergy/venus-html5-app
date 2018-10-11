@@ -1,4 +1,5 @@
 var host = getParameterByName('host');
+
 if (!host) host = window.location.hostname;
 if (!host) host = 'localhost';
 var port = parseInt(getParameterByName('port'));

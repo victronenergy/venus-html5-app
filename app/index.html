@@ -35,8 +35,9 @@
 
   <header>
     <img src="images/logo-vic.svg">
-    <input type="button" value="Toggle shore power" style="display:none ; float: right;" onclick="toggleShorePower();"></input>
-    <input type="button" value="Toggle shore voltage" style="display:none; float: right;" onclick="toggleShoreVoltage();"></input>
+    <input type="button" value="Toggle shore power" style="display:none ; float: right;" onclick="toggleShorePower();" />
+    <input type="button" value="Toggle shore voltage" style="display:none; float: right;" onclick="toggleShoreVoltage();" />
+    <input type="button" value="Reload page" style="display: none;"onclick="location.reload(true);" id="devReload" />
     <input class="remoteBtn" type="button" onclick="location.href='http://' + host;" value="Remote Console" />
     <a href=""></a>
     <div class="connectionStatus"></div>
@@ -71,6 +72,14 @@
         <span class="voltage"><span data-metric="Dc/Loads/Current"></span>&nbsp;&nbsp;&nbsp;<span data-metric="Dc/Loads/Power"></span></br>
     </div>
 </div>
+<script>
+  (function() {
+    // Small convenience button to reload the page on test device :)
+    if (getParameterByName('dev')) {
+	    document.getElementById('devReload').style.display = 'block'
+    }
+  })();
+</script>
 <!--<img src="images/logo-grey-vic.png" style="position: absolute;bottom: 10px;left: 10px;">-->
 </body>
 

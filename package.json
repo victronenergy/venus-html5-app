@@ -4,7 +4,7 @@
   "description": "Metric framework for Victron VenusOS",
   "main": "index.js",
   "scripts": {
-    "dev": "live-server --open='?host=10.46.107.13' app/",
+    "dev": "live-server --open='?host=10.46.107.13&dev=true' app/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
