@@ -6,7 +6,7 @@
  * - A metric uses a formatter function to convert the raw value to a display value (string).
  *   Use the provided defaultFormatter, numericFormatter functions or write your own to format a custom value.
  */
-export class Metric {
+class Metric {
 	/** 
 	 * Create a Metric instance.
 	 * @param {string} key - A unique key identifying the metric.
@@ -21,10 +21,10 @@ export class Metric {
 		this.description = description
 		this.unit = unit
 		this.formatter = formatter === undefined ? defaultFormatter() : formatter
-    this.timeout = timeout === undefined ? 0 : timeout
+		this.timeout = timeout === undefined ? 0 : timeout
 		this._rawValue = undefined
 		this.callbacks = []
-    this.timerReference = undefined
+		this.timerReference = undefined
 	}
 
 	/**
@@ -32,8 +32,8 @@ export class Metric {
 	 * @return {string} The formatted value.
 	 */
 	get value() {
-    return '<span id=' + this.key + '>' + this.formatter(this) + '</a>';
-  }
+		return '<span id=' + this.key + '>' + this.formatter(this) + '</a>';
+	}
 
 	/**
 	 * Get the raw value of the metric.
@@ -41,25 +41,25 @@ export class Metric {
 	 */
 	get rawValue() { return this._rawValue }
 
-  toStale(key) {
-  	var element = document.getElementById(key);
-  	if (element != undefined && element != null) {
-  		element.innerHTML = '<span class="staleValues">' + element.innerHTML + '</span>';
-  	}
-  }
+	toStale(key) {
+		var element = document.getElementById(key);
+		if (element != undefined && element != null) {
+			element.innerHTML = '<span class="staleValues">' + element.innerHTML + '</span>';
+		}
+	}
 
 	/** 
 	 * Set the raw value of the metric.
 	 * This will also fire any callbacks registered using the addOnChangeCallback method.
 	 * @param {} rawValue - The new raw value.
 	 */
-	set rawValue(rawValue) { 
+	set rawValue(rawValue) {
 		this._rawValue = rawValue
 
-    if (this.timeout > 0) {
-      clearTimeout(this.timerReference);
-      this.timerReference = setTimeout(this.toStale.bind(this, this.key), this.timeout);
-    }
+		if (this.timeout > 0) {
+			clearTimeout(this.timerReference);
+			this.timerReference = setTimeout(this.toStale.bind(this, this.key), this.timeout);
+		}
 
 		this.callbacks.forEach((callback) => { callback(this) })
 	}
@@ -78,7 +78,7 @@ export class Metric {
  * @param {string} defaultValue - The value that is displayed if the metric raw value is null or undefined.
  * @return A formatting function.
  */
-export function defaultFormatter(defaultValue = '--') {
+function defaultFormatter(defaultValue = '--') {
 	return (metric) => {
 		if (metric.rawValue === undefined || metric.rawValue === null) {
 			return defaultValue + metric.unit
@@ -94,7 +94,7 @@ export function defaultFormatter(defaultValue = '--') {
  * @param {string} defaultValue - The value that is displayed if the metric raw value is null or undefined.
  * @return A formatting function.
  */
-export function numericFormatter(precision = 0, factor = 1.0, defaultValue = '--') {
+function numericFormatter(precision = 0, factor = 1.0, defaultValue = '--') {
 	return (metric) => {
 		if (metric.rawValue === undefined || metric.rawValue === null) {
 			return defaultValue + metric.unit

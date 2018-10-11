@@ -10,7 +10,7 @@
  * - Listen to changes to registered metrics using the onUpdate callback (metric) => {}
  * - Listen to changes to any metric using the onRawUpdate callback (path, value) => {}
  */
-export class MetricService {
+class MetricService {
 	/**
 	 * Create a new MetricService instance.
 	 * @param {Interface} deviceInterface - The device interface to use.
@@ -38,7 +38,7 @@ export class MetricService {
 		this.deviceInterface.onRawUpdate = (path, value) => {
 			if (ref.onRawUpdate !== undefined) {
 				ref.onRawUpdate(path, value)
-			}			
+			}
 		}
 		this.deviceInterface.connect()
 	}
@@ -61,7 +61,7 @@ export class MetricService {
 	 * @return {Metric} The registered metric
 	 */
 	register(key, path, description, unit, formatter, timeout, access = 'r') {
-		let metric = new Venus.Metric(key, description, unit, formatter, timeout)
+		let metric = new Metric(key, description, unit, formatter, timeout)
 		this.metrics[key] = metric
 		if (path !== undefined) {
 			this.deviceInterface.register(key, path, access)
@@ -90,7 +90,7 @@ export class MetricService {
 		if (metric === undefined) {
 			throw `Binding failed. No registered metric ${metricKey} was found.`
 		}
-		this.bindings.push(new Venus.DataBinding(element, elementProperty, metric, metricProperty))
+		this.bindings.push(new DataBinding(element, elementProperty, metric, metricProperty))
 	}
 
 	/**
@@ -111,7 +111,7 @@ export class MetricService {
 	 */
 	bindElements(element) {
 		let ref = this
-		for (let i=0; i<element.childNodes.length; i++) {
+		for (let i = 0; i < element.childNodes.length; i++) {
 			let childNode = element.childNodes[i]
 			if (childNode.attributes !== undefined) {
 				let dataMetricAttribute = childNode.attributes['data-metric']
@@ -128,7 +128,7 @@ export class MetricService {
 				if (dataMetricAttribute !== undefined) {
 					let metric = ref.metrics[dataMetricAttribute.nodeValue]
 					if (metric !== undefined) {
-						ref.bindings.push(new Venus.DataBinding(childNode, dataBindingProperty, metric, dataMetricProperty))
+						ref.bindings.push(new DataBinding(childNode, dataBindingProperty, metric, dataMetricProperty))
 					}
 					else {
 						console.warn(`Binding element failed. No registered metric ${dataMetricAttribute.nodeValue} was found.`)

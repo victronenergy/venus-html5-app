@@ -8,7 +8,7 @@
  * - Listen to raw changes using the onRawUpdate callback (path, rawValue) => {}
  * - Listen to errors using the onError callback (error) => {}
  */
-export class MqttInterface {
+class MqttInterface {
 	/**
 	 * Create a MqttInterface instance.
 	 * @param {string} host - The host name of the mqtt server.
@@ -84,14 +84,14 @@ export class MqttInterface {
 		this.client = new Paho.MQTT.Client(this.host, this.port, this.clientId)
 		let ref = this
 
-		ref.isAliveTimerRef = setTimeout(() => { 
+		ref.isAliveTimerRef = setTimeout(() => {
 			ref.isAlive = false
 			if (ref.lostConnection != undefined) {
 				ref.lostConnection()
 			}
 		}, ref.timeout)
 
-		this.client.onMessageArrived = function(message) {
+		this.client.onMessageArrived = function (message) {
 			try {
 				let topic = message.destinationName
 
@@ -122,7 +122,7 @@ export class MqttInterface {
 						}
 					}
 					clearTimeout(ref.isAliveTimerRef)
-					ref.isAliveTimerRef = setTimeout(() => { 
+					ref.isAliveTimerRef = setTimeout(() => {
 						ref.isAlive = false
 						if (ref.lostConnection != undefined) {
 							ref.lostConnection()
@@ -151,9 +151,11 @@ export class MqttInterface {
 			}
 		}
 
-		this.client.connect({onSuccess: function(reconnect, uri) {
-			ref.client.subscribe('N/#')
-		}})
+		this.client.connect({
+			onSuccess: function (reconnect, uri) {
+				ref.client.subscribe('N/#')
+			}
+		})
 	}
 
 	/**
@@ -173,14 +175,14 @@ export class MqttInterface {
 	 * @param {string} key - The metric key.
 	 */
 	read(key) {
-		if (this.portalId === undefined) { 
-			throw 'Read failed. The mqtt interface has not detected its portal id yet' 
+		if (this.portalId === undefined) {
+			throw 'Read failed. The mqtt interface has not detected its portal id yet'
 		}
 		let path = this.lookupKey(key)
-		if (path === undefined) { 
-			throw `Read failed. There is no path registered for key: ${key}` 
+		if (path === undefined) {
+			throw `Read failed. There is no path registered for key: ${key}`
 		}
-		if (!path.isReadable) { 
+		if (!path.isReadable) {
 			throw `Read failed. The path with key ${key} is not readable`
 		}
 		this.client.send(`R/${this.portalId}${path.value}`, '')
@@ -192,17 +194,17 @@ export class MqttInterface {
 	 * @param {} value - The value to write.
 	 */
 	write(key, value) {
-		if (this.portalId === undefined) { 
-			throw 'Write failed. The mqtt interface has not detected its portal id yet' 
+		if (this.portalId === undefined) {
+			throw 'Write failed. The mqtt interface has not detected its portal id yet'
 		}
 		let path = this.lookupKey(key)
-		if (path === undefined) { 
-			throw `Write failed. There is no path registered for key: ${key}` 
+		if (path === undefined) {
+			throw `Write failed. There is no path registered for key: ${key}`
 		}
-		if (!path.isWritable) { 
+		if (!path.isWritable) {
 			throw `Write failed. The path with key ${key} is not writable`
 		}
-		let data = JSON.stringify({ value: value})
+		let data = JSON.stringify({ value: value })
 		this.client.send(`W/${this.portalId}${path.value}`, data)
 	}
 
@@ -221,7 +223,7 @@ export class MqttInterface {
  * The MqttInterfacePath class represents a cross-reference between 
  * a metric key and its mqtt path, and also the access of that reference.
  */
-export class MqttInterfacePath {
+class MqttInterfacePath {
 	/**
 	 * Create a MqttInterfacePath instance.
 	 * @param {string} path - The mqtt path of the value.
