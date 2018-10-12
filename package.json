@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "live-server": "^1.2.0",
-    "mqtt": "^2.18.3"
+    "mqtt": "^2.18.3",
+    "prettier": "^1.14.3"
   }
 }
