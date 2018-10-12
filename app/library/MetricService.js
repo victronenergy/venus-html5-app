@@ -85,19 +85,12 @@ class MetricService {
    * @param {Metric} metric - The metric instance
    * @param {string} metricProperty - The name of the property on the metric which holds the formatted value to display (for instance value).
    */
-  bind(
-    element,
-    elementProperty = "innerHTML",
-    metricKey,
-    metricProperty = "value"
-  ) {
+  bind(element, elementProperty = "innerHTML", metricKey, metricProperty = "value") {
     let metric = this.metrics[metricKey]
     if (metric === undefined) {
       throw `Binding failed. No registered metric ${metricKey} was found.`
     }
-    this.bindings.push(
-      new DataBinding(element, elementProperty, metric, metricProperty)
-    )
+    this.bindings.push(new DataBinding(element, elementProperty, metric, metricProperty))
   }
 
   /**
@@ -128,8 +121,7 @@ class MetricService {
       let childNode = element.childNodes[i]
       if (childNode.attributes !== undefined) {
         let dataMetricAttribute = childNode.attributes["data-metric"]
-        let dataMetricPropertyAttribute =
-          childNode.attributes["data-metric-property"]
+        let dataMetricPropertyAttribute = childNode.attributes["data-metric-property"]
         let dataBindingAttribute = childNode.attributes["data-binding"]
         let dataBindingProperty = "innerHTML"
         if (dataBindingAttribute !== undefined) {
@@ -142,20 +134,9 @@ class MetricService {
         if (dataMetricAttribute !== undefined) {
           let metric = ref.metrics[dataMetricAttribute.nodeValue]
           if (metric !== undefined) {
-            ref.bindings.push(
-              new DataBinding(
-                childNode,
-                dataBindingProperty,
-                metric,
-                dataMetricProperty
-              )
-            )
+            ref.bindings.push(new DataBinding(childNode, dataBindingProperty, metric, dataMetricProperty))
           } else {
-            console.warn(
-              `Binding element failed. No registered metric ${
-                dataMetricAttribute.nodeValue
-              } was found.`
-            )
+            console.warn(`Binding element failed. No registered metric ${dataMetricAttribute.nodeValue} was found.`)
           }
         }
       }

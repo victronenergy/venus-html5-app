@@ -46,8 +46,7 @@ class Metric {
   toStale(key) {
     var element = document.getElementById(key)
     if (element != undefined && element != null) {
-      element.innerHTML =
-        '<span class="staleValues">' + element.innerHTML + "</span>"
+      element.innerHTML = '<span class="staleValues">' + element.innerHTML + "</span>"
     }
   }
 
@@ -61,10 +60,7 @@ class Metric {
 
     if (this.timeout > 0) {
       clearTimeout(this.timerReference)
-      this.timerReference = setTimeout(
-        this.toStale.bind(this, this.key),
-        this.timeout
-      )
+      this.timerReference = setTimeout(this.toStale.bind(this, this.key), this.timeout)
     }
 
     this.callbacks.forEach(callback => {
@@ -108,8 +104,6 @@ function numericFormatter(precision = 0, factor = 1.0, defaultValue = "--") {
       return defaultValue + metric.unit
     }
     let value = Number(metric.rawValue) * factor
-    return precision === undefined
-      ? value.toString() + metric.unit
-      : value.toFixed(precision) + metric.unit
+    return precision === undefined ? value.toString() + metric.unit : value.toFixed(precision) + metric.unit
   }
 }

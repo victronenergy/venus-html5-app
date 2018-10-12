@@ -52,12 +52,8 @@ function toggleShorePower() {
   } else {
     metricService.metrics["Dc/Battery/Soc"].rawValue = 35
     metricService.metrics["Ac/Grid/IsConnected"].rawValue = 0
-    metricService.metrics["Dc/Battery/Current"].formatter = numericFormatter(
-      1,
-      -1
-    )
-    metricService.metrics["Dc/Battery/Current"].rawValue =
-      metricService.metrics["Dc/Battery/Current"].rawValue + 0.1
+    metricService.metrics["Dc/Battery/Current"].formatter = numericFormatter(1, -1)
+    metricService.metrics["Dc/Battery/Current"].rawValue = metricService.metrics["Dc/Battery/Current"].rawValue + 0.1
   }
 }
 
@@ -91,10 +87,7 @@ function setupCurrentLimitSelection() {
     var selection = document.createElement("a")
     selection.href = "#"
     selection.innerHTML = currentValue + "A"
-    selection.addEventListener(
-      "click",
-      createSetInputLimitFunction(currentValue)
-    )
+    selection.addEventListener("click", createSetInputLimitFunction(currentValue))
     container.appendChild(selection)
   })
 }
@@ -128,17 +121,13 @@ function setMode(mode) {
 function showModeSelection() {
   document.getElementById("setModeOnButton").classList.remove("modeBtnOn")
   document.getElementById("setModeOffButton").classList.remove("modeBtnOn")
-  document
-    .getElementById("setModeChargeOnlyButton")
-    .classList.remove("modeBtnOn")
+  document.getElementById("setModeChargeOnlyButton").classList.remove("modeBtnOn")
   if (metricService.metrics["System/Mode"].rawValue === 3) {
     document.getElementById("setModeOnButton").classList.add("modeBtnOn")
   } else if (metricService.metrics["System/Mode"].rawValue === 4) {
     document.getElementById("setModeOffButton").classList.add("modeBtnOn")
   } else if (metricService.metrics["System/Mode"].rawValue === 1) {
-    document
-      .getElementById("setModeChargeOnlyButton")
-      .classList.add("modeBtnOn")
+    document.getElementById("setModeChargeOnlyButton").classList.add("modeBtnOn")
   }
   document.getElementById("myMultiPlus").style.width = "350px"
 }
@@ -148,38 +137,10 @@ function hideModeSelection() {
 }
 
 function setupMetrics() {
-  metricService.register(
-    "Dc/Battery/Voltage",
-    "/system/0/Dc/Battery/Voltage",
-    "Voltage",
-    "V",
-    numericFormatter(1),
-    0
-  )
-  metricService.register(
-    "Dc/Battery/Current",
-    "/system/0/Dc/Battery/Current",
-    "Current",
-    "A",
-    numericFormatter(1),
-    0
-  )
-  metricService.register(
-    "Dc/Battery/Power",
-    "/system/0/Dc/Battery/Power",
-    "Power",
-    "W",
-    numericFormatter(),
-    0
-  )
-  metricService.register(
-    "Dc/Battery/Soc",
-    "/system/0/Dc/Battery/Soc",
-    "State of charge",
-    "%",
-    numericFormatter(),
-    0
-  )
+  metricService.register("Dc/Battery/Voltage", "/system/0/Dc/Battery/Voltage", "Voltage", "V", numericFormatter(1), 0)
+  metricService.register("Dc/Battery/Current", "/system/0/Dc/Battery/Current", "Current", "A", numericFormatter(1), 0)
+  metricService.register("Dc/Battery/Power", "/system/0/Dc/Battery/Power", "Power", "W", numericFormatter(), 0)
+  metricService.register("Dc/Battery/Soc", "/system/0/Dc/Battery/Soc", "State of charge", "%", numericFormatter(), 0)
   metricService.register(
     "Dc/Loads/Current",
     "/system/0/Dc/Vebus/Current",
@@ -188,69 +149,14 @@ function setupMetrics() {
     numericFormatter(1),
     0
   )
-  metricService.register(
-    "Dc/Loads/Power",
-    "/system/0/Dc/Vebus/Power",
-    "DC loads power",
-    "W",
-    numericFormatter(),
-    0
-  )
-  metricService.register(
-    "Ac/Loads/Voltage",
-    "/vebus/257/Ac/Out/L1/V",
-    "AC loads voltage",
-    "V",
-    numericFormatter(),
-    0
-  )
-  metricService.register(
-    "Ac/Loads/Current",
-    "/vebus/257/Ac/Out/L1/I",
-    "AC loads current",
-    "A",
-    numericFormatter(1),
-    0
-  )
-  metricService.register(
-    "Ac/Loads/Power",
-    "/vebus/257/Ac/Out/L1/P",
-    "AC loads power",
-    "W",
-    numericFormatter(),
-    0
-  )
-  metricService.register(
-    "Ac/Grid/IsConnected",
-    "/Ac/ActiveIn/Connected",
-    "Grid is connected",
-    "",
-    numericFormatter()
-  )
-  metricService.register(
-    "Ac/Grid/Voltage",
-    "/vebus/257/Ac/ActiveIn/L1/V",
-    "Grid voltage",
-    "V",
-    numericFormatter(),
-    0
-  )
-  metricService.register(
-    "Ac/Grid/Current",
-    "/vebus/257/Ac/ActiveIn/L1/I",
-    "Grid current",
-    "A",
-    numericFormatter(1),
-    0
-  )
-  metricService.register(
-    "Ac/Grid/Power",
-    "/vebus/257/Ac/ActiveIn/L1/P",
-    "Grid power",
-    "W",
-    numericFormatter(),
-    0
-  )
+  metricService.register("Dc/Loads/Power", "/system/0/Dc/Vebus/Power", "DC loads power", "W", numericFormatter(), 0)
+  metricService.register("Ac/Loads/Voltage", "/vebus/257/Ac/Out/L1/V", "AC loads voltage", "V", numericFormatter(), 0)
+  metricService.register("Ac/Loads/Current", "/vebus/257/Ac/Out/L1/I", "AC loads current", "A", numericFormatter(1), 0)
+  metricService.register("Ac/Loads/Power", "/vebus/257/Ac/Out/L1/P", "AC loads power", "W", numericFormatter(), 0)
+  metricService.register("Ac/Grid/IsConnected", "/Ac/ActiveIn/Connected", "Grid is connected", "", numericFormatter())
+  metricService.register("Ac/Grid/Voltage", "/vebus/257/Ac/ActiveIn/L1/V", "Grid voltage", "V", numericFormatter(), 0)
+  metricService.register("Ac/Grid/Current", "/vebus/257/Ac/ActiveIn/L1/I", "Grid current", "A", numericFormatter(1), 0)
+  metricService.register("Ac/Grid/Power", "/vebus/257/Ac/ActiveIn/L1/P", "Grid power", "W", numericFormatter(), 0)
   metricService.register(
     "Ac/Grid/CurrentLimit",
     "/vebus/257/Ac/ActiveIn/CurrentLimit",
@@ -299,21 +205,15 @@ function setupMetrics() {
     "rw"
   )
 
-  metricService.metrics["Ac/Grid/IsConnected"].addOnChangeCallback(function(
-    metric
-  ) {
+  metricService.metrics["Ac/Grid/IsConnected"].addOnChangeCallback(function(metric) {
     if (metric.rawValue == 1) {
       document.getElementById("shorePowerContainer").classList.add("shorePower")
     } else {
-      document
-        .getElementById("shorePowerContainer")
-        .classList.remove("shorePower")
+      document.getElementById("shorePowerContainer").classList.remove("shorePower")
     }
   })
 
-  metricService.metrics["Dc/Battery/Current"].addOnChangeCallback(function(
-    metric
-  ) {
+  metricService.metrics["Dc/Battery/Current"].addOnChangeCallback(function(metric) {
     var container = document.getElementById("batteryContainer")
     if (Number(metric.value) < 0) {
       container.classList.add("batteryDischarge")

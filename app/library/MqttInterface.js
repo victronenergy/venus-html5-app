@@ -34,11 +34,7 @@ class MqttInterface {
       path = "/" + path
     }
     let lowerCaseAccess = access.toLowerCase()
-    if (
-      lowerCaseAccess !== "r" &&
-      lowerCaseAccess !== "w" &&
-      lowerCaseAccess !== "rw"
-    ) {
+    if (lowerCaseAccess !== "r" && lowerCaseAccess !== "w" && lowerCaseAccess !== "rw") {
       throw `Unallowed access ${access}`
     }
     this.registeredPaths[path] = new MqttInterfacePath(path, key, access)
@@ -140,12 +136,7 @@ class MqttInterface {
             let pathValue = topic.substring(prefixLength)
             let path = ref.lookupPath(pathValue)
             let data = JSON.parse(message.payloadString)
-            if (
-              ref.onUpdate !== undefined &&
-              path !== undefined &&
-              path.isReadable &&
-              data.value !== undefined
-            ) {
+            if (ref.onUpdate !== undefined && path !== undefined && path.isReadable && data.value !== undefined) {
               ref.onUpdate(path.key, data.value)
             }
             if (ref.onRawUpdate !== undefined) {
