@@ -1,4 +1,4 @@
-### MQTT vs D-Bus
+### MQTT TOPICS
 
 The data originates from D-Bus on Venus OS. Detailed spec is
 [here](https://github.com/victronenergy/venus/wiki/dbus). There
@@ -19,6 +19,9 @@ system           -> Service type
 /Dc/Battery/Soc  -> D-Bus path.
 ```
 
+On D-Bus, data is sent on change. And dbus-mqtt translates each transmission on D-Bus, called
+a PropertiesChanged message, to a mqtt publish().
+
 ### What topics have what data?
 
 First, note that most data comes from the system device. See explanation on the dbus wiki page
@@ -35,7 +38,7 @@ system/0/Dc/Pv/*
 
 #### Inverter/charger data:
 ```
-All prefixed with system/0/ unless said otherwise:
+All prefixed with system/0/
 
 /Dc/Vebus/Current              <- charge/discharge current between battery
                                   and inverter/charger
@@ -76,10 +79,10 @@ VebusService                                                                    
 ```
 
 The instance you are looking for is the instance of the main VebusService, in above example that is
-com.victronenergy.vebus.ttyO1. So:
+`com.victronenergy.vebus.ttyO1`. So:
 
-1. request system/0/VebusService
-2. look that up in the values of ServiceMapping/*
+1. request `system/0/VebusService`
+2. look that up in the values of `system/0ServiceMapping/*`
 3. take the digit behind the last underscore, and now you'll know the instance
 
 With above example, the instance is 257, making the prefix `vebus/257`.
