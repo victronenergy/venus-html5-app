@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ -z "$1" ]; then
+    echo "Host not set. Usage: $0 <host ip>"
+    exit -1
+fi
+
 POSITIONAL=()
 while [[ $# -gt 0 ]]; do
     key="$1"
@@ -10,12 +15,7 @@ while [[ $# -gt 0 ]]; do
             shift # past argument
             shift # past value
         ;;
-        -h|--host)
-            HOST="$2"
-            shift # past argument
-            shift # past value
-        ;;
-        *)    # unknown option
+        *)  # unknown option
             POSITIONAL+=("$1") # save it in an array for later
             shift # past argument
         ;;
@@ -24,6 +24,8 @@ done
 set -- "${POSITIONAL[@]}" # restore positional parameters
 
 USERNAME=${USERNAME:-root}
-HOST=${HOST:-10.46.107.13}
+HOST="$1"
+
+echo "Uploading app/ to ${USERNAME}@${HOST}:/var/www/venus"
 
 scp -r app/ ${USERNAME}@${HOST}:/var/www/venus
