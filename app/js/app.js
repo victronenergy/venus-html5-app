@@ -87,18 +87,16 @@ function hideCurrentLimitSelection() {
 
 function setMode(mode) {
   if (mode === "on") {
-    deviceInterface.write("System/Mode", 3)
+    deviceInterface.write("/vebus/257/Mode", 3)
   } else if (mode === "off") {
-    deviceInterface.write("System/Mode", 4)
+    deviceInterface.write("/vebus/257/Mode", 4)
   } else if (mode === "charge") {
-    deviceInterface.write("System/Mode", 1)
+    deviceInterface.write("/vebus/257/Mode", 1)
   }
+  hideModeSelection()
 }
 
 function showModeSelection() {
-  document.getElementById("setModeOnButton").classList.add("modeBtnOn")
-  // document.getElementById("setModeOffButton").classList.add("modeBtnOn")
-  // document.getElementById("setModeChargeOnlyButton").classList.add("modeBtnOn")
   document.getElementById("myMultiPlus").style.width = "350px"
 }
 

@@ -80,7 +80,7 @@ class MqttInterface {
           }, ref.timeout)
 
           const path = topic.substring(2 + ref.portalId.length) // 2 = 'N/'
-          const value = JSON.parse(message.payloadString).value
+          const value = message.payloadString ? JSON.parse(message.payloadString).value : ""
           ref.elementUpdater(path, value)
         }
       } catch (error) {
@@ -96,41 +96,26 @@ class MqttInterface {
   }
 
   /**
-   * Request reading a metric.
-   * @param {string} key - The metric key.
-   */
-  read(key) {
-    if (this.portalId === undefined) {
-      throw "Read failed. The mqtt interface has not detected its portal id yet"
-    }
-    let path = this.lookupKey(key)
-    if (path === undefined) {
-      throw `Read failed. There is no path registered for key: ${key}`
-    }
-    if (!path.isReadable) {
-      throw `Read failed. The path with key ${key} is not readable`
-    }
-    this.client.send(`R/${this.portalId}${path.value}`, "")
-  }
-
-  /**
    * Request writing a metric.
    * @param {string} key - The metric key.
    * @param {} value - The value to write.
    */
-  write(key, value) {
-    if (this.portalId === undefined) {
+  write(path, value) {
+    if (!this.portalId) {
       throw "Write failed. The mqtt interface has not detected its portal id yet"
     }
-    let path = this.lookupKey(key)
-    if (path === undefined) {
+    if (!path) {
       throw `Write failed. There is no path registered for key: ${key}`
     }
-    if (!path.isWritable) {
-      throw `Write failed. The path with key ${key} is not writable`
+    const metric = metricsConfig[path]
+    if (!metric) {
+      throw `No metric found for ${path}`
+    }
+    if (!metric.write) {
+      throw `Write failed. The path ${path} is not writable`
     }
     let data = JSON.stringify({ value: value })
-    this.client.send(`W/${this.portalId}${path.value}`, data)
+    this.client.send(`W/${this.portalId}${path}`, data)
   }
 
   /**

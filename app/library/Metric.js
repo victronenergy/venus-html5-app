@@ -151,3 +151,20 @@ function batteyContainerStatus(value) {
     container.classList.remove("batteryDischarge")
   }
 }
+
+function updateModebuttonClasses(value) {
+  Array.from(document.getElementsByClassName("modeButton")).forEach(element => {
+    element.classList.remove("modeBtnOn")
+  })
+  switch (value) {
+    case "ON":
+      document.getElementById("setModeOnButton").classList.add("modeBtnOn")
+      break
+    case "OFF":
+      document.getElementById("setModeOffButton").classList.add("modeBtnOn")
+      break
+    case "Charger only":
+      document.getElementById("setModeChargeOnlyButton").classList.add("modeBtnOn")
+      break
+  }
+}
