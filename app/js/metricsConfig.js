@@ -102,8 +102,8 @@ var metricsConfig = {
     description: "System mode",
     unit: "",
     formatter: systemModeFormatter,
-    timeout: 0,
     callback: updateModebuttonClasses,
+    timeout: 0,
     write: true
   },
   "/vebus/257/Ac/ActiveIn/CurrentLimit": {

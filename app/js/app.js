@@ -71,7 +71,7 @@ function setupCurrentLimitSelection() {
 
 function createSetInputLimitFunction(limit) {
   return function() {
-    deviceInterface.write("Ac/Grid/CurrentLimit", limit)
+    deviceInterface.write("/vebus/257/Ac/ActiveIn/CurrentLimit", limit)
     hideCurrentLimitSelection()
   }
 }
