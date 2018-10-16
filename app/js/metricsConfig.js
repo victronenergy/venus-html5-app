@@ -5,7 +5,7 @@ import {
   gridConnected,
   batteyContainerStatus,
   updateModebuttonClasses
-} from "../library/Metric"
+} from "./util"
 
 export default {
   "/system/0/Dc/Battery/Voltage": {
