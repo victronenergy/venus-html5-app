@@ -22,12 +22,19 @@ module.exports = {
     ),
     new webpack.HotModuleReplacementPlugin()
   ],
+  resolve: {
+    extensions: ['.js', '.ts']
+  },
   module: {
     rules: [
       {
         test: /\.jsx?$/,
         include: [path.resolve(__dirname, "app/")],
         use: "babel-loader"
+      },
+      {
+        test: /\.tsx?$/,
+        loader: 'babel-loader',
       }
     ]
   },

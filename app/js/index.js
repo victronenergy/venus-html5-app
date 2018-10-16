@@ -1,6 +1,6 @@
 import { h, render, Component } from "preact"
 import metricsConfig from "./metricsConfig"
-import MqttInterface from "../library/MqttInterface"
+import VenusClient  from '../service/index'
 
 const getParameterByName = (name, url) => {
   if (!url) url = window.location.href
@@ -16,6 +16,7 @@ const USAmperage = [10, 15, 20, 30, 50, 100]
 const EUAmperage = [6, 10, 13, 16, 25, 32, 63]
 const host = getParameterByName("host") || window.location.hostname || "localhost"
 const port = parseInt(getParameterByName("port")) || 9001
+const mqttUrl = `mqtt://${host}:${port}`
 
 class App extends Component {
   state = {
@@ -40,21 +41,27 @@ class App extends Component {
   }
 
   componentDidMount = () => {
-    const deviceInterface = new MqttInterface(host, port)
-    deviceInterface.connect()
-    deviceInterface.onMessage = (path, value) => {
-      const metric = metricsConfig[path]
-      const formattedValue = metric.formatter(value)
-      const metricName = metric.name
-      console.log(metricName, formattedValue + metric.unit)
-      this.setState({ [metricName]: formattedValue + metric.unit })
-    }
-    deviceInterface.connected = () => {
-      this.setState({ connected: true })
-    }
-    deviceInterface.lostConnection = () => {
-      this.setState({ connected: false })
-    }
+    const deviceInterface = new VenusClient(mqttUrl)
+    deviceInterface.connect().then(() => {
+      const dbusPaths = Object.keys(metricsConfig)
+      deviceInterface.subscribe(dbusPaths)
+    });
+
+    // TODO Implement this
+    // deviceInterface.onMessage = (path, value) => {
+    //   const metric = metricsConfig[path]
+    //   const formattedValue = metric.formatter(value)
+    //   const metricName = metric.name
+    //   console.log(metricName, formattedValue + metric.unit)
+    //   this.setState({ [metricName]: formattedValue + metric.unit })
+    // }
+    // deviceInterface.connected = () => {
+    //   this.setState({ connected: true })
+    // }
+    // deviceInterface.lostConnection = () => {
+    //   this.setState({ connected: false })
+    // }
+
     this.setState({ deviceInterface })
 
     // Enable reload button for test devices
