@@ -1,4 +1,6 @@
-var metricsConfig = {
+import { numericFormatter, systemModeFormatter, systemStateFormatter } from "./util"
+
+export default {
   "/system/0/Dc/Battery/Voltage": {
     name: "Dc/Battery/Voltage",
     description: "Voltage",
@@ -11,7 +13,6 @@ var metricsConfig = {
     description: "Current",
     unit: "A",
     formatter: numericFormatter(1),
-    callback: batteyContainerStatus,
     timeout: 0
   },
   "/system/0/Dc/Battery/Power": {
@@ -66,8 +67,7 @@ var metricsConfig = {
   "/vebus/257/Ac/ActiveIn/Connected": {
     name: "Ac/Grid/IsConnected",
     description: "Grid is connected",
-    formatter: numericFormatter(),
-    callback: gridConnected
+    formatter: numericFormatter()
   },
   "/vebus/257/Ac/ActiveIn/L1/V": {
     name: "Ac/Grid/Voltage",
@@ -102,7 +102,6 @@ var metricsConfig = {
     description: "System mode",
     unit: "",
     formatter: systemModeFormatter,
-    callback: updateModebuttonClasses,
     timeout: 0,
     write: true
   },

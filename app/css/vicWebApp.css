@@ -106,8 +106,6 @@ header {
 
 .bottomBtn {
   background: #387cc6;
-  margin: 10px 3px -7px 3px;
-  display: block;
   padding: 6px;
   text-align: center;
   border-radius: 0 0 5px 5px;
@@ -136,7 +134,7 @@ header {
   box-shadow: inset 0 0 0 2px #dadada;
   background-clip: padding-box;
   border-radius: 16px;
-  padding: 15px 0px 10px 0px;
+  padding-top: 15px;
   position: relative;
   font-size: 6vw;
   text-align: center;
@@ -152,6 +150,7 @@ header {
 .mode {
   font-size: 5.4vw;
   font-weight: bold;
+  width: 100%;
 }
 
 /*********** MODULES ***********/
@@ -356,7 +355,7 @@ header {
 .batteryProgress:after {
   content: "";
   position: absolute;
-  top: 43%;
+  top: 32%;
   left: 1%;
   bottom: 26%;
   right: 2%;
@@ -367,6 +366,9 @@ header {
 
 .grid-33 {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .grid-50 {
   width: 50%;
@@ -390,10 +392,10 @@ header {
   margin-top: -10px;
   margin-left: 20px;
 }
-.connectionOn .connectionStatus {
+.connectionStatus--on {
   background-color: #8bc964;
 }
-.connectionLost .connectionStatus {
+.connectionStatus--off {
   background-color: #f35c58;
 }
 
@@ -550,4 +552,17 @@ header {
 
 .bottomBtn > span {
   margin-left: 5px;
+}
+
+.gridTitle {
+  margin: 10px 0px;
+}
+
+.DCLoads,
+.batteryDischarge {
+  padding-bottom: 15px;
+}
+
+.sidenav--visible {
+  width: 350px;
 }

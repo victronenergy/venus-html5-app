@@ -8,17 +8,19 @@
  * - Listen to raw changes using the onRawUpdate callback (path, rawValue) => {}
  * - Listen to errors using the onError callback (error) => {}
  */
-class MqttInterface {
+
+import metricsConfig from "../js/metricsConfig"
+
+export default class MqttInterface {
   /**
    * Create a MqttInterface instance.
    * @param {string} host - The host name of the mqtt server.
    * @param {numeric} port - The port number of the mqtt server.
    * @param {numeric} timeout - The timeout in milliseconds before the interface connection is considered to be lost.
    */
-  constructor(host = "localhost", port = 9001, elementUpdater, timeout = 10000) {
+  constructor(host = "localhost", port = 9001, timeout = 10000) {
     this.host = host
     this.port = port
-    this.elementUpdater = elementUpdater
     this.timeout = timeout
     this.registeredPaths = Object.keys(metricsConfig)
     this.portalId = undefined
@@ -52,7 +54,7 @@ class MqttInterface {
         } else if (ref.isRelevantMessage(topic)) {
           const path = topic.substring(2 + ref.portalId.length) // 2 = 'N/'
           const value = message.payloadString ? JSON.parse(message.payloadString).value : ""
-          ref.elementUpdater(path, value)
+          ref.onMessage(path, value)
         }
       } catch (error) {
         console.log(error, message)

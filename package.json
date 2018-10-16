@@ -5,13 +5,25 @@
   "main": "index.js",
   "scripts": {
     "dev": "node live-server",
+    "dev-compile": "npx webpack -w",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "babel-loader": "^8.0.4",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "copy-webpack-plugin": "^4.5.3",
     "live-server": "^1.2.0",
     "mqtt": "^2.18.3",
-    "prettier": "^1.14.3"
+    "preact": "^8.3.1",
+    "prettier": "^1.14.3",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.9"
   }
 }
