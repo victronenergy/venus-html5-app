@@ -43,7 +43,7 @@ var metricsConfig = {
     timeout: 0
   },
   "/vebus/257/Ac/Out/L1/V": {
-    name: "Dc/Loads/Voltage",
+    name: "Ac/Loads/Voltage",
     description: "AC loads voltage",
     unit: "V",
     formatter: numericFormatter(),
