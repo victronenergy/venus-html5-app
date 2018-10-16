@@ -1,9 +1,6 @@
-var host = getParameterByName("host")
-
-if (!host) host = window.location.hostname
-if (!host) host = "localhost"
-var port = parseInt(getParameterByName("port"))
-if (!port) port = 9001
+const host = getParameterByName("host") || window.location.hostname || "localhost"
+const port = parseInt(getParameterByName("port")) || 9001
+const deviceInterface = new MqttInterface(host, port, updateElementValue)
 
 function updateElementValue(path, value) {
   const metric = metricsConfig[path]
@@ -12,10 +9,6 @@ function updateElementValue(path, value) {
   if (metric.callback) metric.callback(formattedValue)
   if (element) document.getElementById(metric.name).innerHTML = formattedValue + metric.unit
 }
-
-var deviceInterface = new MqttInterface(host, port, updateElementValue)
-
-var lastIsAliveState = false
 
 window.onload = function() {
   deviceInterface.connect()
@@ -56,8 +49,7 @@ function setupCurrentLimitSelection() {
 
   shoreVoltage = 110
 
-  if (shoreVoltage === undefined) amperage = EUAmperage
-  else if (shoreVoltage > 150) amperage = EUAmperage
+  if (shoreVoltage === undefined || shoreVoltage > 150) amperage = EUAmperage
   else amperage = USAmperage
 
   amperage.forEach(function(currentValue) {

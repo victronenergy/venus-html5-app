@@ -26,55 +26,6 @@ class Metric {
     this.callbacks = []
     this.timerReference = undefined
   }
-
-  /**
-   * Get the formatted value of the metric by calling its formatter.
-   * @return {string} The formatted value.
-   */
-  get value() {
-    return "<span id=" + this.key + ">" + this.formatter(this) + "</a>"
-  }
-
-  /**
-   * Get the raw value of the metric.
-   * @return {} The raw value.
-   */
-  get rawValue() {
-    return this._rawValue
-  }
-
-  toStale(key) {
-    var element = document.getElementById(key)
-    if (element != undefined && element != null) {
-      element.innerHTML = '<span class="staleValues">' + element.innerHTML + "</span>"
-    }
-  }
-
-  /**
-   * Set the raw value of the metric.
-   * This will also fire any callbacks registered using the addOnChangeCallback method.
-   * @param {} rawValue - The new raw value.
-   */
-  set rawValue(rawValue) {
-    this._rawValue = rawValue
-
-    if (this.timeout > 0) {
-      clearTimeout(this.timerReference)
-      this.timerReference = setTimeout(this.toStale.bind(this, this.key), this.timeout)
-    }
-
-    this.callbacks.forEach(callback => {
-      callback(this)
-    })
-  }
-
-  /**
-   * Add a callback that is fired when the raw value of the metric changes.
-   * @param {(metric) => {}} callback - The callback function.
-   */
-  addOnChangeCallback(callback) {
-    this.callbacks.push(callback)
-  }
 }
 
 /**
