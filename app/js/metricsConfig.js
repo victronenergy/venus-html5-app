@@ -1,4 +1,13 @@
-var metricsConfig = {
+import {
+  numericFormatter,
+  systemModeFormatter,
+  systemStateFormatter,
+  gridConnected,
+  batteyContainerStatus,
+  updateModebuttonClasses
+} from "../library/Metric"
+
+export default {
   "/system/0/Dc/Battery/Voltage": {
     name: "Dc/Battery/Voltage",
     description: "Voltage",

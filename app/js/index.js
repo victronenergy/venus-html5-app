@@ -1,7 +1,22 @@
 import { h, render, Component } from "preact"
+import metricsConfig from "./metricsConfig"
+import MqttInterface from "../library/MqttInterface"
+
+const getParameterByName = (name, url) => {
+  if (!url) url = window.location.href
+  name = name.replace(/[\[\]]/g, "\\$&")
+  var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+    results = regex.exec(url)
+  if (!results) return null
+  if (!results[2]) return ""
+  return decodeURIComponent(results[2].replace(/\+/g, " "))
+}
+
 const USAmperage = [10, 15, 20, 30, 50, 100]
 const EUAmperage = [6, 10, 13, 16, 25, 32, 63]
 const shoreVoltage = 110
+const host = getParameterByName("host") || window.location.hostname || "localhost"
+const port = parseInt(getParameterByName("port")) || 9001
 
 class App extends Component {
   state = {
@@ -25,8 +40,32 @@ class App extends Component {
     amperage: shoreVoltage === undefined || shoreVoltage > 150 ? EUAmperage : USAmperage
   }
 
+  componentDidMount = () => {
+    const deviceInterface = new MqttInterface(host, port)
+    deviceInterface.connect()
+    deviceInterface.onMessage = (path, value) => {
+      console.log(path, value)
+      const metric = metricsConfig[path]
+      const formattedValue = metric.formatter(value)
+      const element = document.getElementById(metric.name)
+      if (metric.callback) metric.callback(formattedValue)
+      if (element) document.getElementById(metric.name).innerHTML = formattedValue + metric.unit
+    }
+    deviceInterface.connected = function() {
+      document.body.classList.remove("connectionLost")
+      document.body.classList.add("connectionOn")
+    }
+    deviceInterface.lostConnection = function() {
+      document.body.classList.remove("connectionOn")
+      document.body.classList.add("connectionLost")
+    }
+    this.setState({ deviceInterface })
+
+    // Enable reload button for rtest devices
+    document.getElementById("devReload").style.display = "block"
+  }
+
   updateStateValue = (path, value) => {
-    console.log(path, value)
     this.setState({ [path]: value })
   }
 
@@ -36,7 +75,8 @@ class App extends Component {
         <header>
           <img src="images/logo-vic.svg" />
           <input class="remoteBtn" type="button" onClick="location.href='http://' + host;" value="Remote Console" />
-          <a href="" />
+          {/* Reload element for test devices */}
+          <input type="button" value="Reload page" onclick="location.reload(true);" id="devReload" />
           <div class="connectionStatus" />
         </header>
         <CurrentSelector {...this.state} updateStateValue={this.updateStateValue} />
@@ -55,7 +95,7 @@ class App extends Component {
 
 class CurrentSelector extends Component {
   setAmperage = value => {
-    deviceInterface.write("/vebus/257/Ac/ActiveIn/CurrentLimit", value)
+    this.deviceInterface.write("/vebus/257/Ac/ActiveIn/CurrentLimit", value)
   }
 
   render(props, state) {
@@ -82,7 +122,7 @@ class CurrentSelector extends Component {
 class ModeSelector extends Component {
   setMode = mode => {
     if (mode === "on") {
-      deviceInterface.write("/vebus/257/Mode", 3)
+      this.deviceInterface.write("/vebus/257/Mode", 3)
     } else if (mode === "off") {
       deviceInterface.write("/vebus/257/Mode", 4)
     } else if (mode === "charge") {
