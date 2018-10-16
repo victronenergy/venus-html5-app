@@ -16,6 +16,7 @@
     "@babel/preset-env": "^7.1.0",
     "babel-loader": "^8.0.4",
     "babel-plugin-transform-react-jsx": "^6.24.1",
+    "copy-webpack-plugin": "^4.5.3",
     "live-server": "^1.2.0",
     "mqtt": "^2.18.3",
     "preact": "^8.3.1",
