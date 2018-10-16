@@ -21,6 +21,9 @@ class MqttInterface {
     this.elementUpdater = elementUpdater
     this.timeout = timeout
     this.registeredPaths = Object.keys(metricsConfig)
+    this.portalId = undefined
+    this.clientId = new Date().toJSON().substring(2, 22)
+    this.client = new Paho.MQTT.Client(this.host, this.port, this.clientId)
   }
 
   isRelevantMessage(topic) {
@@ -28,12 +31,10 @@ class MqttInterface {
   }
 
   connect() {
-    if (this.client !== undefined) {
+    if (this.client.isConnected()) {
       throw "The mqtt interface is already connected"
     }
-    this.portalId = undefined
-    this.clientId = new Date().toJSON().substring(2, 22)
-    this.client = new Paho.MQTT.Client(this.host, this.port, this.clientId)
+
     const ref = this
 
     this.client.onMessageArrived = function(message) {
@@ -60,7 +61,7 @@ class MqttInterface {
 
     this.client.onConnectionLost = msg => {
       if (msg.errorCode !== 0) {
-        console.log("onConnectionLost: " + responseObject.errorMessage)
+        console.log("onConnectionLost: " + msg.errorMessage)
       }
       if (ref.lostConnection) ref.lostConnection()
     }
