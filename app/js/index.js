@@ -37,31 +37,29 @@ class App extends Component {
     "Dc/Battery/Power": "427W",
     modeSelectionVisible: false,
     currentSelectionVisible: false,
-    amperage: shoreVoltage === undefined || shoreVoltage > 150 ? EUAmperage : USAmperage
+    amperage: shoreVoltage === undefined || shoreVoltage > 150 ? EUAmperage : USAmperage,
+    connected: false
   }
 
   componentDidMount = () => {
     const deviceInterface = new MqttInterface(host, port)
     deviceInterface.connect()
     deviceInterface.onMessage = (path, value) => {
-      console.log(path, value)
       const metric = metricsConfig[path]
       const formattedValue = metric.formatter(value)
-      const element = document.getElementById(metric.name)
-      if (metric.callback) metric.callback(formattedValue)
-      if (element) document.getElementById(metric.name).innerHTML = formattedValue + metric.unit
+      const metricName = metric.name
+      console.log(metricName, formattedValue + metric.unit)
+      this.setState({ [metricName]: formattedValue + metric.unit })
     }
-    deviceInterface.connected = function() {
-      document.body.classList.remove("connectionLost")
-      document.body.classList.add("connectionOn")
+    deviceInterface.connected = () => {
+      this.setState({ connected: true })
     }
-    deviceInterface.lostConnection = function() {
-      document.body.classList.remove("connectionOn")
-      document.body.classList.add("connectionLost")
+    deviceInterface.lostConnection = () => {
+      this.setState({ connected: false })
     }
     this.setState({ deviceInterface })
 
-    // Enable reload button for rtest devices
+    // Enable reload button for test devices
     document.getElementById("devReload").style.display = "block"
   }
 
@@ -77,7 +75,7 @@ class App extends Component {
           <input class="remoteBtn" type="button" onClick="location.href='http://' + host;" value="Remote Console" />
           {/* Reload element for test devices */}
           <input type="button" value="Reload page" onclick="location.reload(true);" id="devReload" />
-          <div class="connectionStatus" />
+          <div className={"connectionStatus " + (state.connected ? "connectionStatus--on" : "connectionStatus--off")} />
         </header>
         <CurrentSelector {...this.state} updateStateValue={this.updateStateValue} />
         <ModeSelector {...this.state} updateStateValue={this.updateStateValue} />

@@ -33,47 +33,4 @@ function systemModeFormatter(value) {
   return "--"
 }
 
-function gridConnected(value) {
-  if (value == 1) {
-    document.getElementById("shorePowerContainer").classList.add("shorePower")
-  } else {
-    document.getElementById("shorePowerContainer").classList.remove("shorePower")
-  }
-}
-
-function batteyContainerStatus(value) {
-  var container = document.getElementById("batteryContainer")
-  if (Number(value) < 0) {
-    container.classList.add("batteryDischarge")
-    container.classList.remove("batteryCharge")
-  } else {
-    container.classList.add("batteryCharge")
-    container.classList.remove("batteryDischarge")
-  }
-}
-
-function updateModebuttonClasses(value) {
-  Array.from(document.getElementsByClassName("modeButton")).forEach(element => {
-    element.classList.remove("modeBtnOn")
-  })
-  switch (value) {
-    case "ON":
-      document.getElementById("setModeOnButton").classList.add("modeBtnOn")
-      break
-    case "OFF":
-      document.getElementById("setModeOffButton").classList.add("modeBtnOn")
-      break
-    case "Charger only":
-      document.getElementById("setModeChargeOnlyButton").classList.add("modeBtnOn")
-      break
-  }
-}
-
-export {
-  numericFormatter,
-  systemModeFormatter,
-  systemStateFormatter,
-  gridConnected,
-  batteyContainerStatus,
-  updateModebuttonClasses
-}
+export { numericFormatter, systemModeFormatter, systemStateFormatter }

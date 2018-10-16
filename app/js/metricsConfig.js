@@ -1,11 +1,4 @@
-import {
-  numericFormatter,
-  systemModeFormatter,
-  systemStateFormatter,
-  gridConnected,
-  batteyContainerStatus,
-  updateModebuttonClasses
-} from "./util"
+import { numericFormatter, systemModeFormatter, systemStateFormatter } from "./util"
 
 export default {
   "/system/0/Dc/Battery/Voltage": {
@@ -20,7 +13,6 @@ export default {
     description: "Current",
     unit: "A",
     formatter: numericFormatter(1),
-    callback: batteyContainerStatus,
     timeout: 0
   },
   "/system/0/Dc/Battery/Power": {
@@ -75,8 +67,7 @@ export default {
   "/vebus/257/Ac/ActiveIn/Connected": {
     name: "Ac/Grid/IsConnected",
     description: "Grid is connected",
-    formatter: numericFormatter(),
-    callback: gridConnected
+    formatter: numericFormatter()
   },
   "/vebus/257/Ac/ActiveIn/L1/V": {
     name: "Ac/Grid/Voltage",
@@ -111,7 +102,6 @@ export default {
     description: "System mode",
     unit: "",
     formatter: systemModeFormatter,
-    callback: updateModebuttonClasses,
     timeout: 0,
     write: true
   },

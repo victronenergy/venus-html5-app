@@ -355,7 +355,7 @@ header {
 .batteryProgress:after {
   content: "";
   position: absolute;
-  top: 43%;
+  top: 32%;
   left: 1%;
   bottom: 26%;
   right: 2%;
@@ -392,10 +392,10 @@ header {
   margin-top: -10px;
   margin-left: 20px;
 }
-.connectionOn .connectionStatus {
+.connectionStatus--on {
   background-color: #8bc964;
 }
-.connectionLost .connectionStatus {
+.connectionStatus--off {
   background-color: #f35c58;
 }
 
