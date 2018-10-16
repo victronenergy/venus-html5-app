@@ -26,55 +26,6 @@ class Metric {
     this.callbacks = []
     this.timerReference = undefined
   }
-
-  /**
-   * Get the formatted value of the metric by calling its formatter.
-   * @return {string} The formatted value.
-   */
-  get value() {
-    return "<span id=" + this.key + ">" + this.formatter(this) + "</a>"
-  }
-
-  /**
-   * Get the raw value of the metric.
-   * @return {} The raw value.
-   */
-  get rawValue() {
-    return this._rawValue
-  }
-
-  toStale(key) {
-    var element = document.getElementById(key)
-    if (element != undefined && element != null) {
-      element.innerHTML = '<span class="staleValues">' + element.innerHTML + "</span>"
-    }
-  }
-
-  /**
-   * Set the raw value of the metric.
-   * This will also fire any callbacks registered using the addOnChangeCallback method.
-   * @param {} rawValue - The new raw value.
-   */
-  set rawValue(rawValue) {
-    this._rawValue = rawValue
-
-    if (this.timeout > 0) {
-      clearTimeout(this.timerReference)
-      this.timerReference = setTimeout(this.toStale.bind(this, this.key), this.timeout)
-    }
-
-    this.callbacks.forEach(callback => {
-      callback(this)
-    })
-  }
-
-  /**
-   * Add a callback that is fired when the raw value of the metric changes.
-   * @param {(metric) => {}} callback - The callback function.
-   */
-  addOnChangeCallback(callback) {
-    this.callbacks.push(callback)
-  }
 }
 
 /**
@@ -99,11 +50,72 @@ function defaultFormatter(defaultValue = "--") {
  * @return A formatting function.
  */
 function numericFormatter(precision = 0, factor = 1.0, defaultValue = "--") {
-  return metric => {
-    if (metric.rawValue === undefined || metric.rawValue === null) {
-      return defaultValue + metric.unit
+  return value => {
+    if (!value) {
+      return defaultValue
     }
-    let value = Number(metric.rawValue) * factor
-    return precision === undefined ? value.toString() + metric.unit : value.toFixed(precision) + metric.unit
+    let numericValue = Number(value) * factor
+    return precision === undefined ? numericValue.toString() : numericValue.toFixed(precision)
+  }
+}
+
+function systemStateFormatter(value) {
+  if (value == 0) return "Off"
+  if (value == 1) return "Low power"
+  if (value == 2) return "VE.Bus Fault condition"
+  if (value == 3) return "Bulk charging"
+  if (value == 4) return "Absorption charging"
+  if (value == 5) return "Float charging"
+  if (value == 6) return "Storage mode"
+  if (value == 7) return "Equalisation charging"
+  if (value == 8) return "Passthru"
+  if (value == 9) return "Inverting"
+  if (value == 10) return "Assisting"
+  if (value == 256) return "Discharging"
+  if (value == 257) return "Sustain"
+  return "--"
+}
+
+function systemModeFormatter(value) {
+  if (value == 1) return "Charger only"
+  if (value == 2) return "Inverter only"
+  if (value == 3) return "ON"
+  if (value == 4) return "OFF"
+  return "--"
+}
+
+function gridConnected(value) {
+  if (value == 1) {
+    document.getElementById("shorePowerContainer").classList.add("shorePower")
+  } else {
+    document.getElementById("shorePowerContainer").classList.remove("shorePower")
+  }
+}
+
+function batteyContainerStatus(value) {
+  var container = document.getElementById("batteryContainer")
+  if (Number(value) < 0) {
+    container.classList.add("batteryDischarge")
+    container.classList.remove("batteryCharge")
+  } else {
+    container.classList.add("batteryCharge")
+    container.classList.remove("batteryDischarge")
+  }
+}
+
+function updateModebuttonClasses(value) {
+  Array.from(document.getElementsByClassName("modeButton")).forEach(element => {
+    element.classList.remove("modeBtnOn")
+  })
+  switch (value) {
+    case "ON":
+      document.getElementById("setModeOnButton").classList.add("modeBtnOn")
+      break
+    case "OFF":
+      document.getElementById("setModeOffButton").classList.add("modeBtnOn")
+      break
+    case "Charger only":
+      document.getElementById("setModeChargeOnlyButton").classList.add("modeBtnOn")
+      break
   }
 }

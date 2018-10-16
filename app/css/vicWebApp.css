@@ -541,3 +541,13 @@ header {
     border-radius: 0 0 8px 8px;
   }
 }
+
+/* New CSS */
+
+.leftMarginValue {
+  margin-left: 15px;
+}
+
+.bottomBtn > span {
+  margin-left: 5px;
+}
