@@ -20,7 +20,6 @@ class MqttInterface {
     this.port = port
     this.elementUpdater = elementUpdater
     this.timeout = timeout
-    this.isAlive = false
     this.registeredPaths = Object.keys(metricsConfig)
   }
 
@@ -37,48 +36,19 @@ class MqttInterface {
     this.client = new Paho.MQTT.Client(this.host, this.port, this.clientId)
     const ref = this
 
-    ref.isAliveTimerRef = setTimeout(() => {
-      ref.isAlive = false
-      if (ref.lostConnection != undefined) {
-        ref.lostConnection()
-      }
-    }, ref.timeout)
-
     this.client.onMessageArrived = function(message) {
       try {
         const topic = message.destinationName
         if (ref.portalId === undefined && topic.endsWith("/system/0/Serial")) {
-          // before the mqtt interface is ready to read or write
-          // metric values it needs to detect its portal id. The
-          // venus device will publish a message on connect that is
-          // used to extract the portal id.
+          // request portal id to be able to read and write data
           let data = JSON.parse(message.payloadString)
           ref.portalId = data.value
           for (let path in ref.registeredPaths) {
             // send read requests for all registered paths
-            // to be able to update the ui with all values
-            // quicker
             ref.client.send(`R/${ref.portalId}${path}`, "")
           }
           ref.keepAlive()
         } else if (ref.isRelevantMessage(topic)) {
-          // a message has arrived which means that
-          // the mqtt interface is alive, therefore
-          // we need to reset the is alive timer
-          if (!ref.isAlive) {
-            ref.isAlive = true
-            if (ref.connected != undefined) {
-              ref.connected()
-            }
-          }
-          clearTimeout(ref.isAliveTimerRef)
-          ref.isAliveTimerRef = setTimeout(() => {
-            ref.isAlive = false
-            if (ref.lostConnection != undefined) {
-              ref.lostConnection()
-            }
-          }, ref.timeout)
-
           const path = topic.substring(2 + ref.portalId.length) // 2 = 'N/'
           const value = message.payloadString ? JSON.parse(message.payloadString).value : ""
           ref.elementUpdater(path, value)
@@ -88,9 +58,20 @@ class MqttInterface {
       }
     }
 
+    this.client.onConnectionLost = msg => {
+      if (msg.errorCode !== 0) {
+        console.log("onConnectionLost: " + responseObject.errorMessage)
+      }
+      if (ref.lostConnection) ref.lostConnection()
+    }
+
     this.client.connect({
       onSuccess: function(reconnect, uri) {
         ref.client.subscribe("N/#")
+        ref.connected()
+        setInterval(() => {
+          ref.keepAlive()
+        }, ref.timeout)
       }
     })
   }
