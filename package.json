@@ -9,7 +9,7 @@
     "clean": "rm -rf dist",
     "compile": "npm run clean && npx webpack",
     "test": "jest --config jestconfig.json",
-    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "format": "prettier --write \"app/**/*.ts\" \"app/**/*.js\" \"test/**/*.ts\" \"test/**/*.js\"",
     "lint": "tslint -p tsconfig.json"
   },
   "author": "",

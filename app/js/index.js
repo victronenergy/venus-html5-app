@@ -1,6 +1,6 @@
 import { h, render, Component } from "preact"
 import metricsConfig from "./metricsConfig"
-import VenusClient  from '../service/index'
+import VenusClient from "../service/index"
 
 const getParameterByName = (name, url) => {
   if (!url) url = window.location.href
@@ -45,13 +45,13 @@ class App extends Component {
     deviceInterface.connect().then(() => {
       const dbusPaths = Object.keys(metricsConfig)
       deviceInterface.subscribe(dbusPaths)
-    });
+    })
 
     deviceInterface.onMessage = ({ path, value }) => {
-      console.log(path, value);
+      console.log(path, value)
       const metric = metricsConfig[path]
-      if(!metric) {
-        return;
+      if (!metric) {
+        return
       }
 
       const formattedValue = metric.formatter(value)
