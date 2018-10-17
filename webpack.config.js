@@ -15,7 +15,8 @@ module.exports = {
         { from: path.resolve(__dirname, "app/css/"), to: path.resolve(__dirname, "dist/css") },
         { from: path.resolve(__dirname, "app/images/"), to: path.resolve(__dirname, "dist/images") },
         { from: path.resolve(__dirname, "app/vendor/"), to: path.resolve(__dirname, "dist/vendor") },
-        { from: path.resolve(__dirname, "app/index.html"), to: path.resolve(__dirname, "dist/") }
+        { from: path.resolve(__dirname, "app/index.html"), to: path.resolve(__dirname, "dist/") },
+        { from: path.resolve(__dirname, "app/browser-info.html"), to: path.resolve(__dirname, "dist/") }
       ],
       {}
     ),
