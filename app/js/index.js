@@ -201,7 +201,7 @@ class MultiPlus extends Component {
         <img src="images/ico-multiPlus.png" />
         <span class="voltage">
           <Value value={props["System/State"]} connected={props.connected} />
-          <div class="mode bottomBtn" onClick={() => props.updateStateValue("currentSelectionVisible", true)}>
+          <div class="mode bottomBtn" onClick={() => props.updateStateValue("modeSelectionVisible", true)}>
             <img src="images/ico-arrow-bot.png" class="bottomImgArrow" />
             Mode:
             <Value value={props["System/Mode"]} connected={props.connected} />
