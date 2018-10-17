@@ -51,6 +51,7 @@ class App extends Component {
       console.log(path, value)
       const metric = metricsConfig[path]
       if (!metric) {
+        console.error(`Metric not found for path ${path}`)
         return
       }
 
