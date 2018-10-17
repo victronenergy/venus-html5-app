@@ -6,7 +6,7 @@ module.exports = {
   mode: "production",
   entry: path.resolve(__dirname, "app/js/index.js"),
   output: {
-    path: path.resolve(__dirname, "dist/js"), // string
+    path: path.resolve(__dirname, "dist/js"),
     filename: "bundle.js"
   },
   plugins: [
@@ -14,7 +14,6 @@ module.exports = {
       [
         { from: path.resolve(__dirname, "app/css/"), to: path.resolve(__dirname, "dist/css") },
         { from: path.resolve(__dirname, "app/images/"), to: path.resolve(__dirname, "dist/images") },
-        { from: path.resolve(__dirname, "app/vendor/"), to: path.resolve(__dirname, "dist/vendor") },
         { from: path.resolve(__dirname, "app/index.html"), to: path.resolve(__dirname, "dist/") },
         { from: path.resolve(__dirname, "app/browser-info.html"), to: path.resolve(__dirname, "dist/") }
       ],
@@ -23,7 +22,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin()
   ],
   resolve: {
-    extensions: ['.js', '.ts']
+    extensions: [".js", ".ts"]
   },
   module: {
     rules: [
@@ -34,7 +33,7 @@ module.exports = {
       },
       {
         test: /\.tsx?$/,
-        loader: 'babel-loader',
+        loader: "babel-loader"
       }
     ]
   },
