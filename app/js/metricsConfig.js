@@ -90,7 +90,7 @@ export default {
     formatter: numericFormatter(),
     timeout: 0
   },
-  "/SystemState/State": {
+  "/System/State": {
     name: "System/State",
     description: "System state",
     unit: "",
