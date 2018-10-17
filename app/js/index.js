@@ -14,7 +14,6 @@ const getParameterByName = (name, url) => {
 
 const USAmperage = [10, 15, 20, 30, 50, 100]
 const EUAmperage = [6, 10, 13, 16, 25, 32, 63]
-const shoreVoltage = 110
 const host = getParameterByName("host") || window.location.hostname || "localhost"
 const port = parseInt(getParameterByName("port")) || 9001
 
@@ -37,7 +36,6 @@ class App extends Component {
     "Dc/Battery/Power": "427W",
     modeSelectionVisible: false,
     currentSelectionVisible: false,
-    amperage: shoreVoltage === undefined || shoreVoltage > 150 ? EUAmperage : USAmperage,
     connected: false
   }
 
@@ -102,6 +100,9 @@ class CurrentSelector extends Component {
   }
 
   render(props, state) {
+    const shoreVoltage = parseInt(props["Ac/Grid/Voltage"])
+    const amperage = !shoreVoltage || shoreVoltage > 150 ? EUAmperage : USAmperage
+
     return (
       <div id="mySidenav" className={"sidenav " + (props.currentSelectionVisible ? "sidenav--visible" : "")}>
         <a href="#" class="closebtn" onClick={() => props.updateStateValue("currentSelectionVisible", false)}>
@@ -109,7 +110,7 @@ class CurrentSelector extends Component {
         </a>
         <div id="inputLimitSelection" class="amps">
           <h4>Input Limit</h4>
-          {props.amperage.map(currentValue => {
+          {amperage.map(currentValue => {
             return (
               <a href="#" onClick={() => this.setAmperage(currentValue)}>
                 {currentValue + "A"}
