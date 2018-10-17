@@ -1,5 +1,5 @@
 import * as mqtt from "mqtt"
-import VenusClient from "./VenusClient"
+import VenusClient from "../app/service/VenusClient"
 import Mock = jest.Mock
 jest.mock("mqtt", "connect")
 

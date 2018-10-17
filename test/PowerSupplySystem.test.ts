@@ -1,5 +1,5 @@
-import PowerSupplySystem from "./PowerSupplySystem"
-import { DBUS_PATHS } from "./topics"
+import PowerSupplySystem from "../app/service/PowerSupplySystem"
+import { DBUS_PATHS } from "../app/service/topics"
 
 describe("initialization", () => {
   test("starts with no portal id", () => {

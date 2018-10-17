@@ -1,4 +1,4 @@
-import { parseTopic } from "./util"
+import { parseTopic } from "../app/service/util"
 
 test("Parse messages", () => {
   expect(parseTopic("N/985dadd0c9e4/system/0/Serial")).toEqual({
