@@ -1,7 +1,5 @@
-import VenusClient from './VenusClient';
-import {DBUS_PATHS} from "./topics";
+import VenusClient from "./VenusClient"
+import { DBUS_PATHS } from "./topics"
 
-export default VenusClient;
-export {
-    DBUS_PATHS
-};
+export default VenusClient
+export { DBUS_PATHS }

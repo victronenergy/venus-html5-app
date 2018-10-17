@@ -44,10 +44,14 @@ describe("return topic based on dbus path", () => {
   })
 
   test("correctly initializes system paths", () => {
-    expect(system.getTopicFromDbusPath('N', DBUS_PATHS.BATTERY.VOLTAGE)).toBe(`N/985dadd0c9e4/system/0/Dc/Battery/Voltage`)
+    expect(system.getTopicFromDbusPath("N", DBUS_PATHS.BATTERY.VOLTAGE)).toBe(
+      `N/985dadd0c9e4/system/0/Dc/Battery/Voltage`
+    )
   })
 
   test("correctly initializes vebus paths", () => {
-    expect(system.getTopicFromDbusPath('N', DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.CURRENT)).toBe(`N/985dadd0c9e4/vebus/257/Ac/Out/L1/V`)
+    expect(system.getTopicFromDbusPath("N", DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.CURRENT)).toBe(
+      `N/985dadd0c9e4/vebus/257/Ac/Out/L1/V`
+    )
   })
 })
