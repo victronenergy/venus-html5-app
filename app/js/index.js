@@ -159,7 +159,7 @@ class ModeSelector extends Component {
 
 class Value extends Component {
   render(props, state) {
-    return <span className={"value" + (!props.connected && " stale")}>{props.value}</span>
+    return <span className={"value" + (props.connected ? "" : " stale")}>{props.value}</span>
   }
 }
 
