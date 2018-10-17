@@ -33,7 +33,7 @@ const subscribeCallback: ClientSubscribeCallback = (err, granted) => {
 class VenusClient {
   public mqttClient: MqttClient
   private powerSupplySystem: PowerSupplySystem
-  private keepAliveHandler: any = null
+  private keepAliveHandlerRef: any = null
   public onMessage: Function = () => {}
   public onConnectionChanged: Function = () => {}
 
@@ -45,8 +45,6 @@ class VenusClient {
   public connect = () => {
     return new Promise((resolve, reject) => {
       this.mqttClient.once("connect", () => {
-        this.setupKeepAlive()
-
         const subscribeMap = arrayToSubscriptionMap(TOPICS_TO_SUBSCRIBE_ON_INIT)
         this.mqttClient.subscribe(subscribeMap, (err, granted) => {
           subscribeCallback(err, granted)
@@ -57,10 +55,12 @@ class VenusClient {
       })
 
       this.mqttClient.on("connect", () => {
+        this.setupKeepAlive()
         this.onConnectionChanged({ connected: true })
       })
 
       this.mqttClient.on("disconnect", () => {
+        clearInterval(this.keepAliveHandlerRef)
         this.onConnectionChanged({ connected: false })
       })
 
@@ -88,7 +88,8 @@ class VenusClient {
    * Send a read message every 60s to keep the MQTT broker alive
    */
   private setupKeepAlive() {
-    this.keepAliveHandler = setInterval(() => {
+    clearInterval(this.keepAliveHandlerRef)
+    this.keepAliveHandlerRef = setInterval(() => {
       const topic = this.powerSupplySystem.getTopicFromDbusPath("R", DBUS_PATHS.GENERAL.SERIAL)
       this.mqttClient.publish(topic, "")
     }, 60000)
