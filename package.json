@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "node live-server",
     "dev-compile": "npx webpack -w",
+    "clean": "rm -rf dist",
+    "compile": "npm run clean && npx webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

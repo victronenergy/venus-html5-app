@@ -26,6 +26,6 @@ set -- "${POSITIONAL[@]}" # restore positional parameters
 USERNAME=${USERNAME:-root}
 HOST="$1"
 
-echo "Uploading app/ to ${USERNAME}@${HOST}:/var/www/venus"
+echo "Uploading dist/* to ${USERNAME}@${HOST}:/var/www/venus/app"
 
-scp -r app/ ${USERNAME}@${HOST}:/var/www/venus
+scp -r dist/* ${USERNAME}@${HOST}:/var/www/venus/app
