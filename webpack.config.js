@@ -1,5 +1,6 @@
 const CopyWebpackPlugin = require("copy-webpack-plugin")
 const path = require("path")
+const webpack = require("webpack")
 
 module.exports = {
   mode: "production",
@@ -17,7 +18,8 @@ module.exports = {
         { from: path.resolve(__dirname, "app/index.html"), to: path.resolve(__dirname, "dist/") }
       ],
       {}
-    )
+    ),
+    new webpack.HotModuleReplacementPlugin()
   ],
   module: {
     rules: [
@@ -28,5 +30,9 @@ module.exports = {
       }
     ]
   },
-  devtool: "source-map"
+  devtool: "source-map",
+  devServer: {
+    contentBase: "./dist",
+    hot: true
+  }
 }

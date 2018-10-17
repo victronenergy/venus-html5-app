@@ -6,14 +6,14 @@ let venusHost
 
 if (!venusHost) {
   console.log(
-    "Running without venus host set. Set the vatiable in live-server.js if you want to connect to an instance for demo data."
+    "Running without venus host set. Set the variable in live-server.js if you want to connect to an instance for demo data."
   )
 }
 
 const params = {
   port: 8000,
-  root: "app/", // Set root directory that's being served. Defaults to cwd.
-  open: `?host=${venusHost}&dev=true` // When false, it won't load your browser by default.
+  root: "dist/",
+  open: `?host=${venusHost}&dev=true`
 }
 
 liveServer.start(params)
