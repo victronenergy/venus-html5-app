@@ -157,6 +157,12 @@ class ModeSelector extends Component {
   }
 }
 
+class Value extends Component {
+  render(props, state) {
+    return <span className={"value" + (!props.connected && " stale")}>{props.value}</span>
+  }
+}
+
 class ShorePower extends Component {
   render(props, state) {
     return (
@@ -164,13 +170,13 @@ class ShorePower extends Component {
         <p className="gridTitle">Shore Power</p>
         <img src="images/ico-shore.svg" />
         <span class="voltage">
-          <span>{props["Ac/Grid/Voltage"]}</span>
-          <span class="leftMarginValue">{props["Ac/Grid/Current"]}</span>
-          <span class="leftMarginValue">{props["Ac/Grid/Power"]}</span>
+          <Value value={props["Ac/Grid/Voltage"]} connected={props.connected} />
+          <Value value={props["Ac/Grid/Current"]} connected={props.connected} />
+          <Value value={props["Ac/Grid/Power"]} connected={props.connected} />
           <div class="mode bottomBtn" onClick={() => props.updateStateValue("currentSelectionVisible", true)}>
             <img src="images/ico-arrow-bot.png" class="bottomImgArrow" />
-            <span>Input limit:</span>
-            <span>{props["Ac/Grid/CurrentLimit"]}</span>
+            Input limit:
+            <Value value={props["Ac/Grid/CurrentLimit"]} connected={props.connected} />
           </div>
         </span>
       </div>
@@ -185,11 +191,11 @@ class MultiPlus extends Component {
         <p className="gridTitle">MultiPlus</p>
         <img src="images/ico-multiPlus.png" />
         <span class="voltage">
-          <span>{props["System/State"]}</span>
+          <Value value={props["System/State"]} connected={props.connected} />
           <div class="mode bottomBtn" onClick={() => props.updateStateValue("currentSelectionVisible", true)}>
             <img src="images/ico-arrow-bot.png" class="bottomImgArrow" />
-            <span>Mode:</span>
-            <span>{props["System/Mode"]}</span>
+            Mode:
+            <Value value={props["System/Mode"]} connected={props.connected} />
           </div>
         </span>
       </div>
@@ -204,9 +210,9 @@ class AcLoads extends Component {
         <p className="gridTitle">AC Loads</p>
         <img src="images/ico-ac.svg" />
         <span class="voltage">
-          <span>{props["Ac/Loads/Voltage"]}</span>
-          <span class="leftMarginValue">{props["Ac/Loads/Current"]}</span>
-          <span class="leftMarginValue">{props["Ac/Loads/Power"]}</span>
+          <Value value={props["Ac/Loads/Voltage"]} connected={props.connected} />
+          <Value value={props["Ac/Loads/Current"]} connected={props.connected} />
+          <Value value={props["Ac/Loads/Power"]} connected={props.connected} />
         </span>
       </div>
     )
@@ -220,8 +226,8 @@ class DcLoads extends Component {
         <p className="gridTitle">DC Loads</p>
         <img src="images/ico-dc.svg" />
         <span class="voltage">
-          <span>{props["Dc/Loads/Current"]}</span>
-          <span class="leftMarginValue">{props["Dc/Loads/Power"]}</span>
+          <Value value={props["Dc/Loads/Current"]} connected={props.connected} />
+          <Value value={props["Dc/Loads/Power"]} connected={props.connected} />
         </span>
       </div>
     )
@@ -234,13 +240,13 @@ class Battery extends Component {
       <div id="batteryContainer" class="g grid-33 batteryDischarge">
         <p className="gridTitle">
           Battery
-          <span class="leftMarginValue">{props["Dc/Battery/Soc"]}</span>
+          <Value value={props["Dc/Battery/Soc"]} connected={props.connected} />
         </p>
         <div class="batteryProgress" />
         <span class="voltage">
-          <span>{props["Dc/Battery/Voltage"]}</span>
-          <span class="leftMarginValue">{props["Dc/Battery/Current"]}</span>
-          <span class="leftMarginValue">{props["Dc/Battery/Power"]}</span>
+          <Value value={props["Dc/Battery/Voltage"]} connected={props.connected} />
+          <Value value={props["Dc/Battery/Current"]} connected={props.connected} />
+          <Value value={props["Dc/Battery/Power"]} connected={props.connected} />
         </span>
       </div>
     )

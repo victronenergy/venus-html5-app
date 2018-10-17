@@ -155,24 +155,6 @@ header {
 
 /*********** MODULES ***********/
 
-.remoteBtn {
-  background: white;
-  border-radius: 5px;
-  font-weight: bold;
-  padding: 10px 20px;
-  color: #387cc6;
-  position: absolute;
-  right: 10px;
-  font-family: "Handset Condensed", Helvetica, Arial, Sans-Serif;
-  top: 50%;
-  margin-top: -22px;
-  text-decoration: none;
-}
-
-.staleValues {
-  color: #b1b1b1;
-}
-
 .shorePower {
   -webkit-box-shadow: inset 0 0 0 2px #387dc5;
   -moz-box-shadow: inset 0 0 0 2px #387dc5;
@@ -541,13 +523,13 @@ header {
   }
 }
 
-/* New CSS */
+/* New CSS or changed from previous */
 
-.leftMarginValue {
+.value:not(:first-child) {
   margin-left: 15px;
 }
 
-.bottomBtn > span {
+.value:only-of-type {
   margin-left: 5px;
 }
 
@@ -562,4 +544,22 @@ header {
 
 .sidenav--visible {
   width: 350px;
+}
+
+.remoteBtn {
+  background: white;
+  border-radius: 5px;
+  font-weight: bold;
+  padding: 10px 20px;
+  color: #387cc6;
+  position: absolute;
+  right: 10px;
+  font-family: "Handset Condensed", Helvetica, Arial, Sans-Serif;
+  top: 50%;
+  margin-top: -22px;
+  text-decoration: none;
+}
+
+.stale {
+  color: #b1b1b1;
 }
