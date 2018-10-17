@@ -54,6 +54,11 @@ class PowerSupplySystem {
     if (!isHandled) {
       this.handleEverythingElse(topicDetails, data)
     }
+
+    return {
+      path: topicDetails.dbusPath,
+      value: data.value || null
+    }
   }
 
   private handlePortalIdMessage(topic: Topic, data: any) {

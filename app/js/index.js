@@ -20,21 +20,21 @@ const mqttUrl = `mqtt://${host}:${port}`
 
 class App extends Component {
   state = {
-    "Ac/Grid/Voltage": "240V",
-    "Ac/Grid/Current": "1.4A",
-    "Ac/Grid/Power": "241W",
-    "Ac/Grid/CurrentLimit": "10A",
-    "System/State": "Absorbtion charging",
-    "System/Mode": "ON",
-    "Ac/Loads/Voltage": "240V",
-    "Ac/Loads/Current": "0.3A",
-    "Ac/Loads/Power": "21W",
-    "Dc/Loads/Current": "3.4A",
-    "Dc/Loads/Power": "220W",
-    "Dc/Battery/Soc": "88%",
-    "Dc/Battery/Voltage": "57.0V",
-    "Dc/Battery/Current": "7.5A",
-    "Dc/Battery/Power": "427W",
+    "Ac/Grid/Voltage": "--",
+    "Ac/Grid/Current": "--",
+    "Ac/Grid/Power": "--",
+    "Ac/Grid/CurrentLimit": "--",
+    "System/State": "--",
+    "System/Mode": "--",
+    "Ac/Loads/Voltage": "--",
+    "Ac/Loads/Current": "--",
+    "Ac/Loads/Power": "--",
+    "Dc/Loads/Current": "--",
+    "Dc/Loads/Power": "--",
+    "Dc/Battery/Soc": "--",
+    "Dc/Battery/Voltage": "--",
+    "Dc/Battery/Current": "--",
+    "Dc/Battery/Power": "--",
     modeSelectionVisible: false,
     currentSelectionVisible: false,
     connected: false
@@ -47,20 +47,22 @@ class App extends Component {
       deviceInterface.subscribe(dbusPaths)
     });
 
-    // TODO Implement this
-    // deviceInterface.onMessage = (path, value) => {
-    //   const metric = metricsConfig[path]
-    //   const formattedValue = metric.formatter(value)
-    //   const metricName = metric.name
-    //   console.log(metricName, formattedValue + metric.unit)
-    //   this.setState({ [metricName]: formattedValue + metric.unit })
-    // }
-    // deviceInterface.connected = () => {
-    //   this.setState({ connected: true })
-    // }
-    // deviceInterface.lostConnection = () => {
-    //   this.setState({ connected: false })
-    // }
+    deviceInterface.onMessage = ({ path, value }) => {
+      console.log(path, value);
+      const metric = metricsConfig[path]
+      if(!metric) {
+        return;
+      }
+
+      const formattedValue = metric.formatter(value)
+      const metricName = metric.name
+      console.log(metricName, formattedValue + metric.unit)
+      this.setState({ [metricName]: formattedValue + metric.unit })
+    }
+
+    deviceInterface.onConnectionChanged = ({ connected }) => {
+      this.setState({ connected })
+    }
 
     this.setState({ deviceInterface })
 
@@ -103,7 +105,7 @@ class App extends Component {
 
 class CurrentSelector extends Component {
   setAmperage = value => {
-    this.deviceInterface.write("/vebus/257/Ac/ActiveIn/CurrentLimit", value)
+    this.props.deviceInterface.write("/Ac/ActiveIn/CurrentLimit", value)
   }
 
   render(props, state) {
@@ -133,11 +135,11 @@ class CurrentSelector extends Component {
 class ModeSelector extends Component {
   setMode = mode => {
     if (mode === "on") {
-      this.deviceInterface.write("/vebus/257/Mode", 3)
+      this.props.deviceInterface.write("/Mode", 3)
     } else if (mode === "off") {
-      deviceInterface.write("/vebus/257/Mode", 4)
+      this.props.deviceInterface.write("/Mode", 4)
     } else if (mode === "charge") {
-      deviceInterface.write("/vebus/257/Mode", 1)
+      this.props.deviceInterface.write("/Mode", 1)
     }
   }
 

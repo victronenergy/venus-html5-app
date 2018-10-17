@@ -34,6 +34,8 @@ class VenusClient {
   public mqttClient: MqttClient
   private powerSupplySystem: PowerSupplySystem
   private keepAliveHandler: any = null
+  public onMessage: Function = () => {};
+  public onConnectionChanged: Function = () => {};
 
   constructor(host: string) {
     this.mqttClient = mqtt.connect(host)
@@ -42,7 +44,7 @@ class VenusClient {
 
   public connect = () => {
     return new Promise((resolve, reject) => {
-      this.mqttClient.on("connect", () => {
+      this.mqttClient.once("connect", () => {
         this.setupKeepAlive()
 
         const subscribeMap = arrayToSubscriptionMap(TOPICS_TO_SUBSCRIBE_ON_INIT)
@@ -52,7 +54,19 @@ class VenusClient {
             reject(err)
           }
         })
-      })
+      });
+
+      this.mqttClient.on("connect", () => {
+        this.onConnectionChanged({ connected: true });
+      });
+
+      this.mqttClient.on('disconnect', () => {
+        this.onConnectionChanged({ connected: false });
+      });
+
+      this.mqttClient.on('reconnect', () => {
+        this.onConnectionChanged({ connected: false });
+      });
 
       this.mqttClient.on("message", (topic, message) => {
         this.powerSupplySystem.handleNotification(topic, message)
@@ -62,6 +76,12 @@ class VenusClient {
         }
       })
     })
+  }
+
+  public write(dbusPath: string, value: number|string) {
+    const topic = this.powerSupplySystem.getTopicFromDbusPath("W", dbusPath)
+    let data = JSON.stringify({ value: value })
+    this.mqttClient.publish(topic, data)
   }
 
   /**
@@ -75,7 +95,10 @@ class VenusClient {
   }
 
   public subscribe = (dbusPaths: string[]) => {
-    this.mqttClient.on("message", this.powerSupplySystem.handleNotification)
+    this.mqttClient.on("message", (topic, message) => {
+      const clientMessage = this.powerSupplySystem.handleNotification(topic, message);
+      this.onMessage(clientMessage);
+    })
 
     const topics = dbusPaths.map(dbusPath => this.powerSupplySystem.getTopicFromDbusPath("N", dbusPath))
     const subscribeMap = arrayToSubscriptionMap(topics)
