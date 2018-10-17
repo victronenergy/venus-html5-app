@@ -156,11 +156,7 @@ header {
 /*********** MODULES ***********/
 
 .remoteBtn {
-  line-height: 24px;
-  display: inline-block;
   background: white;
-  border: none;
-  font-size: 14px;
   border-radius: 5px;
   font-weight: bold;
   padding: 10px 20px;
@@ -170,6 +166,7 @@ header {
   font-family: "Handset Condensed", Helvetica, Arial, Sans-Serif;
   top: 50%;
   margin-top: -22px;
+  text-decoration: none;
 }
 
 .staleValues {

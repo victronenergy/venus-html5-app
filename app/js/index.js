@@ -71,11 +71,16 @@ class App extends Component {
     return (
       <main>
         <header>
-          <img src="images/logo-vic.svg" />
-          <input class="remoteBtn" type="button" onClick="location.href='http://' + host;" value="Remote Console" />
-          {/* Reload element for test devices */}
-          <input type="button" value="Reload page" onclick="location.reload(true);" id="devReload" />
           <div className={"connectionStatus " + (state.connected ? "connectionStatus--on" : "connectionStatus--off")} />
+          {/* Element for test devices */}
+          <div id="devReload" style="position: fixed; top: 5px; left: 5x;">
+            <input type="button" value="Reload page" onClick={() => location.reload(true)} />
+            <input type="button" value="Browser info" onClick={() => (window.location.href = "/browser-info.html")} />
+          </div>
+          <img src="images/logo-vic.svg" />
+          <a href={"http://" + host} class="remoteBtn" type="button" target="_blank">
+            Remote Console
+          </a>
         </header>
         <CurrentSelector {...this.state} updateStateValue={this.updateStateValue} />
         <ModeSelector {...this.state} updateStateValue={this.updateStateValue} />
