@@ -3,7 +3,37 @@
 Until we get webpack dev server with HMR working use this setup if you wish to hae hotreload while developing.
 
 - webpack build: `npm run dev-compile`
-- live server: `npm run dev`
+- live server `npm run dev` launches the app in your system's default browser. If you have defined a Venus host device
+  IP in live-server.js, it will automatically add that ip as host query param. The dev query param is also set.
+
+### Enabling dev features on devices
+
+When running the application on actual devices, or testing develompent results there are a few convenience features available
+in the UI when query param `dev=<anyvalue>` is passed to the url. It enables buttons in the UI for reloading the page
+and viewing a page with basic information on the running browser.
+
+## Deployment
+
+### Get the device ip
+
+In order to deploy you need to know the target device's IP. It can be connected to by ethernet, LAN or the device's own WLAN.
+Instructions on how to find the IPs can be found [here](https://www.victronenergy.com/live/venus-gx:start#accessing_the_device)
+for the Venus GX device.
+
+### Bundle the app
+
+Run `npm run compile` to bundle the app into dist/ (and to remove existing dist/).
+
+### Run deploy script
+
+In the project main folder run `./bin/deploy.sh <ip>` where ip is the target device's IP. The script also accepts an additional
+--user|-u param that defines the user for the deployment connection. This defaults to root.
+
+### Navigate to the app address again on the target device
+
+Once deployed reload the page by navigating to the Venus host ip
+on the target device. If you have enabled dev faetures and have previously deployed a new version of the ui to the device you can
+press the `reload page` on the top left corner of the page.
 
 # Outdated readme
 
