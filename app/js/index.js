@@ -57,7 +57,6 @@ class App extends Component {
 
       const formattedValue = metric.formatter(value)
       const metricName = metric.name
-      console.log(metricName, formattedValue + metric.unit)
       this.setState({ [metricName]: formattedValue + metric.unit })
     }
 
