@@ -30,9 +30,16 @@ for more info on that. Instance is always 0.
 And that most of below paths are copied from that same dbus wiki page; and all lenghty explanations
 have been stripped out. So, make sure to see the dbus wiki page for details.
 
-#### Battery & Solar data:
+#### Battery data:
 ```
 system/0/Dc/Battery/*
+
+Note on /Dc/Battery/TimeToGo: while charging, it will be invalid. So make sure to handle that
+properly. We either show three dashes (---), or hide the item, when invalid.
+```
+
+#### Solar data:
+```
 system/0/Dc/Pv/*
 ```
 
