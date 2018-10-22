@@ -82,7 +82,7 @@ The instance you are looking for is the instance of the main VebusService, in ab
 `com.victronenergy.vebus.ttyO1`. So:
 
 1. request `system/0/VebusService`
-2. look that up in the values of `system/0ServiceMapping/*`
+2. look that up in the values of `system/0/ServiceMapping/*`
 3. take the digit behind the last underscore, and now you'll know the instance
 
 With above example, the instance is 257, making the prefix `vebus/257`.
@@ -93,10 +93,17 @@ vebus/257/Ac/In/n/CurrentLimit                   <- R/W for input current limit.
 vebus/257/Ac/In/n/CurrentLimit GetMin            <- not implemented!)
 vebus/257/Ac/In/n/CurrentLimit GetMax
 vebus/257/Ac/In/n/CurrentLimitIsAdjustable
-```
-(don't hardcode that vebus/257 ;-).   )
 
-And for on/off it is:
+n = the AC-input. 0 = AC-input 1, and 1 = AC-input 2.
+
+And, don't hardcode that vebus/257 ;-).
+```
+
+Notes:
+1. when /vebus/257/In/n/CurrentLimit is set to an invalid value, it will automatically be changed to a valid value. Some examples for setting it to an invalid value are setting it too low, or setting it to a value that doesn't match with regards to step-sizes.
+2. the Getmin is not implemented because its difficult to implement on our side: The panel frames used to communicate current limits only  contain the max value. min is not included. We can only get the minimum from the active AC input. The minimum is a special case, it will change depending on the configuration of the inverter/charger, for example disabling "powerAssist" changes it.
+
+On/Off/Charger-only control paths:
 ```
 vebus/257/Mode                          <- Position of the switch.
                                            1=Charger Only;2=Inverter Only;3=On;4=Off
