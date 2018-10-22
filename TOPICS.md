@@ -36,6 +36,20 @@ system/0/Dc/Battery/*
 system/0/Dc/Pv/*
 ```
 
+#### AC Input configuration data:
+Some of our inverter/chargers have one AC input, others, the Quattros, have two. Sometimes only
+one input is used; fe. when they have the two-input model for another reason than using the two
+inputs. The installer configures the AC-input types in the menus: Settings -> System Setup.
+
+Then they are stored in 'localsettings', avaible on MQTT as:
+```
+settings/Settings/SystemSetup/AcInput0  <- 0: not in use; 1: grid, 2: generator, 3: shore
+settings/Settings/SystemSetup/AcInput1  <- same
+
+(needs to be verified; I'm not sure how (well) dbus-mqtt handles localsettings, since there is
+no /DeviceInstance.
+```
+
 #### Inverter/charger data:
 ```
 All prefixed with system/0/
