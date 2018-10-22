@@ -158,6 +158,7 @@ vebus/257/Mode                          <- Position of the switch.
                                            1=Charger Only;2=Inverter Only;3=On;4=Off
                                            Make sure to read CCGX manual, and limitations
                                            of this switch, for example when using a VE.Bus BMS.
+vebus/257/ModeIsAdjustable              <- 0: only show the mode / 1: keep it adjustable
 ```
 
 #### Tank data:
