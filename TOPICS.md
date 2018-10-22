@@ -100,8 +100,14 @@ And, don't hardcode that vebus/257 ;-).
 ```
 
 Notes:
-1. when /vebus/257/In/n/CurrentLimit is set to an invalid value, it will automatically be changed to a valid value. Some examples for setting it to an invalid value are setting it too low, or setting it to a value that doesn't match with regards to step-sizes.
-2. the Getmin is not implemented because its difficult to implement on our side: The panel frames used to communicate current limits only  contain the max value. min is not included. We can only get the minimum from the active AC input. The minimum is a special case, it will change depending on the configuration of the inverter/charger, for example disabling "powerAssist" changes it.
+1. when /vebus/257/In/n/CurrentLimit is set to an invalid value, it will automatically
+be changed to a valid value. Some examples for setting it to an invalid value are
+setting it too low, or setting it to a value that doesn't match with regards to step-sizes.
+2. the Getmin is not implemented because its difficult to implement on our side: The
+panel frames used to communicate current limits only  contain the max value. min is not
+included. We can only get the minimum from the active AC input. The minimum is a special
+case, it will change depending on the configuration of the inverter/charger, for example
+disabling "powerAssist" changes it.
 
 On/Off/Charger-only control paths:
 ```
