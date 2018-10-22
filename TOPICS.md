@@ -46,13 +46,13 @@ All prefixed with system/0/
 /SystemState/State             <- Absorption, float, etc.
 
 /Ac/ActiveIn/Source             <- The active AC-In source of the multi.
-                                   0:not available, 1:grid, 2:genset,
+                                   0:not available, 1:grid, 2:generator,
                                    3:shore, 240: inverting/island mode.
 /Ac/Consumption/NumberOfPhases  <- Either 1 (single phase), 2 (split-phase) or
                                    3 (three-phase)
 /Ac/ConsumptionOnOutput/*       <- Use this for AC Consumption.
 /Ac/Grid/*                      <- All from the shore. TODO: check if this shouldn't be /Ac/Shore
-/Ac/Genset/*                    <- All from the genset.
+/Ac/Genset/*                    <- All from the generator.
 
 /VebusService                    <- Returns the service name of the vebus service.
                                     Use that to find the control options:
