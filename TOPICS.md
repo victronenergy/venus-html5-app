@@ -43,7 +43,7 @@ properly. We either show three dashes (---), or hide the item, when invalid.
 system/0/Dc/Pv/*
 ```
 
-#### AC Input configuration data:
+#### AC Input data (Shore / Genset):
 Some of our inverter/chargers have one AC input, others, the Quattros, have two. Sometimes only
 one input is used; fe. when they have the two-input model for another reason than using the two
 inputs. The installer configures the AC-input types in the menus: Settings -> System Setup.
@@ -57,14 +57,38 @@ settings/Settings/SystemSetup/AcInput1  <- same
 no /DeviceInstance.
 ```
 
+For UIs that show only power, and lso not show generator & shore that the same time,
+its simple: take these paths from system/0:
+```
+/Ac/Grid/*                      <- All from the shore. TODO: check if this shouldn't be /Ac/Shore
+/Ac/Genset/*                    <- All from the generator.
+```
+
+For UIs that show more information, so also voltage and current, its a bit more complex:
+- figure out which of the AC-inputs is what; so for example ACinput0 == Generator and
+ACinput1 == Shore.
+- find the ve.bus service (see below).
+
+Then, use these paths:
+```
+/Ac/ActiveIn/ActiveInput       <- Active input: 0 = ACin-1, 1 = ACin-2, 240 is none (inverting).
+
+So, if the ActiveInput == Acinput1, then populate the Shore box with the values from these paths:
+/Ac/ActiveIn/L1/F  <- Frequency (Hz)
+/Ac/ActiveIn/L1/I  <- Current (Amps)
+/Ac/ActiveIn/L1/P  <- Power (Watts)
+/Ac/ActiveIn/L1/S  <- Power (VA - ignore this one)
+/Ac/ActiveIn/L1/V  <- Voltage (Volts)
+```
+
 #### Inverter/charger data:
 ```
 All prefixed with system/0/
 
-/Dc/Vebus/Current              <- charge/discharge current between battery
-                                  and inverter/charger
-/Dc/Vebus/Power                <- same, but then the power
-/SystemState/State             <- Absorption, float, etc.
+/Dc/Vebus/Current               <- charge/discharge current between battery
+                                   and inverter/charger
+/Dc/Vebus/Power                 <- same, but then the power
+/SystemState/State              <- Absorption, float, etc.
 
 /Ac/ActiveIn/Source             <- The active AC-In source of the multi.
                                    0:not available, 1:grid, 2:generator,
@@ -72,11 +96,9 @@ All prefixed with system/0/
 /Ac/Consumption/NumberOfPhases  <- Either 1 (single phase), 2 (split-phase) or
                                    3 (three-phase)
 /Ac/ConsumptionOnOutput/*       <- Use this for AC Consumption.
-/Ac/Grid/*                      <- All from the shore. TODO: check if this shouldn't be /Ac/Shore
-/Ac/Genset/*                    <- All from the generator.
 
-/VebusService                    <- Returns the service name of the vebus service.
-                                    Use that to find the control options:
+/VebusService                   <- Returns the service name of the vebus service.
+                                   Use that to find the control options:
 ```
 
 #### Inverter/charger control:
