@@ -1,20 +1,15 @@
 import * as mqtt from "mqtt"
 import VenusClient from "../src/service/VenusClient"
-import Mock = jest.Mock
-jest.mock("mqtt", "connect")
-
-interface CallbackMap {
-  [event: string]: Function[]
-}
 
 class MockClient {
-  public callbacks: CallbackMap = {}
+  callbacks = {}
 
   notifyClientConnected() {
     this.callbacks["connect"].forEach(cb => cb(null, [{ topic: "x", ops: 0 }]))
   }
 
-  public once = (event: string, callback: Function) => {
+  on = () => {}
+  once = (event, callback) => {
     if (!this.callbacks[event]) {
       this.callbacks[event] = [callback]
     } else {
@@ -22,7 +17,7 @@ class MockClient {
     }
   }
 
-  public subscribe: Mock = jest.fn()
+  subscribe = jest.fn()
 }
 
 const mockClient = new MockClient()

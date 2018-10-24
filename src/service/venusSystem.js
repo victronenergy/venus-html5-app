@@ -2,21 +2,21 @@ import { isPathOfType, parseTopic, Topic } from "./util"
 import { SERVICES } from "./topics"
 import { DBUS_PATHS } from "../config/dbusPaths"
 
-type Equipment = {
-  battery: any
-  inverterCharger: {
-    dcLoads?: any
-    acLoads?: any
-    shorePower?: any
-    system?: any
-  }
-}
+/**
+ * @typedef {object} Equipment
+ * @prop {object} battery
+ * @prop {object} inverterCharger
+ * @prop {object} inverterCharger.dcLoads
+ * @prop {object} inverterCharger.acLoads
+ * @prop {object} inverterCharger.shorePower
+ * @prop {object} inverterCharger.system
+ */
 
 class VenusSystem {
-  public portalId: string | null = null
-  public vebusInstanceId: number | null = null
-  public systemInstanceId: number | null = null
-  public equipment: Equipment
+  portalId = null
+  vebusInstanceId = null
+  systemInstanceId = null
+  equipment
 
   constructor() {
     this.equipment = {
@@ -30,11 +30,17 @@ class VenusSystem {
     }
   }
 
-  public isInitialized = () => {
+  isInitialized = () => {
     return this.portalId && this.vebusInstanceId && this.systemInstanceId !== null
   }
 
-  public getTopicFromDbusPath = (type: "N" | "R" | "W", dbusPath: string) => {
+  /**
+   *
+   * @param {"N" | "R" | "W"} type
+   * @param dbusPath
+   * @returns {string}
+   */
+  getTopicFromDbusPath = (type, dbusPath) => {
     if (SERVICES.SYSTEM.includes(dbusPath)) {
       return `${type}/${this.portalId}/system/${this.systemInstanceId}${dbusPath}`
     } else if (SERVICES.VEBUS.includes(dbusPath)) {
@@ -46,8 +52,8 @@ class VenusSystem {
   }
 
   // Handling of the system components and their IDs below
-  public handleSystemMessage(topic: string, message: any) {
-    const topicDetails: Topic = parseTopic(topic)
+  handleSystemMessage(topic, message) {
+    const topicDetails = parseTopic(topic)
     this.handlePortalIdMessage(topicDetails, message) ||
       this.handleBaterryInfoMessages(topicDetails, message) ||
       this.handleDCLoads(topicDetails, message) ||
@@ -57,7 +63,7 @@ class VenusSystem {
       this.handleDeviceIds(topicDetails, message)
   }
 
-  private handlePortalIdMessage(topic: Topic, data: any) {
+  handlePortalIdMessage(topic, data) {
     if (topic.dbusPath === DBUS_PATHS.GENERAL.SERIAL) {
       this.portalId = data.value
       return true
@@ -65,7 +71,7 @@ class VenusSystem {
     return false
   }
 
-  private handleDeviceIds(topic: Topic, data: any) {
+  handleDeviceIds(topic, data) {
     if (topic.dbusPath === DBUS_PATHS.GENERAL.DEVICE_INSTANCE) {
       console.log(`DEVICE ${topic.serviceType} AVAILABLE WITH ID ${topic.deviceInstance}`)
       switch (topic.serviceType) {
@@ -89,7 +95,7 @@ class VenusSystem {
     return false
   }
 
-  private handleBaterryInfoMessages(topic: Topic, data: any) {
+  handleBaterryInfoMessages(topic, data) {
     if (isPathOfType(topic.dbusPath, DBUS_PATHS.BATTERY)) {
       if (!this.equipment.battery) {
         this.equipment.battery = {}
@@ -100,7 +106,7 @@ class VenusSystem {
     return false
   }
 
-  private handleDCLoads(topic: Topic, data: any) {
+  handleDCLoads(topic, data) {
     if (isPathOfType(topic.dbusPath, DBUS_PATHS.INVERTER_CHARGER.DC_LOADS)) {
       if (!this.equipment.inverterCharger.dcLoads) {
         this.equipment.inverterCharger.dcLoads = {}
@@ -111,7 +117,7 @@ class VenusSystem {
     return false
   }
 
-  private handleACLoads(topic: Topic, data: any) {
+  handleACLoads(topic, data) {
     if (isPathOfType(topic.dbusPath, DBUS_PATHS.INVERTER_CHARGER.AC_LOADS)) {
       if (!this.equipment.inverterCharger.acLoads) {
         this.equipment.inverterCharger.acLoads = {}
@@ -122,7 +128,7 @@ class VenusSystem {
     return false
   }
 
-  private handleShorePower(topic: Topic, data: any) {
+  handleShorePower(topic, data) {
     if (isPathOfType(topic.dbusPath, DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER)) {
       if (!this.equipment.inverterCharger.shorePower) {
         this.equipment.inverterCharger.shorePower = {}
@@ -133,7 +139,7 @@ class VenusSystem {
     return false
   }
 
-  private handleSystemState(topic: Topic, data: any) {
+  handleSystemState(topic, data) {
     if (isPathOfType(topic.dbusPath, DBUS_PATHS.INVERTER_CHARGER.SYSTEM)) {
       if (!this.equipment.inverterCharger.system) {
         this.equipment.inverterCharger.system = {}

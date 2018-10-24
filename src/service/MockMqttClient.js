@@ -2,8 +2,8 @@ import { DBUS_PATHS } from "../config/dbusPaths"
 import { ClientSubscribeCallback, ISubscriptionMap } from "mqtt"
 
 export default class FakeMqttClient {
-  private onMessage: Function = null // this is the function that 'sends data to the ui'
-  private initialized = false
+  onMessage = null // this is the function that 'sends data to the ui'
+  initialized = false
 
   initService(callbackFn) {
     callbackFn("N/mockPortalId/system/0/Serial", JSON.stringify({ value: "mockPortalId" }))
@@ -68,21 +68,21 @@ export default class FakeMqttClient {
     console.log("end")
   }
 
-  once(action: string, callback: Function) {
+  once(action, callback) {
     console.log(`once: ${action}`)
     callback()
   }
 
-  subscribe(sub: string | string[] | ISubscriptionMap, callback: ClientSubscribeCallback) {
+  subscribe(sub, callback) {
     console.log("subscribe:", sub)
   }
 
-  removeAllListeners(event?: string | symbol) {
+  removeAllListeners(event) {
     console.log("Remove all listeners")
     this.initialized = true
   }
 
-  on(action: string, callback: Function) {
+  on(action, callback) {
     console.log(`on: ${action}`)
     if (action === "connect" || action === "disconnect" || action === "reconnect") {
       callback()
@@ -95,7 +95,7 @@ export default class FakeMqttClient {
     } else console.log(action)
   }
 
-  publish(topic: string, data: string | Buffer) {
+  publish(topic, data) {
     console.log(`publish: ${JSON.stringify(data)}`)
   }
 }
