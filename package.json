@@ -4,19 +4,43 @@
   "description": "Metric framework for Victron VenusOS",
   "main": "index.js",
   "scripts": {
-    "webpack": "webpack --mode production",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node live-server",
+    "dev-compile": "npx webpack -w",
+    "dev-compile:mocked": "npx webpack -w --mode=development",
+    "clean": "rm -rf dist",
+    "compile": "npm run clean && npx webpack",
+    "test": "jest --config jestconfig.json",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\" \"test/**/*.ts\" \"test/**/*.js\"",
+    "lint": "tslint -p tsconfig.json"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.5",
-    "babel-preset-env": "^1.7.0",
-    "webpack": "^4.15.1",
-    "webpack-cli": "^3.0.8"
-  },
-  "dependencies": {
-    "mqtt": "^2.18.3"
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-typescript": "^7.1.0",
+    "@types/jest": "^23.3.5",
+    "@types/mqtt": "^2.5.0",
+    "@types/node": "^10.11.7",
+    "babel-loader": "^8.0.4",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "copy-webpack-plugin": "^4.5.3",
+    "css-loader": "^1.0.0",
+    "file-loader": "^2.0.0",
+    "jest": "^23.6.0",
+    "live-server": "^1.2.0",
+    "mqtt": "^2.18.3",
+    "node-sass": "^4.9.4",
+    "preact": "^8.3.1",
+    "prettier": "^1.14.3",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "ts-jest": "^23.10.4",
+    "tslint": "^5.11.0",
+    "tslint-config-prettier": "^1.15.0",
+    "typescript": "^3.1.3",
+    "webpack": "^4.22.0",
+    "webpack-cli": "^3.1.2"
   }
 }
