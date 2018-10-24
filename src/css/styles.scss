@@ -38,23 +38,34 @@ main {
 header {
   height: 70px;
   display: flex;
-  justify-content: flex-end;
-  align-items: flex-start;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.logo {
+  height: 35px;
+  width: 183px;
+  margin-left: 20px;
 }
 
 .connection {
-  height: 50px;
   display: flex;
   align-items: center;
 }
 
+.connection__icon {
+  height: 19px;
+  width: 19px;
+  margin-right: 15px;
+}
+
 .remote-console {
   color: white;
-  margin-left: 10px;
+  margin-left: 25px;
   padding: 10px 20px;
   text-decoration: none;
   border-radius: 6px;
-  /* background-color: #0a101f; */
   background-color: rgba(10, 16, 31, 0.8);
 }
 
@@ -95,8 +106,8 @@ header {
 }
 
 .metric__icon {
-  height: 100%;
-  width: 60px;
+  height: 56px;
+  width: 56px;
 }
 
 .metric__container--left {
@@ -182,9 +193,10 @@ header {
 }
 
 .metric__battery {
-  background-image: url("../images/UI_Battery_Block.png");
+  background-image: url("../images/boat.png");
   background-repeat: no-repeat;
   background-position: right;
+  background-size: auto 100%;
 
   @media #{$portrait-small} {
     background-image: none;
