@@ -1,9 +1,9 @@
-![screenshot](/victron-webapp-screenshot.png?raw=true "")
+![screenshot](/victron-webapp-screenshot.jpg?raw=true)
 
 # Venus OS hosted web app
 
-The "app" is a simle static html5 application (html/css/js), that communicates to the
-rest of Venus OS via MQTT over websockets.
+The "app" is a single page application that communicates to the rest of Venus OS via MQTT over websockets.
+It uses Preact with ES6 for the UI layer and also includes a wrapper service for the MQTT interface built with Typescript.
 
 Its primary purpose is to be a simple to use and nice looking UI for a Victron system on
 marine Multi Functional Displays, such as the ones from Garmin, Simrad and others. This
@@ -12,154 +12,129 @@ removes the need for a Victron panel at the helm: less clutter on the dashboard.
 The secondary purpose is to help OEMs, boat builders and motorhome builders for example,
 make their own custom UI.
 
-The project consist of four main components:
+## Getting started
 
-* `/library` -> the metric library sources
-* `/app    ` -> the web app sources, including the compiled version of the metric library
-* `/*      ` -> some nodejs files used to compile the metric library
+### Initial setup
 
+If it's the first time you run the app:
 
-### Developing your own custom UI
+- make sure to have `node` & `npm` installed on your machine
+- run `npm install` in the root folder
 
-The project is set-up such, that you can use the app (html, css) as an example for how
-to implement your own custom user interface. And use the metric library as is. When
-you need changes in the metric library, please put in a Pull Request, so we keep one
-version.
+### Development
 
+To run the app locally for development you need to:
 
-### Running & developing the app from your computer
+1. start webpack in watch mode, to allow it to re-compile changes to the code as you develop:
 
-It is not necessary to run it from a webserver; as all files are static. Simply open
-index.html in a browser.
+`npm run dev-compile`
 
-The communicates to the rest of Venus OS, to for example retrieve battery voltages, or
-change input current limit, via the MQTT protocol, over websockets. It connects to the
-MQTT broker running on Venus OS.
+2. launch the app through live-server to enable live reload of the changes in the code:
 
-By default, the page expects the broker to listen on the hostname in the url, on port
-9001. It is also possible to specify a different host and port: use the `host` and
-`port` query parameters:
+`npm run dev` 
 
-	file:///home/matthijs/dev/venus-webapp/app/index.html?host=192.168.178.129&port=1884
+This will launch the application in you system's default browser.
 
-Tip: enable the Demo mode on the Venus device; see Settings -> General. This allows to
-get useful data if you have only the Venus device and no other Victron devices. without
-requiring various Victron devices to be connected to the Venus device.
+3. configure the IP of the Venus device
 
+You need to change the `host` (and optionally `port`) query parameters to point to your Venus device:
 
-## Metrics Library documentation
+`path/to/venus-html5-app/dist/index.html?host=192.168.178.129&port=1884`
 
-### Setting up a metric service
+You can also define the IP inside `live-server.js`, and then it will automatically be added as `host` query param when you launch the app the next time using `npm run dev`.
 
-```javascript
-var deviceInterface = new Venus.MqttInterface('localhost', 9001);
-var metricService = new Venus.MetricService(deviceInterface);
+By default, the application starts with the `dev` flag enabled. 
+This adds some convenience features for debugging on actual devices and testing:
+* "Reload page" button - refreshes the page
+* "Browser info" button - links to page containing basic information about the browser in which the app is running
+
+### Running the app with no Venus device available
+
+If there is no real device to be used for MQTT data, you can run the app with a fake MQTT client using `npm run dev-compile:mocked`.
+This fakes the UI's MQTT client to "receive and send" data. Currently only randomizes numbers from 0 to 100 for inputs which in most cases make no sense.
+
+Also, keep in mind the Venus device also has a Demo mode, which allows you to get useful data if you have only the Venus device and no other Victron devices, without requiring various Victron devices to be connected to the Venus device.
+To enable it, navigate to the Venus Remote Console -> Settings -> General.
+
+## Metrics available
+
+A list of all metrics currently available for display in the app is defined in `src/config/metricsConfig.js`.
+
+For example,
+
+```js
+{
+  [DBUS_PATHS.BATTERY.VOLTAGE]: {   // Key is the D-Bus channel name to listen to
+    description: "Voltage",         // This is not used in the UI, just meta data
+    unit: "V",                      // What unit to display next to the metric
+    formatter: numericFormatter(1)  // How to format the raw data
+  }
+}
 ```
 
-### Metrics
+To subscribe to a topic, you only need to specify the D-Bus channel name. The topic URL will be computed automatically by the `VenusClient` class, which is a wrapper on top of the MQTT interface.
 
-When we have the metric service in place, we need to setup our metrics. Each metric needs
-to have a unique key, a path to the device interface, some meta-data and a formatter that
-turns the raw value into a user-friendy string for display. All metric also has an access
-specifier that determines read/writeability.
+A list of all currently supported D-Bus paths is defined in `src/config/dbusPaths`.
 
-NOTE: A metric needs to have the correct access for read/write to work as expected. `'r', 'w' or 'rw'`
+All entries defined in `metricsConnfig` are available to the main application and their state will be refreshed automatically in the UI.
+See `src/js/index.js` for details.
 
-The available Venus OS dbus paths can be found at: <https://github.com/victronenergy/venus/wiki/dbus>
+### Adding new metrics
 
-#### Defining metrics
+To add a new metric:
 
-The following line will register a metric `dc/battery/voltage` that will update using the
-`/system/0/Dc/Battery/Voltage` dbus path. The display is then formatted with 1 decimal
-point. The `'r'` represents the access specifier.
+- Identify the D-bus channel that you want to read [from here](https://github.com/victronenergy/venus/wiki/dbus)
+- Configure the type of MQTT service this is and add it to `src/service/topics` ([docs](https://github.com/victronenergy/dbus-mqtt))
+- (optional) If the type of service is not supported yet, implement in in `src/service/VenusClient`
+- Make the data from the topic available to the UI by adding it to the `metricsConfig` file, together with details on how to display it (formatter function, unit to use)
 
-	metricService.register('dc/battery/voltage', '/system/0/Dc/Battery/Voltage', 'Voltage', 'V', Venus.numericFormatter(1), 'r');
+### Custom formatting
 
-#### Custom formatting
+It is also possible to write completely custom formatting by creating a formatter
+function and attaching it to a metric in `metricsConfig.js`
 
-It is also possible to write completely custom formatting.
+## Deployment
 
-```javascript
-metricService.register('system/mode', '/vebus/257/Mode', 'System mode', '', function(metric) {
-  if (metric.rawValue == 1) return 'Charger only';
-  if (metric.rawValue == 2) return 'Inverter only';
-  if (metric.rawValue == 3) return 'ON';
-  if (metric.rawValue == 4) return 'OFF';
-  return '--';
-}, 'rw');
+### 1. Get the device ip
+
+In order to deploy you need to know the target device's IP. It can be connected to by ethernet, LAN or the device's own WLAN.
+Instructions on how to find the IPs can be found [here](https://www.victronenergy.com/live/venus-gx:start#accessing_the_device)
+for the Venus GX device.
+
+### 2. Run deploy script
+
+In the project main folder run `./bin/deploy.sh <ip>` where ip is the target device's IP. The script also accepts an additional
+`--user|-u` param that defines the user for the deployment connection. This defaults to `root`.
+
+The deploy script also bundles the app. Nore that the script assumes that it's run from the root folder of the application.
+
+### 3. Navigate to the app address again on the target device
+
+Once deployed reload the page by navigating to the Venus host IP on the target device.
+If you have enabled dev features and have previously deployed a new version of the UI to the device you can
+press the `reload page` on the top left corner of the page.
+
+## Making a new release
+
+To make a new release:
+
+1. Create & push a tag for the version (do not use `v` in the version name, just the number)
+2. Update the [todo](https://github.com/victronenergy/venus-private/wiki/todo) page for the build
+
+You should add a note under "waiting for recipe", containing the tag name and the changes included:
+
+```md
+html5-app - <tag name>
+    <message>
 ```
 
-## Data binding
+For example:
 
-### Data binding using HTML
-
-The easiest way of presenting the metric data is by using html attributes. This method
-simply uses a property on the metric to update a property of a HTML element.
-
-* `data-metric` contains the metric key to bind and is required.
-* `data-metric-property` contains the property on the metric to display and is optional (defaults to `value`).
-* `data-binding` contains the property on the element to update and is optional (defaults to `innerHTML`).
-
-```html
-<div data-metric="dc/battery/power"></div>
-<div data-metric="dc/battery/power" data-property="rawValue"></div>
-<input type="checkbox" data-metric="dc/battery/ischarging" data-binding="checked"/>
+```md
+html5-app - 0.2
+    * Reworked the UI 
 ```
 
-To hook up the bindings one must call the `bindElements` method on the metric service:
-
-```javascript
-metricService.bindElements();
-```
-
-### Custom data binding
-
-Sometimes the simple property binding is not enough. Maybe you need to use some script that
-is more complex. In those cases subscribe to the metrics on change callback:
-
-```javascript
-metric.addOnChangeCallback(function(metric) {
-  var message = metric.description + ' = ' + metric.value + metric.unit;
-  document.getElementById('some-id').innerHTML = message;
-});
-```
-
-## Metric service callbacks
-
-You can also subscribe to metric changes using callbacks and implement a completely custom
-data binding.
-
-### Registered metric data
-
-The `onUpdate` callback is raised when a registered metric raw value changes.
-
-```javascript
-metricService.onUpdate = function(metric) {
-  console.log(metric.key + '=' + metric.value);
-};
-```
-
-### Raw device interface data
-
-The `onRawUpdate` callback gives you all updates from the device interface.
-
-```javascript
-metricService.onRawUpdate = function(path, value) {
-  console.log(path + '=' + value);
-};
-```
-
-### Building the Library
-
-First setup the build environment:
-
-	npm install
-
-To build the metric library run the following command:
-
-	npm run webpack
-
-This will output a `venus-metrics.min.js` file in the build folder.
-
-Make sure to copy it to `/app/library` when making a release.
-
+If you need any changes to the how the app is included inside Venus, please specify in the TODO file as well what changes need to be made to the recipe.
+All Venus recipes are found [here](https://github.com/victronenergy/meta-victronenergy/tree/master/meta-ve-software/recipes-ve). 
+A sample recipe for the HTML5 app is [here](https://github.com/victronenergy/meta-victronenergy/blob/master/meta-ve-software/recipes-ve/venus-html5-app_0.1.bb)
