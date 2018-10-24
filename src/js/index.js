@@ -73,7 +73,9 @@ class App extends Component {
       <main>
         <div className="bg" />
         <header>
+          <img src="./images/icons/logo.svg" className="logo" />
           <div className="connection">
+            <img src="./images/icons/connected.svg" className="connection__icon" />
             <p>{this.state.connected ? "Connected" : "Disconnected"}</p>
             <a href={"http://" + host} className="remote-console" target="_blank">
               Remote Console
@@ -138,7 +140,7 @@ class AcInput extends Component {
   render(props, state) {
     return (
       <div className="metric metric--small">
-        <img src="./images/icons/icon_ShorePower.svg" className="metric__icon" />
+        <img src="./images/icons/shore-power.svg" className="metric__icon" />
         <div className="metric__value-container">
           <p>{props.acInput}</p>
           <div className="metric__values">
@@ -207,7 +209,7 @@ class MultiPlus extends Component {
     return (
       <div className="metric">
         <div className="metric__container--left">
-          <img src="./images/icons/icon_multiplus.png" className="metric__icon" />
+          <img src="./images/icons/multiplus.svg" className="metric__icon" />
           <div className="metric__value-container">
             <p>MultiPlus</p>
             <div className="metric__values">
@@ -249,7 +251,7 @@ class Battery extends Component {
     return (
       <div className="metric metric__battery">
         <div className="metric__container--left">
-          <img src="./images/icons/icon_battery.svg" className="metric__icon" />
+          <img src="./images/icons/battery.svg" className="metric__icon" />
           <div className="metric__value-container">
             <p>Battery</p>
             <div className="metric__values">
@@ -274,7 +276,7 @@ class AcLoads extends Component {
   render(props, state) {
     return (
       <div className="metric metric--small">
-        <img src="./images/icons/icon_ac.svg" className="metric__icon" />
+        <img src="./images/icons/ac.svg" className="metric__icon" />
         <div className="metric__value-container">
           <p>AC Loads</p>
           <div className="metric__values">
@@ -292,7 +294,7 @@ class DcLoads extends Component {
   render(props, state) {
     return (
       <div className="metric metric--small">
-        <img src="./images/icons/icon_dc@1x.svg" className="metric__icon" />
+        <img src="./images/icons/dc.svg" className="metric__icon" />
         <div className="metric__value-container">
           <p>DC Loads</p>
           <div className="metric__values">
