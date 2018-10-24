@@ -1,5 +1,5 @@
 import * as mqtt from "mqtt"
-import { MqttClient, ClientSubscribeCallback } from "mqtt"
+import { MqttClient } from "mqtt"
 import { TOPICS } from "./topics"
 import { DBUS_PATHS } from "../config/dbusPaths"
 import { parseMessage, arrayToSubscriptionMap } from "./util"
@@ -9,16 +9,18 @@ import VenusSystem from "./venusSystem"
 // we can use this mock mqtt client that mocks the mqtt server responses to
 // the ui. Implemented using webpack define plugin to define whether or not
 // we are in prod or dev mode.
-declare const DEV: string
+// TODO Check if this still works
+let DEV
+
 import MockMqttClient from "./MockMqttClient"
 
 /**
  * Default quality of service when subscribing - best effort
  * {@link https://www.npmjs.com/package/mqtt#qos}
  */
-const TOPICS_TO_SUBSCRIBE_ON_INIT: string[] = [TOPICS.NOTIFICATION.SERIAL, TOPICS.NOTIFICATION.ALL_DEVICE_INSTANCES]
+const TOPICS_TO_SUBSCRIBE_ON_INIT = [TOPICS.NOTIFICATION.SERIAL, TOPICS.NOTIFICATION.ALL_DEVICE_INSTANCES]
 
-const subscribeCallback: ClientSubscribeCallback = (err, granted) => {
+const subscribeCallback = (err, granted) => {
   if (err) {
     console.log("Error connecting to topic", err)
   } else {
@@ -29,13 +31,20 @@ const subscribeCallback: ClientSubscribeCallback = (err, granted) => {
 }
 
 class VenusClient {
-  public mqttClient: MqttClient | MockMqttClient
-  private venusSystem: VenusSystem
-  private keepAliveHandlerRef: any = null
-  public onMessage: Function = () => {}
-  public onConnectionChanged: Function = () => {}
+  /**
+   * @type {MockMqttClient|MqttClient}
+   */
+  mqttClient
+  /**
+   * @type {VenusSystem}
+   * @private
+   */
+  venusSystem
+  keepAliveHandlerRef = null
+  onMessage = () => {}
+  onConnectionChanged = () => {}
 
-  constructor(host: string) {
+  constructor(host) {
     this.mqttClient = DEV ? new MockMqttClient() : mqtt.connect(host)
     this.venusSystem = new VenusSystem()
     window.onunload = () => {
@@ -43,7 +52,7 @@ class VenusClient {
     }
   }
 
-  public connect = () => {
+  connect = () => {
     return new Promise((resolve, reject) => {
       this.mqttClient.once("connect", () => {
         const initialSubs = arrayToSubscriptionMap(TOPICS_TO_SUBSCRIBE_ON_INIT)
@@ -83,7 +92,7 @@ class VenusClient {
     })
   }
 
-  public write(dbusPath: string, value: number | string) {
+  write(dbusPath, value) {
     const topic = this.venusSystem.getTopicFromDbusPath("W", dbusPath)
     let data = JSON.stringify({ value: value })
     console.log(topic, data)
@@ -93,7 +102,7 @@ class VenusClient {
   /**
    * Send a read message every 50s to keep the MQTT broker alive
    */
-  private setupKeepAlive() {
+  setupKeepAlive() {
     clearInterval(this.keepAliveHandlerRef)
     this.keepAliveHandlerRef = setInterval(() => {
       const topic = this.venusSystem.getTopicFromDbusPath("R", DBUS_PATHS.GENERAL.SERIAL)
@@ -101,7 +110,7 @@ class VenusClient {
     }, 50000)
   }
 
-  public subscribe = (dbusPaths: string[]) => {
+  subscribe = dbusPaths => {
     this.mqttClient.on("message", (topic, message) => {
       const clientMessage = parseMessage(topic, message)
       this.onMessage(clientMessage)

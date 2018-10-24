@@ -1,12 +1,12 @@
-import { ISubscriptionMap } from "mqtt"
-
-export type Topic = {
-  type: "N" | "R" | "W"
-  portalId: string
-  serviceType: string
-  deviceInstance: number | null
-  dbusPath: string
-}
+/**
+ * @typedef {object} Topic
+ *
+ * @prop {"N" | "R" | "W"} type
+ * @prop {string} portalId
+ * @prop {string} serviceType
+ * @prop {string} deviceInstance
+ * @prop {string} dbusPath
+ */
 
 /**
  * Splits a topic string into an object with properties for each "part"
@@ -15,8 +15,9 @@ export type Topic = {
  * N/<portal ID>/<service_type>/<device instance>/<D-Bus path>
  *
  * See details at https://github.com/victronenergy/dbus-mqtt
+ * @returns {Topic}
  */
-export const parseTopic = (topic: string) => {
+export const parseTopic = topic => {
   const parts = topic.split("/")
   return {
     type: parts[0],
@@ -24,10 +25,10 @@ export const parseTopic = (topic: string) => {
     serviceType: parts[2],
     deviceInstance: parseInt(parts[3]),
     dbusPath: "/" + parts.splice(4).join("/")
-  } as Topic
+  }
 }
 
-export const parseMessage = (topic: string, message: Buffer) => {
+export const parseMessage = (topic, message) => {
   let data
   try {
     data = JSON.parse(message.toString())
@@ -44,21 +45,18 @@ export const parseMessage = (topic: string, message: Buffer) => {
   }
 }
 
-export function objectValues(data: any) {
+export function objectValues(data) {
   return Object.keys(data).map(key => data[key])
 }
 
-export const isPathOfType = (dbusPath: string, enumObject: any) => {
+export const isPathOfType = (dbusPath, enumObject) => {
   const paths = objectValues(enumObject)
   return paths.indexOf(dbusPath) !== -1
 }
 
-export const arrayToSubscriptionMap = (toSubscribe: string[]) => {
-  return toSubscribe.reduce(
-    (acc, value) => {
-      acc[value] = 0
-      return acc
-    },
-    {} as ISubscriptionMap
-  )
+export const arrayToSubscriptionMap = toSubscribe => {
+  return toSubscribe.reduce((acc, value) => {
+    acc[value] = 0
+    return acc
+  }, {})
 }
