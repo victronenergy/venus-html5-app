@@ -42,7 +42,7 @@ header {
   align-items: flex-start;
 }
 
-.connection-container {
+.connection {
   height: 50px;
   display: flex;
   align-items: center;
@@ -58,7 +58,7 @@ header {
   background-color: rgba(10, 16, 31, 0.8);
 }
 
-.metric-component {
+.metric {
   margin-bottom: 40px;
   height: 100px;
   padding: 20px;
@@ -84,7 +84,7 @@ header {
   }
 }
 
-.metric-component--small {
+.metric--small {
   width: calc(50% - 10px);
   flex-direction: row;
   height: 100px;
@@ -94,12 +94,12 @@ header {
   }
 }
 
-.metric-icon {
+.metric__icon {
   height: 100%;
   width: 60px;
 }
 
-.metrics-left-container {
+.metric__container--left {
   height: 100%;
   display: flex;
   @media #{$portrait-small} {
@@ -107,7 +107,7 @@ header {
   }
 }
 
-.metrics-container {
+.metric__value-container {
   height: 100%;
   font-size: 20px;
   margin-right: auto;
@@ -117,7 +117,7 @@ header {
   justify-content: space-between;
 }
 
-.metrics {
+.metric__values {
   display: flex;
 }
 
@@ -146,7 +146,7 @@ header {
   }
 }
 
-.metrics-selector-button {
+.selector-button {
   background-color: rgba(10, 16, 31, 0.8);
   color: white;
   height: 100%;
@@ -157,31 +157,31 @@ header {
   cursor: pointer;
 }
 
-.metrics-selector-button:not(:first-child) {
+.selector-button:not(:first-child) {
   margin-left: 10px;
 }
 
-.metrics-selector-button:focus {
+.selector-button:focus {
   outline: 0;
 }
 
-.metrics-selector-button--active {
+.selector-button--active {
   background-color: rgba(48, 175, 255, 0.8);
 }
 
-.amperage-selector-button {
+.selector-button__amperage {
   width: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.select-shore-input-limit {
+.selector-button__shore-input-limit {
   font-size: 22px;
   margin-right: 10px;
 }
 
-.battery-component {
+.metric__battery {
   background-image: url("../images/UI_Battery_Block.png");
   background-repeat: no-repeat;
   background-position: right;
@@ -191,7 +191,7 @@ header {
   }
 }
 
-.battery-level-container {
+.metric__battery-level-container {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -203,20 +203,20 @@ header {
   }
 }
 
-.battery-level {
+.metric__battery-level {
   font-size: 32px;
   font-weight: bold;
 }
 
-.charging-state {
+.metric__charging-state {
   font-size: 20px;
 }
 
-.text-bottom-align {
+.text--bottom-align {
   display: flex;
   align-items: flex-end;
 }
 
-.text-bottom-align > p {
+.text--bottom-align > p {
   line-height: 1;
 }
