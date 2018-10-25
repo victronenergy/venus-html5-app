@@ -39,6 +39,7 @@ class App extends Component {
     [DBUS_PATHS.INVERTER_CHARGER.SYSTEM.STATE]: "--",
     [DBUS_PATHS.INVERTER_CHARGER.SYSTEM.MODE]: "--",
     [DBUS_PATHS.INVERTER_CHARGER.AC_SOURCE]: "Ac Input Mode",
+    currentLimitSelectorVisible: false,
     connected: false
   }
 
@@ -68,6 +69,10 @@ class App extends Component {
     this.setState({ deviceInterface })
   }
 
+  toggleCurrentLimitSelector = () => {
+    this.setState({ currentLimitSelectorVisible: !this.state.currentLimitSelectorVisible })
+  }
+
   render(props, state) {
     return (
       <main>
@@ -82,50 +87,58 @@ class App extends Component {
             </a>
           </div>
         </header>
-        <div>
-          <div className="multi-metric-container">
-            <AcInput
-              acInput={this.state[DBUS_PATHS.INVERTER_CHARGER.AC_SOURCE]}
-              voltage={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.VOLTAGE]}
-              current={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT]}
-              power={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.POWER]}
-              connected={this.state.connected}
-            />
-            <ShoreInputLimit
-              currentLimit={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT]}
-              shoreVoltage={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.VOLTAGE]}
-              deviceInterface={this.state.deviceInterface}
-              connected={this.state.connected}
-            />
-          </div>
-          <MultiPlus
-            state={this.state[DBUS_PATHS.INVERTER_CHARGER.SYSTEM.STATE]}
-            mode={this.state[DBUS_PATHS.INVERTER_CHARGER.SYSTEM.MODE]}
-            connected={this.state.connected}
-            activeMode={this.state[DBUS_PATHS.INVERTER_CHARGER.SYSTEM.MODE]}
+        {state.currentLimitSelectorVisible ? (
+          <ShoreInputLimitSelector
+            toggle={this.state.toggleSelector}
+            shoreVoltage={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.VOLTAGE]}
             deviceInterface={this.state.deviceInterface}
+            toggle={this.toggleCurrentLimitSelector}
           />
-          <Battery
-            soc={this.state[DBUS_PATHS.BATTERY.SOC]}
-            voltage={this.state[DBUS_PATHS.BATTERY.VOLTAGE]}
-            current={this.state[DBUS_PATHS.BATTERY.CURRENT]}
-            power={this.state[DBUS_PATHS.BATTERY.POWER]}
-            connected={this.state.connected}
-          />
-          <div className="multi-metric-container">
-            <AcLoads
-              voltage={this.state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.VOLTAGE]}
-              current={this.state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.CURRENT]}
-              power={this.state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.POWER]}
+        ) : (
+          <div id="metrics-container">
+            <div className="multi-metric-container">
+              <AcInput
+                acInput={this.state[DBUS_PATHS.INVERTER_CHARGER.AC_SOURCE]}
+                voltage={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.VOLTAGE]}
+                current={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT]}
+                power={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.POWER]}
+                connected={this.state.connected}
+              />
+              <ShoreInputLimit
+                currentLimit={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT]}
+                toggle={this.toggleCurrentLimitSelector}
+                connected={this.state.connected}
+              />
+            </div>
+            <MultiPlus
+              state={this.state[DBUS_PATHS.INVERTER_CHARGER.SYSTEM.STATE]}
+              mode={this.state[DBUS_PATHS.INVERTER_CHARGER.SYSTEM.MODE]}
+              connected={this.state.connected}
+              activeMode={this.state[DBUS_PATHS.INVERTER_CHARGER.SYSTEM.MODE]}
+              deviceInterface={this.state.deviceInterface}
+            />
+            <Battery
+              soc={this.state[DBUS_PATHS.BATTERY.SOC]}
+              voltage={this.state[DBUS_PATHS.BATTERY.VOLTAGE]}
+              current={this.state[DBUS_PATHS.BATTERY.CURRENT]}
+              power={this.state[DBUS_PATHS.BATTERY.POWER]}
               connected={this.state.connected}
             />
-            <DcLoads
-              current={this.state[DBUS_PATHS.INVERTER_CHARGER.DC_LOADS.CURRENT]}
-              power={this.state[DBUS_PATHS.INVERTER_CHARGER.DC_LOADS.POWER]}
-              connected={this.state.connected}
-            />
+            <div className="multi-metric-container">
+              <AcLoads
+                voltage={this.state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.VOLTAGE]}
+                current={this.state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.CURRENT]}
+                power={this.state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.POWER]}
+                connected={this.state.connected}
+              />
+              <DcLoads
+                current={this.state[DBUS_PATHS.INVERTER_CHARGER.DC_LOADS.CURRENT]}
+                power={this.state[DBUS_PATHS.INVERTER_CHARGER.DC_LOADS.POWER]}
+                connected={this.state.connected}
+              />
+            </div>
           </div>
-        </div>
+        )}
       </main>
     )
   }
@@ -155,17 +168,22 @@ class AcInput extends Component {
 }
 
 class ShoreInputLimit extends Component {
-  state = {
-    selectorVisible: false
+  render(props, state) {
+    return (
+      <div className="metric metric--small">
+        <button className="selector-button selector-button" onclick={props.toggle}>
+          <span className="selector-button__shore-input-limit">Select shore input limit:</span>
+          {props.currentLimit}
+        </button>
+      </div>
+    )
   }
+}
 
-  toggleSelector = () => {
-    this.setState({ selectorVisible: !this.state.selectorVisible })
-  }
-
+class ShoreInputLimitSelector extends Component {
   setAmperage = value => {
     this.props.deviceInterface.write(DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT, value)
-    this.toggleSelector()
+    this.props.toggle()
   }
 
   render(props, state) {
@@ -173,28 +191,21 @@ class ShoreInputLimit extends Component {
     const amperage = !shoreVoltage || shoreVoltage > 150 ? EUAmperage : USAmperage
 
     return (
-      <div className="metric metric--small">
-        {state.selectorVisible ? (
-          amperage.map(currentValue => {
-            return (
-              <button
-                className={
-                  "selector-button selector-button__amperage" +
-                  (parseInt(props.currentLimit) == currentValue ? " selector-button--active" : "")
-                }
-                href="#"
-                onClick={() => this.setAmperage(currentValue)}
-              >
-                {currentValue}
-              </button>
-            )
-          })
-        ) : (
-          <button className="selector-button selector-button__amperage" onclick={this.toggleSelector}>
-            <span className="selector-button__shore-input-limit">Select shore input limit:</span>
-            {props.currentLimit}
-          </button>
-        )}
+      <div className="amperage-selector">
+        {amperage.map(currentValue => {
+          return (
+            <button
+              className={
+                "selector-button selector-button__amperage" +
+                (parseInt(props.currentLimit) == currentValue ? " selector-button--active" : "")
+              }
+              href="#"
+              onClick={() => this.setAmperage(currentValue)}
+            >
+              {currentValue}
+            </button>
+          )
+        })}
       </div>
     )
   }
