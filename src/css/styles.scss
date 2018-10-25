@@ -36,6 +36,10 @@ header {
   @media #{$wide} {
     width: 183px;
   }
+
+  @media #{$regular} {
+    width: 146px;
+  }
 }
 
 .connection {
@@ -51,6 +55,11 @@ header {
   @media #{$wide} {
     height: 18px;
     width: 19px;
+  }
+
+  @media #{$regular} {
+    height: 14px;
+    width: 15px;
   }
 }
 
@@ -76,6 +85,11 @@ header {
   @media #{$wide} {
     height: 100px;
     padding: 20px 20px 20px 40px;
+  }
+
+  @media #{$regular} {
+    height: 80px;
+    padding: 17px 17px 17px 35px;
   }
 }
 
@@ -131,6 +145,14 @@ header {
   width: calc(50% - 45px);
   display: flex;
   justify-content: space-between;
+
+  @media #{$wide} {
+    width: calc(50% - 40px);
+  }
+
+  @media #{$regular} {
+    width: calc(50% - 37px);
+  }
 }
 
 .selector-button {
@@ -172,6 +194,14 @@ header {
   align-items: center;
   height: 55px;
   width: calc(50% - 45px);
+
+  @media #{$wide} {
+    width: calc(50% - 40px);
+  }
+
+  @media #{$regular} {
+    width: calc(50% - 37px);
+  }
 }
 
 .text--bottom-align {

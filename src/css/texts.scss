@@ -19,6 +19,10 @@
   @media #{$wide} {
     font-size: 20px;
   }
+
+  @media #{$regular} {
+    font-size: 16px;
+  }
 }
 
 .text--very-large {
@@ -26,6 +30,10 @@
 
   @media #{$wide} {
     font-size: 40px;
+  }
+
+  @media #{$regular} {
+    font-size: 32px;
   }
 }
 
@@ -35,6 +43,10 @@
   @media #{$wide} {
     font-size: 18px;
   }
+
+  @media #{$regular} {
+    font-size: 15px;
+  }
 }
 
 .text--very-small {
@@ -42,6 +54,10 @@
 
   @media #{$wide} {
     font-size: 15px;
+  }
+
+  @media #{$regular} {
+    font-size: 12px;
   }
 }
 
