@@ -1,16 +1,6 @@
-@font-face {
-  font-family: Roboto;
-  src: url("./Roboto-Regular.ttf"), url("./Roboto-Bold.ttf");
-}
-
-* {
-  font-family: Roboto, sans-serif;
-}
-
 body {
   margin: 0;
-  padding: 20px 80px;
-  color: white;
+  padding: 20px 60px;
 }
 
 main {
@@ -61,7 +51,6 @@ header {
 }
 
 .remote-console {
-  color: white;
   margin-left: 25px;
   padding: 10px 20px;
   text-decoration: none;
@@ -105,7 +94,6 @@ header {
 
 .metric__value-container {
   height: 100%;
-  font-size: 20px;
   margin-right: auto;
   margin-left: 40px;
   display: flex;
@@ -143,7 +131,6 @@ header {
   color: white;
   height: 100%;
   border: none;
-  font-size: 30px;
   border-radius: 6px;
   flex-grow: 1;
   cursor: pointer;
@@ -162,7 +149,6 @@ header {
 }
 
 .selector-button__shore-input-limit {
-  font-size: 22px;
   margin-right: 10px;
 }
 
@@ -179,15 +165,6 @@ header {
   align-items: center;
   height: 55px;
   width: calc(50% - 30px);
-}
-
-.metric__battery-level {
-  font-size: 32px;
-  font-weight: bold;
-}
-
-.metric__charging-state {
-  font-size: 20px;
 }
 
 .text--bottom-align {
@@ -207,7 +184,7 @@ header {
   box-sizing: border-box;
   border-radius: 16.6px;
   background-color: rgba(18, 26, 40, 1);
-  font-size: 40px;
+  margin: 0 10px;
 }
 
 .selector-button__amperage {
