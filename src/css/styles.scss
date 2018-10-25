@@ -128,16 +128,40 @@ header {
 
 .value {
   width: 65px;
+
+  @media #{$wide} {
+    width: 55px;
+  }
+
+  @media #{$regular} {
+    widows: 45px;
+  }
 }
 
 .value:not(:first-child) {
   text-align: center;
   padding-left: 35px;
   border-left: 0.5px solid rgba(255, 255, 255, 0.29);
+
+  @media #{$wide} {
+    padding-left: 25px;
+  }
+
+  @media #{$regular} {
+    padding-left: 15px;
+  }
 }
 
 .value:not(:last-child) {
   padding-right: 35px;
+
+  @media #{$wide} {
+    padding-right: 25px;
+  }
+
+  @media #{$regular} {
+    padding-right: 15px;
+  }
 }
 
 .metrics-selector {
