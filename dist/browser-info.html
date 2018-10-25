@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<style>
+  .title {
+    font-weight: bold;
+    font-size: 25px;
+  }
+
+  .info {
+    font-weight: normal
+  }
+
+  .title,
+  .info {
+    color: black;
+  }
+
+  body {
+    max-width: 600px;
+    background-color: white;
+  }
+</style>
+
+<body>
+  <div class="title">User agent: <span class="info" id="user-agent"></span></div>
+  <div class="title">Window:
+    <span class="info" id="width"></span> x <span class="info" id="height"></span>
+  </div>
+  <button onclick="goBack();">Go back</button>
+</body>
+
+<script>
+  function goBack() {
+    window.history.back();
+  }
+
+  (function () {
+    document.getElementById('user-agent').innerHTML = navigator.userAgent;
+    document.getElementById('width').innerHTML = window.innerWidth;
+    document.getElementById('height').innerHTML = window.innerHeight;
+
+    window.addEventListener('resize', function () {
+      document.getElementById('width').innerHTML = window.innerWidth;
+      document.getElementById('height').innerHTML = window.innerHeight;
+    })
+  })()
+</script>
+
+</html>

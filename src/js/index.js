@@ -172,8 +172,8 @@ class ShoreInputLimit extends Component {
   render(props, state) {
     return (
       <div className="metric metric--small">
-        <button className="selector-button selector-button" onclick={props.toggle}>
-          <span className="selector-button__shore-input-limit text text--small">Select shore input limit:</span>
+        <button className="selector-button selector-button__shore-input-limit" onclick={props.toggle}>
+          <span className="text text--small">Select shore input limit:</span>
           <span className="text text--bold">{props.currentLimit}</span>
         </button>
       </div>
@@ -197,7 +197,7 @@ class ShoreInputLimitSelector extends Component {
           return (
             <button
               className={
-                "selector-button selector-button__amperage text text--large" +
+                "selector-button selector-button__amperage text text--very-large" +
                 (parseInt(props.currentLimit) == currentValue ? " selector-button--active" : "")
               }
               href="#"

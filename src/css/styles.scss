@@ -1,14 +1,8 @@
+// Use 1920px screen as baseline and scale down when needed
+
 body {
   margin: 0;
   padding: 20px 60px;
-}
-
-main {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
 
 .bg {
@@ -34,9 +28,8 @@ header {
 }
 
 .logo {
-  height: 35px;
-  width: 183px;
-  margin-left: 20px;
+  width: 210px;
+  margin-left: 40px;
 }
 
 .connection {
@@ -45,8 +38,8 @@ header {
 }
 
 .connection__icon {
-  height: 19px;
-  width: 19px;
+  height: 28px;
+  width: 30px;
   margin-right: 15px;
 }
 
@@ -60,8 +53,8 @@ header {
 
 .metric {
   margin-bottom: 40px;
-  height: 100px;
-  padding: 20px;
+  height: 150px;
+  padding: 33px 33px 33px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -78,24 +71,22 @@ header {
 
 .metric--small {
   width: calc(50% - 10px);
-  flex-direction: row;
-  height: 100px;
 }
 
 .metric__icon {
-  height: 56px;
-  width: 56px;
+  height: 100%;
 }
 
 .metric__container--left {
-  height: 100%;
   display: flex;
+  height: 100%;
+  align-items: center;
 }
 
 .metric__value-container {
-  height: 100%;
   margin-right: auto;
   margin-left: 40px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -106,22 +97,22 @@ header {
 }
 
 .value {
-  width: 50px;
+  width: 65px;
 }
 
 .value:not(:first-child) {
   text-align: center;
-  padding-left: 25px;
+  padding-left: 35px;
   border-left: 0.5px solid rgba(255, 255, 255, 0.29);
 }
 
 .value:not(:last-child) {
-  padding-right: 25px;
+  padding-right: 35px;
 }
 
 .metrics-selector {
-  height: 55px;
-  width: calc(50% - 30px);
+  height: 100%;
+  width: calc(50% - 45px);
   display: flex;
   justify-content: space-between;
 }
@@ -149,6 +140,10 @@ header {
 }
 
 .selector-button__shore-input-limit {
+  padding: 24.5px;
+}
+
+.selector-button__shore-input-limit > span:first-child {
   margin-right: 10px;
 }
 
@@ -164,7 +159,7 @@ header {
   justify-content: flex-start;
   align-items: center;
   height: 55px;
-  width: calc(50% - 30px);
+  width: calc(50% - 45px);
 }
 
 .text--bottom-align {
