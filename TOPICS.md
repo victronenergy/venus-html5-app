@@ -48,16 +48,18 @@ Some of our inverter/chargers have one AC input, others, the Quattros, have two.
 one input is used; fe. when they have the two-input model for another reason than using the two
 inputs. The installer configures the AC-input types in the menus: Settings -> System Setup.
 
-Then they are stored in 'localsettings', avaible on MQTT as:
-```
-settings/Settings/SystemSetup/AcInput0  <- 0: not in use; 1: grid, 2: generator, 3: shore
-settings/Settings/SystemSetup/AcInput1  <- same
+Then they are stored in 'localsettings', available on MQTT as:
 
-(needs to be verified; I'm not sure how (well) dbus-mqtt handles localsettings, since there is
-no /DeviceInstance.
+```
+N/{portalId}/settings/0/Settings/SystemSetup/AcInput1
+N/{portalId}/settings/0/Settings/SystemSetup/AcInput2
+// 0: not in use; 1: grid, 2: generator, 3: shore
 ```
 
-For UIs that show only power, and lso not show generator & shore that the same time,
+MQTT does not send notifications to these channels automatically, you need to explicitly send 
+a read request first to receive data.
+
+For UIs that show only power, and also do not show generator & shore at the same time,
 its simple: take these paths from system/0:
 ```
 /Ac/Grid/*                      <- All from the shore. TODO: check if this shouldn't be /Ac/Shore
