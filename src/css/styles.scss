@@ -5,6 +5,10 @@
 body {
   margin: 0;
   padding: 20px 60px;
+
+  @media #{$minimum} {
+    padding: 20px 10px;
+  }
 }
 
 .bg {
