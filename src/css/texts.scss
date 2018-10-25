@@ -15,18 +15,34 @@
   color: white;
   font-weight: 400;
   font-size: 30px;
+
+  @media #{$wide} {
+    font-size: 20px;
+  }
 }
 
 .text--very-large {
   font-size: 60px;
+
+  @media #{$wide} {
+    font-size: 40px;
+  }
 }
 
 .text--small {
   font-size: 27px;
+
+  @media #{$wide} {
+    font-size: 18px;
+  }
 }
 
 .text--very-small {
   font-size: 22px;
+
+  @media #{$wide} {
+    font-size: 15px;
+  }
 }
 
 .text--medium {
