@@ -1,5 +1,7 @@
 // Use 1920px screen as baseline and scale down when needed
 
+@import "./variables.scss";
+
 body {
   margin: 0;
   padding: 20px 60px;
@@ -30,6 +32,10 @@ header {
 .logo {
   width: 210px;
   margin-left: 40px;
+
+  @media #{$wide} {
+    width: 183px;
+  }
 }
 
 .connection {
@@ -41,6 +47,11 @@ header {
   height: 28px;
   width: 30px;
   margin-right: 15px;
+
+  @media #{$wide} {
+    height: 18px;
+    width: 19px;
+  }
 }
 
 .remote-console {
@@ -61,6 +72,11 @@ header {
   box-sizing: border-box;
   border-radius: 16.6px;
   background-color: rgba(18, 26, 40, 1);
+
+  @media #{$wide} {
+    height: 100px;
+    padding: 20px 20px 20px 40px;
+  }
 }
 
 .multi-metric-container {
@@ -137,10 +153,6 @@ header {
 
 .selector-button--active {
   background-color: #30afff;
-}
-
-.selector-button__shore-input-limit {
-  padding: 24.5px;
 }
 
 .selector-button__shore-input-limit > span:first-child {
