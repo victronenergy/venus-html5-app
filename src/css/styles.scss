@@ -1,6 +1,3 @@
-$portrait: "all and (max-width: 1100px)";
-$portrait-small: "all and (max-width: 700px)";
-
 @font-face {
   font-family: Roboto;
   src: url("./Roboto-Regular.ttf"), url("./Roboto-Bold.ttf");
@@ -12,8 +9,16 @@ $portrait-small: "all and (max-width: 700px)";
 
 body {
   margin: 0;
-  padding: 20px 40px;
+  padding: 20px 80px;
   color: white;
+}
+
+main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .bg {
@@ -28,11 +33,6 @@ body {
 
 p {
   margin: 0;
-}
-
-main {
-  width: 100%;
-  height: 100%;
 }
 
 header {
@@ -79,30 +79,18 @@ header {
   box-sizing: border-box;
   border-radius: 16.6px;
   background-color: rgba(18, 26, 40, 1);
-
-  @media #{$portrait-small} {
-    flex-direction: column;
-    height: 200px;
-  }
 }
 
 .multi-metric-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  @media #{$portrait} {
-    flex-direction: column;
-  }
 }
 
 .metric--small {
   width: calc(50% - 10px);
   flex-direction: row;
   height: 100px;
-
-  @media #{$portrait} {
-    width: 100%;
-  }
 }
 
 .metric__icon {
@@ -113,9 +101,6 @@ header {
 .metric__container--left {
   height: 100%;
   display: flex;
-  @media #{$portrait-small} {
-    height: 60px;
-  }
 }
 
 .metric__value-container {
@@ -151,10 +136,6 @@ header {
   width: calc(50% - 30px);
   display: flex;
   justify-content: space-between;
-
-  @media #{$portrait-small} {
-    width: 100%;
-  }
 }
 
 .selector-button {
@@ -180,13 +161,6 @@ header {
   background-color: #30afff;
 }
 
-.selector-button__amperage {
-  width: 60px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .selector-button__shore-input-limit {
   font-size: 22px;
   margin-right: 10px;
@@ -197,10 +171,6 @@ header {
   background-repeat: no-repeat;
   background-position: right;
   background-size: auto 100%;
-
-  @media #{$portrait-small} {
-    background-image: none;
-  }
 }
 
 .metric__battery-level-container {
@@ -209,10 +179,6 @@ header {
   align-items: center;
   height: 55px;
   width: calc(50% - 30px);
-
-  @media #{$portrait} {
-    justify-content: center;
-  }
 }
 
 .metric__battery-level {
@@ -231,4 +197,23 @@ header {
 
 .text--bottom-align > p {
   line-height: 1;
+}
+
+.amperage-selector {
+  padding: 35px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  border-radius: 16.6px;
+  background-color: rgba(18, 26, 40, 1);
+  font-size: 40px;
+}
+
+.selector-button__amperage {
+  max-width: 130px;
+  height: 125px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
