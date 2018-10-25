@@ -2,6 +2,7 @@ import { h, render, Component } from "preact"
 import metricsConfig from "../config/metricsConfig"
 import { DBUS_PATHS } from "../config/dbusPaths"
 import VenusClient from "../service/index"
+import "../css/texts.scss"
 import "../css/styles.scss"
 
 const getParameterByName = (name, url) => {
@@ -81,8 +82,8 @@ class App extends Component {
           <img src="./images/icons/logo.svg" className="logo" />
           <div className="connection">
             <img src="./images/icons/connected.svg" className="connection__icon" />
-            <p>{this.state.connected ? "Connected" : "Disconnected"}</p>
-            <a href={"http://" + host} className="remote-console" target="_blank">
+            <p className="text text--very-small">{this.state.connected ? "Connected" : "Disconnected"}</p>
+            <a href={"http://" + host} className="remote-console text text--very-small" target="_blank">
               Remote Console
             </a>
           </div>
@@ -145,7 +146,7 @@ class App extends Component {
 }
 class Value extends Component {
   render(props, state) {
-    return <p className="value">{props.value}</p>
+    return <p className="value text">{props.value}</p>
   }
 }
 
@@ -155,7 +156,7 @@ class AcInput extends Component {
       <div className="metric metric--small">
         <img src="./images/icons/shore-power.svg" className="metric__icon" />
         <div className="metric__value-container">
-          <p>{props.acInput}</p>
+          <p className="text text--medium">{props.acInput}</p>
           <div className="metric__values">
             <Value value={props.voltage} connected={props.connected} />
             <Value value={props.current} connected={props.connected} />
@@ -172,8 +173,8 @@ class ShoreInputLimit extends Component {
     return (
       <div className="metric metric--small">
         <button className="selector-button selector-button" onclick={props.toggle}>
-          <span className="selector-button__shore-input-limit">Select shore input limit:</span>
-          {props.currentLimit}
+          <span className="selector-button__shore-input-limit text text--small">Select shore input limit:</span>
+          <span className="text text--bold">{props.currentLimit}</span>
         </button>
       </div>
     )
@@ -196,7 +197,7 @@ class ShoreInputLimitSelector extends Component {
           return (
             <button
               className={
-                "selector-button selector-button__amperage" +
+                "selector-button selector-button__amperage text text--large" +
                 (parseInt(props.currentLimit) == currentValue ? " selector-button--active" : "")
               }
               href="#"
@@ -222,30 +223,30 @@ class MultiPlus extends Component {
         <div className="metric__container--left">
           <img src="./images/icons/multiplus.svg" className="metric__icon" />
           <div className="metric__value-container">
-            <p>MultiPlus</p>
+            <p className="text text--medium">MultiPlus</p>
             <div className="metric__values">
-              <p>{props.state}</p>
+              <p className="text">{props.state}</p>
             </div>
           </div>
         </div>
         <div className="metrics-selector">
           <button
             href="#"
-            className={"selector-button" + (props.activeMode == "ON" ? " selector-button--active" : "")}
+            className={"selector-button text" + (props.activeMode == "ON" ? " selector-button--active" : "")}
             onClick={() => this.setMode(DBUS_PATHS.INVERTER_CHARGER.SYSTEM.STATES.ON)}
           >
             On
           </button>
           <button
             href="#"
-            className={"selector-button" + (props.activeMode == "OFF" ? " selector-button--active" : "")}
+            className={"selector-button text" + (props.activeMode == "OFF" ? " selector-button--active" : "")}
             onClick={() => this.setMode(DBUS_PATHS.INVERTER_CHARGER.SYSTEM.STATES.OFF)}
           >
             Off
           </button>
           <button
             href="#"
-            className={"selector-button" + (props.activeMode == "Charger only" ? " selector-button--active" : "")}
+            className={"selector-button text" + (props.activeMode == "Charger only" ? " selector-button--active" : "")}
             onClick={() => this.setMode(DBUS_PATHS.INVERTER_CHARGER.SYSTEM.STATES.CHARGER_ONLY)}
           >
             Charger only
@@ -264,7 +265,7 @@ class Battery extends Component {
         <div className="metric__container--left">
           <img src="./images/icons/battery.svg" className="metric__icon" />
           <div className="metric__value-container">
-            <p>Battery</p>
+            <p className="text text--medium">Battery</p>
             <div className="metric__values">
               <Value value={props.voltage} connected={props.connected} />
               <Value value={props.current} connected={props.connected} />
@@ -274,8 +275,8 @@ class Battery extends Component {
         </div>
         <div className="metric__battery-level-container">
           <div className="text--bottom-align">
-            <p className="metric__battery-level">{parseInt(props.soc)}</p>
-            <p className="metric__charging-state">% {chargingState}</p>
+            <p className="text text--bold">{parseInt(props.soc)}</p>
+            <p className="text text--very-small">% {chargingState}</p>
           </div>
         </div>
       </div>
@@ -289,7 +290,7 @@ class AcLoads extends Component {
       <div className="metric metric--small">
         <img src="./images/icons/ac.svg" className="metric__icon" />
         <div className="metric__value-container">
-          <p>AC Loads</p>
+          <p className="text text--medium">AC Loads</p>
           <div className="metric__values">
             <Value value={props.voltage} connected={props.connected} />
             <Value value={props.current} connected={props.connected} />
@@ -307,7 +308,7 @@ class DcLoads extends Component {
       <div className="metric metric--small">
         <img src="./images/icons/dc.svg" className="metric__icon" />
         <div className="metric__value-container">
-          <p>DC Loads</p>
+          <p className="text text--medium">DC Loads</p>
           <div className="metric__values">
             <Value value={props.current} connected={props.connected} />
             <Value value={props.power} connected={props.connected} />
