@@ -1,0 +1,38 @@
+// Use 1920px screen as baseline and scale down when needed
+
+@import "./variables.scss";
+
+@font-face {
+  font-family: Roboto;
+  src: url("./Roboto-Normal.ttf"), url("./Roboto-Medium.ttf") url("./Roboto-Bold.ttf");
+}
+
+* {
+  font-family: Roboto, sans-serif;
+}
+
+.text {
+  color: white;
+  font-weight: 400;
+  font-size: 30px;
+}
+
+.text--very-large {
+  font-size: 60px;
+}
+
+.text--small {
+  font-size: 27px;
+}
+
+.text--very-small {
+  font-size: 22px;
+}
+
+.text--medium {
+  font-weight: 500;
+}
+
+.text--bold {
+  font-weight: 700;
+}
