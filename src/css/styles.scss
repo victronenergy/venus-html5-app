@@ -97,10 +97,26 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media #{$narrow} {
+    flex-direction: column;
+  }
+}
+
+.metric__container {
+  @media #{$very-narrow} {
+    flex-direction: column;
+    height: 180px;
+    align-items: flex-start;
+  }
 }
 
 .metric--small {
   width: calc(50% - 10px);
+
+  @media #{$narrow} {
+    width: 100%;
+  }
 }
 
 .metric__icon {
@@ -111,6 +127,10 @@ header {
   display: flex;
   height: 100%;
   align-items: center;
+
+  @media #{$very-narrow} {
+    height: 60px;
+  }
 }
 
 .metric__value-container {
@@ -177,6 +197,11 @@ header {
   @media #{$regular} {
     width: calc(50% - 37px);
   }
+
+  @media #{$very-narrow} {
+    height: 60px;
+    width: 100%;
+  }
 }
 
 .selector-button {
@@ -210,6 +235,11 @@ header {
   background-repeat: no-repeat;
   background-position: right;
   background-size: auto 100%;
+
+  @media #{$very-narrow} {
+    background-position: bottom right;
+    background-size: auto 50%;
+  }
 }
 
 .metric__battery-level-container {
