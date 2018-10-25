@@ -219,7 +219,7 @@ class MultiPlus extends Component {
 
   render(props, state) {
     return (
-      <div className="metric">
+      <div className="metric metric__container">
         <div className="metric__container--left">
           <img src="./images/icons/multiplus.svg" className="metric__icon" />
           <div className="metric__value-container">
@@ -261,7 +261,7 @@ class Battery extends Component {
   render(props, state) {
     const chargingState = parseInt(props.current) > 0 ? "Charging" : "Draining"
     return (
-      <div className="metric metric__battery">
+      <div className="metric metric__container metric__battery">
         <div className="metric__container--left">
           <img src="./images/icons/battery.svg" className="metric__icon" />
           <div className="metric__value-container">
