@@ -62,7 +62,8 @@ module.exports = (env, argv) => {
 
   conf.plugins.push(
     new webpack.DefinePlugin({
-      DEV: JSON.stringify(argv.mode === "development")
+      DEV: JSON.stringify(argv.mode === "development"),
+      USE_MOCK_MQTT: JSON.stringify(argv.mode === "development" && argv.mocked)
     })
   )
 

@@ -33,18 +33,24 @@ export const DBUS_PATHS = {
       CONSUMPTION_OUTPUT_L2_POWER: "/Ac/ConsumptionOnOutput/L2/Power",
       CONSUMPTION_OUTPUT_L3_POWER: "/Ac/ConsumptionOnOutput/L3/Power"
     },
-    AC_SOURCE: "/Ac/ActiveIn/Source", // <- The active AC-In source of the multi.
+    ACTIVE_INPUT: "/Ac/ActiveIn/ActiveInput", // Active input: 0 = ACin-1, 1 = ACin-2, 240 is none (inverting).
+    IS_CONNECTED_TO_POWER: "/Ac/ActiveIn/Connected", // 0 when inverting, 1 when connected to an AC in.
     // also known as GRID
     SHORE_POWER: {
-      IS_CONNECTED: "/Ac/ActiveIn/Connected", // 0 when inverting, 1 when connected to an AC in.
-      VOLTAGE: "/Ac/ActiveIn/L1/V",
-      CURRENT: "/Ac/ActiveIn/L1/I",
-      POWER: "/Ac/ActiveIn/L1/P",
-      CURRENT_LIMIT: "/Ac/ActiveIn/CurrentLimit",
+      L1_VOLTAGE: "/Ac/ActiveIn/L1/V", //  <- Voltage (Volts)
+      L1_CURRENT: "/Ac/ActiveIn/L1/I", // <- Current (Amps)
+      L1_POWER: "/Ac/ActiveIn/L1/P", //  <- Power (Watts)
+      L1_FREQUENCY: "/Ac/ActiveIn/L1/F", // <- Frequency (Hz)
+      L2_VOLTAGE: "/Ac/ActiveIn/L2/V", //  <- Voltage (Volts)
+      L2_CURRENT: "/Ac/ActiveIn/L2/I", // <- Current (Amps)
+      L2_POWER: "/Ac/ActiveIn/L2/P", //  <- Power (Watts)
+      L2_FREQUENCY: "/Ac/ActiveIn/L2/F", // <- Frequency (Hz)
+      L3_VOLTAGE: "/Ac/ActiveIn/L3/V", //  <- Voltage (Volts)
+      L3_CURRENT: "/Ac/ActiveIn/L3/I", // <- Current (Amps)
+      L3_POWER: "/Ac/ActiveIn/L3/P", //  <- Power (Watts)
+      L3_FREQUENCY: "/Ac/ActiveIn/L3/F", // <- Frequency (Hz)
 
-      AC_GRID_L1_POWER: "/Ac/Grid/L1/Power", // <- All from the shore.
-      AC_GRID_L2_POWER: "/Ac/Grid/L2/Power",
-      AC_GRID_L3_POWER: "/Ac/Grid/L3/Power"
+      CURRENT_LIMIT: "/Ac/ActiveIn/CurrentLimit"
     },
     GENERATOR: {
       AC_GENSET_L1_POWER: "/Ac/Genset/L1/Power", // <- All from the genset.
@@ -64,5 +70,9 @@ export const DBUS_PATHS = {
       AC_NUMBER_OF_PHASES: "/Ac/Consumption/NumberOfPhases", //  <- Either 1 (single phase), 2 (split-phase) or 3 (three-phase)
       VEBUS_SERVICE: "/VebusService" // <- Returns the service name of the vebus service.
     }
+  },
+  SETTINGS: {
+    AC_INPUT_TYPE1: "/Settings/SystemSetup/AcInput1",
+    AC_INPUT_TYPE2: "/Settings/SystemSetup/AcInput2"
   }
 }

@@ -41,7 +41,7 @@ export const parseMessage = (topic, message) => {
 
   return {
     path: dbusPath,
-    value: data.value || null
+    value: data.value !== undefined ? data.value : null
   }
 }
 

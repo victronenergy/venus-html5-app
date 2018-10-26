@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "node live-server",
-    "dev-compile": "npx webpack -w",
-    "dev-compile:mocked": "npx webpack -w --mode=development",
+    "dev-compile": "npx webpack -w --mode=development",
+    "dev-compile:mocked": "npx webpack -w --mode=development --mocked",
     "clean": "rm -rf dist",
     "compile": "npm run clean && npx webpack",
     "test": "jest --config jestconfig.json",
