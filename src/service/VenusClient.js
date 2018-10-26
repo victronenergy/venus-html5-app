@@ -5,12 +5,10 @@ import { DBUS_PATHS } from "../config/dbusPaths"
 import { parseMessage, arrayToSubscriptionMap } from "./util"
 import VenusSystem from "./venusSystem"
 
-// For development when there is no VEnus device available with demo mode on
+// For development when there is no Venus device available with demo mode on
 // we can use this mock mqtt client that mocks the mqtt server responses to
 // the ui. Implemented using webpack define plugin to define whether or not
 // we are in prod or dev mode.
-// TODO Check if this still works
-let DEV
 
 import MockMqttClient from "./MockMqttClient"
 
