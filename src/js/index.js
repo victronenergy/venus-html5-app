@@ -52,7 +52,7 @@ class App extends Component {
     })
 
     deviceInterface.onMessage = ({ path, value }) => {
-      console.log(path, value)
+      // console.log(path, value)
       const metric = metricsConfig[path]
       if (!metric) {
         console.error(`Metric not found for path ${path}`)
@@ -77,7 +77,7 @@ class App extends Component {
   render(props, state) {
     return (
       <main>
-        <div className="bg" />
+        <div className="bg fixed--full-size" />
         <header>
           <img src="./images/icons/logo.svg" className="logo" />
           <div className="connection">
@@ -89,12 +89,14 @@ class App extends Component {
           </div>
         </header>
         {state.currentLimitSelectorVisible ? (
-          <ShoreInputLimitSelector
-            toggle={this.state.toggleSelector}
-            shoreVoltage={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.VOLTAGE]}
-            deviceInterface={this.state.deviceInterface}
-            toggle={this.toggleCurrentLimitSelector}
-          />
+          <div className="amperage-selector__container fixed--full-size">
+            <ShoreInputLimitSelector
+              toggle={this.state.toggleSelector}
+              shoreVoltage={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.VOLTAGE]}
+              deviceInterface={this.state.deviceInterface}
+              toggle={this.toggleCurrentLimitSelector}
+            />
+          </div>
         ) : (
           <div id="metrics-container">
             <div className="multi-metric-container">
