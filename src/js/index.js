@@ -4,6 +4,7 @@ import { DBUS_PATHS } from "../config/dbusPaths"
 import VenusClient from "../service/index"
 import "../css/texts.scss"
 import "../css/styles.scss"
+import { AC_SOURCE_TYPE } from "../service/topics"
 
 const getParameterByName = (name, url) => {
   if (!url) url = window.location.href
@@ -32,14 +33,16 @@ class App extends Component {
     [DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.VOLTAGE]: "--",
     [DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.CURRENT]: "--",
     [DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.POWER]: "--",
-    [DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.IS_CONNECTED]: "--",
+    [DBUS_PATHS.INVERTER_CHARGER.IS_CONNECTED_TO_POWER]: "--",
     [DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.VOLTAGE]: "--",
     [DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT]: "--",
     [DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT]: "--",
     [DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.POWER]: "--",
     [DBUS_PATHS.INVERTER_CHARGER.SYSTEM.STATE]: "--",
     [DBUS_PATHS.INVERTER_CHARGER.SYSTEM.MODE]: "--",
-    [DBUS_PATHS.INVERTER_CHARGER.AC_SOURCE]: "Ac Input Mode",
+    [DBUS_PATHS.INVERTER_CHARGER.ACTIVE_INPUT]: null,
+    [DBUS_PATHS.SETTINGS.AC_INPUT_TYPE1]: null,
+    [DBUS_PATHS.SETTINGS.AC_INPUT_TYPE2]: null,
     currentLimitSelectorVisible: false,
     connected: false
   }
@@ -52,15 +55,14 @@ class App extends Component {
     })
 
     deviceInterface.onMessage = ({ path, value }) => {
-      // console.log(path, value)
       const metric = metricsConfig[path]
       if (!metric) {
         console.error(`Metric not found for path ${path}`)
         return
       }
 
-      const formattedValue = metric.formatter(value)
-      this.setState({ [path]: formattedValue + metric.unit })
+      const formattedValue = metric.formatter ? metric.formatter(value) : value
+      this.setState({ [path]: metric.unit ? formattedValue + metric.unit : formattedValue })
     }
 
     deviceInterface.onConnectionChanged = ({ connected }) => {
@@ -72,6 +74,14 @@ class App extends Component {
 
   toggleCurrentLimitSelector = () => {
     this.setState({ currentLimitSelectorVisible: !this.state.currentLimitSelectorVisible })
+  }
+
+  isSourceActive = type => {
+    const activeInput = this.state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_INPUT]
+    const input0 = this.state[DBUS_PATHS.SETTINGS.AC_INPUT_TYPE1]
+    const input1 = this.state[DBUS_PATHS.SETTINGS.AC_INPUT_TYPE2]
+
+    return (activeInput === 0 && input0 === type) || (activeInput === 1 && input1 === type)
   }
 
   render(props, state) {
@@ -100,13 +110,13 @@ class App extends Component {
         ) : (
           <div id="metrics-container">
             <div className="multi-metric-container">
-              <AcInput
-                acInput={this.state[DBUS_PATHS.INVERTER_CHARGER.AC_SOURCE]}
-                voltage={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.VOLTAGE]}
-                current={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT]}
-                power={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.POWER]}
-                connected={this.state.connected}
-              />
+              {this.isSourceActive(AC_SOURCE_TYPE.SHORE) && (
+                <ShorePower
+                  voltage={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.VOLTAGE]}
+                  current={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT]}
+                  power={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.POWER]}
+                />
+              )}
               <ShoreInputLimit
                 currentLimit={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT]}
                 toggle={this.toggleCurrentLimitSelector}
@@ -163,6 +173,24 @@ class AcInput extends Component {
             <Value value={props.voltage} connected={props.connected} />
             <Value value={props.current} connected={props.connected} />
             <Value value={props.power} connected={props.connected} />
+          </div>
+        </div>
+      </div>
+    )
+  }
+}
+
+class ShorePower extends Component {
+  render(props, state) {
+    return (
+      <div className="metric metric--small">
+        <img src="./images/icons/shore-power.svg" className="metric__icon" />
+        <div className="metric__value-container">
+          <p className="text text--medium">Shore Power</p>
+          <div className="metric__values">
+            <Value value={props.voltage} />
+            <Value value={props.current} />
+            <Value value={props.power} />
           </div>
         </div>
       </div>

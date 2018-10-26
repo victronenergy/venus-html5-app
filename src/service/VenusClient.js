@@ -16,7 +16,12 @@ import MockMqttClient from "./MockMqttClient"
  * Default quality of service when subscribing - best effort
  * {@link https://www.npmjs.com/package/mqtt#qos}
  */
-const TOPICS_TO_SUBSCRIBE_ON_INIT = [TOPICS.NOTIFICATION.SERIAL, TOPICS.NOTIFICATION.ALL_DEVICE_INSTANCES]
+const TOPICS_TO_SUBSCRIBE_ON_INIT = [
+  TOPICS.NOTIFICATION.SERIAL,
+  TOPICS.NOTIFICATION.ALL_DEVICE_INSTANCES,
+  TOPICS.NOTIFICATION.SETTINGS_AC_INPUT_TYPE1,
+  TOPICS.NOTIFICATION.SETTINGS_AC_INPUT_TYPE2
+]
 
 const subscribeCallback = (err, granted) => {
   if (err) {
@@ -43,7 +48,7 @@ class VenusClient {
   onConnectionChanged = () => {}
 
   constructor(host) {
-    this.mqttClient = DEV ? new MockMqttClient() : mqtt.connect(host)
+    this.mqttClient = USE_MOCK_MQTT ? new MockMqttClient() : mqtt.connect(host)
     this.venusSystem = new VenusSystem()
     window.onunload = () => {
       this.mqttClient.end()
@@ -83,6 +88,7 @@ class VenusClient {
         const message = parseMessage(topic, data)
         this.venusSystem.handleSystemMessage(topic, message)
         if (this.venusSystem.isInitialized()) {
+          this.mqttClient.unsubscribe(TOPICS_TO_SUBSCRIBE_ON_INIT)
           this.mqttClient.removeAllListeners("message")
           resolve()
         }
@@ -93,7 +99,6 @@ class VenusClient {
   write(dbusPath, value) {
     const topic = this.venusSystem.getTopicFromDbusPath("W", dbusPath)
     let data = JSON.stringify({ value: value })
-    console.log(topic, data)
     this.mqttClient.publish(topic, data)
   }
 

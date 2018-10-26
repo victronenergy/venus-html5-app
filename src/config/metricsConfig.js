@@ -56,8 +56,8 @@ export default {
     formatter: numericFormatter(),
     timeout: 0
   },
-  [DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.IS_CONNECTED]: {
-    description: "Grid is connected",
+  [DBUS_PATHS.INVERTER_CHARGER.IS_CONNECTED_TO_POWER]: {
+    description: "Inverter charger is connected to power",
     formatter: numericFormatter()
   },
   [DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.VOLTAGE]: {
@@ -98,9 +98,7 @@ export default {
     timeout: 0,
     write: true
   },
-  [DBUS_PATHS.INVERTER_CHARGER.AC_SOURCE]: {
-    unit: "",
-    formatter: acSourceFormatter,
-    timeout: 0
-  }
+  [DBUS_PATHS.INVERTER_CHARGER.ACTIVE_INPUT]: {},
+  [DBUS_PATHS.SETTINGS.AC_INPUT_TYPE1]: {},
+  [DBUS_PATHS.SETTINGS.AC_INPUT_TYPE2]: {}
 }

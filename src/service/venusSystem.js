@@ -45,8 +45,10 @@ class VenusSystem {
       return `${type}/${this.portalId}/system/${this.systemInstanceId}${dbusPath}`
     } else if (SERVICES.VEBUS.includes(dbusPath)) {
       return `${type}/${this.portalId}/vebus/${this.vebusInstanceId}${dbusPath}`
+    } else if (SERVICES.SETTINGS.includes(dbusPath)) {
+      return `${type}/${this.portalId}/settings/0${dbusPath}`
     } else {
-      console.error(`Could not create path for type ${type} path ${dbusPath}`)
+      console.error(`Unknown D-bus path - please implement! type: ${type}, path: '${dbusPath}'`)
       return ""
     }
   }
