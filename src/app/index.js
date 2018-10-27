@@ -6,7 +6,6 @@ import "../css/texts.scss"
 import "../css/styles.scss"
 
 import ActiveSource from "./components/ActiveSource"
-import Value from "./components/Value"
 import ShoreInputLimitSelector from "./components/ShoreInputLimitSelector"
 
 const getParameterByName = (name, url) => {
@@ -56,6 +55,7 @@ class App extends Component {
     [DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT]: null,
     [DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT_IS_ADJUSTABLE]: null,
     [DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT_MAX]: null,
+    [DBUS_PATHS.INVERTER_CHARGER.PRODUCT_ID]: null,
     currentLimitSelectorVisible: false,
     connected: false
   }
@@ -92,10 +92,7 @@ class App extends Component {
 
   handleShorePowerLimitSelected = limit => {
     this.deviceInterface.write(DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT, limit)
-    this.setState({
-      [DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT]: limit, // optimistic UI update
-      currentLimitSelectorVisible: false
-    })
+    this.toggleCurrentLimitSelector()
   }
 
   render(props, state) {
@@ -116,8 +113,8 @@ class App extends Component {
           <div className="amperage-selector__container fixed--full-size">
             <ShoreInputLimitSelector
               currentLimit={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT]}
-              isAdjustable={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT_IS_ADJUSTABLE]}
               maxLimit={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT_MAX]}
+              productId={this.state[DBUS_PATHS.INVERTER_CHARGER.PRODUCT_ID]}
               onLimitSelected={this.handleShorePowerLimitSelected}
             />
           </div>
@@ -148,8 +145,8 @@ class App extends Component {
               />
               <ShoreInputLimit
                 currentLimit={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT]}
+                isAdjustable={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT_IS_ADJUSTABLE]}
                 onSelectShoreLimitClick={this.toggleCurrentLimitSelector}
-                connected={this.state.connected}
               />
             </div>
             <MultiPlus
@@ -186,6 +183,12 @@ class App extends Component {
   }
 }
 
+class Value extends Component {
+  render(props, state) {
+    return <p className="value text">{props.value}</p>
+  }
+}
+
 class AcInput extends Component {
   render(props, state) {
     return (
@@ -206,6 +209,18 @@ class AcInput extends Component {
 
 class ShoreInputLimit extends Component {
   render(props, state) {
+    if (!props.isAdjustable) {
+      return (
+        <div className="metric metric--small">
+          <div className="metric__value-container">
+            <span className="text text--medium">
+              Shore input limit <span className="text text--bold">{props.currentLimit}</span>
+            </span>
+          </div>
+        </div>
+      )
+    }
+
     return (
       <div className="metric metric--small">
         <button className="selector-button selector-button__shore-input-limit" onclick={props.onSelectShoreLimitClick}>

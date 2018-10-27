@@ -1,7 +1,6 @@
 import { h, Component } from "preact"
 import { AC_SOURCE_TYPE, ACTIVE_INPUT } from "../../service/topics"
-import { formatNumber } from "../formatters"
-import Value from "./Value"
+import NumericValue from "./NumericValue"
 
 const getActiveSource = ({ activeInput, settings }) => {
   let activeSource
@@ -58,9 +57,9 @@ class ActiveSourceMetric extends Component {
         <div className="metric__value-container">
           <p className="text text--medium">{props.title}</p>
           <div className="metric__values">
-            <Value value={props.voltage} unit="V" />
-            <Value value={props.current} unit="A" precision={1} />
-            <Value value={props.power} unit="W" />
+            <NumericValue value={props.voltage} unit={"V"} />
+            <NumericValue value={props.current} unit="A" precision={1} />
+            <NumericValue value={props.power} unit="W" />
           </div>
         </div>
       </div>
