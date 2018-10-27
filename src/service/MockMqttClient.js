@@ -78,6 +78,13 @@ export default class FakeMqttClient {
       `N/mockPortalId/settings/0${DBUS_PATHS.SETTINGS.AC_INPUT_TYPE2}`,
       JSON.stringify({ value: AC_SOURCE_TYPE.SHORE })
     )
+
+    const US_PRODUCT_ID = 991260
+    const EU_PRODUCT_ID = 9760
+    this.onMessage(
+      `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.PRODUCT_ID}`,
+      JSON.stringify({ value: EU_PRODUCT_ID })
+    )
   }
 
   sendMockActiveSource() {
@@ -119,7 +126,7 @@ export default class FakeMqttClient {
       `N/mockPortalId/vebus/257/Ac/In/${ACTIVE_INPUT.INPUT_1}${
         DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT_MAX
       }`,
-      JSON.stringify({ value: 120 })
+      JSON.stringify({ value: 30 })
     )
   }
 

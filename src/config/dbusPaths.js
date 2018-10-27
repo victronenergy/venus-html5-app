@@ -33,7 +33,7 @@ export const DBUS_PATHS = {
       CONSUMPTION_OUTPUT_L2_POWER: "/Ac/ConsumptionOnOutput/L2/Power",
       CONSUMPTION_OUTPUT_L3_POWER: "/Ac/ConsumptionOnOutput/L3/Power"
     },
-    VERSION: "Devices/0/Version",
+    PRODUCT_ID: "/ProductId",
     ACTIVE_INPUT: "/Ac/ActiveIn/ActiveInput", // Active input: 0 = ACin-1, 1 = ACin-2, 240 is none (inverting).
     // also known as GRID
     ACTIVE_IN: {
