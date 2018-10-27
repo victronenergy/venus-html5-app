@@ -33,13 +33,4 @@ function systemModeFormatter(value) {
   return "--"
 }
 
-function acSourceFormatter(value) {
-  if (value == 0) return "Not Available"
-  if (value == 1) return "Grid Input"
-  if (value == 2) return "Generator"
-  if (value == 3) return "Shore Power"
-  if (value == 240) return "Inverting"
-  return "Ac Input Mode"
-}
-
-export { numericFormatter, systemModeFormatter, systemStateFormatter, acSourceFormatter }
+export { numericFormatter, systemModeFormatter, systemStateFormatter }

@@ -54,6 +54,12 @@ export const AC_SOURCE_TYPE = {
   SHORE: 3
 }
 
+export const ACTIVE_INPUT = {
+  INPUT_0: 0,
+  INPUT_1: 1,
+  NONE: 240 // Inverting
+}
+
 export const SYSTEM_MODE = {
   CHARGER_ONLY: 1,
   INVERTER_ONLY: 2,
