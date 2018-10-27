@@ -52,18 +52,22 @@ class App extends Component {
     [DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.POWER_PHASE_1]: null,
     [DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.POWER_PHASE_2]: null,
     [DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.POWER_PHASE_3]: null,
+
+    [DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT]: null,
+    [DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT_IS_ADJUSTABLE]: null,
+    [DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT_MAX]: null,
     currentLimitSelectorVisible: false,
     connected: false
   }
 
   componentDidMount = () => {
-    const deviceInterface = new VenusClient(mqttUrl)
-    deviceInterface.connect().then(() => {
+    this.deviceInterface = new VenusClient(mqttUrl)
+    this.deviceInterface.connect().then(() => {
       const dbusPaths = Object.keys(metricsConfig)
-      deviceInterface.subscribe(dbusPaths)
+      this.deviceInterface.subscribe(dbusPaths)
     })
 
-    deviceInterface.onMessage = ({ path, value }) => {
+    this.deviceInterface.onMessage = ({ path, value }) => {
       const metric = metricsConfig[path]
       if (!metric) {
         console.warn(`Received message for topic you're not listening to: ${path}`)
@@ -74,15 +78,24 @@ class App extends Component {
       this.setState({ [path]: metric.unit ? formattedValue + metric.unit : formattedValue })
     }
 
-    deviceInterface.onConnectionChanged = ({ connected }) => {
+    this.deviceInterface.onConnectionChanged = ({ connected }) => {
       this.setState({ connected })
     }
 
-    this.setState({ deviceInterface })
+    // TODO Remove this
+    this.setState({ deviceInterface: this.deviceInterface })
   }
 
   toggleCurrentLimitSelector = () => {
     this.setState({ currentLimitSelectorVisible: !this.state.currentLimitSelectorVisible })
+  }
+
+  handleShorePowerLimitSelected = limit => {
+    this.deviceInterface.write(DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT, limit)
+    this.setState({
+      [DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT]: limit, // optimistic UI update
+      currentLimitSelectorVisible: false
+    })
   }
 
   render(props, state) {
@@ -102,9 +115,10 @@ class App extends Component {
         {state.currentLimitSelectorVisible ? (
           <div className="amperage-selector__container fixed--full-size">
             <ShoreInputLimitSelector
-              shoreVoltage={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.VOLTAGE]}
-              deviceInterface={this.state.deviceInterface}
-              toggle={this.toggleCurrentLimitSelector}
+              currentLimit={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT]}
+              isAdjustable={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT_IS_ADJUSTABLE]}
+              maxLimit={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT_MAX]}
+              onLimitSelected={this.handleShorePowerLimitSelected}
             />
           </div>
         ) : (
@@ -134,7 +148,7 @@ class App extends Component {
               />
               <ShoreInputLimit
                 currentLimit={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT]}
-                toggle={this.toggleCurrentLimitSelector}
+                onSelectShoreLimitClick={this.toggleCurrentLimitSelector}
                 connected={this.state.connected}
               />
             </div>
@@ -194,7 +208,7 @@ class ShoreInputLimit extends Component {
   render(props, state) {
     return (
       <div className="metric metric--small">
-        <button className="selector-button selector-button__shore-input-limit" onclick={props.toggle}>
+        <button className="selector-button selector-button__shore-input-limit" onclick={props.onSelectShoreLimitClick}>
           <span className="text text--small">Select shore input limit:</span>
           <span className="text text--bold">{props.currentLimit}</span>
         </button>

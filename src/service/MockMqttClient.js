@@ -19,16 +19,21 @@ export default class FakeMqttClient {
     callbackFn("N/mockPortalId/system/0/Serial", JSON.stringify({ value: "mockPortalId" }))
     callbackFn("N/mockPortalId/system/0/DeviceInstance", JSON.stringify({}))
     callbackFn("N/mockPortalId/vebus/257/DeviceInstance", JSON.stringify({}))
+    callbackFn(
+      `N/mockPortalId/settings/0${DBUS_PATHS.SETTINGS.AC_INPUT_TYPE1}`,
+      JSON.stringify({ value: AC_SOURCE_TYPE.GENERATOR })
+    )
+    callbackFn(
+      `N/mockPortalId/settings/0${DBUS_PATHS.SETTINGS.AC_INPUT_TYPE2}`,
+      JSON.stringify({ value: AC_SOURCE_TYPE.SHORE })
+    )
   }
 
   sendMockData = () => {
     this.sendMockSystemConfig()
     this.sendMockActiveSource()
+    this.sendMockShorePowerLimits()
 
-    this.onMessage(
-      `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT}`,
-      JSON.stringify({ value: 50 })
-    )
     this.onMessage(
       `N/mockPortalId/system/0${DBUS_PATHS.BATTERY.VOLTAGE}`,
       JSON.stringify({ value: Math.random() * 100 })
@@ -99,6 +104,25 @@ export default class FakeMqttClient {
     this.sendMockNumber(`N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.POWER_PHASE_3}`)
   }
 
+  sendMockShorePowerLimits() {
+    this.onMessage(
+      `N/mockPortalId/vebus/257/Ac/In/${ACTIVE_INPUT.INPUT_1}${DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT}`,
+      JSON.stringify({ value: 50 })
+    )
+    this.onMessage(
+      `N/mockPortalId/vebus/257/Ac/In/${ACTIVE_INPUT.INPUT_1}${
+        DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT_IS_ADJUSTABLE
+      }`,
+      JSON.stringify({ value: true })
+    )
+    this.onMessage(
+      `N/mockPortalId/vebus/257/Ac/In/${ACTIVE_INPUT.INPUT_1}${
+        DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT_MAX
+      }`,
+      JSON.stringify({ value: 120 })
+    )
+  }
+
   sendMockNumber(path) {
     this.onMessage(path, JSON.stringify({ value: Math.random() * 100 }))
   }
@@ -140,6 +164,6 @@ export default class FakeMqttClient {
   }
 
   publish(topic, data) {
-    console.log(`publish: ${JSON.stringify(data)}`)
+    console.log(`publish [${topic}]: ${JSON.stringify(data)}`)
   }
 }
