@@ -16,6 +16,7 @@
     <input type="button" value="Reload page" onclick="location.reload(true)" />
     <input type="button" value="Browser info" onclick="window.location.href = 'browser-info.html'" />
   </div>
+  <div id="debugLog" style="display: none; color: white; background-color: rgba(18, 26, 40, 1); max-height: 200px; overflow: scroll;"></div>
 </body>
 
 <script>
@@ -29,8 +30,23 @@
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
   }
 
+  function debugLogFn(msg) {
+    document.getElementById('debugLog').innerHTML += msg + "<br/>";
+    return false
+  }
+
+  function debug(name, url) {
+    console.log = debugLogFn
+    console.error = debugLogFn
+    window.onerror = debugLogFn
+
+    document.getElementById("debugLog").style.display = "block"
+  }
+
   (function () {
     if (getParameterByName('dev')) document.getElementById("devReload").style.display = "block"
+
+    if (getParameterByName('debug')) debug()
   })();
 </script>
 

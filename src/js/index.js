@@ -52,7 +52,7 @@ class App extends Component {
     })
 
     deviceInterface.onMessage = ({ path, value }) => {
-      // console.log(path, value)
+      console.log(path, value)
       const metric = metricsConfig[path]
       if (!metric) {
         console.error(`Metric not found for path ${path}`)
