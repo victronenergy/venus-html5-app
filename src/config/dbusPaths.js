@@ -34,23 +34,30 @@ export const DBUS_PATHS = {
       CONSUMPTION_OUTPUT_L3_POWER: "/Ac/ConsumptionOnOutput/L3/Power"
     },
     ACTIVE_INPUT: "/Ac/ActiveIn/ActiveInput", // Active input: 0 = ACin-1, 1 = ACin-2, 240 is none (inverting).
-    IS_CONNECTED_TO_POWER: "/Ac/ActiveIn/Connected", // 0 when inverting, 1 when connected to an AC in.
     // also known as GRID
-    SHORE_POWER: {
-      L1_VOLTAGE: "/Ac/ActiveIn/L1/V", //  <- Voltage (Volts)
-      L1_CURRENT: "/Ac/ActiveIn/L1/I", // <- Current (Amps)
-      L1_POWER: "/Ac/ActiveIn/L1/P", //  <- Power (Watts)
-      L1_FREQUENCY: "/Ac/ActiveIn/L1/F", // <- Frequency (Hz)
-      L2_VOLTAGE: "/Ac/ActiveIn/L2/V", //  <- Voltage (Volts)
-      L2_CURRENT: "/Ac/ActiveIn/L2/I", // <- Current (Amps)
-      L2_POWER: "/Ac/ActiveIn/L2/P", //  <- Power (Watts)
-      L2_FREQUENCY: "/Ac/ActiveIn/L2/F", // <- Frequency (Hz)
-      L3_VOLTAGE: "/Ac/ActiveIn/L3/V", //  <- Voltage (Volts)
-      L3_CURRENT: "/Ac/ActiveIn/L3/I", // <- Current (Amps)
-      L3_POWER: "/Ac/ActiveIn/L3/P", //  <- Power (Watts)
-      L3_FREQUENCY: "/Ac/ActiveIn/L3/F", // <- Frequency (Hz)
+    ACTIVE_IN: {
+      VOLTAGE_PHASE_1: "/Ac/ActiveIn/L1/V", //  <- Voltage (Volts)
+      CURRENT_PHASE_1: "/Ac/ActiveIn/L1/I", // <- Current (Amps)
+      POWER_PHASE_1: "/Ac/ActiveIn/L1/P", //  <- Power (Watts)
+      FREQUENCY_PHASE_1: "/Ac/ActiveIn/L1/F", // <- Frequency (Hz)
 
-      CURRENT_LIMIT: "/Ac/ActiveIn/CurrentLimit"
+      VOLTAGE_PHASE_2: "/Ac/ActiveIn/L2/V",
+      CURRENT_PHASE_2: "/Ac/ActiveIn/L2/I",
+      POWER_PHASE_2: "/Ac/ActiveIn/L2/P",
+      FREQUENCY_PHASE_2: "/Ac/ActiveIn/L2/F",
+
+      VOLTAGE_PHASE_3: "/Ac/ActiveIn/L3/V",
+      CURRENT_PHASE_3: "/Ac/ActiveIn/L3/I",
+      POWER_PHASE_3: "/Ac/ActiveIn/L3/P",
+      FREQUENCY_PHASE_3: "/Ac/ActiveIn/L3/F",
+
+      CURRENT_LIMIT: "/Ac/ActiveIn/CurrentLimit",
+      CURRENT_LIMIT_IS_ADJUSTABLE: "/Ac/ActiveIn/CurrentLimitIsAdjustable"
+    },
+    SHORE_POWER: {
+      CURRENT_LIMIT: "/Ac/In/{n}/CurrentLimit",
+      CURRENT_LIMIT_MAX: "/Ac/In/{n}/CurrentLimitGetMax",
+      CURRENT_LIMIT_IS_ADJUSTABLE: "/Ac/In/{n}/CurrentLimitIsAdjustable"
     },
     GENERATOR: {
       AC_GENSET_L1_POWER: "/Ac/Genset/L1/Power", // <- All from the genset.

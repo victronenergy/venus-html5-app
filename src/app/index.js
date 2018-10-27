@@ -4,7 +4,10 @@ import { DBUS_PATHS } from "../config/dbusPaths"
 import VenusClient from "../service/index"
 import "../css/texts.scss"
 import "../css/styles.scss"
-import { AC_SOURCE_TYPE } from "../service/topics"
+
+import ActiveSource from "./components/ActiveSource"
+import Value from "./components/Value"
+import ShoreInputLimitSelector from "./components/ShoreInputLimitSelector"
 
 const getParameterByName = (name, url) => {
   if (!url) url = window.location.href
@@ -16,8 +19,6 @@ const getParameterByName = (name, url) => {
   return decodeURIComponent(results[2].replace(/\+/g, " "))
 }
 
-const USAmperage = [10, 15, 20, 30, 50, 100]
-const EUAmperage = [6, 10, 13, 16, 25, 32, 63]
 const host = getParameterByName("host") || window.location.hostname || "localhost"
 const port = parseInt(getParameterByName("port")) || 9001
 const mqttUrl = `mqtt://${host}:${port}`
@@ -33,7 +34,6 @@ class App extends Component {
     [DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.VOLTAGE]: "--",
     [DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.CURRENT]: "--",
     [DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.POWER]: "--",
-    [DBUS_PATHS.INVERTER_CHARGER.IS_CONNECTED_TO_POWER]: "--",
     [DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.VOLTAGE]: "--",
     [DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT]: "--",
     [DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT]: "--",
@@ -43,6 +43,15 @@ class App extends Component {
     [DBUS_PATHS.INVERTER_CHARGER.ACTIVE_INPUT]: null,
     [DBUS_PATHS.SETTINGS.AC_INPUT_TYPE1]: null,
     [DBUS_PATHS.SETTINGS.AC_INPUT_TYPE2]: null,
+    [DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.CURRENT_PHASE_1]: null,
+    [DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.CURRENT_PHASE_2]: null,
+    [DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.CURRENT_PHASE_3]: null,
+    [DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.VOLTAGE_PHASE_1]: null,
+    [DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.VOLTAGE_PHASE_2]: null,
+    [DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.VOLTAGE_PHASE_3]: null,
+    [DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.POWER_PHASE_1]: null,
+    [DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.POWER_PHASE_2]: null,
+    [DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.POWER_PHASE_3]: null,
     currentLimitSelectorVisible: false,
     connected: false
   }
@@ -57,7 +66,7 @@ class App extends Component {
     deviceInterface.onMessage = ({ path, value }) => {
       const metric = metricsConfig[path]
       if (!metric) {
-        console.error(`Metric not found for path ${path}`)
+        console.warn(`Received message for topic you're not listening to: ${path}`)
         return
       }
 
@@ -74,14 +83,6 @@ class App extends Component {
 
   toggleCurrentLimitSelector = () => {
     this.setState({ currentLimitSelectorVisible: !this.state.currentLimitSelectorVisible })
-  }
-
-  isSourceActive = type => {
-    const activeInput = this.state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_INPUT]
-    const input0 = this.state[DBUS_PATHS.SETTINGS.AC_INPUT_TYPE1]
-    const input1 = this.state[DBUS_PATHS.SETTINGS.AC_INPUT_TYPE2]
-
-    return (activeInput === 0 && input0 === type) || (activeInput === 1 && input1 === type)
   }
 
   render(props, state) {
@@ -101,7 +102,6 @@ class App extends Component {
         {state.currentLimitSelectorVisible ? (
           <div className="amperage-selector__container fixed--full-size">
             <ShoreInputLimitSelector
-              toggle={this.state.toggleSelector}
               shoreVoltage={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.VOLTAGE]}
               deviceInterface={this.state.deviceInterface}
               toggle={this.toggleCurrentLimitSelector}
@@ -110,13 +110,28 @@ class App extends Component {
         ) : (
           <div id="metrics-container">
             <div className="multi-metric-container">
-              {this.isSourceActive(AC_SOURCE_TYPE.SHORE) && (
-                <ShorePower
-                  voltage={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.VOLTAGE]}
-                  current={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT]}
-                  power={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.POWER]}
-                />
-              )}
+              <ActiveSource
+                activeInput={this.state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_INPUT]}
+                settings={{
+                  input0: this.state[DBUS_PATHS.SETTINGS.AC_INPUT_TYPE1],
+                  input1: this.state[DBUS_PATHS.SETTINGS.AC_INPUT_TYPE2]
+                }}
+                current={{
+                  phase1: this.state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.CURRENT_PHASE_1],
+                  phase2: this.state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.CURRENT_PHASE_2],
+                  phase3: this.state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.CURRENT_PHASE_3]
+                }}
+                voltage={{
+                  phase1: this.state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.VOLTAGE_PHASE_1],
+                  phase2: this.state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.VOLTAGE_PHASE_2],
+                  phase3: this.state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.VOLTAGE_PHASE_3]
+                }}
+                power={{
+                  phase1: this.state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.POWER_PHASE_1],
+                  phase2: this.state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.POWER_PHASE_2],
+                  phase3: this.state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.POWER_PHASE_3]
+                }}
+              />
               <ShoreInputLimit
                 currentLimit={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT]}
                 toggle={this.toggleCurrentLimitSelector}
@@ -156,11 +171,6 @@ class App extends Component {
     )
   }
 }
-class Value extends Component {
-  render(props, state) {
-    return <p className="value text">{props.value}</p>
-  }
-}
 
 class AcInput extends Component {
   render(props, state) {
@@ -180,24 +190,6 @@ class AcInput extends Component {
   }
 }
 
-class ShorePower extends Component {
-  render(props, state) {
-    return (
-      <div className="metric metric--small">
-        <img src="./images/icons/shore-power.svg" className="metric__icon" />
-        <div className="metric__value-container">
-          <p className="text text--medium">Shore Power</p>
-          <div className="metric__values">
-            <Value value={props.voltage} />
-            <Value value={props.current} />
-            <Value value={props.power} />
-          </div>
-        </div>
-      </div>
-    )
-  }
-}
-
 class ShoreInputLimit extends Component {
   render(props, state) {
     return (
@@ -206,37 +198,6 @@ class ShoreInputLimit extends Component {
           <span className="text text--small">Select shore input limit:</span>
           <span className="text text--bold">{props.currentLimit}</span>
         </button>
-      </div>
-    )
-  }
-}
-
-class ShoreInputLimitSelector extends Component {
-  setAmperage = value => {
-    this.props.deviceInterface.write(DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT, value)
-    this.props.toggle()
-  }
-
-  render(props, state) {
-    const shoreVoltage = parseInt(props.shoreVoltage)
-    const amperage = !shoreVoltage || shoreVoltage > 150 ? EUAmperage : USAmperage
-
-    return (
-      <div className="amperage-selector">
-        {amperage.map(currentValue => {
-          return (
-            <button
-              className={
-                "selector-button selector-button__amperage text text--very-large" +
-                (parseInt(props.currentLimit) == currentValue ? " selector-button--active" : "")
-              }
-              href="#"
-              onClick={() => this.setAmperage(currentValue)}
-            >
-              {currentValue}
-            </button>
-          )
-        })}
       </div>
     )
   }

@@ -3,7 +3,7 @@ const webpack = require("webpack")
 const path = require("path")
 
 const conf = {
-  entry: path.resolve(__dirname, "src/js/index.js"),
+  entry: path.resolve(__dirname, "src/app/index.js"),
   output: {
     path: path.resolve(__dirname, "dist/"),
     filename: "bundle.js"

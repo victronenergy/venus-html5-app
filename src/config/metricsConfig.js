@@ -1,4 +1,4 @@
-import { numericFormatter, systemModeFormatter, systemStateFormatter, acSourceFormatter } from "../js/formatters"
+import { numericFormatter, systemModeFormatter, systemStateFormatter, acSourceFormatter } from "../app/formatters"
 import { DBUS_PATHS } from "../config/dbusPaths"
 
 export default {
@@ -56,34 +56,12 @@ export default {
     formatter: numericFormatter(),
     timeout: 0
   },
-  [DBUS_PATHS.INVERTER_CHARGER.IS_CONNECTED_TO_POWER]: {
-    description: "Inverter charger is connected to power",
-    formatter: numericFormatter()
-  },
-  [DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.VOLTAGE]: {
-    description: "Grid voltage",
-    unit: "V",
-    formatter: numericFormatter(),
-    timeout: 0
-  },
-  [DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT]: {
-    description: "Grid current",
-    unit: "A",
-    formatter: numericFormatter(1),
-    timeout: 0
-  },
   [DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT]: {
     description: "Grid input limit",
     unit: "A",
     formatter: numericFormatter(),
     timeout: 0,
     write: true
-  },
-  [DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.POWER]: {
-    description: "Grid power",
-    unit: "W",
-    formatter: numericFormatter(),
-    timeout: 0
   },
   [DBUS_PATHS.INVERTER_CHARGER.SYSTEM.STATE]: {
     description: "System state",
@@ -100,5 +78,14 @@ export default {
   },
   [DBUS_PATHS.INVERTER_CHARGER.ACTIVE_INPUT]: {},
   [DBUS_PATHS.SETTINGS.AC_INPUT_TYPE1]: {},
-  [DBUS_PATHS.SETTINGS.AC_INPUT_TYPE2]: {}
+  [DBUS_PATHS.SETTINGS.AC_INPUT_TYPE2]: {},
+  [DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.CURRENT_PHASE_1]: {},
+  [DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.CURRENT_PHASE_2]: {},
+  [DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.CURRENT_PHASE_3]: {},
+  [DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.POWER_PHASE_1]: {},
+  [DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.POWER_PHASE_2]: {},
+  [DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.POWER_PHASE_3]: {},
+  [DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.VOLTAGE_PHASE_1]: {},
+  [DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.VOLTAGE_PHASE_2]: {},
+  [DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.VOLTAGE_PHASE_3]: {}
 }
