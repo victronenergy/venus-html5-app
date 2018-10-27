@@ -5,14 +5,10 @@ const USAmperage = [10, 15, 20, 30, 50, 100]
 const EUAmperage = [6, 10, 13, 16, 25, 32, 63]
 
 class ShoreInputLimitSelector extends Component {
-  setAmperage = value => {
-    this.props.deviceInterface.write(DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT, value)
-    this.props.toggle()
-  }
-
   render(props, state) {
-    const shoreVoltage = parseInt(props.shoreVoltage)
-    const amperage = !shoreVoltage || shoreVoltage > 150 ? EUAmperage : USAmperage
+    // const shoreVoltage = parseInt(props.shoreVoltage)
+    // const amperage = !shoreVoltage || shoreVoltage > 150 ? EUAmperage : USAmperage
+    const amperage = USAmperage // TODO
 
     return (
       <div className="amperage-selector">
@@ -24,7 +20,7 @@ class ShoreInputLimitSelector extends Component {
                 (parseInt(props.currentLimit) == currentValue ? " selector-button--active" : "")
               }
               href="#"
-              onClick={() => this.setAmperage(currentValue)}
+              onClick={() => props.onLimitSelected(currentValue)}
             >
               {currentValue}
             </button>

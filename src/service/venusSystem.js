@@ -1,5 +1,5 @@
 import { isPathOfType, parseTopic, Topic } from "./util"
-import { SERVICES } from "./topics"
+import { AC_SOURCE_TYPE, SERVICES } from "./topics"
 import { DBUS_PATHS } from "../config/dbusPaths"
 
 /**
@@ -16,6 +16,11 @@ class VenusSystem {
   portalId = null
   vebusInstanceId = null
   systemInstanceId = null
+  acInput1 = null
+  acInput2 = null
+  shorePowerInput = null
+  generatorInput = null
+  gridInput = null
   equipment
 
   constructor() {
@@ -31,7 +36,13 @@ class VenusSystem {
   }
 
   isInitialized = () => {
-    return this.portalId && this.vebusInstanceId && this.systemInstanceId !== null
+    return (
+      this.portalId &&
+      this.vebusInstanceId &&
+      this.systemInstanceId !== null &&
+      this.acInput1 !== null &&
+      this.acInput2 !== null
+    )
   }
 
   /**
@@ -43,6 +54,8 @@ class VenusSystem {
   getTopicFromDbusPath = (type, dbusPath) => {
     if (SERVICES.SYSTEM.includes(dbusPath)) {
       return `${type}/${this.portalId}/system/${this.systemInstanceId}${dbusPath}`
+    } else if (SERVICES.SHORE_POWER.includes(dbusPath)) {
+      return `${type}/${this.portalId}/vebus/${this.vebusInstanceId}/Ac/In/${this.shorePowerInput}${dbusPath}`
     } else if (SERVICES.VEBUS.includes(dbusPath)) {
       return `${type}/${this.portalId}/vebus/${this.vebusInstanceId}${dbusPath}`
     } else if (SERVICES.SETTINGS.includes(dbusPath)) {
@@ -57,12 +70,13 @@ class VenusSystem {
   handleSystemMessage(topic, message) {
     const topicDetails = parseTopic(topic)
     this.handlePortalIdMessage(topicDetails, message) ||
+      this.handleDeviceIds(topicDetails, message) ||
+      this.handleSettings(topicDetails, message) ||
       this.handleBaterryInfoMessages(topicDetails, message) ||
       this.handleDCLoads(topicDetails, message) ||
       this.handleACLoads(topicDetails, message) ||
       this.handleShorePower(topicDetails, message) ||
-      this.handleSystemState(topicDetails, message) ||
-      this.handleDeviceIds(topicDetails, message)
+      this.handleSystemState(topicDetails, message)
   }
 
   handlePortalIdMessage(topic, data) {
@@ -95,6 +109,36 @@ class VenusSystem {
       return true
     }
     return false
+  }
+
+  handleSettings(topic, data) {
+    if (isPathOfType(topic.dbusPath, DBUS_PATHS.SETTINGS)) {
+      let input = null
+      switch (topic.dbusPath) {
+        case DBUS_PATHS.SETTINGS.AC_INPUT_TYPE1:
+          this.acInput1 = data.value
+          input = 0
+          break
+        case DBUS_PATHS.SETTINGS.AC_INPUT_TYPE2:
+          this.acInput2 = data.value
+          input = 1
+          break
+        default:
+          break
+      }
+
+      switch (data.value) {
+        case AC_SOURCE_TYPE.SHORE:
+          this.shorePowerInput = input
+          break
+        case AC_SOURCE_TYPE.GENERATOR:
+          this.generatorInput = input
+          break
+        case AC_SOURCE_TYPE.GRID:
+          this.gridInput = input
+          break
+      }
+    }
   }
 
   handleBaterryInfoMessages(topic, data) {

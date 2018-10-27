@@ -19,12 +19,14 @@
  */
 export const parseTopic = topic => {
   const parts = topic.split("/")
+  const dbusPathParts = parts.splice(4)
+  const isAcIn = dbusPathParts[0] === "Ac" && dbusPathParts[1] === "In"
   return {
     type: parts[0],
     portalId: parts[1],
     serviceType: parts[2],
     deviceInstance: parseInt(parts[3]),
-    dbusPath: "/" + parts.splice(4).join("/")
+    dbusPath: "/" + (isAcIn ? dbusPathParts.splice(3).join("/") : dbusPathParts.join("/"))
   }
 }
 

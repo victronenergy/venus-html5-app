@@ -33,6 +33,7 @@ export const DBUS_PATHS = {
       CONSUMPTION_OUTPUT_L2_POWER: "/Ac/ConsumptionOnOutput/L2/Power",
       CONSUMPTION_OUTPUT_L3_POWER: "/Ac/ConsumptionOnOutput/L3/Power"
     },
+    VERSION: "Devices/0/Version",
     ACTIVE_INPUT: "/Ac/ActiveIn/ActiveInput", // Active input: 0 = ACin-1, 1 = ACin-2, 240 is none (inverting).
     // also known as GRID
     ACTIVE_IN: {
@@ -55,9 +56,10 @@ export const DBUS_PATHS = {
       CURRENT_LIMIT_IS_ADJUSTABLE: "/Ac/ActiveIn/CurrentLimitIsAdjustable"
     },
     SHORE_POWER: {
-      CURRENT_LIMIT: "/Ac/In/{n}/CurrentLimit",
-      CURRENT_LIMIT_MAX: "/Ac/In/{n}/CurrentLimitGetMax",
-      CURRENT_LIMIT_IS_ADJUSTABLE: "/Ac/In/{n}/CurrentLimitIsAdjustable"
+      // Only available for VE.Bus versions > 415
+      CURRENT_LIMIT: "/CurrentLimit",
+      CURRENT_LIMIT_MAX: "/CurrentLimitGetMax",
+      CURRENT_LIMIT_IS_ADJUSTABLE: "/CurrentLimitIsAdjustable"
     },
     GENERATOR: {
       AC_GENSET_L1_POWER: "/Ac/Genset/L1/Power", // <- All from the genset.

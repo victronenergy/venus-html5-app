@@ -1,6 +1,6 @@
 import { h, Component } from "preact"
 
-function formatNumber(value, unit = "", precision = 0, factor = 1.0, defaultValue = "--") {
+export function formatNumber({ value, unit = "", precision = 0, factor = 1.0, defaultValue = "--" }) {
   if (!value) {
     return defaultValue
   }
@@ -10,6 +10,6 @@ function formatNumber(value, unit = "", precision = 0, factor = 1.0, defaultValu
 
 export default class Value extends Component {
   render({ value, unit = "", precision = 0, factor = 1.0, defaultValue = "--" }) {
-    return <p className="value text">{formatNumber(value, unit, precision, factor, defaultValue)}</p>
+    return <p className="value text">{formatNumber({ value, unit, precision, factor, defaultValue })}</p>
   }
 }
