@@ -68,14 +68,8 @@ export const DBUS_PATHS = {
     },
     SYSTEM: {
       STATE: "/SystemState/State",
-      MODE: "/Mode", // Position of the switch.
-      STATES: {
-        CHARGER_ONLY: 1,
-        INVERTER_ONLY: 2,
-        ON: 3,
-        OFF: 4
-      },
-
+      MODE: "/Mode", // Position of the switch. 1=Charger Only;2=Inverter Only;3=On;4=Off
+      MODE_IS_ADJUSTABLE: "/ModeIsAdjustable",
       AC_NUMBER_OF_PHASES: "/Ac/Consumption/NumberOfPhases", //  <- Either 1 (single phase), 2 (split-phase) or 3 (three-phase)
       VEBUS_SERVICE: "/VebusService" // <- Returns the service name of the vebus service.
     }

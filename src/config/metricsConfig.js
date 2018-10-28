@@ -62,6 +62,7 @@ export default {
     formatter: systemStateFormatter,
     timeout: 0
   },
+  [DBUS_PATHS.INVERTER_CHARGER.SYSTEM.MODE_IS_ADJUSTABLE]: {},
   [DBUS_PATHS.INVERTER_CHARGER.SYSTEM.MODE]: {
     description: "System mode",
     unit: "",

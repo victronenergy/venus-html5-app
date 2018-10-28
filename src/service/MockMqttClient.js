@@ -1,6 +1,6 @@
 import { DBUS_PATHS } from "../config/dbusPaths"
 import { ClientSubscribeCallback, ISubscriptionMap } from "mqtt"
-import { AC_SOURCE_TYPE, ACTIVE_INPUT } from "./topics"
+import { AC_SOURCE_TYPE, ACTIVE_INPUT, SYSTEM_MODE, VEBUS_SYSTEM_STATE } from "./topics"
 
 const getRandomInt = max => {
   return Math.floor(Math.random() * Math.floor(max))
@@ -33,6 +33,7 @@ export default class FakeMqttClient {
     this.sendMockSystemConfig()
     this.sendMockActiveSource()
     this.sendMockShorePowerLimits()
+    this.sendMockSystemStatus()
 
     this.onMessage(
       `N/mockPortalId/system/0${DBUS_PATHS.BATTERY.VOLTAGE}`,
@@ -67,8 +68,15 @@ export default class FakeMqttClient {
   }
 
   sendMockSystemConfig() {
-    this.onMessage(`N/mockPortalId/system/0${DBUS_PATHS.INVERTER_CHARGER.SYSTEM.MODE}`, JSON.stringify({ value: 1 }))
-    this.onMessage(`N/mockPortalId/system/0${DBUS_PATHS.INVERTER_CHARGER.SYSTEM.STATE}`, JSON.stringify({ value: 4 }))
+    const US_PRODUCT_ID = 991260
+    const EU_PRODUCT_ID = 9760
+    this.onMessage(
+      `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.PRODUCT_ID}`,
+      JSON.stringify({ value: EU_PRODUCT_ID })
+    )
+  }
+
+  sendMockActiveSource() {
     this.onMessage(
       `N/mockPortalId/settings/0${DBUS_PATHS.SETTINGS.AC_INPUT_TYPE1}`,
       JSON.stringify({ value: AC_SOURCE_TYPE.GENERATOR })
@@ -79,15 +87,6 @@ export default class FakeMqttClient {
       JSON.stringify({ value: AC_SOURCE_TYPE.SHORE })
     )
 
-    const US_PRODUCT_ID = 991260
-    const EU_PRODUCT_ID = 9760
-    this.onMessage(
-      `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.PRODUCT_ID}`,
-      JSON.stringify({ value: EU_PRODUCT_ID })
-    )
-  }
-
-  sendMockActiveSource() {
     this.onMessage(
       `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.ACTIVE_INPUT}`,
       JSON.stringify(
@@ -127,6 +126,23 @@ export default class FakeMqttClient {
         DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT_MAX
       }`,
       JSON.stringify({ value: 30 })
+    )
+  }
+
+  sendMockSystemStatus() {
+    this.onMessage(
+      `N/mockPortalId/system/0${DBUS_PATHS.INVERTER_CHARGER.SYSTEM.MODE}`,
+      JSON.stringify(getRandomValueFromArray(Object.values(SYSTEM_MODE).map(mode => ({ value: mode }))))
+    )
+
+    this.onMessage(
+      `N/mockPortalId/system/0${DBUS_PATHS.INVERTER_CHARGER.SYSTEM.MODE_IS_ADJUSTABLE}`,
+      JSON.stringify({ value: true })
+    )
+
+    this.onMessage(
+      `N/mockPortalId/system/0${DBUS_PATHS.INVERTER_CHARGER.SYSTEM.STATE}`,
+      JSON.stringify(getRandomValueFromArray(Object.values(VEBUS_SYSTEM_STATE).map(mode => ({ value: mode }))))
     )
   }
 
