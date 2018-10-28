@@ -237,6 +237,10 @@ header {
   margin-right: 10px;
 }
 
+.metric__mode--readonly {
+  width: calc(50% - 40px);
+}
+
 .metric__battery {
   background-image: url("../images/boat.png");
   background-repeat: no-repeat;

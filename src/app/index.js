@@ -7,6 +7,7 @@ import "../css/styles.scss"
 
 import ActiveSource from "./components/ActiveSource"
 import ShoreInputLimitSelector from "./components/ShoreInputLimitSelector"
+import { SYSTEM_MODE } from "../service/topics"
 
 const getParameterByName = (name, url) => {
   if (!url) url = window.location.href
@@ -39,6 +40,7 @@ class App extends Component {
     [DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.POWER]: "--",
     [DBUS_PATHS.INVERTER_CHARGER.SYSTEM.STATE]: "--",
     [DBUS_PATHS.INVERTER_CHARGER.SYSTEM.MODE]: "--",
+    [DBUS_PATHS.INVERTER_CHARGER.SYSTEM.MODE_IS_ADJUSTABLE]: null,
     [DBUS_PATHS.INVERTER_CHARGER.ACTIVE_INPUT]: null,
     [DBUS_PATHS.SETTINGS.AC_INPUT_TYPE1]: null,
     [DBUS_PATHS.SETTINGS.AC_INPUT_TYPE2]: null,
@@ -93,6 +95,10 @@ class App extends Component {
   handleShorePowerLimitSelected = limit => {
     this.deviceInterface.write(DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT, limit)
     this.toggleCurrentLimitSelector()
+  }
+
+  handleModeSelected = mode => {
+    this.deviceInterface.write(DBUS_PATHS.INVERTER_CHARGER.SYSTEM.MODE, mode)
   }
 
   render(props, state) {
@@ -151,10 +157,9 @@ class App extends Component {
             </div>
             <MultiPlus
               state={this.state[DBUS_PATHS.INVERTER_CHARGER.SYSTEM.STATE]}
-              mode={this.state[DBUS_PATHS.INVERTER_CHARGER.SYSTEM.MODE]}
-              connected={this.state.connected}
               activeMode={this.state[DBUS_PATHS.INVERTER_CHARGER.SYSTEM.MODE]}
-              deviceInterface={this.state.deviceInterface}
+              isAdjustable={this.state[DBUS_PATHS.INVERTER_CHARGER.SYSTEM.MODE_IS_ADJUSTABLE]}
+              onModeSelected={this.handleModeSelected}
             />
             <Battery
               soc={this.state[DBUS_PATHS.BATTERY.SOC]}
@@ -233,45 +238,51 @@ class ShoreInputLimit extends Component {
 }
 
 class MultiPlus extends Component {
-  setMode = mode => {
-    this.props.deviceInterface.write(DBUS_PATHS.INVERTER_CHARGER.SYSTEM.MODE, mode)
-  }
-
   render(props, state) {
     return (
       <div className="metric metric__container">
         <div className="metric__container--left">
           <img src="./images/icons/multiplus.svg" className="metric__icon" />
           <div className="metric__value-container">
-            <p className="text text--medium">MultiPlus</p>
+            <p className="text text--medium">Inverter/charger</p>
             <div className="metric__values">
               <p className="text">{props.state}</p>
             </div>
           </div>
         </div>
-        <div className="metrics-selector">
-          <button
-            href="#"
-            className={"selector-button text" + (props.activeMode == "ON" ? " selector-button--active" : "")}
-            onClick={() => this.setMode(DBUS_PATHS.INVERTER_CHARGER.SYSTEM.STATES.ON)}
-          >
-            On
-          </button>
-          <button
-            href="#"
-            className={"selector-button text" + (props.activeMode == "OFF" ? " selector-button--active" : "")}
-            onClick={() => this.setMode(DBUS_PATHS.INVERTER_CHARGER.SYSTEM.STATES.OFF)}
-          >
-            Off
-          </button>
-          <button
-            href="#"
-            className={"selector-button text" + (props.activeMode == "Charger only" ? " selector-button--active" : "")}
-            onClick={() => this.setMode(DBUS_PATHS.INVERTER_CHARGER.SYSTEM.STATES.CHARGER_ONLY)}
-          >
-            Charger only
-          </button>
-        </div>
+        {props.isAdjustable ? (
+          <div className="metrics-selector">
+            <button
+              className={"selector-button text" + (props.activeMode == "ON" ? " selector-button--active" : "")}
+              onClick={() => props.onModeSelected(SYSTEM_MODE.ON)}
+            >
+              On
+            </button>
+            <button
+              className={"selector-button text" + (props.activeMode == "OFF" ? " selector-button--active" : "")}
+              onClick={() => props.onModeSelected(SYSTEM_MODE.OFF)}
+            >
+              Off
+            </button>
+            <button
+              className={
+                "selector-button text" + (props.activeMode == "Charger only" ? " selector-button--active" : "")
+              }
+              onClick={() => props.onModeSelected(SYSTEM_MODE.CHARGER_ONLY)}
+            >
+              Charger only
+            </button>
+            {/*// TODO Should we add a button for inverter only as well?*/}
+          </div>
+        ) : (
+          <div className="metric__container--left metric__mode--readonly">
+            <div className="metric__value-container">
+              <div className="metric__values">
+                <p className="text">{props.activeMode}</p>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     )
   }
