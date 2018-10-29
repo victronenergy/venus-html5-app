@@ -233,6 +233,10 @@ header {
   background-color: #30afff;
 }
 
+.selector-button--disabled {
+  opacity: 0.8;
+}
+
 .selector-button__shore-input-limit > span:first-child {
   margin-right: 10px;
 }
