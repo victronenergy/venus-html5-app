@@ -53,7 +53,7 @@ export function objectValues(data) {
 
 export const isPathOfType = (dbusPath, enumObject) => {
   const paths = objectValues(enumObject)
-  return paths.indexOf(dbusPath) !== -1
+  return paths.includes(dbusPath)
 }
 
 export const arrayToSubscriptionMap = toSubscribe => {
