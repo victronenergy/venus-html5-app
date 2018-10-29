@@ -29,21 +29,23 @@ class ShoreInputLimitSelector extends Component {
     })
 
     return (
-      <div className="amperage-selector">
-        {amperageList.map(currentValue => {
-          return (
-            <button
-              className={
-                "selector-button selector-button__amperage text text--very-large" +
-                (parseInt(props.currentLimit) == currentValue ? " selector-button--active" : "")
-              }
-              href="#"
-              onClick={() => props.onLimitSelected(currentValue)}
-            >
-              {currentValue}
-            </button>
-          )
-        })}
+      <div className="amperage-selector__container">
+        <div className="amperage-selector">
+          {amperageList.map(currentValue => {
+            return (
+              <button
+                className={
+                  "selector-button selector-button__amperage text text--very-large" +
+                  (parseInt(props.currentLimit) == currentValue ? " selector-button--active" : "")
+                }
+                href="#"
+                onClick={() => props.onLimitSelected(currentValue)}
+              >
+                {currentValue}
+              </button>
+            )
+          })}
+        </div>
       </div>
     )
   }

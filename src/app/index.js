@@ -124,14 +124,12 @@ class App extends Component {
           </div>
         </header>
         {state.currentLimitSelectorVisible ? (
-          <div className="amperage-selector__container fixed--full-size">
-            <ShoreInputLimitSelector
-              currentLimit={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT]}
-              maxLimit={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT_MAX]}
-              productId={this.state[DBUS_PATHS.INVERTER_CHARGER.PRODUCT_ID]}
-              onLimitSelected={this.handleShorePowerLimitSelected}
-            />
-          </div>
+          <ShoreInputLimitSelector
+            currentLimit={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT]}
+            maxLimit={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT_MAX]}
+            productId={this.state[DBUS_PATHS.INVERTER_CHARGER.PRODUCT_ID]}
+            onLimitSelected={this.handleShorePowerLimitSelected}
+          />
         ) : (
           <div id="metrics-container">
             <div className="multi-metric-container">
