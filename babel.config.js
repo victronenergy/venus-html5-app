@@ -5,7 +5,8 @@ module.exports = {
       {
         targets: {
           chrome: "45"
-        }
+        },
+        useBuiltIns: "usage"
       }
     ]
   ],
