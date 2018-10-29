@@ -21,7 +21,6 @@ export const DBUS_PATHS = {
   // VE.Bus systems (Multis, Quattros, Inverters)
   INVERTER_CHARGER: {
     DC_LOADS: {
-      CURRENT: "/Dc/Vebus/Current", // charge/discharge current between battery and inverter/charger
       POWER: "/Dc/Vebus/Power"
     },
     AC_LOADS: {
