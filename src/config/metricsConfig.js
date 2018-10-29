@@ -3,24 +3,9 @@ import { DBUS_PATHS } from "../config/dbusPaths"
 
 export default {
   [DBUS_PATHS.BATTERY.VOLTAGE]: {},
-  [DBUS_PATHS.BATTERY.CURRENT]: {
-    description: "Current",
-    unit: "A",
-    formatter: numericFormatter(1),
-    timeout: 0
-  },
-  [DBUS_PATHS.BATTERY.POWER]: {
-    description: "Power",
-    unit: "W",
-    formatter: numericFormatter(),
-    timeout: 0
-  },
-  [DBUS_PATHS.BATTERY.SOC]: {
-    description: "State of charge",
-    unit: "%",
-    formatter: numericFormatter(),
-    timeout: 0
-  },
+  [DBUS_PATHS.BATTERY.CURRENT]: {},
+  [DBUS_PATHS.BATTERY.POWER]: {},
+  [DBUS_PATHS.BATTERY.SOC]: {},
   [DBUS_PATHS.INVERTER_CHARGER.DC_LOADS.POWER]: {},
   [DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_CURRENT_PHASE_1]: {},
   [DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_CURRENT_PHASE_2]: {},
