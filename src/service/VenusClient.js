@@ -99,6 +99,7 @@ class VenusClient {
   write(dbusPath, value) {
     const topic = this.venusSystem.getTopicFromDbusPath("W", dbusPath)
     let data = JSON.stringify({ value: value })
+    console.log("Write: ", topic, data)
     this.mqttClient.publish(topic, data)
   }
 
