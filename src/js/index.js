@@ -89,14 +89,11 @@ class App extends Component {
           </div>
         </header>
         {state.currentLimitSelectorVisible ? (
-          <div className="amperage-selector__container fixed--full-size">
-            <ShoreInputLimitSelector
-              toggle={this.state.toggleSelector}
-              shoreVoltage={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.VOLTAGE]}
-              deviceInterface={this.state.deviceInterface}
-              toggle={this.toggleCurrentLimitSelector}
-            />
-          </div>
+          <ShoreInputLimitSelector
+            shoreVoltage={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.VOLTAGE]}
+            deviceInterface={this.state.deviceInterface}
+            toggle={this.toggleCurrentLimitSelector}
+          />
         ) : (
           <div id="metrics-container">
             <div className="multi-metric-container">
@@ -194,21 +191,23 @@ class ShoreInputLimitSelector extends Component {
     const amperage = !shoreVoltage || shoreVoltage > 150 ? EUAmperage : USAmperage
 
     return (
-      <div className="amperage-selector">
-        {amperage.map(currentValue => {
-          return (
-            <button
-              className={
-                "selector-button selector-button__amperage text text--very-large" +
-                (parseInt(props.currentLimit) == currentValue ? " selector-button--active" : "")
-              }
-              href="#"
-              onClick={() => this.setAmperage(currentValue)}
-            >
-              {currentValue}
-            </button>
-          )
-        })}
+      <div className="amperage-selector__container">
+        <div className="amperage-selector">
+          {amperage.map(currentValue => {
+            return (
+              <button
+                className={
+                  "selector-button selector-button__amperage text text--very-large" +
+                  (parseInt(props.currentLimit) == currentValue ? " selector-button--active" : "")
+                }
+                href="#"
+                onClick={() => this.setAmperage(currentValue)}
+              >
+                {currentValue}
+              </button>
+            )
+          })}
+        </div>
       </div>
     )
   }
