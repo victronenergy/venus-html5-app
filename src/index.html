@@ -16,21 +16,38 @@
     <input type="button" value="Reload page" onclick="location.reload(true)" />
     <input type="button" value="Browser info" onclick="window.location.href = 'browser-info.html'" />
   </div>
+  <div id="debugLog" style="color: white; background-color: rgba(18, 26, 40, 1); max-height: 200px; overflow: scroll;"></div>
+  <script>
+    function getParameterByName(name, url) {
+      if (!url) url = window.location.href;
+      name = name.replace(/[\[\]]/g, '\\$&');
+      var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    if (getParameterByName('debug')) window.onerror = function (e) { alert(e) }
+  </script>
 </body>
 
 <script>
-  function getParameterByName(name, url) {
-    if (!url) url = window.location.href;
-    name = name.replace(/[\[\]]/g, '\\$&');
-    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-      results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+  function debugLogFn(msg) {
+    document.getElementById('debugLog').innerHTML += msg + "<br/>";
+    return false
+  }
+
+  function debug(name, url) {
+    console.log = debugLogFn
+    console.error = debugLogFn
+    document.getElementById("debugLog").style.display = "block"
   }
 
   (function () {
     if (getParameterByName('dev')) document.getElementById("devReload").style.display = "block"
+
+    if (getParameterByName('debug')) debug()
   })();
 </script>
 
