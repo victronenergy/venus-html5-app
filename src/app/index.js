@@ -26,10 +26,10 @@ const mqttUrl = `mqtt://${host}:${port}`
 
 class App extends Component {
   state = {
-    [DBUS_PATHS.BATTERY.VOLTAGE]: "--",
-    [DBUS_PATHS.BATTERY.CURRENT]: "--",
-    [DBUS_PATHS.BATTERY.POWER]: "--",
-    [DBUS_PATHS.BATTERY.SOC]: "--",
+    [DBUS_PATHS.BATTERY.VOLTAGE]: null,
+    [DBUS_PATHS.BATTERY.CURRENT]: null,
+    [DBUS_PATHS.BATTERY.POWER]: null,
+    [DBUS_PATHS.BATTERY.SOC]: null,
     [DBUS_PATHS.INVERTER_CHARGER.DC_LOADS.POWER]: null,
 
     [DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_CURRENT_PHASE_1]: null,
@@ -330,7 +330,13 @@ class MultiPlus extends Component {
 
 class Battery extends Component {
   render(props, state) {
-    const chargingState = parseInt(props.current) > 0 ? "Charging" : "Draining"
+    let chargingState
+    if (props.current === null) {
+      chargingState = ""
+    } else {
+      chargingState = props.current > 0 ? "% Charging" : "% Draining"
+    }
+
     return (
       <div className="metric metric__container metric__battery">
         <div className="metric__container--left">
@@ -339,15 +345,15 @@ class Battery extends Component {
             <p className="text text--medium">Battery</p>
             <div className="metric__values">
               <NumericValue value={props.voltage} unit="V" />
-              <Value value={props.current} connected={props.connected} />
-              <Value value={props.power} connected={props.connected} />
+              <NumericValue value={props.current} unit="A" precision={1} />
+              <NumericValue value={props.power} unit="W" />
             </div>
           </div>
         </div>
         <div className="metric__battery-level-container">
           <div className="text--bottom-align">
-            <p className="text text--bold">{parseInt(props.soc)}</p>
-            <p className="text text--very-small">% {chargingState}</p>
+            <p className="text text--bold">{props.soc ? props.soc : ""}</p>
+            <p className="text text--very-small">{chargingState}</p>
           </div>
         </div>
       </div>
