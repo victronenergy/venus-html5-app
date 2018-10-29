@@ -2,12 +2,7 @@ import { numericFormatter, systemModeFormatter, systemStateFormatter, acSourceFo
 import { DBUS_PATHS } from "../config/dbusPaths"
 
 export default {
-  [DBUS_PATHS.BATTERY.VOLTAGE]: {
-    description: "Voltage",
-    unit: "V",
-    formatter: numericFormatter(1),
-    timeout: 0
-  },
+  [DBUS_PATHS.BATTERY.VOLTAGE]: {},
   [DBUS_PATHS.BATTERY.CURRENT]: {
     description: "Current",
     unit: "A",
@@ -26,18 +21,7 @@ export default {
     formatter: numericFormatter(),
     timeout: 0
   },
-  [DBUS_PATHS.INVERTER_CHARGER.DC_LOADS.CURRENT]: {
-    description: "DC loads current",
-    unit: "A",
-    formatter: numericFormatter(1),
-    timeout: 0
-  },
-  [DBUS_PATHS.INVERTER_CHARGER.DC_LOADS.POWER]: {
-    description: "DC loads power",
-    unit: "W",
-    formatter: numericFormatter(),
-    timeout: 0
-  },
+  [DBUS_PATHS.INVERTER_CHARGER.DC_LOADS.POWER]: {},
   [DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_CURRENT_PHASE_1]: {},
   [DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_CURRENT_PHASE_2]: {},
   [DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_CURRENT_PHASE_3]: {},

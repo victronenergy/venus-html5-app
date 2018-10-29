@@ -30,8 +30,7 @@ class App extends Component {
     [DBUS_PATHS.BATTERY.CURRENT]: "--",
     [DBUS_PATHS.BATTERY.POWER]: "--",
     [DBUS_PATHS.BATTERY.SOC]: "--",
-    [DBUS_PATHS.INVERTER_CHARGER.DC_LOADS.CURRENT]: "--",
-    [DBUS_PATHS.INVERTER_CHARGER.DC_LOADS.POWER]: "--",
+    [DBUS_PATHS.INVERTER_CHARGER.DC_LOADS.POWER]: null,
 
     [DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_CURRENT_PHASE_1]: null,
     [DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_CURRENT_PHASE_2]: null,
@@ -196,9 +195,8 @@ class App extends Component {
                 }}
               />
               <DcLoads
-                current={this.state[DBUS_PATHS.INVERTER_CHARGER.DC_LOADS.CURRENT]}
+                batteryVoltage={this.state[DBUS_PATHS.BATTERY.VOLTAGE]}
                 power={this.state[DBUS_PATHS.INVERTER_CHARGER.DC_LOADS.POWER]}
-                connected={this.state.connected}
               />
             </div>
           </div>
@@ -340,7 +338,7 @@ class Battery extends Component {
           <div className="metric__value-container">
             <p className="text text--medium">Battery</p>
             <div className="metric__values">
-              <Value value={props.voltage} connected={props.connected} />
+              <NumericValue value={props.voltage} unit="V" />
               <Value value={props.current} connected={props.connected} />
               <Value value={props.power} connected={props.connected} />
             </div>
@@ -387,8 +385,8 @@ class DcLoads extends Component {
         <div className="metric__value-container">
           <p className="text text--medium">DC Loads</p>
           <div className="metric__values">
-            <Value value={props.current} connected={props.connected} />
-            <Value value={props.power} connected={props.connected} />
+            <NumericValue value={props.power / props.batteryVoltage} unit="A" precision={1} />
+            <NumericValue value={props.power} unit="W" />
           </div>
         </div>
       </div>
