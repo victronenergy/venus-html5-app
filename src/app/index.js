@@ -8,6 +8,7 @@ import "../css/styles.scss"
 import ActiveSource from "./components/ActiveSource"
 import ShoreInputLimitSelector from "./components/ShoreInputLimitSelector"
 import { SYSTEM_MODE } from "../service/topics"
+import NumericValue from "./components/NumericValue"
 
 const getParameterByName = (name, url) => {
   if (!url) url = window.location.href
@@ -31,9 +32,17 @@ class App extends Component {
     [DBUS_PATHS.BATTERY.SOC]: "--",
     [DBUS_PATHS.INVERTER_CHARGER.DC_LOADS.CURRENT]: "--",
     [DBUS_PATHS.INVERTER_CHARGER.DC_LOADS.POWER]: "--",
-    [DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.VOLTAGE]: "--",
-    [DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.CURRENT]: "--",
-    [DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.POWER]: "--",
+
+    [DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_CURRENT_PHASE_1]: null,
+    [DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_CURRENT_PHASE_2]: null,
+    [DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_CURRENT_PHASE_3]: null,
+    [DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_VOLTAGE_PHASE_1]: null,
+    [DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_VOLTAGE_PHASE_2]: null,
+    [DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_VOLTAGE_PHASE_3]: null,
+    [DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_POWER_PHASE_1]: null,
+    [DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_POWER_PHASE_2]: null,
+    [DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_POWER_PHASE_3]: null,
+
     [DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.VOLTAGE]: "--",
     [DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT]: "--",
     [DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT]: "--",
@@ -170,10 +179,21 @@ class App extends Component {
             />
             <div className="multi-metric-container">
               <AcLoads
-                voltage={this.state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.VOLTAGE]}
-                current={this.state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.CURRENT]}
-                power={this.state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.POWER]}
-                connected={this.state.connected}
+                current={{
+                  phase1: this.state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_CURRENT_PHASE_1],
+                  phase2: this.state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_CURRENT_PHASE_2],
+                  phase3: this.state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_CURRENT_PHASE_3]
+                }}
+                voltage={{
+                  phase1: this.state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_VOLTAGE_PHASE_1],
+                  phase2: this.state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_VOLTAGE_PHASE_2],
+                  phase3: this.state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_VOLTAGE_PHASE_3]
+                }}
+                power={{
+                  phase1: this.state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_POWER_PHASE_1],
+                  phase2: this.state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_POWER_PHASE_2],
+                  phase3: this.state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_POWER_PHASE_3]
+                }}
               />
               <DcLoads
                 current={this.state[DBUS_PATHS.INVERTER_CHARGER.DC_LOADS.CURRENT]}
@@ -345,9 +365,13 @@ class AcLoads extends Component {
         <div className="metric__value-container">
           <p className="text text--medium">AC Loads</p>
           <div className="metric__values">
-            <Value value={props.voltage} connected={props.connected} />
-            <Value value={props.current} connected={props.connected} />
-            <Value value={props.power} connected={props.connected} />
+            <NumericValue value={props.voltage.phase1} unit="V" />
+            <NumericValue
+              value={props.current.phase1 + props.current.phase2 + props.current.phase3}
+              unit="A"
+              precision={1}
+            />
+            <NumericValue value={props.power.phase1 + props.power.phase2 + props.power.phase3} unit={"W"} />
           </div>
         </div>
       </div>

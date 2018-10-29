@@ -25,13 +25,15 @@ export const DBUS_PATHS = {
       POWER: "/Dc/Vebus/Power"
     },
     AC_LOADS: {
-      CURRENT: "/Ac/Out/L1/I",
-      POWER: "/Ac/Out/L1/V",
-      VOLTAGE: "/Ac/Out/L1/P",
-
-      CONSUMPTION_OUTPUT_L1_POWER: "/Ac/ConsumptionOnOutput/L1/Power", // <- Use this for AC Consumption.
-      CONSUMPTION_OUTPUT_L2_POWER: "/Ac/ConsumptionOnOutput/L2/Power",
-      CONSUMPTION_OUTPUT_L3_POWER: "/Ac/ConsumptionOnOutput/L3/Power"
+      OUTPUT_CURRENT_PHASE_1: "/Ac/Out/L1/I",
+      OUTPUT_CURRENT_PHASE_2: "/Ac/Out/L2/I",
+      OUTPUT_CURRENT_PHASE_3: "/Ac/Out/L3/I",
+      OUTPUT_VOLTAGE_PHASE_1: "/Ac/Out/L1/P",
+      OUTPUT_VOLTAGE_PHASE_2: "/Ac/Out/L2/P",
+      OUTPUT_VOLTAGE_PHASE_3: "/Ac/Out/L3/P",
+      OUTPUT_POWER_PHASE_1: "/Ac/ConsumptionOnOutput/L1/Power",
+      OUTPUT_POWER_PHASE_2: "/Ac/ConsumptionOnOutput/L2/Power",
+      OUTPUT_POWER_PHASE_3: "/Ac/ConsumptionOnOutput/L3/Power"
     },
     PRODUCT_ID: "/ProductId",
     ACTIVE_INPUT: "/Ac/ActiveIn/ActiveInput", // Active input: 0 = ACin-1, 1 = ACin-2, 240 is none (inverting).

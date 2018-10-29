@@ -38,24 +38,15 @@ export default {
     formatter: numericFormatter(),
     timeout: 0
   },
-  [DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.VOLTAGE]: {
-    description: "AC loads voltage",
-    unit: "V",
-    formatter: numericFormatter(),
-    timeout: 0
-  },
-  [DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.CURRENT]: {
-    description: "AC loads current",
-    unit: "A",
-    formatter: numericFormatter(1),
-    timeout: 0
-  },
-  [DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.POWER]: {
-    description: "AC loads power",
-    unit: "W",
-    formatter: numericFormatter(),
-    timeout: 0
-  },
+  [DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_CURRENT_PHASE_1]: {},
+  [DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_CURRENT_PHASE_2]: {},
+  [DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_CURRENT_PHASE_3]: {},
+  [DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_VOLTAGE_PHASE_1]: {},
+  [DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_VOLTAGE_PHASE_2]: {},
+  [DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_VOLTAGE_PHASE_3]: {},
+  [DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_POWER_PHASE_1]: {},
+  [DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_POWER_PHASE_2]: {},
+  [DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_POWER_PHASE_3]: {},
   [DBUS_PATHS.INVERTER_CHARGER.SYSTEM.STATE]: {
     description: "System state",
     unit: "",
