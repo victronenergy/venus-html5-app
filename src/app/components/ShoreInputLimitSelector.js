@@ -23,8 +23,9 @@ class ShoreInputLimitSelector extends Component {
   }
 
   render(props, state) {
+    const maxLimit = props.maxLimit || 100
     const amperageList = this.getSuggestedAmperageValuesList(props.productId).filter(value => {
-      return value <= props.maxLimit
+      return value <= maxLimit
     })
 
     return (
