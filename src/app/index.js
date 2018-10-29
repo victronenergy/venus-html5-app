@@ -217,11 +217,10 @@ class ShoreInputLimit extends Component {
     if (!props.isAdjustable) {
       return (
         <div className="metric metric--small">
-          <div className="metric__value-container">
-            <span className="text text--medium">
-              Shore input limit <span className="text text--bold">{props.currentLimit}</span>
-            </span>
-          </div>
+          <button disabled className="selector-button selector-button__shore-input-limit selector-button--disabled">
+            <span className="text text--small">Shore input limit:</span>
+            <span className="text text--bold">{props.currentLimit}</span>
+          </button>
         </div>
       )
     }
@@ -275,12 +274,35 @@ class MultiPlus extends Component {
             {/*// TODO Should we add a button for inverter only as well?*/}
           </div>
         ) : (
-          <div className="metric__container--left metric__mode--readonly">
-            <div className="metric__value-container">
-              <div className="metric__values">
-                <p className="text">{props.activeMode}</p>
-              </div>
-            </div>
+          <div className="metrics-selector">
+            <button
+              disabled
+              className={
+                "selector-button selector-button--disabled  text" +
+                (props.activeMode == "ON" ? " selector-button--active" : "")
+              }
+            >
+              On
+            </button>
+            <button
+              disabled
+              className={
+                "selector-button selector-button--disabled text" +
+                (props.activeMode == "OFF" ? " selector-button--active" : "")
+              }
+            >
+              Off
+            </button>
+            <button
+              disabled
+              className={
+                "selector-button selector-button--disabled text" +
+                (props.activeMode == "Charger only" ? " selector-button--active" : "")
+              }
+            >
+              Charger only
+            </button>
+            {/*// TODO Should we add a button for inverter only as well?*/}
           </div>
         )}
       </div>

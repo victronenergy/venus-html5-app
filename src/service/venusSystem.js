@@ -129,13 +129,13 @@ class VenusSystem {
 
       switch (data.value) {
         case AC_SOURCE_TYPE.SHORE:
-          this.shorePowerInput = input
+          this.shorePowerInput = input + 1
           break
         case AC_SOURCE_TYPE.GENERATOR:
-          this.generatorInput = input
+          this.generatorInput = input + 1
           break
         case AC_SOURCE_TYPE.GRID:
-          this.gridInput = input
+          this.gridInput = input + 1
           break
       }
     }
