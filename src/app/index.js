@@ -118,7 +118,7 @@ class App extends Component {
           <div className="connection">
             <img src="./images/icons/connected.svg" className="connection__icon" />
             <p className="text text--very-small">{this.state.connected ? "Connected" : "Disconnected"}</p>
-            <a href={"http://" + host} className="remote-console text text--very-small" target="_blank">
+            <a href={"http://" + host} className="remote-console text text--very-small">
               Remote Console
             </a>
           </div>
