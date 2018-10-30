@@ -153,6 +153,14 @@ header {
   display: flex;
 }
 
+.disconnected {
+  .metric__values,
+  button span,
+  .text--bottom-align {
+    opacity: 0.5;
+  }
+}
+
 .value {
   width: 65px;
 

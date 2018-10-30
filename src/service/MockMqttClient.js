@@ -13,6 +13,7 @@ const getRandomValueFromArray = array => {
 
 export default class FakeMqttClient {
   onMessage = null // this is the function that 'sends data to the ui'
+  onConnect = null
   initialized = false
 
   initService(callbackFn) {
@@ -175,11 +176,12 @@ export default class FakeMqttClient {
 
   on(action, callback) {
     console.log(`on: ${action}`)
-    if (action === "connect" || action === "disconnect" || action === "reconnect") {
-      callback()
+    if (action === "connect") {
+      this.onConnect = callback
     } else if (action === "message" && !this.initialized) {
       this.initService(callback)
     } else if (action === "message" && !this.onMessage) {
+      this.onConnect()
       this.onMessage = callback
       setInterval(this.sendMockData, 2000)
     } else if (action === "message") {

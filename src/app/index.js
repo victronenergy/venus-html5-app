@@ -111,7 +111,7 @@ class App extends Component {
 
   render(props, state) {
     return (
-      <main>
+      <main className={!this.state.connected ? "disconnected" : ""}>
         <div className="bg fixed--full-size" />
         <header>
           <img src="./images/icons/logo.svg" className="logo" />
@@ -172,7 +172,6 @@ class App extends Component {
               voltage={this.state[DBUS_PATHS.BATTERY.VOLTAGE]}
               current={this.state[DBUS_PATHS.BATTERY.CURRENT]}
               power={this.state[DBUS_PATHS.BATTERY.POWER]}
-              connected={this.state.connected}
             />
             <div className="multi-metric-container">
               <AcLoads
@@ -218,9 +217,9 @@ class AcInput extends Component {
         <div className="metric__value-container">
           <p className="text text--medium">{props.acInput}</p>
           <div className="metric__values">
-            <Value value={props.voltage} connected={props.connected} />
-            <Value value={props.current} connected={props.connected} />
-            <Value value={props.power} connected={props.connected} />
+            <Value value={props.voltage} />
+            <Value value={props.current} />
+            <Value value={props.power} />
           </div>
         </div>
       </div>
@@ -271,13 +270,13 @@ class MultiPlus extends Component {
               className={"selector-button text" + (props.activeMode == "ON" ? " selector-button--active" : "")}
               onClick={() => props.onModeSelected(SYSTEM_MODE.ON)}
             >
-              On
+              <span>On</span>
             </button>
             <button
               className={"selector-button text" + (props.activeMode == "OFF" ? " selector-button--active" : "")}
               onClick={() => props.onModeSelected(SYSTEM_MODE.OFF)}
             >
-              Off
+              <span>Off</span>
             </button>
             <button
               className={
@@ -285,7 +284,7 @@ class MultiPlus extends Component {
               }
               onClick={() => props.onModeSelected(SYSTEM_MODE.CHARGER_ONLY)}
             >
-              Charger only
+              <span>Charger only</span>
             </button>
             {/*// TODO Should we add a button for inverter only as well?*/}
           </div>
