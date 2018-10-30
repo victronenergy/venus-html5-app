@@ -46,11 +46,27 @@ const conf = {
       },
       {
         test: /\.jpe?g$|\.gif$|\.png$/i,
-        loader: "file-loader?name=/images/[name].[ext]"
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "[name].[ext]",
+              outputPath: "images"
+            }
+          }
+        ]
       },
       {
-        test: /\.ttf$/,
-        loader: "file-loader?name=/fonts/[name].[ext]"
+        test: /\.ttf$|\.woff2?$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "[name].[ext]",
+              outputPath: "fonts"
+            }
+          }
+        ]
       }
     ]
   }
