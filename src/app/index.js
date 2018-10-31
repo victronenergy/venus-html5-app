@@ -30,6 +30,7 @@ class App extends Component {
     [DBUS_PATHS.BATTERY.CURRENT]: null,
     [DBUS_PATHS.BATTERY.POWER]: null,
     [DBUS_PATHS.BATTERY.SOC]: null,
+    [DBUS_PATHS.BATTERY.STATE]: null,
     [DBUS_PATHS.INVERTER_CHARGER.DC_LOADS.POWER]: null,
 
     [DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_CURRENT_PHASE_1]: null,
@@ -169,6 +170,7 @@ class App extends Component {
             />
             <Battery
               soc={this.state[DBUS_PATHS.BATTERY.SOC]}
+              state={this.state[DBUS_PATHS.BATTERY.STATE]}
               voltage={this.state[DBUS_PATHS.BATTERY.VOLTAGE]}
               current={this.state[DBUS_PATHS.BATTERY.CURRENT]}
               power={this.state[DBUS_PATHS.BATTERY.POWER]}
@@ -327,13 +329,6 @@ class MultiPlus extends Component {
 
 class Battery extends Component {
   render(props, state) {
-    let chargingState
-    if (props.current === null) {
-      chargingState = ""
-    } else {
-      chargingState = props.current > 0 ? "% Charging" : "% Draining"
-    }
-
     return (
       <div className="metric metric__container metric__battery">
         <div className="metric__container--left">
@@ -350,7 +345,11 @@ class Battery extends Component {
         <div className="metric__battery-level-container">
           <div className="text--bottom-align">
             <p className="text text--bold">{props.soc ? props.soc : ""}</p>
-            <p className="text text--very-small">{chargingState}</p>
+            <p className="text text--very-small">
+              {props.soc ? "%" : ""}
+              &nbsp;
+              {props.state || ""}
+            </p>
           </div>
         </div>
       </div>
