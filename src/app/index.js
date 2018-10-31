@@ -336,7 +336,7 @@ class Battery extends Component {
           <div className="metric__value-container">
             <p className="text text--medium">Battery</p>
             <div className="metric__values">
-              <NumericValue value={props.voltage} unit="V" />
+              <NumericValue value={props.voltage} unit="V" precision={1} />
               <NumericValue value={props.current} unit="A" precision={1} />
               <NumericValue value={props.power} unit="W" />
             </div>
@@ -344,8 +344,8 @@ class Battery extends Component {
         </div>
         <div className="metric__battery-level-container">
           <div className="text--bottom-align">
-            <p className="text text--bold">{props.soc ? props.soc : ""}</p>
-            <p className="text text--very-small">
+            <p className="text text--bold text--large">{props.soc ? props.soc : ""}</p>
+            <p className="text text--small">
               {props.soc ? "%" : ""}
               &nbsp;
               {props.state || ""}

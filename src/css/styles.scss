@@ -90,7 +90,7 @@ header {
 .metric {
   margin-bottom: 40px;
   height: 150px;
-  padding: 33px 33px 33px 40px;
+  padding: 33px 40px 33px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -100,12 +100,12 @@ header {
 
   @media #{$wide} {
     height: 100px;
-    padding: 20px 20px 20px 40px;
+    padding: 20px 40px 20px 40px;
   }
 
   @media #{$regular} {
     height: 80px;
-    padding: 17px 17px 17px 35px;
+    padding: 17px 35px 17px 35px;
   }
 }
 
@@ -178,7 +178,7 @@ header {
   }
 
   @media #{$regular} {
-    widows: 45px;
+    width: 45px;
   }
 }
 
