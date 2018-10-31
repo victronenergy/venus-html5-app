@@ -25,6 +25,20 @@
   }
 }
 
+.text--large {
+  color: white;
+  font-weight: 400;
+  font-size: 35px;
+
+  @media #{$wide} {
+    font-size: 25px;
+  }
+
+  @media #{$regular} {
+    font-size: 20px;
+  }
+}
+
 .text--very-large {
   font-size: 60px;
 
