@@ -8,7 +8,7 @@
     "dev-compile": "npx webpack -w --mode=development",
     "dev-compile:mocked": "npx webpack -w --mode=development --mocked",
     "clean": "rm -rf dist",
-    "compile": "npm run clean && npx webpack",
+    "compile": "npm run clean && npx webpack --mode=production",
     "test": "jest --config jestconfig.json",
     "format": "prettier --write \"src/**/*.js\" \"test/**/*.js\""
   },
@@ -25,6 +25,7 @@
     "copy-webpack-plugin": "^4.5.3",
     "css-loader": "^1.0.0",
     "file-loader": "^2.0.0",
+    "html-webpack-plugin": "^3.2.0",
     "jest": "^23.6.0",
     "live-server": "^1.2.0",
     "mqtt": "^2.18.3",

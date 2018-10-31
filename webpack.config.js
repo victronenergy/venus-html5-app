@@ -1,4 +1,5 @@
 const CopyWebpackPlugin = require("copy-webpack-plugin")
+const HtmlWebpackPlugin = require("html-webpack-plugin")
 const webpack = require("webpack")
 const path = require("path")
 
@@ -6,13 +7,16 @@ const conf = {
   entry: path.resolve(__dirname, "src/app/index.js"),
   output: {
     path: path.resolve(__dirname, "dist/"),
-    filename: "bundle.js"
+    filename: "bundle.[contenthash].js"
   },
   plugins: [
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, "src/index.html"),
+      filename: path.resolve(__dirname, "dist/index.html")
+    }),
     new CopyWebpackPlugin(
       [
         { from: path.resolve(__dirname, "src/images/"), to: path.resolve(__dirname, "dist/images") },
-        { from: path.resolve(__dirname, "src/index.html"), to: path.resolve(__dirname, "dist/") },
         { from: path.resolve(__dirname, "src/browser-info.html"), to: path.resolve(__dirname, "dist/") }
       ],
       {}
