@@ -1,4 +1,5 @@
 import * as mqtt from "mqtt"
+import { MqttClient } from "mqtt"
 import { TOPICS } from "./topics"
 import { DBUS_PATHS } from "../config/dbusPaths"
 import { parseMessage, arrayToSubscriptionMap } from "./util"
@@ -42,16 +43,12 @@ class VenusClient {
    * @private
    */
   venusSystem
+  keepAliveHandlerRef = null
   onMessage = () => {}
   onConnectionChanged = () => {}
 
   constructor(host) {
-    this.mqttClient = USE_MOCK_MQTT
-      ? new MockMqttClient()
-      : mqtt.connect(
-          host,
-          { keepalive: 10 }
-        )
+    this.mqttClient = USE_MOCK_MQTT ? new MockMqttClient() : mqtt.connect(host)
     this.venusSystem = new VenusSystem()
     window.onunload = () => {
       this.mqttClient.end()
@@ -71,26 +68,16 @@ class VenusClient {
       })
 
       this.mqttClient.on("connect", () => {
+        this.setupKeepAlive()
         this.onConnectionChanged({ connected: true })
       })
 
       this.mqttClient.on("disconnect", () => {
+        clearInterval(this.keepAliveHandlerRef)
         this.onConnectionChanged({ connected: false })
       })
 
       this.mqttClient.on("reconnect", () => {
-        this.onConnectionChanged({ connected: false })
-      })
-
-      this.mqttClient.on("end", () => {
-        this.onConnectionChanged({ connected: false })
-      })
-
-      this.mqttClient.on("close", () => {
-        this.onConnectionChanged({ connected: false })
-      })
-
-      this.mqttClient.on("offline", () => {
         this.onConnectionChanged({ connected: false })
       })
 
@@ -116,10 +103,21 @@ class VenusClient {
     this.mqttClient.publish(topic, data)
   }
 
+  /**
+   * Send a read message every 50s to keep the MQTT broker alive
+   */
+  setupKeepAlive() {
+    clearInterval(this.keepAliveHandlerRef)
+    this.keepAliveHandlerRef = setInterval(() => {
+      const topic = this.venusSystem.getTopicFromDbusPath("R", DBUS_PATHS.GENERAL.SERIAL)
+      this.mqttClient.publish(topic, "")
+    }, 50000)
+  }
+
   subscribe = dbusPaths => {
     this.mqttClient.on("message", (topic, message) => {
       const clientMessage = parseMessage(topic, message)
-      // console.log("Received message:", topic, clientMessage.value)
+      console.log("Received message:", topic, clientMessage.value)
       this.onMessage(clientMessage)
     })
 
