@@ -35,17 +35,8 @@ export default class FakeMqttClient {
     this.sendMockActiveSource()
     this.sendMockShorePowerLimits()
     this.sendMockSystemStatus()
+    this.sendMockBatteryInfo()
 
-    this.onMessage(
-      `N/mockPortalId/system/0${DBUS_PATHS.BATTERY.VOLTAGE}`,
-      JSON.stringify({ value: Math.random() * 100 })
-    )
-    this.onMessage(
-      `N/mockPortalId/system/0${DBUS_PATHS.BATTERY.CURRENT}`,
-      JSON.stringify({ value: Math.random() * 100 })
-    )
-    this.onMessage(`N/mockPortalId/system/0${DBUS_PATHS.BATTERY.POWER}`, JSON.stringify({ value: Math.random() * 100 }))
-    this.onMessage(`N/mockPortalId/system/0${DBUS_PATHS.BATTERY.SOC}`, JSON.stringify({ value: Math.random() * 100 }))
     this.onMessage(
       `N/mockPortalId/system/0${DBUS_PATHS.INVERTER_CHARGER.DC_LOADS.CURRENT}`,
       JSON.stringify({ value: Math.random() * 100 })
@@ -145,6 +136,20 @@ export default class FakeMqttClient {
       `N/mockPortalId/system/0${DBUS_PATHS.INVERTER_CHARGER.SYSTEM.STATE}`,
       JSON.stringify(getRandomValueFromArray(Object.values(VEBUS_SYSTEM_STATE).map(mode => ({ value: mode }))))
     )
+  }
+
+  sendMockBatteryInfo() {
+    this.onMessage(
+      `N/mockPortalId/system/0${DBUS_PATHS.BATTERY.VOLTAGE}`,
+      JSON.stringify({ value: Math.random() * 100 })
+    )
+    this.onMessage(
+      `N/mockPortalId/system/0${DBUS_PATHS.BATTERY.CURRENT}`,
+      JSON.stringify({ value: Math.random() * 100 })
+    )
+    this.onMessage(`N/mockPortalId/system/0${DBUS_PATHS.BATTERY.POWER}`, JSON.stringify({ value: Math.random() * 100 }))
+    this.onMessage(`N/mockPortalId/system/0${DBUS_PATHS.BATTERY.SOC}`, JSON.stringify({ value: getRandomInt(100) }))
+    this.onMessage(`N/mockPortalId/system/0${DBUS_PATHS.BATTERY.STATE}`, JSON.stringify({ value: getRandomInt(3) }))
   }
 
   sendMockNumber(path) {

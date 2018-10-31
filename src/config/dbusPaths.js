@@ -8,10 +8,10 @@ export const DBUS_PATHS = {
     POWER: "/Dc/Battery/Power",
     VOLTAGE: "/Dc/Battery/Voltage",
     SOC: "/Dc/Battery/Soc", // State of charge
+    STATE: "/Dc/Battery/State",
 
     CIRCUIT_BREAKER_ALARM: "/Dc/Battery/Alarms/CircuitBreakerTripped", //<- Something special
     CONSUMED_AMP_HOURRS: "/Dc/Battery/ConsumedAmphours",
-    STATE: "/Dc/Battery/State",
     TIME_TO_GO: "/Dc/Battery/TimeToGo"
   },
   SOLAR_CHARGERS: {

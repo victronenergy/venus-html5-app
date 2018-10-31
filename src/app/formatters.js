@@ -1,3 +1,5 @@
+import { BATTERY_STATE } from "../service/topics"
+
 function numericFormatter(precision = 0, factor = 1.0, defaultValue = "--") {
   return value => {
     if (!value) {
@@ -33,4 +35,15 @@ function systemModeFormatter(value) {
   return "--"
 }
 
-export { numericFormatter, systemModeFormatter, systemStateFormatter }
+function batteryStateFormatter(value) {
+  switch (value) {
+    case BATTERY_STATE.CHARGING:
+      return "Charging"
+    case BATTERY_STATE.DISCHARGING:
+      return "Discharging"
+    case BATTERY_STATE.IDLE:
+      return "Idle"
+  }
+}
+
+export { numericFormatter, systemModeFormatter, systemStateFormatter, batteryStateFormatter }
