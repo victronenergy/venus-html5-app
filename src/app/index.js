@@ -114,7 +114,7 @@ class App extends Component {
       <main className={!this.state.connected ? "disconnected" : ""}>
         <div className="bg fixed--full-size" />
         <header>
-          <img src="./images/icons/logo.svg" className="logo" />
+          <img src="./images/icons/logo.png" className="logo" />
           <div className="connection">
             <img src="./images/icons/connected.svg" className="connection__icon" />
             <p className="text text--very-small">{this.state.connected ? "Connected" : "Disconnected"}</p>
