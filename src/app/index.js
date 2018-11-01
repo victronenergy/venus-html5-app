@@ -116,7 +116,6 @@ class App extends Component {
   render(props, state) {
     return (
       <main className={!this.state.connected ? "disconnected" : ""}>
-        <div className="bg fixed--full-size" />
         <header>
           <img src="./images/icons/logo.png" className="logo" />
           <div className="connection">
