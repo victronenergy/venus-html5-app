@@ -1,6 +1,8 @@
 import * as mqtt from "mqtt"
 import VenusClient from "../src/service/VenusClient"
 
+global.USE_MOCK_MQTT = false
+
 class MockClient {
   callbacks = {}
 
@@ -34,6 +36,8 @@ test("should subscribe to details about the system on connect", () => {
   mockClient.notifyClientConnected()
   expect(mockClient.subscribe.mock.calls[0][0]).toEqual({
     "N/+/system/0/Serial": 0,
-    "N/+/+/+/DeviceInstance": 0
+    "N/+/+/+/DeviceInstance": 0,
+    "N/+/settings/+/Settings/SystemSetup/AcInput1": 0,
+    "N/+/settings/+/Settings/SystemSetup/AcInput2": 0
   })
 })
