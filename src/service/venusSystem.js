@@ -18,9 +18,13 @@ class VenusSystem {
   systemInstanceId = null
   acInput1 = null
   acInput2 = null
-  shorePowerInput = null
+
+  /**
+   * "Shore" and "Grid" are just different names for the same thing
+   * "Shore" is for boats and "Grid" is for land based systems
+   */
+  shoreOrGridPowerInput = null
   generatorInput = null
-  gridInput = null
   equipment
 
   constructor() {
@@ -55,7 +59,7 @@ class VenusSystem {
     if (SERVICES.SYSTEM.includes(dbusPath)) {
       return `${type}/${this.portalId}/system/${this.systemInstanceId}${dbusPath}`
     } else if (SERVICES.SHORE_POWER.includes(dbusPath)) {
-      return `${type}/${this.portalId}/vebus/${this.vebusInstanceId}/Ac/In/${this.shorePowerInput}${dbusPath}`
+      return `${type}/${this.portalId}/vebus/${this.vebusInstanceId}/Ac/In/${this.shoreOrGridPowerInput}${dbusPath}`
     } else if (SERVICES.VEBUS.includes(dbusPath)) {
       return `${type}/${this.portalId}/vebus/${this.vebusInstanceId}${dbusPath}`
     } else if (SERVICES.SETTINGS.includes(dbusPath)) {
@@ -129,13 +133,13 @@ class VenusSystem {
 
       switch (data.value) {
         case AC_SOURCE_TYPE.SHORE:
-          this.shorePowerInput = input + 1
+        case AC_SOURCE_TYPE.GRID:
+          this.shoreOrGridPowerInput = input + 1
           break
         case AC_SOURCE_TYPE.GENERATOR:
           this.generatorInput = input + 1
           break
-        case AC_SOURCE_TYPE.GRID:
-          this.gridInput = input + 1
+        default:
           break
       }
     }
