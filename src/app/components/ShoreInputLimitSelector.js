@@ -41,7 +41,7 @@ class ShoreInputLimitSelector extends Component {
                 href="#"
                 onClick={() => props.onLimitSelected(currentValue)}
               >
-                {currentValue}
+                {currentValue}A
               </button>
             )
           })}
