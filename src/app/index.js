@@ -136,6 +136,13 @@ class App extends Component {
           />
         ) : (
           <div id="metrics-container">
+            <Battery
+              soc={this.state[DBUS_PATHS.BATTERY.SOC]}
+              state={this.state[DBUS_PATHS.BATTERY.STATE]}
+              voltage={this.state[DBUS_PATHS.BATTERY.VOLTAGE]}
+              current={this.state[DBUS_PATHS.BATTERY.CURRENT]}
+              power={this.state[DBUS_PATHS.BATTERY.POWER]}
+            />
             <div className="multi-metric-container">
               <ActiveSource
                 activeInput={this.state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_INPUT]}
@@ -170,13 +177,6 @@ class App extends Component {
               activeMode={this.state[DBUS_PATHS.INVERTER_CHARGER.SYSTEM.MODE]}
               isAdjustable={this.state[DBUS_PATHS.INVERTER_CHARGER.SYSTEM.MODE_IS_ADJUSTABLE]}
               onModeSelected={this.handleModeSelected}
-            />
-            <Battery
-              soc={this.state[DBUS_PATHS.BATTERY.SOC]}
-              state={this.state[DBUS_PATHS.BATTERY.STATE]}
-              voltage={this.state[DBUS_PATHS.BATTERY.VOLTAGE]}
-              current={this.state[DBUS_PATHS.BATTERY.CURRENT]}
-              power={this.state[DBUS_PATHS.BATTERY.POWER]}
             />
             <div className="multi-metric-container">
               <AcLoads
