@@ -6,6 +6,7 @@ import "../css/texts.scss"
 import "../css/styles.scss"
 
 import ActiveSource from "./components/ActiveSource"
+import ShoreInputLimit from "./components/ShoreInputLimit"
 import ShoreInputLimitSelector from "./components/ShoreInputLimitSelector"
 import { SYSTEM_MODE } from "../service/topics"
 import NumericValue from "./components/NumericValue"
@@ -63,7 +64,7 @@ class App extends Component {
     [DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.POWER_PHASE_2]: null,
     [DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.POWER_PHASE_3]: null,
 
-    [DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT]: null,
+    [DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT]: "--",
     [DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT_IS_ADJUSTABLE]: null,
     [DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT_MAX]: null,
     [DBUS_PATHS.INVERTER_CHARGER.PRODUCT_ID]: null,
@@ -86,7 +87,7 @@ class App extends Component {
       }
 
       const formattedValue = metric.formatter ? metric.formatter(value) : value
-      this.setState({ [path]: metric.unit ? formattedValue + metric.unit : formattedValue })
+      this.setState({ [path]: metric.unit && formattedValue !== "--" ? formattedValue + metric.unit : formattedValue })
     }
 
     this.deviceInterface.onConnectionChanged = ({ connected }) => {
@@ -224,30 +225,6 @@ class AcInput extends Component {
             <Value value={props.power} />
           </div>
         </div>
-      </div>
-    )
-  }
-}
-
-class ShoreInputLimit extends Component {
-  render(props, state) {
-    if (!props.isAdjustable) {
-      return (
-        <div className="metric metric--small">
-          <button disabled className="selector-button selector-button__shore-input-limit selector-button--disabled">
-            <span className="text text--small">Shore input limit:</span>
-            <span className="text text--bold">{props.currentLimit}</span>
-          </button>
-        </div>
-      )
-    }
-
-    return (
-      <div className="metric metric--small">
-        <button className="selector-button selector-button__shore-input-limit" onclick={props.onSelectShoreLimitClick}>
-          <span className="text text--small">Select shore input limit:</span>
-          <span className="text text--bold">{props.currentLimit}</span>
-        </button>
       </div>
     )
   }
