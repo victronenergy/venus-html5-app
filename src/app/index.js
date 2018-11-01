@@ -8,8 +8,10 @@ import "../css/styles.scss"
 import ActiveSource from "./components/ActiveSource"
 import ShoreInputLimit from "./components/ShoreInputLimit"
 import ShoreInputLimitSelector from "./components/ShoreInputLimitSelector"
-import { SYSTEM_MODE } from "../service/topics"
-import NumericValue from "./components/NumericValue"
+import InverterCharger from "./components/InverterCharger"
+import Battery from "./components/Battery"
+import AcLoads from "./components/AcLoads"
+import DcLoads from "./components/DcLoads"
 
 const getParameterByName = (name, url) => {
   if (!url) url = window.location.href
@@ -163,7 +165,7 @@ class App extends Component {
                 onSelectShoreLimitClick={this.toggleCurrentLimitSelector}
               />
             </div>
-            <MultiPlus
+            <InverterCharger
               state={this.state[DBUS_PATHS.INVERTER_CHARGER.SYSTEM.STATE]}
               activeMode={this.state[DBUS_PATHS.INVERTER_CHARGER.SYSTEM.MODE]}
               isAdjustable={this.state[DBUS_PATHS.INVERTER_CHARGER.SYSTEM.MODE_IS_ADJUSTABLE]}
@@ -202,173 +204,6 @@ class App extends Component {
           </div>
         )}
       </main>
-    )
-  }
-}
-
-class Value extends Component {
-  render(props, state) {
-    return <p className="value text">{props.value}</p>
-  }
-}
-
-class AcInput extends Component {
-  render(props, state) {
-    return (
-      <div className="metric metric--small">
-        <img src="./images/icons/shore-power.svg" className="metric__icon" />
-        <div className="metric__value-container">
-          <p className="text text--medium">{props.acInput}</p>
-          <div className="metric__values">
-            <Value value={props.voltage} />
-            <Value value={props.current} />
-            <Value value={props.power} />
-          </div>
-        </div>
-      </div>
-    )
-  }
-}
-
-class MultiPlus extends Component {
-  render(props, state) {
-    return (
-      <div className="metric metric__container">
-        <div className="metric__container--left">
-          <img src="./images/icons/multiplus.svg" className="metric__icon" />
-          <div className="metric__value-container">
-            <p className="text text--medium">Inverter/charger</p>
-            <div className="metric__values">
-              <p className="text">{props.state}</p>
-            </div>
-          </div>
-        </div>
-        {props.isAdjustable ? (
-          <div className="metrics-selector">
-            <button
-              className={"selector-button text" + (props.activeMode == "ON" ? " selector-button--active" : "")}
-              onClick={() => props.onModeSelected(SYSTEM_MODE.ON)}
-            >
-              <span>On</span>
-            </button>
-            <button
-              className={"selector-button text" + (props.activeMode == "OFF" ? " selector-button--active" : "")}
-              onClick={() => props.onModeSelected(SYSTEM_MODE.OFF)}
-            >
-              <span>Off</span>
-            </button>
-            <button
-              className={
-                "selector-button text" + (props.activeMode == "Charger only" ? " selector-button--active" : "")
-              }
-              onClick={() => props.onModeSelected(SYSTEM_MODE.CHARGER_ONLY)}
-            >
-              <span>Charger only</span>
-            </button>
-            {/*// TODO Should we add a button for inverter only as well?*/}
-          </div>
-        ) : (
-          <div className="metrics-selector">
-            <button
-              disabled
-              className={
-                "selector-button selector-button--disabled  text" +
-                (props.activeMode == "ON" ? " selector-button--active" : "")
-              }
-            >
-              On
-            </button>
-            <button
-              disabled
-              className={
-                "selector-button selector-button--disabled text" +
-                (props.activeMode == "OFF" ? " selector-button--active" : "")
-              }
-            >
-              Off
-            </button>
-            <button
-              disabled
-              className={
-                "selector-button selector-button--disabled text" +
-                (props.activeMode == "Charger only" ? " selector-button--active" : "")
-              }
-            >
-              Charger only
-            </button>
-            {/*// TODO Should we add a button for inverter only as well?*/}
-          </div>
-        )}
-      </div>
-    )
-  }
-}
-
-class Battery extends Component {
-  render(props, state) {
-    return (
-      <div className="metric metric__container metric__battery">
-        <div className="metric__container--left">
-          <img src="./images/icons/battery.svg" className="metric__icon" />
-          <div className="metric__value-container">
-            <p className="text text--medium">Battery</p>
-            <div className="metric__values">
-              <NumericValue value={props.voltage} unit="V" precision={1} />
-              <NumericValue value={props.current} unit="A" precision={1} />
-              <NumericValue value={props.power} unit="W" />
-            </div>
-          </div>
-        </div>
-        <div className="metric__battery-level-container">
-          <div className="text--bottom-align">
-            <p className="text text--bold text--large">{props.soc ? props.soc : ""}</p>
-            <p className="text text--small">
-              {props.soc ? "%" : ""}
-              &nbsp;
-              {props.state || ""}
-            </p>
-          </div>
-        </div>
-      </div>
-    )
-  }
-}
-
-class AcLoads extends Component {
-  render(props, state) {
-    return (
-      <div className="metric metric--small">
-        <img src="./images/icons/ac.svg" className="metric__icon" />
-        <div className="metric__value-container">
-          <p className="text text--medium">AC Loads</p>
-          <div className="metric__values">
-            <NumericValue value={props.voltage.phase1} unit="V" />
-            <NumericValue
-              value={props.current.phase1 + props.current.phase2 + props.current.phase3}
-              unit="A"
-              precision={1}
-            />
-            <NumericValue value={props.power.phase1 + props.power.phase2 + props.power.phase3} unit={"W"} />
-          </div>
-        </div>
-      </div>
-    )
-  }
-}
-
-class DcLoads extends Component {
-  render(props, state) {
-    return (
-      <div className="metric metric--small">
-        <img src="./images/icons/dc.svg" className="metric__icon" />
-        <div className="metric__value-container">
-          <p className="text text--medium">DC Loads</p>
-          <div className="metric__values">
-            <NumericValue value={props.power / props.batteryVoltage} unit="A" precision={1} />
-            <NumericValue value={props.power} unit="W" />
-          </div>
-        </div>
-      </div>
     )
   }
 }
