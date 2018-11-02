@@ -20,7 +20,8 @@ body {
   }
 }
 
-html, body {
+html,
+body {
   background-color: #2e3745;
 }
 
@@ -265,6 +266,12 @@ header {
   height: 55px;
   width: calc(50% - 45px);
 
+  &--col {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
   @media #{$wide} {
     width: calc(50% - 40px);
   }
@@ -279,7 +286,7 @@ header {
   align-items: flex-end;
 }
 
-.text--bottom-align > p {
+.text--bottom-align > .text--large {
   line-height: 1;
 }
 

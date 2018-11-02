@@ -34,6 +34,7 @@ class App extends Component {
     [DBUS_PATHS.BATTERY.POWER]: null,
     [DBUS_PATHS.BATTERY.SOC]: null,
     [DBUS_PATHS.BATTERY.STATE]: null,
+    [DBUS_PATHS.BATTERY.TIME_TO_GO]: null,
     [DBUS_PATHS.INVERTER_CHARGER.DC_LOADS.POWER]: null,
 
     [DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_CURRENT_PHASE_1]: null,
@@ -138,6 +139,7 @@ class App extends Component {
               voltage={this.state[DBUS_PATHS.BATTERY.VOLTAGE]}
               current={this.state[DBUS_PATHS.BATTERY.CURRENT]}
               power={this.state[DBUS_PATHS.BATTERY.POWER]}
+              timeToGo={this.state[DBUS_PATHS.BATTERY.TIME_TO_GO]}
             />
             <div className="multi-metric-container">
               <ActiveSource
