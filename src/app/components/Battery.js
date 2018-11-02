@@ -21,12 +21,12 @@ class Battery extends Component {
           className={"metric__battery-level-container" + (showTimetoGo ? " metric__battery-level-container--col" : "")}
         >
           <div className="text--bottom-align">
-            <p className="text text--bold text--large">{props.soc ? props.soc : ""}</p>
-            <p className="text text--small metric__battery-state">
+            <span className="text text--bold text--large">{props.soc ? props.soc : ""}</span>
+            <span className="text text--small metric__battery-state">
               {props.soc ? "%" : ""}
               &nbsp;
-              {!showTimetoGo ? props.state || "" : ""}
-            </p>
+              {props.state || ""}
+            </span>
           </div>
           {showTimetoGo && props.timeToGo ? <p className="text text--small">{props.timeToGo}</p> : ""}
         </div>
