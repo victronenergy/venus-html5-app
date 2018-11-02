@@ -150,6 +150,10 @@ export default class FakeMqttClient {
     this.onMessage(`N/mockPortalId/system/0${DBUS_PATHS.BATTERY.POWER}`, JSON.stringify({ value: Math.random() * 100 }))
     this.onMessage(`N/mockPortalId/system/0${DBUS_PATHS.BATTERY.SOC}`, JSON.stringify({ value: getRandomInt(100) }))
     this.onMessage(`N/mockPortalId/system/0${DBUS_PATHS.BATTERY.STATE}`, JSON.stringify({ value: getRandomInt(3) }))
+    this.onMessage(
+      `N/mockPortalId/system/0${DBUS_PATHS.BATTERY.TIME_TO_GO}`,
+      JSON.stringify({ value: getRandomInt(150000) })
+    )
   }
 
   sendMockNumber(path) {

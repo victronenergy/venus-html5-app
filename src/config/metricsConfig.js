@@ -1,4 +1,10 @@
-import { numericFormatter, systemModeFormatter, systemStateFormatter, batteryStateFormatter } from "../app/formatters"
+import {
+  numericFormatter,
+  systemModeFormatter,
+  systemStateFormatter,
+  batteryStateFormatter,
+  batteryTimeToGoFormatter
+} from "../app/formatters"
 import { DBUS_PATHS } from "../config/dbusPaths"
 
 export default {
@@ -8,6 +14,9 @@ export default {
   [DBUS_PATHS.BATTERY.SOC]: {},
   [DBUS_PATHS.BATTERY.STATE]: {
     formatter: batteryStateFormatter
+  },
+  [DBUS_PATHS.BATTERY.TIME_TO_GO]: {
+    formatter: batteryTimeToGoFormatter
   },
   [DBUS_PATHS.INVERTER_CHARGER.DC_LOADS.POWER]: {},
   [DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_CURRENT_PHASE_1]: {},
