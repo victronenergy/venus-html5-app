@@ -5,3 +5,7 @@ $regular: "all and (max-width: 1279px)";
 $narrow: "all and (max-width: 1023px)";
 $very-narrow: "all and (max-width: 800px)";
 $minimum: "all and (max-width: 600px)";
+
+$short: "all and (max-height: 500px)";
+
+$shortAndNarrow: "all and (max-height: 500px) and (max-width: 600px)"
