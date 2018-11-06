@@ -14,8 +14,8 @@ class ShoreInputLimit extends Component {
     }
 
     return (
-      <div className="metric metric--small">
-        <button className="selector-button selector-button__shore-input-limit" onclick={props.onSelectShoreLimitClick}>
+      <div className="metric metric--small metric--shore-input-limit">
+        <button className="selector-button" onclick={props.onSelectShoreLimitClick}>
           <span className="text text--small">Select shore input limit:&nbsp;</span>
           <span className="text text--bold">{props.currentLimit}</span>
         </button>

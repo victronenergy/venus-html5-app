@@ -31,6 +31,10 @@
   @media #{$short} {
     font-size: 12px;
   }
+
+  @media #{$veryShortAndNarrow} {
+    font-size: 10px;
+  }
 }
 
 .text--large {
@@ -44,6 +48,10 @@
 
   @media #{$regular} {
     font-size: 20px;
+  }
+
+  @media #{$veryShortAndNarrow} {
+    font-size: 14px;
   }
 }
 
@@ -64,6 +72,10 @@
 
   @media #{$short} {
     font-size: 28px;
+  }
+
+  @media #{$veryShortAndNarrow} {
+    font-size: 20px;
   }
 }
 

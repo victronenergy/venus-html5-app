@@ -45,18 +45,16 @@ export default class FakeMqttClient {
       `N/mockPortalId/system/0${DBUS_PATHS.INVERTER_CHARGER.DC_LOADS.POWER}`,
       JSON.stringify({ value: Math.random() * 100 })
     )
-    this.onMessage(
-      `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.VOLTAGE}`,
-      JSON.stringify({ value: Math.random() * 100 })
-    )
-    this.onMessage(
-      `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.CURRENT}`,
-      JSON.stringify({ value: Math.random() * 100 })
-    )
-    this.onMessage(
-      `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.POWER}`,
-      JSON.stringify({ value: Math.random() * 100 })
-    )
+
+    this.sendMockNumber(`N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_CURRENT_PHASE_1}`)
+    this.sendMockNumber(`N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_CURRENT_PHASE_2}`)
+    this.sendMockNumber(`N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_CURRENT_PHASE_3}`)
+    this.sendMockNumber(`N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_POWER_PHASE_1}`)
+    this.sendMockNumber(`N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_POWER_PHASE_2}`)
+    this.sendMockNumber(`N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_POWER_PHASE_3}`)
+    this.sendMockNumber(`N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_VOLTAGE_PHASE_1}`)
+    this.sendMockNumber(`N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_VOLTAGE_PHASE_2}`)
+    this.sendMockNumber(`N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_VOLTAGE_PHASE_3}`)
   }
 
   sendMockSystemConfig() {
@@ -82,11 +80,12 @@ export default class FakeMqttClient {
     this.onMessage(
       `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.ACTIVE_INPUT}`,
       JSON.stringify(
-        getRandomValueFromArray([
-          { value: ACTIVE_INPUT.INPUT_0 },
-          { value: ACTIVE_INPUT.INPUT_1 },
-          { value: ACTIVE_INPUT.NONE }
-        ])
+        { value: ACTIVE_INPUT.NONE }
+        // getRandomValueFromArray([
+        //   { value: ACTIVE_INPUT.INPUT_0 },
+        //   { value: ACTIVE_INPUT.INPUT_1 },
+        //   { value: ACTIVE_INPUT.NONE }
+        // ])
       )
     )
     this.sendMockNumber(`N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.CURRENT_PHASE_1}`)
@@ -157,7 +156,7 @@ export default class FakeMqttClient {
   }
 
   sendMockNumber(path) {
-    this.onMessage(path, JSON.stringify({ value: Math.random() * 100 }))
+    this.onMessage(path, JSON.stringify({ value: Math.random() * 1000 }))
   }
 
   // Mocked functions

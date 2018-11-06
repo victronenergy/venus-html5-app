@@ -38,11 +38,11 @@ class ActiveSource extends Component {
     const activeSource = getActiveSource(props)
 
     if (activeSource === undefined) {
-      return <ActiveSourceMetric title={"..."} />
+      return <ActiveSourceMetric title={"..."} icon="./images/icons/shore-power.svg" />
     }
 
     if (activeSource === null) {
-      return <ActiveSourceMetric title={"Inverting"} icon="./images/icons/inverter.svg" />
+      return <NoActiveSource />
     }
 
     return (
@@ -53,6 +53,19 @@ class ActiveSource extends Component {
         current={props.current.phase1 + props.current.phase2 + props.current.phase3}
         power={props.power.phase1 + props.power.phase2 + props.power.phase3}
       />
+    )
+  }
+}
+class NoActiveSource extends Component {
+  render(props, state) {
+    return (
+      <div className="metric metric--small">
+        <img src="./images/icons/shore-power.svg" className="metric__icon" />
+        <div className={"metric__value-container"}>
+          <p className="text text--medium">Shore power</p>
+          <div className="text">Unplugged</div>
+        </div>
+      </div>
     )
   }
 }
