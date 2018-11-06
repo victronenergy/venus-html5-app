@@ -27,6 +27,13 @@ class ActiveSource extends Component {
     [AC_SOURCE_TYPE.NOT_IN_USE]: "Invalid Configuration" // You cannot have a source that isn't configured as active!
   }
 
+  activeSourceIcon = {
+    [AC_SOURCE_TYPE.SHORE]: "./images/icons/shore-power.svg",
+    [AC_SOURCE_TYPE.GRID]: "./images/icons/shore-power.svg",
+    [AC_SOURCE_TYPE.GENERATOR]: "./images/icons/generator.svg",
+    [AC_SOURCE_TYPE.NOT_IN_USE]: "./images/icons/shore-power.svg"
+  }
+
   render(props, state) {
     const activeSource = getActiveSource(props)
 
@@ -35,12 +42,13 @@ class ActiveSource extends Component {
     }
 
     if (activeSource === null) {
-      return <ActiveSourceMetric title={"Inverting"} />
+      return <ActiveSourceMetric title={"Inverting"} icon="./images/icons/inverter.svg" />
     }
 
     return (
       <ActiveSourceMetric
         title={this.activeSourceLabel[activeSource]}
+        icon={this.activeSourceIcon[activeSource]}
         voltage={props.voltage.phase1}
         current={props.current.phase1 + props.current.phase2 + props.current.phase3}
         power={props.power.phase1 + props.power.phase2 + props.power.phase3}
@@ -51,16 +59,19 @@ class ActiveSource extends Component {
 
 class ActiveSourceMetric extends Component {
   render(props, state) {
+    const hasValues = props.voltage || props.current || props.power
     return (
       <div className="metric metric--small">
-        <img src="./images/icons/shore-power.svg" className="metric__icon" />
-        <div className="metric__value-container">
+        <img src={props.icon} className="metric__icon" />
+        <div className={"metric__value-container" + (hasValues ? "" : " metric__value-container--centered")}>
           <p className="text text--medium">{props.title}</p>
-          <div className="metric__values">
-            <NumericValue value={props.voltage} unit={"V"} />
-            <NumericValue value={props.current} unit="A" precision={1} />
-            <NumericValue value={props.power} unit="W" />
-          </div>
+          {hasValues && (
+            <div className="metric__values">
+              <NumericValue value={props.voltage} unit={"V"} />
+              <NumericValue value={props.current} unit="A" precision={1} />
+              <NumericValue value={props.power} unit="W" />
+            </div>
+          )}
         </div>
       </div>
     )
