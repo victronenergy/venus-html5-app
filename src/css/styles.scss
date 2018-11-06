@@ -22,6 +22,10 @@ body {
   @media #{$short} {
     padding: 10px 20px;
   }
+
+  @media #{$veryShortAndNarrow} {
+    padding: 10px 14px;
+  }
 }
 
 html,
@@ -39,6 +43,10 @@ header {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 30px;
+
+  @media #{$regular} {
+    height: auto;
+  }
 
   @media #{$minimum} {
     height: auto;
@@ -116,6 +124,7 @@ header {
   @media #{$regular} {
     height: 80px;
     padding: 17px 35px 17px 35px;
+    margin-bottom: 20px;
   }
 
   @media #{$minimum} {
@@ -126,6 +135,12 @@ header {
     margin-bottom: 10px;
     height: 70px;
     padding: 14px 25px 14px 25px;
+  }
+
+  @media #{$veryShortAndNarrow} {
+    height: 60px;
+    flex-direction: row;
+    padding: 14px;
   }
 }
 
@@ -158,6 +173,11 @@ header {
     height: 70px;
     flex-direction: row;
   }
+
+  @media #{$veryShortAndNarrow} {
+    height: 100px;
+    flex-direction: column;
+  }
 }
 
 .metric--small {
@@ -169,6 +189,10 @@ header {
 
   @media #{$short} {
     width: calc(50% - 10px);
+  }
+
+  @media #{$veryShortAndNarrow} {
+    width: calc(50% - 5px);
   }
 }
 
@@ -185,8 +209,17 @@ header {
     height: 60px;
   }
 
+  @media #{$short} {
+    height: 100%;
+  }
+
   @media #{$minimum} {
     height: 40px;
+  }
+
+  @media #{$veryShortAndNarrow} {
+    width: 100%;
+    height: 30px;
   }
 }
 
@@ -200,6 +233,10 @@ header {
 
   @media #{$minimum} {
     margin-left: 25px;
+  }
+
+  @media #{$veryShortAndNarrow} {
+    margin-left: 10px;
   }
 }
 
@@ -229,6 +266,10 @@ header {
   @media #{$regular} {
     width: 45px;
   }
+
+  @media #{$short} {
+    width: auto;
+  }
 }
 
 .value:not(:first-child) {
@@ -245,8 +286,11 @@ header {
   }
 
   @media #{$shortAndNarrow} {
-    width: auto;
     padding-left: 5px;
+  }
+
+  @media #{$veryShortAndNarrow} {
+    padding-left: 2px;
   }
 }
 
@@ -266,8 +310,11 @@ header {
   }
 
   @media #{$short} {
-    width: auto;
     padding-right: 5px;
+  }
+
+  @media #{$veryShortAndNarrow} {
+    padding-right: 2px;
   }
 }
 
@@ -293,6 +340,11 @@ header {
   @media #{$short} {
     width: calc(50% - 25px);
   }
+
+  @media #{$veryShortAndNarrow} {
+    height: 30px;
+    width: 100%;
+  }
 }
 
 .selector-button {
@@ -303,6 +355,7 @@ header {
   border-radius: 6px;
   flex-grow: 1;
   cursor: pointer;
+  line-height: 1.2;
 }
 
 .selector-button:not(:first-child) {
@@ -317,8 +370,18 @@ header {
   background-color: #30afff;
 }
 
-.selector-button__shore-input-limit > span:first-child {
+.metric--shore-input-limit {
+  @media #{$veryShortAndNarrow} {
+    padding: 8px;
+  }
+}
+
+.metric--shore-input-limit > .selector-button > span:first-child {
   margin-right: 10px;
+
+  @media #{$minimum} {
+    margin-right: 5px;
+  }
 }
 
 .metric__shore-input-limit--not-adjustable {
@@ -343,12 +406,20 @@ header {
 
   @media #{$short} {
     flex-direction: row;
+    background-position: right;
+    background-size: auto 100%;
+    height: 70px;
   }
 
   @media #{$shortAndNarrow} {
     background-image: none;
     flex-direction: row;
     height: 70px;
+    align-items: center;
+  }
+
+  @media #{$veryShortAndNarrow} {
+    height: 60px;
   }
 }
 
@@ -374,11 +445,11 @@ header {
   }
 
   @media #{$minimum} {
-    height: 40px;
+    //height: 100%;
   }
 
   @media #{$shortAndNarrow} {
-    width: 25%;
+    width: 30%;
   }
 }
 
@@ -389,6 +460,10 @@ header {
 
 .text--bottom-align > .text--large {
   line-height: 1;
+
+  @media #{$veryShortAndNarrow} {
+    line-height: initial;
+  }
 }
 
 .amperage-selector__container {
@@ -408,6 +483,10 @@ header {
 
   @media #{$minimum} {
     margin: 20px 10px;
+  }
+
+  @media #{$veryShortAndNarrow} {
+    padding: 15px;
   }
 
   @media screen and (max-width: 1070px) {
@@ -443,5 +522,12 @@ header {
     max-width: 70px;
     min-width: 70px;
     height: 70px;
+  }
+
+  @media #{$veryShortAndNarrow} {
+    max-width: 50px;
+    min-width: 50px;
+    height: 50px;
+    margin: 5px;
   }
 }
