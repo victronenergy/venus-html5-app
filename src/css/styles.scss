@@ -203,6 +203,10 @@ header {
   }
 }
 
+.metric__value-container--centered {
+  justify-content: center;
+}
+
 .metric__values {
   display: flex;
 }

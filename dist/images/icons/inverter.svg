@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="56px" height="56px" viewBox="0 0 56 56" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.3 (67297) - http://www.bohemiancoding.com/sketch -->
+    <title>icon_inverter_1</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Zeplin" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Style-Guide" transform="translate(-703.000000, -4028.000000)">
+            <g id="icon_inverter_1" transform="translate(703.000000, 4028.000000)">
+                <g id="icon_generator-copy" fill="#FFFFFF">
+                    <circle id="Oval-2-Copy-2" cx="28" cy="28" r="28"></circle>
+                </g>
+                <g id="Group-2" transform="translate(14.000000, 18.000000)" stroke="#0A101F" stroke-width="1.76">
+                    <path d="M0,16.2043269 L6.38980567,16.2043269" id="Path-10"></path>
+                    <path d="M0,4.89663462 L6.38980567,4.89663462" id="Path-10-Copy"></path>
+                    <path d="M25.6,10.5504808 L31.9898057,10.5504808" id="Path-10-Copy"></path>
+                    <polygon id="Path-10-Copy" points="6.4 0 18.2625559 10.602439 6.4 21"></polygon>
+                    <ellipse id="Oval" cx="22.2" cy="10.7019231" rx="3" ry="3.02884615"></ellipse>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
