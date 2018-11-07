@@ -2,7 +2,7 @@ import { BATTERY_STATE } from "../service/topics"
 
 function numericFormatter(precision = 0, factor = 1.0, defaultValue = "--") {
   return value => {
-    if (!value) {
+    if (value === null || value === undefined) {
       return defaultValue
     }
     let numericValue = Number(value) * factor
