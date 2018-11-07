@@ -530,4 +530,8 @@ header {
     height: 50px;
     margin: 5px;
   }
+
+  &:active {
+    @extend .selector-button--active;
+  }
 }
