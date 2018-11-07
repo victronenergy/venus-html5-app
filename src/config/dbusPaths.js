@@ -27,9 +27,9 @@ export const DBUS_PATHS = {
       OUTPUT_CURRENT_PHASE_1: "/Ac/Out/L1/I",
       OUTPUT_CURRENT_PHASE_2: "/Ac/Out/L2/I",
       OUTPUT_CURRENT_PHASE_3: "/Ac/Out/L3/I",
-      OUTPUT_VOLTAGE_PHASE_1: "/Ac/Out/L1/P",
-      OUTPUT_VOLTAGE_PHASE_2: "/Ac/Out/L2/P",
-      OUTPUT_VOLTAGE_PHASE_3: "/Ac/Out/L3/P",
+      OUTPUT_VOLTAGE_PHASE_1: "/Ac/Out/L1/V",
+      OUTPUT_VOLTAGE_PHASE_2: "/Ac/Out/L2/V",
+      OUTPUT_VOLTAGE_PHASE_3: "/Ac/Out/L3/V",
       OUTPUT_POWER_PHASE_1: "/Ac/ConsumptionOnOutput/L1/Power",
       OUTPUT_POWER_PHASE_2: "/Ac/ConsumptionOnOutput/L2/Power",
       OUTPUT_POWER_PHASE_3: "/Ac/ConsumptionOnOutput/L3/Power"
