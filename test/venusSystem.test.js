@@ -90,7 +90,7 @@ describe("venus system", () => {
         })
 
         expect(system.getTopicFromDbusPath("N", DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT)).toBe(
-          `N/985dadd0c9e4/vebus/257/Ac/In/2/CurrentLimit`
+          `N/985dadd0c9e4/vebus/257/Ac/In/2`
         )
       })
     })
