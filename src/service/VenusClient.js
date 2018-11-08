@@ -117,7 +117,7 @@ class VenusClient {
   subscribe = dbusPaths => {
     this.mqttClient.on("message", (topic, message) => {
       const clientMessage = parseMessage(topic, message)
-      console.log("Received message:", topic, clientMessage.value)
+      // console.log("Received message:", topic, clientMessage.value)
       this.onMessage(clientMessage)
     })
 

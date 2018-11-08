@@ -85,7 +85,7 @@ class App extends Component {
     this.deviceInterface.onMessage = ({ path, value }) => {
       const metric = metricsConfig[path]
       if (!metric) {
-        console.warn(`Received message for topic you're not listening to: ${path}`)
+        // console.warn(`Received message for topic you're not listening to: ${path}`)
         return
       }
 
