@@ -1,6 +1,6 @@
 const liveServer = require("live-server")
 
-// Find out the venus hsot ip you want to use: LAN, ethernet or Wlan connection to the device
+// Find out the venus host ip you want to use: LAN, ethernet or Wlan connection to the device
 // Try not to commit the ip :)
 let venusHost
 
