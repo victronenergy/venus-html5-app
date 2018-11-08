@@ -4,12 +4,13 @@
   "description": "Metric framework for Victron VenusOS",
   "main": "index.js",
   "scripts": {
-    "dev": "node live-server",
+    "dev": "node live-server.js",
     "dev-compile": "npx webpack -w --mode=development",
     "dev-compile:mocked": "npx webpack -w --mode=development --mocked",
     "clean": "rm -rf dist",
     "compile": "npm run clean && npx webpack --mode=production",
     "test": "jest --config jestconfig.json",
+    "test-radiator": "node ./test/displays/test-server.js",
     "format": "prettier --write \"src/**/*.js\" \"test/**/*.js\""
   },
   "author": "",

@@ -31,7 +31,7 @@ To run the app locally for development you need to:
 
 2. launch the app through live-server to enable live reload of the changes in the code:
 
-`npm run dev` 
+`npm run dev`
 
 This will launch the application in you system's default browser.
 
@@ -43,10 +43,11 @@ You need to change the `host` (and optionally `port`) query parameters to point 
 
 You can also define the IP inside `live-server.js`, and then it will automatically be added as `host` query param when you launch the app the next time using `npm run dev`.
 
-By default, the application starts with the `dev` flag enabled. 
+By default, the application starts with the `dev` flag enabled.
 This adds some convenience features for debugging on actual devices and testing:
-* "Reload page" button - refreshes the page
-* "Browser info" button - links to page containing basic information about the browser in which the app is running
+
+- "Reload page" button - refreshes the page
+- "Browser info" button - links to page containing basic information about the browser in which the app is running
 
 ### Running the app with no Venus device available
 
@@ -55,6 +56,14 @@ This fakes the UI's MQTT client to "receive and send" data. Currently only rando
 
 Also, keep in mind the Venus device also has a Demo mode, which allows you to get useful data if you have only the Venus device and no other Victron devices, without requiring various Victron devices to be connected to the Venus device.
 To enable it, navigate to the Venus Remote Console -> Settings -> General.
+
+### Device radiator
+
+Since the app will be run on a plethora of different resolutions and split screens there is a "radiator" available which has iframes for all the
+basic combinations of display "splits". The base 1/1 ui is 1280 x 720, which can be changed in the header. In the radiator there are the basic ui
+and multiple split screen variations available relative to the "base" size.
+
+To run this ui it is recommended to use mocked data. Run the mocked devserver as desctibed above and start the radiator ui with `npm run test-radiator`. The radiator had autoreload that automatically reloads changes made to src/ similar to the basic dev autoreload. It also hot reloads changes made to the test/displays/index.html
 
 ## Metrics available
 
@@ -123,18 +132,20 @@ To make a new release:
 
 You should add a note under "waiting for recipe", containing the tag name and the changes included:
 
-```md
+```
+md
 html5-app - <tag name>
     <message>
 ```
 
 For example:
 
-```md
+```
+md
 html5-app - 0.2
-    * Reworked the UI 
+    \* Reworked the UI
 ```
 
 If you need any changes to the how the app is included inside Venus, please specify in the TODO file as well what changes need to be made to the recipe.
-All Venus recipes are found [here](https://github.com/victronenergy/meta-victronenergy/tree/master/meta-ve-software/recipes-ve). 
+All Venus recipes are found [here](https://github.com/victronenergy/meta-victronenergy/tree/master/meta-ve-software/recipes-ve).
 A sample recipe for the HTML5 app is [here](https://github.com/victronenergy/meta-victronenergy/blob/master/meta-ve-software/recipes-ve/venus-html5-app_0.1.bb)
