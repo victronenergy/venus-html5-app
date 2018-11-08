@@ -4,6 +4,7 @@ import { TOPICS } from "./topics"
 import { DBUS_PATHS } from "../config/dbusPaths"
 import { parseMessage, arrayToSubscriptionMap } from "./util"
 import VenusSystem from "./venusSystem"
+import Logger from "../logging/logger"
 
 // For development when there is no Venus device available with demo mode on
 // we can use this mock mqtt client that mocks the mqtt server responses to
@@ -25,10 +26,10 @@ const TOPICS_TO_SUBSCRIBE_ON_INIT = [
 
 const subscribeCallback = (err, granted) => {
   if (err) {
-    console.log("Error connecting to topic", err)
+    Logger.log("Error connecting to topic", err)
   } else {
     granted.forEach(grant => {
-      console.log(`Subscribed to ${grant.topic} with qos ${grant.qos}...`)
+      Logger.log(`Subscribed to ${grant.topic} with qos ${grant.qos}...`)
     })
   }
 }
@@ -99,7 +100,7 @@ class VenusClient {
   write(dbusPath, value) {
     const topic = this.venusSystem.getTopicFromDbusPath("W", dbusPath)
     let data = JSON.stringify({ value: value })
-    console.log("Write: ", topic, data)
+    Logger.log("Write: ", topic, data)
     this.mqttClient.publish(topic, data)
   }
 
@@ -117,7 +118,7 @@ class VenusClient {
   subscribe = dbusPaths => {
     this.mqttClient.on("message", (topic, message) => {
       const clientMessage = parseMessage(topic, message)
-      // console.log("Received message:", topic, clientMessage.value)
+      Logger.log("Received message:", topic, clientMessage.value)
       this.onMessage(clientMessage)
     })
 
