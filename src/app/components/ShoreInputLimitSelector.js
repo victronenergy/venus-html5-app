@@ -1,5 +1,5 @@
 import { h, Component } from "preact"
-import { DBUS_PATHS } from "../../config/dbusPaths"
+import Logger from "../../logging/logger"
 
 const USAmperage = [10, 15, 20, 30, 50, 100]
 const EUAmperage = [6, 10, 13, 16, 25, 32, 63]
@@ -17,7 +17,7 @@ class ShoreInputLimitSelector extends Component {
     } else if (result === 0x2000 || result === 0x2700) {
       return USAmperage
     } else {
-      console.warn(`Could not retrieve amperage US/EU for product id ${productId}`)
+      Logger.warn(`Could not retrieve amperage US/EU for product id ${productId}`)
       return USAmperage
     }
   }

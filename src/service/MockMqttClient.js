@@ -1,6 +1,6 @@
 import { DBUS_PATHS } from "../config/dbusPaths"
-import { ClientSubscribeCallback, ISubscriptionMap } from "mqtt"
 import { AC_SOURCE_TYPE, ACTIVE_INPUT, SYSTEM_MODE, VEBUS_SYSTEM_STATE } from "./topics"
+import Logger from "../logging/logger"
 
 const getRandomInt = max => {
   return Math.floor(Math.random() * Math.floor(max))
@@ -161,29 +161,29 @@ export default class FakeMqttClient {
 
   // Mocked functions
   end() {
-    console.log("end")
+    Logger.log("end")
   }
 
   once(action, callback) {
-    console.log(`once: ${action}`)
+    Logger.log(`once: ${action}`)
     callback()
   }
 
   subscribe(sub, callback) {
-    console.log("subscribe:", sub)
+    Logger.log("subscribe:", sub)
   }
 
   unsubscribe(sub, callback) {
-    console.log("unsubscribe:", sub)
+    Logger.log("unsubscribe:", sub)
   }
 
   removeAllListeners(event) {
-    console.log("Remove all listeners")
+    Logger.log("Remove all listeners")
     this.initialized = true
   }
 
   on(action, callback) {
-    console.log(`on: ${action}`)
+    Logger.log(`on: ${action}`)
     if (action === "connect") {
       this.onConnect = callback
     } else if (action === "message" && !this.initialized) {
@@ -193,10 +193,10 @@ export default class FakeMqttClient {
       this.onMessage = callback
       setInterval(this.sendMockData, 2000)
     } else if (action === "message") {
-    } else console.log(action)
+    } else Logger.log(action)
   }
 
   publish(topic, data) {
-    console.log(`publish [${topic}]: ${JSON.stringify(data)}`)
+    Logger.log(`publish [${topic}]: ${JSON.stringify(data)}`)
   }
 }

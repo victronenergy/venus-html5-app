@@ -2,6 +2,7 @@ import { h, render, Component } from "preact"
 import metricsConfig from "../config/metricsConfig"
 import { DBUS_PATHS } from "../config/dbusPaths"
 import VenusClient from "../service/index"
+import Logger from "../logging/logger"
 import "../css/texts.scss"
 import "../css/styles.scss"
 
@@ -13,15 +14,7 @@ import Battery from "./components/Battery"
 import AcLoads from "./components/AcLoads"
 import DcLoads from "./components/DcLoads"
 
-const getParameterByName = (name, url) => {
-  if (!url) url = window.location.href
-  name = name.replace(/[\[\]]/g, "\\$&")
-  var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-    results = regex.exec(url)
-  if (!results) return null
-  if (!results[2]) return ""
-  return decodeURIComponent(results[2].replace(/\+/g, " "))
-}
+import { getParameterByName } from "../service/util"
 
 const host = getParameterByName("host") || window.location.hostname || "localhost"
 const port = parseInt(getParameterByName("port")) || 9001
@@ -85,7 +78,7 @@ class App extends Component {
     this.deviceInterface.onMessage = ({ path, value }) => {
       const metric = metricsConfig[path]
       if (!metric) {
-        // console.warn(`Received message for topic you're not listening to: ${path}`)
+        Logger.warn(`Received message for topic you're not listening to: ${path}`)
         return
       }
 

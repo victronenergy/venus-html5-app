@@ -1,3 +1,4 @@
+import Logger from "../logging/logger"
 /**
  * @typedef {object} Topic
  *
@@ -36,7 +37,7 @@ export const parseMessage = (topic, message) => {
     data = JSON.parse(message.toString())
   } catch (e) {
     data = {}
-    console.error(topic, `[${message.toString()}]`, e)
+    Logger.error(topic, `[${message.toString()}]`, e)
   }
 
   const { dbusPath } = parseTopic(topic)
@@ -61,4 +62,14 @@ export const arrayToSubscriptionMap = toSubscribe => {
     acc[value] = 0
     return acc
   }, {})
+}
+
+export const getParameterByName = (name, url) => {
+  if (!url) url = window.location.href
+  name = name.replace(/[\[\]]/g, "\\$&")
+  var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+    results = regex.exec(url)
+  if (!results) return null
+  if (!results[2]) return ""
+  return decodeURIComponent(results[2].replace(/\+/g, " "))
 }

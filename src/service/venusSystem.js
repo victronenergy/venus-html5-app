@@ -1,6 +1,7 @@
 import { isPathOfType, parseTopic, Topic } from "./util"
 import { AC_SOURCE_TYPE, SERVICES } from "./topics"
 import { DBUS_PATHS } from "../config/dbusPaths"
+import Logger from "../logging/logger"
 
 /**
  * @typedef {object} Equipment
@@ -65,7 +66,7 @@ class VenusSystem {
     } else if (SERVICES.SETTINGS.includes(dbusPath)) {
       return `${type}/${this.portalId}/settings/0${dbusPath}`
     } else {
-      console.error(`Unknown D-bus path - please implement! type: ${type}, path: '${dbusPath}'`)
+      Logger.error(`Unknown D-bus path - please implement! type: ${type}, path: '${dbusPath}'`)
       return ""
     }
   }
@@ -93,7 +94,7 @@ class VenusSystem {
 
   handleDeviceIds(topic, data) {
     if (topic.dbusPath === DBUS_PATHS.GENERAL.DEVICE_INSTANCE) {
-      console.log(`DEVICE ${topic.serviceType} AVAILABLE WITH ID ${topic.deviceInstance}`)
+      Logger.log(`DEVICE ${topic.serviceType} AVAILABLE WITH ID ${topic.deviceInstance}`)
       switch (topic.serviceType) {
         case "vebus":
           this.vebusInstanceId = topic.deviceInstance
