@@ -1,0 +1,13 @@
+language: node_js
+script:
+- npm run compile
+- npm run test
+deploy:
+  provider: releases
+  api_key:
+    secure: fcEPVT4Uehas7LgtYio0uPbVBgkf98elPqVrmlXue/yDewRG83JPDZnZaS3/2nYGGs1wbrGbO6MfpSd/MdMPzvg9Jg61bYjN4zkynqVXRI9s4DFjHUMa8ixmh5Z5ta1hN56N1L8gdaMayfkjmh3Tp5N/2utCXqAd/wjglMv83bW9axWFdnFohF3LQqqgdlRRhrqxGeeYmvtDGkaK/C2X1Du5bgjMvd4e2nXdmIbuqsL+ebInSDQUFZzT2KKCnC43PqjNTACtEnuUn1OEcWJyZagH6g5Q+tE26woPAMKgYJtu675kqU0JKc/jGkRB8tliGpAOeowuHn8LBr4lQRC8/ZugHjJVv/phVH3TDE4Ma+7jLbkHtUE44z6tCcYEqDmAuWtlwKET8YfY0XfNEwZqIKF/Ys4XbleAd7lECDD9J8178QvdW7OzpRUQQfYkQaLOJSURUBzAyuNR0rkTagXu7+4zQrO/7Hhz26U7/0zthb09q3FYtgZBFtuUCtzGXf6nVY8hN2cI1dV7KUxGajiPTTzw2k228+X58krnohi7yh+IQFyHHJOZwHCyKRjMtGglR3YjLGRxUqX1jkpBYpC/n5MOyS8YSCiEP9n2UMXegvRYjeCrNctTBimxEI82PPSqk0VPz6roagKZCKjvOrrPWH9iJIbOIM4JMMgvPeQH1fc=
+  skip_cleanup: true
+  file_glob: true
+    file: dist/**/*
+  on:
+    tags: true
