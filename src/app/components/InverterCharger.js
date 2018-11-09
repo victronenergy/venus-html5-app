@@ -10,7 +10,7 @@ class InverterCharger extends Component {
           <div className="metric__value-container">
             <p className="text text--medium">Inverter/charger</p>
             <div className="metric__values">
-              <p className="text">{props.state}</p>
+              <p className="text text--smaller">{props.state}</p>
             </div>
           </div>
         </div>

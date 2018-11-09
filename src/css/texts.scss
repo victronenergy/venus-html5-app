@@ -11,104 +11,58 @@
   font-family: Roboto, sans-serif;
 }
 
-.text {
-  color: white;
-  font-weight: 400;
-  font-size: 30px;
+/*
+ * Since we have a very weird scale of resolutions to support, from very narrow and tall
+ * to very "flat" and wide. Relative font sizes to the viewport broke down in these edge
+ * cases, hence there are 2 rules: body font size, which is the basis for everything and
+ * scales the font when width decreases; and main element font-size which scales the 
+ * font when height changes. The different em font sizes scale the component font sizes 
+ * relative to these two aforementioned baselines.
+ */
 
-  @media #{$wide} {
-    font-size: 20px;
-  }
-
-  @media #{$regular} {
-    font-size: 16px;
-  }
-
-  @media #{$minimum} {
-    font-size: 14px;
-  }
-
-  @media #{$short} {
-    font-size: 12px;
-  }
-
-  @media #{$veryShortAndNarrow} {
-    font-size: 10px;
+body {
+  font-size: 22px;
+  @for $i from 1 through 5 {
+    @media all and (max-width: 1200px - $i * 200px) {
+      font-size: 22px - $i * 2px;
+    }
   }
 }
 
-.text--large {
+main {
   color: white;
   font-weight: 400;
-  font-size: 35px;
+  font-size: 100%;
 
-  @media #{$wide} {
-    font-size: 25px;
-  }
-
-  @media #{$regular} {
-    font-size: 20px;
-  }
-
-  @media #{$veryShortAndNarrow} {
-    font-size: 14px;
+  @for $i from 1 through 5 {
+    @media all and (max-height: 900px - $i * 150px) {
+      font-size: 100% - $i * 5;
+    }
   }
 }
 
 .text--very-large {
-  font-size: 60px;
+  font-size: 1.6em;
+}
 
-  @media #{$wide} {
-    font-size: 40px;
-  }
+.text--large {
+  font-size: 1.2em;
+}
 
-  @media #{$regular} {
-    font-size: 32px;
-  }
+.text {
+  font-size: 1em;
+}
 
-  @media #{$minimum} {
-    font-size: 28px;
-  }
-
-  @media #{$short} {
-    font-size: 28px;
-  }
-
-  @media #{$veryShortAndNarrow} {
-    font-size: 20px;
-  }
+.text--smaller {
+  font-size: 0.9em;
 }
 
 .text--small {
-  font-size: 27px;
-
-  @media #{$wide} {
-    font-size: 18px;
-  }
-
-  @media #{$regular} {
-    font-size: 15px;
-  }
-
-  @media #{$short} {
-    font-size: 11px;
-  }
+  font-size: 0.8em;
 }
 
 .text--very-small {
-  font-size: 22px;
-
-  @media #{$wide} {
-    font-size: 15px;
-  }
-
-  @media #{$regular} {
-    font-size: 12px;
-  }
-
-  @media #{$minimum} {
-    font-size: 10px;
-  }
+  font-size: 0.7em;
 }
 
 .text--medium {

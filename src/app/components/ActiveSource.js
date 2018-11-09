@@ -61,9 +61,9 @@ class NoActiveSource extends Component {
     return (
       <div className="metric metric--small">
         <img src="./images/icons/shore-power.svg" className="metric__icon" />
-        <div className={"metric__value-container"}>
+        <div className="metric__value-container">
           <p className="text text--medium">Shore power</p>
-          <div className="text">Unplugged</div>
+          <div className="text text--smaller">Unplugged</div>
         </div>
       </div>
     )
