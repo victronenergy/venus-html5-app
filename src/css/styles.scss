@@ -13,19 +13,7 @@
 
 body {
   margin: 0;
-  padding: 20px 60px;
-
-  @media #{$minimum} {
-    padding: 20px 30px;
-  }
-
-  @media #{$short} {
-    padding: 10px 20px;
-  }
-
-  @media #{$veryShortAndNarrow} {
-    padding: 10px 14px;
-  }
+  padding: 3% 3vw;
 }
 
 html,
@@ -106,9 +94,9 @@ header {
 }
 
 .metric {
-  margin-bottom: 40px;
+  margin-bottom: 3vh;
   height: 150px;
-  padding: 33px 40px 33px 40px;
+  padding: 33px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -123,24 +111,19 @@ header {
 
   @media #{$regular} {
     height: 80px;
-    padding: 17px 35px 17px 35px;
-    margin-bottom: 20px;
-  }
-
-  @media #{$minimum} {
-    margin-bottom: 20px;
+    padding: 17px 35px;
   }
 
   @media #{$short} {
-    margin-bottom: 10px;
     height: 70px;
-    padding: 14px 25px 14px 25px;
+    padding: 14px 25px;
   }
 
   @media #{$veryShortAndNarrow} {
     height: 60px;
     flex-direction: row;
     padding: 14px;
+    border-radius: 10px;
   }
 }
 
