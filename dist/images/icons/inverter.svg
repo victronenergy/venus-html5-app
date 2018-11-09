@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="56px" height="56px" viewBox="0 0 56 56" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.3 (67297) - http://www.bohemiancoding.com/sketch -->
+    <title>icon_inverter_2 copy</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Zeplin" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Style-Guide" transform="translate(-705.000000, -3822.000000)">
+            <g id="icon_inverter_2-copy" transform="translate(705.000000, 3822.000000)">
+                <circle id="Oval" fill="#FFFFFF" cx="28" cy="28" r="28"></circle>
+                <rect id="Rectangle" fill="#0A101F" x="11" y="11" width="34" height="34" rx="11"></rect>
+                <path d="M42.5,13.5 L14.5,42.5" id="Path-11" stroke="#FFFFFF"></path>
+                <path d="M16,20.6664455 C16.9467787,19.5554818 17.9527311,19 19.0178571,19 C21.15279,19 22.9233193,23 24.8760504,23 C26.1778711,23 27.552521,22 29,20" id="Path-12" stroke="#FFFFFF" stroke-width="1.9"></path>
+                <g id="Group-4" transform="translate(28.000000, 33.000000)" stroke="#FFFFFF" stroke-width="2">
+                    <path d="M0,1.10338681 L14,1.10338681" id="Path-12"></path>
+                    <path d="M0,5 L6,5" id="Path-12"></path>
+                    <path d="M8,5.10338681 L14.2,5.10338681" id="Path-12"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

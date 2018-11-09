@@ -10,6 +10,6 @@ export function formatNumber({ value, unit = "", precision = 0, factor = 1.0, de
 
 export default class NumericValue extends Component {
   render({ value, unit = "", precision = 0, factor = 1.0, defaultValue = "--" }) {
-    return <p className="value text">{formatNumber({ value, unit, precision, factor, defaultValue })}</p>
+    return <p className="value text text--smaller">{formatNumber({ value, unit, precision, factor, defaultValue })}</p>
   }
 }

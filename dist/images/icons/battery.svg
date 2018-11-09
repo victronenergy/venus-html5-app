@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="56px" height="56px" viewBox="0 0 56 56" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>ICON_BATTERY</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Zeplin" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Style-Guide" transform="translate(-859.000000, -4136.000000)" fill="#FFFFFF">
+            <path d="M887,4192 C871.536027,4192 859,4179.46397 859,4164 C859,4148.53603 871.536027,4136 887,4136 C902.463973,4136 915,4148.53603 915,4164 C915,4179.46397 902.463973,4192 887,4192 Z M875.32,4156 C874.590984,4156 874,4156.59098 874,4157.32 L874,4173.68 C874,4174.40902 874.590984,4175 875.32,4175 L898.68,4175 C899.409016,4175 900,4174.40902 900,4173.68 L900,4157.32 C900,4156.59098 899.409016,4156 898.68,4156 L875.32,4156 Z M876,4153 L876,4155 L881.25,4155 L881.25,4153 L876,4153 Z M891.75,4153 L891.75,4155 L897,4155 L897,4153 L891.75,4153 Z" id="ICON_BATTERYU"></path>
+        </g>
+    </g>
+</svg>
