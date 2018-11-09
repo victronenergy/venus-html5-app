@@ -10,3 +10,9 @@ $short: "all and (max-height: 500px)";
 
 $shortAndNarrow: "all and (max-height: 500px) and (max-width: 600px)";
 $veryShortAndNarrow: "all and (max-height: 400px) and (max-width: 400px)";
+
+$portrait: "all and (max-aspect-ratio: 9/10)";
+$narrow-portrait: "all and (max-aspect-ratio: 6/10)";
+$very-narrow-portrait: $narrow-portrait + " and (max-width: 400px)";
+
+$low-landscape: "all and (min-aspect-ratio: 3/1)";
