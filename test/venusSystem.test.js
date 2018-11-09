@@ -4,7 +4,6 @@ import { AC_SOURCE_TYPE } from "../src/service/topics"
 
 describe("venus system", () => {
   describe("initialization", () => {
-
     test("fails a testcase", () => {
       expect(true).toBeFalsy()
     })
