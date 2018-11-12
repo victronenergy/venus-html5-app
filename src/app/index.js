@@ -134,7 +134,7 @@ class App extends Component {
               power={this.state[DBUS_PATHS.BATTERY.POWER]}
               timeToGo={this.state[DBUS_PATHS.BATTERY.TIME_TO_GO]}
             />
-            <div className="multi-metric-container">
+            <div className="multi-metric-container shore-power__container">
               <ActiveSource
                 activeInput={this.state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_INPUT]}
                 settings={{

@@ -1,17 +1,17 @@
 // Use 1920px screen as baseline and scale down when needed
 
-$wide: "all and (max-width: 1919px)";
 $regular: "all and (max-width: 1279px)";
 $minimum: "all and (max-width: 600px)";
 
 $shortAndNarrow: "all and (max-height: 500px) and (max-width: 600px)";
-$veryShortAndNarrow: "all and (max-height: 400px) and (max-width: 400px)";
+
+$smaller: "all and (max-width: 1000px) and (min-aspect-ratio: 9/10)";
+$small: "all and (max-width: 800px) and (min-aspect-ratio: 9/10)";
+$very-small: "all and (max-width: 600px) and (min-aspect-ratio: 9/10)";
+$tiny: "all and (max-width: 400px) and (min-aspect-ratio: 9/10)";
 
 $portrait: "all and (max-aspect-ratio: 9/10)";
 $narrow-portrait: "all and (max-aspect-ratio: 6/10)";
 $very-narrow-portrait: $narrow-portrait + " and (max-width: 400px)";
 
 $low-landscape: "all and (min-aspect-ratio: 3/1)";
-
-$metric-padding-sides-landscape: 40px;
-$metric--small-margin-between: 10px; // both elementa have this
