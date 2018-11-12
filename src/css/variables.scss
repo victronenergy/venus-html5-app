@@ -16,3 +16,6 @@ $narrow-portrait: "all and (max-aspect-ratio: 6/10)";
 $very-narrow-portrait: $narrow-portrait + " and (max-width: 400px)";
 
 $low-landscape: "all and (min-aspect-ratio: 3/1)";
+
+$metric-padding-sides-landscape: 40px;
+$metric--small-margin-between: 10px; // both elementa have this

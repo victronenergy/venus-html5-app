@@ -15,7 +15,7 @@ class InverterCharger extends Component {
           </div>
         </div>
         {props.isAdjustable ? (
-          <div className="metrics-selector">
+          <div className="inverter-charger__mode-selector">
             <button
               className={"selector-button text" + (props.activeMode == "ON" ? " selector-button--active" : "")}
               onClick={() => props.onModeSelected(SYSTEM_MODE.ON)}
@@ -39,7 +39,7 @@ class InverterCharger extends Component {
             {/*// TODO Should we add a button for inverter only as well?*/}
           </div>
         ) : (
-          <div className="metrics-selector">
+          <div className="inverter-charger__mode-selector">
             <button
               disabled
               className={
