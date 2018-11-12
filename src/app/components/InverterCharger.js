@@ -4,7 +4,7 @@ import { SYSTEM_MODE } from "../../service/topics"
 class InverterCharger extends Component {
   render(props, state) {
     return (
-      <div className="metric metric__container">
+      <div className="metric metric__container inverter-charger">
         <div className="metric__container--left">
           <img src="./images/icons/multiplus.svg" className="metric__icon" />
           <div className="metric__value-container">

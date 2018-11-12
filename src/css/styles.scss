@@ -15,12 +15,13 @@ body {
   margin: 0;
   padding: 20px 40px 0 40px;
 
-  @media #{$portrait} {
+  @media #{$portrait}, #{$small} {
+    padding-top: 5px;
     padding-right: 15px;
     padding-left: 15px;
   }
 
-  @media #{$very-narrow-portrait} {
+  @media #{$very-narrow-portrait}, #{$very-small} {
     padding-right: 5px;
     padding-left: 5px;
   }
@@ -47,7 +48,7 @@ header {
     margin-bottom: 15px;
   }
 
-  @media #{$portrait} {
+  @media #{$portrait}, #{$small} {
     height: auto;
     padding: 3px 5px 10px 5px;
     margin-bottom: 0;
@@ -55,12 +56,8 @@ header {
 }
 
 .logo {
-  width: 210px;
+  width: 183px;
   margin-left: 40px;
-
-  @media #{$wide} {
-    width: 183px;
-  }
 
   @media #{$regular} {
     width: 146px;
@@ -78,14 +75,9 @@ header {
 }
 
 .connection__icon {
-  height: 28px;
-  width: 30px;
+  height: 18px;
+  width: 19px;
   margin-right: 15px;
-
-  @media #{$wide} {
-    height: 18px;
-    width: 19px;
-  }
 
   @media #{$regular} {
     height: 14px;
@@ -102,7 +94,7 @@ header {
 .metric {
   margin-bottom: 30px;
   height: 100px;
-  padding: 20px $metric-padding-sides-landscape;
+  padding: 20px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -113,21 +105,31 @@ header {
   @media #{$low-landscape} {
     height: 80px;
     margin-bottom: 15px;
-    padding: 15px $metric-padding-sides-landscape;
+    padding: 15px 40px;
   }
 
-  @media #{$portrait} {
+  @media #{$portrait}, #{$smaller} {
     margin-bottom: 10px;
     height: 80px;
     padding: 13px 18px;
     border-radius: 10px;
   }
 
-  @media #{$very-narrow-portrait} {
+  @media #{$very-narrow-portrait}, #{$very-small} {
     margin-bottom: 5px;
     height: 70px;
     padding: 12px;
     border-radius: 7px;
+  }
+
+  @media #{$very-small} {
+    padding: 8px 12px;
+    height: 43px;
+  }
+
+  @media #{$tiny} {
+    height: 40px;
+    padding: 8px 12px;
   }
 }
 
@@ -136,7 +138,7 @@ header {
   justify-content: space-between;
   align-items: center;
 
-  @media #{$portrait} {
+  @media #{$portrait}, #{$tiny} {
     flex-direction: column;
   }
 }
@@ -151,11 +153,19 @@ header {
 
 .metric--small {
   // define margin by setting elements width to 50% - small margin (for both!) and space between the elements
-  width: calc(50% - #{$metric--small-margin-between});
+  width: calc(50% - 10px);
 
   @media #{$portrait} {
     width: 100%;
     height: 66px;
+  }
+
+  @media #{$small} {
+    width: calc(50% - 3px);
+  }
+
+  @media #{$tiny} {
+    width: 100%;
   }
 }
 
@@ -184,6 +194,14 @@ header {
   @media #{$portrait} {
     margin-left: 25px;
   }
+
+  @media #{$smaller} {
+    margin-left: 18px;
+  }
+
+  @media #{$very-small} {
+    margin-left: 10px;
+  }
 }
 
 .metric__value-container--centered {
@@ -205,54 +223,37 @@ header {
 .value {
   width: 65px;
 
-  @media #{$wide} {
-    width: 55px;
+  @media #{$smaller} {
+    width: 45px;
   }
 
-  @media #{$regular} {
-    width: 45px;
+  @media #{$very-small} {
+    width: 40px;
   }
 }
 
 .value:not(:first-child) {
   text-align: center;
-  padding-left: 35px;
+  padding-left: 25px;
   border-left: 0.5px solid rgba(255, 255, 255, 0.29);
-
-  @media #{$wide} {
-    padding-left: 25px;
-  }
-
-  @media #{$regular} {
+  @media #{$smaller} {
     padding-left: 15px;
   }
 
-  @media #{$shortAndNarrow} {
+  @media #{$small} {
     padding-left: 5px;
-  }
-
-  @media #{$veryShortAndNarrow} {
-    padding-left: 2px;
   }
 }
 
 .value:not(:last-child) {
-  padding-right: 35px;
+  padding-right: 25px;
 
-  @media #{$wide} {
-    padding-right: 25px;
-  }
-
-  @media #{$regular} {
+  @media #{$smaller} {
     padding-right: 15px;
   }
 
-  @media #{$portrait} {
-    padding-right: 10px;
-  }
-
-  @media #{$veryShortAndNarrow} {
-    padding-right: 2px;
+  @media #{$small} {
+    padding-right: 5px;
   }
 }
 
@@ -260,7 +261,24 @@ header {
   // When metric has left and right 'parts'
   // (100% width - paddings of parent (80px) - margin between metric--small elements 20px) / 2
   // = (100% - 80px - 20px) / 2 = 50% - 40px - 10px;
-  width: calc(50% - #{$metric-padding-sides-landscape} - #{$metric--small-margin-between});
+  width: calc(50% - 40px - 10px);
+
+  @media #{$portrait}, #{$smaller} {
+    width: calc(50% - 18px - 10px);
+  }
+
+  @media #{$very-narrow-portrait}, #{$small} {
+    width: calc(50% - 12px - 1.5px);
+  }
+}
+
+.inverter-charger,
+.metric--shore-input-limit,
+.metric__shore-input-limit--not-adjustable,
+.shore-power__container {
+  @media #{$tiny} {
+    display: none;
+  }
 }
 
 .inverter-charger__mode-selector {
@@ -300,7 +318,7 @@ header {
 }
 
 .metric--shore-input-limit {
-  @media #{$veryShortAndNarrow} {
+  @media #{$tiny} {
     padding: 8px;
   }
 }
@@ -333,15 +351,8 @@ header {
     background-size: auto 50%;
   }
 
-  @media #{$shortAndNarrow} {
+  @media #{$tiny} {
     background-image: none;
-    flex-direction: row;
-    height: 70px;
-    align-items: center;
-  }
-
-  @media #{$veryShortAndNarrow} {
-    height: 60px;
   }
 }
 
@@ -351,6 +362,11 @@ header {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+
+  @media #{$tiny} {
+    width: auto;
+    margin-right: 20px;
+  }
 
   &--col {
     flex-direction: column;
@@ -367,7 +383,7 @@ header {
 .text--bottom-align > .text--large {
   line-height: 1;
 
-  @media #{$veryShortAndNarrow} {
+  @media #{$tiny} {
     line-height: initial;
   }
 }
@@ -391,7 +407,7 @@ header {
     margin: 20px 10px;
   }
 
-  @media #{$veryShortAndNarrow} {
+  @media #{$tiny} {
     padding: 15px;
   }
 
@@ -430,7 +446,7 @@ header {
     height: 70px;
   }
 
-  @media #{$veryShortAndNarrow} {
+  @media #{$tiny} {
     max-width: 50px;
     min-width: 50px;
     height: 50px;
