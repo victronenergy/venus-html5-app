@@ -1,5 +1,4 @@
 build/**
 node_modules/**
-dist/js/bundle.js.map
-**/*.map*
+dist/
 .DS_Store
