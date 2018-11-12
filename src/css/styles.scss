@@ -16,11 +16,6 @@ body {
   padding: 20px 40px 0 40px;
 
   @media #{$portrait} {
-    padding-right: 30px;
-    padding-left: 30px;
-  }
-
-  @media #{$narrow-portrait} {
     padding-right: 15px;
     padding-left: 15px;
   }
@@ -56,7 +51,7 @@ header {
     margin-bottom: 15px;
   }
 
-  @media #{$short} {
+  @media #{$portrait} {
     height: auto;
     padding: 3px 5px 10px 5px;
     margin-bottom: 0;
@@ -120,12 +115,6 @@ header {
   background-color: rgba(18, 26, 40, 1);
 
   @media #{$portrait} {
-    margin-bottom: 15px;
-    padding: 15px 24px;
-    border-radius: 13px;
-  }
-
-  @media #{$narrow-portrait} {
     margin-bottom: 10px;
     height: 80px;
     padding: 13px 18px;
@@ -152,12 +141,9 @@ header {
 
 .metric__container {
   @media #{$portrait} {
-    height: 180px;
+    height: 120px;
     align-items: flex-start;
-  }
-
-  @media #{$narrow-portrait} {
-    height: 140px;
+    flex-direction: column;
   }
 
   @media #{$short} {
@@ -167,10 +153,6 @@ header {
   @media #{$veryShortAndNarrow} {
     height: 100px;
   }
-
-  @media #{$portrait} {
-    flex-direction: column;
-  }
 }
 
 .metric--small {
@@ -179,6 +161,7 @@ header {
 
   @media #{$portrait} {
     width: 100%;
+    height: 66px;
   }
 }
 
@@ -191,15 +174,11 @@ header {
   height: 100%;
   align-items: center;
 
-  @media #{$portrait} {
-    height: 60px;
-  }
-
   @media #{$short} {
     height: 100%;
   }
 
-  @media #{$narrow-portrait} {
+  @media #{$portrait} {
     height: 40px;
   }
 
@@ -217,7 +196,7 @@ header {
   flex-direction: column;
   justify-content: space-between;
 
-  @media #{$narrow-portrait} {
+  @media #{$portrait} {
     margin-left: 25px;
   }
 
@@ -291,7 +270,7 @@ header {
     padding-right: 15px;
   }
 
-  @media #{$narrow-portrait} {
+  @media #{$portrait} {
     padding-right: 10px;
   }
 
@@ -356,7 +335,7 @@ header {
 .metric--shore-input-limit > .selector-button > span:first-child {
   margin-right: 10px;
 
-  @media #{$narrow-portrait} {
+  @media #{$portrait} {
     margin-right: 5px;
   }
 }
@@ -406,7 +385,6 @@ header {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  height: 55px;
 
   &--col {
     flex-direction: column;
