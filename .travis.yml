@@ -4,6 +4,7 @@ node_js:
 branches:
   only:
   - master
+  - /^\d+\.\d*\.?\d*$/ # Build on tags - allow branches with version numbers
 install:
 - npm ci
 cache:
