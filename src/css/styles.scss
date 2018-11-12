@@ -111,7 +111,7 @@ header {
 .metric {
   margin-bottom: 30px;
   height: 100px;
-  padding: 20px 40px;
+  padding: 20px $metric-padding-sides-landscape;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -174,7 +174,8 @@ header {
 }
 
 .metric--small {
-  width: calc(50% - 10px);
+  // define margin by setting elements width to 50% - small margin (for both!) and space between the elements
+  width: calc(50% - #{$metric--small-margin-between});
 
   @media #{$portrait} {
     width: 100%;
@@ -303,31 +304,22 @@ header {
   }
 }
 
-.metrics-selector {
+.metric__container--right {
+  // When metric has left and right 'parts'
+  // (100% width - paddings of parent (80px) - margin between metric--small elements 20px) / 2
+  // = (100% - 80px - 20px) / 2 = 50% - 40px - 10px;
+  width: calc(50% - #{$metric-padding-sides-landscape} - #{$metric--small-margin-between});
+}
+
+.inverter-charger__mode-selector {
+  @extend .metric__container--right;
+
   height: 100%;
-  width: calc(50% - 45px);
   display: flex;
   justify-content: space-between;
 
-  @media #{$wide} {
-    width: calc(50% - 40px);
-  }
-
-  @media #{$regular} {
-    width: calc(50% - 37px);
-  }
-
   @media #{$portrait} {
     height: 40px;
-    width: 100%;
-  }
-
-  @media #{$short} {
-    width: calc(50% - 25px);
-  }
-
-  @media #{$veryShortAndNarrow} {
-    height: 30px;
     width: 100%;
   }
 }
@@ -409,32 +401,17 @@ header {
 }
 
 .metric__battery-level-container {
+  @extend .metric__container--right;
+
   display: flex;
   justify-content: flex-start;
   align-items: center;
   height: 55px;
-  width: calc(50% - 45px);
 
   &--col {
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-  }
-
-  @media #{$wide} {
-    width: calc(50% - 40px);
-  }
-
-  @media #{$regular} {
-    width: calc(50% - 37px);
-  }
-
-  @media #{$narrow-portrait} {
-    //height: 100%;
-  }
-
-  @media #{$shortAndNarrow} {
-    width: 30%;
   }
 }
 
