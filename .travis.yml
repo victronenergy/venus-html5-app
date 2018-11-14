@@ -1,24 +1,25 @@
 language: node_js
 node_js:
-  - "stable"
+- stable
 branches:
   only:
   - master
-  - /^\d+\.\d*\.?\d*$/ # Build on tags - allow branches with version numbers
+  - "/^\\d+\\.\\d*\\.?\\d*$/" # Build on tags - allow branches with version numbers
 install:
 - npm ci
 cache:
   directories:
   - "$HOME/.npm"
 script:
-  - npm run compile
-  - npm run test
+- npm run compile
+- npm run test
 deploy:
   provider: releases
   api_key:
-    secure: fcEPVT4Uehas7LgtYio0uPbVBgkf98elPqVrmlXue/yDewRG83JPDZnZaS3/2nYGGs1wbrGbO6MfpSd/MdMPzvg9Jg61bYjN4zkynqVXRI9s4DFjHUMa8ixmh5Z5ta1hN56N1L8gdaMayfkjmh3Tp5N/2utCXqAd/wjglMv83bW9axWFdnFohF3LQqqgdlRRhrqxGeeYmvtDGkaK/C2X1Du5bgjMvd4e2nXdmIbuqsL+ebInSDQUFZzT2KKCnC43PqjNTACtEnuUn1OEcWJyZagH6g5Q+tE26woPAMKgYJtu675kqU0JKc/jGkRB8tliGpAOeowuHn8LBr4lQRC8/ZugHjJVv/phVH3TDE4Ma+7jLbkHtUE44z6tCcYEqDmAuWtlwKET8YfY0XfNEwZqIKF/Ys4XbleAd7lECDD9J8178QvdW7OzpRUQQfYkQaLOJSURUBzAyuNR0rkTagXu7+4zQrO/7Hhz26U7/0zthb09q3FYtgZBFtuUCtzGXf6nVY8hN2cI1dV7KUxGajiPTTzw2k228+X58krnohi7yh+IQFyHHJOZwHCyKRjMtGglR3YjLGRxUqX1jkpBYpC/n5MOyS8YSCiEP9n2UMXegvRYjeCrNctTBimxEI82PPSqk0VPz6roagKZCKjvOrrPWH9iJIbOIM4JMMgvPeQH1fc=
+    secure: YwhVwYCJE47WyVNjlFSun8KpgD0vmz4Qg+2yrGKsRCVtD9f060sENlQbLkQL1eiDM/JNrWb8lQS+OoBxKuVHBGhzbeVNt0/VES3c43H7zqHl4tZF5D5wlF5Nv/86Ppu0dkx0mt4PCmsU1Te5fSRyjAE8tY/mzHoNt6ntUWE6wAi0h1/Qj+FqKa2vVJ1U/ruP89XDGIyrXGUlzFGBbotopGYXctypDMW7AcIDG40RtDKolaLRtX19THVGrGBfOKI5rbCH/4iamRt6kGvkmrUv7SPc9ESx9YdkNdoRiaaVC1GFN+yUcK0WXFfuaxwAlKZqC2IDEGPqXwJenpXeQB0mIjRDkXaisZEwuviev47yuFyCk4eWHmVoUAFdYSZ6lqs3r2SntaCIchpocbbe5M626Sbr4sRu/Nk7OMgiojuIiyoxhAZ3+ozso664BDQW1pL5Dn7cMNF+0h/BzbPqF+sw2e4IDA1/2wZmZylTC7GQsCz/y722WVOT0UGwlTR6GqeUUnP03pdCNjSO2C9wzmrRH5U9UPA4JNw0WEBiBZ3AswDjByZPSZ48KZYoLtftyBHQ1htortcZdWXopVWZU+mOadggB/3xrJaH/2lwWh1SgBkAQeqpSDqP2K6RrgUn+RtadZ3wCm8Hl+2nU5chD2CorLvtNmhE9UzONcG02+qyQOE=
   skip_cleanup: true
   file_glob: true
   file: dist/**/*
   on:
+    repo: victronenergy/venus-html5-app
     tags: true
