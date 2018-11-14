@@ -13,13 +13,14 @@ cache:
 script:
 - npm run compile
 - npm run test
+before_deploy:
+- tar -zcvf venus-html5-app.tar.gz dist/
 deploy:
   provider: releases
   api_key:
     secure: YwhVwYCJE47WyVNjlFSun8KpgD0vmz4Qg+2yrGKsRCVtD9f060sENlQbLkQL1eiDM/JNrWb8lQS+OoBxKuVHBGhzbeVNt0/VES3c43H7zqHl4tZF5D5wlF5Nv/86Ppu0dkx0mt4PCmsU1Te5fSRyjAE8tY/mzHoNt6ntUWE6wAi0h1/Qj+FqKa2vVJ1U/ruP89XDGIyrXGUlzFGBbotopGYXctypDMW7AcIDG40RtDKolaLRtX19THVGrGBfOKI5rbCH/4iamRt6kGvkmrUv7SPc9ESx9YdkNdoRiaaVC1GFN+yUcK0WXFfuaxwAlKZqC2IDEGPqXwJenpXeQB0mIjRDkXaisZEwuviev47yuFyCk4eWHmVoUAFdYSZ6lqs3r2SntaCIchpocbbe5M626Sbr4sRu/Nk7OMgiojuIiyoxhAZ3+ozso664BDQW1pL5Dn7cMNF+0h/BzbPqF+sw2e4IDA1/2wZmZylTC7GQsCz/y722WVOT0UGwlTR6GqeUUnP03pdCNjSO2C9wzmrRH5U9UPA4JNw0WEBiBZ3AswDjByZPSZ48KZYoLtftyBHQ1htortcZdWXopVWZU+mOadggB/3xrJaH/2lwWh1SgBkAQeqpSDqP2K6RrgUn+RtadZ3wCm8Hl+2nU5chD2CorLvtNmhE9UzONcG02+qyQOE=
   skip_cleanup: true
-  file_glob: true
-  file: dist/**/*
+  file: venus-html5-app.tar.gz
   on:
     repo: victronenergy/venus-html5-app
     tags: true
