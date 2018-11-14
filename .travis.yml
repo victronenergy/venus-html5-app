@@ -1,26 +1,37 @@
+# We don't need to use `sudo`, and can instead use containers for faster builds
+sudo: false
+# This is a JS project
 language: node_js
+# Use latest stable node version
 node_js:
 - stable
 branches:
   only:
+  # Only run branch builds on master to prevent double builds on pull requests
   - master
-  - "/^\\d+\\.\\d*\\.?\\d*$/" # Build on tags - allow branches with version numbers
+  # Allow branches representing tags, otherwise the deploy step won't trigger
+  - "/^\\d+\\.\\d*\\.?\\d*$/"
+# Use `npm ci` instead of default `npm install` for installing dependencies
 install:
 - npm ci
 cache:
   directories:
   - "$HOME/.npm"
 script:
-- npm run compile
 - npm run test
+- npm run compile
+# Archive the built files in preparation of uploading them to Github
 before_deploy:
 - tar -zcvf venus-html5-app.tar.gz dist/
 deploy:
+  # Upload artifacts to Github Releases - use `releases` provider
   provider: releases
   api_key:
     secure: YwhVwYCJE47WyVNjlFSun8KpgD0vmz4Qg+2yrGKsRCVtD9f060sENlQbLkQL1eiDM/JNrWb8lQS+OoBxKuVHBGhzbeVNt0/VES3c43H7zqHl4tZF5D5wlF5Nv/86Ppu0dkx0mt4PCmsU1Te5fSRyjAE8tY/mzHoNt6ntUWE6wAi0h1/Qj+FqKa2vVJ1U/ruP89XDGIyrXGUlzFGBbotopGYXctypDMW7AcIDG40RtDKolaLRtX19THVGrGBfOKI5rbCH/4iamRt6kGvkmrUv7SPc9ESx9YdkNdoRiaaVC1GFN+yUcK0WXFfuaxwAlKZqC2IDEGPqXwJenpXeQB0mIjRDkXaisZEwuviev47yuFyCk4eWHmVoUAFdYSZ6lqs3r2SntaCIchpocbbe5M626Sbr4sRu/Nk7OMgiojuIiyoxhAZ3+ozso664BDQW1pL5Dn7cMNF+0h/BzbPqF+sw2e4IDA1/2wZmZylTC7GQsCz/y722WVOT0UGwlTR6GqeUUnP03pdCNjSO2C9wzmrRH5U9UPA4JNw0WEBiBZ3AswDjByZPSZ48KZYoLtftyBHQ1htortcZdWXopVWZU+mOadggB/3xrJaH/2lwWh1SgBkAQeqpSDqP2K6RrgUn+RtadZ3wCm8Hl+2nU5chD2CorLvtNmhE9UzONcG02+qyQOE=
   skip_cleanup: true
+  # Upload archive build `before_deploy`
   file: venus-html5-app.tar.gz
+  # Trigger release on tags
   on:
     repo: victronenergy/venus-html5-app
     tags: true
