@@ -29,11 +29,11 @@ class ShoreInputLimitSelector extends Component {
     })
 
     return (
-      <div>
-        <div className="amperage-selector__container">
-          <div className="amperage-selector">
-            <div className="text text--large text--center amperage-selector__description">Select shore input limit</div>
-            {amperageList.map(currentValue => {
+      <div className="amperage-selector__container">
+        <div className="amperage-selector">
+          <div className="text text--large text--center amperage-selector__description">Select shore input limit</div>
+          {amperageList
+            .map(currentValue => {
               return (
                 <button
                   className={
@@ -46,8 +46,14 @@ class ShoreInputLimitSelector extends Component {
                   {currentValue}A
                 </button>
               )
-            })}
-          </div>
+            })
+            // Add these to "cheat" the flexbox and allow center alignment of selector buttons
+            // AND left alignment to the last row of buttons if multilined
+            .concat(
+              amperageList.map(() => {
+                return <div className="empty" />
+              })
+            )}
         </div>
       </div>
     )
