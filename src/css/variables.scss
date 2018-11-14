@@ -3,11 +3,12 @@ $minimum: "all and (max-width: 600px)";
 
 $smaller: "all and (max-width: 1000px) and (min-aspect-ratio: 9/10)";
 $small: "all and (max-width: 800px) and (min-aspect-ratio: 9/10)";
-$very-small: "all and (max-width: 600px) and (min-aspect-ratio: 9/10)";
-$tiny: "all and (max-width: 400px) and (min-aspect-ratio: 9/10)";
+$very-small: "all and (max-width: 650px) and (min-aspect-ratio: 9/10)";
+$tiny: "all and (max-width: 450px) and (min-aspect-ratio: 9/10)";
 
 $portrait: "all and (max-aspect-ratio: 9/10)";
 $narrow-portrait: "all and (max-aspect-ratio: 6/10)";
 $very-narrow-portrait: $narrow-portrait + " and (max-width: 400px)";
 
 $low-landscape: "all and (min-aspect-ratio: 3/1)";
+$very-low-landscape: $low-landscape + " and (max-height: 350px)";
