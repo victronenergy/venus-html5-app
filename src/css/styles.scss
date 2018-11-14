@@ -29,6 +29,11 @@ body {
     padding-right: 5px;
     padding-left: 5px;
   }
+
+  @media #{$low-landscape} {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
 }
 
 html,
@@ -67,15 +72,8 @@ header {
   justify-content: space-between;
   align-items: center;
 
-  @media #{$low-landscape} {
-    height: auto;
-    margin-bottom: 15px;
-  }
-
   @media #{$portrait}, #{$small} {
-    height: auto;
     padding: 3px 5px 10px 5px;
-    margin-bottom: 0;
   }
 }
 
@@ -131,9 +129,16 @@ header {
   background-color: rgba(18, 26, 40, 1);
 
   @media #{$low-landscape} {
-    height: 80px;
-    margin-bottom: 15px;
+    height: 65px;
+    margin-bottom: 10px;
     padding: 15px 40px;
+  }
+
+  @media #{$very-low-landscape} {
+    height: 60px;
+    margin-bottom: 5px;
+    padding: 10px 20px;
+    border-radius: 8px;
   }
 
   @media #{$portrait}, #{$smaller} {
@@ -143,7 +148,7 @@ header {
     border-radius: 10px;
   }
 
-  @media #{$very-narrow-portrait}, #{$very-small} {
+  @media #{$very-narrow-portrait} {
     margin-bottom: 5px;
     height: 70px;
     padding: 12px;
@@ -297,6 +302,10 @@ header {
 
   @media #{$very-narrow-portrait}, #{$small} {
     width: calc(50% - 12px - 1.5px);
+  }
+
+  @media #{$very-low-landscape} {
+    width: calc(50% - 20px - 10px);
   }
 }
 
