@@ -125,27 +125,28 @@ press the `reload page` on the top left corner of the page.
 
 ## Making a new release
 
-To make a new release:
+Whenever a new tag is created, Travis CI will build the app, archive the built files and upload them as `venus-html5-app.tar.gz` to the Github Release associated with the tag.
+The app can then be downloaded from `https://github.com/victronenergy/venus-html5-app/releases/download/<TAG_NAME>/venus-html5-app.tar.gz`.
+
+To include the HTML5 app in the next Venus OS version:
 
 1. Create & push a tag for the version (do not use `v` in the version name, just the number)
 2. Update the [todo](https://github.com/victronenergy/venus-private/wiki/todo) page for the build
 
 You should add a note under "waiting for recipe", containing the tag name and the changes included:
 
-```
-md
+```md
 html5-app - <tag name>
     <message>
 ```
 
 For example:
 
-```
-md
+```md
 html5-app - 0.2
-    \* Reworked the UI
+    * Reworked the UI
 ```
 
 If you need any changes to the how the app is included inside Venus, please specify in the TODO file as well what changes need to be made to the recipe.
 All Venus recipes are found [here](https://github.com/victronenergy/meta-victronenergy/tree/master/meta-ve-software/recipes-ve).
-A sample recipe for the HTML5 app is [here](https://github.com/victronenergy/meta-victronenergy/blob/master/meta-ve-software/recipes-ve/venus-html5-app_0.1.bb)
+A sample recipe for the HTML5 app is [here](https://github.com/victronenergy/meta-victronenergy/tree/master/meta-ve-software/recipes-ve)
