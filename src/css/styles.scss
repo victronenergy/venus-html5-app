@@ -389,42 +389,49 @@ header {
 }
 
 .amperage-selector__container {
+  background-color: rgba(18, 26, 40, 1);
+  border-radius: 16.6px;
+  padding: 25px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .amperage-selector__description {
+  flex-basis: 100%;
   margin-bottom: 10px;
 }
 
 .amperage-selector {
-  padding: 25px;
-  border-radius: 16.6px;
-  background-color: rgba(18, 26, 40, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
 
-  @media #{$minimum} {
-    margin: 20px 10px;
+.empty {
+  // Add these to "cheat" the flexbox and allow center alignment of selector buttons
+  // AND left alignment to the last row of buttons if multilined. See ShoreInputLimitSelector.js
+  height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin: 0px 10px;
+  width: 130px;
+
+  @media all and (min-width: 880px) {
+    display: none;
   }
 
-  @media #{$tiny} {
-    padding: 15px;
+  @media all and (max-width: 729px) {
+    width: 110px;
   }
 
-  @media screen and (max-width: 1070px) {
-    width: 750px;
+  @media all and (max-width: 579px) {
+    width: 70px;
   }
 
-  @media screen and (max-width: 920px) {
-    width: 600px;
-  }
-
-  @media screen and (max-width: 770px) {
-    width: 450px;
-  }
-
-  @media screen and (max-width: 620px) {
-    width: 100%;
+  @media all and (max-width: 400px) {
+    width: 50px;
   }
 }
 
@@ -434,19 +441,19 @@ header {
   min-width: 130px;
   height: 125px;
 
-  @media #{$regular} {
+  @media all and (max-width: 729px) {
     max-width: 110px;
     min-width: 110px;
     height: 110px;
   }
 
-  @media #{$shortAndNarrow} {
+  @media all and (max-width: 579px) {
     max-width: 70px;
     min-width: 70px;
     height: 70px;
   }
 
-  @media #{$tiny} {
+  @media all and (max-width: 400px) {
     max-width: 50px;
     min-width: 50px;
     height: 50px;

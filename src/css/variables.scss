@@ -1,9 +1,5 @@
-// Use 1920px screen as baseline and scale down when needed
-
 $regular: "all and (max-width: 1279px)";
 $minimum: "all and (max-width: 600px)";
-
-$shortAndNarrow: "all and (max-height: 500px) and (max-width: 600px)";
 
 $smaller: "all and (max-width: 1000px) and (min-aspect-ratio: 9/10)";
 $small: "all and (max-width: 800px) and (min-aspect-ratio: 9/10)";
