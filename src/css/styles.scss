@@ -73,7 +73,11 @@ header {
   align-items: center;
 
   @media #{$portrait}, #{$small} {
-    padding: 3px 5px 10px 5px;
+    padding: 0 5px;
+  }
+
+  @media #{$small}, #{$low-landscape} {
+    flex-basis: 40px;
   }
 }
 
@@ -128,21 +132,8 @@ header {
   border-radius: 16.6px;
   background-color: rgba(18, 26, 40, 1);
 
-  @media #{$low-landscape} {
-    height: 65px;
-    margin-bottom: 10px;
-    padding: 15px 40px;
-  }
-
-  @media #{$very-low-landscape} {
-    height: 60px;
-    margin-bottom: 5px;
-    padding: 10px 20px;
-    border-radius: 8px;
-  }
-
   @media #{$portrait}, #{$smaller} {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     height: 80px;
     padding: 13px 18px;
     border-radius: 10px;
@@ -157,12 +148,26 @@ header {
 
   @media #{$very-small} {
     padding: 8px 12px;
+    margin-bottom: 5px;
     height: 55px;
   }
 
   @media #{$tiny} {
     height: 40px;
     padding: 8px 12px;
+  }
+
+  @media #{$low-landscape} {
+    height: 65px;
+    margin-bottom: 10px;
+    padding: 15px 40px;
+  }
+
+  @media #{$very-low-landscape} {
+    height: 60px;
+    margin-bottom: 5px;
+    padding: 10px 20px;
+    border-radius: 8px;
   }
 }
 
