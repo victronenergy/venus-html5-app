@@ -14,7 +14,7 @@
 <body>
   <div id="devReload" style="position: fixed; top: 30px; left: 200px; display: none;">
     <input type="button" value="Reload page" onclick="location.reload(true)" />
-    <input type="button" value="Browser info" onclick="window.location.href = 'browser-info.html'" />
+    <input type="button" value="Browser info" onclick="window.location.href = 'browser-info.html' + window.location.search" />
   </div>
   <div id="debugLog" style="color: white; background-color: rgba(18, 26, 40, 1); max-height: 200px; overflow: scroll;"></div>
   <script>
