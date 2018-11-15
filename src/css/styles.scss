@@ -251,9 +251,9 @@ header {
 }
 
 .disconnected {
-  .metric__values,
+  .metric__value-container > :last-child,
   button span,
-  .text--bottom-align {
+  .metric__battery-level-container {
     opacity: 0.5;
   }
 }
