@@ -27,6 +27,7 @@
     "css-loader": "^1.0.0",
     "file-loader": "^2.0.0",
     "html-webpack-plugin": "^3.2.0",
+    "husky": "^1.1.4",
     "jest": "^23.6.0",
     "live-server": "^1.2.0",
     "mqtt": "^2.18.3",
@@ -41,5 +42,10 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "node hooks/commit-msg.js $HUSKY_GIT_PARAMS"
+    }
   }
 }
