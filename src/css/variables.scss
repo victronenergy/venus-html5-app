@@ -12,3 +12,5 @@ $very-narrow-portrait: $narrow-portrait + " and (max-width: 400px)";
 
 $low-landscape: "all and (min-aspect-ratio: 3/1)";
 $very-low-landscape: $low-landscape + " and (max-height: 350px)";
+
+$hide-remote-console-breakpoint: "all and (max-width: 540px), (max-height: 350px)";
