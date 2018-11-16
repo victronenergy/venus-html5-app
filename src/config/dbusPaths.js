@@ -77,6 +77,7 @@ export const DBUS_PATHS = {
   },
   SETTINGS: {
     AC_INPUT_TYPE1: "/Settings/SystemSetup/AcInput1",
-    AC_INPUT_TYPE2: "/Settings/SystemSetup/AcInput2"
+    AC_INPUT_TYPE2: "/Settings/SystemSetup/AcInput2",
+    SHOW_REMOTE_CONSOLE: "/Settings/SystemSetup/<placeholder>" // TODO: Get real setting
   }
 }

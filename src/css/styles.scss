@@ -117,6 +117,29 @@ header {
   }
 }
 
+.remote-console-button {
+  margin-left: 25px;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 6px;
+  border: none;
+  color: white;
+  background-color: #0a101f;
+  outline: none;
+  cursor: pointer;
+}
+
+.remote-console__container {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.remote-console {
+  height: 350px;
+  width: 800px;
+}
+
 #metrics-container {
   width: 100%;
 }

@@ -1,4 +1,5 @@
 import { h, Component } from "preact"
+import { VIEWS } from "../../config/enums"
 
 class ShoreInputLimit extends Component {
   render(props, state) {
@@ -15,7 +16,7 @@ class ShoreInputLimit extends Component {
 
     return (
       <div className="metric metric--small metric--shore-input-limit">
-        <button className="selector-button text" onclick={props.onSelectShoreLimitClick}>
+        <button className="selector-button text" onclick={() => props.setView(VIEWS.AMPERAGE_SELECTOR)}>
           <span className="text--small">Select shore input limit:&nbsp;</span>
           <span className="text--bold">{props.currentLimit}</span>
         </button>
