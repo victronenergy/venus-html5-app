@@ -122,7 +122,7 @@ class App extends Component {
           <img src="./images/icons/logo.png" className="logo" />
           <div className="connection">
             <img src="./images/icons/connected.svg" className="connection__icon" />
-            <p className="text text--very-small">{this.state.connected ? "Connected" : "Disconnected"}</p>
+            <p className="text text--very-small">{state.connected ? "Connected" : "Disconnected"}</p>
             {state[DBUS_PATHS.SETTINGS.SHOW_REMOTE_CONSOLE] && (
               <button className="remote-console-button text text--very-small" onClick={this.toggleRemoteConsole}>
                 {state.currentView !== VIEWS.REMOTE_CONSOLE ? "Remote Console" : "Close"}
@@ -130,15 +130,15 @@ class App extends Component {
             )}
           </div>
         </header>
-        <main className={!this.state.connected ? "disconnected" : ""}>
+        <main className={!state.connected ? "disconnected" : ""}>
           {(() => {
             switch (state.currentView) {
               case VIEWS.AMPERAGE_SELECTOR:
                 return (
                   <ShoreInputLimitSelector
-                    currentLimit={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT]}
-                    maxLimit={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT_MAX]}
-                    productId={this.state[DBUS_PATHS.INVERTER_CHARGER.PRODUCT_ID]}
+                    currentLimit={state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT]}
+                    maxLimit={state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT_MAX]}
+                    productId={state[DBUS_PATHS.INVERTER_CHARGER.PRODUCT_ID]}
                     onLimitSelected={this.handleShorePowerLimitSelected}
                   />
                 )
@@ -157,69 +157,69 @@ class App extends Component {
                 return (
                   <div id="metrics-container">
                     <Battery
-                      soc={this.state[DBUS_PATHS.BATTERY.SOC]}
-                      state={this.state[DBUS_PATHS.BATTERY.STATE]}
-                      voltage={this.state[DBUS_PATHS.BATTERY.VOLTAGE]}
-                      current={this.state[DBUS_PATHS.BATTERY.CURRENT]}
-                      power={this.state[DBUS_PATHS.BATTERY.POWER]}
-                      timeToGo={this.state[DBUS_PATHS.BATTERY.TIME_TO_GO]}
+                      soc={state[DBUS_PATHS.BATTERY.SOC]}
+                      state={state[DBUS_PATHS.BATTERY.STATE]}
+                      voltage={state[DBUS_PATHS.BATTERY.VOLTAGE]}
+                      current={state[DBUS_PATHS.BATTERY.CURRENT]}
+                      power={state[DBUS_PATHS.BATTERY.POWER]}
+                      timeToGo={state[DBUS_PATHS.BATTERY.TIME_TO_GO]}
                     />
                     <div className="multi-metric-container shore-power__container">
                       <ActiveSource
-                        activeInput={this.state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_INPUT]}
+                        activeInput={state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_INPUT]}
                         settings={{
-                          input0: this.state[DBUS_PATHS.SETTINGS.AC_INPUT_TYPE1],
-                          input1: this.state[DBUS_PATHS.SETTINGS.AC_INPUT_TYPE2]
+                          input0: state[DBUS_PATHS.SETTINGS.AC_INPUT_TYPE1],
+                          input1: state[DBUS_PATHS.SETTINGS.AC_INPUT_TYPE2]
                         }}
                         current={{
-                          phase1: this.state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.CURRENT_PHASE_1],
-                          phase2: this.state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.CURRENT_PHASE_2],
-                          phase3: this.state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.CURRENT_PHASE_3]
+                          phase1: state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.CURRENT_PHASE_1],
+                          phase2: state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.CURRENT_PHASE_2],
+                          phase3: state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.CURRENT_PHASE_3]
                         }}
                         voltage={{
-                          phase1: this.state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.VOLTAGE_PHASE_1],
-                          phase2: this.state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.VOLTAGE_PHASE_2],
-                          phase3: this.state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.VOLTAGE_PHASE_3]
+                          phase1: state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.VOLTAGE_PHASE_1],
+                          phase2: state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.VOLTAGE_PHASE_2],
+                          phase3: state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.VOLTAGE_PHASE_3]
                         }}
                         power={{
-                          phase1: this.state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.POWER_PHASE_1],
-                          phase2: this.state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.POWER_PHASE_2],
-                          phase3: this.state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.POWER_PHASE_3]
+                          phase1: state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.POWER_PHASE_1],
+                          phase2: state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.POWER_PHASE_2],
+                          phase3: state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.POWER_PHASE_3]
                         }}
                       />
                       <ShoreInputLimit
-                        currentLimit={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT]}
-                        isAdjustable={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT_IS_ADJUSTABLE]}
+                        currentLimit={state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT]}
+                        isAdjustable={state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT_IS_ADJUSTABLE]}
                         setView={this.setView}
                       />
                     </div>
                     <InverterCharger
-                      state={this.state[DBUS_PATHS.INVERTER_CHARGER.SYSTEM.STATE]}
-                      activeMode={this.state[DBUS_PATHS.INVERTER_CHARGER.SYSTEM.MODE]}
-                      isAdjustable={this.state[DBUS_PATHS.INVERTER_CHARGER.SYSTEM.MODE_IS_ADJUSTABLE]}
+                      state={state[DBUS_PATHS.INVERTER_CHARGER.SYSTEM.STATE]}
+                      activeMode={state[DBUS_PATHS.INVERTER_CHARGER.SYSTEM.MODE]}
+                      isAdjustable={state[DBUS_PATHS.INVERTER_CHARGER.SYSTEM.MODE_IS_ADJUSTABLE]}
                       onModeSelected={this.handleModeSelected}
                     />
                     <div className="multi-metric-container">
                       <AcLoads
                         current={{
-                          phase1: this.state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_CURRENT_PHASE_1],
-                          phase2: this.state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_CURRENT_PHASE_2],
-                          phase3: this.state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_CURRENT_PHASE_3]
+                          phase1: state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_CURRENT_PHASE_1],
+                          phase2: state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_CURRENT_PHASE_2],
+                          phase3: state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_CURRENT_PHASE_3]
                         }}
                         voltage={{
-                          phase1: this.state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_VOLTAGE_PHASE_1],
-                          phase2: this.state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_VOLTAGE_PHASE_2],
-                          phase3: this.state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_VOLTAGE_PHASE_3]
+                          phase1: state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_VOLTAGE_PHASE_1],
+                          phase2: state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_VOLTAGE_PHASE_2],
+                          phase3: state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_VOLTAGE_PHASE_3]
                         }}
                         power={{
-                          phase1: this.state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_POWER_PHASE_1],
-                          phase2: this.state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_POWER_PHASE_2],
-                          phase3: this.state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_POWER_PHASE_3]
+                          phase1: state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_POWER_PHASE_1],
+                          phase2: state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_POWER_PHASE_2],
+                          phase3: state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_POWER_PHASE_3]
                         }}
                       />
                       <DcLoads
-                        batteryVoltage={this.state[DBUS_PATHS.BATTERY.VOLTAGE]}
-                        power={this.state[DBUS_PATHS.INVERTER_CHARGER.DC_LOADS.POWER]}
+                        batteryVoltage={state[DBUS_PATHS.BATTERY.VOLTAGE]}
+                        power={state[DBUS_PATHS.INVERTER_CHARGER.DC_LOADS.POWER]}
                       />
                     </div>
                   </div>
