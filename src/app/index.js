@@ -130,7 +130,15 @@ class App extends Component {
             )}
           </div>
         </header>
-        <main className={!state.connected ? "disconnected" : ""}>
+        <main
+          className={!state.connected ? "disconnected" : ""}
+          onClick={e => {
+            // Bit of a hack to close "overlays" but doing it without adding event preventDefaults everywhere
+            if (e.target.nodeName === "MAIN") {
+              this.setView(VIEWS.METRICS)
+            }
+          }}
+        >
           {(() => {
             switch (state.currentView) {
               case VIEWS.AMPERAGE_SELECTOR:
@@ -145,7 +153,12 @@ class App extends Component {
                 ca
               case VIEWS.REMOTE_CONSOLE:
                 return (
-                  <div className="remote-console__container">
+                  <div
+                    className="remote-console__container"
+                    onClick={() => {
+                      this.setView(VIEWS.METRICS)
+                    }}
+                  >
                     <iframe className="remote-console" src={"http://" + host} />
                     <span className="text text--large remote-console__small_screen_info">
                       Open in a larger screen to view remote console.
