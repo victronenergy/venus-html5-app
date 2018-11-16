@@ -147,6 +147,9 @@ class App extends Component {
                 return (
                   <div className="remote-console__container">
                     <iframe className="remote-console" src={"http://" + host} />
+                    <span className="text text--large remote-console__small_screen_info">
+                      Open in a larger screen to view remote console.
+                    </span>
                   </div>
                 )
               case VIEWS.METRICS:
