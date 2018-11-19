@@ -37,6 +37,7 @@ class ShoreInputLimitSelector extends Component {
     const amperageList = this.getSuggestedAmperageValuesList(props.productId).filter(value => {
       return value <= maxLimit
     })
+    const currentlySelectedLimit = parseInt(props.currentLimit)
 
     return (
       <div className="amperage-selector__container">
@@ -47,9 +48,8 @@ class ShoreInputLimitSelector extends Component {
               <button
                 className={
                   "selector-button selector-button__amperage text text--very-large" +
-                  (parseInt(props.currentLimit) == currentValue ? " selector-button--active" : "")
+                  (currentlySelectedLimit == currentValue ? " selector-button--active" : "")
                 }
-                href="#"
                 onClick={() => props.onLimitSelected(currentValue)}
               >
                 {currentValue}A
