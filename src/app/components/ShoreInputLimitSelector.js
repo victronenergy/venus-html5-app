@@ -8,6 +8,10 @@ class ShoreInputLimitSelector extends Component {
   state = {
     showEmpties: false
   }
+
+  firstSelectorButtonNode = null
+  amperageContainerNode = null
+
   /**
    * - Mask the Product id with `0xFF00`
    * - If the result is `0x1900` or `0x2600` it is an EU model (230VAC)
@@ -26,8 +30,8 @@ class ShoreInputLimitSelector extends Component {
   }
 
   componentDidMount() {
-    const container = document.getElementsByClassName("amperage-selector")[0]
-    const selectorButton = document.getElementsByClassName("selector-button__amperage")[0]
+    const container = this.amperageContainerNode
+    const selectorButton = this.firstSelectorButtonNode
     const showEmpties = container && selectorButton && container.clientHeight > selectorButton.clientHeight * 2
     this.setState({ showEmpties: showEmpties })
   }
@@ -41,9 +45,9 @@ class ShoreInputLimitSelector extends Component {
 
     return (
       <div className="amperage-selector__container">
-        <div className="amperage-selector">
+        <div className="amperage-selector" ref={node => (this.amperageContainerNode = node)}>
           <div className="text text--large text--center amperage-selector__description">Select shore input limit</div>
-          {amperageList.map(currentValue => {
+          {amperageList.map((currentValue, index) => {
             return (
               <button
                 className={
@@ -51,6 +55,7 @@ class ShoreInputLimitSelector extends Component {
                   (currentlySelectedLimit == currentValue ? " selector-button--active" : "")
                 }
                 onClick={() => props.onLimitSelected(currentValue)}
+                ref={node => (index === 0 ? (this.firstSelectorButtonNode = node) : null)}
               >
                 {currentValue}A
               </button>
