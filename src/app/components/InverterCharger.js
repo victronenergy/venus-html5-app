@@ -14,62 +14,30 @@ class InverterCharger extends Component {
             </div>
           </div>
         </div>
-        {props.isAdjustable ? (
-          <div className="inverter-charger__mode-selector">
-            <button
-              className={"selector-button text" + (props.activeMode == "ON" ? " selector-button--active" : "")}
-              onClick={() => props.onModeSelected(SYSTEM_MODE.ON)}
-            >
-              <span>On</span>
-            </button>
-            <button
-              className={"selector-button text" + (props.activeMode == "OFF" ? " selector-button--active" : "")}
-              onClick={() => props.onModeSelected(SYSTEM_MODE.OFF)}
-            >
-              <span>Off</span>
-            </button>
-            <button
-              className={
-                "selector-button text" + (props.activeMode == "Charger only" ? " selector-button--active" : "")
-              }
-              onClick={() => props.onModeSelected(SYSTEM_MODE.CHARGER_ONLY)}
-            >
-              <span>Charger only</span>
-            </button>
-            {/*// TODO Should we add a button for inverter only as well?*/}
-          </div>
-        ) : (
-          <div className="inverter-charger__mode-selector">
-            <button
-              disabled
-              className={
-                "selector-button selector-button--disabled  text" +
-                (props.activeMode == "ON" ? " selector-button--active" : "")
-              }
-            >
-              On
-            </button>
-            <button
-              disabled
-              className={
-                "selector-button selector-button--disabled text" +
-                (props.activeMode == "OFF" ? " selector-button--active" : "")
-              }
-            >
-              Off
-            </button>
-            <button
-              disabled
-              className={
-                "selector-button selector-button--disabled text" +
-                (props.activeMode == "Charger only" ? " selector-button--active" : "")
-              }
-            >
-              Charger only
-            </button>
-            {/*// TODO Should we add a button for inverter only as well?*/}
-          </div>
-        )}
+        <div className="inverter-charger__mode-selector">
+          <button
+            disabled={!props.isAdjustable}
+            className={"selector-button text" + (props.activeMode == "ON" ? " selector-button--active" : "")}
+            onClick={() => props.onModeSelected(SYSTEM_MODE.ON)}
+          >
+            <span>On</span>
+          </button>
+          <button
+            disabled={!props.isAdjustable}
+            className={"selector-button text" + (props.activeMode == "OFF" ? " selector-button--active" : "")}
+            onClick={() => props.onModeSelected(SYSTEM_MODE.OFF)}
+          >
+            <span>Off</span>
+          </button>
+          <button
+            disabled={!props.isAdjustable}
+            className={"selector-button text" + (props.activeMode == "Charger only" ? " selector-button--active" : "")}
+            onClick={() => props.onModeSelected(SYSTEM_MODE.CHARGER_ONLY)}
+          >
+            <span>Charger only</span>
+          </button>
+          {/*// TODO Should we add a button for inverter only as well?*/}
+        </div>
       </div>
     )
   }
