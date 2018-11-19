@@ -548,3 +548,21 @@ button:disabled {
     @extend .selector-button--active;
   }
 }
+
+.error-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2em;
+
+  .image-container {
+    max-width: 600px;
+  }
+}
+
+.image-container {
+  margin: 2em 0;
+  img {
+    width: 100%;
+  }
+}

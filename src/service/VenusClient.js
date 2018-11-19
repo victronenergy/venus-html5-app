@@ -34,6 +34,13 @@ const subscribeCallback = (err, granted) => {
   }
 }
 
+const STATUS = {
+  CONNECTING: "connecting",
+  CONNECTED: "connected",
+  DISCONNECTED: "disconnected",
+  RECONNECTING: "reconnecting"
+}
+
 class VenusClient {
   /**
    * @type {MockMqttClient|MqttClient}
@@ -45,12 +52,30 @@ class VenusClient {
    */
   venusSystem
   keepAliveHandlerRef = null
+
+  /**
+   * @type {STATUS}
+   */
+  status = null
+
   onMessage = () => {}
   onConnectionChanged = () => {}
 
   constructor(host) {
+    this.status = STATUS.CONNECTING
     this.mqttClient = USE_MOCK_MQTT ? new MockMqttClient() : mqtt.connect(host)
     this.venusSystem = new VenusSystem()
+
+    this.mqttClient.stream.on("error", error => {
+      Logger.warn("MQTT Stream Error", error)
+      this.errorMessage = error
+    })
+
+    this.mqttClient.on("error", error => {
+      Logger.warn("MQTT Error", error)
+      this.errorMessage = error
+    })
+
     window.onunload = () => {
       this.mqttClient.end()
     }
@@ -58,6 +83,8 @@ class VenusClient {
 
   connect = () => {
     return new Promise((resolve, reject) => {
+      Logger.log("Status - initial: ", this.status)
+
       this.mqttClient.once("connect", () => {
         const initialSubs = arrayToSubscriptionMap(TOPICS_TO_SUBSCRIBE_ON_INIT)
         this.mqttClient.subscribe(initialSubs, (err, granted) => {
@@ -69,17 +96,29 @@ class VenusClient {
       })
 
       this.mqttClient.on("connect", () => {
+        Logger.log(`Status: ${this.status} >> ${STATUS.CONNECTED}`)
+        this.status = STATUS.CONNECTED
         this.setupKeepAlive()
         this.onConnectionChanged({ connected: true })
       })
 
       this.mqttClient.on("disconnect", () => {
+        Logger.log(`Status: ${this.status} >> ${STATUS.DISCONNECTED}`)
+        this.status = STATUS.DISCONNECTED
         clearInterval(this.keepAliveHandlerRef)
         this.onConnectionChanged({ connected: false })
       })
 
       this.mqttClient.on("reconnect", () => {
+        Logger.log(`Status: ${this.status} >> ${STATUS.RECONNECTING}`)
+        const previousStatus = this.status
+        this.status = STATUS.RECONNECTING
         this.onConnectionChanged({ connected: false })
+
+        if (this.status === STATUS.RECONNECTING && previousStatus === STATUS.CONNECTING && this.errorMessage) {
+          this.mqttClient.end()
+          reject(this.errorMessage)
+        }
       })
 
       this.mqttClient.on("message", (topic, data) => {
@@ -108,6 +147,7 @@ class VenusClient {
    * Send a read message every 50s to keep the MQTT broker alive
    */
   setupKeepAlive() {
+    Logger.log("Setting up keep alive ...")
     clearInterval(this.keepAliveHandlerRef)
     this.keepAliveHandlerRef = setInterval(() => {
       const topic = this.venusSystem.getTopicFromDbusPath("R", DBUS_PATHS.GENERAL.SERIAL)

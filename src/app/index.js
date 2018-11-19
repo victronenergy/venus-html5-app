@@ -72,10 +72,16 @@ class App extends Component {
 
   componentDidMount = () => {
     this.deviceInterface = new VenusClient(mqttUrl)
-    this.deviceInterface.connect().then(() => {
-      const dbusPaths = Object.keys(metricsConfig)
-      this.deviceInterface.subscribe(dbusPaths)
-    })
+    this.deviceInterface.connect().then(
+      () => {
+        const dbusPaths = Object.keys(metricsConfig)
+        this.deviceInterface.subscribe(dbusPaths)
+      },
+      err => {
+        Logger.warn("Could not connect to MQTT", err)
+        this.setView(VIEWS.MQTT_UNAVAILABLE)
+      }
+    )
 
     this.deviceInterface.onMessage = ({ path, value }) => {
       const metric = metricsConfig[path]
@@ -138,7 +144,7 @@ class App extends Component {
           className={!state.connected ? "disconnected" : ""}
           onClick={e => {
             // Bit of a hack to close "overlays" but doing it without adding event preventDefaults everywhere
-            if (e.target.nodeName === "MAIN") {
+            if (e.target.nodeName === "MAIN" && this.state.currentView !== VIEWS.MQTT_UNAVAILABLE) {
               this.setView(VIEWS.METRICS)
             }
           }}
@@ -238,6 +244,19 @@ class App extends Component {
                         batteryVoltage={state[DBUS_PATHS.BATTERY.VOLTAGE]}
                         power={state[DBUS_PATHS.INVERTER_CHARGER.DC_LOADS.POWER]}
                       />
+                    </div>
+                  </div>
+                )
+              case VIEWS.MQTT_UNAVAILABLE:
+                return (
+                  <div className="error-page">
+                    <span className="text text--large">
+                      Could not connect to the MQTT server. <br />
+                      Please check that MQTT is enabled in your settings: <br />
+                      Remote Console > Settings > Services > MQTT.
+                    </span>
+                    <div className="image-container">
+                      <img src="./images/mqtt-settings.png" />
                     </div>
                   </div>
                 )
