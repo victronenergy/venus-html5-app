@@ -395,6 +395,11 @@ header {
   background-color: #30afff;
 }
 
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
 .metric--shore-input-limit {
   @media #{$tiny} {
     padding: 8px;
