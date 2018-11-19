@@ -124,7 +124,11 @@ class App extends Component {
             <img src="./images/icons/connected.svg" className="connection__icon" />
             <p className="text text--very-small">{state.connected ? "Connected" : "Disconnected"}</p>
             {state[DBUS_PATHS.SETTINGS.SHOW_REMOTE_CONSOLE] && (
-              <button className="remote-console-button text text--very-small" onClick={this.toggleRemoteConsole}>
+              <button
+                className="remote-console-button text text--very-small"
+                onClick={this.toggleRemoteConsole}
+                disabled={!this.state.connected}
+              >
                 {state.currentView !== VIEWS.REMOTE_CONSOLE ? "Remote Console" : "Close"}
               </button>
             )}
