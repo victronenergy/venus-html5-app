@@ -384,7 +384,7 @@ header {
   line-height: 1.2;
 }
 
-.selector-button:not(:first-child) {
+.inverter-charger__mode-selector > .selector-button:not(:first-child) {
   margin-left: 10px;
 }
 
@@ -499,12 +499,8 @@ button:disabled {
   height: 0;
   padding-top: 0;
   padding-bottom: 0;
-  margin: 0px 10px;
+  margin: 0 10px;
   width: 130px;
-
-  @media all and (min-width: 880px) {
-    display: none;
-  }
 
   @media all and (max-width: 729px) {
     width: 110px;
@@ -516,6 +512,7 @@ button:disabled {
 
   @media all and (max-width: 400px) {
     width: 50px;
+    margin: 0 5px;
   }
 }
 
