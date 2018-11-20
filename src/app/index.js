@@ -238,14 +238,17 @@ class App extends Component {
                         />
                         <ShoreInputLimit
                           currentLimit={state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT]}
-                          isAdjustable={state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT_IS_ADJUSTABLE]}
+                          isAdjustable={
+                            state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT_IS_ADJUSTABLE] &&
+                            state.connected
+                          }
                           setView={this.setView}
                         />
                       </div>
                       <InverterCharger
                         state={state[DBUS_PATHS.INVERTER_CHARGER.SYSTEM.STATE]}
                         activeMode={state[DBUS_PATHS.INVERTER_CHARGER.SYSTEM.MODE]}
-                        isAdjustable={state[DBUS_PATHS.INVERTER_CHARGER.SYSTEM.MODE_IS_ADJUSTABLE]}
+                        isAdjustable={state[DBUS_PATHS.INVERTER_CHARGER.SYSTEM.MODE_IS_ADJUSTABLE] && state.connected}
                         onModeSelected={this.handleModeSelected}
                       />
                       <div className="multi-metric-container">
