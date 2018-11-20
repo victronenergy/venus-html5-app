@@ -67,7 +67,7 @@ class App extends Component {
     [DBUS_PATHS.INVERTER_CHARGER.PRODUCT_ID]: null,
     [DBUS_PATHS.SETTINGS.SHOW_REMOTE_CONSOLE]: true,
     connected: false,
-    currentView: VIEWS.METRICS
+    currentView: VIEWS.CONNECTING
   }
 
   componentDidMount = () => {
@@ -95,6 +95,9 @@ class App extends Component {
     }
 
     this.deviceInterface.onConnectionChanged = ({ connected }) => {
+      if (this.state.currentView === VIEWS.CONNECTING && connected) {
+        this.setView(VIEWS.METRICS)
+      }
       this.setState({ connected })
     }
 
@@ -123,7 +126,7 @@ class App extends Component {
 
   render(props, state) {
     return (
-      <div class="main__container">
+      <div className="main__container">
         <header>
           <img src="./images/icons/logo.png" className="logo" />
           <div className="connection">
@@ -151,6 +154,17 @@ class App extends Component {
         >
           {(() => {
             switch (state.currentView) {
+              case VIEWS.CONNECTING:
+                return (
+                  <div className="loading">
+                    <p className="text text--very-large">Connecting</p>
+                    <div className="loading__dots">
+                      <p className="dot">.</p>
+                      <p className="dot two">.</p>
+                      <p className="dot three">.</p>
+                    </div>
+                  </div>
+                )
               case VIEWS.AMPERAGE_SELECTOR:
                 return (
                   <ShoreInputLimitSelector
