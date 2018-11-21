@@ -4,25 +4,26 @@ sudo: false
 language: node_js
 # Use latest stable node version
 node_js:
-- stable
+  - stable
 branches:
   only:
-  # Only run branch builds on master to prevent double builds on pull requests
-  - master
-  # Allow branches representing tags, otherwise the deploy step won't trigger
-  - "/^\\d+\\.\\d*\\.?\\d*$/"
+    # Only run branch builds on master to prevent double builds on pull requests
+    - master
+    # Allow branches representing tags, otherwise the deploy step won't trigger
+    - "/^\\d+\\.\\d*\\.?\\d*$/"
 # Use `npm ci` instead of default `npm install` for installing dependencies
 install:
-- npm ci
+  - npm ci
 cache:
   directories:
-  - "$HOME/.npm"
+    - "$HOME/.npm"
 script:
-- npm run test
-- npm run compile
-# Archive the built files in preparation of uploading them to Github
+  - npm run test
+  - npm run test:ui
+  - npm run compile
+  # Archive the built files in preparation of uploading them to Github
 before_deploy:
-- tar -zcvf venus-html5-app.tar.gz dist/
+  - tar -zcvf venus-html5-app.tar.gz dist/
 deploy:
   # Upload artifacts to Github Releases - use `releases` provider
   provider: releases
