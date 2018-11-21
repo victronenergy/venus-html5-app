@@ -10,7 +10,7 @@ $portrait: "all and (max-aspect-ratio: 9/10)";
 $narrow-portrait: "all and (max-aspect-ratio: 6/10)";
 $very-narrow-portrait: $narrow-portrait + " and (max-width: 400px)";
 
-$low-landscape: "all and (min-aspect-ratio: 3/1)";
+$low-landscape: "all and (min-aspect-ratio: 20/10)";
 $very-low-landscape: $low-landscape + " and (max-height: 350px)";
 
 $hide-remote-console-breakpoint: "all and (max-width: 540px), (max-height: 350px)";

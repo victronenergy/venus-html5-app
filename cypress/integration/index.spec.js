@@ -1,5 +1,42 @@
+const halfVerticalSplit = (w, h) => {
+  return [w / 2, h]
+}
+
+const thirtdVerticalSplit = (w, h) => {
+  return [w / 3, h]
+}
+
+const halfHorizontalSplit = (w, h) => {
+  return [w, h / 2]
+}
+
+const quarter = (w, h) => {
+  return [w / 2, h / 2]
+}
+
+const sixth = (w, h) => {
+  return [w / 3, h / 2]
+}
+
 const deviceResolutions = {
-  garmin: [[1000, 600], [1280, 720], [400, 400]]
+  simrad: [
+    [1280, 720],
+    [1086, 772],
+    halfHorizontalSplit(1086, 772),
+    halfVerticalSplit(1086, 772),
+    thirtdVerticalSplit(1086, 772),
+    quarter(1086, 772),
+    sixth(1086, 772)
+  ],
+  raymarine: [[800, 480], [1280, 720], [1280, 800], [1920, 1080], [1920, 1200]],
+  garmin: [
+    [1280, 723],
+    halfHorizontalSplit(1280, 723),
+    halfVerticalSplit(1280, 723),
+    thirtdVerticalSplit(1280, 723),
+    quarter(1280, 723),
+    sixth(1280, 723)
+  ]
 }
 
 const isElementInViewport = (el, window) => {
