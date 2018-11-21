@@ -102,6 +102,18 @@ To add a new metric:
 It is also possible to write completely custom formatting by creating a formatter
 function and attaching it to a metric in `metricsConfig.js`
 
+## Testing
+
+### Cypress
+
+Cypress is used to run integration tests on the compiled ui to make sure it opens and operated correctly in different
+display sizes. To run cypress you need to run the live server with mocked dependencies:
+
+- `npm run dev-compile:mocked`
+- `npm run dev`
+
+Then you can either run the cypress ui with `npm run cypress` or run the tests in the command line with `npm run test:ui`
+
 ## Deployment
 
 ### 1. Get the device ip
@@ -138,14 +150,13 @@ You should add a note under "waiting for recipe", containing the tag name and th
 
 ```md
 html5-app - <tag name>
-    <message>
+<message>
 ```
 
 For example:
 
 ```md
-html5-app - 0.2
-    * Reworked the UI
+html5-app - 0.2 \* Reworked the UI
 ```
 
 If you need any changes to the how the app is included inside Venus, please specify in the TODO file as well what changes need to be made to the recipe.
