@@ -15,6 +15,9 @@ export default class FakeMqttClient {
   onMessage = null // this is the function that 'sends data to the ui'
   onConnect = null
   initialized = false
+  stream = {
+    on: () => {}
+  }
 
   initService(callbackFn) {
     callbackFn("N/mockPortalId/system/0/Serial", JSON.stringify({ value: "mockPortalId" }))
