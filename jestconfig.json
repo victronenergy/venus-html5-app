@@ -1,5 +1,6 @@
 {
   "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?)$",
   "moduleFileExtensions": ["js", "jsx", "json", "node"],
-  "snapshotSerializers": [ "preact-render-spy/snapshot" ]
+  "snapshotSerializers": ["preact-render-spy/snapshot"],
+  "testPathIgnorePatterns": ["./cypress"]
 }
