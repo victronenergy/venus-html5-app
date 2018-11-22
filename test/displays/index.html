@@ -1,86 +1,81 @@
 <!DOCTYPE html>
 <html>
-
-<style>
-  * {
-    box-sizing: border-box;
-  }
-
-  html {
-    width: 1280px;
-    height: 720px;
-  }
-
-  body {
-    width: 100%;
-    height: 100%;
-    margin-top: 0;
-  }
-
-  header {
-    position: fixed;
-    background-color: lightslategrey;
-    width: 100%;
-    padding: 5px;
-  }
-
-  .full {
-    margin-top: 30px;
-    width: 100%;
-    height: 100%;
-  }
-
-  .half-vertical {
-    width: 50%;
-    height: 100%;
-  }
-
-  .half-horizontal {
-    width: 100%;
-    height: 50%;
-  }
-
-  .third-vertical {
-    width: 33.333333%;
-    height: 100%;
-  }
-
-  .quarter {
-    width: 50%;
-    height: 50%;
-  }
-
-  .sixth {
-    width: 33.33333%;
-    height: 33.33333%;
-  }
-</style>
-
-<body id="body">
-  <header>
-    <label>Base width:</label>
-    <input type="text" id="width" placeholder="Base width" value="1280">
-    <label>Base height</label>
-    <input type="text" id="height" placeholder="Base height" value="720">
-  </header>
-  <iframe class="full" src="/dist/index.html?nolog=true"></iframe>
-  <iframe class="half-vertical" src="/dist/index.html?nolog=true"></iframe>
-  <iframe class="third-vertical" src="/dist/index.html?nolog=true"></iframe>
-  <iframe class="half-horizontal" src="/dist/index.html?nolog=true"></iframe>
-  <iframe class="quarter" src="/dist/index.html?nolog=true"></iframe>
-  <iframe class="sixth" src="/dist/index.html?nolog=true"></iframe>
-</body>
-<script>
-  (function () {
-    document.getElementById('width').onchange = function (event) {
-      document.getElementById('body').style.width = event.target.value + "px";
+  <style>
+    * {
+      box-sizing: border-box;
     }
 
-    document.getElementById('height').onchange = function (event) {
-      document.getElementById('body').style.height = event.target.value + "px";
+    html {
+      width: 1280px;
+      height: 720px;
     }
-  })();
 
-</script>
+    body {
+      width: 100%;
+      height: 100%;
+      margin-top: 0;
+    }
 
+    header {
+      position: fixed;
+      background-color: lightslategrey;
+      width: 100%;
+      padding: 5px;
+    }
+
+    .full {
+      margin-top: 30px;
+      width: 100%;
+      height: 100%;
+    }
+
+    .half-vertical {
+      width: 50%;
+      height: 100%;
+    }
+
+    .half-horizontal {
+      width: 100%;
+      height: 50%;
+    }
+
+    .third-vertical {
+      width: 33.333333%;
+      height: 100%;
+    }
+
+    .quarter {
+      width: 50%;
+      height: 50%;
+    }
+
+    .sixth {
+      width: 33.33333%;
+      height: 33.33333%;
+    }
+  </style>
+
+  <body id="body">
+    <header>
+      <label>Base width:</label> <input type="text" id="width" placeholder="Base width" value="1280" />
+      <label>Base height</label> <input type="text" id="height" placeholder="Base height" value="720" />
+    </header>
+    <iframe class="full" src="/dist/index.html?nolog=true&port=9002"></iframe>
+    <iframe class="half-vertical" src="/dist/index.html?nolog=true&port=9002"></iframe>
+    <iframe class="third-vertical" src="/dist/index.html?nolog=true&port=9002"></iframe>
+    <iframe class="half-horizontal" src="/dist/index.html?nolog=true&port=9002"></iframe>
+    <iframe class="quarter" src="/dist/index.html?nolog=true&port=9002"></iframe>
+    <iframe class="sixth" src="/dist/index.html?nolog=true&port=9002"></iframe>
+  </body>
+  <script>
+    ;(function() {
+      document.getElementById("width").onchange = function(event) {
+        document.getElementById("body").style.width = event.target.value + "px"
+      }
+
+      document.getElementById("height").onchange = function(event) {
+        document.getElementById("body").style.height = event.target.value + "px"
+      }
+    })()
+  </script>
 </html>

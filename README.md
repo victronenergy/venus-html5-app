@@ -41,7 +41,7 @@ You need to change the `host` (and optionally `port`) query parameters to point 
 
 `path/to/venus-html5-app/dist/index.html?host=192.168.178.129&port=1884`
 
-You can also define the IP inside `live-server.js`, and then it will automatically be added as `host` query param when you launch the app the next time using `npm run dev`.
+You can also define the IP inside `dev-server.js`, and then it will automatically be added as `host` query param when you launch the app the next time using `npm run dev`.
 
 By default, the application starts with the `dev` flag enabled.
 This adds some convenience features for debugging on actual devices and testing:
@@ -51,8 +51,10 @@ This adds some convenience features for debugging on actual devices and testing:
 
 ### Running the app with no Venus device available
 
-If there is no real device to be used for MQTT data, you can run the app with a fake MQTT client using `npm run dev-compile:mocked`.
-This fakes the UI's MQTT client to "receive and send" data. Currently only randomizes numbers from 0 to 100 for inputs which in most cases make no sense.
+If there is no real device to be used for MQTT data, you can run the app with a fake MQTT broker:
+
+`npm run dev:mocked`
+This shallowly fakes the MQTT implementation in the Venus device.
 
 Also, keep in mind the Venus device also has a Demo mode, which allows you to get useful data if you have only the Venus device and no other Victron devices, without requiring various Victron devices to be connected to the Venus device.
 To enable it, navigate to the Venus Remote Console -> Settings -> General.
@@ -63,7 +65,7 @@ Since the app will be run on a plethora of different resolutions and split scree
 basic combinations of display "splits". The base 1/1 ui is 1280 x 720, which can be changed in the header. In the radiator there are the basic ui
 and multiple split screen variations available relative to the "base" size.
 
-To run this ui it is recommended to use mocked data. Run the mocked devserver as desctibed above and start the radiator ui with `npm run test-radiator`. The radiator had autoreload that automatically reloads changes made to src/ similar to the basic dev autoreload. It also hot reloads changes made to the test/displays/index.html
+To run this ui it is recommended to use mocked data. Run the mocked mqtt as described above and start the radiator ui with `npm run test-radiator`. The radiator has autoreload that automatically reloads changes made to src/ similar to the basic dev autoreload. It also hot reloads changes made to the test/displays/index.html
 
 ## Metrics available
 
@@ -107,12 +109,13 @@ function and attaching it to a metric in `metricsConfig.js`
 ### Cypress
 
 Cypress is used to run integration tests on the compiled ui to make sure it opens and operated correctly in different
-display sizes. To run cypress you need to run the live server with mocked dependencies:
+display sizes. To run cypress you need to run the live server with mocked mqtt:
 
-- `npm run dev-compile:mocked`
-- `npm run dev`
+- `npm run dev:mocked`
 
-Then you can either run the cypress ui with `npm run cypress` or run the tests in the command line with `npm run test:ui`
+Then you can run the cypress ui with `npm run cypress`.
+
+To run the ui tests in CI-style use `npm run test:ui`
 
 ## Deployment
 

@@ -1,13 +1,13 @@
 const liveServer = require("live-server")
+const mockMQTT = require("./fake-broker.js").MockMQQTBroker
 
 // Find out the venus host ip you want to use: LAN, ethernet or Wlan connection to the device
 // Try not to commit the ip :)
 let venusHost
+let mqtt
 
 if (!venusHost) {
-  console.log(
-    "Running without venus host set. Set the variable in live-server.js if you want to connect to an instance for demo data."
-  )
+  venusHost = "localhost"
 }
 
 const params = {
@@ -17,4 +17,5 @@ const params = {
   open: `?host=${venusHost}&dev=true`
 }
 
+if (process.argv[2] === "--mocked") mqtt = new mockMQTT(9001)
 liveServer.start(params)

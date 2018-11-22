@@ -1,12 +1,12 @@
 const liveServer = require("live-server")
-
-//Run this file with dev-compile:mocked on to get all the different sized UIs visible with mocked deps
+const mockMQTT = require("../../fake-broker.js").MockMQQTBroker
 
 const params = {
-  port: 8001,
+  port: 8002,
   root: "test/displays",
   watch: ["dist/", "test/displays"],
   mount: [["/dist", "./dist"]]
 }
 
+const mqtt = new mockMQTT(9002)
 liveServer.start(params)
