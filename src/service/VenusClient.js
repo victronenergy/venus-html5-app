@@ -6,13 +6,6 @@ import { parseMessage, arrayToSubscriptionMap } from "./util"
 import VenusSystem from "./venusSystem"
 import Logger from "../logging/logger"
 
-// For development when there is no Venus device available with demo mode on
-// we can use this mock mqtt client that mocks the mqtt server responses to
-// the ui. Implemented using webpack define plugin to define whether or not
-// we are in prod or dev mode.
-
-import MockMqttClient from "./MockMqttClient"
-
 /**
  * Default quality of service when subscribing - best effort
  * {@link https://www.npmjs.com/package/mqtt#qos}
@@ -43,7 +36,7 @@ const STATUS = {
 
 class VenusClient {
   /**
-   * @type {MockMqttClient|MqttClient}
+   * @type {MqttClient}
    */
   mqttClient
   /**
@@ -63,7 +56,7 @@ class VenusClient {
 
   constructor(host) {
     this.status = STATUS.CONNECTING
-    this.mqttClient = USE_MOCK_MQTT ? new MockMqttClient() : mqtt.connect(host)
+    this.mqttClient = mqtt.connect(host)
     this.venusSystem = new VenusSystem()
 
     this.mqttClient.stream.on("error", error => {

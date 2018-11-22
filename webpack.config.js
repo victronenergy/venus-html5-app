@@ -1,6 +1,5 @@
 const CopyWebpackPlugin = require("copy-webpack-plugin")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
-const webpack = require("webpack")
 const path = require("path")
 
 const conf = {
@@ -79,13 +78,5 @@ module.exports = (env, argv) => {
   } else {
     conf.mode = "production"
   }
-
-  conf.plugins.push(
-    new webpack.DefinePlugin({
-      DEV: JSON.stringify(argv.mode === "development"),
-      USE_MOCK_MQTT: JSON.stringify(argv.mode === "development" && argv.mocked)
-    })
-  )
-
   return conf
 }
