@@ -3,7 +3,7 @@
 # Venus OS hosted web app
 
 The "app" is a single page application that communicates to the rest of Venus OS via MQTT over websockets.
-It uses Preact with ES6 for the UI layer and also includes a wrapper service for the MQTT interface built with Typescript.
+It uses React with ES6 for the UI layer and also includes a wrapper service for the MQTT interface.
 
 Its primary purpose is to be a simple to use and nice looking UI for a Victron system on
 marine Multi Functional Displays, such as the ones from Garmin, Simrad and others. This
@@ -23,25 +23,17 @@ If it's the first time you run the app:
 
 ### Development
 
-To run the app locally for development you need to:
-
-1. start webpack in watch mode, to allow it to re-compile changes to the code as you develop:
-
-`npm run dev-compile`
-
-2. launch the app through live-server to enable live reload of the changes in the code:
+To run the app locally for development, run:
 
 `npm run dev`
 
-This will launch the application in you system's default browser.
+And then open the app in the browser at `http://localhost?host=<VENUS_IP>`.
 
-3. configure the IP of the Venus device
+This will start the webpack dev server, which will recompile the app on code changes and hot reload the UI.
 
-You need to change the `host` (and optionally `port`) query parameters to point to your Venus device:
+You can to change the `host` (and optionally `port`) query parameters to point to your Venus device:
 
 `path/to/venus-html5-app/dist/index.html?host=192.168.178.129&port=1884`
-
-You can also define the IP inside `dev-server.js`, and then it will automatically be added as `host` query param when you launch the app the next time using `npm run dev`.
 
 By default, the application starts with the `dev` flag enabled.
 This adds some convenience features for debugging on actual devices and testing:
@@ -65,7 +57,8 @@ Since the app will be run on a plethora of different resolutions and split scree
 basic combinations of display "splits". The base 1/1 ui is 1280 x 720, which can be changed in the header. In the radiator there are the basic ui
 and multiple split screen variations available relative to the "base" size.
 
-To run this ui it is recommended to use mocked data. Run the mocked mqtt as described above and start the radiator ui with `npm run test-radiator`. The radiator has autoreload that automatically reloads changes made to src/ similar to the basic dev autoreload. It also hot reloads changes made to the test/displays/index.html
+To run this ui it is recommended to use mocked data. Run the mocked mqtt as described above and navigate to the radiator ui with `http://localhost/radiator.html`.
+Since it is still served through the webpack dev server, the app will hot reload any time there are code changes.
 
 ## Metrics available
 
