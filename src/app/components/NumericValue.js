@@ -1,4 +1,4 @@
-import { h, Component } from "preact"
+import React, { Component } from "react"
 
 export function formatNumber({ value, unit = "", precision = 0, factor = 1.0, defaultValue = "--" }) {
   if (value === null || value === undefined) {
@@ -9,7 +9,8 @@ export function formatNumber({ value, unit = "", precision = 0, factor = 1.0, de
 }
 
 export default class NumericValue extends Component {
-  render({ value, unit = "", precision = 0, factor = 1.0, defaultValue = "--" }) {
+  render() {
+    const { value, unit = "", precision = 0, factor = 1.0, defaultValue = "--" } = this.props
     return <p className="value text text--smaller">{formatNumber({ value, unit, precision, factor, defaultValue })}</p>
   }
 }

@@ -1,4 +1,5 @@
-import { h, render, Component } from "preact"
+import React, { Component } from "react"
+import { render } from "react-dom"
 import metricsConfig from "../config/metricsConfig"
 import { DBUS_PATHS } from "../config/dbusPaths"
 import VenusClient from "../service/index"
@@ -130,39 +131,39 @@ class App extends Component {
     } else this.setView(VIEWS.METRICS)
   }
 
-  render(props, state) {
+  render() {
     return (
       <div className="main__container">
         <header>
           <img src="./images/icons/logo.png" className="logo" />
           <div className="connection">
             <img src="./images/icons/connected.svg" className="connection__icon" />
-            <p className="text text--very-small">{state.connected ? "Connected" : "Disconnected"}</p>
-            {state[DBUS_PATHS.SETTINGS.SHOW_REMOTE_CONSOLE] && (
+            <p className="text text--very-small">{this.state.connected ? "Connected" : "Disconnected"}</p>
+            {this.state[DBUS_PATHS.SETTINGS.SHOW_REMOTE_CONSOLE] && (
               <button
                 className="remote-console-button text text--very-small"
                 onClick={this.toggleRemoteConsole}
                 disabled={!this.state.connected}
               >
-                {state.currentView !== VIEWS.REMOTE_CONSOLE ? "Remote Console" : "Close"}
+                {this.state.currentView !== VIEWS.REMOTE_CONSOLE ? "Remote Console" : "Close"}
               </button>
             )}
           </div>
         </header>
         <main
-          className={!state.connected ? "disconnected" : ""}
+          className={!this.state.connected ? "disconnected" : ""}
           onClick={e => {
             // Bit of a hack to close "overlays" but doing it without adding event preventDefaults everywhere
-            if (e.target.nodeName === "MAIN" && this.state.currentView !== VIEWS.MQTT_UNAVAILABLE) {
+            if (e.target.nodeName === "MAIN" && this.state.state.currentView !== VIEWS.MQTT_UNAVAILABLE) {
               this.setView(VIEWS.METRICS)
             }
           }}
         >
           {(() => {
-            switch (state.currentView) {
+            switch (this.state.currentView) {
               case VIEWS.CONNECTING:
                 return (
-                  <Fade key={VIEWS.CONNECTING} unmount={state.viewUnmounting}>
+                  <Fade key={VIEWS.CONNECTING} unmount={this.state.viewUnmounting}>
                     <div className="loading">
                       <p className="text text--very-large">Connecting</p>
                       <div className="loading__dots">
@@ -175,18 +176,18 @@ class App extends Component {
                 )
               case VIEWS.AMPERAGE_SELECTOR:
                 return (
-                  <Fade key={VIEWS.AMPERAGE_SELECTOR} unmount={state.viewUnmounting}>
+                  <Fade key={VIEWS.AMPERAGE_SELECTOR} unmount={this.state.viewUnmounting}>
                     <ShoreInputLimitSelector
-                      currentLimit={state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT]}
-                      maxLimit={state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT_MAX]}
-                      productId={state[DBUS_PATHS.INVERTER_CHARGER.PRODUCT_ID]}
+                      currentLimit={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT]}
+                      maxLimit={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT_MAX]}
+                      productId={this.state[DBUS_PATHS.INVERTER_CHARGER.PRODUCT_ID]}
                       onLimitSelected={this.handleShorePowerLimitSelected}
                     />
                   </Fade>
                 )
               case VIEWS.REMOTE_CONSOLE:
                 return (
-                  <Fade key={VIEWS.REMOTE_CONSOLE} unmount={state.viewUnmounting}>
+                  <Fade key={VIEWS.REMOTE_CONSOLE} unmount={this.state.viewUnmounting}>
                     <div
                       className="remote-console__container"
                       onClick={() => {
@@ -203,75 +204,77 @@ class App extends Component {
               case VIEWS.METRICS:
               default:
                 return (
-                  <Fade key={VIEWS.METRICS} unmount={state.viewUnmounting}>
+                  <Fade key={VIEWS.METRICS} unmount={this.state.viewUnmounting}>
                     <div id="metrics-container">
                       <Battery
-                        soc={state[DBUS_PATHS.BATTERY.SOC]}
-                        state={state[DBUS_PATHS.BATTERY.STATE]}
-                        voltage={state[DBUS_PATHS.BATTERY.VOLTAGE]}
-                        current={state[DBUS_PATHS.BATTERY.CURRENT]}
-                        power={state[DBUS_PATHS.BATTERY.POWER]}
-                        timeToGo={state[DBUS_PATHS.BATTERY.TIME_TO_GO]}
+                        soc={this.state[DBUS_PATHS.BATTERY.SOC]}
+                        state={this.state[DBUS_PATHS.BATTERY.STATE]}
+                        voltage={this.state[DBUS_PATHS.BATTERY.VOLTAGE]}
+                        current={this.state[DBUS_PATHS.BATTERY.CURRENT]}
+                        power={this.state[DBUS_PATHS.BATTERY.POWER]}
+                        timeToGo={this.state[DBUS_PATHS.BATTERY.TIME_TO_GO]}
                       />
                       <div className="multi-metric-container shore-power__container">
                         <ActiveSource
-                          activeInput={state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_INPUT]}
+                          activeInput={this.state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_INPUT]}
                           settings={{
-                            input0: state[DBUS_PATHS.SETTINGS.AC_INPUT_TYPE1],
-                            input1: state[DBUS_PATHS.SETTINGS.AC_INPUT_TYPE2]
+                            input0: this.state[DBUS_PATHS.SETTINGS.AC_INPUT_TYPE1],
+                            input1: this.state[DBUS_PATHS.SETTINGS.AC_INPUT_TYPE2]
                           }}
                           current={{
-                            phase1: state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.CURRENT_PHASE_1],
-                            phase2: state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.CURRENT_PHASE_2],
-                            phase3: state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.CURRENT_PHASE_3]
+                            phase1: this.state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.CURRENT_PHASE_1],
+                            phase2: this.state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.CURRENT_PHASE_2],
+                            phase3: this.state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.CURRENT_PHASE_3]
                           }}
                           voltage={{
-                            phase1: state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.VOLTAGE_PHASE_1],
-                            phase2: state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.VOLTAGE_PHASE_2],
-                            phase3: state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.VOLTAGE_PHASE_3]
+                            phase1: this.state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.VOLTAGE_PHASE_1],
+                            phase2: this.state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.VOLTAGE_PHASE_2],
+                            phase3: this.state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.VOLTAGE_PHASE_3]
                           }}
                           power={{
-                            phase1: state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.POWER_PHASE_1],
-                            phase2: state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.POWER_PHASE_2],
-                            phase3: state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.POWER_PHASE_3]
+                            phase1: this.state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.POWER_PHASE_1],
+                            phase2: this.state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.POWER_PHASE_2],
+                            phase3: this.state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.POWER_PHASE_3]
                           }}
                         />
                         <ShoreInputLimit
-                          currentLimit={state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT]}
+                          currentLimit={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT]}
                           isAdjustable={
-                            state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT_IS_ADJUSTABLE] &&
-                            state.connected
+                            this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT_IS_ADJUSTABLE] &&
+                            this.state.connected
                           }
                           setView={this.setView}
                         />
                       </div>
                       <InverterCharger
-                        state={state[DBUS_PATHS.INVERTER_CHARGER.SYSTEM.STATE]}
-                        activeMode={state[DBUS_PATHS.INVERTER_CHARGER.SYSTEM.MODE]}
-                        isAdjustable={state[DBUS_PATHS.INVERTER_CHARGER.SYSTEM.MODE_IS_ADJUSTABLE] && state.connected}
+                        state={this.state[DBUS_PATHS.INVERTER_CHARGER.SYSTEM.STATE]}
+                        activeMode={this.state[DBUS_PATHS.INVERTER_CHARGER.SYSTEM.MODE]}
+                        isAdjustable={
+                          this.state[DBUS_PATHS.INVERTER_CHARGER.SYSTEM.MODE_IS_ADJUSTABLE] && this.state.connected
+                        }
                         onModeSelected={this.handleModeSelected}
                       />
                       <div className="multi-metric-container">
                         <AcLoads
                           current={{
-                            phase1: state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_CURRENT_PHASE_1],
-                            phase2: state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_CURRENT_PHASE_2],
-                            phase3: state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_CURRENT_PHASE_3]
+                            phase1: this.state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_CURRENT_PHASE_1],
+                            phase2: this.state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_CURRENT_PHASE_2],
+                            phase3: this.state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_CURRENT_PHASE_3]
                           }}
                           voltage={{
-                            phase1: state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_VOLTAGE_PHASE_1],
-                            phase2: state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_VOLTAGE_PHASE_2],
-                            phase3: state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_VOLTAGE_PHASE_3]
+                            phase1: this.state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_VOLTAGE_PHASE_1],
+                            phase2: this.state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_VOLTAGE_PHASE_2],
+                            phase3: this.state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_VOLTAGE_PHASE_3]
                           }}
                           power={{
-                            phase1: state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_POWER_PHASE_1],
-                            phase2: state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_POWER_PHASE_2],
-                            phase3: state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_POWER_PHASE_3]
+                            phase1: this.state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_POWER_PHASE_1],
+                            phase2: this.state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_POWER_PHASE_2],
+                            phase3: this.state[DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_POWER_PHASE_3]
                           }}
                         />
                         <DcLoads
-                          batteryVoltage={state[DBUS_PATHS.BATTERY.VOLTAGE]}
-                          power={state[DBUS_PATHS.INVERTER_CHARGER.DC_LOADS.POWER]}
+                          batteryVoltage={this.state[DBUS_PATHS.BATTERY.VOLTAGE]}
+                          power={this.state[DBUS_PATHS.INVERTER_CHARGER.DC_LOADS.POWER]}
                         />
                       </div>
                     </div>
@@ -279,7 +282,7 @@ class App extends Component {
                 )
               case VIEWS.MQTT_UNAVAILABLE:
                 return (
-                  <Fade key={VIEWS.MQTT_UNAVAILABLE} unmount={state.viewUnmounting}>
+                  <Fade key={VIEWS.MQTT_UNAVAILABLE} unmount={this.state.viewUnmounting}>
                     <div className="error-page">
                       <span className="text text--large">
                         Could not connect to the MQTT server. <br />
@@ -327,9 +330,9 @@ class Fade extends Component {
     }
   }
 
-  render(props, state) {
-    return <div style={state.style}>{this.props.children}</div>
+  render() {
+    return <div style={this.state.style}>{this.props.children}</div>
   }
 }
 
-render(<App />, document.body)
+render(<App />, document.getElementById("app"))

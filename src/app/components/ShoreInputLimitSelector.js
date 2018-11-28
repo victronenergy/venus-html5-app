@@ -1,4 +1,4 @@
-import { h, Component } from "preact"
+import React, { Component } from "react"
 import Logger from "../../logging/logger"
 
 const USAmperage = [10, 15, 20, 30, 50, 100]
@@ -36,12 +36,12 @@ class ShoreInputLimitSelector extends Component {
     this.setState({ showEmpties: showEmpties })
   }
 
-  render(props, state) {
-    const maxLimit = props.maxLimit || 100
-    const amperageList = this.getSuggestedAmperageValuesList(props.productId).filter(value => {
+  render() {
+    const maxLimit = this.props.maxLimit || 100
+    const amperageList = this.getSuggestedAmperageValuesList(this.props.productId).filter(value => {
       return value <= maxLimit
     })
-    const currentlySelectedLimit = parseInt(props.currentLimit)
+    const currentlySelectedLimit = parseInt(this.props.currentLimit)
 
     return (
       <div className="amperage-selector__container">
@@ -50,11 +50,12 @@ class ShoreInputLimitSelector extends Component {
           {amperageList.map((currentValue, index) => {
             return (
               <button
+                key={currentValue}
                 className={
                   "selector-button selector-button__amperage text text--very-large" +
                   (currentlySelectedLimit == currentValue ? " selector-button--active" : "")
                 }
-                onClick={() => props.onLimitSelected(currentValue)}
+                onClick={() => this.props.onLimitSelected(currentValue)}
                 ref={node => (index === 0 ? (this.firstSelectorButtonNode = node) : null)}
               >
                 {currentValue}A
@@ -64,7 +65,7 @@ class ShoreInputLimitSelector extends Component {
 
           {// Add these to "cheat" the flexbox and allow center alignment of selector buttons
           // AND left alignment to the last row of buttons if multilined
-          state.showEmpties && amperageList.map(() => <div className="empty" />)}
+          this.state.showEmpties && amperageList.map(() => <div className="empty" />)}
         </div>
       </div>
     )

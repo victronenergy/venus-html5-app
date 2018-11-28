@@ -1,4 +1,4 @@
-import { h, Component } from "preact"
+import React, { Component } from "react"
 import { AC_SOURCE_TYPE, ACTIVE_INPUT } from "../../service/topics"
 import NumericValue from "./NumericValue"
 
@@ -34,8 +34,8 @@ class ActiveSource extends Component {
     [AC_SOURCE_TYPE.NOT_IN_USE]: "./images/icons/shore-power.svg"
   }
 
-  render(props, state) {
-    const activeSource = getActiveSource(props)
+  render() {
+    const activeSource = getActiveSource(this.props)
 
     if (activeSource === undefined) {
       return <ActiveSourceMetric title={"..."} icon="./images/icons/shore-power.svg" />
@@ -49,46 +49,43 @@ class ActiveSource extends Component {
       <ActiveSourceMetric
         title={this.activeSourceLabel[activeSource]}
         icon={this.activeSourceIcon[activeSource]}
-        voltage={props.voltage.phase1}
-        current={props.current.phase1 + props.current.phase2 + props.current.phase3}
-        power={props.power.phase1 + props.power.phase2 + props.power.phase3}
+        voltage={this.props.voltage.phase1}
+        current={this.props.current.phase1 + this.props.current.phase2 + this.props.current.phase3}
+        power={this.props.power.phase1 + this.props.power.phase2 + this.props.power.phase3}
       />
     )
   }
 }
-class NoActiveSource extends Component {
-  render(props, state) {
-    return (
-      <div className="metric metric--small">
-        <img src="./images/icons/shore-power.svg" className="metric__icon" />
-        <div className="metric__value-container">
-          <p className="text text--medium">Shore power</p>
-          <div className="text text--smaller">Unplugged</div>
-        </div>
+
+const NoActiveSource = () => {
+  return (
+    <div className="metric metric--small">
+      <img src="./images/icons/shore-power.svg" className="metric__icon" />
+      <div className="metric__value-container">
+        <p className="text text--medium">Shore power</p>
+        <div className="text text--smaller">Unplugged</div>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
-class ActiveSourceMetric extends Component {
-  render(props, state) {
-    const hasValues = props.voltage || props.current || props.power
-    return (
-      <div className="metric metric--small">
-        <img src={props.icon} className="metric__icon" />
-        <div className={"metric__value-container" + (hasValues ? "" : " metric__value-container--centered")}>
-          <p className="text text--medium">{props.title}</p>
-          {hasValues && (
-            <div className="metric__values">
-              <NumericValue value={props.voltage} unit={"V"} />
-              <NumericValue value={props.current} unit="A" precision={1} />
-              <NumericValue value={props.power} unit="W" />
-            </div>
-          )}
-        </div>
+const ActiveSourceMetric = props => {
+  const hasValues = props.voltage || props.current || props.power
+  return (
+    <div className="metric metric--small">
+      <img src={props.icon} className="metric__icon" />
+      <div className={"metric__value-container" + (hasValues ? "" : " metric__value-container--centered")}>
+        <p className="text text--medium">{props.title}</p>
+        {hasValues && (
+          <div className="metric__values">
+            <NumericValue value={props.voltage} unit={"V"} />
+            <NumericValue value={props.current} unit="A" precision={1} />
+            <NumericValue value={props.power} unit="W" />
+          </div>
+        )}
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default ActiveSource
