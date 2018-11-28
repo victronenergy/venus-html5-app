@@ -6,7 +6,7 @@ export default props => {
   return (
     <div className="metric metric__container metric__battery">
       <div className="metric__container--left">
-        <img src="./images/icons/battery.svg" className="metric__icon" />
+        <img src={require("../../images/icons/battery.svg")} className="metric__icon" />
         <div className="metric__value-container">
           <p className="text text--medium">Battery</p>
           <div className="metric__values">

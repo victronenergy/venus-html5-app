@@ -1,25 +1,39 @@
-const CopyWebpackPlugin = require("copy-webpack-plugin")
+const FriendlyErrorsPlugin = require("friendly-errors-webpack-plugin")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const path = require("path")
 
 const conf = {
+  mode: "development",
   entry: path.resolve(__dirname, "src/app/index.js"),
   output: {
     path: path.resolve(__dirname, "dist/"),
     filename: "bundle.[contenthash].js"
   },
+  devServer: {
+    port: 8000,
+    quiet: true,
+    hot: true,
+    overlay: true
+  },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, "src/index.html"),
-      filename: path.resolve(__dirname, "dist/index.html")
+    new FriendlyErrorsPlugin({
+      compilationSuccessInfo: {
+        messages: ["Your application is running on http://localhost:8000/?host=venus2&dev=true"]
+      }
     }),
-    new CopyWebpackPlugin(
-      [
-        { from: path.resolve(__dirname, "src/images/"), to: path.resolve(__dirname, "dist/images") },
-        { from: path.resolve(__dirname, "src/browser-info.html"), to: path.resolve(__dirname, "dist/") }
-      ],
-      {}
-    )
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, "src/index.html")
+    }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, "src/browser-info.html"),
+      filename: "browser-info.html",
+      chunks: []
+    }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, "src/radiator.html"),
+      filename: "radiator.html",
+      chunks: []
+    })
   ],
   resolve: {
     extensions: [".js", ".ts"]
@@ -32,10 +46,6 @@ const conf = {
         use: "babel-loader"
       },
       {
-        test: /\.tsx?$/,
-        loader: "babel-loader"
-      },
-      {
         test: /\.scss$/,
         use: [
           "style-loader", // creates style nodes from JS strings
@@ -44,7 +54,7 @@ const conf = {
         ]
       },
       {
-        test: /\.jpe?g$|\.gif$|\.png$/i,
+        test: /\.jpe?g$|\.gif$|\.svg$|\.png$/i,
         use: [
           {
             loader: "file-loader",
@@ -71,12 +81,9 @@ const conf = {
   }
 }
 
-module.exports = (env, argv) => {
+module.exports = (_env, argv) => {
   if (argv.mode === "development") {
-    conf.mode = "development"
     conf.devtool = "source-map"
-  } else {
-    conf.mode = "production"
   }
   return conf
 }

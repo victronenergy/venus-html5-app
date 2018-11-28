@@ -4,16 +4,13 @@
   "description": "Metric framework for Victron VenusOS",
   "main": "index.js",
   "scripts": {
-    "dev": "npx babel-node dev-server.js",
-    "dev:mocked": "npx babel-node dev-server.js --mocked",
-    "dev-compile": "npx webpack -w --mode=development",
-    "format": "prettier --write \"src/**/*.js\" \"test/**/*.js\"",
+    "dev": "npx babel-node scripts/dev-server.js",
+    "dev:mocked": "npx babel-node scripts/dev-server.js --mocked",
     "clean": "rm -rf dist",
-    "compile": "npm run clean && npx webpack --mode=production",
-    "cypress": "npx cypress open",
-    "test": "jest --config jestconfig.json",
-    "test:ui": "npm run clean && npx webpack --mode=development && npx babel-node test/run-cypress.js",
-    "test-radiator": "npx babel-node ./test/displays/test-server.js"
+    "compile": "npm run clean && npx webpack --mode production",
+    "test": "jest",
+    "test:ui": "npm run clean && npx webpack --mode production && npx babel-node test/run-cypress.js",
+    "cypress": "npx cypress open"
   },
   "author": "",
   "license": "ISC",
@@ -21,24 +18,27 @@
     "@babel/core": "^7.1.6",
     "@babel/node": "^7.0.0",
     "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
     "babel-plugin-transform-react-jsx": "^6.24.1",
-    "copy-webpack-plugin": "^4.5.3",
     "css-loader": "^1.0.0",
     "cypress": "^3.1.2",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
     "file-loader": "^2.0.0",
+    "friendly-errors-webpack-plugin": "^1.7.0",
     "html-webpack-plugin": "^3.2.0",
     "http-server": "^0.11.1",
     "husky": "^1.1.4",
     "jest": "^23.6.0",
+    "lint-staged": "^8.1.0",
     "live-server": "^1.2.0",
     "mosca": "^2.8.3",
     "mqtt": "^2.18.3",
+    "nodemon": "^1.18.6",
     "node-sass": "^4.9.4",
     "prettier": "^1.14.3",
     "react": "^16.6.3",
@@ -47,15 +47,19 @@
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "webpack": "^4.22.0",
-    "webpack-cli": "^3.1.2"
-  },
-  "dependencies": {
-    "@babel/polyfill": "^7.0.0",
-    "nodemon": "^1.18.6"
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10"
   },
   "husky": {
     "hooks": {
+      "pre-commit": "lint-staged",
       "commit-msg": "node hooks/commit-msg.js $HUSKY_GIT_PARAMS"
     }
+  },
+  "lint-staged": {
+    "*.{js,json,css,md}": [
+      "prettier --write",
+      "git add"
+    ]
   }
 }

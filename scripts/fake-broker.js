@@ -1,6 +1,6 @@
 const mosca = require("mosca")
-import { DBUS_PATHS } from "./src/config/dbusPaths"
-import { AC_SOURCE_TYPE, ACTIVE_INPUT, SYSTEM_MODE, VEBUS_SYSTEM_STATE } from "./src/service/topics"
+import { DBUS_PATHS } from "../src/config/dbusPaths"
+import { AC_SOURCE_TYPE, ACTIVE_INPUT, SYSTEM_MODE, VEBUS_SYSTEM_STATE } from "../src/service/topics"
 
 // const US_PRODUCT_ID = 991260
 const EU_PRODUCT_ID = 9760
@@ -34,7 +34,7 @@ const randomlyChangingPaths = [
 ]
 
 export class MockMQQTBroker {
-  constructor(port) {
+  constructor(port = 9001) {
     this.subs = new Set([])
     this.intervalRef = null
     this.data = {}
