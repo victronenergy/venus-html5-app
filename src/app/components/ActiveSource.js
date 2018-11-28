@@ -28,17 +28,17 @@ class ActiveSource extends Component {
   }
 
   activeSourceIcon = {
-    [AC_SOURCE_TYPE.SHORE]: "./images/icons/shore-power.svg",
-    [AC_SOURCE_TYPE.GRID]: "./images/icons/shore-power.svg",
-    [AC_SOURCE_TYPE.GENERATOR]: "./images/icons/generator.svg",
-    [AC_SOURCE_TYPE.NOT_IN_USE]: "./images/icons/shore-power.svg"
+    [AC_SOURCE_TYPE.SHORE]: require("../../images/icons/shore-power.svg"),
+    [AC_SOURCE_TYPE.GRID]: require("../../images/icons/shore-power.svg"),
+    [AC_SOURCE_TYPE.GENERATOR]: require("../../images/icons/generator.svg"),
+    [AC_SOURCE_TYPE.NOT_IN_USE]: require("../../images/icons/shore-power.svg")
   }
 
   render() {
     const activeSource = getActiveSource(this.props)
 
     if (activeSource === undefined) {
-      return <ActiveSourceMetric title={"..."} icon="./images/icons/shore-power.svg" />
+      return <ActiveSourceMetric title={"..."} icon={require("../../images/icons/shore-power.svg")} />
     }
 
     if (activeSource === null) {
@@ -60,7 +60,7 @@ class ActiveSource extends Component {
 const NoActiveSource = () => {
   return (
     <div className="metric metric--small">
-      <img src="./images/icons/shore-power.svg" className="metric__icon" />
+      <img src={require("../../images/icons/shore-power.svg")} className="metric__icon" />
       <div className="metric__value-container">
         <p className="text text--medium">Shore power</p>
         <div className="text text--smaller">Unplugged</div>

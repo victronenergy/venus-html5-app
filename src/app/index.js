@@ -135,9 +135,9 @@ class App extends Component {
     return (
       <div className="main__container">
         <header>
-          <img src="./images/icons/logo.png" className="logo" />
+          <img src={require("../images/icons/logo.png")} className="logo" />
           <div className="connection">
-            <img src="./images/icons/connected.svg" className="connection__icon" />
+            <img src={require("../images/icons/connected.svg")} className="connection__icon" />
             <p className="text text--very-small">{this.state.connected ? "Connected" : "Disconnected"}</p>
             {this.state[DBUS_PATHS.SETTINGS.SHOW_REMOTE_CONSOLE] && (
               <button
@@ -290,7 +290,7 @@ class App extends Component {
                         Remote Console > Settings > Services > MQTT.
                       </span>
                       <div className="image-container">
-                        <img src="./images/mqtt-settings.png" />
+                        <img src={require("../images/mqtt-settings.png")} />
                       </div>
                     </div>
                   </Fade>
