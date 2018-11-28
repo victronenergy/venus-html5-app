@@ -7,8 +7,6 @@ const clientConfig = webpackConfig(null, { mode: "development" })
 
 const clientCompiler = webpack(clientConfig)
 
-// Find out the venus host ip you want to use: LAN, ethernet or Wlan connection to the device
-// Try not to commit the ip :)
 const clientDevServer = new webpackDevServer(clientCompiler, clientConfig.devServer)
 
 if (process.argv[2] === "--mocked") {
