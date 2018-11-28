@@ -1,5 +1,5 @@
-import { h } from "preact"
-import { shallow } from "preact-render-spy"
+import React from "react"
+import { shallow } from "enzyme"
 import NumericValue from "../../src/app/components/NumericValue"
 
 describe("Number display", () => {
