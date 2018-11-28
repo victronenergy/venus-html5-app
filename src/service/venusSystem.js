@@ -41,7 +41,13 @@ class VenusSystem {
   }
 
   isInitialized = () => {
-    return this.portalId && this.vebusInstanceId && this.systemInstanceId !== null && this.acInput1 !== null && this.acInput2 !== null
+    return (
+      this.portalId &&
+      this.vebusInstanceId &&
+      this.systemInstanceId !== null &&
+      this.acInput1 !== null &&
+      this.acInput2 !== null
+    )
   }
 
   /**
