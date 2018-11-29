@@ -45,18 +45,6 @@ class App extends Component {
     [DBUS_PATHS.INVERTER_CHARGER.SYSTEM.STATE]: "--",
     [DBUS_PATHS.INVERTER_CHARGER.SYSTEM.MODE]: "--",
     [DBUS_PATHS.INVERTER_CHARGER.SYSTEM.MODE_IS_ADJUSTABLE]: null,
-    [DBUS_PATHS.INVERTER_CHARGER.ACTIVE_INPUT]: null,
-    [DBUS_PATHS.SETTINGS.AC_INPUT_TYPE1]: null,
-    [DBUS_PATHS.SETTINGS.AC_INPUT_TYPE2]: null,
-    [DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.CURRENT_PHASE_1]: null,
-    [DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.CURRENT_PHASE_2]: null,
-    [DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.CURRENT_PHASE_3]: null,
-    [DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.VOLTAGE_PHASE_1]: null,
-    [DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.VOLTAGE_PHASE_2]: null,
-    [DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.VOLTAGE_PHASE_3]: null,
-    [DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.POWER_PHASE_1]: null,
-    [DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.POWER_PHASE_2]: null,
-    [DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.POWER_PHASE_3]: null,
 
     [DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT]: "--",
     [DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT_IS_ADJUSTABLE]: null,
@@ -246,28 +234,7 @@ class App extends Component {
                                           timeToGo={this.state[DBUS_PATHS.BATTERY.TIME_TO_GO]}
                                         />
                                         <div className="multi-metric-container shore-power__container">
-                                          <ActiveSource
-                                            activeInput={this.state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_INPUT]}
-                                            settings={{
-                                              input0: this.state[DBUS_PATHS.SETTINGS.AC_INPUT_TYPE1],
-                                              input1: this.state[DBUS_PATHS.SETTINGS.AC_INPUT_TYPE2]
-                                            }}
-                                            current={{
-                                              phase1: this.state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.CURRENT_PHASE_1],
-                                              phase2: this.state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.CURRENT_PHASE_2],
-                                              phase3: this.state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.CURRENT_PHASE_3]
-                                            }}
-                                            voltage={{
-                                              phase1: this.state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.VOLTAGE_PHASE_1],
-                                              phase2: this.state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.VOLTAGE_PHASE_2],
-                                              phase3: this.state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.VOLTAGE_PHASE_3]
-                                            }}
-                                            power={{
-                                              phase1: this.state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.POWER_PHASE_1],
-                                              phase2: this.state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.POWER_PHASE_2],
-                                              phase3: this.state[DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.POWER_PHASE_3]
-                                            }}
-                                          />
+                                          <ActiveSource portalId={portalId} vebusInstanceId={vebusInstanceId} />
                                           <ShoreInputLimit
                                             currentLimit={
                                               this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT]

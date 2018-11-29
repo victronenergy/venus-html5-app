@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import { AC_SOURCE_TYPE, ACTIVE_INPUT } from "../../service/topics"
 import NumericValue from "./NumericValue"
+import MqttListOfTopics from "../mqtt/MqttListOfTopics"
 
 const getActiveSource = ({ activeInput, settings }) => {
   let activeSource
@@ -88,4 +89,59 @@ const ActiveSourceMetric = props => {
   )
 }
 
-export default ActiveSource
+class ActiveSourceWithData extends Component {
+  render() {
+    const { portalId, vebusInstanceId } = this.props
+    if (!portalId || !vebusInstanceId) {
+      return <div>Loading...</div>
+    }
+
+    return (
+      <MqttListOfTopics
+        topicList={[
+          `N/${portalId}/settings/0/Settings/SystemSetup/AcInput0`,
+          `N/${portalId}/settings/0/Settings/SystemSetup/AcInput1`,
+          `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/ActiveInput`,
+          `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L1/I`,
+          `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L2/I`,
+          `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L3/I`,
+          `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L1/V`,
+          `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L2/V`,
+          `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L3/V`,
+          `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L1/P`,
+          `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L2/P`,
+          `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L3/P`
+        ]}
+      >
+        {topics => {
+          return (
+            <ActiveSource
+              activeInput={topics[`N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/ActiveInput`].value}
+              settings={{
+                input0: topics[`N/${portalId}/settings/0/Settings/SystemSetup/AcInput0`].value,
+                input1: topics[`N/${portalId}/settings/0/Settings/SystemSetup/AcInput1`].value
+              }}
+              current={{
+                phase1: topics[`N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L1/I`].value,
+                phase2: topics[`N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L2/I`].value,
+                phase3: topics[`N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L3/I`].value
+              }}
+              voltage={{
+                phase1: topics[`N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L1/V`].value,
+                phase2: topics[`N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L2/V`].value,
+                phase3: topics[`N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L3/V`].value
+              }}
+              power={{
+                phase1: topics[`N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L1/P`].value,
+                phase2: topics[`N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L2/P`].value,
+                phase3: topics[`N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L3/P`].value
+              }}
+            />
+          )
+        }}
+      </MqttListOfTopics>
+    )
+  }
+}
+
+export default ActiveSourceWithData
