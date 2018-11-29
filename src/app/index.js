@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import { render } from "react-dom"
-import metricsConfig from "../config/metricsConfig"
 import { DBUS_PATHS } from "../config/dbusPaths"
 import VenusClient from "../service/index"
 import Logger from "../logging/logger"
@@ -30,14 +29,6 @@ export const MqttClientContext = React.createContext(null)
 
 class App extends Component {
   state = {
-    [DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.VOLTAGE]: "--",
-    [DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT]: "--",
-    [DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT]: "--",
-    [DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.POWER]: "--",
-    [DBUS_PATHS.INVERTER_CHARGER.SYSTEM.STATE]: "--",
-    [DBUS_PATHS.INVERTER_CHARGER.SYSTEM.MODE]: "--",
-    [DBUS_PATHS.INVERTER_CHARGER.SYSTEM.MODE_IS_ADJUSTABLE]: null,
-
     [DBUS_PATHS.SETTINGS.SHOW_REMOTE_CONSOLE]: true,
     connected: false,
     currentView: VIEWS.CONNECTING,
@@ -48,26 +39,13 @@ class App extends Component {
     this.deviceInterface = new VenusClient(mqttUrl)
     this.deviceInterface.connect().then(
       () => {
-        const dbusPaths = Object.keys(metricsConfig)
-        this.deviceInterface.subscribe(dbusPaths)
+        // No longer subscribe to anything
       },
       err => {
         Logger.warn("Could not connect to MQTT", err)
         this.setView(VIEWS.MQTT_UNAVAILABLE)
       }
     )
-
-    this.deviceInterface.onMessage = ({ path, value }) => {
-      const metric = metricsConfig[path]
-      if (!metric) {
-        Logger.warn(`Received message for topic you're not listening to: ${path}`)
-        return
-      }
-
-      const formattedValue = metric.formatter ? metric.formatter(value) : value
-      this.setState({ [path]: metric.unit && formattedValue !== "--" ? formattedValue + metric.unit : formattedValue })
-    }
-
     this.deviceInterface.onConnectionChanged = ({ connected }) => {
       if (this.state.currentView === VIEWS.CONNECTING && connected) {
         this.setView(VIEWS.METRICS)
@@ -223,12 +201,9 @@ class App extends Component {
                                           />
                                         </div>
                                         <InverterCharger
-                                          state={this.state[DBUS_PATHS.INVERTER_CHARGER.SYSTEM.STATE]}
-                                          activeMode={this.state[DBUS_PATHS.INVERTER_CHARGER.SYSTEM.MODE]}
-                                          isAdjustable={
-                                            this.state[DBUS_PATHS.INVERTER_CHARGER.SYSTEM.MODE_IS_ADJUSTABLE] &&
-                                            this.state.connected
-                                          }
+                                          portalId={portalId}
+                                          vebusInstanceId={vebusInstanceId}
+                                          connected={this.state.connected}
                                           onModeSelected={this.handleModeSelected}
                                         />
                                         <div className="multi-metric-container">
