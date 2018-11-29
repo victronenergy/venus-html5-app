@@ -1,7 +1,8 @@
 import React, { Component } from "react"
 import NumericValue from "./NumericValue"
+import MqttListOfTopics from "../mqtt/MqttListOfTopics"
 
-export default props => {
+const DcLoads = props => {
   return (
     <div className="metric metric--small">
       <img src={require("../../images/icons/dc.svg")} className="metric__icon" />
@@ -19,3 +20,28 @@ export default props => {
     </div>
   )
 }
+
+class DcLoadsWithData extends Component {
+  render() {
+    const { portalId } = this.props
+    if (!portalId) {
+      return <DcLoads loading />
+    }
+    return (
+      <MqttListOfTopics
+        topicList={[`N/${portalId}/system/0/Dc/Battery/Voltage`, `N/${portalId}/system/0/Dc/System/Power`]}
+      >
+        {topics => {
+          return (
+            <DcLoads
+              batteryVoltage={topics[`N/${portalId}/system/0/Dc/Battery/Voltage`].value}
+              power={topics[`N/${portalId}/system/0/Dc/System/Power`].value}
+            />
+          )
+        }}
+      </MqttListOfTopics>
+    )
+  }
+}
+
+export default DcLoadsWithData
