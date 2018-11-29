@@ -30,12 +30,6 @@ export const MqttClientContext = React.createContext(null)
 
 class App extends Component {
   state = {
-    [DBUS_PATHS.BATTERY.VOLTAGE]: null,
-    [DBUS_PATHS.BATTERY.CURRENT]: null,
-    [DBUS_PATHS.BATTERY.POWER]: null,
-    [DBUS_PATHS.BATTERY.SOC]: null,
-    [DBUS_PATHS.BATTERY.STATE]: null,
-    [DBUS_PATHS.BATTERY.TIME_TO_GO]: null,
     [DBUS_PATHS.INVERTER_CHARGER.DC_LOADS.POWER]: null,
 
     [DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.VOLTAGE]: "--",
@@ -225,14 +219,7 @@ class App extends Component {
                                   return (
                                     <Fade key={VIEWS.METRICS} unmount={this.state.viewUnmounting}>
                                       <div id="metrics-container">
-                                        <Battery
-                                          soc={this.state[DBUS_PATHS.BATTERY.SOC]}
-                                          state={this.state[DBUS_PATHS.BATTERY.STATE]}
-                                          voltage={this.state[DBUS_PATHS.BATTERY.VOLTAGE]}
-                                          current={this.state[DBUS_PATHS.BATTERY.CURRENT]}
-                                          power={this.state[DBUS_PATHS.BATTERY.POWER]}
-                                          timeToGo={this.state[DBUS_PATHS.BATTERY.TIME_TO_GO]}
-                                        />
+                                        <Battery portalId={portalId} />
                                         <div className="multi-metric-container shore-power__container">
                                           <ActiveSource portalId={portalId} vebusInstanceId={vebusInstanceId} />
                                           <ShoreInputLimit

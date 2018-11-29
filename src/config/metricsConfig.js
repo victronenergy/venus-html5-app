@@ -8,16 +8,6 @@ import {
 import { DBUS_PATHS } from "../config/dbusPaths"
 
 export default {
-  [DBUS_PATHS.BATTERY.VOLTAGE]: {},
-  [DBUS_PATHS.BATTERY.CURRENT]: {},
-  [DBUS_PATHS.BATTERY.POWER]: {},
-  [DBUS_PATHS.BATTERY.SOC]: {},
-  [DBUS_PATHS.BATTERY.STATE]: {
-    formatter: batteryStateFormatter
-  },
-  [DBUS_PATHS.BATTERY.TIME_TO_GO]: {
-    formatter: batteryTimeToGoFormatter
-  },
   [DBUS_PATHS.INVERTER_CHARGER.DC_LOADS.POWER]: {},
   [DBUS_PATHS.INVERTER_CHARGER.SYSTEM.STATE]: {
     description: "System state",
