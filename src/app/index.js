@@ -30,8 +30,6 @@ export const MqttClientContext = React.createContext(null)
 
 class App extends Component {
   state = {
-    [DBUS_PATHS.INVERTER_CHARGER.DC_LOADS.POWER]: null,
-
     [DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.VOLTAGE]: "--",
     [DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT]: "--",
     [DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT]: "--",
@@ -235,10 +233,7 @@ class App extends Component {
                                         />
                                         <div className="multi-metric-container">
                                           <AcLoads portalId={portalId} vebusInstanceId={vebusInstanceId} />
-                                          <DcLoads
-                                            batteryVoltage={this.state[DBUS_PATHS.BATTERY.VOLTAGE]}
-                                            power={this.state[DBUS_PATHS.INVERTER_CHARGER.DC_LOADS.POWER]}
-                                          />
+                                          <DcLoads portalId={portalId} />
                                         </div>
                                       </div>
                                     </Fade>

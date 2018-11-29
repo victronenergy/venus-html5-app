@@ -8,7 +8,6 @@ import {
 import { DBUS_PATHS } from "../config/dbusPaths"
 
 export default {
-  [DBUS_PATHS.INVERTER_CHARGER.DC_LOADS.POWER]: {},
   [DBUS_PATHS.INVERTER_CHARGER.SYSTEM.STATE]: {
     description: "System state",
     unit: "",

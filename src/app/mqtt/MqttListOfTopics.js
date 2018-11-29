@@ -41,6 +41,7 @@ class MqttListOfTopics extends Component {
   }
 
   unsubscribeFromListOfTopics(listOfTopics) {
+    console.log("<MqttListOfTopics> Unsubscribing from ", listOfTopics)
     this.props.client.unsubscribe(listOfTopics)
   }
 
