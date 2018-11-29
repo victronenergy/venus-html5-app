@@ -1,4 +1,6 @@
-import { h, Component } from "preact"
+import React, { Component } from "react"
+import { MqttClientContext } from "../index.js"
+
 import * as mqtt from "mqtt"
 export const STATUS = {
   CONNECTING: "connecting",
@@ -13,12 +15,6 @@ class MqttClientProvider extends Component {
     error: null,
     status: STATUS.CONNECTING,
     hasFailedToConnect: false
-  }
-
-  getChildContext() {
-    return {
-      client: this.state.client
-    }
   }
 
   componentDidMount() {
@@ -57,7 +53,11 @@ class MqttClientProvider extends Component {
   }
 
   render() {
-    return this.props.children[0](this.state.status, this.state.error)
+    return (
+      <MqttClientContext.Provider value={this.state.client}>
+        {this.props.children(this.state.status, this.state.error)}
+      </MqttClientContext.Provider>
+    )
   }
 }
 

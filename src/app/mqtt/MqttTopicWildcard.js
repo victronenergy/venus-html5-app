@@ -1,5 +1,6 @@
-import { h, Component } from "preact"
+import React, { Component } from "react"
 import { getMessageValue, parseTopic } from "../../service/util"
+import { MqttClientContext } from "../index.js"
 
 class MqttTopicWildcard extends Component {
   state = {
@@ -10,7 +11,7 @@ class MqttTopicWildcard extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (!this.state.initialized && this.context.client) {
+    if (!this.state.initialized && this.props.client) {
       this.listenFoIncomingMessages()
       this.subscribeToTopic(this.props.wildcard)
       this.setState({ initialized: true })
@@ -28,7 +29,7 @@ class MqttTopicWildcard extends Component {
   }
 
   subscribeToTopic(wildcard) {
-    this.context.client.subscribe(wildcard, (err, [{ topic, qos }]) => {
+    this.props.client.subscribe(wildcard, (err, [{ topic, qos }]) => {
       if (err) {
         console.error(`<MqttTopicWildcard/>`, err)
         this.setState({ error: err })
@@ -43,7 +44,7 @@ class MqttTopicWildcard extends Component {
   }
 
   listenFoIncomingMessages() {
-    this.context.client.on("message", (topic, message) => {
+    this.props.client.on("message", (topic, message) => {
       // console.log("<MqttTopicWildcard />  Message received: ", topic, message.toString())
       // If the subscribe failed, do nothing
       if (this.error) {
@@ -80,10 +81,15 @@ class MqttTopicWildcard extends Component {
     })
   }
 
-  render(props, state) {
-    // In Preact, `children` is always an array, so get first element
-    return <>{props.children[0](state.values)}</>
+  render() {
+    return <React.Fragment>{this.props.children(this.state.values)}</React.Fragment>
   }
 }
 
-export default MqttTopicWildcard
+export default props => (
+  <MqttClientContext.Consumer>
+    {client => {
+      return <MqttTopicWildcard {...props} client={client} />
+    }}
+  </MqttClientContext.Consumer>
+)

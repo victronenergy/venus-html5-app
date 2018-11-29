@@ -1,14 +1,8 @@
-import { h, Component } from "preact"
+import React, { Component } from "react"
 import { getMessageValue, parseTopic } from "../../service/util"
+import { MqttClientContext } from "../index.js"
 
 class MqttListOfTopics extends Component {
-  state = {
-    values: {},
-    initialized: false,
-    subscribed: false,
-    error: null
-  }
-
   constructor(props) {
     super(props)
     const initialValues = {}
@@ -16,13 +10,16 @@ class MqttListOfTopics extends Component {
       const topicParts = parseTopic(topic)
       initialValues[topic] = { ...topicParts, value: null }
     })
-    this.setState({
-      values: initialValues
-    })
+    this.state = {
+      values: initialValues,
+      initialized: false,
+      subscribed: false,
+      error: null
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (!this.state.initialized && this.context.client) {
+    if (!this.state.initialized && this.props.client) {
       this.subscribeToListOfTopics(this.props.topicList)
       this.listenFoIncomingMessages()
       this.setState({ initialized: true })
@@ -40,7 +37,7 @@ class MqttListOfTopics extends Component {
   }
 
   subscribeToListOfTopics(listOfTopics) {
-    this.context.client.subscribe(listOfTopics, (err, topicsSubscribed) => {
+    this.props.client.subscribe(listOfTopics, (err, topicsSubscribed) => {
       if (err) {
         console.error(`<MqttListOfTopics/>`, err)
         this.setState({ error: err })
@@ -57,7 +54,7 @@ class MqttListOfTopics extends Component {
   }
 
   listenFoIncomingMessages() {
-    this.context.client.on("message", (topic, message) => {
+    this.props.client.on("message", (topic, message) => {
       // If the subscribe failed, do nothing
       if (this.error) {
         return
@@ -84,10 +81,15 @@ class MqttListOfTopics extends Component {
     })
   }
 
-  render(props, state) {
-    // In Preact, `children` is always an array, so get first element
-    return <>{props.children[0](state.values)}</>
+  render() {
+    return <>{this.props.children(this.state.values)}</>
   }
 }
 
-export default MqttListOfTopics
+export default props => (
+  <MqttClientContext.Consumer>
+    {client => {
+      return <MqttListOfTopics {...props} client={client} />
+    }}
+  </MqttClientContext.Consumer>
+)

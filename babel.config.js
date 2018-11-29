@@ -1,5 +1,6 @@
 module.exports = {
   presets: [
+    "@babel/preset-react",
     [
       "@babel/preset-env",
       {
@@ -10,5 +11,5 @@ module.exports = {
       }
     ]
   ],
-  plugins: [["transform-react-jsx"], ["@babel/plugin-proposal-class-properties"]]
+  plugins: [["@babel/plugin-proposal-class-properties"]]
 }
