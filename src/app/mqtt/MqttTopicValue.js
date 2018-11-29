@@ -1,5 +1,6 @@
-import { h, Component } from "preact"
+import React, { Component } from "react"
 import { getMessageValue, parseTopic } from "../../service/util"
+import { MqttClientContext } from "../index.js"
 
 class MqttTopicValue extends Component {
   state = {
@@ -11,7 +12,7 @@ class MqttTopicValue extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (!this.state.initialized && this.context.client) {
+    if (!this.state.initialized && this.props.client) {
       this.subscribeToTopic(this.props.topic)
       this.listenFoIncomingMessages()
       this.setState({ initialized: true })
@@ -29,7 +30,7 @@ class MqttTopicValue extends Component {
   }
 
   subscribeToTopic(topicName) {
-    this.context.client.subscribe(topicName, (err, [{ topic, qos }]) => {
+    this.props.client.subscribe(topicName, (err, [{ topic, qos }]) => {
       if (err) {
         console.error(`<MqttTopicValue/>`, err)
         this.setState({ error: err })
@@ -41,7 +42,7 @@ class MqttTopicValue extends Component {
   }
 
   listenFoIncomingMessages() {
-    this.context.client.on("message", (topic, message) => {
+    this.props.client.on("message", (topic, message) => {
       // console.log(topic, message.toString())
       // If the subscribe failed, do nothing
       if (this.error) {
@@ -59,10 +60,15 @@ class MqttTopicValue extends Component {
     })
   }
 
-  render(props, state) {
-    // In Preact, `children` is always an array, so get first element
-    return <>{props.children[0](state.value)}</>
+  render() {
+    return <>{this.props.children(this.state.value)}</>
   }
 }
 
-export default MqttTopicValue
+export default props => (
+  <MqttClientContext.Consumer>
+    {client => {
+      return <MqttTopicValue {...props} client={client} />
+    }}
+  </MqttClientContext.Consumer>
+)

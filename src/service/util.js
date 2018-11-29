@@ -26,12 +26,12 @@ export const parseTopic = topic => {
     type: parts[0],
     portalId: parts[1],
     serviceType: parts[2],
-    deviceInstance: parseInt(parts[3]),
+    deviceInstance: parts[3] === "+" ? "+" : parseInt(parts[3]),
     dbusPath: "/" + (isAcIn ? dbusPathParts.splice(3).join("/") : dbusPathParts.join("/"))
   }
 }
 
-export const parseMessage = (topic, message) => {
+export const getMessageJson = message => {
   let data
   try {
     data = JSON.parse(message.toString())
@@ -39,12 +39,21 @@ export const parseMessage = (topic, message) => {
     data = {}
     Logger.error(topic, `[${message.toString()}]`, e)
   }
+  return data
+}
 
+export const getMessageValue = message => {
+  const data = getMessageJson(message)
+  return data.value !== undefined ? data.value : null
+}
+
+export const parseMessage = (topic, message) => {
+  let value = getMessageValue(message)
   const { dbusPath } = parseTopic(topic)
 
   return {
     path: dbusPath,
-    value: data.value !== undefined ? data.value : null
+    value
   }
 }
 
