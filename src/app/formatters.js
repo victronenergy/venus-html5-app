@@ -35,32 +35,4 @@ function systemModeFormatter(value) {
   return "--"
 }
 
-function batteryStateFormatter(value) {
-  switch (value) {
-    case BATTERY_STATE.CHARGING:
-      return "Charging"
-    case BATTERY_STATE.DISCHARGING:
-      return "Discharging"
-    case BATTERY_STATE.IDLE:
-      return "Idle"
-  }
-}
-
-function batteryTimeToGoFormatter(timeToGo) {
-  const secs = parseInt(timeToGo)
-  if (!isNaN(secs)) {
-    const days = Math.floor(secs / 86400)
-    const hours = Math.floor((secs - days * 86400) / 3600)
-    const minutes = Math.floor((secs - hours * 3600) / 60)
-    const seconds = Math.floor(secs - minutes * 60)
-
-    if (days) return `${days}d ${hours}h`
-    else if (hours) return `${hours}h ${minutes}m`
-    else if (minutes) return `${minutes}m ${seconds}s`
-    else return `${seconds}s`
-  } else {
-    return null
-  }
-}
-
-export { numericFormatter, systemModeFormatter, systemStateFormatter, batteryStateFormatter, batteryTimeToGoFormatter }
+export { numericFormatter, systemModeFormatter, systemStateFormatter }
