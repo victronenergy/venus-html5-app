@@ -1,5 +1,7 @@
 import React, { Component } from "react"
 import Logger from "../../logging/logger"
+import MqttListOfTopics from "../mqtt/MqttListOfTopics"
+import GetShorePowerInputNumber from "../mqtt/victron/GetShorePowerInputNumber"
 
 const USAmperage = [10, 15, 20, 30, 50, 100]
 const EUAmperage = [6, 10, 13, 16, 25, 32, 63]
@@ -65,11 +67,53 @@ class ShoreInputLimitSelector extends Component {
 
           {// Add these to "cheat" the flexbox and allow center alignment of selector buttons
           // AND left alignment to the last row of buttons if multilined
-          this.state.showEmpties && amperageList.map(() => <div className="empty" />)}
+          this.state.showEmpties && amperageList.map(amperage => <div className="empty" key={amperage} />)}
         </div>
       </div>
     )
   }
 }
 
-export default ShoreInputLimitSelector
+class ShoreInputLimitSelectorWithData extends Component {
+  render() {
+    const { portalId, vebusInstanceId } = this.props
+    if (!portalId || !vebusInstanceId) {
+      return <div>Loading..</div>
+    }
+    return (
+      <GetShorePowerInputNumber portalId={portalId}>
+        {shorePowerInput => {
+          if (!shorePowerInput) {
+            return <div>Loading...</div>
+          }
+          return (
+            <MqttListOfTopics
+              topicList={[
+                // Only available for VE.Bus versions > 415
+                `N/${portalId}/vebus/${vebusInstanceId}/Ac/In/${shorePowerInput}/CurrentLimit`,
+                `N/${portalId}/vebus/${vebusInstanceId}/Ac/In/${shorePowerInput}/CurrentLimitGetMax`,
+                `N/${portalId}/vebus/${vebusInstanceId}/ProductId`
+              ]}
+            >
+              {topics => {
+                return (
+                  <ShoreInputLimitSelector
+                    currentLimit={
+                      topics[`N/${portalId}/vebus/${vebusInstanceId}/Ac/In/${shorePowerInput}/CurrentLimit`].value
+                    }
+                    maxLimit={
+                      topics[`N/${portalId}/vebus/${vebusInstanceId}/Ac/In/${shorePowerInput}/CurrentLimitGetMax`].value
+                    }
+                    productId={topics[`N/${portalId}/vebus/${vebusInstanceId}/ProductId`].value}
+                    onLimitSelected={this.props.onLimitSelected}
+                  />
+                )
+              }}
+            </MqttListOfTopics>
+          )
+        }}
+      </GetShorePowerInputNumber>
+    )
+  }
+}
+export default ShoreInputLimitSelectorWithData

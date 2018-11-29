@@ -1,7 +1,10 @@
 import React, { Component } from "react"
 import { VIEWS } from "../../config/enums"
+import GetShorePowerInputNumber from "../mqtt/victron/GetShorePowerInputNumber"
+import MqttListOfTopics from "../mqtt/MqttListOfTopics"
+import { formatNumber } from "./NumericValue"
 
-export default (props, state) => {
+const ShoreInputLimit = props => {
   if (!props.isAdjustable) {
     return (
       <div className="metric metric--small">
@@ -22,3 +25,47 @@ export default (props, state) => {
     </div>
   )
 }
+
+class ShoreInputLimitWithData extends Component {
+  render() {
+    const { portalId, vebusInstanceId } = this.props
+    if (!portalId && !vebusInstanceId) {
+      return <ShoreInputLimit loading />
+    }
+    return (
+      <GetShorePowerInputNumber portalId={portalId}>
+        {shorePowerInput => {
+          if (!shorePowerInput) {
+            // TODO Show - no shore power configured message
+            return <ShoreInputLimit loading />
+          }
+          return (
+            <MqttListOfTopics
+              topicList={[
+                // Only available for VE.Bus versions > 415
+                `N/${portalId}/vebus/${vebusInstanceId}/Ac/In/${shorePowerInput}/CurrentLimit`,
+                `N/${portalId}/vebus/${vebusInstanceId}/Ac/In/${shorePowerInput}/CurrentLimitIsAdjustable`
+              ]}
+            >
+              {topics => {
+                const currentLimit =
+                  topics[`N/${portalId}/vebus/${vebusInstanceId}/Ac/In/${shorePowerInput}/CurrentLimit`].value
+                const isAdjustable =
+                  topics[`N/${portalId}/vebus/${vebusInstanceId}/Ac/In/${shorePowerInput}/CurrentLimitIsAdjustable`]
+                    .value
+                return (
+                  <ShoreInputLimit
+                    currentLimit={formatNumber({ value: currentLimit, unit: "A" })}
+                    isAdjustable={isAdjustable && this.props.connected}
+                    setView={this.props.setView}
+                  />
+                )
+              }}
+            </MqttListOfTopics>
+          )
+        }}
+      </GetShorePowerInputNumber>
+    )
+  }
+}
+export default ShoreInputLimitWithData

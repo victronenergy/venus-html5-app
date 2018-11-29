@@ -21,11 +21,19 @@ class MqttTopicWildcard extends Component {
     if (prevProps.wildcard !== this.props.wildcard) {
       console.log("New wildcard", prevProps, this.props)
       if (prevProps.wildcard !== null) {
-        // TODO Unsubscribe from previous
+        this.unsubscribeFromWildcard(this.props.wildcard)
       }
 
       this.subscribeToTopic(this.props.wildcard)
     }
+  }
+
+  componentWillUnmount() {
+    this.unsubscribeFromWildcard(this.props.wildcard)
+  }
+
+  unsubscribeFromWildcard(wildcard) {
+    this.props.client.unsubscribe(wildcard)
   }
 
   subscribeToTopic(wildcard) {

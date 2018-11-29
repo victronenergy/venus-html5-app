@@ -40,10 +40,6 @@ class App extends Component {
     [DBUS_PATHS.INVERTER_CHARGER.SYSTEM.MODE]: "--",
     [DBUS_PATHS.INVERTER_CHARGER.SYSTEM.MODE_IS_ADJUSTABLE]: null,
 
-    [DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT]: "--",
-    [DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT_IS_ADJUSTABLE]: null,
-    [DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT_MAX]: null,
-    [DBUS_PATHS.INVERTER_CHARGER.PRODUCT_ID]: null,
     [DBUS_PATHS.SETTINGS.SHOW_REMOTE_CONSOLE]: true,
     connected: false,
     currentView: VIEWS.CONNECTING,
@@ -191,9 +187,8 @@ class App extends Component {
                                   return (
                                     <Fade key={VIEWS.AMPERAGE_SELECTOR} unmount={this.state.viewUnmounting}>
                                       <ShoreInputLimitSelector
-                                        currentLimit={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT]}
-                                        maxLimit={this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT_MAX]}
-                                        productId={this.state[DBUS_PATHS.INVERTER_CHARGER.PRODUCT_ID]}
+                                        portalId={portalId}
+                                        vebusInstanceId={vebusInstanceId}
                                         onLimitSelected={this.handleShorePowerLimitSelected}
                                       />
                                     </Fade>
@@ -223,14 +218,9 @@ class App extends Component {
                                         <div className="multi-metric-container shore-power__container">
                                           <ActiveSource portalId={portalId} vebusInstanceId={vebusInstanceId} />
                                           <ShoreInputLimit
-                                            currentLimit={
-                                              this.state[DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT]
-                                            }
-                                            isAdjustable={
-                                              this.state[
-                                                DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT_IS_ADJUSTABLE
-                                              ] && this.state.connected
-                                            }
+                                            portalId={portalId}
+                                            vebusInstanceId={vebusInstanceId}
+                                            connected={this.state.connected}
                                             setView={this.setView}
                                           />
                                         </div>
