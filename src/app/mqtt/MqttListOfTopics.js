@@ -27,13 +27,21 @@ class MqttListOfTopics extends Component {
     }
 
     if (JSON.stringify(prevProps.topicList) !== JSON.stringify(this.props.topicList)) {
-      console.log("New wildcard", prevProps, this.props)
-      if (prevProps.wildcard !== null) {
-        // TODO Unsubscribe from previous
+      console.log("New topicList", prevProps, this.props)
+      if (prevProps.topicList !== null) {
+        this.unsubscribeFromListOfTopics(prevProps.topicList)
       }
 
       this.subscribeToListOfTopics(this.props.topicList)
     }
+  }
+
+  componentWillUnmount() {
+    this.unsubscribeFromListOfTopics(this.props.topicList)
+  }
+
+  unsubscribeFromListOfTopics(listOfTopics) {
+    this.props.client.unsubscribe(listOfTopics)
   }
 
   subscribeToListOfTopics(listOfTopics) {
@@ -50,6 +58,12 @@ class MqttListOfTopics extends Component {
       this.setState({
         subscribed: true
       })
+    })
+
+    // Then send read request, to make sure we get data immediately
+    listOfTopics.forEach(topic => {
+      console.log(`<MqttListOfTopics /> Publish read request to ${topic.replace("N/", "R/")}`)
+      this.props.client.publish(topic.replace("N/", "R/"))
     })
   }
 
