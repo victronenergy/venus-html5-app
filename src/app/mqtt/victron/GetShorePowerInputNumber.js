@@ -1,12 +1,12 @@
 import React, { Component } from "react"
-import MqttListOfTopics from "../MqttListOfTopics"
+import MqttTopicList from "../MqttTopicList"
 import { AC_SOURCE_TYPE } from "../../../service/topics"
 
 class GetShorePowerInputNumber extends Component {
   render() {
     const { portalId } = this.props
     return (
-      <MqttListOfTopics
+      <MqttTopicList
         topicList={[
           `N/${portalId}/settings/0/Settings/SystemSetup/AcInput1`,
           `N/${portalId}/settings/0/Settings/SystemSetup/AcInput2`
@@ -24,7 +24,7 @@ class GetShorePowerInputNumber extends Component {
           }
           return this.props.children(shorePowerInput)
         }}
-      </MqttListOfTopics>
+      </MqttTopicList>
     )
   }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import NumericValue from "./NumericValue"
-import MqttListOfTopics from "../mqtt/MqttListOfTopics"
+import MqttTopicList from "../mqtt/MqttTopicList"
 
 const DcLoads = props => {
   return (
@@ -28,7 +28,7 @@ class DcLoadsWithData extends Component {
       return <DcLoads loading />
     }
     return (
-      <MqttListOfTopics
+      <MqttTopicList
         topicList={[`N/${portalId}/system/0/Dc/Battery/Voltage`, `N/${portalId}/system/0/Dc/System/Power`]}
       >
         {topics => {
@@ -39,7 +39,7 @@ class DcLoadsWithData extends Component {
             />
           )
         }}
-      </MqttListOfTopics>
+      </MqttTopicList>
     )
   }
 }
