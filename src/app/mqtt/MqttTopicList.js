@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { getMessageValue, parseTopic } from "../../service/util"
+import { parseTopic } from "../../service/util"
 import { MqttClientContext } from "../index.js"
 
 class MqttTopicList extends Component {
@@ -21,7 +21,6 @@ class MqttTopicList extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (!this.state.initialized && this.props.client) {
       this.subscribeToListOfTopics(this.props.topicList)
-      this.listenFoIncomingMessages()
       this.setState({ initialized: true })
       return
     }
@@ -68,43 +67,16 @@ class MqttTopicList extends Component {
     })
   }
 
-  listenFoIncomingMessages() {
-    this.props.client.on("message", (topic, message) => {
-      // If the subscribe failed, do nothing
-      if (this.error) {
-        return
-      }
-
-      // Only listen to messages for the the topics we subscribed to in this component
-      // Callback from subscribing takes a long time to come back, so just check based on props
-      if (!this.props.topicList.includes(topic)) {
-        return
-      }
-
-      const value = getMessageValue(message)
-      console.log(`<MqttTopicList /> Received ${topic} >> ${value}`)
-      const topicParts = parseTopic(topic)
-      this.setState({
-        values: {
-          ...this.state.values,
-          [topic]: {
-            ...topicParts,
-            value
-          }
-        }
-      })
-    })
-  }
-
   render() {
-    return <>{this.props.children(this.state.values)}</>
+    return <>{this.props.children(this.props.messages)}</>
   }
 }
 
 export default props => (
   <MqttClientContext.Consumer>
-    {client => {
-      return <MqttTopicList {...props} client={client} />
+    {({ client, getMessagesByTopics }) => {
+      const filteredMessages = getMessagesByTopics(props.topicList)
+      return <MqttTopicList {...props} client={client} messages={filteredMessages} />
     }}
   </MqttClientContext.Consumer>
 )
