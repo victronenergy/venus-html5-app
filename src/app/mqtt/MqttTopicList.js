@@ -1,70 +1,27 @@
 import React, { Component } from "react"
-import { parseTopic } from "../../service/util"
 import { MqttClientContext } from "../index.js"
 
 class MqttTopicList extends Component {
-  constructor(props) {
-    super(props)
-    const initialValues = {}
-    props.topicList.forEach(topic => {
-      const topicParts = parseTopic(topic)
-      initialValues[topic] = { ...topicParts, value: null }
-    })
-    this.state = {
-      values: initialValues,
-      initialized: false,
-      subscribed: false,
-      error: null
-    }
+  state = {
+    initialized: false
   }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (!this.state.initialized && this.props.client) {
-      this.subscribeToListOfTopics(this.props.topicList)
-      this.setState({ initialized: true })
-      return
+  componentDidUpdate(prevProps) {
+    if (!this.state.initialized && this.props.subscribe) {
+      this.props.topicList.forEach(topic => this.props.subscribe(topic))
     }
 
     if (JSON.stringify(prevProps.topicList) !== JSON.stringify(this.props.topicList)) {
       console.log("New topicList", prevProps, this.props)
       if (prevProps.topicList !== null) {
-        this.unsubscribeFromListOfTopics(prevProps.topicList)
+        prevProps.topicList.forEach(topic => this.props.unsubscribe(topic))
       }
 
-      this.subscribeToListOfTopics(this.props.topicList)
+      this.props.topicList.forEach(topic => this.props.subscribe(topic))
     }
   }
 
   componentWillUnmount() {
-    this.unsubscribeFromListOfTopics(this.props.topicList)
-  }
-
-  unsubscribeFromListOfTopics(listOfTopics) {
-    console.log("<MqttTopicList> Unsubscribing from ", listOfTopics)
-    this.props.client.unsubscribe(listOfTopics)
-  }
-
-  subscribeToListOfTopics(listOfTopics) {
-    this.props.client.subscribe(listOfTopics, (err, topicsSubscribed) => {
-      if (err) {
-        console.error(`<MqttTopicList/>`, err)
-        this.setState({ error: err })
-        return
-      }
-
-      topicsSubscribed.forEach(({ topic, qos }) => {
-        console.log(`<MqttTopicList /> Subscribed to ${topic} with QoS ${qos}`)
-      })
-      this.setState({
-        subscribed: true
-      })
-    })
-
-    // Then send read request, to make sure we get data immediately
-    listOfTopics.forEach(topic => {
-      console.log(`<MqttTopicList /> Publish read request to ${topic.replace("N/", "R/")}`)
-      this.props.client.publish(topic.replace("N/", "R/"))
-    })
+    this.props.topicList.forEach(topic => this.props.unsubscribe(topic))
   }
 
   render() {
@@ -74,9 +31,9 @@ class MqttTopicList extends Component {
 
 export default props => (
   <MqttClientContext.Consumer>
-    {({ client, getMessagesByTopics }) => {
+    {({ subscribe, unsubscribe, getMessagesByTopics }) => {
       const filteredMessages = getMessagesByTopics(props.topicList)
-      return <MqttTopicList {...props} client={client} messages={filteredMessages} />
+      return <MqttTopicList {...props} subscribe={subscribe} unsubscribe={unsubscribe} messages={filteredMessages} />
     }}
   </MqttClientContext.Consumer>
 )

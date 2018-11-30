@@ -18,6 +18,7 @@ class MqttClientProvider extends Component {
     hasFailedToConnect: false,
     messages: {}
   }
+  topicsSubscribed = new Set()
 
   componentDidMount() {
     const client = mqtt.connect(`mqtt://${this.props.host}:${this.props.port}`)
@@ -61,6 +62,38 @@ class MqttClientProvider extends Component {
     })
   }
 
+  subscribe = topic => {
+    if (this.topicsSubscribed.has(topic)) {
+      return
+    }
+
+    this.state.client.subscribe(topic, (err, granted) => {
+      if (err) {
+        console.error(err)
+        return
+      }
+      console.log(
+        `Subscribed to ${granted[0] ? granted[0].topic : topic} with QoS ${granted[0] ? granted[0].qos : "unknown"}`
+      )
+      this.topicsSubscribed.add(topic)
+    })
+  }
+
+  unsubscribe = topic => {
+    if (!this.topicsSubscribed.has(topic)) {
+      return
+    }
+
+    this.state.client.unsubscribe(topic, err => {
+      if (err) {
+        console.error(err)
+        return
+      }
+      console.log(`Unsubscribed from ${topic}`)
+      this.topicsSubscribed.delete(topic)
+    })
+  }
+
   getMessagesByTopics = topicList => {
     let initialValues = topicList.reduce((obj, key) => {
       obj[key] = { value: null }
@@ -100,7 +133,8 @@ class MqttClientProvider extends Component {
     return (
       <MqttClientContext.Provider
         value={{
-          client: this.state.client,
+          subscribe: this.state.client ? this.subscribe : null,
+          unsubscribe: this.state.client ? this.unsubscribe : null,
           messages: this.state.messages,
           getMessagesByTopics: this.getMessagesByTopics,
           getMessagesByWildcard: this.getMessagesByWildcard
