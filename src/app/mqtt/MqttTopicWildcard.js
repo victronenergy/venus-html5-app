@@ -51,7 +51,7 @@ class MqttTopicWildcard extends Component {
     })
 
     // Then send read request, to make sure we get data immediately
-    console.log(`<MqttListOfTopics /> Publish read request to ${wildcard.replace("N/", "R/")}`)
+    console.log(`<MqttTopicList /> Publish read request to ${wildcard.replace("N/", "R/")}`)
     this.props.client.publish(wildcard.replace("N/", "R/"))
   }
 

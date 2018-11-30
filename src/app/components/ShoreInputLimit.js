@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { VIEWS } from "../../config/enums"
 import GetShorePowerInputNumber from "../mqtt/victron/GetShorePowerInputNumber"
-import MqttListOfTopics from "../mqtt/MqttListOfTopics"
+import MqttTopicList from "../mqtt/MqttTopicList"
 import { formatNumber } from "./NumericValue"
 
 const ShoreInputLimit = props => {
@@ -40,7 +40,7 @@ class ShoreInputLimitWithData extends Component {
             return <ShoreInputLimit loading />
           }
           return (
-            <MqttListOfTopics
+            <MqttTopicList
               topicList={[
                 // Only available for VE.Bus versions > 415
                 `N/${portalId}/vebus/${vebusInstanceId}/Ac/In/${shorePowerInput}/CurrentLimit`,
@@ -61,7 +61,7 @@ class ShoreInputLimitWithData extends Component {
                   />
                 )
               }}
-            </MqttListOfTopics>
+            </MqttTopicList>
           )
         }}
       </GetShorePowerInputNumber>

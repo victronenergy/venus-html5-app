@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { getMessageValue, parseTopic } from "../../service/util"
 import { MqttClientContext } from "../index.js"
 
-class MqttListOfTopics extends Component {
+class MqttTopicList extends Component {
   constructor(props) {
     super(props)
     const initialValues = {}
@@ -41,20 +41,20 @@ class MqttListOfTopics extends Component {
   }
 
   unsubscribeFromListOfTopics(listOfTopics) {
-    console.log("<MqttListOfTopics> Unsubscribing from ", listOfTopics)
+    console.log("<MqttTopicList> Unsubscribing from ", listOfTopics)
     this.props.client.unsubscribe(listOfTopics)
   }
 
   subscribeToListOfTopics(listOfTopics) {
     this.props.client.subscribe(listOfTopics, (err, topicsSubscribed) => {
       if (err) {
-        console.error(`<MqttListOfTopics/>`, err)
+        console.error(`<MqttTopicList/>`, err)
         this.setState({ error: err })
         return
       }
 
       topicsSubscribed.forEach(({ topic, qos }) => {
-        console.log(`<MqttListOfTopics /> Subscribed to ${topic} with QoS ${qos}`)
+        console.log(`<MqttTopicList /> Subscribed to ${topic} with QoS ${qos}`)
       })
       this.setState({
         subscribed: true
@@ -63,7 +63,7 @@ class MqttListOfTopics extends Component {
 
     // Then send read request, to make sure we get data immediately
     listOfTopics.forEach(topic => {
-      console.log(`<MqttListOfTopics /> Publish read request to ${topic.replace("N/", "R/")}`)
+      console.log(`<MqttTopicList /> Publish read request to ${topic.replace("N/", "R/")}`)
       this.props.client.publish(topic.replace("N/", "R/"))
     })
   }
@@ -82,7 +82,7 @@ class MqttListOfTopics extends Component {
       }
 
       const value = getMessageValue(message)
-      console.log(`<MqttListOfTopics /> Received ${topic} >> ${value}`)
+      console.log(`<MqttTopicList /> Received ${topic} >> ${value}`)
       const topicParts = parseTopic(topic)
       this.setState({
         values: {
@@ -104,7 +104,7 @@ class MqttListOfTopics extends Component {
 export default props => (
   <MqttClientContext.Consumer>
     {client => {
-      return <MqttListOfTopics {...props} client={client} />
+      return <MqttTopicList {...props} client={client} />
     }}
   </MqttClientContext.Consumer>
 )

@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import NumericValue from "./NumericValue"
-import MqttListOfTopics from "../mqtt/MqttListOfTopics"
+import MqttTopicList from "../mqtt/MqttTopicList"
 
 const AcLoads = props => {
   return (
@@ -36,7 +36,7 @@ class AcLoadsWithData extends Component {
       return <AcLoads loading />
     }
     return (
-      <MqttListOfTopics
+      <MqttTopicList
         topicList={[
           `N/${portalId}/vebus/${vebusInstanceId}/Ac/Out/L1/I`,
           `N/${portalId}/vebus/${vebusInstanceId}/Ac/Out/L2/I`,
@@ -70,7 +70,7 @@ class AcLoadsWithData extends Component {
             />
           )
         }}
-      </MqttListOfTopics>
+      </MqttTopicList>
     )
   }
 }

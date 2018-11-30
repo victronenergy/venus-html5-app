@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { SYSTEM_MODE } from "../../service/topics"
-import MqttListOfTopics from "../mqtt/MqttListOfTopics"
+import MqttTopicList from "../mqtt/MqttTopicList"
 
 function systemModeFormatter(value) {
   if (value == 1) return "Charger only"
@@ -75,7 +75,7 @@ class InverterChargerWithData extends Component {
       return <div>Loading..</div>
     }
     return (
-      <MqttListOfTopics
+      <MqttTopicList
         topicList={[
           `N/${portalId}/system/0/SystemState/State`,
           `N/${portalId}/vebus/${vebusInstanceId}/Mode`,
@@ -92,7 +92,7 @@ class InverterChargerWithData extends Component {
             />
           )
         }}
-      </MqttListOfTopics>
+      </MqttTopicList>
     )
   }
 }

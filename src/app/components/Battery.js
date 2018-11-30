@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import NumericValue from "./NumericValue"
-import MqttListOfTopics from "../mqtt/MqttListOfTopics"
+import MqttTopicList from "../mqtt/MqttTopicList"
 
 import { BATTERY_STATE } from "../../service/topics"
 function batteryStateFormatter(value) {
@@ -65,7 +65,7 @@ class BatteryWithData extends Component {
   render() {
     const { portalId } = this.props
     return (
-      <MqttListOfTopics
+      <MqttTopicList
         topicList={[
           `N/${portalId}/system/0/Dc/Battery/Current`,
           `N/${portalId}/system/0/Dc/Battery/State`,
@@ -87,7 +87,7 @@ class BatteryWithData extends Component {
             />
           )
         }}
-      </MqttListOfTopics>
+      </MqttTopicList>
     )
   }
 }

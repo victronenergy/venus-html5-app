@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import Logger from "../../logging/logger"
-import MqttListOfTopics from "../mqtt/MqttListOfTopics"
+import MqttTopicList from "../mqtt/MqttTopicList"
 import GetShorePowerInputNumber from "../mqtt/victron/GetShorePowerInputNumber"
 
 const USAmperage = [10, 15, 20, 30, 50, 100]
@@ -87,7 +87,7 @@ class ShoreInputLimitSelectorWithData extends Component {
             return <div>Loading...</div>
           }
           return (
-            <MqttListOfTopics
+            <MqttTopicList
               topicList={[
                 // Only available for VE.Bus versions > 415
                 `N/${portalId}/vebus/${vebusInstanceId}/Ac/In/${shorePowerInput}/CurrentLimit`,
@@ -109,7 +109,7 @@ class ShoreInputLimitSelectorWithData extends Component {
                   />
                 )
               }}
-            </MqttListOfTopics>
+            </MqttTopicList>
           )
         }}
       </GetShorePowerInputNumber>

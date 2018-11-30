@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { AC_SOURCE_TYPE, ACTIVE_INPUT } from "../../service/topics"
 import NumericValue from "./NumericValue"
-import MqttListOfTopics from "../mqtt/MqttListOfTopics"
+import MqttTopicList from "../mqtt/MqttTopicList"
 
 const getActiveSource = ({ activeInput, settings }) => {
   let activeSource
@@ -97,7 +97,7 @@ class ActiveSourceWithData extends Component {
     }
 
     return (
-      <MqttListOfTopics
+      <MqttTopicList
         topicList={[
           `N/${portalId}/settings/0/Settings/SystemSetup/AcInput0`,
           `N/${portalId}/settings/0/Settings/SystemSetup/AcInput1`,
@@ -139,7 +139,7 @@ class ActiveSourceWithData extends Component {
             />
           )
         }}
-      </MqttListOfTopics>
+      </MqttTopicList>
     )
   }
 }
