@@ -37,7 +37,7 @@ export const getMessageJson = message => {
     data = JSON.parse(message.toString())
   } catch (e) {
     data = {}
-    Logger.error(topic, `[${message.toString()}]`, e)
+    Logger.error("Could not parse message: ", message.toString(), e)
   }
   return data
 }
@@ -81,4 +81,9 @@ export const getParameterByName = (name, url) => {
   if (!results) return null
   if (!results[2]) return ""
   return decodeURIComponent(results[2].replace(/\+/g, " "))
+}
+
+export const phaseSum = phases => {
+  const [phase1, phase2, phase3] = phases || []
+  return phase1.value ? phase1.value + phase2.value + phase3.value : null
 }

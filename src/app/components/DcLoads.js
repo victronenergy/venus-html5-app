@@ -1,6 +1,13 @@
 import React, { Component } from "react"
 import NumericValue from "./NumericValue"
-import MqttTopicList from "../mqtt/MqttTopicList"
+import MqttSubscriptions from "../mqtt/MqttSubscriptions"
+
+const getTopics = portalId => {
+  return {
+    voltage: `N/${portalId}/system/0/Dc/Battery/Voltage`,
+    power: `N/${portalId}/system/0/Dc/System/Power`
+  }
+}
 
 const DcLoads = props => {
   return (
@@ -9,11 +16,7 @@ const DcLoads = props => {
       <div className="metric__value-container">
         <p className="text text--medium">DC Loads</p>
         <div className="metric__values">
-          <NumericValue
-            value={props.batteryVoltage ? props.power / props.batteryVoltage : null}
-            unit="A"
-            precision={1}
-          />
+          <NumericValue value={props.voltage ? props.power / props.voltage : null} unit="A" precision={1} />
           <NumericValue value={props.power} unit="W" />
         </div>
       </div>
@@ -28,18 +31,11 @@ class DcLoadsWithData extends Component {
       return <DcLoads loading />
     }
     return (
-      <MqttTopicList
-        topicList={[`N/${portalId}/system/0/Dc/Battery/Voltage`, `N/${portalId}/system/0/Dc/System/Power`]}
-      >
+      <MqttSubscriptions topics={getTopics(portalId)}>
         {topics => {
-          return (
-            <DcLoads
-              batteryVoltage={topics[`N/${portalId}/system/0/Dc/Battery/Voltage`].value}
-              power={topics[`N/${portalId}/system/0/Dc/System/Power`].value}
-            />
-          )
+          return <DcLoads voltage={topics.voltage.value} power={topics.power.value} />
         }}
-      </MqttTopicList>
+      </MqttSubscriptions>
     )
   }
 }

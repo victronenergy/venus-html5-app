@@ -1,8 +1,30 @@
 import React, { Component } from "react"
 import NumericValue from "./NumericValue"
-import MqttTopicList from "../mqtt/MqttTopicList"
+import MqttSubscriptions from "../mqtt/MqttSubscriptions"
+import { phaseSum } from "../../service/util"
+
+const getTopics = (portalId, vebusInstanceId) => {
+  return {
+    current: [
+      `N/${portalId}/vebus/${vebusInstanceId}/Ac/Out/L1/I`,
+      `N/${portalId}/vebus/${vebusInstanceId}/Ac/Out/L2/I`,
+      `N/${portalId}/vebus/${vebusInstanceId}/Ac/Out/L3/I`
+    ],
+    voltage: [
+      `N/${portalId}/vebus/${vebusInstanceId}/Ac/Out/L1/V`,
+      `N/${portalId}/vebus/${vebusInstanceId}/Ac/Out/L2/V`,
+      `N/${portalId}/vebus/${vebusInstanceId}/Ac/Out/L3/V`
+    ],
+    power: [
+      `N/${portalId}/system/0/Ac/ConsumptionOnOutput/L1/Power`,
+      `N/${portalId}/system/0/Ac/ConsumptionOnOutput/L2/Power`,
+      `N/${portalId}/system/0/Ac/ConsumptionOnOutput/L3/Power`
+    ]
+  }
+}
 
 const AcLoads = props => {
+  const [voltagePhase1] = props.voltage
   return (
     <div className="metric metric--small">
       <img src={require("../../images/icons/ac.svg")} className="metric__icon" />
@@ -12,16 +34,9 @@ const AcLoads = props => {
           <div className="metric__values">Loading...</div>
         ) : (
           <div className="metric__values">
-            <NumericValue value={props.voltage.phase1} unit="V" />
-            <NumericValue
-              value={props.current.phase1 ? props.current.phase1 + props.current.phase2 + props.current.phase3 : null}
-              unit="A"
-              precision={1}
-            />
-            <NumericValue
-              value={props.power.phase1 ? props.power.phase1 + props.power.phase2 + props.power.phase3 : null}
-              unit={"W"}
-            />
+            <NumericValue value={voltagePhase1.value} unit="V" />
+            <NumericValue value={phaseSum(props.current)} unit="A" precision={1} />
+            <NumericValue value={phaseSum(props.power)} unit={"W"} />
           </div>
         )}
       </div>
@@ -36,41 +51,12 @@ class AcLoadsWithData extends Component {
       return <AcLoads loading />
     }
     return (
-      <MqttTopicList
-        topicList={[
-          `N/${portalId}/vebus/${vebusInstanceId}/Ac/Out/L1/I`,
-          `N/${portalId}/vebus/${vebusInstanceId}/Ac/Out/L2/I`,
-          `N/${portalId}/vebus/${vebusInstanceId}/Ac/Out/L3/I`,
-          `N/${portalId}/vebus/${vebusInstanceId}/Ac/Out/L1/V`,
-          `N/${portalId}/vebus/${vebusInstanceId}/Ac/Out/L2/V`,
-          `N/${portalId}/vebus/${vebusInstanceId}/Ac/Out/L3/V`,
-          `N/${portalId}/system/0/Ac/ConsumptionOnOutput/L1/Power`,
-          `N/${portalId}/system/0/Ac/ConsumptionOnOutput/L2/Power`,
-          `N/${portalId}/system/0/Ac/ConsumptionOnOutput/L3/Power`
-        ]}
-      >
+      <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId)}>
         {topics => {
-          return (
-            <AcLoads
-              current={{
-                phase1: topics[`N/${portalId}/vebus/${vebusInstanceId}/Ac/Out/L1/I`].value,
-                phase2: topics[`N/${portalId}/vebus/${vebusInstanceId}/Ac/Out/L2/I`].value,
-                phase3: topics[`N/${portalId}/vebus/${vebusInstanceId}/Ac/Out/L3/I`].value
-              }}
-              voltage={{
-                phase1: topics[`N/${portalId}/vebus/${vebusInstanceId}/Ac/Out/L1/V`].value,
-                phase2: topics[`N/${portalId}/vebus/${vebusInstanceId}/Ac/Out/L2/V`].value,
-                phase3: topics[`N/${portalId}/vebus/${vebusInstanceId}/Ac/Out/L3/V`].value
-              }}
-              power={{
-                phase1: topics[`N/${portalId}/system/0/Ac/ConsumptionOnOutput/L1/Power`].value,
-                phase2: topics[`N/${portalId}/system/0/Ac/ConsumptionOnOutput/L2/Power`].value,
-                phase3: topics[`N/${portalId}/system/0/Ac/ConsumptionOnOutput/L3/Power`].value
-              }}
-            />
-          )
+          const { current, voltage, power } = topics
+          return <AcLoads current={current} voltage={voltage} power={power} />
         }}
-      </MqttTopicList>
+      </MqttSubscriptions>
     )
   }
 }

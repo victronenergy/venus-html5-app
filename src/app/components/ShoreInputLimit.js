@@ -1,8 +1,15 @@
 import React, { Component } from "react"
 import { VIEWS } from "../../config/enums"
 import GetShorePowerInputNumber from "../mqtt/victron/GetShorePowerInputNumber"
-import MqttTopicList from "../mqtt/MqttTopicList"
+import MqttSubscriptions from "../mqtt/MqttSubscriptions"
 import { formatNumber } from "./NumericValue"
+
+const getTopics = (portalId, vebusInstanceId) => {
+  return {
+    currentLimit: `N/${portalId}/vebus/${vebusInstanceId}/Ac/In/${shorePowerInput}/CurrentLimit`,
+    currentLimitIsAdjustable: `N/${portalId}/vebus/${vebusInstanceId}/Ac/In/${shorePowerInput}/CurrentLimitIsAdjustable`
+  }
+}
 
 const ShoreInputLimit = props => {
   if (!props.isAdjustable) {
@@ -40,28 +47,18 @@ class ShoreInputLimitWithData extends Component {
             return <ShoreInputLimit loading />
           }
           return (
-            <MqttTopicList
-              topicList={[
-                // Only available for VE.Bus versions > 415
-                `N/${portalId}/vebus/${vebusInstanceId}/Ac/In/${shorePowerInput}/CurrentLimit`,
-                `N/${portalId}/vebus/${vebusInstanceId}/Ac/In/${shorePowerInput}/CurrentLimitIsAdjustable`
-              ]}
-            >
+            // Only available for VE.Bus versions > 415
+            <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId)}>
               {topics => {
-                const currentLimit =
-                  topics[`N/${portalId}/vebus/${vebusInstanceId}/Ac/In/${shorePowerInput}/CurrentLimit`].value
-                const isAdjustable =
-                  topics[`N/${portalId}/vebus/${vebusInstanceId}/Ac/In/${shorePowerInput}/CurrentLimitIsAdjustable`]
-                    .value
                 return (
                   <ShoreInputLimit
-                    currentLimit={formatNumber({ value: currentLimit, unit: "A" })}
-                    isAdjustable={isAdjustable && this.props.connected}
+                    currentLimit={formatNumber({ value: topics.currentLimit.value, unit: "A" })}
+                    isAdjustable={topics.currentLimitIsAdjustable.value && this.props.connected}
                     setView={this.props.setView}
                   />
                 )
               }}
-            </MqttTopicList>
+            </MqttSubscriptions>
           )
         }}
       </GetShorePowerInputNumber>

@@ -1,6 +1,14 @@
 import React, { Component } from "react"
 import { SYSTEM_MODE } from "../../service/topics"
-import MqttTopicList from "../mqtt/MqttTopicList"
+import MqttSubscriptions from "../mqtt/MqttSubscriptions"
+
+const getTopics = (portalId, vebusInstanceId) => {
+  return {
+    state: `N/${portalId}/system/0/SystemState/State`,
+    mode: `N/${portalId}/vebus/${vebusInstanceId}/Mode`,
+    modeIsAdjustable: `N/${portalId}/vebus/${vebusInstanceId}/ModeIsAdjustable`
+  }
+}
 
 function systemModeFormatter(value) {
   if (value == 1) return "Charger only"
@@ -42,21 +50,21 @@ const InverterCharger = props => {
       </div>
       <div className="inverter-charger__mode-selector">
         <button
-          disabled={!props.isAdjustable}
+          disabled={!props.modeIsAdjustable}
           className={"selector-button text" + (activeMode == "ON" ? " selector-button--active" : "")}
           onClick={() => props.onModeSelected(SYSTEM_MODE.ON)}
         >
           <span>On</span>
         </button>
         <button
-          disabled={!props.isAdjustable}
+          disabled={!props.modeIsAdjustable}
           className={"selector-button text" + (activeMode == "OFF" ? " selector-button--active" : "")}
           onClick={() => props.onModeSelected(SYSTEM_MODE.OFF)}
         >
           <span>Off</span>
         </button>
         <button
-          disabled={!props.isAdjustable}
+          disabled={!props.modeIsAdjustable}
           className={"selector-button text" + (activeMode == "Charger only" ? " selector-button--active" : "")}
           onClick={() => props.onModeSelected(SYSTEM_MODE.CHARGER_ONLY)}
         >
@@ -75,24 +83,18 @@ class InverterChargerWithData extends Component {
       return <div>Loading..</div>
     }
     return (
-      <MqttTopicList
-        topicList={[
-          `N/${portalId}/system/0/SystemState/State`,
-          `N/${portalId}/vebus/${vebusInstanceId}/Mode`,
-          `N/${portalId}/vebus/${vebusInstanceId}/ModeIsAdjustable`
-        ]}
-      >
+      <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId)}>
         {topics => {
           return (
             <InverterCharger
-              state={topics[`N/${portalId}/system/0/SystemState/State`].value}
-              activeMode={topics[`N/${portalId}/vebus/${vebusInstanceId}/Mode`].value}
-              isAdjustable={topics[`N/${portalId}/vebus/${vebusInstanceId}/ModeIsAdjustable`] && this.props.connected}
+              state={topics.state.value}
+              activeMode={topics.mode.value}
+              modeIsAdjustable={topics.modeIsAdjustable && this.props.connected}
               onModeSelected={this.props.onModeSelected}
             />
           )
         }}
-      </MqttTopicList>
+      </MqttSubscriptions>
     )
   }
 }
