@@ -5,7 +5,8 @@ export default props => (
   <MqttTopicWildcard wildcard={`N/+/vebus/+/DeviceInstance`}>
     {messages => {
       if (Object.entries(messages).length === 0) {
-        return <div>Loading...</div>
+        console.log("Waiting for VE.Bus device instance...")
+        return <>{props.children(null)}</>
       }
 
       const firstMessage = Object.entries(messages)[0]

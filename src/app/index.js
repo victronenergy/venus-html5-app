@@ -1,8 +1,5 @@
 import React, { Component } from "react"
 import { render } from "react-dom"
-import { DBUS_PATHS } from "../config/dbusPaths"
-import VenusClient from "../service/index"
-import Logger from "../logging/logger"
 import { VIEWS } from "../config/enums"
 import "../css/texts.scss"
 import "../css/styles.scss"
@@ -29,7 +26,6 @@ export const MqttClientContext = React.createContext(null)
 
 class App extends Component {
   state = {
-    [DBUS_PATHS.SETTINGS.SHOW_REMOTE_CONSOLE]: true,
     currentView: VIEWS.METRICS,
     viewUnmounting: false
   }
@@ -55,13 +51,29 @@ class App extends Component {
     return (
       <MqttClientProvider host={host} port={port}>
         {(status, isConnected, error) => {
+          if (error) {
+            return (
+              <Fade key={VIEWS.MQTT_UNAVAILABLE} unmount={this.state.viewUnmounting}>
+                <MqttUnavailable />
+              </Fade>
+            )
+          }
+
+          if (!isConnected) {
+            return (
+              <Fade key={VIEWS.CONNECTING} unmount={this.state.viewUnmounting}>
+                <Connecting />
+              </Fade>
+            )
+          }
+
           return (
             <GetPortalId>
               {portalId => {
                 // TODO What should happen when portal id has not been received yet?
                 if (!portalId) {
                   console.warn("No portal id yet ...")
-                  portalId = "+"
+                  return <Connecting />
                 }
 
                 return (
@@ -69,8 +81,7 @@ class App extends Component {
                     {vebusInstanceId => {
                       if (!vebusInstanceId) {
                         console.warn("No VE.Bus instance id yet ...")
-                        // return <div>Still loading...</div>
-                        vebusInstanceId = "+"
+                        return <Connecting />
                       }
                       return (
                         <div className="main__container">
@@ -84,22 +95,13 @@ class App extends Component {
                             className={!isConnected ? "disconnected" : ""}
                             onClick={e => {
                               // Bit of a hack to close "overlays" but doing it without adding event preventDefaults everywhere
-                              if (
-                                e.target.nodeName === "MAIN" &&
-                                this.state.state.currentView !== VIEWS.MQTT_UNAVAILABLE
-                              ) {
+                              if (e.target.nodeName === "MAIN") {
                                 this.setView(VIEWS.METRICS)
                               }
                             }}
                           >
                             {(() => {
                               switch (this.state.currentView) {
-                                case VIEWS.CONNECTING:
-                                  return (
-                                    <Fade key={VIEWS.CONNECTING} unmount={this.state.viewUnmounting}>
-                                      <Connecting />
-                                    </Fade>
-                                  )
                                 case VIEWS.AMPERAGE_SELECTOR:
                                   return (
                                     <Fade key={VIEWS.AMPERAGE_SELECTOR} unmount={this.state.viewUnmounting}>
@@ -130,12 +132,6 @@ class App extends Component {
                                         onChangeShoreInputLimitClicked={() => this.setView(VIEWS.AMPERAGE_SELECTOR)}
                                         onModeSelected={this.handleModeSelected}
                                       />
-                                    </Fade>
-                                  )
-                                case VIEWS.MQTT_UNAVAILABLE:
-                                  return (
-                                    <Fade key={VIEWS.MQTT_UNAVAILABLE} unmount={this.state.viewUnmounting}>
-                                      <MqttUnavailable />
                                     </Fade>
                                   )
                               }
