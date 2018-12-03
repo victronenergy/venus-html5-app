@@ -78,7 +78,7 @@ class ActiveSource extends Component {
       <ActiveSourceMetric
         title={this.activeSourceLabel[activeSource]}
         icon={this.activeSourceIcon[activeSource]}
-        voltage={voltagePhase1}
+        voltage={voltagePhase1.value}
         current={phaseSum(this.props.current)}
         power={phaseSum(this.props.power)}
       />
