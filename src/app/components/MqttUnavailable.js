@@ -8,7 +8,7 @@ export default props => (
       Remote Console > Settings > Services > MQTT.
     </span>
     <div className="image-container">
-      <img src={require("../images/mqtt-settings.png")} />
+      <img src={require("../../images/mqtt-settings.png")} />
     </div>
   </div>
 )
