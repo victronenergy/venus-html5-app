@@ -14,8 +14,10 @@ import MqttTopicWildcard from "./mqtt/MqttTopicWildcard"
 import MqttUnavailable from "./components/MqttUnavailable"
 import Metrics from "./components/Metrics"
 import RemoteConsole from "./components/RemoteConsole"
+import Connecting from "./components/Connecting"
 
 import { getParameterByName } from "../service/util"
+import Header from "./components/Header"
 
 const host = getParameterByName("host") || window.location.hostname || "localhost"
 const port = parseInt(getParameterByName("port")) || 9001
@@ -105,22 +107,12 @@ class App extends Component {
                       }
                       return (
                         <div className="main__container">
-                          <header>
-                            <img src={require("../images/icons/logo.png")} className="logo" />
-                            <div className="connection">
-                              <img src={require("../images/icons/connected.svg")} className="connection__icon" />
-                              <p className="text text--very-small">{isConnected ? "Connected" : "Disconnected"}</p>
-                              {this.state[DBUS_PATHS.SETTINGS.SHOW_REMOTE_CONSOLE] && (
-                                <button
-                                  className="remote-console-button text text--very-small"
-                                  onClick={this.toggleRemoteConsole}
-                                  disabled={!isConnected}
-                                >
-                                  {this.state.currentView !== VIEWS.REMOTE_CONSOLE ? "Remote Console" : "Close"}
-                                </button>
-                              )}
-                            </div>
-                          </header>
+                          <Header
+                            portalId={portalId}
+                            isConnected={isConnected}
+                            handleRemoteConsoleButtonClicked={this.toggleRemoteConsole}
+                            currentView={this.state.currentView}
+                          />
                           <main
                             className={!isConnected ? "disconnected" : ""}
                             onClick={e => {
@@ -138,14 +130,7 @@ class App extends Component {
                                 case VIEWS.CONNECTING:
                                   return (
                                     <Fade key={VIEWS.CONNECTING} unmount={this.state.viewUnmounting}>
-                                      <div className="loading">
-                                        <p className="text text--very-large">Connecting</p>
-                                        <div className="loading__dots">
-                                          <p className="dot">.</p>
-                                          <p className="dot two">.</p>
-                                          <p className="dot three">.</p>
-                                        </div>
-                                      </div>
+                                      <Connecting />
                                     </Fade>
                                   )
                                 case VIEWS.AMPERAGE_SELECTOR:
