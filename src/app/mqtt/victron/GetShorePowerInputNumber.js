@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import MqttSubscriptions from "../MqttSubscriptions"
-import { AC_SOURCE_TYPE } from "../../../service/topics"
+import { AC_SOURCE_TYPE } from "../../utils/constants"
 
 const getTopics = portalId => {
   return {

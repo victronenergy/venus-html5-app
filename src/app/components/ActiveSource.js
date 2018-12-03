@@ -1,8 +1,8 @@
 import React, { Component } from "react"
-import { AC_SOURCE_TYPE, ACTIVE_INPUT } from "../../service/topics"
+import { AC_SOURCE_TYPE, ACTIVE_INPUT } from "../utils/constants"
 import NumericValue from "./NumericValue"
 import MqttSubscriptions from "../mqtt/MqttSubscriptions"
-import { phaseSum } from "../../service/util"
+import { phaseSum } from "../utils/util"
 
 const getTopics = (portalId, vebusInstanceId) => {
   return {
