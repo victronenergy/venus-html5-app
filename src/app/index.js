@@ -22,7 +22,6 @@ import Header from "./components/Header"
 
 const host = getParameterByName("host") || window.location.hostname || "localhost"
 const port = parseInt(getParameterByName("port")) || 9001
-const mqttUrl = `mqtt://${host}:${port}`
 const viewChangeDelay = 500
 const viewChangeTransitionDuration = viewChangeDelay - 100
 
@@ -31,29 +30,8 @@ export const MqttClientContext = React.createContext(null)
 class App extends Component {
   state = {
     [DBUS_PATHS.SETTINGS.SHOW_REMOTE_CONSOLE]: true,
-    currentView: VIEWS.CONNECTING,
+    currentView: VIEWS.METRICS,
     viewUnmounting: false
-  }
-
-  componentDidMount = () => {
-    this.deviceInterface = new VenusClient(mqttUrl)
-    this.deviceInterface.connect().then(
-      () => {
-        // No longer subscribe to anything
-      },
-      err => {
-        Logger.warn("Could not connect to MQTT", err)
-        this.setView(VIEWS.MQTT_UNAVAILABLE)
-      }
-    )
-    this.deviceInterface.onConnectionChanged = ({ connected }) => {
-      if (this.state.currentView === VIEWS.CONNECTING && connected) {
-        this.setView(VIEWS.METRICS)
-      }
-    }
-
-    // TODO Remove this
-    this.setState({ deviceInterface: this.deviceInterface })
   }
 
   setView = view => {

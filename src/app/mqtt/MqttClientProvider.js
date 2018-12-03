@@ -64,6 +64,7 @@ class MqttClientProvider extends Component {
 
   subscribe = topic => {
     if (!this.topicsSubscribed.has(topic)) {
+      console.log(`Subscribing to ${topic}`)
       this.state.client.subscribe(topic, (err, granted) => {
         if (err) {
           console.error(err)
