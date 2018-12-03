@@ -17,6 +17,9 @@ import DcLoads from "./components/DcLoads"
 import MqttClientProvider from "./mqtt/MqttClientProvider"
 import MqttTopicWildcard from "./mqtt/MqttTopicWildcard"
 
+import MqttUnavailable from "./components/MqttUnavailable"
+import Metrics from "./components/Metrics"
+
 import { getParameterByName } from "../service/util"
 
 const host = getParameterByName("host") || window.location.hostname || "localhost"
@@ -180,43 +183,19 @@ class App extends Component {
                                 default:
                                   return (
                                     <Fade key={VIEWS.METRICS} unmount={this.state.viewUnmounting}>
-                                      <div id="metrics-container">
-                                        <Battery portalId={portalId} />
-                                        <div className="multi-metric-container shore-power__container">
-                                          <ActiveSource portalId={portalId} vebusInstanceId={vebusInstanceId} />
-                                          <ShoreInputLimit
-                                            portalId={portalId}
-                                            vebusInstanceId={vebusInstanceId}
-                                            connected={isConnected}
-                                            setView={this.setView}
-                                          />
-                                        </div>
-                                        <InverterCharger
-                                          portalId={portalId}
-                                          vebusInstanceId={vebusInstanceId}
-                                          connected={isConnected}
-                                          onModeSelected={this.handleModeSelected}
-                                        />
-                                        <div className="multi-metric-container">
-                                          <AcLoads portalId={portalId} vebusInstanceId={vebusInstanceId} />
-                                          <DcLoads portalId={portalId} />
-                                        </div>
-                                      </div>
+                                      <Metrics
+                                        portalId={portalId}
+                                        vebusInstanceId={vebusInstanceId}
+                                        isConnected={isConnected}
+                                        onChangeShoreInputLimitClicked={() => this.setView(VIEWS.AMPERAGE_SELECTOR)}
+                                        onModeSelected={this.handleModeSelected}
+                                      />
                                     </Fade>
                                   )
                                 case VIEWS.MQTT_UNAVAILABLE:
                                   return (
                                     <Fade key={VIEWS.MQTT_UNAVAILABLE} unmount={this.state.viewUnmounting}>
-                                      <div className="error-page">
-                                        <span className="text text--large">
-                                          Could not connect to the MQTT server. <br />
-                                          Please check that MQTT is enabled in your settings: <br />
-                                          Remote Console > Settings > Services > MQTT.
-                                        </span>
-                                        <div className="image-container">
-                                          <img src={require("../images/mqtt-settings.png")} />
-                                        </div>
-                                      </div>
+                                      <MqttUnavailable />
                                     </Fade>
                                   )
                               }
