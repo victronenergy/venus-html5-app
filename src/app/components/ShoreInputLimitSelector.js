@@ -1,12 +1,13 @@
 import React, { Component } from "react"
 import Logger from "../../logging/logger"
 import MqttSubscriptions from "../mqtt/MqttSubscriptions"
+import MqttWriteValue from "../mqtt/MqttWriteValue"
 import GetShorePowerInputNumber from "../mqtt/victron/GetShorePowerInputNumber"
 
 const USAmperage = [10, 15, 20, 30, 50, 100]
 const EUAmperage = [6, 10, 13, 16, 25, 32, 63]
 
-const getTopics = (portalId, vebusInstanceId) => {
+const getTopics = (portalId, vebusInstanceId, shorePowerInput) => {
   return {
     currentLimit: `N/${portalId}/vebus/${vebusInstanceId}/Ac/In/${shorePowerInput}/CurrentLimit`,
     currentLimitMax: `N/${portalId}/vebus/${vebusInstanceId}/Ac/In/${shorePowerInput}/CurrentLimitGetMax`,
@@ -96,15 +97,24 @@ class ShoreInputLimitSelectorWithData extends Component {
           }
           return (
             // Only available for VE.Bus versions > 415
-            <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId)}>
+            <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId, shorePowerInput)}>
               {topics => {
                 return (
-                  <ShoreInputLimitSelector
-                    currentLimit={topics.currentLimit.value}
-                    maxLimit={topics.currentLimitMax.value}
-                    productId={topics.productId.value}
-                    onLimitSelected={this.props.onLimitSelected}
-                  />
+                  <MqttWriteValue topic={`W/${portalId}/vebus/${vebusInstanceId}/Mode`}>
+                    {(isConnected, updateLimitSelected) => {
+                      return (
+                        <ShoreInputLimitSelector
+                          currentLimit={topics.currentLimit.value}
+                          maxLimit={topics.currentLimitMax.value}
+                          productId={topics.productId.value}
+                          onLimitSelected={value => {
+                            updateLimitSelected(value)
+                            this.props.onLimitSelected()
+                          }}
+                        />
+                      )
+                    }}
+                  </MqttWriteValue>
                 )
               }}
             </MqttSubscriptions>

@@ -4,7 +4,7 @@ import GetShorePowerInputNumber from "../mqtt/victron/GetShorePowerInputNumber"
 import MqttSubscriptions from "../mqtt/MqttSubscriptions"
 import { formatNumber } from "./NumericValue"
 
-const getTopics = (portalId, vebusInstanceId) => {
+const getTopics = (portalId, vebusInstanceId, shorePowerInput) => {
   return {
     currentLimit: `N/${portalId}/vebus/${vebusInstanceId}/Ac/In/${shorePowerInput}/CurrentLimit`,
     currentLimitIsAdjustable: `N/${portalId}/vebus/${vebusInstanceId}/Ac/In/${shorePowerInput}/CurrentLimitIsAdjustable`
@@ -48,7 +48,7 @@ class ShoreInputLimitWithData extends Component {
           }
           return (
             // Only available for VE.Bus versions > 415
-            <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId)}>
+            <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId, shorePowerInput)}>
               {topics => {
                 return (
                   <ShoreInputLimit

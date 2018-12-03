@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import { SYSTEM_MODE } from "../../service/topics"
 import MqttSubscriptions from "../mqtt/MqttSubscriptions"
+import MqttWriteValue from "../mqtt/MqttWriteValue"
 
 const getTopics = (portalId, vebusInstanceId) => {
   return {
@@ -86,12 +87,18 @@ class InverterChargerWithData extends Component {
       <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId)}>
         {topics => {
           return (
-            <InverterCharger
-              state={topics.state.value}
-              activeMode={topics.mode.value}
-              modeIsAdjustable={topics.modeIsAdjustable && this.props.connected}
-              onModeSelected={this.props.onModeSelected}
-            />
+            <MqttWriteValue topic={`W/${portalId}/vebus/${vebusInstanceId}/Mode`}>
+              {(isConnected, updateMode) => {
+                return (
+                  <InverterCharger
+                    state={topics.state.value}
+                    activeMode={topics.mode.value}
+                    modeIsAdjustable={topics.modeIsAdjustable && this.props.connected}
+                    onModeSelected={newMode => updateMode(newMode)}
+                  />
+                )
+              }}
+            </MqttWriteValue>
           )
         }}
       </MqttSubscriptions>
