@@ -63,35 +63,31 @@ class MqttClientProvider extends Component {
   }
 
   subscribe = topic => {
-    if (this.topicsSubscribed.has(topic)) {
-      return
+    if (!this.topicsSubscribed.has(topic)) {
+      this.state.client.subscribe(topic, (err, granted) => {
+        if (err) {
+          console.error(err)
+          return
+        }
+        console.log(
+          `Subscribed to ${granted[0] ? granted[0].topic : topic} with QoS ${granted[0] ? granted[0].qos : "unknown"}`
+        )
+        this.topicsSubscribed.add(topic)
+      })
     }
-
-    this.state.client.subscribe(topic, (err, granted) => {
-      if (err) {
-        console.error(err)
-        return
-      }
-      console.log(
-        `Subscribed to ${granted[0] ? granted[0].topic : topic} with QoS ${granted[0] ? granted[0].qos : "unknown"}`
-      )
-      this.topicsSubscribed.add(topic)
-    })
   }
 
   unsubscribe = topic => {
-    if (!this.topicsSubscribed.has(topic)) {
-      return
+    if (this.topicsSubscribed.has(topic)) {
+      this.state.client.unsubscribe(topic, err => {
+        if (err) {
+          console.error(err)
+          return
+        }
+        console.log(`Unsubscribed from ${topic}`)
+        this.topicsSubscribed.delete(topic)
+      })
     }
-
-    this.state.client.unsubscribe(topic, err => {
-      if (err) {
-        console.error(err)
-        return
-      }
-      console.log(`Unsubscribed from ${topic}`)
-      this.topicsSubscribed.delete(topic)
-    })
   }
 
   getMessagesByTopics = topics => {
@@ -105,24 +101,13 @@ class MqttClientProvider extends Component {
   }
 
   getMessagesByWildcard = wildcard => {
-    const wildcardParts = parseTopic(wildcard)
-    let values = Object.keys(this.state.messages)
-      .filter(topic => {
-        const topicParts = parseTopic(topic)
-        const matchesWildcard =
-          (topicParts.dbusPath === wildcardParts.dbusPath || wildcardParts.dbusPath === "+") &&
-          (topicParts.portalId === wildcardParts.portalId || wildcardParts.portalId === "+") &&
-          (topicParts.serviceType === wildcardParts.serviceType || wildcardParts.serviceType === "+") &&
-          (topicParts.deviceInstance === wildcardParts.deviceInstance || wildcardParts.deviceInstance === "+")
-
-        return matchesWildcard
-      })
+    const re = new RegExp(wildcard.replace(/\+/g, ".*")) // + in mqtt is anything -> .*
+    return Object.keys(this.state.messages)
+      .filter(t => t.match(re))
       .reduce((obj, key) => {
         obj[key] = this.state.messages[key]
         return obj
       }, {})
-
-    return values
   }
 
   render() {
