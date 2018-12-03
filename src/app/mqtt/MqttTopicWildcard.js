@@ -2,16 +2,11 @@ import React, { Component } from "react"
 import { MqttClientContext } from "../index.js"
 
 class MqttTopicWildcard extends Component {
-  state = {
-    initialized: false
+  componentDidMount() {
+    this.props.subscribe(this.props.wildcard)
   }
 
   componentDidUpdate(prevProps) {
-    if (!this.state.initialized && this.props.subscribe) {
-      this.props.subscribe(this.props.wildcard)
-      this.setState({ initialized: true })
-    }
-
     if (prevProps.wildcard !== this.props.wildcard) {
       console.log("New wildcard", prevProps, this.props)
       if (prevProps.wildcard !== null) {

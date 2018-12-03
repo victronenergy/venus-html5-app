@@ -100,7 +100,9 @@ class ShoreInputLimitSelectorWithData extends Component {
             <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId, shorePowerInput)}>
               {topics => {
                 return (
-                  <MqttWriteValue topic={`W/${portalId}/vebus/${vebusInstanceId}/Mode`}>
+                  <MqttWriteValue
+                    topic={`W/${portalId}/vebus/${vebusInstanceId}/Ac/In/${shorePowerInput}/CurrentLimit`}
+                  >
                     {(isConnected, updateLimitSelected) => {
                       return (
                         <ShoreInputLimitSelector

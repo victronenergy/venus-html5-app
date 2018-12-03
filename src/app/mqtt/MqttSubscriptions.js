@@ -2,14 +2,13 @@ import React, { Component } from "react"
 import { MqttClientContext } from "../index.js"
 
 class MqttSubscriptions extends Component {
-  state = {
-    initialized: false
+  componentDidMount() {
+    const topics = Object.values(this.props.topics).flat()
+    topics.forEach(topic => this.props.subscribe(topic))
   }
+
   componentDidUpdate(prevProps) {
     const topics = Object.values(this.props.topics).flat()
-    if (!this.state.initialized && this.props.subscribe) {
-      topics.forEach(topic => this.props.subscribe(topic))
-    }
 
     if (JSON.stringify(prevProps.topics) !== JSON.stringify(this.props.topics)) {
       console.log("New topics", prevProps.topics, this.props.topicsq)

@@ -5,7 +5,8 @@ export default props => (
   <MqttTopicWildcard wildcard={`N/+/system/0/Serial`}>
     {messages => {
       if (Object.entries(messages).length === 0) {
-        return <div>Loading...</div>
+        console.log("Waiting for portal id ...")
+        return <>{props.children(null)}</>
       }
 
       // Only one path will match this wildcard, so just take the value from the first one

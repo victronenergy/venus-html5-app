@@ -19,6 +19,7 @@ class MqttClientProvider extends Component {
     messages: {}
   }
   topicsSubscribed = new Set()
+  portalId = null
 
   componentDidMount() {
     const client = mqtt.connect(`mqtt://${this.props.host}:${this.props.port}`)
@@ -52,6 +53,11 @@ class MqttClientProvider extends Component {
 
     client.on("message", (topic, message) => {
       console.log(`Message received: ${topic} - ${message.toString()}`)
+      if (topic.endsWith("/system/0/Serial") && !this.portalId) {
+        this.portalId = getMessageJson(message).value
+        // Send empty message to trigger messages to return immediately
+        this.publish(`R/${this.portalId}/system/0/Serial`, "")
+      }
 
       this.setState({
         messages: {
