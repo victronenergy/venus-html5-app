@@ -136,7 +136,7 @@ class MqttClientProvider extends Component {
           getMessagesByWildcard: this.getMessagesByWildcard
         }}
       >
-        {this.props.children(this.state.status, this.state.error)}
+        {this.props.children(this.state.status, this.isConnected(), this.state.error)}
       </MqttClientContext.Provider>
     )
   }

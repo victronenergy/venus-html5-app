@@ -30,7 +30,6 @@ export const MqttClientContext = React.createContext(null)
 class App extends Component {
   state = {
     [DBUS_PATHS.SETTINGS.SHOW_REMOTE_CONSOLE]: true,
-    connected: false,
     currentView: VIEWS.CONNECTING,
     viewUnmounting: false
   }
@@ -50,7 +49,6 @@ class App extends Component {
       if (this.state.currentView === VIEWS.CONNECTING && connected) {
         this.setView(VIEWS.METRICS)
       }
-      this.setState({ connected })
     }
 
     // TODO Remove this
@@ -77,7 +75,7 @@ class App extends Component {
   render() {
     return (
       <MqttClientProvider host={host} port={port}>
-        {(status, error) => {
+        {(status, isConnected, error) => {
           return (
             <MqttTopicWildcard wildcard={`N/+/system/0/Serial`}>
               {messages => {
@@ -113,14 +111,12 @@ class App extends Component {
                             <img src={require("../images/icons/logo.png")} className="logo" />
                             <div className="connection">
                               <img src={require("../images/icons/connected.svg")} className="connection__icon" />
-                              <p className="text text--very-small">
-                                {this.state.connected ? "Connected" : "Disconnected"}
-                              </p>
+                              <p className="text text--very-small">{isConnected ? "Connected" : "Disconnected"}</p>
                               {this.state[DBUS_PATHS.SETTINGS.SHOW_REMOTE_CONSOLE] && (
                                 <button
                                   className="remote-console-button text text--very-small"
                                   onClick={this.toggleRemoteConsole}
-                                  disabled={!this.state.connected}
+                                  disabled={!isConnected}
                                 >
                                   {this.state.currentView !== VIEWS.REMOTE_CONSOLE ? "Remote Console" : "Close"}
                                 </button>
@@ -128,7 +124,7 @@ class App extends Component {
                             </div>
                           </header>
                           <main
-                            className={!this.state.connected ? "disconnected" : ""}
+                            className={!isConnected ? "disconnected" : ""}
                             onClick={e => {
                               // Bit of a hack to close "overlays" but doing it without adding event preventDefaults everywhere
                               if (
@@ -191,14 +187,14 @@ class App extends Component {
                                           <ShoreInputLimit
                                             portalId={portalId}
                                             vebusInstanceId={vebusInstanceId}
-                                            connected={this.state.connected}
+                                            connected={isConnected}
                                             setView={this.setView}
                                           />
                                         </div>
                                         <InverterCharger
                                           portalId={portalId}
                                           vebusInstanceId={vebusInstanceId}
-                                          connected={this.state.connected}
+                                          connected={isConnected}
                                           onModeSelected={this.handleModeSelected}
                                         />
                                         <div className="multi-metric-container">
