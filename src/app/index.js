@@ -9,7 +9,8 @@ import "../css/styles.scss"
 
 import ShoreInputLimitSelector from "./components/ShoreInputLimitSelector"
 import MqttClientProvider from "./mqtt/MqttClientProvider"
-import MqttTopicWildcard from "./mqtt/MqttTopicWildcard"
+import GetPortalId from "./mqtt/Victron/GetPortalId"
+import GetVebusDeviceInstance from "./mqtt/Victron/GetVebusDeviceInstance"
 
 import MqttUnavailable from "./components/MqttUnavailable"
 import Metrics from "./components/Metrics"
@@ -77,31 +78,19 @@ class App extends Component {
       <MqttClientProvider host={host} port={port}>
         {(status, isConnected, error) => {
           return (
-            <MqttTopicWildcard wildcard={`N/+/system/0/Serial`}>
-              {messages => {
-                if (Object.entries(messages).length === 0) {
-                  return <div>Loading...</div>
-                }
-
-                // Only one path will match this wildcard, so just take the value from the first one
-                const firstMessage = Object.entries(messages)[0]
-                let portalId = firstMessage[1] ? firstMessage[1].value : null
+            <GetPortalId>
+              {portalId => {
+                // TODO What should happen when portal id has not been received yet?
                 if (!portalId) {
-                  // return <div>Still loading...</div>
+                  console.warn("No portal id yet ...")
                   portalId = "+"
                 }
 
                 return (
-                  <MqttTopicWildcard wildcard={`N/+/vebus/+/DeviceInstance`}>
-                    {messages => {
-                      if (Object.entries(messages).length === 0) {
-                        return <div>Loading...</div>
-                      }
-
-                      const firstMessage = Object.entries(messages)[0]
-                      // You can only have one VE.Bus device in a system, so just take the first one
-                      let vebusInstanceId = firstMessage[1] ? firstMessage[1].value : null
+                  <GetVebusDeviceInstance>
+                    {vebusInstanceId => {
                       if (!vebusInstanceId) {
+                        console.warn("No VE.Bus instance id yet ...")
                         // return <div>Still loading...</div>
                         vebusInstanceId = "+"
                       }
@@ -177,10 +166,10 @@ class App extends Component {
                         </div>
                       )
                     }}
-                  </MqttTopicWildcard>
+                  </GetVebusDeviceInstance>
                 )
               }}
-            </MqttTopicWildcard>
+            </GetPortalId>
           )
         }}
       </MqttClientProvider>
