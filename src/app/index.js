@@ -7,18 +7,13 @@ import { VIEWS } from "../config/enums"
 import "../css/texts.scss"
 import "../css/styles.scss"
 
-import ActiveSource from "./components/ActiveSource"
-import ShoreInputLimit from "./components/ShoreInputLimit"
 import ShoreInputLimitSelector from "./components/ShoreInputLimitSelector"
-import InverterCharger from "./components/InverterCharger"
-import Battery from "./components/Battery"
-import AcLoads from "./components/AcLoads"
-import DcLoads from "./components/DcLoads"
 import MqttClientProvider from "./mqtt/MqttClientProvider"
 import MqttTopicWildcard from "./mqtt/MqttTopicWildcard"
 
 import MqttUnavailable from "./components/MqttUnavailable"
 import Metrics from "./components/Metrics"
+import RemoteConsole from "./components/RemoteConsole"
 
 import { getParameterByName } from "../service/util"
 
@@ -166,17 +161,10 @@ class App extends Component {
                                 case VIEWS.REMOTE_CONSOLE:
                                   return (
                                     <Fade key={VIEWS.REMOTE_CONSOLE} unmount={this.state.viewUnmounting}>
-                                      <div
-                                        className="remote-console__container"
-                                        onClick={() => {
-                                          this.setView(VIEWS.METRICS)
-                                        }}
-                                      >
-                                        <iframe className="remote-console" src={"http://" + host} />
-                                        <span className="text text--large remote-console__small_screen_info">
-                                          Open in a larger screen to view remote console.
-                                        </span>
-                                      </div>
+                                      <RemoteConsole
+                                        host={host}
+                                        onClickOutsideContainer={() => this.setView(VIEWS.METRICS)}
+                                      />
                                     </Fade>
                                   )
                                 case VIEWS.METRICS:
