@@ -25,7 +25,7 @@ const ShoreInputLimit = props => {
 
   return (
     <div className="metric metric--small metric--shore-input-limit">
-      <button className="selector-button text" onClick={() => props.setView(VIEWS.AMPERAGE_SELECTOR)}>
+      <button className="selector-button text" onClick={props.onChangeShoreInputLimitClicked}>
         <span className="text--small">Select shore input limit:&nbsp;</span>
         <span className="text--bold">{props.currentLimit}</span>
       </button>
@@ -54,7 +54,7 @@ class ShoreInputLimitWithData extends Component {
                   <ShoreInputLimit
                     currentLimit={formatNumber({ value: topics.currentLimit.value, unit: "A" })}
                     isAdjustable={topics.currentLimitIsAdjustable.value && this.props.connected}
-                    setView={this.props.setView}
+                    onChangeShoreInputLimitClicked={this.props.onChangeShoreInputLimitClicked}
                   />
                 )
               }}
