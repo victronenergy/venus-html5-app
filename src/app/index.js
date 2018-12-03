@@ -64,13 +64,8 @@ class App extends Component {
     }
   }
 
-  handleShorePowerLimitSelected = limit => {
-    this.deviceInterface.write(DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT, limit)
+  handleShorePowerLimitSelected = () => {
     this.setView(VIEWS.METRICS)
-  }
-
-  handleModeSelected = mode => {
-    this.deviceInterface.write(DBUS_PATHS.INVERTER_CHARGER.SYSTEM.MODE, mode)
   }
 
   toggleRemoteConsole = () => {

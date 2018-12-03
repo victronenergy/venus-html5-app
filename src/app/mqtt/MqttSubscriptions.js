@@ -23,7 +23,8 @@ class MqttSubscriptions extends Component {
   }
 
   componentWillUnmount() {
-    this.props.topics.forEach(topic => this.props.unsubscribe(topic))
+    const topics = Object.values(this.props.topics).flat()
+    topics.forEach(topic => this.props.unsubscribe(topic))
   }
 
   render() {

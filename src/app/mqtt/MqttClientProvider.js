@@ -110,12 +110,27 @@ class MqttClientProvider extends Component {
       }, {})
   }
 
+  publish = (topic, data) => {
+    if (!this.isConnected()) {
+      console.error("Could not publish value")
+    }
+
+    console.log(`Publishing to ${topic}: ${data}`)
+    this.state.client.publish(topic, data)
+  }
+
+  isConnected = () => {
+    return this.state.status === STATUS.CONNECTED
+  }
+
   render() {
     return (
       <MqttClientContext.Provider
         value={{
+          isConnected: this.isConnected(),
           subscribe: this.state.client ? this.subscribe : null,
           unsubscribe: this.state.client ? this.unsubscribe : null,
+          publish: this.state.client ? this.publish : null,
           messages: this.state.messages,
           getMessagesByTopics: this.getMessagesByTopics,
           getMessagesByWildcard: this.getMessagesByWildcard
