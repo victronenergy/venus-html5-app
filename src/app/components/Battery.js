@@ -1,8 +1,20 @@
 import React, { Component } from "react"
 import NumericValue from "./NumericValue"
-import MqttTopicList from "../mqtt/MqttTopicList"
+import MqttSubscriptions from "../mqtt/MqttSubscriptions"
 
 import { BATTERY_STATE } from "../../service/topics"
+
+const getTopics = portalId => {
+  return {
+    current: `N/${portalId}/system/0/Dc/Battery/Current`,
+    state: `N/${portalId}/system/0/Dc/Battery/State`,
+    soc: `N/${portalId}/system/0/Dc/Battery/Soc`,
+    timeToGo: `N/${portalId}/system/0/Dc/Battery/TimeToGo`,
+    power: `N/${portalId}/system/0/Dc/Battery/Power`,
+    voltage: `N/${portalId}/system/0/Dc/Battery/Voltage`
+  }
+}
+
 function batteryStateFormatter(value) {
   switch (value) {
     case BATTERY_STATE.CHARGING:
@@ -65,29 +77,20 @@ class BatteryWithData extends Component {
   render() {
     const { portalId } = this.props
     return (
-      <MqttTopicList
-        topicList={[
-          `N/${portalId}/system/0/Dc/Battery/Current`,
-          `N/${portalId}/system/0/Dc/Battery/State`,
-          `N/${portalId}/system/0/Dc/Battery/Soc`,
-          `N/${portalId}/system/0/Dc/Battery/TimeToGo`,
-          `N/${portalId}/system/0/Dc/Battery/Power`,
-          `N/${portalId}/system/0/Dc/Battery/Voltage`
-        ]}
-      >
+      <MqttSubscriptions topics={getTopics(portalId)}>
         {topics => {
           return (
             <Battery
-              soc={topics[`N/${portalId}/system/0/Dc/Battery/Soc`].value}
-              state={batteryStateFormatter(topics[`N/${portalId}/system/0/Dc/Battery/State`].value)}
-              voltage={topics[`N/${portalId}/system/0/Dc/Battery/Voltage`].value}
-              current={topics[`N/${portalId}/system/0/Dc/Battery/Current`].value}
-              power={topics[`N/${portalId}/system/0/Dc/Battery/Power`].value}
-              timeToGo={batteryTimeToGoFormatter(topics[`N/${portalId}/system/0/Dc/Battery/TimeToGo`].value)}
+              soc={topics.soc.value}
+              state={batteryStateFormatter(topics.state.value)}
+              voltage={topics.voltage.value}
+              current={topics.current.value}
+              power={topics.power.value}
+              timeToGo={batteryTimeToGoFormatter(topics.timeToGo.value)}
             />
           )
         }}
-      </MqttTopicList>
+      </MqttSubscriptions>
     )
   }
 }

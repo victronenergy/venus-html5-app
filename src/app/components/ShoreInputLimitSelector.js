@@ -1,10 +1,18 @@
 import React, { Component } from "react"
 import Logger from "../../logging/logger"
-import MqttTopicList from "../mqtt/MqttTopicList"
+import MqttSubscriptions from "../mqtt/MqttSubscriptions"
 import GetShorePowerInputNumber from "../mqtt/victron/GetShorePowerInputNumber"
 
 const USAmperage = [10, 15, 20, 30, 50, 100]
 const EUAmperage = [6, 10, 13, 16, 25, 32, 63]
+
+const getTopics = (portalId, vebusInstanceId) => {
+  return {
+    currentLimit: `N/${portalId}/vebus/${vebusInstanceId}/Ac/In/${shorePowerInput}/CurrentLimit`,
+    currentLimitMax: `N/${portalId}/vebus/${vebusInstanceId}/Ac/In/${shorePowerInput}/CurrentLimitGetMax`,
+    productId: `N/${portalId}/vebus/${vebusInstanceId}/ProductId`
+  }
+}
 
 class ShoreInputLimitSelector extends Component {
   state = {
@@ -87,29 +95,19 @@ class ShoreInputLimitSelectorWithData extends Component {
             return <div>Loading...</div>
           }
           return (
-            <MqttTopicList
-              topicList={[
-                // Only available for VE.Bus versions > 415
-                `N/${portalId}/vebus/${vebusInstanceId}/Ac/In/${shorePowerInput}/CurrentLimit`,
-                `N/${portalId}/vebus/${vebusInstanceId}/Ac/In/${shorePowerInput}/CurrentLimitGetMax`,
-                `N/${portalId}/vebus/${vebusInstanceId}/ProductId`
-              ]}
-            >
+            // Only available for VE.Bus versions > 415
+            <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId)}>
               {topics => {
                 return (
                   <ShoreInputLimitSelector
-                    currentLimit={
-                      topics[`N/${portalId}/vebus/${vebusInstanceId}/Ac/In/${shorePowerInput}/CurrentLimit`].value
-                    }
-                    maxLimit={
-                      topics[`N/${portalId}/vebus/${vebusInstanceId}/Ac/In/${shorePowerInput}/CurrentLimitGetMax`].value
-                    }
-                    productId={topics[`N/${portalId}/vebus/${vebusInstanceId}/ProductId`].value}
+                    currentLimit={topics.currentLimit.value}
+                    maxLimit={topics.currentLimitMax.value}
+                    productId={topics.productId.value}
                     onLimitSelected={this.props.onLimitSelected}
                   />
                 )
               }}
-            </MqttTopicList>
+            </MqttSubscriptions>
           )
         }}
       </GetShorePowerInputNumber>
