@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import Logger from "../../logging/logger"
+import Logger from "../utils/logger"
 import MqttSubscriptions from "../mqtt/MqttSubscriptions"
 import MqttWriteValue from "../mqtt/MqttWriteValue"
 import GetShorePowerInputNumber from "../mqtt/victron/GetShorePowerInputNumber"

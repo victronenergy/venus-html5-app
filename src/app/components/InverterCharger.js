@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { SYSTEM_MODE } from "../../service/topics"
+import { SYSTEM_MODE } from "../utils/constants"
 import MqttSubscriptions from "../mqtt/MqttSubscriptions"
 import MqttWriteValue from "../mqtt/MqttWriteValue"
 

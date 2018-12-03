@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { MqttClientContext } from "../index.js"
 
 import * as mqtt from "mqtt"
-import { getMessageJson, parseTopic } from "../../service/util"
+import { getMessageJson } from "../utils/util"
 export const STATUS = {
   CONNECTING: "connecting",
   CONNECTED: "connected",

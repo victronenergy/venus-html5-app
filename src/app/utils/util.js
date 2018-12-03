@@ -1,4 +1,5 @@
-import Logger from "../logging/logger"
+import Logger from "./logger"
+
 /**
  * @typedef {object} Topic
  *

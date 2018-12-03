@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import NumericValue from "./NumericValue"
 import MqttSubscriptions from "../mqtt/MqttSubscriptions"
 
-import { BATTERY_STATE } from "../../service/topics"
+import { BATTERY_STATE } from "../utils/constants"
 
 const getTopics = portalId => {
   return {

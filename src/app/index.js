@@ -14,7 +14,7 @@ import Metrics from "./components/Metrics"
 import RemoteConsole from "./components/RemoteConsole"
 import Connecting from "./components/Connecting"
 
-import { getParameterByName } from "../service/util"
+import { getParameterByName } from "./utils/util"
 import Header from "./components/Header"
 
 const host = getParameterByName("host") || window.location.hostname || "localhost"

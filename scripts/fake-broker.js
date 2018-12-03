@@ -1,6 +1,6 @@
 const mosca = require("mosca")
 import { DBUS_PATHS } from "../src/config/dbusPaths"
-import { AC_SOURCE_TYPE, ACTIVE_INPUT, SYSTEM_MODE, VEBUS_SYSTEM_STATE } from "../src/service/topics"
+import { AC_SOURCE_TYPE, ACTIVE_INPUT, SYSTEM_MODE, VEBUS_SYSTEM_STATE } from "../src/app/utils/constants"
 
 // const US_PRODUCT_ID = 991260
 const EU_PRODUCT_ID = 9760

@@ -1,4 +1,4 @@
-import { getParameterByName } from "../service/util"
+import { getParameterByName } from "./util"
 
 const log = (...msgs) => {
   if (!getParameterByName("nolog")) console.log.apply(console, msgs)
