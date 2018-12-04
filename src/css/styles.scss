@@ -15,7 +15,7 @@ html {
   background-color: #2e3745;
 }
 
-body {
+#app {
   margin: 0;
   padding: 20px 40px 0 40px;
 
@@ -38,6 +38,7 @@ body {
 
 html,
 body,
+#app,
 .main__container {
   height: 100%;
   box-sizing: border-box;
