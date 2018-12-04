@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { VIEWS } from "../../config/enums"
+import { VIEWS } from "../utils/constants"
 import GetShorePowerInputNumber from "../mqtt/victron/GetShorePowerInputNumber"
 import MqttSubscriptions from "../mqtt/MqttSubscriptions"
 import { formatNumber } from "./NumericValue"
