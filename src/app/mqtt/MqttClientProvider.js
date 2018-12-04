@@ -19,6 +19,7 @@ class MqttClientProvider extends Component {
     messages: {}
   }
   topicsSubscribed = new Set()
+  keepaliveHAndlerRef
   portalId = null
 
   componentDidMount() {
@@ -55,8 +56,8 @@ class MqttClientProvider extends Component {
       console.log(`Message received: ${topic} - ${message.toString()}`)
       if (topic.endsWith("/system/0/Serial") && !this.portalId) {
         this.portalId = getMessageJson(message).value
-        // Send empty message to trigger messages to return immediately
-        this.publish(`R/${this.portalId}/system/0/Serial`, "")
+        this.sendKeepalive() // Send keepalive to trigger messages to return immediately
+        this.setupKeepalive()
       }
 
       this.setState({
@@ -66,6 +67,15 @@ class MqttClientProvider extends Component {
         }
       })
     })
+  }
+
+  sendKeepalive = () => {
+    this.publish(`R/${this.portalId}/system/0/Serial`, "")
+  }
+
+  setupKeepalive = () => {
+    clearInterval(this.keepaliveHAndlerRef)
+    this.keepaliveHAndlerRef = setInterval(this.sendKeepalive, 50000)
   }
 
   subscribe = topic => {
