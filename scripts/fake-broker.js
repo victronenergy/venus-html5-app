@@ -1,36 +1,34 @@
 const mosca = require("mosca")
-import { DBUS_PATHS } from "../src/config/dbusPaths"
 import { AC_SOURCE_TYPE, ACTIVE_INPUT, SYSTEM_MODE, VEBUS_SYSTEM_STATE } from "../src/app/utils/constants"
 
 // const US_PRODUCT_ID = 991260
 const EU_PRODUCT_ID = 9760
 
 const randomlyChangingPaths = [
-  `N/mockPortalId/system/0${DBUS_PATHS.BATTERY.VOLTAGE}`,
-  `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.VOLTAGE_PHASE_1}`,
-  `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.VOLTAGE_PHASE_2}`,
-  `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.VOLTAGE_PHASE_3}`,
-  `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_VOLTAGE_PHASE_1}`,
-  `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_VOLTAGE_PHASE_2}`,
-  `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_VOLTAGE_PHASE_3}`,
-  `N/mockPortalId/system/0${DBUS_PATHS.BATTERY.CURRENT}`,
-  `N/mockPortalId/system/0${DBUS_PATHS.INVERTER_CHARGER.DC_LOADS.CURRENT}`,
-  `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.CURRENT_PHASE_1}`,
-  `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.CURRENT_PHASE_2}`,
-  `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.CURRENT_PHASE_3}`,
-  `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_CURRENT_PHASE_1}`,
-  `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_CURRENT_PHASE_2}`,
-  `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_CURRENT_PHASE_3}`,
-  `N/mockPortalId/system/0${DBUS_PATHS.BATTERY.POWER}`,
-  `N/mockPortalId/system/0${DBUS_PATHS.INVERTER_CHARGER.DC_LOADS.POWER}`,
-  `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.POWER_PHASE_1}`,
-  `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.POWER_PHASE_2}`,
-  `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.POWER_PHASE_3}`,
-  `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_POWER_PHASE_1}`,
-  `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_POWER_PHASE_2}`,
-  `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_POWER_PHASE_3}`,
-  `N/mockPortalId/system/0${DBUS_PATHS.BATTERY.SOC}`,
-  `N/mockPortalId/system/0${DBUS_PATHS.BATTERY.TIME_TO_GO}`
+  `N/mockPortalId/system/0/Dc/Battery/Voltage`,
+  `N/mockPortalId/vebus/257/Ac/ActiveIn/L1/V`,
+  `N/mockPortalId/vebus/257/Ac/ActiveIn/L2/V`,
+  `N/mockPortalId/vebus/257/Ac/ActiveIn/L3/V`,
+  `N/mockPortalId/vebus/257/Ac/Out/L1/V`,
+  `N/mockPortalId/vebus/257/Ac/Out/L2/V`,
+  `N/mockPortalId/vebus/257/Ac/Out/L3/V`,
+  `N/mockPortalId/system/0/Dc/Battery/Current`,
+  `N/mockPortalId/vebus/257/Ac/ActiveIn/L1/I`,
+  `N/mockPortalId/vebus/257/Ac/ActiveIn/L2/I`,
+  `N/mockPortalId/vebus/257/Ac/ActiveIn/L3/I`,
+  `N/mockPortalId/vebus/257/Ac/Out/L1/I`,
+  `N/mockPortalId/vebus/257/Ac/Out/L2/I`,
+  `N/mockPortalId/vebus/257/Ac/Out/L3/I`,
+  `N/mockPortalId/system/0/Dc/Battery/Power`,
+  `N/mockPortalId/system/0/Dc/System/Power`,
+  `N/mockPortalId/vebus/257/Ac/ActiveIn/L1/P`,
+  `N/mockPortalId/vebus/257/Ac/ActiveIn/L2/P`,
+  `N/mockPortalId/vebus/257/Ac/ActiveIn/L3/P`,
+  `N/mockPortalId/vebus/257/Ac/ConsumptionOnOutput/L1/Power`,
+  `N/mockPortalId/vebus/257/Ac/ConsumptionOnOutput/L2/Power`,
+  `N/mockPortalId/vebus/257/Ac/ConsumptionOnOutput/L3/Power`,
+  `N/mockPortalId/system/0/Dc/Battery/Soc`,
+  `N/mockPortalId/system/0/Dc/Battery/TimeToGo`
 ]
 
 export class MockMQQTBroker {
@@ -111,88 +109,87 @@ export class MockMQQTBroker {
         this.sendCached("N/mockPortalId/vebus/257/DeviceInstance")
         break
       case "N/+/settings/+/Settings/SystemSetup/AcInput1":
-        this.sendCached(`N/mockPortalId/settings/0${DBUS_PATHS.SETTINGS.AC_INPUT_TYPE1}`, AC_SOURCE_TYPE.GENERATOR)
+        this.sendCached(`N/mockPortalId/settings/0/Settings/SystemSetup/AcInput1`, AC_SOURCE_TYPE.GENERATOR)
         break
       case "N/+/settings/+/Settings/SystemSetup/AcInput2":
-        this.sendCached(`N/mockPortalId/settings/0${DBUS_PATHS.SETTINGS.AC_INPUT_TYPE2}`, AC_SOURCE_TYPE.SHORE)
+        this.sendCached(`N/mockPortalId/settings/0/Settings/SystemSetup/AcInput2`, AC_SOURCE_TYPE.SHORE)
         break
-      case `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.PRODUCT_ID}`:
+      case `N/mockPortalId/vebus/257/ProductId`:
         this.sendCached(path, EU_PRODUCT_ID)
         break
-      case `N/mockPortalId/settings/0${DBUS_PATHS.SETTINGS.AC_INPUT_TYPE1}`:
+      case `N/mockPortalId/settings/0/Settings/SystemSetup/AcInput1`:
         this.sendCached(path, AC_SOURCE_TYPE.GENERATOR)
         break
-      case `N/mockPortalId/settings/0${DBUS_PATHS.SETTINGS.AC_INPUT_TYPE2}`:
+      case `N/mockPortalId/settings/0/Settings/SystemSetup/AcInput2`:
         this.sendCached(path, AC_SOURCE_TYPE.SHORE)
         break
-      case `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.ACTIVE_INPUT}`:
+      case `N/mockPortalId/vebus/257/Ac/ActiveIn/ActiveInput`:
         this.sendCached(path, ACTIVE_INPUT.NONE)
         break
       // /mockPortalId/vebus/257/Ac/In/2 =>  because shore power is in AC input 2
-      case `N/mockPortalId/vebus/257/Ac/In/2${DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT_IS_ADJUSTABLE}`:
+      case `N/mockPortalId/vebus/257/Ac/In/2/CurrentLimitIsAdjustable`:
         this.sendCached(path, true)
         break
-      case `N/mockPortalId/vebus/257/Ac/In/2${DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT_MAX}`:
+      case `N/mockPortalId/vebus/257/Ac/In/2/CurrentLimitGetMax`:
         this.sendCached(path, 30)
         break
-      case `N/mockPortalId/vebus/257/Ac/In/2${DBUS_PATHS.INVERTER_CHARGER.SHORE_POWER.CURRENT_LIMIT}`:
+      case `N/mockPortalId/vebus/257/Ac/In/2/CurrentLimit`:
         this.sendCached(path, 13)
         break
-      case `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.SYSTEM.MODE}`:
+      case `N/mockPortalId/vebus/257/Mode`:
         this.sendCached(path, SYSTEM_MODE.ON)
         break
-      case `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.SYSTEM.MODE_IS_ADJUSTABLE}`:
+      case `N/mockPortalId/vebus/257/ModeIsAdjustable`:
         this.sendCached(path, true)
         break
-      case `N/mockPortalId/system/0${DBUS_PATHS.INVERTER_CHARGER.SYSTEM.STATE}`:
+      case `N/mockPortalId/system/0/SystemState/State`:
         this.sendCached(path, VEBUS_SYSTEM_STATE.ABSORPTION_CHARGINNG)
         break
-      case `N/mockPortalId/system/0${DBUS_PATHS.BATTERY.STATE}`:
+      case `N/mockPortalId/system/0/Dc/Battery/State`:
         this.sendCached(path, 2)
         break
 
       // Values that change randomly over time. Add to randomlyChangingPaths to enable random changes
 
       // Voltage
-      case `N/mockPortalId/system/0${DBUS_PATHS.BATTERY.VOLTAGE}`:
-      case `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.VOLTAGE_PHASE_1}`:
-      case `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.VOLTAGE_PHASE_2}`:
-      case `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.VOLTAGE_PHASE_3}`:
-      case `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_VOLTAGE_PHASE_1}`:
-      case `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_VOLTAGE_PHASE_2}`:
-      case `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_VOLTAGE_PHASE_3}`:
+      case `N/mockPortalId/system/0/Dc/Battery/Voltage`:
+      case `N/mockPortalId/vebus/257/Ac/ActiveIn/L1/V`:
+      case `N/mockPortalId/vebus/257/Ac/ActiveIn/L2/V`:
+      case `N/mockPortalId/vebus/257/Ac/ActiveIn/L3/V`:
+      case `N/mockPortalId/vebus/257/Ac/Out/L1/V`:
+      case `N/mockPortalId/vebus/257/Ac/Out/L2/V`:
+      case `N/mockPortalId/vebus/257/Ac/Out/L3/V`:
         this.sendAlteringNumber(path, 8, 180)
         break
 
       // Current
-      case `N/mockPortalId/system/0${DBUS_PATHS.BATTERY.CURRENT}`:
-      case `N/mockPortalId/system/0${DBUS_PATHS.INVERTER_CHARGER.DC_LOADS.CURRENT}`:
-      case `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.CURRENT_PHASE_1}`:
-      case `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.CURRENT_PHASE_2}`:
-      case `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.CURRENT_PHASE_3}`:
-      case `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_CURRENT_PHASE_1}`:
-      case `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_CURRENT_PHASE_2}`:
-      case `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_CURRENT_PHASE_3}`:
+      case `N/mockPortalId/system/0/Dc/Battery/Current`:
+      case `N/mockPortalId/vebus/257/Ac/ActiveIn/L1/I`:
+      case `N/mockPortalId/vebus/257/Ac/ActiveIn/L2/I`:
+      case `N/mockPortalId/vebus/257/Ac/ActiveIn/L3/I`:
+      case `N/mockPortalId/vebus/257/Ac/Out/L1/I`:
+      case `N/mockPortalId/vebus/257/Ac/Out/L2/I`:
+      case `N/mockPortalId/vebus/257/Ac/Out/L3/I`:
         this.sendAlteringNumber(path, 2, 15)
         break
 
       // Power
-      case `N/mockPortalId/system/0${DBUS_PATHS.BATTERY.POWER}`:
-      case `N/mockPortalId/system/0${DBUS_PATHS.INVERTER_CHARGER.DC_LOADS.POWER}`:
-      case `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.POWER_PHASE_1}`:
-      case `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.POWER_PHASE_2}`:
-      case `N/mockPortalId/vebus/257${DBUS_PATHS.INVERTER_CHARGER.ACTIVE_IN.POWER_PHASE_3}`:
-      case `N/mockPortalId/system/0${DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_POWER_PHASE_1}`:
-      case `N/mockPortalId/system/0${DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_POWER_PHASE_2}`:
-      case `N/mockPortalId/system/0${DBUS_PATHS.INVERTER_CHARGER.AC_LOADS.OUTPUT_POWER_PHASE_3}`:
+      case `N/mockPortalId/system/0/Dc/Battery/Power`:
+      case `N/mockPortalId/system/0/Dc/System/Power`:
+      case `N/mockPortalId/vebus/257/Ac/ActiveIn/L1/P`:
+      case `N/mockPortalId/vebus/257/Ac/ActiveIn/L2/P`:
+      case `N/mockPortalId/vebus/257/Ac/ActiveIn/L3/P`:
+      case `N/mockPortalId/system/0/Ac/ConsumptionOnOutput/L1/Power`:
+      case `N/mockPortalId/system/0/Ac/ConsumptionOnOutput/L2/Power`:
+      case `N/mockPortalId/system/0/Ac/ConsumptionOnOutput/L3/Power`:
         this.sendAlteringNumber(path, 4, 150)
         break
 
       // Other
-      case `N/mockPortalId/system/0${DBUS_PATHS.BATTERY.SOC}`:
+      case `N/mockPortalId/system/0/Dc/Battery/Soc`:
         this.sendAlteringNumber(path, 1, 50, true)
         break
-      case `N/mockPortalId/system/0${DBUS_PATHS.BATTERY.TIME_TO_GO}`:
+      case `N/mockPortalId/system/0/Dc/Battery/TimeToGo`:
         this.sendAlteringNumber(path, 500, 50000)
         break
     }
