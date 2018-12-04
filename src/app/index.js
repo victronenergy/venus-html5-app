@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { render } from "react-dom"
-import { VIEWS } from "../config/enums"
+import { VIEWS } from "./utils/constants"
 import "../css/texts.scss"
 import "../css/styles.scss"
 
