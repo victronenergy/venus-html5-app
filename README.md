@@ -62,40 +62,8 @@ Since it is still served through the webpack dev server, the app will hot reload
 
 ## Metrics available
 
-A list of all metrics currently available for display in the app is defined in `src/config/metricsConfig.js`.
-
-For example,
-
-```js
-{
-  [DBUS_PATHS.BATTERY.VOLTAGE]: {   // Key is the D-Bus channel name to listen to
-    description: "Voltage",         // This is not used in the UI, just meta data
-    unit: "V",                      // What unit to display next to the metric
-    formatter: numericFormatter(1)  // How to format the raw data
-  }
-}
-```
-
-To subscribe to a topic, you only need to specify the D-Bus channel name. The topic URL will be computed automatically by the `VenusClient` class, which is a wrapper on top of the MQTT interface.
-
-A list of all currently supported D-Bus paths is defined in `src/config/dbusPaths`.
-
-All entries defined in `metricsConnfig` are available to the main application and their state will be refreshed automatically in the UI.
-See `src/js/index.js` for details.
-
-### Adding new metrics
-
-To add a new metric:
-
 - Identify the D-bus channel that you want to read [from here](https://github.com/victronenergy/venus/wiki/dbus)
-- Configure the type of MQTT service this is and add it to `src/service/topics` ([docs](https://github.com/victronenergy/dbus-mqtt))
-- (optional) If the type of service is not supported yet, implement in in `src/service/VenusClient`
-- Make the data from the topic available to the UI by adding it to the `metricsConfig` file, together with details on how to display it (formatter function, unit to use)
-
-### Custom formatting
-
-It is also possible to write completely custom formatting by creating a formatter
-function and attaching it to a metric in `metricsConfig.js`
+- Create a component using MqttSubscriptions or MqttTopicWildcard and pass the topic as the wrapper topi. See examples in other components
 
 ## Testing
 
