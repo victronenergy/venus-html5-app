@@ -8,8 +8,8 @@ const getTopics = (portalId, vebusInstanceId) => {
   return {
     activeInput: `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/ActiveInput`,
     settings: [
-      `N/${portalId}/settings/0/Settings/SystemSetup/AcInput0`,
-      `N/${portalId}/settings/0/Settings/SystemSetup/AcInput1`
+      `N/${portalId}/settings/0/Settings/SystemSetup/AcInput1`,
+      `N/${portalId}/settings/0/Settings/SystemSetup/AcInput2`
     ],
     current: [
       `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L1/I`,
