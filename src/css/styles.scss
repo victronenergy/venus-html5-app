@@ -392,8 +392,6 @@ header {
 }
 
 .inverter-charger,
-.metric--shore-input-limit,
-.metric__shore-input-limit--not-adjustable,
 .shore-power__container {
   @media #{$tiny} {
     display: none;
@@ -439,25 +437,6 @@ header {
 button:disabled {
   opacity: 0.5;
   cursor: default;
-}
-
-.metric--shore-input-limit {
-  @media #{$tiny} {
-    padding: 8px;
-  }
-}
-
-.metric--shore-input-limit > .selector-button > span:first-child {
-  margin-right: 10px;
-
-  @media #{$portrait} {
-    margin-right: 5px;
-  }
-}
-
-.metric__shore-input-limit--not-adjustable {
-  width: 100%;
-  text-align: center;
 }
 
 .metric__mode--readonly {

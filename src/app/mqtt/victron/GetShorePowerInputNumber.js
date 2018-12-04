@@ -18,6 +18,10 @@ class GetShorePowerInputNumber extends Component {
           const acInput1 = topics.acInput1.value
           const acInput2 = topics.acInput2.value
 
+          if (acInput1 === null || acInput2 === null) {
+            return this.props.children()
+          }
+
           let shorePowerInput = null
           if (acInput1 === AC_SOURCE_TYPE.SHORE || acInput1 === AC_SOURCE_TYPE.GRID) {
             shorePowerInput = 1
