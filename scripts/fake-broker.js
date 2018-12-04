@@ -5,30 +5,30 @@ import { AC_SOURCE_TYPE, ACTIVE_INPUT, SYSTEM_MODE, VEBUS_SYSTEM_STATE } from ".
 const EU_PRODUCT_ID = 9760
 
 const randomlyChangingPaths = [
-  `N/mockPortalId/system/0/Dc/Battery/Voltage`,
-  `N/mockPortalId/vebus/257/Ac/ActiveIn/L1/V`,
-  `N/mockPortalId/vebus/257/Ac/ActiveIn/L2/V`,
-  `N/mockPortalId/vebus/257/Ac/ActiveIn/L3/V`,
-  `N/mockPortalId/vebus/257/Ac/Out/L1/V`,
-  `N/mockPortalId/vebus/257/Ac/Out/L2/V`,
-  `N/mockPortalId/vebus/257/Ac/Out/L3/V`,
-  `N/mockPortalId/system/0/Dc/Battery/Current`,
-  `N/mockPortalId/vebus/257/Ac/ActiveIn/L1/I`,
-  `N/mockPortalId/vebus/257/Ac/ActiveIn/L2/I`,
-  `N/mockPortalId/vebus/257/Ac/ActiveIn/L3/I`,
-  `N/mockPortalId/vebus/257/Ac/Out/L1/I`,
-  `N/mockPortalId/vebus/257/Ac/Out/L2/I`,
-  `N/mockPortalId/vebus/257/Ac/Out/L3/I`,
-  `N/mockPortalId/system/0/Dc/Battery/Power`,
-  `N/mockPortalId/system/0/Dc/System/Power`,
-  `N/mockPortalId/vebus/257/Ac/ActiveIn/L1/P`,
-  `N/mockPortalId/vebus/257/Ac/ActiveIn/L2/P`,
-  `N/mockPortalId/vebus/257/Ac/ActiveIn/L3/P`,
-  `N/mockPortalId/vebus/257/Ac/ConsumptionOnOutput/L1/Power`,
-  `N/mockPortalId/vebus/257/Ac/ConsumptionOnOutput/L2/Power`,
-  `N/mockPortalId/vebus/257/Ac/ConsumptionOnOutput/L3/Power`,
-  `N/mockPortalId/system/0/Dc/Battery/Soc`,
-  `N/mockPortalId/system/0/Dc/Battery/TimeToGo`
+  "N/mockPortalId/system/0/Dc/Battery/Voltage",
+  "N/mockPortalId/vebus/257/Ac/ActiveIn/L1/V",
+  "N/mockPortalId/vebus/257/Ac/ActiveIn/L2/V",
+  "N/mockPortalId/vebus/257/Ac/ActiveIn/L3/V",
+  "N/mockPortalId/vebus/257/Ac/Out/L1/V",
+  "N/mockPortalId/vebus/257/Ac/Out/L2/V",
+  "N/mockPortalId/vebus/257/Ac/Out/L3/V",
+  "N/mockPortalId/system/0/Dc/Battery/Current",
+  "N/mockPortalId/vebus/257/Ac/ActiveIn/L1/I",
+  "N/mockPortalId/vebus/257/Ac/ActiveIn/L2/I",
+  "N/mockPortalId/vebus/257/Ac/ActiveIn/L3/I",
+  "N/mockPortalId/vebus/257/Ac/Out/L1/I",
+  "N/mockPortalId/vebus/257/Ac/Out/L2/I",
+  "N/mockPortalId/vebus/257/Ac/Out/L3/I",
+  "N/mockPortalId/system/0/Dc/Battery/Power",
+  "N/mockPortalId/system/0/Dc/System/Power",
+  "N/mockPortalId/vebus/257/Ac/ActiveIn/L1/P",
+  "N/mockPortalId/vebus/257/Ac/ActiveIn/L2/P",
+  "N/mockPortalId/vebus/257/Ac/ActiveIn/L3/P",
+  "N/mockPortalId/system/0/Ac/ConsumptionOnOutput/L1/Power",
+  "N/mockPortalId/system/0/Ac/ConsumptionOnOutput/L2/Power",
+  "N/mockPortalId/system/0/Ac/ConsumptionOnOutput/L3/Power",
+  "N/mockPortalId/system/0/Dc/Battery/Soc",
+  "N/mockPortalId/system/0/Dc/Battery/TimeToGo"
 ]
 
 export class MockMQQTBroker {
@@ -104,94 +104,93 @@ export class MockMQQTBroker {
       case "N/+/system/0/Serial":
         this.sendCached("N/mockPortalId/system/0/Serial", "mockPortalId")
         break
-      case "N/+/+/+/DeviceInstance":
-        this.sendCached("N/mockPortalId/system/0/DeviceInstance")
-        this.sendCached("N/mockPortalId/vebus/257/DeviceInstance")
+      case "N/+/vebus/+/DeviceInstance":
+        this.sendCached("N/mockPortalId/vebus/257/DeviceInstance", 257)
         break
-      case "N/+/settings/+/Settings/SystemSetup/AcInput1":
-        this.sendCached(`N/mockPortalId/settings/0/Settings/SystemSetup/AcInput1`, AC_SOURCE_TYPE.GENERATOR)
-        break
-      case "N/+/settings/+/Settings/SystemSetup/AcInput2":
-        this.sendCached(`N/mockPortalId/settings/0/Settings/SystemSetup/AcInput2`, AC_SOURCE_TYPE.SHORE)
-        break
-      case `N/mockPortalId/vebus/257/ProductId`:
+      case "N/mockPortalId/vebus/257/ProductId":
         this.sendCached(path, EU_PRODUCT_ID)
         break
-      case `N/mockPortalId/settings/0/Settings/SystemSetup/AcInput1`:
+      case "N/mockPortalId/settings/0/Settings/SystemSetup/AcInput1":
         this.sendCached(path, AC_SOURCE_TYPE.GENERATOR)
         break
-      case `N/mockPortalId/settings/0/Settings/SystemSetup/AcInput2`:
+      case "N/mockPortalId/settings/0/Settings/SystemSetup/AcInput2":
         this.sendCached(path, AC_SOURCE_TYPE.SHORE)
         break
-      case `N/mockPortalId/vebus/257/Ac/ActiveIn/ActiveInput`:
+      case "N/mockPortalId/vebus/257/Ac/ActiveIn/ActiveInput":
         this.sendCached(path, ACTIVE_INPUT.NONE)
         break
       // /mockPortalId/vebus/257/Ac/In/2 =>  because shore power is in AC input 2
-      case `N/mockPortalId/vebus/257/Ac/In/2/CurrentLimitIsAdjustable`:
+      case "N/mockPortalId/vebus/257/Ac/In/2/CurrentLimitIsAdjustable":
         this.sendCached(path, true)
         break
-      case `N/mockPortalId/vebus/257/Ac/In/2/CurrentLimitGetMax`:
+      case "N/mockPortalId/vebus/257/Ac/In/2/CurrentLimitGetMax":
         this.sendCached(path, 30)
         break
-      case `N/mockPortalId/vebus/257/Ac/In/2/CurrentLimit`:
+      case "N/mockPortalId/vebus/257/Ac/In/2/CurrentLimit":
         this.sendCached(path, 13)
         break
-      case `N/mockPortalId/vebus/257/Mode`:
+      case "N/mockPortalId/vebus/257/Mode":
         this.sendCached(path, SYSTEM_MODE.ON)
         break
-      case `N/mockPortalId/vebus/257/ModeIsAdjustable`:
+      case "N/mockPortalId/vebus/257/ModeIsAdjustable":
         this.sendCached(path, true)
         break
-      case `N/mockPortalId/system/0/SystemState/State`:
+      case "N/mockPortalId/system/0/SystemState/State":
         this.sendCached(path, VEBUS_SYSTEM_STATE.ABSORPTION_CHARGINNG)
         break
-      case `N/mockPortalId/system/0/Dc/Battery/State`:
+      case "N/mockPortalId/system/0/Dc/Battery/State":
         this.sendCached(path, 2)
         break
 
       // Values that change randomly over time. Add to randomlyChangingPaths to enable random changes
 
       // Voltage
-      case `N/mockPortalId/system/0/Dc/Battery/Voltage`:
-      case `N/mockPortalId/vebus/257/Ac/ActiveIn/L1/V`:
-      case `N/mockPortalId/vebus/257/Ac/ActiveIn/L2/V`:
-      case `N/mockPortalId/vebus/257/Ac/ActiveIn/L3/V`:
-      case `N/mockPortalId/vebus/257/Ac/Out/L1/V`:
-      case `N/mockPortalId/vebus/257/Ac/Out/L2/V`:
-      case `N/mockPortalId/vebus/257/Ac/Out/L3/V`:
+      case "N/mockPortalId/system/0/Dc/Battery/Voltage":
+      case "N/mockPortalId/vebus/257/Ac/ActiveIn/L1/V":
+      case "N/mockPortalId/vebus/257/Ac/ActiveIn/L2/V":
+      case "N/mockPortalId/vebus/257/Ac/ActiveIn/L3/V":
+      case "N/mockPortalId/vebus/257/Ac/Out/L1/V":
+      case "N/mockPortalId/vebus/257/Ac/Out/L2/V":
+      case "N/mockPortalId/vebus/257/Ac/Out/L3/V":
         this.sendAlteringNumber(path, 8, 180)
         break
 
       // Current
-      case `N/mockPortalId/system/0/Dc/Battery/Current`:
-      case `N/mockPortalId/vebus/257/Ac/ActiveIn/L1/I`:
-      case `N/mockPortalId/vebus/257/Ac/ActiveIn/L2/I`:
-      case `N/mockPortalId/vebus/257/Ac/ActiveIn/L3/I`:
-      case `N/mockPortalId/vebus/257/Ac/Out/L1/I`:
-      case `N/mockPortalId/vebus/257/Ac/Out/L2/I`:
-      case `N/mockPortalId/vebus/257/Ac/Out/L3/I`:
+      case "N/mockPortalId/system/0/Dc/Battery/Current":
+      case "N/mockPortalId/vebus/257/Ac/ActiveIn/L1/I":
+      case "N/mockPortalId/vebus/257/Ac/ActiveIn/L2/I":
+      case "N/mockPortalId/vebus/257/Ac/ActiveIn/L3/I":
+      case "N/mockPortalId/vebus/257/Ac/Out/L1/I":
+      case "N/mockPortalId/vebus/257/Ac/Out/L2/I":
+      case "N/mockPortalId/vebus/257/Ac/Out/L3/I":
         this.sendAlteringNumber(path, 2, 15)
         break
 
       // Power
-      case `N/mockPortalId/system/0/Dc/Battery/Power`:
-      case `N/mockPortalId/system/0/Dc/System/Power`:
-      case `N/mockPortalId/vebus/257/Ac/ActiveIn/L1/P`:
-      case `N/mockPortalId/vebus/257/Ac/ActiveIn/L2/P`:
-      case `N/mockPortalId/vebus/257/Ac/ActiveIn/L3/P`:
-      case `N/mockPortalId/system/0/Ac/ConsumptionOnOutput/L1/Power`:
-      case `N/mockPortalId/system/0/Ac/ConsumptionOnOutput/L2/Power`:
-      case `N/mockPortalId/system/0/Ac/ConsumptionOnOutput/L3/Power`:
+      case "N/mockPortalId/system/0/Dc/Battery/Power":
+      case "N/mockPortalId/system/0/Dc/System/Power":
+      case "N/mockPortalId/vebus/257/Ac/ActiveIn/L1/P":
+      case "N/mockPortalId/vebus/257/Ac/ActiveIn/L2/P":
+      case "N/mockPortalId/vebus/257/Ac/ActiveIn/L3/P":
+      case "N/mockPortalId/system/0/Ac/ConsumptionOnOutput/L1/Power":
+      case "N/mockPortalId/system/0/Ac/ConsumptionOnOutput/L2/Power":
+      case "N/mockPortalId/system/0/Ac/ConsumptionOnOutput/L3/Power":
         this.sendAlteringNumber(path, 4, 150)
         break
 
       // Other
-      case `N/mockPortalId/system/0/Dc/Battery/Soc`:
+      case "N/mockPortalId/system/0/Dc/Battery/Soc":
         this.sendAlteringNumber(path, 1, 50, true)
         break
-      case `N/mockPortalId/system/0/Dc/Battery/TimeToGo`:
+      case "N/mockPortalId/system/0/Dc/Battery/TimeToGo":
         this.sendAlteringNumber(path, 500, 50000)
         break
+
+      // IGNORE PATHS
+      case "N/mockPortalId/settings/0/Settings/SystemSetup/<placeholder>":
+        break
+      default:
+        console.error(`No data for path ${path.toString()}`)
     }
   }
 }
