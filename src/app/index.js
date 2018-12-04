@@ -6,8 +6,8 @@ import "../css/styles.scss"
 
 import ShoreInputLimitSelector from "./components/ShoreInputLimitSelector"
 import MqttClientProvider from "./mqtt/MqttClientProvider"
-import GetPortalId from "./mqtt/Victron/GetPortalId"
-import GetVebusDeviceInstance from "./mqtt/Victron/GetVebusDeviceInstance"
+import GetPortalId from "./mqtt/victron/GetPortalId"
+import GetVebusDeviceInstance from "./mqtt/victron/GetVebusDeviceInstance"
 
 import MqttUnavailable from "./components/MqttUnavailable"
 import Metrics from "./components/Metrics"
