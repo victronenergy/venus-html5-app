@@ -1,29 +1,25 @@
 import React, { Component } from "react"
 import { MqttClientContext } from "../index.js"
+import { flatten } from "../utils/util"
 
 class MqttSubscriptions extends Component {
   componentDidMount() {
-    const topics = Object.values(this.props.topics).flat()
-    topics.forEach(topic => this.props.subscribe(topic))
+    flatten(Object.values(this.props.topics)).forEach(this.props.subscribe)
   }
 
   componentDidUpdate(prevProps) {
-    const topics = Object.values(this.props.topics).flat()
-
     if (JSON.stringify(prevProps.topics) !== JSON.stringify(this.props.topics)) {
       console.log("New topics", prevProps.topics, this.props.topicsq)
       if (prevProps.topics !== null) {
-        const prevTopics = Object.values(this.prevProps.topics).flat()
-        prevTopics.forEach(topic => this.props.unsubscribe(topic))
+        flatten(Object.values(this.prevProps.topics)).forEach(this.props.unsubscribe)
       }
 
-      topics.forEach(topic => this.props.subscribe(topic))
+      flatten(Object.values(this.props.topics)).forEach(this.props.subscribe)
     }
   }
 
   componentWillUnmount() {
-    const topics = Object.values(this.props.topics).flat()
-    topics.forEach(topic => this.props.unsubscribe(topic))
+    flatten(Object.values(this.props.topics)).forEach(this.props.unsubscribe)
   }
 
   render() {
