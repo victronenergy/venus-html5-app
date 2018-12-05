@@ -5,6 +5,7 @@ import ShoreInputLimit from "./ShoreInputLimit"
 import InverterCharger from "./InverterCharger"
 import AcLoads from "./AcLoads"
 import DcLoads from "./DcLoads"
+import Tanks from "./Tanks"
 
 export default props => {
   const { portalId, vebusInstanceId, isConnected } = props
@@ -30,6 +31,7 @@ export default props => {
         <AcLoads portalId={portalId} vebusInstanceId={vebusInstanceId} />
         <DcLoads portalId={portalId} />
       </div>
+      <Tanks portalId={portalId} />
     </div>
   )
 }

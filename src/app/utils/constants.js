@@ -55,3 +55,19 @@ export const VIEWS = {
   REMOTE_CONSOLE: "REMOTE_CONSOLE",
   MQTT_UNAVAILABLE: "MQTT_UNAVAILABLE"
 }
+
+export const TANK_STATUS = {
+  OK: 0,
+  DISCONNECTED: 1,
+  SHORT_CIRCUITED: 2,
+  UNKNOWN: 3
+}
+
+export const TANK_FLUID_TYPE = {
+  FUEL: 0,
+  FRESH_WATER: 1,
+  WASTE_WATER: 2,
+  LIVE_WELL: 3,
+  OIL: 4,
+  BLACK_WATER: 5 // Sewage
+}
