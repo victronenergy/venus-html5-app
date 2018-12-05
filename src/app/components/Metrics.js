@@ -31,7 +31,7 @@ export default props => {
         <AcLoads portalId={portalId} vebusInstanceId={vebusInstanceId} />
         <DcLoads portalId={portalId} />
       </div>
-      <Tanks portalId={portalId} />
+      {false && <Tanks portalId={portalId} />}
     </div>
   )
 }
