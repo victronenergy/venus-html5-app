@@ -1,5 +1,11 @@
 const mosca = require("mosca")
-import { AC_SOURCE_TYPE, ACTIVE_INPUT, SYSTEM_MODE, VEBUS_SYSTEM_STATE } from "../src/app/utils/constants"
+import {
+  AC_SOURCE_TYPE,
+  ACTIVE_INPUT,
+  SYSTEM_MODE,
+  TANK_FLUID_TYPE,
+  VEBUS_SYSTEM_STATE
+} from "../src/app/utils/constants"
 
 // const US_PRODUCT_ID = 991260
 const EU_PRODUCT_ID = 9760
@@ -141,6 +147,16 @@ export class MockMQQTBroker {
       case "N/mockPortalId/system/0/Dc/Battery/State":
         this.sendCached(path, 2)
         break
+      case "N/mockPortalId/tank/+/DeviceInstance":
+        this.sendCached("N/mockPortalId/tank/1/DeviceInstance", 1)
+        this.sendCached("N/mockPortalId/tank/2/DeviceInstance", 2)
+        break
+      case "N/mockPortalId/tank/1/FluidType":
+        this.sendCached(path, TANK_FLUID_TYPE.FRESH_WATER)
+        break
+      case "N/mockPortalId/tank/2/FluidType":
+        this.sendCached(path, TANK_FLUID_TYPE.OIL)
+        break
 
       // Values that change randomly over time. Add to randomlyChangingPaths to enable random changes
 
@@ -176,6 +192,14 @@ export class MockMQQTBroker {
       case "N/mockPortalId/system/0/Ac/ConsumptionOnOutput/L2/Power":
       case "N/mockPortalId/system/0/Ac/ConsumptionOnOutput/L3/Power":
         this.sendAlteringNumber(path, 4, 150)
+        break
+
+      // Tank levels
+      case "N/mockPortalId/tank/1/Level":
+        this.sendAlteringNumber(path, 1, 56)
+        break
+      case "N/mockPortalId/tank/2/Level":
+        this.sendAlteringNumber(path, 1, 75)
         break
 
       // Other
