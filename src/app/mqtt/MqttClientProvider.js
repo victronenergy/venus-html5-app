@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { MqttClientContext } from "../index.js"
+import { MqttClientContext } from "../contexts"
 
 import * as mqtt from "mqtt"
 import { getMessageJson } from "../utils/util"

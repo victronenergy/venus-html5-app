@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { MqttClientContext } from "../index"
+import { MqttClientContext } from "../contexts"
 
 class MqttWriteValue extends Component {
   publish = value => {

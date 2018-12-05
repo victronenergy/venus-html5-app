@@ -22,8 +22,6 @@ const port = parseInt(getParameterByName("port")) || 9001
 const viewChangeDelay = 500
 const viewChangeTransitionDuration = viewChangeDelay - 100
 
-export const MqttClientContext = React.createContext(null)
-
 class App extends Component {
   state = {
     currentView: VIEWS.METRICS,
