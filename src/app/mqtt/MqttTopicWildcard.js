@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { MqttClientContext } from "../index.js"
+import { MqttClientContext } from "../contexts"
 
 class MqttTopicWildcard extends Component {
   componentDidMount() {
