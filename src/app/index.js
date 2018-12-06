@@ -16,11 +16,10 @@ import Connecting from "./components/Connecting"
 
 import { getParameterByName } from "./utils/util"
 import Header from "./components/Header"
+import Fade, { viewChangeDelay } from "./components/Fade"
 
 const host = getParameterByName("host") || window.location.hostname || "localhost"
 const port = parseInt(getParameterByName("port")) || 9001
-const viewChangeDelay = 500
-const viewChangeTransitionDuration = viewChangeDelay - 100
 
 class App extends Component {
   state = {
@@ -50,19 +49,11 @@ class App extends Component {
       <MqttClientProvider host={host} port={port}>
         {(status, isConnected, error) => {
           if (error) {
-            return (
-              <Fade key={VIEWS.MQTT_UNAVAILABLE} unmount={this.state.viewUnmounting}>
-                <MqttUnavailable />
-              </Fade>
-            )
+            return <MqttUnavailable viewUnmounting={this.state.viewUnmounting} />
           }
 
           if (!isConnected) {
-            return (
-              <Fade key={VIEWS.CONNECTING} unmount={this.state.viewUnmounting}>
-                <Connecting />
-              </Fade>
-            )
+            return <Connecting viewUnmounting={this.state.viewUnmounting} />
           }
 
           return (
@@ -146,38 +137,6 @@ class App extends Component {
         }}
       </MqttClientProvider>
     )
-  }
-}
-
-class Fade extends Component {
-  fadeTransition = `opacity ${viewChangeTransitionDuration}ms ease`
-  state = {
-    style: {
-      opacity: 0,
-      transition: this.fadeTransition
-    }
-  }
-
-  fadeIn = () => {
-    this.setState({ style: { opacity: 1, transition: this.fadeTransition } })
-  }
-
-  fadeOut = () => {
-    this.setState({ style: { opacity: 0, transition: this.fadeTransition } })
-  }
-
-  componentDidMount() {
-    setTimeout(this.fadeIn, 10)
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (!prevProps.unmount && this.props.unmount) {
-      setTimeout(this.fadeOut, 10)
-    }
-  }
-
-  render() {
-    return <div style={this.state.style}>{this.props.children}</div>
   }
 }
 
