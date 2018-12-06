@@ -5,6 +5,8 @@ import MqttTopicWildcard from "../mqtt/MqttTopicWildcard"
 
 import { BATTERY_STATE } from "../utils/constants"
 
+const secondaryBatteriesFeatureEnabled = false
+
 const getTopics = portalId => {
   return {
     current: `N/${portalId}/system/0/Dc/Battery/Current`,
@@ -105,7 +107,9 @@ const Battery = props => {
             <NumericValue value={props.current} unit="A" precision={1} />
             <NumericValue value={props.power} unit="W" />
           </div>
-          {props.mainBattery && secondaryBatteries(props.batteries, props.mainBattery, props.portalId)}
+          {secondaryBatteriesFeatureEnabled &&
+            props.mainBattery &&
+            secondaryBatteries(props.batteries, props.mainBattery, props.portalId)}
         </div>
       </div>
       <div
