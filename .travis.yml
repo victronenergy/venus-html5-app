@@ -5,10 +5,6 @@ language: node_js
 # Use latest stable node version
 node_js:
   - stable
-cache:
-  npm: true
-  directories:
-    - ~/.cache
 branches:
   only:
     # Only run branch builds on master to prevent double builds on pull requests
@@ -21,6 +17,7 @@ install:
 cache:
   directories:
     - "$HOME/.npm"
+    - ~/.cache
 script:
   - npm run test
   - npm run test:ui
