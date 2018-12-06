@@ -113,6 +113,12 @@ export class MockMQQTBroker {
       case "N/+/vebus/+/DeviceInstance":
         this.sendCached("N/mockPortalId/vebus/257/DeviceInstance", 257)
         break
+      case "N/mockPortalId/battery/+/DeviceInstance":
+        this.sendCached("N/mockPortalId/battery/0/DeviceInstance", 0)
+        break
+      case "N/mockPortalId/system/0/ActiveBatteryService":
+        this.sendCached("N/mockPortalId/system/0/ActiveBatteryService", "duck/0")
+        break
       case "N/mockPortalId/vebus/257/ProductId":
         this.sendCached(path, EU_PRODUCT_ID)
         break
