@@ -1,0 +1,19 @@
+.selector-button {
+  background-color: #0a101f;
+  color: white;
+  height: 100%;
+  border: none;
+  border-radius: 6px;
+  flex-grow: 1;
+  cursor: pointer;
+  line-height: 1.2;
+}
+
+
+.selector-button:focus {
+  outline: 0;
+}
+
+.selector-button--active {
+  background-color: #30afff;
+}

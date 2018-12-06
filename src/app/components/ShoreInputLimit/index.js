@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import GetShorePowerInputNumber from "../../mqtt/victron/GetShorePowerInputNumber"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 import { formatNumber } from "./../NumericValue"
+import SelectorButton from "../SelectorButton"
 import "./ShoreInputLimit.scss"
 
 const getTopics = (portalId, vebusInstanceId, shorePowerInput) => {
@@ -22,10 +23,10 @@ const ReadOnlyShoreInputLimit = props => (
 
 const EditableShoreInputLimit = props => (
   <div className="metric metric--small metric--shore-input-limit">
-    <button className="selector-button text" onClick={props.onChangeShoreInputLimitClicked}>
+    <SelectorButton onClick={props.onChangeShoreInputLimitClicked}>
       <span className="text--small">Select shore input limit:&nbsp;</span>
       <span className="text--bold">{props.currentLimit}</span>
-    </button>
+    </SelectorButton>
   </div>
 )
 

@@ -1,8 +1,10 @@
 import React, { Component } from "react"
-import Logger from "../utils/logger"
-import MqttSubscriptions from "../mqtt/MqttSubscriptions"
-import MqttWriteValue from "../mqtt/MqttWriteValue"
-import GetShorePowerInputNumber from "../mqtt/victron/GetShorePowerInputNumber"
+import Logger from "../../utils/logger"
+import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
+import MqttWriteValue from "../../mqtt/MqttWriteValue"
+import GetShorePowerInputNumber from "../../mqtt/victron/GetShorePowerInputNumber"
+import "./ShoreInputLimitSelector.scss"
+import SelectorButton from "../SelectorButton"
 
 const USAmperage = [10, 15, 20, 30, 50, 100]
 const EUAmperage = [6, 10, 13, 16, 25, 32, 63]
@@ -35,7 +37,7 @@ class ShoreInputLimitSelector extends Component {
     } else if (result === 0x2000 || result === 0x2700) {
       return USAmperage
     } else {
-      Logger.warn(`Could not retrieve amperage US/EU for product id ${productId}`)
+      Logger.warn(`Could not determine amperage US/EU for product id ${productId}`)
       return USAmperage
     }
   }
@@ -60,17 +62,15 @@ class ShoreInputLimitSelector extends Component {
           <div className="text text--large text--center amperage-selector__description">Select shore input limit</div>
           {amperageList.map((currentValue, index) => {
             return (
-              <button
+              <SelectorButton
                 key={currentValue}
-                className={
-                  "selector-button selector-button__amperage text text--very-large" +
-                  (currentlySelectedLimit == currentValue ? " selector-button--active" : "")
-                }
+                className={"selector-button__amperage text--very-large"}
+                active={currentlySelectedLimit === currentValue}
                 onClick={() => this.props.onLimitSelected(currentValue)}
                 ref={node => (index === 0 ? (this.firstSelectorButtonNode = node) : null)}
               >
                 {currentValue}A
-              </button>
+              </SelectorButton>
             )
           })}
 
