@@ -45,33 +45,22 @@ function batteryTimeToGoFormatter(timeToGo) {
   }
 }
 
-const batteryInstanceRe = new RegExp("N/.*/battery/(\\d+)/Dc/\\d+/.*")
-
-const getBatteryInstances = batteries => {
-  return new Set(
-    Object.keys(batteries).map(batteryPath => {
-      const [, instance] = batteryPath.match(batteryInstanceRe)
-      return instance
-    })
-  )
-}
-
 const mapChannelsToInstances = (instances, mainBatteryInstance) => {
   const [, mainBatteryInstanceNumber] = mainBatteryInstance.split("battery/")
   let instancesWithChannels = []
   instances.forEach(i => {
-    if (i !== mainBatteryInstanceNumber) instancesWithChannels.push([i, 0])
+    if (i != mainBatteryInstanceNumber) instancesWithChannels.push([i, 0])
     instancesWithChannels.push([i, 1])
   })
   return instancesWithChannels
 }
 
-const secondaryBatteries = (batteries, mainBatteryInstance, portalId) => {
-  const instances = getBatteryInstances(batteries)
+const secondaryBatteries = (instances, mainBatteryInstance, portalId) => {
   const instancesWithChannels = mapChannelsToInstances(instances, mainBatteryInstance)
   return instancesWithChannels.map(([instance, channel]) => {
     return (
       <MqttSubscriptions
+        key={instance + channel}
         topics={{
           voltage: `N/${portalId}/battery/${instance}/Dc/${channel}/Voltage`,
           current: `N/${portalId}/battery/${instance}/Dc/${channel}/Current`,
@@ -109,7 +98,7 @@ const Battery = props => {
           </div>
           {secondaryBatteriesFeatureEnabled &&
             props.mainBattery &&
-            secondaryBatteries(props.batteries, props.mainBattery, props.portalId)}
+            secondaryBatteries(props.batteryInstances, props.mainBattery, props.portalId)}
         </div>
       </div>
       <div
@@ -136,8 +125,8 @@ class BatteryWithData extends Component {
       <MqttSubscriptions topics={getTopics(portalId)}>
         {topics => {
           return (
-            <MqttTopicWildcard wildcard={`N/${portalId}/battery/+/Dc/+/+`}>
-              {allBatteries => {
+            <MqttTopicWildcard wildcard={`N/${portalId}/battery/+/DeviceInstance`}>
+              {batteryInstances => {
                 return (
                   <Battery
                     soc={topics.soc.value}
@@ -147,7 +136,7 @@ class BatteryWithData extends Component {
                     power={topics.power.value}
                     timeToGo={batteryTimeToGoFormatter(topics.timeToGo.value)}
                     mainBattery={topics.mainBattery.value}
-                    batteries={allBatteries}
+                    batteryInstances={Object.values(batteryInstances).map(b => b.value)}
                     portalId={portalId}
                   />
                 )
