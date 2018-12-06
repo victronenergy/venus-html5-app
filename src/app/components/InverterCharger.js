@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import { SYSTEM_MODE } from "../utils/constants"
 import MqttSubscriptions from "../mqtt/MqttSubscriptions"
 import MqttWriteValue from "../mqtt/MqttWriteValue"
+import SelectorButton from "./SelectorButton"
 
 const getTopics = (portalId, vebusInstanceId) => {
   return {
@@ -50,27 +51,27 @@ const InverterCharger = props => {
         </div>
       </div>
       <div className="inverter-charger__mode-selector">
-        <button
+        <SelectorButton
           disabled={!props.modeIsAdjustable}
-          className={"selector-button text" + (activeMode == "ON" ? " selector-button--active" : "")}
+          active={activeMode === "ON"}
           onClick={() => props.onModeSelected(SYSTEM_MODE.ON)}
         >
-          <span>On</span>
-        </button>
-        <button
+          On
+        </SelectorButton>
+        <SelectorButton
           disabled={!props.modeIsAdjustable}
-          className={"selector-button text" + (activeMode == "OFF" ? " selector-button--active" : "")}
+          active={activeMode === "OFF"}
           onClick={() => props.onModeSelected(SYSTEM_MODE.OFF)}
         >
-          <span>Off</span>
-        </button>
-        <button
+          Off
+        </SelectorButton>
+        <SelectorButton
           disabled={!props.modeIsAdjustable}
-          className={"selector-button text" + (activeMode == "Charger only" ? " selector-button--active" : "")}
+          active={activeMode === "Charger only"}
           onClick={() => props.onModeSelected(SYSTEM_MODE.CHARGER_ONLY)}
         >
-          <span>Charger only</span>
-        </button>
+          Charger only
+        </SelectorButton>
         {/*// TODO Should we add a button for inverter only as well?*/}
       </div>
     </div>
