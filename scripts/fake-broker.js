@@ -34,7 +34,9 @@ const randomlyChangingPaths = [
   "N/mockPortalId/system/0/Ac/ConsumptionOnOutput/L2/Power",
   "N/mockPortalId/system/0/Ac/ConsumptionOnOutput/L3/Power",
   "N/mockPortalId/system/0/Dc/Battery/Soc",
-  "N/mockPortalId/system/0/Dc/Battery/TimeToGo"
+  "N/mockPortalId/system/0/Dc/Battery/TimeToGo",
+  "N/mockPortalId/system/0/Dc/Pv/Power",
+  "N/mockPortalId/system/0/Dc/Pv/Current"
 ]
 
 export class MockMQQTBroker {
@@ -185,6 +187,7 @@ export class MockMQQTBroker {
       case "N/mockPortalId/vebus/257/Ac/Out/L1/I":
       case "N/mockPortalId/vebus/257/Ac/Out/L2/I":
       case "N/mockPortalId/vebus/257/Ac/Out/L3/I":
+      case "N/mockPortalId/system/0/Dc/Pv/Current":
         this.sendAlteringNumber(path, 2, 15)
         break
 
@@ -197,6 +200,7 @@ export class MockMQQTBroker {
       case "N/mockPortalId/system/0/Ac/ConsumptionOnOutput/L1/Power":
       case "N/mockPortalId/system/0/Ac/ConsumptionOnOutput/L2/Power":
       case "N/mockPortalId/system/0/Ac/ConsumptionOnOutput/L3/Power":
+      case "N/mockPortalId/system/0/Dc/Pv/Power":
         this.sendAlteringNumber(path, 4, 150)
         break
 
