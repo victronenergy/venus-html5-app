@@ -3,7 +3,7 @@ import { Component } from "react"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 import React from "react"
 
-const BatteryName = props => {
+export const BatteryName = props => {
   const productName = props.customName || props.productName
   let label
   if (props.batteryChannel === 0) {
@@ -13,13 +13,22 @@ const BatteryName = props => {
     label = productName ? productName + " starter" : "Starter battery"
   }
 
-  return <>{label}</>
+  if (props.main) {
+    return <>{label}</>
+  } else {
+    return (
+      <>
+        {label} ({props.index})
+      </>
+    )
+  }
 }
 
 BatteryName.propTypes = {
   customName: PropTypes.string,
   productName: PropTypes.string,
-  batteryChannel: PropTypes.number
+  batteryChannel: PropTypes.number.isRequired,
+  main: PropTypes.bool
 }
 
 const getTopics = (portalId, batteryInstanceId) => {
@@ -31,7 +40,7 @@ const getTopics = (portalId, batteryInstanceId) => {
 
 class BatteryNameWithData extends Component {
   render() {
-    const { portalId, batteryInstanceId, batteryChannel } = this.props
+    const { portalId, batteryInstanceId, batteryChannel, ...rest } = this.props
     return (
       <MqttSubscriptions topics={getTopics(portalId, batteryInstanceId)}>
         {topics => {
@@ -40,6 +49,7 @@ class BatteryNameWithData extends Component {
               productName={topics.productName.value}
               customName={topics.customName.value}
               batteryChannel={batteryChannel}
+              {...rest}
             />
           )
         }}
