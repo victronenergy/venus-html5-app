@@ -3,6 +3,7 @@ import NumericValue from "./../NumericValue"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 import MqttTopicWildcard from "../../mqtt/MqttTopicWildcard"
 import BatteryLevel from "./BatteryLevel"
+import BatteryName from "./BatteryName"
 
 const secondaryBatteriesFeatureEnabled = true
 
@@ -18,8 +19,7 @@ const getTopics = portalId => {
   }
 }
 
-const mapChannelsToInstances = (instances, mainBatteryInstance) => {
-  const [, mainBatteryInstanceNumber] = mainBatteryInstance.split("battery/")
+const mapChannelsToInstances = (instances, mainBatteryInstanceNumber) => {
   let instancesWithChannels = []
   instances.forEach(i => {
     if (i != mainBatteryInstanceNumber) instancesWithChannels.push([i, 0])
@@ -44,7 +44,7 @@ const secondaryBatteries = (instances, mainBatteryInstance, portalId) => {
           if (topics.voltage.value || topics.current.value || topics.power.value)
             return (
               <div className="metric__values">
-                {`Instance ${instance} channel ${channel}`}
+                <BatteryName portalId={portalId} batteryInstanceId={instance} batteryChannel={channel} />
                 <NumericValue value={topics.voltage.value} unit="V" precision={1} />
                 <NumericValue value={topics.current.value} unit="A" precision={1} />
                 <NumericValue value={topics.power.value} unit="W" />
@@ -57,20 +57,25 @@ const secondaryBatteries = (instances, mainBatteryInstance, portalId) => {
 }
 
 const Battery = props => {
+  if (!props.mainBattery) {
+    return null
+  }
+  const [, mainBatteryInstanceNumber] = props.mainBattery.split("battery/")
   return (
     <div className="metric metric__container metric__battery">
       <div className="metric__container--left">
         <img src={require("../../../images/icons/battery.svg")} className="metric__icon" />
         <div className="metric__value-container">
-          <p className="text text--medium">Battery</p>
+          <p className="text text--medium">
+            <BatteryName portalId={props.portalId} batteryInstanceId={mainBatteryInstanceNumber} batteryChannel={0} />
+          </p>
           <div className="metric__values">
             <NumericValue value={props.voltage} unit="V" precision={1} />
             <NumericValue value={props.current} unit="A" precision={1} />
             <NumericValue value={props.power} unit="W" />
           </div>
           {secondaryBatteriesFeatureEnabled &&
-            props.mainBattery &&
-            secondaryBatteries(props.batteryInstances, props.mainBattery, props.portalId)}
+            secondaryBatteries(props.batteryInstances, mainBatteryInstanceNumber, props.portalId)}
         </div>
       </div>
       <BatteryLevel state={props.state} soc={props.soc} timeToGo={props.timeToGo} />
