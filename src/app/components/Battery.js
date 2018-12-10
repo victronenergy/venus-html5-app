@@ -2,10 +2,11 @@ import React, { Component } from "react"
 import NumericValue from "./NumericValue"
 import MqttSubscriptions from "../mqtt/MqttSubscriptions"
 import MqttTopicWildcard from "../mqtt/MqttTopicWildcard"
+import PropTypes from "prop-types"
 
 import { BATTERY_STATE } from "../utils/constants"
 
-const secondaryBatteriesFeatureEnabled = false
+const secondaryBatteriesFeatureEnabled = true
 
 const getTopics = portalId => {
   return {
@@ -83,8 +84,32 @@ const secondaryBatteries = (instances, mainBatteryInstance, portalId) => {
   })
 }
 
+const BatteryLevelContainer = props => {
+  const batteryStateLabel = batteryStateFormatter(props.state)
+  const timeToGoLabel = batteryTimeToGoFormatter(props.timeToGo)
+  const showTimetoGo = props.state === BATTERY_STATE.DISCHARGING
+  return (
+    <div className={"metric__battery-level-container" + (showTimetoGo ? " metric__battery-level-container--col" : "")}>
+      <div className="text--bottom-align">
+        <span className="text text--bold text--large">{props.soc ? props.soc : ""}</span>
+        <span className="text text--small metric__battery-state">
+          {props.soc ? "%" : ""}
+          &nbsp;
+          {batteryStateLabel || ""}
+        </span>
+      </div>
+      {showTimetoGo && props.timeToGo ? <p className="text text--small">{timeToGoLabel}</p> : ""}
+    </div>
+  )
+}
+
+BatteryLevelContainer.propTypes = {
+  state: PropTypes.oneOf(Object.values(BATTERY_STATE)),
+  soc: PropTypes.number,
+  timeToGo: PropTypes.number
+}
+
 const Battery = props => {
-  const showTimetoGo = props.state === "Discharging"
   return (
     <div className="metric metric__container metric__battery">
       <div className="metric__container--left">
@@ -101,19 +126,7 @@ const Battery = props => {
             secondaryBatteries(props.batteryInstances, props.mainBattery, props.portalId)}
         </div>
       </div>
-      <div
-        className={"metric__battery-level-container" + (showTimetoGo ? " metric__battery-level-container--col" : "")}
-      >
-        <div className="text--bottom-align">
-          <span className="text text--bold text--large">{props.soc ? props.soc : ""}</span>
-          <span className="text text--small metric__battery-state">
-            {props.soc ? "%" : ""}
-            &nbsp;
-            {props.state || ""}
-          </span>
-        </div>
-        {showTimetoGo && props.timeToGo ? <p className="text text--small">{props.timeToGo}</p> : ""}
-      </div>
+      <BatteryLevelContainer state={props.state} soc={props.soc} timeToGo={props.timeToGo} />
     </div>
   )
 }
@@ -130,11 +143,11 @@ class BatteryWithData extends Component {
                 return (
                   <Battery
                     soc={topics.soc.value}
-                    state={batteryStateFormatter(topics.state.value)}
+                    state={topics.state.value}
                     voltage={topics.voltage.value}
                     current={topics.current.value}
                     power={topics.power.value}
-                    timeToGo={batteryTimeToGoFormatter(topics.timeToGo.value)}
+                    timeToGo={topics.timeToGo.value}
                     mainBattery={topics.mainBattery.value}
                     batteryInstances={Object.values(batteryInstances).map(b => b.value)}
                     portalId={portalId}
