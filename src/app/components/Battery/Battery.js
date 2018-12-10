@@ -5,7 +5,7 @@ import MqttTopicWildcard from "../../mqtt/MqttTopicWildcard"
 import BatteryLevel from "./BatteryLevel"
 import BatteryName from "./BatteryName"
 
-const secondaryBatteriesFeatureEnabled = false
+const secondaryBatteriesFeatureEnabled = true
 
 const getTopics = portalId => {
   return {
@@ -21,16 +21,19 @@ const getTopics = portalId => {
 
 const mapChannelsToInstances = (instances, mainBatteryInstanceNumber) => {
   let instancesWithChannels = []
-  instances.forEach(i => {
-    if (i != mainBatteryInstanceNumber) instancesWithChannels.push([i, 0])
-    instancesWithChannels.push([i, 1])
+  instances.forEach((i, index) => {
+    if (i !== Number(mainBatteryInstanceNumber)) {
+      instancesWithChannels.push([i, 0, index])
+    }
+
+    instancesWithChannels.push([i, 1, index])
   })
   return instancesWithChannels
 }
 
 const secondaryBatteries = (instances, mainBatteryInstance, portalId) => {
   const instancesWithChannels = mapChannelsToInstances(instances, mainBatteryInstance)
-  return instancesWithChannels.map(([instance, channel]) => {
+  return instancesWithChannels.map(([instance, channel, index]) => {
     return (
       <MqttSubscriptions
         key={instance + channel}
@@ -44,7 +47,12 @@ const secondaryBatteries = (instances, mainBatteryInstance, portalId) => {
           if (topics.voltage.value || topics.current.value || topics.power.value)
             return (
               <div className="metric__values">
-                <BatteryName portalId={portalId} batteryInstanceId={instance} batteryChannel={channel} />
+                <BatteryName
+                  portalId={portalId}
+                  batteryInstanceId={instance}
+                  batteryChannel={channel}
+                  index={index + 1}
+                />
                 <NumericValue value={topics.voltage.value} unit="V" precision={1} />
                 <NumericValue value={topics.current.value} unit="A" precision={1} />
                 <NumericValue value={topics.power.value} unit="W" />
@@ -67,7 +75,12 @@ const Battery = props => {
         <img src={require("../../../images/icons/battery.svg")} className="metric__icon" />
         <div className="metric__value-container">
           <p className="text text--medium">
-            <BatteryName portalId={props.portalId} batteryInstanceId={mainBatteryInstanceNumber} batteryChannel={0} />
+            <BatteryName
+              portalId={props.portalId}
+              batteryInstanceId={mainBatteryInstanceNumber}
+              main
+              batteryChannel={0}
+            />
           </p>
           <div className="metric__values">
             <NumericValue value={props.voltage} unit="V" precision={1} />
