@@ -9,6 +9,7 @@ import Solar from "./Solar"
 import Tanks from "./Tanks"
 
 const solarFeatureEnabled = false
+const tanksFeatureEnabled = false
 
 export default props => {
   const { portalId, vebusInstanceId, isConnected } = props
@@ -35,7 +36,7 @@ export default props => {
         <DcLoads portalId={portalId} />
       </div>
       {solarFeatureEnabled && <Solar portalId={portalId} />}
-      {false && <Tanks portalId={portalId} />}
+      {tanksFeatureEnabled && <Tanks portalId={portalId} />}
     </div>
   )
 }

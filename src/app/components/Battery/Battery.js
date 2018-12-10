@@ -5,7 +5,7 @@ import MqttTopicWildcard from "../../mqtt/MqttTopicWildcard"
 import BatteryLevel from "./BatteryLevel"
 import BatteryName from "./BatteryName"
 
-const secondaryBatteriesFeatureEnabled = true
+const secondaryBatteriesFeatureEnabled = false
 
 const getTopics = portalId => {
   return {
