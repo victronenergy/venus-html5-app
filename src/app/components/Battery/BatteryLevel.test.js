@@ -1,11 +1,11 @@
 import { shallow } from "enzyme"
 import React from "react"
-import { BatteryLevelContainer } from "./Battery"
+import BatteryLevel from "./BatteryLevel"
 import { BATTERY_STATE } from "../../utils/constants"
 
 describe("Battery level", () => {
   describe("when battery is charging", () => {
-    const wrapper = shallow(<BatteryLevelContainer state={BATTERY_STATE.CHARGING} soc={95} timeToGo={9000} />)
+    const wrapper = shallow(<BatteryLevel state={BATTERY_STATE.CHARGING} soc={95} timeToGo={9000} />)
 
     it("should show battery level", () => {
       expect(wrapper.text()).toContain("95%")
@@ -21,7 +21,7 @@ describe("Battery level", () => {
   })
 
   describe("when battery is discharging", () => {
-    const wrapper = shallow(<BatteryLevelContainer state={BATTERY_STATE.DISCHARGING} soc={95} timeToGo={9000} />)
+    const wrapper = shallow(<BatteryLevel state={BATTERY_STATE.DISCHARGING} soc={95} timeToGo={9000} />)
 
     it("should show battery level", () => {
       expect(wrapper.text()).toContain("95%")
@@ -37,7 +37,7 @@ describe("Battery level", () => {
   })
 
   describe("when battery is idle", () => {
-    const wrapper = shallow(<BatteryLevelContainer state={BATTERY_STATE.IDLE} soc={95} timeToGo={9000} />)
+    const wrapper = shallow(<BatteryLevel state={BATTERY_STATE.IDLE} soc={95} timeToGo={9000} />)
 
     it("should show battery level", () => {
       expect(wrapper.text()).toContain("95%")
