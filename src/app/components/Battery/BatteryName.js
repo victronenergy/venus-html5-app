@@ -6,28 +6,21 @@ import React from "react"
 export const BatteryName = props => {
   const productName = props.customName || props.productName
   let label
-  if (props.batteryChannel === 0) {
-    label = productName || "Battery"
-  }
-  if (props.batteryChannel === 1) {
-    label = productName ? productName + " starter" : "Starter battery"
+  if (props.main) {
+    label = productName || "Main battery bank"
+  } else if (props.batteryChannel === 0) {
+    label = productName || `Battery ${props.index}`
+  } else if (props.batteryChannel === 1) {
+    label = productName ? productName + " (Starter)" : `Starter battery ${props.index}`
   }
 
-  if (props.main) {
-    return <>{label}</>
-  } else {
-    return (
-      <>
-        {label} ({props.index})
-      </>
-    )
-  }
+  return <>{label}</>
 }
 
 BatteryName.propTypes = {
   customName: PropTypes.string,
   productName: PropTypes.string,
-  batteryChannel: PropTypes.number.isRequired,
+  batteryChannel: PropTypes.number,
   main: PropTypes.bool
 }
 
