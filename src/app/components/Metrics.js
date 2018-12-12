@@ -6,10 +6,8 @@ import InverterCharger from "./InverterCharger"
 import AcLoads from "./AcLoads"
 import DcLoads from "./DcLoads"
 import Solar from "./Solar"
-import Tanks from "./Tanks"
 
 const solarFeatureEnabled = false
-const tanksFeatureEnabled = false
 
 export default props => {
   const { portalId, vebusInstanceId, isConnected } = props
@@ -36,7 +34,6 @@ export default props => {
         <DcLoads portalId={portalId} />
       </div>
       {solarFeatureEnabled && <Solar portalId={portalId} />}
-      {tanksFeatureEnabled && <Tanks portalId={portalId} />}
     </div>
   )
 }
