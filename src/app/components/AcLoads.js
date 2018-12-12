@@ -23,41 +23,54 @@ const getTopics = (portalId, vebusInstanceId) => {
   }
 }
 
-const AcLoads = props => {
-  const [voltagePhase1] = props.voltage || []
+const AcLoadsContainer = props => {
   return (
     <div className="metric metric--small">
       <img src={require("../../images/icons/ac.svg")} className="metric__icon" />
       <div className="metric__value-container">
         <p className="text text--medium">AC Loads</p>
-        {props.loading ? (
-          <div className="metric__values">Loading...</div>
-        ) : (
-          <div className="metric__values">
-            <NumericValue value={voltagePhase1.value} unit="V" />
-            <NumericValue value={phaseSum(props.current)} unit="A" precision={1} />
-            <NumericValue value={phaseSum(props.power)} unit={"W"} />
-          </div>
-        )}
+        <div className="metric__values">{props.children}</div>
       </div>
     </div>
+  )
+}
+
+const AcLoads = props => {
+  const [voltagePhase1] = props.voltage
+  return (
+    <AcLoadsContainer>
+      <NumericValue value={voltagePhase1 ? voltagePhase1.value : null} unit="V" />
+      <NumericValue value={phaseSum(props.current)} unit="A" precision={1} />
+      <NumericValue value={phaseSum(props.power)} unit={"W"} />
+    </AcLoadsContainer>
+  )
+}
+
+const AcLoadsLoading = () => {
+  return (
+    <AcLoadsContainer>
+      <NumericValue value={null} />
+      <NumericValue value={null} />
+      <NumericValue value={null} />
+    </AcLoadsContainer>
   )
 }
 
 class AcLoadsWithData extends Component {
   render() {
     const { portalId, vebusInstanceId } = this.props
-    if (!portalId) {
-      return <AcLoads loading />
+    if (!vebusInstanceId) {
+      return <AcLoadsLoading />
+    } else {
+      return (
+        <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId)}>
+          {topics => {
+            const { current, voltage, power } = topics
+            return <AcLoads current={current} voltage={voltage} power={power} />
+          }}
+        </MqttSubscriptions>
+      )
     }
-    return (
-      <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId)}>
-        {topics => {
-          const { current, voltage, power } = topics
-          return <AcLoads current={current} voltage={voltage} power={power} />
-        }}
-      </MqttSubscriptions>
-    )
   }
 }
 

@@ -68,21 +68,19 @@ class ActiveSource extends Component {
 
     if (activeSource === undefined) {
       return <ActiveSourceMetric title={"--"} icon={require("../../images/icons/shore-power.svg")} />
-    }
-
-    if (activeSource === null) {
+    } else if (activeSource === null) {
       return <NoActiveSource />
+    } else {
+      return (
+        <ActiveSourceMetric
+          title={this.activeSourceLabel[activeSource]}
+          icon={this.activeSourceIcon[activeSource]}
+          voltage={voltagePhase1.value}
+          current={phaseSum(this.props.current)}
+          power={phaseSum(this.props.power)}
+        />
+      )
     }
-
-    return (
-      <ActiveSourceMetric
-        title={this.activeSourceLabel[activeSource]}
-        icon={this.activeSourceIcon[activeSource]}
-        voltage={voltagePhase1.value}
-        current={phaseSum(this.props.current)}
-        power={phaseSum(this.props.power)}
-      />
-    )
   }
 }
 
@@ -120,21 +118,25 @@ const ActiveSourceMetric = props => {
 class ActiveSourceWithData extends Component {
   render() {
     const { portalId, vebusInstanceId } = this.props
-    return (
-      <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId)}>
-        {topics => {
-          return (
-            <ActiveSource
-              activeInput={topics.activeInput}
-              settings={topics.settings}
-              current={topics.current}
-              voltage={topics.voltage}
-              power={topics.power}
-            />
-          )
-        }}
-      </MqttSubscriptions>
-    )
+    if (!vebusInstanceId) {
+      return <NoActiveSource />
+    } else {
+      return (
+        <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId)}>
+          {topics => {
+            return (
+              <ActiveSource
+                activeInput={topics.activeInput}
+                settings={topics.settings}
+                current={topics.current}
+                voltage={topics.voltage}
+                power={topics.power}
+              />
+            )
+          }}
+        </MqttSubscriptions>
+      )
+    }
   }
 }
 
