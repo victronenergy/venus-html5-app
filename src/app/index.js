@@ -68,10 +68,6 @@ class App extends Component {
                 return (
                   <GetVebusDeviceInstance>
                     {vebusInstanceId => {
-                      if (!vebusInstanceId) {
-                        console.warn("No VE.Bus instance id yet ...")
-                        return <Connecting />
-                      }
                       return (
                         <div className="main__container">
                           <Header

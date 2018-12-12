@@ -67,7 +67,7 @@ class ActiveSource extends Component {
     const [voltagePhase1] = this.props.voltage
 
     if (activeSource === undefined) {
-      return <ActiveSourceMetric title={"..."} icon={require("../../images/icons/shore-power.svg")} />
+      return <ActiveSourceMetric title={"--"} icon={require("../../images/icons/shore-power.svg")} />
     }
 
     if (activeSource === null) {
@@ -120,10 +120,6 @@ const ActiveSourceMetric = props => {
 class ActiveSourceWithData extends Component {
   render() {
     const { portalId, vebusInstanceId } = this.props
-    if (!portalId || !vebusInstanceId) {
-      return <div>Loading...</div>
-    }
-
     return (
       <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId)}>
         {topics => {
