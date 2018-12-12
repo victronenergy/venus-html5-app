@@ -1,4 +1,4 @@
-import { parseMessage, parseTopic } from "../src/app/utils/util"
+import { parseTopic } from "../src/app/utils/util"
 
 describe("parseTopic", () => {
   test("splits topic into its parts", () => {
@@ -19,17 +19,5 @@ describe("parseTopic", () => {
       deviceInstance: 0,
       dbusPath: "/CurrentLimit"
     })
-  })
-})
-
-describe("parseMessage", () => {
-  test("correctly extracts value from Buffer message", () => {
-    const result = parseMessage("N/123/Serial", Buffer.from('{ "value": 123 }'))
-    expect(result.value).toEqual(123)
-  })
-
-  test("correctly extracts value 0", () => {
-    const result = parseMessage("N/123/Serial", Buffer.from('{ "value": 0 }'))
-    expect(result.value).toEqual(0)
   })
 })
