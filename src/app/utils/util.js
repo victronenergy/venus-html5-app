@@ -41,21 +41,6 @@ export const getMessageJson = message => {
   }
 }
 
-export const getMessageValue = message => {
-  const data = getMessageJson(message)
-  return data.value !== undefined ? data.value : null
-}
-
-export const parseMessage = (topic, message) => {
-  let value = getMessageValue(message)
-  const { dbusPath } = parseTopic(topic)
-
-  return {
-    path: dbusPath,
-    value
-  }
-}
-
 export function objectValues(data) {
   return Object.keys(data).map(key => data[key])
 }
