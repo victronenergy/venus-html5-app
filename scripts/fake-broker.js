@@ -12,20 +12,22 @@ const EU_PRODUCT_ID = 9760
 
 const randomlyChangingPaths = [
   "N/mockPortalId/system/0/Dc/Battery/Voltage",
+  "N/mockPortalId/system/0/Dc/Battery/Current",
+  "N/mockPortalId/system/0/Dc/Battery/Power",
+  "N/mockPortalId/system/0/Dc/Battery/Soc",
+  "N/mockPortalId/system/0/Dc/Battery/TimeToGo",
   "N/mockPortalId/vebus/257/Ac/ActiveIn/L1/V",
   "N/mockPortalId/vebus/257/Ac/ActiveIn/L2/V",
   "N/mockPortalId/vebus/257/Ac/ActiveIn/L3/V",
   "N/mockPortalId/vebus/257/Ac/Out/L1/V",
   "N/mockPortalId/vebus/257/Ac/Out/L2/V",
   "N/mockPortalId/vebus/257/Ac/Out/L3/V",
-  "N/mockPortalId/system/0/Dc/Battery/Current",
   "N/mockPortalId/vebus/257/Ac/ActiveIn/L1/I",
   "N/mockPortalId/vebus/257/Ac/ActiveIn/L2/I",
   "N/mockPortalId/vebus/257/Ac/ActiveIn/L3/I",
   "N/mockPortalId/vebus/257/Ac/Out/L1/I",
   "N/mockPortalId/vebus/257/Ac/Out/L2/I",
   "N/mockPortalId/vebus/257/Ac/Out/L3/I",
-  "N/mockPortalId/system/0/Dc/Battery/Power",
   "N/mockPortalId/system/0/Dc/System/Power",
   "N/mockPortalId/vebus/257/Ac/ActiveIn/L1/P",
   "N/mockPortalId/vebus/257/Ac/ActiveIn/L2/P",
@@ -33,8 +35,6 @@ const randomlyChangingPaths = [
   "N/mockPortalId/system/0/Ac/ConsumptionOnOutput/L1/Power",
   "N/mockPortalId/system/0/Ac/ConsumptionOnOutput/L2/Power",
   "N/mockPortalId/system/0/Ac/ConsumptionOnOutput/L3/Power",
-  "N/mockPortalId/system/0/Dc/Battery/Soc",
-  "N/mockPortalId/system/0/Dc/Battery/TimeToGo",
   "N/mockPortalId/system/0/Dc/Pv/Power",
   "N/mockPortalId/system/0/Dc/Pv/Current"
 ]
@@ -67,6 +67,11 @@ export class MockMQQTBroker {
     this.server.on("clientConnected", () => {
       clearInterval(this.intervalRef)
       this.intervalRef = setInterval(this.sendRandomValues, 3000)
+      setTimeout(() => {
+        this.sendNull("N/mockPortalId/system/0/Dc/Battery/Voltage")
+        this.sendNull("N/mockPortalId/system/0/Dc/Battery/Current")
+        this.sendNull("N/mockPortalId/system/0/Dc/Battery/Power")
+      }, 5000)
     })
 
     this.server.on("published", packet => {
@@ -83,6 +88,17 @@ export class MockMQQTBroker {
     var message = {
       topic: path,
       payload: JSON.stringify({ value: value || {} }),
+      qos: 0,
+      retain: false
+    }
+
+    this.server.publish(message)
+  }
+
+  sendNull = path => {
+    var message = {
+      topic: path,
+      payload: JSON.stringify({ value: null }),
       qos: 0,
       retain: false
     }

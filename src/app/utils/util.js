@@ -33,14 +33,12 @@ export const parseTopic = topic => {
 }
 
 export const getMessageJson = message => {
-  let data
   try {
-    data = JSON.parse(message.toString())
+    return JSON.parse(message.toString())
   } catch (e) {
-    data = {}
-    Logger.error("Could not parse message: ", message.toString(), e)
+    Logger.error("Could not parse message: ", message.toString())
+    return { value: null }
   }
-  return data
 }
 
 export const getMessageValue = message => {

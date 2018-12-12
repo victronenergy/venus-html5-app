@@ -24,7 +24,7 @@ const getTopics = (portalId, vebusInstanceId) => {
 }
 
 const AcLoads = props => {
-  const [voltagePhase1] = props.voltage
+  const [voltagePhase1] = props.voltage || []
   return (
     <div className="metric metric--small">
       <img src={require("../../images/icons/ac.svg")} className="metric__icon" />
@@ -47,7 +47,7 @@ const AcLoads = props => {
 class AcLoadsWithData extends Component {
   render() {
     const { portalId, vebusInstanceId } = this.props
-    if (!portalId || !vebusInstanceId) {
+    if (!portalId) {
       return <AcLoads loading />
     }
     return (

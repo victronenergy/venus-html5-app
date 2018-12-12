@@ -36,7 +36,7 @@ const secondaryBatteries = (instances, mainBatteryInstance, portalId) => {
   return instancesWithChannels.map(([instance, channel, index]) => {
     return (
       <MqttSubscriptions
-        key={instance + channel}
+        key={`battery-${index}-channel-${channel}`}
         topics={{
           voltage: `N/${portalId}/battery/${instance}/Dc/${channel}/Voltage`,
           current: `N/${portalId}/battery/${instance}/Dc/${channel}/Current`,
@@ -44,7 +44,7 @@ const secondaryBatteries = (instances, mainBatteryInstance, portalId) => {
         }}
       >
         {topics => {
-          if (topics.voltage.value || topics.current.value || topics.power.value)
+          if (topics.voltage.value || topics.current.value || topics.power.value) {
             return (
               <div className="metric__values">
                 <BatteryName
@@ -58,6 +58,7 @@ const secondaryBatteries = (instances, mainBatteryInstance, portalId) => {
                 <NumericValue value={topics.power.value} unit="W" />
               </div>
             )
+          }
         }}
       </MqttSubscriptions>
     )
