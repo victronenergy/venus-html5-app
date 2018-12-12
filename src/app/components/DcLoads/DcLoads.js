@@ -19,7 +19,11 @@ export const DcLoads = props => {
         <div className="metric__values">
           {props.hasDcSystem !== 0 ? (
             <>
-              <NumericValue value={props.voltage ? props.power / props.voltage : undefined} unit="A" precision={1} />
+              <NumericValue
+                value={props.voltage && props.power ? props.power / props.voltage : undefined}
+                unit="A"
+                precision={1}
+              />
               <NumericValue value={props.power} unit="W" />
             </>
           ) : (

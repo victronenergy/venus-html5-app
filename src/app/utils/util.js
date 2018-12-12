@@ -68,8 +68,8 @@ export const getParameterByName = (name, url) => {
 }
 
 export const phaseSum = phases => {
-  const [phase1, phase2, phase3] = phases || []
-  return phase1.value ? phase1.value + phase2.value + phase3.value : null
+  const [phase1, phase2, phase3] = phases
+  return phase1 && phase1.value ? phase1.value + phase2.value + phase3.value : null
 }
 
 export const flatten = arrays => {
