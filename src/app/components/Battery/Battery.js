@@ -4,6 +4,7 @@ import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 import MqttTopicWildcard from "../../mqtt/MqttTopicWildcard"
 import BatteryLevel from "./BatteryLevel"
 import BatteryName from "./BatteryName"
+import HidingContainer from "../HidingContainer"
 
 const secondaryBatteriesFeatureEnabled = true
 
@@ -101,29 +102,31 @@ class BatteryWithData extends Component {
   render() {
     const { portalId } = this.props
     return (
-      <MqttSubscriptions topics={getTopics(portalId)}>
-        {topics => {
-          return (
-            <MqttTopicWildcard wildcard={`N/${portalId}/battery/+/DeviceInstance`}>
-              {batteryInstances => {
-                return (
-                  <Battery
-                    soc={topics.soc.value}
-                    state={topics.state.value}
-                    voltage={topics.voltage.value}
-                    current={topics.current.value}
-                    power={topics.power.value}
-                    timeToGo={topics.timeToGo.value}
-                    mainBattery={topics.mainBattery.value}
-                    batteryInstances={Object.values(batteryInstances).map(b => b.value)}
-                    portalId={portalId}
-                  />
-                )
-              }}
-            </MqttTopicWildcard>
-          )
-        }}
-      </MqttSubscriptions>
+      <HidingContainer>
+        <MqttSubscriptions topics={getTopics(portalId)}>
+          {topics => {
+            return (
+              <MqttTopicWildcard wildcard={`N/${portalId}/battery/+/DeviceInstance`}>
+                {batteryInstances => {
+                  return (
+                    <Battery
+                      soc={topics.soc.value}
+                      state={topics.state.value}
+                      voltage={topics.voltage.value}
+                      current={topics.current.value}
+                      power={topics.power.value}
+                      timeToGo={topics.timeToGo.value}
+                      mainBattery={topics.mainBattery.value}
+                      batteryInstances={Object.values(batteryInstances).map(b => b.value)}
+                      portalId={portalId}
+                    />
+                  )
+                }}
+              </MqttTopicWildcard>
+            )
+          }}
+        </MqttSubscriptions>
+      </HidingContainer>
     )
   }
 }

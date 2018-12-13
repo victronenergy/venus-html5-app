@@ -67,11 +67,12 @@ export class MockMQQTBroker {
     this.server.on("clientConnected", () => {
       clearInterval(this.intervalRef)
       this.intervalRef = setInterval(this.sendRandomValues, 3000)
-      setTimeout(() => {
-        this.sendNull("N/mockPortalId/system/0/Dc/Battery/Voltage")
-        this.sendNull("N/mockPortalId/system/0/Dc/Battery/Current")
-        this.sendNull("N/mockPortalId/system/0/Dc/Battery/Power")
-      }, 5000)
+      // Enable if you want to test sending null values
+      // setTimeout(() => {
+      //   this.sendNull("N/mockPortalId/system/0/Dc/Battery/Voltage")
+      //   this.sendNull("N/mockPortalId/system/0/Dc/Battery/Current")
+      //   this.sendNull("N/mockPortalId/system/0/Dc/Battery/Power")
+      // }, 5000)
     })
 
     this.server.on("published", packet => {

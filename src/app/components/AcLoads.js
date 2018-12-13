@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import NumericValue from "./NumericValue"
 import MqttSubscriptions from "../mqtt/MqttSubscriptions"
+import HidingContainer from "./HidingContainer"
 import { phaseSum } from "../utils/util"
 
 const getTopics = (portalId, vebusInstanceId) => {
@@ -59,18 +60,20 @@ const AcLoadsLoading = () => {
 class AcLoadsWithData extends Component {
   render() {
     const { portalId, vebusInstanceId } = this.props
-    if (!vebusInstanceId) {
-      return <AcLoadsLoading />
-    } else {
-      return (
-        <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId)}>
-          {topics => {
-            const { current, voltage, power } = topics
-            return <AcLoads current={current} voltage={voltage} power={power} />
-          }}
-        </MqttSubscriptions>
-      )
-    }
+    return (
+      <HidingContainer>
+        {!vebusInstanceId ? (
+          <AcLoadsLoading />
+        ) : (
+          <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId)}>
+            {topics => {
+              const { current, voltage, power } = topics
+              return <AcLoads current={current} voltage={voltage} power={power} />
+            }}
+          </MqttSubscriptions>
+        )}
+      </HidingContainer>
+    )
   }
 }
 

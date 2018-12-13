@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import { AC_SOURCE_TYPE, ACTIVE_INPUT } from "../utils/constants"
 import NumericValue from "./NumericValue"
 import MqttSubscriptions from "../mqtt/MqttSubscriptions"
+import HidingContainer from "./HidingContainer"
 import { phaseSum } from "../utils/util"
 
 const getTopics = (portalId, vebusInstanceId) => {
@@ -118,25 +119,27 @@ const ActiveSourceMetric = props => {
 class ActiveSourceWithData extends Component {
   render() {
     const { portalId, vebusInstanceId } = this.props
-    if (!vebusInstanceId) {
-      return <NoActiveSource />
-    } else {
-      return (
-        <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId)}>
-          {topics => {
-            return (
-              <ActiveSource
-                activeInput={topics.activeInput}
-                settings={topics.settings}
-                current={topics.current}
-                voltage={topics.voltage}
-                power={topics.power}
-              />
-            )
-          }}
-        </MqttSubscriptions>
-      )
-    }
+    return (
+      <HidingContainer>
+        {!vebusInstanceId ? (
+          <NoActiveSource />
+        ) : (
+          <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId)}>
+            {topics => {
+              return (
+                <ActiveSource
+                  activeInput={topics.activeInput}
+                  settings={topics.settings}
+                  current={topics.current}
+                  voltage={topics.voltage}
+                  power={topics.power}
+                />
+              )
+            }}
+          </MqttSubscriptions>
+        )}
+      </HidingContainer>
+    )
   }
 }
 

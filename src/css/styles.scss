@@ -38,7 +38,7 @@ body {
   }
 
   @media #{$low-landscape} {
-    padding-top: 0;
+    padding-top: 10px;
     padding-bottom: 0;
   }
 }
@@ -198,6 +198,15 @@ header {
   width: 100%;
 }
 
+.hiding-container {
+  flex-basis: 0;
+  flex-grow: 1;
+
+  @media #{$portrait}, #{$tiny} {
+    width: 100%;
+  }
+}
+
 .metric {
   margin-bottom: 30px;
   height: 100px;
@@ -256,6 +265,20 @@ header {
   @media #{$portrait}, #{$tiny} {
     flex-direction: column;
   }
+
+  & > :first-child {
+    margin-right: 10px;
+    @media #{$portrait}, #{$tiny} {
+      margin: 0;
+    }
+  }
+
+  & > :last-child {
+    margin-left: 10px;
+    @media #{$portrait}, #{$tiny} {
+      margin: 0;
+    }
+  }
 }
 
 .metric__container {
@@ -267,20 +290,10 @@ header {
 }
 
 .metric--small {
-  // define margin by setting elements width to 50% - small margin (for both!) and space between the elements
-  width: calc(50% - 10px);
+  width: 100%;
 
   @media #{$portrait} {
-    width: 100%;
     height: 66px;
-  }
-
-  @media #{$small} {
-    width: calc(50% - 3px);
-  }
-
-  @media #{$tiny} {
-    width: 100%;
   }
 }
 
@@ -389,13 +402,6 @@ header {
 
   @media #{$very-low-landscape} {
     width: calc(50% - 20px - 10px);
-  }
-}
-
-.inverter-charger,
-.shore-power__container {
-  @media #{$tiny} {
-    display: none;
   }
 }
 
