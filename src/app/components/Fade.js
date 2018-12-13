@@ -9,17 +9,18 @@ class Fade extends Component {
   state = {
     style: {
       opacity: 0,
-      transition: this.fadeTransition
+      transition: this.fadeTransition,
+      display: "flex"
     }
   }
   timeoutRef
 
   fadeIn = () => {
-    this.setState({ style: { opacity: 1, transition: this.fadeTransition } })
+    this.setState({ style: { opacity: 1, transition: this.fadeTransition, display: "flex" } })
   }
 
   fadeOut = () => {
-    this.setState({ style: { opacity: 0, transition: this.fadeTransition } })
+    this.setState({ style: { opacity: 0, transition: this.fadeTransition, display: "flex" } })
   }
 
   componentDidMount() {
