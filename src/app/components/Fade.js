@@ -26,7 +26,7 @@ class Fade extends Component {
     this.timeoutRef = setTimeout(this.fadeIn, 10)
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     if (!prevProps.unmount && this.props.unmount) {
       this.timeoutRef = setTimeout(this.fadeOut, 10)
     }

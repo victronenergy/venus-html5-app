@@ -21,6 +21,22 @@ import Fade, { viewChangeDelay } from "./components/Fade"
 const host = getParameterByName("host") || window.location.hostname || "localhost"
 const port = parseInt(getParameterByName("port")) || 9001
 
+const Main = props => {
+  return (
+    <main
+      className={!props.isConnected ? "disconnected" : ""}
+      onClick={e => {
+        // Bit of a hack to close "overlays" but doing it without adding event preventDefaults everywhere
+        if (e.target.nodeName === "MAIN") {
+          props.setView(VIEWS.METRICS)
+        }
+      }}
+    >
+      {props.children}
+    </main>
+  )
+}
+
 class App extends Component {
   state = {
     currentView: VIEWS.METRICS,
@@ -47,89 +63,78 @@ class App extends Component {
   render() {
     return (
       <MqttClientProvider host={host} port={port}>
-        {(status, isConnected, error) => {
+        {(_, isConnected, error) => {
           if (error) {
             return <MqttUnavailable viewUnmounting={this.state.viewUnmounting} />
-          }
-
-          if (!isConnected) {
+          } else if (!isConnected) {
             return <Connecting viewUnmounting={this.state.viewUnmounting} />
+          } else {
+            return (
+              <GetPortalId>
+                {portalId => {
+                  if (!portalId) {
+                    console.warn("No portal id yet ...")
+                    return <Connecting />
+                  } else {
+                    return (
+                      <GetVebusDeviceInstance>
+                        {vebusInstanceId => {
+                          return (
+                            <>
+                              <Header
+                                portalId={portalId}
+                                isConnected={isConnected}
+                                handleRemoteConsoleButtonClicked={this.toggleRemoteConsole}
+                                currentView={this.state.currentView}
+                              />
+                              <Main isConnected={isConnected} setView={this.setView}>
+                                {(() => {
+                                  switch (this.state.currentView) {
+                                    case VIEWS.AMPERAGE_SELECTOR:
+                                      return (
+                                        <Fade key={VIEWS.AMPERAGE_SELECTOR} unmount={this.state.viewUnmounting}>
+                                          <ShoreInputLimitSelector
+                                            portalId={portalId}
+                                            vebusInstanceId={vebusInstanceId}
+                                            onLimitSelected={this.handleShorePowerLimitSelected}
+                                          />
+                                        </Fade>
+                                      )
+                                    case VIEWS.REMOTE_CONSOLE:
+                                      return (
+                                        <Fade key={VIEWS.REMOTE_CONSOLE} unmount={this.state.viewUnmounting}>
+                                          <RemoteConsole
+                                            host={host}
+                                            onClickOutsideContainer={() => this.setView(VIEWS.METRICS)}
+                                          />
+                                        </Fade>
+                                      )
+                                    case VIEWS.METRICS:
+                                    default:
+                                      return (
+                                        <Fade key={VIEWS.METRICS} unmount={this.state.viewUnmounting}>
+                                          <Metrics
+                                            portalId={portalId}
+                                            vebusInstanceId={vebusInstanceId}
+                                            isConnected={isConnected}
+                                            onChangeShoreInputLimitClicked={() => this.setView(VIEWS.AMPERAGE_SELECTOR)}
+                                            onModeSelected={this.handleModeSelected}
+                                          />
+                                        </Fade>
+                                      )
+                                  }
+                                })()}
+                              </Main>
+                            </>
+                          )
+                        }}
+                      </GetVebusDeviceInstance>
+                    )
+                  }
+                }}
+              </GetPortalId>
+            )
           }
-
-          return (
-            <GetPortalId>
-              {portalId => {
-                // TODO What should happen when portal id has not been received yet?
-                if (!portalId) {
-                  console.warn("No portal id yet ...")
-                  return <Connecting />
-                }
-
-                return (
-                  <GetVebusDeviceInstance>
-                    {vebusInstanceId => {
-                      return (
-                        <div className="main__container">
-                          <Header
-                            portalId={portalId}
-                            isConnected={isConnected}
-                            handleRemoteConsoleButtonClicked={this.toggleRemoteConsole}
-                            currentView={this.state.currentView}
-                          />
-                          <main
-                            className={!isConnected ? "disconnected" : ""}
-                            onClick={e => {
-                              // Bit of a hack to close "overlays" but doing it without adding event preventDefaults everywhere
-                              if (e.target.nodeName === "MAIN") {
-                                this.setView(VIEWS.METRICS)
-                              }
-                            }}
-                          >
-                            {(() => {
-                              switch (this.state.currentView) {
-                                case VIEWS.AMPERAGE_SELECTOR:
-                                  return (
-                                    <Fade key={VIEWS.AMPERAGE_SELECTOR} unmount={this.state.viewUnmounting}>
-                                      <ShoreInputLimitSelector
-                                        portalId={portalId}
-                                        vebusInstanceId={vebusInstanceId}
-                                        onLimitSelected={this.handleShorePowerLimitSelected}
-                                      />
-                                    </Fade>
-                                  )
-                                case VIEWS.REMOTE_CONSOLE:
-                                  return (
-                                    <Fade key={VIEWS.REMOTE_CONSOLE} unmount={this.state.viewUnmounting}>
-                                      <RemoteConsole
-                                        host={host}
-                                        onClickOutsideContainer={() => this.setView(VIEWS.METRICS)}
-                                      />
-                                    </Fade>
-                                  )
-                                case VIEWS.METRICS:
-                                default:
-                                  return (
-                                    <Fade key={VIEWS.METRICS} unmount={this.state.viewUnmounting}>
-                                      <Metrics
-                                        portalId={portalId}
-                                        vebusInstanceId={vebusInstanceId}
-                                        isConnected={isConnected}
-                                        onChangeShoreInputLimitClicked={() => this.setView(VIEWS.AMPERAGE_SELECTOR)}
-                                        onModeSelected={this.handleModeSelected}
-                                      />
-                                    </Fade>
-                                  )
-                              }
-                            })()}
-                          </main>
-                        </div>
-                      )
-                    }}
-                  </GetVebusDeviceInstance>
-                )
-              }}
-            </GetPortalId>
-          )
         }}
       </MqttClientProvider>
     )

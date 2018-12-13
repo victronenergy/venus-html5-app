@@ -15,9 +15,16 @@ html {
   background-color: #2e3745;
 }
 
+body {
+  margin: 0;
+}
+
 #app {
   margin: 0;
   padding: 20px 40px 0 40px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 
   @media #{$portrait}, #{$small} {
     padding-top: 5px;
@@ -39,20 +46,13 @@ html {
 html,
 body,
 #app,
-main,
-.main__container {
+main {
   height: 100%;
   box-sizing: border-box;
 }
 
 p {
   margin: 0;
-}
-
-.main__container {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
 }
 
 main,
