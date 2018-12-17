@@ -7,7 +7,7 @@ const conf = {
   entry: path.resolve(__dirname, "src/app/index.js"),
   output: {
     path: path.resolve(__dirname, "dist/"),
-    filename: "bundle.[contenthash].js"
+    filename: "bundle.[hash].js"
   },
   devServer: {
     port: 8000,
