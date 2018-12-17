@@ -7,3 +7,8 @@ const host = getParameterByName("host") || window.location.hostname || "localhos
 const port = parseInt(getParameterByName("port")) || 9001
 
 render(<App host={host} port={port} />, document.getElementById("app"))
+
+// Hot Module Replacement API
+if (module.hot) {
+  module.hot.accept()
+}
