@@ -1,8 +1,7 @@
 import React, { Component } from "react"
-import { AC_SOURCE_TYPE, ACTIVE_INPUT } from "../utils/constants"
-import NumericValue from "./NumericValue"
-import MqttSubscriptions from "../mqtt/MqttSubscriptions"
-import { phaseSum } from "../utils/util"
+import { AC_SOURCE_TYPE, ACTIVE_INPUT } from "../../utils/constants"
+import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
+import ActiveInValues from "./ActiveInValues"
 
 const getTopics = (portalId, vebusInstanceId) => {
   return {
@@ -10,21 +9,6 @@ const getTopics = (portalId, vebusInstanceId) => {
     settings: [
       `N/${portalId}/settings/0/Settings/SystemSetup/AcInput1`,
       `N/${portalId}/settings/0/Settings/SystemSetup/AcInput2`
-    ],
-    current: [
-      `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L1/I`,
-      `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L2/I`,
-      `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L3/I`
-    ],
-    voltage: [
-      `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L1/V`,
-      `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L2/V`,
-      `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L3/V`
-    ],
-    power: [
-      `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L1/P`,
-      `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L2/P`,
-      `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L3/P`
     ]
   }
 }
@@ -56,18 +40,20 @@ class ActiveSource extends Component {
   }
 
   activeSourceIcon = {
-    [AC_SOURCE_TYPE.SHORE]: require("../../images/icons/shore-power.svg"),
-    [AC_SOURCE_TYPE.GRID]: require("../../images/icons/shore-power.svg"),
-    [AC_SOURCE_TYPE.GENERATOR]: require("../../images/icons/generator.svg"),
-    [AC_SOURCE_TYPE.NOT_IN_USE]: require("../../images/icons/shore-power.svg")
+    [AC_SOURCE_TYPE.SHORE]: require("../../../images/icons/shore-power.svg"),
+    [AC_SOURCE_TYPE.GRID]: require("../../../images/icons/shore-power.svg"),
+    [AC_SOURCE_TYPE.GENERATOR]: require("../../../images/icons/generator.svg"),
+    [AC_SOURCE_TYPE.NOT_IN_USE]: require("../../../images/icons/shore-power.svg")
   }
 
   render() {
     const activeSource = getActiveSource(this.props)
-    const [voltagePhase1] = this.props.voltage
+    const { portalId, vebusInstanceId } = this.props
 
     if (activeSource === undefined) {
-      return <ActiveSourceMetric title={"--"} icon={require("../../images/icons/shore-power.svg")} />
+      return (
+        <ActiveSourceMetric title={"--"} icon={require("../../../images/icons/shore-power.svg")} hasValues={false} />
+      )
     } else if (activeSource === null) {
       return <NoActiveSource />
     } else {
@@ -75,9 +61,9 @@ class ActiveSource extends Component {
         <ActiveSourceMetric
           title={this.activeSourceLabel[activeSource]}
           icon={this.activeSourceIcon[activeSource]}
-          voltage={voltagePhase1.value}
-          current={phaseSum(this.props.current)}
-          power={phaseSum(this.props.power)}
+          portalId={portalId}
+          vebusInstanceId={vebusInstanceId}
+          hasValues={true}
         />
       )
     }
@@ -87,7 +73,7 @@ class ActiveSource extends Component {
 const NoActiveSource = () => {
   return (
     <div className="metric metric--small">
-      <img src={require("../../images/icons/shore-power.svg")} className="metric__icon" />
+      <img src={require("../../../images/icons/shore-power.svg")} className="metric__icon" />
       <div className="metric__value-container">
         <p className="text text--medium">Shore power</p>
         <div className="text text--smaller">Unplugged</div>
@@ -97,17 +83,15 @@ const NoActiveSource = () => {
 }
 
 const ActiveSourceMetric = props => {
-  const hasValues = props.voltage || props.current || props.power
+  const { portalId, vebusInstanceId } = props
   return (
     <div className="metric metric--small">
       <img src={props.icon} className="metric__icon" />
-      <div className={"metric__value-container" + (hasValues ? "" : " metric__value-container--centered")}>
+      <div className={"metric__value-container" + (props.hasValues ? "" : " metric__value-container--centered")}>
         <p className="text text--medium">{props.title}</p>
-        {hasValues && (
+        {props.hasValues && (
           <div className="metric__values">
-            <NumericValue value={props.voltage} unit={"V"} />
-            <NumericValue value={props.current} unit="A" precision={1} />
-            <NumericValue value={props.power} unit="W" />
+            <ActiveInValues portalId={portalId} vebusInstanceId={vebusInstanceId} />
           </div>
         )}
       </div>
@@ -128,9 +112,8 @@ class ActiveSourceWithData extends Component {
               <ActiveSource
                 activeInput={topics.activeInput}
                 settings={topics.settings}
-                current={topics.current}
-                voltage={topics.voltage}
-                power={topics.power}
+                portalId={portalId}
+                vebusInstanceId={vebusInstanceId}
               />
             )
           }}
