@@ -38,8 +38,9 @@ class MqttClientProvider extends Component {
       this.setState({ status: STATUS.CONNECTED })
     })
 
-    client.on("disconnect", () => {
+    client.on("offline", () => {
       this.setState({ status: STATUS.DISCONNECTED })
+      this.topicsSubscribed = new Set()
     })
 
     client.on("reconnect", () => {
