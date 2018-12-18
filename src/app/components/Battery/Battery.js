@@ -4,6 +4,7 @@ import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 import MqttTopicWildcard from "../../mqtt/MqttTopicWildcard"
 import BatteryLevel from "./BatteryLevel"
 import BatteryName from "./BatteryName"
+import "./Battery.scss"
 
 const secondaryBatteriesFeatureEnabled = true
 

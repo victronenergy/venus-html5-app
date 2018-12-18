@@ -33,7 +33,12 @@ const BatteryLevel = props => {
   const timeToGoLabel = batteryTimeToGoFormatter(props.timeToGo)
   const showTimetoGo = props.state === BATTERY_STATE.DISCHARGING
   return (
-    <div className={"metric__battery-level-container" + (showTimetoGo ? " metric__battery-level-container--col" : "")}>
+    <div
+      className={
+        "metric__container--right metric__battery-level-container" +
+        (showTimetoGo ? " metric__battery-level-container--col" : "")
+      }
+    >
       <div className="text--bottom-align">
         <span className="text text--bold text--large">{props.soc ? props.soc : ""}</span>
         <span className="text text--small metric__battery-state">
