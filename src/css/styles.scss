@@ -330,7 +330,6 @@ header {
 .disconnected {
   .metric__value-container > :last-child,
   button span,
-  .metric__battery-level-container,
   .metric__shore-input-limit--not-adjustable > :last-child {
     opacity: 0.5;
   }
@@ -425,40 +424,9 @@ button:disabled {
   width: calc(50% - 40px);
 }
 
-.metric__battery {
-  background-image: url("../images/boat.png");
-  background-repeat: no-repeat;
-  background-position: right;
-  background-size: auto 100%;
 
-  @media #{$portrait} {
-    background-position: bottom right;
-    background-size: auto 50%;
-  }
 
-  @media #{$tiny} {
-    background-image: none;
-  }
-}
 
-.metric__battery-level-container {
-  @extend .metric__container--right;
-
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-
-  @media #{$tiny} {
-    width: auto;
-    margin-right: 20px;
-  }
-
-  &--col {
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-  }
-}
 
 .text--bottom-align {
   display: flex;
