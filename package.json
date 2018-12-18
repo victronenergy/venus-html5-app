@@ -4,7 +4,7 @@
   "description": "Metric framework for Victron VenusOS",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --hot --inline --development",
+    "dev": "webpack-dev-server --hot --inline --development -d",
     "fake-mqtt": "nodemon --watch 'scripts/fake-broker.js' --exec 'npx babel-node scripts/start-fake-mqtt.js'",
     "dev:mocked": "concurrently 'npm run dev' 'npm run fake-mqtt'",
     "clean": "rm -rf dist",
