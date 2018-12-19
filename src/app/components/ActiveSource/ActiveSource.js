@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import { AC_SOURCE_TYPE, ACTIVE_INPUT } from "../../utils/constants"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 import ActiveInValues from "./ActiveInValues"
+import HeaderView, { HeaderTitle } from "../HeaderView/HeaderView"
 
 const getTopics = (portalId, vebusInstanceId) => {
   return {
@@ -72,30 +73,24 @@ class ActiveSource extends Component {
 
 const NoActiveSource = () => {
   return (
-    <div className="metric metric--small">
-      <img src={require("../../../images/icons/shore-power.svg")} className="metric__icon" />
-      <div className="metric__value-container">
-        <p className="text text--medium">Shore power</p>
-        <div className="text text--smaller">Unplugged</div>
-      </div>
-    </div>
+    <HeaderView small icon={require("../../../images/icons/shore-power.svg")}>
+      <HeaderTitle>Shore power</HeaderTitle>
+      <div className="text text--smaller">Unplugged</div>
+    </HeaderView>
   )
 }
 
 const ActiveSourceMetric = props => {
   const { portalId, vebusInstanceId } = props
   return (
-    <div className="metric metric--small">
-      <img src={props.icon} className="metric__icon" />
-      <div className={"metric__value-container" + (props.hasValues ? "" : " metric__value-container--centered")}>
-        <p className="text text--medium">{props.title}</p>
-        {props.hasValues && (
-          <div className="metric__values">
-            <ActiveInValues portalId={portalId} vebusInstanceId={vebusInstanceId} />
-          </div>
-        )}
-      </div>
-    </div>
+    <HeaderView small icon={props.icon} centered={props.hasValues}>
+      <HeaderTitle>{props.title}</HeaderTitle>
+      {props.hasValues && (
+        <div className="metric__values">
+          <ActiveInValues portalId={portalId} vebusInstanceId={vebusInstanceId} />
+        </div>
+      )}
+    </HeaderView>
   )
 }
 
