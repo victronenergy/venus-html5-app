@@ -3,6 +3,7 @@ import { AC_SOURCE_TYPE, ACTIVE_INPUT } from "../../utils/constants"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 import ActiveInValues from "./ActiveInValues"
 import HeaderView, { HeaderTitle } from "../HeaderView/HeaderView"
+import MetricValues from "../MetricValues/MetricValues"
 
 const getTopics = (portalId, vebusInstanceId) => {
   return {
@@ -52,9 +53,7 @@ class ActiveSource extends Component {
     const { portalId, vebusInstanceId } = this.props
 
     if (activeSource === undefined) {
-      return (
-        <ActiveSourceMetric title={"--"} icon={require("../../../images/icons/shore-power.svg")} hasValues={false} />
-      )
+      return <ActiveSourceLoading />
     } else if (activeSource === null) {
       return <NoActiveSource />
     } else {
@@ -80,15 +79,24 @@ const NoActiveSource = () => {
   )
 }
 
+const ActiveSourceLoading = () => {
+  return (
+    <HeaderView small icon={require("../../../images/icons/shore-power.svg")}>
+      <HeaderTitle>Active source</HeaderTitle>
+      <div className="text text--smaller">--</div>
+    </HeaderView>
+  )
+}
+
 const ActiveSourceMetric = props => {
   const { portalId, vebusInstanceId } = props
   return (
-    <HeaderView small icon={props.icon} centered={props.hasValues}>
+    <HeaderView small icon={props.icon}>
       <HeaderTitle>{props.title}</HeaderTitle>
       {props.hasValues && (
-        <div className="metric__values">
+        <MetricValues>
           <ActiveInValues portalId={portalId} vebusInstanceId={vebusInstanceId} />
-        </div>
+        </MetricValues>
       )}
     </HeaderView>
   )
@@ -98,7 +106,7 @@ class ActiveSourceWithData extends Component {
   render() {
     const { portalId, vebusInstanceId } = this.props
     if (!vebusInstanceId) {
-      return <NoActiveSource />
+      return <ActiveSourceLoading />
     } else {
       return (
         <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId)}>
