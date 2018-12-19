@@ -5,9 +5,7 @@ import "./HeaderView.scss"
 const HeaderView = props => (
   <div className={"metric" + (props.small ? " metric--small" : "")}>
     <img src={props.icon} className="metric__icon" />
-    <div className={"metric__value-container" + (props.centered ? " metric__value-container--centered" : "")}>
-      {props.children}
-    </div>
+    <div className={"metric__value-container"}>{props.children}</div>
   </div>
 )
 

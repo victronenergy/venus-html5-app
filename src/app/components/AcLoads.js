@@ -2,6 +2,8 @@ import React, { Component } from "react"
 import NumericValue from "./NumericValue"
 import MqttSubscriptions from "../mqtt/MqttSubscriptions"
 import { phaseSum } from "../utils/util"
+import HeaderView, { HeaderTitle } from "./HeaderView/HeaderView"
+import MetricValues from "./MetricValues/MetricValues"
 
 const getTopics = (portalId, vebusInstanceId) => {
   return {
@@ -25,13 +27,10 @@ const getTopics = (portalId, vebusInstanceId) => {
 
 const AcLoadsContainer = props => {
   return (
-    <div className="metric metric--small">
-      <img src={require("../../images/icons/ac.svg")} className="metric__icon" />
-      <div className="metric__value-container">
-        <p className="text text--medium">AC Loads</p>
-        <div className="metric__values">{props.children}</div>
-      </div>
-    </div>
+    <HeaderView small icon={require("../../images/icons/ac.svg")}>
+      <HeaderTitle>AC Loads</HeaderTitle>
+      <MetricValues>{props.children}</MetricValues>
+    </HeaderView>
   )
 }
 

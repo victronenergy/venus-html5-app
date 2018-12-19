@@ -1,6 +1,8 @@
 import React, { Component } from "react"
 import NumericValue from "../NumericValue"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
+import HeaderView, { HeaderTitle } from "../HeaderView/HeaderView"
+import MetricValues from "../MetricValues/MetricValues"
 
 const getTopics = portalId => {
   return {
@@ -11,16 +13,13 @@ const getTopics = portalId => {
 
 const Solar = props => {
   return (
-    <div className="metric metric--small">
-      <img src={require("../../../images/icons/dc.svg")} className="metric__icon" />
-      <div className="metric__value-container">
-        <p className="text text--medium">Solar</p>
-        <div className="metric__values">
-          <NumericValue value={props.current} unit="A" precision={1} />
-          <NumericValue value={props.power} unit="W" />
-        </div>
-      </div>
-    </div>
+    <HeaderView small icon={require("../../../images/icons/dc.svg")}>
+      <HeaderTitle>Solar</HeaderTitle>
+      <MetricValues>
+        <NumericValue value={props.current} unit="A" precision={1} />
+        <NumericValue value={props.power} unit="W" />
+      </MetricValues>
+    </HeaderView>
   )
 }
 
