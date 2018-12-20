@@ -13,7 +13,7 @@ const getTopics = portalId => {
 
 const Solar = props => {
   return (
-    <HeaderView small icon={require("../../../images/icons/dc.svg")} title="Solar">
+    <HeaderView icon={require("../../../images/icons/dc.svg")} title="Solar">
       <MetricValues>
         <NumericValue value={props.current} unit="A" precision={1} />
         <NumericValue value={props.power} unit="W" />
