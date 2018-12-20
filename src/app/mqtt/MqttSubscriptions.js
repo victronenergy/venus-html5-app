@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import { MqttClientContext } from "../contexts"
 import { flatten } from "../utils/util"
+import Logger from "../utils/logger"
 
 class MqttSubscriptions extends Component {
   componentDidMount() {
@@ -9,7 +10,7 @@ class MqttSubscriptions extends Component {
 
   componentDidUpdate(prevProps) {
     if (JSON.stringify(prevProps.topics) !== JSON.stringify(this.props.topics)) {
-      console.log("New topics", prevProps.topics, this.props.topicsq)
+      logger.log("New topics", prevProps.topics, this.props.topicsq)
       if (prevProps.topics !== null) {
         flatten(Object.values(prevProps.topics)).forEach(this.props.unsubscribe)
       }
