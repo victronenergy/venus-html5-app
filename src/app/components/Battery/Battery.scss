@@ -9,6 +9,7 @@
 .battery__header {
   display: flex;
   margin-bottom: 17px;
+  box-sizing: content-box;
 }
 
 .battery__header-text {

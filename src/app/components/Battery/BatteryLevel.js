@@ -31,9 +31,10 @@ function batteryTimeToGoFormatter(timeToGo) {
 }
 
 const BatteryLevel = props => {
-  const batteryStateLabel = batteryStateFormatter(props.state)
-  const timeToGoLabel = batteryTimeToGoFormatter(props.timeToGo)
-  const showTimetoGo = props.state === BATTERY_STATE.DISCHARGING
+  const { state, timeToGo, soc } = props
+  const batteryStateLabel = batteryStateFormatter(state)
+  const timeToGoLabel = batteryTimeToGoFormatter(timeToGo)
+  const showTimetoGo = state === BATTERY_STATE.DISCHARGING && timeToGo
   return (
     <div
       className={classNames("metric__battery-level-container", "text--opaque", {
@@ -41,14 +42,18 @@ const BatteryLevel = props => {
       })}
     >
       <div className="text--bottom-align">
-        {batteryStateLabel && <span className="text text--small metric__battery-state">{batteryStateLabel}</span>}
+        {batteryStateLabel && (
+          <span className="text text--small metric__battery-state">
+            {batteryStateLabel}
+            &nbsp;
+          </span>
+        )}
         <span className="text text--bold">
-          {props.soc ? formatNumber({ value: props.soc }) : ""}
+          {soc ? formatNumber({ value: soc }) : ""}
           <span className="text text--small">%</span>
         </span>
       </div>
-      {showTimetoGo &&
-        props.timeToGo && <span className="text text--small battery-level__time-to-go">{timeToGoLabel}</span>}
+      {showTimetoGo && <span className="text text--small battery-level__time-to-go">{timeToGoLabel}</span>}
     </div>
   )
 }
