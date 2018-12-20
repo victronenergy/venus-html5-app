@@ -6,96 +6,95 @@ import BatteryLevel from "./BatteryLevel"
 import BatteryName from "./BatteryName"
 import "./Battery.scss"
 
-const secondaryBatteriesFeatureEnabled = true
-
 const getTopics = portalId => {
   return {
-    current: `N/${portalId}/system/0/Dc/Battery/Current`,
-    state: `N/${portalId}/system/0/Dc/Battery/State`,
-    soc: `N/${portalId}/system/0/Dc/Battery/Soc`,
-    timeToGo: `N/${portalId}/system/0/Dc/Battery/TimeToGo`,
-    power: `N/${portalId}/system/0/Dc/Battery/Power`,
-    voltage: `N/${portalId}/system/0/Dc/Battery/Voltage`,
     mainBattery: `N/${portalId}/system/0/ActiveBatteryService`
   }
 }
 
-const mapChannelsToInstances = (instances, mainBatteryInstanceNumber) => {
-  let instancesWithChannels = []
-  instances.forEach((i, index) => {
-    if (i !== Number(mainBatteryInstanceNumber)) {
-      instancesWithChannels.push([i, 0, index])
-    }
-
-    instancesWithChannels.push([i, 1, index])
-  })
-  return instancesWithChannels
-}
-
-const secondaryBatteries = (instances, mainBatteryInstance, portalId) => {
-  const instancesWithChannels = mapChannelsToInstances(instances, mainBatteryInstance)
-  return instancesWithChannels.map(([instance, channel, index]) => {
-    return (
-      <MqttSubscriptions
-        key={`battery-${index}-channel-${channel}`}
-        topics={{
-          voltage: `N/${portalId}/battery/${instance}/Dc/${channel}/Voltage`,
-          current: `N/${portalId}/battery/${instance}/Dc/${channel}/Current`,
-          power: `N/${portalId}/battery/${instance}/Dc/${channel}/Power`
-        }}
-      >
-        {topics => {
-          if (topics.voltage.value || topics.current.value || topics.power.value) {
-            return (
-              <div className="metric__values">
-                <BatteryName
-                  portalId={portalId}
-                  batteryInstanceId={instance}
-                  batteryChannel={channel}
-                  index={index + 1}
-                />
-                <NumericValue value={topics.voltage.value} unit="V" precision={1} />
-                <NumericValue value={topics.current.value} unit="A" precision={1} />
-                <NumericValue value={topics.power.value} unit="W" />
-              </div>
-            )
-          }
-        }}
-      </MqttSubscriptions>
-    )
-  })
+const BatteryHeader = props => {
+  return (
+    <div className="battery__header">
+      <img src={require("../../../images/icons/battery.svg")} className="metric__icon" />
+      <div className="battery__header-text">
+        <span>Batteries</span>
+        <span className="text text--smaller text--opaque">{`${props.amount} instance${
+          props.amount.length > 1 ? "s" : ""
+        }`}</span>
+      </div>
+    </div>
+  )
 }
 
 const Battery = props => {
-  if (!props.mainBattery) {
-    return null
-  }
-  const [, mainBatteryInstanceNumber] = props.mainBattery.split("battery/")
+  const { instance, channel, portalId, index, i } = props
+  const isStarter = channel === 1
   return (
-    <div className="metric metric__container metric__battery">
-      <div className="metric__container--left">
-        <img src={require("../../../images/icons/battery.svg")} className="metric__icon" />
-        <div className="metric__value-container">
-          <p className="text text--medium">
-            <BatteryName
-              portalId={props.portalId}
-              batteryInstanceId={mainBatteryInstanceNumber}
-              main
-              batteryChannel={0}
-            />
-          </p>
-          <div className="metric__values">
-            <NumericValue value={props.voltage} unit="V" precision={1} />
-            <NumericValue value={props.current} unit="A" precision={1} />
-            <NumericValue value={props.power} unit="W" />
-          </div>
-          {secondaryBatteriesFeatureEnabled &&
-            secondaryBatteries(props.batteryInstances, mainBatteryInstanceNumber, props.portalId)}
-        </div>
-      </div>
-      <BatteryLevel state={props.state} soc={props.soc} timeToGo={props.timeToGo} />
+    <MqttSubscriptions
+      topics={{
+        voltage: `N/${portalId}/battery/${instance}/Dc/${channel}/Voltage`,
+        current: `N/${portalId}/battery/${instance}/Dc/${channel}/Current`,
+        power: `N/${portalId}/battery/${instance}/Dc/${channel}/Power`,
+        soc: `N/${portalId}/battery/${instance}/Soc`,
+        timeToGo: `N/${portalId}/battery/${instance}/TimeToGo`,
+        state: `N/${portalId}/battery/${instance}/State`
+      }}
+    >
+      {topics => {
+        if (topics.voltage.value || topics.current.value || topics.power.value) {
+          return (
+            <div className="battery">
+              <div className="battery__index">{i}</div>
+              <div className="battery__data">
+                <BatteryName portalId={portalId} batteryInstanceId={instance} batteryChannel={channel} index={index} />
+                <div>
+                  <NumericValue value={topics.voltage.value} unit="V" precision={1} />
+                  {!isStarter && <NumericValue value={topics.current.value} unit="A" precision={1} />}
+                  {!isStarter && <NumericValue value={topics.power.value} unit="W" />}
+                </div>
+              </div>
+              {!isStarter && (
+                <BatteryLevel state={topics.state.value} soc={topics.soc.value} timeToGo={topics.timeToGo.value} />
+              )}
+            </div>
+          )
+        }
+      }}
+    </MqttSubscriptions>
+  )
+}
+
+const Batteries = props => {
+  const { instancesWithChannels, portalId } = props
+  return (
+    <div className="batteries">
+      {instancesWithChannels.map(([instance, channel, indexByInstance], i) => (
+        <Battery
+          instance={instance}
+          channel={channel}
+          index={indexByInstance}
+          i={i + 1}
+          portalId={portalId}
+          key={`battery-${indexByInstance}-channel-${channel}`}
+        />
+      ))}
     </div>
   )
+}
+
+const mainBatteryToFirst = (instances, mainBattery) => {
+  let [, mainBatteryInstance] = mainBattery.split("battery/")
+  // Move main battery to first in the array
+  return [...instances].sort((a, b) => (a === mainBatteryInstance ? -1 : b === mainBatteryInstance ? 1 : 0))
+}
+
+const mapChannelsToInstances = instances => {
+  const instancesWithChannels = []
+  instances.forEach((i, index) => {
+    instancesWithChannels.push([i, 0, index + 1])
+    instancesWithChannels.push([i, 1, index + 1])
+  })
+  return instancesWithChannels
 }
 
 class BatteryWithData extends Component {
@@ -104,25 +103,26 @@ class BatteryWithData extends Component {
     return (
       <MqttSubscriptions topics={getTopics(portalId)}>
         {topics => {
-          return (
-            <MqttTopicWildcard wildcard={`N/${portalId}/battery/+/DeviceInstance`}>
-              {batteryInstances => {
-                return (
-                  <Battery
-                    soc={topics.soc.value}
-                    state={topics.state.value}
-                    voltage={topics.voltage.value}
-                    current={topics.current.value}
-                    power={topics.power.value}
-                    timeToGo={topics.timeToGo.value}
-                    mainBattery={topics.mainBattery.value}
-                    batteryInstances={Object.values(batteryInstances).map(b => b.value)}
-                    portalId={portalId}
-                  />
-                )
-              }}
-            </MqttTopicWildcard>
-          )
+          const { mainBattery } = topics
+          if (!mainBattery.value) {
+            return null
+          } else {
+            return (
+              <MqttTopicWildcard wildcard={`N/${portalId}/battery/+/DeviceInstance`}>
+                {batteryInstances => {
+                  const instances = Object.values(batteryInstances).map(b => parseInt(b.value))
+                  const instancesSorted = mainBatteryToFirst(instances, mainBattery.value)
+                  const instancesWithChannels = mapChannelsToInstances(instancesSorted)
+                  return (
+                    <div className="metric metric__battery">
+                      <BatteryHeader amount={instances.length} />
+                      <Batteries instancesWithChannels={instancesWithChannels} portalId={portalId} />
+                    </div>
+                  )
+                }}
+              </MqttTopicWildcard>
+            )
+          }
         }}
       </MqttSubscriptions>
     )

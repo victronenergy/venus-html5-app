@@ -234,6 +234,28 @@ header {
   }
 }
 
+.value:not(:first-child) {
+  padding-left: 25px;
+  @media #{$smaller} {
+    padding-left: 15px;
+  }
+
+  @media #{$small} {
+    padding-left: 5px;
+  }
+}
+
+.value:not(:last-child) {
+  padding-right: 25px;
+
+  @media #{$smaller} {
+    padding-right: 15px;
+  }
+
+  @media #{$small} {
+    padding-right: 5px;
+  }
+}
 
 .metric__container--right {
   // When metric has left and right 'parts'
@@ -286,10 +308,6 @@ button:disabled {
 .metric__mode--readonly {
   width: calc(50% - 40px);
 }
-
-
-
-
 
 .text--bottom-align {
   display: flex;

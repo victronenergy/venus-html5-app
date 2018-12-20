@@ -1,6 +1,8 @@
 import { BATTERY_STATE } from "../../utils/constants"
+import { formatNumber } from "./../NumericValue"
 import React from "react"
 import PropTypes from "prop-types"
+import classNames from "classnames"
 
 function batteryStateFormatter(value) {
   switch (value) {
@@ -34,20 +36,19 @@ const BatteryLevel = props => {
   const showTimetoGo = props.state === BATTERY_STATE.DISCHARGING
   return (
     <div
-      className={
-        "metric__container--right metric__battery-level-container" +
-        (showTimetoGo ? " metric__battery-level-container--col" : "")
-      }
+      className={classNames("metric__battery-level-container", "text--opaque", {
+        "metric__battery-level-container--col": showTimetoGo
+      })}
     >
       <div className="text--bottom-align">
-        <span className="text text--bold text--large">{props.soc ? props.soc : ""}</span>
-        <span className="text text--small metric__battery-state">
-          {props.soc ? "%" : ""}
-          &nbsp;
-          {batteryStateLabel || ""}
+        {batteryStateLabel && <span className="text text--small metric__battery-state">{batteryStateLabel}</span>}
+        <span className="text text--bold">
+          {props.soc ? formatNumber({ value: props.soc }) : ""}
+          <span className="text text--small">%</span>
         </span>
       </div>
-      {showTimetoGo && props.timeToGo ? <p className="text text--small">{timeToGoLabel}</p> : ""}
+      {showTimetoGo &&
+        props.timeToGo && <span className="text text--small battery-level__time-to-go">{timeToGoLabel}</span>}
     </div>
   )
 }
