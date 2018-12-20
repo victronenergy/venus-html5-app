@@ -1,8 +1,11 @@
 import React, { Component } from "react"
+
 import GetShorePowerInputNumber from "../../mqtt/victron/GetShorePowerInputNumber"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
-import { formatNumber } from "./../NumericValue"
 import SelectorButton from "../SelectorButton"
+
+import { formatNumber } from "./../NumericValue"
+
 import "./ShoreInputLimit.scss"
 
 const getTopics = (portalId, vebusInstanceId, shorePowerInput) => {
