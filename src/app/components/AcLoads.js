@@ -27,7 +27,7 @@ const getTopics = (portalId, vebusInstanceId) => {
 
 const AcLoadsContainer = props => {
   return (
-    <HeaderView small icon={require("../../images/icons/ac.svg")} title="AC Loads">
+    <HeaderView icon={require("../../images/icons/ac.svg")} title="AC Loads">
       <MetricValues>{props.children}</MetricValues>
     </HeaderView>
   )

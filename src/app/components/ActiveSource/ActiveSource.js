@@ -72,7 +72,7 @@ class ActiveSource extends Component {
 
 const NoActiveSource = () => {
   return (
-    <HeaderView small icon={require("../../../images/icons/shore-power.svg")} title="Shore power">
+    <HeaderView icon={require("../../../images/icons/shore-power.svg")} title="Shore power">
       <div className="text text--smaller">Unplugged</div>
     </HeaderView>
   )
@@ -80,7 +80,7 @@ const NoActiveSource = () => {
 
 const ActiveSourceLoading = () => {
   return (
-    <HeaderView small icon={require("../../../images/icons/shore-power.svg")} title="Active source">
+    <HeaderView icon={require("../../../images/icons/shore-power.svg")} title="Active source">
       <div className="text text--smaller">--</div>
     </HeaderView>
   )
@@ -89,7 +89,7 @@ const ActiveSourceLoading = () => {
 const ActiveSourceMetric = props => {
   const { portalId, vebusInstanceId } = props
   return (
-    <HeaderView small icon={props.icon} title={props.title}>
+    <HeaderView icon={props.icon} title={props.title}>
       {props.hasValues && (
         <MetricValues>
           <ActiveInValues portalId={portalId} vebusInstanceId={vebusInstanceId} />

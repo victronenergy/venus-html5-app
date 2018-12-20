@@ -14,25 +14,21 @@ export default props => {
   return (
     <div id="metrics-container">
       <Battery portalId={portalId} />
-      <div className="multi-metric-container shore-power__container">
-        <ActiveSource portalId={portalId} vebusInstanceId={vebusInstanceId} />
-        <ShoreInputLimit
-          portalId={portalId}
-          vebusInstanceId={vebusInstanceId}
-          connected={isConnected}
-          onChangeShoreInputLimitClicked={props.onChangeShoreInputLimitClicked}
-        />
-      </div>
+      <ActiveSource portalId={portalId} vebusInstanceId={vebusInstanceId} />
+      <ShoreInputLimit
+        portalId={portalId}
+        vebusInstanceId={vebusInstanceId}
+        connected={isConnected}
+        onChangeShoreInputLimitClicked={props.onChangeShoreInputLimitClicked}
+      />
       <InverterCharger
         portalId={portalId}
         vebusInstanceId={vebusInstanceId}
         connected={isConnected}
         onModeSelected={props.onModeSelected}
       />
-      <div className="multi-metric-container">
-        <AcLoads portalId={portalId} vebusInstanceId={vebusInstanceId} />
-        <DcLoads portalId={portalId} />
-      </div>
+      <AcLoads portalId={portalId} vebusInstanceId={vebusInstanceId} />
+      <DcLoads portalId={portalId} />
       {solarFeatureEnabled && <Solar portalId={portalId} />}
     </div>
   )

@@ -210,10 +210,6 @@ header {
   background-color: rgba(18, 26, 40, 1);
 }
 
-.metric--small {
-  width: 100%;
-}
-
 .metric__icon {
   height: 100%;
 }
@@ -225,16 +221,6 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
-
-.multi-metric-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  @media #{$portrait}, #{$tiny} {
-    flex-direction: column;
-  }
 }
 
 .metric__container {
@@ -302,13 +288,6 @@ header {
 
   @media #{$very-low-landscape} {
     width: calc(50% - 20px - 10px);
-  }
-}
-
-.inverter-charger,
-.shore-power__container {
-  @media #{$tiny} {
-    display: none;
   }
 }
 

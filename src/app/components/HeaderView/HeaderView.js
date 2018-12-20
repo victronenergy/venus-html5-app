@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import "./HeaderView.scss"
 
 const HeaderView = props => (
-  <div className={"metric" + (props.small ? " metric--small" : "")}>
+  <div className="metric">
     <img src={props.icon} className="metric__icon" />
     <div className={"metric__value-container"}>
       <p className="text text--medium">{props.title}</p>

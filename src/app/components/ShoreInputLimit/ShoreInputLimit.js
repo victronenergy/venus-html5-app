@@ -13,7 +13,7 @@ const getTopics = (portalId, vebusInstanceId, shorePowerInput) => {
 }
 
 const ReadOnlyShoreInputLimit = props => (
-  <div className="metric metric--small">
+  <div className="metric">
     <div className="metric__shore-input-limit--not-adjustable">
       <span className="text--small">Shore input limit:&nbsp;</span>
       <span className="text--bold">{props.currentLimit}</span>
@@ -22,7 +22,7 @@ const ReadOnlyShoreInputLimit = props => (
 )
 
 const EditableShoreInputLimit = props => (
-  <div className="metric metric--small metric--shore-input-limit">
+  <div className="metric metric--shore-input-limit">
     <SelectorButton onClick={props.onChangeShoreInputLimitClicked}>
       <span className="text--small">Select shore input limit:&nbsp;</span>
       <span className="text--bold">{props.currentLimit}</span>
@@ -44,7 +44,7 @@ const ShoreInputLimit = props => {
 }
 
 const MetricSmallLoading = props => (
-  <div className="metric metric--small">
+  <div className="metric">
     <div>
       <span className="text--small">{props.message || "Loading"}</span>
     </div>

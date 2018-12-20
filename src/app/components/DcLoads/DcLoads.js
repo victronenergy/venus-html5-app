@@ -12,7 +12,7 @@ const getTopics = portalId => {
 
 export const DcLoads = props => {
   return (
-    <div className="metric metric--small">
+    <div className="metric">
       <img src={require("../../../images/icons/dc.svg")} className="metric__icon" />
       <div className="metric__value-container">
         <p className="text text--medium">DC Loads</p>
