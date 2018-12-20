@@ -16,6 +16,7 @@ import Connecting from "./../components/Connecting"
 
 import Header from "./../components/Header"
 import Fade, { viewChangeDelay } from "./../components/Fade"
+import Logger from "../utils/logger"
 
 const Main = props => {
   return (
@@ -70,7 +71,7 @@ class App extends Component {
               <GetPortalId>
                 {portalId => {
                   if (!portalId) {
-                    console.warn("No portal id yet ...")
+                    Logger.warn("No portal id yet ...")
                     return <Connecting />
                   } else {
                     return (

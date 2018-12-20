@@ -85,7 +85,7 @@ class MqttClientProvider extends Component {
       Logger.log(`Subscribing to ${topic}`)
       this.state.client.subscribe(topic, (err, granted) => {
         if (err) {
-          console.error(err)
+          Logger.error(err)
           return
         }
         Logger.log(
@@ -100,7 +100,7 @@ class MqttClientProvider extends Component {
     if (this.topicsSubscribed.has(topic)) {
       this.state.client.unsubscribe(topic, err => {
         if (err) {
-          console.error(err)
+          Logger.error(err)
           return
         }
         Logger.log(`Unsubscribed from ${topic}`)
@@ -131,7 +131,7 @@ class MqttClientProvider extends Component {
 
   publish = (topic, data) => {
     if (!this.isConnected()) {
-      console.error("Could not publish value")
+      Logger.error("Could not publish value")
     }
 
     Logger.log(`Publishing to ${topic}: ${data}`)
