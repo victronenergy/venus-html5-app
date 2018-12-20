@@ -1,12 +1,5 @@
 @import "../../../css/variables.scss";
 
-.metric--shore-input-limit,
-.metric__shore-input-limit--not-adjustable {
-  @media #{$tiny} {
-    display: none;
-  }
-}
-
 .metric--shore-input-limit > .selector-button > span:first-child {
   margin-right: 10px;
 
@@ -18,4 +11,9 @@
 .metric__shore-input-limit--not-adjustable {
   width: 100%;
   text-align: center;
+}
+
+.metric__shore-input-limit__limit {
+  margin-right: 30px;
+  color: #30afff;
 }

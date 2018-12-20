@@ -15,35 +15,17 @@ const getTopics = (portalId, vebusInstanceId, shorePowerInput) => {
   }
 }
 
-const ReadOnlyShoreInputLimit = props => (
-  <div className="metric">
-    <div className="metric__shore-input-limit--not-adjustable">
-      <span className="text--small">Shore input limit:&nbsp;</span>
-      <span className="text--bold">{props.currentLimit}</span>
-    </div>
-  </div>
-)
-
-const EditableShoreInputLimit = props => (
-  <div className="metric metric--shore-input-limit">
-    <SelectorButton onClick={props.onChangeShoreInputLimitClicked}>
-      <span className="text--small">Select shore input limit:&nbsp;</span>
-      <span className="text--bold">{props.currentLimit}</span>
-    </SelectorButton>
-  </div>
-)
-
 const ShoreInputLimit = props => {
-  if (props.isAdjustable) {
-    return (
-      <EditableShoreInputLimit
-        currentLimit={props.currentLimit}
-        onChangeShoreInputLimitClicked={props.onChangeShoreInputLimitClicked}
-      />
-    )
-  } else {
-    return <ReadOnlyShoreInputLimit currentLimit={props.currentLimit} />
-  }
+  return (
+    <div>
+      <span className="text--bold metric__shore-input-limit__limit">{props.currentLimit}</span>
+      {props.isAdjustable && (
+        <SelectorButton onClick={props.onChangeShoreInputLimitClicked}>
+          <span className="text--small">Select</span>
+        </SelectorButton>
+      )}
+    </div>
+  )
 }
 
 const MetricSmallLoading = props => (
@@ -58,7 +40,7 @@ class ShoreInputLimitWithData extends Component {
   render() {
     const { portalId, vebusInstanceId } = this.props
     if (!vebusInstanceId) {
-      return <ReadOnlyShoreInputLimit currentLimit={"--"} />
+      return <ShoreInputLimit currentLimit={"--"} />
     } else {
       return (
         <GetShorePowerInputNumber portalId={portalId}>
@@ -76,7 +58,7 @@ class ShoreInputLimitWithData extends Component {
                     return (
                       <ShoreInputLimit
                         currentLimit={formatNumber({ value: topics.currentLimit.value, unit: "A" })}
-                        isAdjustable={topics.currentLimitIsAdjustable.value && this.props.connected}
+                        isAdjustable={topics.currentLimitIsAdjustable.value}
                         onChangeShoreInputLimitClicked={this.props.onChangeShoreInputLimitClicked}
                       />
                     )

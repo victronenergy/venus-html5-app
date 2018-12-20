@@ -247,6 +247,7 @@ header {
 }
 
 .inverter-charger__mode-selector {
+  margin-top: $marginBottom;
   height: 100%;
   width: 100%;
   display: flex;
@@ -259,7 +260,6 @@ header {
 }
 
 .inverter-charger__mode-selector > .selector-button {
-  padding: 15px;
   &:not(:first-child) {
     margin-left: 10px;
   }
