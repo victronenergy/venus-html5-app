@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import NumericValue from "./NumericValue"
 import MqttSubscriptions from "../mqtt/MqttSubscriptions"
 import { phaseSum } from "../utils/util"
-import HeaderView, { HeaderTitle } from "./HeaderView/HeaderView"
+import HeaderView from "./HeaderView/HeaderView"
 import MetricValues from "./MetricValues/MetricValues"
 
 const getTopics = (portalId, vebusInstanceId) => {
@@ -27,8 +27,7 @@ const getTopics = (portalId, vebusInstanceId) => {
 
 const AcLoadsContainer = props => {
   return (
-    <HeaderView small icon={require("../../images/icons/ac.svg")}>
-      <HeaderTitle>AC Loads</HeaderTitle>
+    <HeaderView small icon={require("../../images/icons/ac.svg")} title="AC Loads">
       <MetricValues>{props.children}</MetricValues>
     </HeaderView>
   )
