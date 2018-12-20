@@ -203,7 +203,6 @@ header {
   height: $height;
   padding: $topBottomPadding $rightLeftPadding;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
   border-radius: $borderRadius;
@@ -221,14 +220,6 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
-
-.metric__container {
-  @media #{$portrait} {
-    height: 120px;
-    align-items: flex-start;
-    flex-direction: column;
-  }
 }
 
 .metric__container--left {
@@ -249,52 +240,15 @@ header {
   }
 }
 
-.value:not(:first-child) {
-  padding-left: 25px;
-  @media #{$smaller} {
-    padding-left: 15px;
-  }
-
-  @media #{$small} {
-    padding-left: 5px;
-  }
-}
-
-.value:not(:last-child) {
-  padding-right: 25px;
-
-  @media #{$smaller} {
-    padding-right: 15px;
-  }
-
-  @media #{$small} {
-    padding-right: 5px;
-  }
-}
-
-.metric__container--right {
-  // When metric has left and right 'parts'
-  // (100% width - paddings of parent (80px) - margin between metric--small elements 20px) / 2
-  // = (100% - 80px - 20px) / 2 = 50% - 40px - 10px;
-  width: calc(50% - 40px - 10px);
-
-  @media #{$portrait}, #{$smaller} {
-    width: calc(50% - 18px - 10px);
-  }
-
-  @media #{$very-narrow-portrait}, #{$small} {
-    width: calc(50% - 12px - 1.5px);
-  }
-
-  @media #{$very-low-landscape} {
-    width: calc(50% - 20px - 10px);
-  }
+.inverter-charger {
+  align-items: flex-start;
+  flex-direction: column;
+  height: auto;
 }
 
 .inverter-charger__mode-selector {
-  @extend .metric__container--right;
-
   height: 100%;
+  width: 100%;
   display: flex;
   justify-content: space-between;
 
@@ -304,8 +258,11 @@ header {
   }
 }
 
-.inverter-charger__mode-selector > .selector-button:not(:first-child) {
-  margin-left: 10px;
+.inverter-charger__mode-selector > .selector-button {
+  padding: 15px;
+  &:not(:first-child) {
+    margin-left: 10px;
+  }
 }
 
 button:disabled {
