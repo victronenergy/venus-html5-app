@@ -1,10 +1,10 @@
 @import "../../../css/variables.scss";
 
 .metric__battery {
-  background-image: url("../../../images/boat.png");
-  background-repeat: no-repeat;
-  background-position: right;
-  background-size: auto 100%;
+  height: auto;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 17px 20px;
 
   @media #{$portrait} {
     background-position: bottom right;
@@ -16,23 +16,72 @@
   }
 }
 
+.battery__header {
+  display: flex;
+  margin-bottom: 17px;
+}
+
+.battery__header-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 30px;
+}
+
 .metric__battery-level-container {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-
-  @media #{$tiny} {
-    width: auto;
-    margin-right: 20px;
-  }
+  margin-right: 20px;
 
   &--col {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: flex-end;
     justify-content: center;
   }
 }
 
 .disconnected .metric__battery-level-container {
   opacity: 0.5;
+}
+
+.metric__icon {
+  width: 65px;
+}
+
+.batteries {
+  width: 100%;
+}
+
+.battery {
+  display: flex;
+  background-color: #1d2433;
+  border-radius: 2px;
+
+  &:not(:last-child) {
+    margin-bottom: 9px;
+  }
+
+  width: 100%;
+}
+
+.battery__index {
+  align-items: center;
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  width: 75px;
+}
+
+.battery__data {
+  border-left: solid 1px #131a28;
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+  padding-left: 30px;
+  width: 100%;
+}
+
+.battery-level__time-to-go {
+  white-space: nowrap;
 }
