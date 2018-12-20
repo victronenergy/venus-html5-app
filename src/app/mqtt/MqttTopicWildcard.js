@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import { MqttClientContext } from "../contexts"
+import Logger from "../utils/logger"
 
 class MqttTopicWildcard extends Component {
   componentDidMount() {
@@ -8,7 +9,7 @@ class MqttTopicWildcard extends Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.wildcard !== this.props.wildcard) {
-      console.log("New wildcard", prevProps, this.props)
+      Logger.log("New wildcard", prevProps, this.props)
       if (prevProps.wildcard !== null) {
         this.props.unsubscribe(this.props.wildcard)
       }

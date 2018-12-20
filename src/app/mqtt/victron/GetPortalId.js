@@ -1,11 +1,12 @@
 import React from "react"
 import MqttTopicWildcard from "../MqttTopicWildcard"
+import Logger from "../../utils/logger"
 
 export default props => (
   <MqttTopicWildcard wildcard={`N/+/system/0/Serial`}>
     {messages => {
       if (Object.entries(messages).length === 0) {
-        console.log("Waiting for portal id ...")
+        Logger.log("Waiting for portal id ...")
         return <>{props.children(null)}</>
       }
 

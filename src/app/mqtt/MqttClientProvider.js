@@ -1,8 +1,9 @@
 import React, { Component } from "react"
 import { MqttClientContext } from "../contexts"
-
 import * as mqtt from "mqtt"
+
 import { getMessageJson } from "../utils/util"
+import Logger from "../utils/logger"
 export const STATUS = {
   CONNECTING: "connecting",
   CONNECTED: "connected",
@@ -54,7 +55,7 @@ class MqttClientProvider extends Component {
     })
 
     client.on("message", (topic, message) => {
-      console.log(`Message received: ${topic} - ${message.toString()}`)
+      Logger.log(`Message received: ${topic} - ${message.toString()}`)
       if (topic.endsWith("/system/0/Serial") && !this.portalId) {
         this.portalId = getMessageJson(message).value
         this.sendKeepalive() // Send keepalive to trigger messages to return immediately
@@ -81,13 +82,13 @@ class MqttClientProvider extends Component {
 
   subscribe = topic => {
     if (!this.topicsSubscribed.has(topic)) {
-      console.log(`Subscribing to ${topic}`)
+      Logger.log(`Subscribing to ${topic}`)
       this.state.client.subscribe(topic, (err, granted) => {
         if (err) {
           console.error(err)
           return
         }
-        console.log(
+        Logger.log(
           `Subscribed to ${granted[0] ? granted[0].topic : topic} with QoS ${granted[0] ? granted[0].qos : "unknown"}`
         )
         this.topicsSubscribed.add(topic)
@@ -102,7 +103,7 @@ class MqttClientProvider extends Component {
           console.error(err)
           return
         }
-        console.log(`Unsubscribed from ${topic}`)
+        Logger.log(`Unsubscribed from ${topic}`)
         this.topicsSubscribed.delete(topic)
       })
     }
@@ -133,7 +134,7 @@ class MqttClientProvider extends Component {
       console.error("Could not publish value")
     }
 
-    console.log(`Publishing to ${topic}: ${data}`)
+    Logger.log(`Publishing to ${topic}: ${data}`)
     this.state.client.publish(topic, data)
   }
 
