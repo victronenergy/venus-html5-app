@@ -4,16 +4,6 @@
   height: auto;
   flex-direction: column;
   align-items: flex-start;
-  padding: 17px 20px;
-
-  @media #{$portrait} {
-    background-position: bottom right;
-    background-size: auto 50%;
-  }
-
-  @media #{$tiny} {
-    background-image: none;
-  }
 }
 
 .battery__header {

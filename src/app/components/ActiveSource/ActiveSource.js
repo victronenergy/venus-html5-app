@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { AC_SOURCE_TYPE, ACTIVE_INPUT } from "../../utils/constants"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 import ActiveInValues from "./ActiveInValues"
-import HeaderView, { HeaderTitle } from "../HeaderView/HeaderView"
+import HeaderView from "../HeaderView/HeaderView"
 import MetricValues from "../MetricValues/MetricValues"
 
 const getTopics = (portalId, vebusInstanceId) => {
@@ -72,8 +72,7 @@ class ActiveSource extends Component {
 
 const NoActiveSource = () => {
   return (
-    <HeaderView small icon={require("../../../images/icons/shore-power.svg")}>
-      <HeaderTitle>Shore power</HeaderTitle>
+    <HeaderView small icon={require("../../../images/icons/shore-power.svg")} title="Shore power">
       <div className="text text--smaller">Unplugged</div>
     </HeaderView>
   )
@@ -81,8 +80,7 @@ const NoActiveSource = () => {
 
 const ActiveSourceLoading = () => {
   return (
-    <HeaderView small icon={require("../../../images/icons/shore-power.svg")}>
-      <HeaderTitle>Active source</HeaderTitle>
+    <HeaderView small icon={require("../../../images/icons/shore-power.svg")} title="Active source">
       <div className="text text--smaller">--</div>
     </HeaderView>
   )
@@ -91,8 +89,7 @@ const ActiveSourceLoading = () => {
 const ActiveSourceMetric = props => {
   const { portalId, vebusInstanceId } = props
   return (
-    <HeaderView small icon={props.icon}>
-      <HeaderTitle>{props.title}</HeaderTitle>
+    <HeaderView small icon={props.icon} title={props.title}>
       {props.hasValues && (
         <MetricValues>
           <ActiveInValues portalId={portalId} vebusInstanceId={vebusInstanceId} />
