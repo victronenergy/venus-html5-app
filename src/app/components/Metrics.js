@@ -1,7 +1,7 @@
 import React from "react"
 import Battery from "./Battery"
 import ActiveSource from "./ActiveSource"
-import ShoreInputLimit from "./ShoreInputLimit"
+
 import InverterCharger from "./InverterCharger"
 import AcLoads from "./AcLoads"
 import DcLoads from "./DcLoads"
@@ -14,11 +14,9 @@ export default props => {
   return (
     <div id="metrics-container">
       <Battery portalId={portalId} />
-      <ActiveSource portalId={portalId} vebusInstanceId={vebusInstanceId} />
-      <ShoreInputLimit
+      <ActiveSource
         portalId={portalId}
         vebusInstanceId={vebusInstanceId}
-        connected={isConnected}
         onChangeShoreInputLimitClicked={props.onChangeShoreInputLimitClicked}
       />
       <InverterCharger

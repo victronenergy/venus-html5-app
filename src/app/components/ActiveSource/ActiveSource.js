@@ -4,6 +4,9 @@ import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 import ActiveInValues from "./ActiveInValues"
 import HeaderView from "../HeaderView/HeaderView"
 import MetricValues from "../MetricValues/MetricValues"
+import ShoreInputLimit from "../ShoreInputLimit"
+
+import "./ActiveSource.scss"
 
 const getTopics = (portalId, vebusInstanceId) => {
   return {
@@ -33,43 +36,6 @@ const getActiveSource = ({ activeInput, settings }) => {
   return activeSource
 }
 
-class ActiveSource extends Component {
-  activeSourceLabel = {
-    [AC_SOURCE_TYPE.SHORE]: "Shore Power",
-    [AC_SOURCE_TYPE.GRID]: "Grid Input",
-    [AC_SOURCE_TYPE.GENERATOR]: "Generator",
-    [AC_SOURCE_TYPE.NOT_IN_USE]: "Invalid Configuration" // You cannot have a source that isn't configured as active!
-  }
-
-  activeSourceIcon = {
-    [AC_SOURCE_TYPE.SHORE]: require("../../../images/icons/shore-power.svg"),
-    [AC_SOURCE_TYPE.GRID]: require("../../../images/icons/shore-power.svg"),
-    [AC_SOURCE_TYPE.GENERATOR]: require("../../../images/icons/generator.svg"),
-    [AC_SOURCE_TYPE.NOT_IN_USE]: require("../../../images/icons/shore-power.svg")
-  }
-
-  render() {
-    const activeSource = getActiveSource(this.props)
-    const { portalId, vebusInstanceId } = this.props
-
-    if (activeSource === undefined) {
-      return <ActiveSourceLoading />
-    } else if (activeSource === null) {
-      return <NoActiveSource />
-    } else {
-      return (
-        <ActiveSourceMetric
-          title={this.activeSourceLabel[activeSource]}
-          icon={this.activeSourceIcon[activeSource]}
-          portalId={portalId}
-          vebusInstanceId={vebusInstanceId}
-          hasValues={true}
-        />
-      )
-    }
-  }
-}
-
 const NoActiveSource = () => {
   return (
     <HeaderView icon={require("../../../images/icons/shore-power.svg")} title="Shore power">
@@ -87,21 +53,66 @@ const ActiveSourceLoading = () => {
 }
 
 const ActiveSourceMetric = props => {
-  const { portalId, vebusInstanceId } = props
+  const { portalId, vebusInstanceId, onChangeShoreInputLimitClicked } = props
   return (
-    <HeaderView icon={props.icon} title={props.title}>
-      {props.hasValues && (
-        <MetricValues>
-          <ActiveInValues portalId={portalId} vebusInstanceId={vebusInstanceId} />
-        </MetricValues>
-      )}
-    </HeaderView>
+    <div className="metric metric__active-source">
+      <HeaderView icon={props.icon} title={props.title} child>
+        {props.hasValues && (
+          <MetricValues>
+            <ActiveInValues portalId={portalId} vebusInstanceId={vebusInstanceId} />
+          </MetricValues>
+        )}
+      </HeaderView>
+      <ShoreInputLimit
+        portalId={portalId}
+        vebusInstanceId={vebusInstanceId}
+        onChangeShoreInputLimitClicked={onChangeShoreInputLimitClicked}
+      />
+    </div>
   )
+}
+
+class ActiveSource extends Component {
+  activeSourceLabel = {
+    [AC_SOURCE_TYPE.SHORE]: "Shore Power",
+    [AC_SOURCE_TYPE.GRID]: "Grid Input",
+    [AC_SOURCE_TYPE.GENERATOR]: "Generator",
+    [AC_SOURCE_TYPE.NOT_IN_USE]: "Invalid Configuration" // You cannot have a source that isn't configured as active!
+  }
+
+  activeSourceIcon = {
+    [AC_SOURCE_TYPE.SHORE]: require("../../../images/icons/shore-power.svg"),
+    [AC_SOURCE_TYPE.GRID]: require("../../../images/icons/shore-power.svg"),
+    [AC_SOURCE_TYPE.GENERATOR]: require("../../../images/icons/generator.svg"),
+    [AC_SOURCE_TYPE.NOT_IN_USE]: require("../../../images/icons/shore-power.svg")
+  }
+
+  render() {
+    const activeSource = getActiveSource(this.props)
+    const { portalId, vebusInstanceId, onChangeShoreInputLimitClicked } = this.props
+
+    if (activeSource === undefined) {
+      return <ActiveSourceLoading />
+    } else if (activeSource === null) {
+      return <NoActiveSource />
+    } else {
+      return (
+        <ActiveSourceMetric
+          title={this.activeSourceLabel[activeSource]}
+          icon={this.activeSourceIcon[activeSource]}
+          portalId={portalId}
+          vebusInstanceId={vebusInstanceId}
+          hasValues={true}
+          onChangeShoreInputLimitClicked={onChangeShoreInputLimitClicked}
+        />
+      )
+    }
+  }
 }
 
 class ActiveSourceWithData extends Component {
   render() {
-    const { portalId, vebusInstanceId } = this.props
+    const { portalId, vebusInstanceId, onChangeShoreInputLimitClicked } = this.props
     if (!vebusInstanceId) {
       return <ActiveSourceLoading />
     } else {
@@ -114,6 +125,7 @@ class ActiveSourceWithData extends Component {
                 settings={topics.settings}
                 portalId={portalId}
                 vebusInstanceId={vebusInstanceId}
+                onChangeShoreInputLimitClicked={onChangeShoreInputLimitClicked}
               />
             )
           }}

@@ -1,5 +1,5 @@
 .selector-button {
-  background-color: #0a101f;
+  background-color: #2a3341;
   color: white;
   height: 100%;
   border: none;
@@ -7,8 +7,8 @@
   flex-grow: 1;
   cursor: pointer;
   line-height: 1.2;
+  padding: 15px 45px;
 }
-
 
 .selector-button:focus {
   outline: 0;
