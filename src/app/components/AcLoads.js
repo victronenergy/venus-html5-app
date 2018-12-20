@@ -1,9 +1,11 @@
 import React, { Component } from "react"
-import NumericValue from "./NumericValue"
-import MqttSubscriptions from "../mqtt/MqttSubscriptions"
-import { phaseSum } from "../utils/util"
+
 import HeaderView from "./HeaderView/HeaderView"
 import MetricValues from "./MetricValues/MetricValues"
+import MqttSubscriptions from "../mqtt/MqttSubscriptions"
+import NumericValue from "./NumericValue"
+
+import { phaseSum } from "../utils/util"
 
 const getTopics = (portalId, vebusInstanceId) => {
   return {
@@ -25,32 +27,28 @@ const getTopics = (portalId, vebusInstanceId) => {
   }
 }
 
-const AcLoadsContainer = props => {
-  return (
-    <HeaderView icon={require("../../images/icons/ac.svg")} title="AC Loads">
-      <MetricValues>{props.children}</MetricValues>
-    </HeaderView>
-  )
-}
-
 const AcLoads = props => {
   const [voltagePhase1] = props.voltage
   return (
-    <AcLoadsContainer>
-      <NumericValue value={voltagePhase1 ? voltagePhase1.value : null} unit="V" />
-      <NumericValue value={phaseSum(props.current)} unit="A" precision={1} />
-      <NumericValue value={phaseSum(props.power)} unit={"W"} />
-    </AcLoadsContainer>
+    <HeaderView icon={require("../../images/icons/ac.svg")} title="AC Loads">
+      <MetricValues>
+        <NumericValue value={voltagePhase1 ? voltagePhase1.value : null} unit="V" />
+        <NumericValue value={phaseSum(props.current)} unit="A" precision={1} />
+        <NumericValue value={phaseSum(props.power)} unit={"W"} />
+      </MetricValues>
+    </HeaderView>
   )
 }
 
 const AcLoadsLoading = () => {
   return (
-    <AcLoadsContainer>
-      <NumericValue value={null} />
-      <NumericValue value={null} />
-      <NumericValue value={null} />
-    </AcLoadsContainer>
+    <HeaderView icon={require("../../images/icons/ac.svg")} title="AC Loads">
+      <MetricValues>
+        <NumericValue value={null} />
+        <NumericValue value={null} />
+        <NumericValue value={null} />
+      </MetricValues>
+    </HeaderView>
   )
 }
 
