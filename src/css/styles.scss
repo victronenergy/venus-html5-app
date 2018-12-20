@@ -198,6 +198,35 @@ header {
   width: 100%;
 }
 
+.metric {
+  margin-bottom: $marginBottom;
+  height: $height;
+  padding: $topBottomPadding $rightLeftPadding;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  border-radius: $borderRadius;
+  background-color: rgba(18, 26, 40, 1);
+}
+
+.metric--small {
+  width: 100%;
+}
+
+.metric__icon {
+  height: 100%;
+}
+
+.metric__value-container {
+  margin-right: auto;
+  margin-left: $rightLeftPadding;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .multi-metric-container {
   display: flex;
   justify-content: space-between;
