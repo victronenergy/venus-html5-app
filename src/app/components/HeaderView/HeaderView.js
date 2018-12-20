@@ -1,9 +1,10 @@
 import React from "react"
 import PropTypes from "prop-types"
+
 import "./HeaderView.scss"
 
 const HeaderView = props => (
-  <div className="metric">
+  <div className={props.child ? "header-view__child" : "metric"}>
     <img src={props.icon} className="metric__icon" />
     <div className={"metric__value-container"}>
       <p className="text text--medium">{props.title}</p>
@@ -13,8 +14,7 @@ const HeaderView = props => (
 )
 
 HeaderView.propTypes = {
-  small: PropTypes.bool,
-  centered: PropTypes.bool,
+  child: PropTypes.bool,
   icon: PropTypes.string
 }
 

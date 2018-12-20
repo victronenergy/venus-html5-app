@@ -1,8 +1,12 @@
 import React, { Component } from "react"
-import { SYSTEM_MODE } from "../utils/constants"
+
+import HeaderView from "./HeaderView/HeaderView"
+import MetricValues from "./MetricValues/MetricValues"
 import MqttSubscriptions from "../mqtt/MqttSubscriptions"
 import MqttWriteValue from "../mqtt/MqttWriteValue"
 import SelectorButton from "./SelectorButton"
+
+import { SYSTEM_MODE } from "../utils/constants"
 
 const getTopics = (portalId, vebusInstanceId) => {
   return {
@@ -40,16 +44,12 @@ function systemStateFormatter(value) {
 const InverterCharger = props => {
   const activeMode = systemModeFormatter(props.activeMode)
   return (
-    <div className="metric metric__container inverter-charger">
-      <div className="metric__container--left">
-        <img src={require("../../images/icons/multiplus.svg")} className="metric__icon" />
-        <div className="metric__value-container">
-          <p className="text text--medium">Inverter/charger</p>
-          <div className="metric__values">
-            <p className="text text--smaller">{systemStateFormatter(props.state)}</p>
-          </div>
-        </div>
-      </div>
+    <div className="metric inverter-charger">
+      <HeaderView icon={require("../../images/icons/multiplus.svg")} title="Inverter / Charger" child>
+        <MetricValues>
+          <p className="text text--smaller">{systemStateFormatter(props.state)}</p>
+        </MetricValues>
+      </HeaderView>
       <div className="inverter-charger__mode-selector">
         <SelectorButton
           disabled={!props.modeIsAdjustable}

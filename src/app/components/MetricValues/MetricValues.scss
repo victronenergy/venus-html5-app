@@ -4,22 +4,8 @@
   display: flex;
 }
 
-.value {
-  width: 65px;
-
-  @media #{$smaller} {
-    width: 45px;
-  }
-
-  @media #{$very-small} {
-    width: 40px;
-  }
-}
-
 .value:not(:first-child) {
-  text-align: center;
   padding-left: 25px;
-  border-left: 0.5px solid rgba(255, 255, 255, 0.29);
   @media #{$smaller} {
     padding-left: 15px;
   }
