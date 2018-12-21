@@ -21,10 +21,10 @@
  */
 
 body {
-  font-size: 22px;
+  font-size: 16px;
   @for $i from 1 through 5 {
     @media all and (max-width: 1200px - $i * 200px) {
-      font-size: 22px - $i * 2px;
+      font-size: 16px - $i * 2px;
     }
   }
 }

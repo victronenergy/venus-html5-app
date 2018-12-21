@@ -1,8 +1,10 @@
 import React, { Component } from "react"
-import NumericValue from "../NumericValue"
-import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
+
 import HeaderView from "../HeaderView/HeaderView"
+import HidingContainer from "../HidingContainer"
 import MetricValues from "../MetricValues/MetricValues"
+import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
+import NumericValue from "../NumericValue"
 
 const getTopics = portalId => {
   return {
@@ -25,15 +27,18 @@ const Solar = props => {
 class SolarWithData extends Component {
   render() {
     const { portalId } = this.props
-    if (!portalId) {
-      return <Solar loading />
-    }
     return (
-      <MqttSubscriptions topics={getTopics(portalId)}>
-        {topics => {
-          return <Solar current={topics.current.value} power={topics.power.value} />
-        }}
-      </MqttSubscriptions>
+      <HidingContainer>
+        {!portalId ? (
+          <Solar loading />
+        ) : (
+          <MqttSubscriptions topics={getTopics(portalId)}>
+            {topics => {
+              return <Solar current={topics.current.value} power={topics.power.value} />
+            }}
+          </MqttSubscriptions>
+        )}
+      </HidingContainer>
     )
   }
 }

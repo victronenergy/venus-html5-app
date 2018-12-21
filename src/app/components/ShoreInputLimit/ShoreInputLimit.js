@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 
+import HidingContainer from "../HidingContainer"
 import GetShorePowerInputNumber from "../../mqtt/victron/GetShorePowerInputNumber"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 import SelectorButton from "../SelectorButton"
@@ -39,37 +40,39 @@ const MetricSmallLoading = props => (
 class ShoreInputLimitWithData extends Component {
   render() {
     const { portalId, vebusInstanceId } = this.props
-    if (!vebusInstanceId) {
-      return <ShoreInputLimit currentLimit={"--"} />
-    } else {
-      return (
-        <GetShorePowerInputNumber portalId={portalId}>
-          {shorePowerInput => {
-            if (shorePowerInput === undefined) {
-              return <MetricSmallLoading />
-            } else if (shorePowerInput === null) {
-              return (
-                <MetricSmallLoading message="No shore power configured. Please check 'Remote Console > Settings > System setup > AC input'" />
-              )
-            } else {
-              return (
-                <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId, shorePowerInput)}>
-                  {topics => {
-                    return (
-                      <ShoreInputLimit
-                        currentLimit={formatNumber({ value: topics.currentLimit.value, unit: "A" })}
-                        isAdjustable={topics.currentLimitIsAdjustable.value}
-                        onChangeShoreInputLimitClicked={this.props.onChangeShoreInputLimitClicked}
-                      />
-                    )
-                  }}
-                </MqttSubscriptions>
-              )
-            }
-          }}
-        </GetShorePowerInputNumber>
-      )
-    }
+    return (
+      <HidingContainer>
+        {!vebusInstanceId ? (
+          <ShoreInputLimit currentLimit={"--"} />
+        ) : (
+          <GetShorePowerInputNumber portalId={portalId}>
+            {shorePowerInput => {
+              if (shorePowerInput === undefined) {
+                return <MetricSmallLoading />
+              } else if (shorePowerInput === null) {
+                return (
+                  <MetricSmallLoading message="No shore power configured. Please check 'Remote Console > Settings > System setup > AC input'" />
+                )
+              } else {
+                return (
+                  <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId, shorePowerInput)}>
+                    {topics => {
+                      return (
+                        <ShoreInputLimit
+                          currentLimit={formatNumber({ value: topics.currentLimit.value, unit: "A" })}
+                          isAdjustable={topics.currentLimitIsAdjustable.value}
+                          onChangeShoreInputLimitClicked={this.props.onChangeShoreInputLimitClicked}
+                        />
+                      )
+                    }}
+                  </MqttSubscriptions>
+                )
+              }
+            }}
+          </GetShorePowerInputNumber>
+        )}
+      </HidingContainer>
+    )
   }
 }
 export default ShoreInputLimitWithData

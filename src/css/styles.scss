@@ -21,7 +21,7 @@ body {
 
 #app {
   margin: 0;
-  padding: 20px 40px 0 40px;
+  padding: 20px 30px 0 30px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -109,17 +109,9 @@ main {
 
 header {
   display: flex;
-  flex-basis: 50px;
   justify-content: space-between;
   align-items: center;
-
-  @media #{$portrait}, #{$small} {
-    padding: 0 5px;
-  }
-
-  @media #{$small}, #{$low-landscape} {
-    flex-basis: 40px;
-  }
+  margin: 20px 0;
 }
 
 .logo {
@@ -196,12 +188,17 @@ header {
 
 #metrics-container {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
 }
 
 .metric {
-  margin-bottom: $marginBottom;
   height: $height;
   padding: $topBottomPadding $rightLeftPadding;
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-bottom: $marginBottom;
   display: flex;
   align-items: center;
   box-sizing: border-box;
@@ -300,6 +297,14 @@ button:disabled {
 .image-container {
   margin: 2em 0;
   img {
+    width: 100%;
+  }
+}
+
+.hiding-container {
+  flex-basis: 0;
+  width: 50%;
+  @media #{$portrait}, #{$smaller} {
     width: 100%;
   }
 }

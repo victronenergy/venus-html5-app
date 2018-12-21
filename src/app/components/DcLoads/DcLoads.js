@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 
 import HeaderView from "../HeaderView/HeaderView"
+import HidingContainer from "../HidingContainer"
 import MetricValues from "../MetricValues/MetricValues"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 import NumericValue from "./../NumericValue"
@@ -40,13 +41,19 @@ export const DcLoads = props => {
 class DcLoadsWithData extends Component {
   render() {
     return (
-      <MqttSubscriptions topics={getTopics(this.props.portalId)}>
-        {topics => {
-          return (
-            <DcLoads voltage={topics.voltage.value} power={topics.power.value} hasDcSystem={topics.hasDcSystem.value} />
-          )
-        }}
-      </MqttSubscriptions>
+      <HidingContainer>
+        <MqttSubscriptions topics={getTopics(this.props.portalId)}>
+          {topics => {
+            return (
+              <DcLoads
+                voltage={topics.voltage.value}
+                power={topics.power.value}
+                hasDcSystem={topics.hasDcSystem.value}
+              />
+            )
+          }}
+        </MqttSubscriptions>
+      </HidingContainer>
     )
   }
 }

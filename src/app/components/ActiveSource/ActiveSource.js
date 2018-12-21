@@ -1,10 +1,13 @@
 import React, { Component } from "react"
-import { AC_SOURCE_TYPE, ACTIVE_INPUT } from "../../utils/constants"
-import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
+
 import ActiveInValues from "./ActiveInValues"
 import HeaderView from "../HeaderView/HeaderView"
+import HidingContainer from "../HidingContainer"
+import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 import MetricValues from "../MetricValues/MetricValues"
 import ShoreInputLimit from "../ShoreInputLimit"
+
+import { AC_SOURCE_TYPE, ACTIVE_INPUT } from "../../utils/constants"
 
 import "./ActiveSource.scss"
 
@@ -113,25 +116,27 @@ class ActiveSource extends Component {
 class ActiveSourceWithData extends Component {
   render() {
     const { portalId, vebusInstanceId, onChangeShoreInputLimitClicked } = this.props
-    if (!vebusInstanceId) {
-      return <ActiveSourceLoading />
-    } else {
-      return (
-        <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId)}>
-          {topics => {
-            return (
-              <ActiveSource
-                activeInput={topics.activeInput}
-                settings={topics.settings}
-                portalId={portalId}
-                vebusInstanceId={vebusInstanceId}
-                onChangeShoreInputLimitClicked={onChangeShoreInputLimitClicked}
-              />
-            )
-          }}
-        </MqttSubscriptions>
-      )
-    }
+    return (
+      <HidingContainer>
+        {!vebusInstanceId ? (
+          <ActiveSourceLoading />
+        ) : (
+          <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId)}>
+            {topics => {
+              return (
+                <ActiveSource
+                  activeInput={topics.activeInput}
+                  settings={topics.settings}
+                  portalId={portalId}
+                  vebusInstanceId={vebusInstanceId}
+                  onChangeShoreInputLimitClicked={onChangeShoreInputLimitClicked}
+                />
+              )
+            }}
+          </MqttSubscriptions>
+        )}
+      </HidingContainer>
+    )
   }
 }
 
