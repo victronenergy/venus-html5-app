@@ -1,7 +1,9 @@
 import React, { Component } from "react"
+
+import BatteryLevel from "./BatteryLevel"
+import HidingContainer from "../HidingContainer"
 import NumericValue from "./../NumericValue"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
-import BatteryLevel from "./BatteryLevel"
 
 import { getMessageJson } from "../../utils/util"
 
@@ -55,23 +57,25 @@ class BatteryWithData extends Component {
   render() {
     const { portalId } = this.props
     return (
-      <MqttSubscriptions topics={getTopics(portalId)}>
-        {topics => {
-          let { batteries } = topics
-          if (!batteries.value) {
-            return null
-          } else {
-            batteries = getMessageJson(batteries.value)
-            mainBatteryToFirst(batteries)
-            return (
-              <div className="metric metric__battery">
-                <BatteryHeader amount={batteries.length} />
-                <Batteries batteries={batteries} />
-              </div>
-            )
-          }
-        }}
-      </MqttSubscriptions>
+      <HidingContainer>
+        <MqttSubscriptions topics={getTopics(portalId)}>
+          {topics => {
+            let { batteries } = topics
+            if (!batteries.value) {
+              return null
+            } else {
+              batteries = getMessageJson(batteries.value)
+              mainBatteryToFirst(batteries)
+              return (
+                <div className="metric metric__battery">
+                  <BatteryHeader amount={batteries.length} />
+                  <Batteries batteries={batteries} />
+                </div>
+              )
+            }
+          }}
+        </MqttSubscriptions>
+      </HidingContainer>
     )
   }
 }

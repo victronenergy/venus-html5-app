@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 
 import HeaderView from "./HeaderView/HeaderView"
+import HidingContainer from "./HidingContainer"
 import MetricValues from "./MetricValues/MetricValues"
 import MqttSubscriptions from "../mqtt/MqttSubscriptions"
 import MqttWriteValue from "../mqtt/MqttWriteValue"
@@ -81,28 +82,31 @@ const InverterCharger = props => {
 class InverterChargerWithData extends Component {
   render() {
     const { portalId, vebusInstanceId } = this.props
-    if (!portalId && !vebusInstanceId) {
-      return <div>Loading..</div>
-    }
     return (
-      <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId)}>
-        {topics => {
-          return (
-            <MqttWriteValue topic={`W/${portalId}/vebus/${vebusInstanceId}/Mode`}>
-              {(isConnected, updateMode) => {
-                return (
-                  <InverterCharger
-                    state={topics.state.value}
-                    activeMode={topics.mode.value}
-                    modeIsAdjustable={topics.modeIsAdjustable && this.props.connected}
-                    onModeSelected={newMode => updateMode(newMode)}
-                  />
-                )
-              }}
-            </MqttWriteValue>
-          )
-        }}
-      </MqttSubscriptions>
+      <HidingContainer>
+        {!portalId && !vebusInstanceId ? (
+          <div>Loading..</div>
+        ) : (
+          <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId)}>
+            {topics => {
+              return (
+                <MqttWriteValue topic={`W/${portalId}/vebus/${vebusInstanceId}/Mode`}>
+                  {(isConnected, updateMode) => {
+                    return (
+                      <InverterCharger
+                        state={topics.state.value}
+                        activeMode={topics.mode.value}
+                        modeIsAdjustable={topics.modeIsAdjustable && this.props.connected}
+                        onModeSelected={newMode => updateMode(newMode)}
+                      />
+                    )
+                  }}
+                </MqttWriteValue>
+              )
+            }}
+          </MqttSubscriptions>
+        )}
+      </HidingContainer>
     )
   }
 }

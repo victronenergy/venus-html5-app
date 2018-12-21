@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 
 import HeaderView from "./HeaderView/HeaderView"
+import HidingContainer from "./HidingContainer"
 import MetricValues from "./MetricValues/MetricValues"
 import MqttSubscriptions from "../mqtt/MqttSubscriptions"
 import NumericValue from "./NumericValue"
@@ -55,18 +56,20 @@ const AcLoadsLoading = () => {
 class AcLoadsWithData extends Component {
   render() {
     const { portalId, vebusInstanceId } = this.props
-    if (!vebusInstanceId) {
-      return <AcLoadsLoading />
-    } else {
-      return (
-        <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId)}>
-          {topics => {
-            const { current, voltage, power } = topics
-            return <AcLoads current={current} voltage={voltage} power={power} />
-          }}
-        </MqttSubscriptions>
-      )
-    }
+    return (
+      <HidingContainer>
+        {!vebusInstanceId ? (
+          <AcLoadsLoading />
+        ) : (
+          <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId)}>
+            {topics => {
+              const { current, voltage, power } = topics
+              return <AcLoads current={current} voltage={voltage} power={power} />
+            }}
+          </MqttSubscriptions>
+        )}
+      </HidingContainer>
+    )
   }
 }
 
