@@ -3,23 +3,26 @@ import React from "react"
 
 export const viewChangeDelay = 500
 const viewChangeTransitionDuration = viewChangeDelay - 100
+const baseStyle = {
+  transition: `opacity ${viewChangeTransitionDuration}ms ease`,
+  display: "flex"
+}
 
 class Fade extends Component {
-  fadeTransition = `opacity ${viewChangeTransitionDuration}ms ease`
   state = {
     style: {
       opacity: 0,
-      transition: this.fadeTransition
+      ...baseStyle
     }
   }
   timeoutRef
 
   fadeIn = () => {
-    this.setState({ style: { opacity: 1, transition: this.fadeTransition } })
+    this.setState({ style: { opacity: 1, ...baseStyle } })
   }
 
   fadeOut = () => {
-    this.setState({ style: { opacity: 0, transition: this.fadeTransition } })
+    this.setState({ style: { opacity: 0, ...baseStyle } })
   }
 
   componentDidMount() {
