@@ -76,3 +76,20 @@
 .battery-level__time-to-go {
   white-space: nowrap;
 }
+
+.button__paginator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .selector-button {
+    flex-grow: unset;
+    &:not(:last-child) {
+      margin-right: 10px;
+    }
+  }
+}
+
+.button__paginator-label {
+  margin-right: 20px;
+}

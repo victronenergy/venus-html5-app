@@ -2,12 +2,13 @@ import React, { Component } from "react"
 
 import BatteryLevel from "./BatteryLevel"
 import HidingContainer from "../HidingContainer"
-import NumericValue from "./../NumericValue"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
-
-import { getMessageJson } from "../../utils/util"
+import NumericValue from "./../NumericValue"
+import SelectorButton from "../SelectorButton"
 
 import "./Battery.scss"
+
+const pageSize = 3
 
 const getTopics = portalId => {
   return {
@@ -27,25 +28,61 @@ const BatteryHeader = ({ amount }) => {
   )
 }
 
-const Batteries = ({ batteries }) => {
+const Paginator = ({ setPage, currentPage, pages }) => {
   return (
-    <div className="batteries">
-      {batteries.map(({ voltage, current, power, name, soc, state, id, timetogo }, i) => (
-        <div className="battery" key={id}>
-          <div className="battery__index">{i}</div>
-          <div className="battery__data">
-            {name}
-            <div>
-              {voltage && <NumericValue value={voltage} unit="V" precision={1} />}
-              {current && <NumericValue value={current} unit="A" precision={1} />}
-              {power && <NumericValue value={power} unit="W" />}
-            </div>
-          </div>
-          {soc && <BatteryLevel state={state} soc={soc} timeToGo={timetogo} />}
-        </div>
-      ))}
+    <div className="button__paginator">
+      <span className="text--opaque button__paginator-label">Page:</span>
+      {[...new Array(pages)].map((_, i) => {
+        return (
+          <SelectorButton active={i === currentPage} onClick={() => setPage(i)}>
+            {i + 1}
+          </SelectorButton>
+        )
+      })}
     </div>
   )
+}
+
+class Batteries extends Component {
+  state = { currentPage: 0 }
+
+  setPage = currentPage => {
+    this.setState({ currentPage })
+  }
+
+  render() {
+    const { batteries } = this.props
+    const paginate = batteries.length > pageSize
+    const batteriesToShow = paginate
+      ? batteries.slice(this.state.currentPage * pageSize, this.state.currentPage * pageSize + pageSize)
+      : batteries
+
+    return (
+      <div className="batteries">
+        {batteriesToShow.map(({ voltage, current, power, name, soc, state, id, timetogo }, i) => (
+          <div className="battery" key={id}>
+            <div className="battery__index">{i + 1 + this.state.currentPage * pageSize}</div>
+            <div className="battery__data">
+              {name}
+              <div>
+                {voltage && <NumericValue value={voltage} unit="V" precision={1} />}
+                {current && <NumericValue value={current} unit="A" precision={1} />}
+                {power && <NumericValue value={power} unit="W" />}
+              </div>
+            </div>
+            {soc && <BatteryLevel state={state} soc={soc} timeToGo={timetogo} />}
+          </div>
+        ))}
+        {paginate && (
+          <Paginator
+            setPage={this.setPage}
+            currentPage={this.state.currentPage}
+            pages={Math.ceil(batteries.length / pageSize)}
+          />
+        )}
+      </div>
+    )
+  }
 }
 
 const mainBatteryToFirst = batteries => {
