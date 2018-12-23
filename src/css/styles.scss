@@ -194,7 +194,6 @@ header {
 }
 
 .metric {
-  height: $height;
   padding: $topBottomPadding $rightLeftPadding;
   margin-right: 10px;
   margin-left: 10px;
@@ -207,7 +206,7 @@ header {
 }
 
 .metric__icon {
-  height: 100%;
+  height: 45px;
 }
 
 .metric__value-container {
