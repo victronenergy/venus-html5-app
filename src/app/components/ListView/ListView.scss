@@ -1,0 +1,19 @@
+.list-view {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.list-view__header {
+  display: flex;
+  align-items: center;
+}
+
+.list-view__rows {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.list-row {
+  margin-top: 5px;
+}
