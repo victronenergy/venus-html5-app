@@ -21,7 +21,7 @@ body {
 
 #app {
   margin: 0;
-  padding: 20px 30px 0 30px;
+  padding: 20px 2vw 0 2vw;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -191,6 +191,7 @@ header {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .metric {
@@ -300,9 +301,10 @@ button:disabled {
 }
 
 .hiding-container {
-  flex-basis: 0;
-  width: 50%;
+  // flex-basis: 0;
+  // width: 50%;
   @media #{$portrait}, #{$smaller} {
     width: 100%;
   }
+  width: 48vw;
 }
