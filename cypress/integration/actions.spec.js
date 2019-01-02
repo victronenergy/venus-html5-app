@@ -26,7 +26,7 @@ describe("Testing basic actions in the ui", () => {
   })
 
   it("Selects shore input limit", () => {
-    cy.get(".metric--shore-input-limit").click()
+    cy.get(".metric__active-source button").click()
     cy.get(".amperage-selector__container").should("be.visible")
     cy.get("#metrics-container").should("not.be.visible")
     cy.get(".amperage-selector > button.selector-button--active")

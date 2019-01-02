@@ -67,11 +67,11 @@ export class MockMQQTBroker {
     this.server.on("clientConnected", () => {
       clearInterval(this.intervalRef)
       this.intervalRef = setInterval(this.sendRandomValues, 3000)
-      setTimeout(() => {
-        this.sendNull("N/mockPortalId/system/0/Dc/Battery/Voltage")
-        this.sendNull("N/mockPortalId/system/0/Dc/Battery/Current")
-        this.sendNull("N/mockPortalId/system/0/Dc/Battery/Power")
-      }, 5000)
+      // setTimeout(() => {
+      //   this.sendNull("N/mockPortalId/system/0/Dc/Battery/Voltage")
+      //   this.sendNull("N/mockPortalId/system/0/Dc/Battery/Current")
+      //   this.sendNull("N/mockPortalId/system/0/Dc/Battery/Power")
+      // }, 5000)
     })
 
     this.server.on("published", packet => {
@@ -147,7 +147,7 @@ export class MockMQQTBroker {
         this.sendCached(path, AC_SOURCE_TYPE.SHORE)
         break
       case "N/mockPortalId/vebus/257/Ac/ActiveIn/ActiveInput":
-        this.sendCached(path, ACTIVE_INPUT.NONE)
+        this.sendCached(path, ACTIVE_INPUT.INPUT_1)
         break
       // /mockPortalId/vebus/257/Ac/In/2 =>  because shore power is in AC input 2
       case "N/mockPortalId/vebus/257/Ac/In/2/CurrentLimitIsAdjustable":

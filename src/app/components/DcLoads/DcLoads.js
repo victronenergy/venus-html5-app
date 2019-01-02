@@ -16,25 +16,23 @@ const getTopics = portalId => {
 
 export const DcLoads = props => {
   return (
-    <HeaderView icon={require("../../../images/icons/dc.svg")} title="DC Loads">
-      <MetricValues>
-        {props.hasDcSystem !== 0 ? (
-          <>
-            <NumericValue
-              value={props.voltage && props.power ? props.power / props.voltage : undefined}
-              unit="A"
-              precision={1}
-            />
-            <NumericValue value={props.power} unit="W" />
-          </>
-        ) : (
-          <p className="text--smaller">
-            Please check that "DC System" setting is enabled under "Remote Console" > "Settings" > "System setup" > "Has
-            DC System".
-          </p>
-        )}
-      </MetricValues>
-    </HeaderView>
+    <MetricValues>
+      {props.hasDcSystem !== 0 ? (
+        <>
+          <NumericValue
+            value={props.voltage && props.power ? props.power / props.voltage : undefined}
+            unit="A"
+            precision={1}
+          />
+          <NumericValue value={props.power} unit="W" />
+        </>
+      ) : (
+        <p className="text--smaller">
+          Please check that "DC System" setting is enabled under "Remote Console" > "Settings" > "System setup" > "Has
+          DC System".
+        </p>
+      )}
+    </MetricValues>
   )
 }
 
@@ -45,11 +43,13 @@ class DcLoadsWithData extends Component {
         <MqttSubscriptions topics={getTopics(this.props.portalId)}>
           {topics => {
             return (
-              <DcLoads
-                voltage={topics.voltage.value}
-                power={topics.power.value}
-                hasDcSystem={topics.hasDcSystem.value}
-              />
+              <HeaderView icon={require("../../../images/icons/dc.svg")} title="DC Loads">
+                <DcLoads
+                  voltage={topics.voltage.value}
+                  power={topics.power.value}
+                  hasDcSystem={topics.hasDcSystem.value}
+                />
+              </HeaderView>
             )
           }}
         </MqttSubscriptions>

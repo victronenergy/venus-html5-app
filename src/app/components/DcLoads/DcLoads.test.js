@@ -1,10 +1,10 @@
 import { DcLoads } from "./DcLoads"
-import { shallow } from "enzyme"
+import { mount } from "enzyme"
 import React from "react"
 
 describe("DC Loads", () => {
   describe("when valid", () => {
-    const wrapper = shallow(<DcLoads voltage={12.345} power={98.765} hasDcSystem={"1"} />)
+    const wrapper = mount(<DcLoads voltage={12.345} power={98.765} hasDcSystem={"1"} />)
 
     it("shows current", () => {
       const current = wrapper
@@ -28,7 +28,7 @@ describe("DC Loads", () => {
   })
 
   describe("when voltage is empty", () => {
-    const wrapper = shallow(<DcLoads power={98.765} hasDcSystem={1} />)
+    const wrapper = mount(<DcLoads power={98.765} hasDcSystem={1} />)
 
     it("shows empty current", () => {
       expect(
@@ -41,7 +41,7 @@ describe("DC Loads", () => {
   })
 
   describe("when DC Power is not enabled", () => {
-    const wrapper = shallow(<DcLoads power={98.765} hasDcSystem={0} />)
+    const wrapper = mount(<DcLoads power={98.765} hasDcSystem={0} />)
 
     it("shows hint to the user", () => {
       expect(wrapper.text()).toContain("Has DC System")
@@ -49,7 +49,7 @@ describe("DC Loads", () => {
   })
 
   describe("when values aren't loaded yet", () => {
-    const wrapper = shallow(<DcLoads />)
+    const wrapper = mount(<DcLoads />)
 
     it("shows empty current", () => {
       expect(
