@@ -230,8 +230,7 @@ header {
 
 .disconnected {
   .metric__value-container > :last-child,
-  button span,
-  .metric__shore-input-limit--not-adjustable > :last-child {
+  button span {
     opacity: 0.5;
   }
 }
