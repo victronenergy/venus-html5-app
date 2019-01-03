@@ -1,6 +1,7 @@
 import React from "react"
+
+import { ListRow } from "../ListView/ListView"
 import NumericValue from "../NumericValue"
-import { phaseSum } from "../../utils/util"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 
 const getTopics = (portalId, vebusInstanceId) => {
@@ -16,23 +17,30 @@ const getTopics = (portalId, vebusInstanceId) => {
       `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L3/V`
     ],
     power: [
-      `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L1/P`,
-      `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L2/P`,
-      `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L3/P`
+      `N/${portalId}/system/0/Ac/ConsumptionOnOutput/L1/Power`,
+      `N/${portalId}/system/0/Ac/ConsumptionOnOutput/L2/Power`,
+      `N/${portalId}/system/0/Ac/ConsumptionOnOutput/L3/Power`
     ]
   }
 }
 
 export const ActiveInTotalValues = props => {
-  const [voltagePhase1] = props.voltage
-  const current = phaseSum(props.current)
-  const power = phaseSum(props.power)
+  const { voltage, current, power, threePhase } = props
 
-  return (
+  return threePhase ? (
+    voltage.map((v, i) => (
+      <ListRow>
+        <span className="text text--smaller">Phase {i + 1}</span>
+        <NumericValue value={v.value} unit="V" />
+        <NumericValue value={current[i].value} unit="A" precision={1} />
+        <NumericValue value={power[i].value} unit={"W"} />
+      </ListRow>
+    ))
+  ) : (
     <>
-      <NumericValue value={voltagePhase1.value} unit={"V"} />
-      <NumericValue value={current} unit="A" precision={1} />
-      <NumericValue value={power} unit="W" />
+      <NumericValue value={voltage[0].value} unit={"V"} />
+      <NumericValue value={current[0].value} unit="A" precision={1} />
+      <NumericValue value={power[0].value} unit="W" />
     </>
   )
 }
@@ -45,7 +53,7 @@ export default props => {
     return (
       <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId)}>
         {topics => {
-          return <ActiveInTotalValues current={topics.current} voltage={topics.voltage} power={topics.power} />
+          return <ActiveInTotalValues {...topics} threePhase={props.threePhase} />
         }}
       </MqttSubscriptions>
     )

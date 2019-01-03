@@ -3,6 +3,7 @@ import React, { Component } from "react"
 import ActiveInValues from "./ActiveInValues"
 import HeaderView from "../HeaderView/HeaderView"
 import HidingContainer from "../HidingContainer"
+import { ListView } from "../ListView/ListView"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 import MetricValues from "../MetricValues/MetricValues"
 import ShoreInputLimit from "../ShoreInputLimit"
@@ -14,6 +15,7 @@ import "./ActiveSource.scss"
 const getTopics = (portalId, vebusInstanceId) => {
   return {
     activeInput: `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/ActiveInput`,
+    phases: `N/${portalId}/vebus/${vebusInstanceId}/Ac/NumberOfPhases`,
     settings: [
       `N/${portalId}/settings/0/Settings/SystemSetup/AcInput1`,
       `N/${portalId}/settings/0/Settings/SystemSetup/AcInput2`
@@ -56,16 +58,24 @@ const ActiveSourceLoading = () => {
 }
 
 const ActiveSourceMetric = props => {
-  const { portalId, vebusInstanceId, onChangeShoreInputLimitClicked } = props
+  const { portalId, vebusInstanceId, onChangeShoreInputLimitClicked, phases, icon, title } = props
   return (
     <div className="metric metric__active-source">
-      <HeaderView icon={props.icon} title={props.title} child>
-        {props.hasValues && (
-          <MetricValues>
-            <ActiveInValues portalId={portalId} vebusInstanceId={vebusInstanceId} />
-          </MetricValues>
-        )}
-      </HeaderView>
+      {phases > 1 ? (
+        <ListView icon={icon} title={title} subTitle={`${phases} phases`} child>
+          <ActiveInValues portalId={portalId} vebusInstanceId={vebusInstanceId} threePhase={true} />
+        </ListView>
+      ) : (
+        <>
+          <HeaderView icon={props.icon} title={props.title} child>
+            {props.hasValues && (
+              <MetricValues>
+                <ActiveInValues portalId={portalId} vebusInstanceId={vebusInstanceId} />
+              </MetricValues>
+            )}
+          </HeaderView>
+        </>
+      )}
       <ShoreInputLimit
         portalId={portalId}
         vebusInstanceId={vebusInstanceId}
@@ -92,7 +102,7 @@ class ActiveSource extends Component {
 
   render() {
     const activeSource = getActiveSource(this.props)
-    const { portalId, vebusInstanceId, onChangeShoreInputLimitClicked } = this.props
+    const { portalId, vebusInstanceId, onChangeShoreInputLimitClicked, phases } = this.props
 
     if (activeSource === undefined) {
       return <ActiveSourceLoading />
@@ -107,6 +117,7 @@ class ActiveSource extends Component {
           vebusInstanceId={vebusInstanceId}
           hasValues={true}
           onChangeShoreInputLimitClicked={onChangeShoreInputLimitClicked}
+          phases={phases.value}
         />
       )
     }
@@ -125,8 +136,7 @@ class ActiveSourceWithData extends Component {
             {topics => {
               return (
                 <ActiveSource
-                  activeInput={topics.activeInput}
-                  settings={topics.settings}
+                  {...topics}
                   portalId={portalId}
                   vebusInstanceId={vebusInstanceId}
                   onChangeShoreInputLimitClicked={onChangeShoreInputLimitClicked}
