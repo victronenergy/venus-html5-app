@@ -16,14 +16,19 @@ const getTopics = portalId => {
   }
 }
 
-const BatteryHeader = ({ amount }) => {
+const BatteryHeader = ({ amount, toggleShowAll, showAll }) => {
   return (
-    <div className="battery__header">
+    <div className="battery-header">
       <img src={require("../../../images/icons/battery.svg")} className="metric__icon" />
-      <div className="battery__header-text">
+      <div className="battery-header__text">
         <span>Batteries</span>
         <span className="text text--smaller text--opaque">{`${amount} instance${amount > 1 ? "s" : ""}`}</span>
       </div>
+      {amount > pageSize && (
+        <SelectorButton className="battery-header__show-all" onClick={toggleShowAll}>
+          {showAll ? "Collapse" : "Show all"}
+        </SelectorButton>
+      )}
     </div>
   )
 }
@@ -34,7 +39,7 @@ const Paginator = ({ setPage, currentPage, pages }) => {
       <span className="text--opaque button__paginator-label">Page:</span>
       {[...new Array(pages)].map((_, i) => {
         return (
-          <SelectorButton active={i === currentPage} onClick={() => setPage(i)}>
+          <SelectorButton active={i === currentPage} onClick={() => setPage(i)} key={i}>
             {i + 1}
           </SelectorButton>
         )
@@ -43,7 +48,7 @@ const Paginator = ({ setPage, currentPage, pages }) => {
   )
 }
 
-class Batteries extends Component {
+export class Batteries extends Component {
   state = { currentPage: 0 }
 
   setPage = currentPage => {
@@ -52,7 +57,7 @@ class Batteries extends Component {
 
   render() {
     const { batteries } = this.props
-    const paginate = batteries.length > pageSize
+    const paginate = batteries.length > pageSize && !this.props.showAll
     const batteriesToShow = paginate
       ? batteries.slice(this.state.currentPage * pageSize, this.state.currentPage * pageSize + pageSize)
       : batteries
@@ -91,6 +96,12 @@ const mainBatteryToFirst = batteries => {
 }
 
 class BatteryWithData extends Component {
+  state = { showAll: false }
+
+  toggleShowAll = () => {
+    this.setState({ showAll: !this.state.showAll })
+  }
+
   render() {
     const { portalId } = this.props
     return (
@@ -104,8 +115,12 @@ class BatteryWithData extends Component {
               mainBatteryToFirst(batteries)
               return (
                 <div className="metric metric__battery">
-                  <BatteryHeader amount={batteries.length} />
-                  <Batteries batteries={batteries} />
+                  <BatteryHeader
+                    amount={batteries.length}
+                    toggleShowAll={this.toggleShowAll}
+                    showAll={this.state.showAll}
+                  />
+                  <Batteries batteries={batteries} showAll={this.state.showAll} />
                 </div>
               )
             }
