@@ -6,17 +6,27 @@
   align-items: flex-start;
 }
 
-.battery__header {
+.battery-header {
   display: flex;
   margin-bottom: 17px;
   box-sizing: content-box;
+  width: 100%;
 }
 
-.battery__header-text {
+.battery-header__text {
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin-left: $rightLeftPadding;
+}
+
+.battery-header__show-all {
+  flex-grow: 0;
+  margin-left: auto;
+
+  &:active {
+    background-color: $color-active;
+  }
 }
 
 .metric__battery-level-container {
