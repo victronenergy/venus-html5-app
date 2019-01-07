@@ -7,8 +7,6 @@ import AcLoads from "./AcLoads"
 import DcLoads from "./DcLoads"
 import Solar from "./Solar"
 
-const solarFeatureEnabled = false
-
 export default class Metrics extends Component {
   ref = React.createRef()
   state = { height: 50 } // height as CSS vh-attribute
@@ -40,7 +38,7 @@ export default class Metrics extends Component {
         />
         <AcLoads portalId={portalId} vebusInstanceId={vebusInstanceId} />
         <DcLoads portalId={portalId} />
-        {solarFeatureEnabled && <Solar portalId={portalId} />}
+        <Solar portalId={portalId} />
       </div>
     )
   }
