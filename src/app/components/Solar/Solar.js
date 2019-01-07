@@ -15,7 +15,7 @@ const getTopics = portalId => {
 
 const Solar = props => {
   return (
-    <HeaderView icon={require("../../../images/icons/dc.svg")} title="Solar">
+    <HeaderView icon={require("../../../images/icons/icon_solar.svg")} title="Solar">
       <MetricValues>
         <NumericValue value={props.current} unit="A" precision={1} />
         <NumericValue value={props.power} unit="W" />
@@ -29,12 +29,14 @@ class SolarWithData extends Component {
     const { portalId } = this.props
     return (
       <HidingContainer>
-        {!portalId ? (
-          <Solar loading />
-        ) : (
+        {!portalId ? null : (
           <MqttSubscriptions topics={getTopics(portalId)}>
             {topics => {
-              return <Solar current={topics.current.value} power={topics.power.value} />
+              if (!topics.current.value && !topics.power.value) {
+                return null
+              } else {
+                return <Solar current={topics.current.value} power={topics.power.value} />
+              }
             }}
           </MqttSubscriptions>
         )}
