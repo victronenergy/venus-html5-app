@@ -70,12 +70,12 @@ export class Batteries extends Component {
             <div className="battery__data">
               {name}
               <div>
-                {voltage && <NumericValue value={voltage} unit="V" precision={1} />}
-                {current && <NumericValue value={current} unit="A" precision={1} />}
-                {power && <NumericValue value={power} unit="W" />}
+                <NumericValue value={voltage} unit="V" precision={1} />
+                <NumericValue value={current} unit="A" precision={1} />
+                <NumericValue value={power} unit="W" />
               </div>
             </div>
-            {soc && <BatteryLevel state={state} soc={soc} timeToGo={timetogo} />}
+            {soc !== undefined && <BatteryLevel state={state} soc={soc} timeToGo={timetogo} />}
           </div>
         ))}
         {paginate && (
