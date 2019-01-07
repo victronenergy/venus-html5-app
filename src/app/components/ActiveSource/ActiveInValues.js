@@ -17,9 +17,9 @@ const getTopics = (portalId, vebusInstanceId) => {
       `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L3/V`
     ],
     power: [
-      `N/${portalId}/system/0/Ac/ConsumptionOnOutput/L1/Power`,
-      `N/${portalId}/system/0/Ac/ConsumptionOnOutput/L2/Power`,
-      `N/${portalId}/system/0/Ac/ConsumptionOnOutput/L3/Power`
+      `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L1/P`,
+      `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L2/P`,
+      `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L3/P`
     ]
   }
 }
