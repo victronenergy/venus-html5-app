@@ -167,10 +167,3 @@ vebus/257/Mode                          <- Position of the switch.
                                            of this switch, for example when using a VE.Bus BMS.
 vebus/257/ModeIsAdjustable              <- 0: only show the mode / 1: keep it adjustable
 ```
-
-#### Tank data:
-
-```
-Note that there can be 0 or more tanks: each tank has its own instance number. Not
-necessarily sequential or starting at 0.
-```
