@@ -5,7 +5,7 @@ import HidingContainer from "./HidingContainer"
 import { ListView, ListRow } from "./ListView/ListView"
 import MetricValues from "./MetricValues/MetricValues"
 import MqttSubscriptions from "../mqtt/MqttSubscriptions"
-import NumericValue from "./NumericValue"
+import NumericValue from "./NumericValue/NumericValue"
 
 const getTopics = (portalId, vebusInstanceId) => {
   return {

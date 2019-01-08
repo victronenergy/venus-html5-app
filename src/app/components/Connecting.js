@@ -1,9 +1,9 @@
 import React from "react"
 import Fade from "./Fade"
 
-export default props => (
+export default ({ viewUnmounting }) => (
   <main>
-    <Fade unmount={props.viewUnmounting}>
+    <Fade unmount={viewUnmounting}>
       <div className="loading">
         <p className="text text--very-large">Connecting</p>
         <div className="loading__dots">

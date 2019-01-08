@@ -1,9 +1,9 @@
 import React from "react"
 import Fade from "./Fade"
 
-export default props => (
+export default ({ viewUnmounting }) => (
   <main>
-    <Fade unmount={props.viewUnmounting}>
+    <Fade unmount={viewUnmounting}>
       <div className="error-page">
         <span className="text text--large">
           Could not connect to the MQTT server. <br />

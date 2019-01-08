@@ -3,7 +3,7 @@ import React, { Component } from "react"
 import BatteryLevel from "./BatteryLevel"
 import HidingContainer from "../HidingContainer"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
-import NumericValue from "./../NumericValue"
+import NumericValue from "../NumericValue/NumericValue"
 import SelectorButton from "../SelectorButton"
 
 import "./Battery.scss"
@@ -56,8 +56,8 @@ export class Batteries extends Component {
   }
 
   render() {
-    const { batteries } = this.props
-    const paginate = batteries.length > pageSize && !this.props.showAll
+    const { batteries, showAll } = this.props
+    const paginate = batteries.length > pageSize && !showAll
     const batteriesToShow = paginate
       ? batteries.slice(this.state.currentPage * pageSize, this.state.currentPage * pageSize + pageSize)
       : batteries

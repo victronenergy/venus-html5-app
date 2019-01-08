@@ -4,7 +4,7 @@ import HeaderView from "../HeaderView/HeaderView"
 import HidingContainer from "../HidingContainer"
 import MetricValues from "../MetricValues/MetricValues"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
-import NumericValue from "../NumericValue"
+import NumericValue from "../NumericValue/NumericValue"
 
 const getTopics = portalId => {
   return {
@@ -13,12 +13,12 @@ const getTopics = portalId => {
   }
 }
 
-const Solar = props => {
+const Solar = ({ current, power }) => {
   return (
     <HeaderView icon={require("../../../images/icons/icon_solar.svg")} title="Solar">
       <MetricValues>
-        <NumericValue value={props.current} unit="A" precision={1} />
-        <NumericValue value={props.power} unit="W" />
+        <NumericValue value={current} unit="A" precision={1} />
+        <NumericValue value={power} unit="W" />
       </MetricValues>
     </HeaderView>
   )

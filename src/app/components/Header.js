@@ -3,7 +3,7 @@ import { VIEWS } from "../utils/constants"
 import MqttSubscriptions from "../mqtt/MqttSubscriptions"
 
 const Header = props => {
-  const { isConnected, showRemoteConsoleSetting, currentView } = props
+  const { isConnected, showRemoteConsoleSetting, currentView, handleRemoteConsoleButtonClicked } = props
   return (
     <header>
       <img src={require("../../images/icons/logo.png")} className="logo" />
@@ -13,7 +13,7 @@ const Header = props => {
         {showRemoteConsoleSetting && (
           <button
             className="remote-console-button text text--very-small"
-            onClick={props.handleRemoteConsoleButtonClicked}
+            onClick={handleRemoteConsoleButtonClicked}
             disabled={!isConnected}
           >
             {currentView !== VIEWS.REMOTE_CONSOLE ? "Remote Console" : "Close"}
@@ -28,7 +28,7 @@ const Header = props => {
 // showRemoteConsoleSetting={topics.showRemoteConsoleSetting.value}
 class HeaderWithData extends Component {
   render() {
-    const { portalId, isConnected, currentView } = this.props
+    const { portalId, isConnected, currentView, handleRemoteConsoleButtonClicked } = this.props
     return (
       <MqttSubscriptions
         topics={{ showRemoteConsoleSetting: `N/${portalId}/settings/0/Settings/SystemSetup/<placeholder>` }}
@@ -38,7 +38,7 @@ class HeaderWithData extends Component {
             <Header
               showRemoteConsoleSetting={true}
               isConnected={isConnected}
-              handleRemoteConsoleButtonClicked={this.props.handleRemoteConsoleButtonClicked}
+              handleRemoteConsoleButtonClicked={handleRemoteConsoleButtonClicked}
               currentView={currentView}
             />
           )

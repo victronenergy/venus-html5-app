@@ -4,7 +4,7 @@ import GetShorePowerInputNumber from "../../mqtt/victron/GetShorePowerInputNumbe
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 import SelectorButton from "../SelectorButton"
 
-import { formatNumber } from "./../NumericValue"
+import { formatNumber } from "../NumericValue/NumericValue"
 
 import "./ShoreInputLimit.scss"
 
@@ -15,12 +15,12 @@ const getTopics = (portalId, vebusInstanceId, shorePowerInput) => {
   }
 }
 
-const ShoreInputLimit = props => {
+const ShoreInputLimit = ({ isAdjustable, currentLimit, onChangeShoreInputLimitClicked }) => {
   return (
-    props.isAdjustable && (
+    isAdjustable && (
       <div>
-        <span className="text--bold metric__shore-input-limit__limit">{props.currentLimit}</span>
-        <SelectorButton onClick={props.onChangeShoreInputLimitClicked}>
+        <span className="text--bold metric__shore-input-limit__limit">{currentLimit}</span>
+        <SelectorButton onClick={onChangeShoreInputLimitClicked}>
           <span className="text--small">Select</span>
         </SelectorButton>
       </div>
@@ -28,17 +28,17 @@ const ShoreInputLimit = props => {
   )
 }
 
-const MetricSmallLoading = props => (
+const MetricSmallLoading = ({ message }) => (
   <div className="metric">
     <div>
-      <span className="text--small">{props.message || "Loading"}</span>
+      <span className="text--small">{message || "Loading"}</span>
     </div>
   </div>
 )
 
 class ShoreInputLimitWithData extends Component {
   render() {
-    const { portalId, vebusInstanceId } = this.props
+    const { portalId, vebusInstanceId, onChangeShoreInputLimitClicked } = this.props
     return !vebusInstanceId ? (
       <ShoreInputLimit currentLimit={"--"} />
     ) : (
@@ -58,7 +58,7 @@ class ShoreInputLimitWithData extends Component {
                     <ShoreInputLimit
                       currentLimit={formatNumber({ value: topics.currentLimit.value, unit: "A" })}
                       isAdjustable={topics.currentLimitIsAdjustable.value}
-                      onChangeShoreInputLimitClicked={this.props.onChangeShoreInputLimitClicked}
+                      onChangeShoreInputLimitClicked={onChangeShoreInputLimitClicked}
                     />
                   )
                 }}

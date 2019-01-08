@@ -50,11 +50,11 @@ class ShoreInputLimitSelector extends Component {
   }
 
   render() {
-    const maxLimit = this.props.maxLimit || 100
-    const amperageList = this.getSuggestedAmperageValuesList(this.props.productId).filter(value => {
+    const { maxLimit = 100, productId, currentLimit, onLimitSelected } = this.props
+    const amperageList = this.getSuggestedAmperageValuesList(productId).filter(value => {
       return value <= maxLimit
     })
-    const currentlySelectedLimit = parseInt(this.props.currentLimit)
+    const currentlySelectedLimit = parseInt(currentLimit)
 
     return (
       <div className="amperage-selector__container">
@@ -66,7 +66,7 @@ class ShoreInputLimitSelector extends Component {
                 key={currentValue}
                 className={"selector-button__amperage text--very-large"}
                 active={currentlySelectedLimit === currentValue}
-                onClick={() => this.props.onLimitSelected(currentValue)}
+                onClick={() => onLimitSelected(currentValue)}
                 ref={node => (index === 0 ? (this.firstSelectorButtonNode = node) : null)}
               >
                 {currentValue}A
@@ -85,7 +85,7 @@ class ShoreInputLimitSelector extends Component {
 
 class ShoreInputLimitSelectorWithData extends Component {
   render() {
-    const { portalId, vebusInstanceId } = this.props
+    const { portalId, vebusInstanceId, onLimitSelected } = this.props
     if (!portalId || !vebusInstanceId) {
       return <div>Loading..</div>
     }
@@ -111,7 +111,7 @@ class ShoreInputLimitSelectorWithData extends Component {
                           productId={topics.productId.value}
                           onLimitSelected={value => {
                             updateLimitSelected(value)
-                            this.props.onLimitSelected()
+                            onLimitSelected()
                           }}
                         />
                       )

@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 
-export function formatNumber({ value, unit = "", precision = 0, factor = 1.0, defaultValue = "--" }) {
+export const formatNumber = ({ value, unit = "", precision = 0, factor = 1.0, defaultValue = "--" }) => {
   if (value === null || value === undefined) {
     return defaultValue
   }

@@ -11,7 +11,7 @@ const getTopics = portalId => {
 
 class GetShorePowerInputNumber extends Component {
   render() {
-    const { portalId } = this.props
+    const { portalId, children } = this.props
     return (
       <MqttSubscriptions topics={getTopics(portalId)}>
         {topics => {
@@ -19,7 +19,7 @@ class GetShorePowerInputNumber extends Component {
           const acInput2 = topics.acInput2.value
 
           if (acInput1 === null || acInput2 === null) {
-            return this.props.children()
+            return children()
           }
 
           let shorePowerInput = null
@@ -28,7 +28,7 @@ class GetShorePowerInputNumber extends Component {
           } else if (acInput2 === AC_SOURCE_TYPE.SHORE || acInput2 === AC_SOURCE_TYPE.GRID) {
             shorePowerInput = 2
           }
-          return this.props.children(shorePowerInput)
+          return children(shorePowerInput)
         }}
       </MqttSubscriptions>
     )

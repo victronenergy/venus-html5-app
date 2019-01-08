@@ -23,22 +23,17 @@ const getTopics = (portalId, vebusInstanceId) => {
   }
 }
 
-const getActiveSource = ({ activeInput, settings }) => {
-  let activeSource
-  const [input0, input1] = settings
+const getActiveSource = ({ activeInput, settings: [input0, input1] }) => {
   switch (activeInput.value) {
     case ACTIVE_INPUT.INPUT_0:
-      activeSource = input0.value
-      break
+      return input0.value
     case ACTIVE_INPUT.INPUT_1:
-      activeSource = input1.value
-      break
+      return input1.value
     case ACTIVE_INPUT.NONE:
-      activeSource = null
+      return null
     default:
-      break
+      return undefined
   }
-  return activeSource
 }
 
 const NoActiveSource = () => {
@@ -58,7 +53,7 @@ const ActiveSourceLoading = () => {
 }
 
 const ActiveSourceMetric = props => {
-  const { portalId, vebusInstanceId, onChangeShoreInputLimitClicked, phases, icon, title } = props
+  const { portalId, vebusInstanceId, onChangeShoreInputLimitClicked, phases, icon, title, hasValues } = props
   return (
     <div className="metric metric__active-source">
       {phases > 1 ? (
@@ -66,15 +61,13 @@ const ActiveSourceMetric = props => {
           <ActiveInValues portalId={portalId} vebusInstanceId={vebusInstanceId} threePhase={true} />
         </ListView>
       ) : (
-        <>
-          <HeaderView icon={props.icon} title={props.title} child>
-            {props.hasValues && (
-              <MetricValues>
-                <ActiveInValues portalId={portalId} vebusInstanceId={vebusInstanceId} />
-              </MetricValues>
-            )}
-          </HeaderView>
-        </>
+        <HeaderView icon={icon} title={title} child>
+          {hasValues && (
+            <MetricValues>
+              <ActiveInValues portalId={portalId} vebusInstanceId={vebusInstanceId} />
+            </MetricValues>
+          )}
+        </HeaderView>
       )}
       <ShoreInputLimit
         portalId={portalId}
