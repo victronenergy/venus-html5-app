@@ -17,7 +17,7 @@ const getTopics = (portalId, vebusInstanceId) => {
   }
 }
 
-function systemModeFormatter(value) {
+const systemModeFormatter = value => {
   if (value == 1) return "Charger only"
   if (value == 2) return "Inverter only"
   if (value == 3) return "ON"
@@ -25,7 +25,7 @@ function systemModeFormatter(value) {
   return "--"
 }
 
-function systemStateFormatter(value) {
+const systemStateFormatter = value => {
   if (value == 0) return "Off"
   if (value == 1) return "Low power"
   if (value == 2) return "VE.Bus Fault condition"
@@ -42,34 +42,34 @@ function systemStateFormatter(value) {
   return "--"
 }
 
-const InverterCharger = props => {
-  const activeMode = systemModeFormatter(props.activeMode)
+const InverterCharger = ({ activeMode, state, modeIsAdjustable, onModeSelected }) => {
+  const systemMode = systemModeFormatter(activeMode)
   return (
     <div className="metric inverter-charger">
       <HeaderView icon={require("../../images/icons/multiplus.svg")} title="Inverter / Charger" child>
         <MetricValues>
-          <p className="text text--smaller">{systemStateFormatter(props.state)}</p>
+          <p className="text text--smaller">{systemStateFormatter(state)}</p>
         </MetricValues>
       </HeaderView>
       <div className="inverter-charger__mode-selector">
         <SelectorButton
-          disabled={!props.modeIsAdjustable}
-          active={activeMode === "ON"}
-          onClick={() => props.onModeSelected(SYSTEM_MODE.ON)}
+          disabled={!modeIsAdjustable}
+          active={systemMode === "ON"}
+          onClick={() => onModeSelected(SYSTEM_MODE.ON)}
         >
           On
         </SelectorButton>
         <SelectorButton
-          disabled={!props.modeIsAdjustable}
-          active={activeMode === "OFF"}
-          onClick={() => props.onModeSelected(SYSTEM_MODE.OFF)}
+          disabled={!modeIsAdjustable}
+          active={systemMode === "OFF"}
+          onClick={() => onModeSelected(SYSTEM_MODE.OFF)}
         >
           Off
         </SelectorButton>
         <SelectorButton
-          disabled={!props.modeIsAdjustable}
-          active={activeMode === "Charger only"}
-          onClick={() => props.onModeSelected(SYSTEM_MODE.CHARGER_ONLY)}
+          disabled={!modeIsAdjustable}
+          active={systemMode === "Charger only"}
+          onClick={() => onModeSelected(SYSTEM_MODE.CHARGER_ONLY)}
         >
           Charger only
         </SelectorButton>
@@ -81,7 +81,7 @@ const InverterCharger = props => {
 
 class InverterChargerWithData extends Component {
   render() {
-    const { portalId, vebusInstanceId } = this.props
+    const { portalId, vebusInstanceId, connected } = this.props
     return (
       <HidingContainer>
         {!portalId && !vebusInstanceId ? (
@@ -96,7 +96,7 @@ class InverterChargerWithData extends Component {
                       <InverterCharger
                         state={topics.state.value}
                         activeMode={topics.mode.value}
-                        modeIsAdjustable={topics.modeIsAdjustable && this.props.connected}
+                        modeIsAdjustable={topics.modeIsAdjustable && connected}
                         onModeSelected={newMode => updateMode(newMode)}
                       />
                     )

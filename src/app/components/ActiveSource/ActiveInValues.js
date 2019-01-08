@@ -1,7 +1,7 @@
 import React from "react"
 
 import { ListRow } from "../ListView/ListView"
-import NumericValue from "../NumericValue"
+import NumericValue from "../NumericValue/NumericValue"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 
 const getTopics = (portalId, vebusInstanceId) => {
@@ -24,9 +24,7 @@ const getTopics = (portalId, vebusInstanceId) => {
   }
 }
 
-export const ActiveInTotalValues = props => {
-  const { voltage, current, power, threePhase } = props
-
+export const ActiveInTotalValues = ({ voltage, current, power, threePhase }) => {
   return threePhase ? (
     voltage.map((v, i) => (
       <ListRow>
@@ -45,15 +43,14 @@ export const ActiveInTotalValues = props => {
   )
 }
 
-export default props => {
-  const { portalId, vebusInstanceId } = props
+export default ({ portalId, vebusInstanceId, threePhase }) => {
   if (!vebusInstanceId) {
     return null
   } else {
     return (
       <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId)}>
         {topics => {
-          return <ActiveInTotalValues {...topics} threePhase={props.threePhase} />
+          return <ActiveInTotalValues {...topics} threePhase={threePhase} />
         }}
       </MqttSubscriptions>
     )

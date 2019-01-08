@@ -18,18 +18,18 @@ import Header from "./../components/Header"
 import Fade, { viewChangeDelay } from "./../components/Fade"
 import Logger from "../utils/logger"
 
-const Main = props => {
+const Main = ({ isConnected, children, setView }) => {
   return (
     <main
-      className={!props.isConnected ? "disconnected" : ""}
+      className={!isConnected ? "disconnected" : ""}
       onClick={e => {
         // Bit of a hack to close "overlays" but doing it without adding event preventDefaults everywhere
         if (e.target.nodeName === "MAIN") {
-          props.setView(VIEWS.METRICS)
+          setView(VIEWS.METRICS)
         }
       }}
     >
-      {props.children}
+      {children}
     </main>
   )
 }

@@ -1,10 +1,10 @@
 import { BATTERY_STATE } from "../../utils/constants"
-import { formatNumber } from "./../NumericValue"
+import { formatNumber } from "../NumericValue/NumericValue"
 import React from "react"
 import PropTypes from "prop-types"
 import classNames from "classnames"
 
-function batteryStateFormatter(value) {
+const batteryStateFormatter = value => {
   switch (value) {
     case BATTERY_STATE.CHARGING:
       return "Charging"
@@ -14,7 +14,8 @@ function batteryStateFormatter(value) {
       return "Idle"
   }
 }
-function batteryTimeToGoFormatter(timeToGo) {
+
+const batteryTimeToGoFormatter = timeToGo => {
   const secs = parseInt(timeToGo)
   if (!isNaN(secs)) {
     const days = Math.floor(secs / 86400)
@@ -30,8 +31,7 @@ function batteryTimeToGoFormatter(timeToGo) {
   }
 }
 
-const BatteryLevel = props => {
-  const { state, timeToGo, soc } = props
+const BatteryLevel = ({ state, timeToGo, soc }) => {
   const batteryStateLabel = batteryStateFormatter(state)
   const timeToGoLabel = batteryTimeToGoFormatter(timeToGo)
   const showTimetoGo = state === BATTERY_STATE.DISCHARGING && timeToGo

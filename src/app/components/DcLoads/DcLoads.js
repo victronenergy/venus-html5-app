@@ -4,7 +4,7 @@ import HeaderView from "../HeaderView/HeaderView"
 import HidingContainer from "../HidingContainer"
 import MetricValues from "../MetricValues/MetricValues"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
-import NumericValue from "./../NumericValue"
+import NumericValue from "../NumericValue/NumericValue"
 
 const getTopics = portalId => {
   return {
@@ -14,17 +14,13 @@ const getTopics = portalId => {
   }
 }
 
-export const DcLoads = props => {
+export const DcLoads = ({ hasDcSystem, voltage, power }) => {
   return (
     <MetricValues>
-      {props.hasDcSystem !== 0 ? (
+      {hasDcSystem !== 0 ? (
         <>
-          <NumericValue
-            value={props.voltage && props.power ? props.power / props.voltage : undefined}
-            unit="A"
-            precision={1}
-          />
-          <NumericValue value={props.power} unit="W" />
+          <NumericValue value={voltage && power ? power / voltage : undefined} unit="A" precision={1} />
+          <NumericValue value={power} unit="W" />
         </>
       ) : (
         <p className="text--smaller">

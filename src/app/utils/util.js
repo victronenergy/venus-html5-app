@@ -41,7 +41,7 @@ export const getMessageJson = message => {
   }
 }
 
-export function objectValues(data) {
+export const objectValues = data => {
   return Object.keys(data).map(key => data[key])
 }
 
