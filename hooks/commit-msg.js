@@ -10,7 +10,7 @@ try {
   } else if (subject.endsWith(".")) {
     console.error("The subject of the commit should not end with a period ('.')")
     process.exit(1)
-  } else if (body.some(line => line.length > 80)) {
+  } else if (body.some(line => !line.startsWith("#") && line.length > 80)) {
     console.error("The lines in the commit body should not be over 80 characters long.")
     process.exit(1)
   } else process.exit(0)
