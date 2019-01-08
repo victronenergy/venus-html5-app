@@ -112,8 +112,8 @@ class MqttClientProvider extends Component {
   getMessagesByTopics = topics => {
     return Object.entries(topics).reduce((res, [key, topics]) => {
       const value = Array.isArray(topics)
-        ? topics.map(t => this.state.messages[t] || { value: null })
-        : this.state.messages[topics] || { value: null }
+        ? topics.map(t => (this.state.messages[t] || {}).value)
+        : (this.state.messages[topics] || {}).value
       res[key] = value
       return res
     }, {})
@@ -124,7 +124,7 @@ class MqttClientProvider extends Component {
     return Object.keys(this.state.messages)
       .filter(t => t.match(re))
       .reduce((obj, key) => {
-        obj[key] = this.state.messages[key]
+        obj[key] = (this.state.messages[key] || {}).value
         return obj
       }, {})
   }

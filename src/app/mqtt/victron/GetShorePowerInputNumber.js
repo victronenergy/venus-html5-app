@@ -15,8 +15,8 @@ class GetShorePowerInputNumber extends Component {
     return (
       <MqttSubscriptions topics={getTopics(portalId)}>
         {topics => {
-          const acInput1 = topics.acInput1.value
-          const acInput2 = topics.acInput2.value
+          const acInput1 = topics.acInput1
+          const acInput2 = topics.acInput2
 
           if (acInput1 === null || acInput2 === null) {
             return children()

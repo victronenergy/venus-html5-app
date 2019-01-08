@@ -108,7 +108,7 @@ class BatteryWithData extends Component {
       <HidingContainer>
         <MqttSubscriptions topics={getTopics(portalId)}>
           {topics => {
-            const batteries = topics.batteries.value
+            const batteries = topics.batteries
             if (!batteries) {
               return null
             } else {

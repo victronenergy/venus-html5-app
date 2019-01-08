@@ -50,9 +50,9 @@ class ShoreInputLimitSelector extends Component {
   }
 
   render() {
-    const { maxLimit = 100, productId, currentLimit, onLimitSelected } = this.props
+    const { currentLimitMax = 100, productId, currentLimit, onLimitSelected } = this.props
     const amperageList = this.getSuggestedAmperageValuesList(productId).filter(value => {
-      return value <= maxLimit
+      return value <= currentLimitMax
     })
     const currentlySelectedLimit = parseInt(currentLimit)
 
@@ -103,12 +103,10 @@ class ShoreInputLimitSelectorWithData extends Component {
                   <MqttWriteValue
                     topic={`W/${portalId}/vebus/${vebusInstanceId}/Ac/In/${shorePowerInput}/CurrentLimit`}
                   >
-                    {(isConnected, updateLimitSelected) => {
+                    {(_, updateLimitSelected) => {
                       return (
                         <ShoreInputLimitSelector
-                          currentLimit={topics.currentLimit.value}
-                          maxLimit={topics.currentLimitMax.value}
-                          productId={topics.productId.value}
+                          {...topics}
                           onLimitSelected={value => {
                             updateLimitSelected(value)
                             onLimitSelected()

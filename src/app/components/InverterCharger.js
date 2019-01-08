@@ -91,11 +91,11 @@ class InverterChargerWithData extends Component {
             {topics => {
               return (
                 <MqttWriteValue topic={`W/${portalId}/vebus/${vebusInstanceId}/Mode`}>
-                  {(isConnected, updateMode) => {
+                  {(_, updateMode) => {
                     return (
                       <InverterCharger
-                        state={topics.state.value}
-                        activeMode={topics.mode.value}
+                        state={topics.state}
+                        activeMode={topics.mode}
                         modeIsAdjustable={topics.modeIsAdjustable && connected}
                         onModeSelected={newMode => updateMode(newMode)}
                       />

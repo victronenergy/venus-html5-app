@@ -25,7 +25,7 @@ const Header = props => {
 }
 
 // TODO Add topic for SystemSetup and then change value passed to header
-// showRemoteConsoleSetting={topics.showRemoteConsoleSetting.value}
+// showRemoteConsoleSetting={topics.showRemoteConsoleSetting}
 class HeaderWithData extends Component {
   render() {
     const { portalId, isConnected, currentView, handleRemoteConsoleButtonClicked } = this.props

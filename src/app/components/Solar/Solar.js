@@ -32,10 +32,10 @@ class SolarWithData extends Component {
         {!portalId ? null : (
           <MqttSubscriptions topics={getTopics(portalId)}>
             {topics => {
-              if (!topics.current.value && !topics.power.value) {
+              if (!topics.current && !topics.power) {
                 return null
               } else {
-                return <Solar current={topics.current.value} power={topics.power.value} />
+                return <Solar {...topics} />
               }
             }}
           </MqttSubscriptions>

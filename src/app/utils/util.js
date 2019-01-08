@@ -67,11 +67,6 @@ export const getParameterByName = (name, url) => {
   return decodeURIComponent(results[2].replace(/\+/g, " "))
 }
 
-export const phaseSum = phases => {
-  const [phase1, phase2, phase3] = phases
-  return phase1 && phase1.value ? phase1.value + phase2.value + phase3.value : null
-}
-
 export const flatten = arrays => {
   return [].concat.apply([], arrays)
 }
