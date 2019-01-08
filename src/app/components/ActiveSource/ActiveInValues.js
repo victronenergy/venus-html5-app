@@ -1,7 +1,7 @@
 import React from "react"
 
 import { ListRow } from "../ListView/ListView"
-import NumericValue from "../NumericValue/NumericValue"
+import NumericValue from "../NumericValue/index"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 
 const getTopics = (portalId, vebusInstanceId) => {

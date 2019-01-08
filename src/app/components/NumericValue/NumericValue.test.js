@@ -1,6 +1,6 @@
 import React from "react"
 import { shallow } from "enzyme"
-import NumericValue from "./NumericValue"
+import NumericValue from "./NumericValue/index"
 
 describe("Number display", () => {
   it("shows dashes when no value given", () => {

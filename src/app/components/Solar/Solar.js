@@ -2,9 +2,9 @@ import React, { Component } from "react"
 
 import HeaderView from "../HeaderView/HeaderView"
 import HidingContainer from "../HidingContainer"
-import MetricValues from "../MetricValues/MetricValues"
+import MetricValues from "../MetricValues"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
-import NumericValue from "../NumericValue/NumericValue"
+import NumericValue from "../NumericValue/index"
 
 const getTopics = portalId => {
   return {
