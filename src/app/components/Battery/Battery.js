@@ -3,7 +3,7 @@ import React, { Component } from "react"
 import BatteryLevel from "./BatteryLevel"
 import HidingContainer from "../HidingContainer"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
-import NumericValue from "../NumericValue/NumericValue"
+import NumericValue from "../NumericValue/index"
 import SelectorButton from "../SelectorButton"
 
 import "./Battery.scss"

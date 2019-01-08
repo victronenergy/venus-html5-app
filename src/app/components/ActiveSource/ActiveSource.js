@@ -5,7 +5,7 @@ import HeaderView from "../HeaderView/HeaderView"
 import HidingContainer from "../HidingContainer"
 import { ListView } from "../ListView/ListView"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
-import MetricValues from "../MetricValues/MetricValues"
+import MetricValues from "../MetricValues"
 import ShoreInputLimit from "../ShoreInputLimit"
 
 import { AC_SOURCE_TYPE, ACTIVE_INPUT } from "../../utils/constants"

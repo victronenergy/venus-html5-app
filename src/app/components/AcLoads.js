@@ -1,11 +1,11 @@
 import React, { Component } from "react"
 
-import HeaderView from "./HeaderView/HeaderView"
+import HeaderView from "./HeaderView"
 import HidingContainer from "./HidingContainer"
-import { ListView, ListRow } from "./ListView/ListView"
-import MetricValues from "./MetricValues/MetricValues"
+import { ListView, ListRow } from "./ListView"
+import MetricValues from "./MetricValues"
 import MqttSubscriptions from "../mqtt/MqttSubscriptions"
-import NumericValue from "./NumericValue/NumericValue"
+import NumericValue from "./NumericValue/index"
 
 const getTopics = (portalId, vebusInstanceId) => {
   return {

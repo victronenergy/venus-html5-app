@@ -4,7 +4,7 @@ import GetShorePowerInputNumber from "../../mqtt/victron/GetShorePowerInputNumbe
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 import SelectorButton from "../SelectorButton"
 
-import { formatNumber } from "../NumericValue/NumericValue"
+import { formatNumber } from "../NumericValue/index"
 
 import "./ShoreInputLimit.scss"
 

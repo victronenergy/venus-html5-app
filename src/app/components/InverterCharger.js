@@ -1,8 +1,8 @@
 import React, { Component } from "react"
 
-import HeaderView from "./HeaderView/HeaderView"
+import HeaderView from "./HeaderView"
 import HidingContainer from "./HidingContainer"
-import MetricValues from "./MetricValues/MetricValues"
+import MetricValues from "./MetricValues"
 import MqttSubscriptions from "../mqtt/MqttSubscriptions"
 import MqttWriteValue from "../mqtt/MqttWriteValue"
 import SelectorButton from "./SelectorButton"

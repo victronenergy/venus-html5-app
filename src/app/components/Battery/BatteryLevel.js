@@ -1,5 +1,5 @@
 import { BATTERY_STATE } from "../../utils/constants"
-import { formatNumber } from "../NumericValue/NumericValue"
+import { formatNumber } from "../NumericValue/index"
 import React from "react"
 import PropTypes from "prop-types"
 import classNames from "classnames"
