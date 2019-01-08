@@ -7,23 +7,23 @@ describe("DC Loads", () => {
     const wrapper = mount(<DcLoads voltage={12.345} power={98.765} hasDcSystem={"1"} />)
 
     it("shows current", () => {
-      const current = wrapper
+      const props = wrapper
         .find("NumericValue")
         .first()
         .props()
 
-      expect(current.value).toEqual(98.765 / 12.345, "Current should be voltage divided by power")
-      expect(current.precision).toEqual(1, "Current should be displayed with one value")
+      expect(props.value).toEqual(98.765 / 12.345, "Current should be voltage divided by power")
+      expect(props.precision).toEqual(1, "Current should be displayed with one value")
     })
 
     it("shows power", () => {
-      const power = wrapper
+      const props = wrapper
         .find("NumericValue")
         .at(1)
         .props()
 
-      expect(power.value).toEqual(98.765)
-      expect(power.precision).toBeUndefined()
+      expect(props.value).toEqual(98.765)
+      expect(props.precision).toBeUndefined()
     })
   })
 

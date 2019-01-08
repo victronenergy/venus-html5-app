@@ -12,7 +12,7 @@ export default ({ children }) => (
 
       const firstMessage = Object.entries(messages)[0]
       // You can only have one VE.Bus device in a system, so just take the first one
-      let vebusInstanceId = firstMessage[1] ? firstMessage[1].value : null
+      let vebusInstanceId = firstMessage[1] ? firstMessage[1] : null
       return children(vebusInstanceId)
     }}
   </MqttTopicWildcard>

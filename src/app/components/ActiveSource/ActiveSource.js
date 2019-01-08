@@ -24,11 +24,11 @@ const getTopics = (portalId, vebusInstanceId) => {
 }
 
 const getActiveSource = ({ activeInput, settings: [input0, input1] }) => {
-  switch (activeInput.value) {
+  switch (activeInput) {
     case ACTIVE_INPUT.INPUT_0:
-      return input0.value
+      return input0
     case ACTIVE_INPUT.INPUT_1:
-      return input1.value
+      return input1
     case ACTIVE_INPUT.NONE:
       return null
     default:
@@ -110,7 +110,7 @@ class ActiveSource extends Component {
           vebusInstanceId={vebusInstanceId}
           hasValues={true}
           onChangeShoreInputLimitClicked={onChangeShoreInputLimitClicked}
-          phases={phases.value}
+          phases={phases}
         />
       )
     }

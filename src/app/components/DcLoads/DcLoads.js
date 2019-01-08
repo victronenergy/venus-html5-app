@@ -40,11 +40,7 @@ class DcLoadsWithData extends Component {
           {topics => {
             return (
               <HeaderView icon={require("../../../images/icons/dc.svg")} title="DC Loads">
-                <DcLoads
-                  voltage={topics.voltage.value}
-                  power={topics.power.value}
-                  hasDcSystem={topics.hasDcSystem.value}
-                />
+                <DcLoads {...topics} />
               </HeaderView>
             )
           }}

@@ -11,7 +11,7 @@ export default ({ children }) => (
       } else {
         // Only one path will match this wildcard, so just take the value from the first one
         const firstMessage = Object.entries(messages)[0]
-        let portalId = firstMessage[1] ? firstMessage[1].value : null
+        let portalId = firstMessage[1] ? firstMessage[1] : null
         return children(portalId)
       }
     }}

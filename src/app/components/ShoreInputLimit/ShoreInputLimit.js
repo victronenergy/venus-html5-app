@@ -56,8 +56,8 @@ class ShoreInputLimitWithData extends Component {
                 {topics => {
                   return (
                     <ShoreInputLimit
-                      currentLimit={formatNumber({ value: topics.currentLimit.value, unit: "A" })}
-                      isAdjustable={topics.currentLimitIsAdjustable.value}
+                      currentLimit={formatNumber({ value: topics.currentLimit, unit: "A" })}
+                      isAdjustable={topics.currentLimitIsAdjustable}
                       onChangeShoreInputLimitClicked={onChangeShoreInputLimitClicked}
                     />
                   )
