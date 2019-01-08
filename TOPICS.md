@@ -145,8 +145,6 @@ N/{portalId}/system/0/Ac/ActiveIn/Source             <- The active AC-In source 
 N/{portalId}/system/0/Ac/Consumption/NumberOfPhases  <- Either 1 (single phase), 2 (split-phase) or
                                                         3 (three-phase)
 
-N/{portalId}/system/0/Ac/ConsumptionOnOutput/*       <- Use this for AC Consumption.
-
 N/{portalId}/system/0/VebusService                   <- Returns the service name of the vebus service.
                                                         Use that to find the control options:
 ```
@@ -245,12 +243,10 @@ N/{portalId]/vebus/{vebusInstanceId}/Ac/Out/L3/V
 Power:
 
 ```
-N/{portalId}/system/0/Ac/ConsumptionOnOutput/L1/Power
-N/{portalId}/system/0/Ac/ConsumptionOnOutput/L2/Power
-N/{portalId}/system/0/Ac/ConsumptionOnOutput/L3/Power
+N/{portalId]/vebus/{vebusInstanceId}/Ac/Out/L1/P
+N/{portalId]/vebus/{vebusInstanceId}/Ac/Out/L2/P
+N/{portalId]/vebus/{vebusInstanceId}/Ac/Out/L3/P
 ```
-
-Note: do not use `N/{portalId]/vebus/{vebusInstanceId}/Ac/Out/L1/P`
 
 #### DC Loads
 

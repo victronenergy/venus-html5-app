@@ -9,7 +9,7 @@ import NumericValue from "./NumericValue/index"
 
 const getTopics = (portalId, vebusInstanceId) => {
   return {
-    phases: `N/${portalId}/system/0/Ac/ConsumptionOnOutput/NumberOfPhases`,
+    phases: `N/${portalId}/system/0/Ac/Consumption/NumberOfPhases`,
     current: [
       `N/${portalId}/vebus/${vebusInstanceId}/Ac/Out/L1/I`,
       `N/${portalId}/vebus/${vebusInstanceId}/Ac/Out/L2/I`,
@@ -21,9 +21,9 @@ const getTopics = (portalId, vebusInstanceId) => {
       `N/${portalId}/vebus/${vebusInstanceId}/Ac/Out/L3/V`
     ],
     power: [
-      `N/${portalId}/system/0/Ac/ConsumptionOnOutput/L1/Power`,
-      `N/${portalId}/system/0/Ac/ConsumptionOnOutput/L2/Power`,
-      `N/${portalId}/system/0/Ac/ConsumptionOnOutput/L3/Power`
+      `N/${portalId}/vebus/${vebusInstanceId}/Ac/Out/L1/P`,
+      `N/${portalId}/vebus/${vebusInstanceId}/Ac/Out/L2/P`,
+      `N/${portalId}/vebus/${vebusInstanceId}/Ac/Out/L3/P`
     ]
   }
 }
