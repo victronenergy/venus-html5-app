@@ -6,6 +6,7 @@ import InverterCharger from "./InverterCharger"
 import AcLoads from "./AcLoads"
 import DcLoads from "./DcLoads"
 import Solar from "./Solar"
+import Chargers from "./Chargers"
 
 export default class Metrics extends Component {
   metricsRef = React.createRef()
@@ -36,6 +37,7 @@ export default class Metrics extends Component {
         {vebusInstanceId && <AcLoads {...commonProps} />}
         <DcLoads {...commonProps} />
         <Solar {...commonProps} />
+        <Chargers portalId={portalId} />
       </div>
     )
   }
