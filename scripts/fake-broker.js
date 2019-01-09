@@ -197,9 +197,9 @@ export class MockMQQTBroker {
       case "N/mockPortalId/vebus/257/Ac/ActiveIn/L1/P":
       case "N/mockPortalId/vebus/257/Ac/ActiveIn/L2/P":
       case "N/mockPortalId/vebus/257/Ac/ActiveIn/L3/P":
-      case "N/mockPortalId/system/0/Ac/ConsumptionOnOutput/L1/Power":
-      case "N/mockPortalId/system/0/Ac/ConsumptionOnOutput/L2/Power":
-      case "N/mockPortalId/system/0/Ac/ConsumptionOnOutput/L3/Power":
+      case "N/mockPortalId/vebus/257/Ac/Out/L1/P":
+      case "N/mockPortalId/vebus/257/Ac/Out/L2/P":
+      case "N/mockPortalId/vebus/257/Ac/Out/L3/P":
       case "N/mockPortalId/system/0/Dc/Pv/Power":
         this.sendAlteringNumber(path, 4, 150)
         break
