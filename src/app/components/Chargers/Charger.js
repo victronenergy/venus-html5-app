@@ -8,6 +8,7 @@ import MetricValues from "../MetricValues/MetricValues"
 import SelectorButton from "../SelectorButton/SelectorButton"
 import { CHARGER_MODE } from "../../utils/constants"
 import { ShoreInputLimit } from "../ShoreInputLimit/ShoreInputLimit"
+import SystemState from "../SystemState"
 
 const getTopics = (portalId, deviceInstanceId) => {
   return {
@@ -27,18 +28,6 @@ const getTopics = (portalId, deviceInstanceId) => {
 const chargerModeFormatter = value => {
   if (value == 0) return "OFF"
   if (value == 1) return "ON"
-  return "--"
-}
-
-const chargerStateFormatter = value => {
-  if (value == 0) return "Off"
-  if (value == 1) return "Low power"
-  if (value == 2) return "VE.Bus Fault condition"
-  if (value == 3) return "Bulk charging"
-  if (value == 4) return "Absorption charging"
-  if (value == 5) return "Float charging"
-  if (value == 6) return "Storage mode"
-  if (value == 7) return "Equalisation charging"
   return "--"
 }
 
@@ -66,7 +55,9 @@ const Charger = ({ nrOfOutputs, current, state, mode, currentLimit, onModeSelect
       <div className="charger__header-wrapper">
         <HeaderView icon={require("../../../images/icons/multiplus.svg")} title="Charger" child>
           <MetricValues>
-            <p className="text text--smaller text--opaque">{chargerStateFormatter(state)}</p>
+            <p className="text text--smaller text--opaque">
+              <SystemState value={state} />
+            </p>
           </MetricValues>
         </HeaderView>
         <div className="charger__input-limit-selector">{changeLimit}</div>
