@@ -3,7 +3,7 @@ import classnames from "classnames"
 
 import "./ListView.scss"
 
-export const ListView = ({ child, children, icon, title }) => (
+export const ListView = ({ child, children, icon, title, subTitle }) => (
   <div className={classnames({ metric: !child }, "list-view")}>
     <div className="list-view__header">
       <img src={icon} className="metric__icon" />
