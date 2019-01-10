@@ -48,6 +48,11 @@ export const SYSTEM_MODE = {
   OFF: 4
 }
 
+export const CHARGER_MODE = {
+  OFF: 0,
+  ON: 1
+}
+
 export const VIEWS = {
   CONNECTING: "CONNECTING",
   METRICS: "METRICS",

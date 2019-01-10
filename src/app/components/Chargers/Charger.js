@@ -1,11 +1,12 @@
 import React from "react"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
+import MqttWriteValue from "../../mqtt/MqttWriteValue"
 import HeaderView from "../../components/HeaderView"
 import NumericValue from "../NumericValue/NumericValue"
 import HidingContainer from "../../components/HidingContainer"
 import MetricValues from "../MetricValues/MetricValues"
 import SelectorButton from "../SelectorButton/SelectorButton"
-import { SYSTEM_MODE } from "../../utils/constants"
+import { CHARGER_MODE } from "../../utils/constants"
 
 const getTopics = (portalId, deviceInstanceId) => {
   return {
@@ -45,7 +46,7 @@ const Charger = ({ nrOfOutputs, current, state, mode, onModeSelected }) => {
     <div>
       <span className="text text--smaller">Output</span>
       {current.map((v, i) => (
-        <NumericValue value={current[i]} unit="A" precision={1} />
+        <NumericValue key={i} value={current[i]} unit="A" precision={1} />
       ))}
     </div>
   )
@@ -64,14 +65,14 @@ const Charger = ({ nrOfOutputs, current, state, mode, onModeSelected }) => {
         <SelectorButton
           disabled={!modeIsAdjustable}
           active={systemMode === "ON"}
-          onClick={() => onModeSelected(SYSTEM_MODE.ON)}
+          onClick={() => onModeSelected(CHARGER_MODE.ON)}
         >
           On
         </SelectorButton>
         <SelectorButton
           disabled={!modeIsAdjustable}
           active={systemMode === "OFF"}
-          onClick={() => onModeSelected(SYSTEM_MODE.OFF)}
+          onClick={() => onModeSelected(CHARGER_MODE.OFF)}
         >
           Off
         </SelectorButton>
@@ -83,7 +84,15 @@ const Charger = ({ nrOfOutputs, current, state, mode, onModeSelected }) => {
 const ChargerWithData = ({ portalId, deviceInstanceId }) => (
   <HidingContainer>
     <MqttSubscriptions topics={getTopics(portalId, deviceInstanceId)}>
-      {topics => <Charger {...topics} />}
+      {topics => {
+        return (
+          <MqttWriteValue topic={`W/${portalId}/charger/${deviceInstanceId}/Mode`}>
+            {(_, updateMode) => {
+              return <Charger {...topics} onModeSelected={updateMode} />
+            }}
+          </MqttWriteValue>
+        )
+      }}
     </MqttSubscriptions>
   </HidingContainer>
 )
