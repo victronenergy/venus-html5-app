@@ -122,22 +122,18 @@ class ActiveSourceWithData extends Component {
     const { portalId, vebusInstanceId, onChangeShoreInputLimitClicked } = this.props
     return (
       <HidingContainer>
-        {!vebusInstanceId ? (
-          <ActiveSourceLoading />
-        ) : (
-          <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId)}>
-            {topics => {
-              return (
-                <ActiveSource
-                  {...topics}
-                  portalId={portalId}
-                  vebusInstanceId={vebusInstanceId}
-                  onChangeShoreInputLimitClicked={onChangeShoreInputLimitClicked}
-                />
-              )
-            }}
-          </MqttSubscriptions>
-        )}
+        <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId)}>
+          {topics => {
+            return (
+              <ActiveSource
+                {...topics}
+                portalId={portalId}
+                vebusInstanceId={vebusInstanceId}
+                onChangeShoreInputLimitClicked={onChangeShoreInputLimitClicked}
+              />
+            )
+          }}
+        </MqttSubscriptions>
       </HidingContainer>
     )
   }
