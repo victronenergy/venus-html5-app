@@ -1,6 +1,7 @@
 const FriendlyErrorsPlugin = require("friendly-errors-webpack-plugin")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const path = require("path")
+const webpack = require("webpack")
 
 const conf = {
   mode: "development",
@@ -20,9 +21,6 @@ const conf = {
       compilationSuccessInfo: {
         messages: ["Your application is running on http://localhost:8000/?host=localhost&dev=true"]
       }
-    }),
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, "src/index.html")
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "src/browser-info.html"),
@@ -85,5 +83,12 @@ module.exports = (_env, argv) => {
   if (argv.mode === "development") {
     conf.devtool = "source-map"
   }
+  conf.plugins.push(
+    new HtmlWebpackPlugin({
+      filename: "index.html",
+      template: path.resolve(__dirname, "src/index.html"),
+      ENV: argv.mode === "production" ? "production" : "develpoment"
+    })
+  )
   return conf
 }
