@@ -45,13 +45,13 @@ const systemStateFormatter = value => {
 const InverterCharger = ({ activeMode, state, modeIsAdjustable, onModeSelected }) => {
   const systemMode = systemModeFormatter(activeMode)
   return (
-    <div className="metric inverter-charger">
+    <div className="metric charger inverter-charger">
       <HeaderView icon={require("../../images/icons/multiplus.svg")} title="Inverter / Charger" child>
         <MetricValues>
           <p className="text text--smaller">{systemStateFormatter(state)}</p>
         </MetricValues>
       </HeaderView>
-      <div className="inverter-charger__mode-selector">
+      <div className="charger__mode-selector">
         <SelectorButton
           disabled={!modeIsAdjustable}
           active={systemMode === "ON"}
