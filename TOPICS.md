@@ -59,13 +59,23 @@ N/{portalId}/system/0/Dc/Pv/Power
 N/{portalId}/system/0/Dc/Pv/Current
 ```
 
-#### AC Input data (Shore / Genset):
+#### AC Input data (Shore / Genset) for inverter/charger aka vebus
 
-##### What inputs are available?
+There are three types of devices that show up on D-Bus as a com.victronenergy.vebus device:
+- Inverters. These have no AC-input, so no AC-Input current limit
+- Multis: one AC-input; connected to either shore (adjustable) or a generator (not adjustable)
+- Quattros: two AC-inputs; typically one is connected to shore, and the other to a generator
 
-Some of our inverter/chargers have one AC input, others, the Quattros, have two. Sometimes only
-one input is used; fe. when they have the two-input model for another reason than using the two
-inputs. The installer configures the AC-input types in the menus: Settings -> System Setup.
+Which one you have can be determined from this path:
+
+```
+N/{portalId}/vebus/{vebusInstanceId}/Ac/NumberOfAcInputs
+// 0 = Inverter, 1 = system with one input, 2 = system with two inputs
+```
+
+##### What input is what (shore, or generator)
+
+The installer configures the AC-input types in the menus: Settings -> System Setup.
 
 Then they are stored in 'localsettings', available on MQTT as:
 
@@ -75,7 +85,7 @@ N/{portalId}/settings/0/Settings/SystemSetup/AcInput2
 // 0: not in use; 1: grid, 2: generator, 3: shore
 ```
 
-##### Which input is currently active?
+##### Which input is currently active
 
 Figure out which of the AC-inputs is what; so for example ACinput0 == Generator and
 ACinput1 == Shore. (based on the the settings above) and then look at this path:
