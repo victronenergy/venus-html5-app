@@ -56,7 +56,7 @@ class ShoreInputLimitWithData extends Component {
                     <ShoreInputLimit
                       currentLimit={formatNumber({ value: topics.currentLimit, unit: "A" })}
                       isAdjustable={topics.currentLimitIsAdjustable}
-                      onChangeShoreInputLimitClicked={onChangeShoreInputLimitClicked}
+                      onChangeShoreInputLimitClicked={() => onChangeShoreInputLimitClicked(vebusInstanceId)}
                     />
                   )
                 }}
