@@ -11,9 +11,7 @@ export default class Metrics extends Component {
   ref = React.createRef()
   state = { height: 50 } // height as CSS vh-attribute
 
-  render() {
-    const { portalId, vebusInstanceId, isConnected, onChangeShoreInputLimitClicked, onModeSelected } = this.props
-
+  componentDidUpdate() {
     if (
       this.state.height < 100 &&
       this.ref.current &&
@@ -21,6 +19,10 @@ export default class Metrics extends Component {
     ) {
       this.setState({ height: this.state.height + 5 })
     }
+  }
+
+  render() {
+    const { portalId, vebusInstanceId, isConnected, onChangeShoreInputLimitClicked, onModeSelected } = this.props
 
     return (
       <div id="metrics-container" ref={this.ref} style={{ height: `${this.state.height}vh` }}>
