@@ -126,3 +126,7 @@ html5-app - 0.2 \* Reworked the UI
 If you need any changes to the how the app is included inside Venus, please specify in the TODO file as well what changes need to be made to the recipe.
 All Venus recipes are found [here](https://github.com/victronenergy/meta-victronenergy/tree/master/meta-ve-software/recipes-ve).
 A sample recipe for the HTML5 app is [here](https://github.com/victronenergy/meta-victronenergy/tree/master/meta-ve-software/recipes-ve)
+
+## Device error logging
+
+When the app is hosted from a VenusGX, there is no convenient way to see the errors in the js console. To make troubleshooting easier the app sends (at least attempts) to send the error messages through websocket to the device. The log can be found at `/var/log/venus-html5-app/current`.

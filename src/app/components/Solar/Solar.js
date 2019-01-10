@@ -28,19 +28,21 @@ class SolarWithData extends Component {
   render() {
     const { portalId, metricsRef } = this.props
     return (
-      <MqttSubscriptions topics={getTopics(portalId)}>
-        {topics => {
-          if (!topics.current && !topics.power) {
-            return null
-          } else {
-            return (
-              <HidingContainer metricsRef={metricsRef}>
-                <Solar {...topics} />
-              </HidingContainer>
-            )
-          }
-        }}
-      </MqttSubscriptions>
+      portalId && (
+        <MqttSubscriptions topics={getTopics(portalId)}>
+          {topics => {
+            if (!topics.current && !topics.power) {
+              return null
+            } else {
+              return (
+                <HidingContainer metricsRef={metricsRef}>
+                  <Solar {...topics} />
+                </HidingContainer>
+              )
+            }
+          }}
+        </MqttSubscriptions>
+      )
     )
   }
 }

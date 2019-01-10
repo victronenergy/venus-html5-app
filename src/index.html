@@ -1,55 +1,77 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title>Victron Venus Status</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+  </head>
 
-<head>
-  <title>Victron Venus Status</title>
-  <!-- Required meta tags -->
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <meta http-equiv="Pragma" content="no-cache" />
-  <meta http-equiv="Expires" content="0" />
-</head>
+  <body>
+    <div id="app"></div>
+    <div id="devReload" style="position: fixed; top: 30px; left: 200px; display: none;">
+      <input type="button" value="Reload page" onclick="location.reload(true)" />
+      <input
+        type="button"
+        value="Browser info"
+        onclick="window.location.href = 'browser-info.html' + window.location.search"
+      />
+    </div>
+    <div
+      id="debugLog"
+      style="color: white; background-color: rgba(18, 26, 40, 1); max-height: 200px; overflow: scroll;"
+    ></div>
+    <script>
+      function getParameterByName(name, url) {
+        if (!url) url = window.location.href
+        name = name.replace(/[\[\]]/g, "\\$&")
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+          results = regex.exec(url)
+        if (!results) return null
+        if (!results[2]) return ""
+        return decodeURIComponent(results[2].replace(/\+/g, " "))
+      }
 
-<body>
-  <div id="app"></div>
-  <div id="devReload" style="position: fixed; top: 30px; left: 200px; display: none;">
-    <input type="button" value="Reload page" onclick="location.reload(true)" />
-    <input type="button" value="Browser info" onclick="window.location.href = 'browser-info.html' + window.location.search" />
-  </div>
-  <div id="debugLog" style="color: white; background-color: rgba(18, 26, 40, 1); max-height: 200px; overflow: scroll;"></div>
-  <script>
-    function getParameterByName(name, url) {
-      if (!url) url = window.location.href;
-      name = name.replace(/[\[\]]/g, '\\$&');
-      var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-        results = regex.exec(url);
-      if (!results) return null;
-      if (!results[2]) return '';
-      return decodeURIComponent(results[2].replace(/\+/g, ' '));
-    }
+      var mode = "<%= htmlWebpackPlugin.options.ENV %>"
 
-    if (getParameterByName('debug')) window.onerror = function (e) { alert(e) }
-  </script>
-</body>
+      if (mode === "production") {
+        var host = getParameterByName("host") || "localhost"
+        var socket = new WebSocket("ws://" + host + ":7890")
+        window.onerror = function(msg, url, lineNo, columnNo, err) {
+          var data = {
+            time: new Date(),
+            error: msg
+          }
 
-<script>
-  function debugLogFn(msg) {
-    document.getElementById('debugLog').innerHTML += msg + "<br/>";
-    return false
-  }
+          if (err) {
+            data.stack = err.stack
+          }
 
-  function debug(name, url) {
-    console.log = debugLogFn
-    console.error = debugLogFn
-    document.getElementById("debugLog").style.display = "block"
-  }
+          socket.send(JSON.stringify(data))
+          return true
+        }
+      }
 
-  (function () {
-    if (getParameterByName('dev')) document.getElementById("devReload").style.display = "block"
+      function debugLogFn(msg) {
+        document.getElementById("debugLog").innerHTML += msg + "<br/>"
+        return false
+      }
 
-    if (getParameterByName('debug')) debug()
-  })();
-</script>
+      function debug(name, url) {
+        console.log = debugLogFn
+        console.error = debugLogFn
+        document.getElementById("debugLog").style.display = "block"
+      }
 
+      window.onload = function() {
+        if (getParameterByName("debug")) {
+          debug()
+          document.getElementById("devReload").style.display = "block"
+        }
+      }
+    </script>
+  </body>
 </html>

@@ -57,6 +57,10 @@ class App extends Component {
     } else this.setView(VIEWS.METRICS)
   }
 
+  componentDidCatch = (e, i) => {
+    if (window.onerror) window.onerror(e.message, null, null, null, { stack: e.stack })
+  }
+
   render() {
     const { host, port } = this.props
     return (
