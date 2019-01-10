@@ -27,18 +27,22 @@ export default class Metrics extends Component {
     return (
       <div id="metrics-container" ref={this.ref} style={{ height: `${this.state.height}vh` }}>
         <Battery portalId={portalId} />
-        <ActiveSource
-          portalId={portalId}
-          vebusInstanceId={vebusInstanceId}
-          onChangeShoreInputLimitClicked={onChangeShoreInputLimitClicked}
-        />
-        <InverterCharger
-          portalId={portalId}
-          vebusInstanceId={vebusInstanceId}
-          connected={isConnected}
-          onModeSelected={onModeSelected}
-        />
-        <AcLoads portalId={portalId} vebusInstanceId={vebusInstanceId} />
+        {vebusInstanceId && (
+          <ActiveSource
+            portalId={portalId}
+            vebusInstanceId={vebusInstanceId}
+            onChangeShoreInputLimitClicked={onChangeShoreInputLimitClicked}
+          />
+        )}
+        {vebusInstanceId && (
+          <InverterCharger
+            portalId={portalId}
+            vebusInstanceId={vebusInstanceId}
+            connected={isConnected}
+            onModeSelected={onModeSelected}
+          />
+        )}
+        {vebusInstanceId && <AcLoads portalId={portalId} vebusInstanceId={vebusInstanceId} />}
         <DcLoads portalId={portalId} />
         <Solar portalId={portalId} />
       </div>

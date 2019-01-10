@@ -105,15 +105,15 @@ class BatteryWithData extends Component {
   render() {
     const { portalId } = this.props
     return (
-      <HidingContainer>
-        <MqttSubscriptions topics={getTopics(portalId)}>
-          {topics => {
-            const batteries = topics.batteries
-            if (!batteries) {
-              return null
-            } else {
-              mainBatteryToFirst(batteries)
-              return (
+      <MqttSubscriptions topics={getTopics(portalId)}>
+        {topics => {
+          const batteries = topics.batteries
+          if (!batteries) {
+            return null
+          } else {
+            mainBatteryToFirst(batteries)
+            return (
+              <HidingContainer>
                 <div className="metric metric__battery">
                   <BatteryHeader
                     amount={batteries.length}
@@ -122,11 +122,11 @@ class BatteryWithData extends Component {
                   />
                   <Batteries batteries={batteries} showAll={this.state.showAll} />
                 </div>
-              )
-            }
-          }}
-        </MqttSubscriptions>
-      </HidingContainer>
+              </HidingContainer>
+            )
+          }
+        }}
+      </MqttSubscriptions>
     )
   }
 }

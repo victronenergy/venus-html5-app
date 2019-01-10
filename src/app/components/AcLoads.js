@@ -54,32 +54,16 @@ const AcLoads = props => {
   )
 }
 
-const AcLoadsLoading = () => {
-  return (
-    <HeaderView icon={require("../../images/icons/ac.svg")} title="AC Loads">
-      <MetricValues>
-        <NumericValue value={null} />
-        <NumericValue value={null} />
-        <NumericValue value={null} />
-      </MetricValues>
-    </HeaderView>
-  )
-}
-
 class AcLoadsWithData extends Component {
   render() {
     const { portalId, vebusInstanceId } = this.props
     return (
       <HidingContainer>
-        {!vebusInstanceId ? (
-          <AcLoadsLoading />
-        ) : (
-          <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId)}>
-            {topics => {
-              return <AcLoads {...topics} />
-            }}
-          </MqttSubscriptions>
-        )}
+        <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId)}>
+          {topics => {
+            return <AcLoads {...topics} />
+          }}
+        </MqttSubscriptions>
       </HidingContainer>
     )
   }
