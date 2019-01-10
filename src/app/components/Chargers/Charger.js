@@ -2,11 +2,12 @@ import React from "react"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 import MqttWriteValue from "../../mqtt/MqttWriteValue"
 import HeaderView from "../../components/HeaderView"
-import NumericValue from "../NumericValue/NumericValue"
+import NumericValue, { formatNumber } from "../NumericValue/NumericValue"
 import HidingContainer from "../../components/HidingContainer"
 import MetricValues from "../MetricValues/MetricValues"
 import SelectorButton from "../SelectorButton/SelectorButton"
 import { CHARGER_MODE } from "../../utils/constants"
+import { ShoreInputLimit } from "../ShoreInputLimit/ShoreInputLimit"
 
 const getTopics = (portalId, deviceInstanceId) => {
   return {
@@ -41,7 +42,7 @@ const chargerStateFormatter = value => {
   return "--"
 }
 
-const Charger = ({ nrOfOutputs, current, state, mode, onModeSelected }) => {
+const Charger = ({ nrOfOutputs, current, state, mode, currentLimit, onModeSelected, onChangeInputLimitClicked }) => {
   const output = (
     <div>
       <span className="text text--smaller">Output</span>
@@ -50,16 +51,26 @@ const Charger = ({ nrOfOutputs, current, state, mode, onModeSelected }) => {
       ))}
     </div>
   )
+  const changeLimit = (
+    <ShoreInputLimit
+      currentLimit={formatNumber({ value: currentLimit, unit: "A" })}
+      isAdjustable={true}
+      onChangeShoreInputLimitClicked={onChangeInputLimitClicked}
+    />
+  )
 
   const systemMode = chargerModeFormatter(mode)
   const modeIsAdjustable = true // For chargers, mode is always adjustable
   return (
     <div className="metric charger">
-      <HeaderView icon={require("../../../images/icons/multiplus.svg")} title="Charger" child>
-        <MetricValues>
-          <p className="text text--smaller">{chargerStateFormatter(state)}</p>
-        </MetricValues>
-      </HeaderView>
+      <div className="charger__header-wrapper">
+        <HeaderView icon={require("../../../images/icons/multiplus.svg")} title="Charger" child>
+          <MetricValues>
+            <p className="text text--smaller text--opaque">{chargerStateFormatter(state)}</p>
+          </MetricValues>
+        </HeaderView>
+        <div className="charger__input-limit-selector">{changeLimit}</div>
+      </div>
       <div className="charger__output">{output}</div>
       <div className="charger__mode-selector">
         <SelectorButton
