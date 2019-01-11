@@ -13,7 +13,7 @@ export default class Metrics extends Component {
 
   componentDidUpdate() {
     if (
-      this.state.height < 100 &&
+      this.state.height < 80 &&
       this.ref.current &&
       this.ref.current.children[this.ref.current.childElementCount - 1].style.visibility === "hidden"
     ) {

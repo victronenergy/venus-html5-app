@@ -45,8 +45,7 @@ body {
 
 html,
 body,
-#app,
-main {
+#app {
   height: 100%;
   box-sizing: border-box;
 }
@@ -65,7 +64,6 @@ main {
   flex-direction: column;
   justify-content: center;
   flex-grow: 1;
-  margin-bottom: 5vh;
 }
 
 .loading {
@@ -111,7 +109,8 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 20px 0;
+  margin-bottom: 5vh;
+  height: 15vh;
 }
 
 .logo {
