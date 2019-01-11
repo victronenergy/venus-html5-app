@@ -3,7 +3,6 @@ import React, { Component } from "react"
 const isElementInViewport = el => {
   if (!el) return true
   const rect = el.getBoundingClientRect()
-  // return rect.top >= 0 && rect.left >= 0 && rect.bottom <= window.innerHeight && rect.right <= window.innerWidth
   return rect.right <= window.innerWidth
 }
 

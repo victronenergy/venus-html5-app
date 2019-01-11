@@ -15,7 +15,7 @@ $very-low-landscape: $low-landscape + " and (max-height: 350px)";
 
 $hide-remote-console-breakpoint: "all and (max-width: 540px), (max-height: 350px)";
 
-$base: 0.045em;
+$base: 0.05em;
 $topBottomPadding: 17 * $base;
 $rightLeftPadding: 20 * $base;
 $height: 81 * $base;
