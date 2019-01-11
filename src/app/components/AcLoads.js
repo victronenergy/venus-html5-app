@@ -58,13 +58,15 @@ class AcLoadsWithData extends Component {
   render() {
     const { portalId, vebusInstanceId } = this.props
     return (
-      <HidingContainer>
-        <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId)}>
-          {topics => {
-            return <AcLoads {...topics} />
-          }}
-        </MqttSubscriptions>
-      </HidingContainer>
+      <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId)}>
+        {topics => {
+          return (
+            <HidingContainer>
+              <AcLoads {...topics} />
+            </HidingContainer>
+          )
+        }}
+      </MqttSubscriptions>
     )
   }
 }

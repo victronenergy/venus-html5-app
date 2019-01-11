@@ -83,26 +83,26 @@ class InverterChargerWithData extends Component {
   render() {
     const { portalId, vebusInstanceId, connected } = this.props
     return (
-      <HidingContainer>
-        <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId)}>
-          {topics => {
-            return (
-              <MqttWriteValue topic={`W/${portalId}/vebus/${vebusInstanceId}/Mode`}>
-                {(_, updateMode) => {
-                  return (
+      <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId)}>
+        {topics => {
+          return (
+            <MqttWriteValue topic={`W/${portalId}/vebus/${vebusInstanceId}/Mode`}>
+              {(_, updateMode) => {
+                return (
+                  <HidingContainer>
                     <InverterCharger
                       state={topics.state}
                       activeMode={topics.mode}
                       modeIsAdjustable={topics.modeIsAdjustable && connected}
                       onModeSelected={newMode => updateMode(newMode)}
                     />
-                  )
-                }}
-              </MqttWriteValue>
-            )
-          }}
-        </MqttSubscriptions>
-      </HidingContainer>
+                  </HidingContainer>
+                )
+              }}
+            </MqttWriteValue>
+          )
+        }}
+      </MqttSubscriptions>
     )
   }
 }

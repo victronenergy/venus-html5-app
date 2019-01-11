@@ -35,17 +35,17 @@ export const DcLoads = ({ hasDcSystem, voltage, power }) => {
 class DcLoadsWithData extends Component {
   render() {
     return (
-      <HidingContainer>
-        <MqttSubscriptions topics={getTopics(this.props.portalId)}>
-          {topics => {
-            return (
+      <MqttSubscriptions topics={getTopics(this.props.portalId)}>
+        {topics => {
+          return (
+            <HidingContainer>
               <HeaderView icon={require("../../../images/icons/dc.svg")} title="DC Loads">
                 <DcLoads {...topics} />
               </HeaderView>
-            )
-          }}
-        </MqttSubscriptions>
-      </HidingContainer>
+            </HidingContainer>
+          )
+        }}
+      </MqttSubscriptions>
     )
   }
 }
