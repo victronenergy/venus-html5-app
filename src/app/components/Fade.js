@@ -5,7 +5,8 @@ export const viewChangeDelay = 500
 const viewChangeTransitionDuration = viewChangeDelay - 100
 const baseStyle = {
   transition: `opacity ${viewChangeTransitionDuration}ms ease`,
-  display: "flex"
+  display: "flex",
+  width: "100%"
 }
 
 class Fade extends Component {
