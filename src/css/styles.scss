@@ -14,14 +14,40 @@
 html {
   background-color: #2e3745;
 }
-
 body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body,
+p {
   margin: 0;
 }
 
+html,
+body,
 #app {
-  margin: 0;
-  padding: 20px 2vw 0 2vw;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+main,
+header {
+  flex-shrink: 0;
+}
+
+main {
+  height: 85%;
+  width: 100%;
+  max-width: 1280px;
+  display: flex;
+  align-items: center;
+}
+
+#app {
+  align-items: center;
+  width: 100%;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -41,29 +67,6 @@ body {
     padding-top: 0;
     padding-bottom: 0;
   }
-}
-
-html,
-body,
-#app {
-  height: 100%;
-  box-sizing: border-box;
-}
-
-p {
-  margin: 0;
-}
-
-main,
-header {
-  flex-shrink: 0;
-}
-
-main {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  flex-grow: 1;
 }
 
 .loading {
@@ -109,13 +112,14 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 5vh;
-  height: 15vh;
+  box-sizing: border-box;
+  height: 15%;
+  width: 100%;
+  padding: 0 40px;
 }
 
 .logo {
   width: 183px;
-  margin-left: 40px;
 
   @media #{$regular} {
     width: 146px;
@@ -191,6 +195,10 @@ header {
   flex-direction: column;
   flex-wrap: wrap;
   align-items: center;
+
+  @media all and (max-width: 1340px) {
+    padding: 0 30px;
+  }
 }
 
 .metric {
@@ -300,10 +308,8 @@ button:disabled {
 }
 
 .hiding-container {
-  // flex-basis: 0;
-  // width: 50%;
   @media #{$portrait}, #{$smaller} {
     width: 100%;
   }
-  width: 48vw;
+  width: 50%;
 }
