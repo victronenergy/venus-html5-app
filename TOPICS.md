@@ -260,15 +260,8 @@ N/{portalId]/vebus/{vebusInstanceId}/Ac/Out/L3/P
 
 #### DC Loads
 
-To get the current, divide the DC system power by DC battery voltage
-
 ```
-N/{portalId}/system/0/Dc/System/Power
-N/{portalId}/system/0/Dc/Battery/Voltage
-```
-
-For the power, use:
-
-```
-N/{portalId}/system/0/Dc/System/Power
+Voltage: N/{portalId}/system/0/Dc/Battery/Voltage
+Current: power divded by voltage
+Power: N/{portalId}/system/0/Dc/System/Power
 ```
