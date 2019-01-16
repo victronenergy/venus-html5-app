@@ -8,7 +8,7 @@
 
 .battery-header {
   display: flex;
-  margin-bottom: 17px;
+  margin-bottom: $metricHeaderMarginBottom;
   box-sizing: content-box;
   width: 100%;
 }
