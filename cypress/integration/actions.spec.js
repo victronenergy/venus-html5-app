@@ -10,10 +10,10 @@ describe("Testing basic actions in the ui", () => {
   })
 
   it("Selects inverter charger mode", () => {
-    cy.get(".inverter-charger__mode-selector > button.selector-button--active")
+    cy.get(".charger__mode-selector > button.selector-button--active")
       .as("active")
       .should("have.length", 1)
-    cy.get(".inverter-charger__mode-selector > button:not(.selector-button--active)")
+    cy.get(".charger__mode-selector > button:not(.selector-button--active)")
       .as("buttons")
       .should("have.length", 2)
     cy.get("@buttons")
