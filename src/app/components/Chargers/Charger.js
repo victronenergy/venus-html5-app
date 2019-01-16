@@ -83,20 +83,22 @@ const Charger = ({ nrOfOutputs, current, state, mode, currentLimit, onModeSelect
   )
 }
 
-const ChargerWithData = ({ portalId, deviceInstanceId }) => (
-  <HidingContainer>
-    <MqttSubscriptions topics={getTopics(portalId, deviceInstanceId)}>
-      {topics => {
-        return (
-          <MqttWriteValue topic={`W/${portalId}/charger/${deviceInstanceId}/Mode`}>
-            {(_, updateMode) => {
-              return <Charger {...topics} onModeSelected={updateMode} />
-            }}
-          </MqttWriteValue>
-        )
-      }}
-    </MqttSubscriptions>
-  </HidingContainer>
+const ChargerWithData = ({ portalId, deviceInstanceId, metricsRef }) => (
+  <MqttSubscriptions topics={getTopics(portalId, deviceInstanceId)}>
+    {topics => {
+      return (
+        <MqttWriteValue topic={`W/${portalId}/charger/${deviceInstanceId}/Mode`}>
+          {(_, updateMode) => {
+            return (
+              <HidingContainer metricsRef={metricsRef}>
+                <Charger {...topics} onModeSelected={updateMode} />
+              </HidingContainer>
+            )
+          }}
+        </MqttWriteValue>
+      )
+    }}
+  </MqttSubscriptions>
 )
 
 export default ChargerWithData

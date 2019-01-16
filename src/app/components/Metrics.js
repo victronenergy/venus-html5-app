@@ -37,7 +37,7 @@ export default class Metrics extends Component {
         {vebusInstanceId && <AcLoads {...commonProps} />}
         <DcLoads {...commonProps} />
         <Solar {...commonProps} />
-        <Chargers portalId={portalId} />
+        <Chargers {...commonProps} />
       </div>
     )
   }
