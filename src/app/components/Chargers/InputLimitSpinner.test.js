@@ -16,13 +16,13 @@ describe("Input limit spinner", () => {
     })
 
     it("shows current limit", () => {
-      const limit = wrapper.find(".metric__shore-input-limit__limit").text()
+      const limit = wrapper.find(".metric__current-input-limit__limit").text()
 
       expect(limit).toEqual("10A")
     })
 
     it("should call prop `onCurrentLimitChanged` with limit increased by 1", () => {
-      const plusButton = wrapper.find(".input-limit__increment").first()
+      const plusButton = wrapper.find(".metric__current-input-limit__increment").first()
       plusButton.simulate("click")
 
       const invocationArgs = onCurrentLimitChanged.mock.calls[0]
@@ -30,7 +30,7 @@ describe("Input limit spinner", () => {
     })
 
     it("should call prop `onCurrentLimitChanged` with limit decreased by 1", () => {
-      const minusButton = wrapper.find(".input-limit__decrement").first()
+      const minusButton = wrapper.find(".metric__current-input-limit__decrement").first()
       minusButton.simulate("click")
 
       const invocationArgs = onCurrentLimitChanged.mock.calls[0]
