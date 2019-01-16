@@ -11,17 +11,17 @@ class InputLimitSpinner extends Component {
         <div>
           <SelectorButton
             narrow
-            className="input-limit__decrement"
+            className="metric__current-input-limit__decrement"
             onClick={() => onInputLimitChanged(currentLimit - 1)}
           >
             <span className="text--small">-</span>
           </SelectorButton>
-          <span className="text--bold metric__shore-input-limit__limit">
+          <span className="text--bold metric__current-input-limit__limit">
             {formatNumber({ value: currentLimit, unit: "A" })}
           </span>
           <SelectorButton
             narrow
-            className="input-limit__increment"
+            className="metric__current-input-limit__increment"
             onClick={() => onInputLimitChanged(currentLimit + 1)}
           >
             <span className="text--small">+</span>
