@@ -2,13 +2,13 @@ import React from "react"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 import MqttWriteValue from "../../mqtt/MqttWriteValue"
 import HeaderView from "../../components/HeaderView"
-import NumericValue, { formatNumber } from "../NumericValue/NumericValue"
+import NumericValue from "../NumericValue/NumericValue"
 import HidingContainer from "../../components/HidingContainer"
 import MetricValues from "../MetricValues/MetricValues"
 import SelectorButton from "../SelectorButton/SelectorButton"
 import { CHARGER_MODE } from "../../utils/constants"
-import { ShoreInputLimit } from "../ShoreInputLimit/ShoreInputLimit"
 import SystemState from "../SystemState"
+import InputLimitSpinner from "./InputLimitSpinner"
 
 const getTopics = (portalId, deviceInstanceId) => {
   return {
@@ -40,13 +40,7 @@ const Charger = ({ nrOfOutputs, current, state, mode, currentLimit, onModeSelect
       ))}
     </div>
   )
-  const changeLimit = (
-    <ShoreInputLimit
-      currentLimit={formatNumber({ value: currentLimit, unit: "A" })}
-      isAdjustable={true}
-      onChangeShoreInputLimitClicked={onChangeInputLimitClicked}
-    />
-  )
+  const changeLimit = <InputLimitSpinner currentLimit={currentLimit} onInputLimitChanged={onChangeInputLimitClicked} />
 
   const systemMode = chargerModeFormatter(mode)
   const modeIsAdjustable = true // For chargers, mode is always adjustable
@@ -90,9 +84,15 @@ const ChargerWithData = ({ portalId, deviceInstanceId, metricsRef }) => (
         <MqttWriteValue topic={`W/${portalId}/charger/${deviceInstanceId}/Mode`}>
           {(_, updateMode) => {
             return (
-              <HidingContainer metricsRef={metricsRef}>
-                <Charger {...topics} onModeSelected={updateMode} />
-              </HidingContainer>
+              <MqttWriteValue topic={`W/${portalId}/charger/${deviceInstanceId}/Ac/In/CurrentLimit`}>
+                {(_, updateInputLimit) => {
+                  return (
+                    <HidingContainer metricsRef={metricsRef}>
+                      <Charger {...topics} onModeSelected={updateMode} onChangeInputLimitClicked={updateInputLimit} />
+                    </HidingContainer>
+                  )
+                }}
+              </MqttWriteValue>
             )
           }}
         </MqttWriteValue>
