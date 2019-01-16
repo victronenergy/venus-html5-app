@@ -1,10 +1,11 @@
 import React, { Component } from "react"
-import Battery from "./Battery"
-import ActiveSource from "./ActiveSource"
 
-import InverterCharger from "./InverterCharger"
+import ActiveSource from "./ActiveSource"
 import AcLoads from "./AcLoads"
+import Battery from "./Battery"
 import DcLoads from "./DcLoads"
+import Inverters from "./Inverters"
+import InverterCharger from "./InverterCharger"
 import Solar from "./Solar"
 import Chargers from "./Chargers"
 
@@ -36,6 +37,7 @@ export default class Metrics extends Component {
         <DcLoads {...commonProps} />
         <Solar {...commonProps} />
         <Chargers {...commonProps} />
+        <Inverters {...commonProps} />
       </div>
     )
   }
