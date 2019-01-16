@@ -120,7 +120,6 @@ class App extends Component {
                                             vebusInstanceId={vebusInstanceId}
                                             isConnected={isConnected}
                                             onChangeShoreInputLimitClicked={() => this.setView(VIEWS.AMPERAGE_SELECTOR)}
-                                            onModeSelected={this.handleModeSelected}
                                           />
                                         </Fade>
                                       )
