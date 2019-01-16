@@ -62,6 +62,7 @@ N/{portalId}/system/0/Dc/Pv/Current
 #### AC Input data (Shore / Genset) for inverter/charger aka vebus
 
 There are three types of devices that show up on D-Bus as a com.victronenergy.vebus device:
+
 - Inverters. These have no AC-input, so no AC-Input current limit
 - Multis: one AC-input; connected to either shore (adjustable) or a generator (not adjustable)
 - Quattros: two AC-inputs; typically one is connected to shore, and the other to a generator
@@ -264,4 +265,36 @@ N/{portalId]/vebus/{vebusInstanceId}/Ac/Out/L3/P
 Voltage: N/{portalId}/system/0/Dc/Battery/Voltage
 Current: power divded by voltage
 Power: N/{portalId}/system/0/Dc/System/Power
+```
+
+#### Charger information
+
+A system has chargers available if there are devices registered at `/charger/`:
+
+```
+N/+/charger/+/DeviceInstance
+```
+
+Then, for each charger, the following info is available:
+
+```
+// Name displayed is "CustomName", if available, otherwise "ProductName"
+N/${portalId}/charger/${deviceInstanceId}/ProductName,
+N/${portalId}/charger/${deviceInstanceId}/CustomName
+
+N/${portalId}/charger/${deviceInstanceId}/Ac/In/CurrentLimit
+N/${portalId}/charger/${deviceInstanceId}/Mode  // 1-ON, 4-OFF
+N/${portalId}/charger/${deviceInstanceId}/State // Same values as system/State
+
+N/${portalId}/charger/${deviceInstanceId}/NrOfOutputs
+N/${portalId}/charger/${deviceInstanceId}/Dc/0/Current,
+N/${portalId}/charger/${deviceInstanceId}/Dc/1/Current,
+N/${portalId}/charger/${deviceInstanceId}/Dc/2/Current
+```
+
+The following properties can also be changed:
+
+```
+W/${portalId}/charger/${deviceInstanceId}/Ac/In/CurrentLimit
+W/${portalId}/charger/${deviceInstanceId}/Mode`
 ```
