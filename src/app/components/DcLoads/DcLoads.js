@@ -34,11 +34,12 @@ export const DcLoads = ({ hasDcSystem, voltage, power }) => {
 
 class DcLoadsWithData extends Component {
   render() {
+    const { portalId, metricsRef } = this.props
     return (
-      <MqttSubscriptions topics={getTopics(this.props.portalId)}>
+      <MqttSubscriptions topics={getTopics(portalId)}>
         {topics => {
           return (
-            <HidingContainer>
+            <HidingContainer metricsRef={metricsRef}>
               <HeaderView icon={require("../../../images/icons/dc.svg")} title="DC Loads">
                 <DcLoads {...topics} />
               </HeaderView>

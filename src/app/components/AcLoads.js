@@ -35,7 +35,7 @@ const AcLoads = props => {
   return showAsList ? (
     <ListView icon={require("../../images/icons/ac.svg")} title="AC Loads" subTitle={`${phases} phases`}>
       {voltage.map((v, i) => (
-        <ListRow>
+        <ListRow key={i}>
           <span className="text text--smaller">Phase {i + 1}</span>
           <NumericValue value={v} unit="V" />
           <NumericValue value={current[i]} unit="A" precision={1} />
@@ -56,12 +56,12 @@ const AcLoads = props => {
 
 class AcLoadsWithData extends Component {
   render() {
-    const { portalId, vebusInstanceId } = this.props
+    const { portalId, vebusInstanceId, metricsRef } = this.props
     return (
       <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId)}>
         {topics => {
           return (
-            <HidingContainer>
+            <HidingContainer metricsRef={metricsRef}>
               <AcLoads {...topics} />
             </HidingContainer>
           )

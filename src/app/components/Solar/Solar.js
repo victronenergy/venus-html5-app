@@ -26,7 +26,7 @@ const Solar = ({ current, power }) => {
 
 class SolarWithData extends Component {
   render() {
-    const { portalId } = this.props
+    const { portalId, metricsRef } = this.props
     return (
       <MqttSubscriptions topics={getTopics(portalId)}>
         {topics => {
@@ -34,7 +34,7 @@ class SolarWithData extends Component {
             return null
           } else {
             return (
-              <HidingContainer>
+              <HidingContainer metricsRef={metricsRef}>
                 <Solar {...topics} />
               </HidingContainer>
             )
