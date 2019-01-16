@@ -24,11 +24,15 @@ const getTopics = (portalId, deviceInstanceId) => {
   }
 }
 
-// TODO Check values for mode and state
 const chargerModeFormatter = value => {
-  if (value == 0) return "OFF"
-  if (value == 1) return "ON"
-  return "--"
+  switch (value) {
+    case CHARGER_MODE.OFF:
+      return "OFF"
+    case CHARGER_MODE.ON:
+      return "ON"
+    default:
+      return "--"
+  }
 }
 
 const Charger = ({ nrOfOutputs, current, state, mode, currentLimit, onModeSelected, onChangeInputLimitClicked }) => {
@@ -42,8 +46,7 @@ const Charger = ({ nrOfOutputs, current, state, mode, currentLimit, onModeSelect
   )
   const changeLimit = <InputLimitSpinner currentLimit={currentLimit} onInputLimitChanged={onChangeInputLimitClicked} />
 
-  const systemMode = chargerModeFormatter(mode)
-  const modeIsAdjustable = true // For chargers, mode is always adjustable
+  const chargerMode = chargerModeFormatter(mode)
   return (
     <div className="metric charger">
       <div className="charger__header-wrapper">
@@ -58,18 +61,10 @@ const Charger = ({ nrOfOutputs, current, state, mode, currentLimit, onModeSelect
       </div>
       <div className="charger__output">{output}</div>
       <div className="charger__mode-selector">
-        <SelectorButton
-          disabled={!modeIsAdjustable}
-          active={systemMode === "ON"}
-          onClick={() => onModeSelected(CHARGER_MODE.ON)}
-        >
+        <SelectorButton active={chargerMode === "ON"} onClick={() => onModeSelected(CHARGER_MODE.ON)}>
           On
         </SelectorButton>
-        <SelectorButton
-          disabled={!modeIsAdjustable}
-          active={systemMode === "OFF"}
-          onClick={() => onModeSelected(CHARGER_MODE.OFF)}
-        >
+        <SelectorButton active={chargerMode === "OFF"} onClick={() => onModeSelected(CHARGER_MODE.OFF)}>
           Off
         </SelectorButton>
       </div>

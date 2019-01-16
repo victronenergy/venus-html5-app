@@ -50,7 +50,7 @@ export const SYSTEM_MODE = {
 }
 
 export const CHARGER_MODE = {
-  OFF: 0,
+  OFF: 4,
   ON: 1
 }
 
