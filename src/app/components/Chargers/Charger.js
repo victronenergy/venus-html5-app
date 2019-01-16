@@ -12,6 +12,8 @@ import InputLimitSpinner from "./InputLimitSpinner"
 
 const getTopics = (portalId, deviceInstanceId) => {
   return {
+    productName: `N/${portalId}/charger/${deviceInstanceId}/ProductName`,
+    customName: `N/${portalId}/charger/${deviceInstanceId}/CustomName`,
     currentLimit: `N/${portalId}/charger/${deviceInstanceId}/Ac/In/CurrentLimit`,
     state: `N/${portalId}/charger/${deviceInstanceId}/State`,
     mode: `N/${portalId}/charger/${deviceInstanceId}/Mode`,
@@ -35,7 +37,17 @@ const chargerModeFormatter = value => {
   }
 }
 
-const Charger = ({ nrOfOutputs, current, state, mode, currentLimit, onModeSelected, onChangeInputLimitClicked }) => {
+const Charger = ({
+  productName,
+  customName,
+  nrOfOutputs,
+  current,
+  state,
+  mode,
+  currentLimit,
+  onModeSelected,
+  onChangeInputLimitClicked
+}) => {
   const output = (
     <div>
       <span className="text text--smaller">Output</span>
@@ -55,7 +67,11 @@ const Charger = ({ nrOfOutputs, current, state, mode, currentLimit, onModeSelect
   return (
     <div className="metric charger">
       <div className="charger__header-wrapper">
-        <HeaderView icon={require("../../../images/icons/multiplus.svg")} title="Charger" child>
+        <HeaderView
+          icon={require("../../../images/icons/multiplus.svg")}
+          title={productName || customName || "Charger"}
+          child
+        >
           <MetricValues>
             <p className="text text--smaller text--opaque">
               <SystemState value={state} />
