@@ -9,10 +9,10 @@ const Header = props => {
       <img src={require("../../images/icons/logo.png")} className="logo" />
       <div className="connection">
         <img src={require("../../images/icons/connected.svg")} className="connection__icon" />
-        <p className="text text--very-small">{isConnected ? "Connected" : "Disconnected"}</p>
+        <p className="text text--small">{isConnected ? "Connected" : "Disconnected"}</p>
         {showRemoteConsoleSetting && (
           <button
-            className="remote-console-button text text--very-small"
+            className="remote-console-button text text--small"
             onClick={handleRemoteConsoleButtonClicked}
             disabled={!isConnected}
           >
