@@ -1,16 +1,17 @@
 import React, { Component } from "react"
 
-const isElementInViewport = el => {
-  if (!el) return true
-  const rect = el.getBoundingClientRect()
-  return rect.right <= window.innerWidth
+const isElementWithinContainer = (el, container) => {
+  if (!el || !container) return true
+  const elRight = el.getBoundingClientRect().right
+  const containerRight = container.getBoundingClientRect().right
+  return elRight <= containerRight
 }
 
 export default class HidingElement extends Component {
   ref = React.createRef()
 
   render() {
-    const visibility = isElementInViewport(this.ref.current) ? "visible" : "hidden"
+    const visibility = isElementWithinContainer(this.ref.current, this.props.metricsRef.current) ? "visible" : "hidden"
     return (
       <div style={{ visibility }} className="hiding-container" ref={this.ref}>
         {this.props.children}

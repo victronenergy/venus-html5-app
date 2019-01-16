@@ -119,12 +119,12 @@ class ActiveSource extends Component {
 
 class ActiveSourceWithData extends Component {
   render() {
-    const { portalId, vebusInstanceId, onChangeShoreInputLimitClicked } = this.props
+    const { portalId, vebusInstanceId, onChangeShoreInputLimitClicked, metricsRef } = this.props
     return (
       <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId)}>
         {topics => {
           return (
-            <HidingContainer>
+            <HidingContainer metricsRef={metricsRef}>
               <ActiveSource
                 {...topics}
                 portalId={portalId}

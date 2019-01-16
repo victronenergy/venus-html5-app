@@ -103,7 +103,7 @@ class BatteryWithData extends Component {
   }
 
   render() {
-    const { portalId } = this.props
+    const { portalId, metricsRef } = this.props
     return (
       <MqttSubscriptions topics={getTopics(portalId)}>
         {topics => {
@@ -113,7 +113,7 @@ class BatteryWithData extends Component {
           } else {
             mainBatteryToFirst(batteries)
             return (
-              <HidingContainer>
+              <HidingContainer metricsRef={metricsRef}>
                 <div className="metric metric__battery">
                   <BatteryHeader
                     amount={batteries.length}
