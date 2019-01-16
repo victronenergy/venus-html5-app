@@ -47,6 +47,11 @@ const Charger = ({ nrOfOutputs, current, state, mode, currentLimit, onModeSelect
   const changeLimit = <InputLimitSpinner currentLimit={currentLimit} onInputLimitChanged={onChangeInputLimitClicked} />
 
   const chargerMode = chargerModeFormatter(mode)
+
+  // When a topic is invalid, it returns undefined -> no value means topic is not supported
+  const chargerSupportsMode = mode !== undefined
+  const chargerSupportsInputLimit = currentLimit !== undefined
+
   return (
     <div className="metric charger">
       <div className="charger__header-wrapper">
@@ -57,17 +62,19 @@ const Charger = ({ nrOfOutputs, current, state, mode, currentLimit, onModeSelect
             </p>
           </MetricValues>
         </HeaderView>
-        <div className="charger__input-limit-selector">{changeLimit}</div>
+        {chargerSupportsInputLimit && <div className="charger__input-limit-selector">{changeLimit}</div>}
       </div>
       <div className="charger__output">{output}</div>
-      <div className="charger__mode-selector">
-        <SelectorButton active={chargerMode === "ON"} onClick={() => onModeSelected(CHARGER_MODE.ON)}>
-          On
-        </SelectorButton>
-        <SelectorButton active={chargerMode === "OFF"} onClick={() => onModeSelected(CHARGER_MODE.OFF)}>
-          Off
-        </SelectorButton>
-      </div>
+      {chargerSupportsMode && (
+        <div className="charger__mode-selector">
+          <SelectorButton active={chargerMode === "ON"} onClick={() => onModeSelected(CHARGER_MODE.ON)}>
+            On
+          </SelectorButton>
+          <SelectorButton active={chargerMode === "OFF"} onClick={() => onModeSelected(CHARGER_MODE.OFF)}>
+            Off
+          </SelectorButton>
+        </div>
+      )}
     </div>
   )
 }
