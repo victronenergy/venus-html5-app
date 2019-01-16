@@ -83,20 +83,14 @@ const Charger = ({ nrOfOutputs, current, state, mode, currentLimit, onModeSelect
   )
 }
 
-const ChargerWithData = ({ portalId, deviceInstanceId, onChangeInputLimitClicked }) => (
+const ChargerWithData = ({ portalId, deviceInstanceId }) => (
   <HidingContainer>
     <MqttSubscriptions topics={getTopics(portalId, deviceInstanceId)}>
       {topics => {
         return (
           <MqttWriteValue topic={`W/${portalId}/charger/${deviceInstanceId}/Mode`}>
             {(_, updateMode) => {
-              return (
-                <Charger
-                  {...topics}
-                  onModeSelected={updateMode}
-                  onChangeInputLimitClicked={() => onChangeInputLimitClicked(deviceInstanceId)}
-                />
-              )
+              return <Charger {...topics} onModeSelected={updateMode} />
             }}
           </MqttWriteValue>
         )
