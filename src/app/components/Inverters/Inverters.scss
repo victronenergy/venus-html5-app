@@ -1,0 +1,29 @@
+@import "../../../css/variables.scss";
+
+.inverter {
+  align-items: flex-start;
+  flex-direction: column;
+  height: auto;
+}
+
+.inverter__mode-selector {
+  margin-top: $marginBottom;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  @media #{$portrait} {
+    height: 40px;
+    width: 100%;
+  }
+}
+
+.inverter__mode-selector > .selector-button {
+  &:not(:first-child) {
+    margin-left: 10px;
+  }
+
+  padding-left: 0;
+  padding-right: 0;
+}

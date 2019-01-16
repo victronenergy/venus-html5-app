@@ -59,7 +59,6 @@ const InverterCharger = ({ activeMode, state, modeIsAdjustable, onModeSelected }
         >
           Charger only
         </SelectorButton>
-        {/*// TODO Should we add a button for inverter only as well?*/}
       </div>
     </div>
   )

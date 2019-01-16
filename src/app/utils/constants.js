@@ -54,6 +54,12 @@ export const CHARGER_MODE = {
   ON: 1
 }
 
+export const INVERTER_MODE = {
+  ON: 2,
+  OFF: 4,
+  ECO: 5
+}
+
 export const VIEWS = {
   CONNECTING: "CONNECTING",
   METRICS: "METRICS",
