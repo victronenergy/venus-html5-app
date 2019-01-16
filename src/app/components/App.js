@@ -90,7 +90,11 @@ class App extends Component {
                                   switch (this.state.currentView) {
                                     case VIEWS.AMPERAGE_SELECTOR:
                                       return (
-                                        <Fade key={VIEWS.AMPERAGE_SELECTOR} unmount={this.state.viewUnmounting}>
+                                        <Fade
+                                          key={VIEWS.AMPERAGE_SELECTOR}
+                                          unmount={this.state.viewUnmounting}
+                                          fullWidth
+                                        >
                                           <ShoreInputLimitSelector
                                             portalId={portalId}
                                             vebusInstanceId={vebusInstanceId}
@@ -100,7 +104,7 @@ class App extends Component {
                                       )
                                     case VIEWS.REMOTE_CONSOLE:
                                       return (
-                                        <Fade key={VIEWS.REMOTE_CONSOLE} unmount={this.state.viewUnmounting}>
+                                        <Fade key={VIEWS.REMOTE_CONSOLE} unmount={this.state.viewUnmounting} fullWidth>
                                           <RemoteConsole
                                             host={host}
                                             onClickOutsideContainer={() => this.setView(VIEWS.METRICS)}
@@ -110,7 +114,7 @@ class App extends Component {
                                     case VIEWS.METRICS:
                                     default:
                                       return (
-                                        <Fade key={VIEWS.METRICS} unmount={this.state.viewUnmounting}>
+                                        <Fade key={VIEWS.METRICS} unmount={this.state.viewUnmounting} fullWidth>
                                           <Metrics
                                             portalId={portalId}
                                             vebusInstanceId={vebusInstanceId}

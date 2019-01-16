@@ -5,25 +5,23 @@ export const viewChangeDelay = 500
 const viewChangeTransitionDuration = viewChangeDelay - 100
 const baseStyle = {
   transition: `opacity ${viewChangeTransitionDuration}ms ease`,
-  display: "flex",
-  width: "100%"
+  display: "flex"
 }
 
 class Fade extends Component {
   state = {
     style: {
-      opacity: 0,
-      ...baseStyle
+      opacity: 0
     }
   }
   timeoutRef
 
   fadeIn = () => {
-    this.setState({ style: { opacity: 1, ...baseStyle } })
+    this.setState({ style: { opacity: 1 } })
   }
 
   fadeOut = () => {
-    this.setState({ style: { opacity: 0, ...baseStyle } })
+    this.setState({ style: { opacity: 0 } })
   }
 
   componentDidMount() {
@@ -41,7 +39,11 @@ class Fade extends Component {
   }
 
   render() {
-    return <div style={this.state.style}>{this.props.children}</div>
+    return (
+      <div style={{ ...this.state.style, ...baseStyle, ...(this.props.fullWidth && { width: "100%" }) }}>
+        {this.props.children}
+      </div>
+    )
   }
 }
 
