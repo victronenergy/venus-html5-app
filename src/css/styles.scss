@@ -269,18 +269,6 @@ button:disabled {
   width: calc(50% - 40px);
 }
 
-.text--bottom-align {
-  display: flex;
-}
-
-.text--bottom-align > .text--large {
-  line-height: 1;
-
-  @media #{$tiny} {
-    line-height: initial;
-  }
-}
-
 .error-page {
   display: flex;
   flex-direction: column;
