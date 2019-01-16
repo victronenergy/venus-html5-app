@@ -239,7 +239,7 @@ header {
 }
 
 .charger__mode-selector {
-  margin-top: $marginBottom;
+  margin-top: $metricHeaderMarginBottom;
   height: 100%;
   width: 100%;
   display: flex;
@@ -261,7 +261,7 @@ header {
 }
 
 .charger__output {
-  margin-top: 1.35em;
+  margin-top: $metricHeaderMarginBottom;
 }
 
 .charger__header-wrapper {
