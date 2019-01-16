@@ -37,7 +37,6 @@ const Main = ({ isConnected, children, setView }) => {
 class App extends Component {
   state = {
     currentView: VIEWS.METRICS,
-    deviceSelectedForAmperageView: null,
     viewUnmounting: false
   }
 
@@ -49,13 +48,7 @@ class App extends Component {
   }
 
   handleShorePowerLimitSelected = () => {
-    this.setState({ deviceSelectedForAmperageView: null })
     this.setView(VIEWS.METRICS)
-  }
-
-  handleChangeLimitClicked = deviceInstanceId => {
-    this.setState({ deviceSelectedForAmperageView: deviceInstanceId })
-    this.setView(VIEWS.AMPERAGE_SELECTOR)
   }
 
   toggleRemoteConsole = () => {
@@ -104,7 +97,7 @@ class App extends Component {
                                         >
                                           <ShoreInputLimitSelector
                                             portalId={portalId}
-                                            vebusInstanceId={this.deviceSelectedForAmperageView}
+                                            vebusInstanceId={vebusInstanceId}
                                             onLimitSelected={this.handleShorePowerLimitSelected}
                                           />
                                         </Fade>
@@ -126,7 +119,8 @@ class App extends Component {
                                             portalId={portalId}
                                             vebusInstanceId={vebusInstanceId}
                                             isConnected={isConnected}
-                                            onChangeShoreInputLimitClicked={this.handleChangeLimitClicked}
+                                            onChangeShoreInputLimitClicked={() => this.setView(VIEWS.AMPERAGE_SELECTOR)}
+                                            onModeSelected={this.handleModeSelected}
                                           />
                                         </Fade>
                                       )
