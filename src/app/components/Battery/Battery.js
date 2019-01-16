@@ -68,14 +68,15 @@ export class Batteries extends Component {
           <div className="battery" key={id}>
             <div className="battery__index">{i + 1 + this.state.currentPage * pageSize}</div>
             <div className="battery__data">
-              {name}
+              <div className="battery__title-row">
+                {name} {soc !== undefined && <BatteryLevel state={state} soc={soc} timeToGo={timetogo} />}
+              </div>
               <div>
                 <NumericValue value={voltage} unit="V" precision={1} />
                 <NumericValue value={current} unit="A" precision={1} />
                 <NumericValue value={power} unit="W" />
               </div>
             </div>
-            {soc !== undefined && <BatteryLevel state={state} soc={soc} timeToGo={timetogo} />}
           </div>
         ))}
         {paginate && (
