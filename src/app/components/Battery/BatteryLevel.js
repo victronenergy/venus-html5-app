@@ -41,7 +41,7 @@ const BatteryLevel = ({ state, timeToGo, soc }) => {
         "metric__battery-level-container--col": showTimetoGo
       })}
     >
-      <div className="text--bottom-align">
+      <div>
         {batteryStateLabel && (
           <span className="text text--small metric__battery-state">
             {batteryStateLabel}
