@@ -52,22 +52,6 @@ main {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-
-  @media #{$portrait}, #{$small} {
-    padding-top: 5px;
-    padding-right: 15px;
-    padding-left: 15px;
-  }
-
-  @media #{$very-narrow-portrait}, #{$very-small} {
-    padding-right: 5px;
-    padding-left: 5px;
-  }
-
-  @media #{$low-landscape} {
-    padding-top: 0;
-    padding-bottom: 0;
-  }
 }
 
 .loading {
@@ -138,8 +122,8 @@ header {
 }
 
 .connection__icon {
-  height: 18px;
-  width: 19px;
+  height: 22px;
+  width: 23px;
   margin-right: 15px;
 
   @media #{$regular} {
@@ -198,7 +182,11 @@ header {
   align-items: center;
 
   @media all and (max-width: 1340px) {
-    padding: 0 30px;
+    padding: 0 40px;
+  }
+
+  @media #{$portrait}, #{$small} {
+    padding: 0 3vw;
   }
 }
 
