@@ -244,11 +244,6 @@ header {
   width: 100%;
   display: flex;
   justify-content: space-between;
-
-  @media #{$portrait} {
-    height: 40px;
-    width: 100%;
-  }
 }
 
 .charger__mode-selector > .selector-button {
