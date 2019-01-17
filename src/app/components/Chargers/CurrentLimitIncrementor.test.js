@@ -1,4 +1,4 @@
-import InputLimitSpinner from "./InputLimitSpinner"
+import CurrentLimitIncrementor from "./CurrentLimitIncrementor"
 import { shallow } from "enzyme"
 import React from "react"
 
@@ -8,7 +8,7 @@ describe("Input limit spinner", () => {
     let wrapper
 
     beforeEach(() => {
-      wrapper = shallow(<InputLimitSpinner currentLimit={10} onInputLimitChanged={onCurrentLimitChanged} />)
+      wrapper = shallow(<CurrentLimitIncrementor currentLimit={10} onInputLimitChanged={onCurrentLimitChanged} />)
     })
 
     afterEach(() => {

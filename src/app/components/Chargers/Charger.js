@@ -8,7 +8,7 @@ import MetricValues from "../MetricValues/MetricValues"
 import SelectorButton from "../SelectorButton/SelectorButton"
 import { CHARGER_MODE } from "../../utils/constants"
 import SystemState from "../SystemState"
-import InputLimitSpinner from "./InputLimitSpinner"
+import CurrentLimitIncrementor from "./CurrentLimitIncrementor"
 
 const getTopics = (portalId, deviceInstanceId) => {
   return {
@@ -56,7 +56,9 @@ const Charger = ({
       ))}
     </div>
   )
-  const changeLimit = <InputLimitSpinner currentLimit={currentLimit} onInputLimitChanged={onChangeInputLimitClicked} />
+  const changeLimit = (
+    <CurrentLimitIncrementor currentLimit={currentLimit} onInputLimitChanged={onChangeInputLimitClicked} />
+  )
 
   const chargerMode = chargerModeFormatter(mode)
 
