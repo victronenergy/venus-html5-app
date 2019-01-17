@@ -66,12 +66,12 @@ const InverterCharger = ({ activeMode, state, modeIsAdjustable, onModeSelected }
 
 class InverterChargerWithData extends Component {
   render() {
-    const { portalId, vebusInstanceId, connected, metricsRef } = this.props
+    const { portalId, inverterChargerDeviceId, connected, metricsRef } = this.props
     return (
-      <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId)}>
+      <MqttSubscriptions topics={getTopics(portalId, inverterChargerDeviceId)}>
         {topics => {
           return (
-            <MqttWriteValue topic={`W/${portalId}/vebus/${vebusInstanceId}/Mode`}>
+            <MqttWriteValue topic={`W/${portalId}/vebus/${inverterChargerDeviceId}/Mode`}>
               {(_, updateMode) => {
                 return (
                   <HidingContainer metricsRef={metricsRef}>

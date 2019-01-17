@@ -24,16 +24,16 @@ export default class Metrics extends Component {
   }
 
   render() {
-    const { portalId, vebusInstanceId, isConnected, onChangeShoreInputLimitClicked } = this.props
-    const commonProps = { portalId, vebusInstanceId, metricsRef: this.metricsRef }
+    const { portalId, inverterChargerDeviceId, isConnected, onChangeShoreInputLimitClicked } = this.props
+    const commonProps = { portalId, inverterChargerDeviceId, metricsRef: this.metricsRef }
     return (
       <div id="metrics-container" ref={this.metricsRef} style={{ height: `${this.state.height}vh` }}>
         <Battery {...commonProps} />
-        {vebusInstanceId && (
+        {inverterChargerDeviceId && (
           <ActiveSource {...commonProps} onChangeShoreInputLimitClicked={onChangeShoreInputLimitClicked} />
         )}
-        {vebusInstanceId && <InverterCharger {...commonProps} connected={isConnected} />}
-        {vebusInstanceId && <AcLoads {...commonProps} />}
+        {inverterChargerDeviceId && <InverterCharger {...commonProps} connected={isConnected} />}
+        {inverterChargerDeviceId && <AcLoads {...commonProps} />}
         <DcLoads {...commonProps} />
         <Solar {...commonProps} />
         <Chargers {...commonProps} />

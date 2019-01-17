@@ -53,25 +53,25 @@ const ActiveSourceLoading = () => {
 }
 
 const ActiveSourceMetric = props => {
-  const { portalId, vebusInstanceId, onChangeShoreInputLimitClicked, phases, icon, title, hasValues } = props
+  const { portalId, inverterChargerDeviceId, onChangeShoreInputLimitClicked, phases, icon, title, hasValues } = props
   return (
     <div className="metric metric__active-source">
       {phases > 1 ? (
         <ListView icon={icon} title={title} subTitle={`${phases} phases`} child>
-          <ActiveInValues portalId={portalId} vebusInstanceId={vebusInstanceId} threePhase={true} />
+          <ActiveInValues portalId={portalId} inverterChargerDeviceId={inverterChargerDeviceId} threePhase={true} />
         </ListView>
       ) : (
         <HeaderView icon={icon} title={title} child>
           {hasValues && (
             <MetricValues>
-              <ActiveInValues portalId={portalId} vebusInstanceId={vebusInstanceId} />
+              <ActiveInValues portalId={portalId} inverterChargerDeviceId={inverterChargerDeviceId} />
             </MetricValues>
           )}
         </HeaderView>
       )}
       <ShoreInputLimit
         portalId={portalId}
-        vebusInstanceId={vebusInstanceId}
+        inverterChargerDeviceId={inverterChargerDeviceId}
         onChangeShoreInputLimitClicked={onChangeShoreInputLimitClicked}
       />
     </div>
@@ -95,7 +95,7 @@ class ActiveSource extends Component {
 
   render() {
     const activeSource = getActiveSource(this.props)
-    const { portalId, vebusInstanceId, onChangeShoreInputLimitClicked, phases } = this.props
+    const { portalId, inverterChargerDeviceId, onChangeShoreInputLimitClicked, phases } = this.props
 
     if (activeSource === undefined) {
       return <ActiveSourceLoading />
@@ -107,7 +107,7 @@ class ActiveSource extends Component {
           title={this.activeSourceLabel[activeSource]}
           icon={this.activeSourceIcon[activeSource]}
           portalId={portalId}
-          vebusInstanceId={vebusInstanceId}
+          inverterChargerDeviceId={inverterChargerDeviceId}
           hasValues={true}
           onChangeShoreInputLimitClicked={onChangeShoreInputLimitClicked}
           phases={phases}
@@ -119,16 +119,16 @@ class ActiveSource extends Component {
 
 class ActiveSourceWithData extends Component {
   render() {
-    const { portalId, vebusInstanceId, onChangeShoreInputLimitClicked, metricsRef } = this.props
+    const { portalId, inverterChargerDeviceId, onChangeShoreInputLimitClicked, metricsRef } = this.props
     return (
-      <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId)}>
+      <MqttSubscriptions topics={getTopics(portalId, inverterChargerDeviceId)}>
         {topics => {
           return (
             <HidingContainer metricsRef={metricsRef}>
               <ActiveSource
                 {...topics}
                 portalId={portalId}
-                vebusInstanceId={vebusInstanceId}
+                inverterChargerDeviceId={inverterChargerDeviceId}
                 onChangeShoreInputLimitClicked={onChangeShoreInputLimitClicked}
               />
             </HidingContainer>

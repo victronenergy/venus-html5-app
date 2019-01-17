@@ -43,12 +43,12 @@ export const ActiveInTotalValues = ({ voltage, current, power, threePhase }) => 
   )
 }
 
-export default ({ portalId, vebusInstanceId, threePhase }) => {
-  if (!vebusInstanceId) {
+export default ({ portalId, inverterChargerDeviceId, threePhase }) => {
+  if (!inverterChargerDeviceId) {
     return null
   } else {
     return (
-      <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId)}>
+      <MqttSubscriptions topics={getTopics(portalId, inverterChargerDeviceId)}>
         {topics => {
           return <ActiveInTotalValues {...topics} threePhase={threePhase} />
         }}

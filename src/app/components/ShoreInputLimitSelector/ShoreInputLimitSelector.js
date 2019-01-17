@@ -85,8 +85,8 @@ class ShoreInputLimitSelector extends Component {
 
 class ShoreInputLimitSelectorWithData extends Component {
   render() {
-    const { portalId, vebusInstanceId, onLimitSelected } = this.props
-    if (!portalId || !vebusInstanceId) {
+    const { portalId, inverterChargerDeviceId, onLimitSelected } = this.props
+    if (!portalId || !inverterChargerDeviceId) {
       return <div>Loading..</div>
     }
     return (
@@ -97,11 +97,11 @@ class ShoreInputLimitSelectorWithData extends Component {
           }
           return (
             // Only available for VE.Bus versions > 415
-            <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId, shorePowerInput)}>
+            <MqttSubscriptions topics={getTopics(portalId, inverterChargerDeviceId, shorePowerInput)}>
               {topics => {
                 return (
                   <MqttWriteValue
-                    topic={`W/${portalId}/vebus/${vebusInstanceId}/Ac/In/${shorePowerInput}/CurrentLimit`}
+                    topic={`W/${portalId}/vebus/${inverterChargerDeviceId}/Ac/In/${shorePowerInput}/CurrentLimit`}
                   >
                     {(_, updateLimitSelected) => {
                       return (
