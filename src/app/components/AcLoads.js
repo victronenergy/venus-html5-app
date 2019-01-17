@@ -56,9 +56,9 @@ const AcLoads = props => {
 
 class AcLoadsWithData extends Component {
   render() {
-    const { portalId, vebusInstanceId, metricsRef } = this.props
+    const { portalId, inverterChargerDeviceId, metricsRef } = this.props
     return (
-      <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId)}>
+      <MqttSubscriptions topics={getTopics(portalId, inverterChargerDeviceId)}>
         {topics => {
           return (
             <HidingContainer metricsRef={metricsRef}>

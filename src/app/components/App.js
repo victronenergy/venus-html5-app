@@ -7,7 +7,7 @@ import "../../css/styles.scss"
 import ShoreInputLimitSelector from "./../components/ShoreInputLimitSelector"
 import MqttClientProvider from "./../mqtt/MqttClientProvider"
 import GetPortalId from "./../mqtt/victron/GetPortalId"
-import GetVebusDeviceInstance from "./../mqtt/victron/GetVebusDeviceInstance"
+import GetInverterChargerDeviceInstance from "./../mqtt/victron/GetInverterChargerDeviceInstance"
 
 import MqttUnavailable from "./../components/MqttUnavailable"
 import Metrics from "./../components/Metrics"
@@ -75,8 +75,8 @@ class App extends Component {
                     return <Connecting />
                   } else {
                     return (
-                      <GetVebusDeviceInstance>
-                        {vebusInstanceId => {
+                      <GetInverterChargerDeviceInstance portalId={portalId}>
+                        {inverterChargerDeviceId => {
                           return (
                             <>
                               <Header
@@ -97,7 +97,7 @@ class App extends Component {
                                         >
                                           <ShoreInputLimitSelector
                                             portalId={portalId}
-                                            vebusInstanceId={vebusInstanceId}
+                                            inverterChargerDeviceId={inverterChargerDeviceId}
                                             onLimitSelected={this.handleShorePowerLimitSelected}
                                           />
                                         </Fade>
@@ -117,7 +117,7 @@ class App extends Component {
                                         <Fade key={VIEWS.METRICS} unmount={this.state.viewUnmounting} fullWidth>
                                           <Metrics
                                             portalId={portalId}
-                                            vebusInstanceId={vebusInstanceId}
+                                            inverterChargerDeviceId={inverterChargerDeviceId}
                                             isConnected={isConnected}
                                             onChangeShoreInputLimitClicked={() => this.setView(VIEWS.AMPERAGE_SELECTOR)}
                                           />
@@ -129,7 +129,7 @@ class App extends Component {
                             </>
                           )
                         }}
-                      </GetVebusDeviceInstance>
+                      </GetInverterChargerDeviceInstance>
                     )
                   }
                 }}

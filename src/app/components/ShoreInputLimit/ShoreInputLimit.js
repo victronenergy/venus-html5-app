@@ -36,8 +36,8 @@ const MetricSmallLoading = ({ message }) => (
 
 class ShoreInputLimitWithData extends Component {
   render() {
-    const { portalId, vebusInstanceId, onChangeShoreInputLimitClicked } = this.props
-    return !vebusInstanceId ? (
+    const { portalId, inverterChargerDeviceId, onChangeShoreInputLimitClicked } = this.props
+    return !inverterChargerDeviceId ? (
       <ShoreInputLimit currentLimit={"--"} />
     ) : (
       <GetShorePowerInputNumber portalId={portalId}>
@@ -50,7 +50,7 @@ class ShoreInputLimitWithData extends Component {
             )
           } else {
             return (
-              <MqttSubscriptions topics={getTopics(portalId, vebusInstanceId, shorePowerInput)}>
+              <MqttSubscriptions topics={getTopics(portalId, inverterChargerDeviceId, shorePowerInput)}>
                 {topics => {
                   return (
                     <ShoreInputLimit
