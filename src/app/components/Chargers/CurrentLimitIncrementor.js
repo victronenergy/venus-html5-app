@@ -3,7 +3,7 @@ import SelectorButton from "../SelectorButton/SelectorButton"
 import PropTypes from "prop-types"
 import { formatNumber } from "../NumericValue"
 
-class InputLimitSpinner extends Component {
+class CurrentLimitIncrementor extends Component {
   render() {
     const { currentLimit, onInputLimitChanged } = this.props
     return (
@@ -32,9 +32,9 @@ class InputLimitSpinner extends Component {
   }
 }
 
-InputLimitSpinner.propTypes = {
+CurrentLimitIncrementor.propTypes = {
   onInputLimitChanged: PropTypes.func,
   currentLimit: PropTypes.number
 }
 
-export default InputLimitSpinner
+export default CurrentLimitIncrementor
