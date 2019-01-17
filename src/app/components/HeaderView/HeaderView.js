@@ -14,7 +14,8 @@ const HeaderView = ({ child, children, icon, title }) => (
 )
 
 HeaderView.propTypes = {
-  child: PropTypes.bool
+  child: PropTypes.bool,
+  icon: PropTypes.string
 }
 
 export default HeaderView
