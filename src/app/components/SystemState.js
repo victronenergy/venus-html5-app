@@ -1,6 +1,13 @@
 import React from "react"
 import { VEBUS_SYSTEM_STATE } from "../utils/constants"
 
+/**
+ * The same enum is used for:
+ * - inverter state
+ * - inverter/charger state
+ * - charger state
+ */
+
 const systemStateFormatter = value => {
   switch (value) {
     case VEBUS_SYSTEM_STATE.OFF:
