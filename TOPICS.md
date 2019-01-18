@@ -298,3 +298,22 @@ The following properties can also be changed:
 W/${portalId}/charger/${deviceInstanceId}/Ac/In/CurrentLimit
 W/${portalId}/charger/${deviceInstanceId}/Mode`
 ```
+
+#### Inverter information
+
+Dbus spec for invertes [here](https://github.com/victronenergy/venus/wiki/dbus)
+
+For every inverter in the system show an element in the ui. Inverters can be found on D-Bus under two paths:
+
+- com.victronenergy.inverter (<-- see simulation H in [venus-docker repo](https://github.com/victronenergy/venus-docker))
+  - `N/+/charger/+/DeviceInstance`
+- com.victronenergy.vebus, with /Ac/NumberOfInputs == 0 (<-- see simulation A in [venus-docker repo](https://github.com/victronenergy/venus-docker))
+  - `N/+/vebus/+/DeviceInstance`
+
+The element should contain this information:
+
+- The switch (on/off/eco); it wil always be available on D-Bus
+- The state (On, Off, Eco, alarm; which can be overload or low battery)
+- AC output voltage, current. Not power; because its not available for all models.
+
+See Inverter.js and Inverters.js for implementation.
