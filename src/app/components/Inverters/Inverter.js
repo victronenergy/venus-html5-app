@@ -53,7 +53,6 @@ export const Inverter = ({
 }) => {
   // if nAcInputs === 0 it means it's an inverter, if not it's an inverter/charger => skip
   const show = !isVebusInverter || nAcInputs === 0
-  console.log(voltage, current, power)
   return (
     show && (
       <div className="metric inverter">
