@@ -14,9 +14,8 @@ const HeaderView = ({ child, children, icon, title }) => (
 )
 
 HeaderView.propTypes = {
-  child: PropTypes.bool
-  // TODO: This breaks in tests, try to fix!
-  // icon: PropTypes.string
+  child: PropTypes.bool,
+  icon: PropTypes.string
 }
 
 export default HeaderView
