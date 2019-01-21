@@ -87,7 +87,7 @@ module.exports = (_env, argv) => {
     new HtmlWebpackPlugin({
       filename: "index.html",
       template: path.resolve(__dirname, "src/index.html"),
-      ENV: argv.mode === "production" ? "production" : "develpoment"
+      ENV: argv.mode
     })
   )
   return conf
