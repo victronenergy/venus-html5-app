@@ -38,7 +38,7 @@
       var mode = "<%= htmlWebpackPlugin.options.ENV %>"
 
       if (mode === "production") {
-        var host = getParameterByName("host") || "localhost"
+        var host = getParameterByName("host") || window.location.hostname || "localhost"
         var socket = new WebSocket("ws://" + host + ":7890")
         window.onerror = function(msg, url, lineNo, columnNo, err) {
           var data = {
