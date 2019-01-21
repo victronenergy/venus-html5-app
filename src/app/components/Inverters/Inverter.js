@@ -12,12 +12,13 @@ import SelectorButton from "../SelectorButton"
 
 import "./Inverter.scss"
 
-const getTopics = (portalId, deviceInstance, isVebusInverter) => {
-  const source = isVebusInverter ? "vebus" : "inverter"
+const getTopics = (portalId, deviceInstance, source) => {
   return {
     state: `N/${portalId}/${source}/${deviceInstance}/State`,
     mode: `N/${portalId}/${source}/${deviceInstance}/Mode`,
     voltage: `N/${portalId}/${source}/${deviceInstance}/Ac/Out/L1/V`,
+    current: `N/${portalId}/${source}/${deviceInstance}/Ac/Out/L1/I`,
+    power: `N/${portalId}/${source}/${deviceInstance}/Ac/Out/L1/P`,
     productName: `N/${portalId}/${source}/${deviceInstance}/ProductName`,
     customName: `N/${portalId}/${source}/${deviceInstance}/CustomName`,
     // nAcInputs is obnly available for vebus inverters, for system ones will always be undefined
@@ -38,9 +39,21 @@ const stateFormatter = state => {
   }
 }
 
-export const Inverter = ({ state, mode, voltage, productName, customName, nAcInputs, isVebusInverter }) => {
+export const Inverter = ({
+  state,
+  mode,
+  voltage,
+  current,
+  power,
+  productName,
+  customName,
+  nAcInputs,
+  isVebusInverter,
+  updateMode
+}) => {
   // if nAcInputs === 0 it means it's an inverter, if not it's an inverter/charger => skip
   const show = !isVebusInverter || nAcInputs === 0
+  console.log(voltage, current, power)
   return (
     show && (
       <div className="metric inverter">
@@ -51,7 +64,9 @@ export const Inverter = ({ state, mode, voltage, productName, customName, nAcInp
         >
           <MetricValues>
             <p className="text text--smaller">{stateFormatter(state)}</p>
-            {!!voltage && <NumericValue value={voltage} unit="V" />}
+            <NumericValue value={voltage} unit="V" />
+            <NumericValue value={current} unit="A" precision={1} />
+            <NumericValue value={power || voltage * current} unit="W" />
           </MetricValues>
         </HeaderView>
         <div className="inverter__mode-selector">
@@ -71,12 +86,13 @@ export const Inverter = ({ state, mode, voltage, productName, customName, nAcInp
 }
 
 const InverterWithData = ({ portalId, deviceInstance, metricsRef, isVebusInverter }) => {
+  const source = isVebusInverter ? "vebus" : "inverter"
   return (
     <HidingContainer metricsRef={metricsRef}>
-      <MqttWriteValue topic={`W/${portalId}/inverter/${deviceInstance}/Mode`}>
+      <MqttWriteValue topic={`W/${portalId}/${source}/${deviceInstance}/Mode`}>
         {(_, updateMode) => (
-          <MqttSubscriptions topics={getTopics(portalId, deviceInstance, isVebusInverter)}>
-            {topics => <Inverter {...topics} isVebusInverter={isVebusInverter} />}
+          <MqttSubscriptions topics={getTopics(portalId, deviceInstance, source)}>
+            {topics => <Inverter {...topics} isVebusInverter={isVebusInverter} updateMode={updateMode} />}
           </MqttSubscriptions>
         )}
       </MqttWriteValue>
