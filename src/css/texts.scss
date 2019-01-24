@@ -24,7 +24,7 @@ body {
   font-size: 20px;
   @for $i from 1 through 5 {
     @media all and (max-width: 1200px - $i * 200px) {
-      font-size: 16px - $i * 2px;
+      font-size: 20px - $i * 0.8px;
     }
   }
 }
@@ -36,7 +36,7 @@ body {
 
   @for $i from 1 through 5 {
     @media all and (max-height: 900px - $i * 150px) {
-      font-size: 100% - $i * 5;
+      font-size: 100% - $i * 4;
     }
   }
 }
