@@ -59,13 +59,14 @@
     <header>
       <label>Base width:</label> <input type="text" id="width" placeholder="Base width" value="1280" />
       <label>Base height</label> <input type="text" id="height" placeholder="Base height" value="720" />
+      <label>Port</label> <input type="text" id="port" placeholder="Port" value="9001" />
     </header>
-    <iframe class="full" src="/index.html?nolog=true&port=9002"></iframe>
-    <iframe class="half-vertical" src="/index.html?nolog=true&port=9002"></iframe>
-    <iframe class="third-vertical" src="/index.html?nolog=true&port=9002"></iframe>
-    <iframe class="half-horizontal" src="/index.html?nolog=true&port=9002"></iframe>
-    <iframe class="quarter" src="/index.html?nolog=true&port=9002"></iframe>
-    <iframe class="sixth" src="/index.html?nolog=true&port=9002"></iframe>
+    <iframe class="full" src="/index.html?nolog=true"></iframe>
+    <iframe class="half-vertical" src="/index.html?nolog=true"></iframe>
+    <iframe class="third-vertical" src="/index.html?nolog=true"></iframe>
+    <iframe class="half-horizontal" src="/index.html?nolog=true"></iframe>
+    <iframe class="quarter" src="/index.html?nolog=true"></iframe>
+    <iframe class="sixth" src="/index.html?nolog=true"></iframe>
   </body>
   <script>
     ;(function() {
@@ -75,6 +76,15 @@
 
       document.getElementById("height").onchange = function(event) {
         document.getElementById("body").style.height = event.target.value + "px"
+      }
+
+      document.getElementById("port").onchange = function(event) {
+        document.querySelector(".full").src = "/index.html?nolog=true&port=" + event.target.value
+        document.querySelector(".half-vertical").src = "/index.html?nolog=true&port=" + event.target.value
+        document.querySelector(".third-vertical").src = "/index.html?nolog=true&port=" + event.target.value
+        document.querySelector(".half-horizontal").src = "/index.html?nolog=true&port=" + event.target.value
+        document.querySelector(".quarter").src = "/index.html?nolog=true&port=" + event.target.value
+        document.querySelector(".sixth").src = "/index.html?nolog=true&port=" + event.target.value
       }
     })()
   </script>
