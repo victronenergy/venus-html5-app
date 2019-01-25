@@ -22,35 +22,45 @@ class MqttClientProvider extends Component {
   topicsSubscribed = new Set()
   keepaliveHAndlerRef
   portalId = null
+  isMounted = false
+
+  safeSetState(state) {
+    if (this.isMounted) this.setState(state)
+  }
+
+  componentWillUnmount() {
+    this.isMounted = false
+  }
 
   componentDidMount() {
+    this.isMounted = true
     const client = mqtt.connect(`mqtt://${this.props.host}:${this.props.port}`)
-    this.setState({ client })
+    this.safeSetState({ client })
 
     client.stream.on("error", error => {
-      this.setState({ error })
+      this.safeSetState({ error })
     })
 
     client.on("error", error => {
-      this.setState({ error })
+      this.safeSetState({ error })
     })
 
     client.on("connect", () => {
-      this.setState({ status: STATUS.CONNECTED })
+      this.safeSetState({ status: STATUS.CONNECTED })
     })
 
     client.on("offline", () => {
-      this.setState({ status: STATUS.DISCONNECTED })
+      this.safeSetState({ status: STATUS.DISCONNECTED })
       this.topicsSubscribed = new Set()
     })
 
     client.on("reconnect", () => {
       const previousStatus = this.state.status
-      this.setState({ status: STATUS.RECONNECTING })
+      this.safeSetState({ status: STATUS.RECONNECTING })
 
       if (previousStatus === STATUS.CONNECTING && this.state.error) {
         client.end()
-        this.setState({ hasFailedToConnect: true })
+        this.safeSetState({ hasFailedToConnect: true })
       }
     })
 
@@ -62,7 +72,7 @@ class MqttClientProvider extends Component {
         this.setupKeepalive()
       }
 
-      this.setState({
+      this.safeSetState({
         messages: {
           ...this.state.messages,
           [topic]: getMessageJson(message)
