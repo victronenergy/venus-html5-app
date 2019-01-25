@@ -17,6 +17,7 @@ import Connecting from "./../components/Connecting"
 import Header from "./../components/Header"
 import Fade, { viewChangeDelay } from "./../components/Fade"
 import Logger from "../utils/logger"
+import Error from "./Error"
 
 const Main = ({ isConnected, children, setView }) => {
   return (
@@ -57,13 +58,21 @@ class App extends Component {
     } else this.setView(VIEWS.METRICS)
   }
 
-  componentDidCatch = (e, i) => {
+  componentDidCatch = e => {
     if (window.onerror) window.onerror(e.message, null, null, null, { stack: e.stack })
+  }
+
+  static getDerivedStateFromError() {
+    return { currentView: VIEWS.ERROR, viewUnmounting: true }
   }
 
   render() {
     const { host, port } = this.props
-    return (
+    return this.state.currentView === VIEWS.ERROR ? (
+      <Fade key={VIEWS.ERROR} unmount={this.state.viewUnmounting} fullWidth>
+        <Error />
+      </Fade>
+    ) : (
       <MqttClientProvider host={host} port={port}>
         {(_, isConnected, error) => {
           if (error) {
