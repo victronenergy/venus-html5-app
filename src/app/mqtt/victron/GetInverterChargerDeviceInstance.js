@@ -20,12 +20,12 @@ export default ({ children, portalId }) => (
       return (
         <MqttSubscriptions topics={topics}>
           {topics => {
-            const vebusDevices = Object.entries(topics).filter(item => {
-              // Take only "Multi" devices -> must have more than one AcInput
-              return item[1] !== 0
-            })
             // You can only have one "Multi" device in a system, so just take the first one
-            let vebusInstanceId = vebusDevices[0] ? parseInt(vebusDevices[0][0]) : null
+            const [multiInstance] = Object.entries(topics).filter(([_, nAcInputs]) => {
+              // Take only "Multi" devices -> must have more than one AcInput
+              return nAcInputs && nAcInputs !== 0
+            })
+            const vebusInstanceId = multiInstance ? parseInt(multiInstance[0]) : null
             return children(vebusInstanceId)
           }}
         </MqttSubscriptions>
