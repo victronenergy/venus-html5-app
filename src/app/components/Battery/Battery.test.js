@@ -83,16 +83,4 @@ describe("Battery element", () => {
       expect(wrapper.find(".button__paginator").exists()).toBe(true)
     })
   })
-
-  describe("should show all batteries", () => {
-    const wrapper = mount(<Batteries batteries={batteries} showAll={true} />)
-
-    it("page should show all batteries", () => {
-      expect(wrapper.find(".battery").length).toBe(7)
-    })
-
-    it("should not show pagination", () => {
-      expect(wrapper.find(".button__paginator").exists()).toBe(false)
-    })
-  })
 })

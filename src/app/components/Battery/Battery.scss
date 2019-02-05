@@ -48,6 +48,8 @@
 
 .batteries {
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .battery {
@@ -62,6 +64,10 @@
   width: 100%;
 }
 
+.battery--dummy {
+  flex-grow: 1;
+}
+
 .battery__title-row {
   display: flex;
   justify-content: space-between;
@@ -69,15 +75,16 @@
 }
 
 .battery__index {
-  align-items: center;
   display: flex;
   flex-shrink: 0;
+  align-items: center;
   justify-content: center;
-  width: 75px;
+  width: 70px;
+  margin: 10px 0;
+  border-right: solid 1px #131a28;
 }
 
 .battery__data {
-  border-left: solid 1px #131a28;
   display: flex;
   flex-direction: column;
   margin: 10px 0;
