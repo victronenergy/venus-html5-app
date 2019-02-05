@@ -9,7 +9,7 @@ import SelectorButton from "../SelectorButton"
 
 import "./Battery.scss"
 
-const pageSize = 3
+const PAGE_SIZE = 3
 
 const getTopics = portalId => {
   return {
@@ -17,7 +17,7 @@ const getTopics = portalId => {
   }
 }
 
-const BatteryHeader = ({ amount }) => {
+const BatteryHeader = ({ amount, paginate, setPage, currentPage }) => {
   return (
     <div className="battery-header">
       <img src={require("../../../images/icons/battery.svg")} className="metric__icon" />
@@ -25,6 +25,7 @@ const BatteryHeader = ({ amount }) => {
         <span>Batteries</span>
         <span className="text text--smaller text--opaque">{`${amount} instance${amount > 1 ? "s" : ""}`}</span>
       </div>
+      {paginate && <Paginator setPage={setPage} currentPage={currentPage} pages={Math.ceil(amount / PAGE_SIZE)} />}
     </div>
   )
 }
@@ -32,16 +33,49 @@ const BatteryHeader = ({ amount }) => {
 const Paginator = ({ setPage, currentPage, pages }) => {
   return (
     <div className="button__paginator">
-      <span className="text--opaque button__paginator-label">Page:</span>
-      {[...new Array(pages)].map((_, i) => {
-        return (
-          <SelectorButton active={i === currentPage} onClick={() => setPage(i)} key={i}>
-            {i + 1}
-          </SelectorButton>
-        )
-      })}
+      <SelectorButton disabled={currentPage < 1} onClick={() => setPage(currentPage - 1)}>
+        &lt;
+      </SelectorButton>
+      <span className="battery__paginator-page">{currentPage + 1}</span>
+      <SelectorButton disabled={currentPage + 1 >= pages} onClick={() => setPage(currentPage + 1)}>
+        &gt;
+      </SelectorButton>
     </div>
   )
+}
+
+export class BatteryList extends Component {
+  ref = React.createRef()
+
+  render() {
+    const { batteries, currentPage } = this.props
+
+    return (
+      <div
+        className="batteries"
+        ref={this.ref}
+        style={this.ref.current && batteries.some(b => b.dummy) ? { height: this.ref.current.offsetHeight } : {}}
+      >
+        {batteries.map(({ voltage, current, power, name, soc, state, id, timetogo, dummy }, i) => (
+          <div className={classnames("battery", { "battery--dummy": dummy })} key={id || i}>
+            <div className="battery__index">{!dummy && i + 1 + currentPage * PAGE_SIZE}</div>
+            {!dummy && (
+              <div className="battery__data">
+                <div className="battery__title-row">
+                  {name} {soc !== undefined && <BatteryLevel state={state} soc={soc} timeToGo={timetogo} />}
+                </div>
+                <div>
+                  <NumericValue value={voltage} unit="V" precision={1} />
+                  <NumericValue value={current} unit="A" precision={1} />
+                  <NumericValue value={power} unit="W" />
+                </div>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    )
+  }
 }
 
 export class Batteries extends Component {
@@ -54,46 +88,21 @@ export class Batteries extends Component {
 
   render() {
     const { batteries } = this.props
-    const paginate = batteries.length > pageSize
+    const paginate = batteries.length > PAGE_SIZE
     const batteriesToShow = paginate
-      ? batteries.slice(this.state.currentPage * pageSize, this.state.currentPage * pageSize + pageSize)
+      ? batteries.slice(this.state.currentPage * PAGE_SIZE, this.state.currentPage * PAGE_SIZE + PAGE_SIZE)
       : batteries
-
     // These fill the last page with empty elements if necessary
-    const fillerBatteries = paginate ? [...Array(pageSize - batteriesToShow.length)].map(() => ({ dummy: true })) : []
-
+    const fillerBatteries = paginate ? [...Array(PAGE_SIZE - batteriesToShow.length)].map(() => ({ dummy: true })) : []
     return (
-      <div
-        className="batteries"
-        ref={this.ref}
-        style={this.ref.current && batteriesToShow.length < pageSize ? { height: this.ref.current.offsetHeight } : {}}
-      >
-        {batteriesToShow
-          .concat(fillerBatteries)
-          .map(({ voltage, current, power, name, soc, state, id, timetogo, dummy }, i) => (
-            <div className={classnames("battery", { "battery--dummy": dummy })} key={id || i}>
-              <div className="battery__index">{!dummy && i + 1 + this.state.currentPage * pageSize}</div>
-              {!dummy && (
-                <div className="battery__data">
-                  <div className="battery__title-row">
-                    {name} {soc !== undefined && <BatteryLevel state={state} soc={soc} timeToGo={timetogo} />}
-                  </div>
-                  <div>
-                    <NumericValue value={voltage} unit="V" precision={1} />
-                    <NumericValue value={current} unit="A" precision={1} />
-                    <NumericValue value={power} unit="W" />
-                  </div>
-                </div>
-              )}
-            </div>
-          ))}
-        {paginate && (
-          <Paginator
-            setPage={this.setPage}
-            currentPage={this.state.currentPage}
-            pages={Math.ceil(batteries.length / pageSize)}
-          />
-        )}
+      <div className="metric metric__battery">
+        <BatteryHeader
+          amount={batteries.length}
+          setPage={this.setPage}
+          currentPage={this.state.currentPage}
+          paginate={paginate}
+        />
+        <BatteryList batteries={batteriesToShow.concat(fillerBatteries)} currentPage={this.state.currentPage} />
       </div>
     )
   }
@@ -104,25 +113,24 @@ const mainBatteryToFirst = batteries => {
   return batteries.sort((a, b) => (a.active_battery_service ? -1 : b.active_battery_service ? 1 : 0))
 }
 
-const BatteryWithData = ({ portalId, metricsRef }) => {
-  return (
-    <MqttSubscriptions topics={getTopics(portalId)}>
-      {({ batteries }) => {
-        if (!batteries) {
-          return null
-        } else {
-          const sortedBatteries = mainBatteryToFirst(batteries)
-          return (
-            <HidingContainer metricsRef={metricsRef}>
-              <div className="metric metric__battery">
-                <BatteryHeader amount={sortedBatteries.length} />
+class BatteryWithData extends Component {
+  render() {
+    return (
+      <MqttSubscriptions topics={getTopics(this.props.portalId)}>
+        {({ batteries }) => {
+          if (!batteries) {
+            return null
+          } else {
+            const sortedBatteries = mainBatteryToFirst(batteries)
+            return (
+              <HidingContainer metricsRef={this.props.metricsRef}>
                 <Batteries batteries={sortedBatteries} />
-              </div>
-            </HidingContainer>
-          )
-        }
-      }}
-    </MqttSubscriptions>
-  )
+              </HidingContainer>
+            )
+          }
+        }}
+      </MqttSubscriptions>
+    )
+  }
 }
 export default BatteryWithData
