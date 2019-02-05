@@ -1,6 +1,6 @@
 import { mount } from "enzyme"
 import React from "react"
-import { Batteries, BatteryHeader } from "./Battery"
+import { Batteries } from "./Battery"
 
 const batteries = [
   {
@@ -61,7 +61,7 @@ const batteries = [
 
 describe("Battery element", () => {
   describe("with a few batteries", () => {
-    const wrapper = mount(<Batteries batteries={batteries.slice(0, 3)} showAll={true} />)
+    const wrapper = mount(<Batteries batteries={batteries.slice(0, 3)} />)
 
     it("should show batteries", () => {
       expect(wrapper.find(".battery").length).toBe(3)
@@ -73,7 +73,7 @@ describe("Battery element", () => {
   })
 
   describe("with more than 1 page of batteries", () => {
-    const wrapper = mount(<Batteries batteries={batteries} showAll={false} />)
+    const wrapper = mount(<Batteries batteries={batteries} />)
 
     it("page should show one page of batteries", () => {
       expect(wrapper.find(".battery").length).toBe(3)
@@ -81,6 +81,18 @@ describe("Battery element", () => {
 
     it("should show pagination", () => {
       expect(wrapper.find(".button__paginator").exists()).toBe(true)
+    })
+
+    it("should have 'filler' elements on the last page", () => {
+      const paginatorLabel = wrapper.find(".battery__paginator-page")
+      const nextPage = wrapper.find(".selector-button").last()
+
+      expect(paginatorLabel.text()).toBe("1")
+      nextPage.simulate("click")
+      nextPage.simulate("click")
+      expect(paginatorLabel.text()).toBe("3")
+
+      expect(wrapper.find(".battery--dummy").length).toBe(2)
     })
   })
 })

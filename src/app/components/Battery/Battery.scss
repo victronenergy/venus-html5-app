@@ -97,18 +97,13 @@
 }
 
 .button__paginator {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
+  margin-left: auto;
   .selector-button {
     flex-grow: unset;
-    &:not(:last-child) {
-      margin-right: 10px;
-    }
+    padding: 13px 35px;
   }
 }
 
-.button__paginator-label {
-  margin-right: 20px;
+.battery__paginator-page {
+  margin: 0 20px;
 }
