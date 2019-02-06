@@ -1,14 +1,18 @@
 import React from "react"
-import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
-import MqttWriteValue from "../../mqtt/MqttWriteValue"
+
+import CurrentLimitIncrementor from "./CurrentLimitIncrementor"
 import HeaderView from "../../components/HeaderView"
-import NumericValue from "../NumericValue/NumericValue"
 import HidingContainer from "../../components/HidingContainer"
 import MetricValues from "../MetricValues/MetricValues"
+import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
+import MqttWriteValue from "../../mqtt/MqttWriteValue"
+import NumericValue from "../NumericValue/NumericValue"
 import SelectorButton from "../SelectorButton/SelectorButton"
-import { CHARGER_MODE } from "../../utils/constants"
 import SystemState from "../SystemState"
-import CurrentLimitIncrementor from "./CurrentLimitIncrementor"
+
+import { CHARGER_MODE } from "../../utils/constants"
+
+import "./Charger.scss"
 
 const getTopics = (portalId, deviceInstanceId) => {
   return {

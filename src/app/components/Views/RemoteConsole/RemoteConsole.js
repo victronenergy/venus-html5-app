@@ -1,5 +1,7 @@
 import React from "react"
 
+import "./RemoteConsole.scss"
+
 export default ({ onClickOutsideContainer, host }) => (
   <div className="remote-console__container" onClick={onClickOutsideContainer}>
     <iframe className="remote-console" src={"http://" + host} />

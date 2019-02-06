@@ -1,14 +1,18 @@
 import React, { Component } from "react"
-import { VIEWS } from "../utils/constants"
-import MqttSubscriptions from "../mqtt/MqttSubscriptions"
+
+import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
+
+import { VIEWS } from "../../utils/constants"
+
+import "./Header.scss"
 
 const Header = props => {
   const { isConnected, showRemoteConsoleSetting, currentView, handleRemoteConsoleButtonClicked } = props
   return (
     <header>
-      <img src={require("../../images/icons/logo.png")} className="logo" />
+      <img src={require("../../../images/icons/logo.png")} className="logo" />
       <div className="connection">
-        <img src={require("../../images/icons/connected.svg")} className="connection__icon" />
+        <img src={require("../../../images/icons/connected.svg")} className="connection__icon" />
         <p className="text text--small">{isConnected ? "Connected" : "Disconnected"}</p>
         {showRemoteConsoleSetting && (
           <button

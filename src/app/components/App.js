@@ -1,23 +1,18 @@
 import React, { Component } from "react"
 
+import Fade, { viewChangeDelay } from "./Fade"
+import GetInverterChargerDeviceInstance from "./../mqtt/victron/GetInverterChargerDeviceInstance"
+import GetPortalId from "./../mqtt/victron/GetPortalId"
+import Header from "./Header/Header"
+import MqttClientProvider from "./../mqtt/MqttClientProvider"
+import ShoreInputLimitSelector from "./ShoreInputLimitSelector"
+
+import { MqttUnavailable, Metrics, RemoteConsole, Connecting, Error } from "./Views"
+
+import Logger from "../utils/logger"
 import { VIEWS } from "./../utils/constants"
 import "../../css/texts.scss"
 import "../../css/styles.scss"
-
-import ShoreInputLimitSelector from "./../components/ShoreInputLimitSelector"
-import MqttClientProvider from "./../mqtt/MqttClientProvider"
-import GetPortalId from "./../mqtt/victron/GetPortalId"
-import GetInverterChargerDeviceInstance from "./../mqtt/victron/GetInverterChargerDeviceInstance"
-
-import MqttUnavailable from "./../components/MqttUnavailable"
-import Metrics from "./../components/Metrics"
-import RemoteConsole from "./../components/RemoteConsole"
-import Connecting from "./../components/Connecting"
-
-import Header from "./../components/Header"
-import Fade, { viewChangeDelay } from "./../components/Fade"
-import Logger from "../utils/logger"
-import Error from "./Error"
 
 const Main = ({ isConnected, children, setView }) => {
   return (
