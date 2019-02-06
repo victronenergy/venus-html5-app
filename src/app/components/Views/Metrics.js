@@ -1,13 +1,13 @@
 import React, { Component } from "react"
 
-import ActiveSource from "./ActiveSource"
-import AcLoads from "./AcLoads"
-import Battery from "./Battery"
-import DcLoads from "./DcLoads"
-import Inverters from "./Inverters"
-import InverterCharger from "./InverterCharger"
-import Solar from "./Solar"
-import Chargers from "./Chargers"
+import ActiveSource from "../ActiveSource"
+import AcLoads from "../AcLoads"
+import Battery from "../Battery"
+import Chargers from "../Chargers"
+import DcLoads from "../DcLoads"
+import Inverters from "../Inverters"
+import InverterCharger from "../InverterCharger/InverterCharger"
+import Solar from "../Solar"
 
 const hasTwoColumns = metricsContainer => {
   if (!metricsContainer || metricsContainer.childElementCount < 2) return false

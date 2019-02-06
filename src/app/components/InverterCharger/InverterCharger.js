@@ -1,14 +1,16 @@
 import React, { Component } from "react"
 
-import HeaderView from "./HeaderView"
-import HidingContainer from "./HidingContainer"
-import MetricValues from "./MetricValues"
-import MqttSubscriptions from "../mqtt/MqttSubscriptions"
-import MqttWriteValue from "../mqtt/MqttWriteValue"
-import SelectorButton from "./SelectorButton"
+import HeaderView from "../HeaderView"
+import HidingContainer from "../HidingContainer"
+import MetricValues from "../MetricValues"
+import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
+import MqttWriteValue from "../../mqtt/MqttWriteValue"
+import SelectorButton from "../SelectorButton"
 
-import { SYSTEM_MODE } from "../utils/constants"
-import SystemState from "./SystemState"
+import { SYSTEM_MODE } from "../../utils/constants"
+import SystemState from "../SystemState"
+
+import "../Chargers/Charger.scss"
 
 const getTopics = (portalId, vebusInstanceId) => {
   return {
@@ -30,7 +32,7 @@ const InverterCharger = ({ activeMode, state, modeIsAdjustable, onModeSelected }
   const systemMode = systemModeFormatter(activeMode)
   return (
     <div className="metric charger inverter-charger">
-      <HeaderView icon={require("../../images/icons/multiplus.svg")} title="Inverter / Charger" child>
+      <HeaderView icon={require("../../../images/icons/multiplus.svg")} title="Inverter / Charger" child>
         <MetricValues>
           <p className="text text--smaller">
             <SystemState value={state} />

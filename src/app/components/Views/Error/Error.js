@@ -1,9 +1,9 @@
 import React from "react"
 
-import "../../css/texts.scss"
-import "../../css/styles.scss"
+import "./Error.scss"
+import "../../../../css/texts.scss"
 
-export default props => {
+export default () => {
   return (
     <div className="error text--large">
       <div>

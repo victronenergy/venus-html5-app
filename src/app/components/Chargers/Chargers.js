@@ -1,7 +1,7 @@
 import React from "react"
 
-import MqttTopicWildcard from "../../mqtt/MqttTopicWildcard"
 import Charger from "./Charger"
+import MqttTopicWildcard from "../../mqtt/MqttTopicWildcard"
 
 const Chargers = ({ portalId, ...rest }) => (
   <MqttTopicWildcard wildcard="N/+/charger/+/DeviceInstance">

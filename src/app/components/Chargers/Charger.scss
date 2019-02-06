@@ -1,11 +1,11 @@
 @import "../../../css/variables.scss";
 
-.inverter {
+.charger {
   flex-direction: column;
   height: auto;
 }
 
-.inverter__mode-selector {
+.charger__mode-selector {
   margin-top: $metricHeaderMarginBottom;
   height: 100%;
   width: 100%;
@@ -13,11 +13,25 @@
   justify-content: space-between;
 }
 
-.inverter__mode-selector > .selector-button {
+.charger__mode-selector > .selector-button {
   &:not(:first-child) {
     margin-left: 10px;
   }
 
   padding-left: 0;
   padding-right: 0;
+}
+
+.charger__output {
+  margin-top: $metricHeaderMarginBottom;
+}
+
+.charger__header-wrapper {
+  width: 100%;
+  display: flex;
+
+  .charger__input-limit-selector {
+    align-self: flex-end;
+    margin-left: auto;
+  }
 }

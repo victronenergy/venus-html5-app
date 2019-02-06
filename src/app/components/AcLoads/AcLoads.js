@@ -1,11 +1,11 @@
 import React, { Component } from "react"
 
-import HeaderView from "./HeaderView"
-import HidingContainer from "./HidingContainer"
-import { ListView, ListRow } from "./ListView"
-import MetricValues from "./MetricValues"
-import MqttSubscriptions from "../mqtt/MqttSubscriptions"
-import NumericValue from "./NumericValue/index"
+import HeaderView from "../HeaderView"
+import HidingContainer from "../HidingContainer"
+import { ListView, ListRow } from "../ListView"
+import MetricValues from "../MetricValues"
+import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
+import NumericValue from "../NumericValue/index"
 
 const getTopics = (portalId, vebusInstanceId) => {
   return {
@@ -33,7 +33,7 @@ const AcLoads = props => {
   const showAsList = phases > 1
 
   return showAsList ? (
-    <ListView icon={require("../../images/icons/ac.svg")} title="AC Loads" subTitle={`${phases} phases`}>
+    <ListView icon={require("../../../images/icons/ac.svg")} title="AC Loads" subTitle={`${phases} phases`}>
       {voltage.map((v, i) => (
         <ListRow key={i}>
           <span className="text text--smaller">Phase {i + 1}</span>
@@ -44,7 +44,7 @@ const AcLoads = props => {
       ))}
     </ListView>
   ) : (
-    <HeaderView icon={require("../../images/icons/ac.svg")} title="AC Loads">
+    <HeaderView icon={require("../../../images/icons/ac.svg")} title="AC Loads">
       <MetricValues>
         <NumericValue value={voltage[0]} unit="V" />
         <NumericValue value={current[0]} unit="A" precision={1} />

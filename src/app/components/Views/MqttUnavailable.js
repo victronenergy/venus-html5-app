@@ -1,5 +1,5 @@
 import React from "react"
-import Fade from "./Fade"
+import Fade from "../Fade"
 
 export default ({ viewUnmounting }) => (
   <main>
@@ -11,7 +11,7 @@ export default ({ viewUnmounting }) => (
           Remote Console > Settings > Services > MQTT.
         </span>
         <div className="image-container">
-          <img src={require("../../images/mqtt-settings.png")} />
+          <img src={require("../../../images/mqtt-settings.png")} />
         </div>
       </div>
     </Fade>
