@@ -22,8 +22,7 @@ const BatteryHeader = ({ amount, paginate, setPage, currentPage }) => {
     <div className="battery-header">
       <img src={require("../../../images/icons/battery.svg")} className="metric__icon" />
       <div className="battery-header__text">
-        <span>Batteries</span>
-        <span className="text text--smaller text--opaque">{`${amount} instance${amount > 1 ? "s" : ""}`}</span>
+        <span>Batteries {paginate ? `(${amount})` : ""}</span>
       </div>
       {paginate && <Paginator setPage={setPage} currentPage={currentPage} pages={Math.ceil(amount / PAGE_SIZE)} />}
     </div>
@@ -58,7 +57,7 @@ export class BatteryList extends Component {
       >
         {batteries.map(({ voltage, current, power, name, soc, state, id, timetogo, dummy }, i) => (
           <div className={classnames("battery", { "battery--dummy": dummy })} key={id || i}>
-            <div className="battery__index">{!dummy && i + 1 + currentPage * PAGE_SIZE}</div>
+            {batteries.length > 1 && <div className="battery__index">{!dummy && i + 1 + currentPage * PAGE_SIZE}</div>}
             {!dummy && (
               <div className="battery__data">
                 <div className="battery__title-row">
