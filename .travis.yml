@@ -20,7 +20,6 @@ cache:
     - ~/.cache
 script:
   - npm run test
-  - npm run test:ui
   - npm run compile
   # Archive the built files in preparation of uploading them to Github
 before_deploy:

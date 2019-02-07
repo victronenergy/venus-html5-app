@@ -43,10 +43,12 @@ This adds some convenience features for debugging on actual devices and testing:
 
 ### Running the app with no Venus device available
 
-If there is no real device to be used for MQTT data, you can run the app with a fake MQTT broker:
+The mqtt mock is no longer mainainted. Use [venus-docker](https://github.com/victronenergy/venus-docker) instead or a Venus GX in demo mode (below).
 
-`npm run dev:mocked`
-This shallowly fakes the MQTT implementation in the Venus device.
+~~If there is no real device to be used for MQTT data, you can run the app with a fake MQTT broker:~~
+
+~~`npm run dev:mocked`
+This shallowly fakes the MQTT implementation in the Venus device.~~
 
 Also, keep in mind the Venus device also has a Demo mode, which allows you to get useful data if you have only the Venus device and no other Victron devices, without requiring various Victron devices to be connected to the Venus device.
 To enable it, navigate to the Venus Remote Console -> Settings -> General.
@@ -67,12 +69,18 @@ Since it is still served through the webpack dev server, the app will hot reload
 
 ## Testing
 
+### Enzyme
+
+Most components have Enzyme unit tests. Run all of these tests with `npm run test`
+
 ### Cypress
 
 Cypress is used to run integration tests on the compiled ui to make sure it opens and operated correctly in different
-display sizes. To run cypress you need to run the live server with mocked mqtt:
+display sizes. To run cypress you need to run the live server and an instance of venus docker in the Venus GX demo mode (z):
 
-- `npm run dev:mocked`
+(in html5 app repo): `npm run dev`
+
+(in venus docker repo): `./run.sh -s z`
 
 Then you can run the cypress ui with `npm run cypress`.
 
