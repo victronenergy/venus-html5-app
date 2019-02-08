@@ -96,14 +96,23 @@
   white-space: nowrap;
 }
 
-.button__paginator {
+.battery__paginator {
   margin-left: auto;
+  display: flex;
+  align-items: center;
+
   .selector-button {
-    flex-grow: unset;
     padding: 13px 35px;
+    height: 100%;
   }
 }
 
 .battery__paginator-page {
   margin: 0 20px;
+}
+
+.battery__paginator-button {
+  display: flex;
+  max-height: 22px;
+  height: 100%;
 }

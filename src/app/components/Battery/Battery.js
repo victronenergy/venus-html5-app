@@ -31,13 +31,13 @@ const BatteryHeader = ({ amount, paginate, setPage, currentPage }) => {
 
 const Paginator = ({ setPage, currentPage, pages }) => {
   return (
-    <div className="button__paginator">
+    <div className="battery__paginator">
       <SelectorButton disabled={currentPage < 1} onClick={() => setPage(currentPage - 1)}>
-        &lt;
+        <img src={require("../../../images/icons/L.svg")} className="battery__paginator-button" />
       </SelectorButton>
       <span className="battery__paginator-page">{currentPage + 1}</span>
       <SelectorButton disabled={currentPage + 1 >= pages} onClick={() => setPage(currentPage + 1)}>
-        &gt;
+        <img src={require("../../../images/icons/R.svg")} className="battery__paginator-button" />
       </SelectorButton>
     </div>
   )

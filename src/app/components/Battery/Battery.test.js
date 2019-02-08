@@ -68,7 +68,7 @@ describe("Battery element", () => {
     })
 
     it("should not show pagination", () => {
-      expect(wrapper.find(".button__paginator").exists()).toBe(false)
+      expect(wrapper.find(".battery__paginator").exists()).toBe(false)
     })
   })
 
@@ -80,7 +80,7 @@ describe("Battery element", () => {
     })
 
     it("should show pagination", () => {
-      expect(wrapper.find(".button__paginator").exists()).toBe(true)
+      expect(wrapper.find(".battery__paginator").exists()).toBe(true)
     })
 
     it("should have 'filler' elements on the last page", () => {

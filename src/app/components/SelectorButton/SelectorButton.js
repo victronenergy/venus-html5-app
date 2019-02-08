@@ -16,7 +16,7 @@ class SelectorButton extends Component {
           className || ""
         )}
       >
-        <span>{children}</span>
+        {children}
       </button>
     )
   }
