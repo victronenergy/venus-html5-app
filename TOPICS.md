@@ -96,9 +96,11 @@ N/{portalId}/vebus/{vebusInstanceId}/Ac/ActiveIn/ActiveInput
 // Active input: 0 = ACin-1, 1 = ACin-2, 240 is none (inverting).
 ```
 
-##### How to get information about the currently active input (grid / shore / generator)?
+##### Where to get the readings for the AC inputs (grid / shore / generator)?
 
-For UIs that show more information, so also voltage and current, its a bit more complex:
+Normally we'd say go to the .system device. But the html5 app UI also wants
+voltage and current, which are not available on .system device. Therefore, get
+them straight from the .vebus service:
 
 - figure out which of the AC-inputs is what; so for example ACinput0 == Generator and
   ACinput1 == Shore.
@@ -113,21 +115,20 @@ N/{portalId}/vebus/{vebusInstanceId}/Ac/ActiveIn/L1/P  <- Power (Watts)
 N/{portalId}/vebus/{vebusInstanceId}/Ac/ActiveIn/L1/V  <- Voltage (Volts)
 ```
 
-You can check if the system is a 3 phase system using:
-
+The number of phases, for all boxes related to the vebus device can be retrieved here:
 ```
 N/${portalId}/vebus/${vebusInstanceId}/Ac/NumberOfPhases
 ```
 
-Note: For UIs that show only power, and also do not show generator & shore at the same time,
-you can take the info from these paths under system/0:
+Note: For other UIs, that show only power, and also do not show generator & shore
+at the same time, you can take the info from these paths under system/0:
 
 ```
 N/{portalId}/system/0/Ac/Grid/*                      <- All from the shore. TODO: check if this shouldn't be /Ac/Shore
 N/{portalId}/system/0/Ac/Genset/*                    <- All from the generator.
 ```
 
-#### Inverter/charger data:
+#### Rest of inverter/charger data:
 
 ```
 N/{portalId}/system/0/Dc/Vebus/Current               <- charge/discharge current between battery
@@ -152,9 +153,6 @@ N/{portalId}/system/0/SystemState/State              <- Absorption, float, etc.
 N/{portalId}/system/0/Ac/ActiveIn/Source             <- The active AC-In source of the multi.
                                                        0:not available, 1:grid, 2:generator,
                                                        3:shore, 240: inverting/island mode.
-
-N/{portalId}/system/0/Ac/Consumption/NumberOfPhases  <- Either 1 (single phase), 2 (split-phase) or
-                                                        3 (three-phase)
 
 N/{portalId}/system/0/VebusService                   <- Returns the service name of the vebus service.
                                                         Use that to find the control options:
@@ -196,11 +194,10 @@ Notes:
    disabling "powerAssist" changes it.
 3. Paths for /CurrentLimit described below are only available starting from version 415 of the VE.Bus device.
 
-##### Suggestions available for selecting the shore input limit
+##### Make commonly used shore input limits available as a button
 
-The list of amperages displayed depends on whether the device is US based or EU based.
-
-To determine that, get the product id from:
+The list of amperages commonly used depends on wether the system is US based or EU based. To
+etermine that, get the product id from:
 
 ```
 N/{portalId}/vebus/{vebusInstanceId}/ProductId
@@ -209,7 +206,6 @@ N/{portalId}/vebus/{vebusInstanceId}/ProductId
 Then, mask the Product id with `0xFF00`
 
 If the result is `0x1900` or `0x2600` it is an EU model (230VAC)
-
 If the result is `0x2000` or `0x2700` it is an US model (120VAC)
 
 Default values for US/EU are:
