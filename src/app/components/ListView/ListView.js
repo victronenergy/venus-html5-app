@@ -9,10 +9,10 @@ export const ListView = ({ child, children, icon, title, subTitle }) => (
       <img src={icon} className="metric__icon" />
       <div className="metric__value-container">
         <p className="text text--medium">{title}</p>
-        <span className="text text--smaller text--opaque">{subTitle}</span>
+        {subTitle && <span className="text text--smaller text--opaque">{subTitle}</span>}
       </div>
     </div>
-    <div className="list-view__rows">{children}</div>
+    {children && <div className="list-view__rows">{children}</div>}
   </div>
 )
 

@@ -1,12 +1,8 @@
 describe("Testing basic actions in the ui", () => {
-  before(() => {
-    cy.viewport(1280, 720)
-  })
-
   it("Successfully opens page", () => {
     cy.visit("/")
     cy.get(".connection > p").should("contain", "Connected")
-    cy.get("#metrics-container").should("be.visible")
+    cy.get(".metrics-container").should("be.visible")
   })
 
   it("Selects inverter charger mode", () => {
@@ -26,9 +22,9 @@ describe("Testing basic actions in the ui", () => {
   })
 
   it("Selects shore input limit", () => {
-    cy.get(".metric__active-source button").click()
+    cy.get(".metric__current-input-limit button").click()
     cy.get(".amperage-selector__container").should("be.visible")
-    cy.get("#metrics-container").should("not.be.visible")
+    cy.get(".metrics-container").should("not.be.visible")
     cy.get(".amperage-selector > button.selector-button--active")
       .as("active")
       .should("have.length", 1)
@@ -42,10 +38,10 @@ describe("Testing basic actions in the ui", () => {
 
   it("Opens remote console", () => {
     cy.get(".remote-console-button").click()
-    cy.get("#metrics-container").should("not.be.visible")
+    cy.get(".metrics-container").should("not.be.visible")
     cy.get(".remote-console__container").should("be.visible")
     cy.get("main").click()
-    cy.get("#metrics-container").should("be.visible")
+    cy.get(".metrics-container").should("be.visible")
     cy.get(".remote-console__container").should("not.be.visible")
   })
 })

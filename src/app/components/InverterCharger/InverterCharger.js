@@ -1,16 +1,18 @@
 import React, { Component } from "react"
+import classnames from "classnames"
 
+import GetShorePowerInputNumber from "../../mqtt/victron/GetShorePowerInputNumber"
 import HeaderView from "../HeaderView"
 import HidingContainer from "../HidingContainer"
-import MetricValues from "../MetricValues"
+import InputLimit from "./InputLimit"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 import MqttWriteValue from "../../mqtt/MqttWriteValue"
 import SelectorButton from "../SelectorButton"
 
+import { systemStateFormatter } from "../../utils/util"
 import { SYSTEM_MODE } from "../../utils/constants"
-import SystemState from "../SystemState"
 
-import "../Chargers/Charger.scss"
+import "./InverterCharger.scss"
 
 const getTopics = (portalId, vebusInstanceId) => {
   return {
@@ -20,43 +22,53 @@ const getTopics = (portalId, vebusInstanceId) => {
   }
 }
 
-const systemModeFormatter = value => {
-  if (value == 1) return "Charger only"
-  if (value == 2) return "Inverter only"
-  if (value == 3) return "ON"
-  if (value == 4) return "OFF"
-  return "--"
-}
-
-const InverterCharger = ({ activeMode, state, modeIsAdjustable, onModeSelected }) => {
-  const systemMode = systemModeFormatter(activeMode)
+const InverterCharger = ({
+  mode,
+  state,
+  modeIsAdjustable,
+  onModeSelected,
+  onChangeInputLimitClicked,
+  inverterChargerDeviceId,
+  portalId
+}) => {
   return (
     <div className="metric charger inverter-charger">
-      <HeaderView icon={require("../../../images/icons/multiplus.svg")} title="Inverter / Charger" child>
-        <MetricValues>
-          <p className="text text--smaller">
-            <SystemState value={state} />
-          </p>
-        </MetricValues>
-      </HeaderView>
+      <GetShorePowerInputNumber portalId={portalId}>
+        {shoreInput => {
+          return (
+            <div
+              className={classnames("inverter-charger__header", { "inverter-charger__header--column": !shoreInput })}
+            >
+              <HeaderView
+                icon={require("../../../images/icons/multiplus.svg")}
+                title="Inverter / Charger"
+                subTitle={systemStateFormatter(state)}
+                child
+              />
+              <InputLimit
+                portalId={portalId}
+                inverterChargerDeviceId={inverterChargerDeviceId}
+                onChangeInputLimitClicked={onChangeInputLimitClicked}
+                shorePowerInput={shoreInput}
+              />
+            </div>
+          )
+        }}
+      </GetShorePowerInputNumber>
       <div className="charger__mode-selector">
-        <SelectorButton
-          disabled={!modeIsAdjustable}
-          active={systemMode === "ON"}
-          onClick={() => onModeSelected(SYSTEM_MODE.ON)}
-        >
+        <SelectorButton disabled={!modeIsAdjustable} active={mode === 3} onClick={() => onModeSelected(SYSTEM_MODE.ON)}>
           On
         </SelectorButton>
         <SelectorButton
           disabled={!modeIsAdjustable}
-          active={systemMode === "OFF"}
+          active={mode === 4}
           onClick={() => onModeSelected(SYSTEM_MODE.OFF)}
         >
           Off
         </SelectorButton>
         <SelectorButton
           disabled={!modeIsAdjustable}
-          active={systemMode === "Charger only"}
+          active={mode === 1}
           onClick={() => onModeSelected(SYSTEM_MODE.CHARGER_ONLY)}
         >
           Charger only
@@ -68,7 +80,7 @@ const InverterCharger = ({ activeMode, state, modeIsAdjustable, onModeSelected }
 
 class InverterChargerWithData extends Component {
   render() {
-    const { portalId, inverterChargerDeviceId, connected, metricsRef } = this.props
+    const { portalId, inverterChargerDeviceId, connected, metricsRef, onChangeInputLimitClicked } = this.props
     return (
       <MqttSubscriptions topics={getTopics(portalId, inverterChargerDeviceId)}>
         {topics => {
@@ -78,10 +90,12 @@ class InverterChargerWithData extends Component {
                 return (
                   <HidingContainer metricsRef={metricsRef}>
                     <InverterCharger
-                      state={topics.state}
-                      activeMode={topics.mode}
+                      {...topics}
+                      inverterChargerDeviceId={inverterChargerDeviceId}
+                      portalId={portalId}
                       modeIsAdjustable={topics.modeIsAdjustable && connected}
                       onModeSelected={newMode => updateMode(newMode)}
+                      onChangeInputLimitClicked={onChangeInputLimitClicked}
                     />
                   </HidingContainer>
                 )

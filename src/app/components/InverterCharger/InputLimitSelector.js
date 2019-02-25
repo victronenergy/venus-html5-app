@@ -1,10 +1,13 @@
 import React, { Component } from "react"
-import Logger from "../../utils/logger"
+
+import GetShorePowerInputNumber from "../../mqtt/victron/GetShorePowerInputNumber"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 import MqttWriteValue from "../../mqtt/MqttWriteValue"
-import GetShorePowerInputNumber from "../../mqtt/victron/GetShorePowerInputNumber"
-import "./ShoreInputLimitSelector.scss"
 import SelectorButton from "../SelectorButton"
+
+import Logger from "../../utils/logger"
+
+import "./InputLimitSelector.scss"
 
 const USAmperage = [10, 15, 20, 30, 50, 100]
 const EUAmperage = [6, 10, 13, 16, 25, 32, 63]
@@ -17,7 +20,7 @@ const getTopics = (portalId, vebusInstanceId, shorePowerInput) => {
   }
 }
 
-class ShoreInputLimitSelector extends Component {
+class InputLimitSelector extends Component {
   state = {
     showEmpties: false
   }
@@ -83,7 +86,7 @@ class ShoreInputLimitSelector extends Component {
   }
 }
 
-class ShoreInputLimitSelectorWithData extends Component {
+class InputLimitSelectorWithData extends Component {
   render() {
     const { portalId, inverterChargerDeviceId, onLimitSelected } = this.props
     if (!portalId || !inverterChargerDeviceId) {
@@ -105,7 +108,7 @@ class ShoreInputLimitSelectorWithData extends Component {
                   >
                     {(_, updateLimitSelected) => {
                       return (
-                        <ShoreInputLimitSelector
+                        <InputLimitSelector
                           {...topics}
                           onLimitSelected={value => {
                             updateLimitSelected(value)
@@ -124,4 +127,4 @@ class ShoreInputLimitSelectorWithData extends Component {
     )
   }
 }
-export default ShoreInputLimitSelectorWithData
+export default InputLimitSelectorWithData

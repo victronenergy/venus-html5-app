@@ -3,19 +3,20 @@
 .list-view {
   flex-direction: column;
   align-items: flex-start;
+  flex-grow: 1;
 }
 
 .list-view__header {
   display: flex;
   align-items: center;
-  margin-bottom: $metricHeaderMarginBottom;
 }
 
 .list-view__rows {
+  margin-top: $metricHeaderMarginBottom;
   display: flex;
   flex-direction: column;
 }
 
-.list-row {
+.list-row:not(:first-child) {
   margin-top: 5px;
 }

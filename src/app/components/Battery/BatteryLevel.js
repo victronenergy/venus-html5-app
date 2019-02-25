@@ -37,21 +37,18 @@ const BatteryLevel = ({ state, timeToGo, soc }) => {
   const showTimetoGo = state === BATTERY_STATE.DISCHARGING && timeToGo
   return (
     <div
-      className={classNames("metric__battery-level-container", "text--opaque", {
+      className={classNames("metric__battery-level-container", {
         "metric__battery-level-container--col": showTimetoGo
       })}
     >
       <div>
-        {batteryStateLabel && (
-          <span className="text text--small metric__battery-state">
-            {batteryStateLabel}
-            &nbsp;
-          </span>
-        )}
         <span className="text text--bold">
           {soc ? formatNumber({ value: soc }) : ""}
-          <span className="text text--small">%</span>
+          <span className="text text--small">%&nbsp;</span>
         </span>
+        {batteryStateLabel && (
+          <span className="text text--small metric__battery-state text--opaque">{batteryStateLabel}</span>
+        )}
       </div>
       {showTimetoGo && <span className="text text--small battery-level__time-to-go">{timeToGoLabel}</span>}
     </div>

@@ -3,12 +3,11 @@ import React, { Component } from "react"
 import ActiveInValues from "./ActiveInValues"
 import HeaderView from "../HeaderView/HeaderView"
 import HidingContainer from "../HidingContainer"
-import { ListView } from "../ListView/ListView"
+import { ListView } from "../ListView"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 import MetricValues from "../MetricValues"
-import ShoreInputLimit from "../ShoreInputLimit"
 
-import { AC_SOURCE_TYPE, ACTIVE_INPUT } from "../../utils/constants"
+import { AC_SOURCE_TYPE } from "../../utils/constants"
 
 import "./ActiveSource.scss"
 
@@ -23,116 +22,72 @@ const getTopics = (portalId, vebusInstanceId) => {
   }
 }
 
-const getActiveSource = ({ activeInput, settings: [input0, input1] }) => {
-  switch (activeInput) {
-    case ACTIVE_INPUT.INPUT_0:
-      return input0
-    case ACTIVE_INPUT.INPUT_1:
-      return input1
-    case ACTIVE_INPUT.NONE:
-      return null
-    default:
-      return undefined
+const activeSourceLabel = {
+  [AC_SOURCE_TYPE.SHORE]: "Shore Power",
+  [AC_SOURCE_TYPE.GRID]: "Grid Input",
+  [AC_SOURCE_TYPE.GENERATOR]: "Generator",
+  [AC_SOURCE_TYPE.NOT_IN_USE]: "Invalid Configuration" // You cannot have a source that isn't configured as active!
+}
+
+const activeSourceIcon = {
+  [AC_SOURCE_TYPE.SHORE]: require("../../../images/icons/shore-power.svg"),
+  [AC_SOURCE_TYPE.GRID]: require("../../../images/icons/shore-power.svg"),
+  [AC_SOURCE_TYPE.GENERATOR]: require("../../../images/icons/generator.svg"),
+  [AC_SOURCE_TYPE.NOT_IN_USE]: require("../../../images/icons/shore-power.svg")
+}
+
+const getSourceSubtitle = (active, phases, source) => {
+  if (active) {
+    return phases > 1 ? "3 phase" : null
+  } else {
+    return source === AC_SOURCE_TYPE.GENERATOR ? "Stopped" : "Unplugged"
   }
 }
 
-const NoActiveSource = () => {
-  return (
-    <HeaderView icon={require("../../../images/icons/shore-power.svg")} title="Shore power">
-      <div className="text text--smaller">Unplugged</div>
-    </HeaderView>
-  )
-}
-
-const ActiveSourceLoading = () => {
-  return (
-    <HeaderView icon={require("../../../images/icons/shore-power.svg")} title="Active source">
-      <div className="text text--smaller">--</div>
-    </HeaderView>
-  )
-}
-
-const ActiveSourceMetric = props => {
-  const { portalId, inverterChargerDeviceId, onChangeShoreInputLimitClicked, phases, icon, title, hasValues } = props
+const ActiveSource = ({ portalId, inverterChargerDeviceId, source, active, phases }) => {
+  const icon = activeSourceIcon[source]
+  const title = activeSourceLabel[source]
+  const subTitle = getSourceSubtitle(active, phases, source)
   return (
     <div className="metric metric__active-source">
       {phases > 1 ? (
-        <ListView icon={icon} title={title} subTitle={`${phases} phases`} child>
-          <ActiveInValues portalId={portalId} inverterChargerDeviceId={inverterChargerDeviceId} threePhase={true} />
+        <ListView icon={icon} title={title} subTitle={subTitle} child>
+          {active && (
+            <ActiveInValues portalId={portalId} inverterChargerDeviceId={inverterChargerDeviceId} threePhase={true} />
+          )}
         </ListView>
       ) : (
-        <HeaderView icon={icon} title={title} child>
-          {hasValues && (
-            <MetricValues>
-              <ActiveInValues portalId={portalId} inverterChargerDeviceId={inverterChargerDeviceId} />
-            </MetricValues>
-          )}
-        </HeaderView>
+        <>
+          <HeaderView icon={icon} title={title} subTitle={subTitle} child>
+            {active && (
+              <MetricValues>
+                <ActiveInValues portalId={portalId} inverterChargerDeviceId={inverterChargerDeviceId} />
+              </MetricValues>
+            )}
+          </HeaderView>
+        </>
       )}
-      <ShoreInputLimit
-        portalId={portalId}
-        inverterChargerDeviceId={inverterChargerDeviceId}
-        onChangeShoreInputLimitClicked={onChangeShoreInputLimitClicked}
-      />
     </div>
   )
 }
 
-class ActiveSource extends Component {
-  activeSourceLabel = {
-    [AC_SOURCE_TYPE.SHORE]: "Shore Power",
-    [AC_SOURCE_TYPE.GRID]: "Grid Input",
-    [AC_SOURCE_TYPE.GENERATOR]: "Generator",
-    [AC_SOURCE_TYPE.NOT_IN_USE]: "Invalid Configuration" // You cannot have a source that isn't configured as active!
-  }
-
-  activeSourceIcon = {
-    [AC_SOURCE_TYPE.SHORE]: require("../../../images/icons/shore-power.svg"),
-    [AC_SOURCE_TYPE.GRID]: require("../../../images/icons/shore-power.svg"),
-    [AC_SOURCE_TYPE.GENERATOR]: require("../../../images/icons/generator.svg"),
-    [AC_SOURCE_TYPE.NOT_IN_USE]: require("../../../images/icons/shore-power.svg")
-  }
-
-  render() {
-    const activeSource = getActiveSource(this.props)
-    const { portalId, inverterChargerDeviceId, onChangeShoreInputLimitClicked, phases } = this.props
-
-    if (activeSource === undefined) {
-      return <ActiveSourceLoading />
-    } else if (activeSource === null) {
-      return <NoActiveSource />
-    } else {
-      return (
-        <ActiveSourceMetric
-          title={this.activeSourceLabel[activeSource]}
-          icon={this.activeSourceIcon[activeSource]}
-          portalId={portalId}
-          inverterChargerDeviceId={inverterChargerDeviceId}
-          hasValues={true}
-          onChangeShoreInputLimitClicked={onChangeShoreInputLimitClicked}
-          phases={phases}
-        />
-      )
-    }
-  }
-}
-
 class ActiveSourceWithData extends Component {
   render() {
-    const { portalId, inverterChargerDeviceId, onChangeShoreInputLimitClicked, metricsRef } = this.props
+    const { portalId, inverterChargerDeviceId, metricsRef } = this.props
     return (
       <MqttSubscriptions topics={getTopics(portalId, inverterChargerDeviceId)}>
         {topics => {
-          return (
-            <HidingContainer metricsRef={metricsRef}>
+          return topics.settings.map((source, i) => (
+            <HidingContainer metricsRef={metricsRef} key={i}>
               <ActiveSource
-                {...topics}
+                source={source}
+                phases={topics.phases}
+                active={topics.activeInput === i}
                 portalId={portalId}
                 inverterChargerDeviceId={inverterChargerDeviceId}
-                onChangeShoreInputLimitClicked={onChangeShoreInputLimitClicked}
               />
             </HidingContainer>
-          )
+          ))
         }}
       </MqttSubscriptions>
     )

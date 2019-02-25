@@ -9,6 +9,10 @@
   cursor: pointer;
   line-height: 1.2;
   padding: 13px 45px;
+
+  &:active {
+    background-color: $color-active;
+  }
 }
 
 .selector-button:focus {

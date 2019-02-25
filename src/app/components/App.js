@@ -4,8 +4,8 @@ import Fade, { viewChangeDelay } from "./Fade"
 import GetInverterChargerDeviceInstance from "./../mqtt/victron/GetInverterChargerDeviceInstance"
 import GetPortalId from "./../mqtt/victron/GetPortalId"
 import Header from "./Header/Header"
+import { InverterChargerInputLimitSelector } from "./InverterCharger"
 import MqttClientProvider from "./../mqtt/MqttClientProvider"
-import ShoreInputLimitSelector from "./ShoreInputLimitSelector"
 
 import { MqttUnavailable, Metrics, RemoteConsole, Connecting, Error } from "./Views"
 
@@ -96,14 +96,14 @@ class App extends Component {
                               <Main isConnected={isConnected} setView={this.setView}>
                                 {(() => {
                                   switch (this.state.currentView) {
-                                    case VIEWS.AMPERAGE_SELECTOR:
+                                    case VIEWS.INVERTER_CHARGER_INPUT_LIMIT_SELECTOR:
                                       return (
                                         <Fade
-                                          key={VIEWS.AMPERAGE_SELECTOR}
+                                          key={VIEWS.INVERTER_CHARGER_INPUT_LIMIT_SELECTOR}
                                           unmount={this.state.viewUnmounting}
                                           fullWidth
                                         >
-                                          <ShoreInputLimitSelector
+                                          <InverterChargerInputLimitSelector
                                             portalId={portalId}
                                             inverterChargerDeviceId={inverterChargerDeviceId}
                                             onLimitSelected={this.handleShorePowerLimitSelected}
@@ -127,7 +127,9 @@ class App extends Component {
                                             portalId={portalId}
                                             inverterChargerDeviceId={inverterChargerDeviceId}
                                             isConnected={isConnected}
-                                            onChangeShoreInputLimitClicked={() => this.setView(VIEWS.AMPERAGE_SELECTOR)}
+                                            onChangeInverterChargerInputLimitClicked={() =>
+                                              this.setView(VIEWS.INVERTER_CHARGER_INPUT_LIMIT_SELECTOR)
+                                            }
                                           />
                                         </Fade>
                                       )

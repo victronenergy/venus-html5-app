@@ -20,13 +20,18 @@ header {
 
   @media #{$minimum} {
     width: 115px;
-    margin-left: 0;
   }
 }
 
 .connection {
   display: flex;
   align-items: center;
+
+  :not(:last-child) {
+    @media #{$tiny} {
+      display: none;
+    }
+  }
 }
 
 .connection__icon {
