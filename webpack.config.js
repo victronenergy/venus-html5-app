@@ -19,7 +19,7 @@ const conf = {
   plugins: [
     new FriendlyErrorsPlugin({
       compilationSuccessInfo: {
-        messages: ["Your application is running on http://localhost:8000/?host=localhost&dev=true"]
+        messages: ["Your application is running on http://localhost:8000"]
       }
     }),
     new HtmlWebpackPlugin({

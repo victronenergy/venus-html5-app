@@ -12,7 +12,7 @@
 
   <body>
     <div id="app"></div>
-    <div id="devReload" style="position: fixed; top: 30px; left: 200px; display: none;">
+    <div id="debugReload" style="position: fixed; top: 30px; left: 200px; display: none;">
       <input type="button" value="Reload page" onclick="location.reload(true)" />
       <input
         type="button"
@@ -22,7 +22,7 @@
     </div>
     <div
       id="debugLog"
-      style="color: white; background-color: rgba(18, 26, 40, 1); max-height: 200px; overflow: scroll;"
+      style="color: white; background-color: rgba(18, 26, 40, 1); max-height: 200px; overflow: scroll; position: fixed; bottom: 0"
     ></div>
     <script>
       function getParameterByName(name, url) {
@@ -69,7 +69,7 @@
       window.onload = function() {
         if (getParameterByName("debug")) {
           debug()
-          document.getElementById("devReload").style.display = "block"
+          document.getElementById("debugReload").style.display = "block"
         }
       }
     </script>

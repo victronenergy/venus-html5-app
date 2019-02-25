@@ -27,19 +27,15 @@ To run the app locally for development, run:
 
 `npm run dev`
 
-And then open the app in the browser at `http://localhost?host=<VENUS_IP>`.
+And then open the app in the browser at `http://localhost:8000`.
 
 This will start the webpack dev server, which will recompile the app on code changes and hot reload the UI.
 
-You can to change the `host` (and optionally `port`) query parameters to point to your Venus device:
+You can change the `host` and `port` (although the default 9001 is usually correct) query parameters to point to your Venus device:
 
-`path/to/venus-html5-app/dist/index.html?host=192.168.178.129&port=1884`
+`http://localhost:8000?host=localhost&host=<VENUS_DEVICE_IP>&port=9001`
 
-By default, the application starts with the `dev` flag enabled.
-This adds some convenience features for debugging on actual devices and testing:
-
-- "Reload page" button - refreshes the page
-- "Browser info" button - links to page containing basic information about the browser in which the app is running
+This way you can run the local app against venus device data if the venus device is on the same network as your computer.
 
 ### Running the app with no Venus device available
 
@@ -47,11 +43,9 @@ The mqtt mock is no longer mainainted. Use [venus-docker](https://github.com/vic
 
 ~~If there is no real device to be used for MQTT data, you can run the app with a fake MQTT broker:~~
 
-~~`npm run dev:mocked`
-This shallowly fakes the MQTT implementation in the Venus device.~~
+~~`npm run dev:mocked` This shallowly fakes the MQTT implementation in the Venus device.~~
 
-Also, keep in mind the Venus device also has a Demo mode, which allows you to get useful data if you have only the Venus device and no other Victron devices, without requiring various Victron devices to be connected to the Venus device.
-To enable it, navigate to the Venus Remote Console -> Settings -> General.
+Also keep in mind the Venus device also has a Demo mode, which allows you to get useful data if you only have the Venus device available, without requiring various Victron devices to be connected to the Venus device. To enable it, navigate to the Venus Remote Console -> Settings -> General.
 
 ### Device radiator
 
@@ -138,3 +132,13 @@ A sample recipe for the HTML5 app is [here](https://github.com/victronenergy/met
 ## Device error logging
 
 When the app is hosted from a VenusGX, there is no convenient way to see the errors in the js console. To make troubleshooting easier the app sends (at least attempts) to send the error messages through websocket to the device. The log can be found at `/var/log/venus-html5-app/current`.
+
+## Device debugging
+
+By adding `debug=true` to the query params you can enable some convenience features for debugging on actual devices:
+
+- "Reload page" button - refreshes the page
+- "Browser info" button - links to page containing basic information about the browser in which the app is running
+- A debug log element, which redirects all console messages to a visible element in the ui
+
+To enable this on a device set the debugReload and debugLog elements to visible in index.html and deploy to the device.
