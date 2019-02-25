@@ -3,20 +3,18 @@ import React from "react"
 import CurrentLimitIncrementor from "./CurrentLimitIncrementor"
 import HeaderView from "../../components/HeaderView"
 import HidingContainer from "../../components/HidingContainer"
-import MetricValues from "../MetricValues/MetricValues"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 import MqttWriteValue from "../../mqtt/MqttWriteValue"
 import NumericValue from "../NumericValue/NumericValue"
 import SelectorButton from "../SelectorButton/SelectorButton"
-import SystemState from "../SystemState"
 
+import { systemStateFormatter } from "../../utils/util"
 import { CHARGER_MODE } from "../../utils/constants"
 
 import "./Charger.scss"
 
 const getTopics = (portalId, deviceInstanceId) => {
   return {
-    productName: `N/${portalId}/charger/${deviceInstanceId}/ProductName`,
     customName: `N/${portalId}/charger/${deviceInstanceId}/CustomName`,
     currentLimit: `N/${portalId}/charger/${deviceInstanceId}/Ac/In/CurrentLimit`,
     state: `N/${portalId}/charger/${deviceInstanceId}/State`,
@@ -41,52 +39,40 @@ const chargerModeFormatter = value => {
   }
 }
 
-const Charger = ({
-  productName,
-  customName,
-  nrOfOutputs,
-  current,
-  state,
-  mode,
-  currentLimit,
-  onModeSelected,
-  onChangeInputLimitClicked
-}) => {
-  const output = (
-    <div>
-      <span className="text text--smaller">Output</span>
-      {current.map((v, i) => (
-        <NumericValue key={i} value={current[i]} unit="A" precision={1} />
-      ))}
-    </div>
-  )
-  const changeLimit = (
-    <CurrentLimitIncrementor currentLimit={currentLimit} onInputLimitChanged={onChangeInputLimitClicked} />
-  )
+const output = current => (
+  <div>
+    <span className="text text--smaller">Output</span>
+    {current.map((_, i) => (
+      <NumericValue key={i} value={current[i]} unit="A" precision={1} />
+    ))}
+  </div>
+)
 
-  const chargerMode = chargerModeFormatter(mode)
-
+const Charger = ({ customName, current, state, mode, currentLimit, onModeSelected, onChangeInputLimitClicked }) => {
   // When a topic is invalid, it returns undefined -> no value means topic is not supported
   const chargerSupportsMode = mode !== undefined
   const chargerSupportsInputLimit = currentLimit !== undefined
+  const chargerMode = chargerModeFormatter(mode)
 
   return (
     <div className="metric charger">
       <div className="charger__header-wrapper">
         <HeaderView
           icon={require("../../../images/icons/multiplus.svg")}
-          title={productName || customName || "Charger"}
+          title={customName || "Charger"}
+          subTitle={systemStateFormatter(state)}
           child
-        >
-          <MetricValues>
-            <p className="text text--smaller text--opaque">
-              <SystemState value={state} />
-            </p>
-          </MetricValues>
-        </HeaderView>
-        {chargerSupportsInputLimit && <div className="charger__input-limit-selector">{changeLimit}</div>}
+        />
+        {chargerSupportsInputLimit && (
+          <div className="charger__input-limit-selector">
+            {currentLimit !== null &&
+              currentLimit !== undefined && (
+                <CurrentLimitIncrementor currentLimit={currentLimit} onInputLimitChanged={onChangeInputLimitClicked} />
+              )}
+          </div>
+        )}
       </div>
-      <div className="charger__output">{output}</div>
+      <div className="charger__output">{output(current)}</div>
       {chargerSupportsMode && (
         <div className="charger__mode-selector">
           <SelectorButton active={chargerMode === "ON"} onClick={() => onModeSelected(CHARGER_MODE.ON)}>

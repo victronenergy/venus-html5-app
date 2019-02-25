@@ -18,10 +18,6 @@ class MqttTopicWildcard extends Component {
     }
   }
 
-  componentWillUnmount() {
-    this.props.unsubscribe(this.props.wildcard)
-  }
-
   render() {
     return <>{this.props.children(this.props.messages)}</>
   }

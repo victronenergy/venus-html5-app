@@ -54,7 +54,7 @@ for (let [device, resolutions] of Object.entries(deviceResolutions)) {
       it("Successfully opens page", () => {
         cy.visit("/")
         cy.get(".connection > p").should("contain", "Connected")
-        cy.get("#metrics-container").should("be.visible")
+        cy.get(".metrics-container").should("be.visible")
       })
 
       describe("Contains metrics elements", () => {

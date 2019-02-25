@@ -1,5 +1,7 @@
 {
-  "baseUrl": "http://localhost:8000",
+  "baseUrl": "http://localhost:8000/",
   "video": false,
-  "ignoreTestFiles": "*rendering.spec.js"
+  "ignoreTestFiles": "*rendering.spec.js",
+  "viewportWidth": 1280,
+  "viewportHeight": 720
 }

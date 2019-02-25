@@ -1,5 +1,5 @@
-$regular: "all and (max-width: 1279px)";
-$minimum: "all and (max-width: 600px)";
+$regular: "all and (min-width: 501px) and (max-width: 900px)";
+$minimum: "all and (max-width: 500px)";
 
 $smaller: "all and (max-width: 1000px) and (min-aspect-ratio: 9/10)";
 $small: "all and (max-width: 800px) and (min-aspect-ratio: 9/10)";
@@ -21,5 +21,6 @@ $rightLeftPadding: 20 * $base;
 $height: 81 * $base;
 $borderRadius: 17 * $base;
 $marginBottom: 4vh;
+$smallMarginBottom: 2vh;
 $metricHeaderMarginBottom: 17 * $base;
 $color-active: #30afff;

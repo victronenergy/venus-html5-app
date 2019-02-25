@@ -82,6 +82,10 @@
   width: 70px;
   margin: 10px 0;
   border-right: solid 1px #131a28;
+
+  @media #{$minimum} {
+    display: none;
+  }
 }
 
 .battery__data {

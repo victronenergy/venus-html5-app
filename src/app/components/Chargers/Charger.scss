@@ -29,9 +29,5 @@
 .charger__header-wrapper {
   width: 100%;
   display: flex;
-
-  .charger__input-limit-selector {
-    align-self: flex-end;
-    margin-left: auto;
-  }
+  justify-content: space-between;
 }

@@ -12,13 +12,13 @@ export default ({ children, portalId }) => (
       }
 
       const deviceInstances = Object.values(messages)
-      const topics = deviceInstances.reduce((acc, id) => {
+      const subs = deviceInstances.reduce((acc, id) => {
         acc[id] = `N/${portalId}/vebus/${id}/Ac/NumberOfAcInputs`
         return acc
       }, {})
 
       return (
-        <MqttSubscriptions topics={topics}>
+        <MqttSubscriptions topics={subs}>
           {topics => {
             // You can only have one "Multi" device in a system, so just take the first one
             const [multiInstance] = Object.entries(topics).filter(([_, nAcInputs]) => {

@@ -19,10 +19,6 @@ class MqttSubscriptions extends Component {
     }
   }
 
-  componentWillUnmount() {
-    flatten(Object.values(this.props.topics)).forEach(this.props.unsubscribe)
-  }
-
   render() {
     return <>{this.props.children(this.props.messages)}</>
   }
