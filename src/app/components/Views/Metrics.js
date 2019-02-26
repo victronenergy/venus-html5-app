@@ -76,7 +76,8 @@ export default class Metrics extends Component {
         style={style}
       >
         <Battery {...commonProps} />
-        {!!inverterChargerDeviceId && <ActiveSource {...commonProps} />}
+        {!!inverterChargerDeviceId && <AcLoads {...commonProps} />}
+        <DcLoads {...commonProps} />
         {!!inverterChargerDeviceId && (
           <InverterCharger
             {...commonProps}
@@ -84,8 +85,7 @@ export default class Metrics extends Component {
             connected={isConnected}
           />
         )}
-        {!!inverterChargerDeviceId && <AcLoads {...commonProps} />}
-        <DcLoads {...commonProps} />
+        {!!inverterChargerDeviceId && <ActiveSource {...commonProps} />}
         <Solar {...commonProps} />
         <Chargers {...commonProps} />
         <Inverters {...commonProps} />
