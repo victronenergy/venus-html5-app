@@ -77,17 +77,20 @@ class ActiveSourceWithData extends Component {
     return (
       <MqttSubscriptions topics={getTopics(portalId, inverterChargerDeviceId)}>
         {topics => {
-          return topics.settings.map((source, i) => (
-            <HidingContainer metricsRef={metricsRef} key={i}>
-              <ActiveSource
-                source={source}
-                phases={topics.phases}
-                active={topics.activeInput === i}
-                portalId={portalId}
-                inverterChargerDeviceId={inverterChargerDeviceId}
-              />
-            </HidingContainer>
-          ))
+          return topics.settings.map(
+            (source, i) =>
+              source !== AC_SOURCE_TYPE.NOT_IN_USE && ( // do not render if the source is not in use
+                <HidingContainer metricsRef={metricsRef} key={i}>
+                  <ActiveSource
+                    source={source}
+                    phases={topics.phases}
+                    active={topics.activeInput === i}
+                    portalId={portalId}
+                    inverterChargerDeviceId={inverterChargerDeviceId}
+                  />
+                </HidingContainer>
+              )
+          )
         }}
       </MqttSubscriptions>
     )
