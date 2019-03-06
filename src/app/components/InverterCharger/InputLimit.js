@@ -27,20 +27,12 @@ export const InputLimit = ({ isAdjustable, currentLimit, onChangeInputLimitClick
   )
 }
 
-const MetricSmallLoading = ({ message }) => <span className="text--small">{message || "Loading"}</span>
-
 class InputLimitWithData extends Component {
   render() {
     const { portalId, inverterChargerDeviceId, onChangeInputLimitClicked, shorePowerInput } = this.props
-    if (!inverterChargerDeviceId) return <InputLimit currentLimit={"--"} />
-    else if (shorePowerInput === undefined) {
-      return <MetricSmallLoading />
-    } else if (shorePowerInput === null) {
-      return (
-        <MetricSmallLoading message="No shore power configured. Please check 'Remote Console > Settings > System setup > AC input'" />
-      )
-    } else {
-      return (
+    return (
+      inverterChargerDeviceId &&
+      shorePowerInput && (
         <MqttSubscriptions topics={getTopics(portalId, inverterChargerDeviceId, shorePowerInput)}>
           {topics => {
             return (
@@ -53,7 +45,7 @@ class InputLimitWithData extends Component {
           }}
         </MqttSubscriptions>
       )
-    }
+    )
   }
 }
 export default InputLimitWithData
