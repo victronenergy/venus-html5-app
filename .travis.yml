@@ -4,7 +4,7 @@ sudo: false
 language: node_js
 # Use latest stable node version
 node_js:
-  - stable
+  - lts/*
 branches:
   only:
     # Only run branch builds on master to prevent double builds on pull requests
