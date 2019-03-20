@@ -3,16 +3,14 @@
 .selector-button {
   background-color: #2a3341;
   color: $color-white;
-  // border: none;
   border-radius: 6px;
   flex-grow: 1;
-  cursor: pointer;
   line-height: 1.2;
-  //padding: 13px 45px;
   padding: 12px 25px;
-
   text-align: center;
   vertical-align: middle;
+
+  cursor: pointer;
 
   &:active {
     background-color: $color-active;
@@ -29,4 +27,9 @@
 
 .selector-button--disabled {
   opacity: 0.5;
+  cursor: default;
+
+  &:active {
+    background-color: #2a3341;
+  }
 }
