@@ -11,7 +11,8 @@ class CurrentLimitIncrementor extends Component {
         <SelectorButton
           narrow
           className="metric__current-input-limit__decrement"
-          onClick={() => onInputLimitChanged(currentLimit - 1)}
+          onClick={() => onInputLimitChanged(currentLimit > 0 && currentLimit - 1)}
+          disabled={currentLimit <= 0}
         >
           -
         </SelectorButton>
