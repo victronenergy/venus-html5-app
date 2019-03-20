@@ -28,7 +28,7 @@ export const ActiveInTotalValues = ({ voltage, current, power, threePhase }) => 
   return threePhase ? (
     voltage.map((v, i) => (
       <ListRow key={i}>
-        <span className="text text--smaller">Phase {i + 1}</span>
+        <span className="value">Phase {i + 1}</span>
         <NumericValue value={v} unit="V" />
         <NumericValue value={current[i]} unit="A" precision={1} />
         <NumericValue value={power[i]} unit={"W"} />
