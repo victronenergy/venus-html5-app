@@ -2,7 +2,6 @@ import { BATTERY_STATE } from "../../utils/constants"
 import { formatNumber } from "../NumericValue/index"
 import React from "react"
 import PropTypes from "prop-types"
-import classNames from "classnames"
 
 const batteryStateFormatter = value => {
   switch (value) {
@@ -21,11 +20,13 @@ const batteryTimeToGoFormatter = timeToGo => {
     const days = Math.floor(secs / 86400)
     const hours = Math.floor((secs - days * 86400) / 3600)
     const minutes = Math.floor((secs - hours * 3600) / 60)
-    const seconds = Math.floor(secs - minutes * 60)
-    if (days) return `${days}d ${hours}h`
-    else if (hours) return `${hours}h ${minutes}m`
-    else if (minutes) return `${minutes}m ${seconds}s`
-    else return `${seconds}s`
+    // const seconds = Math.floor(secs - minutes * 60)
+
+    if (days) return `${days} days`
+    else if (hours) return `${hours} hours`
+    else if (minutes) return `${minutes} minutes`
+    // we are not interested in seconds, since it's an
+    // estimate anyways
   } else {
     return null
   }
@@ -35,22 +36,12 @@ const BatteryLevel = ({ state, timeToGo, soc }) => {
   const batteryStateLabel = batteryStateFormatter(state)
   const timeToGoLabel = batteryTimeToGoFormatter(timeToGo)
   const showTimetoGo = state === BATTERY_STATE.DISCHARGING && timeToGo
+
   return (
-    <div
-      className={classNames("metric__battery-level-container", {
-        "metric__battery-level-container--col": showTimetoGo
-      })}
-    >
-      <div>
-        <span className="text text--bold">
-          {soc ? formatNumber({ value: soc }) : ""}
-          <span className="text text--small">%&nbsp;</span>
-        </span>
-        {batteryStateLabel && (
-          <span className="text text--small metric__battery-state text--opaque">{batteryStateLabel}</span>
-        )}
-      </div>
-      {showTimetoGo && <span className="text text--small battery-level__time-to-go">{timeToGoLabel}</span>}
+    <div className="metrics__right">
+      {batteryStateLabel && <span>{batteryStateLabel}</span>}
+      {showTimetoGo && <span>{timeToGoLabel}</span>}
+      {soc && <span>{formatNumber({ value: soc })}%</span>}
     </div>
   )
 }

@@ -7,25 +7,26 @@ class CurrentLimitIncrementor extends Component {
   render() {
     const { currentLimit, onInputLimitChanged } = this.props
     return (
-      <div>
+      <>
         <SelectorButton
           narrow
           className="metric__current-input-limit__decrement"
           onClick={() => onInputLimitChanged(currentLimit - 1)}
         >
-          <span className="text--small">-</span>
+          -
         </SelectorButton>
-        <span className="text--bold metric__current-input-limit__limit">
-          {formatNumber({ value: currentLimit, unit: "A" })}
-        </span>
+        <div className="metric__current-input-limit__limit">
+          <div>{formatNumber({ value: currentLimit, unit: "A" })}</div>
+          <div className="text--subtitle">Input Limit</div>
+        </div>
         <SelectorButton
           narrow
           className="metric__current-input-limit__increment"
           onClick={() => onInputLimitChanged(currentLimit + 1)}
         >
-          <span className="text--small">+</span>
+          +
         </SelectorButton>
-      </div>
+      </>
     )
   }
 }

@@ -11,10 +11,6 @@ export const formatNumber = ({ value, unit = "", precision = 0, factor = 1.0, de
 export default class NumericValue extends Component {
   render() {
     const { value, unit = "", precision = 0, factor = 1.0, defaultValue = "--" } = this.props
-    return (
-      <span className="value text text--smaller text--opaque">
-        {formatNumber({ value, unit, precision, factor, defaultValue })}
-      </span>
-    )
+    return <span className="value">{formatNumber({ value, unit, precision, factor, defaultValue })}</span>
   }
 }

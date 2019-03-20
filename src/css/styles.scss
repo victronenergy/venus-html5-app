@@ -60,6 +60,7 @@ main {
   flex-direction: column;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: space-between;
 
   @media all and (max-width: 1340px) {
     padding: 0 40px;
@@ -82,7 +83,7 @@ main {
   display: flex;
   box-sizing: border-box;
   border-radius: $borderRadius;
-  background-color: rgba(18, 26, 40, 1);
+  background-color:#121a28;
 }
 
 .metrics-container--single-col .metric {
@@ -101,9 +102,9 @@ main {
 }
 
 .metric__value-container {
-  margin-right: auto;
   margin-left: $rightLeftPadding;
   height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -158,4 +159,11 @@ button:disabled {
     width: 100%;
   }
   width: 50%;
+}
+
+.boat-image {
+  background: #121a28 url("../images/boat.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: right;
 }

@@ -39,13 +39,17 @@ const chargerModeFormatter = value => {
   }
 }
 
-const output = current => (
-  <div>
-    <span className="text text--smaller">Output</span>
-    {current.map((_, i) => (
-      <NumericValue key={i} value={current[i]} unit="A" precision={1} />
-    ))}
-  </div>
+const ChargerSubtitle = (current, state) => (
+  <MetricValues inflate>
+    <div className="metrics__left">
+      {current.map((_, i) => (
+        <NumericValue key={i} value={current[i]} unit="A" precision={1} />
+      ))}
+    </div>
+    <div className="metrics__right">
+      <span>{systemStateFormatter(state)}</span>
+    </div>
+  </MetricValues>
 )
 
 const Charger = ({ customName, current, state, mode, currentLimit, onModeSelected, onChangeInputLimitClicked }) => {
@@ -60,19 +64,10 @@ const Charger = ({ customName, current, state, mode, currentLimit, onModeSelecte
         <HeaderView
           icon={require("../../../images/icons/multiplus.svg")}
           title={customName || "Charger"}
-          subTitle={systemStateFormatter(state)}
+          children={ChargerSubtitle(current, state)}
           child
         />
-        {chargerSupportsInputLimit && (
-          <div className="charger__input-limit-selector">
-            {currentLimit !== null &&
-              currentLimit !== undefined && (
-                <CurrentLimitIncrementor currentLimit={currentLimit} onInputLimitChanged={onChangeInputLimitClicked} />
-              )}
-          </div>
-        )}
       </div>
-      <div className="charger__output">{output(current)}</div>
       {chargerSupportsMode && (
         <div className="charger__mode-selector">
           <SelectorButton active={chargerMode === "ON"} onClick={() => onModeSelected(CHARGER_MODE.ON)}>
@@ -81,6 +76,17 @@ const Charger = ({ customName, current, state, mode, currentLimit, onModeSelecte
           <SelectorButton active={chargerMode === "OFF"} onClick={() => onModeSelected(CHARGER_MODE.OFF)}>
             Off
           </SelectorButton>
+          {chargerSupportsInputLimit && (
+            <div className="charger__input-limit-selector">
+              {currentLimit !== null &&
+                currentLimit !== undefined && (
+                  <CurrentLimitIncrementor
+                    currentLimit={currentLimit}
+                    onInputLimitChanged={onChangeInputLimitClicked}
+                  />
+                )}
+            </div>
+          )}
         </div>
       )}
     </div>

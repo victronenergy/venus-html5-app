@@ -3,6 +3,7 @@ import classnames from "classnames"
 
 import BatteryLevel from "./BatteryLevel"
 import HidingContainer from "../HidingContainer"
+import MetricValues from "../MetricValues"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 import NumericValue from "../NumericValue/index"
 import SelectorButton from "../SelectorButton"
@@ -20,10 +21,8 @@ const BatteryHeader = ({ amount, paginate, setPage, currentPage, pageSize }) => 
     <div className="battery-header">
       <img src={require("../../../images/icons/battery.svg")} className="metric__icon" />
       <div className="battery-header__text">
-        <span>
-          Batteries&nbsp;
-          {paginate ? `(${amount})` : ""}
-        </span>
+        <p className="text--title">{amount > 1 ? "Batteries" : "Battery"}</p>
+        <p className="text--subtitle">{amount > 1 && `${amount} Batteries`}</p>
       </div>
       {paginate && <Paginator setPage={setPage} currentPage={currentPage} pages={Math.ceil(amount / pageSize)} />}
     </div>
@@ -60,17 +59,17 @@ export class BatteryList extends Component {
           const isStarter = id && id.endsWith(":1")
           return (
             <div className={classnames("battery", { "battery--dummy": dummy })} key={id || i}>
-              {batteries.length > 1 && <div className="battery__index">{!dummy && i + 1 + currentPage * pageSize}</div>}
               {!dummy && (
                 <div className="battery__data">
-                  <div className="battery__title-row">
-                    {name} {soc !== undefined && <BatteryLevel state={state} soc={soc} timeToGo={timetogo} />}
-                  </div>
-                  <div>
-                    <NumericValue value={voltage} unit="V" precision={1} />
-                    {!isStarter && <NumericValue value={current} unit="A" precision={1} />}
-                    {!isStarter && <NumericValue value={power} unit="W" />}
-                  </div>
+                  <div className="battery__title-row text--subtitle-upper">BATTERY</div>
+                  <MetricValues inflate>
+                    <div className="metrics__left">
+                      <NumericValue value={voltage} unit="V" precision={1} />
+                      {!isStarter && <NumericValue value={current} unit="A" precision={1} />}
+                      {!isStarter && <NumericValue value={power} unit="W" />}
+                    </div>
+                    {soc !== undefined && <BatteryLevel state={state} soc={soc} timeToGo={timetogo} />}
+                  </MetricValues>
                 </div>
               )}
             </div>

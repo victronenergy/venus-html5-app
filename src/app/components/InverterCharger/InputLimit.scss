@@ -3,6 +3,8 @@
 .metric__current-input-limit__limit {
   margin: 0 20px;
   color: $color-active;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .metric__current-input-limit {

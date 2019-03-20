@@ -27,7 +27,12 @@
 }
 
 .charger__header-wrapper {
-  width: 100%;
   display: flex;
   justify-content: space-between;
+}
+
+.charger__input-limit-selector {
+  display: flex;
+  flex-direction: row;
+  margin-left: 10px;
 }

@@ -40,7 +40,7 @@ class DcLoadsWithData extends Component {
         {topics => {
           return (
             <HidingContainer metricsRef={metricsRef}>
-              <HeaderView icon={require("../../../images/icons/dc.svg")} title="DC Loads">
+              <HeaderView icon={require("../../../images/icons/dc.svg")} title="DC Loads" showBoat>
                 <DcLoads {...topics} />
               </HeaderView>
             </HidingContainer>
