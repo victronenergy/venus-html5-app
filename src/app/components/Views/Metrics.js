@@ -75,9 +75,9 @@ export default class Metrics extends Component {
         ref={this.metricsRef}
         style={style}
       >
-        <Battery {...commonProps} />
-        {!!inverterChargerDeviceId && <AcLoads {...commonProps} />}
         <DcLoads {...commonProps} />
+        {!!inverterChargerDeviceId && <AcLoads {...commonProps} />}
+        <Battery {...commonProps} />
         {!!inverterChargerDeviceId && (
           <InverterCharger
             {...commonProps}
