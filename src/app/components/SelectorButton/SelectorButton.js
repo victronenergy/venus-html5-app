@@ -8,11 +8,15 @@ class SelectorButton extends Component {
     return (
       <div
         disabled={disabled}
-        onClick={onClick}
+        onClick={() => !disabled && onClick()}
         className={classNames(
           "selector-button",
           "text",
-          { "selector-button--active": active, "selector-button--narrow": narrow },
+          {
+            "selector-button--active": active,
+            "selector-button--narrow": narrow,
+            "selector-button--disabled": disabled
+          },
           className || ""
         )}
       >
