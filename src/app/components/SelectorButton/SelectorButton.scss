@@ -2,13 +2,17 @@
 
 .selector-button {
   background-color: #2a3341;
-  color: white;
-  border: none;
+  color: $color-white;
+  // border: none;
   border-radius: 6px;
   flex-grow: 1;
   cursor: pointer;
   line-height: 1.2;
-  padding: 13px 45px;
+  //padding: 13px 45px;
+  padding: 12px 25px;
+
+  text-align: center;
+  vertical-align: middle;
 
   &:active {
     background-color: $color-active;
@@ -24,5 +28,5 @@
 }
 
 .selector-button--narrow {
-  padding: 13px 30px;
+  // padding: 13px 30px;
 }

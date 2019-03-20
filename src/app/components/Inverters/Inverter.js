@@ -38,6 +38,19 @@ const stateFormatter = state => {
   }
 }
 
+const InverterSubtitle = (voltage, current, power, state) => (
+  <MetricValues inflate>
+    <div className="metrics__left">
+      <NumericValue value={voltage} unit="V" />
+      <NumericValue value={current} unit="A" precision={1} />
+      <NumericValue value={power || voltage * current} unit="W" />
+    </div>
+    <div className="metrics__right">
+      <span>{stateFormatter(state)}</span>
+    </div>
+  </MetricValues>
+)
+
 export const Inverter = ({
   state,
   mode,
@@ -59,12 +72,7 @@ export const Inverter = ({
       <HidingContainer metricsRef={metricsRef}>
         <div className="metric inverter">
           <HeaderView icon={require("../../../images/icons/multiplus.svg")} title={customName || "Inverter"} child>
-            <MetricValues>
-              <p className="text text--smaller">{stateFormatter(state)}</p>
-              <NumericValue value={voltage} unit="V" />
-              <NumericValue value={current} unit="A" precision={1} />
-              <NumericValue value={power || voltage * current} unit="W" />
-            </MetricValues>
+            {InverterSubtitle(voltage, current, power, state)}
           </HeaderView>
           <div className="inverter__mode-selector">
             <SelectorButton active={mode === onMode} onClick={() => updateMode(onMode)}>

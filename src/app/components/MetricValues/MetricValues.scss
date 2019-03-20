@@ -2,27 +2,19 @@
 
 .metric__values {
   display: flex;
+  color: $color-white;
+  font-size: 1.1rem;
 }
 
-.value:not(:first-child) {
-  padding-left: 25px;
+.value {
+  padding-right: 2em;
   @media #{$smaller} {
-    padding-left: 15px;
-  }
-
-  @media #{$small} {
-    padding-left: 5px;
+    padding-right: 1.5rem;
   }
 }
 
-.value:not(:last-child) {
-  padding-right: 25px;
-
-  @media #{$smaller} {
-    padding-right: 15px;
-  }
-
-  @media #{$small} {
-    padding-right: 5px;
-  }
+.inflate {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }

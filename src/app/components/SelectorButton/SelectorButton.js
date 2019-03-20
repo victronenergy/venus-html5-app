@@ -6,7 +6,7 @@ class SelectorButton extends Component {
   render() {
     const { disabled, active, narrow, onClick, className, children } = this.props
     return (
-      <button
+      <div
         disabled={disabled}
         onClick={onClick}
         className={classNames(
@@ -17,7 +17,7 @@ class SelectorButton extends Component {
         )}
       >
         {children}
-      </button>
+      </div>
     )
   }
 }

@@ -31,7 +31,7 @@ body {
 
 #app {
   color: white;
-  font-weight: 400;
+  font-weight: 300;
   font-size: 100%;
 
   @for $i from 1 through 5 {
@@ -42,32 +42,31 @@ body {
 }
 
 .text {
-  font-size: 1em;
+  font-size: 1rem;
 }
 
 .text--very-large {
-  font-size: 1.6em;
+  font-size: 1.6rem;
 }
 
 .text--large {
-  font-size: 1.2em;
+  font-size: 1.2rem;
 }
 
 .text--smaller {
-  font-size: 0.9em;
+  font-size: 0.85rem;
 }
 
 .text--small {
-  font-size: 0.8em;
+  font-size: 0.8rem;
 }
 
 .text--very-small {
-  font-size: 0.7em;
+  font-size: 0.7rem;
 }
 
 .text--medium {
-  font-weight: 500;
-  text-transform: uppercase;
+  font-weight: 600;
 }
 
 .text--bold {
@@ -80,4 +79,26 @@ body {
 
 .text--opaque {
   opacity: 0.7;
+}
+
+.text--title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: $color-lightgray;
+  // line-height: 1.2em;
+  padding-bottom: 2px;
+}
+
+.text--subtitle {
+  font-size: 0.9rem;
+  color: $color-gray;
+  // line-height: 1.2em;
+  padding-bottom: 2px;
+}
+
+.text--subtitle-upper {
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: $color-lightgray;
 }

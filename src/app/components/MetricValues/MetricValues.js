@@ -1,6 +1,8 @@
 import "./MetricValues.scss"
 import React from "react"
 
-const MetricValues = ({ children }) => <div className="metric__values">{children}</div>
+const MetricValues = ({ children, inflate = "" }) => (
+  <div className={"metric__values" + (inflate && " inflate")}>{children}</div>
+)
 
 export default MetricValues
