@@ -7,7 +7,6 @@ class SelectorButton extends Component {
     const { disabled, active, narrow, onClick, className, children } = this.props
     return (
       <div
-        disabled={disabled}
         onClick={() => !disabled && onClick()}
         className={classNames(
           "selector-button",
