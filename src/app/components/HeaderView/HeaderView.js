@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 
 import "./HeaderView.scss"
 
-const MAX_TITLE_LENGTH = 21
+const MAX_TITLE_LENGTH = 40
 
 const HeaderView = ({ child, children, icon, title = "", subTitle = "", showBoat = "" }) => (
   <div className={(child ? "header-view__child" : "metric") + (showBoat && " boat-image")}>
@@ -12,7 +12,7 @@ const HeaderView = ({ child, children, icon, title = "", subTitle = "", showBoat
       {title.length <= MAX_TITLE_LENGTH ? (
         <p className="text--title">{title}</p>
       ) : (
-        <p className="text--medium">
+        <p className="text--title">
           {title.slice(0, MAX_TITLE_LENGTH)}
           &hellip;{" "}
         </p>

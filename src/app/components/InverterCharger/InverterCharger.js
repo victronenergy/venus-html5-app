@@ -18,6 +18,8 @@ const getTopics = (portalId, vebusInstanceId) => {
   return {
     state: `N/${portalId}/system/0/SystemState/State`,
     mode: `N/${portalId}/vebus/${vebusInstanceId}/Mode`,
+    customName: `N/${portalId}/vebus/${vebusInstanceId}/CustomName`,
+    productName: `N/${portalId}/vebus/${vebusInstanceId}/ProductName`,
     modeIsAdjustable: `N/${portalId}/vebus/${vebusInstanceId}/ModeIsAdjustable`
   }
 }
@@ -25,12 +27,16 @@ const getTopics = (portalId, vebusInstanceId) => {
 const InverterCharger = ({
   mode,
   state,
+  productName,
+  customName,
   modeIsAdjustable,
   onModeSelected,
   onChangeInputLimitClicked,
   inverterChargerDeviceId,
   portalId
 }) => {
+  const productNameShort = productName && productName.split(" ")[0]
+
   return (
     <div className="metric charger inverter-charger">
       <GetShorePowerInputNumber portalId={portalId}>
@@ -41,7 +47,7 @@ const InverterCharger = ({
             >
               <HeaderView
                 icon={require("../../../images/icons/multiplus.svg")}
-                title="Inverter / Charger"
+                title={customName || `Inverter / Charger: ${productNameShort}`}
                 subTitle={systemStateFormatter(state)}
                 child
               />

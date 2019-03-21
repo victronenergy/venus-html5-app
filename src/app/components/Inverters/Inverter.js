@@ -20,6 +20,7 @@ const getTopics = (portalId, deviceInstance, source) => {
     current: `N/${portalId}/${source}/${deviceInstance}/Ac/Out/L1/I`,
     power: `N/${portalId}/${source}/${deviceInstance}/Ac/Out/L1/P`,
     customName: `N/${portalId}/${source}/${deviceInstance}/CustomName`,
+    productName: `N/${portalId}/${source}/${deviceInstance}/ProductName`,
     // nAcInputs is obnly available for vebus inverters, for system ones will always be undefined
     nAcInputs: `N/${portalId}/${source}/${deviceInstance}/Ac/NumberOfAcInputs`
   }
@@ -58,6 +59,7 @@ export const Inverter = ({
   current,
   power,
   customName,
+  productName,
   nAcInputs,
   isVebusInverter,
   updateMode,
@@ -67,11 +69,18 @@ export const Inverter = ({
   const show = !isVebusInverter || nAcInputs === 0
   // Vebus inverters use mode 3 in stead of 2 for ON.
   const onMode = isVebusInverter ? INVERTER_MODE.VEBUS_ON : INVERTER_MODE.ON
+
+  const productNameShort = productName && productName.split(" ")[0]
+
   return (
     show && (
       <HidingContainer metricsRef={metricsRef}>
         <div className="metric inverter">
-          <HeaderView icon={require("../../../images/icons/multiplus.svg")} title={customName || "Inverter"} child>
+          <HeaderView
+            icon={require("../../../images/icons/multiplus.svg")}
+            title={customName || `Inverter: ${productNameShort}`}
+            child
+          >
             {InverterSubtitle(voltage, current, power, state)}
           </HeaderView>
           <div className="inverter__mode-selector">
