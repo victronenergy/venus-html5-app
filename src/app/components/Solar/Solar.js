@@ -31,15 +31,13 @@ class SolarWithData extends Component {
       portalId && (
         <MqttSubscriptions topics={getTopics(portalId)}>
           {topics => {
-            if (!topics.current && !topics.power) {
-              return null
-            } else {
+            if (topics.current || topics.power || topics.power === 0) {
               return (
                 <HidingContainer metricsRef={metricsRef}>
                   <Solar {...topics} />
                 </HidingContainer>
               )
-            }
+            } else return null
           }}
         </MqttSubscriptions>
       )
