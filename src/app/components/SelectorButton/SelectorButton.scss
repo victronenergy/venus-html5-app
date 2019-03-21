@@ -2,18 +2,21 @@
 
 .selector-button {
   background-color: #2a3341;
-  color: $color-white;
+  color: $color-lightgray;
   border-radius: 6px;
+
+  padding: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-grow: 1;
-  line-height: 1.2;
-  padding: 12px 25px;
-  text-align: center;
-  vertical-align: middle;
 
   cursor: pointer;
 
   &:active {
     background-color: $color-active;
+    color: $color-white;
   }
 }
 
@@ -23,6 +26,7 @@
 
 .selector-button--active {
   background-color: $color-active;
+  color: $color-white;
 }
 
 .selector-button--disabled {
@@ -32,4 +36,30 @@
   &:active {
     background-color: #2a3341;
   }
+}
+
+.selector-button--left {
+  border-radius: 6px 0 0 6px;
+  padding: 0 24px;
+}
+
+.selector-button--right {
+  border-radius: 0 6px 6px 0;
+  padding: 0 24px;
+}
+
+.selector-button--middle {
+  background-color: #2a3341;
+  line-height: 1.2;
+  padding: 0 12px;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+
+  min-width: 36px;
+  margin: 0 1px;
+  border-radius: 0;
 }

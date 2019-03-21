@@ -5,9 +5,21 @@
   color: $color-active;
   text-align: center;
   white-space: nowrap;
+  align-self: center;
 }
 
 .metric__current-input-limit {
   display: flex;
   align-items: center;
+}
+
+.metric__current-input-limit__label {
+
+  padding-left: 1.5em;
+  padding-right: 0.9em;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
 }

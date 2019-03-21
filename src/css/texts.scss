@@ -47,10 +47,17 @@ body {
 
 .text--very-large {
   font-size: 1.6rem;
+  font-weight: 500;
 }
 
 .text--large {
   font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.text--medium {
+  font-size: 1.1rem;
+  font-weight: 500;
 }
 
 .text--smaller {
@@ -63,10 +70,6 @@ body {
 
 .text--very-small {
   font-size: 0.7rem;
-}
-
-.text--medium {
-  font-weight: 600;
 }
 
 .text--bold {
