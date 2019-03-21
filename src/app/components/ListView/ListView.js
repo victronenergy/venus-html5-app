@@ -8,7 +8,7 @@ export const ListView = ({ child, children, icon, title, subTitle }) => (
     <div className="list-view__header">
       <img src={icon} className="metric__icon" />
       <div className="metric__value-container">
-        <p className="text text--medium">{title}</p>
+        <p className="text text--bold">{title}</p>
         {subTitle && <span className="text text--smaller text--opaque">{subTitle}</span>}
       </div>
     </div>

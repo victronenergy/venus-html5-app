@@ -10,7 +10,7 @@ class SelectorButton extends Component {
         onClick={() => !disabled && onClick()}
         className={classNames(
           "selector-button",
-          "text",
+          "text--smaller",
           {
             "selector-button--active": active,
             "selector-button--narrow": narrow,
