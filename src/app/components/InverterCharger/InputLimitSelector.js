@@ -71,6 +71,7 @@ class InputLimitSelector extends Component {
                 active={currentlySelectedLimit === currentValue}
                 onClick={() => onLimitSelected(currentValue)}
                 ref={node => (index === 0 ? (this.firstSelectorButtonNode = node) : null)}
+                large
               >
                 {currentValue}A
               </SelectorButton>
