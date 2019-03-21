@@ -4,13 +4,13 @@ import classNames from "classnames"
 // Keep as class component to allow refs
 class SelectorButton extends Component {
   render() {
-    const { disabled, active, narrow, onClick, className, children } = this.props
+    const { disabled, active, narrow, large, onClick, className, children } = this.props
     return (
       <div
         onClick={() => !disabled && onClick()}
         className={classNames(
           "selector-button",
-          "text--smaller",
+          large ? "text--very-large" : "text--smaller",
           {
             "selector-button--active": active,
             "selector-button--narrow": narrow,
