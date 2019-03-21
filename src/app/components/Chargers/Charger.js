@@ -17,6 +17,7 @@ import "./Charger.scss"
 const getTopics = (portalId, deviceInstanceId) => {
   return {
     customName: `N/${portalId}/charger/${deviceInstanceId}/CustomName`,
+    productName: `N/${portalId}/charger/${deviceInstanceId}/ProductName`,
     currentLimit: `N/${portalId}/charger/${deviceInstanceId}/Ac/In/CurrentLimit`,
     state: `N/${portalId}/charger/${deviceInstanceId}/State`,
     mode: `N/${portalId}/charger/${deviceInstanceId}/Mode`,
@@ -53,18 +54,29 @@ const ChargerSubtitle = (current, state) => (
   </MetricValues>
 )
 
-const Charger = ({ customName, current, state, mode, currentLimit, onModeSelected, onChangeInputLimitClicked }) => {
+const Charger = ({
+  customName,
+  productName,
+  current,
+  state,
+  mode,
+  currentLimit,
+  onModeSelected,
+  onChangeInputLimitClicked
+}) => {
   // When a topic is invalid, it returns undefined -> no value means topic is not supported
   const chargerSupportsMode = mode !== undefined
   const chargerSupportsInputLimit = currentLimit !== undefined
   const chargerMode = chargerModeFormatter(mode)
+
+  const productNameShort = productName && productName.split(" ")[0]
 
   return (
     <div className="metric charger">
       <div className="charger__header-wrapper">
         <HeaderView
           icon={require("../../../images/icons/multiplus.svg")}
-          title={customName || "Charger"}
+          title={customName || `Charger: ${productNameShort}`}
           children={ChargerSubtitle(current, state)}
           child
         />
