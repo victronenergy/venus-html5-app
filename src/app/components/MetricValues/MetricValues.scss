@@ -18,3 +18,11 @@
   justify-content: space-between;
   flex-wrap: wrap;
 }
+
+
+.battery__data .metric__values {
+  @media #{$minimum} {
+    font-size: 1rem;
+    height: 2rem;
+  }
+}

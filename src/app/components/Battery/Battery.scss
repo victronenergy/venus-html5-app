@@ -16,13 +16,15 @@
 .battery-header__text {
   display: flex;
   flex-direction: column;
-  margin-left: $rightLeftPadding;
   margin-top: 3px;
+  align-self: center;
+  white-space: nowrap
 }
 
 .battery-header__show-all {
   flex-grow: 0;
   margin-left: auto;
+  align-items: center;
 
   &:active {
     background-color: $color-active;
@@ -108,10 +110,16 @@
 .battery__paginator {
   margin-left: auto;
   display: flex;
-  align-items: center;
+
+  .selector-button {
+    padding: 0 24px;
+  }
 }
 
 .battery__paginator-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 0 20px;
 }
 
