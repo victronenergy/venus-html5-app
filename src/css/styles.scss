@@ -92,6 +92,8 @@ main {
 
 .metric__icon {
   height: 45px;
+  margin-right: $rightLeftPadding;
+
   @media #{$tiny} {
     height: 35px;
   }
@@ -102,12 +104,12 @@ main {
 }
 
 .metric__value-container {
-  margin-left: $rightLeftPadding;
   height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-self: center;
 }
 
 .metric__container--left {
