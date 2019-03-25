@@ -1,7 +1,7 @@
 @import "../../../css/variables.scss";
 
 .metric__current-input-limit__limit {
-  margin: 0 20px;
+  margin-right: 1rem;
   color: $color-active;
   text-align: center;
   white-space: nowrap;
@@ -10,7 +10,8 @@
 
 .metric__current-input-limit {
   display: flex;
-  align-items: center;
+  // align-items: center;
+  width: 12rem;
 }
 
 .metric__current-input-limit__label {

@@ -101,7 +101,6 @@ class App extends Component {
                                         <Fade
                                           key={VIEWS.INVERTER_CHARGER_INPUT_LIMIT_SELECTOR}
                                           unmount={this.state.viewUnmounting}
-                                          fullWidth
                                         >
                                           <InverterChargerInputLimitSelector
                                             portalId={portalId}
