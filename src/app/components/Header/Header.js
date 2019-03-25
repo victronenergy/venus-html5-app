@@ -12,8 +12,8 @@ const Header = props => {
     <header>
       <img src={require("../../../images/icons/logo.png")} className="logo" />
       <div className="connection">
-        <img src={require("../../../images/icons/connected.svg")} className="connection__icon" />
-        <p className="text text--small">{isConnected ? "Connected" : "Disconnected"}</p>
+        {/* <img src={require("../../../images/icons/connected.svg")} className="connection__icon" />
+        <p className="text text--small">{isConnected ? "Connected" : "Disconnected"}</p> */}
         {showRemoteConsoleSetting && (
           <button
             className="remote-console-button text text--small"
