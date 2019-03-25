@@ -5,9 +5,6 @@
   color: $color-lightgray;
   border-radius: 6px;
 
-  // padding: 16px;
-  // min-height: 45px;
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,7 +12,7 @@
 
   cursor: pointer;
 
-  &:active {
+  &:not(.selector-button--disabled):active {
     background-color: $color-active;
     color: $color-white;
   }
@@ -28,15 +25,12 @@
 .selector-button--active {
   background-color: $color-active;
   color: $color-white;
+
 }
 
 .selector-button--disabled {
   opacity: 0.5;
   cursor: default;
-
-  &:active {
-    background-color: #2a3341;
-  }
 }
 
 .selector-button--left {
