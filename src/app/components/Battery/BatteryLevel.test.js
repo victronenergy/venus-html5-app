@@ -32,7 +32,7 @@ describe("Battery level", () => {
     })
 
     it("should show time to go", () => {
-      expect(wrapper.text()).toContain("2h 30m")
+      expect(wrapper.text()).toContain("2 hours")
     })
   })
 
