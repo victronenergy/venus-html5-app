@@ -14,12 +14,10 @@
 }
 
 .metric__current-input-limit__label {
-
-  padding-left: 1.5em;
-  padding-right: 0.9em;
+  padding: 0 0em;
 
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-grow: 1;
+  justify-content: flex-end;
+  flex-grow: 0.25 ;
 }

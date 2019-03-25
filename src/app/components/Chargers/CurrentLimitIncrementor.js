@@ -8,7 +8,6 @@ class CurrentLimitIncrementor extends Component {
     const { currentLimit, onInputLimitChanged } = this.props
     return (
       <>
-        <div className="metric__current-input-limit__label text--subtitle">{"Limit"}</div>
         <SelectorButton
           narrow
           className="metric__current-input-limit__decrement selector-button--left"
