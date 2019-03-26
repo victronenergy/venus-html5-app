@@ -45,8 +45,12 @@ const getContainerHeight = metrics => {
 }
 
 export default class Metrics extends Component {
-  metricsRef = React.createRef()
-  state = { height: null, layoutCols: 1 } // height: null because int - null = int, int - undefined = NaN
+  constructor(props) {
+    super(props)
+
+    this.state = { height: props.savedState.metricsHeight || null, layoutCols: props.savedState.metricsCols || 1 } // height: null because int - null = int, int - undefined = NaN
+    this.metricsRef = React.createRef()
+  }
 
   componentDidUpdate() {
     if (this.metricsRef.current) {
@@ -63,6 +67,12 @@ export default class Metrics extends Component {
           this.setState({ height })
       }
     }
+  }
+
+  componentWillUnmount() {
+    // this is a bit of a hacky way to save the height in the
+    // parent component. It should probably be calculated there, anyways
+    this.props.saveState(this.state.height, this.state.layoutCols)
   }
 
   render() {
