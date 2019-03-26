@@ -6,9 +6,26 @@ header {
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
-  height: 15%;
   width: 100%;
-  padding: 0 40px;
+  padding: 30px (40px + 10px);
+
+  @media #{$portrait}, #{$small} {
+    padding: 30px (20px + 10px);
+  }
+
+  @media #{$narrow-portrait} {
+    padding: 20px 10px;
+  }
+
+  @media #{$tiny} {
+    padding: 10px 10px;
+  }
+
+  @media #{$very-low-landscape}, #{$low-landscape} {
+    padding: 0 (40px + 10px);
+    padding-top: 10px;
+  }
+
 }
 
 .logo {
