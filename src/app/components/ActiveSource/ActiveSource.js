@@ -38,7 +38,7 @@ const activeSourceIcon = {
 
 const getSourceSubtitle = (active, phases, source) => {
   if (active) {
-    return phases > 1 ? "3 phase" : null
+    return phases > 1 ? "3 phases" : null
   } else {
     return source === AC_SOURCE_TYPE.GENERATOR ? "Stopped" : "Unplugged"
   }
