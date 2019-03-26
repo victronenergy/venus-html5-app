@@ -67,7 +67,7 @@ main {
   }
 
   @media #{$portrait}, #{$small} {
-    padding: 0 3vw;
+    padding: 0 20px;
   }
 
   @media #{$narrow-portrait}, #{$tiny} {
