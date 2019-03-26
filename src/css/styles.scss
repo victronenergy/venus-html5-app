@@ -75,6 +75,18 @@ main {
   }
 }
 
+.metrics-container--mobile {
+  @media #{$narrow-portrait} {
+    flex-wrap: nowrap;
+  }
+}
+
+.scrollable {
+  flex: 1;
+  align-items: start;
+  overflow-y: scroll;
+}
+
 .metric {
   padding: $topBottomPadding $rightLeftPadding;
   margin-right: 10px;

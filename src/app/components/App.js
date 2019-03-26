@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 
+import classnames from "classnames"
 import Fade, { viewChangeDelay } from "./Fade"
 import GetInverterChargerDeviceInstance from "./../mqtt/victron/GetInverterChargerDeviceInstance"
 import GetPortalId from "./../mqtt/victron/GetPortalId"
@@ -14,10 +15,10 @@ import { VIEWS } from "./../utils/constants"
 import "../../css/texts.scss"
 import "../../css/styles.scss"
 
-const Main = ({ isConnected, children, setView }) => {
+const Main = ({ isConnected, isMobileDevice, children, setView }) => {
   return (
     <main
-      className={!isConnected ? "disconnected" : ""}
+      className={classnames({ disconnected: !isConnected, scrollable: isMobileDevice })}
       onClick={e => {
         // Bit of a hack to close "overlays" but doing it without adding event preventDefaults everywhere
         if (e.target.nodeName === "MAIN") {
@@ -31,6 +32,9 @@ const Main = ({ isConnected, children, setView }) => {
 }
 
 class App extends Component {
+  // a crude, but simple way of seeing if the device is mobile
+  isMobileDevice = typeof window.orientation !== "undefined" || navigator.userAgent.indexOf("IEMobile") !== -1
+
   state = {
     currentView: VIEWS.METRICS,
     viewUnmounting: false,
@@ -97,7 +101,11 @@ class App extends Component {
                                 handleRemoteConsoleButtonClicked={this.toggleRemoteConsole}
                                 currentView={this.state.currentView}
                               />
-                              <Main isConnected={isConnected} setView={this.setView}>
+                              <Main
+                                isConnected={isConnected}
+                                isMobileDevice={this.isMobileDevice}
+                                setView={this.setView}
+                              >
                                 {(() => {
                                   switch (this.state.currentView) {
                                     case VIEWS.INVERTER_CHARGER_INPUT_LIMIT_SELECTOR:
@@ -133,6 +141,7 @@ class App extends Component {
                                             onChangeInverterChargerInputLimitClicked={() =>
                                               this.setView(VIEWS.INVERTER_CHARGER_INPUT_LIMIT_SELECTOR)
                                             }
+                                            mobile={this.isMobileDevice}
                                             savedState={this.state.metricsState}
                                             saveState={(height, cols) => {
                                               this.setState({
