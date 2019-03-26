@@ -19,6 +19,9 @@
 .remote-console__small_screen_info {
   display: none;
 
+  padding: 1rem;
+  text-align: center;
+
   @media #{$hide-remote-console-breakpoint} {
     display: inline;
   }
