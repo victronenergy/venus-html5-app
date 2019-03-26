@@ -78,4 +78,9 @@ header {
   background-color: #2A3341;
   outline: none;
   cursor: pointer;
+
+  @media #{$hide-remote-console-breakpoint} {
+    display: none;
+  }
+
 }
