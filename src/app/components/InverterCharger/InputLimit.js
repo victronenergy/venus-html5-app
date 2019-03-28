@@ -18,8 +18,8 @@ export const InputLimit = ({ isAdjustable, currentLimit, onChangeInputLimitClick
   return (
     <div className="metric__current-input-limit">
       <div className="input-limit-header__wrapper">
-        <div className="text--large metric__current-input-limit__limit">{currentLimit}</div>
-        {!isAdjustable && <div class="text--subtitle">Input Limit</div>}
+        {currentLimit !== "--" && <div className="text--large metric__current-input-limit__limit">{currentLimit}</div>}
+        {!isAdjustable && currentLimit !== "--" && <div className="text--subtitle">Input Limit</div>}
       </div>
 
       {isAdjustable !== 0 && (
@@ -42,7 +42,7 @@ class InputLimitWithData extends Component {
             return (
               <InputLimit
                 currentLimit={formatNumber({ value: topics.currentLimit, unit: "A" })}
-                isAdjustable={topics.currentLimitIsAdjustable}
+                isAdjustable={topics.currentLimitIsAdjustable || 0}
                 onChangeInputLimitClicked={onChangeInputLimitClicked}
               />
             )
