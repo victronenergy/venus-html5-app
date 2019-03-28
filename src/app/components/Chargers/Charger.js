@@ -91,8 +91,8 @@ const Charger = ({
           </SelectorButton>
           {chargerSupportsInputLimit && (
             <>
-              <div className="metric__current-input-limit__label text--subtitle">{"Limit"}</div>
               <div className="charger__input-limit-selector">
+                <div className="charger__input-limit-selector__label text--subtitle">{"Limit"}</div>
                 {currentLimit !== null &&
                   currentLimit !== undefined && (
                     <CurrentLimitIncrementor

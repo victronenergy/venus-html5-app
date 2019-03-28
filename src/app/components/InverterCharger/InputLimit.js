@@ -17,10 +17,14 @@ const getTopics = (portalId, vebusInstanceId, shorePowerInput) => {
 export const InputLimit = ({ isAdjustable, currentLimit, onChangeInputLimitClicked }) => {
   return (
     <div className="metric__current-input-limit">
-      <span className="text--large metric__current-input-limit__limit">{currentLimit}</span>
+      <div className="input-limit-header__wrapper">
+        <div className="text--large metric__current-input-limit__limit">{currentLimit}</div>
+        {!isAdjustable && <div class="text--subtitle">Input Limit</div>}
+      </div>
+
       {isAdjustable !== 0 && (
         <SelectorButton onClick={onChangeInputLimitClicked}>
-          <span className="text--small">Select</span>
+          <span className="text--small">Input Limit</span>
         </SelectorButton>
       )}
     </div>

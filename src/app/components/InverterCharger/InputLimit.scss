@@ -1,24 +1,30 @@
 @import "../../../css/variables.scss";
 
+.metric__current-input-limit {
+  display: flex;
+  max-height: 45px;
+}
+
+.metric__current-input-limit .selector-button {
+  width: 6rem;
+  margin-left: 1rem;
+}
+
 .metric__current-input-limit__limit {
-  margin-right: 1rem;
   color: $color-active;
   text-align: center;
   white-space: nowrap;
   align-self: center;
 }
 
-.metric__current-input-limit {
-  display: flex;
-  // align-items: center;
-  width: 12rem;
-}
-
 .metric__current-input-limit__label {
   padding: 0 0em;
-
   display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  flex-grow: 0.25 ;
+}
+
+.input-limit-header__wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  white-space: nowrap;
 }
