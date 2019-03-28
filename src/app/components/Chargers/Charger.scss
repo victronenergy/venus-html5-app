@@ -35,4 +35,12 @@
   display: flex;
   flex-direction: row;
   margin-left: 10px;
+  flex: 2;
+  max-width: 16rem;
+}
+
+.charger__input-limit-selector__label {
+  padding: 0 1em;
+  display: flex;
+  align-items: center;
 }
