@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import classnames from "classnames"
 
+import HeaderView from "../HeaderView"
 import BatteryLevel from "./BatteryLevel"
 import HidingContainer from "../HidingContainer"
 import MetricValues from "../MetricValues"
@@ -45,7 +46,6 @@ const Paginator = ({ setPage, currentPage, pages }) => {
 
 export class BatteryList extends Component {
   ref = React.createRef()
-
   render() {
     const { batteries, currentPage, pageSize } = this.props
     return (
@@ -80,6 +80,23 @@ export class BatteryList extends Component {
   }
 }
 
+const SingleBattery = ({ voltage, current, power, name, soc, state, id, timetogo }) => {
+  const isStarter = id && id.endsWith(":1")
+  const batteryNameShort = name && name.split(" ")[0]
+  return (
+    <HeaderView icon={require("../../../images/icons/battery.svg")} title={`Battery: ${batteryNameShort}`}>
+      <MetricValues inflate>
+        <div className="metrics__left">
+          <NumericValue value={voltage} unit="V" precision={1} />
+          {!isStarter && <NumericValue value={current} unit="A" precision={1} />}
+          {!isStarter && <NumericValue value={power} unit="W" />}
+        </div>
+        {soc !== undefined && <BatteryLevel state={state} soc={soc} timeToGo={timetogo} />}
+      </MetricValues>
+    </HeaderView>
+  )
+}
+
 export class Batteries extends Component {
   state = { currentPage: 0 }
   ref = React.createRef()
@@ -99,7 +116,10 @@ export class Batteries extends Component {
       : batteries
     // These fill the last page with empty elements if necessary
     const fillerBatteries = paginate ? [...Array(pageSize - batteriesToShow.length)].map(() => ({ dummy: true })) : []
-    return (
+
+    const showSingleBattery = <SingleBattery {...batteries[0]} />
+
+    const showMultipleBatteries = (
       <div className="metric metric__battery">
         <BatteryHeader
           amount={batteries.length}
@@ -115,6 +135,8 @@ export class Batteries extends Component {
         />
       </div>
     )
+
+    return batteries.length === 1 ? showSingleBattery : showMultipleBatteries
   }
 }
 
