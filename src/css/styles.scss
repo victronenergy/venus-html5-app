@@ -79,7 +79,12 @@ main {
   @media #{$narrow-portrait} {
     flex-wrap: nowrap;
   }
+  @media (orientation: landscape) {
+    flex-direction: row;
+  }
 }
+
+
 
 .scrollable {
   flex: 1;

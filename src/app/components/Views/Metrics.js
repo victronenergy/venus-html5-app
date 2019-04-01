@@ -53,7 +53,7 @@ export default class Metrics extends Component {
   }
 
   componentDidUpdate() {
-    if (!this.isMobileDevice && this.metricsRef.current) {
+    if (!this.props.mobile && this.metricsRef.current) {
       const metrics = [...this.metricsRef.current.children]
       const cols = getRequiredCols(metrics)
       if (this.state.layoutCols !== cols) this.setState({ layoutCols: cols })
@@ -78,7 +78,9 @@ export default class Metrics extends Component {
   render() {
     const { portalId, inverterChargerDeviceId, isConnected, onChangeInverterChargerInputLimitClicked } = this.props
     const commonProps = { portalId, inverterChargerDeviceId, metricsRef: this.metricsRef }
-    const style = this.state.layoutCols === 2 ? { height: this.state.height } : {}
+
+    let style = this.state.layoutCols === 2 ? { height: this.state.height } : {}
+
     return (
       <div
         className={classnames("metrics-container", {

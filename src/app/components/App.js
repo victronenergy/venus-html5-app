@@ -33,6 +33,7 @@ const Main = ({ isConnected, isMobileDevice, children, setView }) => {
 
 class App extends Component {
   // a crude, but simple way of seeing if the device is mobile
+  // should eventually be replaced with something more robust like react-device-detect
   isMobileDevice = typeof window.orientation !== "undefined" || navigator.userAgent.indexOf("IEMobile") !== -1
 
   state = {
@@ -100,6 +101,7 @@ class App extends Component {
                                 isConnected={isConnected}
                                 handleRemoteConsoleButtonClicked={this.toggleRemoteConsole}
                                 currentView={this.state.currentView}
+                                isMobileDevice={this.isMobileDevice}
                               />
                               <Main
                                 isConnected={isConnected}
