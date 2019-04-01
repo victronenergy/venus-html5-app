@@ -78,9 +78,10 @@ header {
   background-color: #2A3341;
   outline: none;
   cursor: pointer;
+}
 
+.remote-console-button:not(.mobile-view) {
   @media #{$hide-remote-console-breakpoint} {
     display: none;
   }
-
 }

@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import classnames from "classnames"
 
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 
@@ -7,16 +8,14 @@ import { VIEWS } from "../../utils/constants"
 import "./Header.scss"
 
 const Header = props => {
-  const { isConnected, showRemoteConsoleSetting, currentView, handleRemoteConsoleButtonClicked } = props
+  const { isConnected, showRemoteConsoleSetting, currentView, handleRemoteConsoleButtonClicked, isMobileDevice } = props
   return (
     <header>
       <img src={require("../../../images/icons/logo.png")} className="logo" />
       <div className="connection">
-        {/* <img src={require("../../../images/icons/connected.svg")} className="connection__icon" />
-        <p className="text text--small">{isConnected ? "Connected" : "Disconnected"}</p> */}
         {showRemoteConsoleSetting && (
           <button
-            className="remote-console-button text text--small"
+            className={classnames("remote-console-button", "text", "text--small", { "mobile-view": isMobileDevice })}
             onClick={handleRemoteConsoleButtonClicked}
             disabled={!isConnected}
           >
@@ -32,7 +31,7 @@ const Header = props => {
 // showRemoteConsoleSetting={topics.showRemoteConsoleSetting}
 class HeaderWithData extends Component {
   render() {
-    const { portalId, isConnected, currentView, handleRemoteConsoleButtonClicked } = this.props
+    const { portalId, isConnected, currentView, handleRemoteConsoleButtonClicked, isMobileDevice } = this.props
     return (
       <MqttSubscriptions
         topics={{ showRemoteConsoleSetting: `N/${portalId}/settings/0/Settings/SystemSetup/<placeholder>` }}
@@ -44,6 +43,7 @@ class HeaderWithData extends Component {
               isConnected={isConnected}
               handleRemoteConsoleButtonClicked={handleRemoteConsoleButtonClicked}
               currentView={currentView}
+              isMobileDevice={isMobileDevice}
             />
           )
         }}
