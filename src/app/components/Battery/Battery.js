@@ -56,12 +56,12 @@ export class BatteryList extends Component {
       >
         {batteries.map(({ voltage, current, power, name, soc, state, id, timetogo, dummy }, i) => {
           const isStarter = id && id.endsWith(":1")
-          const batteryNameShort = name && name.split(" ")[0]
+
           return (
             <div className={classnames("battery", { "battery--dummy": dummy })} key={id || i}>
               {!dummy && (
                 <div className="battery__data">
-                  <div className="battery__title-row text--subtitle-upper">{batteryNameShort}</div>
+                  <div className="battery__title-row text--subtitle-upper">{name}</div>
                   <MetricValues inflate>
                     <div className="metrics__left">
                       <NumericValue value={voltage} unit="V" precision={1} />
@@ -82,9 +82,9 @@ export class BatteryList extends Component {
 
 const SingleBattery = ({ voltage, current, power, name, soc, state, id, timetogo }) => {
   const isStarter = id && id.endsWith(":1")
-  const batteryNameShort = name && name.split(" ")[0]
+
   return (
-    <HeaderView icon={require("../../../images/icons/battery.svg")} title={`Battery: ${batteryNameShort}`}>
+    <HeaderView icon={require("../../../images/icons/battery.svg")} title={`Battery: ${name}`}>
       <MetricValues inflate>
         <div className="metrics__left">
           <NumericValue value={voltage} unit="V" precision={1} />
