@@ -54,22 +54,13 @@ export class BatteryList extends Component {
         ref={this.ref}
         style={this.ref.current && batteries.some(b => b.dummy) ? { height: this.ref.current.offsetHeight } : {}}
       >
-        {batteries.map(({ voltage, current, power, name, soc, state, id, timetogo, dummy }, i) => {
-          const isStarter = id && id.endsWith(":1")
-
+        {batteries.map((battery, i) => {
           return (
-            <div className={classnames("battery", { "battery--dummy": dummy })} key={id || i}>
-              {!dummy && (
+            <div className={classnames("battery", { "battery--dummy": battery.dummy })} key={i}>
+              {!battery.dummy && (
                 <div className="battery__data">
-                  <div className="battery__title-row text--subtitle-upper">{name}</div>
-                  <MetricValues inflate>
-                    <div className="metrics__left">
-                      <NumericValue value={voltage} unit="V" precision={1} />
-                      {!isStarter && <NumericValue value={current} unit="A" precision={1} />}
-                      {!isStarter && <NumericValue value={power} unit="W" />}
-                    </div>
-                    {soc !== undefined && <BatteryLevel state={state} soc={soc} timeToGo={timetogo} />}
-                  </MetricValues>
+                  <div className="battery__title-row text--subtitle-upper">{battery.name}</div>
+                  <BatteryRow {...battery} />
                 </div>
               )}
             </div>
@@ -80,20 +71,24 @@ export class BatteryList extends Component {
   }
 }
 
-const SingleBattery = ({ voltage, current, power, name, soc, state, id, timetogo }) => {
-  const isStarter = id && id.endsWith(":1")
+const SingleBattery = battery => (
+  <HeaderView icon={require("../../../images/icons/battery.svg")} title={`Battery: ${battery.name}`}>
+    <BatteryRow {...battery} />
+  </HeaderView>
+)
 
+const BatteryRow = battery => {
   return (
-    <HeaderView icon={require("../../../images/icons/battery.svg")} title={`Battery: ${name}`}>
-      <MetricValues inflate>
-        <div className="metrics__left">
-          <NumericValue value={voltage} unit="V" precision={1} />
-          {!isStarter && <NumericValue value={current} unit="A" precision={1} />}
-          {!isStarter && <NumericValue value={power} unit="W" />}
-        </div>
-        {soc !== undefined && <BatteryLevel state={state} soc={soc} timeToGo={timetogo} />}
-      </MetricValues>
-    </HeaderView>
+    <MetricValues inflate>
+      <div className="metrics__left">
+        <NumericValue value={battery.voltage} unit="V" defaultValue={null} precision={1} />
+        <NumericValue value={battery.current} unit="A" defaultValue={null} precision={1} />
+        <NumericValue value={battery.power} unit="W" defaultValue={null} />
+      </div>
+      {battery.soc !== undefined && (
+        <BatteryLevel state={battery.state} soc={battery.soc} timeToGo={battery.timetogo} />
+      )}
+    </MetricValues>
   )
 }
 
@@ -117,9 +112,7 @@ export class Batteries extends Component {
     // These fill the last page with empty elements if necessary
     const fillerBatteries = paginate ? [...Array(pageSize - batteriesToShow.length)].map(() => ({ dummy: true })) : []
 
-    const showSingleBattery = <SingleBattery {...batteries[0]} />
-
-    const showMultipleBatteries = (
+    const MultipleBatteries = (
       <div className="metric metric__battery">
         <BatteryHeader
           amount={batteries.length}
@@ -136,7 +129,7 @@ export class Batteries extends Component {
       </div>
     )
 
-    return batteries.length === 1 ? showSingleBattery : showMultipleBatteries
+    return batteries.length === 1 ? SingleBattery(batteries[0]) : MultipleBatteries
   }
 }
 
