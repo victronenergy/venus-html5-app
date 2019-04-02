@@ -17,6 +17,11 @@
   flex-direction: column;
 }
 
+.list-row {
+  display: flex;
+  align-items: center;
+}
+
 .list-row:not(:first-child) {
   margin-top: 5px;
 }

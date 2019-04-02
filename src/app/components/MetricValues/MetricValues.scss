@@ -2,16 +2,28 @@
 
 .metric__values {
   display: flex;
+
   color: $color-white;
   font-size: 1.1rem;
 }
 
+.metrics__left {
+  display: flex;
+  flex: 1;
+}
+
+.metrics__right > span:not(:first-child) {
+  margin-left: 16px;
+}
+
+.value:not(:first-child) {
+  min-width: 4.5rem;
+}
+
 .value {
-  padding-right: 30px;
+  text-align: right;
+  margin-right: 1rem;
   letter-spacing: 0.05em;
-  @media #{$smaller} {
-    padding-right: 15px;
-  }
 }
 
 .value__phase {

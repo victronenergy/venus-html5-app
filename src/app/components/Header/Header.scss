@@ -10,7 +10,7 @@ header {
   padding: 30px (40px + 10px);
 
   @media #{$portrait}, #{$small} {
-    padding: 30px (20px + 10px);
+    padding: 20px (20px + 10px);
   }
 
   @media #{$narrow-portrait} {
