@@ -38,6 +38,7 @@ class DcLoadsWithData extends Component {
     return (
       <MqttSubscriptions topics={getTopics(portalId)}>
         {topics => {
+          if (topics && !topics.power) return null
           return (
             <HidingContainer metricsRef={metricsRef}>
               <HeaderView icon={require("../../../images/icons/dc.svg")} title="DC Loads" showBoat>
