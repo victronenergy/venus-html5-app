@@ -4,7 +4,7 @@ import React from "react"
 
 describe("DC Loads", () => {
   describe("when valid", () => {
-    const wrapper = mount(<DcLoads voltage={12.345} power={98.765} hasDcSystem={"1"} />)
+    const wrapper = mount(<DcLoads voltage={12.345} power={98.765} />)
 
     it("shows current", () => {
       const props = wrapper
@@ -28,7 +28,7 @@ describe("DC Loads", () => {
   })
 
   describe("when voltage is empty", () => {
-    const wrapper = mount(<DcLoads power={98.765} hasDcSystem={1} />)
+    const wrapper = mount(<DcLoads power={98.765} />)
 
     it("shows empty current", () => {
       expect(
@@ -37,14 +37,6 @@ describe("DC Loads", () => {
           .first()
           .props().value
       ).toBeUndefined()
-    })
-  })
-
-  describe("when DC Power is not enabled", () => {
-    const wrapper = mount(<DcLoads power={98.765} hasDcSystem={0} />)
-
-    it("shows hint to the user", () => {
-      expect(wrapper.text()).toContain("Has DC System")
     })
   })
 
