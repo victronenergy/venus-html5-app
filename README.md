@@ -12,16 +12,42 @@ removes the need for a Victron panel at the helm: less clutter on the dashboard.
 The secondary purpose is to help OEMs, boat builders and motorhome builders for example,
 make their own custom UI.
 
-## Getting started
+## 0. Contents
 
-### Initial setup
+Chapters in this readme:
+
+1. Functionality.
+2. Development
+3. Testing
+4. Making a release
+5. Device error logging
+6. Device debugging
+
+## 1. Functionality
+
+How certain devices are visualised/rendered on HTML5, what topics are used, and similar information is documented in three places:
+
+- [TOPICS.md](https://github.com/victronenergy/venus-html5-app/blob/master/TOPICS.md)
+- [wiki/Translating system components into the HTML5 app](https://github.com/victronenergy/venus-html5-app/wiki/Translating-system-components-into-the-HTML5-app.)
+- [wiki/Dashboard overview](https://github.com/victronenergy/venus-html5-app/wiki/Dashboard-overview)
+
+### 1.? Handling disconnects
+
+When devices are disconnected from the GX Device, see [this issue](https://github.com/victronenergy/venus-html5-app/issues/49)
+for what happens on the D-Bus.
+
+On MQTT, this is translated into sending an empty message on the subs which depend on the lost service. Depending on the element we show either -- for the value (in the case of numeric values) or another default state for the component (like disconnected for the active source).
+
+## 2. Development
+
+### 2.1 Initial setup
 
 If it's the first time you run the app:
 
 - make sure to have `node` & `npm` installed on your machine
 - run `npm install` in the root folder
 
-### Development
+### 2.2 Development
 
 To run the app locally for development, run:
 
@@ -37,7 +63,7 @@ You can change the `host` and `port` (although the default 9001 is usually corre
 
 This way you can run the local app against venus device data if the venus device is on the same network as your computer.
 
-### Running the app with no Venus device available
+### 2.3 Running the app with no Venus device available
 
 The mqtt mock is no longer mainainted. Use [venus-docker](https://github.com/victronenergy/venus-docker) instead or a Venus GX in demo mode (below).
 
@@ -47,7 +73,7 @@ The mqtt mock is no longer mainainted. Use [venus-docker](https://github.com/vic
 
 Also keep in mind the Venus device also has a Demo mode, which allows you to get useful data if you only have the Venus device available, without requiring various Victron devices to be connected to the Venus device. To enable it, navigate to the Venus Remote Console -> Settings -> General.
 
-### Device radiator
+### 2.4 Device radiator
 
 Since the app will be run on a plethora of different resolutions and split screens there is a "radiator" available which has iframes for all the
 basic combinations of display "splits". The base 1/1 ui is 1280 x 720, which can be changed in the header. In the radiator there are the basic ui
@@ -56,18 +82,44 @@ and multiple split screen variations available relative to the "base" size.
 To run this ui it is recommended to use mocked data. Run the mocked mqtt as described above and navigate to the radiator ui with `http://localhost/radiator.html`.
 Since it is still served through the webpack dev server, the app will hot reload any time there are code changes.
 
-## Metrics available
+## 2.5 Metrics available
 
 - Identify the D-bus channel that you want to read [from here](https://github.com/victronenergy/venus/wiki/dbus)
 - Create a component using MqttSubscriptions or MqttTopicWildcard and pass the topic as the wrapper topi. See examples in other components
 
-## Testing
+### 2.6 Deploying to a device during development
 
-### Enzyme
+#### 2.6.1 Get the device ip
+
+In order to deploy you need to know the target device's IP. It can be connected to by ethernet, LAN or the device's own WLAN.
+Instructions on how to find the IPs can be found [here](https://www.victronenergy.com/live/venus-gx:start#accessing_the_device)
+for the Venus GX device.
+
+#### 2.6.2 Run deploy script
+
+In the project main folder run `./bin/deploy.sh <ip>` where ip is the target device's IP. The script also accepts an additional
+`--user|-u` param that defines the user for the deployment connection. This defaults to `root`.
+
+The deploy script also bundles the app. Nore that the script assumes that it's run from the root folder of the application.
+
+#### 2.6.3 Navigate to the app address again on the target device
+
+Once deployed reload the page by navigating to the Venus host IP on the target device.
+If you have enabled dev features and have previously deployed a new version of the UI to the device you can
+press the `reload page` on the top left corner of the page.
+
+
+## 3. Testing
+
+### 3.1 Venus OS Release test plan
+
+In the Venus OS release test plan there is a tab containing all tests.
+
+### 3.2 Enzyme
 
 Most components have Enzyme unit tests. Run all of these tests with `npm run test`
 
-### Cypress
+### 3.3 Cypress
 
 Cypress is used to run integration tests on the compiled ui to make sure it opens and operated correctly in different
 display sizes. To run cypress you need to run the live server and an instance of venus docker in the Venus GX demo mode (z):
@@ -80,28 +132,7 @@ Then you can run the cypress ui with `npm run cypress`.
 
 To run the ui tests in CI-style use `npm run test:ui`
 
-## Deployment
-
-### 1. Get the device ip
-
-In order to deploy you need to know the target device's IP. It can be connected to by ethernet, LAN or the device's own WLAN.
-Instructions on how to find the IPs can be found [here](https://www.victronenergy.com/live/venus-gx:start#accessing_the_device)
-for the Venus GX device.
-
-### 2. Run deploy script
-
-In the project main folder run `./bin/deploy.sh <ip>` where ip is the target device's IP. The script also accepts an additional
-`--user|-u` param that defines the user for the deployment connection. This defaults to `root`.
-
-The deploy script also bundles the app. Nore that the script assumes that it's run from the root folder of the application.
-
-### 3. Navigate to the app address again on the target device
-
-Once deployed reload the page by navigating to the Venus host IP on the target device.
-If you have enabled dev features and have previously deployed a new version of the UI to the device you can
-press the `reload page` on the top left corner of the page.
-
-## Making a new release
+## 4. Making a release
 
 Whenever a new tag is created, Travis CI will build the app, archive the built files and upload them as `venus-html5-app.tar.gz` to the Github Release associated with the tag.
 The app can then be downloaded from `https://github.com/victronenergy/venus-html5-app/releases/download/<TAG_NAME>/venus-html5-app.tar.gz`.
@@ -130,11 +161,11 @@ If you need any changes to the how the app is included inside Venus, please spec
 All Venus recipes are found [here](https://github.com/victronenergy/meta-victronenergy/tree/master/meta-ve-software/recipes-ve).
 A sample recipe for the HTML5 app is [here](https://github.com/victronenergy/meta-victronenergy/tree/master/meta-ve-software/recipes-ve)
 
-## Device error logging
+## 5. Device error logging
 
 When the app is hosted from a VenusGX, there is no convenient way to see the errors in the js console. To make troubleshooting easier the app sends (at least attempts) to send the error messages through websocket to the device. The log can be found at `/var/log/venus-html5-app/current`.
 
-## Device debugging
+## 6. Device debugging
 
 By adding `debug=true` to the query params you can enable some convenience features for debugging on actual devices:
 
