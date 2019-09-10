@@ -25,13 +25,17 @@ Chapters in this readme:
 
 ## 1. Functionality
 
-How certain devices are visualised/rendered on HTML5, what topics are used, and similar information is documented in three places:
+### 1.1 Documentation per Box
+
+`Boxes` are the various designed visualisation: there is a Battery box, a Generator box, a Shorepower box, and so forth.
+
+How certain devices are visualised/rendered on HTML5, ie. in to what box(es), and what topics are used for what parameter, and more is documented in three places:
 
 - [TOPICS.md](https://github.com/victronenergy/venus-html5-app/blob/master/TOPICS.md)
 - [wiki/Translating system components into the HTML5 app](https://github.com/victronenergy/venus-html5-app/wiki/Translating-system-components-into-the-HTML5-app.)
 - [wiki/Dashboard overview](https://github.com/victronenergy/venus-html5-app/wiki/Dashboard-overview)
 
-### 1.? Handling disconnects
+### 1.2 Handling disconnects
 
 When devices are disconnected from the GX Device, see [this issue](https://github.com/victronenergy/venus-html5-app/issues/49)
 for what happens on the D-Bus.
