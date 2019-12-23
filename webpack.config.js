@@ -48,6 +48,7 @@ const conf = {
         use: [
           "style-loader", // creates style nodes from JS strings
           "css-loader", // translates CSS into CommonJS
+          "postcss-loader", // Add vendor prefixes to CSS
           "sass-loader" // compiles Sass to CSS, using Node Sass by default
         ]
       },
