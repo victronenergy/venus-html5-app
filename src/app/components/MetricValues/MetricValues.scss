@@ -9,7 +9,7 @@
 
 .metrics__left {
   display: flex;
-  flex: 1;
+  flex: 1 1 auto;
 }
 
 .metrics__right > span:not(:first-child) {
