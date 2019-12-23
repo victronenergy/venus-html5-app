@@ -1,12 +1,11 @@
 @import "../../../css/variables.scss";
 
 header {
-  flex-shrink: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-sizing: border-box;
   width: 100%;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
   padding: 30px (40px + 10px);
 
   @media #{$portrait}, #{$small} {
@@ -22,7 +21,7 @@ header {
   }
 
   @media #{$very-low-landscape}, #{$low-landscape} {
-    padding: 5px (40px + 10px);
+    padding: 15px (40px + 10px);
     padding-top: 5px;
   }
 
@@ -30,6 +29,7 @@ header {
 
 .logo {
   width: 183px;
+  grid-column: 2;
 
   @media #{$regular} {
     width: 146px;
@@ -41,8 +41,11 @@ header {
 }
 
 .connection {
+  grid-column: 3;
+  justify-self: right;
+
   display: flex;
-  align-items: center;
+  align-items: right;
 
   :not(:last-child) {
     @media #{$tiny} {
