@@ -21,6 +21,11 @@ header {
   @media #{$narrow-portrait}, #{$tiny} {
     padding: 10px 10px;
   }
+
+  @media #{$very-low-landscape}, #{$low-landscape} {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
 }
 
 .logo {
