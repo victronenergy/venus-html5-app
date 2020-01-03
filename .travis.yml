@@ -1,27 +1,29 @@
-# We don't need to use `sudo`, and can instead use containers for faster builds
-sudo: false
-# This is a JS project
 language: node_js
 # Use latest stable node version
 node_js:
   - lts/*
-branches:
-  only:
-    # Only run branch builds on master to prevent double builds on pull requests
-    - master
-    # Allow branches representing tags, otherwise the deploy step won't trigger
-    - "/^\\d+\\.\\d*\\.?\\d*$/"
-# Use `npm ci` instead of default `npm install` for installing dependencies
-install:
-  - npm ci
+
+addons:
+  apt:
+    packages:
+      # Ubuntu 16+ does not install this dependency by default
+      - libgconf-2-4
+
+## Cache NPM folder and Cypress binary
 cache:
   directories:
-    - "$HOME/.npm"
+    - ~/.npm
     - ~/.cache
+
+install:
+  - npm ci
+
 script:
-  - npm run test
-  - npm run compile
-  # Archive the built files in preparation of uploading them to Github
+  - npm run test:unit
+  - npm run serve:ci &
+  - npm run test:e2e
+
+# Archive the built files in preparation of uploading them to Github
 before_deploy:
   - tar -zcvf venus-html5-app.tar.gz dist/
 deploy:

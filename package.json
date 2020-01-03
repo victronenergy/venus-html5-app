@@ -4,14 +4,16 @@
   "description": "Metric framework for Victron VenusOS",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --hot --inline --development -d",
-    "fake-mqtt": "nodemon --watch 'scripts/fake-broker.js' --exec 'npx babel-node scripts/start-fake-mqtt.js'",
-    "dev:mocked": "concurrently 'npm run dev' 'npm run fake-mqtt'",
     "clean": "rm -rf dist",
-    "compile": "npm run clean && npx webpack --mode production",
-    "test": "jest",
-    "test:ui": "npm run clean && npx webpack --mode production && npx babel-node test/run-cypress.js",
-    "cypress": "npx cypress open"
+    "compile": "npm run clean && webpack --mode production",
+    "dev": "webpack-dev-server --hot --inline --development -d",
+    "test:unit": "jest",
+    "serve:ci": "http-server ./dist -p 8000 -c-1 --silent",
+    "test:e2e": "npm run compile && npm run cy:run",
+    "cy:version": "cypress version",
+    "cy:verify": "cypress verify",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run"
   },
   "author": "",
   "license": "ISC",
