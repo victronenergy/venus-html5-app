@@ -112,7 +112,6 @@ Once deployed reload the page by navigating to the Venus host IP on the target d
 If you have enabled dev features and have previously deployed a new version of the UI to the device you can
 press the `reload page` on the top left corner of the page.
 
-
 ## 3. Testing
 
 ### 3.1 Venus OS Release test plan
@@ -121,7 +120,7 @@ In the Venus OS release test plan there is a tab containing all tests.
 
 ### 3.2 Enzyme
 
-Most components have Enzyme unit tests. Run all of these tests with `npm run test`
+Most components have Enzyme unit tests. Run all of these tests with `npm run test:unit`
 
 ### 3.3 Cypress
 
