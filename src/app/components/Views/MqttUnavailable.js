@@ -8,7 +8,7 @@ export default ({ viewUnmounting }) => (
         <span className="text text--large">
           Could not connect to the MQTT server. <br />
           Please check that MQTT is enabled in your settings: <br />
-          Remote Console > Settings > Services > MQTT.
+          Remote Control > Settings > Services > MQTT on LAN (Plaintext)
         </span>
         <div className="image-container">
           <img src={require("../../../images/mqtt-settings-v2.42.png")} />
