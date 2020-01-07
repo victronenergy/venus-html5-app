@@ -133,7 +133,7 @@ display sizes. To run cypress you need to run the live server and an instance of
 
 Then you can run the cypress ui with `npm run cypress`.
 
-To run the ui tests in CI-style use `npm run test:ui`
+To run the ui tests in CI-style use `npm run test:e2e`
 
 ## 4. Making a release
 

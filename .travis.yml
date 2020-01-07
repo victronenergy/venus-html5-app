@@ -24,10 +24,11 @@ install:
   - npm ci
 
 script:
-  - npm run test:unit
+  - npm run compile
   - npm run serve:ci &
-  - docker run -d --rm -p 9001:9001 -p 1883:1883 -p 3000:3000 -p 8080:80 --name venus-docker aleximb/venus-docker /root/run_with_simulation.sh z
-  - npm run test:e2e
+  - docker run -d --rm -p 9001:9001 -p 1883:1883 -p 3000:3000 -p 8080:80 --name venus-docker aleximb/venus-docker:latest /root/run_with_simulation.sh z
+  - npm run test:ci
+
 
 # Archive the built files in preparation of uploading them to Github
 before_deploy:
@@ -42,5 +43,6 @@ deploy:
   file: venus-html5-app.tar.gz
   # Trigger release on tags
   on:
-    repo: victronenergy/venus-html5-app
     tags: true
+    all_branches: true
+    condition: $TRAVIS_TAG =~ ^\d+\.\d*.?\d*$
