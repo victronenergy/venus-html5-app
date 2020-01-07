@@ -5,7 +5,7 @@ describe("Testing basic values rendering in the ui", () => {
 
   it("Successfully opens page", () => {
     cy.visit("/")
-    cy.get(".connection > p").should("contain", "Connected")
+    cy.get("header > .logo").should("be.visible")
     cy.get(".metrics-container").should("be.visible")
   })
 

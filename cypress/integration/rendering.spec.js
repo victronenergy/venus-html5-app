@@ -28,7 +28,13 @@ const deviceResolutions = {
     quarter(1086, 772),
     sixth(1086, 772)
   ],
-  raymarine: [[800, 480], [1280, 720], [1280, 800], [1920, 1080], [1920, 1200]],
+  raymarine: [
+    [800, 480],
+    [1280, 720],
+    [1280, 800],
+    [1920, 1080],
+    [1920, 1200]
+  ],
   garmin: [
     [1280, 723],
     halfHorizontalSplit(1280, 723),
@@ -53,7 +59,7 @@ for (let [device, resolutions] of Object.entries(deviceResolutions)) {
 
       it("Successfully opens page", () => {
         cy.visit("/")
-        cy.get(".connection > p").should("contain", "Connected")
+        cy.get("header > .logo").should("be.visible")
         cy.get(".metrics-container").should("be.visible")
       })
 
