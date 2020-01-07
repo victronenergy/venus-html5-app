@@ -1,4 +1,9 @@
 language: node_js
+
+# Use Docker for running venus-docker simulations during testing
+services:
+  - docker
+
 # Use latest stable node version
 node_js:
   - lts/*
@@ -21,6 +26,8 @@ install:
 script:
   - npm run test:unit
   - npm run serve:ci &
+  - docker pull aleximb/docker-venus
+  - docker run -d --rm -p 9001:9001 -p 1883:1883 -p 3000:3000 -p 8080:80 --name venus-docker aleximb/venus-docker /root/run_with_simulation.sh z
   - npm run test:e2e
 
 # Archive the built files in preparation of uploading them to Github
