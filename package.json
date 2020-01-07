@@ -13,7 +13,7 @@
     "cy:version": "cypress version",
     "cy:verify": "cypress verify",
     "cy:open": "cypress open",
-    "cy:run": "cypress run"
+    "cy:run": "cypress run --record"
   },
   "author": "",
   "license": "ISC",
