@@ -163,6 +163,9 @@ button:disabled {
 
   .image-container {
     max-width: 600px;
+    img {
+      border-radius: 5px;
+    }
   }
 }
 

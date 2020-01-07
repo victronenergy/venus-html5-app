@@ -11,7 +11,7 @@ export default ({ viewUnmounting }) => (
           Remote Console > Settings > Services > MQTT.
         </span>
         <div className="image-container">
-          <img src={require("../../../images/mqtt-settings.png")} />
+          <img src={require("../../../images/mqtt-settings-v2.42.png")} />
         </div>
       </div>
     </Fade>
