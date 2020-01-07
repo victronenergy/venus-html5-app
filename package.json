@@ -7,13 +7,15 @@
     "clean": "rm -rf dist",
     "compile": "npm run clean && webpack --mode production",
     "dev": "webpack-dev-server --hot --inline --development -d",
-    "test:unit": "jest",
     "serve:ci": "http-server ./dist -p 8000 -c-1 --silent",
-    "test:e2e": "npm run compile && npm run cy:run",
+    "test:dev": "jest && cypress run",
+    "test:ci": "jest && cypress run --record",
+    "test:unit": "jest",
+    "test:e2e": "cypress run",
     "cy:version": "cypress version",
     "cy:verify": "cypress verify",
     "cy:open": "cypress open",
-    "cy:run": "cypress run --record"
+    "cy:run": "cypress run"
   },
   "author": "",
   "license": "ISC",
