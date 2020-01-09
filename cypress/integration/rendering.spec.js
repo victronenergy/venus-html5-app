@@ -79,7 +79,7 @@ for (let [device, resolutions] of Object.entries(deviceResolutions)) {
 
         it("main div", () => {
           // Wait for the app to react to the viewport changes
-          cy.wait(500)
+          cy.wait(1500)
           cy.get("main > div").isWithinViewport(width, height)
         })
       })
