@@ -50,8 +50,6 @@ for (let [device, resolutions] of Object.entries(deviceResolutions)) {
     context(`${device} resolution ${width}x${height}`, () => {
       beforeEach(() => {
         cy.viewport(width, height)
-        // Wait for the app to react to the viewport changes
-        cy.wait(100)
       })
 
       it("Successfully opens page", () => {
@@ -80,6 +78,8 @@ for (let [device, resolutions] of Object.entries(deviceResolutions)) {
         })
 
         it("main div", () => {
+          // Wait for the app to react to the viewport changes
+          cy.wait(500)
           cy.get("main > div").isWithinViewport(width, height)
         })
       })
