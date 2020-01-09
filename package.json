@@ -9,7 +9,7 @@
     "dev": "webpack-dev-server --hot --inline --development -d",
     "serve:ci": "http-server ./dist -p 8000 -c-1 --silent",
     "test:dev": "jest && cypress run",
-    "test:ci": "jest && cypress run --record",
+    "test:ci": "jest && cypress run",
     "test:unit": "jest",
     "test:e2e": "cypress run",
     "cy:version": "cypress version",
