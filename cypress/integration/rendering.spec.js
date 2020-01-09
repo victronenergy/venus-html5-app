@@ -45,16 +45,13 @@ const deviceResolutions = {
   ]
 }
 
-const isElementInViewport = (el, window) => {
-  const rect = el.getBoundingClientRect()
-  return rect.top >= 0 && rect.left >= 0 && rect.bottom <= window.innerHeight && rect.right <= window.innerWidth
-}
-
 for (let [device, resolutions] of Object.entries(deviceResolutions)) {
   for (let [width, height] of resolutions) {
     context(`${device} resolution ${width}x${height}`, () => {
       beforeEach(() => {
         cy.viewport(width, height)
+        // Wait for the app to react to the viewport changes
+        cy.wait(1)
       })
 
       it("Successfully opens page", () => {
@@ -65,7 +62,7 @@ for (let [device, resolutions] of Object.entries(deviceResolutions)) {
 
       describe("Contains metrics elements", () => {
         it("Contains metrics", () => {
-          cy.get(".metric").should("have.length", 6)
+          cy.get(".metric").should("have.length", 7)
         })
 
         if (width < 450 && width / height >= 0.9) {
@@ -78,12 +75,12 @@ for (let [device, resolutions] of Object.entries(deviceResolutions)) {
       })
 
       describe("Elements are in viewport", () => {
-        it("main", () => {
-          cy.window().then(window => {
-            cy.get("main")
-              .then(el => isElementInViewport(el[0], window))
-              .should("be.true")
-          })
+        it("header", () => {
+          cy.get("header").isWithinViewport(width, height)
+        })
+
+        it("main div", () => {
+          cy.get("main > div").isWithinViewport(width, height)
         })
       })
     })
