@@ -27,19 +27,15 @@ const Header = props => {
   )
 }
 
-// TODO Add topic for SystemSetup and then change value passed to header
-// showRemoteConsoleSetting={topics.showRemoteConsoleSetting}
 class HeaderWithData extends Component {
   render() {
     const { portalId, isConnected, currentView, handleRemoteConsoleButtonClicked, isMobileDevice } = this.props
     return (
-      <MqttSubscriptions
-        topics={{ showRemoteConsoleSetting: `N/${portalId}/settings/0/Settings/SystemSetup/<placeholder>` }}
-      >
+      <MqttSubscriptions topics={{ showRemoteConsoleSetting: `N/${portalId}/settings/0/Settings/System/VncLocal` }}>
         {topics => {
           return (
             <Header
-              showRemoteConsoleSetting={true}
+              showRemoteConsoleSetting={!!topics.showRemoteConsoleSetting}
               isConnected={isConnected}
               handleRemoteConsoleButtonClicked={handleRemoteConsoleButtonClicked}
               currentView={currentView}
