@@ -51,7 +51,7 @@ for (let [device, resolutions] of Object.entries(deviceResolutions)) {
       beforeEach(() => {
         cy.viewport(width, height)
         // Wait for the app to react to the viewport changes
-        cy.wait(1)
+        cy.wait(100)
       })
 
       it("Successfully opens page", () => {
