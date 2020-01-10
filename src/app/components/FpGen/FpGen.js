@@ -79,7 +79,7 @@ const FpGen = ({
   const showAsList = phases > 1
 
   return (
-    <HeaderView
+    <ListView
       icon={require("../../../images/icons/fp_generator.svg")}
       title="Generator"
       subTitle={getState(statusCode)}
@@ -123,7 +123,7 @@ const FpGen = ({
           Off
         </SelectorButton>
       </div>
-    </HeaderView>
+    </ListView>
   )
 }
 
