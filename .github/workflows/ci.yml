@@ -1,13 +1,28 @@
 name: Continous Integration Workflow
-on:
-  push:
-    tags:        
-      - ^\d+\.\d*.?\d*$
-      
+on: [push]
+
 jobs:
   build:
    runs-on: ubuntu-latest
    steps:
-   - uses: ./.github/workflows/ci
-   - name: Archive bundle
-     run: tar -zcvf venus-html5-app.tar.gz dist/
+   - uses: actions/checkout@v2
+   - name: Setup Node.js 12.x
+     uses: actions/setup-node@master
+     with:
+      node-version: 12.x
+   - name: Node modules cache
+     uses: actions/cache@v1
+     with:
+      path: ~/.npm
+      key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+   - name: Install the dependecies
+     run: npm ci
+   - name: Build the bundle
+     run: npm run compile
+   - name: Serve the application
+     run: npm run serve:ci &
+   - name: Run the Venus simulation
+     run: |
+      docker run -d --rm -p 9001:9001 -p 1883:1883 -p 3000:3000 -p 8080:80 --name venus-docker victronenergy/venus-docker:latest /root/run_with_simulation.sh z
+   - name: Run unit and E2E tests
+     run: npm run test:ci
