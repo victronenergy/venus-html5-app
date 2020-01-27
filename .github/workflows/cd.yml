@@ -1,13 +1,13 @@
 name: Continous Deployment Releases Workflow
 on:
   push:
-    tags:        
+    tags:
       - ^\d+\.\d*.?\d*$
-      
 jobs:
   build:
-   runs-on: ubuntu-latest
-   steps:
-   - uses: ./.github/workflows/ci
-   - name: Archive bundle
-     run: tar -zcvf venus-html5-app.tar.gz dist/
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/workflows/ci
+      - name: Archive bundle
+        run: tar -zcvf venus-html5-app.tar.gz dist/
+
