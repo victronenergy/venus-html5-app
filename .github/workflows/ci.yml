@@ -28,9 +28,7 @@ jobs:
           /root/run_with_simulation.sh z
       - name: Run unit and E2E tests
         run: npm run test:ci
-      - name: Upload test artifacts
       - name: Upload Cypress Screenshots
-        id: cypress-screenshots
         uses: actions/upload-artifact@v1
         if: always()
         with:
@@ -38,7 +36,6 @@ jobs:
           path: cypress/screenshots
       - name: Upload Cypress Videos
         uses: actions/upload-artifact@v1
-        id: cypress-videos
         if: always()
         with:
           name: cypress-videos
