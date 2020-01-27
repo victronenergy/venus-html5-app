@@ -137,7 +137,7 @@ To run the ui tests in CI-style use `npm run test:e2e`
 
 ## 4. Making a release
 
-Whenever a new tag is created, Travis CI will build the app, archive the built files and upload them as `venus-html5-app.tar.gz` to the Github Release associated with the tag.
+Whenever a new tag is created, GitHub Actions will build the app, archive the built files and upload them as `venus-html5-app.tar.gz` to the Github Release associated with the tag.
 The app can then be downloaded from `https://github.com/victronenergy/venus-html5-app/releases/download/<TAG_NAME>/venus-html5-app.tar.gz`.
 The build script expects the tags to follow semantic versioning (e.g. `1.2.3`, `1.2`, etc.) and will not trigger for tags that don't follow this convention (e.g. `v1.0`, `test`).
 
