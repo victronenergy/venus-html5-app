@@ -29,12 +29,15 @@ jobs:
       - name: Run unit and E2E tests
         run: npm run test:ci
       - name: Upload test artifacts
-      - uses: actions/upload-artifact@v1
+      - name: Upload Cypress Screenshots
+        uses: actions/upload-artifact@v1
         if: always()
         with:
           name: cypress-screenshots
           path: cypress/screenshots
-      - uses: actions/upload-artifact@v1
+      - name: Upload Cypress Videos
+        uses: actions/upload-artifact@v1
+        id: cypress
         if: always()
         with:
           name: cypress-videos
