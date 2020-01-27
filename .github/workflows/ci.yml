@@ -1,0 +1,13 @@
+name: Continous Integration Workflow
+on:
+  push:
+    tags:        
+      - ^\d+\.\d*.?\d*$
+      
+jobs:
+  build:
+   runs-on: ubuntu-latest
+   steps:
+   - uses: ./.github/workflows/ci
+   - name: Archive bundle
+     run: tar -zcvf venus-html5-app.tar.gz dist/
