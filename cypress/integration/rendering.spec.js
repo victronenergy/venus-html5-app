@@ -80,6 +80,7 @@ for (let [device, resolutions] of Object.entries(deviceResolutions)) {
         it("main div", () => {
           // Wait for the app to react to the viewport changes
           cy.wait(2000)
+          cy.screenshot()
           cy.get("main > div").isWithinViewport(width, height)
         })
       })
