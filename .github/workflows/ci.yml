@@ -1,6 +1,9 @@
 name: Continous Integration Workflow
 on:
-  - push
+  push:
+    branches: 
+      - '**'
+
 jobs:
   build:
     runs-on: ubuntu-latest
