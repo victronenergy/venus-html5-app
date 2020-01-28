@@ -1,6 +1,6 @@
 name: Continous Deployment Releases Workflow
 on:
-  push:
+  create:
     tags:
       - ^\d+\.\d*.?\d*$
 jobs:
