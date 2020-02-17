@@ -7,8 +7,7 @@ import Logger from "../utils/logger"
 export const STATUS = {
   CONNECTING: "connecting",
   CONNECTED: "connected",
-  DISCONNECTED: "disconnected",
-  RECONNECTING: "reconnecting"
+  DISCONNECTED: "disconnected"
 }
 
 class MqttClientProvider extends Component {
@@ -16,7 +15,6 @@ class MqttClientProvider extends Component {
     client: null,
     error: null,
     status: STATUS.CONNECTING,
-    hasFailedToConnect: false,
     messages: {}
   }
   topicsSubscribed = new Set()
@@ -38,30 +36,20 @@ class MqttClientProvider extends Component {
     this.safeSetState({ client })
 
     client.stream.on("error", error => {
-      this.safeSetState({ error })
+      this.safeSetState({ error, status: STATUS.DISCONNECTED })
     })
 
     client.on("error", error => {
-      this.safeSetState({ error })
-    })
-
-    client.on("connect", () => {
-      this.safeSetState({ status: STATUS.CONNECTED })
+      this.safeSetState({ error, status: STATUS.DISCONNECTED })
     })
 
     client.on("offline", () => {
-      this.safeSetState({ status: STATUS.DISCONNECTED })
-      this.topicsSubscribed = new Set()
+      this.safeSetState({ error: true, status: STATUS.DISCONNECTED })
     })
 
-    client.on("reconnect", () => {
-      const previousStatus = this.state.status
-      this.safeSetState({ status: STATUS.RECONNECTING })
-
-      if (previousStatus === STATUS.CONNECTING && this.state.error) {
-        client.end()
-        this.safeSetState({ hasFailedToConnect: true })
-      }
+    client.on("connect", () => {
+      this.topicsSubscribed = new Set()
+      this.safeSetState({ error: null, status: STATUS.CONNECTED })
     })
 
     client.on("message", (topic, message) => {
