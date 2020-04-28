@@ -8,14 +8,14 @@ import { VIEWS } from "../../utils/constants"
 import "./Header.scss"
 
 const Header = props => {
-  const { isConnected, showRemoteConsoleSetting, currentView, handleRemoteConsoleButtonClicked, isMobileDevice } = props
+  const { isConnected, showRemoteConsoleSetting, currentView, handleRemoteConsoleButtonClicked } = props
   return (
     <header>
       <img src={require("../../../images/icons/logo.png")} className="logo" />
       <div className="connection">
         {showRemoteConsoleSetting && (
           <button
-            className={classnames("remote-console-button", "text", "text--small", { "mobile-view": isMobileDevice })}
+            class="remote-console-button text text--small"
             onClick={handleRemoteConsoleButtonClicked}
             disabled={!isConnected}
           >
@@ -29,7 +29,7 @@ const Header = props => {
 
 class HeaderWithData extends Component {
   render() {
-    const { portalId, isConnected, currentView, handleRemoteConsoleButtonClicked, isMobileDevice } = this.props
+    const { portalId, isConnected, currentView, handleRemoteConsoleButtonClicked } = this.props
     return (
       <MqttSubscriptions topics={{ showRemoteConsoleSetting: `N/${portalId}/settings/0/Settings/System/VncLocal` }}>
         {topics => {
@@ -39,7 +39,6 @@ class HeaderWithData extends Component {
               isConnected={isConnected}
               handleRemoteConsoleButtonClicked={handleRemoteConsoleButtonClicked}
               currentView={currentView}
-              isMobileDevice={isMobileDevice}
             />
           )
         }}
