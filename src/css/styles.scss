@@ -44,8 +44,12 @@ main {
   align-items: center;
   justify-content: center;
 
-  overflow-y: scroll;
-  overflow-x: hidden;
+  @media #{$portrait}, #{$small}  {
+    flex: 1;
+    align-items: flex-start;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
 }
 
 #app {
@@ -77,11 +81,8 @@ main {
     padding: 0;
   }
 
-  @media #{$narrow-portrait} {
+  @media #{$portrait} {
     flex-wrap: nowrap;
-  }
-  @media (orientation: landscape) {
-    flex-direction: row;
   }
 }
 
