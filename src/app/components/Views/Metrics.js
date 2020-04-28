@@ -53,7 +53,7 @@ export default class Metrics extends Component {
   }
 
   componentDidUpdate() {
-    if (!this.props.mobile && this.metricsRef.current) {
+    if (this.metricsRef.current) {
       const metrics = [...this.metricsRef.current.children]
       const cols = getRequiredCols(metrics)
       if (this.state.layoutCols !== cols) this.setState({ layoutCols: cols })
@@ -84,8 +84,7 @@ export default class Metrics extends Component {
     return (
       <div
         className={classnames("metrics-container", {
-          "metrics-container--single-col": this.state.layoutCols === 1,
-          "metrics-container--mobile": this.props.mobile
+          "metrics-container--single-col": this.state.layoutCols === 1
         })}
         ref={this.metricsRef}
         style={style}

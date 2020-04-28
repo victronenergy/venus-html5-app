@@ -43,6 +43,7 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow-y: scroll;
 }
 
 #app {
@@ -59,7 +60,7 @@ main {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
 
   @media all and (max-width: 1340px) {
@@ -73,9 +74,7 @@ main {
   @media #{$narrow-portrait}, #{$tiny} {
     padding: 0;
   }
-}
 
-.metrics-container--mobile {
   @media #{$narrow-portrait} {
     flex-wrap: nowrap;
   }
@@ -84,13 +83,6 @@ main {
   }
 }
 
-
-
-.scrollable {
-  flex: 1;
-  align-items: start;
-  overflow-y: scroll;
-}
 
 .metric {
   padding: $topBottomPadding $rightLeftPadding;

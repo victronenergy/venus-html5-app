@@ -84,7 +84,7 @@ header {
   cursor: pointer;
 }
 
-.remote-console-button:not(.mobile-view) {
+.remote-console-button {
   @media #{$hide-remote-console-breakpoint} {
     display: none;
   }
