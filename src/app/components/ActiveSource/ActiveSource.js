@@ -46,7 +46,7 @@ const getSourceSubtitle = (active, phases, source) => {
 
 const ActiveSource = ({ portalId, inverterChargerDeviceId, source, active, phases }) => {
   const icon = activeSourceIcon[source]
-  const title = activeSourceLabel[source]
+  const title = "Active Input: " + activeSourceLabel[source]
   const subTitle = getSourceSubtitle(active, phases, source)
   return (
     <div className="metric metric__active-source">
