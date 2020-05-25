@@ -106,8 +106,8 @@ export default class Metrics extends Component {
         <Solar {...commonProps} />
         <Chargers {...commonProps} />
         <Inverters {...commonProps} />
-        {/* <FpGen {...commonProps} /> */}
         <Generator {...commonProps} />
+        {/* <FpGen {...commonProps} /> */}
       </div>
     )
   }

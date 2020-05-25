@@ -1,5 +1,23 @@
 @import "../ListView/ListView.scss";
 
-.metric__generator {
+.generator {
+  flex-direction: column;
+  height: auto;
+}
+
+.generator__mode-selector {
+  margin-top: $metricHeaderMarginBottom;
+  height: 45px;
+  width: 100%;
+  display: flex;
   justify-content: space-between;
+}
+
+.generator__mode-selector > .selector-button {
+  &:not(:first-child) {
+    margin-left: 10px;
+  }
+
+  padding-left: 0;
+  padding-right: 0;
 }

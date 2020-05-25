@@ -5,21 +5,39 @@ import HeaderView from "../HeaderView/HeaderView"
 import HidingContainer from "../HidingContainer"
 import { ListView } from "../ListView"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
+import MqttWriteValue from "../../mqtt/MqttWriteValue"
 import MetricValues from "../MetricValues"
+import SelectorButton from "../SelectorButton"
 
-import { FISCHER_PANDA_GENSET_PRODUCT_ID } from "../../utils/constants"
+import {
+  FISCHER_PANDA_GENSET_PRODUCT_ID,
+  FISCHER_PANDA_GENSET_AUTOSTART,
+  GENERATOR_START_STOP,
+  RELAY_FUNCTION
+} from "../../utils/constants"
 
 import "./Generator.scss"
 
 const getTopics = portalId => {
   return {
     productId: `N/${portalId}/system/0/Ac/Genset/ProductId`,
+    relayFunction: `N/${portalId}/settings/0/Settings/Relay/Function`,
     phases: `N/${portalId}/system/0/Ac/Genset/NumberOfPhases`,
-    statusCode: `N/${portalId}/genset/0/StatusCode`
+    statusCode: `N/${portalId}/genset/0/StatusCode`,
+    autoStart: `N/${portalId}/genset/0/AutoStart`
   }
 }
 
-const getGeneratorTitle = productId => {
+const getStartStopTopic = (portalId, productId, relayFunction) => {
+  switch (productId) {
+    case FISCHER_PANDA_GENSET_PRODUCT_ID:
+      return `W/${portalId}/genset/0/Start`
+    default:
+      return relayFunction === RELAY_FUNCTION.GENERATOR_START_STOP ? `W/${portalId}/generator/0/startstop0` : undefined
+  }
+}
+
+const getTitle = productId => {
   switch (productId) {
     case FISCHER_PANDA_GENSET_PRODUCT_ID:
       return "Fischer Panda Generator"
@@ -28,7 +46,7 @@ const getGeneratorTitle = productId => {
   }
 }
 
-const getGeneratorIcon = productId => {
+const getIcon = productId => {
   switch (productId) {
     case FISCHER_PANDA_GENSET_PRODUCT_ID:
       return require("../../../images/icons/fp_generator.svg")
@@ -37,7 +55,7 @@ const getGeneratorIcon = productId => {
   }
 }
 
-const getSourceSubtitle = (productId, phases, statusCode) => {
+const getSubtitle = (productId, phases, statusCode) => {
   switch (productId) {
     case FISCHER_PANDA_GENSET_PRODUCT_ID:
       return getGensetState(statusCode)
@@ -69,22 +87,16 @@ function getGensetState(statusCode) {
   }
 }
 
-const getHasValues = productId => {
-  switch (productId) {
-    case FISCHER_PANDA_GENSET_PRODUCT_ID:
-      return true
-    default:
-      return false
-  }
-}
+const Generator = ({ portalId, productId, phases, statusCode, autoStart, onModeSelected }) => {
+  const icon = getIcon(productId)
+  const title = getTitle(productId)
+  const subTitle = getSubtitle(productId, phases, statusCode)
+  const hasValues = productId === FISCHER_PANDA_GENSET_PRODUCT_ID
+  const isAutoStartEnabled = autoStart === FISCHER_PANDA_GENSET_AUTOSTART.ENABLED
+  console.log("Autostart", autoStart)
 
-const Generator = ({ portalId, productId, phases, statusCode }) => {
-  const icon = getGeneratorIcon(productId)
-  const title = getGeneratorTitle(productId)
-  const subTitle = getSourceSubtitle(productId, phases, statusCode)
-  const hasValues = getHasValues(productId)
   return (
-    <div className="metric metric__generator">
+    <div className="metric generator">
       {phases > 1 ? (
         <ListView icon={icon} title={title} subTitle={subTitle} child>
           {hasValues && <GeneratorValues portalId={portalId} threePhase={true} />}
@@ -99,6 +111,18 @@ const Generator = ({ portalId, productId, phases, statusCode }) => {
           )
         </HeaderView>
       )}
+      <div className="generator__mode-selector">
+        <SelectorButton
+          disabled={!isAutoStartEnabled}
+          active={statusCode === 8}
+          onClick={() => onModeSelected(GENERATOR_START_STOP.STOP)}
+        >
+          On
+        </SelectorButton>
+        <SelectorButton active={statusCode < 8} onClick={() => onModeSelected(GENERATOR_START_STOP.START)}>
+          Off
+        </SelectorButton>
+      </div>
     </div>
   )
 }
@@ -110,9 +134,15 @@ class GeneratorWithData extends Component {
       <MqttSubscriptions topics={getTopics(portalId)}>
         {topics =>
           topics.productId && (
-            <HidingContainer metricsRef={metricsRef} key={topics.productId}>
-              <Generator portalId={portalId} {...topics} />
-            </HidingContainer>
+            <MqttWriteValue topic={getStartStopTopic(topics.portalId, topics.productId, topics.relayFunction)}>
+              {(_, updateMode) => {
+                return (
+                  <HidingContainer metricsRef={metricsRef} key={topics.productId}>
+                    <Generator portalId={portalId} {...topics} onModeSelected={updateMode} />
+                  </HidingContainer>
+                )
+              }}
+            </MqttWriteValue>
           )
         }
       </MqttSubscriptions>
