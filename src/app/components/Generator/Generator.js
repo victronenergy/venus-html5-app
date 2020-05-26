@@ -21,8 +21,8 @@ import "./Generator.scss"
 const getTopics = portalId => {
   return {
     productId: `N/${portalId}/system/0/Ac/Genset/ProductId`,
-    relayFunction: `N/${portalId}/settings/0/Settings/Relay/Function`,
     phases: `N/${portalId}/system/0/Ac/Genset/NumberOfPhases`,
+    relayFunction: `N/${portalId}/settings/0/Settings/Relay/Function`,
     statusCode: `N/${portalId}/genset/0/StatusCode`,
     autoStart: `N/${portalId}/genset/0/AutoStart`
   }
@@ -92,8 +92,8 @@ const Generator = ({ portalId, productId, phases, statusCode, autoStart, onModeS
   const title = getTitle(productId)
   const subTitle = getSubtitle(productId, phases, statusCode)
   const hasValues = productId === FISCHER_PANDA_GENSET_PRODUCT_ID
-  const isAutoStartEnabled = autoStart === FISCHER_PANDA_GENSET_AUTOSTART.ENABLED
-  console.log("Autostart", autoStart)
+  const hasAutoStart = productId === FISCHER_PANDA_GENSET_PRODUCT_ID
+  const isAutoStartDisabled = autoStart === FISCHER_PANDA_GENSET_AUTOSTART.DISABLED
 
   return (
     <div className="metric generator">
@@ -113,16 +113,22 @@ const Generator = ({ portalId, productId, phases, statusCode, autoStart, onModeS
       )}
       <div className="generator__mode-selector">
         <SelectorButton
-          disabled={!isAutoStartEnabled}
+          disabled={hasAutoStart && isAutoStartDisabled}
           active={statusCode === 8}
-          onClick={() => onModeSelected(GENERATOR_START_STOP.STOP)}
+          onClick={() => onModeSelected(GENERATOR_START_STOP.START)}
         >
           On
         </SelectorButton>
-        <SelectorButton active={statusCode < 8} onClick={() => onModeSelected(GENERATOR_START_STOP.START)}>
+        <SelectorButton active={statusCode < 8} onClick={() => onModeSelected(GENERATOR_START_STOP.STOP)}>
           Off
         </SelectorButton>
       </div>
+      {hasAutoStart && isAutoStartDisabled && (
+        <div className="generator__autostart-msg">
+          AutoStart functionality is currently disabled, enable it on the genset panel in order to control the genset
+          from this panel.
+        </div>
+      )}
     </div>
   )
 }
@@ -134,7 +140,7 @@ class GeneratorWithData extends Component {
       <MqttSubscriptions topics={getTopics(portalId)}>
         {topics =>
           topics.productId && (
-            <MqttWriteValue topic={getStartStopTopic(topics.portalId, topics.productId, topics.relayFunction)}>
+            <MqttWriteValue topic={getStartStopTopic(portalId, topics.productId, topics.relayFunction)}>
               {(_, updateMode) => {
                 return (
                   <HidingContainer metricsRef={metricsRef} key={topics.productId}>

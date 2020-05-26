@@ -5,19 +5,25 @@
   height: auto;
 }
 
+.generator__autostart-msg {
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: $color-gray;
+}
+
 .generator__mode-selector {
   margin-top: $metricHeaderMarginBottom;
   height: 45px;
   width: 100%;
   display: flex;
   justify-content: space-between;
-}
 
-.generator__mode-selector > .selector-button {
-  &:not(:first-child) {
-    margin-left: 10px;
+  > .selector-button {
+    &:not(:first-child) {
+      margin-left: 10px;
+    }
+  
+    padding-left: 0;
+    padding-right: 0;
   }
-
-  padding-left: 0;
-  padding-right: 0;
 }
