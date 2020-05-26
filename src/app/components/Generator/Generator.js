@@ -139,7 +139,7 @@ class GeneratorWithData extends Component {
     return (
       <MqttSubscriptions topics={getTopics(portalId)}>
         {topics =>
-          topics.productId && (
+          topics.productId === FISCHER_PANDA_GENSET_PRODUCT_ID && ( // only render for Fisher Panda Gensets for now
             <MqttWriteValue topic={getStartStopTopic(portalId, topics.productId, topics.relayFunction)}>
               {(_, updateMode) => {
                 return (
