@@ -124,7 +124,7 @@ const Generator = ({ portalId, productId, phases, statusCode, autoStart, onModeS
         </SelectorButton>
       </div>
       {hasAutoStart && isAutoStartDisabled && (
-        <div className="generator__autostart-msg">
+        <div className="generator__autostart-msg text--smaller text--opaque">
           AutoStart functionality is currently disabled, enable it on the genset panel in order to control the genset
           from this panel.
         </div>
