@@ -9,8 +9,7 @@ import DcLoads from "../DcLoads"
 import Inverters from "../Inverters"
 import { InverterCharger } from "../InverterCharger"
 import Solar from "../Solar"
-import FpGen from "../FpGen"
-import Generator from "../Generator"
+import Generators from "../Generators"
 
 const getRequiredCols = metrics => {
   if (metrics.length < 2) return 1
@@ -105,8 +104,7 @@ export default class Metrics extends Component {
         <Solar {...commonProps} />
         <Chargers {...commonProps} />
         <Inverters {...commonProps} />
-        <Generator {...commonProps} />
-        {/* <FpGen {...commonProps} /> */}
+        <Generators {...commonProps} />
       </div>
     )
   }
