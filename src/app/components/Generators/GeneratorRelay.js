@@ -2,10 +2,11 @@ import React, { Component } from "react"
 
 import HeaderView from "../HeaderView/HeaderView"
 import HidingContainer from "../HidingContainer"
-import { ListView } from "../ListView"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 import MqttWriteValue from "../../mqtt/MqttWriteValue"
 import SelectorButton from "../SelectorButton"
+
+import { GENERATOR_START_STOP } from "../../utils/constants"
 
 import "./Generator.scss"
 
