@@ -9,7 +9,11 @@ import MqttWriteValue from "../../mqtt/MqttWriteValue"
 import MetricValues from "../MetricValues"
 import SelectorButton from "../SelectorButton"
 
-import { FISCHER_PANDA_GENSET_PRODUCT_ID, FISCHER_PANDA_GENSET_AUTOSTART } from "../../utils/constants"
+import {
+  FISCHER_PANDA_GENSET_PRODUCT_ID,
+  FISCHER_PANDA_GENSET_AUTOSTART,
+  GENERATOR_START_STOP
+} from "../../utils/constants"
 
 import "./Generator.scss"
 
