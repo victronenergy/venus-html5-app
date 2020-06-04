@@ -12,24 +12,48 @@ import "./Generator.scss"
 
 const getTopics = portalId => {
   return {
-    polarity: `N/${portalId}/settings/0/Settings/Relay/Polarity`
+    statusCode: `N/${portalId}/generator/0/Generator0/State`,
+    manualStart: `N/${portalId}/generator/0/Generator0/ManualStart`,
+    autoStart: `N/${portalId}/settings/0/Settings/Generator0/AutoStartEnabled`
   }
 }
 
-const GeneratorRelay = ({ polarity, onModeSelected }) => {
+function getGeneratorState(statusCode) {
+  switch (statusCode) {
+    case 0:
+      return "Stopped"
+    case 1:
+      return "Running"
+    case 10:
+      return "Error"
+    default:
+      return "Not available"
+  }
+}
+
+const GeneratorRelay = ({ statusCode, manualStart, autoStart, onManualModeSelected, onAutoModeSelected }) => {
   const icon = require("../../../images/icons/generator.svg")
   const title = "Generator Relay"
-  const subTitle = null
+  const subTitle = getGeneratorState(statusCode)
 
   return (
     <div className="metric generator">
       <HeaderView icon={icon} title={title} subTitle={subTitle} child />
       <div className="generator__mode-selector">
-        <SelectorButton active={!!polarity} onClick={() => onModeSelected(GENERATOR_START_STOP.START)}>
+        <SelectorButton
+          active={manualStart && !autoStart}
+          onClick={() => onManualModeSelected(GENERATOR_START_STOP.START)}
+        >
           On
         </SelectorButton>
-        <SelectorButton active={!polarity} onClick={() => onModeSelected(GENERATOR_START_STOP.STOP)}>
+        <SelectorButton
+          active={!manualStart && !autoStart}
+          onClick={() => onManualModeSelected(GENERATOR_START_STOP.STOP)}
+        >
           Off
+        </SelectorButton>
+        <SelectorButton active={autoStart} onClick={() => onAutoModeSelected(GENERATOR_START_STOP.AUTO_ON)}>
+          Auto start/stop
         </SelectorButton>
       </div>
     </div>
@@ -38,16 +62,27 @@ const GeneratorRelay = ({ polarity, onModeSelected }) => {
 
 class GeneratorRelayWithData extends Component {
   render() {
-    const { portalId, startStopTopic, metricsRef } = this.props
+    const { portalId, manualStartStopTopic, autoStartStopTopic, metricsRef } = this.props
     return (
       <MqttSubscriptions topics={getTopics(portalId)}>
         {topics => (
-          <MqttWriteValue topic={startStopTopic}>
-            {(_, updateMode) => {
+          <MqttWriteValue topic={autoStartStopTopic}>
+            {(_, updateAutoMode) => {
               return (
-                <HidingContainer metricsRef={metricsRef} key="generator-relay">
-                  <GeneratorRelay portalId={portalId} {...topics} onModeSelected={updateMode} />
-                </HidingContainer>
+                <MqttWriteValue topic={manualStartStopTopic}>
+                  {(_, updateManualMode) => {
+                    return (
+                      <HidingContainer metricsRef={metricsRef} key="generator-relay">
+                        <GeneratorRelay
+                          portalId={portalId}
+                          {...topics}
+                          onManualModeSelected={updateManualMode}
+                          onAutoModeSelected={updateAutoMode}
+                        />
+                      </HidingContainer>
+                    )
+                  }}
+                </MqttWriteValue>
               )
             }}
           </MqttWriteValue>

@@ -70,14 +70,9 @@ export const FISCHER_PANDA_GENSET_AUTOSTART = {
 
 export const GENERATOR_START_STOP = {
   STOP: 0,
-  START: 1
-}
-
-export const RELAY_FUNCTION = {
-  ALARM: 0,
-  GENERATOR_START_STOP: 1,
-  TANK_PUMP: 2,
-  MANUAL: 3
+  START: 1,
+  AUTO_ON: 1,
+  AUTO_OFF: 0
 }
 
 export const VIEWS = {
