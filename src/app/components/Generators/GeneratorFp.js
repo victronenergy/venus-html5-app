@@ -23,10 +23,8 @@ const getTopics = portalId => {
     productId: `N/${portalId}/genset/0/ProductId`,
     productName: `N/${portalId}/genset/0/ProductName`,
     phases: `N/${portalId}/genset/0/NrOfPhases`,
-    autoStart: `N/${portalId}/genset/0/AutoStart`,
-    coolantTemp: `N/${portalId}/genset/0/Engine/CoolantTemperature`,
-    windingTemp: `N/${portalId}/genset/0/Engine/WindingTemperature`,
-    exhaustTemp: `N/${portalId}/genset/0/Engine/ExaustTemperature`
+    gensetAutoStart: `N/${portalId}/genset/0/AutoStart`,
+    autoStart: `N/${portalId}/settings/0/Settings/Services/FischerPandaAutoStartStop`
   }
 }
 
@@ -62,11 +60,21 @@ function getGensetState(statusCode) {
   }
 }
 
-const GeneratorFp = ({ portalId, productId, productName, phases, statusCode, autoStart, onModeSelected }) => {
+const GeneratorFp = ({
+  portalId,
+  productId,
+  productName,
+  phases,
+  statusCode,
+  gensetAutoStart,
+  autoStart,
+  onManualModeSelected,
+  onAutoModeSelected
+}) => {
   const icon = getIcon(productId)
   const title = productName || "Genset"
   const subTitle = getGensetState(statusCode)
-  const isAutoStartDisabled = autoStart === FISCHER_PANDA_GENSET_AUTOSTART.DISABLED
+  const isAutoStartDisabled = gensetAutoStart === FISCHER_PANDA_GENSET_AUTOSTART.DISABLED
 
   return (
     <div className="metric generator">
@@ -87,12 +95,15 @@ const GeneratorFp = ({ portalId, productId, productName, phases, statusCode, aut
         <SelectorButton
           disabled={isAutoStartDisabled}
           active={statusCode === 8}
-          onClick={() => onModeSelected(GENERATOR_START_STOP.START)}
+          onClick={() => onManualModeSelected(GENERATOR_START_STOP.START)}
         >
           On
         </SelectorButton>
-        <SelectorButton active={statusCode < 8} onClick={() => onModeSelected(GENERATOR_START_STOP.STOP)}>
+        <SelectorButton active={statusCode < 8} onClick={() => onManualModeSelected(GENERATOR_START_STOP.STOP)}>
           Off
+        </SelectorButton>
+        <SelectorButton active={autoStart} onClick={() => onAutoModeSelected(GENERATOR_START_STOP.AUTO_ON)}>
+          Auto start/stop
         </SelectorButton>
       </div>
       {isAutoStartDisabled && (
@@ -107,16 +118,27 @@ const GeneratorFp = ({ portalId, productId, productName, phases, statusCode, aut
 
 class GeneratorFpWithData extends Component {
   render() {
-    const { portalId, startStopTopic, metricsRef } = this.props
+    const { portalId, manualStartStopTopic, autoStartStopTopic, metricsRef } = this.props
     return (
       <MqttSubscriptions topics={getTopics(portalId)}>
         {topics => (
-          <MqttWriteValue topic={startStopTopic}>
-            {(_, updateMode) => {
+          <MqttWriteValue topic={autoStartStopTopic}>
+            {(_, updateAutoMode) => {
               return (
-                <HidingContainer metricsRef={metricsRef} key={topics.productId}>
-                  <GeneratorFp portalId={portalId} {...topics} onModeSelected={updateMode} />
-                </HidingContainer>
+                <MqttWriteValue topic={manualStartStopTopic}>
+                  {(_, updateManualMode) => {
+                    return (
+                      <HidingContainer metricsRef={metricsRef} key="generator-fp">
+                        <GeneratorFp
+                          portalId={portalId}
+                          {...topics}
+                          onManualModeSelected={updateManualMode}
+                          onAutoModeSelected={updateAutoMode}
+                        />
+                      </HidingContainer>
+                    )
+                  }}
+                </MqttWriteValue>
               )
             }}
           </MqttWriteValue>
