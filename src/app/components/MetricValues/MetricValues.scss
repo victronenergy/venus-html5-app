@@ -2,9 +2,14 @@
 
 .metric__values {
   display: flex;
+  flex-wrap: wrap;
 
   color: $color-white;
   font-size: 1.1rem;
+
+  .metric__values__temperatures {
+    flex-basis: 100%;
+  }
 }
 
 .metrics__left {
@@ -29,6 +34,12 @@
 .value__phase {
   text-transform: uppercase;
   font-size: 0.8rem;
+  color: $color-gray;
+}
+
+.value__temperature {
+  font-size: 0.8rem;
+  margin-right: 0;
   color: $color-gray;
 }
 
