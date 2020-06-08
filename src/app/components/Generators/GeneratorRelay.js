@@ -33,7 +33,7 @@ function getGeneratorState(statusCode) {
 
 const GeneratorRelay = ({ statusCode, manualStart, autoStart, onManualModeSelected, onAutoModeSelected }) => {
   const icon = require("../../../images/icons/generator.svg")
-  const title = "Generator Relay"
+  const title = "Generator"
   const subTitle = getGeneratorState(statusCode)
 
   return (
