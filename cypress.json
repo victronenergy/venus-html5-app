@@ -3,5 +3,12 @@
   "video": true,
   "viewportWidth": 1280,
   "viewportHeight": 720,
-  "projectId": "gho3jq"
+  "projectId": "gho3jq",
+  "reporter": "mochawesome",
+  "reporterOptions": {
+    "reportDir": "cypress/results",
+    "overwrite": false,
+    "html": false,
+    "json": true
+  }
 }
