@@ -28,12 +28,16 @@ jobs:
           /root/run_with_simulation.sh z
       - name: Run unit and E2E tests
         run: npm run test:ci
-      - name: Upload Cypress Screenshots
+      - name: Merge E2E test results
+        run: npx mochawesome-merge "cypress/results/*.json" > mochawesome.json
+      - name: Generate E2E reports
+        run: npx marge mochawesome.json        
+      - name: Upload E2E Reports
         uses: actions/upload-artifact@v1
         if: always()
         with:
-          name: cypress-screenshots
-          path: cypress/screenshots
+          name: mochawesome-report
+          path: mochawesome-report
       - name: Upload Cypress Screenshots
         uses: actions/upload-artifact@v1
         if: always()

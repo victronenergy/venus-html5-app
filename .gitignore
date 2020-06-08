@@ -4,3 +4,6 @@ dist/
 .DS_Store
 cypress/screenshots
 cypress/videos
+cypress/results
+mochawesome.json
+mochawesome-report
