@@ -94,12 +94,21 @@ const GeneratorFp = ({
       <div className="generator__mode-selector">
         <SelectorButton
           disabled={isAutoStartDisabled}
-          active={statusCode === 8}
-          onClick={() => onManualModeSelected(GENERATOR_START_STOP.START)}
+          active={statusCode === 8 && !autoStart}
+          onClick={() => {
+            onAutoModeSelected(GENERATOR_START_STOP.AUTO_OFF)
+            onManualModeSelected(GENERATOR_START_STOP.START)
+          }}
         >
           On
         </SelectorButton>
-        <SelectorButton active={statusCode < 8} onClick={() => onManualModeSelected(GENERATOR_START_STOP.STOP)}>
+        <SelectorButton
+          active={statusCode < 8 && !autoStart}
+          onClick={() => {
+            onAutoModeSelected(GENERATOR_START_STOP.AUTO_OFF)
+            onManualModeSelected(GENERATOR_START_STOP.STOP)
+          }}
+        >
           Off
         </SelectorButton>
         <SelectorButton active={autoStart} onClick={() => onAutoModeSelected(GENERATOR_START_STOP.AUTO_ON)}>
