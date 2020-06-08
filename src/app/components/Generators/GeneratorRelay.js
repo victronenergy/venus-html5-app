@@ -42,13 +42,19 @@ const GeneratorRelay = ({ statusCode, manualStart, autoStart, onManualModeSelect
       <div className="generator__mode-selector">
         <SelectorButton
           active={manualStart && !autoStart}
-          onClick={() => onManualModeSelected(GENERATOR_START_STOP.START)}
+          onClick={() => {
+            onAutoModeSelected(GENERATOR_START_STOP.AUTO_OFF)
+            onManualModeSelected(GENERATOR_START_STOP.START)
+          }}
         >
           On
         </SelectorButton>
         <SelectorButton
           active={!manualStart && !autoStart}
-          onClick={() => onManualModeSelected(GENERATOR_START_STOP.STOP)}
+          onClick={() => {
+            onAutoModeSelected(GENERATOR_START_STOP.AUTO_OFF)
+            onManualModeSelected(GENERATOR_START_STOP.STOP)
+          }}
         >
           Off
         </SelectorButton>
