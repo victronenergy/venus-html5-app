@@ -80,9 +80,7 @@ const GeneratorFp = ({
     <div className="metric generator">
       {phases > 1 ? (
         <ListView icon={icon} title={title} subTitle={subTitle} child>
-          <MetricValues>
-            <GensetValues portalId={portalId} threePhase={true} />
-          </MetricValues>
+          <GensetValues portalId={portalId} threePhase={true} />
         </ListView>
       ) : (
         <HeaderView icon={icon} title={title} subTitle={subTitle} child>
