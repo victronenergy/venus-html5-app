@@ -15,7 +15,7 @@ const Header = props => {
       <div className="connection">
         {showRemoteConsoleSetting && (
           <button
-            class="remote-console-button text text--small"
+            className="remote-console-button text text--small"
             onClick={handleRemoteConsoleButtonClicked}
             disabled={!isConnected}
           >
