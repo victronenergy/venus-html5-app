@@ -1,3 +1,5 @@
+const addContext = require("mochawesome/addContext")
+
 const halfVerticalSplit = (w, h) => {
   return [w / 2, h]
 }
@@ -80,7 +82,9 @@ for (let [device, resolutions] of Object.entries(deviceResolutions)) {
         it("main div", () => {
           // Wait for the app to react to the viewport changes
           cy.wait(2000)
-          cy.screenshot()
+          cy.screenshot(`${device} resolution ${width}x${height}`)
+          const imagePath = `screenshots/${cy.spec.name}/${device} resolution ${width}x${height}.png`
+          addContext({ test }, imagePath)
           cy.get("main > div").isWithinViewport(width, height)
         })
       })

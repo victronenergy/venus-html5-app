@@ -22,8 +22,10 @@ const MAX_TEST_NAME_LENGTH = 220
 
 Cypress.on("test:after:run", (test, runnable) => {
   const fullTestName = getFullTestName(runnable)
-  const imagePath = `screenshots/${Cypress.spec.name}/${fullTestName}${test.state === "failed" ? " (failed)" : ""}.png`
-  addContext({ test }, imagePath)
+  if (test.state === "failed") {
+    const imagePath = `screenshots/${Cypress.spec.name}/${fullTestName} (failed).png`
+    addContext({ test }, imagePath)
+  }
   addContext({ test }, `videos/${Cypress.spec.name}.mp4`)
 })
 
