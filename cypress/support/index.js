@@ -16,5 +16,29 @@
 // Import commands.js using ES2015 syntax:
 import "./commands"
 
-// Alternatively you can use CommonJS syntax:
-// require('./commands')
+const addContext = require("mochawesome/addContext")
+
+const MAX_TEST_NAME_LENGTH = 220
+
+Cypress.on("test:after:run", (test, runnable) => {
+  const fullTestName = getFullTestName(runnable)
+  const imagePath = `screenshots/${Cypress.spec.name}/${fullTestName}${test.state === "failed" ? " (failed)" : ""}.png`
+  addContext({ test }, imagePath)
+  addContext({ test }, `videos/${Cypress.spec.name}.mp4`)
+})
+
+function getFullTestName(runnable) {
+  let item = runnable
+  const name = [runnable.title]
+
+  while (item.parent) {
+    name.unshift(item.parent.title)
+    item = item.parent
+  }
+
+  return name
+    .filter(Boolean)
+    .map(n => n.trim())
+    .join(" -- ")
+    .substring(0, MAX_TEST_NAME_LENGTH)
+}
