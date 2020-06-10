@@ -83,7 +83,7 @@ for (let [device, resolutions] of Object.entries(deviceResolutions)) {
           // Wait for the app to react to the viewport changes
           cy.wait(2000)
           cy.screenshot(`${device} resolution ${width}x${height}`)
-          const imagePath = `screenshots/${cy.spec.name}/${device} resolution ${width}x${height}.png`
+          const imagePath = `screenshots/${Cypress.spec.name}/${device} resolution ${width}x${height}.png`
           addContext({ test }, imagePath)
           cy.get("main > div").isWithinViewport(width, height)
         })
