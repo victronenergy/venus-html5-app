@@ -29,15 +29,21 @@ jobs:
       - name: Run unit and E2E tests
         run: npm run test:ci
       - name: Merge E2E test results
-        run: npx mochawesome-merge "cypress/results/*.json" > mochawesome.json
+        run: npx mochawesome-merge cypress/results/*.json > cypress/results/results.json
       - name: Generate E2E reports
-        run: npx marge mochawesome.json        
-      - name: Upload E2E Reports
+        run: npx marge cypress/results/results.json -f index.html -o cypress/report --cdn    
+      - name: Upload E2E Results
         uses: actions/upload-artifact@v1
         if: always()
         with:
-          name: mochawesome-report
-          path: mochawesome-report
+          name: e2e-tests-results
+          path: cypress/results/results.json
+      - name: Upload E2E Report
+        uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: e2e-tests-report
+          path: cypress/report/index.html
       - name: Upload Cypress Screenshots
         uses: actions/upload-artifact@v1
         if: always()
