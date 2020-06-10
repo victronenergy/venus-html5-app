@@ -28,6 +28,9 @@ jobs:
           /root/run_with_simulation.sh z
       - name: Run unit and E2E tests
         run: npm run test:ci
+      - name: Generate E2E Report
+        run: npm run generate-e2e-report
+        if: always()
       - name: Upload E2E Results
         uses: actions/upload-artifact@v1
         if: always()
