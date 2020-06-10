@@ -26,3 +26,11 @@ Cypress.Commands.add(`isWithinViewport`, { prevSubject: true }, (subject, width,
 
   return subject
 })
+
+const addContext = require("mochawesome/addContext")
+
+Cypress.Commands.add("addContext", content => {
+  cy.once("test:after:run", test => {
+    addContext({ test }, content)
+  })
+})
