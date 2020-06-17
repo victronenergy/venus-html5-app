@@ -4,7 +4,7 @@ import classnames from "classnames"
 import Fade, { viewChangeDelay } from "./Fade"
 import GetInverterChargerDeviceInstance from "./../mqtt/victron/GetInverterChargerDeviceInstance"
 import GetPortalId from "./../mqtt/victron/GetPortalId"
-import Header from "./Header/Header"
+import Header, { HeaderWithoutMQTTData } from "./Header/Header"
 import { InverterChargerInputLimitSelector } from "./InverterCharger"
 import MqttClientProvider from "./../mqtt/MqttClientProvider"
 
@@ -76,7 +76,28 @@ class App extends Component {
       <MqttClientProvider host={host} port={port}>
         {(_, isConnected, error) => {
           if (error) {
-            return <MqttUnavailable viewUnmounting={this.state.viewUnmounting} />
+            return (
+              <>
+                <HeaderWithoutMQTTData
+                  handleRemoteConsoleButtonClicked={this.toggleRemoteConsole}
+                  currentView={this.state.currentView}
+                />
+                {(() => {
+                  switch (this.state.currentView) {
+                    case VIEWS.REMOTE_CONSOLE:
+                      return (
+                        <Main isConnected={isConnected} setView={this.setView}>
+                          <Fade key={VIEWS.REMOTE_CONSOLE} unmount={this.state.viewUnmounting} fullWidth>
+                            <RemoteConsole host={host} onClickOutsideContainer={() => this.setView(VIEWS.METRICS)} />
+                          </Fade>
+                        </Main>
+                      )
+                    default:
+                      return <MqttUnavailable viewUnmounting={this.state.viewUnmounting} />
+                  }
+                })()}
+              </>
+            )
           } else if (!isConnected) {
             return <Connecting viewUnmounting={this.state.viewUnmounting} />
           } else {
@@ -94,7 +115,6 @@ class App extends Component {
                             <>
                               <Header
                                 portalId={portalId}
-                                isConnected={isConnected}
                                 handleRemoteConsoleButtonClicked={this.toggleRemoteConsole}
                                 currentView={this.state.currentView}
                               />
