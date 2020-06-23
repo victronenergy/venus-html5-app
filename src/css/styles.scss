@@ -44,10 +44,6 @@ main {
   align-items: center;
   justify-content: center;
 
-  @media #{$low-landscape} {
-    align-items: flex-start;
-  }
-
   @media #{$portrait}, #{$small}  {
     flex: 1;
     align-items: flex-start;
