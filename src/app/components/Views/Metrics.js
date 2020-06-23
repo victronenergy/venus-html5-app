@@ -25,10 +25,7 @@ const getContainerHeight = metrics => {
    * The container must be just high enough to fit half of the total height of the metrics
    * elements. This means that either the left or the right column can be the taller one,
    * but prefer left over right for aesthetics.
-   *
-   * Unset height when some of the elements are hudden to center the whole content.
    */
-  if (metrics.some(m => m.getBoundingClientRect().right > window.innerWidth)) return "unset"
   const metricsHeights = metrics.map(c => c.getBoundingClientRect().height)
   const reversed = [...metricsHeights].reverse()
   const minHeight = metricsHeights.reduce((a, b) => a + b, 0) / 2
