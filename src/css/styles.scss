@@ -71,7 +71,7 @@ main {
   flex-direction: column;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
 
   @media all and (max-width: 1340px) {
     padding: 0 40px;
