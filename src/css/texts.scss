@@ -14,17 +14,17 @@
 /*
  * Since we have a very weird scale of resolutions to support, from very narrow and tall
  * to very "flat" and wide. Relative font sizes to the viewport broke down in these edge
- * cases, hence there are 2 rules: body font size, which is the basis for everything and
+ * cases, hence there are 2 rules: html font size, which is the basis for everything and
  * scales the font when width decreases; and main element font-size which scales the 
  * font when height changes. The different em font sizes scale the component font sizes 
  * relative to these two aforementioned baselines.
  */
 
-body {
-  font-size: 20px;
+html {
+  font-size: 16px;
   @for $i from 1 through 5 {
-    @media all and (max-width: 1200px - $i * 200px) {
-      font-size: 20px - $i * 0.7px;
+    @media all and (max-width: 1920px - $i * 200px) {
+      font-size: 16px - $i * 0.70px;
     }
   }
 }
