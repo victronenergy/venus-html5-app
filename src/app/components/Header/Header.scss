@@ -12,15 +12,15 @@ header {
   padding-top: 50px;
 
   @media all and (max-width: 1340px) {
-    padding: 50px 50px 10px;
+    padding: 50px 50px 5px;
   }
 
   @media #{$portrait}, #{$small} {
-    padding: 50px 30px 10px;
+    padding: 50px 30px 5px;
   }
 
   @media #{$narrow-portrait}, #{$tiny} {
-    padding: 50px 10px 10px;
+    padding: 50px 10px 5px;
   }
 }
 
