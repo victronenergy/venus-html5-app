@@ -16,7 +16,7 @@ header {
   }
 
   @media #{$portrait}, #{$small} {
-    padding: 50px 30px 5px;
+    padding: 50px 30px 10px;
   }
 
   @media #{$narrow-portrait}, #{$tiny} {
