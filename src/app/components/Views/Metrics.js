@@ -15,8 +15,8 @@ const getRequiredCols = metrics => {
   if (metrics.length < 2) return 1
   else {
     const metricsTotalHeight = metrics.map(c => Math.ceil(c.clientHeight)).reduce((a, b) => a + b, 0)
-    // metrics-container max-height = 80vh
-    return metricsTotalHeight > Math.floor(window.innerHeight * 0.8) ? 2 : 1
+    // metrics-container max-height = 75vh
+    return metricsTotalHeight > Math.floor(window.innerHeight * 0.75) ? 2 : 1
   }
 }
 
