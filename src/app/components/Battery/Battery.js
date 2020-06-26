@@ -103,7 +103,7 @@ export class Batteries extends Component {
   render() {
     const { batteries } = this.props
 
-    const pageSize = window.innerHeight < 250 ? 1 : window.innerHeight < 400 ? 2 : 3
+    const pageSize = window.innerHeight < 450 ? 1 : window.innerHeight < 550 ? 2 : 3
 
     const paginate = batteries.length > pageSize
     const batteriesToShow = paginate
