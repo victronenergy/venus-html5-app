@@ -1,7 +1,7 @@
-$regular: "all and (min-width: 501px) and (max-width: 1080px)";
+$regular: "all and (min-width: 501px) and (max-width: 1000px)";
 $minimum: "all and (max-width: 500px)";
 
-$smaller: "all and (max-width: 1080px) and (min-aspect-ratio: 9/10)";
+$smaller: "all and (max-width: 1000px) and (min-aspect-ratio: 9/10)";
 $small: "all and (max-width: 800px) and (min-aspect-ratio: 9/10)";
 $very-small: "all and (max-width: 650px) and (min-aspect-ratio: 9/10)";
 $tiny: "all and (max-width: 450px) and (min-aspect-ratio: 9/10)";
