@@ -14,6 +14,7 @@
 html {
   background: #1f2535;
 }
+
 body {
   display: flex;
   justify-content: center;
@@ -98,10 +99,6 @@ main {
   background-color:#121a28;
 }
 
-.metrics-container--single-col .metric {
-  margin-bottom: $smallMarginBottom;
-}
-
 .metric__icon {
   height: 45px;
   margin-right: $rightLeftPadding;
@@ -124,16 +121,6 @@ main {
   align-self: center;
 }
 
-.metric__container--left {
-  display: flex;
-  height: 100%;
-  align-items: center;
-
-  @media #{$portrait} {
-    height: 40px;
-  }
-}
-
 .disconnected {
   .metric__value-container > :last-child,
   button span {
@@ -144,10 +131,6 @@ main {
 button:disabled {
   opacity: 0.5;
   cursor: default;
-}
-
-.metric__mode--readonly {
-  width: calc(50% - 40px);
 }
 
 .error-page {

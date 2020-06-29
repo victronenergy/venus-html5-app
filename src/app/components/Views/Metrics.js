@@ -45,8 +45,7 @@ const getContainerHeight = metrics => {
 export default class Metrics extends Component {
   constructor(props) {
     super(props)
-
-    this.state = { height: props.savedState.metricsHeight || null, layoutCols: props.savedState.metricsCols || 1 } // height: null because int - null = int, int - undefined = NaN
+    this.state = { height: null, layoutCols: 2 }
     this.metricsRef = React.createRef()
   }
 
@@ -57,20 +56,9 @@ export default class Metrics extends Component {
       if (this.state.layoutCols !== cols) this.setState({ layoutCols: cols })
       else if (this.state.layoutCols === 2) {
         const height = getContainerHeight(metrics)
-        if (
-          (height === "unset" && this.state.height !== "unset") ||
-          (height !== "unset" && this.state.height === "unset") ||
-          Math.abs(height - this.state.height) > 1
-        )
-          this.setState({ height })
+        if (Math.abs(height - this.state.height) > 1) this.setState({ height })
       }
     }
-  }
-
-  componentWillUnmount() {
-    // this is a bit of a hacky way to save the height in the
-    // parent component. It should probably be calculated there, anyways
-    this.props.saveState(this.state.height, this.state.layoutCols)
   }
 
   render() {
@@ -80,13 +68,7 @@ export default class Metrics extends Component {
     let style = this.state.layoutCols === 2 ? { height: this.state.height } : {}
 
     return (
-      <div
-        className={classnames("metrics-container", {
-          "metrics-container--single-col": this.state.layoutCols === 1
-        })}
-        ref={this.metricsRef}
-        style={style}
-      >
+      <div className="metrics-container" ref={this.metricsRef} style={style}>
         <DcLoads {...commonProps} />
         {!!inverterChargerDeviceId && <AcLoads {...commonProps} />}
         <Battery {...commonProps} />

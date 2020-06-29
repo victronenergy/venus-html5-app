@@ -34,11 +34,7 @@ const Main = ({ isConnected, children, setView }) => {
 class App extends Component {
   state = {
     currentView: VIEWS.METRICS,
-    viewUnmounting: false,
-    metricsState: {
-      metricsHeight: null,
-      metricsCols: null
-    }
+    viewUnmounting: false
   }
 
   setView = view => {
@@ -154,15 +150,6 @@ class App extends Component {
                                             onChangeInverterChargerInputLimitClicked={() =>
                                               this.setView(VIEWS.INVERTER_CHARGER_INPUT_LIMIT_SELECTOR)
                                             }
-                                            savedState={this.state.metricsState}
-                                            saveState={(height, cols) => {
-                                              this.setState({
-                                                metricsState: {
-                                                  metricsHeight: height,
-                                                  metricsCols: cols
-                                                }
-                                              })
-                                            }}
                                           />
                                         </Fade>
                                       )
