@@ -106,8 +106,15 @@ export class Batteries extends Component {
     const pageSize = window.innerHeight < 500 ? 1 : window.innerHeight < 550 ? 2 : 3
 
     const paginate = batteries.length > pageSize
+
+    const pages = Math.ceil(batteries.length / pageSize)
+
+    let currentPage = this.state.currentPage
+
+    if (paginate && currentPage >= pages) currentPage = 0
+
     const batteriesToShow = paginate
-      ? batteries.slice(this.state.currentPage * pageSize, this.state.currentPage * pageSize + pageSize)
+      ? batteries.slice(currentPage * pageSize, currentPage * pageSize + pageSize)
       : batteries
     // These fill the last page with empty elements if necessary
     const fillerBatteries = paginate ? [...Array(pageSize - batteriesToShow.length)].map(() => ({ dummy: true })) : []
@@ -117,13 +124,13 @@ export class Batteries extends Component {
         <BatteryHeader
           amount={batteries.length}
           setPage={this.setPage}
-          currentPage={this.state.currentPage}
+          currentPage={currentPage}
           paginate={paginate}
           pageSize={pageSize}
         />
         <BatteryList
           batteries={batteriesToShow.concat(fillerBatteries)}
-          currentPage={this.state.currentPage}
+          currentPage={currentPage}
           pageSize={pageSize}
         />
       </div>
