@@ -62,7 +62,7 @@ main {
 
 .metrics-container {
   width: 100%;
-  max-height: 77vh;
+  max-height: calc(100vh - 100px);
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
