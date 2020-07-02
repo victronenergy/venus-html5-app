@@ -96,6 +96,11 @@ main {
   box-sizing: border-box;
   border-radius: $borderRadius;
   background-color:#121a28;
+
+  @media #{$portrait} {
+    margin-bottom: $marginBottom / 2;
+  }
+
 }
 
 .metric__icon {
