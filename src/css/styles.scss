@@ -98,7 +98,7 @@ main {
   background-color:#121a28;
 
   @media #{$portrait} {
-    margin-bottom: $marginBottom / 2;
+    margin: 1rem 0;
   }
 
 }
