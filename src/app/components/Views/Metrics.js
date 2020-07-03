@@ -55,7 +55,7 @@ export default class Metrics extends Component {
       const cols = getRequiredCols(metrics)
       if (this.state.layoutCols !== cols) this.setState({ layoutCols: cols })
       else if (this.state.layoutCols === 2) {
-        const height = getContainerHeight(metrics)
+        const height = Math.min(window.innerHeight - 100, getContainerHeight(metrics))
         if (
           (height === "unset" && this.state.height !== "unset") ||
           (height !== "unset" && this.state.height === "unset") ||
