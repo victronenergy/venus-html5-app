@@ -11,11 +11,13 @@ import { InverterCharger } from "../InverterCharger"
 import Solar from "../Solar"
 import Generators from "../Generators"
 
+const HEADER_SIZE = 110
+
 const getRequiredCols = metrics => {
   if (metrics.length < 2) return 1
   else {
     const metricsTotalHeight = metrics.map(c => Math.ceil(c.clientHeight)).reduce((a, b) => a + b, 0)
-    return metricsTotalHeight > Math.floor(window.innerHeight - 100) ? 2 : 1
+    return metricsTotalHeight > Math.floor(window.innerHeight - HEADER_SIZE) ? 2 : 1
   }
 }
 
@@ -55,7 +57,7 @@ export default class Metrics extends Component {
       const cols = getRequiredCols(metrics)
       if (this.state.layoutCols !== cols) this.setState({ layoutCols: cols })
       else if (this.state.layoutCols === 2) {
-        const height = Math.min(window.innerHeight - 100, getContainerHeight(metrics))
+        const height = Math.min(window.innerHeight - HEADER_SIZE, getContainerHeight(metrics))
         if (
           (height === "unset" && this.state.height !== "unset") ||
           (height !== "unset" && this.state.height === "unset") ||
