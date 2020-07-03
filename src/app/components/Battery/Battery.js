@@ -93,25 +93,36 @@ const BatteryRow = battery => {
 }
 
 export class Batteries extends Component {
-  state = { currentPage: 0 }
+  state = { pageSize: 1, currentPage: 0 }
   ref = React.createRef()
 
   setPage = currentPage => {
     this.setState({ currentPage })
   }
 
-  render() {
-    const { batteries } = this.props
-
+  updatePageSize() {
     const pageSize = window.innerHeight < 500 ? 1 : window.innerHeight < 550 ? 2 : 3
 
+    if (pageSize !== this.state.pageSize) {
+      this.setState({ pageSize })
+      this.setPage(0)
+    }
+  }
+
+  componentDidMount() {
+    this.updatePageSize()
+    window.addEventListener("resize", this.updatePageSize.bind(this))
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.updatePageSize.bind(this))
+  }
+
+  render() {
+    const { batteries } = this.props
+    const pageSize = this.state.pageSize
     const paginate = batteries.length > pageSize
-
-    const pages = Math.ceil(batteries.length / pageSize)
-
-    let currentPage = this.state.currentPage
-
-    if (paginate && currentPage >= pages) currentPage = 0
+    const currentPage = this.state.currentPage
 
     const batteriesToShow = paginate
       ? batteries.slice(currentPage * pageSize, currentPage * pageSize + pageSize)
