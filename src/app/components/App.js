@@ -34,7 +34,13 @@ const Main = ({ isConnected, children, setView }) => {
 class App extends Component {
   state = {
     currentView: VIEWS.METRICS,
-    viewUnmounting: false
+    viewUnmounting: false,
+    currentPage: 0,
+    pages: 1
+  }
+
+  setPage = currentPage => {
+    this.setState({ currentPage })
   }
 
   setView = view => {
@@ -113,6 +119,9 @@ class App extends Component {
                                 portalId={portalId}
                                 handleRemoteConsoleButtonClicked={this.toggleRemoteConsole}
                                 currentView={this.state.currentView}
+                                setPage={this.setPage}
+                                currentPage={this.state.currentPage}
+                                pages={this.state.pages}
                               />
                               <Main isConnected={isConnected} setView={this.setView}>
                                 {(() => {
@@ -150,6 +159,9 @@ class App extends Component {
                                             onChangeInverterChargerInputLimitClicked={() =>
                                               this.setView(VIEWS.INVERTER_CHARGER_INPUT_LIMIT_SELECTOR)
                                             }
+                                            setPages={pages => this.setState({ pages })}
+                                            currentPage={this.state.currentPage}
+                                            pages={this.state.pages}
                                           />
                                         </Fade>
                                       )

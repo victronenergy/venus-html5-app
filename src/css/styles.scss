@@ -33,26 +33,6 @@ body,
   box-sizing: border-box;
 }
 
-main {
-  flex-shrink: 0;
-}
-
-main {
-  height: 90%;
-  width: 100%;
-  max-width: 1280px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  @media #{$portrait}, #{$small}  {
-    flex: 1;
-    align-items: flex-start;
-    overflow-y: scroll;
-    overflow-x: hidden;
-  }
-}
-
 #app {
   align-items: center;
   width: 100%;
@@ -61,32 +41,24 @@ main {
   overflow: hidden;
 }
 
+main {
+  height: 100%;
+  width: 100%;
+  max-width: 1280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .metrics-container {
   width: 100%;
-  max-height: 75vh;
+  max-height: calc(100vh - 110px);
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   align-items: center;
   justify-content: flex-start;
-
-  @media all and (max-width: 1340px) {
-    padding: 0 40px;
-  }
-
-  @media #{$portrait}, #{$small} {
-    padding: 0 20px;
-  }
-
-  @media #{$narrow-portrait}, #{$tiny} {
-    padding: 0;
-  }
-
-  @media #{$portrait} {
-    flex-wrap: nowrap;
-  }
 }
-
 
 .metric {
   padding: $topBottomPadding $rightLeftPadding;
