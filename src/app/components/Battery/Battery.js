@@ -101,7 +101,7 @@ export class Batteries extends Component {
   }
 
   updatePageSize() {
-    const pageSize = window.innerHeight < 500 ? 1 : window.innerHeight < 550 ? 2 : 3
+    const pageSize = window.innerHeight < 500 ? 1 : window.innerHeight < 700 ? 2 : 3
 
     if (pageSize !== this.state.pageSize) {
       this.setState({ pageSize })
