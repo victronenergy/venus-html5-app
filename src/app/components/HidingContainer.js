@@ -13,7 +13,8 @@ export default class HidingElement extends Component {
   render() {
     const visibility = isElementWithinWindow(this.ref.current) ? "visible" : "hidden"
     return (
-      <div style={{ visibility }} className="hiding-container" ref={this.ref}>
+      // <div style={{ visibility }} className="hiding-container" ref={this.ref}>
+      <div className="hiding-container" ref={this.ref}>
         {this.props.children}
       </div>
     )
