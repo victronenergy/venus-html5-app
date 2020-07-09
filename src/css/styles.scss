@@ -48,6 +48,7 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 .metrics-container {
@@ -69,6 +70,7 @@ main {
   box-sizing: border-box;
   border-radius: $borderRadius;
   background-color:#121a28;
+}
 
 .metric__icon {
   height: 45px;

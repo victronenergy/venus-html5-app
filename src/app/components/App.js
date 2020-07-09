@@ -43,6 +43,10 @@ class App extends Component {
     this.setState({ currentPage })
   }
 
+  setPages = pages => {
+    this.setState({ currentPage: 0, pages })
+  }
+
   setView = view => {
     if (this.state.currentView !== view) {
       this.setState({ viewUnmounting: true })
@@ -159,7 +163,7 @@ class App extends Component {
                                             onChangeInverterChargerInputLimitClicked={() =>
                                               this.setView(VIEWS.INVERTER_CHARGER_INPUT_LIMIT_SELECTOR)
                                             }
-                                            setPages={pages => this.setState({ pages })}
+                                            setPages={this.setPages}
                                             currentPage={this.state.currentPage}
                                             pages={this.state.pages}
                                           />
