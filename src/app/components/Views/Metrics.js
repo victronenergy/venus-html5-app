@@ -64,12 +64,12 @@ export default class Metrics extends Component {
       const cols = getRequiredCols(metrics)
       if (this.state.layoutCols !== cols) this.setState({ layoutCols: cols })
 
-      const pages = getRequiredPages(metrics, this.state.height, cols)
-      if (this.props.pages !== pages) this.props.setPages(pages)
-
       const maxHeight = Math.floor(window.innerHeight - HEADER_HEIGHT)
       const height = this.state.layoutCols === 2 ? Math.min(getContainerHeight(metrics), maxHeight) : maxHeight
       if (height !== this.state.height) this.setState({ height })
+
+      const pages = getRequiredPages(metrics, this.state.height, cols)
+      if (this.props.pages !== pages) this.props.setPages(pages)
     }
   }
 
