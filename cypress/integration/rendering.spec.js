@@ -81,7 +81,7 @@ for (let [device, resolutions] of Object.entries(deviceResolutions)) {
         if (width / height >= 1) {
           it("last hiding div in viewport", () => {
             // Wait for the app to react to the viewport changes
-            cy.wait(2000)
+            cy.wait(3000)
             cy.screenshot(`${device} resolution ${width}x${height}`)
             const imagePath = `screenshots/${Cypress.spec.name}/${device} resolution ${width}x${height}.png`
             cy.addContext(imagePath)

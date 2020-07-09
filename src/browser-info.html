@@ -33,6 +33,9 @@
   <div class="title">Window:
     <span class="info" id="width"></span> x <span class="info" id="height"></span>
   </div>
+  <div class="title">Device pixel ratio: 
+    <span class="info" id="devicePixelRatio"></span>
+  </div>
   <div class="title">Query params: <span class="info" id="params"></span></div>
   <button id="back" onclick="goBack();">Go back</button>
 </body>
@@ -46,6 +49,7 @@
     document.getElementById('user-agent').innerHTML = navigator.userAgent;
     document.getElementById('width').innerHTML = window.innerWidth;
     document.getElementById('height').innerHTML = window.innerHeight;
+    document.getElementById('devicePixelRatio').innerHTML = window.devicePixelRatio;
     document.getElementById('params').innerHTML = window.location.search.slice(1).replace(/=/g, ': ').replace(/&/g, ', ')
 
     window.addEventListener('resize', function () {

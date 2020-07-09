@@ -93,21 +93,39 @@ const BatteryRow = battery => {
 }
 
 export class Batteries extends Component {
-  state = { currentPage: 0 }
+  state = { pageSize: 1, currentPage: 0 }
   ref = React.createRef()
 
   setPage = currentPage => {
     this.setState({ currentPage })
   }
 
+  updatePageSize() {
+    const pageSize = window.innerHeight < 500 ? 1 : window.innerHeight < 700 ? 2 : 3
+
+    if (pageSize !== this.state.pageSize) {
+      this.setState({ pageSize })
+      this.setPage(0)
+    }
+  }
+
+  componentDidMount() {
+    this.updatePageSize()
+    window.addEventListener("resize", this.updatePageSize.bind(this))
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.updatePageSize.bind(this))
+  }
+
   render() {
     const { batteries } = this.props
-
-    const pageSize = window.innerHeight < 500 ? 1 : window.innerHeight < 550 ? 2 : 3
-
+    const pageSize = this.state.pageSize
     const paginate = batteries.length > pageSize
+    const currentPage = this.state.currentPage
+
     const batteriesToShow = paginate
-      ? batteries.slice(this.state.currentPage * pageSize, this.state.currentPage * pageSize + pageSize)
+      ? batteries.slice(currentPage * pageSize, currentPage * pageSize + pageSize)
       : batteries
     // These fill the last page with empty elements if necessary
     const fillerBatteries = paginate ? [...Array(pageSize - batteriesToShow.length)].map(() => ({ dummy: true })) : []
@@ -117,13 +135,13 @@ export class Batteries extends Component {
         <BatteryHeader
           amount={batteries.length}
           setPage={this.setPage}
-          currentPage={this.state.currentPage}
+          currentPage={currentPage}
           paginate={paginate}
           pageSize={pageSize}
         />
         <BatteryList
           batteries={batteriesToShow.concat(fillerBatteries)}
-          currentPage={this.state.currentPage}
+          currentPage={currentPage}
           pageSize={pageSize}
         />
       </div>
