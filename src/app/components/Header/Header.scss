@@ -8,35 +8,16 @@ header {
   box-sizing: border-box;
   width: 100%;
   max-width: 1280px;
-
   padding: 50px 10px 10px;
-
-  // @media #{$portrait}, #{$small} {
-  //   padding: 50px 30px 10px;
-  // }
-
-  // @media all and (max-width: 1340px) {
-  //   padding: 50px 50px 5px;
-  // }
-
-  // @media #{$portrait}, #{$small} {
-  //   padding: 50px 30px 10px;
-  // }
-
-  // @media #{$narrow-portrait}, #{$tiny} {
-  //   padding: 50px 10px 5px;
-  // }
 }
 
 .logo {
-  width: 185px;
+  width: 155px;
 
-  @media #{$regular} {
-    width: 150px;
-  }
 
   @media #{$minimum} {
-    width: 115px;
+    width: 120px;
+    margin-right: 10px;
   }
 }
 
@@ -44,37 +25,25 @@ header {
   display: flex;
 
   .selector-button {
-    padding: 10px 20px;
+    padding: 10px 24px;
   }
 
   .header__paginator-page {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 20px;
+    margin: 0 10px;
   }
   
   .header__paginator-button {
     display: flex;
-    max-height: 22px;
-    height: 100%;
-  }
-}
-
-.connection {
-  display: flex;
-  align-items: center;
-
-  :not(:last-child) {
-    @media #{$tiny} {
-      display: none;
-    }
+    height: 1rem;
   }
 }
 
 .remote-console-button {
-  margin-left: 25px;
-  padding: 13px 20px;
+  display: flex;
+  padding: 15px 24px;
   text-decoration: none;
   border-radius: 6px;
   border: none;
@@ -86,6 +55,6 @@ header {
 
 .remote-console-button {
   @media #{$hide-remote-console-breakpoint} {
-    display: none;
+    visibility: hidden;
   }
 }

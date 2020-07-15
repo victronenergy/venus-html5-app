@@ -11,13 +11,11 @@ const Header = props => {
     <header>
       <img src={require("../../../images/icons/logo.png")} className="logo" />
       {pages > 1 && <Paginator setPage={setPage} currentPage={currentPage} pages={pages} />}
-      <div className="connection">
-        {showRemoteConsoleSetting && (
-          <button className="remote-console-button text text--small" onClick={handleRemoteConsoleButtonClicked}>
-            {currentView !== VIEWS.REMOTE_CONSOLE ? "Remote Console" : "Close"}
-          </button>
-        )}
-      </div>
+      {showRemoteConsoleSetting && (
+        <button className="remote-console-button" onClick={handleRemoteConsoleButtonClicked}>
+          {currentView !== VIEWS.REMOTE_CONSOLE ? "Remote Console" : "Close"}
+        </button>
+      )}
     </header>
   )
 }
