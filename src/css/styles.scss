@@ -59,6 +59,12 @@ main {
   flex-wrap: wrap;
   align-items: center;
   justify-content: flex-start;
+
+
+  @media #{$smaller}, #{$portrait} {
+    justify-content: center;
+  }
+
 }
 
 .metric {
