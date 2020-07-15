@@ -25,7 +25,20 @@ const getRequiredCols = metrics => {
 const getRequiredPages = (metrics, containerHeight, cols) => {
   if (metrics.length < 2) return 1
   if (!containerHeight) return 1
-  return Math.ceil(getMetricsTotalHeight(metrics) / (containerHeight * cols))
+
+  const metricsHeights = metrics.map(c => c.getBoundingClientRect().height)
+  let columns = 1
+  let columnHeight = 0
+
+  for (let i = 0; i < metricsHeights.length; i++) {
+    if (columnHeight + metricsHeights[i] > containerHeight) {
+      columns += 1
+      columnHeight = 0
+    }
+    columnHeight += metricsHeights[i]
+  }
+
+  return Math.ceil(columns / cols)
 }
 
 const getContainerHeight = metrics => {

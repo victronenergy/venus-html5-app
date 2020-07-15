@@ -58,7 +58,7 @@ header {
     visibility: hidden;
   }
 
-  @media #{$small} {
+  @media #{$minimum} {
     display: none;
   }
 }
