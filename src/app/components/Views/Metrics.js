@@ -1,6 +1,4 @@
 import React, { Component } from "react"
-import classnames from "classnames"
-
 import ActiveSource from "../ActiveSource"
 import AcLoads from "../AcLoads"
 import Battery from "../Battery"
@@ -11,14 +9,37 @@ import { InverterCharger } from "../InverterCharger"
 import Solar from "../Solar"
 import Generators from "../Generators"
 
-const HEADER_SIZE = 110
+const HEADER_HEIGHT = 110
+
+const getMetricsTotalHeight = metrics => metrics.map(c => Math.ceil(c.clientHeight)).reduce((a, b) => a + b, 0)
 
 const getRequiredCols = metrics => {
   if (metrics.length < 2) return 1
-  else {
-    const metricsTotalHeight = metrics.map(c => Math.ceil(c.clientHeight)).reduce((a, b) => a + b, 0)
-    return metricsTotalHeight > Math.floor(window.innerHeight - HEADER_SIZE) ? 2 : 1
+  if (window.innerWidth / window.innerHeight < 9 / 10) return 1
+  if (window.innerWidth < 1000) return 1
+  // Always show two columns on wide displays
+  if (window.innerWidth > 1500) return 2
+  // .metrics-container { max-height: calc(100vh - 110px); }
+  return getMetricsTotalHeight(metrics) > Math.floor(window.innerHeight - HEADER_HEIGHT) ? 2 : 1
+}
+
+const getRequiredPages = (metrics, containerHeight, cols) => {
+  if (metrics.length < 2) return 1
+  if (!containerHeight) return 1
+
+  const metricsHeights = metrics.map(c => c.getBoundingClientRect().height)
+  let columns = 1
+  let columnHeight = 0
+
+  for (let i = 0; i < metricsHeights.length; i++) {
+    if (columnHeight + metricsHeights[i] > containerHeight) {
+      columns += 1
+      columnHeight = 0
+    }
+    columnHeight += metricsHeights[i]
   }
+
+  return Math.ceil(columns / cols)
 }
 
 const getContainerHeight = metrics => {
@@ -46,48 +67,40 @@ const getContainerHeight = metrics => {
 export default class Metrics extends Component {
   constructor(props) {
     super(props)
-
-    this.state = { height: props.savedState.metricsHeight || null, layoutCols: props.savedState.metricsCols || 1 } // height: null because int - null = int, int - undefined = NaN
+    this.state = { height: 0, layoutCols: 1 }
     this.metricsRef = React.createRef()
   }
 
   componentDidUpdate() {
     if (this.metricsRef.current) {
       const metrics = [...this.metricsRef.current.children]
+
       const cols = getRequiredCols(metrics)
       if (this.state.layoutCols !== cols) this.setState({ layoutCols: cols })
-      else if (this.state.layoutCols === 2) {
-        const height = Math.min(window.innerHeight - HEADER_SIZE, getContainerHeight(metrics))
-        if (
-          (height === "unset" && this.state.height !== "unset") ||
-          (height !== "unset" && this.state.height === "unset") ||
-          Math.abs(height - this.state.height) > 1
-        )
-          this.setState({ height })
-      }
+
+      const maxHeight = Math.floor(window.innerHeight - HEADER_HEIGHT)
+      const height = this.state.layoutCols === 2 ? Math.min(getContainerHeight(metrics), maxHeight) : maxHeight
+      if (height !== this.state.height) this.setState({ height })
+
+      const pages = getRequiredPages(metrics, this.state.height, cols)
+      if (this.props.pages !== pages) this.props.setPages(pages)
     }
   }
 
-  componentWillUnmount() {
-    // this is a bit of a hacky way to save the height in the
-    // parent component. It should probably be calculated there, anyways
-    this.props.saveState(this.state.height, this.state.layoutCols)
-  }
-
   render() {
-    const { portalId, inverterChargerDeviceId, isConnected, onChangeInverterChargerInputLimitClicked } = this.props
+    const {
+      portalId,
+      inverterChargerDeviceId,
+      isConnected,
+      onChangeInverterChargerInputLimitClicked,
+      currentPage
+    } = this.props
     const commonProps = { portalId, inverterChargerDeviceId, metricsRef: this.metricsRef }
 
-    let style = this.state.layoutCols === 2 ? { height: this.state.height } : {}
+    let style = { height: this.state.height, transform: `translate(-${currentPage * 100}%)` }
 
     return (
-      <div
-        className={classnames("metrics-container", {
-          "metrics-container--single-col": this.state.layoutCols === 1
-        })}
-        ref={this.metricsRef}
-        style={style}
-      >
+      <div className="metrics-container" ref={this.metricsRef} style={style}>
         <DcLoads {...commonProps} />
         {!!inverterChargerDeviceId && <AcLoads {...commonProps} />}
         <Battery {...commonProps} />
