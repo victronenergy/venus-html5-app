@@ -1,6 +1,6 @@
 {
   "name": "victron-venus-metrics",
-  "version": "1.4.7",
+  "version": "1.5.0",
   "description": "Metric framework for Victron VenusOS",
   "main": "index.js",
   "scripts": {
