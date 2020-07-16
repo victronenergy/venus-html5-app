@@ -77,19 +77,17 @@ for (let [device, resolutions] of Object.entries(deviceResolutions)) {
           cy.get("header").isWithinViewport(width, height)
         })
 
-        // Test for the last visibile element in landscape mode
-        if (width / height >= 1) {
-          it("last hiding div in viewport", () => {
-            // Wait for the app to react to the viewport changes
-            cy.wait(3000)
-            cy.screenshot(`${device} resolution ${width}x${height}`)
-            const imagePath = `screenshots/${Cypress.spec.name}/${device} resolution ${width}x${height}.png`
-            cy.addContext(imagePath)
-            cy.get("main > div > div > .hiding-container:visible")
-              .last()
-              .isWithinViewport(width, height)
-          })
-        }
+        it("metrics-container", () => {
+          cy.get(".metrics-container").isWithinViewport(width, height)
+        })
+
+        it("takes a screenshot", () => {
+          // Wait for the app to react to the viewport changes
+          cy.wait(1000)
+          cy.screenshot(`${device} resolution ${width}x${height}`)
+          const imagePath = `screenshots/${Cypress.spec.name}/${device} resolution ${width}x${height}.png`
+          cy.addContext(imagePath)
+        })
       })
     })
   }
