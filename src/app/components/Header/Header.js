@@ -5,7 +5,7 @@ import { VIEWS } from "../../utils/constants"
 
 import "./Header.scss"
 
-const Header = props => {
+export const Header = props => {
   const { showRemoteConsoleSetting, currentView, handleRemoteConsoleButtonClicked, setPage, currentPage, pages } = props
   return (
     <header>
@@ -30,7 +30,7 @@ const Paginator = ({ setPage, currentPage, pages }) => {
       </SelectorButton>
       <span className="header__paginator-page">
         {[...Array(pages).keys()].map(page => (
-          <svg height="50" width="20">
+          <svg height="50" width="20" key={page}>
             <circle cx="10" cy="25" r="5" fill={page === currentPage ? "#30afff" : "#aaa"} />
           </svg>
         ))}
