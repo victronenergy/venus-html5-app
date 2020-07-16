@@ -17,7 +17,8 @@ const getRequiredCols = metrics => {
   if (metrics.length < 2) return 1
   if (window.innerWidth / window.innerHeight < 9 / 10) return 1
   if (window.innerWidth < 1000) return 1
-
+  // Always show two columns on wide displays
+  if (window.innerWidth > 1500) return 2
   // .metrics-container { max-height: calc(100vh - 110px); }
   return getMetricsTotalHeight(metrics) > Math.floor(window.innerHeight - HEADER_HEIGHT) ? 2 : 1
 }
