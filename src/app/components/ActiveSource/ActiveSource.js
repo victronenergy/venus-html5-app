@@ -22,10 +22,10 @@ const getTopics = (portalId, vebusInstanceId) => {
   }
 }
 
-const activeSourceLabel = {
+const activeSourceTitle = {
   [AC_SOURCE_TYPE.SHORE]: "Shore Power",
   [AC_SOURCE_TYPE.GRID]: "Grid Input",
-  [AC_SOURCE_TYPE.GENERATOR]: "Generator",
+  [AC_SOURCE_TYPE.GENERATOR]: "Generator Input",
   [AC_SOURCE_TYPE.NOT_IN_USE]: "Invalid Configuration" // You cannot have a source that isn't configured as active!
 }
 
@@ -46,7 +46,7 @@ const getSourceSubtitle = (active, phases, source) => {
 
 const ActiveSource = ({ portalId, inverterChargerDeviceId, source, active, phases }) => {
   const icon = activeSourceIcon[source]
-  const title = "Active Input: " + activeSourceLabel[source]
+  const title = activeSourceTitle[source]
   const subTitle = getSourceSubtitle(active, phases, source)
   return (
     <div className="metric metric__active-source">
