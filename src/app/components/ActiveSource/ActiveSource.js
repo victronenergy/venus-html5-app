@@ -25,29 +25,27 @@ const getTopics = (portalId, vebusInstanceId) => {
 const activeSourceTitle = {
   [AC_SOURCE_TYPE.SHORE]: "Shore Power",
   [AC_SOURCE_TYPE.GRID]: "Grid Input",
-  [AC_SOURCE_TYPE.GENERATOR]: "Generator Input",
   [AC_SOURCE_TYPE.NOT_IN_USE]: "Invalid Configuration" // You cannot have a source that isn't configured as active!
 }
 
 const activeSourceIcon = {
   [AC_SOURCE_TYPE.SHORE]: require("../../../images/icons/shore-power.svg"),
   [AC_SOURCE_TYPE.GRID]: require("../../../images/icons/shore-power.svg"),
-  [AC_SOURCE_TYPE.GENERATOR]: require("../../../images/icons/generator.svg"),
   [AC_SOURCE_TYPE.NOT_IN_USE]: require("../../../images/icons/shore-power.svg")
 }
 
-const getSourceSubtitle = (active, phases, source) => {
+const getSourceSubtitle = (active, phases) => {
   if (active) {
     return phases > 1 ? "3 phases" : null
   } else {
-    return source === AC_SOURCE_TYPE.GENERATOR ? "Stopped" : "Unplugged"
+    return "Unplugged"
   }
 }
 
 const ActiveSource = ({ portalId, inverterChargerDeviceId, source, active, phases }) => {
   const icon = activeSourceIcon[source]
   const title = activeSourceTitle[source]
-  const subTitle = getSourceSubtitle(active, phases, source)
+  const subTitle = getSourceSubtitle(active, phases)
   return (
     <div className="metric metric__active-source">
       {phases > 1 ? (
@@ -79,7 +77,7 @@ class ActiveSourceWithData extends Component {
         {topics => {
           return topics.settings.map(
             (source, i) =>
-              source !== AC_SOURCE_TYPE.NOT_IN_USE && ( // do not render if the source is not in use
+              [AC_SOURCE_TYPE.GRID, AC_SOURCE_TYPE.SHORE].includes(source) && (
                 <HidingContainer metricsRef={metricsRef} key={i}>
                   <ActiveSource
                     source={source}

@@ -128,28 +128,30 @@ class GeneratorFpWithData extends Component {
     const { portalId, manualStartStopTopic, autoStartStopTopic, metricsRef } = this.props
     return (
       <MqttSubscriptions topics={getTopics(portalId)}>
-        {topics => (
-          <MqttWriteValue topic={autoStartStopTopic}>
-            {(_, updateAutoMode) => {
-              return (
-                <MqttWriteValue topic={manualStartStopTopic}>
-                  {(_, updateManualMode) => {
-                    return (
-                      <HidingContainer metricsRef={metricsRef} key="generator-fp">
-                        <GeneratorFp
-                          portalId={portalId}
-                          {...topics}
-                          onManualModeSelected={updateManualMode}
-                          onAutoModeSelected={updateAutoMode}
-                        />
-                      </HidingContainer>
-                    )
-                  }}
-                </MqttWriteValue>
-              )
-            }}
-          </MqttWriteValue>
-        )}
+        {topics =>
+          topics.statusCode !== undefined && (
+            <MqttWriteValue topic={autoStartStopTopic}>
+              {(_, updateAutoMode) => {
+                return (
+                  <MqttWriteValue topic={manualStartStopTopic}>
+                    {(_, updateManualMode) => {
+                      return (
+                        <HidingContainer metricsRef={metricsRef} key="generator-fp">
+                          <GeneratorFp
+                            portalId={portalId}
+                            {...topics}
+                            onManualModeSelected={updateManualMode}
+                            onAutoModeSelected={updateAutoMode}
+                          />
+                        </HidingContainer>
+                      )
+                    }}
+                  </MqttWriteValue>
+                )
+              }}
+            </MqttWriteValue>
+          )
+        }
       </MqttSubscriptions>
     )
   }
