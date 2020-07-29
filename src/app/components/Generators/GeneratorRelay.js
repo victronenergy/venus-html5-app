@@ -30,7 +30,7 @@ const getTopics = (portalId, vebusInstanceId) => {
 
 function getGeneratorState(statusCode, active, phases) {
   if (active) {
-    return phases > 3 ? "3 phases" : "Running"
+    return phases > 1 ? "3 phases" : "Running"
   }
 
   switch (statusCode) {
