@@ -3,6 +3,7 @@ import React, { Component } from "react"
 import ActiveInValues from "../ActiveSource/ActiveInValues"
 
 import HeaderView from "../HeaderView/HeaderView"
+import { ListView } from "../ListView"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 import MqttWriteValue from "../../mqtt/MqttWriteValue"
 import SelectorButton from "../SelectorButton"
@@ -27,16 +28,18 @@ const getTopics = (portalId, vebusInstanceId) => {
   }
 }
 
-function getGeneratorState(statusCode) {
+function getGeneratorState(statusCode, active, phases) {
+  if (active) {
+    return phases > 3 ? "3 phases" : "Running"
+  }
+
   switch (statusCode) {
-    case 0:
-      return "Stopped"
     case 1:
       return "Running"
     case 10:
       return "Error"
     default:
-      return "Not available"
+      return "Stopped"
   }
 }
 
@@ -53,7 +56,7 @@ const GeneratorRelay = ({
 }) => {
   const icon = require("../../../images/icons/generator.svg")
   const title = "Generator"
-  const subTitle = active && phases > 1 ? "3 phases" : getGeneratorState(statusCode)
+  const subTitle = getGeneratorState(statusCode, active, phases)
 
   return (
     <div className="metric generator">
@@ -64,40 +67,39 @@ const GeneratorRelay = ({
           )}
         </ListView>
       ) : (
-        <>
-          <HeaderView icon={icon} title={title} subTitle={subTitle} child>
-            {active && (
-              <MetricValues>
-                <ActiveInValues portalId={portalId} inverterChargerDeviceId={inverterChargerDeviceId} />
-              </MetricValues>
-            )}
-          </HeaderView>
-        </>
+        <HeaderView icon={icon} title={title} subTitle={subTitle} child>
+          {active && (
+            <MetricValues>
+              <ActiveInValues portalId={portalId} inverterChargerDeviceId={inverterChargerDeviceId} />
+            </MetricValues>
+          )}
+        </HeaderView>
       )}
-
-      <div className="generator__mode-selector">
-        <SelectorButton
-          active={manualStart && !autoStart}
-          onClick={() => {
-            onAutoModeSelected(GENERATOR_START_STOP.AUTO_OFF)
-            onManualModeSelected(GENERATOR_START_STOP.START)
-          }}
-        >
-          On
-        </SelectorButton>
-        <SelectorButton
-          active={!manualStart && !autoStart}
-          onClick={() => {
-            onAutoModeSelected(GENERATOR_START_STOP.AUTO_OFF)
-            onManualModeSelected(GENERATOR_START_STOP.STOP)
-          }}
-        >
-          Off
-        </SelectorButton>
-        <SelectorButton active={autoStart} onClick={() => onAutoModeSelected(GENERATOR_START_STOP.AUTO_ON)}>
-          Auto start/stop
-        </SelectorButton>
-      </div>
+      {statusCode !== undefined && (
+        <div className="generator__mode-selector">
+          <SelectorButton
+            active={manualStart && !autoStart}
+            onClick={() => {
+              onAutoModeSelected(GENERATOR_START_STOP.AUTO_OFF)
+              onManualModeSelected(GENERATOR_START_STOP.START)
+            }}
+          >
+            On
+          </SelectorButton>
+          <SelectorButton
+            active={!manualStart && !autoStart}
+            onClick={() => {
+              onAutoModeSelected(GENERATOR_START_STOP.AUTO_OFF)
+              onManualModeSelected(GENERATOR_START_STOP.STOP)
+            }}
+          >
+            Off
+          </SelectorButton>
+          <SelectorButton active={autoStart} onClick={() => onAutoModeSelected(GENERATOR_START_STOP.AUTO_ON)}>
+            Auto start/stop
+          </SelectorButton>
+        </div>
+      )}
     </div>
   )
 }
