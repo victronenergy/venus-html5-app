@@ -10,12 +10,13 @@ import SelectorButton from "../SelectorButton"
 import HidingContainer from "../HidingContainer"
 import MetricValues from "../MetricValues"
 
-import { GENERATOR_START_STOP, AC_SOURCE_TYPE } from "../../utils/constants"
+import { GENERATOR_START_STOP, AC_SOURCE_TYPE, RELAY_FUNCTION } from "../../utils/constants"
 
 import "./Generator.scss"
 
 const getTopics = (portalId, vebusInstanceId) => {
   return {
+    relayFunction: `N/${portalId}/settings/0/Settings/Relay/Function`,
     statusCode: `N/${portalId}/generator/0/Generator0/State`,
     manualStart: `N/${portalId}/generator/0/Generator0/ManualStart`,
     autoStart: `N/${portalId}/settings/0/Settings/Generator0/AutoStartEnabled`,
@@ -51,6 +52,7 @@ const GeneratorRelay = ({
   inverterChargerDeviceId,
   manualStart,
   autoStart,
+  relayFunction,
   onManualModeSelected,
   onAutoModeSelected
 }) => {
@@ -75,31 +77,33 @@ const GeneratorRelay = ({
           )}
         </HeaderView>
       )}
-      {statusCode !== undefined && (
-        <div className="generator__mode-selector">
-          <SelectorButton
-            active={manualStart && !autoStart}
-            onClick={() => {
-              onAutoModeSelected(GENERATOR_START_STOP.AUTO_OFF)
-              onManualModeSelected(GENERATOR_START_STOP.START)
-            }}
-          >
-            On
-          </SelectorButton>
-          <SelectorButton
-            active={!manualStart && !autoStart}
-            onClick={() => {
-              onAutoModeSelected(GENERATOR_START_STOP.AUTO_OFF)
-              onManualModeSelected(GENERATOR_START_STOP.STOP)
-            }}
-          >
-            Off
-          </SelectorButton>
-          <SelectorButton active={autoStart} onClick={() => onAutoModeSelected(GENERATOR_START_STOP.AUTO_ON)}>
-            Auto start/stop
-          </SelectorButton>
-        </div>
-      )}
+      {
+        (relayFunction = RELAY_FUNCTION.GENERATOR_START_STOP && statusCode !== undefined && (
+          <div className="generator__mode-selector">
+            <SelectorButton
+              active={manualStart && !autoStart}
+              onClick={() => {
+                onAutoModeSelected(GENERATOR_START_STOP.AUTO_OFF)
+                onManualModeSelected(GENERATOR_START_STOP.START)
+              }}
+            >
+              On
+            </SelectorButton>
+            <SelectorButton
+              active={!manualStart && !autoStart}
+              onClick={() => {
+                onAutoModeSelected(GENERATOR_START_STOP.AUTO_OFF)
+                onManualModeSelected(GENERATOR_START_STOP.STOP)
+              }}
+            >
+              Off
+            </SelectorButton>
+            <SelectorButton active={autoStart} onClick={() => onAutoModeSelected(GENERATOR_START_STOP.AUTO_ON)}>
+              Auto start/stop
+            </SelectorButton>
+          </div>
+        ))
+      }
     </div>
   )
 }
@@ -111,43 +115,41 @@ class GeneratorRelayWithData extends Component {
       <MqttSubscriptions topics={getTopics(portalId, inverterChargerDeviceId)}>
         {topics => (
           <MqttWriteValue topic={autoStartStopTopic}>
-            {(_, updateAutoMode) => {
-              return (
-                <MqttWriteValue topic={manualStartStopTopic}>
-                  {(_, updateManualMode) => {
-                    return topics.settings.includes(AC_SOURCE_TYPE.GENERATOR)
-                      ? topics.settings.map(
-                          (source, i) =>
-                            source === AC_SOURCE_TYPE.GENERATOR && (
-                              <HidingContainer metricsRef={metricsRef} key={"generator-relay-" + i}>
-                                <GeneratorRelay
-                                  portalId={portalId}
-                                  {...topics}
-                                  source={source}
-                                  phases={topics.phases}
-                                  active={topics.activeInput === i}
-                                  inverterChargerDeviceId={inverterChargerDeviceId}
-                                  onManualModeSelected={updateManualMode}
-                                  onAutoModeSelected={updateAutoMode}
-                                />
-                              </HidingContainer>
-                            )
-                        )
-                      : topics.statusCode !== undefined && (
-                          <HidingContainer metricsRef={metricsRef} key="generator-relay">
-                            <GeneratorRelay
-                              portalId={portalId}
-                              {...topics}
-                              inverterChargerDeviceId={inverterChargerDeviceId}
-                              onManualModeSelected={updateManualMode}
-                              onAutoModeSelected={updateAutoMode}
-                            />
-                          </HidingContainer>
-                        )
-                  }}
-                </MqttWriteValue>
-              )
-            }}
+            {(_, updateAutoMode) => (
+              <MqttWriteValue topic={manualStartStopTopic}>
+                {(_, updateManualMode) =>
+                  topics.settings.includes(AC_SOURCE_TYPE.GENERATOR)
+                    ? topics.settings.map(
+                        (source, i) =>
+                          source === AC_SOURCE_TYPE.GENERATOR && (
+                            <HidingContainer metricsRef={metricsRef} key={"generator-relay-" + i}>
+                              <GeneratorRelay
+                                portalId={portalId}
+                                {...topics}
+                                source={source}
+                                phases={topics.phases}
+                                active={topics.activeInput === i}
+                                inverterChargerDeviceId={inverterChargerDeviceId}
+                                onManualModeSelected={updateManualMode}
+                                onAutoModeSelected={updateAutoMode}
+                              />
+                            </HidingContainer>
+                          )
+                      )
+                    : (topics.relayFunction = RELAY_FUNCTION.GENERATOR_START_STOP && topics.statusCode !== undefined && (
+                        <HidingContainer metricsRef={metricsRef} key="generator-relay">
+                          <GeneratorRelay
+                            portalId={portalId}
+                            {...topics}
+                            inverterChargerDeviceId={inverterChargerDeviceId}
+                            onManualModeSelected={updateManualMode}
+                            onAutoModeSelected={updateAutoMode}
+                          />
+                        </HidingContainer>
+                      ))
+                }
+              </MqttWriteValue>
+            )}
           </MqttWriteValue>
         )}
       </MqttSubscriptions>
