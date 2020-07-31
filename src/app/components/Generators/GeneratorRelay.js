@@ -77,33 +77,31 @@ const GeneratorRelay = ({
           )}
         </HeaderView>
       )}
-      {
-        (relayFunction = RELAY_FUNCTION.GENERATOR_START_STOP && statusCode !== undefined && (
-          <div className="generator__mode-selector">
-            <SelectorButton
-              active={manualStart && !autoStart}
-              onClick={() => {
-                onAutoModeSelected(GENERATOR_START_STOP.AUTO_OFF)
-                onManualModeSelected(GENERATOR_START_STOP.START)
-              }}
-            >
-              On
-            </SelectorButton>
-            <SelectorButton
-              active={!manualStart && !autoStart}
-              onClick={() => {
-                onAutoModeSelected(GENERATOR_START_STOP.AUTO_OFF)
-                onManualModeSelected(GENERATOR_START_STOP.STOP)
-              }}
-            >
-              Off
-            </SelectorButton>
-            <SelectorButton active={autoStart} onClick={() => onAutoModeSelected(GENERATOR_START_STOP.AUTO_ON)}>
-              Auto start/stop
-            </SelectorButton>
-          </div>
-        ))
-      }
+      {relayFunction === RELAY_FUNCTION.GENERATOR_START_STOP && statusCode !== undefined && (
+        <div className="generator__mode-selector">
+          <SelectorButton
+            active={manualStart && !autoStart}
+            onClick={() => {
+              onAutoModeSelected(GENERATOR_START_STOP.AUTO_OFF)
+              onManualModeSelected(GENERATOR_START_STOP.START)
+            }}
+          >
+            On
+          </SelectorButton>
+          <SelectorButton
+            active={!manualStart && !autoStart}
+            onClick={() => {
+              onAutoModeSelected(GENERATOR_START_STOP.AUTO_OFF)
+              onManualModeSelected(GENERATOR_START_STOP.STOP)
+            }}
+          >
+            Off
+          </SelectorButton>
+          <SelectorButton active={autoStart} onClick={() => onAutoModeSelected(GENERATOR_START_STOP.AUTO_ON)}>
+            Auto start/stop
+          </SelectorButton>
+        </div>
+      )}
     </div>
   )
 }
