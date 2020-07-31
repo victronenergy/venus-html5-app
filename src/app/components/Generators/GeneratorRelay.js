@@ -136,7 +136,8 @@ class GeneratorRelayWithData extends Component {
                             </HidingContainer>
                           )
                       )
-                    : (topics.relayFunction = RELAY_FUNCTION.GENERATOR_START_STOP && topics.statusCode !== undefined && (
+                    : topics.relayFunction === RELAY_FUNCTION.GENERATOR_START_STOP &&
+                      topics.statusCode !== undefined && (
                         <HidingContainer metricsRef={metricsRef} key="generator-relay">
                           <GeneratorRelay
                             portalId={portalId}
@@ -146,7 +147,7 @@ class GeneratorRelayWithData extends Component {
                             onAutoModeSelected={updateAutoMode}
                           />
                         </HidingContainer>
-                      ))
+                      )
                 }
               </MqttWriteValue>
             )}
