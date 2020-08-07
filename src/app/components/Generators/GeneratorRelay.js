@@ -15,11 +15,14 @@ import { GENERATOR_START_STOP, AC_SOURCE_TYPE, RELAY_FUNCTION } from "../../util
 import "./Generator.scss"
 
 const getTopics = (portalId, vebusInstanceId) => {
-  return {
+  const relayTopics = {
     relayFunction: `N/${portalId}/settings/0/Settings/Relay/Function`,
     statusCode: `N/${portalId}/generator/0/Generator0/State`,
     manualStart: `N/${portalId}/generator/0/Generator0/ManualStart`,
-    autoStart: `N/${portalId}/settings/0/Settings/Generator0/AutoStartEnabled`,
+    autoStart: `N/${portalId}/settings/0/Settings/Generator0/AutoStartEnabled`
+  }
+
+  const vebusTopics = {
     activeInput: `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/ActiveInput`,
     phases: `N/${portalId}/vebus/${vebusInstanceId}/Ac/NumberOfPhases`,
     settings: [
@@ -27,6 +30,8 @@ const getTopics = (portalId, vebusInstanceId) => {
       `N/${portalId}/settings/0/Settings/SystemSetup/AcInput2`
     ]
   }
+
+  return vebusInstanceId ? { ...relayTopics, ...vebusTopics } : relayTopics
 }
 
 function getGeneratorState(statusCode, active, phases) {
@@ -116,7 +121,7 @@ class GeneratorRelayWithData extends Component {
             {(_, updateAutoMode) => (
               <MqttWriteValue topic={manualStartStopTopic}>
                 {(_, updateManualMode) =>
-                  topics.settings.includes(AC_SOURCE_TYPE.GENERATOR)
+                  inverterChargerDeviceId && topics.settings.includes(AC_SOURCE_TYPE.GENERATOR)
                     ? topics.settings.map(
                         (source, i) =>
                           source === AC_SOURCE_TYPE.GENERATOR && (
@@ -140,7 +145,6 @@ class GeneratorRelayWithData extends Component {
                           <GeneratorRelay
                             portalId={portalId}
                             {...topics}
-                            inverterChargerDeviceId={inverterChargerDeviceId}
                             onManualModeSelected={updateManualMode}
                             onAutoModeSelected={updateAutoMode}
                           />
