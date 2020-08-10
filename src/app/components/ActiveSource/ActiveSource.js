@@ -2,7 +2,7 @@ import React, { Component } from "react"
 
 import ActiveInValues from "./ActiveInValues"
 import HeaderView from "../HeaderView/HeaderView"
-import HidingContainer from "../HidingContainer"
+import ColumnContainer from "../ColumnContainer"
 import { ListView } from "../ListView"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 import MetricValues from "../MetricValues"
@@ -71,14 +71,14 @@ const ActiveSource = ({ portalId, inverterChargerDeviceId, source, active, phase
 
 class ActiveSourceWithData extends Component {
   render() {
-    const { portalId, inverterChargerDeviceId, metricsRef } = this.props
+    const { portalId, inverterChargerDeviceId } = this.props
     return (
       <MqttSubscriptions topics={getTopics(portalId, inverterChargerDeviceId)}>
         {topics => {
           return topics.settings.map(
             (source, i) =>
               [AC_SOURCE_TYPE.GRID, AC_SOURCE_TYPE.SHORE].includes(source) && (
-                <HidingContainer metricsRef={metricsRef} key={i}>
+                <ColumnContainer key={i}>
                   <ActiveSource
                     source={source}
                     phases={topics.phases}
@@ -86,7 +86,7 @@ class ActiveSourceWithData extends Component {
                     portalId={portalId}
                     inverterChargerDeviceId={inverterChargerDeviceId}
                   />
-                </HidingContainer>
+                </ColumnContainer>
               )
           )
         }}

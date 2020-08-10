@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 
 import HeaderView from "../HeaderView/HeaderView"
-import HidingContainer from "../HidingContainer"
+import ColumnContainer from "../ColumnContainer"
 import MetricValues from "../MetricValues"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 import NumericValue from "../NumericValue/index"
@@ -26,16 +26,16 @@ const Solar = ({ current, power }) => {
 
 class SolarWithData extends Component {
   render() {
-    const { portalId, metricsRef } = this.props
+    const { portalId } = this.props
     return (
       portalId && (
         <MqttSubscriptions topics={getTopics(portalId)}>
           {topics => {
             if (topics.current || topics.power || topics.power === 0) {
               return (
-                <HidingContainer metricsRef={metricsRef}>
+                <ColumnContainer>
                   <Solar {...topics} />
-                </HidingContainer>
+                </ColumnContainer>
               )
             } else return null
           }}

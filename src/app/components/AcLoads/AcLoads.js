@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 
 import HeaderView from "../HeaderView"
-import HidingContainer from "../HidingContainer"
+import ColumnContainer from "../ColumnContainer"
 import { ListView, ListRow } from "../ListView"
 import MetricValues from "../MetricValues"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
@@ -56,14 +56,14 @@ const AcLoads = props => {
 
 class AcLoadsWithData extends Component {
   render() {
-    const { portalId, inverterChargerDeviceId, metricsRef } = this.props
+    const { portalId, inverterChargerDeviceId } = this.props
     return (
       <MqttSubscriptions topics={getTopics(portalId, inverterChargerDeviceId)}>
         {topics => {
           return (
-            <HidingContainer metricsRef={metricsRef}>
+            <ColumnContainer>
               <AcLoads {...topics} />
-            </HidingContainer>
+            </ColumnContainer>
           )
         }}
       </MqttSubscriptions>

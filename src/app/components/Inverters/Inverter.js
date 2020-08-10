@@ -3,7 +3,7 @@ import React from "react"
 import { INVERTER_MODE } from "../../utils/constants"
 
 import HeaderView from "../HeaderView"
-import HidingContainer from "../../components/HidingContainer"
+import ColumnContainer from "../../components/ColumnContainer"
 import MetricValues from "../MetricValues"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 import MqttWriteValue from "../../mqtt/MqttWriteValue"
@@ -62,8 +62,7 @@ export const Inverter = ({
   productName,
   nAcInputs,
   isVebusInverter,
-  updateMode,
-  metricsRef
+  updateMode
 }) => {
   // if nAcInputs === 0 it means it's an inverter, if not it's an inverter/charger => skip
   const show = !isVebusInverter || nAcInputs === 0
@@ -74,7 +73,7 @@ export const Inverter = ({
 
   return (
     show && (
-      <HidingContainer metricsRef={metricsRef}>
+      <ColumnContainer>
         <div className="metric inverter">
           <HeaderView
             icon={require("../../../images/icons/multiplus.svg")}
@@ -97,20 +96,18 @@ export const Inverter = ({
             )}
           </div>
         </div>
-      </HidingContainer>
+      </ColumnContainer>
     )
   )
 }
 
-const InverterWithData = ({ portalId, deviceInstance, metricsRef, isVebusInverter }) => {
+const InverterWithData = ({ portalId, deviceInstance, isVebusInverter }) => {
   const source = isVebusInverter ? "vebus" : "inverter"
   return (
     <MqttWriteValue topic={`W/${portalId}/${source}/${deviceInstance}/Mode`}>
       {(_, updateMode) => (
         <MqttSubscriptions topics={getTopics(portalId, deviceInstance, source)}>
-          {topics => (
-            <Inverter {...topics} isVebusInverter={isVebusInverter} updateMode={updateMode} metricsRef={metricsRef} />
-          )}
+          {topics => <Inverter {...topics} isVebusInverter={isVebusInverter} updateMode={updateMode} />}
         </MqttSubscriptions>
       )}
     </MqttWriteValue>

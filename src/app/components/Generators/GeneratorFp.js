@@ -2,7 +2,7 @@ import React, { Component } from "react"
 
 import GensetValues from "./GensetValues"
 import HeaderView from "../HeaderView/HeaderView"
-import HidingContainer from "../HidingContainer"
+import ColumnContainer from "../ColumnContainer"
 import { ListView } from "../ListView"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 import MqttWriteValue from "../../mqtt/MqttWriteValue"
@@ -125,7 +125,7 @@ const GeneratorFp = ({
 
 class GeneratorFpWithData extends Component {
   render() {
-    const { portalId, manualStartStopTopic, autoStartStopTopic, metricsRef } = this.props
+    const { portalId, manualStartStopTopic, autoStartStopTopic } = this.props
     return (
       <MqttSubscriptions topics={getTopics(portalId)}>
         {topics =>
@@ -136,14 +136,14 @@ class GeneratorFpWithData extends Component {
                   <MqttWriteValue topic={manualStartStopTopic}>
                     {(_, updateManualMode) => {
                       return (
-                        <HidingContainer metricsRef={metricsRef} key="generator-fp">
+                        <ColumnContainer key="generator-fp">
                           <GeneratorFp
                             portalId={portalId}
                             {...topics}
                             onManualModeSelected={updateManualMode}
                             onAutoModeSelected={updateAutoMode}
                           />
-                        </HidingContainer>
+                        </ColumnContainer>
                       )
                     }}
                   </MqttWriteValue>

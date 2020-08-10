@@ -3,7 +3,7 @@ import classnames from "classnames"
 
 import HeaderView from "../HeaderView"
 import BatteryLevel from "./BatteryLevel"
-import HidingContainer from "../HidingContainer"
+import ColumnContainer from "../ColumnContainer"
 import MetricValues from "../MetricValues"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 import NumericValue from "../NumericValue/index"
@@ -166,9 +166,9 @@ class BatteryWithData extends Component {
           } else {
             const sortedBatteries = mainBatteryToFirst(batteries)
             return (
-              <HidingContainer metricsRef={this.props.metricsRef}>
+              <ColumnContainer>
                 <Batteries batteries={sortedBatteries} />
-              </HidingContainer>
+              </ColumnContainer>
             )
           }
         }}

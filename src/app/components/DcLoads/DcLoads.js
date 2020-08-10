@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 
 import HeaderView from "../HeaderView/HeaderView"
-import HidingContainer from "../HidingContainer"
+import ColumnContainer from "../ColumnContainer"
 import MetricValues from "../MetricValues"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 import NumericValue from "../NumericValue/index"
@@ -24,17 +24,17 @@ export const DcLoads = ({ voltage, power }) => {
 
 class DcLoadsWithData extends Component {
   render() {
-    const { portalId, metricsRef } = this.props
+    const { portalId } = this.props
     return (
       <MqttSubscriptions topics={getTopics(portalId)}>
         {topics => {
           if (topics && !topics.power) return null
           return (
-            <HidingContainer metricsRef={metricsRef}>
+            <ColumnContainer>
               <HeaderView icon={require("../../../images/icons/dc.svg")} title="DC Loads" showBoat>
                 <DcLoads {...topics} />
               </HeaderView>
-            </HidingContainer>
+            </ColumnContainer>
           )
         }}
       </MqttSubscriptions>

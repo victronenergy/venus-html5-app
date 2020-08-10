@@ -3,7 +3,7 @@ import classnames from "classnames"
 
 import GetShorePowerInputNumber from "../../mqtt/victron/GetShorePowerInputNumber"
 import HeaderView from "../HeaderView"
-import HidingContainer from "../HidingContainer"
+import ColumnContainer from "../ColumnContainer"
 import InputLimit from "./InputLimit"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 import MqttWriteValue from "../../mqtt/MqttWriteValue"
@@ -86,7 +86,7 @@ const InverterCharger = ({
 
 class InverterChargerWithData extends Component {
   render() {
-    const { portalId, inverterChargerDeviceId, connected, metricsRef, onChangeInputLimitClicked } = this.props
+    const { portalId, inverterChargerDeviceId, connected, onChangeInputLimitClicked } = this.props
     return (
       <MqttSubscriptions topics={getTopics(portalId, inverterChargerDeviceId)}>
         {topics => {
@@ -94,7 +94,7 @@ class InverterChargerWithData extends Component {
             <MqttWriteValue topic={`W/${portalId}/vebus/${inverterChargerDeviceId}/Mode`}>
               {(_, updateMode) => {
                 return (
-                  <HidingContainer metricsRef={metricsRef}>
+                  <ColumnContainer>
                     <InverterCharger
                       {...topics}
                       inverterChargerDeviceId={inverterChargerDeviceId}
@@ -103,7 +103,7 @@ class InverterChargerWithData extends Component {
                       onModeSelected={newMode => updateMode(newMode)}
                       onChangeInputLimitClicked={onChangeInputLimitClicked}
                     />
-                  </HidingContainer>
+                  </ColumnContainer>
                 )
               }}
             </MqttWriteValue>

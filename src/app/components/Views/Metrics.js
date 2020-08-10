@@ -95,7 +95,7 @@ export default class Metrics extends Component {
       onChangeInverterChargerInputLimitClicked,
       currentPage
     } = this.props
-    const commonProps = { portalId, inverterChargerDeviceId, metricsRef: this.metricsRef }
+    const commonProps = { portalId, inverterChargerDeviceId }
 
     let style = { height: this.state.height, transform: `translate(-${currentPage * 100}%)` }
 

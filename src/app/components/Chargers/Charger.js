@@ -2,7 +2,7 @@ import React from "react"
 
 import CurrentLimitIncrementor from "./CurrentLimitIncrementor"
 import HeaderView from "../../components/HeaderView"
-import HidingContainer from "../../components/HidingContainer"
+import ColumnContainer from "../../components/ColumnContainer"
 import MetricValues from "../MetricValues"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 import MqttWriteValue from "../../mqtt/MqttWriteValue"
@@ -93,13 +93,12 @@ const Charger = ({
             <>
               <div className="charger__input-limit-selector">
                 <div className="charger__input-limit-selector__label text--subtitle">{"Limit"}</div>
-                {currentLimit !== null &&
-                  currentLimit !== undefined && (
-                    <CurrentLimitIncrementor
-                      currentLimit={currentLimit}
-                      onInputLimitChanged={onChangeInputLimitClicked}
-                    />
-                  )}
+                {currentLimit !== null && currentLimit !== undefined && (
+                  <CurrentLimitIncrementor
+                    currentLimit={currentLimit}
+                    onInputLimitChanged={onChangeInputLimitClicked}
+                  />
+                )}
               </div>
             </>
           )}
@@ -109,7 +108,7 @@ const Charger = ({
   )
 }
 
-const ChargerWithData = ({ portalId, deviceInstanceId, metricsRef }) => (
+const ChargerWithData = ({ portalId, deviceInstanceId }) => (
   <MqttSubscriptions topics={getTopics(portalId, deviceInstanceId)}>
     {topics => {
       return (
@@ -119,9 +118,9 @@ const ChargerWithData = ({ portalId, deviceInstanceId, metricsRef }) => (
               <MqttWriteValue topic={`W/${portalId}/charger/${deviceInstanceId}/Ac/In/CurrentLimit`}>
                 {(_, updateInputLimit) => {
                   return (
-                    <HidingContainer metricsRef={metricsRef}>
+                    <ColumnContainer>
                       <Charger {...topics} onModeSelected={updateMode} onChangeInputLimitClicked={updateInputLimit} />
-                    </HidingContainer>
+                    </ColumnContainer>
                   )
                 }}
               </MqttWriteValue>

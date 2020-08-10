@@ -154,7 +154,7 @@ button:disabled {
   }
 }
 
-.hiding-container {
+.column-container {
   @media #{$portrait}, #{$smaller} {
     width: 100%;
   }

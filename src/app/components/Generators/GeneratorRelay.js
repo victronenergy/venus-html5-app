@@ -7,7 +7,7 @@ import { ListView } from "../ListView"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 import MqttWriteValue from "../../mqtt/MqttWriteValue"
 import SelectorButton from "../SelectorButton"
-import HidingContainer from "../HidingContainer"
+import ColumnContainer from "../ColumnContainer"
 import MetricValues from "../MetricValues"
 
 import { GENERATOR_START_STOP, AC_SOURCE_TYPE, RELAY_FUNCTION } from "../../utils/constants"
@@ -113,7 +113,7 @@ const GeneratorRelay = ({
 
 class GeneratorRelayWithData extends Component {
   render() {
-    const { portalId, manualStartStopTopic, autoStartStopTopic, inverterChargerDeviceId, metricsRef } = this.props
+    const { portalId, manualStartStopTopic, autoStartStopTopic, inverterChargerDeviceId } = this.props
     return (
       <MqttSubscriptions topics={getTopics(portalId, inverterChargerDeviceId)}>
         {topics => (
@@ -125,7 +125,7 @@ class GeneratorRelayWithData extends Component {
                     ? topics.settings.map(
                         (source, i) =>
                           source === AC_SOURCE_TYPE.GENERATOR && (
-                            <HidingContainer metricsRef={metricsRef} key={"generator-relay-" + i}>
+                            <ColumnContainer key={"generator-relay-" + i}>
                               <GeneratorRelay
                                 portalId={portalId}
                                 {...topics}
@@ -136,19 +136,19 @@ class GeneratorRelayWithData extends Component {
                                 onManualModeSelected={updateManualMode}
                                 onAutoModeSelected={updateAutoMode}
                               />
-                            </HidingContainer>
+                            </ColumnContainer>
                           )
                       )
                     : topics.relayFunction === RELAY_FUNCTION.GENERATOR_START_STOP &&
                       topics.statusCode !== undefined && (
-                        <HidingContainer metricsRef={metricsRef} key="generator-relay">
+                        <ColumnContainer key="generator-relay">
                           <GeneratorRelay
                             portalId={portalId}
                             {...topics}
                             onManualModeSelected={updateManualMode}
                             onAutoModeSelected={updateAutoMode}
                           />
-                        </HidingContainer>
+                        </ColumnContainer>
                       )
                 }
               </MqttWriteValue>
