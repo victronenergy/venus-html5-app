@@ -5,11 +5,13 @@
   align-items: center;
   justify-content: center;
   flex-grow: 1;
+  overflow: hidden;
 }
 
 .remote-console {
-  height: 350px;
+  height: 355px;
   flex-basis: 800px;
+  overflow: hidden;
 
   @media #{$hide-remote-console-breakpoint} {
     display: none;
