@@ -34,7 +34,7 @@ const AcLoads = props => {
 
   return showAsList ? (
     <ListView icon={require("../../../images/icons/ac.svg")} title="AC Loads" subTitle={`${phases} phases`}>
-      {voltage.map((v, i) => (
+      {voltage.slice(0, phases).map((v, i) => (
         <ListRow key={i}>
           <span className="value value__phase">L {i + 1}</span>
           <NumericValue value={v} unit="V" />
