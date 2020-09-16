@@ -43,8 +43,9 @@ export const ActiveInTotalValues = ({ voltage, current, power, frequency, coolan
       <NumericValue value={exhaust} unit="°C" />
     </ListRow>
   )
-  return phases ? (
+  return phases > 1 ? (
     voltage
+      .slice(0, phases)
       .map((v, i) => (
         <ListRow key={i}>
           <span className="value value__phase">L {i + 1}</span>
