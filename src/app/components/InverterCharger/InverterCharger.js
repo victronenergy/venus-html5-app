@@ -37,6 +37,13 @@ const InverterCharger = ({
 }) => {
   const productNameShort = productName && productName.split(" ")[0]
 
+  function getModeTitle(modeNum) {
+    if (modeNum === 3) return "On"
+    else if (modeNum === 4) return "Off"
+    else if (modeNum === 2) return "Charger only"
+    else return ""
+  }
+
   return (
     <div className="metric charger inverter-charger">
       <GetShorePowerInputNumber portalId={portalId}>
@@ -48,7 +55,7 @@ const InverterCharger = ({
               <HeaderView
                 icon={require("../../../images/icons/multiplus.svg")}
                 title={customName || `Inverter / Charger: ${productNameShort}`}
-                subTitle={systemStateFormatter(state)}
+                subTitle={`${getModeTitle(mode)} - ${systemStateFormatter(state)}  `}
                 child
               />
               <InputLimit
@@ -61,25 +68,19 @@ const InverterCharger = ({
           )
         }}
       </GetShorePowerInputNumber>
-      <div className="charger__mode-selector">
-        <SelectorButton disabled={!modeIsAdjustable} active={mode === 3} onClick={() => onModeSelected(SYSTEM_MODE.ON)}>
-          On
-        </SelectorButton>
-        <SelectorButton
-          disabled={!modeIsAdjustable}
-          active={mode === 4}
-          onClick={() => onModeSelected(SYSTEM_MODE.OFF)}
-        >
-          Off
-        </SelectorButton>
-        <SelectorButton
-          disabled={!modeIsAdjustable}
-          active={mode === 1}
-          onClick={() => onModeSelected(SYSTEM_MODE.CHARGER_ONLY)}
-        >
-          Charger only
-        </SelectorButton>
-      </div>
+      {!!modeIsAdjustable && (
+        <div className="charger__mode-selector">
+          <SelectorButton active={mode === 3} onClick={() => onModeSelected(SYSTEM_MODE.ON)}>
+            {getModeTitle(3)}
+          </SelectorButton>
+          <SelectorButton active={mode === 4} onClick={() => onModeSelected(SYSTEM_MODE.OFF)}>
+            {getModeTitle(4)}
+          </SelectorButton>
+          <SelectorButton active={mode === 1} onClick={() => onModeSelected(SYSTEM_MODE.CHARGER_ONLY)}>
+            {getModeTitle(1)}
+          </SelectorButton>
+        </div>
+      )}
     </div>
   )
 }
