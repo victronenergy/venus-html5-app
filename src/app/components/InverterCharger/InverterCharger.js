@@ -40,7 +40,7 @@ const InverterCharger = ({
   function getModeTitle(modeNum) {
     if (modeNum === 3) return "On"
     else if (modeNum === 4) return "Off"
-    else if (modeNum === 2) return "Charger only"
+    else if (modeNum === 1) return "Charger only"
     else return ""
   }
 
