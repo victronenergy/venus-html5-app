@@ -55,7 +55,7 @@ const InverterCharger = ({
               <HeaderView
                 icon={require("../../../images/icons/multiplus.svg")}
                 title={customName || `Inverter / Charger: ${productNameShort}`}
-                subTitle={`${getModeTitle(mode)} - ${systemStateFormatter(state)}  `}
+                subTitle={(!modeIsAdjustable ? getModeTitle(mode) + " - " : "") + systemStateFormatter(state)}
                 child
               />
               <InputLimit
