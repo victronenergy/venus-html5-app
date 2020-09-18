@@ -2,22 +2,41 @@ import React, { Component } from "react"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 import SelectorButton from "../SelectorButton"
 import { VIEWS } from "../../utils/constants"
+import { Icon, InlineIcon } from "@iconify/react"
+import lockIcon from "@iconify/icons-simple-line-icons/lock"
+import lockOpen from "@iconify/icons-simple-line-icons/lock-open"
 
 import "./Header.scss"
 
 export const Header = props => {
-  const { showRemoteConsoleSetting, currentView, handleRemoteConsoleButtonClicked, setPage, currentPage, pages } = props
+  const {
+    showRemoteConsoleSetting,
+    currentView,
+    handleRemoteConsoleButtonClicked,
+    handleLockScreenButtonClicked,
+    screenLocked,
+    setPage,
+    currentPage,
+    pages
+  } = props
   return (
     <header>
       <img src={require("../../../images/icons/logo.png")} className="logo" />
       {currentView === VIEWS.METRICS && pages > 1 && (
         <Paginator setPage={setPage} currentPage={currentPage} pages={pages} />
       )}
-      {showRemoteConsoleSetting && (
-        <button className="remote-console-button" onClick={handleRemoteConsoleButtonClicked}>
-          {currentView !== VIEWS.REMOTE_CONSOLE ? "Remote Console" : "Close"}
+      <div className="header-button-container">
+        <button className="lock-button" onClick={handleLockScreenButtonClicked}>
+          {screenLocked ? <InlineIcon icon={lockIcon} /> : <InlineIcon icon={lockOpen} />}
+          &nbsp; Toggle lock
         </button>
-      )}
+
+        {showRemoteConsoleSetting && (
+          <button className="remote-console-button" onClick={handleRemoteConsoleButtonClicked}>
+            {currentView !== VIEWS.REMOTE_CONSOLE ? "Remote Console" : "Close"}
+          </button>
+        )}
+      </div>
     </header>
   )
 }
@@ -45,7 +64,16 @@ const Paginator = ({ setPage, currentPage, pages }) => {
 
 class HeaderWithData extends Component {
   render() {
-    const { portalId, currentView, handleRemoteConsoleButtonClicked, setPage, currentPage, pages } = this.props
+    const {
+      portalId,
+      currentView,
+      handleRemoteConsoleButtonClicked,
+      handleLockScreenButtonClicked,
+      screenLocked,
+      setPage,
+      currentPage,
+      pages
+    } = this.props
     return (
       <MqttSubscriptions topics={{ showRemoteConsoleSetting: `N/${portalId}/settings/0/Settings/System/VncLocal` }}>
         {topics => {
@@ -53,6 +81,8 @@ class HeaderWithData extends Component {
             <Header
               showRemoteConsoleSetting={!!topics.showRemoteConsoleSetting}
               handleRemoteConsoleButtonClicked={handleRemoteConsoleButtonClicked}
+              handleLockScreenButtonClicked={handleLockScreenButtonClicked}
+              screenLocked={screenLocked}
               currentView={currentView}
               setPage={setPage}
               currentPage={currentPage}
@@ -67,11 +97,13 @@ class HeaderWithData extends Component {
 
 class HeaderWithoutMQTTData extends Component {
   render() {
-    const { currentView, handleRemoteConsoleButtonClicked } = this.props
+    const { currentView, handleRemoteConsoleButtonClicked, handleLockScreenButtonClicked, screenLocked } = this.props
     return (
       <Header
         showRemoteConsoleSetting={true}
         handleRemoteConsoleButtonClicked={handleRemoteConsoleButtonClicked}
+        handleLockScreenButtonClicked={handleLockScreenButtonClicked}
+        screenLocked={screenLocked}
         currentView={currentView}
       />
     )

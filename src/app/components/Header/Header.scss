@@ -14,7 +14,6 @@ header {
 .logo {
   width: 155px;
 
-
   @media #{$minimum} {
     width: 120px;
     margin-right: 10px;
@@ -34,7 +33,7 @@ header {
     justify-content: center;
     margin: 0 10px;
   }
-  
+
   .header__paginator-button {
     display: flex;
     height: 1rem;
@@ -48,7 +47,7 @@ header {
   border-radius: 6px;
   border: none;
   color: $color-lightgray;
-  background-color: #2A3341;
+  background-color: #2a3341;
   outline: none;
   cursor: pointer;
 }
@@ -61,4 +60,21 @@ header {
   @media #{$minimum} {
     display: none;
   }
+}
+
+.header-button-container {
+  display: flex;
+}
+
+.lock-button {
+  display: flex;
+  padding: 15px 24px;
+  text-decoration: none;
+  border-radius: 6px;
+  border: none;
+  color: $color-lightgray;
+  background-color: #2a3341;
+  outline: none;
+  cursor: pointer;
+  margin-right: 10px;
 }

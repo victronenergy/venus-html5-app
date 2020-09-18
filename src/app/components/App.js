@@ -36,7 +36,8 @@ class App extends Component {
     currentView: VIEWS.METRICS,
     viewUnmounting: false,
     currentPage: 0,
-    pages: 1
+    pages: 1,
+    screenLocked: false
   }
 
   setPage = currentPage => {
@@ -64,6 +65,12 @@ class App extends Component {
     } else this.setView(VIEWS.METRICS)
   }
 
+  toggleLock = () => {
+    this.setState(prevState => ({
+      screenLocked: !prevState.screenLocked
+    }))
+  }
+
   componentDidCatch = e => {
     if (window.onerror) window.onerror(e.message, null, null, null, { stack: e.stack })
   }
@@ -86,6 +93,8 @@ class App extends Component {
               <>
                 <HeaderWithoutMQTTData
                   handleRemoteConsoleButtonClicked={this.toggleRemoteConsole}
+                  handleLockScreenButtonClicked={this.toggleLock}
+                  screenLocked={this.state.screenLocked}
                   currentView={this.state.currentView}
                 />
                 {(() => {
@@ -122,6 +131,8 @@ class App extends Component {
                               <Header
                                 portalId={portalId}
                                 handleRemoteConsoleButtonClicked={this.toggleRemoteConsole}
+                                handleLockScreenButtonClicked={this.toggleLock}
+                                screenLocked={this.state.screenLocked}
                                 currentView={this.state.currentView}
                                 setPage={this.setPage}
                                 currentPage={this.state.currentPage}
