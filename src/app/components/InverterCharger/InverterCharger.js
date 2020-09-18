@@ -33,7 +33,8 @@ const InverterCharger = ({
   onModeSelected,
   onChangeInputLimitClicked,
   inverterChargerDeviceId,
-  portalId
+  portalId,
+  screenLocked
 }) => {
   const productNameShort = productName && productName.split(" ")[0]
 
@@ -62,18 +63,22 @@ const InverterCharger = ({
         }}
       </GetShorePowerInputNumber>
       <div className="charger__mode-selector">
-        <SelectorButton disabled={!modeIsAdjustable} active={mode === 3} onClick={() => onModeSelected(SYSTEM_MODE.ON)}>
+        <SelectorButton
+          disabled={!modeIsAdjustable || screenLocked}
+          active={mode === 3}
+          onClick={() => onModeSelected(SYSTEM_MODE.ON)}
+        >
           On
         </SelectorButton>
         <SelectorButton
-          disabled={!modeIsAdjustable}
+          disabled={!modeIsAdjustable || screenLocked}
           active={mode === 4}
           onClick={() => onModeSelected(SYSTEM_MODE.OFF)}
         >
           Off
         </SelectorButton>
         <SelectorButton
-          disabled={!modeIsAdjustable}
+          disabled={!modeIsAdjustable || screenLocked}
           active={mode === 1}
           onClick={() => onModeSelected(SYSTEM_MODE.CHARGER_ONLY)}
         >
@@ -86,7 +91,7 @@ const InverterCharger = ({
 
 class InverterChargerWithData extends Component {
   render() {
-    const { portalId, inverterChargerDeviceId, connected, onChangeInputLimitClicked } = this.props
+    const { portalId, inverterChargerDeviceId, connected, onChangeInputLimitClicked, screenLocked } = this.props
     return (
       <MqttSubscriptions topics={getTopics(portalId, inverterChargerDeviceId)}>
         {topics => {
@@ -100,6 +105,7 @@ class InverterChargerWithData extends Component {
                       inverterChargerDeviceId={inverterChargerDeviceId}
                       portalId={portalId}
                       modeIsAdjustable={topics.modeIsAdjustable && connected}
+                      screenLocked={screenLocked}
                       onModeSelected={newMode => updateMode(newMode)}
                       onChangeInputLimitClicked={onChangeInputLimitClicked}
                     />

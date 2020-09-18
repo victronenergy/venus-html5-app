@@ -177,6 +177,7 @@ class App extends Component {
                                             setPages={this.setPages}
                                             currentPage={this.state.currentPage}
                                             pages={this.state.pages}
+                                            screenLocked={this.state.screenLocked}
                                           />
                                         </Fade>
                                       )
