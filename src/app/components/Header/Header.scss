@@ -40,7 +40,11 @@ header {
   }
 }
 
-.remote-console-button {
+.header-button-container {
+  display: flex;
+}
+
+.header-button {
   display: flex;
   padding: 15px 24px;
   text-decoration: none;
@@ -53,6 +57,7 @@ header {
 }
 
 .remote-console-button {
+  @extend .header-button;
   @media #{$hide-remote-console-breakpoint} {
     visibility: hidden;
   }
@@ -62,19 +67,7 @@ header {
   }
 }
 
-.header-button-container {
-  display: flex;
-}
-
 .lock-button {
-  display: flex;
-  padding: 15px 24px;
-  text-decoration: none;
-  border-radius: 6px;
-  border: none;
-  color: $color-lightgray;
-  background-color: #2a3341;
-  outline: none;
-  cursor: pointer;
+  @extend .header-button;
   margin-right: 10px;
 }

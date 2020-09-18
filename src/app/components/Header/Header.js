@@ -27,8 +27,15 @@ export const Header = props => {
       )}
       <div className="header-button-container">
         <button className="lock-button" onClick={handleLockScreenButtonClicked}>
-          {screenLocked ? <InlineIcon icon={lockIcon} /> : <InlineIcon icon={lockOpen} />}
-          &nbsp; Toggle lock
+          {screenLocked ? (
+            <span>
+              <InlineIcon icon={lockIcon} /> &nbsp; Unlock to make changes
+            </span>
+          ) : (
+            <span>
+              <InlineIcon icon={lockOpen} /> &nbsp; Lock to prevent changes
+            </span>
+          )}
         </button>
 
         {showRemoteConsoleSetting && (
