@@ -25,18 +25,21 @@ export const Header = props => {
       {currentView === VIEWS.METRICS && pages > 1 && (
         <Paginator setPage={setPage} currentPage={currentPage} pages={pages} />
       )}
+
       <div className="header-button-container">
-        <button className="lock-button" onClick={handleLockScreenButtonClicked}>
-          {screenLocked ? (
-            <span>
-              <InlineIcon icon={lockIcon} /> &nbsp; Unlock to make changes
-            </span>
-          ) : (
-            <span>
-              <InlineIcon icon={lockOpen} /> &nbsp; Lock to prevent changes
-            </span>
-          )}
-        </button>
+        {currentView === VIEWS.METRICS && (
+          <button className="lock-button" onClick={handleLockScreenButtonClicked}>
+            {screenLocked ? (
+              <span>
+                <InlineIcon icon={lockIcon} /> &nbsp; Unlock to make changes
+              </span>
+            ) : (
+              <span>
+                <InlineIcon icon={lockOpen} /> &nbsp; Lock to prevent changes
+              </span>
+            )}
+          </button>
+        )}
 
         {showRemoteConsoleSetting && (
           <button className="remote-console-button" onClick={handleRemoteConsoleButtonClicked}>
