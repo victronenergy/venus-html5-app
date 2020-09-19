@@ -37,7 +37,7 @@ class App extends Component {
     viewUnmounting: false,
     currentPage: 0,
     pages: 1,
-    screenLocked: false
+    screenLocked: true
   }
 
   setPage = currentPage => {
