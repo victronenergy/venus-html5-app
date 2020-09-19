@@ -66,8 +66,3 @@ header {
     display: none;
   }
 }
-
-.lock-button {
-  @extend .header-button;
-  margin-right: 10px;
-}

@@ -1,10 +1,8 @@
 import React, { Component } from "react"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 import SelectorButton from "../SelectorButton"
+import LockButton from "../../components/LockButton/LockButton"
 import { VIEWS } from "../../utils/constants"
-import { Icon, InlineIcon } from "@iconify/react"
-import lockIcon from "@iconify/icons-simple-line-icons/lock"
-import lockOpen from "@iconify/icons-simple-line-icons/lock-open"
 
 import "./Header.scss"
 
@@ -28,17 +26,7 @@ export const Header = props => {
 
       <div className="header-button-container">
         {currentView === VIEWS.METRICS && (
-          <button className="lock-button" onClick={handleLockScreenButtonClicked}>
-            {screenLocked ? (
-              <span>
-                <InlineIcon icon={lockIcon} /> &nbsp; Unlock to make changes
-              </span>
-            ) : (
-              <span>
-                <InlineIcon icon={lockOpen} /> &nbsp; Lock to prevent changes
-              </span>
-            )}
-          </button>
+          <LockButton onClick={handleLockScreenButtonClicked} screenLocked={screenLocked} />
         )}
 
         {showRemoteConsoleSetting && (
