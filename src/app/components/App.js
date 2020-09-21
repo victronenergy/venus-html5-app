@@ -15,6 +15,8 @@ import { VIEWS } from "./../utils/constants"
 import "../../css/texts.scss"
 import "../../css/styles.scss"
 
+import { LockButtonFooter } from "./LockButton/LockButton"
+
 const Main = ({ isConnected, children, setView }) => {
   return (
     <main
@@ -184,6 +186,7 @@ class App extends Component {
                                   }
                                 })()}
                               </Main>
+                              <LockButtonFooter onClick={this.toggleLock} screenLocked={this.state.screenLocked} />
                             </>
                           )
                         }}

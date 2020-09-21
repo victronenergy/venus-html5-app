@@ -19,7 +19,6 @@ export const Header = props => {
   } = props
   return (
     <Fragment>
-      <LockButtonHeader onClick={handleLockScreenButtonClicked} screenLocked={screenLocked} />
       <header>
         <img src={require("../../../images/icons/logo.png")} className="logo" />
         {currentView === VIEWS.METRICS && pages > 1 && (
@@ -38,6 +37,7 @@ export const Header = props => {
           )}
         </div>
       </header>
+      {/* <LockButtonHeader onClick={handleLockScreenButtonClicked} screenLocked={screenLocked} /> */}
     </Fragment>
   )
 }

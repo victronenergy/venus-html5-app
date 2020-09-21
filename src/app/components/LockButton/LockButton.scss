@@ -1,35 +1,27 @@
 @import "../Header/Header.scss";
+@import "../../../css/variables.scss";
 
 .lock-button {
   @extend .header-button;
   margin-right: 10px;
-
-  @media #{$hide-remote-console-breakpoint} {
-    visibility: hidden;
-  }
 
   @media #{$minimum} {
     display: none;
   }
 }
 
-.lock-button-header {
-  flex-shrink: 0;
+.lock-button-footer {
   justify-content: center;
   align-items: center;
-  width: 100%;
   max-width: 1280px;
-  padding: 10px;
+  padding: 15px 0 15px 0;
   background: #2a3341;
   color: $color-lightgray;
-  padding: 15px 24px;
-
-  visibility: hidden;
+  border-radius: 6px;
+  border: none;
+  width: calc(100% - 20px);
+  margin: 0 10px 2vh 10px;
   display: none;
-
-  @media #{$hide-remote-console-breakpoint} {
-    visibility: visible;
-  }
 
   @media #{$minimum} {
     display: flex;

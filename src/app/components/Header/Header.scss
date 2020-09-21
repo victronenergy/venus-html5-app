@@ -50,10 +50,7 @@ header {
 
 .header-button-container {
   display: flex;
-
-  @media #{$hide-remote-console-breakpoint} {
-    visibility: hidden;
-  }
+  margin-left: 10px;
 
   @media #{$minimum} {
     display: none;
@@ -64,6 +61,7 @@ header {
   display: flex;
   padding: 15px 24px;
   text-decoration: none;
+  align-items: center;
   border-radius: 6px;
   border: none;
   color: $color-lightgray;
@@ -74,4 +72,8 @@ header {
 
 .remote-console-button {
   @extend .header-button;
+
+  @media #{$hide-remote-console-breakpoint} {
+    display: none;
+  }
 }
