@@ -70,7 +70,7 @@ const GeneratorRelay = ({
       {phases > 1 ? (
         <ListView icon={icon} title={title} subTitle={subTitle} child>
           {active && (
-            <ActiveInValues portalId={portalId} inverterChargerDeviceId={inverterChargerDeviceId} threePhase={true} />
+            <ActiveInValues portalId={portalId} inverterChargerDeviceId={inverterChargerDeviceId} phases={phases} />
           )}
         </ListView>
       ) : (

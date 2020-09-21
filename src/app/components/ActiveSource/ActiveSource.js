@@ -36,7 +36,7 @@ const activeSourceIcon = {
 
 const getSourceSubtitle = (active, phases) => {
   if (active) {
-    return phases > 1 ? "3 phases" : null
+    return phases > 1 ? `${phases} phases` : null
   } else {
     return "Unplugged"
   }
@@ -51,7 +51,7 @@ const ActiveSource = ({ portalId, inverterChargerDeviceId, source, active, phase
       {phases > 1 ? (
         <ListView icon={icon} title={title} subTitle={subTitle} child>
           {active && (
-            <ActiveInValues portalId={portalId} inverterChargerDeviceId={inverterChargerDeviceId} threePhase={true} />
+            <ActiveInValues portalId={portalId} inverterChargerDeviceId={inverterChargerDeviceId} phases={phases} />
           )}
         </ListView>
       ) : (

@@ -32,7 +32,7 @@ const getTopics = portalId => {
   }
 }
 
-export const ActiveInTotalValues = ({ voltage, current, power, frequency, coolant, winding, exhaust, threePhase }) => {
+export const ActiveInTotalValues = ({ voltage, current, power, frequency, coolant, winding, exhaust, phases }) => {
   const temperatures = (
     <ListRow key="temperatures">
       <span className="value value__temperature">Coolant</span>
@@ -43,8 +43,9 @@ export const ActiveInTotalValues = ({ voltage, current, power, frequency, coolan
       <NumericValue value={exhaust} unit="°C" />
     </ListRow>
   )
-  return threePhase ? (
+  return phases > 1 ? (
     voltage
+      .slice(0, phases)
       .map((v, i) => (
         <ListRow key={i}>
           <span className="value value__phase">L {i + 1}</span>
@@ -66,11 +67,11 @@ export const ActiveInTotalValues = ({ voltage, current, power, frequency, coolan
   )
 }
 
-export default ({ portalId, threePhase }) => {
+export default ({ portalId, phases }) => {
   return (
     <MqttSubscriptions topics={getTopics(portalId)}>
       {topics => {
-        return <ActiveInTotalValues {...topics} threePhase={threePhase} />
+        return <ActiveInTotalValues {...topics} phases={phases} />
       }}
     </MqttSubscriptions>
   )
