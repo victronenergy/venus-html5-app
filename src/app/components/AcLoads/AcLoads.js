@@ -28,7 +28,7 @@ const getTopics = (portalId, vebusInstanceId) => {
   }
 }
 
-const AcLoads = props => {
+export const AcLoads = props => {
   const { current, voltage, power, phases } = props
   const showAsList = phases > 1
 
