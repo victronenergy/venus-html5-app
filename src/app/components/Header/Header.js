@@ -1,7 +1,7 @@
-import React, { Component } from "react"
+import React, { Component, Fragment } from "react"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 import SelectorButton from "../SelectorButton"
-import LockButton from "../../components/LockButton/LockButton"
+import { LockButton, LockButtonHeader } from "../../components/LockButton/LockButton"
 import { VIEWS } from "../../utils/constants"
 
 import "./Header.scss"
@@ -18,24 +18,27 @@ export const Header = props => {
     pages
   } = props
   return (
-    <header>
-      <img src={require("../../../images/icons/logo.png")} className="logo" />
-      {currentView === VIEWS.METRICS && pages > 1 && (
-        <Paginator setPage={setPage} currentPage={currentPage} pages={pages} />
-      )}
-
-      <div className="header-button-container">
-        {currentView === VIEWS.METRICS && (
-          <LockButton onClick={handleLockScreenButtonClicked} screenLocked={screenLocked} />
+    <Fragment>
+      <LockButtonHeader onClick={handleLockScreenButtonClicked} screenLocked={screenLocked} />
+      <header>
+        <img src={require("../../../images/icons/logo.png")} className="logo" />
+        {currentView === VIEWS.METRICS && pages > 1 && (
+          <Paginator setPage={setPage} currentPage={currentPage} pages={pages} />
         )}
 
-        {showRemoteConsoleSetting && (
-          <button className="remote-console-button" onClick={handleRemoteConsoleButtonClicked}>
-            {currentView !== VIEWS.REMOTE_CONSOLE ? "Remote Console" : "Close"}
-          </button>
-        )}
-      </div>
-    </header>
+        <div className="header-button-container">
+          {currentView === VIEWS.METRICS && (
+            <LockButton onClick={handleLockScreenButtonClicked} screenLocked={screenLocked} />
+          )}
+
+          {showRemoteConsoleSetting && (
+            <button className="remote-console-button" onClick={handleRemoteConsoleButtonClicked}>
+              {currentView !== VIEWS.REMOTE_CONSOLE ? "Remote Console" : "Close"}
+            </button>
+          )}
+        </div>
+      </header>
+    </Fragment>
   )
 }
 

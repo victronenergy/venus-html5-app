@@ -23,4 +23,25 @@ class LockButton extends Component {
   }
 }
 
+class LockButtonHeader extends Component {
+  render() {
+    const { onClick, screenLocked } = this.props
+    return (
+      <div className="lock-button-header" onClick={onClick}>
+        {screenLocked ? (
+          <div>
+            <InlineIcon icon={lockIcon} /> &nbsp; Unlock to make changes
+          </div>
+        ) : (
+          <div>
+            <InlineIcon icon={lockOpen} /> &nbsp; Lock to prevent changes
+          </div>
+        )}
+      </div>
+    )
+  }
+}
+
 export default LockButton
+
+export { LockButton, LockButtonHeader }

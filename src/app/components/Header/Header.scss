@@ -9,6 +9,14 @@ header {
   width: 100%;
   max-width: 1280px;
   padding: 50px 10px 10px;
+
+  @media #{$hide-remote-console-breakpoint} {
+    padding: 20px 10px 10px;
+  }
+
+  @media #{$minimum} {
+    padding: 20px 10px 10px;
+  }
 }
 
 .logo {
@@ -42,6 +50,14 @@ header {
 
 .header-button-container {
   display: flex;
+
+  @media #{$hide-remote-console-breakpoint} {
+    visibility: hidden;
+  }
+
+  @media #{$minimum} {
+    display: none;
+  }
 }
 
 .header-button {
@@ -58,11 +74,4 @@ header {
 
 .remote-console-button {
   @extend .header-button;
-  @media #{$hide-remote-console-breakpoint} {
-    visibility: hidden;
-  }
-
-  @media #{$minimum} {
-    display: none;
-  }
 }
