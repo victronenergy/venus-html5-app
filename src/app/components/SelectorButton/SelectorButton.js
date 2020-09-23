@@ -14,7 +14,7 @@ class SelectorButton extends Component {
       <LockContext.Consumer>
         {context => (
           <div
-            onClick={() => !disabled && onClick()}
+            onClick={() => (alwaysUnlocked || !(disabled || context.screenLocked)) && onClick()}
             className={classNames(
               "selector-button",
               large ? "text--very-large" : "text--smaller",
