@@ -12,6 +12,8 @@ import SelectorButton from "../SelectorButton"
 import { systemStateFormatter } from "../../utils/util"
 import { SYSTEM_MODE } from "../../utils/constants"
 
+import { LockContext } from "../../contexts"
+
 import "./InverterCharger.scss"
 
 const getTopics = (portalId, vebusInstanceId) => {
@@ -33,8 +35,7 @@ const InverterCharger = ({
   onModeSelected,
   onChangeInputLimitClicked,
   inverterChargerDeviceId,
-  portalId,
-  screenLocked
+  portalId
 }) => {
   const productNameShort = productName && productName.split(" ")[0]
 
@@ -63,22 +64,18 @@ const InverterCharger = ({
         }}
       </GetShorePowerInputNumber>
       <div className="charger__mode-selector">
-        <SelectorButton
-          disabled={!modeIsAdjustable || screenLocked}
-          active={mode === 3}
-          onClick={() => onModeSelected(SYSTEM_MODE.ON)}
-        >
+        <SelectorButton disabled={!modeIsAdjustable} active={mode === 3} onClick={() => onModeSelected(SYSTEM_MODE.ON)}>
           On
         </SelectorButton>
         <SelectorButton
-          disabled={!modeIsAdjustable || screenLocked}
+          disabled={!modeIsAdjustable}
           active={mode === 4}
           onClick={() => onModeSelected(SYSTEM_MODE.OFF)}
         >
           Off
         </SelectorButton>
         <SelectorButton
-          disabled={!modeIsAdjustable || screenLocked}
+          disabled={!modeIsAdjustable}
           active={mode === 1}
           onClick={() => onModeSelected(SYSTEM_MODE.CHARGER_ONLY)}
         >
