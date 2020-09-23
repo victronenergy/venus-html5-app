@@ -4,51 +4,50 @@ import lockIcon from "@iconify/icons-simple-line-icons/lock"
 import lockOpen from "@iconify/icons-simple-line-icons/lock-open"
 import { LockContext } from "../../contexts"
 import "./LockButton.scss"
+import { VIEWS } from "../../utils/constants"
+
+class LockButtonHeader extends Component {
+  render() {
+    const { currentView, header } = this.props
+    return <LockButton currentView={currentView} header={header} />
+  }
+}
+
+// Renders on mobile/vertical views
+class LockButtonFooter extends Component {
+  render() {
+    const { currentView, header } = this.props
+    return <LockButton currentView={currentView} header={header} />
+  }
+}
 
 class LockButton extends Component {
   render() {
+    const { currentView, header } = this.props
     return (
-      <LockContext.Consumer>
-        {context => (
-          <button className="lock-button" onClick={context.toggleLocked}>
-            {context.screenLocked ? (
-              <span>
-                <InlineIcon icon={lockIcon} /> &nbsp; Unlock to make changes
-              </span>
-            ) : (
-              <span>
-                <InlineIcon icon={lockOpen} /> &nbsp; Lock to prevent changes
-              </span>
+      <>
+        {currentView === VIEWS.METRICS && (
+          <LockContext.Consumer>
+            {context => (
+              <div className={header ? "lock-button" : "lock-button-footer"} onClick={context.toggleLocked}>
+                {context.screenLocked ? (
+                  <div>
+                    <InlineIcon icon={lockIcon} /> &nbsp; Unlock to make changes
+                  </div>
+                ) : (
+                  <div>
+                    <InlineIcon icon={lockOpen} /> &nbsp; Lock to prevent changes
+                  </div>
+                )}
+              </div>
             )}
-          </button>
+          </LockContext.Consumer>
         )}
-      </LockContext.Consumer>
+      </>
     )
   }
 }
 
-class LockButtonFooter extends Component {
-  render() {
-    return (
-      <LockContext.Consumer>
-        {context => (
-          <div className="lock-button-footer" onClick={context.toggleLocked}>
-            {context.screenLocked ? (
-              <div>
-                <InlineIcon icon={lockIcon} /> &nbsp; Unlock to make changes
-              </div>
-            ) : (
-              <div>
-                <InlineIcon icon={lockOpen} /> &nbsp; Lock to prevent changes
-              </div>
-            )}
-          </div>
-        )}
-      </LockContext.Consumer>
-    )
-  }
-}
+export default LockButtonHeader
 
-export default LockButton
-
-export { LockButton, LockButtonFooter }
+export { LockButtonHeader, LockButtonFooter }

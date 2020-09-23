@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 import SelectorButton from "../SelectorButton"
-import { LockButton, LockButtonHeader } from "../../components/LockButton/LockButton"
+import { LockButtonHeader } from "../../components/LockButton/LockButton"
 import { VIEWS } from "../../utils/constants"
 
 import "./Header.scss"
@@ -26,9 +26,12 @@ export const Header = props => {
         )}
 
         <div className="header-button-container">
-          {currentView === VIEWS.METRICS && (
-            <LockButton onClick={handleLockScreenButtonClicked} screenLocked={screenLocked} />
-          )}
+          <LockButtonHeader
+            onClick={handleLockScreenButtonClicked}
+            screenLocked={screenLocked}
+            currentView={currentView}
+            header={true}
+          />
 
           {showRemoteConsoleSetting && (
             <button className="remote-console-button" onClick={handleRemoteConsoleButtonClicked}>
@@ -37,7 +40,6 @@ export const Header = props => {
           )}
         </div>
       </header>
-      {/* <LockButtonHeader onClick={handleLockScreenButtonClicked} screenLocked={screenLocked} /> */}
     </Fragment>
   )
 }
@@ -45,7 +47,7 @@ export const Header = props => {
 const Paginator = ({ setPage, currentPage, pages }) => {
   return (
     <div className="header__paginator">
-      <SelectorButton disabled={currentPage < 1} onClick={() => setPage(currentPage - 1)}>
+      <SelectorButton alwaysUnlocked={true} disabled={currentPage < 1} onClick={() => setPage(currentPage - 1)}>
         <img src={require("../../../images/icons/L.svg")} className="header__paginator-button" />
       </SelectorButton>
       <span className="header__paginator-page">
@@ -56,7 +58,11 @@ const Paginator = ({ setPage, currentPage, pages }) => {
         ))}
       </span>
 
-      <SelectorButton disabled={currentPage + 1 >= pages} onClick={() => setPage(currentPage + 1)}>
+      <SelectorButton
+        alwaysUnlocked={true}
+        disabled={currentPage + 1 >= pages}
+        onClick={() => setPage(currentPage + 1)}
+      >
         <img src={require("../../../images/icons/R.svg")} className="header__paginator-button" />
       </SelectorButton>
     </div>

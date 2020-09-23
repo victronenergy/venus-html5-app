@@ -40,12 +40,12 @@ class App extends Component {
     viewUnmounting: false,
     currentPage: 0,
     pages: 1,
+    showLockButton: true,
     screenLocked: false,
     toggleLock: this.toggleLock
   }
 
   toggleLocked = () => {
-    console.log("toggle lock")
     this.setState(state => ({
       screenLocked: state.screenLocked ? false : true
     }))
@@ -204,7 +204,7 @@ class App extends Component {
                                     }
                                   })()}
                                 </Main>
-                                <LockButtonFooter />
+                                <LockButtonFooter currentView={this.state.currentView} />
                               </>
                             </LockContext.Provider>
                           )

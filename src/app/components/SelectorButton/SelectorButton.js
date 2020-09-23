@@ -4,8 +4,12 @@ import { LockContext } from "../../contexts"
 
 // Keep as class component to allow refs
 class SelectorButton extends Component {
+  static defaultProps = {
+    alwaysUnlocked: false
+  }
+
   render() {
-    const { disabled, active, narrow, large, onClick, className, children } = this.props
+    const { disabled, active, narrow, large, onClick, className, children, alwaysUnlocked } = this.props
     return (
       <LockContext.Consumer>
         {context => (
@@ -17,7 +21,7 @@ class SelectorButton extends Component {
               {
                 "selector-button--active": active,
                 "selector-button--narrow": narrow,
-                "selector-button--disabled": disabled || context.screenLocked
+                "selector-button--disabled": !alwaysUnlocked && (disabled || context.screenLocked)
               },
               className || ""
             )}
