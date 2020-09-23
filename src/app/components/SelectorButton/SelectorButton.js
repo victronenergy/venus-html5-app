@@ -14,14 +14,17 @@ class SelectorButton extends Component {
       <LockContext.Consumer>
         {context => (
           <div
-            onClick={() => (alwaysUnlocked || !(disabled || context.screenLocked)) && onClick()}
+            // Buttons are shown as 'disabled' and do not 'onClick' if screenLocked
+            // ... except if they are alwaysUnlocked (pagination buttons)
+            // ... alwaysUnlocked buttons can still be disabled (e.g. 'previous page'-button on page 1)
+            onClick={() => (!context.screenLocked || alwaysUnlocked) && !disabled && onClick()}
             className={classNames(
               "selector-button",
               large ? "text--very-large" : "text--smaller",
               {
                 "selector-button--active": active,
                 "selector-button--narrow": narrow,
-                "selector-button--disabled": !alwaysUnlocked && (disabled || context.screenLocked)
+                "selector-button--disabled": disabled || (context.screenLocked && !alwaysUnlocked)
               },
               className || ""
             )}
