@@ -1,10 +1,8 @@
 import React, { Component, useContext } from "react"
-import { InlineIcon } from "@iconify/react"
-import lockIcon from "@iconify/icons-simple-line-icons/lock"
-import lockOpen from "@iconify/icons-simple-line-icons/lock-open"
+import classNames from "classnames"
 import { LockContext } from "../../contexts"
-import "./LockButton.scss"
 import { VIEWS } from "../../utils/constants"
+import "./LockButton.scss"
 
 class LockButtonHeader extends Component {
   render() {
@@ -29,15 +27,24 @@ class LockButton extends Component {
         {currentView === VIEWS.METRICS && (
           <LockContext.Consumer>
             {context => (
-              <div className={header ? "lock-button" : "lock-button-footer"} onClick={context.toggleLocked}>
+              <div
+                className={classNames("text--smaller", header ? "lock-button" : "lock-button-footer")}
+                onClick={context.toggleLocked}
+              >
                 {context.screenLocked ? (
-                  <div>
-                    <InlineIcon icon={lockIcon} /> &nbsp; Unlock to make changes
-                  </div>
+                  <>
+                    <span>
+                      <img src={require("../../../images/icons/VRM_MFD_Lock.svg")} className="lock-icon" />
+                    </span>
+                    &nbsp; Unlock to make changes
+                  </>
                 ) : (
-                  <div>
-                    <InlineIcon icon={lockOpen} /> &nbsp; Lock to prevent changes
-                  </div>
+                  <>
+                    <span>
+                      <img src={require("../../../images/icons/VRM_MFD_Unlock.svg")} className="lock-icon" />
+                    </span>
+                    &nbsp; Lock to prevent changes
+                  </>
                 )}
               </div>
             )}
