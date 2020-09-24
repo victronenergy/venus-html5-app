@@ -50,4 +50,4 @@ class LockButton extends Component {
 
 export default LockButtonHeader
 
-export { LockButtonHeader, LockButtonFooter }
+export { LockButtonHeader, LockButtonFooter, LockButton }

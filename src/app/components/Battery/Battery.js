@@ -36,9 +36,7 @@ const Paginator = ({ setPage, currentPage, pages }) => {
       <SelectorButton alwaysUnlocked={true} disabled={currentPage < 1} onClick={() => setPage(currentPage - 1)}>
         <img src={require("../../../images/icons/L.svg")} className="battery__paginator-button" />
       </SelectorButton>
-      <span alwaysUnlocked={true} className="battery__paginator-page">
-        {currentPage + 1}
-      </span>
+      <span className="battery__paginator-page">{currentPage + 1}</span>
       <SelectorButton
         alwaysUnlocked={true}
         disabled={currentPage + 1 >= pages}
