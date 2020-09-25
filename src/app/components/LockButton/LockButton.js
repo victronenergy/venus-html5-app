@@ -34,14 +34,14 @@ class LockButton extends Component {
                 {context.screenLocked ? (
                   <>
                     <span>
-                      <img src={require("../../../images/icons/VRM_MFD_Lock.svg")} className="lock-icon" />
+                      <img src={require("../../../images/icons/lock.svg")} className="lock-icon" />
                     </span>
                     &nbsp; Unlock to make changes
                   </>
                 ) : (
                   <>
                     <span>
-                      <img src={require("../../../images/icons/VRM_MFD_Unlock.svg")} className="lock-icon" />
+                      <img src={require("../../../images/icons/unlock.svg")} className="lock-icon" />
                     </span>
                     &nbsp; Lock to prevent changes
                   </>
