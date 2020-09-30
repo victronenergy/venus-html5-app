@@ -36,14 +36,14 @@ class LockButton extends Component {
                     <span>
                       <img src={require("../../../images/icons/lock.svg")} className="lock-icon" />
                     </span>
-                    &nbsp; Unlock to make changes
+                    <span class="lock-text">Unlock to make changes</span>
                   </>
                 ) : (
                   <>
                     <span>
                       <img src={require("../../../images/icons/unlock.svg")} className="lock-icon" />
                     </span>
-                    &nbsp; Lock to prevent changes
+                    <span class="lock-text">Lock to prevent changes</span>
                   </>
                 )}
               </div>
