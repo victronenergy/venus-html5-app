@@ -9,11 +9,18 @@ header {
   width: 100%;
   max-width: 1280px;
   padding: 50px 10px 10px;
+
+  @media #{$hide-remote-console-breakpoint} {
+    padding: 20px 10px 10px;
+  }
+
+  @media #{$minimum} {
+    padding: 20px 10px 10px;
+  }
 }
 
 .logo {
   width: 155px;
-
 
   @media #{$minimum} {
     width: 120px;
@@ -34,31 +41,39 @@ header {
     justify-content: center;
     margin: 0 10px;
   }
-  
+
   .header__paginator-button {
     display: flex;
     height: 1rem;
   }
 }
 
-.remote-console-button {
+.header-button-container {
+  display: flex;
+  margin-left: 10px;
+
+  @media #{$minimum} {
+    display: none;
+  }
+}
+
+.header-button {
   display: flex;
   padding: 15px 24px;
   text-decoration: none;
+  align-items: center;
   border-radius: 6px;
   border: none;
   color: $color-lightgray;
-  background-color: #2A3341;
+  background-color: #2a3341;
   outline: none;
   cursor: pointer;
 }
 
 .remote-console-button {
-  @media #{$hide-remote-console-breakpoint} {
-    visibility: hidden;
-  }
+  @extend .header-button;
 
-  @media #{$minimum} {
+  @media #{$hide-remote-console-breakpoint} {
     display: none;
   }
 }

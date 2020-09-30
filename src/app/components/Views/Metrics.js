@@ -93,7 +93,8 @@ export default class Metrics extends Component {
       inverterChargerDeviceId,
       isConnected,
       onChangeInverterChargerInputLimitClicked,
-      currentPage
+      currentPage,
+      screenLocked
     } = this.props
     const commonProps = { portalId, inverterChargerDeviceId }
 
@@ -109,6 +110,7 @@ export default class Metrics extends Component {
             {...commonProps}
             onChangeInputLimitClicked={onChangeInverterChargerInputLimitClicked}
             connected={isConnected}
+            screenLocked={screenLocked}
           />
         )}
         {!!inverterChargerDeviceId && <ActiveSource {...commonProps} />}

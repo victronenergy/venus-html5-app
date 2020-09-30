@@ -12,6 +12,8 @@ import SelectorButton from "../SelectorButton"
 import { systemStateFormatter } from "../../utils/util"
 import { SYSTEM_MODE } from "../../utils/constants"
 
+import { LockContext } from "../../contexts"
+
 import "./InverterCharger.scss"
 
 const getTopics = (portalId, vebusInstanceId) => {
@@ -87,7 +89,7 @@ const InverterCharger = ({
 
 class InverterChargerWithData extends Component {
   render() {
-    const { portalId, inverterChargerDeviceId, connected, onChangeInputLimitClicked } = this.props
+    const { portalId, inverterChargerDeviceId, connected, onChangeInputLimitClicked, screenLocked } = this.props
     return (
       <MqttSubscriptions topics={getTopics(portalId, inverterChargerDeviceId)}>
         {topics => {
@@ -101,6 +103,7 @@ class InverterChargerWithData extends Component {
                       inverterChargerDeviceId={inverterChargerDeviceId}
                       portalId={portalId}
                       modeIsAdjustable={topics.modeIsAdjustable && connected}
+                      screenLocked={screenLocked}
                       onModeSelected={newMode => updateMode(newMode)}
                       onChangeInputLimitClicked={onChangeInputLimitClicked}
                     />
