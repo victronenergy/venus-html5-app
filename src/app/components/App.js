@@ -41,8 +41,12 @@ class App extends Component {
     currentPage: 0,
     pages: 1,
     showLockButton: true,
-    screenLocked: false,
+    screenLocked: localStorage.getItem("screenLocked") === "true",
     toggleLock: this.toggleLock
+  }
+
+  componentDidUpdate = () => {
+    localStorage.setItem("screenLocked", this.state.screenLocked)
   }
 
   toggleLocked = () => {

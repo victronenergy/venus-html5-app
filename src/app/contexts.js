@@ -4,6 +4,6 @@ export const MqttClientContext = React.createContext(null)
 
 export const LockContext = React.createContext({
   showLockButton: true,
-  screenLocked: false,
+  screenLocked: localStorage.getItem("screenLocked"),
   toggleLocked: () => {}
 })
