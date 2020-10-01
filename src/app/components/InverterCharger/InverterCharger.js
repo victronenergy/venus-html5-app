@@ -12,8 +12,6 @@ import SelectorButton from "../SelectorButton"
 import { systemStateFormatter } from "../../utils/util"
 import { SYSTEM_MODE } from "../../utils/constants"
 
-import { LockContext } from "../../contexts"
-
 import "./InverterCharger.scss"
 
 const getTopics = (portalId, vebusInstanceId) => {
