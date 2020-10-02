@@ -97,6 +97,7 @@ class App extends Component {
       <MqttClientProvider host={host} port={port}>
         {(_, isConnected, error) => {
           if (error) {
+            this.setState({ screenLocked: false })
             return (
               <LockContext.Provider
                 value={{
