@@ -6,8 +6,8 @@ import "./LockButton.scss"
 
 class LockButtonHeader extends Component {
   render() {
-    const { currentView, header } = this.props
-    return <LockButton currentView={currentView} header={header} />
+    const { currentView, header, showLockButton } = this.props
+    return <LockButton currentView={currentView} header={header} showLockButton={showLockButton} />
   }
 }
 
@@ -20,11 +20,14 @@ class LockButtonFooter extends Component {
 }
 
 class LockButton extends Component {
+  static defaultProps = {
+    showLockButton: true
+  }
   render() {
-    const { currentView, header } = this.props
+    const { currentView, header, showLockButton } = this.props
     return (
       <>
-        {currentView === VIEWS.METRICS && (
+        {currentView === VIEWS.METRICS && showLockButton && (
           <LockContext.Consumer>
             {context => (
               <div

@@ -40,7 +40,6 @@ class App extends Component {
     viewUnmounting: false,
     currentPage: 0,
     pages: 1,
-    showLockButton: true,
     screenLocked: localStorage.getItem("screenLocked") === "true",
     toggleLock: this.toggleLock
   }
@@ -102,7 +101,7 @@ class App extends Component {
               <LockContext.Provider
                 value={{
                   screenLocked: this.state.screenLocked,
-                  toggleLocked: this.toggleLocked
+                  showLockButton: false
                 }}
               >
                 <>
@@ -146,7 +145,8 @@ class App extends Component {
                             <LockContext.Provider
                               value={{
                                 screenLocked: this.state.screenLocked,
-                                toggleLocked: this.toggleLocked
+                                toggleLocked: this.toggleLocked,
+                                showLockButton: true
                               }}
                             >
                               <>
