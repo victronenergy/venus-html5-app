@@ -13,6 +13,7 @@ export const Header = props => {
     handleRemoteConsoleButtonClicked,
     handleLockScreenButtonClicked,
     screenLocked,
+    showLockButton,
     setPage,
     currentPage,
     pages
@@ -31,6 +32,7 @@ export const Header = props => {
             screenLocked={screenLocked}
             currentView={currentView}
             header={true}
+            showLockButton={showLockButton}
           />
 
           {showRemoteConsoleSetting && (
@@ -112,6 +114,7 @@ class HeaderWithoutMQTTData extends Component {
         handleLockScreenButtonClicked={handleLockScreenButtonClicked}
         screenLocked={screenLocked}
         currentView={currentView}
+        showLockButton={false}
       />
     )
   }
