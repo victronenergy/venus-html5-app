@@ -144,8 +144,7 @@ class App extends Component {
                             <LockContext.Provider
                               value={{
                                 screenLocked: this.state.screenLocked,
-                                toggleLocked: this.toggleLocked,
-                                showLockButton: true
+                                toggleLocked: this.toggleLocked
                               }}
                             >
                               <>
