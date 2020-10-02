@@ -12,7 +12,6 @@ export const Header = props => {
     currentView,
     handleRemoteConsoleButtonClicked,
     handleLockScreenButtonClicked,
-    screenLocked,
     showLockButton,
     setPage,
     currentPage,
@@ -29,7 +28,6 @@ export const Header = props => {
         <div className="header-button-container">
           <LockButtonHeader
             onClick={handleLockScreenButtonClicked}
-            screenLocked={screenLocked}
             currentView={currentView}
             header={true}
             showLockButton={showLockButton}
@@ -78,7 +76,6 @@ class HeaderWithData extends Component {
       currentView,
       handleRemoteConsoleButtonClicked,
       handleLockScreenButtonClicked,
-      screenLocked,
       setPage,
       currentPage,
       pages
@@ -91,7 +88,6 @@ class HeaderWithData extends Component {
               showRemoteConsoleSetting={!!topics.showRemoteConsoleSetting}
               handleRemoteConsoleButtonClicked={handleRemoteConsoleButtonClicked}
               handleLockScreenButtonClicked={handleLockScreenButtonClicked}
-              screenLocked={screenLocked}
               currentView={currentView}
               setPage={setPage}
               currentPage={currentPage}
@@ -106,13 +102,12 @@ class HeaderWithData extends Component {
 
 class HeaderWithoutMQTTData extends Component {
   render() {
-    const { currentView, handleRemoteConsoleButtonClicked, handleLockScreenButtonClicked, screenLocked } = this.props
+    const { currentView, handleRemoteConsoleButtonClicked, handleLockScreenButtonClicked } = this.props
     return (
       <Header
         showRemoteConsoleSetting={true}
         handleRemoteConsoleButtonClicked={handleRemoteConsoleButtonClicked}
         handleLockScreenButtonClicked={handleLockScreenButtonClicked}
-        screenLocked={screenLocked}
         currentView={currentView}
         showLockButton={false}
       />
