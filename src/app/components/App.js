@@ -108,7 +108,6 @@ class App extends Component {
                   <HeaderWithoutMQTTData
                     handleRemoteConsoleButtonClicked={this.toggleRemoteConsole}
                     handleLockScreenButtonClicked={this.toggleLock}
-                    screenLocked={this.state.screenLocked}
                     currentView={this.state.currentView}
                   />
                   {(() => {
