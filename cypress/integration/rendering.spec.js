@@ -42,6 +42,11 @@ const deviceResolutions = {
     thirtdVerticalSplit(1280, 723),
     quarter(1280, 723),
     sixth(1280, 723)
+  ],
+  other: [
+    [2560, 1440],
+    [3840, 2160],
+    [1024, 1366]
   ]
 }
 
