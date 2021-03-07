@@ -36,12 +36,13 @@ const BatteryLevel = ({ state, timeToGo, soc }) => {
   const batteryStateLabel = batteryStateFormatter(state)
   const timeToGoLabel = batteryTimeToGoFormatter(timeToGo)
   const showTimetoGo = state === BATTERY_STATE.DISCHARGING && timeToGo
+  const showSoc = soc !== undefined && soc !== null
 
   return (
     <div className="metrics__right">
       {batteryStateLabel && <span>{batteryStateLabel}</span>}
       {showTimetoGo && <span>{timeToGoLabel}</span>}
-      {soc && <span>{formatNumber({ value: soc })}%</span>}
+      {showSoc && <span>{formatNumber({ value: soc })}%</span>}
     </div>
   )
 }
