@@ -10,6 +10,8 @@ import { GENERATOR_START_STOP } from "../../utils/constants"
 
 import "./Generator.scss"
 
+import GeneratorIcon from "../../../images/icons/generator.svg"
+
 const getTopics = portalId => {
   return {
     statusCode: `N/${portalId}/generator/0/Generator0/State`,
@@ -32,13 +34,12 @@ function getGeneratorState(statusCode) {
 }
 
 const GeneratorRelay = ({ statusCode, manualStart, autoStart, onManualModeSelected, onAutoModeSelected }) => {
-  const icon = require("../../../images/icons/generator.svg")
   const title = "Generator"
   const subTitle = getGeneratorState(statusCode)
 
   return (
     <div className="metric generator">
-      <HeaderView icon={icon} title={title} subTitle={subTitle} child />
+      <HeaderView icon={GeneratorIcon} title={title} subTitle={subTitle} child />
       <div className="generator__mode-selector">
         <SelectorButton
           active={manualStart && !autoStart}

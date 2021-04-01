@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import SelectorButton from "../SelectorButton/SelectorButton"
-import PropTypes from "prop-types"
 import { formatNumber } from "../NumericValue"
 
 class CurrentLimitIncrementor extends Component {
@@ -41,9 +40,9 @@ class CurrentLimitIncrementor extends Component {
   }
 }
 
-CurrentLimitIncrementor.propTypes = {
-  onInputLimitChanged: PropTypes.func,
-  currentLimit: PropTypes.number
-}
+// CurrentLimitIncrementor.propTypes = {
+//   onInputLimitChanged: PropTypes.func,
+//   currentLimit: PropTypes.number
+// }
 
 export default CurrentLimitIncrementor

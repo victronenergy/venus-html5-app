@@ -11,6 +11,9 @@ import { AC_SOURCE_TYPE } from "../../utils/constants"
 
 import "./ActiveSource.scss"
 
+import ShorePowerIcon from "../../../images/icons/shore-power.svg"
+import GeneratorIcon from "../../../images/icons/generator.svg"
+
 const getTopics = (portalId, vebusInstanceId) => {
   return {
     activeInput: `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/ActiveInput`,
@@ -30,10 +33,10 @@ const activeSourceTitle = {
 }
 
 const activeSourceIcon = {
-  [AC_SOURCE_TYPE.SHORE]: require("../../../images/icons/shore-power.svg"),
-  [AC_SOURCE_TYPE.GRID]: require("../../../images/icons/shore-power.svg"),
-  [AC_SOURCE_TYPE.GENERATOR]: require("../../../images/icons/generator.svg"),
-  [AC_SOURCE_TYPE.NOT_IN_USE]: require("../../../images/icons/shore-power.svg")
+  [AC_SOURCE_TYPE.SHORE]: ShorePowerIcon,
+  [AC_SOURCE_TYPE.GRID]: ShorePowerIcon,
+  [AC_SOURCE_TYPE.GENERATOR]: GeneratorIcon,
+  [AC_SOURCE_TYPE.NOT_IN_USE]: ShorePowerIcon
 }
 
 const getSourceSubtitle = (active, phases, source) => {

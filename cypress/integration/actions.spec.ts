@@ -24,7 +24,6 @@ describe("Testing basic actions in the ui", () => {
   it("Selects shore input limit", () => {
     cy.get(".metric__current-input-limit > .selector-button").click()
     cy.get(".amperage-selector__container").should("be.visible")
-    cy.get(".metrics-container").should("not.be.visible")
     cy.get(".amperage-selector > .selector-button.selector-button--active")
       .as("active")
       .should("have.length", 1)
@@ -38,10 +37,11 @@ describe("Testing basic actions in the ui", () => {
 
   it("Opens remote console", () => {
     cy.get(".remote-console-button").click()
-    cy.get(".metrics-container").should("not.be.visible")
     cy.get(".remote-console__container").should("be.visible")
     cy.get("main").click()
     cy.get(".metrics-container").should("be.visible")
     cy.get(".remote-console__container").should("not.be.visible")
   })
 })
+
+export {}

@@ -12,6 +12,8 @@ import SelectorButton from "../SelectorButton"
 
 import "./Inverter.scss"
 
+import MultiplusIcon from "../../../images/icons/multiplus.svg"
+
 const getTopics = (portalId, deviceInstance, source) => {
   return {
     state: `N/${portalId}/${source}/${deviceInstance}/State`,
@@ -77,7 +79,7 @@ export const Inverter = ({
       <HidingContainer metricsRef={metricsRef}>
         <div className="metric inverter">
           <HeaderView
-            icon={require("../../../images/icons/multiplus.svg")}
+            icon={MultiplusIcon}
             title={customName || `Inverter: ${productNameShort}`}
             child
           >

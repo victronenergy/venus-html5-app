@@ -11,6 +11,10 @@ import SelectorButton from "../SelectorButton"
 
 import "./Battery.scss"
 
+import BatteryIcon from "../../../images/icons/battery.svg"
+import LIcon from "../../../images/icons/L.svg"
+import RIcon from "../../../images/icons/R.svg"
+
 const getTopics = portalId => {
   return {
     batteries: `N/${portalId}/system/0/Batteries`
@@ -20,7 +24,7 @@ const getTopics = portalId => {
 const BatteryHeader = ({ amount, paginate, setPage, currentPage, pageSize }) => {
   return (
     <div className="battery-header">
-      <img src={require("../../../images/icons/battery.svg")} className="metric__icon" />
+      <img src={BatteryIcon} className="metric__icon" />
       <div className="battery-header__text">
         <p className="text--title">{amount > 1 ? "Batteries" : "Battery"}</p>
         <p className="text--subtitle">{amount > 1 && `${amount} Batteries`}</p>
@@ -34,11 +38,11 @@ const Paginator = ({ setPage, currentPage, pages }) => {
   return (
     <div className="battery__paginator">
       <SelectorButton disabled={currentPage < 1} onClick={() => setPage(currentPage - 1)}>
-        <img src={require("../../../images/icons/L.svg")} className="battery__paginator-button" />
+        <img src={LIcon} className="battery__paginator-button" />
       </SelectorButton>
       <span className="battery__paginator-page">{currentPage + 1}</span>
       <SelectorButton disabled={currentPage + 1 >= pages} onClick={() => setPage(currentPage + 1)}>
-        <img src={require("../../../images/icons/R.svg")} className="battery__paginator-button" />
+        <img src={RIcon} className="battery__paginator-button" />
       </SelectorButton>
     </div>
   )
@@ -72,7 +76,7 @@ export class BatteryList extends Component {
 }
 
 const SingleBattery = battery => (
-  <HeaderView icon={require("../../../images/icons/battery.svg")} title={`Battery: ${battery.name}`}>
+  <HeaderView icon={BatteryIcon} title={`Battery: ${battery.name}`}>
     <BatteryRow {...battery} />
   </HeaderView>
 )

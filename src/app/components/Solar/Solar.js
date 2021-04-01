@@ -6,6 +6,8 @@ import MetricValues from "../MetricValues"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 import NumericValue from "../NumericValue/index"
 
+import SolarIcon from "../../../images/icons/icon_solar.svg"
+
 const getTopics = portalId => {
   return {
     power: `N/${portalId}/system/0/Dc/Pv/Power`,
@@ -15,7 +17,7 @@ const getTopics = portalId => {
 
 const Solar = ({ current, power }) => {
   return (
-    <HeaderView icon={require("../../../images/icons/icon_solar.svg")} title="Solar">
+    <HeaderView icon={SolarIcon} title="Solar">
       <MetricValues>
         <NumericValue value={current} unit="A" precision={1} />
         <NumericValue value={power} unit="W" />

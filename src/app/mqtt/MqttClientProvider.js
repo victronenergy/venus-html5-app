@@ -20,18 +20,18 @@ class MqttClientProvider extends Component {
   topicsSubscribed = new Set()
   keepaliveHAndlerRef
   portalId = null
-  isMounted = false
+  mounted = false
 
   safeSetState(state) {
-    if (this.isMounted) this.setState(state)
+    if (this.mounted) this.setState(state)
   }
 
   componentWillUnmount() {
-    this.isMounted = false
+    this.mounted = false
   }
 
   componentDidMount() {
-    this.isMounted = true
+    this.mounted = true
     const client = mqtt.connect(`mqtt://${this.props.host}:${this.props.port}`)
     this.safeSetState({ client })
 

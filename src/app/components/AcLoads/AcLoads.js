@@ -7,6 +7,8 @@ import MetricValues from "../MetricValues"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 import NumericValue from "../NumericValue/index"
 
+import AcIcon from "../../../images/icons/ac.svg"
+
 const getTopics = (portalId, vebusInstanceId) => {
   return {
     phases: `N/${portalId}/system/0/Ac/Consumption/NumberOfPhases`,
@@ -33,7 +35,7 @@ const AcLoads = props => {
   const showAsList = phases > 1
 
   return showAsList ? (
-    <ListView icon={require("../../../images/icons/ac.svg")} title="AC Loads" subTitle={`${phases} phases`}>
+    <ListView icon={AcIcon} title="AC Loads" subTitle={`${phases} phases`}>
       {voltage.map((v, i) => (
         <ListRow key={i}>
           <span className="value value__phase">L {i + 1}</span>
@@ -44,7 +46,7 @@ const AcLoads = props => {
       ))}
     </ListView>
   ) : (
-    <HeaderView icon={require("../../../images/icons/ac.svg")} title="AC Loads">
+    <HeaderView icon={AcIcon} title="AC Loads">
       <MetricValues>
         <NumericValue value={voltage[0]} unit="V" />
         <NumericValue value={current[0]} unit="A" precision={1} />

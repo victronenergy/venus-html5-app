@@ -1,4 +1,4 @@
-import { parseTopic } from "../src/app/utils/util"
+import { parseTopic } from "./util"
 
 describe("parseTopic", () => {
   test("splits topic into its parts", () => {

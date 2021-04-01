@@ -14,6 +14,8 @@ import { CHARGER_MODE } from "../../utils/constants"
 
 import "./Charger.scss"
 
+import MultiplusIcon from "../../../images/icons/multiplus.svg"
+
 const getTopics = (portalId, deviceInstanceId) => {
   return {
     customName: `N/${portalId}/charger/${deviceInstanceId}/CustomName`,
@@ -75,7 +77,7 @@ const Charger = ({
     <div className="metric charger">
       <div className="charger__header-wrapper">
         <HeaderView
-          icon={require("../../../images/icons/multiplus.svg")}
+          icon={MultiplusIcon}
           title={customName || `Charger: ${productNameShort}`}
           children={ChargerSubtitle(current, state)}
           child

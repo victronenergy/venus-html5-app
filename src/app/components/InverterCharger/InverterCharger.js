@@ -14,6 +14,8 @@ import { SYSTEM_MODE } from "../../utils/constants"
 
 import "./InverterCharger.scss"
 
+import MultiplusIcon from "../../../images/icons/multiplus.svg"
+
 const getTopics = (portalId, vebusInstanceId) => {
   return {
     state: `N/${portalId}/system/0/SystemState/State`,
@@ -46,7 +48,7 @@ const InverterCharger = ({
               className={classnames("inverter-charger__header", { "inverter-charger__header--column": !shoreInput })}
             >
               <HeaderView
-                icon={require("../../../images/icons/multiplus.svg")}
+                icon={MultiplusIcon}
                 title={customName || `Inverter / Charger: ${productNameShort}`}
                 subTitle={systemStateFormatter(state)}
                 child

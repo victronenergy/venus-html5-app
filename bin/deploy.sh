@@ -27,8 +27,8 @@ USERNAME=${USERNAME:-root}
 HOST="$1"
 
 echo "Building app.."
-npm run compile
+npm run build
 
-echo "Uploading dist/* to ${USERNAME}@${HOST}:/var/www/venus/app"
+echo "Uploading build/* to ${USERNAME}@${HOST}:/var/www/venus/app"
 
-scp -r dist/* ${USERNAME}@${HOST}:/var/www/venus/app
+scp -r build/* ${USERNAME}@${HOST}:/var/www/venus/app

@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 const sizes = [
   [400, 768 / 4],
   [600, 768 / 4],
@@ -43,3 +45,5 @@ describe("Testing pagination", () => {
     })
   })
 })
+
+export {}

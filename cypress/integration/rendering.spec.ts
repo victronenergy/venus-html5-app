@@ -1,20 +1,20 @@
-const halfVerticalSplit = (w, h) => {
+const halfVerticalSplit = (w: number, h: number) => {
   return [w / 2, h]
 }
 
-const thirtdVerticalSplit = (w, h) => {
+const thirdVerticalSplit = (w: number, h: number) => {
   return [w / 3, h]
 }
 
-const halfHorizontalSplit = (w, h) => {
+const halfHorizontalSplit = (w: number, h: number) => {
   return [w, h / 2]
 }
 
-const quarter = (w, h) => {
+const quarter = (w: number, h: number) => {
   return [w / 2, h / 2]
 }
 
-const sixth = (w, h) => {
+const sixth = (w: number, h: number) => {
   return [w / 3, h / 2]
 }
 
@@ -24,7 +24,7 @@ const deviceResolutions = {
     [1086, 772],
     halfHorizontalSplit(1086, 772),
     halfVerticalSplit(1086, 772),
-    thirtdVerticalSplit(1086, 772),
+    thirdVerticalSplit(1086, 772),
     quarter(1086, 772),
     sixth(1086, 772)
   ],
@@ -39,7 +39,7 @@ const deviceResolutions = {
     [1280, 723],
     halfHorizontalSplit(1280, 723),
     halfVerticalSplit(1280, 723),
-    thirtdVerticalSplit(1280, 723),
+    thirdVerticalSplit(1280, 723),
     quarter(1280, 723),
     sixth(1280, 723)
   ],
@@ -69,20 +69,20 @@ for (let [device, resolutions] of Object.entries(deviceResolutions)) {
         })
 
         if (width < 450 && width / height >= 0.9) {
-          it("Hides inverter charger, shore input limit and shore power in tiny ui", () => {
+          it("Hides inverter charger in tiny ui", () => {
             cy.get(".inverter-charger").should("not.be.visible")
-            cy.get(".metric--shore-input-limit").should("not.be.visible")
-            cy.get(".shore-power__container").should("not.be.visible")
           })
         }
       })
 
       describe("Elements are in viewport", () => {
         it("header", () => {
+          // @ts-ignore
           cy.get("header").isWithinViewport(width, height)
         })
 
         it("metrics-container", () => {
+          // @ts-ignore
           cy.get(".metrics-container").isWithinViewport(width, height)
         })
 
@@ -91,9 +91,12 @@ for (let [device, resolutions] of Object.entries(deviceResolutions)) {
           cy.wait(1000)
           cy.screenshot(`${device} resolution ${width}x${height}`)
           const imagePath = `screenshots/${Cypress.spec.name}/${device} resolution ${width}x${height}.png`
+          // @ts-ignore
           cy.addContext(imagePath)
         })
       })
     })
   }
 }
+
+export {}

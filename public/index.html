@@ -11,7 +11,7 @@
   </head>
 
   <body>
-    <div id="app"></div>
+    <div id="root"></div>
     <div id="debugReload" style="position: fixed; top: 30px; left: 200px; display: none;">
       <input type="button" value="Reload page" onclick="location.reload(true)" />
       <input
@@ -35,24 +35,20 @@
         return decodeURIComponent(results[2].replace(/\+/g, " "))
       }
 
-      var mode = "<%= htmlWebpackPlugin.options.ENV %>"
-
-      if (mode === "production") {
-        var host = getParameterByName("host") || window.location.hostname || "localhost"
-        var socket = new WebSocket("ws://" + host + ":7890")
-        window.onerror = function(msg, url, lineNo, columnNo, err) {
-          var data = {
-            time: new Date(),
-            error: msg
-          }
-
-          if (err) {
-            data.stack = err.stack
-          }
-
-          socket.send(JSON.stringify(data))
-          return true
+      var host = getParameterByName("host") || window.location.hostname || "localhost"
+      var socket = new WebSocket("ws://" + host + ":7890")
+      window.onerror = function(msg, url, lineNo, columnNo, err) {
+        var data = {
+          time: new Date(),
+          error: msg
         }
+
+        if (err) {
+          data.stack = err.stack
+        }
+
+        socket.send(JSON.stringify(data))
+        return true
       }
 
       function debugLogFn(msg) {

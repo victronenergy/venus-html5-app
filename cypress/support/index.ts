@@ -29,12 +29,13 @@ Cypress.on("test:after:run", (test, runnable) => {
   addContext({ test }, `videos/${Cypress.spec.name}.mp4`)
 })
 
-function getFullTestName(runnable) {
+function getFullTestName(runnable: Mocha.Test) {
   let item = runnable
   const name = [runnable.title]
 
   while (item.parent) {
     name.unshift(item.parent.title)
+    // @ts-ignore
     item = item.parent
   }
 

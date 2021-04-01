@@ -1,7 +1,6 @@
 import { BATTERY_STATE } from "../../utils/constants"
 import { formatNumber } from "../NumericValue/index"
 import React from "react"
-import PropTypes from "prop-types"
 
 const batteryStateFormatter = value => {
   switch (value) {
@@ -47,10 +46,10 @@ const BatteryLevel = ({ state, timeToGo, soc }) => {
   )
 }
 
-BatteryLevel.propTypes = {
-  state: PropTypes.oneOf(Object.values(BATTERY_STATE)),
-  soc: PropTypes.number,
-  timeToGo: PropTypes.number
-}
+// BatteryLevel.propTypes = {
+//   state: PropTypes.oneOf(Object.values(BATTERY_STATE)),
+//   soc: PropTypes.number,
+//   timeToGo: PropTypes.number
+// }
 
 export default BatteryLevel

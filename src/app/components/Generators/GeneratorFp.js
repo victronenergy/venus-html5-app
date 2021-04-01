@@ -17,6 +17,10 @@ import {
 
 import "./Generator.scss"
 
+import FpGeneratorIcon from "../../../images/icons/fp_generator.svg"
+import GeneratorIcon from "../../../images/icons/generator.svg"
+
+
 const getTopics = portalId => {
   return {
     statusCode: `N/${portalId}/genset/0/StatusCode`,
@@ -31,9 +35,9 @@ const getTopics = portalId => {
 const getIcon = productId => {
   switch (productId) {
     case FISCHER_PANDA_GENSET_PRODUCT_ID:
-      return require("../../../images/icons/fp_generator.svg")
+      return FpGeneratorIcon
     default:
-      return require("../../../images/icons/generator.svg")
+      return GeneratorIcon
   }
 }
 

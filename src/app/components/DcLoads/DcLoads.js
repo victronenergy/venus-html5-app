@@ -6,6 +6,8 @@ import MetricValues from "../MetricValues"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 import NumericValue from "../NumericValue/index"
 
+import DcIcon from "../../../images/icons/dc.svg"
+
 const getTopics = portalId => {
   return {
     voltage: `N/${portalId}/system/0/Dc/Battery/Voltage`,
@@ -31,7 +33,7 @@ class DcLoadsWithData extends Component {
           if (topics && !topics.power) return null
           return (
             <HidingContainer metricsRef={metricsRef}>
-              <HeaderView icon={require("../../../images/icons/dc.svg")} title="DC Loads" showBoat>
+              <HeaderView icon={DcIcon} title="DC Loads" showBoat>
                 <DcLoads {...topics} />
               </HeaderView>
             </HidingContainer>

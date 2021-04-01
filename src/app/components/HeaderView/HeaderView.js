@@ -1,5 +1,4 @@
 import React from "react"
-import PropTypes from "prop-types"
 
 import "./HeaderView.scss"
 
@@ -22,10 +21,5 @@ const HeaderView = ({ child, children, icon, title = "", subTitle = "", showBoat
     </div>
   </div>
 )
-
-HeaderView.propTypes = {
-  child: PropTypes.bool,
-  icon: PropTypes.string
-}
 
 export default HeaderView

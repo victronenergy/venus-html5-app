@@ -5,11 +5,15 @@ import { VIEWS } from "../../utils/constants"
 
 import "./Header.scss"
 
+import Logo from "../../../images/icons/logo.png"
+import LIcon from "../../../images/icons/L.svg"
+import RIcon from "../../../images/icons/R.svg"
+
 export const Header = props => {
   const { showRemoteConsoleSetting, currentView, handleRemoteConsoleButtonClicked, setPage, currentPage, pages } = props
   return (
     <header>
-      <img src={require("../../../images/icons/logo.png")} className="logo" />
+      <img src={Logo} className="logo" />
       {currentView === VIEWS.METRICS && pages > 1 && (
         <Paginator setPage={setPage} currentPage={currentPage} pages={pages} />
       )}
@@ -26,7 +30,7 @@ const Paginator = ({ setPage, currentPage, pages }) => {
   return (
     <div className="header__paginator">
       <SelectorButton disabled={currentPage < 1} onClick={() => setPage(currentPage - 1)}>
-        <img src={require("../../../images/icons/L.svg")} className="header__paginator-button" />
+        <img src={LIcon} className="header__paginator-button" />
       </SelectorButton>
       <span className="header__paginator-page">
         {[...Array(pages).keys()].map(page => (
@@ -37,7 +41,7 @@ const Paginator = ({ setPage, currentPage, pages }) => {
       </span>
 
       <SelectorButton disabled={currentPage + 1 >= pages} onClick={() => setPage(currentPage + 1)}>
-        <img src={require("../../../images/icons/R.svg")} className="header__paginator-button" />
+        <img src={RIcon} className="header__paginator-button" />
       </SelectorButton>
     </div>
   )

@@ -17,3 +17,5 @@ describe("Testing basic values rendering in the ui", () => {
     })
   })
 })
+
+export {}
