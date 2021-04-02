@@ -40,7 +40,6 @@ describe("Testing basic actions in the ui", () => {
     cy.get(".remote-console__container").should("be.visible")
     cy.get("main").click()
     cy.get(".metrics-container").should("be.visible")
-    cy.get(".remote-console__container").should("not.be.visible")
   })
 })
 
