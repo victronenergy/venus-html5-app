@@ -10,4 +10,6 @@ const error = (...msgs) => {
   if (!getParameterByName("nolog")) console.error(...msgs)
 }
 
-export default { log, warn, error }
+const logger = { log, warn, error }
+
+export default logger;

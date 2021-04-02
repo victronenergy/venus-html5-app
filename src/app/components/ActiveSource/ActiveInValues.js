@@ -43,7 +43,7 @@ export const ActiveInTotalValues = ({ voltage, current, power, threePhase }) => 
   )
 }
 
-export default ({ portalId, inverterChargerDeviceId, threePhase }) => {
+const ActiveInValues = ({ portalId, inverterChargerDeviceId, threePhase }) => {
   if (!inverterChargerDeviceId) {
     return null
   } else {
@@ -56,3 +56,5 @@ export default ({ portalId, inverterChargerDeviceId, threePhase }) => {
     )
   }
 }
+
+export default ActiveInValues;

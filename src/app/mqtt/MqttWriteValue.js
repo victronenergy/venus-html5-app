@@ -10,11 +10,12 @@ class MqttWriteValue extends Component {
     return <>{this.props.children(this.props.isConnected, this.publish)}</>
   }
 }
-
-export default props => (
+const MqttWriteValueWrapped = props => (
   <MqttClientContext.Consumer>
     {({ publish, isConnected }) => {
       return <MqttWriteValue {...props} publish={publish} isConnected={isConnected} />
     }}
   </MqttClientContext.Consumer>
 )
+
+export default MqttWriteValueWrapped;

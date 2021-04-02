@@ -3,7 +3,7 @@ import MqttTopicWildcard from "../MqttTopicWildcard"
 import Logger from "../../utils/logger"
 import MqttSubscriptions from "../MqttSubscriptions"
 
-export default ({ children, portalId }) => (
+const GetInverterChargerDeviceInstance = ({ children, portalId }) => (
   <MqttTopicWildcard wildcard={`N/+/vebus/+/DeviceInstance`}>
     {messages => {
       if (Object.entries(messages).length === 0) {
@@ -33,3 +33,5 @@ export default ({ children, portalId }) => (
     }}
   </MqttTopicWildcard>
 )
+
+export default GetInverterChargerDeviceInstance;

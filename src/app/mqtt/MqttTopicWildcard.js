@@ -23,7 +23,7 @@ class MqttTopicWildcard extends Component {
   }
 }
 
-export default props => (
+const MqttTopicWildcardWrapped = props => (
   <MqttClientContext.Consumer>
     {({ subscribe, unsubscribe, getMessagesByWildcard }) => {
       const filteredMessages = getMessagesByWildcard(props.wildcard)
@@ -33,3 +33,5 @@ export default props => (
     }}
   </MqttClientContext.Consumer>
 )
+
+export default MqttTopicWildcardWrapped;

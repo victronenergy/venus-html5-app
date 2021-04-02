@@ -4,7 +4,7 @@ import Fade from "../../Fade"
 
 import "./Connecting.scss"
 
-export default ({ viewUnmounting }) => (
+const Connecting = ({ viewUnmounting }) => (
   <main>
     <Fade unmount={viewUnmounting}>
       <div className="connecting">
@@ -18,3 +18,5 @@ export default ({ viewUnmounting }) => (
     </Fade>
   </main>
 )
+
+export default Connecting;

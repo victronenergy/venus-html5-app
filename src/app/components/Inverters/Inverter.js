@@ -38,6 +38,8 @@ const stateFormatter = state => {
       return "Fault"
     case 9:
       return "Inverting"
+    default:
+      return null;
   }
 }
 

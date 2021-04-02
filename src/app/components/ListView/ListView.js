@@ -6,7 +6,7 @@ import "./ListView.scss"
 export const ListView = ({ child, children, icon, title, subTitle }) => (
   <div className={classnames({ metric: !child }, "list-view")}>
     <div className="list-view__header">
-      <img src={icon} className="metric__icon" />
+      <img src={icon} className="metric__icon" alt={"List View Icon"} />
       <div className="metric__value-container">
         <p className="text text--title text--bold">{title}</p>
         {subTitle && <span className="text text--smaller text--opaque">{subTitle}</span>}

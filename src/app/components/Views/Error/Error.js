@@ -3,7 +3,7 @@ import React from "react"
 import "./Error.scss"
 import "../../../../css/texts.scss"
 
-export default () => {
+const Error = () => {
   return (
     <div className="error text--large">
       <div>
@@ -21,3 +21,5 @@ export default () => {
     </div>
   )
 }
+
+export default Error;

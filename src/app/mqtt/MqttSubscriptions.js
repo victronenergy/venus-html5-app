@@ -24,7 +24,7 @@ class MqttSubscriptions extends Component {
   }
 }
 
-export default props => (
+const MqttSubscriptionsWrapped = props => (
   <MqttClientContext.Consumer>
     {({ subscribe, unsubscribe, getMessagesByTopics }) => {
       const filteredMessages = getMessagesByTopics(props.topics)
@@ -34,3 +34,5 @@ export default props => (
     }}
   </MqttClientContext.Consumer>
 )
+
+export default MqttSubscriptionsWrapped;

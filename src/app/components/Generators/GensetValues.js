@@ -66,7 +66,7 @@ export const ActiveInTotalValues = ({ voltage, current, power, frequency, coolan
   )
 }
 
-export default ({ portalId, threePhase }) => {
+const GensetValues = ({ portalId, threePhase }) => {
   return (
     <MqttSubscriptions topics={getTopics(portalId)}>
       {topics => {
@@ -75,3 +75,5 @@ export default ({ portalId, threePhase }) => {
     </MqttSubscriptions>
   )
 }
+
+export default GensetValues;

@@ -10,6 +10,8 @@ const batteryStateFormatter = value => {
       return "Discharging"
     case BATTERY_STATE.IDLE:
       return "Idle"
+    default:
+      return null
   }
 }
 

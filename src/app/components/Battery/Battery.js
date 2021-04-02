@@ -24,7 +24,7 @@ const getTopics = portalId => {
 const BatteryHeader = ({ amount, paginate, setPage, currentPage, pageSize }) => {
   return (
     <div className="battery-header">
-      <img src={BatteryIcon} className="metric__icon" />
+      <img src={BatteryIcon} className="metric__icon" alt={"Battery Icon"} />
       <div className="battery-header__text">
         <p className="text--title">{amount > 1 ? "Batteries" : "Battery"}</p>
         <p className="text--subtitle">{amount > 1 && `${amount} Batteries`}</p>
@@ -38,11 +38,11 @@ const Paginator = ({ setPage, currentPage, pages }) => {
   return (
     <div className="battery__paginator">
       <SelectorButton disabled={currentPage < 1} onClick={() => setPage(currentPage - 1)}>
-        <img src={LIcon} className="battery__paginator-button" />
+        <img src={LIcon} className="battery__paginator-button" alt={"Battery Paginator Button"} />
       </SelectorButton>
       <span className="battery__paginator-page">{currentPage + 1}</span>
       <SelectorButton disabled={currentPage + 1 >= pages} onClick={() => setPage(currentPage + 1)}>
-        <img src={RIcon} className="battery__paginator-button" />
+        <img src={RIcon} className="battery__paginator-button" alt={"Battery Paginator Button"} />
       </SelectorButton>
     </div>
   )
@@ -51,7 +51,7 @@ const Paginator = ({ setPage, currentPage, pages }) => {
 export class BatteryList extends Component {
   ref = React.createRef()
   render() {
-    const { batteries, currentPage, pageSize } = this.props
+    const { batteries } = this.props
     return (
       <div
         className="batteries"

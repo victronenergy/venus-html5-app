@@ -2,7 +2,7 @@ import React from "react"
 import MqttTopicWildcard from "../MqttTopicWildcard"
 import Logger from "../../utils/logger"
 
-export default ({ children }) => (
+const GetPortalId = ({ children }) => (
   <MqttTopicWildcard wildcard={`N/+/system/0/Serial`}>
     {messages => {
       if (Object.entries(messages).length === 0) {
@@ -17,3 +17,5 @@ export default ({ children }) => (
     }}
   </MqttTopicWildcard>
 )
+
+export default GetPortalId;
