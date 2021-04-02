@@ -1,6 +1,6 @@
 import React from "react"
 
-import { ListRow } from "../ListView/ListView"
+import { ListRow } from '../ListView'
 import NumericValue from "../NumericValue/index"
 import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 
