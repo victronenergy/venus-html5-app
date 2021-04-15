@@ -2,6 +2,7 @@ import React, {Component} from "react"
 
 import classnames from "classnames"
 import Fade, {viewChangeDelay} from "./components/Fade"
+import {appService} from './modules/App/App.service'
 import GetInverterChargerDeviceInstance from "./mqtt/victron/GetInverterChargerDeviceInstance"
 import GetPortalId from "./mqtt/victron/GetPortalId"
 import Header, {HeaderWithoutMQTTData} from "./components/Header/Header"
@@ -122,6 +123,7 @@ class App extends Component<{host: string, port: number}> {
                                         // @ts-ignore
                                       return <Connecting/>
                                     } else {
+                                        appService.updatePortalId(portalId)
                                         return (
                                             <GetInverterChargerDeviceInstance portalId={portalId}>
                                                 {(inverterChargerDeviceId: any) => {

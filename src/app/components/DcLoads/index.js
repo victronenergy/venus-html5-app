@@ -1,1 +1,1 @@
-export { default } from "./DcLoads"
+export {default} from './DcLoads'

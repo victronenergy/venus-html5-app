@@ -10,7 +10,7 @@ class MqttSubscriptions extends Component {
 
   componentDidUpdate(prevProps) {
     if (JSON.stringify(prevProps.topics) !== JSON.stringify(this.props.topics)) {
-      Logger.log("New topics", prevProps.topics, this.props.topicsq)
+      Logger.log("New topics", prevProps.topics, this.props.topics)
       if (prevProps.topics !== null) {
         flatten(Object.values(prevProps.topics)).forEach(this.props.unsubscribe)
       }

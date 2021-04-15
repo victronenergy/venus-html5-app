@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import {appService} from '../../modules/App/App.service'
 import ActiveSource from "../ActiveSource"
 import AcLoads from "../AcLoads"
 import Battery from "../Battery"
@@ -73,6 +74,8 @@ export default class Metrics extends Component {
 
   componentDidUpdate() {
     if (this.metricsRef.current) {
+      appService.updateMetricsRef(this.metricsRef)
+
       const metrics = [...this.metricsRef.current.children]
 
       const cols = getRequiredCols(metrics)
