@@ -1,3 +1,4 @@
+import {akitaDevtools} from '@datorama/akita'
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './app/App';
@@ -7,6 +8,8 @@ import reportWebVitals from './reportWebVitals';
 
 const host = getParameterByName("host") || window.location.hostname || "localhost"
 const port = parseInt(getParameterByName("port") ?? "9001")
+
+akitaDevtools()
 
 ReactDOM.render(
   <React.StrictMode>

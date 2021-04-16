@@ -1,6 +1,9 @@
 import React, { Component } from "react"
 import { MqttClientContext } from "../contexts"
 import * as mqtt from "mqtt"
+import {appService} from '../modules/App/App.service'
+import {mqttQuery} from '../modules/Mqtt/Mqtt.query'
+import {mqttService} from '../modules/Mqtt/Mqtt.service'
 
 import { getMessageJson } from "../utils/util"
 import Logger from "../utils/logger"
@@ -11,19 +14,21 @@ export const STATUS = {
 }
 
 class MqttClientProvider extends Component {
-  state = {
-    client: null,
-    error: null,
-    status: STATUS.CONNECTING,
-    messages: {}
-  }
+  state = {}
   topicsSubscribed = new Set()
   keepaliveHAndlerRef
   portalId = null
   mounted = false
 
   safeSetState(state) {
-    if (this.mounted) this.setState(state)
+    if (this.mounted) {
+      // this.setState(state)
+      mqttService.update(state)
+      // mqttService.update({
+      //   ...state,
+      //   topicsSubscribed: this.topicsSubscribed,
+      // })
+      }
   }
 
   componentWillUnmount() {
@@ -32,6 +37,9 @@ class MqttClientProvider extends Component {
 
   componentDidMount() {
     this.mounted = true
+
+    mqttQuery.all$.subscribe(state => this.setState(state))
+
     const client = mqtt.connect(`mqtt://${this.props.host}:${this.props.port}`)
     this.safeSetState({ client })
 
@@ -56,6 +64,7 @@ class MqttClientProvider extends Component {
       Logger.log(`Message received: ${topic} - ${message.toString()}`)
       if (topic.endsWith("/system/0/Serial") && !this.portalId) {
         this.portalId = getMessageJson(message).value
+        appService.updatePortalId(this.portalId)
         this.sendKeepalive() // Send keepalive to trigger messages to return immediately
         this.setupKeepalive()
       }

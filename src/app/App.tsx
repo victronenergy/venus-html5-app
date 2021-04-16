@@ -79,7 +79,7 @@ class App extends Component<{host: string, port: number}> {
 
     render () {
         // @ts-ignore
-      const {host, port} = this.props
+      const {host, port} = this.props // TODO: Pass to state
         return this.state.currentView === VIEWS.ERROR ? (
             <Fade key={VIEWS.ERROR} unmount={this.state.viewUnmounting} fullWidth>
                 <Error/>
@@ -123,7 +123,7 @@ class App extends Component<{host: string, port: number}> {
                                         // @ts-ignore
                                       return <Connecting/>
                                     } else {
-                                        appService.updatePortalId(portalId)
+                                        // appService.updatePortalId(portalId)
                                         return (
                                             <GetInverterChargerDeviceInstance portalId={portalId}>
                                                 {(inverterChargerDeviceId: any) => {

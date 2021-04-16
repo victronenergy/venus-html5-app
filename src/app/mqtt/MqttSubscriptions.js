@@ -29,7 +29,7 @@ const MqttSubscriptionsWrapped = props => (
     {({ subscribe, unsubscribe, getMessagesByTopics }) => {
       const filteredMessages = getMessagesByTopics(props.topics)
       return (
-        <MqttSubscriptions {...props} subscribe={subscribe} unsubscribe={unsubscribe} messages={filteredMessages} />
+        <MqttSubscriptions {...props} subscribe={subscribe} unsubscribe={unsubscribe} messages={filteredMessages}/>
       )
     }}
   </MqttClientContext.Consumer>

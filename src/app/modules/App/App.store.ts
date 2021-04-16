@@ -3,7 +3,7 @@ import {RefObject} from 'react'
 import {APP_STORE_NAME} from './App.constants'
 
 export interface AppState {
-    portalId: string | number | null
+    portalId: string | null
     metricsRef: RefObject<any> | null
 }
 

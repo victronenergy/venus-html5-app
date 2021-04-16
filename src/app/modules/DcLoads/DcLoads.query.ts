@@ -8,6 +8,7 @@ export class DcLoadsQuery extends Query<DcLoadsState> {
 
     power$ = this.select(state => state.power)
     voltage$ = this.select(state => state.voltage)
+    all$ = this.select()
 }
 
 export const dcLoadsQuery = new DcLoadsQuery(dcLoadsStore)

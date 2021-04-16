@@ -1,4 +1,4 @@
-import {dcLoadsStore, DcLoadsStore} from './DcLoads.store'
+import {DcLoadsState, dcLoadsStore, DcLoadsStore} from './DcLoads.store'
 
 export class DcLoadsService {
     constructor (private store: DcLoadsStore) {}
@@ -9,6 +9,14 @@ export class DcLoadsService {
 
     updateVoltage (voltage: number) {
         this.store.update({voltage})
+    }
+
+    reset () {
+        this.store.reset()
+    }
+
+    updateAll (data: Partial<DcLoadsState>) {
+        this.store.update(data)
     }
 }
 

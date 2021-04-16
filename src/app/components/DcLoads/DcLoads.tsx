@@ -7,10 +7,8 @@ import NumericValue from '../NumericValue/index'
 import DcLoadsData from './DcLoadsData'
 import HeaderView from '../HeaderView'
 
-
 export const DcLoads = () => {
-    const [voltage] = useObservableState(() => dcLoadsQuery.voltage$)
-    const [power] = useObservableState(() => dcLoadsQuery.power$)
+    const {voltage, power} = useObservableState(dcLoadsQuery.all$) ?? {}
 
     return (
         <DcLoadsData>

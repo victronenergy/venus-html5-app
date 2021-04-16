@@ -1,21 +1,38 @@
 import {useObservableState} from 'observable-hooks'
-import React, {ReactNode} from 'react'
+import React, {ReactNode, useEffect} from 'react'
 import {appQuery} from '../../modules/App/App.query'
-import {dcLoadsService, getTopics} from '../../modules/DcLoads'
+import {dcLoadsService, DcLoadsState, getTopics} from '../../modules/DcLoads'
+import {mqttQuery} from '../../modules/Mqtt/Mqtt.query'
 import MqttSubscriptions from '../../mqtt/MqttSubscriptions'
 import HidingContainer from '../HidingContainer'
 
 export const DcLoadsData = ({children}: { children: ReactNode }) => {
-    // @ts-ignore
-    const [portalId] = useObservableState(() => appQuery.portalId$)
-    const [metricsRef] = useObservableState(() => appQuery.metricsRef$)
+    const portalId = useObservableState(appQuery.portalId$)
+    const metricsRef = useObservableState(appQuery.metricsRef$)
+    const messages = useObservableState(mqttQuery.messages$)
+
+    useEffect(() => {
+        const topics = getTopics(portalId)
+        if (messages) {
+            // TODO: This is the getMessagesByTopics function from MqttClientProvider, it should be moved to a separate library
+            const result = Object.entries(topics).reduce((res: {[topic: string]: string | string[]}, [key, topics]) => {
+                res[key] = Array.isArray(topics)
+                    ? topics.map(t => (messages[t] || {}).value)
+                    : (messages[topics] || {}).value
+                return res
+            }, {})
+            dcLoadsService.updateAll(result)
+        }
+    }, [messages, portalId])
 
     return (
         <MqttSubscriptions topics={getTopics(portalId)}>
-            {(topics: { voltage: number; power: number }) => {
-                if (topics && !topics.power) return null
-                dcLoadsService.updatePower(topics.power)
-                dcLoadsService.updateVoltage(topics.voltage)
+            {(topics: Partial<DcLoadsState>) => {
+                if (topics && !topics.power) {
+                    // dcLoadsService.reset()
+                    return null
+                }
+                // dcLoadsService.updateAll(topics)
                 return (
                     <HidingContainer metricsRef={metricsRef}>
                         {children}
