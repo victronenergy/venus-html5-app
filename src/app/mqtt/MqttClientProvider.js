@@ -1,168 +1,22 @@
-import React, { Component } from "react"
-import { MqttClientContext } from "../contexts"
-import * as mqtt from "mqtt"
-import {appService} from '../modules/App/App.service'
-import {mqttQuery} from '../modules/Mqtt/Mqtt.query'
-import {mqttService} from '../modules/Mqtt/Mqtt.service'
+import React, {Component} from 'react'
+import {MqttClientContext} from '../contexts'
 
-import { getMessageJson } from "../utils/util"
-import Logger from "../utils/logger"
-export const STATUS = {
-  CONNECTING: "connecting",
-  CONNECTED: "connected",
-  DISCONNECTED: "disconnected"
-}
-
+// TODO: Remove once all usages are refactored
 class MqttClientProvider extends Component {
-  state = {}
-  topicsSubscribed = new Set()
-  keepaliveHAndlerRef
-  portalId = null
-  mounted = false
-
-  safeSetState(state) {
-    if (this.mounted) {
-      // this.setState(state)
-      mqttService.update(state)
-      // mqttService.update({
-      //   ...state,
-      //   topicsSubscribed: this.topicsSubscribed,
-      // })
-      }
-  }
-
-  componentWillUnmount() {
-    this.mounted = false
-  }
-
-  componentDidMount() {
-    this.mounted = true
-
-    mqttQuery.all$.subscribe(state => this.setState(state))
-
-    const client = mqtt.connect(`mqtt://${this.props.host}:${this.props.port}`)
-    this.safeSetState({ client })
-
-    client.stream.on("error", error => {
-      this.safeSetState({ error, status: STATUS.DISCONNECTED })
-    })
-
-    client.on("error", error => {
-      this.safeSetState({ error, status: STATUS.DISCONNECTED })
-    })
-
-    client.on("offline", () => {
-      this.safeSetState({ error: true, status: STATUS.DISCONNECTED })
-    })
-
-    client.on("connect", () => {
-      this.topicsSubscribed = new Set()
-      this.safeSetState({ error: null, status: STATUS.CONNECTED })
-    })
-
-    client.on("message", (topic, message) => {
-      Logger.log(`Message received: ${topic} - ${message.toString()}`)
-      if (topic.endsWith("/system/0/Serial") && !this.portalId) {
-        this.portalId = getMessageJson(message).value
-        appService.updatePortalId(this.portalId)
-        this.sendKeepalive() // Send keepalive to trigger messages to return immediately
-        this.setupKeepalive()
-      }
-
-      this.safeSetState({
-        messages: {
-          ...this.state.messages,
-          [topic]: getMessageJson(message)
-        }
-      })
-    })
-  }
-
-  sendKeepalive = () => {
-    this.publish(`R/${this.portalId}/system/0/Serial`, "")
-  }
-
-  setupKeepalive = () => {
-    clearInterval(this.keepaliveHAndlerRef)
-    this.keepaliveHAndlerRef = setInterval(this.sendKeepalive, 50000)
-  }
-
-  subscribe = topic => {
-    if (!this.topicsSubscribed.has(topic)) {
-      Logger.log(`Subscribing to ${topic}`)
-      this.state.client.subscribe(topic, (err, granted) => {
-        if (err) {
-          Logger.error(err)
-          return
-        }
-        Logger.log(
-          `Subscribed to ${granted[0] ? granted[0].topic : topic} with QoS ${granted[0] ? granted[0].qos : "unknown"}`
-        )
-        this.topicsSubscribed.add(topic)
-      })
-    }
-  }
-
-  unsubscribe = topic => {
-    if (this.topicsSubscribed.has(topic)) {
-      this.state.client.unsubscribe(topic, err => {
-        if (err) {
-          Logger.error(err)
-          return
-        }
-        Logger.log(`Unsubscribed from ${topic}`)
-        this.topicsSubscribed.delete(topic)
-      })
-    }
-  }
-
-  getMessagesByTopics = topics => {
-    return Object.entries(topics).reduce((res, [key, topics]) => {
-      const value = Array.isArray(topics)
-        ? topics.map(t => (this.state.messages[t] || {}).value)
-        : (this.state.messages[topics] || {}).value
-      res[key] = value
-      return res
-    }, {})
-  }
-
-  getMessagesByWildcard = wildcard => {
-    const re = new RegExp(wildcard.replace(/\+/g, ".*")) // + in mqtt is anything -> .*
-    return Object.keys(this.state.messages)
-      .filter(t => t.match(re))
-      .reduce((obj, key) => {
-        obj[key] = (this.state.messages[key] || {}).value
-        return obj
-      }, {})
-  }
-
-  publish = (topic, data) => {
-    if (!this.isConnected()) {
-      Logger.error("Could not publish value")
-    }
-
-    Logger.log(`Publishing to ${topic}: ${data}`)
-    this.state.client.publish(topic, data)
-  }
-
-  isConnected = () => {
-    return this.state.status === STATUS.CONNECTED
-  }
-
   render() {
     return (
       <MqttClientContext.Provider
         value={{
-          isConnected: this.isConnected(),
-          subscribe: this.state.client ? this.subscribe : null,
-          unsubscribe: this.state.client ? this.unsubscribe : null,
-          publish: this.state.client ? this.publish : null,
-          messages: this.state.messages,
-          getMessagesByTopics: this.getMessagesByTopics,
-          getMessagesByWildcard: this.getMessagesByWildcard
+          isConnected: null,
+          subscribe: null,
+          unsubscribe: null,
+          publish: null,
+          messages: null,
+          getMessagesByTopics: null,
+          getMessagesByWildcard: null
         }}
       >
-        {this.props.children(this.state.status, this.isConnected(), this.state.error)}
+        {this.props.children(null, false, null)}
       </MqttClientContext.Provider>
     )
   }

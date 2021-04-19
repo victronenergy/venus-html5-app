@@ -1,31 +1,29 @@
 import {Store, StoreConfig} from '@datorama/akita'
 import {MqttClient} from 'mqtt'
-import {RefObject} from 'react'
-import {MQTT_STORE_NAME, STATUS} from './Mqtt.constants'
+import {MQTT_STORE_NAME, STATUS} from '.'
+import {MqttMessages, PortalId} from '.'
 
 export interface MqttState {
-    host: string
-    port: number
     client: MqttClient | null
-    error: object | null
+    error: object | null | boolean
     status: string
-    messages: {[topic: string]: {value: string}}
+    messages: MqttMessages
     topicsSubscribed: Set<string>
-    keepAliveHandlerRef: RefObject<any> | null
+    portalId: PortalId
+    keepAliveHandlerRef: any
 }
 
 const createInitialState = (): MqttState => ({
-    host: 'localhost',
-    port: 1883,
     client: null,
     status: STATUS.CONNECTING,
     messages: {},
     topicsSubscribed: new Set(),
-    keepAliveHandlerRef: null,
     error: null,
+    portalId: null,
+    keepAliveHandlerRef: undefined,
 })
 
-@StoreConfig({name: MQTT_STORE_NAME})
+@StoreConfig({name: MQTT_STORE_NAME, resettable: true})
 export class MqttStore extends Store<MqttState> {
     constructor () {
         super(createInitialState())

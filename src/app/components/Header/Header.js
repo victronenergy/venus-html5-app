@@ -1,5 +1,4 @@
 import React, { Component } from "react"
-import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
 import SelectorButton from "../SelectorButton"
 import { VIEWS } from "../../utils/constants"
 
@@ -49,22 +48,22 @@ const Paginator = ({ setPage, currentPage, pages }) => {
 
 class HeaderWithData extends Component {
   render() {
-    const { portalId, currentView, handleRemoteConsoleButtonClicked, setPage, currentPage, pages } = this.props
+    const { currentView, handleRemoteConsoleButtonClicked, setPage, currentPage, pages } = this.props
     return (
-      <MqttSubscriptions topics={{ showRemoteConsoleSetting: `N/${portalId}/settings/0/Settings/System/VncLocal` }}>
-        {topics => {
-          return (
+      // <MqttSubscriptions topics={{ showRemoteConsoleSetting: `N/${portalId}/settings/0/Settings/System/VncLocal` }}>
+      //   {topics => {
+      //     return (
             <Header
-              showRemoteConsoleSetting={!!topics.showRemoteConsoleSetting}
+              showRemoteConsoleSetting={true} // TODO: !!topics.showRemoteConsoleSetting
               handleRemoteConsoleButtonClicked={handleRemoteConsoleButtonClicked}
               currentView={currentView}
               setPage={setPage}
               currentPage={currentPage}
               pages={pages}
             />
-          )
-        }}
-      </MqttSubscriptions>
+      //     )
+      //   }}
+      // </MqttSubscriptions>
     )
   }
 }

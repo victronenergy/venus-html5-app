@@ -1,20 +1,17 @@
-import React, {Component} from "react"
+import classnames from 'classnames'
+import {useObservableState} from 'observable-hooks'
+import React, {useEffect, useState} from 'react'
+import '../css/styles.scss'
+import '../css/texts.scss'
+import Fade, {viewChangeDelay} from './components/Fade'
+import Header, {HeaderWithoutMQTTData} from './components/Header/Header'
+import {InverterChargerInputLimitSelector} from './components/InverterCharger'
 
-import classnames from "classnames"
-import Fade, {viewChangeDelay} from "./components/Fade"
-import {appService} from './modules/App/App.service'
-import GetInverterChargerDeviceInstance from "./mqtt/victron/GetInverterChargerDeviceInstance"
-import GetPortalId from "./mqtt/victron/GetPortalId"
-import Header, {HeaderWithoutMQTTData} from "./components/Header/Header"
-import {InverterChargerInputLimitSelector} from "./components/InverterCharger"
-import MqttClientProvider from "./mqtt/MqttClientProvider"
-
-import {MqttUnavailable, Metrics, RemoteConsole, Connecting, Error} from "./components/Views"
-
-import Logger from "./utils/logger"
+import {Connecting, Error, Metrics, MqttUnavailable, RemoteConsole} from './components/Views'
+import {mqttQuery} from './modules/Mqtt'
+import {useMqtt} from './modules/Mqtt/Mqtt.facade'
+import {useVebus} from './modules/Vebus/Vebus.facade'
 import {VIEWS} from './utils/constants'
-import "../css/texts.scss"
-import "../css/styles.scss"
 
 // @ts-ignore
 const Main = ({isConnected, children, setView}) => {
@@ -24,7 +21,7 @@ const Main = ({isConnected, children, setView}) => {
             onClick={e => {
                 // Bit of a hack to close "overlays" but doing it without adding event preventDefaults everywhere
                 // @ts-ignore
-              if (e.target.nodeName === "MAIN") {
+                if (e.target.nodeName === 'MAIN') {
                     setView(VIEWS.METRICS)
                 }
             }}
@@ -34,172 +31,150 @@ const Main = ({isConnected, children, setView}) => {
     )
 }
 
-class App extends Component<{host: string, port: number}> {
-    state = {
-        currentView: VIEWS.METRICS,
-        viewUnmounting: false,
-        currentPage: 0,
-        pages: 1
+const App = (props: { host: string, port: number }) => {
+    const {host, port} = props
+    const [currentView, setCurrentView] = useState(VIEWS.METRICS)
+    const [viewUnmounting, setViewUnmounting] = useState(false)
+    const [currentPage, setCurrentPage] = useState(0)
+    const [pages, setTotalPages] = useState(1)
+    const portalId = useObservableState(mqttQuery.portalId$)
+    const isConnected = useObservableState(mqttQuery.isConnected$)
+    const error = useObservableState(mqttQuery.error$)
+    const mqttService = useMqtt()
+    const {instanceId: vebusInstanceId} = useVebus()
+
+    const setPage = (currentPage: number) => {
+        setCurrentPage(currentPage)
     }
 
-    setPage = (currentPage: any) => {
-        this.setState({currentPage})
+    const setPages = (pages: number) => {
+        setTotalPages(pages)
+        setCurrentPage(0)
     }
 
-    setPages = (pages: any) => {
-        this.setState({currentPage: 0, pages})
-    }
-
-    setView = (view: string) => {
-        if (this.state.currentView !== view) {
-            this.setState({viewUnmounting: true})
-            setTimeout(() => this.setState({viewUnmounting: false, currentView: view}), viewChangeDelay)
+    const setView = (view: string) => {
+        if (currentView !== view) {
+            setViewUnmounting(true)
+            setTimeout(() => {
+                setCurrentView(view)
+                setViewUnmounting(false)
+            }, viewChangeDelay)
         }
     }
 
-    handleShorePowerLimitSelected = () => {
-        this.setView(VIEWS.METRICS)
+    const handleShorePowerLimitSelected = () => {
+        setView(VIEWS.METRICS)
     }
 
-    toggleRemoteConsole = () => {
-        if (this.state.currentView !== VIEWS.REMOTE_CONSOLE) {
-            this.setView(VIEWS.REMOTE_CONSOLE)
-        } else this.setView(VIEWS.METRICS)
+    const toggleRemoteConsole = () => {
+        if (currentView !== VIEWS.REMOTE_CONSOLE) {
+            setView(VIEWS.REMOTE_CONSOLE)
+        } else setView(VIEWS.METRICS)
     }
 
-    componentDidCatch = (e: any) => {
-        if (window.onerror) { // @ts-ignore
-          window.onerror(e.message, undefined, undefined, undefined, {stack: e.stack})
-        }
-    }
+    useEffect(() => {
+        console.log('Booting MQTT from App')
+        mqttService.boot(host, port)
+    }, [host, port, mqttService])
 
-    static getDerivedStateFromError () {
-        return {currentView: VIEWS.ERROR, viewUnmounting: true}
-    }
-
-    render () {
-        // @ts-ignore
-      const {host, port} = this.props // TODO: Pass to state
-        return this.state.currentView === VIEWS.ERROR ? (
-            <Fade key={VIEWS.ERROR} unmount={this.state.viewUnmounting} fullWidth>
+    if (currentView === VIEWS.ERROR) {
+        return (
+            <Fade key={VIEWS.ERROR} unmount={viewUnmounting} fullWidth>
                 <Error/>
             </Fade>
-        ) : (
-            <MqttClientProvider host={host} port={port}>
-                {(_: any, isConnected: any, error: boolean) => {
-                    if (error) {
-                        return (
-                            <>
-                                <HeaderWithoutMQTTData
-                                    handleRemoteConsoleButtonClicked={this.toggleRemoteConsole}
-                                    currentView={this.state.currentView}
-                                />
-                                {(() => {
-                                    switch (this.state.currentView) {
-                                        case VIEWS.REMOTE_CONSOLE:
-                                            return (
-                                                <Main isConnected={isConnected} setView={this.setView}>
-                                                    <Fade key={VIEWS.REMOTE_CONSOLE} unmount={this.state.viewUnmounting}
-                                                          fullWidth>
-                                                        <RemoteConsole host={host}
-                                                                       onClickOutsideContainer={() => this.setView(VIEWS.METRICS)}/>
-                                                    </Fade>
-                                                </Main>
-                                            )
-                                        default:
-                                            return <MqttUnavailable viewUnmounting={this.state.viewUnmounting}/>
-                                    }
-                                })()}
-                            </>
-                        )
-                    } else if (!isConnected) {
-                        return <Connecting viewUnmounting={this.state.viewUnmounting}/>
-                    } else {
-                      return (
-                            <GetPortalId>
-                                {(portalId: any) => {
-                                    if (!portalId) {
-                                        Logger.warn("No portal id yet ...")
-                                        // @ts-ignore
-                                      return <Connecting/>
-                                    } else {
-                                        // appService.updatePortalId(portalId)
-                                        return (
-                                            <GetInverterChargerDeviceInstance portalId={portalId}>
-                                                {(inverterChargerDeviceId: any) => {
-                                                    return (
-                                                        <>
-                                                            <Header
-                                                                portalId={portalId}
-                                                                handleRemoteConsoleButtonClicked={this.toggleRemoteConsole}
-                                                                currentView={this.state.currentView}
-                                                                setPage={this.setPage}
-                                                                currentPage={this.state.currentPage}
-                                                                pages={this.state.pages}
-                                                            />
-                                                            <Main isConnected={isConnected} setView={this.setView}>
-                                                                {(() => {
-                                                                    switch (this.state.currentView) {
-                                                                        case VIEWS.INVERTER_CHARGER_INPUT_LIMIT_SELECTOR:
-                                                                            return (
-                                                                                <Fade
-                                                                                    key={VIEWS.INVERTER_CHARGER_INPUT_LIMIT_SELECTOR}
-                                                                                    unmount={this.state.viewUnmounting}
-                                                                                >
-                                                                                    <InverterChargerInputLimitSelector
-                                                                                        portalId={portalId}
-                                                                                        inverterChargerDeviceId={inverterChargerDeviceId}
-                                                                                        onLimitSelected={this.handleShorePowerLimitSelected}
-                                                                                    />
-                                                                                </Fade>
-                                                                            )
-                                                                        case VIEWS.REMOTE_CONSOLE:
-                                                                            return (
-                                                                                <Fade key={VIEWS.REMOTE_CONSOLE}
-                                                                                      unmount={this.state.viewUnmounting}
-                                                                                      fullWidth>
-                                                                                    <RemoteConsole
-                                                                                        host={host}
-                                                                                        onClickOutsideContainer={() => this.setView(VIEWS.METRICS)}
-                                                                                    />
-                                                                                </Fade>
-                                                                            )
-                                                                        case VIEWS.METRICS:
-                                                                        default:
-                                                                            return (
-                                                                                <Fade key={VIEWS.METRICS}
-                                                                                      unmount={this.state.viewUnmounting}
-                                                                                      fullWidth>
-                                                                                    <Metrics
-                                                                                        portalId={portalId}
-                                                                                        inverterChargerDeviceId={inverterChargerDeviceId}
-                                                                                        isConnected={isConnected}
-                                                                                        onChangeInverterChargerInputLimitClicked={() =>
-                                                                                            this.setView(VIEWS.INVERTER_CHARGER_INPUT_LIMIT_SELECTOR)
-                                                                                        }
-                                                                                        setPages={this.setPages}
-                                                                                        currentPage={this.state.currentPage}
-                                                                                        pages={this.state.pages}
-                                                                                    />
-                                                                                </Fade>
-                                                                            )
-                                                                    }
-                                                                })()}
-                                                            </Main>
-                                                        </>
-                                                    )
-                                                }}
-                                            </GetInverterChargerDeviceInstance>
-                                        )
-                                    }
-                                }}
-                            </GetPortalId>
-                        )
-                    }
-                }}
-            </MqttClientProvider>
         )
     }
+
+    if (error) {
+        return (
+            <>
+                <HeaderWithoutMQTTData
+                    handleRemoteConsoleButtonClicked={toggleRemoteConsole}
+                    currentView={currentView}
+                />
+                {(() => {
+                    switch (currentView) {
+                        case VIEWS.REMOTE_CONSOLE:
+                            return (
+                                <Main isConnected={isConnected} setView={setView}>
+                                    <Fade key={VIEWS.REMOTE_CONSOLE} unmount={viewUnmounting}
+                                          fullWidth>
+                                        <RemoteConsole host={host}
+                                                       onClickOutsideContainer={() => setView(VIEWS.METRICS)}/>
+                                    </Fade>
+                                </Main>
+                            )
+                        default:
+                            return <MqttUnavailable viewUnmounting={viewUnmounting}/>
+                    }
+                })()}
+            </>
+        )
+    }
+
+    if (!isConnected || !portalId) {
+        return <Connecting viewUnmounting={viewUnmounting}/>
+    }
+
+    return (<>
+        <Header
+            portalId={portalId}
+            handleRemoteConsoleButtonClicked={toggleRemoteConsole}
+            currentView={currentView}
+            setPage={setPage}
+            currentPage={currentPage}
+            pages={pages}
+        />
+        <Main isConnected={isConnected} setView={setView}>
+            {(() => {
+                switch (currentView) {
+                    case VIEWS.INVERTER_CHARGER_INPUT_LIMIT_SELECTOR:
+                        return (
+                            <Fade
+                                key={VIEWS.INVERTER_CHARGER_INPUT_LIMIT_SELECTOR}
+                                unmount={viewUnmounting}
+                            >
+                                <InverterChargerInputLimitSelector
+                                    portalId={portalId}
+                                    inverterChargerDeviceId={vebusInstanceId}
+                                    onLimitSelected={handleShorePowerLimitSelected}
+                                />
+                            </Fade>
+                        )
+                    case VIEWS.REMOTE_CONSOLE:
+                        return (
+                            <Fade key={VIEWS.REMOTE_CONSOLE}
+                                  unmount={viewUnmounting}
+                                  fullWidth>
+                                <RemoteConsole
+                                    host={host}
+                                    onClickOutsideContainer={() => setView(VIEWS.METRICS)}
+                                />
+                            </Fade>
+                        )
+                    case VIEWS.METRICS:
+                    default:
+                        return (
+                            <Fade key={VIEWS.METRICS}
+                                  unmount={viewUnmounting}
+                                  fullWidth>
+                                <Metrics
+                                    portalId={portalId}
+                                    inverterChargerDeviceId={vebusInstanceId}
+                                    isConnected={isConnected}
+                                    onChangeInverterChargerInputLimitClicked={() =>
+                                        setView(VIEWS.INVERTER_CHARGER_INPUT_LIMIT_SELECTOR)
+                                    }
+                                    setPages={setPages}
+                                    currentPage={currentPage}
+                                    pages={pages}
+                                />
+                            </Fade>
+                        )
+                }
+            })()}
+        </Main>
+    </>)
 }
 
 export default App

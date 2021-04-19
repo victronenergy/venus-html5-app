@@ -49,7 +49,7 @@ const getSourceSubtitle = (active, phases, source) => {
 
 const ActiveSource = ({ portalId, inverterChargerDeviceId, source, active, phases }) => {
   const icon = activeSourceIcon[source]
-  const title = activeSourceTitle[source]
+  const title = activeSourceTitle[source] || 'Unknown'
   const subTitle = getSourceSubtitle(active, phases, source)
   return (
     <div className="metric metric__active-source">
@@ -80,7 +80,7 @@ class ActiveSourceWithData extends Component {
     return (
       <MqttSubscriptions topics={getTopics(portalId, inverterChargerDeviceId)}>
         {topics => {
-          return topics.settings.map(
+          return topics.settings?.map(
             (source, i) =>
               source !== AC_SOURCE_TYPE.NOT_IN_USE && ( // do not render if the source is not in use
                 <HidingContainer metricsRef={metricsRef} key={i}>

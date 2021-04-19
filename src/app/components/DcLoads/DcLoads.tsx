@@ -1,24 +1,23 @@
-import {useObservableState} from 'observable-hooks'
 import React from 'react'
 import DcIcon from '../../../images/icons/dc.svg'
-import {dcLoadsQuery} from '../../modules/DcLoads'
+import {useDcLoads} from '../../modules/DcLoads'
+import HeaderView from '../HeaderView'
+import HidingContainer from '../HidingContainer'
 import MetricValues from '../MetricValues'
 import NumericValue from '../NumericValue/index'
-import DcLoadsData from './DcLoadsData'
-import HeaderView from '../HeaderView'
 
 export const DcLoads = () => {
-    const {voltage, power} = useObservableState(dcLoadsQuery.all$) ?? {}
+    const {voltage, power} = useDcLoads()
 
     return (
-        <DcLoadsData>
+        <HidingContainer>
             <HeaderView icon={DcIcon} title="DC Loads" showBoat>
                 <MetricValues>
                     <NumericValue value={voltage && power ? power / voltage : undefined} unit="A" precision={1}/>
                     <NumericValue value={power} unit="W"/>
                 </MetricValues>
             </HeaderView>
-        </DcLoadsData>
+        </HidingContainer>
     )
 }
 
