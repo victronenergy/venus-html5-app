@@ -75,11 +75,6 @@ export class MqttService {
     }
 
     boot = (host: string, port: number) => {
-        // if (this.store === undefined) {
-        //     console.log('Store not initialised yet, skipping boot')
-        //     return
-        // }
-
         console.log('MQTT booting')
         const client = mqtt.connect(`mqtt://${host}:${port}`)
         this.store.update({client})
