@@ -1,40 +1,26 @@
 import React, { Component } from "react"
-import classnames from "classnames"
-
-import HeaderView from "../HeaderView"
-import BatteryLevel from "./BatteryLevel"
 import HidingContainer from "../HidingContainer"
-import MetricValues from "../MetricValues"
-import MqttSubscriptions from "../../mqtt/MqttSubscriptions"
-import NumericValue from "../NumericValue/index"
-import SelectorButton from "../SelectorButton"
+import { Battery, useBattery } from "../../modules/Battery/Battery.provider"
 
 import "./Battery.scss"
-
 import BatteryIcon from "../../../images/icons/battery.svg"
+import classnames from "classnames"
+import HeaderView from "../HeaderView"
+import NumericValue from "../NumericValue"
+import MetricValues from "../MetricValues"
 import LIcon from "../../../images/icons/L.svg"
 import RIcon from "../../../images/icons/R.svg"
+import SelectorButton from "../SelectorButton"
+import { BatteryLevel } from "./BatteryLevel"
 
-const getTopics = portalId => {
-  return {
-    batteries: `N/${portalId}/system/0/Batteries`
-  }
+
+type PaginatorProps = {
+  setPage: Function,
+  currentPage: number,
+  pages: number,
 }
 
-const BatteryHeader = ({ amount, paginate, setPage, currentPage, pageSize }) => {
-  return (
-    <div className="battery-header">
-      <img src={BatteryIcon} className="metric__icon" alt={"Battery Icon"} />
-      <div className="battery-header__text">
-        <p className="text--title">{amount > 1 ? "Batteries" : "Battery"}</p>
-        <p className="text--subtitle">{amount > 1 && `${amount} Batteries`}</p>
-      </div>
-      {paginate && <Paginator setPage={setPage} currentPage={currentPage} pages={Math.ceil(amount / pageSize)} />}
-    </div>
-  )
-}
-
-const Paginator = ({ setPage, currentPage, pages }) => {
+const Paginator = ({ setPage, currentPage, pages }: PaginatorProps) => {
   return (
     <div className="battery__paginator">
       <SelectorButton disabled={currentPage < 1} onClick={() => setPage(currentPage - 1)}>
@@ -48,15 +34,65 @@ const Paginator = ({ setPage, currentPage, pages }) => {
   )
 }
 
-export class BatteryList extends Component {
-  ref = React.createRef()
+type BatteryHeaderProps = {
+  amount: number,
+  paginate: boolean,
+  setPage: Function,
+  currentPage: number,
+  pageSize: number,
+}
+
+const BatteryHeader = ({ amount, paginate, setPage, currentPage, pageSize }: BatteryHeaderProps) => {
+  return (
+    <div className="battery-header">
+      <img src={BatteryIcon} className="metric__icon" alt={"Battery Icon"} />
+      <div className="battery-header__text">
+        <p className="text--title">{amount > 1 ? "Batteries" : "Battery"}</p>
+        <p className="text--subtitle">{amount > 1 && `${amount} Batteries`}</p>
+      </div>
+      {paginate && <Paginator setPage={setPage} currentPage={currentPage} pages={Math.ceil(amount / pageSize)} />}
+    </div>
+  )
+}
+
+
+const BatteryRow = (battery: Battery) => {
+  return (
+    <MetricValues inflate={""}>
+      <div className="metrics__left">
+        <NumericValue value={battery.voltage} unit="V" defaultValue={null} precision={1} />
+        <NumericValue value={battery.current} unit="A" defaultValue={null} precision={1} />
+        <NumericValue value={battery.power} unit="W" defaultValue={null} />
+      </div>
+      {battery.soc !== undefined && (
+        <BatteryLevel battery={battery} />
+      )}
+    </MetricValues>
+  )
+}
+
+const SingleBattery = (battery: Battery) => (
+  <HeaderView icon={BatteryIcon} title={`Battery: ${battery.name}`}>
+    <BatteryRow {...battery} />
+  </HeaderView>
+)
+
+type BatteryListProps = {
+  batteries: Array<Battery | any>
+  currentPage: number
+  pageSize: number
+}
+
+class BatteryList extends Component<BatteryListProps> {
+  ref = React.createRef<HTMLDivElement>()
+
   render() {
     const { batteries } = this.props
     return (
       <div
         className="batteries"
         ref={this.ref}
-        style={this.ref.current && batteries.some(b => b.dummy) ? { height: this.ref.current.offsetHeight } : {}}
+        style={this.ref.current && batteries.some(b => b.dummy) ? { height: this.ref.current!.offsetHeight } : {}}
       >
         {batteries.map((battery, i) => {
           return (
@@ -64,7 +100,7 @@ export class BatteryList extends Component {
               {!battery.dummy && (
                 <div className="battery__data">
                   <div className="battery__title-row text--subtitle-upper">{battery.name}</div>
-                  <BatteryRow {...battery} />
+                  <BatteryRow {...battery as Battery} />
                 </div>
               )}
             </div>
@@ -75,32 +111,20 @@ export class BatteryList extends Component {
   }
 }
 
-const SingleBattery = battery => (
-  <HeaderView icon={BatteryIcon} title={`Battery: ${battery.name}`}>
-    <BatteryRow {...battery} />
-  </HeaderView>
-)
 
-const BatteryRow = battery => {
-  return (
-    <MetricValues inflate>
-      <div className="metrics__left">
-        <NumericValue value={battery.voltage} unit="V" defaultValue={null} precision={1} />
-        <NumericValue value={battery.current} unit="A" defaultValue={null} precision={1} />
-        <NumericValue value={battery.power} unit="W" defaultValue={null} />
-      </div>
-      {battery.soc !== undefined && (
-        <BatteryLevel state={battery.state} soc={battery.soc} timeToGo={battery.timetogo} />
-      )}
-    </MetricValues>
-  )
-}
+type BatteriesProps = {
+  batteries: Array<Battery>;
+};
+type BatteriesState = {
+  pageSize: number
+  currentPage: number
+};
 
-export class Batteries extends Component {
+export class Batteries extends Component<BatteriesProps, BatteriesState> {
   state = { pageSize: 1, currentPage: 0 }
   ref = React.createRef()
 
-  setPage = currentPage => {
+  setPage = (currentPage: number) => {
     this.setState({ currentPage })
   }
 
@@ -128,7 +152,7 @@ export class Batteries extends Component {
     const paginate = batteries.length > pageSize
     const currentPage = this.state.currentPage
 
-    const batteriesToShow = paginate
+    const batteriesToShow: Array<any> = paginate
       ? batteries.slice(currentPage * pageSize, currentPage * pageSize + pageSize)
       : batteries
     // These fill the last page with empty elements if necessary
@@ -155,29 +179,18 @@ export class Batteries extends Component {
   }
 }
 
-const mainBatteryToFirst = batteries => {
-  // Move main battery to first in the array
-  return batteries.sort((a, b) => (a.active_battery_service ? -1 : b.active_battery_service ? 1 : 0))
-}
+export const BatteriesWithData = () => {
+  const { batteries } = useBattery()
 
-class BatteryWithData extends Component {
-  render() {
+  if (batteries) {
     return (
-      <MqttSubscriptions topics={getTopics(this.props.portalId)}>
-        {({ batteries }) => {
-          if (!batteries) {
-            return null
-          } else {
-            const sortedBatteries = mainBatteryToFirst(batteries)
-            return (
-              <HidingContainer metricsRef={this.props.metricsRef}>
-                <Batteries batteries={sortedBatteries} />
-              </HidingContainer>
-            )
-          }
-        }}
-      </MqttSubscriptions>
+      <HidingContainer>
+        <Batteries batteries={batteries} />
+      </HidingContainer>
     )
+  } else {
+    return <div/>
   }
 }
-export default BatteryWithData
+
+export default BatteriesWithData

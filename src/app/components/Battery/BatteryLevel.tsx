@@ -1,8 +1,9 @@
 import { BATTERY_STATE } from "../../utils/constants"
-import { formatNumber } from "../NumericValue/index"
+import { Battery } from "../../modules/Battery/Battery.provider"
 import React from "react"
+import { formatNumber } from "../NumericValue"
 
-const batteryStateFormatter = value => {
+const batteryStateFormatter = (value: number) => {
   switch (value) {
     case BATTERY_STATE.CHARGING:
       return "Charging"
@@ -15,8 +16,8 @@ const batteryStateFormatter = value => {
   }
 }
 
-const batteryTimeToGoFormatter = timeToGo => {
-  const secs = parseInt(timeToGo)
+const batteryTimeToGoFormatter = (timeToGo: number) => {
+  const secs = timeToGo
   if (!isNaN(secs)) {
     const days = Math.floor(secs / 86400)
     const hours = Math.floor((secs - days * 86400) / 3600)
@@ -33,25 +34,21 @@ const batteryTimeToGoFormatter = timeToGo => {
   }
 }
 
-const BatteryLevel = ({ state, timeToGo, soc }) => {
-  const batteryStateLabel = batteryStateFormatter(state)
-  const timeToGoLabel = batteryTimeToGoFormatter(timeToGo)
-  const showTimetoGo = state === BATTERY_STATE.DISCHARGING && timeToGo
-  const showSoc = soc !== undefined && soc !== null
+type BatteryLevelProps = {
+  battery: Battery
+}
+
+export const BatteryLevel = ({ battery }: BatteryLevelProps) => {
+  const batteryStateLabel = batteryStateFormatter(battery.state!)
+  const timeToGoLabel = batteryTimeToGoFormatter(battery.timeToGo!)
+  const showTimetoGo = battery.state === BATTERY_STATE.DISCHARGING && battery.timeToGo
+  const showSoc = battery.soc !== undefined && battery.soc !== null
 
   return (
     <div className="metrics__right">
       {batteryStateLabel && <span>{batteryStateLabel}</span>}
       {showTimetoGo && <span>{timeToGoLabel}</span>}
-      {showSoc && <span>{formatNumber({ value: soc })}%</span>}
+      {showSoc && <span>{formatNumber({ value: battery.soc })}%</span>}
     </div>
   )
 }
-
-// BatteryLevel.propTypes = {
-//   state: PropTypes.oneOf(Object.values(BATTERY_STATE)),
-//   soc: PropTypes.number,
-//   timeToGo: PropTypes.number
-// }
-
-export default BatteryLevel
