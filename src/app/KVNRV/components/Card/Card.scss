@@ -1,0 +1,34 @@
+@import "../../css/variables";
+
+
+.card {
+  padding: 0.8rem;
+  border-radius: 5px;
+  box-shadow: 2px 2px 8px $color-lightgray;
+  background: white;
+  color: black;
+  margin: 1rem;
+
+  &.small {
+    width: $card-width-small;
+  }
+  &.big {
+    width: $card-width-big;
+  }
+
+  .header {
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.5rem;
+    border-bottom: 1px solid $color-lightgray;
+
+    .header__text {
+      color: $color-black;
+      font-weight: bolder;
+    }
+  }
+
+  .body {
+    padding: 0.5rem;
+  }
+}
