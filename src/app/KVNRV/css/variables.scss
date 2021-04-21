@@ -1,0 +1,19 @@
+@import "../../../css/variables";
+
+$color-black: #222222;
+
+$card-margin: 0.3rem;
+
+$card-width-small: 12rem;
+$card-width-big: $card-width-small * 2 + $card-margin * 2;
+
+$color-green: #00C564;
+$color-yellow: #eda63e;
+$color-yellow-fade: #f0c587;
+$color-red: #ea5b57;
+$color-red-fade: #ed9895;
+
+$donut-size-small: 6rem;
+$donut-width-big: 7rem;
+$donut-height-big: $donut-width-big - 3rem;
+$donut-offset: 0.24rem;

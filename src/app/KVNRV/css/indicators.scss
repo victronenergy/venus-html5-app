@@ -1,0 +1,53 @@
+@import "../../../css/variables.scss";
+
+$indicator-main-font-value-big: 2rem;
+$indicator-main-font-name-big: 1.5rem;
+$indicator-main-font-value-small: 2rem;
+$indicator-main-font-name-small: 1.2rem;
+
+.indicator {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  padding-bottom: 0.5rem;
+
+  .value {
+    text-align: left;
+    font-weight: bolder;
+  }
+
+  .name {
+    color: $color-lightgray;
+  }
+}
+
+.indicator-main {
+  @extend .indicator;
+  flex-direction: row;
+
+  .value {
+    line-height: $indicator-main-font-value-big;
+    font-size: $indicator-main-font-value-big;
+    font-weight: bold;
+    margin-right: 0.5rem
+  }
+
+  .name {
+    line-height: $indicator-main-font-value-big;
+    font-size: $indicator-main-font-name-big;
+  }
+}
+
+.indicator-main--small {
+  @extend .indicator-main;
+
+  .value {
+    line-height: $indicator-main-font-value-small;
+    font-size: $indicator-main-font-value-small;
+  }
+
+  .name {
+    line-height: $indicator-main-font-value-small;
+    font-size: $indicator-main-font-name-small;
+  }
+}
