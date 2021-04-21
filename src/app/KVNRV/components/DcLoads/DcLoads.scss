@@ -1,0 +1,11 @@
+@import "../../css/variables.scss";
+
+
+.info-bar {
+  border-radius: 5px;
+  border: $color-lightgray solid 1px;
+  color: $color-lightgray;
+  padding: 0.2rem;
+  text-align: center;
+  font-weight: 100;
+}
