@@ -1,0 +1,10 @@
+@import "../../css/variables";
+
+.not-available {
+  height: $donut-height-big;
+  display: flex;
+  align-self: center;
+  align-content: center;
+  align-items: center;
+  color: $color-gray;
+}
