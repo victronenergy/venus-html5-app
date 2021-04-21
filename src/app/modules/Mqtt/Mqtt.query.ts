@@ -29,7 +29,7 @@ export class MqttQuery extends Query<MqttState> {
                             if (Array.isArray(topic)) {
                                 return [label, topic.map(t => (messages[t]))]
                             }
-                            return [label, messages[topic]]
+                            return topic ? [label, messages[topic]] : [label, undefined]
                         },
                     ),
                 )),
