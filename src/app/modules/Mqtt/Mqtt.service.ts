@@ -1,5 +1,5 @@
 import * as mqtt from 'mqtt'
-import {STATUS} from '.'
+import {STATUS, Topics} from '.'
 import Logger from '../../utils/logger'
 import {getMessageJson} from '../../utils/util'
 import {MqttState, MqttStore} from '.'
@@ -50,12 +50,12 @@ export class MqttService {
         })
     }
 
-    subscribeToTopics = (topics: { [key: string]: string }) => {
-        Object.values(topics).map(this.subscribeToTopic)
+    subscribeToTopics = (topics: Topics) => {
+        Object.values(topics).flat().map(this.subscribeToTopic)
     }
 
-    unsubscribeFromTopics = (topics: { [key: string]: string }) => {
-        Object.values(topics).map(this.unsubscribeFromTopic)
+    unsubscribeFromTopics = (topics: Topics) => {
+        Object.values(topics).flat().map(this.unsubscribeFromTopic)
     }
 
     addMessage = (topic: string, message: { value: string | null }) => {
