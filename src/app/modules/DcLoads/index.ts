@@ -1,1 +1,1 @@
-export * from './DcLoads.facade'
+export * from './DcLoads.provider'

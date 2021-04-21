@@ -23,7 +23,7 @@ export function useDcLoads (): DcLoadsState {
         return () => mqttService.unsubscribeFromTopics(topics)
     })
 
-    const power = useObservableState(mqttQuery.messagesByTopic$(topics.power).pipe(map(v => parseInt(v as string))))
+    const power = useObservableState(mqttQuery.messagesByTopic$(topics.power).pipe(map(v => -1 * parseInt(v as string))))
     const voltage = useObservableState(mqttQuery.messagesByTopic$(topics.voltage).pipe(map(v => parseInt(v as string))))
 
     return {power, voltage}
