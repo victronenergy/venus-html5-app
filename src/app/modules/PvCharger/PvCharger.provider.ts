@@ -1,6 +1,6 @@
 import {useObservableState, useSubscription} from 'observable-hooks'
 import {mqttQuery} from '../Mqtt'
-import {useMqtt} from '../Mqtt/Mqtt.facade'
+import {useMqtt} from '../Mqtt/Mqtt.provider'
 import { map } from "rxjs/operators"
 
 

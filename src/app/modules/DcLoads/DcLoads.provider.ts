@@ -1,30 +1,29 @@
-import {useObservableState, useSubscription} from 'observable-hooks'
-import {map} from 'rxjs/operators'
-import {mqttQuery} from '../Mqtt'
-import {useMqtt} from '../Mqtt/Mqtt.facade'
+import {useObservableState} from 'observable-hooks'
+import {mqttQuery, PortalId, Topics} from '../Mqtt'
+import {useTopicState, useTopicSubscriptions, useTopicsWithPortalId} from '../Mqtt/Mqtt.provider'
 
 export interface DcLoadsState {
-    power: number | undefined
-    voltage: number | undefined
+    power?: number
+    voltage?: number
+}
+
+export interface DcLoadsTopics extends Topics {
+    power?: string
+    voltage?: string
 }
 
 export function useDcLoads (): DcLoadsState {
-    const portalId = useObservableState(mqttQuery.portalId$)
-    const mqttService = useMqtt()
-
-    const topics = {
+    const getTopics = (portalId: PortalId) => ({
         voltage: `N/${portalId}/system/0/Dc/Battery/Voltage`,
         power: `N/${portalId}/system/0/Dc/System/Power`,
-    }
-
-    useSubscription(mqttQuery.portalId$, () => {
-        mqttService.subscribeToTopics(topics)
-
-        return () => mqttService.unsubscribeFromTopics(topics)
     })
+    const topics$ = useTopicsWithPortalId<DcLoadsTopics>(getTopics, mqttQuery.portalId$)
+    const topics = useObservableState(topics$, {})
 
-    const power = useObservableState(mqttQuery.messagesByTopic$(topics.power).pipe(map(v => -1 * parseInt(v as string))))
-    const voltage = useObservableState(mqttQuery.messagesByTopic$(topics.voltage).pipe(map(v => parseInt(v as string))))
+    useTopicSubscriptions(topics$)
+
+    const power = -1 * parseInt(useTopicState(topics.power) as string)
+    const voltage = parseInt(useTopicState(topics.voltage) as string)
 
     return {power, voltage}
 }

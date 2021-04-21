@@ -11,7 +11,9 @@ export class MqttService {
         this.store.update(data)
     }
 
-    subscribeToTopic = (topic: string) => {
+    subscribeToTopic = (topic?: string) => {
+        if (!topic) return;
+
         this.store.update(state => {
             if (!state.topicsSubscribed.has(topic)) {
                 Logger.log(`Subscribing to ${topic}`)
@@ -32,7 +34,9 @@ export class MqttService {
         })
     }
 
-    unsubscribeFromTopic = (topic: string) => {
+    unsubscribeFromTopic = (topic?: string) => {
+        if (!topic) return;
+
         this.store.update(state => {
             if (state.topicsSubscribed.has(topic)) {
                 state.client?.unsubscribe(topic, (err: any) => {

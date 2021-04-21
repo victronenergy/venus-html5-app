@@ -9,7 +9,7 @@ import {InverterChargerInputLimitSelector} from './components/InverterCharger'
 
 import {Connecting, Error, Metrics, MqttUnavailable, RemoteConsole} from './components/Views'
 import {mqttQuery} from './modules/Mqtt'
-import {useMqtt} from './modules/Mqtt/Mqtt.facade'
+import {useMqtt} from './modules/Mqtt/Mqtt.provider'
 import {useVebus} from './modules/Vebus/Vebus.facade'
 import {VIEWS} from './utils/constants'
 

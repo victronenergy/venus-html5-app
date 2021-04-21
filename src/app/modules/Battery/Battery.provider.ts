@@ -1,43 +1,42 @@
-import {useObservableState, useSubscription} from 'observable-hooks'
-import {mqttQuery} from '../Mqtt'
-import {useMqtt} from '../Mqtt/Mqtt.facade'
+import {useObservableState} from 'observable-hooks'
+import {mqttQuery, PortalId, Topics} from '../Mqtt'
+import {useTopicState, useTopicSubscriptions, useTopicsWithPortalId} from '../Mqtt/Mqtt.provider'
 
 export interface Battery {
-  current: number | undefined
-  voltage: number | undefined
-  soc: number | undefined
-  power: number | undefined
-  temperature: number | undefined
-  timeToGo: number | undefined
-  instance: number | undefined
-  state: number | undefined
-  id: string | undefined
-  name: string | undefined
+    current?: number
+    voltage?: number
+    soc?: number
+    power?: number
+    temperature?: number
+    timeToGo?: number
+    instance?: number
+    state?: number
+    id?: string
+    name?: string
 }
 
 export interface BatteryState {
-  batteries: Array<Battery> | undefined
+    batteries?: Array<Battery>
+}
+
+export interface BatteryTopics extends Topics {
+    batteries?: string
 }
 
 export function useBattery (): BatteryState {
-  const portalId = useObservableState(mqttQuery.portalId$)
-  const mqttService = useMqtt()
+    const getTopics = (portalId: PortalId) => ({
+        batteries: `N/${portalId}/system/0/Batteries`,
+    })
 
-  const topics = {
-    batteries: `N/${portalId}/system/0/Batteries`,
-  }
+    const topics$ = useTopicsWithPortalId<BatteryTopics>(getTopics, mqttQuery.portalId$)
+    const topics = useObservableState(topics$, {})
 
-  useSubscription(mqttQuery.portalId$, () => {
-    mqttService.subscribeToTopics(topics)
+    useTopicSubscriptions(topics$)
 
-    return () => mqttService.unsubscribeFromTopics(topics)
-  })
+    let batteries = useTopicState(topics.batteries) as Battery[]
+    if (batteries) {
+        batteries = batteries.sort((a, b) => (a.state ? -1 : b.state ? 1 : 0))
+    }
 
-  let batteries = useObservableState(mqttQuery.messagesByTopic$(topics.batteries)) as Battery[]
-  if (batteries) {
-    batteries = batteries.sort((a, b) => (a.state ? -1 : b.state ? 1 : 0))
-  }
-
-  return {batteries}
-
+    return {batteries}
 }
