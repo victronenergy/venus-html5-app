@@ -1,6 +1,6 @@
 import {Query} from '@datorama/akita'
 import {map, pluck} from 'rxjs/operators'
-import {STATUS} from '.'
+import {STATUS, Topics} from '.'
 import {MqttState, mqttStore, MqttStore} from './Mqtt.store'
 
 export class MqttQuery extends Query<MqttState> {
@@ -20,7 +20,7 @@ export class MqttQuery extends Query<MqttState> {
 
     messagesByTopic$ = (topic: string) => this.select(s => s.messages).pipe(pluck(topic))
 
-    messagesByTopics$ = (topics: { [key: string]: string | string[] }) => {
+    messagesByTopics$ = (topics: Topics) => {
         return this.select(s => s.messages)
             .pipe(
                 map(messages => Object.fromEntries(
