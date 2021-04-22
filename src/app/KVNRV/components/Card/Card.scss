@@ -7,13 +7,15 @@
   box-shadow: 2px 2px 8px $color-lightgray;
   background: white;
   color: black;
-  margin: 1rem;
+  margin: $card-margin;
 
   &.small {
     width: $card-width-small;
+    height: $card-height-small;
   }
   &.big {
     width: $card-width-big;
+    height: $card-height-big;
   }
 
   .header {
