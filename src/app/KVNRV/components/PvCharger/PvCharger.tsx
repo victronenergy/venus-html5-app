@@ -21,7 +21,7 @@ const PvCharger = () => {
       <Card title={'PV Charger'} icon={undefined} size={SIZE_SMALL}>
         <div className="pv_charger gauge">
           {pow ? (
-            <DonutIndicator value={pow} percent={normalized_power} parts={[0.8, 0.1, 0.1]} unit={"W"} />
+            <DonutIndicator value={pow} percent={normalized_power} parts={PV_CONF.THRESHOLDS} unit={"W"} />
           ) : ( <NotAvailable /> )}
 
           <div className={"info-bar"}>

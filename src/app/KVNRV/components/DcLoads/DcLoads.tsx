@@ -2,7 +2,7 @@ import React  from "react"
 import { Card, SIZE_SMALL } from "../Card"
 import DonutIndicator from "../DonutIndicator"
 import { useDcLoads } from "../../../modules/DcLoads"
-import { DC_CONF } from "../../constants/constants"
+import { DC_CONF, PV_CONF } from "../../constants/constants"
 import "./DcLoads.scss"
 import { NotAvailable } from "../NotAvailable"
 
@@ -17,7 +17,7 @@ export const DcLoads = () => {
       <Card title={'DC Loads'} icon={undefined} size={SIZE_SMALL}>
         <div className="gauge">
           {power ? (
-            <DonutIndicator value={power} percent={normalized_power} parts={[0.5, 0.25, 0.25]} unit={"W"} />
+            <DonutIndicator value={power} percent={normalized_power} parts={DC_CONF.THRESHOLDS} unit={"W"} />
           ) : ( <NotAvailable /> )}
 
           <div className={"info-bar"}>
