@@ -2,11 +2,13 @@ import React, { Component } from "react"
 import Battery from "../Battery"
 import DcLoads from "../DcLoads"
 import PvCharger from "../PvCharger"
-// import ActiveSource from "../ActiveSource"
-// import AcLoads from "../AcLoads"
-// import Chargers from "../Chargers"
-// import Inverters from "../Inverters"
-// import Generators from "../Generators"
+import AcLoads from "../AcLoads"
+import FreshWater from "../FreshWater"
+import Status from "../Status"
+import ShorePower from "../ShorePower"
+import AcMode from "../AcMode"
+import WasteWater from "../WasteWater"
+import BlackWater from "../BlackWater"
 import '../../css/metrics.scss'
 
 
@@ -22,15 +24,40 @@ export default class Metrics extends Component {
   render() {
     return (
       <div className="metrics-container">
-        <PvCharger />
-        <DcLoads  />
-        <Battery  />
+        <div className="container">
+          <div className={"row"}>
 
-        {/*<AcLoads />*/}
-        {/*<ActiveSource />*/}
-        {/*<Chargers />*/}
-        {/*<Inverters />*/}
-        {/*<Generators />*/}
+            <div className="col-span-4">
+              <Status />
+
+              <div className="row">
+                <ShorePower />
+                <AcLoads />
+              </div>
+            </div>
+
+            <div className="col-span-4">
+              <Battery  />
+
+              <div className="row">
+                <PvCharger />
+                <DcLoads />
+              </div>
+
+              <AcMode />
+            </div>
+
+            <div className="col-span-4">
+              <FreshWater />
+
+              <div className="row">
+                <WasteWater />
+                <BlackWater />
+              </div>
+            </div>
+
+          </div>
+        </div>
       </div>
     )
   }
