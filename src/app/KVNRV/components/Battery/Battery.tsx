@@ -45,7 +45,7 @@ export const BatteriesWithData = () => {
   if (batteries && batteries[0] && batteries[0].soc && batteries[0].state) {
     const battery = batteries[0]
     const batteryStateLabel = batteryStateFormatter(battery.state!)
-    const batteryLevelBars = Math.ceil(battery.soc! / (100 / CELL_NUMBER)) - 1;
+    const batteryLevelBars = Math.ceil(battery.soc! / (100 / CELL_NUMBER));
     return (
       <div className="">
         <Card title={'Battery'} icon={undefined} size={SIZE_BIG}>
