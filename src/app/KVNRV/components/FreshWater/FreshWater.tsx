@@ -1,12 +1,14 @@
 import React, { Component } from "react"
 
-import { Card, SIZE_BIG } from "../Card"
+import { Card, SIZE_BIG, SIZE_LONG } from "../Card"
 import { useWater, FreshWaterType } from "../../../modules/Water/Water.provider"
 import { NotAvailable } from "../NotAvailable"
 import NumericValue from "../../../components/NumericValue"
 import WaterTank from "../../images/WaterTank.svg"
 import WaterTankTop from "../../images/WaterTankTop.svg"
 import "./FreshWater.scss"
+import { Footer } from "../Card/Card"
+import { STATUS_LEVELS } from "../Views/Metrics"
 
 
 type FreshWaterProps = {
