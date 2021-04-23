@@ -22,9 +22,9 @@ export const AcLoads = () => {
           ) : ( <NotAvailable /> )}
 
           <div className={"info-bar"}>
-            <span>{(voltage || '--') + " V"}</span>
-            <span>{(current || '--') + " A"}</span>
-            <span>{(phases || '--') + " Hz"}</span>
+            <div className={"info-bar__cell"}>{(voltage || '--') + " V"}</div>
+            <div className={"info-bar__cell"}>{(current || '--') + " A"}</div>
+            <div className={"info-bar__cell"}>{(phases || '--') + " Hz"}</div>
           </div>
         </div>
       </Card>

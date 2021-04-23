@@ -21,7 +21,7 @@ export const DcLoads = () => {
           ) : ( <NotAvailable /> )}
 
           <div className={"info-bar"}>
-            <span>{(voltage || '--') + " A"}</span>
+            <div className={"info-bar__cell"}>{(voltage || '--') + " A"}</div>
           </div>
         </div>
       </Card>

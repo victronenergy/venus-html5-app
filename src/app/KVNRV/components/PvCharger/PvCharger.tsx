@@ -25,7 +25,7 @@ const PvCharger = () => {
           ) : ( <NotAvailable /> )}
 
           <div className={"info-bar"}>
-            <span>{(current || '--') + " A"}</span>
+            <div className={"info-bar__cell"}>{(current || '--') + " A"}</div>
           </div>
         </div>
       </Card>

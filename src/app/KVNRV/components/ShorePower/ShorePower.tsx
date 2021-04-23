@@ -11,7 +11,7 @@ export const ShorePower = () => {
         <div className="gauge">
           <NotAvailable />
           <div className={"info-bar"}>
-            <span>{('--') + " A"}</span>
+            <div className={"info-bar__cell"}>{('--') + " A"}</div>
           </div>
         </div>
       </Card>
