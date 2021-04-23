@@ -1,8 +1,12 @@
 import {useObservableState, useSubscription} from 'observable-hooks'
-import {map} from 'rxjs/operators'
-import {mqttQuery} from '../Mqtt'
-import {useMqtt} from '../Mqtt/Mqtt.provider'
+import { mqttQuery, PortalId, Topics } from "../Mqtt"
+import {
+  useTopicsState,
+  useTopicSubscriptions,
+  useTopicsWithPortalIdAndInstanceId
+} from "../Mqtt/Mqtt.provider"
 import { vebusQuery } from "../Vebus/Vebus.query"
+import { InstanceId } from "../Vebus/Vebus.store"
 
 export interface AcLoadsState {
   phases: number | undefined
@@ -11,40 +15,38 @@ export interface AcLoadsState {
   power: number | undefined
 }
 
+export interface AcLoadsTopics extends Topics {
+  power?: Array<string>
+  voltage?: Array<string>
+  current?: Array<string>
+  phases?: string
+}
+
 export function useAcLoads (): AcLoadsState {
-  const portalId = useObservableState(mqttQuery.portalId$)
-  // const instanceId = useObservableState(vebusQuery.instanceId$)
-  const mqttService = useMqtt()
-
-  const topics = {
+  const getTopics = (portalId: PortalId, instanceId: InstanceId) => ({
     phases: `N/${portalId}/system/0/Ac/Consumption/NumberOfPhases`,
-    // current: [
-    //   `N/${portalId}/vebus/${instanceId}/Ac/Out/L1/I`,
-    //   `N/${portalId}/vebus/${instanceId}/Ac/Out/L2/I`,
-    //   `N/${portalId}/vebus/${instanceId}/Ac/Out/L3/I`
-    // ],
-    // voltage: [
-    //   `N/${portalId}/vebus/${instanceId}/Ac/Out/L1/V`,
-    //   `N/${portalId}/vebus/${instanceId}/Ac/Out/L2/V`,
-    //   `N/${portalId}/vebus/${instanceId}/Ac/Out/L3/V`
-    // ],
-    // power: [
-    //   `N/${portalId}/vebus/${instanceId}/Ac/Out/L1/P`,
-    //   `N/${portalId}/vebus/${instanceId}/Ac/Out/L2/P`,
-    //   `N/${portalId}/vebus/${instanceId}/Ac/Out/L3/P`
-    // ]
-  }
-
-  useSubscription(mqttQuery.portalId$, () => {
-    mqttService.subscribeToTopics(topics)
-
-    return () => mqttService.unsubscribeFromTopics(topics)
+    current: [
+      `N/${portalId}/vebus/${instanceId}/Ac/Out/L1/I`,
+      `N/${portalId}/vebus/${instanceId}/Ac/Out/L2/I`,
+      `N/${portalId}/vebus/${instanceId}/Ac/Out/L3/I`
+    ],
+    voltage: [
+      `N/${portalId}/vebus/${instanceId}/Ac/Out/L1/V`,
+      `N/${portalId}/vebus/${instanceId}/Ac/Out/L2/V`,
+      `N/${portalId}/vebus/${instanceId}/Ac/Out/L3/V`
+    ],
+    power: [
+      `N/${portalId}/vebus/${instanceId}/Ac/Out/L1/P`,
+      `N/${portalId}/vebus/${instanceId}/Ac/Out/L2/P`,
+      `N/${portalId}/vebus/${instanceId}/Ac/Out/L3/P`
+    ]
   })
 
-  const current = 0
-  const voltage = 0
-  const power = 0
-  const phases = useObservableState(mqttQuery.messagesByTopic$(topics.phases).pipe(map(v => -1 * parseInt(v as string))))
+  const topics$ = useTopicsWithPortalIdAndInstanceId<AcLoadsTopics>(getTopics, mqttQuery.portalId$, vebusQuery.instanceId$)
+  const topics = useObservableState(topics$, {})
 
-  return {current, voltage, power, phases}
+  useTopicSubscriptions(topics$)
+  // const msg = useTopicsState(topics)
+
+  return {phases: undefined, current: undefined, voltage: undefined, power: undefined}
 }

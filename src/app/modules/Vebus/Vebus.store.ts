@@ -1,7 +1,9 @@
 import {Store, StoreConfig} from '@datorama/akita'
 
+export type InstanceId = number | null | undefined
+
 export interface VebusState {
-    instanceId: number | null | undefined
+    instanceId: InstanceId
 }
 
 export const VEBUS_STORE_NAME = 'vebus'
