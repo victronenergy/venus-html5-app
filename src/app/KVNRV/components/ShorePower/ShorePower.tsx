@@ -7,7 +7,7 @@ export const ShorePower = () => {
 
   return (
     <div className="">
-      <Card title={'Shore Power'} icon={undefined} size={SIZE_SMALL}>
+      <Card title={'Shore Power'} size={SIZE_SMALL}>
         <div className="gauge">
           <NotAvailable />
           <div className={"info-bar"}>

@@ -34,10 +34,11 @@ export class FreshWater extends Component<FreshWaterProps, FreshWaterState>{
 
   render() {
     const {fresh_water} = this.props
+    const footer: Footer = {status: STATUS_LEVELS.WARNING, property: "Status"};
 
     return (
       <div className="">
-        <Card title={'Fresh Water'} icon={undefined} size={SIZE_BIG}>
+        <Card title={'Fresh Water'} size={[SIZE_BIG, SIZE_LONG]} footer={footer}>
           {fresh_water ? (
             <div className="fresh_water">
               <div className="indicator-main">

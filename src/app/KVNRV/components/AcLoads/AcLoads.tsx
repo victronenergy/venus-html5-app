@@ -15,7 +15,7 @@ export const AcLoads = () => {
 
   return (
     <div className="">
-      <Card title={'AC Loads'} icon={undefined} size={SIZE_SMALL}>
+      <Card title={'AC Loads'} size={SIZE_SMALL}>
         <div className="gauge">
           {power ? (
             <DonutIndicator value={power} percent={normalized_power} parts={AC_CONF.THRESHOLDS} unit={"W"} />

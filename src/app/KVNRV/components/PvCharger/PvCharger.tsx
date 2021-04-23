@@ -18,7 +18,7 @@ const PvCharger = () => {
 
   return (
     <div className="">
-      <Card title={'PV Charger'} icon={undefined} size={SIZE_SMALL}>
+      <Card title={'PV Charger'} size={SIZE_SMALL}>
         <div className="pv_charger gauge">
           {pow ? (
             <DonutIndicator value={pow} percent={normalized_power} parts={PV_CONF.THRESHOLDS} unit={"W"} />

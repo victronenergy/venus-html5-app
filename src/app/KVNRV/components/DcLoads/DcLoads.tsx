@@ -14,7 +14,7 @@ export const DcLoads = () => {
 
   return (
     <div className="">
-      <Card title={'DC Loads'} icon={undefined} size={SIZE_SMALL}>
+      <Card title={'DC Loads'} size={SIZE_SMALL}>
         <div className="gauge">
           {power ? (
             <DonutIndicator value={power} percent={normalized_power} parts={DC_CONF.THRESHOLDS} unit={"W"} />

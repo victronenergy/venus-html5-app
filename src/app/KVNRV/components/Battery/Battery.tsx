@@ -48,7 +48,7 @@ export const BatteriesWithData = () => {
     const batteryLevelBars = Math.ceil(battery.soc! / (100 / CELL_NUMBER));
     return (
       <div className="">
-        <Card title={'Battery'} icon={undefined} size={SIZE_BIG}>
+        <Card title={'Battery'} size={SIZE_BIG}>
           <div className={'battery'}>
             <div className="battery__group">
               <div className="indicator-main">
