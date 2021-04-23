@@ -5,9 +5,10 @@ import DonutIndicator from "../DonutIndicator"
 import { usePvCharger } from "../../../modules/PvCharger/PvCharger.provider"
 import { Card, SIZE_SMALL } from "../Card"
 import { NotAvailable } from "../NotAvailable"
+import { CommonProps } from "../Views/Metrics"
 
 
-const PvCharger = () => {
+const PvCharger = (props: CommonProps) => {
   const {current, power} = usePvCharger()
 
   let pow = power

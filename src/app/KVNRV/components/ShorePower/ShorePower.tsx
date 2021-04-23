@@ -2,8 +2,9 @@ import React  from "react"
 import { Card, SIZE_SMALL } from "../Card"
 import "./ShorePower.scss"
 import { NotAvailable } from "../NotAvailable"
+import { CommonProps } from "../Views/Metrics"
 
-export const ShorePower = () => {
+export const ShorePower = (props: CommonProps) => {
 
   return (
     <div className="">

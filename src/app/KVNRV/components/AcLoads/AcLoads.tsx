@@ -5,9 +5,10 @@ import { useAcLoads } from "../../../modules/AcLoads/AcLoads.provider"
 import { Card, SIZE_SMALL } from "../Card"
 import DonutIndicator from "../DonutIndicator"
 import { NotAvailable } from "../NotAvailable"
+import { CommonProps } from "../Views/Metrics"
 
 
-export const AcLoads = () => {
+export const AcLoads = (props: CommonProps) => {
   const {current, voltage, power, phases} = useAcLoads()
 
   let normalized_power = (power || 0) / AC_CONF.MAX

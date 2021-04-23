@@ -6,7 +6,7 @@ import SettingsIcon from "../../images/SettingsIcon.svg"
 import { CommonProps } from "../Views/Metrics"
 
 
-export const AcMode = () => {
+export const AcMode = (props: CommonProps) => {
   return (
     <div className="">
       <Card title={'AC Mode'} icon={SettingsIcon} size={SIZE_BIG}>

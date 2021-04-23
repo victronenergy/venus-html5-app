@@ -2,11 +2,12 @@ import React  from "react"
 import { Card, SIZE_SMALL } from "../Card"
 import DonutIndicator from "../DonutIndicator"
 import { useDcLoads } from "../../../modules/DcLoads"
-import { DC_CONF, PV_CONF } from "../../constants/constants"
+import { DC_CONF } from "../../constants/constants"
 import "./DcLoads.scss"
 import { NotAvailable } from "../NotAvailable"
+import { CommonProps, STATUS_LEVELS } from "../Views/Metrics"
 
-export const DcLoads = () => {
+export const DcLoads = (props: CommonProps) => {
   const {voltage, power} = useDcLoads()
 
   let normalized_power = (power || 0) / DC_CONF.MAX

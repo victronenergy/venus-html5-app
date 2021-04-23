@@ -5,6 +5,7 @@ import "./Battery.scss"
 import { BATTERY_STATE } from "../../../utils/constants"
 import { useBattery } from "../../../modules/Battery/Battery.provider"
 import NumericValue from "../../../components/NumericValue"
+import { CommonProps } from "../Views/Metrics"
 
 const batteryStateFormatter = (value: number) => {
   switch (value) {
@@ -39,7 +40,7 @@ function getClassname(idx: number, batteryLevelBars: number) {
   return c
 }
 
-export const BatteriesWithData = () => {
+export const Batteries = (props: CommonProps) => {
   const { batteries } = useBattery()
 
   if (batteries && batteries[0] && batteries[0].soc && batteries[0].state) {
@@ -101,4 +102,4 @@ export const BatteriesWithData = () => {
   }
 }
 
-export default BatteriesWithData
+export default Batteries
