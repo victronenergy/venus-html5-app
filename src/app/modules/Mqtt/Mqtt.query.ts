@@ -1,5 +1,5 @@
 import {Query} from '@datorama/akita'
-import {map, pluck} from 'rxjs/operators'
+import {filter, map, pluck} from 'rxjs/operators'
 import {STATUS, Topics} from '.'
 import {MqttState, mqttStore, MqttStore} from './Mqtt.store'
 
@@ -43,8 +43,9 @@ export class MqttQuery extends Query<MqttState> {
                 map(messages => Object.fromEntries(
                     Object.entries(messages)
                         .filter(([label]) => label.match(re))
-                        .map(([label, topic]) => [label, messages[topic as string]]),
+                        .map(([label, topic]) => [label, messages[label]]),
                 )),
+                filter(value => Object.values(value).length > 0),
             )
     }
 }

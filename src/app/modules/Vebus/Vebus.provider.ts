@@ -8,10 +8,12 @@ import {vebusQuery} from './Vebus.query'
 import {VebusService} from './Vebus.service'
 import {VebusState, vebusStore} from './Vebus.store'
 
+export const useVebusService = () => new VebusService(vebusStore)
+
 export const useVebus = (): VebusState => {
     const portalId = useObservableState(mqttQuery.portalId$)
     const instanceId = useObservableState(vebusQuery.instanceId$)
-    const vebusService = new VebusService(vebusStore)
+    const vebusService = useVebusService()
     const mqttService = useMqtt()
     const topic = 'N/+/vebus/+/DeviceInstance'
 
@@ -19,9 +21,10 @@ export const useVebus = (): VebusState => {
         mqttService.subscribeToTopic(topic)
 
         return () => mqttService.unsubscribeFromTopic(topic)
-    }, [mqttService])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [portalId])
 
-    useSubscription(mqttQuery.messagesByWildcard$('N/+/vebus/+/DeviceInstance'), messages => {
+    useSubscription(mqttQuery.messagesByWildcard$(topic), messages => {
         if (!messages || Object.entries(messages).length === 0) {
             Logger.log('Waiting for VE.Bus device instance...')
         } else {

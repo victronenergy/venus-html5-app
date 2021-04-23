@@ -10,7 +10,7 @@ import {InverterChargerInputLimitSelector} from './components/InverterCharger'
 import {Connecting, Error, Metrics, MqttUnavailable, RemoteConsole} from './components/Views'
 import {mqttQuery} from './modules/Mqtt'
 import {useMqtt} from './modules/Mqtt/Mqtt.provider'
-import {useVebus} from './modules/Vebus/Vebus.facade'
+import {useVebus} from './modules/Vebus/Vebus.provider'
 import {VIEWS} from './utils/constants'
 
 // @ts-ignore
@@ -75,7 +75,9 @@ const App = (props: { host: string, port: number }) => {
     useEffect(() => {
         console.log('Booting MQTT from App')
         mqttService.boot(host, port)
-    }, [host, port, mqttService])
+        // MqttService "changes" on every render so we don't want it as a dependency as it causes a loop
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [host, port])
 
     if (currentView === VIEWS.ERROR) {
         return (

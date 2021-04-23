@@ -22,7 +22,7 @@ export class MqttService {
                         Logger.error(err)
                         return
                     }
-                    Logger.log(
+                    Logger.warn(
                         `Subscribed to ${granted[0] ? granted[0].topic : topic} with QoS ${granted[0] ? granted[0].qos : 'unknown'}`,
                     )
                 })
