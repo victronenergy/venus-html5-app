@@ -1,5 +1,49 @@
 @import "../../css/variables";
 
 .metrics__status {
-  height: 25.5rem;
+  .title {
+    font-size: $indicator-main-font-value-big;
+    margin-bottom: 1rem;
+  }
+
+  .subheading {
+    font-size: $indicator-main-font-name-small;
+    color: $color-lightgray;
+    justify-content: space-between;
+  }
+
+  .status-updates {
+    margin-top: 1rem;
+
+    .status-update {
+      margin-top: 1rem;
+      border-radius: 5px;
+      padding: 0.3rem;
+      color: white;
+      font-size: 0.9rem;
+      justify-content: space-between;
+      align-items: center;
+
+      &.warning {
+        background-color: $color-yellow;
+
+        .status-update__icon {
+          background-color: $color-yellow-fade;
+        }
+      }
+      &.alarm {
+        background-color: $color-red;
+
+        .status-update__icon {
+          background-color: $color-red-fade;
+        }
+      }
+
+      .status-update__icon {
+        margin-right: 0.2rem;
+        padding: 0.2rem;
+        border-radius: 5px;
+      }
+    }
+  }
 }
