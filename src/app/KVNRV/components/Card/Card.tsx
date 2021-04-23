@@ -1,10 +1,17 @@
 import React, { FunctionComponent } from "react"
 import "./Card.scss"
+import { STATUS_LEVELS_MSG } from "../Views/Metrics"
+
+export type Footer = {
+  status: string,
+  property: string,
+}
 
 type CardProps = {
   title: string,
-  size: string,
-  icon: string | undefined
+  size: string | Array<string>,
+  icon?: string,
+  footer?: Footer
 }
 
 export const SIZE_SMALL = 'small';
@@ -24,9 +31,17 @@ export const Card: FunctionComponent<CardProps> = ({ title, size, icon, children
         )}
       </div>
 
-      <div className="body">
-        {children}
+        <div className="body">
+          {children}
+        </div>
       </div>
+
+      {footer && (
+        <div className={"footer " + footer.status}>
+          <span>{footer.property}: </span>
+          <span>{STATUS_LEVELS_MSG[footer.status]}</span>
+        </div>
+      )}
     </div>
   )
 }

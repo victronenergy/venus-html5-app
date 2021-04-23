@@ -34,3 +34,16 @@
     padding: 0.5rem;
   }
 }
+
+  .footer {
+    bottom: 0;
+    font-size: 0.7rem;
+    padding: 0.2rem 0.8rem;
+    border-radius: 0 0 5px 5px;
+    color: white;
+
+    &.success { background-color: $color-green; }
+    &.warning { background-color: $color-yellow; }
+    &.alarm { background-color: $color-red; }
+  }
+}
