@@ -13,6 +13,10 @@ export const DcLoads = (props: CommonProps) => {
   let normalized_power = (power || 0) / DC_CONF.MAX
   normalized_power = Math.max(Math.min(normalized_power, 1), 0)
 
+  if (voltage &&  voltage > 20) {
+    props.addStatusUpdate({level: STATUS_LEVELS.WARNING, part: "DC Loads", message: "Overheating"})
+  }
+
   return (
     <div className="">
       <Card title={'DC Loads'} size={SIZE_SMALL}>
