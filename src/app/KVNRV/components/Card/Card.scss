@@ -2,12 +2,14 @@
 
 
 .card {
-  padding: 0.8rem;
   border-radius: 5px;
   box-shadow: 2px 2px 8px $color-lightgray;
   background: white;
   color: black;
   margin: $card-margin;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   &.small {
     width: $card-width-small;
@@ -18,22 +20,31 @@
     height: $card-height-big;
   }
 
-  .header {
-    margin-bottom: 0.75rem;
-    padding-bottom: 0.5rem;
-    padding-left: 0.5rem;
-    border-bottom: 1px solid $color-lightgray;
+  &.long {
+    height: ($card-height-small * 2) + ($card-margin * 2)
+  }
 
-    .header__text {
-      color: $color-black;
-      font-weight: bolder;
+  .contents {
+    padding: 0.8rem;
+
+    .header {
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.5rem;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+      border-bottom: 1px solid $color-lightgray;
+      justify-content: space-between;
+
+      .header__text {
+        color: $color-black;
+        font-weight: bolder;
+      }
+    }
+
+    .body {
+      padding: 0.5rem;
     }
   }
-
-  .body {
-    padding: 0.5rem;
-  }
-}
 
   .footer {
     bottom: 0;
