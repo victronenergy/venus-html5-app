@@ -1,10 +1,17 @@
 @import "./variables.scss";
+@import "./grid.scss";
 @import "./indicators.scss";
 
 .metrics-container {
   background-color: #ebecee;
   width: 100%;
   height: 100%;
+
+  .container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
 }
 
 .metric {
@@ -15,4 +22,30 @@
 .gauge {
   display: flex;
   flex-direction: column;
+}
+
+
+.info-bar {
+  border-radius: 5px;
+  border: $color-lightgray solid 1px;
+  color: $color-lightgray;
+  text-align: center;
+  font-weight: 100;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  .info-bar__cell {
+    width: 100%;
+    padding: 0.2rem;
+
+    &:first-child {
+      border-right: $color-lightgray solid 1px;
+    }
+
+
+    &:last-child {
+      border-left: $color-lightgray solid 1px;
+    }
+  }
 }

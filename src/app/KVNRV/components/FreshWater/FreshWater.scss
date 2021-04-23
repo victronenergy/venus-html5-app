@@ -1,0 +1,63 @@
+@import "../../css/variables.scss";
+
+
+.fresh_water {
+  display: flex;
+  flex-direction: row;
+
+  .indicator-main {
+    min-width: fit-content;
+  }
+
+  .wrapper {
+    width: 100%;
+
+    .water-tank {
+      width: $water-tank-width;
+      align-self: flex-end;
+      position: relative;
+      padding: 0.3rem;
+      float: right;
+
+      .water-tank__outline {
+        width: $water-tank-width;
+      }
+
+      .water-tank__text {
+        position: absolute;
+        bottom: 2rem;
+        left: 50%;
+        z-index: 2;
+
+        .value {
+          position: relative;
+          left: -32%;
+          font-size: $indicator-main-font-name-big;
+        }
+      }
+
+      .water-tank__water {
+        position: absolute;
+        bottom: 15px;
+        right: -3px;
+        height: 80%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+
+        .water-tank__water__top {
+          width: $water-tank-water-width;
+        }
+
+        .water-tank__water__body {
+          margin-top: -5px;
+          border-radius: 4px;
+          width: $water-tank-water-width;
+          background-color: $water-tank-color;
+          transition: height 0.3s ease-in-out;
+          height: 3rem;
+        }
+      }
+    }
+  }
+}

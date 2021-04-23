@@ -5,6 +5,7 @@ import "./Battery.scss"
 import { BATTERY_STATE } from "../../../utils/constants"
 import { useBattery } from "../../../modules/Battery/Battery.provider"
 import NumericValue from "../../../components/NumericValue"
+import { CommonProps } from "../Views/Metrics"
 
 const batteryStateFormatter = (value: number) => {
   switch (value) {
@@ -39,16 +40,16 @@ function getClassname(idx: number, batteryLevelBars: number) {
   return c
 }
 
-export const BatteriesWithData = () => {
+export const Batteries = (props: CommonProps) => {
   const { batteries } = useBattery()
 
   if (batteries && batteries[0] && batteries[0].soc && batteries[0].state) {
     const battery = batteries[0]
     const batteryStateLabel = batteryStateFormatter(battery.state!)
-    const batteryLevelBars = Math.ceil(battery.soc! / (100 / CELL_NUMBER)) - 1;
+    const batteryLevelBars = Math.ceil(battery.soc! / (100 / CELL_NUMBER));
     return (
       <div className="">
-        <Card title={'Battery'} icon={undefined} size={SIZE_BIG}>
+        <Card title={'Battery'} size={SIZE_BIG}>
           <div className={'battery'}>
             <div className="battery__group">
               <div className="indicator-main">
@@ -101,4 +102,4 @@ export const BatteriesWithData = () => {
   }
 }
 
-export default BatteriesWithData
+export default Batteries

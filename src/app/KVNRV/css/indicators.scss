@@ -1,9 +1,4 @@
-@import "../../../css/variables.scss";
-
-$indicator-main-font-value-big: 2rem;
-$indicator-main-font-name-big: 1.5rem;
-$indicator-main-font-value-small: 2rem;
-$indicator-main-font-name-small: 1.2rem;
+@import "./variables.scss";
 
 .indicator {
   display: flex;

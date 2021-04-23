@@ -5,9 +5,10 @@ import DonutIndicator from "../DonutIndicator"
 import { usePvCharger } from "../../../modules/PvCharger/PvCharger.provider"
 import { Card, SIZE_SMALL } from "../Card"
 import { NotAvailable } from "../NotAvailable"
+import { CommonProps } from "../Views/Metrics"
 
 
-const PvCharger = () => {
+const PvCharger = (props: CommonProps) => {
   const {current, power} = usePvCharger()
 
   let pow = power
@@ -18,14 +19,14 @@ const PvCharger = () => {
 
   return (
     <div className="">
-      <Card title={'PV Charger'} icon={undefined} size={SIZE_SMALL}>
+      <Card title={'PV Charger'} size={SIZE_SMALL}>
         <div className="pv_charger gauge">
           {pow ? (
-            <DonutIndicator value={pow} percent={normalized_power} parts={[0.8, 0.1, 0.1]} unit={"W"} />
+            <DonutIndicator value={pow} percent={normalized_power} parts={PV_CONF.THRESHOLDS} unit={"W"} />
           ) : ( <NotAvailable /> )}
 
           <div className={"info-bar"}>
-            <span>{(current || '--') + " A"}</span>
+            <div className={"info-bar__cell"}>{(current || '--') + " A"}</div>
           </div>
         </div>
       </Card>
