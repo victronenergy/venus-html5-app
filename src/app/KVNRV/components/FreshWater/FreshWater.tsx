@@ -30,7 +30,7 @@ export class FreshWater extends Component<FreshWaterProps, FreshWaterState>{
 
   componentDidUpdate() {
     if (this.water_body_ref.current) {
-      this.water_body_ref.current.style.height = this.props.fresh_water.level * 100 + '%'
+      this.water_body_ref.current.style.height = 0.3 * 100 + '%'
     }
   }
 
@@ -60,10 +60,8 @@ export class FreshWater extends Component<FreshWaterProps, FreshWaterState>{
                   </div>
 
                   <div className={"water-tank__water"}>
-                    <span>
-                      <img src={WaterTankTop} className="water-tank__water__top" />
-                      <div ref={this.water_body_ref} className={"water-tank__water__body"} />
-                    </span>
+                    <img src={WaterTankTop} className="water-tank__water__top" />
+                    <div ref={this.water_body_ref} className={"water-tank__water__body"} />
                   </div>
                 </div>
               </div>

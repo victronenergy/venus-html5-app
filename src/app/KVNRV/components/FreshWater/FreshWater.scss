@@ -38,20 +38,21 @@
 
       .water-tank__water {
         position: absolute;
-        bottom: 15px;
-        right: -3px;
-        height: 80%;
+        bottom: 0.9rem;
+        right: 0.4rem;
+        height: 13rem;
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
 
         .water-tank__water__top {
           width: $water-tank-water-width;
+          border-radius: 0;
         }
 
         .water-tank__water__body {
-          margin-top: -5px;
-          border-radius: 4px;
+          margin-top: -1px;
+          border-radius: 0 0 4px 4px;
           width: $water-tank-water-width;
           background-color: $water-tank-color;
           transition: height 0.3s ease-in-out;
