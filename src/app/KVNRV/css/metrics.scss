@@ -39,12 +39,7 @@
     width: 100%;
     padding: 0.2rem;
 
-    &:first-child {
-      border-right: $color-lightgray solid 1px;
-    }
-
-
-    &:last-child {
+    &:nth-child(n+2) {
       border-left: $color-lightgray solid 1px;
     }
   }
