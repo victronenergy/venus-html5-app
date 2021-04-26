@@ -7,7 +7,9 @@ import Fade, {viewChangeDelay} from './components/Fade'
 import Header, {HeaderWithoutMQTTData} from './components/Header/Header'
 import {InverterChargerInputLimitSelector} from './components/InverterCharger'
 
-import {Connecting, Error, Metrics, MqttUnavailable, RemoteConsole} from './components/Views'
+// import {Connecting, Error, Metrics, MqttUnavailable, RemoteConsole} from './components/Views'
+import {Connecting, Error, Metrics, MqttUnavailable, RemoteConsole} from './KVNRV/components/Views'
+
 import {mqttQuery} from './modules/Mqtt'
 import {useMqtt} from './modules/Mqtt/Mqtt.provider'
 import {useVebus} from './modules/Vebus/Vebus.provider'
@@ -161,15 +163,15 @@ const App = (props: { host: string, port: number }) => {
                                   unmount={viewUnmounting}
                                   fullWidth>
                                 <Metrics
-                                    portalId={portalId}
-                                    inverterChargerDeviceId={vebusInstanceId}
-                                    isConnected={isConnected}
-                                    onChangeInverterChargerInputLimitClicked={() =>
-                                        setView(VIEWS.INVERTER_CHARGER_INPUT_LIMIT_SELECTOR)
-                                    }
-                                    setPages={setPages}
-                                    currentPage={currentPage}
-                                    pages={pages}
+                                    // portalId={portalId}
+                                    // inverterChargerDeviceId={vebusInstanceId}
+                                    // isConnected={isConnected}
+                                    // onChangeInverterChargerInputLimitClicked={() =>
+                                    //     setView(VIEWS.INVERTER_CHARGER_INPUT_LIMIT_SELECTOR)
+                                    // }
+                                    // setPages={setPages}
+                                    // currentPage={currentPage}
+                                    // pages={pages}
                                 />
                             </Fade>
                         )

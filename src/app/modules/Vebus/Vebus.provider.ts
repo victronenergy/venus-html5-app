@@ -39,7 +39,10 @@ export const useVebus = (): VebusState => {
                 return nAcInputs && parseInt(nAcInputs) !== 0
             })
 
-            vebusService.setInstanceId(multiInstance ? parseInt(multiInstance[0]) : null)
+            const newInstanceId = multiInstance ? parseInt(multiInstance[0]) : null
+            if (newInstanceId !== instanceId) {
+                vebusService.setInstanceId(newInstanceId)
+            }
         }
     })
 
