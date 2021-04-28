@@ -12,3 +12,13 @@ export const PV_CONF = {
   MAX: 100,
   THRESHOLDS: [0.8, 0.1, 0.1]
 };
+
+export const FRESH_WATER_CONF = {
+  THRESHOLDS: [0.7, 0.2, 0.1]
+}
+export const BLACK_WATER_CONF = {
+  THRESHOLDS: [0.7, 0.2, 0.1]
+}
+export const WASTE_WATER_CONF = {
+  THRESHOLDS: [0.7, 0.2, 0.1]
+}
