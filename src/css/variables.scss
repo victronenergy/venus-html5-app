@@ -29,6 +29,7 @@ $metricHeaderMarginBottom: 17 * $base;
   --color-darkgray: #555555;
   --color-white: #EEEEEE;
   --main-bg-color: #1f2535;
+  --text-color-main: #1f2535;
 }
 
 $color-active: var(--color-active);
@@ -37,3 +38,4 @@ $color-gray: var(--color-gray);
 $color-darkgray: var(--color-darkgray);
 $color-white: var(--color-white);
 $main-bg-color: var(--main-bg-color);
+$text-color-main: var(--text-color-main);
