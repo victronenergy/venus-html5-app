@@ -1,8 +1,5 @@
-import {useObservableState, useSubscription} from 'observable-hooks'
-import {map} from 'rxjs/operators'
-import { mqttQuery, PortalId } from "../Mqtt"
-import { useMqtt, useTopicSubscriptions, useTopicsWithPortalId } from "../Mqtt/Mqtt.provider"
-import { DcLoadsTopics } from "../DcLoads"
+import { mqttQuery, PortalId, Topics } from "../Mqtt"
+import { useTopicsState, useTopicSubscriptions, useTopicsWithPortalId } from "../Mqtt/Mqtt.provider"
 
 export interface WaterType {
   volume: number,
@@ -11,9 +8,15 @@ export interface WaterType {
 }
 
 export interface WaterState {
-  fresh_water: WaterType | undefined
-  waste_water: WaterType | undefined
-  black_water: WaterType | undefined
+  fresh_water?: WaterType
+  waste_water?: WaterType
+  black_water?: WaterType
+}
+
+export interface WaterTopics extends Topics {
+  fresh_water?: string
+  waste_water?: string
+  black_water?: string
 }
 
 export function useWater (): WaterState {
@@ -22,14 +25,15 @@ export function useWater (): WaterState {
     waste_water: `N/${portalId}/system/0/Water`,
     black_water: `N/${portalId}/system/0/Water`,
   })
-  const topics$ = useTopicsWithPortalId<DcLoadsTopics>(getTopics, mqttQuery.portalId$)
-  const topics = useObservableState(topics$, {})
 
-  // useTopicSubscriptions(topics$)
+  const topics$ = useTopicsWithPortalId<WaterTopics>(getTopics, mqttQuery.portalId$)
 
-  const fresh_water = {volume: 2, size: 9, level: 0} as WaterType
-  const waste_water = {volume: 2, size: 9, level: 0.4} as WaterType
-  const black_water = {volume: 2, size: 9, level: 0.4} as WaterType
+  useTopicSubscriptions(topics$)
+  let { fresh_water, waste_water, black_water } = useTopicsState<WaterState>(topics$)
+
+  fresh_water = {volume: 2, size: 9, level: 0} as WaterType
+  waste_water = {volume: 2, size: 9, level: 0.4} as WaterType
+  black_water = {volume: 2, size: 9, level: 0.4} as WaterType
 
   return {fresh_water, waste_water, black_water}
 }

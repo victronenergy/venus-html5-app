@@ -1,34 +1,26 @@
-import {useObservableState, useSubscription} from 'observable-hooks'
-import {mqttQuery} from '../Mqtt'
-import {useMqtt} from '../Mqtt/Mqtt.provider'
-import { map } from "rxjs/operators"
+import { mqttQuery, PortalId, Topics } from "../Mqtt"
+import { useTopicsState, useTopicSubscriptions, useTopicsWithPortalId } from "../Mqtt/Mqtt.provider"
 
 
 export interface PvChargerState {
-  current: number | undefined
-  power: number | undefined
+    current?: number
+    power?: number
 }
 
+export interface PvChargerTopics extends Topics {
+    current?: string
+    power?: string
+}
 export function usePvCharger (): PvChargerState {
-  const portalId = useObservableState(mqttQuery.portalId$)
-  const mqttService = useMqtt()
-
-  const topics = {
-    power: `N/${portalId}/system/0/Dc/Pv/Power`,
-    current: `N/${portalId}/system/0/Dc/Pv/Current`
-  }
-
-  useSubscription(mqttQuery.portalId$, () => {
-    mqttService.subscribeToTopics(topics)
-
-    return () => mqttService.unsubscribeFromTopics(topics)
+  const getTopics = (portalId: PortalId) => ({
+      power: `N/${portalId}/system/0/Dc/Pv/Power`,
+      current: `N/${portalId}/system/0/Dc/Pv/Current`
   })
 
-  const power = useObservableState(mqttQuery.messagesByTopic$(topics.power).pipe(map(v => -1 * parseInt(v as string))))
-  const current = useObservableState(mqttQuery.messagesByTopic$(topics.current).pipe(map(v => parseInt(v as string))))
+  const topics$ = useTopicsWithPortalId<PvChargerTopics>(getTopics, mqttQuery.portalId$)
 
-  console.log("PvCharger", power, current);
+  useTopicSubscriptions(topics$)
+  let { power, current } = useTopicsState<PvChargerState>(topics$)
 
   return {power, current}
-
 }

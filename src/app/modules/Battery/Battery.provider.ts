@@ -1,6 +1,9 @@
-import {useObservableState} from 'observable-hooks'
 import {mqttQuery, PortalId, Topics} from '../Mqtt'
-import {useTopicState, useTopicSubscriptions, useTopicsWithPortalId} from '../Mqtt/Mqtt.provider'
+import {
+    useTopicsState,
+    useTopicSubscriptions,
+    useTopicsWithPortalId,
+} from "../Mqtt/Mqtt.provider"
 
 export interface Battery {
     current?: number
@@ -29,11 +32,10 @@ export function useBattery (): BatteryState {
     })
 
     const topics$ = useTopicsWithPortalId<BatteryTopics>(getTopics, mqttQuery.portalId$)
-    const topics = useObservableState(topics$, {})
 
     useTopicSubscriptions(topics$)
+    let { batteries } = useTopicsState<BatteryState>(topics$)
 
-    let batteries = useTopicState(topics.batteries) as Battery[]
     if (batteries) {
         batteries = batteries.sort((a, b) => (a.state ? -1 : b.state ? 1 : 0))
     }

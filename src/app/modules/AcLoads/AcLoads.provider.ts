@@ -40,7 +40,7 @@ export function useAcLoads (): AcLoadsState {
     const topics$ = useTopicsWithPortalIdAndInstanceId<AcLoadsTopics>(getTopics, mqttQuery.portalId$, vebusQuery.instanceId$)
 
     useTopicSubscriptions(topics$)
-    const msg = useTopicsState<AcLoadsState>(topics$)
+    let { current, voltage, power, phases } = useTopicsState<AcLoadsState>(topics$)
 
-    return msg
+    return { current, voltage, power, phases }
 }
