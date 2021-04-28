@@ -1,0 +1,62 @@
+@import '../../css/variables.scss';
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 1rem;
+  align-items: center;
+  background-color: $header-bg-color;
+  color: $color-white;
+
+  .header__left {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+
+    .header__logo {
+      border-right: white solid 2px;
+      padding-right: 1rem;
+
+
+      .header__logo__image {
+        vertical-align: super;
+        margin-right: 0.5rem;
+      }
+
+      .header__logo__text {
+        font-size: 2rem;
+        font-weight: 900;
+      }
+    }
+
+    .header__info {
+      padding-left: 1rem;
+      font-size: 0.8rem;
+    }
+  }
+
+  .header__buttons {
+    display: flex;
+    flex-direction: row;
+
+    button {
+      font-size: 1.2rem;
+      background-color: $header-button-color;
+      color: $color-white;
+    }
+
+    .header__buttons__lock {
+
+    }
+
+    .header__buttons__remote {
+
+    }
+
+    .header__buttons__darkmode {
+
+    }
+  }
+}
