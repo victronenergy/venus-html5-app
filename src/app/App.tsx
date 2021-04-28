@@ -1,5 +1,5 @@
-import { KVNRV } from "./KVNRV/KVNRV"
-import { MarineApp } from "./MarineApp/MarineApp"
+import { KVNRV } from "./KVNRV"
+import { MarineApp } from "./MarineApp"
 
 export type AppProps = {
     host: string
