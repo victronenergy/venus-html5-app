@@ -12,7 +12,7 @@ export const ShorePower = (props: CommonProps) => {
         <div className="gauge">
           <NotAvailable />
           <div className={"info-bar"}>
-            <div className={"info-bar__cell"}>{('--') + " A"}</div>
+            <div className={"info-bar__cell"}>{'-- A'}</div>
           </div>
         </div>
       </Card>

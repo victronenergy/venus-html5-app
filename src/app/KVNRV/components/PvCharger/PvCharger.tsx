@@ -12,7 +12,7 @@ const PvCharger = (props: CommonProps) => {
   const {current, power} = usePvCharger()
 
   let pow = power
-  if (pow != undefined && isNaN(pow)) { pow = 0; }
+  if (pow !== undefined && isNaN(pow)) { pow = 0; }
 
   let normalized_power = (pow || 0) / PV_CONF.MAX
   normalized_power = Math.max(Math.min(normalized_power, 1), 0)

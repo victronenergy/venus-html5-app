@@ -5,7 +5,7 @@ import { useDcLoads } from "../../../modules/DcLoads"
 import { DC_CONF } from "../../constants/constants"
 
 import { NotAvailable } from "../NotAvailable"
-import { CommonProps, STATUS_LEVELS } from "../Views/Metrics"
+import { CommonProps } from "../Views/Metrics"
 
 export const DcLoads = (props: CommonProps) => {
   const {voltage, power} = useDcLoads()

@@ -62,7 +62,7 @@ export default class Metrics extends Component<{}, MetricsState> {
   removeStatusUpdate = (su_part: string) => {
     if (this.isUpdatePresent(su_part)) {
       let sus = this.state.status_updates.slice();
-      sus = sus.splice(sus.findIndex((s => s.part == su_part)), 1);
+      sus = sus.splice(sus.findIndex((s => s.part === su_part)), 1);
       this.setState({ status_updates: sus });
     }
   }
