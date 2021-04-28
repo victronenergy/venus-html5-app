@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react"
-import "./Card.scss"
+
 import { STATUS_LEVELS_MSG } from "../Views/Metrics"
 
 export type Footer = {

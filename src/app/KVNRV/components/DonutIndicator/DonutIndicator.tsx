@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { Chart } from 'chart.js';
-import "./DonutIndicator.scss"
+
 
 
 const colorGray = '#c8c9c9'

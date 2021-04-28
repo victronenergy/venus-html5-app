@@ -1,10 +1,10 @@
 import React  from "react"
 import { Card, SIZE_SMALL } from "../Card"
-import "./WasteWater.scss"
+
 import { NotAvailable } from "../NotAvailable"
 import { CommonProps, STATUS_LEVELS } from "../Views/Metrics"
 import { Footer } from "../Card/Card"
-import NumericValue from "../../../components/NumericValue"
+import NumericValue from "../../../MarineApp/components/NumericValue"
 import { useWater } from "../../../modules/Water/Water.provider"
 import ProgressIndicator from "../ProgressIndicator"
 import { WASTE_WATER_CONF } from "../../constants/constants"

@@ -1,7 +1,7 @@
 import React from "react"
 
-import "./Error.scss"
-import "../../../../../css/texts.scss"
+
+
 
 const Error = () => {
   return (

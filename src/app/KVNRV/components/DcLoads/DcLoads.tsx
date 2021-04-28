@@ -3,7 +3,7 @@ import { Card, SIZE_SMALL } from "../Card"
 import DonutIndicator from "../DonutIndicator"
 import { useDcLoads } from "../../../modules/DcLoads"
 import { DC_CONF } from "../../constants/constants"
-import "./DcLoads.scss"
+
 import { NotAvailable } from "../NotAvailable"
 import { CommonProps, STATUS_LEVELS } from "../Views/Metrics"
 
@@ -13,9 +13,9 @@ export const DcLoads = (props: CommonProps) => {
   let normalized_power = (power || 0) / DC_CONF.MAX
   normalized_power = Math.max(Math.min(normalized_power, 1), 0)
 
-  if (voltage &&  voltage > 20) {
-    props.addStatusUpdate({level: STATUS_LEVELS.WARNING, part: "DC Loads", message: "Overheating"})
-  }
+  // if (voltage &&  voltage > 20) {
+  //   props.addStatusUpdate({level: STATUS_LEVELS.WARNING, part: "DC Loads", message: "Overheating"})
+  // }
 
   return (
     <div className="">

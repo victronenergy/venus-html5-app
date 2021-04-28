@@ -1,10 +1,10 @@
 import React  from "react"
 import { Card, SIZE_BIG } from "../Card"
 
-import "./Battery.scss"
+
 import { BATTERY_STATE } from "../../../utils/constants"
 import { useBattery } from "../../../modules/Battery/Battery.provider"
-import NumericValue from "../../../components/NumericValue"
+import NumericValue from "../../../MarineApp/components/NumericValue"
 import { CommonProps } from "../Views/Metrics"
 
 const batteryStateFormatter = (value: number) => {

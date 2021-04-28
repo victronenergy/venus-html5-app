@@ -1,5 +1,5 @@
 import React from "react"
-import Fade from "../../../components/Fade"
+import Fade from "../../../MarineApp/components/Fade"
 
 const MqttUnavailable = ({ viewUnmounting }) => (
   <main>
@@ -12,7 +12,7 @@ const MqttUnavailable = ({ viewUnmounting }) => (
           Try using the Remote Console button at the top of this screen to change your settings remotely.
         </div>
         <div className="image-container">
-          <img src={require("../../../../images/mqtt-settings-v2.42.png")} alt={"MQTT Settings Guide"}/>
+          <img src={require("../../../MarineApp/images/mqtt-settings-v2.42.png")} alt={"MQTT Settings Guide"}/>
         </div>
       </div>
     </Fade>

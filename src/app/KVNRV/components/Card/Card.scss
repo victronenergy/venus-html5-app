@@ -1,9 +1,9 @@
-@import "../../css/variables";
+
 
 
 .card {
   border-radius: 5px;
-  box-shadow: 2px 2px 8px $color-lightgray;
+  box-shadow: 2px 2px 8px var(--color-gray);
   background: white;
   color: black;
   margin: $card-margin;
@@ -32,7 +32,7 @@
       padding-bottom: 0.5rem;
       padding-left: 0.5rem;
       padding-right: 0.5rem;
-      border-bottom: 1px solid $color-lightgray;
+      border-bottom: 1px solid var(--color-gray);
       justify-content: space-between;
 
       .header__text {
