@@ -1,13 +1,10 @@
 
 
-$progress-height: 1.5rem;
-$progress-radius: 3rem;
-
 .progress-indicator {
   border-radius: $progress-radius;
   width: 100%;
   height: $progress-height;
-  background-color: var(--color-gray-light);
+  background-color: $color-gray-light;
 
 
   .progress-indicator__bar {
