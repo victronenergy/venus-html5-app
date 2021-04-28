@@ -1,2 +1,8 @@
 @import "../../css/variables.scss";
 
+.waste-water {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 80%;
+}
