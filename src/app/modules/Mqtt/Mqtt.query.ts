@@ -1,6 +1,6 @@
 import {Query} from '@datorama/akita'
 import {filter, map, pluck} from 'rxjs/operators'
-import {STATUS, Topics} from '.'
+import {MqttMessage, STATUS, Topics} from '.'
 import {MqttState, mqttStore, MqttStore} from './Mqtt.store'
 
 export class MqttQuery extends Query<MqttState> {
@@ -21,19 +21,23 @@ export class MqttQuery extends Query<MqttState> {
     messagesByTopic$ = (topic: string) => this.select(s => s.messages).pipe(pluck(topic))
 
     messagesByTopics$ = (topics: Topics) => {
-        return this.select(s => s.messages)
-            .pipe(
-                map(messages => Object.fromEntries(
-                    Object.entries(topics).map(
-                        ([label, topic]) => {
-                            if (Array.isArray(topic)) {
-                                return [label, topic.map(t => (messages[t]))]
-                            }
-                            return topic ? [label, messages[topic]] : [label, undefined]
-                        },
-                    ),
-                )),
-            )
+        return this.select(({messages}) => {
+            if (topics === undefined) {
+                return {}
+            }
+
+            const result: { [key: string]: MqttMessage | MqttMessage[] } = {}
+            Object.entries(topics).forEach(([label, topic]) => {
+                if (Array.isArray(topic)) {
+                    result[label] = topic.map(t => messages[t])
+                } else if (topic === undefined) {
+                    result[label] = undefined
+                } else {
+                    result[label] = messages[topic]
+                }
+            })
+            return result
+        })
     }
 
     messagesByWildcard$ = (wildcard: string) => {
