@@ -10,7 +10,7 @@ import MqttWriteValue from "../../../mqtt/MqttWriteValue"
 import NumericValue from "../NumericValue"
 import SelectorButton from "../SelectorButton"
 
-
+import './Inverter.scss'
 
 import MultiplusIcon from "../../images/icons/multiplus.svg"
 

@@ -4,6 +4,7 @@ import { Card, SIZE_BIG } from "../Card"
 import { NotAvailable } from "../NotAvailable"
 import SettingsIcon from "../../images/SettingsIcon.svg"
 import { CommonProps } from "../Views/Metrics"
+import './AcMode.scss'
 
 
 export const AcMode = (props: CommonProps) => {

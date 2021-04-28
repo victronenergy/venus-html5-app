@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import classNames from "classnames"
+import './SelectorButton.scss'
 
 // Keep as class component to allow refs
 class SelectorButton extends Component {

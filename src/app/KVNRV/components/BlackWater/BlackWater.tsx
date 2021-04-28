@@ -4,6 +4,7 @@ import { Card, SIZE_SMALL } from "../Card"
 import { NotAvailable } from "../NotAvailable"
 import { CommonProps, STATUS_LEVELS } from "../Views/Metrics"
 import { Footer } from "../Card/Card"
+import './BlackWater.scss'
 
 export const BlackWater = (props: CommonProps) => {
   const footer: Footer = {status: STATUS_LEVELS.ALARM, property: "Status"}

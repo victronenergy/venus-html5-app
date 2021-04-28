@@ -9,6 +9,8 @@ import { useWater } from "../../../modules/Water/Water.provider"
 import ProgressIndicator from "../ProgressIndicator"
 import { WASTE_WATER_CONF } from "../../constants/constants"
 
+import './WasteWater.scss'
+
 export const WasteWater = (props: CommonProps) => {
   const {waste_water} = useWater()
 

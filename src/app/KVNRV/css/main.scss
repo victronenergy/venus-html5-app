@@ -1,3 +1,40 @@
+@import "../../../css/texts.scss";
+
+@import "./variables.scss";
+@import "./grid.scss";
+@import "./indicators.scss";
+
+
+body {
+  --color-lightgray: #c8c9c9;
+  --color-green: #00C564;
+  --color-yellow: #eda63e;
+  --color-red: #ea5b57;
+
+}
+
+.light {
+  --main-bg-color: #F4F5F7;
+  --text-color-main: var(--color-black);
+  --card-bg-color: #ffffff;
+  --header-bg-color: #28348D;
+  --header-button-color: #3E4DBE;
+  --card-shadow-color: var(--color-lightgray);
+}
+
+.dark {
+  --main-bg-color: #202633;
+  --text-color-main: #ffffff;
+  --card-bg-color: #2D333F;
+  --header-bg-color: #141B27;
+  --header-button-color: #2D333F;
+  --card-shadow-color: var(--color-black);
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+}
 
 .metrics-container {
   background-color: $main-bg-color;
@@ -11,10 +48,6 @@
     display: flex;
     justify-content: center;
   }
-}
-
-.metric {
-
 }
 
 

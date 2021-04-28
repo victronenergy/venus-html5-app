@@ -1,11 +1,9 @@
-
-
+@import '../../css/variables.scss';
 
 .card {
   border-radius: 5px;
-  box-shadow: 2px 2px 8px $color-gray;
-  background: white;
-  color: black;
+  box-shadow: 2px 2px 8px $card-shadow-color;
+  background: $card-bg-color;
   margin: $card-margin;
   display: flex;
   flex-direction: column;
@@ -27,7 +25,7 @@
   .contents {
     padding: 0.8rem;
 
-    .header {
+    .card__header {
       margin-bottom: 0.75rem;
       padding-bottom: 0.5rem;
       padding-left: 0.5rem;
@@ -35,19 +33,18 @@
       border-bottom: 1px solid $color-gray;
       justify-content: space-between;
 
-      .header__text {
-        color: $color-black;
+      .card__header__text {
         font-weight: bolder;
       }
     }
 
-    .body {
+    .card__body {
       padding: 0.5rem;
       height: 100%;
     }
   }
 
-  .footer {
+  .card__footer {
     bottom: 0;
     font-size: 0.7rem;
     padding: 0.2rem 0.8rem;

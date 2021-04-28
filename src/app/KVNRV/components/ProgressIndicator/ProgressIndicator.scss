@@ -1,10 +1,10 @@
-
+@import '../../css/variables.scss';
 
 .progress-indicator {
   border-radius: $progress-radius;
   width: 100%;
   height: $progress-height;
-  background-color: $color-gray-light;
+  background-color: $color-lightgray;
 
 
   .progress-indicator__bar {

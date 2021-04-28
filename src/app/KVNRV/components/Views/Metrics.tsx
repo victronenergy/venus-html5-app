@@ -9,7 +9,6 @@ import ShorePower from "../ShorePower"
 import AcMode from "../AcMode"
 import WasteWater from "../WasteWater"
 import BlackWater from "../BlackWater"
-import '../../css/index.scss'
 
 export const STATUS_LEVELS = {
   SUCCESS: "success",

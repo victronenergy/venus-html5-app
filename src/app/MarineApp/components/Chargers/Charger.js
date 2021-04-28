@@ -12,7 +12,7 @@ import SelectorButton from "../SelectorButton/SelectorButton"
 import { systemStateFormatter } from "../../../utils/util"
 import { CHARGER_MODE } from "../../../utils/constants"
 
-
+import './Charger.scss'
 
 import MultiplusIcon from "../../images/icons/multiplus.svg"
 

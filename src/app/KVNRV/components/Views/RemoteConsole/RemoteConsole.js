@@ -1,6 +1,6 @@
 import React from "react"
 
-
+import './RemoteConsole.scss'
 
 const RemoteConsole = ({ onClickOutsideContainer, host }) => (
   <div className="remote-console__container" onClick={onClickOutsideContainer}>

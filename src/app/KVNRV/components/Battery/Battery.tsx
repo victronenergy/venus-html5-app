@@ -6,6 +6,10 @@ import { BATTERY_STATE } from "../../../utils/constants"
 import { useBattery } from "../../../modules/Battery/Battery.provider"
 import NumericValue from "../../../MarineApp/components/NumericValue"
 import { CommonProps } from "../Views/Metrics"
+import { NotAvailable } from "../NotAvailable"
+
+import './Battery.scss'
+
 
 const batteryStateFormatter = (value: number) => {
   switch (value) {
@@ -98,7 +102,15 @@ export const Batteries = (props: CommonProps) => {
       </div>
     )
   } else {
-    return <div/>
+    return (
+      <div className="">
+        <Card title={'Battery'} size={SIZE_BIG}>
+          <div className={"gauge"}>
+            <NotAvailable />
+          </div>
+        </Card>
+      </div>
+    )
   }
 }
 

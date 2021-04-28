@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import SelectorButton from "../SelectorButton"
 import { VIEWS } from "../../../utils/constants"
 
-
+import './Header.scss'
 
 import Logo from "../../images/icons/logo.png"
 import LIcon from "../../images/icons/L.svg"

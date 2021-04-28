@@ -3,6 +3,7 @@ import { Card, SIZE_SMALL } from "../Card"
 
 import { NotAvailable } from "../NotAvailable"
 import { CommonProps } from "../Views/Metrics"
+import './ShorePower.scss'
 
 export const ShorePower = (props: CommonProps) => {
 

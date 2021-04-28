@@ -1,3 +1,14 @@
+@import "../../../css/variables.scss";
+
+$card-bg-color: var(--card-bg-color);
+$card-shadow-color: var(--card-shadow-color);
+$color-green: var(--color-green);
+$color-yellow: var(--color-yellow);
+$color-red: var(--color-red);
+
+$color-yellow-fade: #f0c587;
+$color-red-fade: #ed9895;
+
 
 $card-margin: 0.5rem;
 
@@ -7,16 +18,7 @@ $card-height-big: $card-height-small;
 $card-width-small: 12rem;
 $card-width-big: ($card-width-small * 2) + ($card-margin * 2);
 
-$color-lightergray: #c8c9c9;
-$color-black: #222222;
-$color-green: #00C564;
-$color-yellow: #eda63e;
-$color-yellow-fade: #f0c587;
-$color-red: #ea5b57;
-$color-red-fade: #ed9895;
-
 $indent-base: 0.8;
-
 
 $donut-size-small: 6rem;
 $donut-width-big: 7rem;
@@ -34,10 +36,3 @@ $water-tank-water-width: 8rem;
 
 $progress-height: 1.5rem;
 $progress-radius: 3rem;
-
-:root {
-  --background-color: #112233;
-  --text-color-main: #112233;
-  --color-gray-light: #112233;
-  --color-gray: #112233;
-}

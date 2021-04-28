@@ -1,6 +1,6 @@
 import React from "react"
 
-
+import './HeaderView.scss'
 
 const MAX_TITLE_LENGTH = 40
 

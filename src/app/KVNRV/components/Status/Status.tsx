@@ -6,7 +6,7 @@ import IconWarning from "../../images/IconWarning.svg"
 import IconAlarm from "../../images/IconWarning.svg"
 import IconClose from "../../images/IconClose.svg"
 import { STATUS_LEVELS, StatusUpdate } from "../Views/Metrics"
-
+import './Status.scss'
 
 type StatusProps = {
   status_updates: Array<StatusUpdate>

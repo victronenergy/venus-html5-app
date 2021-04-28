@@ -9,7 +9,7 @@ import WaterTankTop from "../../images/WaterTankTop.svg"
 
 import { Footer } from "../Card/Card"
 import { STATUS_LEVELS } from "../Views/Metrics"
-
+import './FreshWater.scss'
 
 type FreshWaterProps = {
   fresh_water: WaterType

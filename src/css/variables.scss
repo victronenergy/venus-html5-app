@@ -22,20 +22,16 @@ $borderRadius: 17 * $base;
 $marginBottom: 2vh;
 $metricHeaderMarginBottom: 17 * $base;
 
-:root {
-  --color-active: #30afff;
-  --color-lightgray: #AAAAAA;
-  --color-gray: #999999;
-  --color-darkgray: #555555;
-  --color-white: #EEEEEE;
-  --main-bg-color: #1f2535;
-  --text-color-main: #1f2535;
-}
 
-$color-active: var(--color-active);
 $color-lightgray: var(--color-lightgray);
 $color-gray: var(--color-gray);
 $color-darkgray: var(--color-darkgray);
+$color-black: var(--color-black);
 $color-white: var(--color-white);
+$color-offwhite: var(--color-offwhite);
+
+$color-active: var(--color-active);
+$header-bg-color: var(--header-bg-color);
+$header-button-color: var(--header-button-color);
 $main-bg-color: var(--main-bg-color);
 $text-color-main: var(--text-color-main);

@@ -8,7 +8,7 @@ import SelectorButton from "../SelectorButton"
 
 import { GENERATOR_START_STOP } from "../../../utils/constants"
 
-
+import './Generator.scss'
 
 import GeneratorIcon from "../../images/icons/generator.svg"
 

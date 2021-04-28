@@ -4,7 +4,7 @@ import MqttSubscriptions from "../../../mqtt/MqttSubscriptions"
 import SelectorButton from "../SelectorButton"
 
 import { formatNumber } from "../NumericValue"
-
+import './InputLimit.scss'
 
 
 const getTopics = (portalId, vebusInstanceId, shorePowerInput) => {

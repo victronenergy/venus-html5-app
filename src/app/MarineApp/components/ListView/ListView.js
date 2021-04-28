@@ -1,7 +1,7 @@
 import React from "react"
 import classnames from "classnames"
 
-
+import './ListView.scss'
 
 export const ListView = ({ child, children, icon, title, subTitle }) => (
   <div className={classnames({ metric: !child }, "list-view")}>

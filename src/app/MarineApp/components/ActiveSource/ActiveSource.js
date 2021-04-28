@@ -9,7 +9,7 @@ import MetricValues from "../MetricValues"
 
 import { AC_SOURCE_TYPE } from "../../../utils/constants"
 
-
+import './ActiveSource.scss'
 
 import ShorePowerIcon from "../../images/icons/shore-power.svg"
 import GeneratorIcon from "../../images/icons/generator.svg"

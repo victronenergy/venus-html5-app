@@ -1,5 +1,6 @@
 import { KVNRV } from "./KVNRV"
 import { MarineApp } from "./MarineApp"
+import './css/index.scss'
 
 export type AppProps = {
     host: string

@@ -1,47 +1,7 @@
 import React, { Component } from "react"
 import { Chart } from 'chart.js';
+import './DonutIndicator.scss'
 
-
-
-const colorGray = '#c8c9c9'
-const colorRed = '#ea5b57'
-const colorYellow = '#eda63e'
-const colorGreen = '#02be62'
-
-let dataOuter = {
-  labels: [
-    'Red',
-  ],
-  datasets: [{
-    label: '',
-    data: [] as Array<number>,
-    backgroundColor: [
-      colorGreen,
-      colorYellow,
-      colorRed,
-    ],
-    borderColor: [
-      'rgba(255, 255, 255 ,1)',
-    ]
-  }]
-};
-
-let dataInner = {
-  labels: [
-    'Red',
-  ],
-  datasets: [{
-    label: '',
-    data: [] as Array<number>,
-    backgroundColor: [
-      colorGray,
-      colorGray,
-    ],
-    borderColor: [
-      'rgba(255, 255, 255 ,1)',
-    ]
-  }]
-};
 
 const defaultOptions = {
   maintainAspectRatio: false,
@@ -56,7 +16,6 @@ const defaultOptions = {
     enabled: false
   }
 }
-
 
 type DonutIndicatorProps = {
   value: number,
@@ -83,7 +42,9 @@ class DonutIndicator extends Component<DonutIndicatorProps> {
       const innerChartCanvas = this.innerChartRef.current.getContext("2d");
 
       if (outerChartCanvas && innerChartCanvas) {
+        let { dataOuter, dataInner } = this.getData();
         dataOuter.datasets[0]!.data = this.props.parts;
+
         new Chart(outerChartCanvas, {
           type: "doughnut",
           data: dataOuter,
@@ -127,8 +88,58 @@ class DonutIndicator extends Component<DonutIndicatorProps> {
     }
   }
 
+  getData() {
+    let {colorGray, colorRed, colorYellow, colorGreen} = this.getColors()
+
+    let dataOuter = {
+      labels: [
+        'Red',
+      ],
+      datasets: [{
+        label: '',
+        data: [] as Array<number>,
+        backgroundColor: [
+          colorGreen,
+          colorYellow,
+          colorRed,
+        ],
+        borderColor: 'transparent',
+      }]
+    };
+
+    let dataInner = {
+      labels: [
+        'Red',
+      ],
+      datasets: [{
+        label: '',
+        data: [] as Array<number>,
+        backgroundColor: [
+          colorGray,
+          colorGray,
+        ],
+        borderColor: 'transparent',
+      }]
+    };
+
+    return { dataOuter, dataInner };
+  }
+
+  getColors() {
+    const container = getComputedStyle(document.querySelector("#root > .container") as Element)
+
+    const colorGray = container.getPropertyValue('--color-lightgray');
+    const colorRed = container.getPropertyValue('--color-red');
+    const colorYellow = container.getPropertyValue('--color-yellow');
+    const colorGreen = container.getPropertyValue('--color-green');
+
+    return { colorGray, colorRed, colorYellow, colorGreen };
+  }
+
   updateInner() {
     if (this.innerChart) {
+      let {colorGray, colorRed, colorYellow, colorGreen} = this.getColors()
+
       let currentColor = this.props.percent < this.props.parts[0] ? colorGreen : (
         this.props.percent < this.props.parts[0] + this.props.parts[1] ? colorYellow : colorRed
       );

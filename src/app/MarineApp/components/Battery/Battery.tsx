@@ -13,6 +13,7 @@ import RIcon from "../../images/icons/R.svg"
 import SelectorButton from "../SelectorButton"
 import { BatteryLevel } from "./BatteryLevel"
 
+import './Battery.scss'
 
 type PaginatorProps = {
   setPage: Function,

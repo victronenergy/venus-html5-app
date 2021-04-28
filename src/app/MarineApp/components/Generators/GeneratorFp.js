@@ -15,7 +15,7 @@ import {
   GENERATOR_START_STOP
 } from "../../../utils/constants"
 
-
+import './Generator.scss'
 
 import FpGeneratorIcon from "../../images/icons/fp_generator.svg"
 import GeneratorIcon from "../../images/icons/generator.svg"

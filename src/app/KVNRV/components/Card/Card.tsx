@@ -1,6 +1,8 @@
 import React, { FunctionComponent } from "react"
 
 import { STATUS_LEVELS_MSG } from "../Views/Metrics"
+import './Card.scss'
+
 
 export type Footer = {
   status: string,
@@ -22,24 +24,24 @@ export const Card: FunctionComponent<CardProps> = ({ title, size, icon, footer ,
   return (
     <div className={"card " + (Array.isArray(size) ? size.join(" ") : size)}>
       <div className={"contents"}>
-        <div className="header row">
-          <div className="header__text">
+        <div className="card__header row">
+          <div className="card__header__text">
             {title}
           </div>
           {icon && (
-            <div className='header__icon'>
+            <div className='card__header__icon'>
               <img src={icon} alt={"Card icon"} />
             </div>
           )}
         </div>
 
-        <div className="body">
+        <div className="card__body">
           {children}
         </div>
       </div>
 
       {footer && (
-        <div className={"footer " + footer.status}>
+        <div className={"card__footer " + footer.status}>
           <span>{footer.property}: </span>
           <span>{STATUS_LEVELS_MSG[footer.status]}</span>
         </div>
