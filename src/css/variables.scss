@@ -21,9 +21,19 @@ $rightLeftPadding: 20 * $base;
 $borderRadius: 17 * $base;
 $marginBottom: 2vh;
 $metricHeaderMarginBottom: 17 * $base;
-$color-active: #30afff;
 
-$color-lightgray: #AAAAAA;
-$color-gray: #999999;
-$color-darkgray: #555555;
-$color-white: #EEEEEE;
+:root {
+  --color-active: #30afff;
+  --color-lightgray: #AAAAAA;
+  --color-gray: #999999;
+  --color-darkgray: #555555;
+  --color-white: #EEEEEE;
+  --main-bg-color: #1f2535;
+}
+
+$color-active: var(--color-active);
+$color-lightgray: var(--color-lightgray);
+$color-gray: var(--color-gray);
+$color-darkgray: var(--color-darkgray);
+$color-white: var(--color-white);
+$main-bg-color: var(--main-bg-color);
