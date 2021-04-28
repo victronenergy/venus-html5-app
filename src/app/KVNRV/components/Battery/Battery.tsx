@@ -28,7 +28,7 @@ function getClassname(idx: number, batteryLevelBars: number) {
   let c = '';
 
   if (idx < batteryLevelBars) {
-    c += ' active'
+    c += ' success'
   }
 
   if (batteryLevelBars <= ALARM_LEVEL) {

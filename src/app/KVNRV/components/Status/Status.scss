@@ -25,15 +25,11 @@
       align-items: center;
 
       &.warning {
-        background-color: $color-yellow;
-
         .status-update__icon {
           background-color: $color-yellow-fade;
         }
       }
       &.alarm {
-        background-color: $color-red;
-
         .status-update__icon {
           background-color: $color-red-fade;
         }

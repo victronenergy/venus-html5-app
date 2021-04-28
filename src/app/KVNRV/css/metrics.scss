@@ -44,3 +44,7 @@
     }
   }
 }
+
+.success { background-color: $color-green !important; }
+.warning { background-color: $color-yellow !important; }
+.alarm { background-color: $color-red !important; }
