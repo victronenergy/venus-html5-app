@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react"
 import KVNRVLogo from "../../images/KVNRV-Logo.svg"
-import LockIcon from "../../images/KVNRV-Logo.svg"
-import RemoteIcon from "../../images/KVNRV-Logo.svg"
+import LockIcon from "../../images/LockIcon.svg"
+import RemoteIcon from "../../images/RemoteIcon.svg"
 
 import './Header.scss'
 
 type HeaderProps = {
+  darkMode: boolean
   toggleDarkMode: Function
 }
 
@@ -43,27 +44,30 @@ const Header = (props: HeaderProps) => {
 
         <div className={"header__info"}>
           <div>Calvin Hendricks</div>
-          <div>{ time.toLocaleString('nl-NL', dateFormat) }</div>
+          <div>{ time.toLocaleString('en-US', dateFormat) }</div>
         </div>
       </div>
 
       <div className={"header__buttons"}>
-        <div className={"header__buttons__lock"}>
-          <button>
-            <img src={LockIcon} alt={"Lock icon"}/>
-            Lock changes
-          </button>
-        </div>
+        <button className={"header__buttons__lock"}>
+          <img src={LockIcon} className={"header__buttons__icon"} alt={"Lock icon"}/>
+          <span className={"header__buttons__text"}>Lock changes</span>
+        </button>
 
-        <div className={"header__buttons__remote"}>
-          <button>
-            <img src={RemoteIcon} alt={"Remote Connection icon"}/>
-            Remote connection
-          </button>
-        </div>
+        <button className={"header__buttons__remote"}>
+          <img src={RemoteIcon} className={"header__buttons__icon"} alt={"Remote Connection icon"}/>
+          <span className={"header__buttons__text"}>Remote connection</span>
+        </button>
 
         <div className={"header__buttons__darkmode"}>
-          <input type="checkbox" onClick={(e) => props.toggleDarkMode(e)} />
+          <label htmlFor="header__buttons__darkmode__input" className="header__buttons__darkmode__switch">
+            <input
+              type="checkbox"
+              onChange={(e) => props.toggleDarkMode(e)}
+              id="header__buttons__darkmode__input"
+            />
+            <span className="header__buttons__darkmode__slider"/>
+          </label>
         </div>
       </div>
     </div>

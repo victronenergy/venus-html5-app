@@ -21,13 +21,14 @@
 
 
       .header__logo__image {
-        vertical-align: super;
+        vertical-align: middle;
         margin-right: 0.5rem;
       }
 
       .header__logo__text {
         font-size: 2rem;
         font-weight: 900;
+        vertical-align: middle;
       }
     }
 
@@ -41,22 +42,72 @@
     display: flex;
     flex-direction: row;
 
-    button {
+    .header__buttons__lock, .header__buttons__remote {
       font-size: 1.2rem;
       background-color: $header-button-color;
       color: $color-white;
+      padding: 0.5rem 0.8rem;
+      border: none;
+      border-radius: 5px;
+      margin-right: 1rem;
+
+      .header__buttons__icon {
+        margin-right: 0.5rem;
+        vertical-align: middle;
+      }
+      .header__buttons__text {
+        vertical-align: middle;
+        font-size: 0.9rem;
+      }
     }
 
-    .header__buttons__lock {
-
-    }
-
-    .header__buttons__remote {
-
-    }
+    $theme-slider-width: 3rem;
+    $theme-slider-height: 1rem;
+    $theme-slider-circle-size: $theme-slider-height * 1.5;
 
     .header__buttons__darkmode {
+      align-self: center;
 
+      .header__buttons__darkmode__switch {
+        position: relative;
+        display: inline-block;
+        height: $theme-slider-height;
+        width: $theme-slider-width;
+      }
+
+      #header__buttons__darkmode__input {
+        display:none;
+      }
+
+      .header__buttons__darkmode__slider {
+        background-color: $header-button-color;
+        bottom: 0;
+        cursor: pointer;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transition: .4s;
+        border-radius: 1rem;
+
+        &:before {
+          bottom: -1 * ($theme-slider-height * 0.5) / 2;
+          content: "";
+          left: 0;
+          position: absolute;
+          transition: .1s;
+          height: $theme-slider-circle-size;
+          width: $theme-slider-circle-size;
+          border-radius: 50%;
+          background: $color-white url("../../images/LightThemeIcon.svg") no-repeat center/75%;
+        }
+      }
+
+
+      #header__buttons__darkmode__input:checked + .header__buttons__darkmode__slider:before {
+        transform: translateX($theme-slider-width - $theme-slider-circle-size);
+        background: $color-white url("../../images/DarkThemeIcon.svg") no-repeat center/55%;
+      }
     }
   }
 }
