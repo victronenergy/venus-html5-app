@@ -10,7 +10,6 @@ body {
   --color-green: #00C564;
   --color-yellow: #eda63e;
   --color-red: #ea5b57;
-
 }
 
 .light {
@@ -34,14 +33,13 @@ body {
 .container {
   width: 100%;
   height: 100%;
+  background-color: $main-bg-color;
 }
 
 .metrics-container {
-  background-color: $main-bg-color;
   color: $text-color-main;
-  overflow: scroll;
   width: 100%;
-  height: 100%;
+  height: content-box;
 
   .container {
     width: 100%;
