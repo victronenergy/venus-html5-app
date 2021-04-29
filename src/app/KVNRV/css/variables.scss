@@ -12,17 +12,17 @@ $color-red-fade: #ed9895;
 
 $card-margin: 0.5rem;
 
-$card-height-small: 10rem;
+$card-height-small: 11rem;
 $card-height-big: $card-height-small;
 
-$card-width-small: 10rem;
+$card-width-small: 11rem;
 $card-width-big: ($card-width-small * 2) + ($card-margin * 2);
 
 $indent-base: 0.8;
 
 $donut-size-small: $card-width-small / 2;
 $donut-width-big: $donut-size-small;
-$donut-height-big: $donut-width-big - $card-width-small / 4;
+$donut-height-big: $donut-width-big - $card-width-small / 6;
 $donut-offset: 0.24rem;
 
 $indicator-main-font-value-big: 2rem;
