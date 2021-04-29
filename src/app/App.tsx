@@ -1,6 +1,6 @@
 import { KVNRV } from "./KVNRV"
 import { MarineApp } from "./MarineApp"
-import './css/index.scss'
+import '../css/index.scss'
 
 export type AppProps = {
     host: string
@@ -11,15 +11,11 @@ const App = (props: AppProps) => {
 
     if (whitelabel === "KVNRV") {
         return (
-          <div>
-              <KVNRV {...props} />
-          </div>
+            <KVNRV {...props} />
         )
     } else {
         return (
-          <div>
-              <MarineApp {...props} />
-          </div>
+            <MarineApp {...props} />
         )
     }
 }
