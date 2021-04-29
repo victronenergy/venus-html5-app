@@ -12,7 +12,7 @@ export type Footer = {
 type CardProps = {
   title: string,
   size: string | Array<string>,
-  icon?: string,
+  icon?: boolean,
   footer?: Footer
 }
 
@@ -29,9 +29,7 @@ export const Card: FunctionComponent<CardProps> = ({ title, size, icon, footer ,
             {title}
           </div>
           {icon && (
-            <div className='card__header__icon'>
-              <img src={icon} alt={"Card icon"} />
-            </div>
+            <div className='card__header__icon' />
           )}
         </div>
 
