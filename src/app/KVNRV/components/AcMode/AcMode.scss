@@ -1,1 +1,19 @@
 @import '../../css/variables.scss';
+
+.ac_mode_indicator {
+  flex-direction: column;
+  text-align: center;
+  width: auto;
+
+  .name {
+    font-size: 1rem;
+  }
+
+  .ac_mode_indicator__mode {
+    border-radius: 5px;
+    border: $color-green solid 1px;
+    width: $card-width-big/2;
+    align-self: center;
+    color: $color-green;
+  }
+}
