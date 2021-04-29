@@ -55,9 +55,6 @@ export class FreshWater extends Component<FreshWaterProps, FreshWaterState>{
               <div className="wrapper">
                 <div className={'water-tank'}>
                   <img src={WaterTank} className="water-tank__outline"  alt={"Water tank outline"}/>
-                  <div className={"water-tank__text"}>
-                    <NumericValue value={fresh_water.level * 100} unit="%" defaultValue={'--'} precision={0} />
-                  </div>
 
                   <div className={"water-tank__water"}>
                     <img src={WaterTankTop} className="water-tank__water__top"  alt={"Water wave top"}/>

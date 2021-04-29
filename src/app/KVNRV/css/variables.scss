@@ -12,27 +12,27 @@ $color-red-fade: #ed9895;
 
 $card-margin: 0.5rem;
 
-$card-height-small: 12rem;
+$card-height-small: 10rem;
 $card-height-big: $card-height-small;
 
-$card-width-small: 12rem;
+$card-width-small: 10rem;
 $card-width-big: ($card-width-small * 2) + ($card-margin * 2);
 
 $indent-base: 0.8;
 
-$donut-size-small: 6rem;
-$donut-width-big: 7rem;
-$donut-height-big: $donut-width-big - 3rem;
+$donut-size-small: $card-width-small / 2;
+$donut-width-big: $donut-size-small;
+$donut-height-big: $donut-width-big - $card-width-small / 4;
 $donut-offset: 0.24rem;
 
 $indicator-main-font-value-big: 2rem;
 $indicator-main-font-name-big: 1.5rem;
-$indicator-main-font-value-small: 2rem;
-$indicator-main-font-name-small: 1.2rem;
+$indicator-main-font-value-small: 1.6rem;
+$indicator-main-font-name-small: 1rem;
 
-$water-tank-width: 10rem;
+$water-tank-width: $card-height-small * 0.9;
 $water-tank-color: #01BDFE;
-$water-tank-water-width: 8rem;
+$water-tank-water-width: $water-tank-width * 0.8;
 
 $progress-height: 1.5rem;
 $progress-radius: 3rem;

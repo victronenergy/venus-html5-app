@@ -30,7 +30,7 @@ export const WasteWater = (props: CommonProps) => {
         <div className="gauge">
           {waste_water ? (
             <div className={'waste-water'}>
-              <div className="indicator-main">
+              <div className="indicator-main--small">
               <span>
                 <NumericValue value={waste_water.level * 100} unit="%" defaultValue={'--'} precision={0} />
                 <span className="name">
