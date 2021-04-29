@@ -1,7 +1,7 @@
 import { BATTERY_STATE } from "../../../utils/constants"
 import { Battery } from "../../../modules/Battery/Battery.provider"
 import React from "react"
-import { formatNumber } from "../NumericValue"
+import { formatNumber } from "../../../components/NumericValue"
 
 const batteryStateFormatter = (value: number) => {
   switch (value) {

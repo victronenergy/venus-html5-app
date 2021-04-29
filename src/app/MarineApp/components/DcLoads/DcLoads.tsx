@@ -4,7 +4,7 @@ import {useDcLoads} from '../../../modules/DcLoads'
 import HeaderView from '../HeaderView'
 import HidingContainer from '../HidingContainer'
 import MetricValues from '../MetricValues'
-import NumericValue from '../NumericValue'
+import NumericValue from '../../../components/NumericValue'
 
 export const DcLoads = () => {
     const {voltage, power} = useDcLoads()

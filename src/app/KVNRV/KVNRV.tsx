@@ -1,27 +1,27 @@
 import Header  from "./components/Header"
 import React from "react"
 import { Metrics } from "./components/Views"
-import { AppProps } from "../utils/constants"
+import { AppProps } from "../App"
 
 type AppState = {
-  dark_mode: boolean
+  darkMode: boolean
 }
 
 export class KVNRV extends React.Component<AppProps, AppState>{
   constructor(props: AppProps) {
     super(props);
 
-    this.state = { dark_mode: false }
+    this.state = { darkMode: false }
   }
 
   toggleDarkMode() {
-    this.setState({ dark_mode: !this.state.dark_mode })
+    this.setState({ darkMode: !this.state.darkMode })
   }
 
   render() {
     return (
-      <div className={'container ' + (this.state.dark_mode ? 'dark' : 'light')}>
-        <Header toggleDarkMode={() => this.toggleDarkMode()} />
+      <div className={'container ' + (this.state.darkMode ? 'dark' : 'light')}>
+        <Header darkMode={this.state.darkMode} toggleDarkMode={() => this.toggleDarkMode()} />
         <Metrics />
       </div>
     )

@@ -4,7 +4,7 @@ import { Card, SIZE_BIG } from "../Card"
 
 import { BATTERY_STATE } from "../../../utils/constants"
 import { useBattery } from "../../../modules/Battery/Battery.provider"
-import NumericValue from "../../../MarineApp/components/NumericValue"
+import NumericValue from "../../../components/NumericValue"
 import { CommonProps } from "../Views/Metrics"
 import { NotAvailable } from "../NotAvailable"
 

@@ -3,7 +3,7 @@ import React, { Component } from "react"
 import MqttSubscriptions from "../../../mqtt/MqttSubscriptions"
 import SelectorButton from "../SelectorButton"
 
-import { formatNumber } from "../NumericValue"
+import { formatNumber } from "../../../components/NumericValue"
 import './InputLimit.scss'
 
 

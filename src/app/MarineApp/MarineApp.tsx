@@ -10,7 +10,8 @@ import {Connecting, Error, Metrics, MqttUnavailable, RemoteConsole} from './comp
 import {mqttQuery} from '../modules/Mqtt'
 import {useMqtt} from '../modules/Mqtt/Mqtt.provider'
 import {useVebus} from '../modules/Vebus/Vebus.provider'
-import { AppProps, VIEWS } from "../utils/constants"
+import { VIEWS } from "../utils/constants"
+import { AppProps } from "../App"
 
 type MainProps = {
   isConnected?: boolean,

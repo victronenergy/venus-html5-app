@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import SelectorButton from "../SelectorButton/SelectorButton"
-import { formatNumber } from "../NumericValue"
+import { formatNumber } from "../../../components/NumericValue"
 
 class CurrentLimitIncrementor extends Component {
   render() {

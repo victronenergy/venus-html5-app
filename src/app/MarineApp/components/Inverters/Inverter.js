@@ -7,7 +7,7 @@ import HidingContainer from "../HidingContainer"
 import MetricValues from "../MetricValues"
 import MqttSubscriptions from "../../../mqtt/MqttSubscriptions"
 import MqttWriteValue from "../../../mqtt/MqttWriteValue"
-import NumericValue from "../NumericValue"
+import NumericValue from "../../../components/NumericValue"
 import SelectorButton from "../SelectorButton"
 
 import './Inverter.scss'

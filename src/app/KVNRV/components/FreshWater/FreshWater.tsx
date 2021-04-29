@@ -3,7 +3,7 @@ import React, { Component } from "react"
 import { Card, SIZE_BIG, SIZE_LONG } from "../Card"
 import { useWater, WaterType } from "../../../modules/Water/Water.provider"
 import { NotAvailable } from "../NotAvailable"
-import NumericValue from "../../../MarineApp/components/NumericValue"
+import NumericValue from "../../../components/NumericValue"
 import WaterTank from "../../images/WaterTank.svg"
 import WaterTankTop from "../../images/WaterTankTop.svg"
 

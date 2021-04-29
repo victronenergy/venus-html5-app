@@ -4,7 +4,7 @@ import HeaderView from "../HeaderView/HeaderView"
 import HidingContainer from "../HidingContainer"
 import MetricValues from "../MetricValues"
 import MqttSubscriptions from "../../../mqtt/MqttSubscriptions"
-import NumericValue from "../NumericValue"
+import NumericValue from "../../../components/NumericValue"
 
 import SolarIcon from "../../images/icons/icon_solar.svg"
 

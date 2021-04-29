@@ -1,7 +1,7 @@
 import React from "react"
 
 import { ListRow } from '../ListView'
-import NumericValue from "../NumericValue"
+import NumericValue from "../../../components/NumericValue"
 import MqttSubscriptions from "../../../mqtt/MqttSubscriptions"
 
 const getTopics = portalId => {

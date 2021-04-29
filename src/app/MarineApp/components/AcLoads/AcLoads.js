@@ -5,7 +5,7 @@ import HidingContainer from "../HidingContainer"
 import { ListView, ListRow } from "../ListView"
 import MetricValues from "../MetricValues"
 import MqttSubscriptions from "../../../mqtt/MqttSubscriptions"
-import NumericValue from "../NumericValue"
+import NumericValue from "../../../components/NumericValue"
 
 import AcIcon from "../../images/icons/ac.svg"
 
