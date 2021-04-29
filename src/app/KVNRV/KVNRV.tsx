@@ -1,7 +1,7 @@
-import { AppProps } from "../App"
 import Header  from "./components/Header"
 import React from "react"
 import { Metrics } from "./components/Views"
+import { AppProps } from "../utils/constants"
 
 type AppState = {
   dark_mode: boolean

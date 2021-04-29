@@ -10,11 +10,14 @@ import {Connecting, Error, Metrics, MqttUnavailable, RemoteConsole} from './comp
 import {mqttQuery} from '../modules/Mqtt'
 import {useMqtt} from '../modules/Mqtt/Mqtt.provider'
 import {useVebus} from '../modules/Vebus/Vebus.provider'
-import {VIEWS} from '../utils/constants'
-import { AppProps } from "../App"
+import { AppProps, VIEWS } from "../utils/constants"
 
-// @ts-ignore
-const Main = ({isConnected, children, setView}) => {
+type MainProps = {
+  isConnected?: boolean,
+  children: any,
+  setView: Function
+}
+const Main = ({isConnected, children, setView}: MainProps) => {
   return (
     <main
       className={classnames({disconnected: !isConnected})}
