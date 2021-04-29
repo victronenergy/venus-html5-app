@@ -1,5 +1,6 @@
 import '../css/index.scss'
 import React from "react"
+import Loading from "./components/Loading"
 
 const KVNRV = React.lazy(() => import('./KVNRV'));
 const MarineApp = React.lazy(() => import('./MarineApp'));
@@ -14,13 +15,13 @@ const App = (props: AppProps) => {
 
     if (whitelabel === "KVNRV") {
         return (
-          <React.Suspense fallback={() => (<div>Suspense</div>)}>
-              <KVNRV {...props} />
+          <React.Suspense fallback={<Loading />} >
+            <KVNRV {...props} />
           </React.Suspense>
         )
     } else {
         return (
-          <React.Suspense fallback={() => (<div>Suspense</div>)}>
+          <React.Suspense fallback={<Loading />} >
               <MarineApp {...props} />
           </React.Suspense>
         )
