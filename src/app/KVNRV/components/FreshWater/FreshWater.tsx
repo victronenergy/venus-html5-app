@@ -4,7 +4,6 @@ import { Card, SIZE_BIG, SIZE_LONG } from "../Card"
 import { useWater, WaterType } from "../../../modules/Water/Water.provider"
 import { NotAvailable } from "../NotAvailable"
 import NumericValue from "../../../components/NumericValue"
-import WaterTank from "../../images/WaterTank.svg"
 import WaterTankTop from "../../images/WaterTankTop.svg"
 
 import { Footer } from "../Card/Card"
@@ -54,11 +53,11 @@ export class FreshWater extends Component<FreshWaterProps, FreshWaterState>{
 
               <div className="wrapper">
                 <div className={'water-tank'}>
-                  <img src={WaterTank} className="water-tank__outline"  alt={"Water tank outline"}/>
-
-                  <div className={"water-tank__water"}>
-                    <img src={WaterTankTop} className="water-tank__water__top"  alt={"Water wave top"}/>
-                    <div ref={this.water_body_ref} className={"water-tank__water__body"} />
+                  <div className="water-tank__outline">
+                    <div className={"water-tank__water"}>
+                      <img src={WaterTankTop} className="water-tank__water__top"  alt={"Water wave top"}/>
+                      <div ref={this.water_body_ref} className={"water-tank__water__body"} />
+                    </div>
                   </div>
                 </div>
               </div>
