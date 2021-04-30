@@ -1,19 +1,51 @@
 @import '../../css/variables.scss';
 
-.ac_mode_indicator {
+.ac_mode {
   flex-direction: column;
   text-align: center;
   width: auto;
 
   .name {
     font-size: 1rem;
+
+    &:nth-child(n+2) {
+      margin-top: 0.5rem;
+    }
   }
 
-  .ac_mode_indicator__mode {
+  .ac_mode__mode {
     border-radius: 5px;
     border: $color-green solid 1px;
     width: $card-width-big/2;
     align-self: center;
     color: $color-green;
+  }
+}
+
+.ac_mode_modal {
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  .name:nth-child(n+2) {
+    margin-top: 0.9rem;
+  }
+
+  .ac_mode_modal__group {
+    width: inherit;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    .ac_mode_modal__button {
+      flex-grow: 1;
+      margin: 0.3rem;
+      border-radius: 5px;
+      border: none;
+      color: $text-color-main;
+      background-color: $color-lightgray;
+      padding: 0.7rem;
+      font-size: 0.9rem;
+    }
   }
 }

@@ -1,6 +1,6 @@
 import React  from "react"
 
-import { Card, SIZE_BIG } from "../Card"
+import { Card, SIZE_BIG, ICON_SETTINGS } from "../Card"
 import { CommonProps } from "../Views/Metrics"
 import { AC_MODE } from "../../constants/constants"
 import NumericValue from "../../../components/NumericValue"
@@ -9,7 +9,7 @@ import AcModeModal from "./AcModeModal"
 import './AcMode.scss'
 
 
-const acModeFormatter = (value: number) => {
+export const acModeFormatter = (value: number) => {
   switch (value) {
     case AC_MODE.MODES.ON:
       return "On"
@@ -41,11 +41,19 @@ class AcMode extends React.Component<CommonProps, AcModeState>{
     }
   }
 
+  onClose() {
+    this.setState({ modalOpen: false })
+  }
+
+  onOpen() {
+    this.setState({ modalOpen: true })
+  }
+
   render() {
     return (
       <div className="">
-        <Card title={'AC Mode'} icon={true} size={SIZE_BIG}>
-          <div className="indicator-main--small ac_mode_indicator">
+        <Card title={'AC Mode'} icon={ICON_SETTINGS} size={SIZE_BIG} onIconClick={() => this.onOpen()}>
+          <div className="indicator-main--small ac_mode">
 
             <div className="name">Input limit</div>
             <div>
@@ -53,11 +61,19 @@ class AcMode extends React.Component<CommonProps, AcModeState>{
             </div>
 
             <div className="name">Mode</div>
-            <div className={"ac_mode_indicator__mode"}>
+            <div className={"ac_mode__mode"}>
               { acModeFormatter(this.state.mode) }
             </div>
           </div>
-          {this.state.modalOpen && <AcModeModal mode={this.state.mode} inputLimit={this.state.inputLimit} />}
+          {this.state.modalOpen && (
+            <AcModeModal
+              mode={this.state.mode}
+              inputLimit={this.state.inputLimit}
+              onClose={() => this.onClose()}
+              onModeInput={(mode: number) => this.setState({mode})}
+              onLimitInput={(inputLimit: number) => this.setState({inputLimit})}
+            />
+          )}
         </Card>
       </div>
     )
