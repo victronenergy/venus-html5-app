@@ -11,7 +11,7 @@ export class KVNRV extends React.Component<AppProps, AppState> {
   constructor(props: AppProps) {
     super(props)
 
-    this.state = { darkMode: false }
+    this.state = { darkMode: true }
   }
 
   toggleDarkMode() {
