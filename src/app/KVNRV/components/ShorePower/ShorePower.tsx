@@ -24,4 +24,4 @@ export const ShorePower = (props: CommonProps) => {
   )
 }
 
-export default ShorePower
+export default React.memo(ShorePower)

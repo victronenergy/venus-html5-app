@@ -37,4 +37,4 @@ const PvCharger = (props: CommonProps) => {
   )
 }
 
-export default PvCharger
+export default React.memo(PvCharger)

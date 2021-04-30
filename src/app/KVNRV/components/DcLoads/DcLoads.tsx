@@ -1,4 +1,4 @@
-import React  from "react"
+import React from "react"
 import { Card, SIZE_SMALL } from "../Card"
 import DonutIndicator from "../DonutIndicator"
 import { useDcLoads } from "../../../modules/DcLoads"
@@ -12,24 +12,27 @@ import NumericValue from "../../../components/NumericValue"
 export const DcLoads = (props: CommonProps) => {
   const {voltage, power} = useDcLoads()
 
-  let normalized_power = (power || 0) / DC_CONF.MAX
+  let v = 0, p = 0
+  if (voltage && power) {
+    v = voltage[0] || 0
+    p = power[0] || 0
+  }
+
+  let normalized_power = (p || 0) / DC_CONF.MAX
   normalized_power = Math.max(Math.min(normalized_power, 1), 0)
 
-  // if (voltage &&  voltage > 20) {
-  //   props.addStatusUpdate({level: STATUS_LEVELS.WARNING, part: "DC Loads", message: "Overheating"})
-  // }
 
   return (
     <div className="">
       <Card title={'DC Loads'} size={SIZE_SMALL}>
         <div className="gauge">
           {power ? (
-            <DonutIndicator value={power} percent={normalized_power} parts={DC_CONF.THRESHOLDS} unit={"W"} />
+            <DonutIndicator value={p} percent={normalized_power} parts={DC_CONF.THRESHOLDS} unit={"W"} />
           ) : ( <NotAvailable /> )}
 
           <div className={"info-bar"}>
             <div className={"info-bar__cell"}>
-              <NumericValue value={voltage} unit={"A"} precision={0} />
+              <NumericValue value={v} unit={"A"} precision={0} />
             </div>
           </div>
         </div>
@@ -38,4 +41,4 @@ export const DcLoads = (props: CommonProps) => {
   )
 }
 
-export default DcLoads
+export default React.memo(DcLoads)

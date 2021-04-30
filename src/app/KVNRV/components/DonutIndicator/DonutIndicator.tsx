@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React, { PureComponent } from "react"
 import { Chart } from 'chart.js';
 import './DonutIndicator.scss'
 import { formatNumber } from "../../../components/NumericValue"
@@ -15,7 +15,7 @@ const defaultOptions = {
   aspectRatio: 1,
   tooltips: {
     enabled: false
-  }
+  },
 }
 
 type DonutIndicatorProps = {
@@ -25,7 +25,7 @@ type DonutIndicatorProps = {
   parts: Array<number>
 }
 
-class DonutIndicator extends Component<DonutIndicatorProps> {
+class DonutIndicator extends PureComponent<DonutIndicatorProps> {
   constructor(props: DonutIndicatorProps) {
     super(props);
     this.outerChartRef = React.createRef();
@@ -72,7 +72,7 @@ class DonutIndicator extends Component<DonutIndicatorProps> {
 
               let text = formatNumber({value: this.props.value, unit: this.props.unit, precision: 0}),
                 textX = Math.round((width - ctx.measureText(text).width) / 2),
-                textY = height / 2 + (height * 0.3);
+                textY = height / 2 + (height * 0.25);
 
               ctx.fillText(text, textX, textY);
               ctx.save();
@@ -105,6 +105,11 @@ class DonutIndicator extends Component<DonutIndicatorProps> {
           colorYellow,
           colorRed,
         ],
+        hoverBackgroundColor: [
+          colorGreen,
+          colorYellow,
+          colorRed,
+        ],
         borderColor: 'transparent',
       }]
     };
@@ -117,6 +122,10 @@ class DonutIndicator extends Component<DonutIndicatorProps> {
         label: '',
         data: [] as Array<number>,
         backgroundColor: [
+          colorGray,
+          colorGray,
+        ],
+        hoverBackgroundColor: [
           colorGray,
           colorGray,
         ],
@@ -150,6 +159,7 @@ class DonutIndicator extends Component<DonutIndicatorProps> {
         let percent = Math.max(0, this.props.percent);
         this.innerChart.data.datasets[0].data = [percent, 1 - percent]
         this.innerChart.data.datasets[0].backgroundColor = [currentColor, colorGray];
+        this.innerChart.data.datasets[0].hoverBackgroundColor = [currentColor, colorGray];
       }
       this.innerChart.update();
     }
