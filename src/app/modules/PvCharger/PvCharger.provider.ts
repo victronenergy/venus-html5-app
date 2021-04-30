@@ -11,16 +11,16 @@ export interface PvChargerTopics extends Topics {
     current?: string
     power?: string
 }
-export function usePvCharger (): PvChargerState {
-  const getTopics = (portalId: PortalId) => ({
-      power: `N/${portalId}/system/0/Dc/Pv/Power`,
-      current: `N/${portalId}/system/0/Dc/Pv/Current`
-  })
+export function usePvCharger(): PvChargerState {
+    const getTopics = (portalId: PortalId) => ({
+        power: [`N/${portalId}/system/0/Dc/Pv/Power`],
+        current: [`N/${portalId}/system/0/Dc/Pv/Current`]
+    })
 
-  const topics$ = useTopicsWithPortalId<PvChargerTopics>(getTopics, mqttQuery.portalId$)
+    const topics$ = useTopicsWithPortalId<PvChargerTopics>(getTopics, mqttQuery.portalId$)
 
-  useTopicSubscriptions(topics$)
-  let { power, current } = useTopicsState<PvChargerState>(topics$)
+    useTopicSubscriptions(topics$)
+    let { power, current } = useTopicsState<PvChargerState>(topics$)
 
-  return {power, current}
+    return { power, current }
 }

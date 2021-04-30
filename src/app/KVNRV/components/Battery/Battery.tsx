@@ -1,4 +1,4 @@
-import React  from "react"
+import React from "react"
 import { Card, SIZE_BIG } from "../Card"
 
 
@@ -59,27 +59,28 @@ export const Batteries = (props: CommonProps) => {
               <div className="indicator-main">
                 <span>
                   <NumericValue value={battery.soc} unit="%" defaultValue={'--'} precision={1} />
-                  {batteryStateLabel && (
-                    <span className="name">
-                      {batteryStateLabel}
-                    </span>
-                  )}
+
                 </span>
+                {batteryStateLabel && (
+                  <div className="name">
+                    {batteryStateLabel}
+                  </div>
+                )}
               </div>
 
               <span>
                 <div className="indicator">
-                    <span className="name">
-                      Power
+                  <span className="name">
+                    Power
                     </span>
-                    <NumericValue value={battery.power} unit="V" defaultValue={'--'} precision={1} />
+                  <NumericValue value={battery.power} unit="V" defaultValue={'--'} precision={1} />
                 </div>
 
                 <div className="indicator">
-                    <span className="name">
-                      Current
+                  <span className="name">
+                    Current
                     </span>
-                    <NumericValue value={battery.current} unit="A" defaultValue={'--'} precision={1} />
+                  <NumericValue value={battery.current} unit="A" defaultValue={'--'} precision={1} />
                 </div>
               </span>
             </div>
