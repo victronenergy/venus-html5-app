@@ -42,10 +42,14 @@
       margin: 0.3rem;
       border-radius: 5px;
       border: none;
-      color: $text-color-main;
+      color: $color-darkgray;
       background-color: $color-lightgray;
       padding: 0.7rem;
       font-size: 0.9rem;
+
+      &.success {
+        color: $color-white;
+      }
     }
   }
 }
