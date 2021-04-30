@@ -1,13 +1,22 @@
 import React  from "react"
 
-import { AC_CONF } from "../../constants/constants"
+import { AC_CONF, Conf } from "../../constants/constants"
 import { useAcLoads } from "../../../modules/AcLoads/AcLoads.provider"
 import { Card, SIZE_SMALL } from "../Card"
 import DonutIndicator from "../DonutIndicator"
 import { NotAvailable } from "../NotAvailable"
-import { CommonProps } from "../Views/Metrics"
+import { CommonProps, STATUS_LEVELS } from "../Views/Metrics"
 import NumericValue from "../../../components/NumericValue"
 
+const sendUpdate = (percent: number, conf: Conf, part: string, addFunc: Function, removeFunc: Function) => {
+  removeFunc(part)
+
+    if (percent > conf.THRESHOLDS[0] && percent < conf.THRESHOLDS[0] + conf.THRESHOLDS[1]) {
+      addFunc({part, message: " too much power!", level: STATUS_LEVELS.WARNING})
+    } else {
+      addFunc({part, message: " too much power!", level: STATUS_LEVELS.ALARM})
+    }
+}
 
 export const AcLoads = (props: CommonProps) => {
   let {current, voltage, power, phases} = useAcLoads()
@@ -21,6 +30,8 @@ export const AcLoads = (props: CommonProps) => {
 
   let normalized_power = p / AC_CONF.MAX
   normalized_power = Math.max(Math.min(normalized_power, 1), 0)
+
+  sendUpdate(normalized_power, AC_CONF, "AC Loads", props.addStatusUpdate, props.removeStatusUpdate)
 
   return (
     <div className="">
