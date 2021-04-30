@@ -4,7 +4,7 @@ import { Card, SIZE_BIG, SIZE_LONG } from "../Card"
 import { Footer } from "../Card/Card"
 import IconWarning from "../../images/IconWarning.svg"
 import IconAlarm from "../../images/IconWarning.svg"
-import IconClose from "../../../images/IconClose.svg"
+import IconClose from "../../../images/IconClose-Dark.svg"
 import { STATUS_LEVELS, StatusUpdate } from "../Views/Metrics"
 import './Status.scss'
 
