@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import { Chart } from 'chart.js';
 import './DonutIndicator.scss'
+import { formatNumber } from "../../../components/NumericValue"
 
 
 const defaultOptions = {
@@ -64,11 +65,11 @@ class DonutIndicator extends Component<DonutIndicatorProps> {
               if (!ctx || !height || !width) {return;}
 
               ctx.restore();
-              let fontSize = (height / 60).toFixed(2);
+              let fontSize = (height / 70).toFixed(2);
               ctx.font = fontSize + "em sans-serif";
               ctx.textBaseline = "middle";
 
-              let text = this.props.value + " " + this.props.unit,
+              let text = formatNumber({value: this.props.value, unit: this.props.unit, precision: 0}),
                 textX = Math.round((width - ctx.measureText(text).width) / 2),
                 textY = height / 2 + (height * 0.3);
 

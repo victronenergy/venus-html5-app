@@ -6,7 +6,7 @@
   height: $donut-height-big;
   width: $donut-width-big;
   align-self: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 
   .outer-chart {
     position: absolute;
@@ -18,8 +18,8 @@
 
   .inner-chart {
     position: absolute;
-    width: $donut-size-small !important;
-    height: $donut-size-small - 2.5rem !important;
+    width: $donut-size-small * 0.85 !important;
+    height: $donut-size-small * 0.6 !important;
     top: calc(50% + #{$donut-offset});
     left: 50%;
     transform: translate(-50%, -50%);
