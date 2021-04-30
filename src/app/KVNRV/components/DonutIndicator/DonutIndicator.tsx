@@ -68,6 +68,7 @@ class DonutIndicator extends Component<DonutIndicatorProps> {
               let fontSize = (height / 70).toFixed(2);
               ctx.font = fontSize + "em sans-serif";
               ctx.textBaseline = "middle";
+              ctx.fillStyle = this.getColors().textColor;
 
               let text = formatNumber({value: this.props.value, unit: this.props.unit, precision: 0}),
                 textX = Math.round((width - ctx.measureText(text).width) / 2),
@@ -133,8 +134,9 @@ class DonutIndicator extends Component<DonutIndicatorProps> {
     const colorRed = container.getPropertyValue('--color-red');
     const colorYellow = container.getPropertyValue('--color-yellow');
     const colorGreen = container.getPropertyValue('--color-green');
+    const textColor = container.getPropertyValue('--text-color-main');
 
-    return { colorGray, colorRed, colorYellow, colorGreen };
+    return { colorGray, colorRed, colorYellow, colorGreen, textColor };
   }
 
   updateInner() {
