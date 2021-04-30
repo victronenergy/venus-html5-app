@@ -20,6 +20,8 @@
 
       .water-tank__outline {
         width: $water-tank-width;
+        height: $water-tank-height;
+        background: var(--water-tank-img) center/90% no-repeat;
       }
 
       .water-tank__text {
@@ -37,8 +39,8 @@
 
       .water-tank__water {
         position: absolute;
-        bottom: 0.9rem;
-        right: 0.4rem;
+        bottom: 0.7rem;
+        right: 0.85rem;
         height: 13rem;
         display: flex;
         flex-direction: column;
