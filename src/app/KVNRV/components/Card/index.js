@@ -1,1 +1,1 @@
-export { Card, SIZE_SMALL, SIZE_BIG, SIZE_LONG } from './Card'
+export { Card, SIZE_SMALL, SIZE_BIG, SIZE_LONG, ICON_CLOSE, ICON_SETTINGS } from './Card'

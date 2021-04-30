@@ -12,7 +12,8 @@ export type Footer = {
 type CardProps = {
   title: string,
   size: string | Array<string>,
-  icon?: boolean,
+  icon?: string,
+  onIconClick?: Function,
   footer?: Footer
 }
 
@@ -20,7 +21,10 @@ export const SIZE_SMALL = 'small';
 export const SIZE_BIG = 'big';
 export const SIZE_LONG = 'long';
 
-export const Card: FunctionComponent<CardProps> = ({ title, size, icon, footer , children }) => {
+export const ICON_SETTINGS = 'settings';
+export const ICON_CLOSE = 'settings';
+
+export const Card: FunctionComponent<CardProps> = ({ title, size, icon, onIconClick, footer , children }) => {
   return (
     <div className={"card " + (Array.isArray(size) ? size.join(" ") : size)}>
       <div className={"contents"}>
@@ -29,7 +33,7 @@ export const Card: FunctionComponent<CardProps> = ({ title, size, icon, footer ,
             {title}
           </div>
           {icon && (
-            <div className='card__header__icon' />
+            <div className={'card__header__icon ' + icon} onClick={(e) => onIconClick && onIconClick(e)} />
           )}
         </div>
 

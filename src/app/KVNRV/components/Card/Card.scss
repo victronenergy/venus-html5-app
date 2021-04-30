@@ -36,11 +36,14 @@
       }
 
       .card__header__icon {
-        background: $color-lightgray url('../../images/SettingsIcon.svg') center no-repeat;
+        background-color: $color-lightgray;
         width: 1.3rem;
         height: 1.3rem;
         border-radius: 5px;
       }
+
+      .settings { background: $color-lightgray var(--settings-icon) center no-repeat; }
+      .close { background: $color-lightgray var(--settings-icon) center no-repeat; }
     }
 
     .card__body {
