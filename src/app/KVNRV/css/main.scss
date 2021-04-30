@@ -19,15 +19,20 @@ body {
   --header-bg-color: #28348D;
   --header-button-color: #3E4DBE;
   --card-shadow-color: var(--color-lightgray);
+  --settings-icon: url('../../images/SettingsIcon.svg');
+  --water-tank-img: url('../images/WaterTank.svg');
 }
 
 .dark {
+  --color-lightgray: #81858B;
   --main-bg-color: #202633;
   --text-color-main: #ffffff;
   --card-bg-color: #2D333F;
   --header-bg-color: #141B27;
   --header-button-color: #2D333F;
   --card-shadow-color: var(--color-black);
+  --settings-icon: url('../../images/SettingsIcon-Dark.svg');
+  --water-tank-img: url('../images/WaterTank-Dark.svg');
 }
 
 .container {

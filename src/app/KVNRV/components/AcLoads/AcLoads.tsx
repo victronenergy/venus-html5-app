@@ -6,6 +6,7 @@ import { Card, SIZE_SMALL } from "../Card"
 import DonutIndicator from "../DonutIndicator"
 import { NotAvailable } from "../NotAvailable"
 import { CommonProps } from "../Views/Metrics"
+import NumericValue from "../../../components/NumericValue"
 
 
 export const AcLoads = (props: CommonProps) => {
@@ -23,9 +24,15 @@ export const AcLoads = (props: CommonProps) => {
           ) : ( <NotAvailable /> )}
 
           <div className={"info-bar"}>
-            <div className={"info-bar__cell"}>{(voltage || '--') + " V"}</div>
-            <div className={"info-bar__cell"}>{(current || '--') + " A"}</div>
-            <div className={"info-bar__cell"}>{(phases || '--') + " Hz"}</div>
+            <div className={"info-bar__cell"}>
+              <NumericValue value={voltage} unit={"V"} precision={0} />
+            </div>
+            <div className={"info-bar__cell"}>
+              <NumericValue value={current} unit={"A"} precision={0} />
+            </div>
+            <div className={"info-bar__cell"}>
+              <NumericValue value={phases} unit={"Hz"} precision={0} />
+            </div>
           </div>
         </div>
       </Card>
