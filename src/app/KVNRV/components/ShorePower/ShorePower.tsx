@@ -4,6 +4,7 @@ import { Card, SIZE_SMALL } from "../Card"
 import { NotAvailable } from "../NotAvailable"
 import { CommonProps } from "../Views/Metrics"
 import './ShorePower.scss'
+import NumericValue from "../../../components/NumericValue"
 
 export const ShorePower = (props: CommonProps) => {
 
@@ -13,7 +14,9 @@ export const ShorePower = (props: CommonProps) => {
         <div className="gauge">
           <NotAvailable />
           <div className={"info-bar"}>
-            <div className={"info-bar__cell"}>{'-- A'}</div>
+            <div className={"info-bar__cell"}>
+              <NumericValue value={0} unit={"A"} precision={0} />
+            </div>
           </div>
         </div>
       </Card>

@@ -7,6 +7,7 @@ import { DC_CONF } from "../../constants/constants"
 import { NotAvailable } from "../NotAvailable"
 import { CommonProps } from "../Views/Metrics"
 import './DcLoads.scss'
+import NumericValue from "../../../components/NumericValue"
 
 export const DcLoads = (props: CommonProps) => {
   const {voltage, power} = useDcLoads()
@@ -27,7 +28,9 @@ export const DcLoads = (props: CommonProps) => {
           ) : ( <NotAvailable /> )}
 
           <div className={"info-bar"}>
-            <div className={"info-bar__cell"}>{(voltage || '--') + " A"}</div>
+            <div className={"info-bar__cell"}>
+              <NumericValue value={voltage} unit={"A"} precision={0} />
+            </div>
           </div>
         </div>
       </Card>

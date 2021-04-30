@@ -6,6 +6,7 @@ import { usePvCharger } from "../../../modules/PvCharger/PvCharger.provider"
 import { Card, SIZE_SMALL } from "../Card"
 import { NotAvailable } from "../NotAvailable"
 import { CommonProps } from "../Views/Metrics"
+import NumericValue from "../../../components/NumericValue"
 
 
 const PvCharger = (props: CommonProps) => {
@@ -26,7 +27,9 @@ const PvCharger = (props: CommonProps) => {
           ) : ( <NotAvailable /> )}
 
           <div className={"info-bar"}>
-            <div className={"info-bar__cell"}>{(current || '--') + " A"}</div>
+            <div className={"info-bar__cell"}>
+              <NumericValue value={current} unit={"A"} precision={0} />
+            </div>
           </div>
         </div>
       </Card>
