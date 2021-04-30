@@ -1,6 +1,7 @@
 import '../css/index.scss'
-import React from "react"
+import React, {useEffect} from "react"
 import Loading from "./components/Loading"
+import {MqttService, mqttStore} from "./modules/Mqtt";
 
 const KVNRV = React.lazy(() => import('./KVNRV'));
 const MarineApp = React.lazy(() => import('./MarineApp'));
@@ -12,6 +13,11 @@ export type AppProps = {
 
 const App = (props: AppProps) => {
     const whitelabel = "KVNRV";
+
+    useEffect(() => {
+        const mqttService = new MqttService(mqttStore)
+        mqttService.boot(props.host, props.port)
+    }, [props.host, props.port])
 
     if (whitelabel === "KVNRV") {
         return (
