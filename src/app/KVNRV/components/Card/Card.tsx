@@ -22,7 +22,7 @@ export const SIZE_BIG = 'big';
 export const SIZE_LONG = 'long';
 
 export const ICON_SETTINGS = 'settings';
-export const ICON_CLOSE = 'settings';
+export const ICON_CLOSE = 'close';
 
 export const Card: FunctionComponent<CardProps> = ({ title, size, icon, onIconClick, footer , children }) => {
   return (
