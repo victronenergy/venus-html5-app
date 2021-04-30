@@ -7,8 +7,6 @@ import SelectorButton from "../SelectorButton"
 
 import Logger from "../../../utils/logger"
 
-
-
 const USAmperage = [10, 15, 20, 30, 50, 100]
 const EUAmperage = [6, 10, 13, 16, 25, 32, 63]
 
@@ -16,13 +14,13 @@ const getTopics = (portalId, vebusInstanceId, shorePowerInput) => {
   return {
     currentLimit: `N/${portalId}/vebus/${vebusInstanceId}/Ac/In/${shorePowerInput}/CurrentLimit`,
     currentLimitMax: `N/${portalId}/vebus/${vebusInstanceId}/Ac/In/${shorePowerInput}/CurrentLimitGetMax`,
-    productId: `N/${portalId}/vebus/${vebusInstanceId}/ProductId`
+    productId: `N/${portalId}/vebus/${vebusInstanceId}/ProductId`,
   }
 }
 
 class InputLimitSelector extends Component {
   state = {
-    showEmpties: false
+    showEmpties: false,
   }
 
   firstSelectorButtonNode = null
@@ -54,14 +52,14 @@ class InputLimitSelector extends Component {
 
   render() {
     const { currentLimitMax = 100, productId, currentLimit, onLimitSelected } = this.props
-    const amperageList = this.getSuggestedAmperageValuesList(productId).filter(value => {
+    const amperageList = this.getSuggestedAmperageValuesList(productId).filter((value) => {
       return value <= currentLimitMax
     })
     const currentlySelectedLimit = parseInt(currentLimit)
 
     return (
       <div className="amperage-selector__container">
-        <div className="amperage-selector" ref={node => (this.amperageContainerNode = node)}>
+        <div className="amperage-selector" ref={(node) => (this.amperageContainerNode = node)}>
           <div className="text text--large text--center amperage-selector__description">Select shore input limit</div>
           {amperageList.map((currentValue, index) => {
             return (
@@ -70,7 +68,7 @@ class InputLimitSelector extends Component {
                 className={"selector-button__amperage text--very-large"}
                 active={currentlySelectedLimit === currentValue}
                 onClick={() => onLimitSelected(currentValue)}
-                ref={node => (index === 0 ? (this.firstSelectorButtonNode = node) : null)}
+                ref={(node) => (index === 0 ? (this.firstSelectorButtonNode = node) : null)}
                 large
               >
                 {currentValue}A
@@ -78,9 +76,11 @@ class InputLimitSelector extends Component {
             )
           })}
 
-          {// Add these to "cheat" the flexbox and allow center alignment of selector buttons
-          // AND left alignment to the last row of buttons if multilined
-          this.state.showEmpties && amperageList.map(amperage => <div className="empty" key={amperage} />)}
+          {
+            // Add these to "cheat" the flexbox and allow center alignment of selector buttons
+            // AND left alignment to the last row of buttons if multilined
+            this.state.showEmpties && amperageList.map((amperage) => <div className="empty" key={amperage} />)
+          }
         </div>
       </div>
     )
@@ -95,14 +95,14 @@ class InputLimitSelectorWithData extends Component {
     }
     return (
       <GetShorePowerInputNumber portalId={portalId}>
-        {shorePowerInput => {
+        {(shorePowerInput) => {
           if (!shorePowerInput) {
             return <div>Loading...</div>
           }
           return (
             // Only available for VE.Bus versions > 415
             <MqttSubscriptions topics={getTopics(portalId, inverterChargerDeviceId, shorePowerInput)}>
-              {topics => {
+              {(topics) => {
                 return (
                   <MqttWriteValue
                     topic={`W/${portalId}/vebus/${inverterChargerDeviceId}/Ac/In/${shorePowerInput}/CurrentLimit`}
@@ -111,7 +111,7 @@ class InputLimitSelectorWithData extends Component {
                       return (
                         <InputLimitSelector
                           {...topics}
-                          onLimitSelected={value => {
+                          onLimitSelected={(value) => {
                             updateLimitSelected(value)
                             onLimitSelected()
                           }}

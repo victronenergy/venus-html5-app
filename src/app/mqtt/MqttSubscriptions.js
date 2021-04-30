@@ -1,6 +1,6 @@
-import React from 'react'
+import React from "react"
 
 // TODO: Remove once all usages are refactored
-const MqttSubscriptionsWrapped = props => (<>{props.children({})}</>)
+const MqttSubscriptionsWrapped = (props) => <>{props.children({})}</>
 
 export default MqttSubscriptionsWrapped

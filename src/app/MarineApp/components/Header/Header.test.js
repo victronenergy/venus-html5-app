@@ -8,9 +8,9 @@ describe("Header element", () => {
     const wrapper = mount(
       <Header
         showRemoteConsoleSetting={true}
-        handleRemoteConsoleButtonClicked={() => {}}
+        handleRemoteConsoleButtonClicked={() => { }}
         currentView={VIEWS.METRICS}
-        setPage={() => {}}
+        setPage={() => { }}
         currentPage={1}
         pages={1}
       />
@@ -29,9 +29,9 @@ describe("Header element", () => {
     const wrapper = mount(
       <Header
         showRemoteConsoleSetting={true}
-        handleRemoteConsoleButtonClicked={() => {}}
+        handleRemoteConsoleButtonClicked={() => { }}
         currentView={VIEWS.METRICS}
-        setPage={() => {}}
+        setPage={() => { }}
         currentPage={1}
         pages={3}
       />

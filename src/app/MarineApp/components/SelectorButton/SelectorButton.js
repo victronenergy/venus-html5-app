@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import classNames from "classnames"
-import './SelectorButton.scss'
+import "./SelectorButton.scss"
 
 // Keep as class component to allow refs
 class SelectorButton extends Component {
@@ -15,7 +15,7 @@ class SelectorButton extends Component {
           {
             "selector-button--active": active,
             "selector-button--narrow": narrow,
-            "selector-button--disabled": disabled
+            "selector-button--disabled": disabled,
           },
           className || ""
         )}

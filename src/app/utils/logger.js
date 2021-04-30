@@ -12,4 +12,4 @@ const error = (...msgs) => {
 
 const logger = { log, warn, error }
 
-export default logger;
+export default logger

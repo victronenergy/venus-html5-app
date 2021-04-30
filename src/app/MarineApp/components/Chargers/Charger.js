@@ -12,7 +12,7 @@ import SelectorButton from "../SelectorButton/SelectorButton"
 import { systemStateFormatter } from "../../../utils/util"
 import { CHARGER_MODE } from "../../../utils/constants"
 
-import './Charger.scss'
+import "./Charger.scss"
 
 import MultiplusIcon from "../../images/icons/multiplus.svg"
 
@@ -27,12 +27,12 @@ const getTopics = (portalId, deviceInstanceId) => {
     current: [
       `N/${portalId}/charger/${deviceInstanceId}/Dc/0/Current`,
       `N/${portalId}/charger/${deviceInstanceId}/Dc/1/Current`,
-      `N/${portalId}/charger/${deviceInstanceId}/Dc/2/Current`
-    ]
+      `N/${portalId}/charger/${deviceInstanceId}/Dc/2/Current`,
+    ],
   }
 }
 
-const chargerModeFormatter = value => {
+const chargerModeFormatter = (value) => {
   switch (value) {
     case CHARGER_MODE.OFF:
       return "OFF"
@@ -64,7 +64,7 @@ const Charger = ({
   mode,
   currentLimit,
   onModeSelected,
-  onChangeInputLimitClicked
+  onChangeInputLimitClicked,
 }) => {
   // When a topic is invalid, it returns undefined -> no value means topic is not supported
   const chargerSupportsMode = mode !== undefined
@@ -95,13 +95,12 @@ const Charger = ({
             <>
               <div className="charger__input-limit-selector">
                 <div className="charger__input-limit-selector__label text--subtitle">{"Limit"}</div>
-                {currentLimit !== null &&
-                  currentLimit !== undefined && (
-                    <CurrentLimitIncrementor
-                      currentLimit={currentLimit}
-                      onInputLimitChanged={onChangeInputLimitClicked}
-                    />
-                  )}
+                {currentLimit !== null && currentLimit !== undefined && (
+                  <CurrentLimitIncrementor
+                    currentLimit={currentLimit}
+                    onInputLimitChanged={onChangeInputLimitClicked}
+                  />
+                )}
               </div>
             </>
           )}
@@ -113,7 +112,7 @@ const Charger = ({
 
 const ChargerWithData = ({ portalId, deviceInstanceId, metricsRef }) => (
   <MqttSubscriptions topics={getTopics(portalId, deviceInstanceId)}>
-    {topics => {
+    {(topics) => {
       return (
         <MqttWriteValue topic={`W/${portalId}/charger/${deviceInstanceId}/Mode`}>
           {(_, updateMode) => {

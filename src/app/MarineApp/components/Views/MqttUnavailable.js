@@ -12,12 +12,11 @@ const MqttUnavailable = ({ viewUnmounting }) => (
           Try using the Remote Console button at the top of this screen to change your settings remotely.
         </div>
         <div className="image-container">
-          <img src={require("../../images/mqtt-settings-v2.42.png")} alt={"MQTT Settings Guide"}/>
+          <img src={require("../../images/mqtt-settings-v2.42.png")} alt={"MQTT Settings Guide"} />
         </div>
       </div>
     </Fade>
   </main>
 )
 
-export default MqttUnavailable;
-
+export default MqttUnavailable

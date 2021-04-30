@@ -1,34 +1,34 @@
 import React from "react"
 
-import { ListRow } from '../ListView'
+import { ListRow } from "../ListView"
 import NumericValue from "../../../components/NumericValue"
 import MqttSubscriptions from "../../../mqtt/MqttSubscriptions"
 
-const getTopics = portalId => {
+const getTopics = (portalId) => {
   return {
     voltage: [
       `N/${portalId}/genset/0/Ac/L1/Voltage`,
       `N/${portalId}/genset/0/Ac/L2/Voltage`,
-      `N/${portalId}/genset/0/Ac/L3/Voltage`
+      `N/${portalId}/genset/0/Ac/L3/Voltage`,
     ],
     current: [
       `N/${portalId}/genset/0/Ac/L1/Current`,
       `N/${portalId}/genset/0/Ac/L2/Current`,
-      `N/${portalId}/genset/0/Ac/L3/Current`
+      `N/${portalId}/genset/0/Ac/L3/Current`,
     ],
     power: [
       `N/${portalId}/genset/0/Ac/L1/Power`,
       `N/${portalId}/genset/0/Ac/L2/Power`,
-      `N/${portalId}/genset/0/Ac/L3/Power`
+      `N/${portalId}/genset/0/Ac/L3/Power`,
     ],
     frequency: [
       `N/${portalId}/genset/0/Ac/L1/Frequency`,
       `N/${portalId}/genset/0/Ac/L2/Frequency`,
-      `N/${portalId}/genset/0/Ac/L3/Frequency`
+      `N/${portalId}/genset/0/Ac/L3/Frequency`,
     ],
     coolant: `N/${portalId}/genset/0/Engine/CoolantTemperature`,
     winding: `N/${portalId}/genset/0/Engine/WindingTemperature`,
-    exhaust: `N/${portalId}/genset/0/Engine/ExaustTemperature`
+    exhaust: `N/${portalId}/genset/0/Engine/ExaustTemperature`,
   }
 }
 
@@ -69,11 +69,11 @@ export const ActiveInTotalValues = ({ voltage, current, power, frequency, coolan
 const GensetValues = ({ portalId, threePhase }) => {
   return (
     <MqttSubscriptions topics={getTopics(portalId)}>
-      {topics => {
+      {(topics) => {
         return <ActiveInTotalValues {...topics} threePhase={threePhase} />
       }}
     </MqttSubscriptions>
   )
 }
 
-export default GensetValues;
+export default GensetValues

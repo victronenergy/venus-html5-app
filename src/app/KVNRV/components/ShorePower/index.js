@@ -1,1 +1,1 @@
-export {default} from './ShorePower'
+export { default } from "./ShorePower"

@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { MqttClientContext } from "../contexts"
 
 class MqttWriteValue extends Component {
-  publish = value => {
+  publish = (value) => {
     let data = JSON.stringify({ value: value })
     this.props.publish(this.props.topic, data)
   }
@@ -10,7 +10,7 @@ class MqttWriteValue extends Component {
     return <>{this.props.children(this.props.isConnected, this.publish)}</>
   }
 }
-const MqttWriteValueWrapped = props => (
+const MqttWriteValueWrapped = (props) => (
   <MqttClientContext.Consumer>
     {({ publish, isConnected }) => {
       return <MqttWriteValue {...props} publish={publish} isConnected={isConnected} />
@@ -18,4 +18,4 @@ const MqttWriteValueWrapped = props => (
   </MqttClientContext.Consumer>
 )
 
-export default MqttWriteValueWrapped;
+export default MqttWriteValueWrapped

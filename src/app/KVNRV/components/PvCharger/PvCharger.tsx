@@ -1,4 +1,4 @@
-import React  from "react"
+import React from "react"
 
 import { PV_CONF } from "../../constants/constants"
 import DonutIndicator from "../DonutIndicator"
@@ -8,23 +8,26 @@ import { NotAvailable } from "../NotAvailable"
 import { CommonProps } from "../Views/Metrics"
 import NumericValue from "../../../components/NumericValue"
 
-
 const PvCharger = (props: CommonProps) => {
-  const {current, power} = usePvCharger()
+  const { current, power } = usePvCharger()
 
   let pow = power
-  if (pow !== undefined && isNaN(pow)) { pow = 0; }
+  if (pow !== undefined && isNaN(pow)) {
+    pow = 0
+  }
 
   let normalized_power = (pow || 0) / PV_CONF.MAX
   normalized_power = Math.max(Math.min(normalized_power, 1), 0)
 
   return (
     <div className="">
-      <Card title={'PV Charger'} size={SIZE_SMALL}>
+      <Card title={"PV Charger"} size={SIZE_SMALL}>
         <div className="pv_charger gauge">
           {pow ? (
             <DonutIndicator value={pow} percent={normalized_power} parts={PV_CONF.THRESHOLDS} unit={"W"} />
-          ) : ( <NotAvailable /> )}
+          ) : (
+            <NotAvailable />
+          )}
 
           <div className={"info-bar"}>
             <div className={"info-bar__cell"}>

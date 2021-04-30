@@ -7,20 +7,14 @@ describe("DC Loads", () => {
     const wrapper = mount(<DcLoads voltage={12.345} power={98.765} />)
 
     it("shows current", () => {
-      const props = wrapper
-        .find("NumericValue")
-        .first()
-        .props()
+      const props = wrapper.find("NumericValue").first().props()
 
       expect(props.value).toEqual(98.765 / 12.345, "Current should be voltage divided by power")
       expect(props.precision).toEqual(1, "Current should be displayed with one value")
     })
 
     it("shows power", () => {
-      const props = wrapper
-        .find("NumericValue")
-        .at(1)
-        .props()
+      const props = wrapper.find("NumericValue").at(1).props()
 
       expect(props.value).toEqual(98.765)
       expect(props.precision).toBeUndefined()
@@ -31,12 +25,7 @@ describe("DC Loads", () => {
     const wrapper = mount(<DcLoads power={98.765} />)
 
     it("shows empty current", () => {
-      expect(
-        wrapper
-          .find("NumericValue")
-          .first()
-          .props().value
-      ).toBeUndefined()
+      expect(wrapper.find("NumericValue").first().props().value).toBeUndefined()
     })
   })
 
@@ -44,21 +33,11 @@ describe("DC Loads", () => {
     const wrapper = mount(<DcLoads />)
 
     it("shows empty current", () => {
-      expect(
-        wrapper
-          .find("NumericValue")
-          .first()
-          .props().value
-      ).toBeUndefined()
+      expect(wrapper.find("NumericValue").first().props().value).toBeUndefined()
     })
 
     it("shows empty power", () => {
-      expect(
-        wrapper
-          .find("NumericValue")
-          .at(1)
-          .props().value
-      ).toBeUndefined()
+      expect(wrapper.find("NumericValue").at(1).props().value).toBeUndefined()
     })
   })
 })

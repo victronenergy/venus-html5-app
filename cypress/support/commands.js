@@ -16,7 +16,7 @@
 // -- This is a child command --
 // Cypress.Commands.add("drag", { prevSubject: 'element'}, (subject, options) => { ... })
 
-import '@testing-library/cypress/add-commands'
+import "@testing-library/cypress/add-commands"
 
 // eslint-disable-next-line no-undef
 Cypress.Commands.add(`isWithinViewport`, { prevSubject: true }, (subject, width, height) => {
@@ -33,9 +33,9 @@ Cypress.Commands.add(`isWithinViewport`, { prevSubject: true }, (subject, width,
 const addContext = require("mochawesome/addContext")
 
 // eslint-disable-next-line no-undef
-Cypress.Commands.add("addContext", content => {
+Cypress.Commands.add("addContext", (content) => {
   // eslint-disable-next-line no-undef
-  cy.once("test:after:run", test => {
+  cy.once("test:after:run", (test) => {
     addContext({ test }, content)
   })
 })

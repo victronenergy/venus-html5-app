@@ -1,16 +1,15 @@
-import React  from "react"
+import React from "react"
 import { Card, SIZE_SMALL } from "../Card"
 
 import { NotAvailable } from "../NotAvailable"
 import { CommonProps } from "../Views/Metrics"
-import './ShorePower.scss'
+import "./ShorePower.scss"
 import NumericValue from "../../../components/NumericValue"
 
 export const ShorePower = (props: CommonProps) => {
-
   return (
     <div className="">
-      <Card title={'Shore Power'} size={SIZE_SMALL}>
+      <Card title={"Shore Power"} size={SIZE_SMALL}>
         <div className="gauge">
           <NotAvailable />
           <div className={"info-bar"}>

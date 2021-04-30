@@ -1,13 +1,13 @@
-import React  from "react"
-import './ProgressIndicator.scss'
+import React from "react"
+import "./ProgressIndicator.scss"
 
 type ProgressIndicatorProps = {
-  percent: number,
+  percent: number
   level: string
 }
 
 const ProgressIndicator = (props: ProgressIndicatorProps) => {
-  const styles = {width: (props.percent * 100) + "%" }
+  const styles = { width: props.percent * 100 + "%" }
 
   return (
     <div className="progress-indicator">

@@ -26,14 +26,14 @@ const deviceResolutions = {
     halfVerticalSplit(1086, 772),
     thirdVerticalSplit(1086, 772),
     quarter(1086, 772),
-    sixth(1086, 772)
+    sixth(1086, 772),
   ],
   raymarine: [
     [800, 480],
     [1280, 720],
     [1280, 800],
     [1920, 1080],
-    [1920, 1200]
+    [1920, 1200],
   ],
   garmin: [
     [1280, 723],
@@ -41,13 +41,13 @@ const deviceResolutions = {
     halfVerticalSplit(1280, 723),
     thirdVerticalSplit(1280, 723),
     quarter(1280, 723),
-    sixth(1280, 723)
+    sixth(1280, 723),
   ],
   other: [
     [2560, 1440],
     [3840, 2160],
-    [1024, 1366]
-  ]
+    [1024, 1366],
+  ],
 }
 
 for (let [device, resolutions] of Object.entries(deviceResolutions)) {

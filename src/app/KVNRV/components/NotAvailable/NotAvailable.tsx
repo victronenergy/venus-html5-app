@@ -1,7 +1,3 @@
-import './NotAvailable.scss'
+import "./NotAvailable.scss"
 
-export const NotAvailable = () => (
-  <div className='not-available'>
-    Not Available
-  </div>
-)
+export const NotAvailable = () => <div className="not-available">Not Available</div>

@@ -11,9 +11,9 @@ import Generators from "../Generators"
 
 const HEADER_HEIGHT = 110
 
-const getMetricsTotalHeight = metrics => metrics.map(c => Math.ceil(c.clientHeight)).reduce((a, b) => a + b, 0)
+const getMetricsTotalHeight = (metrics) => metrics.map((c) => Math.ceil(c.clientHeight)).reduce((a, b) => a + b, 0)
 
-const getRequiredCols = metrics => {
+const getRequiredCols = (metrics) => {
   if (metrics.length < 2) return 1
   if (window.innerWidth / window.innerHeight < 9 / 10) return 1
   if (window.innerWidth < 1000) return 1
@@ -27,7 +27,7 @@ const getRequiredPages = (metrics, containerHeight, cols) => {
   if (metrics.length < 2) return 1
   if (!containerHeight) return 1
 
-  const metricsHeights = metrics.map(c => c.getBoundingClientRect().height)
+  const metricsHeights = metrics.map((c) => c.getBoundingClientRect().height)
   let columns = 1
   let columnHeight = 0
 
@@ -42,13 +42,13 @@ const getRequiredPages = (metrics, containerHeight, cols) => {
   return Math.ceil(columns / cols)
 }
 
-const getContainerHeight = metrics => {
+const getContainerHeight = (metrics) => {
   /**
    * The container must be just high enough to fit half of the total height of the metrics
    * elements. This means that either the left or the right column can be the taller one,
    * but prefer left over right for aesthetics.
    */
-  const metricsHeights = metrics.map(c => c.getBoundingClientRect().height)
+  const metricsHeights = metrics.map((c) => c.getBoundingClientRect().height)
   const reversed = [...metricsHeights].reverse()
   const minHeight = metricsHeights.reduce((a, b) => a + b, 0) / 2
   for (let i = 1; i <= metricsHeights.length; i++) {
@@ -93,7 +93,7 @@ export default class Metrics extends Component {
       inverterChargerDeviceId,
       isConnected,
       onChangeInverterChargerInputLimitClicked,
-      currentPage
+      currentPage,
     } = this.props
     const commonProps = { portalId, inverterChargerDeviceId, metricsRef: this.metricsRef }
 

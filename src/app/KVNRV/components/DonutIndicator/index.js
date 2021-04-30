@@ -1,1 +1,1 @@
-export {default} from './DonutIndicator'
+export { default } from "./DonutIndicator"

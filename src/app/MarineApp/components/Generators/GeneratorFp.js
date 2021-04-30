@@ -12,27 +12,26 @@ import SelectorButton from "../SelectorButton"
 import {
   FISCHER_PANDA_GENSET_PRODUCT_ID,
   FISCHER_PANDA_GENSET_AUTOSTART,
-  GENERATOR_START_STOP
+  GENERATOR_START_STOP,
 } from "../../../utils/constants"
 
-import './Generator.scss'
+import "./Generator.scss"
 
 import FpGeneratorIcon from "../../images/icons/fp_generator.svg"
 import GeneratorIcon from "../../images/icons/generator.svg"
 
-
-const getTopics = portalId => {
+const getTopics = (portalId) => {
   return {
     statusCode: `N/${portalId}/genset/0/StatusCode`,
     productId: `N/${portalId}/genset/0/ProductId`,
     productName: `N/${portalId}/genset/0/ProductName`,
     phases: `N/${portalId}/genset/0/NrOfPhases`,
     gensetAutoStart: `N/${portalId}/genset/0/AutoStart`,
-    autoStart: `N/${portalId}/settings/0/Settings/Services/FischerPandaAutoStartStop`
+    autoStart: `N/${portalId}/settings/0/Settings/Services/FischerPandaAutoStartStop`,
   }
 }
 
-const getIcon = productId => {
+const getIcon = (productId) => {
   switch (productId) {
     case FISCHER_PANDA_GENSET_PRODUCT_ID:
       return FpGeneratorIcon
@@ -73,7 +72,7 @@ const GeneratorFp = ({
   gensetAutoStart,
   autoStart,
   onManualModeSelected,
-  onAutoModeSelected
+  onAutoModeSelected,
 }) => {
   const icon = getIcon(productId)
   const title = productName || "Genset"
@@ -132,7 +131,7 @@ class GeneratorFpWithData extends Component {
     const { portalId, manualStartStopTopic, autoStartStopTopic, metricsRef } = this.props
     return (
       <MqttSubscriptions topics={getTopics(portalId)}>
-        {topics => (
+        {(topics) => (
           <MqttWriteValue topic={autoStartStopTopic}>
             {(_, updateAutoMode) => {
               return (

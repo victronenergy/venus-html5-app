@@ -9,7 +9,7 @@ import MetricValues from "../MetricValues"
 
 import { AC_SOURCE_TYPE } from "../../../utils/constants"
 
-import './ActiveSource.scss'
+import "./ActiveSource.scss"
 
 import ShorePowerIcon from "../../images/icons/shore-power.svg"
 import GeneratorIcon from "../../images/icons/generator.svg"
@@ -20,8 +20,8 @@ const getTopics = (portalId, vebusInstanceId) => {
     phases: `N/${portalId}/vebus/${vebusInstanceId}/Ac/NumberOfPhases`,
     settings: [
       `N/${portalId}/settings/0/Settings/SystemSetup/AcInput1`,
-      `N/${portalId}/settings/0/Settings/SystemSetup/AcInput2`
-    ]
+      `N/${portalId}/settings/0/Settings/SystemSetup/AcInput2`,
+    ],
   }
 }
 
@@ -29,14 +29,14 @@ const activeSourceTitle = {
   [AC_SOURCE_TYPE.SHORE]: "Shore Power",
   [AC_SOURCE_TYPE.GRID]: "Grid Input",
   [AC_SOURCE_TYPE.GENERATOR]: "Generator Input",
-  [AC_SOURCE_TYPE.NOT_IN_USE]: "Invalid Configuration" // You cannot have a source that isn't configured as active!
+  [AC_SOURCE_TYPE.NOT_IN_USE]: "Invalid Configuration", // You cannot have a source that isn't configured as active!
 }
 
 const activeSourceIcon = {
   [AC_SOURCE_TYPE.SHORE]: ShorePowerIcon,
   [AC_SOURCE_TYPE.GRID]: ShorePowerIcon,
   [AC_SOURCE_TYPE.GENERATOR]: GeneratorIcon,
-  [AC_SOURCE_TYPE.NOT_IN_USE]: ShorePowerIcon
+  [AC_SOURCE_TYPE.NOT_IN_USE]: ShorePowerIcon,
 }
 
 const getSourceSubtitle = (active, phases, source) => {
@@ -49,7 +49,7 @@ const getSourceSubtitle = (active, phases, source) => {
 
 const ActiveSource = ({ portalId, inverterChargerDeviceId, source, active, phases }) => {
   const icon = activeSourceIcon[source]
-  const title = activeSourceTitle[source] || 'Unknown'
+  const title = activeSourceTitle[source] || "Unknown"
   const subTitle = getSourceSubtitle(active, phases, source)
   return (
     <div className="metric metric__active-source">
@@ -79,7 +79,7 @@ class ActiveSourceWithData extends Component {
     const { portalId, inverterChargerDeviceId, metricsRef } = this.props
     return (
       <MqttSubscriptions topics={getTopics(portalId, inverterChargerDeviceId)}>
-        {topics => {
+        {(topics) => {
           return topics.settings?.map(
             (source, i) =>
               source !== AC_SOURCE_TYPE.NOT_IN_USE && ( // do not render if the source is not in use

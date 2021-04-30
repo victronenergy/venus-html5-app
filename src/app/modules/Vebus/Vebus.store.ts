@@ -1,18 +1,18 @@
-import {Store, StoreConfig} from '@datorama/akita'
+import { Store, StoreConfig } from "@datorama/akita"
 
 export type InstanceId = number | null | undefined
 
 export interface VebusState {
-    instanceId: InstanceId
+  instanceId: InstanceId
 }
 
-export const VEBUS_STORE_NAME = 'vebus'
+export const VEBUS_STORE_NAME = "vebus"
 
-@StoreConfig({name: VEBUS_STORE_NAME})
+@StoreConfig({ name: VEBUS_STORE_NAME })
 export class VebusStore extends Store<VebusState> {
-    constructor () {
-        super({})
-    }
+  constructor() {
+    super({})
+  }
 }
 
 export const vebusStore = new VebusStore()

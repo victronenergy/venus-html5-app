@@ -8,11 +8,11 @@ const sizes = [
   [1280, 720 / 4],
   [1086, 772 / 4],
   [1920, 1080 / 4],
-  [1920, 1200 / 4]
+  [1920, 1200 / 4],
 ]
 
 describe("Testing pagination", () => {
-  sizes.forEach(size => {
+  sizes.forEach((size) => {
     beforeEach(() => {
       if (Cypress._.isArray(size)) {
         cy.viewport(size[0], size[1])
@@ -35,12 +35,12 @@ describe("Testing pagination", () => {
       cy.get(firstCircleSelector).should("be.visible")
       cy.get(firstCircleSelector)
         .invoke("attr", "fill")
-        .then(color => color === activeColor)
+        .then((color) => color === activeColor)
       cy.get(".header__paginator > :last-child").click()
       const secondCircleSelector = ".header__paginator > span > svg:nth-child(2) > circle"
       cy.get(secondCircleSelector)
         .invoke("attr", "fill")
-        .then(color => color === defaultColor)
+        .then((color) => color === defaultColor)
       cy.get(".metrics-container").should("be.visible")
     })
   })

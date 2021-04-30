@@ -1,5 +1,5 @@
-import React, {Component} from 'react'
-import {MqttClientContext} from '../contexts'
+import React, { Component } from "react"
+import { MqttClientContext } from "../contexts"
 
 // TODO: Remove once all usages are refactored
 class MqttClientProvider extends Component {
@@ -13,7 +13,7 @@ class MqttClientProvider extends Component {
           publish: null,
           messages: null,
           getMessagesByTopics: null,
-          getMessagesByWildcard: null
+          getMessagesByWildcard: null,
         }}
       >
         {this.props.children(null, false, null)}

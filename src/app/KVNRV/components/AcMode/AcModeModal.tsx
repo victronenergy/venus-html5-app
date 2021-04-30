@@ -2,7 +2,6 @@ import Modal from "../../../components/Modal"
 import { AC_MODE } from "../../constants/constants"
 import { acModeFormatter } from "./AcMode"
 
-
 type AcModeModalProps = {
   mode: number
   inputLimit: number
@@ -11,13 +10,10 @@ type AcModeModalProps = {
   onLimitInput: Function
 }
 const AcModeModal = (props: AcModeModalProps) => {
-
   return (
     <Modal title={"AC Mode"} onClose={props.onClose}>
       <div className="ac_mode_modal indicator-main--small">
-        <div className={"name"}>
-          Select mode
-        </div>
+        <div className={"name"}>Select mode</div>
         <div className={"ac_mode_modal__group"}>
           {Object.values(AC_MODE.MODES).map((mode) => (
             <button
@@ -30,9 +26,7 @@ const AcModeModal = (props: AcModeModalProps) => {
           ))}
         </div>
 
-        <div className={"name"}>
-          Select shore input limit
-        </div>
+        <div className={"name"}>Select shore input limit</div>
         <div className={"ac_mode_modal__group"}>
           {Object.values(AC_MODE.LIMITS).map((limit) => (
             <button

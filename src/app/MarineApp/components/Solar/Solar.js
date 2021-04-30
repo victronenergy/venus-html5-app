@@ -8,10 +8,10 @@ import NumericValue from "../../../components/NumericValue"
 
 import SolarIcon from "../../images/icons/icon_solar.svg"
 
-const getTopics = portalId => {
+const getTopics = (portalId) => {
   return {
     power: `N/${portalId}/system/0/Dc/Pv/Power`,
-    current: `N/${portalId}/system/0/Dc/Pv/Current`
+    current: `N/${portalId}/system/0/Dc/Pv/Current`,
   }
 }
 
@@ -32,7 +32,7 @@ class SolarWithData extends Component {
     return (
       portalId && (
         <MqttSubscriptions topics={getTopics(portalId)}>
-          {topics => {
+          {(topics) => {
             if (topics.current || topics.power || topics.power === 0) {
               return (
                 <HidingContainer metricsRef={metricsRef}>

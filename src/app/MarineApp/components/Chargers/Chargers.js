@@ -5,9 +5,9 @@ import MqttTopicWildcard from "../../../mqtt/MqttTopicWildcard"
 
 const Chargers = ({ portalId, ...rest }) => (
   <MqttTopicWildcard wildcard="N/+/charger/+/DeviceInstance">
-    {messages => {
+    {(messages) => {
       const chargerIds = Object.values(messages)
-      return chargerIds.map(id => <Charger key={id} portalId={portalId} deviceInstanceId={id} {...rest} />)
+      return chargerIds.map((id) => <Charger key={id} portalId={portalId} deviceInstanceId={id} {...rest} />)
     }}
   </MqttTopicWildcard>
 )

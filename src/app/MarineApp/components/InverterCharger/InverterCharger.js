@@ -12,8 +12,6 @@ import SelectorButton from "../SelectorButton"
 import { systemStateFormatter } from "../../../utils/util"
 import { SYSTEM_MODE } from "../../../utils/constants"
 
-
-
 import MultiplusIcon from "../../images/icons/multiplus.svg"
 
 const getTopics = (portalId, vebusInstanceId) => {
@@ -22,7 +20,7 @@ const getTopics = (portalId, vebusInstanceId) => {
     mode: `N/${portalId}/vebus/${vebusInstanceId}/Mode`,
     customName: `N/${portalId}/vebus/${vebusInstanceId}/CustomName`,
     productName: `N/${portalId}/vebus/${vebusInstanceId}/ProductName`,
-    modeIsAdjustable: `N/${portalId}/vebus/${vebusInstanceId}/ModeIsAdjustable`
+    modeIsAdjustable: `N/${portalId}/vebus/${vebusInstanceId}/ModeIsAdjustable`,
   }
 }
 
@@ -35,14 +33,14 @@ const InverterCharger = ({
   onModeSelected,
   onChangeInputLimitClicked,
   inverterChargerDeviceId,
-  portalId
+  portalId,
 }) => {
   const productNameShort = productName && productName.split(" ")[0]
 
   return (
     <div className="metric charger inverter-charger">
       <GetShorePowerInputNumber portalId={portalId}>
-        {shoreInput => {
+        {(shoreInput) => {
           return (
             <div
               className={classnames("inverter-charger__header", { "inverter-charger__header--column": !shoreInput })}
@@ -91,7 +89,7 @@ class InverterChargerWithData extends Component {
     const { portalId, inverterChargerDeviceId, connected, metricsRef, onChangeInputLimitClicked } = this.props
     return (
       <MqttSubscriptions topics={getTopics(portalId, inverterChargerDeviceId)}>
-        {topics => {
+        {(topics) => {
           return (
             <MqttWriteValue topic={`W/${portalId}/vebus/${inverterChargerDeviceId}/Mode`}>
               {(_, updateMode) => {
@@ -102,7 +100,7 @@ class InverterChargerWithData extends Component {
                       inverterChargerDeviceId={inverterChargerDeviceId}
                       portalId={portalId}
                       modeIsAdjustable={topics.modeIsAdjustable && connected}
-                      onModeSelected={newMode => updateMode(newMode)}
+                      onModeSelected={(newMode) => updateMode(newMode)}
                       onChangeInputLimitClicked={onChangeInputLimitClicked}
                     />
                   </HidingContainer>

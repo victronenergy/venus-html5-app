@@ -10,7 +10,7 @@ import MqttWriteValue from "../../../mqtt/MqttWriteValue"
 import NumericValue from "../../../components/NumericValue"
 import SelectorButton from "../SelectorButton"
 
-import './Inverter.scss'
+import "./Inverter.scss"
 
 import MultiplusIcon from "../../images/icons/multiplus.svg"
 
@@ -24,11 +24,11 @@ const getTopics = (portalId, deviceInstance, source) => {
     customName: `N/${portalId}/${source}/${deviceInstance}/CustomName`,
     productName: `N/${portalId}/${source}/${deviceInstance}/ProductName`,
     // nAcInputs is obnly available for vebus inverters, for system ones will always be undefined
-    nAcInputs: `N/${portalId}/${source}/${deviceInstance}/Ac/NumberOfAcInputs`
+    nAcInputs: `N/${portalId}/${source}/${deviceInstance}/Ac/NumberOfAcInputs`,
   }
 }
 
-const stateFormatter = state => {
+const stateFormatter = (state) => {
   switch (state) {
     case 0:
       return "Off"
@@ -39,7 +39,7 @@ const stateFormatter = state => {
     case 9:
       return "Inverting"
     default:
-      return null;
+      return null
   }
 }
 
@@ -67,7 +67,7 @@ export const Inverter = ({
   nAcInputs,
   isVebusInverter,
   updateMode,
-  metricsRef
+  metricsRef,
 }) => {
   // if nAcInputs === 0 it means it's an inverter, if not it's an inverter/charger => skip
   const show = !isVebusInverter || nAcInputs === 0
@@ -80,11 +80,7 @@ export const Inverter = ({
     show && (
       <HidingContainer metricsRef={metricsRef}>
         <div className="metric inverter">
-          <HeaderView
-            icon={MultiplusIcon}
-            title={customName || `Inverter: ${productNameShort}`}
-            child
-          >
+          <HeaderView icon={MultiplusIcon} title={customName || `Inverter: ${productNameShort}`} child>
             {InverterSubtitle(voltage, current, power, state)}
           </HeaderView>
           <div className="inverter__mode-selector">
@@ -112,7 +108,7 @@ const InverterWithData = ({ portalId, deviceInstance, metricsRef, isVebusInverte
     <MqttWriteValue topic={`W/${portalId}/${source}/${deviceInstance}/Mode`}>
       {(_, updateMode) => (
         <MqttSubscriptions topics={getTopics(portalId, deviceInstance, source)}>
-          {topics => (
+          {(topics) => (
             <Inverter {...topics} isVebusInverter={isVebusInverter} updateMode={updateMode} metricsRef={metricsRef} />
           )}
         </MqttSubscriptions>

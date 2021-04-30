@@ -2,13 +2,13 @@ import React, { Component } from "react"
 import SelectorButton from "../SelectorButton"
 import { VIEWS } from "../../../utils/constants"
 
-import './Header.scss'
+import "./Header.scss"
 
 import Logo from "../../images/icons/logo.png"
 import LIcon from "../../images/icons/L.svg"
 import RIcon from "../../images/icons/R.svg"
 
-export const Header = props => {
+export const Header = (props) => {
   const { showRemoteConsoleSetting, currentView, handleRemoteConsoleButtonClicked, setPage, currentPage, pages } = props
   return (
     <header>
@@ -32,7 +32,7 @@ const Paginator = ({ setPage, currentPage, pages }) => {
         <img src={LIcon} className="header__paginator-button" alt={"Header Paginator Button"} />
       </SelectorButton>
       <span className="header__paginator-page">
-        {[...Array(pages).keys()].map(page => (
+        {[...Array(pages).keys()].map((page) => (
           <svg height="50" width="20" key={page}>
             <circle cx="10" cy="25" r="5" fill={page === currentPage ? "#30afff" : "#aaa"} />
           </svg>
@@ -53,14 +53,14 @@ class HeaderWithData extends Component {
       // <MqttSubscriptions topics={{ showRemoteConsoleSetting: `N/${portalId}/settings/0/Settings/System/VncLocal` }}>
       //   {topics => {
       //     return (
-            <Header
-              showRemoteConsoleSetting={true} // TODO: !!topics.showRemoteConsoleSetting
-              handleRemoteConsoleButtonClicked={handleRemoteConsoleButtonClicked}
-              currentView={currentView}
-              setPage={setPage}
-              currentPage={currentPage}
-              pages={pages}
-            />
+      <Header
+        showRemoteConsoleSetting={true} // TODO: !!topics.showRemoteConsoleSetting
+        handleRemoteConsoleButtonClicked={handleRemoteConsoleButtonClicked}
+        currentView={currentView}
+        setPage={setPage}
+        currentPage={currentPage}
+        pages={pages}
+      />
       //     )
       //   }}
       // </MqttSubscriptions>

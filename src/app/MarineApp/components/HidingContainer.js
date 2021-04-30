@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 
-
 export default class HidingElement extends Component {
   ref = React.createRef()
 

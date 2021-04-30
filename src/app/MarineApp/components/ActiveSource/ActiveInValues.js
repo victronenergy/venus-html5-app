@@ -1,6 +1,6 @@
 import React from "react"
 
-import { ListRow } from '../ListView'
+import { ListRow } from "../ListView"
 import NumericValue from "../../../components/NumericValue"
 import MqttSubscriptions from "../../../mqtt/MqttSubscriptions"
 
@@ -9,18 +9,18 @@ const getTopics = (portalId, vebusInstanceId) => {
     current: [
       `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L1/I`,
       `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L2/I`,
-      `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L3/I`
+      `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L3/I`,
     ],
     voltage: [
       `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L1/V`,
       `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L2/V`,
-      `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L3/V`
+      `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L3/V`,
     ],
     power: [
       `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L1/P`,
       `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L2/P`,
-      `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L3/P`
-    ]
+      `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/L3/P`,
+    ],
   }
 }
 
@@ -49,7 +49,7 @@ const ActiveInValues = ({ portalId, inverterChargerDeviceId, threePhase }) => {
   } else {
     return (
       <MqttSubscriptions topics={getTopics(portalId, inverterChargerDeviceId)}>
-        {topics => {
+        {(topics) => {
           return <ActiveInTotalValues {...topics} threePhase={threePhase} />
         }}
       </MqttSubscriptions>
@@ -57,4 +57,4 @@ const ActiveInValues = ({ portalId, inverterChargerDeviceId, threePhase }) => {
   }
 }
 
-export default ActiveInValues;
+export default ActiveInValues

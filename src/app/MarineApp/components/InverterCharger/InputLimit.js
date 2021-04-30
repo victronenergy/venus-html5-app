@@ -4,13 +4,12 @@ import MqttSubscriptions from "../../../mqtt/MqttSubscriptions"
 import SelectorButton from "../SelectorButton"
 
 import { formatNumber } from "../../../components/NumericValue"
-import './InputLimit.scss'
-
+import "./InputLimit.scss"
 
 const getTopics = (portalId, vebusInstanceId, shorePowerInput) => {
   return {
     currentLimit: `N/${portalId}/vebus/${vebusInstanceId}/Ac/In/${shorePowerInput}/CurrentLimit`,
-    currentLimitIsAdjustable: `N/${portalId}/vebus/${vebusInstanceId}/Ac/In/${shorePowerInput}/CurrentLimitIsAdjustable`
+    currentLimitIsAdjustable: `N/${portalId}/vebus/${vebusInstanceId}/Ac/In/${shorePowerInput}/CurrentLimitIsAdjustable`,
   }
 }
 
@@ -38,7 +37,7 @@ class InputLimitWithData extends Component {
       inverterChargerDeviceId &&
       shorePowerInput && (
         <MqttSubscriptions topics={getTopics(portalId, inverterChargerDeviceId, shorePowerInput)}>
-          {topics => {
+          {(topics) => {
             return (
               <InputLimit
                 currentLimit={formatNumber({ value: topics.currentLimit, unit: "A" })}

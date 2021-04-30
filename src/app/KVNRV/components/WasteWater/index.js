@@ -1,1 +1,1 @@
-export {default} from './WasteWater'
+export { default } from "./WasteWater"

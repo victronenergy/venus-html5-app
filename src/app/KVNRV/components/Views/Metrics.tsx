@@ -23,17 +23,17 @@ export const STATUS_LEVELS_MSG = {
 }
 
 export type StatusUpdate = {
-  part: string,
-  message: string,
+  part: string
+  message: string
   level: string
 }
 
 type MetricsState = {
-  status_updates: Array<StatusUpdate>;
+  status_updates: Array<StatusUpdate>
 }
 
 export interface CommonProps {
-  addStatusUpdate: Function,
+  addStatusUpdate: Function
   removeStatusUpdate: Function
 }
 
@@ -42,38 +42,43 @@ export default class Metrics extends Component<{}, MetricsState> {
     super(props)
 
     this.state = {
-      status_updates: []
+      status_updates: [],
     }
   }
 
   isUpdatePresent(su_part: string) {
-    return this.state.status_updates.find(s => s.part === su_part);
+    return this.state.status_updates.find((s) => s.part === su_part)
   }
 
   addStatusUpdate = (su: StatusUpdate) => {
     if (!this.isUpdatePresent(su.part)) {
-      let sus = this.state.status_updates.slice();
-      sus.push(su);
-      this.setState({status_updates: sus});
+      let sus = this.state.status_updates.slice()
+      sus.push(su)
+      this.setState({ status_updates: sus })
     }
   }
 
   removeStatusUpdate = (su_part: string) => {
     if (this.isUpdatePresent(su_part)) {
-      let sus = this.state.status_updates.slice();
-      sus = sus.splice(sus.findIndex((s => s.part === su_part)), 1);
-      this.setState({ status_updates: sus });
+      let sus = this.state.status_updates.slice()
+      sus = sus.splice(
+        sus.findIndex((s) => s.part === su_part),
+        1
+      )
+      this.setState({ status_updates: sus })
     }
   }
 
   render() {
-    const commonProps: CommonProps = { addStatusUpdate: this.addStatusUpdate, removeStatusUpdate: this.removeStatusUpdate };
+    const commonProps: CommonProps = {
+      addStatusUpdate: this.addStatusUpdate,
+      removeStatusUpdate: this.removeStatusUpdate,
+    }
 
     return (
       <div className="metrics-container">
         <div className="container">
           <div className={"row"}>
-
             <div className="col-span-4">
               <Status status_updates={this.state.status_updates} />
 
@@ -102,7 +107,6 @@ export default class Metrics extends Component<{}, MetricsState> {
                 <BlackWater {...commonProps} />
               </div>
             </div>
-
           </div>
         </div>
       </div>

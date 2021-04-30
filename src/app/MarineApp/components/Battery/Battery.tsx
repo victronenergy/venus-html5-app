@@ -2,7 +2,6 @@ import React, { Component } from "react"
 import HidingContainer from "../HidingContainer"
 import { Battery, useBattery } from "../../../modules/Battery/Battery.provider"
 
-
 import BatteryIcon from "../../images/icons/battery.svg"
 import classnames from "classnames"
 import HeaderView from "../HeaderView"
@@ -13,12 +12,12 @@ import RIcon from "../../images/icons/R.svg"
 import SelectorButton from "../SelectorButton"
 import { BatteryLevel } from "./BatteryLevel"
 
-import './Battery.scss'
+import "./Battery.scss"
 
 type PaginatorProps = {
-  setPage: Function,
-  currentPage: number,
-  pages: number,
+  setPage: Function
+  currentPage: number
+  pages: number
 }
 
 const Paginator = ({ setPage, currentPage, pages }: PaginatorProps) => {
@@ -36,11 +35,11 @@ const Paginator = ({ setPage, currentPage, pages }: PaginatorProps) => {
 }
 
 type BatteryHeaderProps = {
-  amount: number,
-  paginate: boolean,
-  setPage: Function,
-  currentPage: number,
-  pageSize: number,
+  amount: number
+  paginate: boolean
+  setPage: Function
+  currentPage: number
+  pageSize: number
 }
 
 const BatteryHeader = ({ amount, paginate, setPage, currentPage, pageSize }: BatteryHeaderProps) => {
@@ -56,7 +55,6 @@ const BatteryHeader = ({ amount, paginate, setPage, currentPage, pageSize }: Bat
   )
 }
 
-
 const BatteryRow = (battery: Battery) => {
   return (
     <MetricValues inflate={""}>
@@ -65,9 +63,7 @@ const BatteryRow = (battery: Battery) => {
         <NumericValue value={battery.current} unit="A" defaultValue={null} precision={1} />
         <NumericValue value={battery.power} unit="W" defaultValue={null} />
       </div>
-      {battery.soc !== undefined && (
-        <BatteryLevel battery={battery} />
-      )}
+      {battery.soc !== undefined && <BatteryLevel battery={battery} />}
     </MetricValues>
   )
 }
@@ -93,7 +89,7 @@ class BatteryList extends Component<BatteryListProps> {
       <div
         className="batteries"
         ref={this.ref}
-        style={this.ref.current && batteries.some(b => b.dummy) ? { height: this.ref.current!.offsetHeight } : {}}
+        style={this.ref.current && batteries.some((b) => b.dummy) ? { height: this.ref.current!.offsetHeight } : {}}
       >
         {batteries.map((battery, i) => {
           return (
@@ -101,7 +97,7 @@ class BatteryList extends Component<BatteryListProps> {
               {!battery.dummy && (
                 <div className="battery__data">
                   <div className="battery__title-row text--subtitle-upper">{battery.name}</div>
-                  <BatteryRow {...battery as Battery} />
+                  <BatteryRow {...(battery as Battery)} />
                 </div>
               )}
             </div>
@@ -112,14 +108,13 @@ class BatteryList extends Component<BatteryListProps> {
   }
 }
 
-
 type BatteriesProps = {
-  batteries: Array<Battery>;
-};
+  batteries: Array<Battery>
+}
 type BatteriesState = {
   pageSize: number
   currentPage: number
-};
+}
 
 export class Batteries extends Component<BatteriesProps, BatteriesState> {
   state = { pageSize: 1, currentPage: 0 }
@@ -190,7 +185,7 @@ export const BatteriesWithData = () => {
       </HidingContainer>
     )
   } else {
-    return <div/>
+    return <div />
   }
 }
 

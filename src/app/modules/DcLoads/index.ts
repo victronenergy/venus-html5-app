@@ -1,1 +1,1 @@
-export * from './DcLoads.provider'
+export * from "./DcLoads.provider"

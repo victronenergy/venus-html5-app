@@ -1,4 +1,4 @@
-import React  from "react"
+import React from "react"
 
 import { AC_CONF, Conf } from "../../constants/constants"
 import { useAcLoads } from "../../../modules/AcLoads/AcLoads.provider"
@@ -11,17 +11,19 @@ import NumericValue from "../../../components/NumericValue"
 const sendUpdate = (percent: number, conf: Conf, part: string, addFunc: Function, removeFunc: Function) => {
   removeFunc(part)
 
-    if (percent > conf.THRESHOLDS[0] && percent < conf.THRESHOLDS[0] + conf.THRESHOLDS[1]) {
-      addFunc({part, message: " too much power!", level: STATUS_LEVELS.WARNING})
-    } else {
-      addFunc({part, message: " too much power!", level: STATUS_LEVELS.ALARM})
-    }
+  if (percent > conf.THRESHOLDS[0] && percent < conf.THRESHOLDS[0] + conf.THRESHOLDS[1]) {
+    addFunc({ part, message: " too much power!", level: STATUS_LEVELS.WARNING })
+  } else {
+    addFunc({ part, message: " too much power!", level: STATUS_LEVELS.ALARM })
+  }
 }
 
 export const AcLoads = (props: CommonProps) => {
-  let {current, voltage, power, phases} = useAcLoads()
+  let { current, voltage, power, phases } = useAcLoads()
 
-  let c = 0, v = 0, p = 0
+  let c = 0,
+    v = 0,
+    p = 0
   if (current && voltage && power) {
     c = current[0] || 0
     v = voltage[0] || 0
@@ -35,11 +37,13 @@ export const AcLoads = (props: CommonProps) => {
 
   return (
     <div className="">
-      <Card title={'AC Loads'} size={SIZE_SMALL}>
+      <Card title={"AC Loads"} size={SIZE_SMALL}>
         <div className="gauge">
           {power ? (
             <DonutIndicator value={p} percent={normalized_power} parts={AC_CONF.THRESHOLDS} unit={"W"} />
-          ) : ( <NotAvailable /> )}
+          ) : (
+            <NotAvailable />
+          )}
 
           <div className={"info-bar"}>
             <div className={"info-bar__cell"}>

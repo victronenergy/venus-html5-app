@@ -1,1 +1,1 @@
-export {default} from './BlackWater'
+export { default } from "./BlackWater"

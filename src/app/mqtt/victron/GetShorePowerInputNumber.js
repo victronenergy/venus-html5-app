@@ -2,10 +2,10 @@ import React, { Component } from "react"
 import MqttSubscriptions from "../MqttSubscriptions"
 import { AC_SOURCE_TYPE } from "../../utils/constants"
 
-const getTopics = portalId => {
+const getTopics = (portalId) => {
   return {
     acInput1: `N/${portalId}/settings/0/Settings/SystemSetup/AcInput1`,
-    acInput2: `N/${portalId}/settings/0/Settings/SystemSetup/AcInput2`
+    acInput2: `N/${portalId}/settings/0/Settings/SystemSetup/AcInput2`,
   }
 }
 
@@ -14,7 +14,7 @@ class GetShorePowerInputNumber extends Component {
     const { portalId, children } = this.props
     return (
       <MqttSubscriptions topics={getTopics(portalId)}>
-        {topics => {
+        {(topics) => {
           const acInput1 = topics.acInput1
           const acInput2 = topics.acInput2
 

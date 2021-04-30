@@ -7,7 +7,7 @@ describe("parseTopic", () => {
       portalId: "985dadd0c9e4",
       serviceType: "system",
       deviceInstance: 0,
-      dbusPath: "/Serial"
+      dbusPath: "/Serial",
     })
   })
 
@@ -17,7 +17,7 @@ describe("parseTopic", () => {
       portalId: "985dadd0c9e4",
       serviceType: "system",
       deviceInstance: 0,
-      dbusPath: "/CurrentLimit"
+      dbusPath: "/CurrentLimit",
     })
   })
 })

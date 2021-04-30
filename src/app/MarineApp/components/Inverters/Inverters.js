@@ -5,14 +5,14 @@ import MqttTopicWildcard from "../../../mqtt/MqttTopicWildcard"
 
 const Inverters = ({ portalId, metricsRef }) => (
   <MqttTopicWildcard wildcard={`N/${portalId}/inverter/+/DeviceInstance`}>
-    {systemInverters => (
+    {(systemInverters) => (
       <MqttTopicWildcard wildcard={`N/${portalId}/vebus/+/DeviceInstance`}>
-        {vebusInverters => {
+        {(vebusInverters) => {
           const systemInverterIds = Object.values(systemInverters)
           const vebusInverterIds = Object.values(vebusInverters)
           return systemInverterIds
             .concat(vebusInverterIds)
-            .map(id => (
+            .map((id) => (
               <InverterWithData
                 key={id}
                 portalId={portalId}

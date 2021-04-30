@@ -1,22 +1,22 @@
 export type Conf = {
-  MAX: number,
+  MAX: number
   THRESHOLDS: Array<number>
 }
 
 export const DC_CONF: Conf = {
   MAX: 500,
-  THRESHOLDS: [0.5, 0.25, 0.25]
-};
+  THRESHOLDS: [0.5, 0.25, 0.25],
+}
 
 export const AC_CONF: Conf = {
   MAX: 300,
-  THRESHOLDS: [0.6, 0.2, 0.2]
-};
+  THRESHOLDS: [0.6, 0.2, 0.2],
+}
 
 export const PV_CONF: Conf = {
   MAX: 100,
-  THRESHOLDS: [0.8, 0.1, 0.1]
-};
+  THRESHOLDS: [0.8, 0.1, 0.1],
+}
 
 export const AC_MODE = {
   MODES: {
@@ -25,23 +25,15 @@ export const AC_MODE = {
     CHARGER_ONLY: 2,
     INVERTER_ONLY: 3,
   },
-  LIMITS: [
-    6,
-    10,
-    13,
-    16,
-    25,
-    32,
-    63,
-  ]
+  LIMITS: [6, 10, 13, 16, 25, 32, 63],
 }
 
 export const FRESH_WATER_CONF = {
-  THRESHOLDS: [0.7, 0.2, 0.1]
+  THRESHOLDS: [0.7, 0.2, 0.1],
 }
 export const BLACK_WATER_CONF = {
-  THRESHOLDS: [0.7, 0.2, 0.1]
+  THRESHOLDS: [0.7, 0.2, 0.1],
 }
 export const WASTE_WATER_CONF = {
-  THRESHOLDS: [0.7, 0.2, 0.1]
+  THRESHOLDS: [0.7, 0.2, 0.1],
 }

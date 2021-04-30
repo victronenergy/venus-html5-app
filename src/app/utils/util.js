@@ -21,7 +21,7 @@ import { VEBUS_SYSTEM_STATE } from "./constants"
  * See details at https://github.com/victronenergy/dbus-mqtt
  * @returns {Topic}
  */
-export const parseTopic = topic => {
+export const parseTopic = (topic) => {
   const parts = topic.split("/")
   const dbusPathParts = parts.splice(4)
   const isAcIn = dbusPathParts[0] === "Ac" && dbusPathParts[1] === "In"
@@ -30,11 +30,11 @@ export const parseTopic = topic => {
     portalId: parts[1],
     serviceType: parts[2],
     deviceInstance: parts[3] === "+" ? "+" : parseInt(parts[3]),
-    dbusPath: "/" + (isAcIn ? dbusPathParts.splice(3).join("/") : dbusPathParts.join("/"))
+    dbusPath: "/" + (isAcIn ? dbusPathParts.splice(3).join("/") : dbusPathParts.join("/")),
   }
 }
 
-export const getMessageJson = message => {
+export const getMessageJson = (message) => {
   try {
     return JSON.parse(message.toString())
   } catch (e) {
@@ -43,8 +43,8 @@ export const getMessageJson = message => {
   }
 }
 
-export const objectValues = data => {
-  return Object.keys(data).map(key => data[key])
+export const objectValues = (data) => {
+  return Object.keys(data).map((key) => data[key])
 }
 
 export const isPathOfType = (dbusPath, enumObject) => {
@@ -52,7 +52,7 @@ export const isPathOfType = (dbusPath, enumObject) => {
   return paths.includes(dbusPath)
 }
 
-export const arrayToSubscriptionMap = toSubscribe => {
+export const arrayToSubscriptionMap = (toSubscribe) => {
   return toSubscribe.reduce((acc, value) => {
     acc[value] = 0
     return acc
@@ -69,11 +69,11 @@ export const getParameterByName = (name, url) => {
   return decodeURIComponent(results[2].replace(/\+/g, " "))
 }
 
-export const flatten = arrays => {
+export const flatten = (arrays) => {
   return [].concat(...arrays)
 }
 
-export const systemStateFormatter = value => {
+export const systemStateFormatter = (value) => {
   switch (value) {
     case VEBUS_SYSTEM_STATE.OFF:
       return "Off"

@@ -1,7 +1,6 @@
 import React from "react"
 
-import './Error.scss'
-
+import "./Error.scss"
 
 const Error = () => {
   return (
@@ -22,4 +21,4 @@ const Error = () => {
   )
 }
 
-export default Error;
+export default Error

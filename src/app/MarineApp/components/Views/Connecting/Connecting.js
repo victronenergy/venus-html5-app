@@ -2,7 +2,7 @@ import React from "react"
 
 import Fade from "../../Fade"
 
-import './Connecting.scss'
+import "./Connecting.scss"
 
 const Connecting = ({ viewUnmounting }) => (
   <main>
@@ -19,4 +19,4 @@ const Connecting = ({ viewUnmounting }) => (
   </main>
 )
 
-export default Connecting;
+export default Connecting

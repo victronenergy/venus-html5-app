@@ -1,1 +1,1 @@
-export { default } from './Battery'
+export { default } from "./Battery"

@@ -2,8 +2,8 @@ import { mqttQuery, PortalId, Topics } from "../Mqtt"
 import { useTopicsState, useTopicSubscriptions, useTopicsWithPortalId } from "../Mqtt/Mqtt.provider"
 
 export interface WaterType {
-  volume: number,
-  size: number,
+  volume: number
+  size: number
   level: number
 }
 
@@ -19,7 +19,7 @@ export interface WaterTopics extends Topics {
   black_water?: string
 }
 
-export function useWater (): WaterState {
+export function useWater(): WaterState {
   const getTopics = (portalId: PortalId) => ({
     fresh_water: `N/${portalId}/system/0/Water`,
     waste_water: `N/${portalId}/system/0/Water`,
@@ -31,9 +31,9 @@ export function useWater (): WaterState {
   useTopicSubscriptions(topics$)
   let { fresh_water, waste_water, black_water } = useTopicsState<WaterState>(topics$)
 
-  fresh_water = {volume: 2, size: 9, level: 0} as WaterType
-  waste_water = {volume: 2, size: 9, level: 0.4} as WaterType
-  black_water = {volume: 2, size: 9, level: 0.4} as WaterType
+  fresh_water = { volume: 2, size: 9, level: 0 } as WaterType
+  waste_water = { volume: 2, size: 9, level: 0.4 } as WaterType
+  black_water = { volume: 2, size: 9, level: 0.4 } as WaterType
 
-  return {fresh_water, waste_water, black_water}
+  return { fresh_water, waste_water, black_water }
 }

@@ -15,22 +15,22 @@ const getTopics = (portalId, vebusInstanceId) => {
     current: [
       `N/${portalId}/vebus/${vebusInstanceId}/Ac/Out/L1/I`,
       `N/${portalId}/vebus/${vebusInstanceId}/Ac/Out/L2/I`,
-      `N/${portalId}/vebus/${vebusInstanceId}/Ac/Out/L3/I`
+      `N/${portalId}/vebus/${vebusInstanceId}/Ac/Out/L3/I`,
     ],
     voltage: [
       `N/${portalId}/vebus/${vebusInstanceId}/Ac/Out/L1/V`,
       `N/${portalId}/vebus/${vebusInstanceId}/Ac/Out/L2/V`,
-      `N/${portalId}/vebus/${vebusInstanceId}/Ac/Out/L3/V`
+      `N/${portalId}/vebus/${vebusInstanceId}/Ac/Out/L3/V`,
     ],
     power: [
       `N/${portalId}/vebus/${vebusInstanceId}/Ac/Out/L1/P`,
       `N/${portalId}/vebus/${vebusInstanceId}/Ac/Out/L2/P`,
-      `N/${portalId}/vebus/${vebusInstanceId}/Ac/Out/L3/P`
-    ]
+      `N/${portalId}/vebus/${vebusInstanceId}/Ac/Out/L3/P`,
+    ],
   }
 }
 
-const AcLoads = props => {
+const AcLoads = (props) => {
   const { current, voltage, power, phases } = props
   const showAsList = phases > 1
   console.log("AcLoads", props, current, voltage, power)
@@ -62,7 +62,7 @@ class AcLoadsWithData extends Component {
     const { portalId, inverterChargerDeviceId, metricsRef } = this.props
     return (
       <MqttSubscriptions topics={getTopics(portalId, inverterChargerDeviceId)}>
-        {topics => {
+        {(topics) => {
           return (
             <HidingContainer metricsRef={metricsRef}>
               <AcLoads {...topics} />

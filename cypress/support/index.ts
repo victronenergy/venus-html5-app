@@ -41,7 +41,7 @@ function getFullTestName(runnable: Mocha.Test) {
 
   return name
     .filter(Boolean)
-    .map(n => n.trim())
+    .map((n) => n.trim())
     .join(" -- ")
     .substring(0, MAX_TEST_NAME_LENGTH)
 }

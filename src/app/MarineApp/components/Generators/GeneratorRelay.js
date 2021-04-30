@@ -8,15 +8,15 @@ import SelectorButton from "../SelectorButton"
 
 import { GENERATOR_START_STOP } from "../../../utils/constants"
 
-import './Generator.scss'
+import "./Generator.scss"
 
 import GeneratorIcon from "../../images/icons/generator.svg"
 
-const getTopics = portalId => {
+const getTopics = (portalId) => {
   return {
     statusCode: `N/${portalId}/generator/0/Generator0/State`,
     manualStart: `N/${portalId}/generator/0/Generator0/ManualStart`,
-    autoStart: `N/${portalId}/settings/0/Settings/Generator0/AutoStartEnabled`
+    autoStart: `N/${portalId}/settings/0/Settings/Generator0/AutoStartEnabled`,
   }
 }
 
@@ -72,7 +72,7 @@ class GeneratorRelayWithData extends Component {
     const { portalId, manualStartStopTopic, autoStartStopTopic, metricsRef } = this.props
     return (
       <MqttSubscriptions topics={getTopics(portalId)}>
-        {topics => (
+        {(topics) => (
           <MqttWriteValue topic={autoStartStopTopic}>
             {(_, updateAutoMode) => {
               return (
