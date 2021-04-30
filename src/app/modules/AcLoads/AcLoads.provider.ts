@@ -2,6 +2,7 @@ import {mqttQuery, PortalId, Topics} from '../Mqtt'
 import {useTopicsState, useTopicSubscriptions, useTopicsWithPortalIdAndInstanceId} from '../Mqtt/Mqtt.provider'
 import {vebusQuery} from '../Vebus/Vebus.query'
 import {InstanceId} from '../Vebus/Vebus.store'
+import {useVebus} from "../Vebus/Vebus.provider";
 
 export interface AcLoadsState {
     phases: number | undefined
@@ -36,6 +37,7 @@ export function useAcLoads (): AcLoadsState {
             `N/${portalId}/vebus/${instanceId}/Ac/Out/L3/P`,
         ],
     })
+    useVebus()
 
     const topics$ = useTopicsWithPortalIdAndInstanceId<AcLoadsTopics>(getTopics, mqttQuery.portalId$, vebusQuery.instanceId$)
 
