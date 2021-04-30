@@ -54,6 +54,7 @@
     "mochawesome": "^6.2.2",
     "mochawesome-merge": "^4.2.0",
     "mochawesome-report-generator": "^5.2.0",
+    "onchange": "^7.1.0",
     "prettier": "^2.2.1"
   },
   "scripts": {
@@ -75,7 +76,8 @@
     "cy:verify": "cypress verify",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "prettier-watch": "onchange \"**/*\" -- prettier --write --ignore-unknown {{changed}}"
   },
   "eslintConfig": {
     "extends": [
