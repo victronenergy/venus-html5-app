@@ -2,13 +2,13 @@ import { mqttQuery, PortalId, Topics } from "../Mqtt"
 import { useTopicsState, useTopicSubscriptions, useTopicsWithPortalId } from "../Mqtt/Mqtt.provider"
 
 export interface GensetValuesState {
-  voltage?: Array<number>
-  current?: Array<number>
-  power?: Array<number>
-  frequency?: Array<number>
-  coolant?: number
-  winding?: number
-  exhaust?: number
+  voltage: [number?, number?, number?]
+  current: [number?, number?, number?]
+  power: [number?, number?, number?]
+  frequency: [number?, number?, number?]
+  coolant: number
+  winding: number
+  exhaust: number
 }
 
 export interface GensetValuesTopics extends Topics {

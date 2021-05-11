@@ -2,8 +2,8 @@ import { mqttQuery, PortalId, Topics } from "../Mqtt"
 import { useTopicsState, useTopicSubscriptions, useTopicsWithPortalId } from "../Mqtt/Mqtt.provider"
 
 export interface DcLoadsState {
-  voltage?: number
-  power?: number
+  voltage: number
+  power: number
 }
 
 export interface DcLoadsTopics extends Topics {

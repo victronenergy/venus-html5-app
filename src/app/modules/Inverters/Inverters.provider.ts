@@ -3,8 +3,8 @@ import { useTopicsState, useTopicSubscriptions, useTopicsWithPortalIdAndInstance
 import { vebusQuery } from "../Vebus"
 
 export interface InvertersState {
-  systemInverters?: any[]
-  vebusInverters?: any[]
+  systemInverters: any[]
+  vebusInverters: any[]
 }
 
 export interface InvertersTopics extends Topics {

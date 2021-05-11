@@ -9,11 +9,11 @@ import { InstanceId, vebusQuery } from "../Vebus"
 import { useObservableState } from "observable-hooks"
 
 export interface InverterChargerState {
-  state?: number
-  mode?: number
-  customName?: number
-  productName?: number
-  modeIsAdjustable?: number
+  state: number
+  mode: number
+  customName: number
+  productName: number
+  modeIsAdjustable: number
 }
 
 export interface InverterChargerTopics extends Topics {

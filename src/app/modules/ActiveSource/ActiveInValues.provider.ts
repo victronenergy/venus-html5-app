@@ -2,19 +2,19 @@ import { mqttQuery, PortalId, Topics } from "../Mqtt"
 import { InstanceId, useVebus, vebusQuery } from "../Vebus"
 import { useTopicsState, useTopicSubscriptions, useTopicsWithPortalIdAndInstanceId } from "../Mqtt/Mqtt.provider"
 
-export interface ActiveInSourceState {
-  current?: Array<number>
-  voltage?: Array<number>
-  power?: Array<number>
+export interface ActiveInValuesState {
+  current: Array<number>
+  voltage: Array<number>
+  power: Array<number>
 }
 
-export interface ActiveInSourceTopics extends Topics {
+export interface ActiveInValuesTopics extends Topics {
   power?: Array<string>
   voltage?: Array<string>
   current?: Array<string>
 }
 
-export function useActiveInSource(): ActiveInSourceState {
+export function useActiveInValues(): ActiveInValuesState {
   const getTopics = (portalId: PortalId, instanceId: InstanceId) => ({
     current: [
       `N/${portalId}/vebus/${instanceId}/Ac/ActiveIn/L1/I`,
@@ -34,14 +34,13 @@ export function useActiveInSource(): ActiveInSourceState {
   })
   useVebus()
 
-  const topics$ = useTopicsWithPortalIdAndInstanceId<ActiveInSourceTopics>(
+  const topics$ = useTopicsWithPortalIdAndInstanceId<ActiveInValuesTopics>(
     getTopics,
     mqttQuery.portalId$,
     vebusQuery.instanceId$
   )
 
   useTopicSubscriptions(topics$)
-  let { current, voltage, power } = useTopicsState<ActiveInSourceState>(topics$)
 
-  return { current, voltage, power }
+  return useTopicsState<ActiveInValuesState>(topics$)
 }

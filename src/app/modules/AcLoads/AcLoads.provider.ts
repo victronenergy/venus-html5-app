@@ -5,10 +5,10 @@ import { InstanceId } from "../Vebus/Vebus.store"
 import { useVebus } from "../Vebus/Vebus.provider"
 
 export interface AcLoadsState {
-  phases?: number
-  current?: Array<number>
-  voltage?: Array<number>
-  power?: Array<number>
+  phases: number
+  current: Array<number>
+  voltage: Array<number>
+  power: Array<number>
 }
 
 export interface AcLoadsTopics extends Topics {

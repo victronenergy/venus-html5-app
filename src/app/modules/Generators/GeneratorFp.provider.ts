@@ -3,12 +3,12 @@ import { useMqtt, useTopicsState, useTopicSubscriptions, useTopicsWithPortalId }
 import { useObservableState } from "observable-hooks"
 
 export interface GeneratorFpState {
-  statusCode?: number
-  productId?: number
-  productName?: number
-  phases?: number
-  gensetAutoStart?: number
-  autoStart?: number
+  statusCode: number
+  productId: number
+  productName: number
+  phases: number
+  gensetAutoStart: number
+  autoStart: number
 }
 
 export interface GeneratorFpTopics extends Topics {

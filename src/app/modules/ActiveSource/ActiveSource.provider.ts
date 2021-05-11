@@ -1,13 +1,11 @@
 import { mqttQuery, PortalId, Topics } from "../Mqtt"
 import { useTopicsState, useTopicSubscriptions, useTopicsWithPortalIdAndInstanceId } from "../Mqtt/Mqtt.provider"
-import { vebusQuery } from "../Vebus/Vebus.query"
-import { InstanceId } from "../Vebus/Vebus.store"
-import { useVebus } from "../Vebus/Vebus.provider"
+import { vebusQuery, useVebus, InstanceId } from "../Vebus"
 
 export interface ActiveSourceState {
-  activeInput?: number
-  phases?: number
-  settings?: Array<number>
+  activeInput: number
+  phases: number
+  settings: Array<number>
 }
 
 export interface ActiveSourceTopics extends Topics {

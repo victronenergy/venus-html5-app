@@ -3,9 +3,9 @@ import { useMqtt, useTopicsState, useTopicSubscriptions, useTopicsWithPortalId }
 import { useObservableState } from "observable-hooks"
 
 export interface GeneratorRelayState {
-  statusCode?: number
-  manualStart?: number
-  autoStart?: number
+  statusCode: number
+  manualStart: number
+  autoStart: number
 }
 
 export interface GeneratorRelayTopics extends Topics {

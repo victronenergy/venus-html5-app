@@ -11,11 +11,11 @@ import { useObservableState } from "observable-hooks"
 import { of } from "rxjs"
 
 export interface InputLimitSelectorState {
-  state?: string
-  mode?: string
-  customName?: string
-  productName?: string
-  modeIsAdjustable?: boolean
+  state: string
+  mode: string
+  customName: string
+  productName: string
+  modeIsAdjustable: boolean
 }
 
 export interface InputLimitSelectorTopics extends Topics {

@@ -2,8 +2,8 @@ import { mqttQuery, PortalId, Topics } from "../Mqtt"
 import { useTopicsState, useTopicSubscriptions, useTopicsWithPortalId } from "../Mqtt/Mqtt.provider"
 
 export interface ShorePowerInputState {
-  acInput1?: string
-  acInput2?: string
+  acInput1: string
+  acInput2: string
 }
 
 export interface ShorePowerInputTopics extends Topics {

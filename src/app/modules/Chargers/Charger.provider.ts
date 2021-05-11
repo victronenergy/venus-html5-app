@@ -15,13 +15,13 @@ export interface ChargerTopics extends Topics {
 }
 
 export interface ChargerState {
-  customName?: string
+  customName: string
   productName: string
-  currentLimit?: number
-  state?: string
-  mode?: string
-  nrOfOutputs?: number
-  current?: [number?, number?, number?]
+  currentLimit: number
+  state: string
+  mode: string
+  nrOfOutputs: number
+  current: [number?, number?, number?]
 }
 
 export interface ChargerProvider extends ChargerState {

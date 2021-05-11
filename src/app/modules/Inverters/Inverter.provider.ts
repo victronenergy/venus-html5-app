@@ -5,14 +5,14 @@ import { useObservableState } from "observable-hooks"
 import { of } from "rxjs"
 
 export interface InverterState {
-  state?: string
-  mode?: string
-  voltage?: number
-  current?: number
-  power?: number
-  customName?: string
-  productName?: string
-  nAcInputs?: number
+  state: string
+  mode: string
+  voltage: number
+  current: number
+  power: number
+  customName: string
+  productName: string
+  nAcInputs: number
 }
 
 export interface InverterTopics extends Topics {

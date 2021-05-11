@@ -4,8 +4,8 @@ import { InstanceId, vebusQuery } from "../Vebus"
 import { of } from "rxjs"
 
 export interface InputLimitState {
-  currentLimit?: string
-  currentLimitIsAdjustable?: string
+  currentLimit: string
+  currentLimitIsAdjustable: string
 }
 
 export interface InputLimitTopics extends Topics {

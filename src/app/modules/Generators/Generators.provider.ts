@@ -2,9 +2,9 @@ import { mqttQuery, PortalId, Topics } from "../Mqtt"
 import { useTopicsState, useTopicSubscriptions, useTopicsWithPortalId } from "../Mqtt/Mqtt.provider"
 
 export interface GeneratorsState {
-  relayFunction?: number
-  gensetCode?: number
-  generatorState?: number
+  relayFunction: number
+  gensetCode: number
+  generatorState: number
 }
 
 export interface GeneratorsTopics extends Topics {
