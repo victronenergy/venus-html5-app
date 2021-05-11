@@ -3,12 +3,9 @@ import React, { Component } from "react"
 import ActiveInValues from "../ActiveSource/ActiveInValues"
 
 import HeaderView from "../HeaderView/HeaderView"
-import HidingContainer from "../HidingContainer"
 import MqttSubscriptions from "../../../mqtt/MqttSubscriptions"
 import MqttWriteValue from "../../../mqtt/MqttWriteValue"
 import { ListView } from "../ListView"
-import MqttSubscriptions from "../../../mqtt/MqttSubscriptions"
-import MqttWriteValue from "../../../mqtt/MqttWriteValue"
 import SelectorButton from "../SelectorButton"
 import ColumnContainer from "../ColumnContainer"
 import MetricValues from "../MetricValues"
@@ -31,8 +28,8 @@ const getTopics = (portalId, vebusInstanceId) => {
     phases: `N/${portalId}/vebus/${vebusInstanceId}/Ac/NumberOfPhases`,
     settings: [
       `N/${portalId}/settings/0/Settings/SystemSetup/AcInput1`,
-      `N/${portalId}/settings/0/Settings/SystemSetup/AcInput2`
-    ]
+      `N/${portalId}/settings/0/Settings/SystemSetup/AcInput2`,
+    ],
   }
 
   return vebusInstanceId ? { ...relayTopics, ...vebusTopics } : relayTopics
@@ -63,7 +60,7 @@ const GeneratorRelay = ({
   autoStart,
   relayFunction,
   onManualModeSelected,
-  onAutoModeSelected
+  onAutoModeSelected,
 }) => {
   const title = "Generator"
   const subTitle = getGeneratorState(statusCode, active, phases)

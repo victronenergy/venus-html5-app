@@ -29,7 +29,7 @@ const activeSourceTitle = {
   [AC_SOURCE_TYPE.SHORE]: "Shore Power",
   [AC_SOURCE_TYPE.GRID]: "Grid Input",
   [AC_SOURCE_TYPE.GENERATOR]: "Generator Input",
-  [AC_SOURCE_TYPE.NOT_IN_USE]: "Invalid Configuration" // You cannot have a source that isn't configured as active!
+  [AC_SOURCE_TYPE.NOT_IN_USE]: "Invalid Configuration", // You cannot have a source that isn't configured as active!
 }
 
 const activeSourceIcon = {

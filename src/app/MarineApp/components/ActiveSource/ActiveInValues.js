@@ -49,7 +49,7 @@ const ActiveInValues = ({ portalId, inverterChargerDeviceId, phases }) => {
   } else {
     return (
       <MqttSubscriptions topics={getTopics(portalId, inverterChargerDeviceId)}>
-        {topics => {
+        {(topics) => {
           return <ActiveInTotalValues {...topics} phases={phases} />
         }}
       </MqttSubscriptions>

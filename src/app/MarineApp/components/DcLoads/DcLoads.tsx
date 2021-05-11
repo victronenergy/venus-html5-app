@@ -13,7 +13,11 @@ export const DcLoads = () => {
     <ColumnContainer>
       <HeaderView icon={DcIcon} title="DC Loads" showBoat>
         <MetricValues>
-          <NumericValue value={voltage && power ? power / voltage : undefined} unit="A" precision={1} />
+          <NumericValue
+            value={voltage && voltage[0] && power && power[0] ? power[0] / voltage[0] : undefined}
+            unit="A"
+            precision={1}
+          />
           <NumericValue value={power} unit="W" />
         </MetricValues>
       </HeaderView>

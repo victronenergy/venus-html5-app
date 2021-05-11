@@ -67,7 +67,6 @@ export const Inverter = ({
   nAcInputs,
   isVebusInverter,
   updateMode,
-  metricsRef,
 }) => {
   // if nAcInputs === 0 it means it's an inverter, if not it's an inverter/charger => skip
   const show = !isVebusInverter || nAcInputs === 0
@@ -108,9 +107,7 @@ const InverterWithData = ({ portalId, deviceInstance, isVebusInverter }) => {
     <MqttWriteValue topic={`W/${portalId}/${source}/${deviceInstance}/Mode`}>
       {(_, updateMode) => (
         <MqttSubscriptions topics={getTopics(portalId, deviceInstance, source)}>
-          {(topics) => (
-            <Inverter {...topics} isVebusInverter={isVebusInverter} updateMode={updateMode} metricsRef={metricsRef} />
-          )}
+          {(topics) => <Inverter {...topics} isVebusInverter={isVebusInverter} updateMode={updateMode} />}
         </MqttSubscriptions>
       )}
     </MqttWriteValue>

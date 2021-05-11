@@ -74,7 +74,14 @@ const Paginator = ({ setPage, currentPage, pages }) => {
 
 class HeaderWithData extends Component {
   render() {
-    const { currentView, handleRemoteConsoleButtonClicked, setPage, currentPage, pages } = this.props
+    const {
+      currentView,
+      handleRemoteConsoleButtonClicked,
+      handleLockScreenButtonClicked,
+      setPage,
+      currentPage,
+      pages,
+    } = this.props
     return (
       // <MqttSubscriptions topics={{ showRemoteConsoleSetting: `N/${portalId}/settings/0/Settings/System/VncLocal` }}>
       //   {topics => {
