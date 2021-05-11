@@ -5,6 +5,7 @@ import { useObservableState, useSubscription } from "observable-hooks"
 import { mqttQuery } from "../Mqtt"
 import Logger from "../../utils/logger"
 import { ChargerInstanceId } from "./Chargers.store"
+import { chargersQuery } from "./Chargers.query"
 
 export const useChargers = () => {
   const portalId = useObservableState(mqttQuery.portalId$)
@@ -27,4 +28,8 @@ export const useChargers = () => {
       chargersService.setChargers(deviceInstances)
     }
   })
+
+  const chargers = useObservableState(chargersQuery.chargers$)
+
+  return { chargers }
 }
