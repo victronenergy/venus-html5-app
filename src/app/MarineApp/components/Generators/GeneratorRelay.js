@@ -68,7 +68,7 @@ const GeneratorRelay = ({
   return (
     <div className="metric generator">
       {phases > 1 ? (
-        <ListView icon={GeneratorIcon} title={title} subTitle={subTitle} child>
+        <ListView icon={GeneratorIcon} title={title} subTitle={subTitle} child={true}>
           {active && (
             <ActiveInValues portalId={portalId} inverterChargerDeviceId={inverterChargerDeviceId} phases={phases} />
           )}

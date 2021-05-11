@@ -7,13 +7,12 @@ import { InverterChargerInputLimitSelector } from "./components/InverterCharger"
 
 import { Connecting, Error, Metrics, MqttUnavailable, RemoteConsole } from "./components/Views"
 
-import { mqttQuery } from "../modules/Mqtt"
+import { mqttQuery, useVebus } from "../modules"
 import { useMqtt } from "../modules/Mqtt/Mqtt.provider"
-import { useVebus } from "../modules/Vebus/Vebus.provider"
 import { VIEWS } from "../utils/constants"
 import { AppProps } from "../App"
 
-import { LockButtonFooter } from "./components/LockButton/LockButton"
+import { LockButtonFooter } from "./components/LockButton"
 import { LockContext } from "../contexts"
 
 type MainProps = {
@@ -125,7 +124,6 @@ export const MarineApp = (props: AppProps) => {
     <LockContext.Provider value={{ screenLocked, toggleLocked: () => toggleLocked }}>
       <>
         <Header
-          portalId={portalId}
           handleRemoteConsoleButtonClicked={toggleRemoteConsole}
           currentView={currentView}
           setPage={setPage}
@@ -138,11 +136,7 @@ export const MarineApp = (props: AppProps) => {
               case VIEWS.INVERTER_CHARGER_INPUT_LIMIT_SELECTOR:
                 return (
                   <Fade key={VIEWS.INVERTER_CHARGER_INPUT_LIMIT_SELECTOR} unmount={viewUnmounting}>
-                    <InverterChargerInputLimitSelector
-                      portalId={portalId}
-                      inverterChargerDeviceId={vebusInstanceId}
-                      onLimitSelected={handleShorePowerLimitSelected}
-                    />
+                    <InverterChargerInputLimitSelector onLimitSelected={handleShorePowerLimitSelected} />
                   </Fade>
                 )
               case VIEWS.REMOTE_CONSOLE:
@@ -156,7 +150,6 @@ export const MarineApp = (props: AppProps) => {
                 return (
                   <Fade key={VIEWS.METRICS} unmount={viewUnmounting} fullWidth>
                     <Metrics
-                      portalId={portalId}
                       inverterChargerDeviceId={vebusInstanceId}
                       isConnected={isConnected}
                       onChangeInverterChargerInputLimitClicked={() =>

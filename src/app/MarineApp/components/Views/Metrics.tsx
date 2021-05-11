@@ -8,12 +8,14 @@ import Inverters from "../Inverters"
 import { InverterCharger } from "../InverterCharger"
 import Solar from "../Solar"
 import Generators from "../Generators"
+import { InstanceId } from "../../../modules"
 
 const HEADER_HEIGHT = 110
 
-const getMetricsTotalHeight = (metrics) => metrics.map((c) => Math.ceil(c.clientHeight)).reduce((a, b) => a + b, 0)
+const getMetricsTotalHeight = (metrics: HTMLDivElement[]) =>
+  metrics.map((c) => Math.ceil(c.clientHeight)).reduce((a, b) => a + b, 0)
 
-const getRequiredCols = (metrics) => {
+const getRequiredCols = (metrics: HTMLDivElement[]) => {
   if (metrics.length < 2) return 1
   if (window.innerWidth / window.innerHeight < 9 / 10) return 1
   if (window.innerWidth < 1000) return 1
@@ -23,7 +25,7 @@ const getRequiredCols = (metrics) => {
   return getMetricsTotalHeight(metrics) > Math.floor(window.innerHeight - HEADER_HEIGHT) ? 2 : 1
 }
 
-const getRequiredPages = (metrics, containerHeight, cols) => {
+const getRequiredPages = (metrics: HTMLDivElement[], cols: number, containerHeight?: number) => {
   if (metrics.length < 2) return 1
   if (!containerHeight) return 1
 
@@ -42,17 +44,17 @@ const getRequiredPages = (metrics, containerHeight, cols) => {
   return Math.ceil(columns / cols)
 }
 
-const getContainerHeight = (metrics) => {
+const getContainerHeight = (metrics: HTMLDivElement[]) => {
   /**
    * The container must be just high enough to fit half of the total height of the metrics
    * elements. This means that either the left or the right column can be the taller one,
    * but prefer left over right for aesthetics.
    */
-  const metricsHeights = metrics.map((c) => c.getBoundingClientRect().height)
+  const metricsHeights = metrics.map((c: HTMLDivElement) => c.getBoundingClientRect().height)
   const reversed = [...metricsHeights].reverse()
-  const minHeight = metricsHeights.reduce((a, b) => a + b, 0) / 2
+  const minHeight = metricsHeights.reduce((a: number, b: number) => a + b, 0) / 2
   for (let i = 1; i <= metricsHeights.length; i++) {
-    const leftColHeight = metricsHeights.slice(0, i).reduce((a, b) => a + b, 0)
+    const leftColHeight = metricsHeights.slice(0, i).reduce((a: number, b: number) => a + b, 0)
     const rightColHeight = reversed.slice(0, i).reduce((a, b) => a + b, 0)
     if (leftColHeight >= minHeight && rightColHeight >= minHeight) {
       return Math.min(leftColHeight, rightColHeight)
@@ -64,22 +66,37 @@ const getContainerHeight = (metrics) => {
   }
 }
 
-export default class Metrics extends Component {
-  constructor(props) {
+type MetricsProps = {
+  inverterChargerDeviceId: InstanceId
+  isConnected: boolean
+  onChangeInverterChargerInputLimitClicked: Function
+  currentPage: number
+  setPages: Function
+  pages: number
+}
+
+type MetricsState = {
+  height: number
+  layoutCols: number
+}
+
+export default class Metrics extends Component<MetricsProps, MetricsState> {
+  metricsRef = React.createRef<HTMLDivElement>()
+
+  constructor(props: MetricsProps) {
     super(props)
     this.state = { height: 0, layoutCols: 1 }
-    this.metricsRef = React.createRef()
   }
 
   componentDidUpdate() {
     if (this.metricsRef.current) {
-      const metrics = [...this.metricsRef.current.children]
+      const metrics = Array.from(this.metricsRef.current.children) as HTMLDivElement[]
 
       const cols = getRequiredCols(metrics)
       if (this.state.layoutCols !== cols) this.setState({ layoutCols: cols })
 
       const maxHeight = Math.floor(window.innerHeight - HEADER_HEIGHT)
-      const height = this.state.layoutCols === 2 ? Math.min(getContainerHeight(metrics), maxHeight) : maxHeight
+      const height = this.state.layoutCols === 2 ? Math.min(getContainerHeight(metrics)!, maxHeight) : maxHeight
       if (height !== this.state.height) this.setState({ height })
 
       const pages = getRequiredPages(metrics, this.state.height, cols)
@@ -88,36 +105,26 @@ export default class Metrics extends Component {
   }
 
   render() {
-    const {
-      portalId,
-      inverterChargerDeviceId,
-      isConnected,
-      onChangeInverterChargerInputLimitClicked,
-      currentPage,
-      screenLocked,
-    } = this.props
-    const commonProps = { portalId, inverterChargerDeviceId }
+    const { inverterChargerDeviceId, isConnected, onChangeInverterChargerInputLimitClicked, currentPage } = this.props
 
     let style = { height: this.state.height, transform: `translate(-${currentPage * 100}%)` }
 
     return (
       <div className="metrics-container" ref={this.metricsRef} style={style}>
-        <DcLoads {...commonProps} />
-        {!!inverterChargerDeviceId && <AcLoads {...commonProps} />}
-        <Battery {...commonProps} />
+        <DcLoads />
+        {!!inverterChargerDeviceId && <AcLoads />}
+        <Battery />
         {!!inverterChargerDeviceId && (
           <InverterCharger
-            {...commonProps}
             onChangeInputLimitClicked={onChangeInverterChargerInputLimitClicked}
             connected={isConnected}
-            screenLocked={screenLocked}
           />
         )}
-        {!!inverterChargerDeviceId && <ActiveSource {...commonProps} />}
-        <Solar {...commonProps} />
-        <Chargers {...commonProps} />
-        <Inverters {...commonProps} />
-        <Generators {...commonProps} />
+        {!!inverterChargerDeviceId && <ActiveSource />}
+        <Solar />
+        <Chargers />
+        <Inverters />
+        <Generators />
       </div>
     )
   }

@@ -4,7 +4,22 @@ import "./HeaderView.scss"
 
 const MAX_TITLE_LENGTH = 40
 
-const HeaderView = ({ child = false, children, icon, title = "", subTitle = "", showBoat = false }) => (
+type HeaderViewProps = {
+  child?: boolean
+  icon: string
+  title?: string
+  subTitle?: string
+  showBoat?: boolean
+}
+
+const HeaderView: React.FunctionComponent<HeaderViewProps> = ({
+  child = false,
+  children,
+  icon,
+  title = "",
+  subTitle = "",
+  showBoat = false,
+}) => (
   <div className={(child ? "header-view__child" : "metric") + ((showBoat && " boat-image") || "")}>
     <img src={icon} className="metric__icon" alt={"Header View Icon"} />
     <div className={"metric__value-container"}>

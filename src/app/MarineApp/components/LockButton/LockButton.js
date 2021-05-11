@@ -1,10 +1,14 @@
-import React, { Component, useContext } from "react"
+import React, { Component } from "react"
 import classNames from "classnames"
 import { LockContext } from "../../../contexts"
 import { VIEWS } from "../../../utils/constants"
+
+import UnlockIcon from "../../../../images/icons/unlock.svg"
+import LockIcon from "../../../../images/icons/lock.svg"
+
 import "./LockButton.scss"
 
-class LockButtonHeader extends Component {
+export class LockButtonHeader extends Component {
   render() {
     const { currentView, header, showLockButton } = this.props
     return <LockButton currentView={currentView} header={header} showLockButton={showLockButton} />
@@ -12,14 +16,14 @@ class LockButtonHeader extends Component {
 }
 
 // Renders on mobile/vertical views
-class LockButtonFooter extends Component {
+export class LockButtonFooter extends Component {
   render() {
     const { currentView, header } = this.props
     return <LockButton currentView={currentView} header={header} />
   }
 }
 
-class LockButton extends Component {
+export class LockButton extends Component {
   static defaultProps = {
     showLockButton: true,
   }
@@ -37,14 +41,14 @@ class LockButton extends Component {
                 {context.screenLocked ? (
                   <>
                     <span>
-                      <img src={require("../../../../images/icons/lock.svg")} className="lock-icon" />
+                      <img src={LockIcon} className="lock-icon" alt={"Lock icon"} />
                     </span>
                     <span className="lock-text">Unlock to make changes</span>
                   </>
                 ) : (
                   <>
                     <span>
-                      <img src={require("../../../../images/icons/unlock.svg")} className="lock-icon" />
+                      <img src={UnlockIcon} className="lock-icon" alt={"Unlock icon"} />
                     </span>
                     <span className="lock-text">Lock to prevent changes</span>
                   </>
@@ -57,7 +61,3 @@ class LockButton extends Component {
     )
   }
 }
-
-export default LockButtonHeader
-
-export { LockButtonHeader, LockButtonFooter, LockButton }

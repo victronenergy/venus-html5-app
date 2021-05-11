@@ -3,7 +3,14 @@ import classnames from "classnames"
 
 import "./ListView.scss"
 
-export const ListView = ({ child, children, icon, title, subTitle }) => (
+type ListViewProps = {
+  child: boolean
+  icon: string
+  title: string
+  subTitle: string
+}
+
+export const ListView: React.FunctionComponent<ListViewProps> = ({ child, icon, title, subTitle, children }) => (
   <div className={classnames({ metric: !child }, "list-view")}>
     <div className="list-view__header">
       <img src={icon} className="metric__icon" alt={"List View Icon"} />
@@ -16,4 +23,4 @@ export const ListView = ({ child, children, icon, title, subTitle }) => (
   </div>
 )
 
-export const ListRow = ({ children }) => <div className="list-row">{children}</div>
+export const ListRow: React.FunctionComponent<any> = ({ children }) => <div className="list-row">{children}</div>

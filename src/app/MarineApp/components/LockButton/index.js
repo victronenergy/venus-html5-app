@@ -1,1 +1,1 @@
-export { default } from "./LockButton"
+export { LockButtonHeader, LockButtonFooter, LockButton } from "./LockButton"
