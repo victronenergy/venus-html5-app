@@ -12,8 +12,8 @@ export interface PvChargerTopics extends Topics {
 }
 export function usePvCharger(): PvChargerState {
   const getTopics = (portalId: PortalId) => ({
-    power: [`N/${portalId}/system/0/Dc/Pv/Power`],
-    current: [`N/${portalId}/system/0/Dc/Pv/Current`],
+    power: `N/${portalId}/system/0/Dc/Pv/Power`,
+    current: `N/${portalId}/system/0/Dc/Pv/Current`,
   })
 
   const topics$ = useTopicsWithPortalId<PvChargerTopics>(getTopics, mqttQuery.portalId$)
