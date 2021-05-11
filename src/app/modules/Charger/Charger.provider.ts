@@ -1,12 +1,14 @@
 import { mqttQuery, PortalId, Topics } from "../Mqtt"
-import { InstanceId, vebusQuery } from "../Vebus"
 import {
   useMqtt,
   useTopicsState,
   useTopicSubscriptions,
+  useTopicsWithParameters,
   useTopicsWithPortalIdAndInstanceId,
 } from "../Mqtt/Mqtt.provider"
 import { useObservableState } from "observable-hooks"
+import { ChargerInstanceId } from "./Chargers.store"
+import { of } from "rxjs"
 
 export interface ChargerTopics extends Topics {
   customName?: string
@@ -33,35 +35,31 @@ export interface ChargerProvider extends ChargerState {
   updateCurrentLimit: () => void
 }
 
-export const useCharger = () => {
-  const getTopics = (portalId: PortalId, deviceInstanceId: InstanceId) => ({
-    customName: `N/${portalId}/charger/${deviceInstanceId}/CustomName`,
-    productName: `N/${portalId}/charger/${deviceInstanceId}/ProductName`,
-    currentLimit: `N/${portalId}/charger/${deviceInstanceId}/Ac/In/CurrentLimit`,
-    state: `N/${portalId}/charger/${deviceInstanceId}/State`,
-    mode: `N/${portalId}/charger/${deviceInstanceId}/Mode`,
-    nrOfOutputs: `N/${portalId}/charger/${deviceInstanceId}/NrOfOutputs`,
+export const useCharger = (chargerId: ChargerInstanceId) => {
+  const getTopics = (portalId: PortalId, chargerInstanceId: ChargerInstanceId) => ({
+    customName: `N/${portalId}/charger/${chargerInstanceId}/CustomName`,
+    productName: `N/${portalId}/charger/${chargerInstanceId}/ProductName`,
+    currentLimit: `N/${portalId}/charger/${chargerInstanceId}/Ac/In/CurrentLimit`,
+    state: `N/${portalId}/charger/${chargerInstanceId}/State`,
+    mode: `N/${portalId}/charger/${chargerInstanceId}/Mode`,
+    nrOfOutputs: `N/${portalId}/charger/${chargerInstanceId}/NrOfOutputs`,
     current: [
-      `N/${portalId}/charger/${deviceInstanceId}/Dc/0/Current`,
-      `N/${portalId}/charger/${deviceInstanceId}/Dc/1/Current`,
-      `N/${portalId}/charger/${deviceInstanceId}/Dc/2/Current`,
+      `N/${portalId}/charger/${chargerInstanceId}/Dc/0/Current`,
+      `N/${portalId}/charger/${chargerInstanceId}/Dc/1/Current`,
+      `N/${portalId}/charger/${chargerInstanceId}/Dc/2/Current`,
     ],
   })
 
-  const topics$ = useTopicsWithPortalIdAndInstanceId<ChargerTopics>(
-    getTopics,
-    mqttQuery.portalId$,
-    vebusQuery.instanceId$
-  )
+  const topics$ = useTopicsWithParameters<ChargerTopics>(getTopics, mqttQuery.portalId$)
 
   useTopicSubscriptions(topics$)
 
-  const getWriteTopics = (portalId: PortalId, deviceInstanceId: InstanceId) => ({
-    mode: `W/${portalId}/charger/${deviceInstanceId}/Mode`,
-    currentLimit: `W/${portalId}/charger/${deviceInstanceId}/Ac/In/CurrentLimit`,
+  const getWriteTopics = (portalId: PortalId, chargerInstanceId: ChargerInstanceId) => ({
+    mode: `W/${portalId}/charger/${chargerInstanceId}/Mode`,
+    currentLimit: `W/${portalId}/charger/${chargerInstanceId}/Ac/In/CurrentLimit`,
   })
 
-  const writeTopics$ = useTopicsWithPortalIdAndInstanceId(getWriteTopics, mqttQuery.portalId$, vebusQuery.instanceId$)
+  const writeTopics$ = useTopicsWithParameters(getWriteTopics, mqttQuery.portalId$, of(chargerId))
   const writeTopics = useObservableState(writeTopics$)
 
   const mqtt = useMqtt()
