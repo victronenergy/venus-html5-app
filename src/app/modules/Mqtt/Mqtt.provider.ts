@@ -56,16 +56,21 @@ export const useTopicsState = <TMessages = any>(topics: Observable<Topics | unde
 export const useTopicsWithPortalId = <TTopics = Topics>(
   getTopicsMethod: (portalId: PortalId) => TTopics,
   portalId$: Observable<PortalId>
-) => useObservable<TTopics>(() => portalId$.pipe(distinctUntilChanged(), map(getTopicsMethod)))
+) => useTopicsWithParameters<TTopics>(getTopicsMethod, portalId$)
 
 export const useTopicsWithPortalIdAndInstanceId = <TTopics = Topics>(
   getTopicsMethod: (portalId: PortalId, instanceId: InstanceId) => TTopics,
   portalId$: Observable<PortalId>,
   instanceId$: Observable<InstanceId>
+) => useTopicsWithParameters<TTopics>(getTopicsMethod, portalId$, instanceId$)
+
+export const useTopicsWithParameters = <TTopics = Topics>(
+  getTopicsMethod: (...args: any[]) => TTopics,
+  ...observables: Observable<any>[]
 ) =>
   useObservable<TTopics>(() =>
-    combineLatest([portalId$, instanceId$]).pipe(
+    combineLatest(observables).pipe(
       distinctUntilChanged(),
-      map(([portalId, instanceId]) => getTopicsMethod(portalId, instanceId))
+      map((parameters) => getTopicsMethod(...parameters))
     )
   )
