@@ -5,8 +5,8 @@ import { useObservableState } from "observable-hooks"
 import { of } from "rxjs"
 
 export interface InverterState {
-  state: string
-  mode: string
+  state: number
+  mode: number
   voltage: number
   current: number
   power: number
@@ -27,7 +27,7 @@ export interface InverterTopics extends Topics {
 }
 
 export interface InverterProvider extends InverterState {
-  updateMode: () => void
+  updateMode: (mode: number) => void
 }
 
 export function useInverter(source: string): InverterProvider {
@@ -61,7 +61,7 @@ export function useInverter(source: string): InverterProvider {
   const writeTopics = useObservableState(writeTopics$)
 
   const mqtt = useMqtt()
-  const updateMode = (mode: string) => mqtt.publish(writeTopics!.mode, mode)
+  const updateMode = (mode: number) => mqtt.publish(writeTopics!.mode, mode.toString())
 
   return { ...useTopicsState<InverterState>(topics$), updateMode } as InverterProvider
 }

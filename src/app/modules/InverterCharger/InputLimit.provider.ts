@@ -5,7 +5,7 @@ import { of } from "rxjs"
 
 export interface InputLimitState {
   currentLimit: string
-  currentLimitIsAdjustable: string
+  currentLimitIsAdjustable: boolean
 }
 
 export interface InputLimitTopics extends Topics {
@@ -13,7 +13,7 @@ export interface InputLimitTopics extends Topics {
   currentLimitIsAdjustable?: string
 }
 
-export function useInputLimit(shorePowerInput: string): InputLimitState {
+export function useInputLimit(shorePowerInput: number): InputLimitState {
   const getTopics = (portalId: PortalId, deviceInstanceId: InstanceId, shorePowerInput: string) => {
     return {
       currentLimit: `N/${portalId}/vebus/${deviceInstanceId}/Ac/In/${shorePowerInput}/CurrentLimit`,

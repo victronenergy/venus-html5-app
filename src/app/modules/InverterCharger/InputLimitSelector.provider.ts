@@ -11,33 +11,27 @@ import { useObservableState } from "observable-hooks"
 import { of } from "rxjs"
 
 export interface InputLimitSelectorState {
-  state: string
-  mode: string
-  customName: string
-  productName: string
-  modeIsAdjustable: boolean
+  currentLimit: number
+  currentLimitMax: number
+  productId: number
 }
 
 export interface InputLimitSelectorTopics extends Topics {
-  state?: string
-  mode?: string
-  customName?: string
-  productName?: string
-  modeIsAdjustable?: string
+  currentLimit?: string
+  currentLimitMax?: string
+  productId?: string
 }
 
 export interface InputLimitSelectorProvider extends InputLimitSelectorState {
-  updateLimit: () => void
+  updateLimit: (limit: number) => void
 }
 
-export function useInputLimitSelector(shorePowerInput: string): InputLimitSelectorProvider {
+export function useInputLimitSelector(shorePowerInput: number): InputLimitSelectorProvider {
   const getTopics = (portalId: PortalId, deviceInstanceId: InstanceId) => {
     return {
-      state: `N/${portalId}/system/0/SystemState/State`,
-      mode: `N/${portalId}/vebus/${deviceInstanceId}/Mode`,
-      customName: `N/${portalId}/vebus/${deviceInstanceId}/CustomName`,
-      productName: `N/${portalId}/vebus/${deviceInstanceId}/ProductName`,
-      modeIsAdjustable: `N/${portalId}/vebus/${deviceInstanceId}/ModeIsAdjustable`,
+      currentLimit: `N/${portalId}/vebus/${deviceInstanceId}/Ac/In/${shorePowerInput}/CurrentLimit`,
+      currentLimitMax: `N/${portalId}/vebus/${deviceInstanceId}/Ac/In/${shorePowerInput}/CurrentLimitGetMax`,
+      productId: `N/${portalId}/vebus/${deviceInstanceId}/ProductId`,
     }
   }
 
@@ -62,7 +56,7 @@ export function useInputLimitSelector(shorePowerInput: string): InputLimitSelect
   const writeTopics = useObservableState(writeTopics$)
 
   const mqtt = useMqtt()
-  const updateLimit = (limit: string) => mqtt.publish(writeTopics!.limit, limit)
+  const updateLimit = (limit: number) => mqtt.publish(writeTopics!.limit, limit.toString())
 
   return { ...useTopicsState<InputLimitSelectorState>(topics$), updateLimit } as InputLimitSelectorProvider
 }

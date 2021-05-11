@@ -11,9 +11,9 @@ import { useObservableState } from "observable-hooks"
 export interface InverterChargerState {
   state: number
   mode: number
-  customName: number
-  productName: number
-  modeIsAdjustable: number
+  customName: string
+  productName: string
+  modeIsAdjustable: boolean
 }
 
 export interface InverterChargerTopics extends Topics {
@@ -25,10 +25,10 @@ export interface InverterChargerTopics extends Topics {
 }
 
 export interface InverterChargerProvider extends InverterChargerState {
-  updateMode: () => void
+  updateMode: (mode: number) => void
 }
 
-export function useInverterCharger(): InverterChargerState {
+export function useInverterCharger(): InverterChargerProvider {
   const getTopics = (portalId: PortalId, deviceInstanceId: InstanceId) => {
     return {
       state: `N/${portalId}/system/0/SystemState/State`,
@@ -55,7 +55,7 @@ export function useInverterCharger(): InverterChargerState {
   const writeTopics = useObservableState(writeTopics$)
 
   const mqtt = useMqtt()
-  const updateMode = (mode: string) => mqtt.publish(writeTopics!.mode, mode)
+  const updateMode = (mode: number) => mqtt.publish(writeTopics!.mode, mode.toString())
 
   return { ...useTopicsState<InverterChargerState>(topics$), updateMode } as InverterChargerProvider
 }

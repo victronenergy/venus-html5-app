@@ -5,7 +5,7 @@ import { useObservableState } from "observable-hooks"
 export interface GeneratorFpState {
   statusCode: number
   productId: number
-  productName: number
+  productName: string
   phases: number
   gensetAutoStart: number
   autoStart: number
@@ -21,8 +21,8 @@ export interface GeneratorFpTopics extends Topics {
 }
 
 export interface GeneratorFpProvider extends GeneratorFpState {
-  updateAutoMode: () => void
-  updateManualMode: () => void
+  updateAutoMode: (mode: number) => void
+  updateManualMode: (currentLimit: number) => void
 }
 
 export function useGeneratorFp(): GeneratorFpProvider {
@@ -46,9 +46,8 @@ export function useGeneratorFp(): GeneratorFpProvider {
   const writeTopics = useObservableState(writeTopics$)
 
   const mqtt = useMqtt()
-  const updateAutoMode = (mode: string) => mqtt.publish(writeTopics!.autoMode, mode)
-  const updateManualMode = (currentLimit: number | string) =>
-    mqtt.publish(writeTopics!.manualMode, currentLimit.toString())
+  const updateAutoMode = (mode: number) => mqtt.publish(writeTopics!.autoMode, mode.toString())
+  const updateManualMode = (currentLimit: number) => mqtt.publish(writeTopics!.manualMode, currentLimit.toString())
 
   const topics$ = useTopicsWithPortalId<GeneratorFpTopics>(getTopics, mqttQuery.portalId$)
 

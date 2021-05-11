@@ -18,15 +18,15 @@ export interface ChargerState {
   customName: string
   productName: string
   currentLimit: number
-  state: string
-  mode: string
+  state: number
+  mode: number
   nrOfOutputs: number
   current: [number?, number?, number?]
 }
 
 export interface ChargerProvider extends ChargerState {
-  updateMode: () => void
-  updateCurrentLimit: () => void
+  updateMode: (mode: number) => void
+  updateCurrentLimit: (limit: number) => void
 }
 
 export const useCharger = (chargerId: ChargerInstanceId) => {
@@ -57,7 +57,7 @@ export const useCharger = (chargerId: ChargerInstanceId) => {
   const writeTopics = useObservableState(writeTopics$)
 
   const mqtt = useMqtt()
-  const updateMode = (mode: string) => mqtt.publish(writeTopics!.mode, mode)
+  const updateMode = (mode: number) => mqtt.publish(writeTopics!.mode, mode.toString())
   const updateCurrentLimit = (currentLimit: number | string) =>
     mqtt.publish(writeTopics!.currentLimit, currentLimit.toString())
 
