@@ -2,7 +2,7 @@ import React from "react"
 
 import CurrentLimitIncrementor from "./CurrentLimitIncrementor"
 import HeaderView from "../HeaderView"
-import HidingContainer from "../HidingContainer"
+import ColumnContainer from "../../components/ColumnContainer"
 import MetricValues from "../MetricValues"
 import MqttSubscriptions from "../../../mqtt/MqttSubscriptions"
 import MqttWriteValue from "../../../mqtt/MqttWriteValue"
@@ -110,7 +110,7 @@ const Charger = ({
   )
 }
 
-const ChargerWithData = ({ portalId, deviceInstanceId, metricsRef }) => (
+const ChargerWithData = ({ portalId, deviceInstanceId }) => (
   <MqttSubscriptions topics={getTopics(portalId, deviceInstanceId)}>
     {(topics) => {
       return (
@@ -120,9 +120,9 @@ const ChargerWithData = ({ portalId, deviceInstanceId, metricsRef }) => (
               <MqttWriteValue topic={`W/${portalId}/charger/${deviceInstanceId}/Ac/In/CurrentLimit`}>
                 {(_, updateInputLimit) => {
                   return (
-                    <HidingContainer metricsRef={metricsRef}>
+                    <ColumnContainer>
                       <Charger {...topics} onModeSelected={updateMode} onChangeInputLimitClicked={updateInputLimit} />
-                    </HidingContainer>
+                    </ColumnContainer>
                   )
                 }}
               </MqttWriteValue>

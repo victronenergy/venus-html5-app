@@ -2,7 +2,7 @@ import React, { Component } from "react"
 
 import ActiveInValues from "./ActiveInValues"
 import HeaderView from "../HeaderView/HeaderView"
-import HidingContainer from "../HidingContainer"
+import ColumnContainer from "../ColumnContainer"
 import { ListView } from "../ListView"
 import MqttSubscriptions from "../../../mqtt/MqttSubscriptions"
 import MetricValues from "../MetricValues"
@@ -29,7 +29,7 @@ const activeSourceTitle = {
   [AC_SOURCE_TYPE.SHORE]: "Shore Power",
   [AC_SOURCE_TYPE.GRID]: "Grid Input",
   [AC_SOURCE_TYPE.GENERATOR]: "Generator Input",
-  [AC_SOURCE_TYPE.NOT_IN_USE]: "Invalid Configuration", // You cannot have a source that isn't configured as active!
+  [AC_SOURCE_TYPE.NOT_IN_USE]: "Invalid Configuration" // You cannot have a source that isn't configured as active!
 }
 
 const activeSourceIcon = {
@@ -39,24 +39,24 @@ const activeSourceIcon = {
   [AC_SOURCE_TYPE.NOT_IN_USE]: ShorePowerIcon,
 }
 
-const getSourceSubtitle = (active, phases, source) => {
+const getSourceSubtitle = (active, phases) => {
   if (active) {
-    return phases > 1 ? "3 phases" : null
+    return phases > 1 ? `${phases} phases` : null
   } else {
-    return source === AC_SOURCE_TYPE.GENERATOR ? "Stopped" : "Unplugged"
+    return "Unplugged"
   }
 }
 
 const ActiveSource = ({ portalId, inverterChargerDeviceId, source, active, phases }) => {
   const icon = activeSourceIcon[source]
   const title = activeSourceTitle[source] || "Unknown"
-  const subTitle = getSourceSubtitle(active, phases, source)
+  const subTitle = getSourceSubtitle(active, phases)
   return (
     <div className="metric metric__active-source">
       {phases > 1 ? (
         <ListView icon={icon} title={title} subTitle={subTitle} child>
           {active && (
-            <ActiveInValues portalId={portalId} inverterChargerDeviceId={inverterChargerDeviceId} threePhase={true} />
+            <ActiveInValues portalId={portalId} inverterChargerDeviceId={inverterChargerDeviceId} phases={phases} />
           )}
         </ListView>
       ) : (
@@ -76,14 +76,14 @@ const ActiveSource = ({ portalId, inverterChargerDeviceId, source, active, phase
 
 class ActiveSourceWithData extends Component {
   render() {
-    const { portalId, inverterChargerDeviceId, metricsRef } = this.props
+    const { portalId, inverterChargerDeviceId } = this.props
     return (
       <MqttSubscriptions topics={getTopics(portalId, inverterChargerDeviceId)}>
         {(topics) => {
           return topics.settings?.map(
             (source, i) =>
-              source !== AC_SOURCE_TYPE.NOT_IN_USE && ( // do not render if the source is not in use
-                <HidingContainer metricsRef={metricsRef} key={i}>
+              [AC_SOURCE_TYPE.GRID, AC_SOURCE_TYPE.SHORE].includes(source) && (
+                <ColumnContainer key={i}>
                   <ActiveSource
                     source={source}
                     phases={topics.phases}
@@ -91,7 +91,7 @@ class ActiveSourceWithData extends Component {
                     portalId={portalId}
                     inverterChargerDeviceId={inverterChargerDeviceId}
                   />
-                </HidingContainer>
+                </ColumnContainer>
               )
           )
         }}

@@ -24,9 +24,9 @@ const getTopics = (portalId, vebusInstanceId) => {
   }
 }
 
-export const ActiveInTotalValues = ({ voltage, current, power, threePhase }) => {
-  return threePhase ? (
-    voltage.map((v, i) => (
+export const ActiveInTotalValues = ({ voltage, current, power, phases }) => {
+  return phases > 1 ? (
+    voltage.slice(0, phases).map((v, i) => (
       <ListRow key={i}>
         <span className="value value__phase">L {i + 1}</span>
         <NumericValue value={v} unit="V" />
@@ -43,14 +43,14 @@ export const ActiveInTotalValues = ({ voltage, current, power, threePhase }) => 
   )
 }
 
-const ActiveInValues = ({ portalId, inverterChargerDeviceId, threePhase }) => {
+const ActiveInValues = ({ portalId, inverterChargerDeviceId, phases }) => {
   if (!inverterChargerDeviceId) {
     return null
   } else {
     return (
       <MqttSubscriptions topics={getTopics(portalId, inverterChargerDeviceId)}>
-        {(topics) => {
-          return <ActiveInTotalValues {...topics} threePhase={threePhase} />
+        {topics => {
+          return <ActiveInTotalValues {...topics} phases={phases} />
         }}
       </MqttSubscriptions>
     )

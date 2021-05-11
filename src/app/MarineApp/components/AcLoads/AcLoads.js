@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 
 import HeaderView from "../HeaderView"
-import HidingContainer from "../HidingContainer"
+import ColumnContainer from "../ColumnContainer"
 import { ListView, ListRow } from "../ListView"
 import MetricValues from "../MetricValues"
 import MqttSubscriptions from "../../../mqtt/MqttSubscriptions"
@@ -37,7 +37,7 @@ const AcLoads = (props) => {
 
   return showAsList ? (
     <ListView icon={AcIcon} title="AC Loads" subTitle={`${phases} phases`}>
-      {voltage.map((v, i) => (
+      {voltage.slice(0, phases).map((v, i) => (
         <ListRow key={i}>
           <span className="value value__phase">L {i + 1}</span>
           <NumericValue value={v} unit="V" />
@@ -59,14 +59,14 @@ const AcLoads = (props) => {
 
 class AcLoadsWithData extends Component {
   render() {
-    const { portalId, inverterChargerDeviceId, metricsRef } = this.props
+    const { portalId, inverterChargerDeviceId } = this.props
     return (
       <MqttSubscriptions topics={getTopics(portalId, inverterChargerDeviceId)}>
         {(topics) => {
           return (
-            <HidingContainer metricsRef={metricsRef}>
+            <ColumnContainer>
               <AcLoads {...topics} />
-            </HidingContainer>
+            </ColumnContainer>
           )
         }}
       </MqttSubscriptions>

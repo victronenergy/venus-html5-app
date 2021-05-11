@@ -1,6 +1,6 @@
 import "../css/index.scss"
 import React, { useEffect } from "react"
-import Loading from "./components/Loading"
+import Loading from "./MarineApp/components/Loading"
 import { MqttService, mqttStore } from "./modules/Mqtt"
 
 const KVNRV = React.lazy(() => import("./KVNRV"))

@@ -69,7 +69,10 @@ This way you can run the local app against venus device data if the venus device
 
 ### 2.3 Running the app with no Venus device available
 
-The mqtt mock is no longer mainainted. Use [venus-docker](https://github.com/victronenergy/venus-docker) instead or a Venus GX in demo mode (below).
+The MQTT mock is no longer maintained. Use [venus-docker](https://github.com/victronenergy/venus-docker) instead or a Venus GX in demo mode (below).
+
+You can run multiple `venus-docker` simulations by executing: `echo {a..z} | xargs -n1 ./run.sh -s`. Each container running a simulation will expose MQTT on
+an increasing port number starting from `9001`.
 
 ~~If there is no real device to be used for MQTT data, you can run the app with a fake MQTT broker:~~
 

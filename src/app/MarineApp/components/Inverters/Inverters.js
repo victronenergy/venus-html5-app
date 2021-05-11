@@ -3,7 +3,7 @@ import React from "react"
 import InverterWithData from "./Inverter"
 import MqttTopicWildcard from "../../../mqtt/MqttTopicWildcard"
 
-const Inverters = ({ portalId, metricsRef }) => (
+const Inverters = ({ portalId }) => (
   <MqttTopicWildcard wildcard={`N/${portalId}/inverter/+/DeviceInstance`}>
     {(systemInverters) => (
       <MqttTopicWildcard wildcard={`N/${portalId}/vebus/+/DeviceInstance`}>
@@ -17,7 +17,6 @@ const Inverters = ({ portalId, metricsRef }) => (
                 key={id}
                 portalId={portalId}
                 deviceInstance={id}
-                metricsRef={metricsRef}
                 isVebusInverter={vebusInverterIds.includes(id)}
               />
             ))

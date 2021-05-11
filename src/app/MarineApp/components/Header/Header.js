@@ -1,5 +1,6 @@
-import React, { Component } from "react"
+import React, { Component, Fragment } from "react"
 import SelectorButton from "../SelectorButton"
+import { LockButtonHeader } from "../../components/LockButton/LockButton"
 import { VIEWS } from "../../../utils/constants"
 
 import "./Header.scss"
@@ -9,26 +10,47 @@ import LIcon from "../../images/icons/L.svg"
 import RIcon from "../../images/icons/R.svg"
 
 export const Header = (props) => {
-  const { showRemoteConsoleSetting, currentView, handleRemoteConsoleButtonClicked, setPage, currentPage, pages } = props
+  const {
+    showRemoteConsoleSetting,
+    currentView,
+    handleRemoteConsoleButtonClicked,
+    handleLockScreenButtonClicked,
+    showLockButton,
+    setPage,
+    currentPage,
+    pages,
+  } = props
   return (
-    <header>
-      <img src={Logo} className="logo" alt={"Logo"} />
-      {currentView === VIEWS.METRICS && pages > 1 && (
-        <Paginator setPage={setPage} currentPage={currentPage} pages={pages} />
-      )}
-      {showRemoteConsoleSetting && (
-        <button className="remote-console-button" onClick={handleRemoteConsoleButtonClicked}>
-          {currentView !== VIEWS.REMOTE_CONSOLE ? "Remote Console" : "Close"}
-        </button>
-      )}
-    </header>
+    <Fragment>
+      <header>
+        <img src={Logo} className="logo" alt={"Logo"} />
+        {currentView === VIEWS.METRICS && pages > 1 && (
+          <Paginator setPage={setPage} currentPage={currentPage} pages={pages} />
+        )}
+
+        <div className="header-button-container">
+          <LockButtonHeader
+            onClick={handleLockScreenButtonClicked}
+            currentView={currentView}
+            header={true}
+            showLockButton={showLockButton}
+          />
+
+          {showRemoteConsoleSetting && (
+            <button className="remote-console-button" onClick={handleRemoteConsoleButtonClicked}>
+              {currentView !== VIEWS.REMOTE_CONSOLE ? "Remote Console" : "Close"}
+            </button>
+          )}
+        </div>
+      </header>
+    </Fragment>
   )
 }
 
 const Paginator = ({ setPage, currentPage, pages }) => {
   return (
     <div className="header__paginator">
-      <SelectorButton disabled={currentPage < 1} onClick={() => setPage(currentPage - 1)}>
+      <SelectorButton alwaysUnlocked={true} disabled={currentPage < 1} onClick={() => setPage(currentPage - 1)}>
         <img src={LIcon} className="header__paginator-button" alt={"Header Paginator Button"} />
       </SelectorButton>
       <span className="header__paginator-page">
@@ -39,7 +61,11 @@ const Paginator = ({ setPage, currentPage, pages }) => {
         ))}
       </span>
 
-      <SelectorButton disabled={currentPage + 1 >= pages} onClick={() => setPage(currentPage + 1)}>
+      <SelectorButton
+        alwaysUnlocked={true}
+        disabled={currentPage + 1 >= pages}
+        onClick={() => setPage(currentPage + 1)}
+      >
         <img src={RIcon} className="header__paginator-button" alt={"Header Paginator Button"} />
       </SelectorButton>
     </div>
@@ -56,6 +82,7 @@ class HeaderWithData extends Component {
       <Header
         showRemoteConsoleSetting={true} // TODO: !!topics.showRemoteConsoleSetting
         handleRemoteConsoleButtonClicked={handleRemoteConsoleButtonClicked}
+        handleLockScreenButtonClicked={handleLockScreenButtonClicked}
         currentView={currentView}
         setPage={setPage}
         currentPage={currentPage}
@@ -70,12 +97,14 @@ class HeaderWithData extends Component {
 
 class HeaderWithoutMQTTData extends Component {
   render() {
-    const { currentView, handleRemoteConsoleButtonClicked } = this.props
+    const { currentView, handleRemoteConsoleButtonClicked, handleLockScreenButtonClicked } = this.props
     return (
       <Header
         showRemoteConsoleSetting={true}
         handleRemoteConsoleButtonClicked={handleRemoteConsoleButtonClicked}
+        handleLockScreenButtonClicked={handleLockScreenButtonClicked}
         currentView={currentView}
+        showLockButton={false}
       />
     )
   }

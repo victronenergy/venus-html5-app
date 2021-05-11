@@ -2,7 +2,7 @@ import React, { Component } from "react"
 
 import GensetValues from "./GensetValues"
 import HeaderView from "../HeaderView/HeaderView"
-import HidingContainer from "../HidingContainer"
+import ColumnContainer from "../ColumnContainer"
 import { ListView } from "../ListView"
 import MqttSubscriptions from "../../../mqtt/MqttSubscriptions"
 import MqttWriteValue from "../../../mqtt/MqttWriteValue"
@@ -83,7 +83,7 @@ const GeneratorFp = ({
     <div className="metric generator">
       {phases > 1 ? (
         <ListView icon={icon} title={title} subTitle={subTitle} child>
-          <GensetValues portalId={portalId} threePhase={true} />
+          <GensetValues portalId={portalId} phases={phases} />
         </ListView>
       ) : (
         <HeaderView icon={icon} title={title} subTitle={subTitle} child>
@@ -128,31 +128,33 @@ const GeneratorFp = ({
 
 class GeneratorFpWithData extends Component {
   render() {
-    const { portalId, manualStartStopTopic, autoStartStopTopic, metricsRef } = this.props
+    const { portalId, manualStartStopTopic, autoStartStopTopic } = this.props
     return (
       <MqttSubscriptions topics={getTopics(portalId)}>
-        {(topics) => (
-          <MqttWriteValue topic={autoStartStopTopic}>
-            {(_, updateAutoMode) => {
-              return (
-                <MqttWriteValue topic={manualStartStopTopic}>
-                  {(_, updateManualMode) => {
-                    return (
-                      <HidingContainer metricsRef={metricsRef} key="generator-fp">
-                        <GeneratorFp
-                          portalId={portalId}
-                          {...topics}
-                          onManualModeSelected={updateManualMode}
-                          onAutoModeSelected={updateAutoMode}
-                        />
-                      </HidingContainer>
-                    )
-                  }}
-                </MqttWriteValue>
-              )
-            }}
-          </MqttWriteValue>
-        )}
+        {(topics) =>
+          topics.statusCode !== undefined && (
+            <MqttWriteValue topic={autoStartStopTopic}>
+              {(_, updateAutoMode) => {
+                return (
+                  <MqttWriteValue topic={manualStartStopTopic}>
+                    {(_, updateManualMode) => {
+                      return (
+                        <ColumnContainer key="generator-fp">
+                          <GeneratorFp
+                            portalId={portalId}
+                            {...topics}
+                            onManualModeSelected={updateManualMode}
+                            onAutoModeSelected={updateAutoMode}
+                          />
+                        </ColumnContainer>
+                      )
+                    }}
+                  </MqttWriteValue>
+                )
+              }}
+            </MqttWriteValue>
+          )
+        }
       </MqttSubscriptions>
     )
   }

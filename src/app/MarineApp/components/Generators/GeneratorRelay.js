@@ -1,97 +1,161 @@
 import React, { Component } from "react"
 
+import ActiveInValues from "../ActiveSource/ActiveInValues"
+
 import HeaderView from "../HeaderView/HeaderView"
 import HidingContainer from "../HidingContainer"
 import MqttSubscriptions from "../../../mqtt/MqttSubscriptions"
 import MqttWriteValue from "../../../mqtt/MqttWriteValue"
+import { ListView } from "../ListView"
+import MqttSubscriptions from "../../../mqtt/MqttSubscriptions"
+import MqttWriteValue from "../../../mqtt/MqttWriteValue"
 import SelectorButton from "../SelectorButton"
+import ColumnContainer from "../ColumnContainer"
+import MetricValues from "../MetricValues"
 
-import { GENERATOR_START_STOP } from "../../../utils/constants"
+import { GENERATOR_START_STOP, AC_SOURCE_TYPE, RELAY_FUNCTION } from "../../../utils/constants"
 
 import "./Generator.scss"
-
 import GeneratorIcon from "../../images/icons/generator.svg"
 
-const getTopics = (portalId) => {
-  return {
+const getTopics = (portalId, vebusInstanceId) => {
+  const relayTopics = {
+    relayFunction: `N/${portalId}/settings/0/Settings/Relay/Function`,
     statusCode: `N/${portalId}/generator/0/Generator0/State`,
     manualStart: `N/${portalId}/generator/0/Generator0/ManualStart`,
     autoStart: `N/${portalId}/settings/0/Settings/Generator0/AutoStartEnabled`,
   }
+
+  const vebusTopics = {
+    activeInput: `N/${portalId}/vebus/${vebusInstanceId}/Ac/ActiveIn/ActiveInput`,
+    phases: `N/${portalId}/vebus/${vebusInstanceId}/Ac/NumberOfPhases`,
+    settings: [
+      `N/${portalId}/settings/0/Settings/SystemSetup/AcInput1`,
+      `N/${portalId}/settings/0/Settings/SystemSetup/AcInput2`
+    ]
+  }
+
+  return vebusInstanceId ? { ...relayTopics, ...vebusTopics } : relayTopics
 }
 
-function getGeneratorState(statusCode) {
+function getGeneratorState(statusCode, active, phases) {
+  if (active) {
+    return phases > 1 ? "3 phases" : "Running"
+  }
+
   switch (statusCode) {
-    case 0:
-      return "Stopped"
     case 1:
       return "Running"
     case 10:
       return "Error"
     default:
-      return "Not available"
+      return "Stopped"
   }
 }
 
-const GeneratorRelay = ({ statusCode, manualStart, autoStart, onManualModeSelected, onAutoModeSelected }) => {
+const GeneratorRelay = ({
+  statusCode,
+  active,
+  phases,
+  portalId,
+  inverterChargerDeviceId,
+  manualStart,
+  autoStart,
+  relayFunction,
+  onManualModeSelected,
+  onAutoModeSelected
+}) => {
   const title = "Generator"
-  const subTitle = getGeneratorState(statusCode)
+  const subTitle = getGeneratorState(statusCode, active, phases)
 
   return (
     <div className="metric generator">
-      <HeaderView icon={GeneratorIcon} title={title} subTitle={subTitle} child />
-      <div className="generator__mode-selector">
-        <SelectorButton
-          active={manualStart && !autoStart}
-          onClick={() => {
-            onAutoModeSelected(GENERATOR_START_STOP.AUTO_OFF)
-            onManualModeSelected(GENERATOR_START_STOP.START)
-          }}
-        >
-          On
-        </SelectorButton>
-        <SelectorButton
-          active={!manualStart && !autoStart}
-          onClick={() => {
-            onAutoModeSelected(GENERATOR_START_STOP.AUTO_OFF)
-            onManualModeSelected(GENERATOR_START_STOP.STOP)
-          }}
-        >
-          Off
-        </SelectorButton>
-        <SelectorButton active={autoStart} onClick={() => onAutoModeSelected(GENERATOR_START_STOP.AUTO_ON)}>
-          Auto start/stop
-        </SelectorButton>
-      </div>
+      {phases > 1 ? (
+        <ListView icon={GeneratorIcon} title={title} subTitle={subTitle} child>
+          {active && (
+            <ActiveInValues portalId={portalId} inverterChargerDeviceId={inverterChargerDeviceId} phases={phases} />
+          )}
+        </ListView>
+      ) : (
+        <HeaderView icon={GeneratorIcon} title={title} subTitle={subTitle} child>
+          {active && (
+            <MetricValues>
+              <ActiveInValues portalId={portalId} inverterChargerDeviceId={inverterChargerDeviceId} />
+            </MetricValues>
+          )}
+        </HeaderView>
+      )}
+      {relayFunction === RELAY_FUNCTION.GENERATOR_START_STOP && statusCode !== undefined && (
+        <div className="generator__mode-selector">
+          <SelectorButton
+            active={manualStart && !autoStart}
+            onClick={() => {
+              onAutoModeSelected(GENERATOR_START_STOP.AUTO_OFF)
+              onManualModeSelected(GENERATOR_START_STOP.START)
+            }}
+          >
+            On
+          </SelectorButton>
+          <SelectorButton
+            active={!manualStart && !autoStart}
+            onClick={() => {
+              onAutoModeSelected(GENERATOR_START_STOP.AUTO_OFF)
+              onManualModeSelected(GENERATOR_START_STOP.STOP)
+            }}
+          >
+            Off
+          </SelectorButton>
+          <SelectorButton active={autoStart} onClick={() => onAutoModeSelected(GENERATOR_START_STOP.AUTO_ON)}>
+            Auto start/stop
+          </SelectorButton>
+        </div>
+      )}
     </div>
   )
 }
 
 class GeneratorRelayWithData extends Component {
   render() {
-    const { portalId, manualStartStopTopic, autoStartStopTopic, metricsRef } = this.props
+    const { portalId, manualStartStopTopic, autoStartStopTopic, inverterChargerDeviceId } = this.props
     return (
-      <MqttSubscriptions topics={getTopics(portalId)}>
+      <MqttSubscriptions topics={getTopics(portalId, inverterChargerDeviceId)}>
         {(topics) => (
           <MqttWriteValue topic={autoStartStopTopic}>
-            {(_, updateAutoMode) => {
-              return (
-                <MqttWriteValue topic={manualStartStopTopic}>
-                  {(_, updateManualMode) => {
-                    return (
-                      <HidingContainer metricsRef={metricsRef} key="generator-relay">
-                        <GeneratorRelay
-                          portalId={portalId}
-                          {...topics}
-                          onManualModeSelected={updateManualMode}
-                          onAutoModeSelected={updateAutoMode}
-                        />
-                      </HidingContainer>
-                    )
-                  }}
-                </MqttWriteValue>
-              )
-            }}
+            {(_, updateAutoMode) => (
+              <MqttWriteValue topic={manualStartStopTopic}>
+                {(_, updateManualMode) =>
+                  inverterChargerDeviceId && topics.settings.includes(AC_SOURCE_TYPE.GENERATOR)
+                    ? topics.settings.map(
+                        (source, i) =>
+                          source === AC_SOURCE_TYPE.GENERATOR && (
+                            <ColumnContainer key={"generator-relay-" + i}>
+                              <GeneratorRelay
+                                portalId={portalId}
+                                {...topics}
+                                source={source}
+                                phases={topics.phases}
+                                active={topics.activeInput === i}
+                                inverterChargerDeviceId={inverterChargerDeviceId}
+                                onManualModeSelected={updateManualMode}
+                                onAutoModeSelected={updateAutoMode}
+                              />
+                            </ColumnContainer>
+                          )
+                      )
+                    : topics.relayFunction === RELAY_FUNCTION.GENERATOR_START_STOP &&
+                      topics.statusCode !== undefined && (
+                        <ColumnContainer key="generator-relay">
+                          <GeneratorRelay
+                            portalId={portalId}
+                            {...topics}
+                            onManualModeSelected={updateManualMode}
+                            onAutoModeSelected={updateAutoMode}
+                          />
+                        </ColumnContainer>
+                      )
+                }
+              </MqttWriteValue>
+            )}
           </MqttWriteValue>
         )}
       </MqttSubscriptions>

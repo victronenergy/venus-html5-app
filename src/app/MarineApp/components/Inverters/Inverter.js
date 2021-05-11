@@ -3,7 +3,7 @@ import React from "react"
 import { INVERTER_MODE } from "../../../utils/constants"
 
 import HeaderView from "../HeaderView"
-import HidingContainer from "../HidingContainer"
+import ColumnContainer from "../../components/ColumnContainer"
 import MetricValues from "../MetricValues"
 import MqttSubscriptions from "../../../mqtt/MqttSubscriptions"
 import MqttWriteValue from "../../../mqtt/MqttWriteValue"
@@ -78,7 +78,7 @@ export const Inverter = ({
 
   return (
     show && (
-      <HidingContainer metricsRef={metricsRef}>
+      <ColumnContainer>
         <div className="metric inverter">
           <HeaderView icon={MultiplusIcon} title={customName || `Inverter: ${productNameShort}`} child>
             {InverterSubtitle(voltage, current, power, state)}
@@ -97,12 +97,12 @@ export const Inverter = ({
             )}
           </div>
         </div>
-      </HidingContainer>
+      </ColumnContainer>
     )
   )
 }
 
-const InverterWithData = ({ portalId, deviceInstance, metricsRef, isVebusInverter }) => {
+const InverterWithData = ({ portalId, deviceInstance, isVebusInverter }) => {
   const source = isVebusInverter ? "vebus" : "inverter"
   return (
     <MqttWriteValue topic={`W/${portalId}/${source}/${deviceInstance}/Mode`}>

@@ -23,17 +23,20 @@ type PaginatorProps = {
 const Paginator = ({ setPage, currentPage, pages }: PaginatorProps) => {
   return (
     <div className="battery__paginator">
-      <SelectorButton disabled={currentPage < 1} onClick={() => setPage(currentPage - 1)}>
-        <img src={LIcon} className="battery__paginator-button" alt={"Battery Paginator Button"} />
+      <SelectorButton alwaysUnlocked={true} disabled={currentPage < 1} onClick={() => setPage(currentPage - 1)}>
+        <img src={LIcon} className="battery__paginator-button" />
       </SelectorButton>
       <span className="battery__paginator-page">{currentPage + 1}</span>
-      <SelectorButton disabled={currentPage + 1 >= pages} onClick={() => setPage(currentPage + 1)}>
-        <img src={RIcon} className="battery__paginator-button" alt={"Battery Paginator Button"} />
+      <SelectorButton
+        alwaysUnlocked={true}
+        disabled={currentPage + 1 >= pages}
+        onClick={() => setPage(currentPage + 1)}
+      >
+        <img src={RIcon} className="battery__paginator-button" />
       </SelectorButton>
     </div>
   )
 }
-
 type BatteryHeaderProps = {
   amount: number
   paginate: boolean

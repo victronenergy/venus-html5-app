@@ -13,6 +13,9 @@ import { useVebus } from "../modules/Vebus/Vebus.provider"
 import { VIEWS } from "../utils/constants"
 import { AppProps } from "../App"
 
+import { LockButtonFooter } from "./components/LockButton/LockButton"
+import { LockContext } from "../contexts"
+
 type MainProps = {
   isConnected?: boolean
   children: any
@@ -41,6 +44,7 @@ export const MarineApp = (props: AppProps) => {
   const [viewUnmounting, setViewUnmounting] = useState(false)
   const [currentPage, setCurrentPage] = useState(0)
   const [pages, setTotalPages] = useState(1)
+  const [screenLocked, toggleLocked] = useState(true)
   const portalId = useObservableState(mqttQuery.portalId$)
   const isConnected = useObservableState(mqttQuery.isConnected$)
   const error = useObservableState(mqttQuery.error$)
@@ -118,54 +122,57 @@ export const MarineApp = (props: AppProps) => {
   }
 
   return (
-    <>
-      <Header
-        portalId={portalId}
-        handleRemoteConsoleButtonClicked={toggleRemoteConsole}
-        currentView={currentView}
-        setPage={setPage}
-        currentPage={currentPage}
-        pages={pages}
-      />
-      <Main isConnected={isConnected} setView={setView}>
-        {(() => {
-          switch (currentView) {
-            case VIEWS.INVERTER_CHARGER_INPUT_LIMIT_SELECTOR:
-              return (
-                <Fade key={VIEWS.INVERTER_CHARGER_INPUT_LIMIT_SELECTOR} unmount={viewUnmounting}>
-                  <InverterChargerInputLimitSelector
-                    portalId={portalId}
-                    inverterChargerDeviceId={vebusInstanceId}
-                    onLimitSelected={handleShorePowerLimitSelected}
-                  />
-                </Fade>
-              )
-            case VIEWS.REMOTE_CONSOLE:
-              return (
-                <Fade key={VIEWS.REMOTE_CONSOLE} unmount={viewUnmounting} fullWidth>
-                  <RemoteConsole host={host} onClickOutsideContainer={() => setView(VIEWS.METRICS)} />
-                </Fade>
-              )
-            case VIEWS.METRICS:
-            default:
-              return (
-                <Fade key={VIEWS.METRICS} unmount={viewUnmounting} fullWidth>
-                  <Metrics
-                    portalId={portalId}
-                    inverterChargerDeviceId={vebusInstanceId}
-                    isConnected={isConnected}
-                    onChangeInverterChargerInputLimitClicked={() =>
-                      setView(VIEWS.INVERTER_CHARGER_INPUT_LIMIT_SELECTOR)
-                    }
-                    setPages={setPages}
-                    currentPage={currentPage}
-                    pages={pages}
-                  />
-                </Fade>
-              )
-          }
-        })()}
-      </Main>
-    </>
+    <LockContext.Provider value={{ screenLocked, toggleLocked: () => toggleLocked }}>
+      <>
+        <Header
+          portalId={portalId}
+          handleRemoteConsoleButtonClicked={toggleRemoteConsole}
+          currentView={currentView}
+          setPage={setPage}
+          currentPage={currentPage}
+          pages={pages}
+        />
+        <Main isConnected={isConnected} setView={setView}>
+          {(() => {
+            switch (currentView) {
+              case VIEWS.INVERTER_CHARGER_INPUT_LIMIT_SELECTOR:
+                return (
+                  <Fade key={VIEWS.INVERTER_CHARGER_INPUT_LIMIT_SELECTOR} unmount={viewUnmounting}>
+                    <InverterChargerInputLimitSelector
+                      portalId={portalId}
+                      inverterChargerDeviceId={vebusInstanceId}
+                      onLimitSelected={handleShorePowerLimitSelected}
+                    />
+                  </Fade>
+                )
+              case VIEWS.REMOTE_CONSOLE:
+                return (
+                  <Fade key={VIEWS.REMOTE_CONSOLE} unmount={viewUnmounting} fullWidth>
+                    <RemoteConsole host={host} onClickOutsideContainer={() => setView(VIEWS.METRICS)} />
+                  </Fade>
+                )
+              case VIEWS.METRICS:
+              default:
+                return (
+                  <Fade key={VIEWS.METRICS} unmount={viewUnmounting} fullWidth>
+                    <Metrics
+                      portalId={portalId}
+                      inverterChargerDeviceId={vebusInstanceId}
+                      isConnected={isConnected}
+                      onChangeInverterChargerInputLimitClicked={() =>
+                        setView(VIEWS.INVERTER_CHARGER_INPUT_LIMIT_SELECTOR)
+                      }
+                      setPages={setPages}
+                      currentPage={currentPage}
+                      pages={pages}
+                    />
+                  </Fade>
+                )
+            }
+          })()}
+        </Main>
+        <LockButtonFooter currentView={currentView} />
+      </>
+    </LockContext.Provider>
   )
 }
