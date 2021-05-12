@@ -1,10 +1,10 @@
-import {useObservableState, useSubscription} from 'observable-hooks'
+import { useObservableState, useSubscription } from "observable-hooks"
 import { mqttQuery, PortalId, Topics } from "../Mqtt"
-import { useTopicsState, useTopicSubscriptions, useTopicsWithPortalId } from "../Mqtt/Mqtt.provider"
+import { useTopicSubscriptions, useTopicsWithPortalId } from "../Mqtt/Mqtt.provider"
 import { AC_SOURCE_TYPE } from "../../utils/constants"
-import {shorePowerInputQuery} from './ShorePowerInput.query'
-import {useShorePowerInputService} from './ShorePowerInput.service'
-import {ShorePowerInputState, shorePowerInputStore} from './ShorePowerInput.store'
+import { shorePowerInputQuery } from "./ShorePowerInput.query"
+import { useShorePowerInputService } from "./ShorePowerInput.service"
+import { ShorePowerInputState } from "./ShorePowerInput.store"
 
 export interface ShorePowerInputTopics extends Topics {
   acInput1?: string
@@ -24,12 +24,12 @@ export function useShorePowerInput(): ShorePowerInputState {
   const topics = useObservableState(topics$)
   const shorePowerInputService = useShorePowerInputService()
 
-  useSubscription(mqttQuery.messagesByTopics$(topics!), ({acInput1, acInput2}) => {
+  useSubscription(mqttQuery.messagesByTopics$(topics!), ({ acInput1, acInput2 }) => {
     let inputId = 0
 
-    if (acInput1 === AC_SOURCE_TYPE.SHORE.toString() || acInput1 === AC_SOURCE_TYPE.GRID.toString()) {
+    if (Number(acInput1) === AC_SOURCE_TYPE.SHORE || Number(acInput1) === AC_SOURCE_TYPE.GRID) {
       inputId = 1
-    } else if (acInput2 === AC_SOURCE_TYPE.SHORE.toString() || acInput2 === AC_SOURCE_TYPE.GRID.toString()) {
+    } else if (Number(acInput2) === AC_SOURCE_TYPE.SHORE || Number(acInput2) === AC_SOURCE_TYPE.GRID) {
       inputId = 2
     }
 
