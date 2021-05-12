@@ -24,7 +24,7 @@ type DonutIndicatorProps = {
   parts: Array<number>
 }
 
-class DonutIndicator extends PureComponent<DonutIndicatorProps> {
+export class DonutIndicator extends PureComponent<DonutIndicatorProps> {
   constructor(props: DonutIndicatorProps) {
     super(props)
     this.outerChartRef = React.createRef()

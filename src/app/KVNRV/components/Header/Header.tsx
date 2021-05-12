@@ -14,7 +14,7 @@ const timer = () => {
   return new Date()
 }
 
-const Header = (props: HeaderProps) => {
+export const Header = (props: HeaderProps) => {
   const [time, setTime] = useState(timer())
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React from "react"
 import SelectorButton from "../SelectorButton/SelectorButton"
 import { formatNumber } from "../../../components/NumericValue"
 

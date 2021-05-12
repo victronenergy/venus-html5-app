@@ -10,7 +10,7 @@ type AcModeModalProps = {
   onModeInput: Function
   onLimitInput: Function
 }
-const AcModeModal = (props: AcModeModalProps) => {
+export const AcModeModal = (props: AcModeModalProps) => {
   const { updateMode, updateLimit } = useAcMode()
 
   return (

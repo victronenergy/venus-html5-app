@@ -6,7 +6,7 @@ import { CommonProps } from "../Views/Metrics"
 import "./ShorePower.scss"
 import NumericValue from "../../../components/NumericValue"
 
-export const ShorePower = (props: CommonProps) => {
+export const ShorePower = React.memo((props: CommonProps) => {
   return (
     <div className="">
       <Card title={"Shore Power"} size={SIZE_SMALL}>
@@ -21,6 +21,6 @@ export const ShorePower = (props: CommonProps) => {
       </Card>
     </div>
   )
-}
+})
 
-export default React.memo(ShorePower)
+export default ShorePower

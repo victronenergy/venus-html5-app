@@ -8,7 +8,7 @@ import { CommonProps } from "../Views/Metrics"
 import "./DcLoads.scss"
 import NumericValue from "../../../components/NumericValue"
 
-export const DcLoads = (props: CommonProps) => {
+export const DcLoads = React.memo((props: CommonProps) => {
   const { voltage, power } = useDcLoads()
 
   let normalized_power = (power || 0) / DC_CONF.MAX
@@ -28,6 +28,6 @@ export const DcLoads = (props: CommonProps) => {
       </Card>
     </div>
   )
-}
+})
 
-export default React.memo(DcLoads)
+export default DcLoads

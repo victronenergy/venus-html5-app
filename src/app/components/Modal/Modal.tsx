@@ -7,7 +7,7 @@ type ModalProps = {
   onClose: Function
 }
 
-const Modal: FunctionComponent<ModalProps> = ({ title, onClose, children }) => (
+export const Modal: FunctionComponent<ModalProps> = ({ title, onClose, children }) => (
   <div className={"modal__background"}>
     <Card title={title} size={SIZE_BIG} icon={ICON_CLOSE} onIconClick={onClose}>
       {children}

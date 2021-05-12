@@ -9,7 +9,7 @@ import NumericValue from "../../../components/NumericValue"
 import DonutIndicator from "../../../components/DonutIndicator"
 import { NotAvailable } from "../NotAvailable"
 
-export const AcLoads = (props: CommonProps) => {
+export const AcLoads = React.memo((props: CommonProps) => {
   let { current, voltage, power, frequency } = useAcLoads()
   if (!(current && voltage && power && frequency)) {
     return <NotAvailable />
@@ -40,6 +40,6 @@ export const AcLoads = (props: CommonProps) => {
       </Card>
     </div>
   )
-}
+})
 
-export default React.memo(AcLoads)
+export default AcLoads
