@@ -18,6 +18,11 @@ export const PV_CONF: Conf = {
   THRESHOLDS: [0.8, 0.1, 0.1],
 }
 
+export const SHORE_POWER_CONF: Conf = {
+  MAX: 100,
+  THRESHOLDS: [0.8, 0.1, 0.1],
+}
+
 export const AC_MODE = {
   MODES: {
     ON: 1,
