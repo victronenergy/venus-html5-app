@@ -129,9 +129,10 @@ export class MqttService {
     if (this.store?.getValue().status !== STATUS.CONNECTED || !this.store?.getValue().client) {
       Logger.error("Could not publish value")
     }
+    const message = JSON.stringify({ value: data })
 
-    Logger.log(`Publishing to ${topic}: ${data}`)
+    Logger.log(`Publishing to ${topic}: ${message}`)
 
-    this.store?.getValue().client?.publish(topic, data)
+    this.store?.getValue().client?.publish(topic, message)
   }
 }
