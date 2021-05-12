@@ -1,6 +1,8 @@
 import Modal from "../../../components/Modal"
-import { AC_MODE } from "../../constants/constants"
+import { AC_MODE } from "../../utils/constants"
 import { acModeFormatter } from "./AcMode"
+import { useAcMode } from "../../../modules/AcMode"
+import { useShorePowerInput } from "../../../modules/ShorePowerInput/ShorePowerInput.provider"
 
 type AcModeModalProps = {
   mode: number
@@ -10,6 +12,9 @@ type AcModeModalProps = {
   onLimitInput: Function
 }
 const AcModeModal = (props: AcModeModalProps) => {
+  const { shorePowerInput } = useShorePowerInput()
+  const { updateMode, updateLimit } = useAcMode(shorePowerInput)
+
   return (
     <Modal title={"AC Mode"} onClose={props.onClose}>
       <div className="ac_mode_modal indicator-main--small">
@@ -19,25 +24,35 @@ const AcModeModal = (props: AcModeModalProps) => {
             <button
               key={mode}
               className={"ac_mode_modal__button" + (props.mode === mode ? " success" : "")}
-              onClick={() => props.onModeInput(mode)}
+              onClick={() => {
+                updateMode(mode)
+                props.onModeInput(mode)
+              }}
             >
               {acModeFormatter(mode)}
             </button>
           ))}
         </div>
 
-        <div className={"name"}>Select shore input limit</div>
-        <div className={"ac_mode_modal__group"}>
-          {Object.values(AC_MODE.LIMITS).map((limit) => (
-            <button
-              key={limit}
-              className={"ac_mode_modal__button" + (props.inputLimit === limit ? " success" : "")}
-              onClick={() => props.onLimitInput(limit)}
-            >
-              {limit + "A"}
-            </button>
-          ))}
-        </div>
+        {updateLimit && (
+          <>
+            <div className={"name"}>Select shore input limit</div>
+            <div className={"ac_mode_modal__group"}>
+              {Object.values(AC_MODE.LIMITS).map((limit) => (
+                <button
+                  key={limit}
+                  className={"ac_mode_modal__button" + (props.inputLimit === limit ? " success" : "")}
+                  onClick={() => {
+                    updateLimit(limit)
+                    props.onLimitInput(limit)
+                  }}
+                >
+                  {limit + "A"}
+                </button>
+              ))}
+            </div>
+          </>
+        )}
       </div>
     </Modal>
   )
