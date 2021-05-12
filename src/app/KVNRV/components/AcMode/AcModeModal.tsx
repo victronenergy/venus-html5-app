@@ -1,18 +1,16 @@
 import Modal from "../../../components/Modal"
 import { AC_MODE } from "../../utils/constants"
 import { acModeFormatter } from "./AcMode"
-import { useAcMode } from "../../../modules/AcMode"
 
 type AcModeModalProps = {
   mode: number
-  inputLimit: number
+  limit?: number
+  updateMode: Function
+  updateLimit?: Function
   onClose: Function
-  onModeInput: Function
-  onLimitInput: Function
 }
-export const AcModeModal = (props: AcModeModalProps) => {
-  const { updateMode, updateLimit } = useAcMode()
 
+export const AcModeModal = (props: AcModeModalProps) => {
   return (
     <Modal title={"AC Mode"} onClose={props.onClose}>
       <div className="ac_mode_modal indicator-main--small">
@@ -22,28 +20,22 @@ export const AcModeModal = (props: AcModeModalProps) => {
             <button
               key={mode}
               className={"ac_mode_modal__button" + (props.mode === mode ? " success" : "")}
-              onClick={() => {
-                updateMode(mode)
-                props.onModeInput(mode)
-              }}
+              onClick={() => props.updateMode(mode)}
             >
               {acModeFormatter(mode)}
             </button>
           ))}
         </div>
 
-        {updateLimit && (
+        {props.updateLimit && (
           <>
             <div className={"name"}>Select shore input limit</div>
             <div className={"ac_mode_modal__group"}>
               {Object.values(AC_MODE.LIMITS).map((limit) => (
                 <button
                   key={limit}
-                  className={"ac_mode_modal__button" + (props.inputLimit === limit ? " success" : "")}
-                  onClick={() => {
-                    updateLimit(limit)
-                    props.onLimitInput(limit)
-                  }}
+                  className={"ac_mode_modal__button" + (props.limit === limit ? " success" : "")}
+                  onClick={() => props.updateLimit!(limit)}
                 >
                   {limit + "A"}
                 </button>
@@ -55,5 +47,3 @@ export const AcModeModal = (props: AcModeModalProps) => {
     </Modal>
   )
 }
-
-export default AcModeModal
