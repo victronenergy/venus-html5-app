@@ -7,6 +7,7 @@ import { AcModeModal } from "./AcModeModal"
 
 import "./AcMode.scss"
 import { useAcMode } from "../../../modules/AcMode"
+import { CommonProps } from "../Views/Metrics"
 
 export const acModeFormatter = (value: number) => {
   switch (value) {
@@ -23,7 +24,7 @@ export const acModeFormatter = (value: number) => {
   }
 }
 
-export const AcMode = () => {
+export const AcMode = (props: CommonProps) => {
   const { mode, limit, updateMode, updateLimit } = useAcMode()
 
   const [modalOpen, setModalOpen] = useState(false)

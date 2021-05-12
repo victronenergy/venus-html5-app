@@ -6,18 +6,15 @@ import { NotAvailable } from "../NotAvailable"
 import NumericValue from "../../../components/NumericValue"
 import WaterTankTop from "../../images/WaterTankTop.svg"
 
-import { Footer } from "../../../components/Card/Card"
-import { STATUS_LEVELS, STATUS_LEVELS_MSG } from "../Views/Metrics"
+import { CommonProps } from "../Views/Metrics"
 import "./FreshWater.scss"
+import { sendUpdate } from "../../utils/helpers"
+import { FRESH_WATER_CONF } from "../../utils/constants"
 
-export const FreshWater = () => {
+export const FreshWater = (props: CommonProps) => {
   const { fresh_water } = useWater()
 
-  const footer: Footer = {
-    status: STATUS_LEVELS.WARNING,
-    property: "Status",
-    message: STATUS_LEVELS_MSG[STATUS_LEVELS.WARNING],
-  }
+  const footer = sendUpdate(0, FRESH_WATER_CONF, "Fresh Water", props.addStatusUpdate, props.removeStatusUpdate)
 
   return (
     <div className="">

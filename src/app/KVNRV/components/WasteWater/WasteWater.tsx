@@ -2,33 +2,25 @@ import React from "react"
 import { Card, SIZE_SMALL } from "../../../components/Card"
 
 import { NotAvailable } from "../NotAvailable"
-import { CommonProps, STATUS_LEVELS, STATUS_LEVELS_MSG } from "../Views/Metrics"
-import { Footer } from "../../../components/Card/Card"
+import { CommonProps } from "../Views/Metrics"
 import NumericValue from "../../../components/NumericValue"
 import { useWater } from "../../../modules"
 import ProgressIndicator from "../ProgressIndicator"
 import { WASTE_WATER_CONF } from "../../utils/constants"
 
 import "./WasteWater.scss"
+import { sendUpdate } from "../../utils/helpers"
 
 export const WasteWater = (props: CommonProps) => {
   const { waste_water } = useWater()
 
-  const footer: Footer = {
-    status: STATUS_LEVELS.SUCCESS,
-    property: "Status",
-    message: STATUS_LEVELS_MSG[STATUS_LEVELS.SUCCESS],
-  }
-
-  let level = ""
-  if (waste_water) {
-    level =
-      waste_water.level < WASTE_WATER_CONF.THRESHOLDS[0]
-        ? STATUS_LEVELS.SUCCESS
-        : waste_water.level < WASTE_WATER_CONF.THRESHOLDS[0] + WASTE_WATER_CONF.THRESHOLDS[1]
-        ? STATUS_LEVELS.WARNING
-        : STATUS_LEVELS.ALARM
-  }
+  const footer = sendUpdate(
+    waste_water?.level ?? 0,
+    WASTE_WATER_CONF,
+    "Waste Water",
+    props.addStatusUpdate,
+    props.removeStatusUpdate
+  )
 
   return (
     <div className="">
@@ -43,7 +35,7 @@ export const WasteWater = (props: CommonProps) => {
                 </span>
               </div>
 
-              <ProgressIndicator percent={waste_water.level} level={level} />
+              <ProgressIndicator percent={waste_water.level} level={footer.status} />
             </div>
           ) : (
             <NotAvailable />

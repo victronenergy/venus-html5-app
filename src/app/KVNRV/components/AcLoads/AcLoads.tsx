@@ -14,25 +14,15 @@ export const AcLoads = React.memo((props: CommonProps) => {
   if (!(current && voltage && power && frequency)) {
     return <NotAvailable />
   }
+  const normalizedPower = normalizePower(power[0] ?? 0, AC_CONF.MAX)
 
-  sendUpdate(
-    normalizePower(power[0] ?? 0, AC_CONF.MAX),
-    AC_CONF,
-    "AC Loads",
-    props.addStatusUpdate,
-    props.removeStatusUpdate
-  )
+  sendUpdate(normalizedPower, AC_CONF, "AC Loads", props.addStatusUpdate, props.removeStatusUpdate)
 
   return (
     <div className="">
       <Card title={"AC Loads"} size={SIZE_SMALL}>
         <div className="gauge">
-          <DonutIndicator
-            value={power[0] ?? 0}
-            percent={normalizePower(power[0] ?? 0, AC_CONF.MAX)}
-            parts={AC_CONF.THRESHOLDS}
-            unit={"W"}
-          />
+          <DonutIndicator value={power[0] ?? 0} percent={normalizedPower} parts={AC_CONF.THRESHOLDS} unit={"W"} />
 
           <div className={"info-bar"}>
             <div className={"info-bar__cell"}>
