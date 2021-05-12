@@ -52,3 +52,5 @@ export const Status = (props: StatusProps) => {
     </div>
   )
 }
+
+export default Status

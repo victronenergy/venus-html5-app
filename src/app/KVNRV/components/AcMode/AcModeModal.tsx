@@ -11,7 +11,7 @@ type AcModeModalProps = {
   onModeInput: Function
   onLimitInput: Function
 }
-const AcModeModal = (props: AcModeModalProps) => {
+export const AcModeModal = (props: AcModeModalProps) => {
   const { shorePowerInput } = useShorePowerInput()
   const { updateMode, updateLimit } = useAcMode(shorePowerInput)
 

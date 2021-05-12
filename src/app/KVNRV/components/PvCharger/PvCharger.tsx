@@ -7,7 +7,7 @@ import { Card, SIZE_SMALL } from "../../../components/Card"
 import { CommonProps } from "../Views/Metrics"
 import NumericValue from "../../../components/NumericValue"
 
-const PvCharger = (props: CommonProps) => {
+export const PvCharger = React.memo((props: CommonProps) => {
   const { current, power } = usePvCharger()
 
   let normalized_power = (power || 0) / PV_CONF.MAX
@@ -28,6 +28,6 @@ const PvCharger = (props: CommonProps) => {
       </Card>
     </div>
   )
-}
+})
 
-export default React.memo(PvCharger)
+export default PvCharger

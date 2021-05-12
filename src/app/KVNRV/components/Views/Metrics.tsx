@@ -37,7 +37,7 @@ export interface CommonProps {
   removeStatusUpdate: Function
 }
 
-export default class Metrics extends Component<{}, MetricsState> {
+export class Metrics extends Component<{}, MetricsState> {
   constructor(props: {}) {
     super(props)
 
@@ -113,3 +113,5 @@ export default class Metrics extends Component<{}, MetricsState> {
     )
   }
 }
+
+export default Metrics

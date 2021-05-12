@@ -6,7 +6,7 @@ type ProgressIndicatorProps = {
   level: string
 }
 
-const ProgressIndicator = (props: ProgressIndicatorProps) => {
+export const ProgressIndicator = (props: ProgressIndicatorProps) => {
   const styles = { width: props.percent * 100 + "%" }
 
   return (

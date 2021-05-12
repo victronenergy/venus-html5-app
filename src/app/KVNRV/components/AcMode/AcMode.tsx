@@ -29,7 +29,7 @@ type AcModeState = {
   modalOpen: boolean
 }
 
-class AcMode extends React.Component<CommonProps, AcModeState> {
+export class AcMode extends React.Component<CommonProps, AcModeState> {
   constructor(props: CommonProps) {
     super(props)
 
