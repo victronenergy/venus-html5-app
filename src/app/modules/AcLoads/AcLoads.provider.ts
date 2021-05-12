@@ -1,20 +1,17 @@
 import { mqttQuery, PortalId, Topics } from "../Mqtt"
 import { useTopicsState, useTopicSubscriptions, useTopicsWithPortalIdAndInstanceId } from "../Mqtt/Mqtt.provider"
-import { vebusQuery } from "../Vebus/Vebus.query"
-import { InstanceId } from "../Vebus/Vebus.store"
-import { useVebus } from "../Vebus/Vebus.provider"
+import { vebusQuery, InstanceId, useVebus } from "../Vebus"
 
 export interface AcLoadsState {
   phases: number
+  frequency: Array<number>
   current: Array<number>
   voltage: Array<number>
   power: Array<number>
-  currentSum: number
-  voltageSum: number
-  powerSum: number
 }
 
 export interface AcLoadsTopics extends Topics {
+  frequency?: Array<string>
   power?: Array<string>
   voltage?: Array<string>
   current?: Array<string>
@@ -24,6 +21,11 @@ export interface AcLoadsTopics extends Topics {
 export function useAcLoads(): AcLoadsState {
   const getTopics = (portalId: PortalId, instanceId: InstanceId) => ({
     phases: `N/${portalId}/system/0/Ac/Consumption/NumberOfPhases`,
+    frequency: [
+      `N/${portalId}/vebus/${instanceId}/Ac/Out/L1/F`,
+      `N/${portalId}/vebus/${instanceId}/Ac/Out/L2/F`,
+      `N/${portalId}/vebus/${instanceId}/Ac/Out/L3/F`,
+    ],
     current: [
       `N/${portalId}/vebus/${instanceId}/Ac/Out/L1/I`,
       `N/${portalId}/vebus/${instanceId}/Ac/Out/L2/I`,
@@ -49,11 +51,7 @@ export function useAcLoads(): AcLoadsState {
   )
 
   useTopicSubscriptions(topics$)
-  const { current, voltage, power, phases } = useTopicsState<AcLoadsState>(topics$)
+  const { current, voltage, power, frequency, phases } = useTopicsState<AcLoadsState>(topics$)
 
-  const currentSum = (current || []).reduce((a, b) => a + b, 0)
-  const voltageSum = (voltage || []).reduce((a, b) => a + b, 0)
-  const powerSum = (power || []).reduce((a, b) => a + b, 0)
-
-  return { current, voltage, power, phases, currentSum, voltageSum, powerSum }
+  return { current, voltage, power, frequency, phases }
 }
