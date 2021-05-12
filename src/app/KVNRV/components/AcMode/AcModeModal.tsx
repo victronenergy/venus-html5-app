@@ -2,7 +2,6 @@ import Modal from "../../../components/Modal"
 import { AC_MODE } from "../../utils/constants"
 import { acModeFormatter } from "./AcMode"
 import { useAcMode } from "../../../modules/AcMode"
-import { useShorePowerInput } from "../../../modules/ShorePowerInput/ShorePowerInput.provider"
 
 type AcModeModalProps = {
   mode: number
@@ -12,8 +11,7 @@ type AcModeModalProps = {
   onLimitInput: Function
 }
 const AcModeModal = (props: AcModeModalProps) => {
-  const { shorePowerInput } = useShorePowerInput()
-  const { updateMode, updateLimit } = useAcMode(shorePowerInput)
+  const { updateMode, updateLimit } = useAcMode()
 
   return (
     <Modal title={"AC Mode"} onClose={props.onClose}>

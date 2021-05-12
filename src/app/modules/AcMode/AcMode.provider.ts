@@ -1,8 +1,8 @@
 import { mqttQuery, PortalId, Topics } from "../Mqtt"
 import { useMqtt, useTopicsWithParameters } from "../Mqtt/Mqtt.provider"
+import {shorePowerInputQuery, useShorePowerInput} from '../ShorePowerInput'
 import { vebusQuery, InstanceId } from "../Vebus"
 import { useObservableState } from "observable-hooks"
-import { of } from "rxjs"
 
 export interface AcModeProvider {
   updateMode: (mode: number) => void
@@ -14,7 +14,7 @@ export interface AcModeTopics extends Topics {
   limit?: string
 }
 
-export function useAcMode(shorePowerInput?: number): AcModeProvider {
+export function useAcMode(): AcModeProvider {
   const getWriteTopics = (portalId: PortalId, deviceInstanceId: InstanceId, shorePowerInput?: number) => {
     let res = {
       mode: `W/${portalId}/vebus/${deviceInstanceId}/Mode`,
@@ -28,11 +28,12 @@ export function useAcMode(shorePowerInput?: number): AcModeProvider {
     return res
   }
 
+  useShorePowerInput()
   const writeTopics$ = useTopicsWithParameters(
     getWriteTopics,
     mqttQuery.portalId$,
     vebusQuery.instanceId$,
-    of(shorePowerInput)
+    shorePowerInputQuery.inputId$
   )
   const writeTopics = useObservableState(writeTopics$)
 
