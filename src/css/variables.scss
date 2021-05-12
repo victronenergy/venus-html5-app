@@ -38,3 +38,25 @@ $header-bg-color: var(--header-bg-color);
 $header-button-color: var(--header-button-color);
 $main-bg-color: var(--main-bg-color);
 $text-color-main: var(--text-color-main);
+
+
+// card related variables
+$card-bg-color: var(--card-bg-color);
+$card-shadow-color: var(--card-shadow-color);
+$color-green: var(--color-green);
+$color-yellow: var(--color-yellow);
+$color-red: var(--color-red);
+
+$card-margin: 0.5rem;
+
+$card-height-small: 11rem;
+$card-height-big: $card-height-small;
+
+$card-width-small: 11rem;
+$card-width-big: ($card-width-small * 2) + ($card-margin * 2);
+
+// donut indicator variables
+$donut-size-small: $card-width-small / 1.7;
+$donut-width-big: $donut-size-small;
+$donut-height-big: $donut-width-big - $card-width-small / 6;
+$donut-offset: 0.24rem;

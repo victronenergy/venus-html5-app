@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react"
 import { Chart } from "chart.js"
 import "./DonutIndicator.scss"
-import { formatNumber } from "../../../components/NumericValue"
+import { formatNumber } from "../NumericValue"
 
 const defaultOptions = {
   maintainAspectRatio: false,

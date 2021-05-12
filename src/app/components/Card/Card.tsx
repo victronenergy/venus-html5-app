@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react"
 
-import { STATUS_LEVELS_MSG } from "../Views/Metrics"
+import { STATUS_LEVELS_MSG } from "../../KVNRV/components/Views/Metrics"
 import "./Card.scss"
 
 export type Footer = {

@@ -1,6 +1,6 @@
 import "./Modal.scss"
 import { FunctionComponent } from "react"
-import { Card, SIZE_BIG, ICON_CLOSE } from "../../KVNRV/components/Card"
+import { Card, SIZE_BIG, ICON_CLOSE } from "../Card"
 
 type ModalProps = {
   title: string
