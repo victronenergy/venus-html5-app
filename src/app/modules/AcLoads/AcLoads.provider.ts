@@ -9,6 +9,9 @@ export interface AcLoadsState {
   current: Array<number>
   voltage: Array<number>
   power: Array<number>
+  currentSum: number
+  voltageSum: number
+  powerSum: number
 }
 
 export interface AcLoadsTopics extends Topics {
@@ -46,7 +49,11 @@ export function useAcLoads(): AcLoadsState {
   )
 
   useTopicSubscriptions(topics$)
-  let { current, voltage, power, phases } = useTopicsState<AcLoadsState>(topics$)
+  const { current, voltage, power, phases } = useTopicsState<AcLoadsState>(topics$)
 
-  return { current, voltage, power, phases }
+  const currentSum = (current || []).reduce((a, b) => a + b, 0)
+  const voltageSum = (voltage || []).reduce((a, b) => a + b, 0)
+  const powerSum = (power || []).reduce((a, b) => a + b, 0)
+
+  return { current, voltage, power, phases, currentSum, voltageSum, powerSum }
 }
