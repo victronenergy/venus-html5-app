@@ -10,18 +10,6 @@ import AcMode from "../AcMode"
 import WasteWater from "../WasteWater"
 import BlackWater from "../BlackWater"
 
-export const STATUS_LEVELS = {
-  SUCCESS: "success",
-  WARNING: "warning",
-  ALARM: "alarm",
-}
-
-export const STATUS_LEVELS_MSG = {
-  [STATUS_LEVELS.SUCCESS]: "Optimal",
-  [STATUS_LEVELS.WARNING]: "Warning",
-  [STATUS_LEVELS.ALARM]: "Critical",
-}
-
 export type StatusUpdate = {
   part: string
   message: string

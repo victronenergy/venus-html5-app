@@ -5,8 +5,9 @@ import { Footer } from "../../../components/Card/Card"
 import IconWarning from "../../images/IconWarning.svg"
 import IconAlarm from "../../images/IconWarning.svg"
 import IconClose from "../../../images/IconClose-Dark.svg"
-import { STATUS_LEVELS, STATUS_LEVELS_MSG, StatusUpdate } from "../Views/Metrics"
 import "./Status.scss"
+import { StatusUpdate } from "../Views/Metrics"
+import { STATUS_LEVELS, STATUS_LEVELS_MSG } from "../../utils/constants"
 
 type StatusProps = {
   status_updates: Array<StatusUpdate>
