@@ -45,10 +45,10 @@ function getClassname(idx: number, batteryLevelBars: number) {
 export const Batteries = (props: CommonProps) => {
   const { batteries } = useBattery()
 
-  if (batteries && batteries[0] && batteries[0].soc && batteries[0].state) {
+  if (batteries && batteries[0]) {
     const battery = batteries[0]
-    const batteryStateLabel = batteryStateFormatter(battery.state!)
-    const batteryLevelBars = Math.ceil(battery.soc! / (100 / CELL_NUMBER))
+    const batteryStateLabel = batteryStateFormatter(battery.state)
+    const batteryLevelBars = Math.ceil(battery.soc / (100 / CELL_NUMBER))
     return (
       <div className="">
         <Card title={"Battery"} size={SIZE_BIG}>
@@ -65,12 +65,12 @@ export const Batteries = (props: CommonProps) => {
               <span>
                 <div className="indicator">
                   <span className="name">Power</span>
-                  <NumericValue value={battery.power} unit="V" defaultValue={"--"} precision={1} />
+                  <NumericValue value={battery.power} unit="V" defaultValue={"--"} precision={0} />
                 </div>
 
                 <div className="indicator">
                   <span className="name">Current</span>
-                  <NumericValue value={battery.current} unit="A" defaultValue={"--"} precision={1} />
+                  <NumericValue value={battery.current} unit="A" defaultValue={"--"} precision={0} />
                 </div>
               </span>
             </div>
