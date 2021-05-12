@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import HidingContainer from "../HidingContainer"
-import { Battery, useBattery } from "../../../modules/Battery/Battery.provider"
+import { Battery, useBattery } from "../../../modules"
 
 import BatteryIcon from "../../images/icons/battery.svg"
 import classnames from "classnames"
@@ -24,7 +24,7 @@ const Paginator = ({ setPage, currentPage, pages }: PaginatorProps) => {
   return (
     <div className="battery__paginator">
       <SelectorButton alwaysUnlocked={true} disabled={currentPage < 1} onClick={() => setPage(currentPage - 1)}>
-        <img src={LIcon} className="battery__paginator-button" />
+        <img src={LIcon} className="battery__paginator-button" alt={"Pagination button left"} />
       </SelectorButton>
       <span className="battery__paginator-page">{currentPage + 1}</span>
       <SelectorButton
@@ -32,7 +32,7 @@ const Paginator = ({ setPage, currentPage, pages }: PaginatorProps) => {
         disabled={currentPage + 1 >= pages}
         onClick={() => setPage(currentPage + 1)}
       >
-        <img src={RIcon} className="battery__paginator-button" />
+        <img src={RIcon} className="battery__paginator-button" alt={"Pagination button right"} />
       </SelectorButton>
     </div>
   )

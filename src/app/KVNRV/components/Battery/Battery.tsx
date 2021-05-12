@@ -76,7 +76,7 @@ export const Batteries = (props: CommonProps) => {
             </div>
 
             <div className="battery__charge">
-              <div className="battery__charge__top"></div>
+              <div className="battery__charge__top" />
               <div className="battery__charge__body">
                 {Array.from(Array(5).keys())
                   .reverse()
