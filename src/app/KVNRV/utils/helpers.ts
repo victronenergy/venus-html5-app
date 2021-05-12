@@ -12,3 +12,7 @@ export const sendUpdate = (percent: number, conf: Conf, part: string, addFunc: F
     removeFunc(part)
   }
 }
+
+export const normalizePower = (power: number, max: number) => {
+  return Math.max(Math.min(power / max, 1), 0)
+}

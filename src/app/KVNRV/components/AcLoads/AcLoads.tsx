@@ -3,7 +3,7 @@ import React from "react"
 import { CommonProps } from "../Views/Metrics"
 import { useAcLoads } from "../../../modules"
 import { Card, SIZE_SMALL } from "../../../components/Card"
-import { sendUpdate } from "../../utils/helpers"
+import { normalizePower, sendUpdate } from "../../utils/helpers"
 import { AC_CONF } from "../../utils/constants"
 import NumericValue from "../../../components/NumericValue"
 import DonutIndicator from "../../../components/DonutIndicator"
@@ -15,16 +15,25 @@ export const AcLoads = React.memo((props: CommonProps) => {
     return <NotAvailable />
   }
 
-  let normalized_power = (power[0] ?? 0) / AC_CONF.MAX
-  normalized_power = Math.max(Math.min(normalized_power, 1), 0)
-
-  sendUpdate(normalized_power, AC_CONF, "AC Loads", props.addStatusUpdate, props.removeStatusUpdate)
+  sendUpdate(
+    normalizePower(power[0] ?? 0, AC_CONF.MAX),
+    AC_CONF,
+    "AC Loads",
+    props.addStatusUpdate,
+    props.removeStatusUpdate
+  )
 
   return (
     <div className="">
       <Card title={"AC Loads"} size={SIZE_SMALL}>
         <div className="gauge">
-          <DonutIndicator value={power[0] ?? 0} percent={normalized_power} parts={AC_CONF.THRESHOLDS} unit={"W"} />
+          <DonutIndicator
+            value={power[0] ?? 0}
+            percent={normalizePower(power[0] ?? 0, AC_CONF.MAX)}
+            parts={AC_CONF.THRESHOLDS}
+            unit={"W"}
+          />
+
           <div className={"info-bar"}>
             <div className={"info-bar__cell"}>
               <NumericValue value={voltage[0] ?? 0} unit={"V"} precision={0} />
