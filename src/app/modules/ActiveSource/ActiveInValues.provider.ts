@@ -4,6 +4,7 @@ import { useTopicsState, useTopicSubscriptions, useTopicsWithPortalIdAndInstance
 
 export interface ActiveInValuesState {
   current: Array<number>
+  frequency: Array<number>
   voltage: Array<number>
   power: Array<number>
 }
@@ -16,6 +17,11 @@ export interface ActiveInValuesTopics extends Topics {
 
 export function useActiveInValues(): ActiveInValuesState {
   const getTopics = (portalId: PortalId, instanceId: InstanceId) => ({
+    frequency: [
+      `N/${portalId}/vebus/${instanceId}/Ac/ActiveIn/L1/F`,
+      `N/${portalId}/vebus/${instanceId}/Ac/ActiveIn/L2/F`,
+      `N/${portalId}/vebus/${instanceId}/Ac/ActiveIn/L3/F`,
+    ],
     current: [
       `N/${portalId}/vebus/${instanceId}/Ac/ActiveIn/L1/I`,
       `N/${portalId}/vebus/${instanceId}/Ac/ActiveIn/L2/I`,
