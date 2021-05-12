@@ -1,9 +1,9 @@
 import React from "react"
 
-import { PV_CONF } from "../../constants/constants"
-import DonutIndicator from "../DonutIndicator"
-import { usePvCharger } from "../../../modules/PvCharger/PvCharger.provider"
-import { Card, SIZE_SMALL } from "../Card"
+import { PV_CONF } from "../../utils/constants"
+import DonutIndicator from "../../../components/DonutIndicator"
+import { usePvCharger } from "../../../modules"
+import { Card, SIZE_SMALL } from "../../../components/Card"
 import { NotAvailable } from "../NotAvailable"
 import { CommonProps } from "../Views/Metrics"
 import NumericValue from "../../../components/NumericValue"

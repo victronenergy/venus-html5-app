@@ -1,13 +1,13 @@
 import React, { Component } from "react"
 
-import { Card, SIZE_BIG, SIZE_LONG } from "../Card"
-import { useWater, WaterType } from "../../../modules/Water/Water.provider"
+import { Card, SIZE_BIG, SIZE_LONG } from "../../../components/Card"
+import { useWater, WaterType } from "../../../modules"
 import { NotAvailable } from "../NotAvailable"
 import NumericValue from "../../../components/NumericValue"
 import WaterTankTop from "../../images/WaterTankTop.svg"
 
-import { Footer } from "../Card/Card"
-import { STATUS_LEVELS } from "../Views/Metrics"
+import { Footer } from "../../../components/Card/Card"
+import { STATUS_LEVELS, STATUS_LEVELS_MSG } from "../Views/Metrics"
 import "./FreshWater.scss"
 
 type FreshWaterProps = {
@@ -35,7 +35,11 @@ export class FreshWater extends Component<FreshWaterProps, FreshWaterState> {
 
   render() {
     const { fresh_water } = this.props
-    const footer: Footer = { status: STATUS_LEVELS.WARNING, property: "Status" }
+    const footer: Footer = {
+      status: STATUS_LEVELS.WARNING,
+      property: "Status",
+      message: STATUS_LEVELS_MSG[STATUS_LEVELS.WARNING],
+    }
 
     return (
       <div className="">

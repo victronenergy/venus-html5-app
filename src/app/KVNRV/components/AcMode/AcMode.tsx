@@ -1,8 +1,8 @@
 import React from "react"
 
-import { Card, SIZE_BIG, ICON_SETTINGS } from "../Card"
+import { Card, SIZE_BIG, ICON_SETTINGS } from "../../../components/Card"
 import { CommonProps } from "../Views/Metrics"
-import { AC_MODE } from "../../constants/constants"
+import { AC_MODE } from "../../utils/constants"
 import NumericValue from "../../../components/NumericValue"
 import AcModeModal from "./AcModeModal"
 

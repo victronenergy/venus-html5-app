@@ -1,11 +1,11 @@
 import React, { FunctionComponent } from "react"
 
-import { STATUS_LEVELS_MSG } from "../../KVNRV/components/Views/Metrics"
 import "./Card.scss"
 
 export type Footer = {
   status: string
   property: string
+  message: string
 }
 
 type CardProps = {
@@ -38,7 +38,7 @@ export const Card: FunctionComponent<CardProps> = ({ title, size, icon, onIconCl
       {footer && (
         <div className={"card__footer " + footer.status}>
           <span>{footer.property}: </span>
-          <span>{STATUS_LEVELS_MSG[footer.status]}</span>
+          <span>{footer.message}</span>
         </div>
       )}
     </div>

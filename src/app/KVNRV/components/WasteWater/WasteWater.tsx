@@ -1,20 +1,24 @@
 import React from "react"
-import { Card, SIZE_SMALL } from "../Card"
+import { Card, SIZE_SMALL } from "../../../components/Card"
 
 import { NotAvailable } from "../NotAvailable"
-import { CommonProps, STATUS_LEVELS } from "../Views/Metrics"
-import { Footer } from "../Card/Card"
+import { CommonProps, STATUS_LEVELS, STATUS_LEVELS_MSG } from "../Views/Metrics"
+import { Footer } from "../../../components/Card/Card"
 import NumericValue from "../../../components/NumericValue"
-import { useWater } from "../../../modules/Water/Water.provider"
+import { useWater } from "../../../modules"
 import ProgressIndicator from "../ProgressIndicator"
-import { WASTE_WATER_CONF } from "../../constants/constants"
+import { WASTE_WATER_CONF } from "../../utils/constants"
 
 import "./WasteWater.scss"
 
 export const WasteWater = (props: CommonProps) => {
   const { waste_water } = useWater()
 
-  const footer: Footer = { status: STATUS_LEVELS.SUCCESS, property: "Status" }
+  const footer: Footer = {
+    status: STATUS_LEVELS.SUCCESS,
+    property: "Status",
+    message: STATUS_LEVELS_MSG[STATUS_LEVELS.SUCCESS],
+  }
 
   let level = ""
   if (waste_water) {

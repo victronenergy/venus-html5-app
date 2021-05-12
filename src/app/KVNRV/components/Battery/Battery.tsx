@@ -1,8 +1,8 @@
 import React from "react"
-import { Card, SIZE_BIG } from "../Card"
+import { Card, SIZE_BIG } from "../../../components/Card"
 
 import { BATTERY_STATE } from "../../../utils/constants"
-import { useBattery } from "../../../modules/Battery/Battery.provider"
+import { useBattery } from "../../../modules"
 import NumericValue from "../../../components/NumericValue"
 import { CommonProps } from "../Views/Metrics"
 import { NotAvailable } from "../NotAvailable"

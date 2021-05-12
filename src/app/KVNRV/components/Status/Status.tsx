@@ -1,11 +1,11 @@
 import React from "react"
 
-import { Card, SIZE_BIG, SIZE_LONG } from "../Card"
-import { Footer } from "../Card/Card"
+import { Card, SIZE_BIG, SIZE_LONG } from "../../../components/Card"
+import { Footer } from "../../../components/Card/Card"
 import IconWarning from "../../images/IconWarning.svg"
 import IconAlarm from "../../images/IconWarning.svg"
 import IconClose from "../../../images/IconClose-Dark.svg"
-import { STATUS_LEVELS, StatusUpdate } from "../Views/Metrics"
+import { STATUS_LEVELS, STATUS_LEVELS_MSG, StatusUpdate } from "../Views/Metrics"
 import "./Status.scss"
 
 type StatusProps = {
@@ -13,7 +13,11 @@ type StatusProps = {
 }
 
 export const Status = (props: StatusProps) => {
-  const footer: Footer = { status: STATUS_LEVELS.SUCCESS, property: "Connection" }
+  const footer: Footer = {
+    status: STATUS_LEVELS.SUCCESS,
+    property: "Connection",
+    message: STATUS_LEVELS_MSG[STATUS_LEVELS.SUCCESS],
+  }
 
   return (
     <div className="metrics__status">
