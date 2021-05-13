@@ -3,12 +3,10 @@ import Battery from "../Battery"
 import DcLoads from "../DcLoads"
 import PvCharger from "../PvCharger"
 import AcLoads from "../AcLoads"
-import FreshWater from "../FreshWater"
+import Tanks from "../Tanks"
 import { Status } from "../Status"
 import ShorePower from "../ShorePower"
 import AcMode from "../AcMode"
-import WasteWater from "../WasteWater"
-import BlackWater from "../BlackWater"
 
 export type StatusUpdate = {
   part: string
@@ -62,6 +60,7 @@ export class Metrics extends Component<{}, MetricsState> {
       addStatusUpdate: this.addStatusUpdate,
       removeStatusUpdate: this.removeStatusUpdate,
     }
+    console.log("Metrics@render")
 
     return (
       <div className="metrics-container">
@@ -87,14 +86,7 @@ export class Metrics extends Component<{}, MetricsState> {
               <AcMode {...commonProps} />
             </div>
 
-            <div className="col-span-4">
-              <FreshWater {...commonProps} />
-
-              <div className="row">
-                <WasteWater {...commonProps} />
-                <BlackWater {...commonProps} />
-              </div>
-            </div>
+            <Tanks {...commonProps} />
           </div>
         </div>
       </div>

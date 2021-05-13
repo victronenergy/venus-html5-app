@@ -22,6 +22,7 @@ export type Conf = {
   MAX: number
   THRESHOLDS: Array<number>
   MESSAGES: MessagesObj
+  DEVICE_ID?: number
 }
 
 export const DC_CONF: Conf = {
@@ -60,29 +61,34 @@ export const SHORE_POWER_CONF: Conf = {
   },
 }
 
-export const FRESH_WATER_CONF: Conf = {
-  MAX: 1,
-  THRESHOLDS: [0.7, 0.2, 0.1],
-  MESSAGES: {
-    [WARNING]: "not enough water",
-    [ALARM]: "you're gonna die of thirst",
-  },
-}
-export const BLACK_WATER_CONF: Conf = {
-  MAX: 1,
-  THRESHOLDS: [0.7, 0.2, 0.1],
-  MESSAGES: {
-    [WARNING]: "too much water",
-    [ALARM]: "way too much water",
-  },
-}
-export const WASTE_WATER_CONF: Conf = {
-  MAX: 1,
-  THRESHOLDS: [0.7, 0.2, 0.1],
-  MESSAGES: {
-    [WARNING]: "too much water",
-    [ALARM]: "way too much water",
-  },
+export const TANKS_CONF = {
+  FRESH_WATER: {
+    DEVICE_ID: 1,
+    MAX: 1,
+    THRESHOLDS: [0.6, 0.3, 0.1],
+    MESSAGES: {
+      [WARNING]: "not enough water",
+      [ALARM]: "you're gonna die of thirst",
+    },
+  } as Conf,
+  GRAY_WATER: {
+    DEVICE_ID: 2,
+    MAX: 1,
+    THRESHOLDS: [0.7, 0.2, 0.1],
+    MESSAGES: {
+      [WARNING]: "too much water",
+      [ALARM]: "way too much water",
+    },
+  } as Conf,
+  BLACK_WATER: {
+    DEVICE_ID: 5,
+    MAX: 1,
+    THRESHOLDS: [0.7, 0.2, 0.1],
+    MESSAGES: {
+      [WARNING]: "too much water",
+      [ALARM]: "way too much water",
+    },
+  } as Conf,
 }
 
 export const AC_MODE = {
