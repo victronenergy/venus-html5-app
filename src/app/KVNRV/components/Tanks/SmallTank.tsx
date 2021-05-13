@@ -9,11 +9,13 @@ import "./SmallTank.scss"
 import { sendUpdate } from "../../utils/helpers"
 import { TankProps } from "./Tanks"
 import { useTank } from "../../../modules/Tanks/Tank.provider"
+import { useStatus } from "../../../modules/Status/Status.provider"
 
-export const SmallTank = React.memo(({ tankId, conf, addStatusUpdate, removeStatusUpdate }: TankProps) => {
+export const SmallTank = React.memo(({ tankId, conf }: TankProps) => {
+  const { statusService } = useStatus()
   const tank = useTank(tankId)
-  console.log("SmallTank", tank)
-  const footer = tank ? sendUpdate(tank.level, conf, tank.customName, addStatusUpdate, removeStatusUpdate) : undefined
+  console.log("SmallTank", tank, tankId)
+  const footer = tank ? sendUpdate(tank.level / 100, conf, tank.customName, statusService) : undefined
 
   return (
     <div className="">
@@ -23,12 +25,12 @@ export const SmallTank = React.memo(({ tankId, conf, addStatusUpdate, removeStat
             <div className={"small-tank"}>
               <div className="indicator-main--small">
                 <span>
-                  <NumericValue value={tank.level * 100} unit="%" defaultValue={"--"} precision={0} />
+                  <NumericValue value={tank.level} unit="%" defaultValue={"--"} precision={0} />
                   <span className="name">{formatNumber({ value: tank.capacity * 1000, unit: "L" })}</span>
                 </span>
               </div>
 
-              <ProgressIndicator percent={tank.level} level={footer!.status} />
+              <ProgressIndicator percent={tank.level / 100} level={footer!.status} />
             </div>
           ) : (
             <NotAvailable />

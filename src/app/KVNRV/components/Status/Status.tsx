@@ -3,17 +3,16 @@ import React from "react"
 import { Card, SIZE_BIG, SIZE_LONG } from "../../../components/Card"
 import { Footer } from "../../../components/Card/Card"
 import IconWarning from "../../images/IconWarning.svg"
-import IconAlarm from "../../images/IconWarning.svg"
 import IconClose from "../../../images/IconClose-Dark.svg"
 import "./Status.scss"
-import { StatusUpdate } from "../Views/Metrics"
 import { STATUS_LEVELS, STATUS_LEVELS_MSG } from "../../utils/constants"
+import { useStatus } from "../../../modules/Status/Status.provider"
+import { StatusUpdate } from "../../../modules/Status/Status.store"
 
-type StatusProps = {
-  status_updates: Array<StatusUpdate>
-}
+export const Status = () => {
+  const { statuses } = useStatus()
+  console.log("Status@useStatus", statuses)
 
-export const Status = (props: StatusProps) => {
   const footer: Footer = {
     status: STATUS_LEVELS.SUCCESS,
     property: "Connection",
@@ -30,15 +29,12 @@ export const Status = (props: StatusProps) => {
         </div>
 
         <div className={"status-updates"}>
-          {props.status_updates &&
-            props.status_updates.map((update) => (
+          {statuses &&
+            statuses.map((update: StatusUpdate) => (
               <div className={"status-update row " + update.level} key={"status-update-" + update.part}>
                 <span className={"row align-items-center"}>
                   <div className={"status-update__icon"}>
-                    <img
-                      src={update.level === STATUS_LEVELS.WARNING ? IconWarning : IconAlarm}
-                      alt={"Status update icon"}
-                    />
+                    <img src={IconWarning} alt={"Status update icon"} />
                   </div>
 
                   <span>{update.part}: </span>

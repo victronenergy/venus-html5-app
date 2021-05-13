@@ -1,6 +1,5 @@
 import React from "react"
 
-import { CommonProps } from "../Views/Metrics"
 import { useAcLoads } from "../../../modules"
 import { Card, SIZE_SMALL } from "../../../components/Card"
 import { normalizePower, sendUpdate } from "../../utils/helpers"
@@ -8,15 +7,18 @@ import { AC_CONF } from "../../utils/constants"
 import NumericValue from "../../../components/NumericValue"
 import DonutIndicator from "../../../components/DonutIndicator"
 import { NotAvailable } from "../NotAvailable"
+import { useStatus } from "../../../modules/Status/Status.provider"
 
-export const AcLoads = React.memo((props: CommonProps) => {
+export const AcLoads = React.memo(() => {
+  const { statusService } = useStatus()
+
   let { current, voltage, power, frequency } = useAcLoads()
   if (!(current && voltage && power && frequency)) {
     return <NotAvailable />
   }
   const normalizedPower = normalizePower(power[0] ?? 0, AC_CONF.MAX)
 
-  sendUpdate(normalizedPower, AC_CONF, "AC Loads", props.addStatusUpdate, props.removeStatusUpdate)
+  sendUpdate(normalizedPower, AC_CONF, "AC Loads", statusService)
 
   return (
     <div className="">

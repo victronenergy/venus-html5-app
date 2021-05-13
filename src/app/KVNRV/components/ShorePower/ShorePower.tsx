@@ -1,7 +1,6 @@
 import React from "react"
 import { Card, SIZE_SMALL } from "../../../components/Card"
 
-import { CommonProps } from "../Views/Metrics"
 import "./ShorePower.scss"
 import DonutIndicator from "../../../components/DonutIndicator"
 import NumericValue from "../../../components/NumericValue"
@@ -9,15 +8,17 @@ import { useActiveInValues } from "../../../modules/ActiveSource/ActiveInValues.
 import { SHORE_POWER_CONF } from "../../utils/constants"
 import { normalizePower, sendUpdate } from "../../utils/helpers"
 import { NotAvailable } from "../NotAvailable"
+import { useStatus } from "../../../modules/Status/Status.provider"
 
-export const ShorePower = React.memo((props: CommonProps) => {
+export const ShorePower = React.memo(() => {
   const { current, frequency, voltage, power } = useActiveInValues()
+  const { statusService } = useStatus()
 
   if (!(current && voltage && power)) {
     return <NotAvailable />
   }
   const normalizedPower = normalizePower(power[0] ?? 0, SHORE_POWER_CONF.MAX)
-  sendUpdate(normalizedPower, SHORE_POWER_CONF, "DC Loads", props.addStatusUpdate, props.removeStatusUpdate)
+  sendUpdate(normalizedPower, SHORE_POWER_CONF, "DC Loads", statusService)
 
   return (
     <div className="">

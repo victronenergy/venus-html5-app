@@ -4,7 +4,6 @@ import { Card, SIZE_BIG } from "../../../components/Card"
 import { BATTERY_STATE } from "../../../utils/constants"
 import { useBattery } from "../../../modules"
 import NumericValue from "../../../components/NumericValue"
-import { CommonProps } from "../Views/Metrics"
 import { NotAvailable } from "../NotAvailable"
 
 import "./Battery.scss"
@@ -42,7 +41,7 @@ function getClassname(idx: number, batteryLevelBars: number) {
   return c
 }
 
-export const Batteries = (props: CommonProps) => {
+export const Batteries = () => {
   const { batteries } = useBattery()
 
   if (batteries && batteries[0]) {

@@ -8,85 +8,33 @@ import { Status } from "../Status"
 import ShorePower from "../ShorePower"
 import AcMode from "../AcMode"
 
-export type StatusUpdate = {
-  part: string
-  message: string
-  level: string
-}
-
-type MetricsState = {
-  status_updates: Array<StatusUpdate>
-}
-
-export interface CommonProps {
-  addStatusUpdate: Function
-  removeStatusUpdate: Function
-}
-
-export class Metrics extends Component<{}, MetricsState> {
-  constructor(props: {}) {
-    super(props)
-
-    this.state = {
-      status_updates: [],
-    }
-  }
-
-  isUpdatePresent(su_part: string) {
-    return this.state.status_updates.find((s) => s.part === su_part)
-  }
-
-  addStatusUpdate = (su: StatusUpdate) => {
-    if (!this.isUpdatePresent(su.part)) {
-      let sus = this.state.status_updates.slice()
-      sus.push(su)
-      this.setState({ status_updates: sus })
-    }
-  }
-
-  removeStatusUpdate = (su_part: string) => {
-    if (this.isUpdatePresent(su_part)) {
-      let sus = this.state.status_updates.slice()
-      sus = sus.splice(
-        sus.findIndex((s) => s.part === su_part),
-        1
-      )
-      this.setState({ status_updates: sus })
-    }
-  }
-
+export class Metrics extends Component<any, any> {
   render() {
-    const commonProps: CommonProps = {
-      addStatusUpdate: this.addStatusUpdate,
-      removeStatusUpdate: this.removeStatusUpdate,
-    }
-    console.log("Metrics@render")
-
     return (
       <div className="metrics-container">
         <div className="container">
           <div className={"row"}>
             <div className="col-span-4">
-              <Status status_updates={this.state.status_updates} />
+              <Status />
 
               <div className="row">
-                <ShorePower {...commonProps} />
-                <AcLoads {...commonProps} />
+                <ShorePower />
+                <AcLoads />
               </div>
             </div>
 
             <div className="col-span-4">
-              <Battery {...commonProps} />
+              <Battery />
 
               <div className="row">
-                <PvCharger {...commonProps} />
-                <DcLoads {...commonProps} />
+                <PvCharger />
+                <DcLoads />
               </div>
 
-              <AcMode {...commonProps} />
+              <AcMode />
             </div>
 
-            <Tanks {...commonProps} />
+            <Tanks />
           </div>
         </div>
       </div>

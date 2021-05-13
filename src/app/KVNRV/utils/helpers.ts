@@ -1,7 +1,8 @@
 import { Conf, MessagesObj, STATUS_LEVELS, STATUS_LEVELS_MSG } from "./constants"
 import { Footer } from "../../components/Card/Card"
+import { StatusService } from "../../modules/Status/Status.service"
 
-export const sendUpdate = (percent: number, conf: Conf, part: string, addFunc: Function, removeFunc: Function) => {
+export const sendUpdate = (percent: number, conf: Conf, part: string, statusService: StatusService) => {
   let level = STATUS_LEVELS.SUCCESS
   let footer: Footer = {
     message: STATUS_LEVELS_MSG[level],
@@ -12,17 +13,19 @@ export const sendUpdate = (percent: number, conf: Conf, part: string, addFunc: F
   if (percent > conf.THRESHOLDS[0]) {
     if (percent < conf.THRESHOLDS[0] + conf.THRESHOLDS[1]) {
       level = STATUS_LEVELS.WARNING
-      addFunc({ part, message: conf.MESSAGES[level as keyof MessagesObj] ?? "", level: level })
+      statusService.addStatus({ part: "My butt", message: "Nooo", level: "alarm" })
+
+      statusService.addStatus({ part, message: conf.MESSAGES[level as keyof MessagesObj] ?? "", level: level })
       footer.status = level
       footer.message = STATUS_LEVELS_MSG[level]
     } else {
       level = STATUS_LEVELS.ALARM
-      addFunc({ part, message: conf.MESSAGES[level as keyof MessagesObj], level: level })
+      statusService.addStatus({ part, message: conf.MESSAGES[level as keyof MessagesObj], level: level })
       footer.status = level
       footer.message = STATUS_LEVELS_MSG[level]
     }
   } else {
-    removeFunc(part)
+    statusService.removeStatus(part)
   }
 
   return footer

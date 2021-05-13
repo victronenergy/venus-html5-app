@@ -4,15 +4,16 @@ import { PV_CONF } from "../../utils/constants"
 import DonutIndicator from "../../../components/DonutIndicator"
 import { usePvCharger } from "../../../modules"
 import { Card, SIZE_SMALL } from "../../../components/Card"
-import { CommonProps } from "../Views/Metrics"
 import NumericValue from "../../../components/NumericValue"
 import { normalizePower, sendUpdate } from "../../utils/helpers"
+import { useStatus } from "../../../modules/Status/Status.provider"
 
-export const PvCharger = React.memo((props: CommonProps) => {
+export const PvCharger = React.memo(() => {
+  const { statusService } = useStatus()
   const { current, power } = usePvCharger()
 
   const normalizedPower = normalizePower(power ?? 0, PV_CONF.MAX)
-  sendUpdate(normalizedPower, PV_CONF, "DC Loads", props.addStatusUpdate, props.removeStatusUpdate)
+  sendUpdate(normalizedPower, PV_CONF, "DC Loads", statusService)
 
   return (
     <div className="">

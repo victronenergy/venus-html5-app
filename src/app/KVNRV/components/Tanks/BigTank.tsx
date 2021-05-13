@@ -9,14 +9,15 @@ import "./BigTank.scss"
 import { sendUpdate } from "../../utils/helpers"
 import { TankProps } from "./Tanks"
 import { useTank } from "../../../modules/Tanks/Tank.provider"
+import { useStatus } from "../../../modules/Status/Status.provider"
 
-export const BigTank = React.memo(({ tankId, conf, addStatusUpdate, removeStatusUpdate }: TankProps) => {
+export const BigTank = React.memo(({ tankId, conf }: TankProps) => {
   const tank = useTank(tankId)
-  console.log("sendUpdate", 100 - tank.level)
+  const { statusService } = useStatus()
 
-  const footer = tank
-    ? sendUpdate(100 - tank.level, conf, tank.customName, addStatusUpdate, removeStatusUpdate)
-    : undefined
+  console.log("BigTank", tank)
+
+  const footer = tank ? sendUpdate(1 - tank.level / 100, conf, tank.customName, statusService) : undefined
 
   return (
     <div className="">
