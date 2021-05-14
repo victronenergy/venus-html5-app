@@ -11,13 +11,19 @@ type PaginatorProps = {
 }
 
 export const Paginator = ({ pages, currentPage, setCurrentPage }: PaginatorProps) => {
+  const updatePage = (pageNumber: number) => {
+    if (pageNumber >= 0 && pageNumber < pages) {
+      setCurrentPage(pageNumber)
+    }
+  }
+
   return (
     <div className="paginator">
       <img
         src={LIcon}
         className="paginator__icon"
         alt={"Paginator icon left"}
-        onClick={() => setCurrentPage(currentPage - 1)}
+        onClick={() => updatePage(currentPage - 1)}
       />
 
       {Array.from(Array(pages).keys()).map((i) => (
@@ -28,7 +34,7 @@ export const Paginator = ({ pages, currentPage, setCurrentPage }: PaginatorProps
         src={RIcon}
         className="paginator__icon"
         alt={"Paginator icon right"}
-        onClick={() => setCurrentPage(currentPage + 1)}
+        onClick={() => updatePage(currentPage + 1)}
       />
     </div>
   )
