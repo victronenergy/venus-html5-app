@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { useTheme } from "../../../modules"
 import KVNRVLogo from "../../images/KVNRV-Logo.svg"
-import LockIcon from "../../images/LockIcon.svg"
 import RemoteIcon from "../../images/RemoteIcon.svg"
 
 import "./Header.scss"
@@ -45,12 +44,12 @@ export const Header = () => {
       </div>
 
       <div className={"header__buttons"}>
-        <button className={"header__buttons__lock"}>
-          <img src={LockIcon} className={"header__buttons__icon"} alt={"Lock icon"} />
-          <span className={"header__buttons__text"}>Lock changes</span>
+        <button className={"header__buttons__remote-console"}>
+          <img src={RemoteIcon} className={"header__buttons__icon"} alt={"Remote Console icon"} />
+          <span className={"header__buttons__text"}>Remote console</span>
         </button>
 
-        <button className={"header__buttons__remote"}>
+        <button className={"header__buttons__remote-connection"}>
           <img src={RemoteIcon} className={"header__buttons__icon"} alt={"Remote Connection icon"} />
           <span className={"header__buttons__text"}>Remote connection</span>
         </button>
