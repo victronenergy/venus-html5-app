@@ -1,7 +1,6 @@
 import { Store, StoreConfig } from "@datorama/akita"
 import { MqttClient } from "mqtt"
-import { MQTT_STORE_NAME, STATUS } from "."
-import { MqttMessages, PortalId } from "."
+import { MQTT_STORE_NAME, MqttMessages, PortalId, STATUS } from "."
 
 export interface MqttState {
   client: MqttClient | null

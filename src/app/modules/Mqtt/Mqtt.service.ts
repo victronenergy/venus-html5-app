@@ -1,8 +1,7 @@
 import * as mqtt from "mqtt"
-import { STATUS, Topics } from "."
+import { MqttState, MqttStore, STATUS, Topics } from "."
 import Logger from "../../utils/logger"
 import { getMessageJson } from "../../utils/util"
-import { MqttState, MqttStore } from "."
 
 export class MqttService {
   constructor(protected store: MqttStore) {}
@@ -65,7 +64,6 @@ export class MqttService {
   addMessage = (topic: string, message: { value: string | null }) => {
     this.store.update((state) => {
       return {
-        ...state,
         messages: {
           ...state.messages,
           [topic]: message.value ?? undefined,

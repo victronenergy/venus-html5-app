@@ -1,5 +1,5 @@
 import { Query } from "@datorama/akita"
-import { filter, map, pluck } from "rxjs/operators"
+import { distinctUntilChanged, filter, map, pluck } from "rxjs/operators"
 import { MqttMessage, STATUS, Topics } from "."
 import { MqttState, mqttStore, MqttStore } from "./Mqtt.store"
 
@@ -21,23 +21,40 @@ export class MqttQuery extends Query<MqttState> {
   messagesByTopic$ = (topic: string) => this.select((s) => s.messages).pipe(pluck(topic))
 
   messagesByTopics$ = (topics: Topics) => {
-    return this.select(({ messages }) => {
-      if (topics === undefined) {
-        return {}
-      }
-
-      const result: { [key: string]: MqttMessage | MqttMessage[] } = {}
-      Object.entries(topics).forEach(([label, topic]) => {
-        if (Array.isArray(topic)) {
-          result[label] = topic.map((t) => messages[t])
-        } else if (topic === undefined) {
-          result[label] = undefined
-        } else {
-          result[label] = messages[topic]
+    return this.select((s) => s.messages).pipe(
+      distinctUntilChanged((a, b) => {
+        return Object.values(topics)
+          .flat()
+          .every((topic) => topic === undefined || b[topic] === a[topic])
+      }),
+      map((messages) => {
+        if (topics === undefined) {
+          return {}
         }
-      })
-      return result
-    })
+
+        const result: { [key: string]: MqttMessage | MqttMessage[] } = {}
+        Object.entries(topics).forEach(([label, topic]) => {
+          if (Array.isArray(topic)) {
+            result[label] = topic.map((t) => messages[t])
+          } else if (topic === undefined) {
+            result[label] = undefined
+          } else {
+            result[label] = messages[topic]
+          }
+        })
+        return result
+      }),
+      filter(
+        (messages) =>
+          !Object.values(messages).every((value) => {
+            if (Array.isArray(value)) {
+              return value.length === 0 || value.every((v) => v === undefined || v === null)
+            } else {
+              return value === undefined || value === null
+            }
+          })
+      )
+    )
   }
 
   messagesByWildcard$ = (wildcard: string) => {
