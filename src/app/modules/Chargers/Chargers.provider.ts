@@ -1,24 +1,22 @@
 import { useChargersService } from "./Chargers.service"
-import { useMqtt } from "../Mqtt/Mqtt.provider"
-import { useEffect } from "react"
+import { useTopicSubscriptions, useTopicsWithPortalId } from "../Mqtt/Mqtt.provider"
 import { useObservableState, useSubscription } from "observable-hooks"
-import { mqttQuery } from "../Mqtt"
+import { mqttQuery, PortalId } from "../Mqtt"
 import Logger from "../../utils/logger"
 import { ChargerInstanceId } from "./Chargers.store"
 import { chargersQuery } from "./Chargers.query"
 
 export const useChargers = () => {
-  const portalId = useObservableState(mqttQuery.portalId$)
   const chargersService = useChargersService()
-  const mqttService = useMqtt()
-  const topic = "N/+/charger/+/DeviceInstance"
+  const topic = "N/+/charger/+/DeviceInstance" // TODO: Into getTopics
 
-  useEffect(() => {
-    mqttService.subscribeToTopic(topic)
+  const getTopics = (portalId: PortalId) => ({
+    chargerInstances: `N/${portalId}/charger/+/DeviceInstance`,
+  })
 
-    return () => mqttService.unsubscribeFromTopic(topic)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [portalId])
+  const topics$ = useTopicsWithPortalId(getTopics, mqttQuery.portalId$)
+
+  useTopicSubscriptions(topics$)
 
   useSubscription(mqttQuery.messagesByWildcard$(topic), (messages) => {
     if (!messages || Object.entries(messages).length === 0) {
