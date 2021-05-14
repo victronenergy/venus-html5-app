@@ -13,8 +13,6 @@ export const BigTank = ({ tankId, conf }: TankProps) => {
   const tank = useTank(tankId)
   const footer = useSendUpdate(1 - tank.level / 100, conf, tank.customName)
 
-  console.log("BigTank", tank)
-
   return (
     <div className="">
       <Card title={tank?.customName ?? "--"} size={[SIZE_BIG, SIZE_LONG]} footer={footer}>
@@ -23,7 +21,7 @@ export const BigTank = ({ tankId, conf }: TankProps) => {
             <div className="indicator-main">
               <span>
                 <NumericValue value={tank.level} unit="%" defaultValue={"--"} precision={0} />
-                <span className="name">{formatNumber({ value: tank.capacity * 1000, unit: "L" })}</span>
+                <div className="name">{formatNumber({ value: tank.remaining * 1000, unit: "L" })}</div>
               </span>
             </div>
 

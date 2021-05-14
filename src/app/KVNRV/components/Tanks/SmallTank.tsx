@@ -24,7 +24,7 @@ export const SmallTank = ({ tankId, conf }: TankProps) => {
               <div className="indicator-main--small">
                 <span>
                   <NumericValue value={tank.level} unit="%" defaultValue={"--"} precision={0} />
-                  <span className="name">{formatNumber({ value: tank.capacity * 1000, unit: "L" })}</span>
+                  <span className="name">{formatNumber({ value: tank.remaining * 1000, unit: "L" })}</span>
                 </span>
               </div>
 
