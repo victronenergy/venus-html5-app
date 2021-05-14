@@ -7,9 +7,9 @@ import ProgressIndicator from "../../components/ProgressIndicator"
 
 import "./SmallTank.scss"
 import { sendUpdate } from "../../utils/helpers"
-import { TankProps } from "./Tanks"
 import { useTank } from "../../../modules/Tanks/Tank.provider"
 import { useStatus } from "../../../modules/Status/Status.provider"
+import { TankProps } from "./index"
 
 export const SmallTank = ({ tankId, conf }: TankProps) => {
   const { statusService } = useStatus()

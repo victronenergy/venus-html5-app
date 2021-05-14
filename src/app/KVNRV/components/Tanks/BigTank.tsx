@@ -7,9 +7,9 @@ import WaterTankTop from "../../images/WaterTankTop.svg"
 
 import "./BigTank.scss"
 import { sendUpdate } from "../../utils/helpers"
-import { TankProps } from "./Tanks"
 import { useTank } from "../../../modules/Tanks/Tank.provider"
 import { useStatus } from "../../../modules/Status/Status.provider"
+import { TankProps } from "./index"
 
 export const BigTank = ({ tankId, conf }: TankProps) => {
   const tank = useTank(tankId)
