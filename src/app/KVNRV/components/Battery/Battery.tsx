@@ -61,9 +61,9 @@ export const Batteries = () => {
                 {batteryStateLabel && <div className="name">{batteryStateLabel}</div>}
               </div>
 
-              <span>
+              <div>
                 <div className="indicator">
-                  <span className="name">Power</span>
+                  <span className="name">Voltage</span>
                   <NumericValue value={battery.voltage} unit="V" defaultValue={"--"} precision={2} />
                 </div>
 
@@ -71,7 +71,7 @@ export const Batteries = () => {
                   <span className="name">Current</span>
                   <NumericValue value={battery.current} unit="A" defaultValue={"--"} precision={1} />
                 </div>
-              </span>
+              </div>
             </div>
 
             <div className="battery__charge">
