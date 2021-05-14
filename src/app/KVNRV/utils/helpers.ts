@@ -1,30 +1,36 @@
 import { Conf, MessagesObj, STATUS_LEVELS, STATUS_LEVELS_MSG } from "./constants"
 import { Footer } from "../../components/Card/Card"
-import { StatusService } from "../../modules/Status/Status.service"
+import { useStatusService } from "../../modules/Status/Status.service"
+import { useEffect, useState } from "react"
 
-export const sendUpdate = (percent: number, conf: Conf, part: string, statusService: StatusService) => {
-  let level = STATUS_LEVELS.SUCCESS
-  let footer: Footer = {
+// TODO: Move to a different file
+export const useSendUpdate = (percent: number, conf: Conf, part: string) => {
+  const statusService = useStatusService()
+  const [level, setLevel] = useState(STATUS_LEVELS.SUCCESS)
+  const footer: Footer = {
     message: STATUS_LEVELS_MSG[level],
     property: "Status",
     status: level,
   }
 
-  if (percent > conf.THRESHOLDS[0]) {
-    if (percent < conf.THRESHOLDS[0] + conf.THRESHOLDS[1]) {
-      level = STATUS_LEVELS.WARNING
-      statusService.addStatus({ part, message: conf.MESSAGES[level as keyof MessagesObj] ?? "", level: level })
-      footer.status = level
-      footer.message = STATUS_LEVELS_MSG[level]
+  useEffect(() => {
+    if (percent > conf.THRESHOLDS[0]) {
+      if (percent < conf.THRESHOLDS[0] + conf.THRESHOLDS[1]) {
+        setLevel(STATUS_LEVELS.WARNING)
+        statusService.addStatus({ part, message: conf.MESSAGES[level as keyof MessagesObj] ?? "", level: level })
+        footer.status = level
+        footer.message = STATUS_LEVELS_MSG[level]
+      } else {
+        setLevel(STATUS_LEVELS.ALARM)
+        statusService.addStatus({ part, message: conf.MESSAGES[level as keyof MessagesObj], level: level })
+        footer.status = level
+        footer.message = STATUS_LEVELS_MSG[level]
+      }
     } else {
-      level = STATUS_LEVELS.ALARM
-      statusService.addStatus({ part, message: conf.MESSAGES[level as keyof MessagesObj], level: level })
-      footer.status = level
-      footer.message = STATUS_LEVELS_MSG[level]
+      statusService.removeStatus(part)
     }
-  } else {
-    statusService.removeStatus(part)
-  }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [percent])
 
   return footer
 }
