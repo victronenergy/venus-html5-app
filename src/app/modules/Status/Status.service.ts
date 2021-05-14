@@ -8,7 +8,7 @@ export class StatusService {
   }
 
   addStatus = (status: StatusUpdate) => {
-    if (this.isUpdatePresent(status.part) === false) {
+    if (status.part && this.isUpdatePresent(status.part) === false) {
       let sus = this.store.getValue().status.slice()
       sus.push(status)
       this.store.update({ status: sus })

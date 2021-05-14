@@ -13,8 +13,6 @@ export const sendUpdate = (percent: number, conf: Conf, part: string, statusServ
   if (percent > conf.THRESHOLDS[0]) {
     if (percent < conf.THRESHOLDS[0] + conf.THRESHOLDS[1]) {
       level = STATUS_LEVELS.WARNING
-      statusService.addStatus({ part: "My butt", message: "Nooo", level: "alarm" })
-
       statusService.addStatus({ part, message: conf.MESSAGES[level as keyof MessagesObj] ?? "", level: level })
       footer.status = level
       footer.message = STATUS_LEVELS_MSG[level]
