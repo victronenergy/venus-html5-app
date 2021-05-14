@@ -72,8 +72,8 @@ export const Metrics = () => {
           <Status />
 
           <div className="row">
+            <PvCharger />
             <ShorePower />
-            <DcLoads />
           </div>
         </div>
 
@@ -81,7 +81,7 @@ export const Metrics = () => {
           <Battery />
 
           <div className="row">
-            <PvCharger />
+            <DcLoads />
             <AcLoads />
           </div>
 
