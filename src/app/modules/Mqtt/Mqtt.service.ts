@@ -94,6 +94,8 @@ export class MqttService {
       console.log("MQTT connected")
       this.store.update({ error: null, status: STATUS.CONNECTED })
       this.subscribeToTopic("N/+/system/0/Serial")
+      this.sendKeepalive()
+      this.setupKeepalive()
     })
 
     client.on("message", async (topic, message) => {
