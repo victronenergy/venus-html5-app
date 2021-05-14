@@ -23,10 +23,10 @@ export const Metrics = () => {
   const computePages = () => {
     if (window.innerWidth >= SCREEN_SIZES.LG) {
       setPages(1)
-      setCurrentPage(Math.min(1, currentPage))
+      setCurrentPage(Math.min(0, currentPage))
     } else if (window.innerWidth >= SCREEN_SIZES.MD) {
       setPages(2)
-      setCurrentPage(Math.min(2, currentPage))
+      setCurrentPage(Math.min(1, currentPage))
     } else if (window.innerWidth >= SCREEN_SIZES.SM) {
       setPages(3)
     }
@@ -73,7 +73,7 @@ export const Metrics = () => {
 
           <div className="row">
             <ShorePower />
-            <AcLoads />
+            <DcLoads />
           </div>
         </div>
 
@@ -82,7 +82,7 @@ export const Metrics = () => {
 
           <div className="row">
             <PvCharger />
-            <DcLoads />
+            <AcLoads />
           </div>
 
           <AcMode />
