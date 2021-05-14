@@ -6,7 +6,7 @@ import NumericValue from "../../../components/NumericValue"
 import { AcModeModal } from "./AcModeModal"
 
 import "./AcMode.scss"
-import { useAcMode } from "../../../modules/AcMode"
+import { useAcMode } from "../../../modules"
 
 export const acModeFormatter = (value: number) => {
   switch (value) {
@@ -34,7 +34,7 @@ export const AcMode = () => {
         <div className="indicator-main--small ac_mode">
           <div className="name">Input limit</div>
           <div>
-            <NumericValue value={limit ?? "--"} unit={"A"} precision={0} />
+            <NumericValue value={limit} unit={"A"} precision={0} />
           </div>
 
           <div className="name">Mode</div>
