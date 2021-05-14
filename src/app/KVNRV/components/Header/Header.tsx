@@ -1,21 +1,18 @@
 import React, { useEffect, useState } from "react"
+import { useTheme } from "../../../modules"
 import KVNRVLogo from "../../images/KVNRV-Logo.svg"
 import LockIcon from "../../images/LockIcon.svg"
 import RemoteIcon from "../../images/RemoteIcon.svg"
 
 import "./Header.scss"
 
-type HeaderProps = {
-  darkMode: boolean
-  toggleDarkMode: Function
-}
-
 const timer = () => {
   return new Date()
 }
 
-export const Header = (props: HeaderProps) => {
+export const Header = () => {
   const [time, setTime] = useState(timer())
+  const { darkMode, themeService } = useTheme()
 
   useEffect(() => {
     const t = setTimeout(() => {
@@ -60,7 +57,12 @@ export const Header = (props: HeaderProps) => {
 
         <div className={"header__buttons__darkmode"}>
           <label htmlFor="header__buttons__darkmode__input" className="header__buttons__darkmode__switch">
-            <input type="checkbox" onChange={(e) => props.toggleDarkMode(e)} id="header__buttons__darkmode__input" />
+            <input
+              type="checkbox"
+              checked={darkMode}
+              onChange={(e) => themeService.setTheme(!darkMode)}
+              id="header__buttons__darkmode__input"
+            />
             <span className="header__buttons__darkmode__slider" />
           </label>
         </div>

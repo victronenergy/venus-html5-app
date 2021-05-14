@@ -29,7 +29,7 @@ export const Card: FunctionComponent<CardProps> = ({ title, size, icon, onIconCl
       <div className={"contents"}>
         <div className="card__header row">
           <div className="card__header__text">{title}</div>
-          {icon && <div className={"card__header__icon " + icon} onClick={(e) => onIconClick && onIconClick(e)} />}
+          {icon && <button className={"card__header__icon " + icon} onClick={(e) => onIconClick && onIconClick(e)} />}
         </div>
 
         <div className="card__body">{children}</div>

@@ -2,6 +2,7 @@ import React, { PureComponent } from "react"
 import { Chart } from "chart.js"
 import "./DonutIndicator.scss"
 import { formatNumber } from "../NumericValue"
+import { useTheme } from "../../modules"
 
 const defaultOptions = {
   maintainAspectRatio: false,
@@ -22,6 +23,7 @@ type DonutIndicatorProps = {
   unit: string
   percent: number
   parts: Array<number>
+  darkMode: boolean
 }
 
 export class DonutIndicator extends PureComponent<DonutIndicatorProps> {
@@ -162,7 +164,7 @@ export class DonutIndicator extends PureComponent<DonutIndicatorProps> {
   }
 
   componentDidUpdate(prevProps: Readonly<DonutIndicatorProps>) {
-    if (prevProps.value !== this.props.value) {
+    if (prevProps.value !== this.props.value || prevProps.darkMode !== this.props.darkMode) {
       this.updateInner()
     }
   }
@@ -177,4 +179,12 @@ export class DonutIndicator extends PureComponent<DonutIndicatorProps> {
   }
 }
 
-export default DonutIndicator
+const withTheme = (Component: any) => {
+  return (props: any) => {
+    const { darkMode } = useTheme()
+
+    return <Component darkMode={darkMode} {...props} />
+  }
+}
+
+export default withTheme(DonutIndicator)
