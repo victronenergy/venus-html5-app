@@ -58,6 +58,11 @@ body {
   }
 }
 
+button {
+  cursor: pointer;
+  border: none;
+}
+
 
 .gauge {
   display: flex;
