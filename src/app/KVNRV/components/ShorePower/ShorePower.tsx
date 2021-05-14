@@ -4,9 +4,9 @@ import { Card, SIZE_SMALL } from "../../../components/Card"
 import "./ShorePower.scss"
 import DonutIndicator from "../../../components/DonutIndicator"
 import NumericValue from "../../../components/NumericValue"
-import { useActiveInValues } from "../../../modules/ActiveSource/ActiveInValues.provider"
+import { useActiveInValues, useSendUpdate } from "../../../modules"
 import { SHORE_POWER_CONF } from "../../utils/constants"
-import { normalizePower, useSendUpdate } from "../../utils/helpers"
+import { normalizePower } from "../../utils/helpers"
 import { NotAvailable } from "../NotAvailable"
 
 export const ShorePower = () => {

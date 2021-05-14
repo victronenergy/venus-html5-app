@@ -6,9 +6,9 @@ import NumericValue, { formatNumber } from "../../../components/NumericValue"
 import ProgressIndicator from "../../components/ProgressIndicator"
 
 import "./SmallTank.scss"
-import { useSendUpdate } from "../../utils/helpers"
-import { useTank } from "../../../modules/Tanks/Tank.provider"
+import { useTank } from "../../../modules"
 import { TankProps } from "./index"
+import { useSendUpdate } from "../../../modules"
 
 export const SmallTank = ({ tankId, conf }: TankProps) => {
   const tank = useTank(tankId)

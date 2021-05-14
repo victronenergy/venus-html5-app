@@ -1,12 +1,12 @@
 import React from "react"
 import { Card, SIZE_SMALL } from "../../../components/Card"
 import DonutIndicator from "../../../components/DonutIndicator"
-import { useDcLoads } from "../../../modules"
+import { useDcLoads, useSendUpdate } from "../../../modules"
 import { DC_CONF } from "../../utils/constants"
 
 import "./DcLoads.scss"
 import NumericValue from "../../../components/NumericValue"
-import { normalizePower, useSendUpdate } from "../../utils/helpers"
+import { normalizePower } from "../../utils/helpers"
 
 export const DcLoads = () => {
   const { voltage, power } = useDcLoads()

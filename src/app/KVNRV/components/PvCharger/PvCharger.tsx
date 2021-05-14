@@ -2,10 +2,10 @@ import React from "react"
 
 import { PV_CONF } from "../../utils/constants"
 import DonutIndicator from "../../../components/DonutIndicator"
-import { usePvCharger } from "../../../modules"
+import { usePvCharger, useSendUpdate } from "../../../modules"
 import { Card, SIZE_SMALL } from "../../../components/Card"
 import NumericValue from "../../../components/NumericValue"
-import { normalizePower, useSendUpdate } from "../../utils/helpers"
+import { normalizePower } from "../../utils/helpers"
 
 export const PvCharger = () => {
   const { current, power } = usePvCharger()

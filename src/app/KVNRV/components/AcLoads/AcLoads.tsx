@@ -1,8 +1,8 @@
 import React from "react"
 
-import { useAcLoads } from "../../../modules"
+import { useAcLoads, useSendUpdate } from "../../../modules"
 import { Card, SIZE_SMALL } from "../../../components/Card"
-import { normalizePower, useSendUpdate } from "../../utils/helpers"
+import { normalizePower } from "../../utils/helpers"
 import { AC_CONF } from "../../utils/constants"
 import NumericValue from "../../../components/NumericValue"
 import DonutIndicator from "../../../components/DonutIndicator"

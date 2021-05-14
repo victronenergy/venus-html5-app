@@ -1,8 +1,8 @@
-import { Conf } from "../../utils/constants"
+import { WidgetConfiguration } from "../../utils/constants"
 
 export type TankProps = {
   tankId: number
-  conf: Conf
+  conf: WidgetConfiguration
 }
 
 export { BigTank } from "./BigTank"

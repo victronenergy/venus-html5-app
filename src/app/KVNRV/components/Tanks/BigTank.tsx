@@ -6,8 +6,7 @@ import NumericValue, { formatNumber } from "../../../components/NumericValue"
 import WaterTankTop from "../../images/WaterTankTop.svg"
 
 import "./BigTank.scss"
-import { useSendUpdate } from "../../utils/helpers"
-import { useTank } from "../../../modules/Tanks/Tank.provider"
+import { useSendUpdate, useTank } from "../../../modules"
 import { TankProps } from "./index"
 
 export const BigTank = ({ tankId, conf }: TankProps) => {

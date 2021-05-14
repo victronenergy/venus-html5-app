@@ -18,14 +18,14 @@ export type MessagesObj = {
   alarm: string
 }
 
-export type Conf = {
+export type WidgetConfiguration = {
   MAX: number
   THRESHOLDS: Array<number>
   MESSAGES: MessagesObj
   DEVICE_ID?: number
 }
 
-export const DC_CONF: Conf = {
+export const DC_CONF: WidgetConfiguration = {
   MAX: 500,
   THRESHOLDS: [0.5, 0.25, 0.25],
   MESSAGES: {
@@ -34,7 +34,7 @@ export const DC_CONF: Conf = {
   },
 }
 
-export const AC_CONF: Conf = {
+export const AC_CONF: WidgetConfiguration = {
   MAX: 300,
   THRESHOLDS: [0.6, 0.2, 0.2],
   MESSAGES: {
@@ -43,7 +43,7 @@ export const AC_CONF: Conf = {
   },
 }
 
-export const PV_CONF: Conf = {
+export const PV_CONF: WidgetConfiguration = {
   MAX: 100,
   THRESHOLDS: [0.8, 0.1, 0.1],
   MESSAGES: {
@@ -52,7 +52,7 @@ export const PV_CONF: Conf = {
   },
 }
 
-export const SHORE_POWER_CONF: Conf = {
+export const SHORE_POWER_CONF: WidgetConfiguration = {
   MAX: 100,
   THRESHOLDS: [0.8, 0.1, 0.1],
   MESSAGES: {
@@ -70,7 +70,7 @@ export const TANKS_CONF = {
       [WARNING]: "not enough water",
       [ALARM]: "you're gonna die of thirst",
     },
-  } as Conf,
+  } as WidgetConfiguration,
   GRAY_WATER: {
     DEVICE_ID: 2,
     MAX: 1,
@@ -79,7 +79,7 @@ export const TANKS_CONF = {
       [WARNING]: "too much water",
       [ALARM]: "way too much water",
     },
-  } as Conf,
+  } as WidgetConfiguration,
   BLACK_WATER: {
     DEVICE_ID: 5,
     MAX: 1,
@@ -88,7 +88,7 @@ export const TANKS_CONF = {
       [WARNING]: "too much water",
       [ALARM]: "way too much water",
     },
-  } as Conf,
+  } as WidgetConfiguration,
 }
 
 export const AC_MODE = {
