@@ -29,8 +29,8 @@ export const DC_CONF: WidgetConfiguration = {
   MAX: 500,
   THRESHOLDS: [0.5, 0.25, 0.25],
   MESSAGES: {
-    [WARNING]: "slightly too much",
-    [ALARM]: "really, too much power",
+    [WARNING]: "high power load",
+    [ALARM]: "critically high power load",
   },
 }
 
@@ -38,8 +38,8 @@ export const AC_CONF: WidgetConfiguration = {
   MAX: 300,
   THRESHOLDS: [0.6, 0.2, 0.2],
   MESSAGES: {
-    [WARNING]: "slightly too much",
-    [ALARM]: "really, too much power",
+    [WARNING]: "high power load",
+    [ALARM]: "critically high power load",
   },
 }
 
@@ -47,8 +47,8 @@ export const PV_CONF: WidgetConfiguration = {
   MAX: 100,
   THRESHOLDS: [0.8, 0.1, 0.1],
   MESSAGES: {
-    [WARNING]: "slightly too much",
-    [ALARM]: "really, too much power",
+    [WARNING]: "high power load",
+    [ALARM]: "critically high power load",
   },
 }
 
@@ -56,8 +56,8 @@ export const SHORE_POWER_CONF: WidgetConfiguration = {
   MAX: 100,
   THRESHOLDS: [0.8, 0.1, 0.1],
   MESSAGES: {
-    [WARNING]: "slightly too much",
-    [ALARM]: "really, too much power",
+    [WARNING]: "high power load",
+    [ALARM]: "critically high power load",
   },
 }
 
@@ -67,8 +67,8 @@ export const TANKS_CONF = {
     MAX: 1,
     THRESHOLDS: [0.6, 0.3, 0.1],
     MESSAGES: {
-      [WARNING]: "not enough water",
-      [ALARM]: "you're gonna die of thirst",
+      [WARNING]: "water level very low",
+      [ALARM]: "water levels critically low",
     },
   } as WidgetConfiguration,
   GRAY_WATER: {
@@ -76,8 +76,8 @@ export const TANKS_CONF = {
     MAX: 1,
     THRESHOLDS: [0.7, 0.2, 0.1],
     MESSAGES: {
-      [WARNING]: "too much water",
-      [ALARM]: "way too much water",
+      [WARNING]: "water level high",
+      [ALARM]: "critical levels of water",
     },
   } as WidgetConfiguration,
   BLACK_WATER: {
@@ -85,8 +85,8 @@ export const TANKS_CONF = {
     MAX: 1,
     THRESHOLDS: [0.7, 0.2, 0.1],
     MESSAGES: {
-      [WARNING]: "too much water",
-      [ALARM]: "way too much water",
+      [WARNING]: "water level very high",
+      [ALARM]: "critical levels of water",
     },
   } as WidgetConfiguration,
 }
