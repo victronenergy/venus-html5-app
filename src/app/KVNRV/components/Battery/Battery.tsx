@@ -64,12 +64,12 @@ export const Batteries = () => {
               <span>
                 <div className="indicator">
                   <span className="name">Power</span>
-                  <NumericValue value={battery.power} unit="V" defaultValue={"--"} precision={0} />
+                  <NumericValue value={battery.voltage} unit="V" defaultValue={"--"} precision={2} />
                 </div>
 
                 <div className="indicator">
                   <span className="name">Current</span>
-                  <NumericValue value={battery.current} unit="A" defaultValue={"--"} precision={0} />
+                  <NumericValue value={battery.current} unit="A" defaultValue={"--"} precision={1} />
                 </div>
               </span>
             </div>
