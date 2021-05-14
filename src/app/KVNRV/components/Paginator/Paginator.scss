@@ -1,0 +1,22 @@
+@import '../../css/variables.scss';
+
+.paginator {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  .paginator__icon {
+    padding: 0.4rem 0.6rem ;
+    margin: 0.6rem 1rem;
+    background-color: $paginator-arrow-color;
+    border-radius: 5px;
+  }
+
+  .paginator__dot {
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 50%;
+    background-color: $color-lightgray;
+    margin: auto 0.4rem;
+  }
+}
