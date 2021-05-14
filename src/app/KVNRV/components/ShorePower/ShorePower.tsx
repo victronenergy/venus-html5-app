@@ -10,7 +10,7 @@ import { normalizePower, sendUpdate } from "../../utils/helpers"
 import { NotAvailable } from "../NotAvailable"
 import { useStatus } from "../../../modules/Status/Status.provider"
 
-export const ShorePower = React.memo(() => {
+export const ShorePower = () => {
   const { current, frequency, voltage, power } = useActiveInValues()
   const { statusService } = useStatus()
 
@@ -41,6 +41,6 @@ export const ShorePower = React.memo(() => {
       </Card>
     </div>
   )
-})
+}
 
 export default ShorePower

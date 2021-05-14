@@ -11,7 +11,7 @@ import { TankProps } from "./Tanks"
 import { useTank } from "../../../modules/Tanks/Tank.provider"
 import { useStatus } from "../../../modules/Status/Status.provider"
 
-export const SmallTank = React.memo(({ tankId, conf }: TankProps) => {
+export const SmallTank = ({ tankId, conf }: TankProps) => {
   const { statusService } = useStatus()
   const tank = useTank(tankId)
   console.log("SmallTank", tank, tankId)
@@ -39,4 +39,4 @@ export const SmallTank = React.memo(({ tankId, conf }: TankProps) => {
       </Card>
     </div>
   )
-})
+}

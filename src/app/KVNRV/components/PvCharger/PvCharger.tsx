@@ -8,7 +8,7 @@ import NumericValue from "../../../components/NumericValue"
 import { normalizePower, sendUpdate } from "../../utils/helpers"
 import { useStatus } from "../../../modules/Status/Status.provider"
 
-export const PvCharger = React.memo(() => {
+export const PvCharger = () => {
   const { statusService } = useStatus()
   const { current, power } = usePvCharger()
 
@@ -30,6 +30,6 @@ export const PvCharger = React.memo(() => {
       </Card>
     </div>
   )
-})
+}
 
 export default PvCharger

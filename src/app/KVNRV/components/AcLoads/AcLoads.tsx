@@ -9,7 +9,7 @@ import DonutIndicator from "../../../components/DonutIndicator"
 import { NotAvailable } from "../NotAvailable"
 import { useStatus } from "../../../modules/Status/Status.provider"
 
-export const AcLoads = React.memo(() => {
+export const AcLoads = () => {
   const { statusService } = useStatus()
 
   let { current, voltage, power, frequency } = useAcLoads()
@@ -41,6 +41,6 @@ export const AcLoads = React.memo(() => {
       </Card>
     </div>
   )
-})
+}
 
 export default AcLoads

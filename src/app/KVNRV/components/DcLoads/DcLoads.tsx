@@ -9,7 +9,7 @@ import NumericValue from "../../../components/NumericValue"
 import { normalizePower, sendUpdate } from "../../utils/helpers"
 import { useStatus } from "../../../modules/Status/Status.provider"
 
-export const DcLoads = React.memo(() => {
+export const DcLoads = () => {
   const { statusService } = useStatus()
   const { voltage, power } = useDcLoads()
 
@@ -31,6 +31,6 @@ export const DcLoads = React.memo(() => {
       </Card>
     </div>
   )
-})
+}
 
 export default DcLoads
