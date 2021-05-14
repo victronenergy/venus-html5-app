@@ -3,11 +3,9 @@ import React from "react"
 import { Card, SIZE_BIG, SIZE_LONG } from "../../../components/Card"
 import { Footer } from "../../../components/Card/Card"
 import IconWarning from "../../images/IconWarning.svg"
-import IconClose from "../../../images/IconClose-Dark.svg"
 import "./Status.scss"
 import { STATUS_LEVELS, STATUS_LEVELS_MSG } from "../../utils/constants"
-import { useStatus } from "../../../modules/Status/Status.provider"
-import { StatusUpdate } from "../../../modules/Status/Status.store"
+import { StatusUpdate, useStatus } from "../../../modules"
 
 export const Status = () => {
   const { statuses } = useStatus()
@@ -38,10 +36,8 @@ export const Status = () => {
                   </div>
 
                   <span>{update.part}: </span>
-                  <span>{update.message}</span>
+                  <span className={"status-update__message"}>{update.message}</span>
                 </span>
-
-                <img src={IconClose} alt={"Close icon"} />
               </div>
             ))}
         </div>
