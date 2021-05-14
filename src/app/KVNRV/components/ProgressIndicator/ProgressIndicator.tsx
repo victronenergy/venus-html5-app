@@ -7,7 +7,13 @@ type ProgressIndicatorProps = {
 }
 
 export const ProgressIndicator = (props: ProgressIndicatorProps) => {
-  const styles = { width: props.percent * 100 + "%" }
+  let percent = props.percent * 100
+  if (percent < 5) {
+    percent = 0
+  } else if (percent < 10) {
+    percent = 10
+  }
+  const styles = { width: percent + "%" }
 
   return (
     <div className="progress-indicator">

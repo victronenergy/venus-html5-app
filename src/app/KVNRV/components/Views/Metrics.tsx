@@ -93,7 +93,7 @@ export const Metrics = () => {
 
           <div className="row">
             <SmallTank tankId={TANKS_CONF.GRAY_WATER.DEVICE_ID!} conf={TANKS_CONF.GRAY_WATER} />
-            <SmallTank tankId={TANKS_CONF.GRAY_WATER.DEVICE_ID!} conf={TANKS_CONF.BLACK_WATER} />
+            <SmallTank tankId={TANKS_CONF.BLACK_WATER.DEVICE_ID!} conf={TANKS_CONF.BLACK_WATER} />
           </div>
         </div>
       </div>
