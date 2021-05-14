@@ -2,6 +2,7 @@ import * as mqtt from "mqtt"
 import { MqttState, MqttStore, STATUS, Topics } from "."
 import Logger from "../../utils/logger"
 import { getMessageJson } from "../../utils/util"
+import { IClientOptions, MqttClient } from "mqtt"
 
 export class MqttService {
   constructor(protected store: MqttStore) {}
@@ -78,7 +79,21 @@ export class MqttService {
 
   boot = (host: string, port: number) => {
     console.log("MQTT booting")
-    const client = mqtt.connect(`mqtt://${host}:${port}`)
+
+    let client: MqttClient
+
+    if (port === 443) {
+      const mqttClientOptions: IClientOptions = {
+        path: "/mqtt",
+        username: "vrmlogin_live_<VRM_USER_EMAIL>",
+        password: "<VRM_TOKEN>",
+      }
+      // client = mqtt.connect(`mqtts://webmqtt90.victronenergy.com:443`, mqttClientOptions)
+      client = mqtt.connect(`mqtts://<VRM_MQTT_WEBHOST>.victronenergy.com:443`, mqttClientOptions)
+    } else {
+      client = mqtt.connect(`mqtt://${host}:${port}`)
+    }
+
     this.store.update({ client })
 
     client.on("error", (error) => {
@@ -93,7 +108,7 @@ export class MqttService {
     client.on("connect", () => {
       console.log("MQTT connected")
       this.store.update({ error: null, status: STATUS.CONNECTED })
-      this.subscribeToTopic("N/+/system/0/Serial")
+      this.subscribeToTopic("N/dca632c080c9/system/0/Serial")
       this.sendKeepalive()
       this.setupKeepalive()
     })

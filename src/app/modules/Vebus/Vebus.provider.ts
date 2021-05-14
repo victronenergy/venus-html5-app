@@ -15,7 +15,7 @@ export const useVebus = (): VebusState => {
   const instanceId = useObservableState(vebusQuery.instanceId$)
   const vebusService = useVebusService()
   const mqttService = useMqtt()
-  const topic = "N/+/vebus/+/DeviceInstance"
+  const topic = "N/dca632c080c9/vebus/+/DeviceInstance"
 
   useEffect(() => {
     mqttService.subscribeToTopic(topic)

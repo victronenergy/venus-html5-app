@@ -8,7 +8,7 @@ import { chargersQuery } from "./Chargers.query"
 
 export const useChargers = () => {
   const chargersService = useChargersService()
-  const topic = "N/+/charger/+/DeviceInstance" // TODO: Into getTopics
+  const topic = "N/dca632c080c9/charger/+/DeviceInstance" // TODO: Into getTopics
 
   const getTopics = (portalId: PortalId) => ({
     chargerInstances: `N/${portalId}/charger/+/DeviceInstance`,

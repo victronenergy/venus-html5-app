@@ -11,7 +11,7 @@ export const useTanks = () => {
   const portalId = useObservableState(mqttQuery.portalId$)
   const tanksService = useTanksService()
   const mqttService = useMqtt()
-  const topic = "N/+/tank/+/DeviceInstance"
+  const topic = "N/dca632c080c9/tank/+/DeviceInstance"
 
   useEffect(() => {
     mqttService.subscribeToTopic(topic)
