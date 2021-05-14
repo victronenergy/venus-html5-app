@@ -6,15 +6,12 @@ import { DC_CONF } from "../../utils/constants"
 
 import "./DcLoads.scss"
 import NumericValue from "../../../components/NumericValue"
-import { normalizePower, sendUpdate } from "../../utils/helpers"
-import { useStatus } from "../../../modules/Status/Status.provider"
+import { normalizePower, useSendUpdate } from "../../utils/helpers"
 
 export const DcLoads = () => {
-  const { statusService } = useStatus()
   const { voltage, power } = useDcLoads()
-
   const normalizedPower = normalizePower(power ?? 0, DC_CONF.MAX)
-  sendUpdate(normalizedPower, DC_CONF, "DC Loads", statusService)
+  useSendUpdate(normalizedPower, DC_CONF, "DC Loads")
 
   return (
     <div className="">

@@ -6,19 +6,17 @@ import DonutIndicator from "../../../components/DonutIndicator"
 import NumericValue from "../../../components/NumericValue"
 import { useActiveInValues } from "../../../modules/ActiveSource/ActiveInValues.provider"
 import { SHORE_POWER_CONF } from "../../utils/constants"
-import { normalizePower, sendUpdate } from "../../utils/helpers"
+import { normalizePower, useSendUpdate } from "../../utils/helpers"
 import { NotAvailable } from "../NotAvailable"
-import { useStatus } from "../../../modules/Status/Status.provider"
 
 export const ShorePower = () => {
   const { current, frequency, voltage, power } = useActiveInValues()
-  const { statusService } = useStatus()
+  const normalizedPower = normalizePower(power && power[0] ? power[0] : 0, SHORE_POWER_CONF.MAX)
+  useSendUpdate(normalizedPower, SHORE_POWER_CONF, "Shore Power")
 
   if (!(current && voltage && power)) {
     return <NotAvailable />
   }
-  const normalizedPower = normalizePower(power[0] ?? 0, SHORE_POWER_CONF.MAX)
-  sendUpdate(normalizedPower, SHORE_POWER_CONF, "DC Loads", statusService)
 
   return (
     <div className="">

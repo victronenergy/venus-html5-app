@@ -10,7 +10,7 @@ import { NotAvailable } from "../NotAvailable"
 
 export const AcLoads = () => {
   const { current, voltage, power, frequency } = useAcLoads()
-  const normalizedPower = normalizePower(power[0] ?? 0, AC_CONF.MAX)
+  const normalizedPower = normalizePower(power && power[0] ? power[0] : 0, AC_CONF.MAX)
   useSendUpdate(normalizedPower, AC_CONF, "AC Loads")
 
   if (!(current && voltage && power && frequency)) {

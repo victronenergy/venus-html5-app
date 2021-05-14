@@ -6,18 +6,15 @@ import NumericValue, { formatNumber } from "../../../components/NumericValue"
 import WaterTankTop from "../../images/WaterTankTop.svg"
 
 import "./BigTank.scss"
-import { sendUpdate } from "../../utils/helpers"
+import { useSendUpdate } from "../../utils/helpers"
 import { useTank } from "../../../modules/Tanks/Tank.provider"
-import { useStatus } from "../../../modules/Status/Status.provider"
 import { TankProps } from "./index"
 
 export const BigTank = ({ tankId, conf }: TankProps) => {
   const tank = useTank(tankId)
-  const { statusService } = useStatus()
+  const footer = useSendUpdate(1 - tank.level / 100, conf, tank.customName)
 
   console.log("BigTank", tank)
-
-  const footer = tank ? sendUpdate(1 - tank.level / 100, conf, tank.customName, statusService) : undefined
 
   return (
     <div className="">

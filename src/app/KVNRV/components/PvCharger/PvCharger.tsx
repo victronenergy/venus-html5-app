@@ -5,13 +5,13 @@ import DonutIndicator from "../../../components/DonutIndicator"
 import { usePvCharger } from "../../../modules"
 import { Card, SIZE_SMALL } from "../../../components/Card"
 import NumericValue from "../../../components/NumericValue"
-import { normalizePower } from "../../utils/helpers"
+import { normalizePower, useSendUpdate } from "../../utils/helpers"
 
 export const PvCharger = () => {
   const { current, power } = usePvCharger()
 
   const normalizedPower = normalizePower(power ?? 0, PV_CONF.MAX)
-  // sendUpdate(normalizedPower, PV_CONF, "DC Loads")
+  useSendUpdate(normalizedPower, PV_CONF, "PV Charger")
 
   return (
     <div className="">

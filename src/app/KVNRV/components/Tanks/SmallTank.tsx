@@ -6,16 +6,14 @@ import NumericValue, { formatNumber } from "../../../components/NumericValue"
 import ProgressIndicator from "../../components/ProgressIndicator"
 
 import "./SmallTank.scss"
-import { sendUpdate } from "../../utils/helpers"
+import { useSendUpdate } from "../../utils/helpers"
 import { useTank } from "../../../modules/Tanks/Tank.provider"
-import { useStatus } from "../../../modules/Status/Status.provider"
 import { TankProps } from "./index"
 
 export const SmallTank = ({ tankId, conf }: TankProps) => {
-  const { statusService } = useStatus()
   const tank = useTank(tankId)
   console.log("SmallTank", tank, tankId)
-  const footer = tank ? sendUpdate(tank.level / 100, conf, tank.customName, statusService) : undefined
+  const footer = useSendUpdate(tank.level / 100, conf, tank.customName)
 
   return (
     <div className="">
