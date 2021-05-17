@@ -8,6 +8,12 @@
   @media #{$minimum} {
     display: none;
   }
+
+  .lock-text {
+    @media #{$regular} {
+      display: none;
+    }
+  }
 }
 
 .lock-button-footer {
@@ -34,5 +40,5 @@
 }
 
 .lock-text {
-  margin-left: 9px;
+  margin-left: .5rem;
 }

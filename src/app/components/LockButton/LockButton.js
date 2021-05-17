@@ -30,7 +30,7 @@ class LockButton extends Component {
         {currentView === VIEWS.METRICS && showLockButton && (
           <LockContext.Consumer>
             {context => (
-              <div
+              <button
                 className={classNames("text--smaller", header ? "lock-button" : "lock-button-footer")}
                 onClick={context.toggleLocked}
               >
@@ -49,7 +49,7 @@ class LockButton extends Component {
                     <span className="lock-text">Lock to prevent changes</span>
                   </>
                 )}
-              </div>
+              </button>
             )}
           </LockContext.Consumer>
         )}
