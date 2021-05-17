@@ -9,7 +9,6 @@ import { StatusUpdate, useStatus } from "../../../modules"
 
 export const Status = () => {
   const { statuses } = useStatus()
-  console.log("Status@useStatus", statuses)
 
   const footer: Footer = {
     status: STATUS_LEVELS.SUCCESS,

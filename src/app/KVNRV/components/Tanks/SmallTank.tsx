@@ -12,7 +12,6 @@ import { useSendUpdate } from "../../../modules"
 
 export const SmallTank = ({ tankId, conf }: TankProps) => {
   const tank = useTank(tankId)
-  console.log("SmallTank", tank, tankId)
   const footer = useSendUpdate(tank.level / 100, conf, tank.customName)
 
   return (
