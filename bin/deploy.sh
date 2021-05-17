@@ -31,4 +31,4 @@ npm run compile
 
 echo "Uploading dist/* to ${USERNAME}@${HOST}:/var/www/venus/app"
 
-scp -r dist/* ${USERNAME}@${HOST}:/var/www/venus/app
+scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r dist/* ${USERNAME}@${HOST}:/var/www/venus/app
