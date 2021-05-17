@@ -17,7 +17,7 @@ export class StatusService {
   removeStatus = (status_part: string) => {
     if (this.isUpdatePresent(status_part)) {
       let sus = this.store.getValue().status.slice()
-      sus = sus.splice(
+      sus.splice(
         sus.findIndex((s) => s.part === status_part),
         1
       )

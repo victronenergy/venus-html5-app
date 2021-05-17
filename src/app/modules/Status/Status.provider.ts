@@ -33,6 +33,7 @@ export const useSendUpdate = (percent: number, conf: WidgetConfiguration, part: 
       }
     } else {
       statusService.removeStatus(part)
+      setLevel(STATUS_LEVELS.SUCCESS)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [percent])
