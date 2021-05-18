@@ -13,6 +13,7 @@ import { SIZE_BIG, SIZE_LONG, SIZE_SMALL } from "../../../components/Card"
 
 export const SCREEN_SIZES = {
   TALL: {
+    SIZE: 750,
     SM: 300,
     MD: 850,
     LG: 1250,
@@ -36,7 +37,7 @@ export const Metrics = () => {
     let size = window.innerHeight < SCREEN_SIZES.SHORT.SIZE ? SCREEN_SIZES.SHORT : SCREEN_SIZES.TALL
     if (window.innerWidth < size.MD) {
       pageNum = 3
-    } else if (window.innerWidth < size.LG) {
+    } else if (window.innerWidth < size.LG || window.innerHeight < size.SIZE) {
       pageNum = 2
       setCurrentPage(Math.min(1, currentPage))
     } else if (window.innerWidth >= size.LG) {
@@ -51,7 +52,7 @@ export const Metrics = () => {
           <div className={[getClassName(), "row", getIsHidden(0, pageNum)].join(" ")}>
             <Status size={[SIZE_BIG, SIZE_LONG]} />
 
-            <div className={window.innerWidth < size.SM ? "row" : "col-span-4"}>
+            <div className={window.innerWidth < size.SM ? "row" : "col-span-4 grid"}>
               <Battery size={SIZE_SMALL} />
               <ShorePower />
             </div>
@@ -69,7 +70,7 @@ export const Metrics = () => {
           <div className={["row", getClassName(), getIsHidden(2, pageNum)].join(" ")}>
             <BigTank tankId={TANKS_CONF.FRESH_WATER.DEVICE_ID!} conf={TANKS_CONF.FRESH_WATER} />
 
-            <div className={window.innerWidth < size.SM ? "row" : "col-span-4"}>
+            <div className={window.innerWidth < size.SM ? "row" : "col-span-4 grid"}>
               <SmallTank tankId={TANKS_CONF.GRAY_WATER.DEVICE_ID!} conf={TANKS_CONF.GRAY_WATER} />
               <SmallTank tankId={TANKS_CONF.BLACK_WATER.DEVICE_ID!} conf={TANKS_CONF.BLACK_WATER} />
             </div>
@@ -123,7 +124,7 @@ export const Metrics = () => {
 
   const scaleMetrics = () => {
     let screenHeight = window.innerHeight * 0.8
-    let screenWidth = window.innerWidth
+    let screenWidth = window.innerWidth * 0.9
 
     let childrenWidth = computeChildrenSize(metricsRef.current?.children[0], "clientWidth")
     let childrenHeight = computeChildrenSize(metricsRef.current, "clientHeight")
@@ -132,8 +133,7 @@ export const Metrics = () => {
       let widthRatio = childrenWidth / screenWidth
       let ratio = Math.max(heightRatio, widthRatio)
 
-      console.log(ratio)
-      if (metricsRef.current && ratio > 1) {
+      if (metricsRef.current) {
         ratio = ratio > 1 ? 0 : 1 - ratio
         let scaleFactor = 1 + ratio
         metricsRef.current.style.fontSize = scaleFactor + "rem"
