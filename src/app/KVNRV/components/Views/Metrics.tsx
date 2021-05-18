@@ -19,7 +19,7 @@ export const SCREEN_SIZES = {
   },
   SHORT: {
     SIZE: 750,
-    SM: 300,
+    SM: 670,
     MD: 975,
     LG: 1500,
   },
@@ -34,31 +34,30 @@ export const Metrics = () => {
   const computePages = () => {
     let pageNum = 1
     let size = window.innerHeight < SCREEN_SIZES.SHORT.SIZE ? SCREEN_SIZES.SHORT : SCREEN_SIZES.TALL
-    if (window.innerWidth >= size.LG) {
-      pageNum = 1
-      setCurrentPage(Math.min(0, currentPage))
-    } else if (window.innerWidth >= size.MD) {
+    if (window.innerWidth < size.MD) {
+      pageNum = 3
+    } else if (window.innerWidth < size.LG) {
       pageNum = 2
       setCurrentPage(Math.min(1, currentPage))
-    } else if (window.innerWidth >= size.SM) {
-      pageNum = 3
+    } else if (window.innerWidth >= size.LG) {
+      pageNum = 1
+      setCurrentPage(Math.min(0, currentPage))
     }
     setPages(pageNum)
 
     if (window.innerHeight < SCREEN_SIZES.SHORT.SIZE) {
       setLayout(
         <div className="row">
-          <div className={getClassName() + " row " + getIsHidden(0, pageNum)}>
+          <div className={[getClassName(), "row", getIsHidden(0, pageNum)].join(" ")}>
             <Status size={[SIZE_BIG, SIZE_LONG]} />
-            <div className={""}>
-              <div className="grid">
-                <Battery size={SIZE_SMALL} />
-                <ShorePower />
-              </div>
+
+            <div className={window.innerWidth < size.SM ? "row" : "col-span-4"}>
+              <Battery size={SIZE_SMALL} />
+              <ShorePower />
             </div>
           </div>
 
-          <div className={getClassName() + " grid " + getIsHidden(1, pageNum)}>
+          <div className={[getClassName(), getIsHidden(1, pageNum)].join(" ")}>
             <AcMode />
 
             <div className="row">
@@ -67,10 +66,10 @@ export const Metrics = () => {
             </div>
           </div>
 
-          <div className={getClassName() + " row " + getIsHidden(2, pageNum)}>
+          <div className={[getClassName(), getIsHidden(2, pageNum)].join(" ")}>
             <BigTank tankId={TANKS_CONF.FRESH_WATER.DEVICE_ID!} conf={TANKS_CONF.FRESH_WATER} />
 
-            <div className="grid">
+            <div className="row">
               <SmallTank tankId={TANKS_CONF.GRAY_WATER.DEVICE_ID!} conf={TANKS_CONF.GRAY_WATER} />
               <SmallTank tankId={TANKS_CONF.BLACK_WATER.DEVICE_ID!} conf={TANKS_CONF.BLACK_WATER} />
             </div>
@@ -122,7 +121,7 @@ export const Metrics = () => {
       .reduce((a: number, b: number) => a + b, 0)
   }
 
-  window.onresize = () => {
+  const scaleMetrics = () => {
     let screenHeight = window.innerHeight * 0.8
     let screenWidth = window.innerWidth
 
@@ -139,8 +138,21 @@ export const Metrics = () => {
         metricsRef.current.style.fontSize = scaleFactor + "rem"
       }
     }
-    computePages()
   }
+
+  useEffect(() => {
+    function resizeHandler() {
+      scaleMetrics()
+      computePages()
+    }
+    window.addEventListener("resize", resizeHandler)
+    setTimeout(resizeHandler, 100)
+    return () => {
+      window.removeEventListener("resize", resizeHandler)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   useEffect(() => {
     computePages()
     // eslint-disable-next-line react-hooks/exhaustive-deps
