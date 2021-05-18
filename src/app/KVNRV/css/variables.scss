@@ -12,18 +12,18 @@ $color-red: var(--color-red);
 $color-yellow-fade: #f0c587;
 $color-red-fade: #ed9895;
 
-$card-margin: 0.5rem;
+$card-margin: 0.5em;
 
-$card-height-small: 11rem;
+$card-height-small: 11em;
 $card-height-big: $card-height-small;
 
-$card-width-small: 11rem;
+$card-width-small: 11em;
 $card-width-big: ($card-width-small * 2) + ($card-margin * 2);
 
 $donut-size-small: $card-width-small / 1.7;
 $donut-width-big: $donut-size-small;
 $donut-height-big: $donut-width-big - $card-width-small / 6;
-$donut-offset: 0.24rem;
+$donut-offset: 0.24em;
 
 
 // app specific variables
@@ -38,7 +38,7 @@ $water-tank-height: $card-height-small * 1.4;
 $water-tank-water-width: $water-tank-width * 0.75;
 $water-tank-color: #01BDFE;
 
-$progress-height: 1.5rem;
-$progress-radius: 3rem;
+$progress-height: 1.5em;
+$progress-radius: 3em;
 
 $paginator-arrow-color: var(--paginator-arrow-color)

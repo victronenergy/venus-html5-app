@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import Battery from "../Battery"
 import DcLoads from "../DcLoads"
 import PvCharger from "../PvCharger"
@@ -12,51 +12,62 @@ import { TANKS_CONF } from "../../utils/constants"
 import { SIZE_BIG, SIZE_LONG, SIZE_SMALL } from "../../../components/Card"
 
 export const SCREEN_SIZES = {
-  SM: 300,
-  MD: 750,
-  LG: 1250,
-  SHORT: 700,
+  TALL: {
+    SM: 300,
+    MD: 850,
+    LG: 1250,
+  },
+  SHORT: {
+    SIZE: 750,
+    SM: 300,
+    MD: 975,
+    LG: 1500,
+  },
 }
 
 export const Metrics = () => {
   let [pages, setPages] = useState(1)
   let [currentPage, setCurrentPage] = useState(0)
   let [layout, setLayout] = useState(<></>)
+  const metricsRef = useRef<HTMLDivElement>(null)
 
   const computePages = () => {
     let pageNum = 1
-    if (window.innerWidth >= SCREEN_SIZES.LG) {
+    let size = window.innerHeight < SCREEN_SIZES.SHORT.SIZE ? SCREEN_SIZES.SHORT : SCREEN_SIZES.TALL
+    if (window.innerWidth >= size.LG) {
       pageNum = 1
       setCurrentPage(Math.min(0, currentPage))
-    } else if (window.innerWidth >= SCREEN_SIZES.MD) {
+    } else if (window.innerWidth >= size.MD) {
       pageNum = 2
       setCurrentPage(Math.min(1, currentPage))
-    } else if (window.innerWidth >= SCREEN_SIZES.SM) {
+    } else if (window.innerWidth >= size.SM) {
       pageNum = 3
     }
     setPages(pageNum)
 
-    if (window.innerHeight < SCREEN_SIZES.SHORT) {
+    if (window.innerHeight < SCREEN_SIZES.SHORT.SIZE) {
       setLayout(
         <div className="row">
-          <div className={"row " + getIsHidden(0, pageNum)}>
-            <Status size={[SIZE_SMALL, SIZE_LONG]} />
+          <div className={getClassName() + " row " + getIsHidden(0, pageNum)}>
+            <Status size={[SIZE_BIG, SIZE_LONG]} />
             <div className={""}>
-              <div className="row">
+              <div className="grid">
                 <Battery size={SIZE_SMALL} />
                 <ShorePower />
               </div>
-
-              <AcMode />
             </div>
           </div>
 
-          <div className={"grid " + getIsHidden(1, pageNum)}>
-            <DcLoads />
-            <AcLoads />
+          <div className={getClassName() + " grid " + getIsHidden(1, pageNum)}>
+            <AcMode />
+
+            <div className="row">
+              <DcLoads />
+              <AcLoads />
+            </div>
           </div>
 
-          <div className={"row " + getIsHidden(2, pageNum)}>
+          <div className={getClassName() + " row " + getIsHidden(2, pageNum)}>
             <BigTank tankId={TANKS_CONF.FRESH_WATER.DEVICE_ID!} conf={TANKS_CONF.FRESH_WATER} />
 
             <div className="grid">
@@ -102,7 +113,34 @@ export const Metrics = () => {
     }
   }
 
-  window.onresize = computePages
+  const computeChildrenSize = (el: Element | null | undefined, property: string) => {
+    if (!el) {
+      return null
+    }
+    return Array.from(el.children)
+      .map((child) => child[property as keyof Element] as number)
+      .reduce((a: number, b: number) => a + b, 0)
+  }
+
+  window.onresize = () => {
+    let screenHeight = window.innerHeight * 0.8
+    let screenWidth = window.innerWidth
+
+    let childrenWidth = computeChildrenSize(metricsRef.current?.children[0], "clientWidth")
+    let childrenHeight = computeChildrenSize(metricsRef.current, "clientHeight")
+    if (childrenWidth && childrenHeight) {
+      let heightRatio = childrenHeight / screenHeight
+      let widthRatio = childrenWidth / screenWidth
+      let ratio = Math.max(heightRatio, widthRatio)
+
+      if (metricsRef.current) {
+        ratio = ratio > 1 ? 0 : 1 - ratio
+        let scaleFactor = 1 + ratio
+        metricsRef.current.style.fontSize = scaleFactor + "rem"
+      }
+    }
+    computePages()
+  }
   useEffect(() => {
     computePages()
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -143,7 +181,7 @@ export const Metrics = () => {
   }
 
   return (
-    <div className="metrics-container">
+    <div className="metrics-container" ref={metricsRef}>
       {layout}
 
       {pages > 1 && <Paginator pages={pages} currentPage={currentPage} setCurrentPage={setCurrentPage} />}

@@ -3,28 +3,28 @@
 .metrics__status {
   .title {
     font-size: $indicator-main-font-value-big;
-    margin-bottom: 1rem;
+    margin-bottom: 0.6em;
   }
 
   .subheading {
     font-size: $indicator-main-font-name-small;
     color: $color-gray;
-    justify-content: space-between;
+    justify-content: space-between !important;
   }
 
   .status-updates {
-    margin-top: 1rem;
-    height: 10rem;
+    margin-top: 1em;
+    height: 10em;
     overflow: auto;
 
     &.small {
-      height: 7rem;
+      height: 7em;
     }
 
     .status-update {
-      margin-top: 1rem;
+      margin-top: 1em;
       border-radius: 5px;
-      padding: 0.3rem;
+      padding: 0.3em;
       color: white;
       font-size: 0.9rem;
       justify-content: space-between;
@@ -42,12 +42,12 @@
       }
 
       .status-update__message {
-        margin-left: 0.2rem;
+        margin-left: 0.2em;
       }
 
       .status-update__icon {
-        margin-right: 0.2rem;
-        padding: 0.2rem;
+        margin-right: 0.2em;
+        padding: 0.2em;
         border-radius: 5px;
       }
     }

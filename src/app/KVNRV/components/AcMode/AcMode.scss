@@ -7,10 +7,6 @@
 
   .name {
     font-size: 1rem;
-
-    &:nth-child(n+2) {
-      margin-top: 0.5rem;
-    }
   }
 
   .ac_mode__mode {
@@ -28,7 +24,7 @@
   width: 100%;
 
   .name:nth-child(n+2) {
-    margin-top: 0.9rem;
+    margin-top: 0.9em;
   }
 
   .ac_mode_modal__group {
@@ -39,12 +35,12 @@
 
     .ac_mode_modal__button {
       flex-grow: 1;
-      margin: 0.3rem;
+      margin: 0.3em;
       border-radius: 5px;
       border: none;
       color: $color-darkgray;
       background-color: $color-lightgray;
-      padding: 0.7rem;
+      padding: 0.7em;
       font-size: 0.9rem;
 
       &.success {
