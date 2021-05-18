@@ -66,10 +66,10 @@ export const Metrics = () => {
             </div>
           </div>
 
-          <div className={[getClassName(), getIsHidden(2, pageNum)].join(" ")}>
+          <div className={["row", getClassName(), getIsHidden(2, pageNum)].join(" ")}>
             <BigTank tankId={TANKS_CONF.FRESH_WATER.DEVICE_ID!} conf={TANKS_CONF.FRESH_WATER} />
 
-            <div className="row">
+            <div className={window.innerWidth < size.SM ? "row" : "col-span-4"}>
               <SmallTank tankId={TANKS_CONF.GRAY_WATER.DEVICE_ID!} conf={TANKS_CONF.GRAY_WATER} />
               <SmallTank tankId={TANKS_CONF.BLACK_WATER.DEVICE_ID!} conf={TANKS_CONF.BLACK_WATER} />
             </div>
@@ -132,7 +132,8 @@ export const Metrics = () => {
       let widthRatio = childrenWidth / screenWidth
       let ratio = Math.max(heightRatio, widthRatio)
 
-      if (metricsRef.current) {
+      console.log(ratio)
+      if (metricsRef.current && ratio > 1) {
         ratio = ratio > 1 ? 0 : 1 - ratio
         let scaleFactor = 1 + ratio
         metricsRef.current.style.fontSize = scaleFactor + "rem"
