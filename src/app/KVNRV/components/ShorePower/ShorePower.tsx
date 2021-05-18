@@ -14,25 +14,25 @@ export const ShorePower = () => {
   const normalizedPower = normalizePower(power && power[0] ? power[0] : 0, SHORE_POWER_CONF.MAX)
   useSendUpdate(normalizedPower, SHORE_POWER_CONF, "Shore Power")
 
-  if (!(current && voltage && power)) {
-    return <NotAvailable />
-  }
-
   return (
     <div className="">
       <Card title={"Shore Power"} size={SIZE_SMALL}>
         <div className="gauge">
-          <DonutIndicator value={power[0]} percent={normalizedPower} parts={SHORE_POWER_CONF.THRESHOLDS} unit={"W"} />
+          {power ? (
+            <DonutIndicator value={power[0]} percent={normalizedPower} parts={SHORE_POWER_CONF.THRESHOLDS} unit={"W"} />
+          ) : (
+            <NotAvailable />
+          )}
 
           <div className={"info-bar"}>
             <div className={"info-bar__cell"}>
-              <NumericValue value={voltage[0] ?? 0} unit={"V"} precision={0} />
+              <NumericValue value={voltage ? voltage[0] : undefined} unit={"V"} precision={0} />
             </div>
             <div className={"info-bar__cell"}>
-              <NumericValue value={current[0] ?? 0} unit={"A"} precision={0} />
+              <NumericValue value={current ? current[0] : undefined} unit={"A"} precision={0} />
             </div>
             <div className={"info-bar__cell"}>
-              <NumericValue value={frequency[0] ?? 0} unit={"Hz"} precision={0} />
+              <NumericValue value={frequency ? frequency[0] : undefined} unit={"Hz"} precision={0} />
             </div>
           </div>
         </div>

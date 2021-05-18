@@ -1,5 +1,5 @@
 import React from "react"
-import { Card, SIZE_BIG } from "../../../components/Card"
+import { Card, SIZE_SMALL } from "../../../components/Card"
 
 import { BATTERY_STATE } from "../../../utils/constants"
 import { useBattery } from "../../../modules"
@@ -41,7 +41,11 @@ function getClassname(idx: number, batteryLevelBars: number) {
   return c
 }
 
-export const Batteries = () => {
+type BatteryProps = {
+  size: string
+}
+
+export const Batteries = ({ size }: BatteryProps) => {
   const { batteries } = useBattery()
 
   if (batteries && batteries[0]) {
@@ -50,10 +54,10 @@ export const Batteries = () => {
     const batteryLevelBars = Math.ceil(battery.soc / (100 / CELL_NUMBER))
     return (
       <div className="">
-        <Card title={"Battery"} size={SIZE_BIG}>
+        <Card title={"Battery"} size={size}>
           <div className={"battery"}>
-            <div className="battery__group">
-              <div className="indicator-main">
+            <div className={"battery__group " + size}>
+              <div className={"indicator-main" + (size === SIZE_SMALL ? "--small" : "")}>
                 <div>
                   <NumericValue value={battery.soc} unit="%" defaultValue={"--"} precision={1} />
                   <br />
@@ -61,23 +65,24 @@ export const Batteries = () => {
                 {batteryStateLabel && <div className="name">{batteryStateLabel}</div>}
               </div>
 
-              <span>
+              <div>
                 <div className="indicator">
-                  <span className="name">Power</span>
-                  <NumericValue value={battery.power} unit="V" defaultValue={"--"} precision={0} />
+                  <span className="name">Voltage</span>
+                  <NumericValue value={battery.voltage} unit="V" defaultValue={"--"} precision={2} />
                 </div>
-
-                <div className="indicator">
-                  <span className="name">Current</span>
-                  <NumericValue value={battery.current} unit="A" defaultValue={"--"} precision={0} />
-                </div>
-              </span>
+                {size !== SIZE_SMALL && (
+                  <div className="indicator">
+                    <span className="name">Current</span>
+                    <NumericValue value={battery.current} unit="A" defaultValue={"--"} precision={1} />
+                  </div>
+                )}
+              </div>
             </div>
 
             <div className="battery__charge">
               <div className="battery__charge__top" />
               <div className="battery__charge__body">
-                {Array.from(Array(5).keys())
+                {Array.from(Array(batteryLevelBars).keys())
                   .reverse()
                   .map((idx) => (
                     <div
@@ -94,7 +99,7 @@ export const Batteries = () => {
   } else {
     return (
       <div className="">
-        <Card title={"Battery"} size={SIZE_BIG}>
+        <Card title={"Battery"} size={size}>
           <div className={"gauge"}>
             <NotAvailable />
           </div>

@@ -5,61 +5,14 @@
   flex-direction: row;
 
   .indicator-main {
-    min-width: fit-content;
+    flex: 1;
   }
 
-  .wrapper {
-    width: 100%;
-
-    .water-tank {
-      width: $water-tank-width;
-      align-self: flex-end;
-      position: relative;
-      padding: 0.3rem;
-      float: right;
-
-      .water-tank__outline {
-        width: $water-tank-width;
-        height: $water-tank-height;
-        background: var(--water-tank-img) center/90% no-repeat;
-      }
-
-      .water-tank__text {
-        position: absolute;
-        bottom: 2rem;
-        left: 50%;
-        z-index: 2;
-
-        .value {
-          position: relative;
-          left: -32%;
-          font-size: $indicator-main-font-name-big;
-        }
-      }
-
-      .water-tank__water {
-        position: absolute;
-        bottom: 0.7rem;
-        right: 0.85rem;
-        height: 13rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-
-        .water-tank__water__top {
-          width: $water-tank-water-width;
-          border-radius: 0;
-        }
-
-        .water-tank__water__body {
-          margin-top: -1px;
-          border-radius: 0 0 4px 4px;
-          width: $water-tank-water-width;
-          background-color: $water-tank-color;
-          transition: height 0.3s ease-in-out;
-          height: 3rem;
-        }
-      }
+  .tank-illustration {
+    flex: 1;
+    svg {
+      width: 100%;
+      height: auto;
     }
   }
 }

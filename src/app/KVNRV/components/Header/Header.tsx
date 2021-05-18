@@ -58,7 +58,7 @@ export const Header = () => {
           <label htmlFor="header__buttons__darkmode__input" className="header__buttons__darkmode__switch">
             <input
               type="checkbox"
-              checked={darkMode}
+              checked={darkMode ?? true}
               onChange={(e) => themeService.setTheme(!darkMode)}
               id="header__buttons__darkmode__input"
             />

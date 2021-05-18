@@ -1,15 +1,18 @@
 import React from "react"
 
-import { Card, SIZE_BIG, SIZE_LONG } from "../../../components/Card"
+import { Card } from "../../../components/Card"
 import { Footer } from "../../../components/Card/Card"
 import IconWarning from "../../images/IconWarning.svg"
 import "./Status.scss"
 import { STATUS_LEVELS, STATUS_LEVELS_MSG } from "../../utils/constants"
 import { StatusUpdate, useStatus } from "../../../modules"
 
-export const Status = () => {
+type StatusProps = {
+  size: string[]
+}
+
+export const Status = ({ size }: StatusProps) => {
   const { statuses } = useStatus()
-  console.log("Status@useStatus", statuses)
 
   const footer: Footer = {
     status: STATUS_LEVELS.SUCCESS,
@@ -19,14 +22,14 @@ export const Status = () => {
 
   return (
     <div className="metrics__status">
-      <Card title={"Status"} size={[SIZE_BIG, SIZE_LONG]} footer={footer}>
+      <Card title={"Status"} size={size} footer={footer}>
         <div className={"title"}>Penny's House</div>
         <div className={"subheading row"}>
           <div className={"subheading__model"}>Class A Motor Home</div>
           <div className={"subheading__year"}>Model: 2016</div>
         </div>
 
-        <div className={"status-updates"}>
+        <div className={"status-updates " + size.join(" ")}>
           {statuses &&
             statuses.map((update: StatusUpdate) => (
               <div className={"status-update row " + update.level} key={"status-update-" + update.part}>

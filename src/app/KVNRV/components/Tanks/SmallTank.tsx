@@ -12,7 +12,6 @@ import { useSendUpdate } from "../../../modules"
 
 export const SmallTank = ({ tankId, conf }: TankProps) => {
   const tank = useTank(tankId)
-  console.log("SmallTank", tank, tankId)
   const footer = useSendUpdate(tank.level / 100, conf, tank.customName)
 
   return (
@@ -24,7 +23,7 @@ export const SmallTank = ({ tankId, conf }: TankProps) => {
               <div className="indicator-main--small">
                 <span>
                   <NumericValue value={tank.level} unit="%" defaultValue={"--"} precision={0} />
-                  <span className="name">{formatNumber({ value: tank.capacity * 1000, unit: "L" })}</span>
+                  <span className="name">{formatNumber({ value: tank.remaining * 1000, unit: "L" })}</span>
                 </span>
               </div>
 

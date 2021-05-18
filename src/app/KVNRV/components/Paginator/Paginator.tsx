@@ -27,7 +27,7 @@ export const Paginator = ({ pages, currentPage, setCurrentPage }: PaginatorProps
       />
 
       {Array.from(Array(pages).keys()).map((i) => (
-        <div className={"paginator__dot" + (i === currentPage ? " warning" : "")} />
+        <div key={i} className={"paginator__dot" + (i === currentPage ? " warning" : "")} />
       ))}
 
       <img
