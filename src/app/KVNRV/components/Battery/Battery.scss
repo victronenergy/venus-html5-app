@@ -30,9 +30,6 @@ $battery-height: 5rem;
       }
     }
 
-    @media #{$minimum} {
-      flex-direction: column;
-    }
   }
 
   .battery__charge {
