@@ -73,7 +73,7 @@ export class DonutIndicator extends PureComponent<DonutIndicatorProps> {
                 ctx.textBaseline = "middle"
                 ctx.fillStyle = this.getColors().textColor
 
-                let text = formatNumber({ value: this.props.value, unit: this.props.unit, precision: 0 }),
+                let text = formatNumber({ value: this.props.value, unit: this.props.unit, prefix: true }),
                   textX = Math.round((width - ctx.measureText(text).width) / 2),
                   textY = height / 2 + height * 0.25
 
