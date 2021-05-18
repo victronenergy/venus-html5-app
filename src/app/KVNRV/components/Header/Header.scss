@@ -48,7 +48,7 @@
     display: flex;
     flex-direction: row;
 
-    .header__buttons__lock, .header__buttons__remote {
+    .header__buttons__remote-console, .header__buttons__remote-connection {
       font-size: 1.2rem;
       background-color: $header-button-color;
       color: $color-white;
