@@ -11,11 +11,11 @@ import { TankProps } from "./index"
 
 export const BigTank = ({ tankId, conf }: TankProps) => {
   const tank = useTank(tankId)
-  const footer = useSendUpdate(1 - tank.level / 100, conf, tank.customName)
+  const footer = useSendUpdate(1 - tank.level / 100, conf, tank.customName ?? tank.productName)
 
   return (
     <div className="">
-      <Card title={tank?.customName ?? "--"} size={[SIZE_BIG, SIZE_LONG]} footer={footer}>
+      <Card title={tank?.customName ?? tank.productName} size={[SIZE_BIG, SIZE_LONG]} footer={footer}>
         {tank ? (
           <div className="big-tank">
             <div className="indicator-main">

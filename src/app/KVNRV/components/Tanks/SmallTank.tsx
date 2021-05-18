@@ -12,11 +12,11 @@ import { useSendUpdate } from "../../../modules"
 
 export const SmallTank = ({ tankId, conf }: TankProps) => {
   const tank = useTank(tankId)
-  const footer = useSendUpdate(tank.level / 100, conf, tank.customName)
+  const footer = useSendUpdate(tank.level / 100, conf, tank.customName ?? tank.productName)
 
   return (
     <div className="">
-      <Card title={tank?.customName ?? "--"} size={SIZE_SMALL} footer={footer}>
+      <Card title={tank?.customName ?? tank.productName} size={SIZE_SMALL} footer={footer}>
         <div className="gauge">
           {tank ? (
             <div className={"small-tank"}>
