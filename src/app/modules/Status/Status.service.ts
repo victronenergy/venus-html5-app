@@ -8,10 +8,16 @@ export class StatusService {
   }
 
   addStatus = (status: StatusUpdate) => {
-    if (status.part && this.isUpdatePresent(status.part) === false) {
+    if (status.part && !this.isUpdatePresent(status.part)) {
       let sus = this.store.getValue().status.slice()
       sus.push(status)
       this.store.update({ status: sus })
+    } else {
+      const existingStatus = this.store.getValue()?.status?.find((s) => s.part === status.part)
+      if (existingStatus && existingStatus.level !== status.level) {
+        this.removeStatus(status.part)
+        this.addStatus(status)
+      }
     }
   }
   removeStatus = (status_part: string) => {
