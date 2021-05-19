@@ -33,8 +33,16 @@
   <div class="title">Window:
     <span class="info" id="width"></span> x <span class="info" id="height"></span>
   </div>
-  <div class="title">Device pixel ratio: 
+  <div class="title">Device pixel ratio:
     <span class="info" id="devicePixelRatio"></span>
+  </div>
+
+  <div class="title">localStorage:
+    <span class="info" id="localStorageSupport"></span>
+  </div>
+
+  <div class="title">window.localStorage:
+    <span class="info" id="windowLocalStorageSupport"></span>
   </div>
   <div class="title">Query params: <span class="info" id="params"></span></div>
   <button id="back" onclick="goBack();">Go back</button>
@@ -56,6 +64,39 @@
       document.getElementById('width').innerHTML = window.innerWidth;
       document.getElementById('height').innerHTML = window.innerHeight;
     })
+
+    if (typeof window.localStorage !== 'undefined') {
+      try {
+        window.localStorage.setItem('feature_test', 'yes');
+        if (localStorage.getItem('feature_test') === 'yes') {
+          window.localStorage.removeItem('feature_test');
+          document.getElementById('localStorageSupport').innerHTML = "Enabled";
+        } else {
+          document.getElementById('localStorageSupport').innerHTML = "Disabled";
+        }
+      } catch (e) {
+        document.getElementById('localStorageSupport').innerHTML = "Disabled with exception:" + e;
+      }
+    } else {
+      document.getElementById('localStorageSupport').innerHTML = "Not available";
+    }
+
+    if (typeof window.localStorage !== 'undefined') {
+      try {
+        window.localStorage.setItem('feature_test', 'yes');
+        if (localStorage.getItem('feature_test') === 'yes') {
+          window.localStorage.removeItem('feature_test');
+          document.getElementById('windowLocalStorageSupport').innerHTML = "Enabled";
+        } else {
+          document.getElementById('windowLocalStorageSupport').innerHTML = "Disabled";
+        }
+      } catch (e) {
+        document.getElementById('windowLocalStorageSupport').innerHTML = "Disabled with exception:" + e;
+      }
+    } else {
+      document.getElementById('windowLocalStorageSupport').innerHTML = "Not available";
+    }
+
   })()
 </script>
 
