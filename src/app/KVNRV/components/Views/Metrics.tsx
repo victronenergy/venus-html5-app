@@ -4,7 +4,6 @@ import DcLoads from "../DcLoads"
 import PvCharger from "../PvCharger"
 import AcLoads from "../AcLoads"
 import Status from "../Status"
-import ShorePower from "../ShorePower"
 import AcMode from "../AcMode"
 import Paginator from "../Paginator"
 import { BigTank, SmallTank } from "../Tanks"
@@ -84,7 +83,7 @@ export const Metrics = () => {
 
             <div className="row">
               <PvCharger />
-              <ShorePower />
+              <AcLoads />
             </div>
           </div>
 
@@ -93,17 +92,11 @@ export const Metrics = () => {
             <AcMode />
           </div>
 
+          <div className={[getClassName(), getIsHidden(2, pageNum)].join(" ")}>
             <div className="row">
               <DcLoads />
-              <AcLoads />
+              <SmallTank tankId={TANKS_CONF.FRESH_WATER.DEVICE_ID!} conf={TANKS_CONF.FRESH_WATER} invert={true} />
             </div>
-
-            <AcMode />
-          </div>
-
-          <div className={[getClassName(), getIsHidden(2, pageNum)].join(" ")}>
-            <BigTank tankId={TANKS_CONF.FRESH_WATER.DEVICE_ID!} conf={TANKS_CONF.FRESH_WATER} invert={true} />
-
             <div className="row">
               <SmallTank tankId={TANKS_CONF.GRAY_WATER.DEVICE_ID!} conf={TANKS_CONF.GRAY_WATER} invert={false} />
               <SmallTank tankId={TANKS_CONF.BLACK_WATER.DEVICE_ID!} conf={TANKS_CONF.BLACK_WATER} invert={false} />
