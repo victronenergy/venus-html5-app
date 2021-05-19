@@ -10,11 +10,12 @@
     font-size: $indicator-main-font-name-small;
     color: $color-gray;
     justify-content: space-between !important;
+    margin-top: 0.5rem;
   }
 
   .status-updates {
     margin-top: 1em;
-    height: 10em;
+    height: 9em;
     overflow: auto;
 
     &.small {
