@@ -1,5 +1,5 @@
 import React from "react"
-import { Card, SIZE_SMALL } from "../../../components/Card"
+import { Card, SIZE_NARROW, SIZE_SHORT } from "../../../components/Card"
 import DonutIndicator from "../../../components/DonutIndicator"
 import { useDcLoads, useSendUpdate } from "../../../modules"
 import { DC_CONF } from "../../utils/constants"
@@ -14,19 +14,17 @@ export const DcLoads = () => {
   useSendUpdate(normalizedPower, DC_CONF, "DC Loads")
 
   return (
-    <div className="">
-      <Card title={"DC Loads"} size={SIZE_SMALL}>
-        <div className="gauge">
-          <DonutIndicator value={power} percent={normalizedPower} parts={DC_CONF.THRESHOLDS} unit={"W"} />
+    <Card title={"DC Loads"} size={[SIZE_SHORT, SIZE_NARROW]}>
+      <div className="gauge">
+        <DonutIndicator value={power} percent={normalizedPower} parts={DC_CONF.THRESHOLDS} unit={"W"} />
 
-          <div className={"info-bar"}>
-            <div className={"info-bar__cell"}>
-              <NumericValue value={voltage} unit={"A"} precision={0} />
-            </div>
+        <div className={"info-bar"}>
+          <div className={"info-bar__cell"}>
+            <NumericValue value={voltage} unit={"A"} precision={0} />
           </div>
         </div>
-      </Card>
-    </div>
+      </div>
+    </Card>
   )
 }
 

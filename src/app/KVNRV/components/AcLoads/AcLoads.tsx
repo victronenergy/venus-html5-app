@@ -1,7 +1,7 @@
 import React from "react"
 
 import { useAcLoads, useSendUpdate } from "../../../modules"
-import { Card, SIZE_SMALL } from "../../../components/Card"
+import { Card, SIZE_NARROW, SIZE_SHORT } from "../../../components/Card"
 import { normalizePower } from "../../utils/helpers"
 import { AC_CONF } from "../../utils/constants"
 import NumericValue from "../../../components/NumericValue"
@@ -14,29 +14,27 @@ export const AcLoads = () => {
   useSendUpdate(normalizedPower, AC_CONF, "AC Loads")
 
   return (
-    <div className="">
-      <Card title={"AC Loads"} size={SIZE_SMALL}>
-        <div className="gauge">
-          {power ? (
-            <DonutIndicator value={power[0] ?? 0} percent={normalizedPower} parts={AC_CONF.THRESHOLDS} unit={"W"} />
-          ) : (
-            <NotAvailable />
-          )}
+    <Card title={"AC Loads"} size={[SIZE_SHORT, SIZE_NARROW]}>
+      <div className="gauge">
+        {power ? (
+          <DonutIndicator value={power[0] ?? 0} percent={normalizedPower} parts={AC_CONF.THRESHOLDS} unit={"W"} />
+        ) : (
+          <NotAvailable />
+        )}
 
-          <div className={"info-bar"}>
-            <div className={"info-bar__cell"}>
-              <NumericValue value={voltage ? voltage[0] : undefined} unit={"V"} precision={0} />
-            </div>
-            <div className={"info-bar__cell"}>
-              <NumericValue value={current ? current[0] : undefined} unit={"A"} precision={0} />
-            </div>
-            <div className={"info-bar__cell"}>
-              <NumericValue value={frequency ? frequency[0] : undefined} unit={"Hz"} precision={0} />
-            </div>
+        <div className={"info-bar"}>
+          <div className={"info-bar__cell"}>
+            <NumericValue value={voltage ? voltage[0] : undefined} unit={"V"} precision={0} />
+          </div>
+          <div className={"info-bar__cell"}>
+            <NumericValue value={current ? current[0] : undefined} unit={"A"} precision={0} />
+          </div>
+          <div className={"info-bar__cell"}>
+            <NumericValue value={frequency ? frequency[0] : undefined} unit={"Hz"} precision={0} />
           </div>
         </div>
-      </Card>
-    </div>
+      </div>
+    </Card>
   )
 }
 

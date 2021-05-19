@@ -1,6 +1,6 @@
 import React from "react"
 
-import { Card, SIZE_SMALL } from "../../../components/Card"
+import { Card, SIZE_NARROW, SIZE_SHORT } from "../../../components/Card"
 import { NotAvailable } from "../NotAvailable"
 import NumericValue, { formatNumber } from "../../../components/NumericValue"
 import ProgressIndicator from "../../components/ProgressIndicator"
@@ -20,7 +20,7 @@ export const SmallTank = ({ tankId, conf, invert }: TankProps) => {
 
   return (
     <div className="">
-      <Card title={tank?.customName ?? tank.productName} size={SIZE_SMALL} footer={footer}>
+      <Card title={tank?.customName ?? tank.productName} size={[SIZE_SHORT, SIZE_NARROW]} footer={footer}>
         <div className="gauge">
           {tank ? (
             <div className={"small-tank"}>

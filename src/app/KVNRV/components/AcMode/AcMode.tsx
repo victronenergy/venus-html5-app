@@ -1,12 +1,15 @@
 import React, { useState } from "react"
 
-import { Card, SIZE_BIG, ICON_SETTINGS } from "../../../components/Card"
-import { AC_MODE } from "../../utils/constants"
-import NumericValue from "../../../components/NumericValue"
+import { Card, SIZE_WIDE, ICON_SETTINGS, SIZE_SHORT } from "../../../components/Card"
+import { AC_MODE, SHORE_POWER_CONF } from "../../utils/constants"
+import NumericValue, { formatNumber } from "../../../components/NumericValue"
 import { AcModeModal } from "./AcModeModal"
 
 import "./AcMode.scss"
-import { useAcMode } from "../../../modules"
+import { useAcMode, useActiveInValues, useSendUpdate } from "../../../modules"
+import { normalizePower } from "../../utils/helpers"
+import DonutIndicator from "../../../components/DonutIndicator"
+import { NotAvailable } from "../NotAvailable"
 
 export const acModeFormatter = (value: number) => {
   switch (value) {
@@ -25,21 +28,42 @@ export const acModeFormatter = (value: number) => {
 
 export const AcMode = () => {
   const { mode, limit, updateMode, updateLimit } = useAcMode()
+  const { current, frequency, voltage, power } = useActiveInValues()
+  const normalizedPower = normalizePower(power && power[0] ? power[0] : 0, SHORE_POWER_CONF.MAX)
+  useSendUpdate(normalizedPower, SHORE_POWER_CONF, "Shore Power")
 
   const [modalOpen, setModalOpen] = useState(false)
 
   return (
-    <div className="">
-      <Card title={"AC Mode"} icon={ICON_SETTINGS} size={SIZE_BIG} onIconClick={() => setModalOpen(true)}>
-        <div className="indicator-main--small ac_mode">
-          <div className="name">Input limit</div>
-          <div>
-            <NumericValue value={limit} unit={"A"} precision={0} />
-          </div>
+    <div className="ac_mode">
+      <Card
+        title={"AC Mode"}
+        icon={ICON_SETTINGS}
+        size={[SIZE_WIDE, SIZE_SHORT]}
+        onIconClick={() => setModalOpen(true)}
+        infoText={"Limit: " + formatNumber({ value: limit, unit: "A" })}
+      >
+        <div className="gauge">
+          {power ? (
+            <DonutIndicator value={power[0]} percent={normalizedPower} parts={SHORE_POWER_CONF.THRESHOLDS} unit={"W"} />
+          ) : (
+            <NotAvailable />
+          )}
 
-          <div className="name">Mode</div>
-          <div className={"ac_mode__mode"}>{acModeFormatter(Number(mode))}</div>
+          <div className={"info-bar"}>
+            <div className={"info-bar__cell"}>
+              <NumericValue value={voltage ? voltage[0] : undefined} unit={"V"} precision={0} />
+            </div>
+            <div className={"info-bar__cell"}>
+              <NumericValue value={current ? current[0] : undefined} unit={"A"} precision={0} />
+            </div>
+            <div className={"info-bar__cell"}>
+              <NumericValue value={frequency ? frequency[0] : undefined} unit={"Hz"} precision={0} />
+            </div>
+            <div className={"info-bar__cell ac_mode__mode"}>{acModeFormatter(Number(mode))}</div>
+          </div>
         </div>
+
         {modalOpen && (
           <AcModeModal
             mode={Number(mode)}

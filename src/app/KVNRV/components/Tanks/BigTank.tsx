@@ -1,4 +1,4 @@
-import { Card, SIZE_BIG, SIZE_LONG } from "../../../components/Card"
+import { Card, SIZE_WIDE, SIZE_LONG } from "../../../components/Card"
 import { NotAvailable } from "../NotAvailable"
 import NumericValue, { formatNumber } from "../../../components/NumericValue"
 import { useSendUpdate, useTank } from "../../../modules"
@@ -13,7 +13,7 @@ export const BigTank = ({ tankId, conf, invert }: TankProps) => {
 
   return (
     <div className="">
-      <Card title={tank?.customName ?? tank.productName} size={[SIZE_BIG, SIZE_LONG]} footer={footer}>
+      <Card title={tank?.customName ?? tank.productName} size={[SIZE_WIDE, SIZE_LONG]} footer={footer}>
         {tank ? (
           <div className="big-tank">
             <div className="indicator-main">

@@ -1,5 +1,5 @@
 import React from "react"
-import { Card, SIZE_SMALL } from "../../../components/Card"
+import { Card, SIZE_SHORT } from "../../../components/Card"
 
 import { BATTERY_STATE } from "../../../utils/constants"
 import { useBattery } from "../../../modules"
@@ -42,7 +42,7 @@ function getClassname(idx: number, batteryLevelBars: number) {
 }
 
 type BatteryProps = {
-  size: string
+  size: string[]
 }
 
 export const Batteries = ({ size }: BatteryProps) => {

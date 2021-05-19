@@ -16,8 +16,9 @@ type CardProps = {
   footer?: Footer
 }
 
-export const SIZE_SMALL = "small"
-export const SIZE_BIG = "big"
+export const SIZE_SHORT = "short"
+export const SIZE_WIDE = "wide"
+export const SIZE_NARROW = "narrow"
 export const SIZE_LONG = "long"
 
 export const ICON_SETTINGS = "settings"

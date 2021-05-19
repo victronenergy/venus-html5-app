@@ -9,7 +9,7 @@ import AcMode from "../AcMode"
 import Paginator from "../Paginator"
 import { BigTank, SmallTank } from "../Tanks"
 import { TANKS_CONF } from "../../utils/constants"
-import { SIZE_BIG, SIZE_LONG, SIZE_SMALL } from "../../../components/Card"
+import { SIZE_WIDE, SIZE_LONG, SIZE_SHORT } from "../../../components/Card"
 
 export const SCREEN_SIZES = {
   TALL: {
@@ -50,11 +50,10 @@ export const Metrics = () => {
       setLayout(
         <div className="row">
           <div className={[getClassName(), "row", getIsHidden(0, pageNum)].join(" ")}>
-            <Status size={[SIZE_BIG, SIZE_LONG]} />
+            <Status size={[SIZE_WIDE, SIZE_LONG]} />
 
             <div className={window.innerWidth < size.SM ? "row" : "col-span-4 grid"}>
-              <Battery size={SIZE_SMALL} />
-              <ShorePower />
+              <Battery size={[SIZE_WIDE, SIZE_SHORT]} />
             </div>
           </div>
 
@@ -81,7 +80,7 @@ export const Metrics = () => {
       setLayout(
         <div className="row">
           <div className={[getClassName(), getIsHidden(0, pageNum)].join(" ")}>
-            <Status size={[SIZE_BIG, SIZE_LONG]} />
+            <Status size={[SIZE_WIDE, SIZE_LONG]} />
 
             <div className="row">
               <PvCharger />
@@ -89,8 +88,10 @@ export const Metrics = () => {
             </div>
           </div>
 
-          <div className={[getClassName(), getIsHidden(1, pageNum)].join(" ")}>
-            <Battery size={SIZE_BIG} />
+          <div className={["grid", getClassName(), getIsHidden(1, pageNum)].join(" ")}>
+            <Battery size={[SIZE_WIDE, SIZE_LONG]} />
+            <AcMode />
+          </div>
 
             <div className="row">
               <DcLoads />
