@@ -6,9 +6,10 @@ import { TankProps } from "./index"
 
 import "./BigTank.scss"
 
-export const BigTank = ({ tankId, conf }: TankProps) => {
+export const BigTank = ({ tankId, conf, invert }: TankProps) => {
   const tank = useTank(tankId)
-  const footer = useSendUpdate(1 - tank.level / 100, conf, tank.customName ?? tank.productName)
+  const tankLevel = tank.level / 100 ?? 0
+  const footer = useSendUpdate(invert ? 1 - tankLevel : tankLevel, conf, tank.customName ?? tank.productName)
 
   return (
     <div className="">
@@ -17,7 +18,7 @@ export const BigTank = ({ tankId, conf }: TankProps) => {
           <div className="big-tank">
             <div className="indicator-main">
               <span>
-                <NumericValue value={tank.level} unit="%" defaultValue={"--"} precision={0} />
+                <NumericValue value={tankLevel} unit="%" defaultValue={"--"} precision={0} />
                 <div className="name">{formatNumber({ value: tank.remaining * 1000, unit: "L" })}</div>
               </span>
             </div>
@@ -32,7 +33,7 @@ export const BigTank = ({ tankId, conf }: TankProps) => {
                   <rect x="61" y="1" width="81" height="8" rx="3"></rect>
                 </g>
                 <g fill="#00BFFF" clipPath="url(#tank-clip-path)">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 2250" y={100 - (tank.level ?? 0) + "%"}>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 2250" y={100 - (tankLevel ?? 0) + "%"}>
                     <path d="M0,192L48,176C96,160,192,128,288,138.7C384,149,480,203,576,234.7C672,267,768,277,864,261.3C960,245,1056,203,1152,186.7C1248,171,1344,181,1392,186.7L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
                     <rect x="0" y="315" width="100%" height="100%"></rect>
                   </svg>

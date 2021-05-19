@@ -10,9 +10,13 @@ import { useTank } from "../../../modules"
 import { TankProps } from "./index"
 import { useSendUpdate } from "../../../modules"
 
-export const SmallTank = ({ tankId, conf }: TankProps) => {
+export const SmallTank = ({ tankId, conf, invert }: TankProps) => {
   const tank = useTank(tankId)
-  const footer = useSendUpdate(tank.level / 100, conf, tank.customName ?? tank.productName)
+  const footer = useSendUpdate(
+    invert ? 1 - tank.level / 100 : tank.level / 100,
+    conf,
+    tank.customName ?? tank.productName
+  )
 
   return (
     <div className="">
