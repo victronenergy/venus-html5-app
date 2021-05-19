@@ -85,8 +85,6 @@ button {
 
 
 .info-bar {
-  border-radius: 5px;
-  border: $color-gray solid 1px;
   color: $color-gray;
   text-align: center;
   font-weight: 100;
@@ -98,9 +96,20 @@ button {
     width: 100%;
     padding: 0.2rem;
     white-space: nowrap;
+    border: $color-gray solid 1px;
 
-    &:nth-child(n+2) {
-      border-left: $color-gray solid 1px;
+    &:first-child {
+      border-radius: 5px 0 0 5px;
+    }
+    &:last-child {
+      border-radius: 0 5px 5px 0;
+    }
+    &:only-child {
+      border-radius: 5px;
+    }
+
+    &:not(:last-child) {
+      border-right: none;
     }
   }
 }

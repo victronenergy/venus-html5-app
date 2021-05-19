@@ -11,7 +11,7 @@
 
   .ac_mode__mode {
     border-radius: 5px;
-    border: $color-green solid 1px;
+    border: $color-green solid 1px !important;
     width: $card-width-big/2;
     align-self: center;
     color: $color-green;
