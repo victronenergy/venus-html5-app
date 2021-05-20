@@ -40,11 +40,8 @@ export const useSendUpdate = (percent: number, conf: WidgetConfiguration, part: 
       statusService.removeStatus(part)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [percent])
+  }, [percent, part])
 
-  if (currLevel !== STATUS_LEVELS.SUCCESS) {
-    statusService.addStatus({ part, message: conf.MESSAGES[level as keyof MessagesObj] ?? "", level: level })
-  }
   footer.status = currLevel
 
   return footer
