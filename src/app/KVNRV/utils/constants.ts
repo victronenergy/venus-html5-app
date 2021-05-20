@@ -102,10 +102,10 @@ export const TANKS_CONF = {
 
 export const AC_MODE = {
   MODES: {
-    ON: 1,
-    OFF: 0,
-    CHARGER_ONLY: 2,
-    INVERTER_ONLY: 3,
+    CHARGER_ONLY: 1,
+    INVERTER_ONLY: 2,
+    ON: 3,
+    OFF: 4,
   },
   LIMITS: [6, 10, 13, 16, 25, 32, 63],
 }
