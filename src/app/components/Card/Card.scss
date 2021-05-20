@@ -33,7 +33,7 @@
       padding: 0 0.5rem 0.5rem;
       border-bottom: 1px solid $color-gray;
       justify-content: space-between;
-      height: 1.6rem;
+      height: 1.6em;
 
       .card__header__text {
         font-weight: bolder;
@@ -47,13 +47,13 @@
 
       .card__header__icon {
         background-color: $color-lightgray;
-        width: 1.3rem;
-        height: 1.3rem;
+        width: 1em;
+        height: 1em;
         border-radius: 5px;
       }
 
       .settings { background: $color-lightgray var(--settings-icon) center/0.9rem no-repeat; }
-      .close { background: $color-lightgray var(--close-icon) center no-repeat; }
+      .close { background: $color-lightgray var(--close-icon) center/0.9rem no-repeat; }
     }
 
     .card__body {
