@@ -8,20 +8,20 @@ import AcMode from "../AcMode"
 import Paginator from "../Paginator"
 import { BigTank, SmallTank } from "../Tanks"
 import { TANKS_CONF } from "../../utils/constants"
-import { SIZE_WIDE, SIZE_LONG, SIZE_SHORT } from "../../../components/Card"
+import { SIZE_WIDE, SIZE_LONG } from "../../../components/Card"
 
 export const SCREEN_SIZES = {
   TALL: {
     SIZE: 750,
     SM: 300,
-    MD: 850,
-    LG: 1250,
+    MD: 650,
+    LG: 1280,
   },
   SHORT: {
-    SIZE: 750,
+    SIZE: 600,
     SM: 670,
-    MD: 975,
-    LG: 1500,
+    MD: 800,
+    LG: 1200,
   },
 }
 
@@ -52,7 +52,7 @@ export const Metrics = () => {
             <Status size={[SIZE_WIDE, SIZE_LONG]} />
 
             <div className={window.innerWidth < size.SM ? "row" : "col-span-4 grid"}>
-              <Battery size={[SIZE_WIDE, SIZE_SHORT]} />
+              <Battery size={[SIZE_WIDE, SIZE_LONG]} />
             </div>
           </div>
 
@@ -118,7 +118,7 @@ export const Metrics = () => {
 
   const scaleMetrics = () => {
     let screenHeight = window.innerHeight * 0.8
-    let screenWidth = window.innerWidth * 0.9
+    let screenWidth = window.innerWidth * 0.95
 
     let childrenWidth = computeChildrenSize(metricsRef.current?.children[0], "clientWidth")
     let childrenHeight = computeChildrenSize(metricsRef.current, "clientHeight")
@@ -128,7 +128,7 @@ export const Metrics = () => {
       let ratio = Math.max(heightRatio, widthRatio)
 
       if (metricsRef.current) {
-        ratio = ratio > 1 ? 0 : 1 - ratio
+        ratio = ratio > 1 ? 0 : 1 - ratio * 1.1
         let scaleFactor = 1 + ratio
         metricsRef.current.style.fontSize = scaleFactor + "rem"
       }
@@ -137,13 +137,17 @@ export const Metrics = () => {
 
   useEffect(() => {
     function resizeHandler() {
-      scaleMetrics()
-      computePages()
+      setTimeout(() => {
+        scaleMetrics()
+        computePages()
+      }, 200)
     }
     window.addEventListener("resize", resizeHandler)
-    setTimeout(resizeHandler, 100)
+    window.addEventListener("orientationchange", resizeHandler)
+    setTimeout(resizeHandler, 50)
     return () => {
       window.removeEventListener("resize", resizeHandler)
+      window.removeEventListener("orientationchange", resizeHandler)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])

@@ -11,12 +11,7 @@
 }
 
 html {
-  font-size: 20px;
-  @for $i from 1 through 20 {
-    @media all and (max-height: 1920px - $i * 200px), (max-width: 1920px - $i * 200px) {
-      font-size: 20px - $i * 1px;
-    }
-  }
+  font-size: calc(0.7vw + 0.8vh);
 }
 
 body {
