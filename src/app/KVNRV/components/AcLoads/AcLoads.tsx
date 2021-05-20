@@ -5,8 +5,8 @@ import { Card, SIZE_NARROW, SIZE_SHORT } from "../../../components/Card"
 import { normalizePower } from "../../utils/helpers"
 import { AC_CONF } from "../../utils/constants"
 import NumericValue from "../../../components/NumericValue"
-import DonutIndicator from "../../../components/DonutIndicator"
 import { NotAvailable } from "../NotAvailable"
+import GaugeIndicator from "../../../components/GaugeIndicator"
 
 export const AcLoads = () => {
   const { current, voltage, power, frequency } = useAcLoads()
@@ -17,7 +17,13 @@ export const AcLoads = () => {
     <Card title={"AC Loads"} size={[SIZE_SHORT, SIZE_NARROW]}>
       <div className="gauge">
         {power ? (
-          <DonutIndicator value={power[0] ?? 0} percent={normalizedPower} parts={AC_CONF.THRESHOLDS} unit={"W"} />
+          <GaugeIndicator
+            value={power[0] ?? 0}
+            percent={normalizedPower}
+            parts={AC_CONF.THRESHOLDS}
+            unit={"W"}
+            gauge={false}
+          />
         ) : (
           <NotAvailable />
         )}

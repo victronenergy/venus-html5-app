@@ -2,12 +2,12 @@ import React from "react"
 import { Card, SIZE_NARROW, SIZE_SHORT } from "../../../components/Card"
 
 import "./ShorePower.scss"
-import DonutIndicator from "../../../components/DonutIndicator"
 import NumericValue from "../../../components/NumericValue"
 import { useActiveInValues, useSendUpdate } from "../../../modules"
 import { SHORE_POWER_CONF } from "../../utils/constants"
 import { normalizePower } from "../../utils/helpers"
 import { NotAvailable } from "../NotAvailable"
+import GaugeIndicator from "../../../components/GaugeIndicator"
 
 export const ShorePower = () => {
   const { current, frequency, voltage, power } = useActiveInValues()
@@ -19,7 +19,13 @@ export const ShorePower = () => {
       <Card title={"Shore Power"} size={[SIZE_SHORT, SIZE_NARROW]}>
         <div className="gauge">
           {power ? (
-            <DonutIndicator value={power[0]} percent={normalizedPower} parts={SHORE_POWER_CONF.THRESHOLDS} unit={"W"} />
+            <GaugeIndicator
+              value={power[0]}
+              percent={normalizedPower}
+              parts={SHORE_POWER_CONF.THRESHOLDS}
+              unit={"W"}
+              gauge={false}
+            />
           ) : (
             <NotAvailable />
           )}

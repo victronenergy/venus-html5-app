@@ -8,8 +8,8 @@ import { AcModeModal } from "./AcModeModal"
 import "./AcMode.scss"
 import { useAcMode, useActiveInValues, useSendUpdate } from "../../../modules"
 import { normalizePower } from "../../utils/helpers"
-import DonutIndicator from "../../../components/DonutIndicator"
 import { NotAvailable } from "../NotAvailable"
+import GaugeIndicator from "../../../components/GaugeIndicator"
 
 export const acModeFormatter = (value: number) => {
   switch (value) {
@@ -45,7 +45,7 @@ export const AcMode = () => {
       >
         <div className="gauge">
           {power ? (
-            <DonutIndicator value={power[0]} percent={normalizedPower} parts={SHORE_POWER_CONF.THRESHOLDS} unit={"W"} />
+            <GaugeIndicator value={power[0]} percent={normalizedPower} parts={SHORE_POWER_CONF.THRESHOLDS} unit={"W"} />
           ) : (
             <NotAvailable />
           )}
