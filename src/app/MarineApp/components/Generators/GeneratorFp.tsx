@@ -1,5 +1,7 @@
 import React from "react"
 
+import { useGeneratorFp } from "../../../modules"
+
 import GensetValues from "./GensetValues"
 import HeaderView from "../HeaderView/HeaderView"
 import ColumnContainer from "../ColumnContainer"
@@ -17,7 +19,6 @@ import "./Generator.scss"
 
 import FpGeneratorIcon from "../../images/icons/fp_generator.svg"
 import GeneratorIcon from "../../images/icons/generator.svg"
-import { useGeneratorFp } from "../../../modules/Generators/GeneratorFp.provider"
 
 const getIcon = (productId: number) => {
   switch (productId) {
@@ -68,53 +69,57 @@ const GeneratorFp = () => {
   const subTitle = getGensetState(statusCode)
   const isAutoStartDisabled = gensetAutoStart === FISCHER_PANDA_GENSET_AUTOSTART.DISABLED
 
-  return (
-    <ColumnContainer key="generator-fp">
-      <div className="metric generator">
-        {phases > 1 ? (
-          <ListView icon={icon} title={title} subTitle={subTitle} child={true}>
-            <GensetValues phases={phases} />
-          </ListView>
-        ) : (
-          <HeaderView icon={icon} title={title} subTitle={subTitle} child>
-            <MetricValues>
+  if (phases) {
+    return (
+      <ColumnContainer key="generator-fp">
+        <div className="metric generator">
+          {phases > 1 ? (
+            <ListView icon={icon} title={title} subTitle={subTitle} child={true}>
               <GensetValues phases={phases} />
-            </MetricValues>
-          </HeaderView>
-        )}
-        <div className="generator__mode-selector">
-          <SelectorButton
-            disabled={isAutoStartDisabled}
-            active={statusCode === 8 && !autoStart}
-            onClick={() => {
-              updateManualMode(GENERATOR_START_STOP.AUTO_OFF)
-              updateAutoMode(GENERATOR_START_STOP.START)
-            }}
-          >
-            On
-          </SelectorButton>
-          <SelectorButton
-            active={statusCode < 8 && !autoStart}
-            onClick={() => {
-              updateManualMode(GENERATOR_START_STOP.AUTO_OFF)
-              updateAutoMode(GENERATOR_START_STOP.STOP)
-            }}
-          >
-            Off
-          </SelectorButton>
-          <SelectorButton active={autoStart} onClick={() => updateManualMode(GENERATOR_START_STOP.AUTO_ON)}>
-            Auto start/stop
-          </SelectorButton>
-        </div>
-        {isAutoStartDisabled && (
-          <div className="generator__autostart-msg text--smaller text--opaque">
-            The Fisher Panda AutoStart functionality is currently disabled, enable it on the genset panel in order to
-            control the genset from this panel.
+            </ListView>
+          ) : (
+            <HeaderView icon={icon} title={title} subTitle={subTitle} child>
+              <MetricValues>
+                <GensetValues phases={phases} />
+              </MetricValues>
+            </HeaderView>
+          )}
+          <div className="generator__mode-selector">
+            <SelectorButton
+              disabled={isAutoStartDisabled}
+              active={statusCode === 8 && !autoStart}
+              onClick={() => {
+                updateManualMode(GENERATOR_START_STOP.AUTO_OFF)
+                updateAutoMode(GENERATOR_START_STOP.START)
+              }}
+            >
+              On
+            </SelectorButton>
+            <SelectorButton
+              active={statusCode < 8 && !autoStart}
+              onClick={() => {
+                updateManualMode(GENERATOR_START_STOP.AUTO_OFF)
+                updateAutoMode(GENERATOR_START_STOP.STOP)
+              }}
+            >
+              Off
+            </SelectorButton>
+            <SelectorButton active={autoStart} onClick={() => updateManualMode(GENERATOR_START_STOP.AUTO_ON)}>
+              Auto start/stop
+            </SelectorButton>
           </div>
-        )}
-      </div>
-    </ColumnContainer>
-  )
+          {isAutoStartDisabled && (
+            <div className="generator__autostart-msg text--smaller text--opaque">
+              The Fisher Panda AutoStart functionality is currently disabled, enable it on the genset panel in order to
+              control the genset from this panel.
+            </div>
+          )}
+        </div>
+      </ColumnContainer>
+    )
+  } else {
+    return <ColumnContainer />
+  }
 }
 
 export default GeneratorFp

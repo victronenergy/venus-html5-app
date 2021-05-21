@@ -79,13 +79,6 @@ export const MarineApp = (props: AppProps) => {
     } else setView(VIEWS.METRICS)
   }
 
-  useEffect(() => {
-    console.log("Booting MQTT from App")
-    mqttService.boot(host, port)
-    // MqttService "changes" on every render so we don't want it as a dependency as it causes a loop
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [host, port])
-
   if (currentView === VIEWS.ERROR) {
     return (
       <Fade key={VIEWS.ERROR} unmount={viewUnmounting} fullWidth>

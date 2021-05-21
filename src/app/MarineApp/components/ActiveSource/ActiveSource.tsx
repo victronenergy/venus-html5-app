@@ -1,11 +1,12 @@
 import React from "react"
 
+import { useActiveSource } from "../../../modules"
+
 import ActiveInValues from "./ActiveInValues"
 import HeaderView from "../HeaderView/HeaderView"
 import ColumnContainer from "../ColumnContainer"
 import { ListView } from "../ListView"
 import MetricValues from "../MetricValues"
-import { useActiveSource } from "../../../modules/ActiveSource/ActiveSource.provider"
 
 import { AC_SOURCE_TYPE } from "../../../utils/constants"
 

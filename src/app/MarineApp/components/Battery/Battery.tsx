@@ -1,18 +1,20 @@
 import React, { Component } from "react"
-import HidingContainer from "../HidingContainer"
+
 import { Battery, useBattery } from "../../../modules"
 
+import ColumnContainer from "../ColumnContainer"
 import BatteryIcon from "../../images/icons/battery.svg"
 import classnames from "classnames"
 import HeaderView from "../HeaderView"
 import NumericValue from "../../../components/NumericValue"
 import MetricValues from "../MetricValues"
-import LIcon from "../../images/icons/L.svg"
-import RIcon from "../../images/icons/R.svg"
 import SelectorButton from "../SelectorButton"
 import { BatteryLevel } from "./BatteryLevel"
 
 import "./Battery.scss"
+
+import LIcon from "../../images/icons/L.svg"
+import RIcon from "../../images/icons/R.svg"
 
 type PaginatorProps = {
   setPage: Function
@@ -183,9 +185,9 @@ export const BatteriesWithData = () => {
 
   if (batteries) {
     return (
-      <HidingContainer>
+      <ColumnContainer>
         <Batteries batteries={batteries} />
-      </HidingContainer>
+      </ColumnContainer>
     )
   } else {
     return <div />
