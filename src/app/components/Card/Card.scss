@@ -29,8 +29,8 @@
     padding: 0.8rem;
 
     .card__header {
-      margin-bottom: 0.5rem;
-      padding: 0 0.5rem 0.5rem;
+      margin-bottom: 0.5em;
+      padding: 0 0.5em 0.5em;
       border-bottom: 1px solid $color-gray;
       justify-content: space-between;
       height: 1.6em;
@@ -47,13 +47,13 @@
 
       .card__header__icon {
         background-color: $color-lightgray;
-        width: 1em;
-        height: 1em;
+        width: 1.2em;
+        height: 1.2em;
         border-radius: 5px;
       }
 
-      .settings { background: $color-lightgray var(--settings-icon) center/0.9rem no-repeat; }
-      .close { background: $color-lightgray var(--close-icon) center/0.9rem no-repeat; }
+      .settings { background: $color-lightgray var(--settings-icon) center/0.9em no-repeat; }
+      .close { background: $color-lightgray var(--close-icon) center/0.75em no-repeat; }
     }
 
     .card__body {
