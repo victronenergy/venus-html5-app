@@ -32,7 +32,7 @@ function getGeneratorState(statusCode: number, active: boolean, phases: number) 
 
 type GeneratorRelayProps = {
   statusCode: number
-  phases: number
+  phases?: number
   manualStart: number
   autoStart: number
   relayFunction: number
@@ -44,7 +44,7 @@ type GeneratorRelayProps = {
 const GeneratorRelay = ({
   statusCode,
   active,
-  phases,
+  phases = 1,
   manualStart,
   autoStart,
   relayFunction,
