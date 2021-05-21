@@ -28,12 +28,6 @@ export function useTank(tankId: TankInstanceId): TankState {
     productName: `N/${portalId}/tank/${tankId}/ProductName`,
   })
 
-  // Capacity = capacity of tank in kLiters (multiply by 1000)
-  // Level = percentage of tank
-  // Remaining = remaining in kLiters (multiply by 1000)
-  // CustomName for title
-  // change name to tanks
-
   const topics$ = useTopicsWithParameters<TankTopics>(getTopics, mqttQuery.portalId$, of(tankId))
 
   useTopicSubscriptions(topics$)
