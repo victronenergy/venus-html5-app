@@ -1,7 +1,7 @@
 import classnames from "classnames"
 import { useObservableState } from "observable-hooks"
 import React, { useEffect, useState } from "react"
-import Fade, { viewChangeDelay } from "./components/Fade"
+import Fade, { viewChangeDelay } from "../components/Fade"
 import Header, { HeaderWithoutMQTTData } from "./components/Header/Header"
 import { InverterChargerInputLimitSelector } from "./components/InverterCharger"
 

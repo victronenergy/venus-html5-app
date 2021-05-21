@@ -1,8 +1,8 @@
 import * as mqtt from "mqtt"
+import { IClientOptions, MqttClient } from "mqtt"
 import { MqttState, MqttStore, STATUS, Topics } from "."
 import Logger from "../../utils/logger"
 import { getMessageJson } from "../../utils/util"
-import { IClientOptions, MqttClient } from "mqtt"
 
 export class MqttService {
   constructor(protected store: MqttStore) {}
@@ -77,24 +77,40 @@ export class MqttService {
     this.store.update({ portalId })
   }
 
-  boot = (host: string, port: number) => {
+  boot = (
+    host: string | null,
+    port: number,
+    username?: string,
+    password?: string,
+    webhost?: string,
+    portalId?: string,
+    environment: string = "live"
+  ) => {
     console.log("MQTT booting")
 
-    let client: MqttClient
+    let client = this.store?.getValue()?.client
+
+    if (client?.connected) {
+      client.end()
+      this.store.update({ status: STATUS.DISCONNECTED })
+    }
 
     if (port === 443) {
+      if (!username || !password || !webhost || !environment) {
+        return
+      }
+
       const mqttClientOptions: IClientOptions = {
         path: "/mqtt",
-        username: "vrmlogin_live_<VRM_USER_EMAIL>",
-        password: "<VRM_TOKEN>",
+        username: `vrmlogin_${environment}_${username}`,
+        password: password,
       }
-      // client = mqtt.connect(`mqtts://webmqtt90.victronenergy.com:443`, mqttClientOptions)
-      client = mqtt.connect(`mqtts://<VRM_MQTT_WEBHOST>.victronenergy.com:443`, mqttClientOptions)
+      client = mqtt.connect(`mqtts://${webhost}:${port}`, mqttClientOptions)
     } else {
       client = mqtt.connect(`mqtt://${host}:${port}`)
     }
 
-    this.store.update({ client })
+    this.store.update({ client, portalId })
 
     client.on("error", (error) => {
       console.log("MQTT error")
@@ -108,7 +124,7 @@ export class MqttService {
     client.on("connect", () => {
       console.log("MQTT connected")
       this.store.update({ error: null, status: STATUS.CONNECTED })
-      this.subscribeToTopic("N/dca632c080c9/system/0/Serial")
+      this.subscribeToTopic(`N/${portalId}/system/0/Serial`)
       this.sendKeepalive()
       this.setupKeepalive()
     })

@@ -1,7 +1,7 @@
 import "../css/index.scss"
 import React, { useEffect } from "react"
 import Loading from "./MarineApp/components/Loading"
-import { MqttService, mqttStore } from "./modules/Mqtt"
+import { MqttService, mqttStore, vrmQuery } from "./modules"
 
 const KVNRV = React.lazy(() => import("./KVNRV"))
 const MarineApp = React.lazy(() => import("./MarineApp"))
@@ -16,13 +16,20 @@ const App = (props: AppProps) => {
 
   useEffect(() => {
     const mqttService = new MqttService(mqttStore)
-    mqttService.boot(props.host, props.port)
+
+    vrmQuery.all$.subscribe((vrm) => {
+      if (!vrm.userId || !vrm.token) {
+        mqttService.boot(props.host, props.port)
+      }
+
+      mqttService.boot(props.host, 443, vrm.username, vrm.token, vrm.webhost, vrm.portalId, "live")
+    })
   }, [props.host, props.port])
 
   if (whitelabel === "KVNRV") {
     return (
       <React.Suspense fallback={<Loading />}>
-        <KVNRV {...props} />
+        <KVNRV />
       </React.Suspense>
     )
   } else {

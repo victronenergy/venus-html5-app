@@ -1,11 +1,27 @@
-import { useState } from "react"
+import { FormEventHandler, useState } from "react"
 import KVNRVLogo from "../../../images/KVNRV-Logo.svg"
 import "./RemoteLogin.scss"
+import { useVrmService } from "../../../../modules"
 
 export const RemoteLogin = () => {
-  let [email, setEmail] = useState("")
-  let [password, setPassword] = useState("")
-  let [remember, setRemember] = useState(true)
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [remember, setRemember] = useState(true)
+  const vrmService = useVrmService()
+
+  const submitLogin: FormEventHandler<HTMLFormElement> = async (event) => {
+    event.preventDefault()
+
+    try {
+      await vrmService.login(email, password)
+      await vrmService.updateInstanceDetails()
+
+      // TODO: Go to metrics
+    } catch (e) {
+      console.error(e)
+      // TODO: Display error to user
+    }
+  }
 
   return (
     <div className={"login-page"}>
@@ -15,7 +31,7 @@ export const RemoteLogin = () => {
           <span className={"login__logo__text"}>KVNRV</span>
         </div>
 
-        <div className={"login__form"}>
+        <form className={"login__form"} onSubmit={submitLogin}>
           <label className={"login__form__label"} htmlFor={"login-email"}>
             Email
           </label>
@@ -38,8 +54,8 @@ export const RemoteLogin = () => {
             onInput={(e) => setPassword(e.currentTarget.value)}
           />
 
-          <button className={"login__form__button"}>Log in</button>
-        </div>
+          <button className={"login__form__button"} type={"submit"}>Log in</button>
+        </form>
 
         <div className={"login__bottom"}>
           <div className={"login__bottom__remember"}>
@@ -53,7 +69,7 @@ export const RemoteLogin = () => {
             <label htmlFor={"login-remember"}>Remember me</label>
           </div>
 
-          <a href={"victronenergy.com"}>Forgot Passowrd?</a>
+          <a href={"victronenergy.com"}>Forgot Password?</a>
         </div>
         <div className={"login__footer"}>
           <span>

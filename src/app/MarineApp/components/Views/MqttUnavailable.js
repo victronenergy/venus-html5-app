@@ -1,5 +1,5 @@
 import React from "react"
-import Fade from "../Fade"
+import Fade from "../../../components/Fade"
 
 const MqttUnavailable = ({ viewUnmounting }) => (
   <main>

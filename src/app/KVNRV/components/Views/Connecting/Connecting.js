@@ -1,6 +1,6 @@
 import React from "react"
 
-import Fade from "../../../../MarineApp/components/Fade"
+import Fade from "../../../../components/Fade"
 import "./Connecting.scss"
 
 const Connecting = ({ viewUnmounting }) => (

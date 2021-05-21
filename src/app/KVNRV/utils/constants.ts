@@ -109,3 +109,8 @@ export const AC_MODE = {
   },
   LIMITS: [6, 10, 13, 16, 25, 32, 63],
 }
+
+export const VIEWS = {
+  METRICS: "METRICS",
+  LOGIN: "LOGIN",
+}

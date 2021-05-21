@@ -4,12 +4,17 @@ import KVNRVLogo from "../../images/KVNRV-Logo.svg"
 import RemoteIcon from "../../images/RemoteIcon.svg"
 
 import "./Header.scss"
+import { VIEWS } from "../../utils/constants"
 
 const timer = () => {
   return new Date()
 }
 
-export const Header = () => {
+export interface HeaderProps {
+  setCurrentView: (view: string) => void
+}
+
+export const Header = ({ setCurrentView }: HeaderProps) => {
   const [time, setTime] = useState(timer())
   const { darkMode, themeService } = useTheme()
 
@@ -44,12 +49,12 @@ export const Header = () => {
       </div>
 
       <div className={"header__buttons"}>
-        <button className={"header__buttons__remote-console"}>
+        <button className={"header__buttons__remote-console"} onClick={() => setCurrentView(VIEWS.METRICS)}>
           <img src={RemoteIcon} className={"header__buttons__icon"} alt={"Remote Console icon"} />
           <span className={"header__buttons__text"}>Remote console</span>
         </button>
 
-        <button className={"header__buttons__remote-connection"}>
+        <button className={"header__buttons__remote-connection"} onClick={() => setCurrentView(VIEWS.LOGIN)}>
           <img src={RemoteIcon} className={"header__buttons__icon"} alt={"Remote Connection icon"} />
           <span className={"header__buttons__text"}>Remote connection</span>
         </button>
