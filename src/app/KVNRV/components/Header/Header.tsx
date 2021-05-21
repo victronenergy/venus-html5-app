@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useTheme } from "../../../modules"
+import { useAppService, useTheme } from "../../../modules"
 import KVNRVLogo from "../../images/KVNRV-Logo.svg"
 import RemoteIcon from "../../images/RemoteIcon.svg"
 
@@ -10,13 +10,10 @@ const timer = () => {
   return new Date()
 }
 
-export interface HeaderProps {
-  setCurrentView: (view: string) => void
-}
-
-export const Header = ({ setCurrentView }: HeaderProps) => {
+export const Header = () => {
   const [time, setTime] = useState(timer())
   const { darkMode, themeService } = useTheme()
+  const appService = useAppService()
 
   useEffect(() => {
     const t = setTimeout(() => {
@@ -49,12 +46,13 @@ export const Header = ({ setCurrentView }: HeaderProps) => {
       </div>
 
       <div className={"header__buttons"}>
-        <button className={"header__buttons__remote-console"} onClick={() => setCurrentView(VIEWS.METRICS)}>
+        {/*TODO: This button should actually lead to the remote console, but is set to metrics for convenience during dev*/}
+        <button className={"header__buttons__remote-console"} onClick={() => appService.setPage(VIEWS.METRICS)}>
           <img src={RemoteIcon} className={"header__buttons__icon"} alt={"Remote Console icon"} />
           <span className={"header__buttons__text"}>Remote console</span>
         </button>
 
-        <button className={"header__buttons__remote-connection"} onClick={() => setCurrentView(VIEWS.LOGIN)}>
+        <button className={"header__buttons__remote-connection"} onClick={() => appService.setPage(VIEWS.LOGIN)}>
           <img src={RemoteIcon} className={"header__buttons__icon"} alt={"Remote Connection icon"} />
           <span className={"header__buttons__text"}>Remote connection</span>
         </button>

@@ -1,15 +1,22 @@
-import { akitaDevtools } from "@datorama/akita"
+import { akitaDevtools, persistState } from "@datorama/akita"
 import React from "react"
 import ReactDOM from "react-dom"
 import App from "./app/App"
 import { getParameterByName } from "./app/utils/util"
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration"
 import reportWebVitals from "./reportWebVitals"
+import { APP_STORE_NAME, VRM_STORE_NAME } from "./app/modules"
 
 const host = getParameterByName("host") || window.location.hostname || "localhost"
 const port = parseInt(getParameterByName("port") ?? "9001")
 
 akitaDevtools()
+
+// TODO: Implement storage strategy for devices that do not support localStorage
+// https://datorama.github.io/akita/docs/enhancers/persist-state
+persistState({
+  include: [APP_STORE_NAME, VRM_STORE_NAME]
+})
 
 ReactDOM.render(
   <React.StrictMode>

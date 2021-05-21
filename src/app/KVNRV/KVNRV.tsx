@@ -1,19 +1,20 @@
-import React, { useState } from "react"
+import React from "react"
 import { Header } from "./components/Header"
 import { Metrics } from "./components/Views"
-import { useTheme } from "../modules"
+import { useApp, useTheme } from "../modules"
 import { VIEWS } from "./utils/constants"
 import RemoteLogin from "./components/Views/RemoteLogin"
 
 export const KVNRV = () => {
   const { darkMode } = useTheme()
-  const [currentView, setCurrentView] = useState(VIEWS.METRICS)
+  const appData = useApp()
 
   return (
     <div className={"container " + (darkMode ? "dark" : "light")}>
-      <Header setCurrentView={setCurrentView} />
+      <Header />
       {(() => {
-        switch (currentView) {
+        switch (appData?.page) {
+          default:
           case VIEWS.METRICS:
             return <Metrics />
           case VIEWS.LOGIN:

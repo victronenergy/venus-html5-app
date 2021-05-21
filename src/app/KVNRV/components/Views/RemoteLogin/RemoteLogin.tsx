@@ -1,13 +1,15 @@
 import { FormEventHandler, useState } from "react"
 import KVNRVLogo from "../../../images/KVNRV-Logo.svg"
 import "./RemoteLogin.scss"
-import { useVrmService } from "../../../../modules"
+import { useAppService, useVrmService } from "../../../../modules"
+import { VIEWS } from "../../../utils/constants"
 
 export const RemoteLogin = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [remember, setRemember] = useState(true)
   const vrmService = useVrmService()
+  const appService = useAppService()
 
   const submitLogin: FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault()
@@ -16,7 +18,7 @@ export const RemoteLogin = () => {
       await vrmService.login(email, password)
       await vrmService.updateInstanceDetails()
 
-      // TODO: Go to metrics
+      appService.setPage(VIEWS.METRICS)
     } catch (e) {
       console.error(e)
       // TODO: Display error to user
