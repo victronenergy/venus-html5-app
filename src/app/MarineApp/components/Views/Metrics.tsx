@@ -99,7 +99,7 @@ export default class Metrics extends Component<MetricsProps, MetricsState> {
       const height = this.state.layoutCols === 2 ? Math.min(getContainerHeight(metrics)!, maxHeight) : maxHeight
       if (height !== this.state.height) this.setState({ height })
 
-      const pages = getRequiredPages(metrics, this.state.height, cols)
+      const pages = getRequiredPages(metrics, cols, this.state.height)
       if (this.props.pages !== pages) this.props.setPages(pages)
     }
   }

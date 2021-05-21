@@ -1,5 +1,7 @@
 import React from "react"
 
+import { useCharger, ChargerInstanceId } from "../../../modules"
+
 import CurrentLimitIncrementor from "./CurrentLimitIncrementor"
 import HeaderView from "../HeaderView"
 import ColumnContainer from "../../components/ColumnContainer"
@@ -13,8 +15,6 @@ import { CHARGER_MODE } from "../../../utils/constants"
 import "./Charger.scss"
 
 import MultiplusIcon from "../../images/icons/multiplus.svg"
-import { useCharger } from "../../../modules/Chargers"
-import { ChargerInstanceId } from "../../../modules/Chargers/Chargers.store"
 
 const chargerModeFormatter = (value: number) => {
   switch (value) {
@@ -55,6 +55,9 @@ const Charger = ({ chargerId }: ChargerProps) => {
 
   const productNameShort = productName && productName.split(" ")[0]
 
+  if (!current) {
+    return <ColumnContainer />
+  }
   return (
     <ColumnContainer>
       <div className="metric charger">

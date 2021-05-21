@@ -1,5 +1,7 @@
 import React, { Fragment } from "react"
-import { useHeader } from "../../../modules/Header/Header.provider"
+
+import { useHeader } from "../../../modules"
+
 import SelectorButton from "../SelectorButton"
 import { VIEWS } from "../../../utils/constants"
 import { LockButtonHeader } from "../LockButton"
@@ -65,11 +67,12 @@ const Paginator = ({ setPage, currentPage, pages }: PaginatorProps) => {
         <img src={LIcon} className="header__paginator-button" alt={"Header Paginator Button"} />
       </SelectorButton>
       <span className="header__paginator-page">
-        {Array.from(Array(pages).keys()).map((page) => (
-          <svg height="50" width="20" key={page}>
-            <circle cx="10" cy="25" r="5" fill={page === currentPage ? "#30afff" : "#aaa"} />
-          </svg>
-        ))}
+        {pages &&
+          Array.from(Array(pages).keys()).map((page) => (
+            <svg height="50" width="20" key={page}>
+              <circle cx="10" cy="25" r="5" fill={page === currentPage ? "#30afff" : "#aaa"} />
+            </svg>
+          ))}
       </span>
 
       <SelectorButton

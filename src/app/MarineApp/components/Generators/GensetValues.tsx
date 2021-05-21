@@ -1,8 +1,9 @@
 import React from "react"
 
+import { useGensetValues } from "../../../modules"
+
 import { ListRow } from "../ListView"
 import NumericValue from "../../../components/NumericValue"
-import { useGensetValues } from "../../../modules/Generators/GensetValues.provider"
 
 type GensetValuesProps = {
   phases: number

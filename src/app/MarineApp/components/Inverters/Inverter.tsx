@@ -1,5 +1,7 @@
 import React from "react"
 
+import { useInverter } from "../../../modules"
+
 import { INVERTER_MODE } from "../../../utils/constants"
 
 import HeaderView from "../HeaderView"
@@ -11,7 +13,6 @@ import SelectorButton from "../SelectorButton"
 import "./Inverter.scss"
 
 import MultiplusIcon from "../../images/icons/multiplus.svg"
-import { useInverter } from "../../../modules/Inverters/Inverter.provider"
 
 const stateFormatter = (state: number) => {
   switch (state) {

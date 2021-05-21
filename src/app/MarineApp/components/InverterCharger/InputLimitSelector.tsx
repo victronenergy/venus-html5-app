@@ -1,10 +1,10 @@
 import React, { useState } from "react"
 
+import { useInputLimitSelector, useShorePowerInput } from "../../../modules"
+
 import SelectorButton from "../SelectorButton"
 
 import Logger from "../../../utils/logger"
-import { useInputLimitSelector } from "../../../modules/InverterCharger/InputLimitSelector.provider"
-import { useShorePowerInput } from "../../../modules/ShorePowerInput/ShorePowerInput.provider"
 import Loading from "../Loading"
 
 const USAmperage = [10, 15, 20, 30, 50, 100]
@@ -30,11 +30,11 @@ const getSuggestedAmperageValuesList = (productId: number) => {
 
 type InputLimitSelectorProps = {
   onLimitSelected: Function
-  shorePowerInput: number
+  inputId: number
 }
 
-const InputLimitSelector = ({ shorePowerInput, onLimitSelected }: InputLimitSelectorProps) => {
-  const { currentLimit, currentLimitMax, productId, updateLimit } = useInputLimitSelector(shorePowerInput)
+const InputLimitSelector = ({ inputId, onLimitSelected }: InputLimitSelectorProps) => {
+  const { currentLimit, currentLimitMax, productId, updateLimit } = useInputLimitSelector(inputId)
 
   const selectedHandler = (value: number) => {
     updateLimit(value)
@@ -90,9 +90,9 @@ const InputLimitSelector = ({ shorePowerInput, onLimitSelected }: InputLimitSele
 }
 
 const InputLimitSelectorWrapper = (props: any) => {
-  const { shorePowerInput } = useShorePowerInput()
-  if (shorePowerInput) {
-    return <InputLimitSelector shorePowerInput={shorePowerInput} {...props} />
+  const { inputId } = useShorePowerInput()
+  if (inputId) {
+    return <InputLimitSelector inputId={inputId} {...props} />
   } else {
     return <Loading />
   }
