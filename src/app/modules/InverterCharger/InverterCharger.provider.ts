@@ -5,7 +5,7 @@ import {
   useTopicSubscriptions,
   useTopicsWithPortalIdAndInstanceId,
 } from "../Mqtt/Mqtt.provider"
-import { InstanceId, vebusQuery } from "../Vebus"
+import { InstanceId, useVebus, vebusQuery } from "../Vebus"
 import { useObservableState } from "observable-hooks"
 
 export interface InverterChargerState {
@@ -38,6 +38,7 @@ export function useInverterCharger(): InverterChargerProvider {
       modeIsAdjustable: `N/${portalId}/vebus/${deviceInstanceId}/ModeIsAdjustable`,
     }
   }
+  useVebus()
 
   const topics$ = useTopicsWithPortalIdAndInstanceId<InverterChargerTopics>(
     getTopics,
