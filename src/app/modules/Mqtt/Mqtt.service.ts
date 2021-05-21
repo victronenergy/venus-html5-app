@@ -124,7 +124,7 @@ export class MqttService {
     client.on("connect", () => {
       console.log("MQTT connected")
       this.store.update({ error: null, status: STATUS.CONNECTED })
-      this.subscribeToTopic(`N/${portalId}/system/0/Serial`)
+      this.subscribeToTopic(`N/${portalId ?? "+"}/system/0/Serial`)
       this.sendKeepalive()
       this.setupKeepalive()
     })
