@@ -72,7 +72,7 @@ const GeneratorRelay = ({
       {relayFunction === RELAY_FUNCTION.GENERATOR_START_STOP && statusCode !== undefined && (
         <div className="generator__mode-selector">
           <SelectorButton
-            active={manualStart && !autoStart}
+            active={manualStart === 1 && autoStart !== 1}
             onClick={() => {
               updateAutoMode(GENERATOR_START_STOP.AUTO_OFF)
               updateManualMode(GENERATOR_START_STOP.START)
@@ -89,7 +89,7 @@ const GeneratorRelay = ({
           >
             Off
           </SelectorButton>
-          <SelectorButton active={autoStart} onClick={() => updateAutoMode(GENERATOR_START_STOP.AUTO_ON)}>
+          <SelectorButton active={autoStart === 1} onClick={() => updateAutoMode(GENERATOR_START_STOP.AUTO_ON)}>
             Auto start/stop
           </SelectorButton>
         </div>

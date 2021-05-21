@@ -104,7 +104,7 @@ const GeneratorFp = () => {
             >
               Off
             </SelectorButton>
-            <SelectorButton active={autoStart} onClick={() => updateManualMode(GENERATOR_START_STOP.AUTO_ON)}>
+            <SelectorButton active={autoStart === 1} onClick={() => updateManualMode(GENERATOR_START_STOP.AUTO_ON)}>
               Auto start/stop
             </SelectorButton>
           </div>
