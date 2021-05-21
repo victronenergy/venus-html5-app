@@ -16,6 +16,8 @@ export const RemoteLogin = () => {
 
     try {
       await vrmService.login(email, password)
+      setEmail("")
+      setPassword("")
       await vrmService.updateInstanceDetails()
 
       appService.setPage(VIEWS.METRICS)
