@@ -23,7 +23,9 @@ export const useChargers = () => {
       Logger.log("Waiting for chargers...")
     } else {
       const deviceInstances = Object.values(messages) as ChargerInstanceId[]
-      chargersService.setChargers(deviceInstances)
+      if (chargers && !deviceInstances.every((di) => chargers.includes(di))) {
+        chargersService.setChargers(deviceInstances)
+      }
     }
   })
 
