@@ -22,7 +22,7 @@ export const acModeFormatter = (value: number) => {
     case AC_MODE.MODES.INVERTER_ONLY:
       return "Inverter only"
     default:
-      return null
+      return "--"
   }
 }
 
