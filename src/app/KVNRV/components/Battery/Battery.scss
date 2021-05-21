@@ -1,8 +1,8 @@
 @import '../../css/variables.scss';
 
 
-$battery-width: 2.5rem;
-$battery-height: 5rem;
+$battery-width: 2.5em;
+$battery-height: 5em;
 
 .battery {
   display: flex;
@@ -14,7 +14,7 @@ $battery-height: 5rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding-right: 1rem;
+    padding-right: 1em;
 
     .indicator-main {
       flex-direction: column;
@@ -30,9 +30,6 @@ $battery-height: 5rem;
       }
     }
 
-    @media #{$minimum} {
-      flex-direction: column;
-    }
   }
 
   .battery__charge {
@@ -52,7 +49,7 @@ $battery-height: 5rem;
       height: $battery-height;
       border: $color-gray solid 2px;
       border-radius: 8px;
-      padding: 0.2rem 0.15rem 0.15rem 0.15rem;
+      padding: 0.2em 0.15em 0.15em 0.15em;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
@@ -62,7 +59,7 @@ $battery-height: 5rem;
         width: 100%;
         height: $battery-height * 0.16;
         background-color: transparent;
-        margin-top: 0.2rem;
+        margin-top: 0.2em;
 
         &:first-child {
           border-radius: 4px 4px 0 0;

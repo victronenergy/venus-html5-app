@@ -8,6 +8,7 @@ export interface TankState {
   level: number
   remaining: number
   customName: string
+  productName: string
 }
 
 export interface TankTopics extends Topics {
@@ -15,6 +16,7 @@ export interface TankTopics extends Topics {
   level?: string
   remaining?: string
   customName?: string
+  productName?: string
 }
 
 export function useTank(tankId: TankInstanceId): TankState {
@@ -23,6 +25,7 @@ export function useTank(tankId: TankInstanceId): TankState {
     level: `N/${portalId}/tank/${tankId}/Level`,
     remaining: `N/${portalId}/tank/${tankId}/Remaining`,
     customName: `N/${portalId}/tank/${tankId}/CustomName`,
+    productName: `N/${portalId}/tank/${tankId}/ProductName`,
   })
 
   // Capacity = capacity of tank in kLiters (multiply by 1000)

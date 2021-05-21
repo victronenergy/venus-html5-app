@@ -1,10 +1,23 @@
 import React, { Component } from "react"
 
-export const formatNumber = ({ value, unit = "", precision = 0, factor = 1.0, defaultValue = "--" }) => {
+export const formatNumber = ({
+  value,
+  unit = "",
+  precision = 0,
+  factor = 1.0,
+  defaultValue = "--",
+  prefix = false,
+}) => {
   if (value === null || value === undefined) {
     return defaultValue
   }
   let numericValue = Number(value) * factor
+  if (prefix) {
+    while (numericValue > 1000) {
+      numericValue = numericValue / 1000
+      unit = "k" + unit
+    }
+  }
   return precision === undefined ? numericValue.toString() + unit : numericValue.toFixed(precision) + unit
 }
 

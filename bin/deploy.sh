@@ -31,4 +31,4 @@ npm run build
 
 echo "Uploading build/* to ${USERNAME}@${HOST}:/var/www/venus/app"
 
-scp -r build/* ${USERNAME}@${HOST}:/var/www/venus/app
+scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r build/* ${USERNAME}@${HOST}:/var/www/venus/app

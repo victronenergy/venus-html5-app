@@ -1,11 +1,11 @@
 import React from "react"
 
 import { PV_CONF } from "../../utils/constants"
-import DonutIndicator from "../../../components/DonutIndicator"
 import { usePvCharger, useSendUpdate } from "../../../modules"
-import { Card, SIZE_SMALL } from "../../../components/Card"
+import { Card, SIZE_NARROW, SIZE_SHORT } from "../../../components/Card"
 import NumericValue from "../../../components/NumericValue"
 import { normalizePower } from "../../utils/helpers"
+import GaugeIndicator from "../../../components/GaugeIndicator"
 
 export const PvCharger = () => {
   const { current, power } = usePvCharger()
@@ -15,10 +15,9 @@ export const PvCharger = () => {
 
   return (
     <div className="">
-      <Card title={"PV Charger"} size={SIZE_SMALL}>
+      <Card title={"PV Charger"} size={[SIZE_SHORT, SIZE_NARROW]}>
         <div className="pv_charger gauge">
-          <DonutIndicator value={power} percent={normalizedPower} parts={PV_CONF.THRESHOLDS} unit={"W"} />
-
+          <GaugeIndicator value={power} percent={normalizedPower} parts={PV_CONF.THRESHOLDS} unit={"W"} gauge={false} />
           <div className={"info-bar"}>
             <div className={"info-bar__cell"}>
               <NumericValue value={current} unit={"A"} precision={0} />

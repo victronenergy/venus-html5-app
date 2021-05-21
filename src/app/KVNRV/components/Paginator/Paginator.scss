@@ -6,17 +6,20 @@
   justify-content: center;
 
   .paginator__icon {
-    padding: 0.4rem 0.6rem ;
-    margin: 0.6rem 1rem;
+    width: 2em;
+    height: 2em;
+    padding: 0.3em 0.5em ;
+    margin: 0.6em 1em;
     background-color: $paginator-arrow-color;
     border-radius: 5px;
+    cursor: pointer;
   }
 
   .paginator__dot {
-    width: 0.7rem;
-    height: 0.7rem;
+    width: 0.8em;
+    height: 0.8em;
     border-radius: 50%;
     background-color: $color-lightgray;
-    margin: auto 0.4rem;
+    margin: auto 0.4em;
   }
 }

@@ -14,33 +14,35 @@ export const useStatus = () => {
 export const useSendUpdate = (percent: number, conf: WidgetConfiguration, part: string) => {
   const statusService = useStatusService()
   const [level, setLevel] = useState(STATUS_LEVELS.SUCCESS)
+  let currLevel = level
   const footer: Footer = {
     message: STATUS_LEVELS_MSG[level],
     property: "Status",
-    status: level,
+    status: currLevel,
   }
 
   useEffect(() => {
     if (percent > conf.THRESHOLDS[0]) {
       if (percent < conf.THRESHOLDS[0] + conf.THRESHOLDS[1]) {
-        setLevel(STATUS_LEVELS.WARNING)
-        footer.status = level
+        currLevel = STATUS_LEVELS.WARNING
+        footer.status = currLevel
         footer.message = STATUS_LEVELS_MSG[level]
       } else {
-        setLevel(STATUS_LEVELS.ALARM)
-        footer.status = level
+        currLevel = STATUS_LEVELS.ALARM
+        footer.status = currLevel
         footer.message = STATUS_LEVELS_MSG[level]
       }
+      setLevel(currLevel)
+      statusService.addStatus({ part, message: conf.MESSAGES[currLevel as keyof MessagesObj] ?? "", level: currLevel })
     } else {
+      currLevel = STATUS_LEVELS.SUCCESS
+      setLevel(currLevel)
       statusService.removeStatus(part)
-      setLevel(STATUS_LEVELS.SUCCESS)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [percent])
+  }, [percent, part])
 
-  if (level !== STATUS_LEVELS.SUCCESS) {
-    statusService.addStatus({ part, message: conf.MESSAGES[level as keyof MessagesObj] ?? "", level: level })
-  }
+  footer.status = currLevel
 
   return footer
 }

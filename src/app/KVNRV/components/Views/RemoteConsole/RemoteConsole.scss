@@ -21,7 +21,7 @@
 .remote-console__small_screen_info {
   display: none;
 
-  padding: 1rem;
+  padding: 1em;
   text-align: center;
 
   @media #{$hide-remote-console-breakpoint} {

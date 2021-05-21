@@ -25,6 +25,15 @@ export type WidgetConfiguration = {
   DEVICE_ID?: number
 }
 
+export const BATTERY_CONF: WidgetConfiguration = {
+  MAX: 100,
+  THRESHOLDS: [0.1, 0.1, 0.5, 0.1, 0.1],
+  MESSAGES: {
+    [WARNING]: "battery usage high",
+    [ALARM]: "critically high battery usage",
+  },
+}
+
 export const DC_CONF: WidgetConfiguration = {
   MAX: 500,
   THRESHOLDS: [0.5, 0.25, 0.25],
@@ -93,10 +102,10 @@ export const TANKS_CONF = {
 
 export const AC_MODE = {
   MODES: {
-    ON: 1,
-    OFF: 0,
-    CHARGER_ONLY: 2,
-    INVERTER_ONLY: 3,
+    CHARGER_ONLY: 1,
+    INVERTER_ONLY: 2,
+    ON: 3,
+    OFF: 4,
   },
   LIMITS: [6, 10, 13, 16, 25, 32, 63],
 }

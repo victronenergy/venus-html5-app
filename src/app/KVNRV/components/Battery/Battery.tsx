@@ -1,5 +1,5 @@
 import React from "react"
-import { Card, SIZE_SMALL } from "../../../components/Card"
+import { Card, SIZE_SHORT } from "../../../components/Card"
 
 import { BATTERY_STATE } from "../../../utils/constants"
 import { useBattery } from "../../../modules"
@@ -7,6 +7,9 @@ import NumericValue from "../../../components/NumericValue"
 import { NotAvailable } from "../NotAvailable"
 
 import "./Battery.scss"
+import { BATTERY_CONF } from "../../utils/constants"
+import GaugeIndicator from "../../../components/GaugeIndicator"
+import { normalizePower } from "../../utils/helpers"
 
 const batteryStateFormatter = (value: number) => {
   switch (value) {
@@ -42,7 +45,7 @@ function getClassname(idx: number, batteryLevelBars: number) {
 }
 
 type BatteryProps = {
-  size: string
+  size: string[]
 }
 
 export const Batteries = ({ size }: BatteryProps) => {
@@ -52,59 +55,65 @@ export const Batteries = ({ size }: BatteryProps) => {
     const battery = batteries[0]
     const batteryStateLabel = batteryStateFormatter(battery.state)
     const batteryLevelBars = Math.ceil(battery.soc / (100 / CELL_NUMBER))
-    return (
-      <div className="">
-        <Card title={"Battery"} size={size}>
-          <div className={"battery"}>
-            <div className={"battery__group " + size}>
-              <div className={"indicator-main" + (size === SIZE_SMALL ? "--small" : "")}>
-                <div>
-                  <NumericValue value={battery.soc} unit="%" defaultValue={"--"} precision={1} />
-                  <br />
-                </div>
-                {batteryStateLabel && <div className="name">{batteryStateLabel}</div>}
-              </div>
+    const normalizedPower = normalizePower(battery.power, BATTERY_CONF.MAX)
 
+    return (
+      <Card title={"Battery"} size={size}>
+        <div className={"battery"}>
+          <div className={"battery__group " + size}>
+            <div className={"indicator-main" + (size.includes(SIZE_SHORT) ? "--small" : "")}>
               <div>
-                <div className="indicator">
-                  <span className="name">Voltage</span>
-                  <NumericValue value={battery.voltage} unit="V" defaultValue={"--"} precision={2} />
-                </div>
-                {size !== SIZE_SMALL && (
-                  <div className="indicator">
-                    <span className="name">Current</span>
-                    <NumericValue value={battery.current} unit="A" defaultValue={"--"} precision={1} />
-                  </div>
-                )}
+                <NumericValue value={battery.soc} unit="%" defaultValue={"--"} precision={1} />
+                <br />
               </div>
+              {batteryStateLabel && <div className="name">{batteryStateLabel}</div>}
             </div>
 
-            <div className="battery__charge">
-              <div className="battery__charge__top" />
-              <div className="battery__charge__body">
-                {Array.from(Array(batteryLevelBars).keys())
-                  .reverse()
-                  .map((idx) => (
-                    <div
-                      className={"battery__charge__body__cell" + getClassname(idx, batteryLevelBars)}
-                      key={"battery-cell-" + idx}
-                    />
-                  ))}
+            <div>
+              <div className="indicator">
+                <span className="name">Voltage</span>
+                <NumericValue value={battery.voltage} unit="V" defaultValue={"--"} precision={2} />
+              </div>
+              <div className="indicator">
+                <span className="name">Current</span>
+                <NumericValue value={battery.current} unit="A" defaultValue={"--"} precision={1} />
               </div>
             </div>
           </div>
-        </Card>
-      </div>
+
+          <div className="battery__charge">
+            <div className="battery__charge__top" />
+            <div className="battery__charge__body">
+              {Array.from(Array(batteryLevelBars).keys())
+                .reverse()
+                .map((idx) => (
+                  <div
+                    className={"battery__charge__body__cell" + getClassname(idx, batteryLevelBars)}
+                    key={"battery-cell-" + idx}
+                  />
+                ))}
+            </div>
+          </div>
+        </div>
+        <div className="gauge">
+          <GaugeIndicator
+            value={battery.current}
+            percent={normalizedPower}
+            parts={BATTERY_CONF.THRESHOLDS}
+            unit={"W"}
+            size={"big"}
+            gauge={true}
+          />
+        </div>
+      </Card>
     )
   } else {
     return (
-      <div className="">
-        <Card title={"Battery"} size={size}>
-          <div className={"gauge"}>
-            <NotAvailable />
-          </div>
-        </Card>
-      </div>
+      <Card title={"Battery"} size={size}>
+        <div className={"gauge"}>
+          <NotAvailable />
+        </div>
+      </Card>
     )
   }
 }

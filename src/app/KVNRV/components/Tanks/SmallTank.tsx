@@ -1,6 +1,6 @@
 import React from "react"
 
-import { Card, SIZE_SMALL } from "../../../components/Card"
+import { Card, SIZE_NARROW, SIZE_SHORT } from "../../../components/Card"
 import { NotAvailable } from "../NotAvailable"
 import NumericValue, { formatNumber } from "../../../components/NumericValue"
 import ProgressIndicator from "../../components/ProgressIndicator"
@@ -10,13 +10,17 @@ import { useTank } from "../../../modules"
 import { TankProps } from "./index"
 import { useSendUpdate } from "../../../modules"
 
-export const SmallTank = ({ tankId, conf }: TankProps) => {
+export const SmallTank = ({ tankId, conf, invert }: TankProps) => {
   const tank = useTank(tankId)
-  const footer = useSendUpdate(tank.level / 100, conf, tank.customName)
+  const footer = useSendUpdate(
+    invert ? 1 - tank.level / 100 : tank.level / 100,
+    conf,
+    tank.customName ?? tank.productName
+  )
 
   return (
     <div className="">
-      <Card title={tank?.customName ?? "--"} size={SIZE_SMALL} footer={footer}>
+      <Card title={tank?.customName ?? tank.productName} size={[SIZE_SHORT, SIZE_NARROW]} footer={footer}>
         <div className="gauge">
           {tank ? (
             <div className={"small-tank"}>
