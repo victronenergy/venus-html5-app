@@ -1,5 +1,5 @@
 import * as mqtt from "mqtt"
-import { IClientOptions, MqttClient } from "mqtt"
+import { IClientOptions } from "mqtt"
 import { MqttState, MqttStore, STATUS, Topics } from "."
 import Logger from "../../utils/logger"
 import { getMessageJson } from "../../utils/util"
@@ -78,11 +78,10 @@ export class MqttService {
   }
 
   boot = (
-    host: string | null,
-    port: number,
+    host: string = "localhost",
+    port: number | null,
     username?: string,
     password?: string,
-    webhost?: string,
     portalId?: string,
     environment: string = "live"
   ) => {
@@ -95,8 +94,10 @@ export class MqttService {
       this.store.update({ status: STATUS.DISCONNECTED })
     }
 
-    if (port === 443) {
-      if (!username || !password || !webhost || !environment) {
+    let remote = false
+
+    if (username && password) {
+      if (!host || !environment) {
         return
       }
 
@@ -105,7 +106,9 @@ export class MqttService {
         username: `vrmlogin_${environment}_${username}`,
         password: password,
       }
-      client = mqtt.connect(`mqtts://${webhost}:${port}`, mqttClientOptions)
+      client = mqtt.connect(`mqtts://${host}:443`, mqttClientOptions)
+
+      remote = true
     } else {
       client = mqtt.connect(`mqtt://${host}:${port}`)
     }
@@ -124,7 +127,7 @@ export class MqttService {
     client.on("connect", () => {
       console.log("MQTT connected")
       this.store.update({ error: null, status: STATUS.CONNECTED })
-      this.subscribeToTopic(`N/${portalId ?? "+"}/system/0/Serial`)
+      this.subscribeToTopic(`N/${(remote && portalId) || "+"}/system/0/Serial`) // Never use wildcard when connecting remotely
       this.sendKeepalive()
       this.setupKeepalive()
     })
@@ -144,7 +147,10 @@ export class MqttService {
   }
 
   sendKeepalive = () => {
-    this.publish(`R/${this.store?.getValue().portalId}/system/0/Serial`, "")
+    const portalId = this.store?.getValue().portalId
+    if (portalId) {
+      this.publish(`R/${this.store?.getValue().portalId}/system/0/Serial`, "")
+    }
   }
 
   setupKeepalive = () => {
@@ -158,7 +164,7 @@ export class MqttService {
 
   publish = (topic: string, data: string) => {
     if (this.store?.getValue().status !== STATUS.CONNECTED || !this.store?.getValue().client) {
-      Logger.error("Could not publish value")
+      Logger.error("Could not publish value, not connected to MQTT broker")
     }
     const message = JSON.stringify({ value: data })
 

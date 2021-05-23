@@ -25,7 +25,7 @@ const App = (props: AppProps) => {
 
     vrmQuery.all$.subscribe((vrm) => {
       if (vrm.username && vrm.token && vrm.webhost && vrm.portalId) {
-        mqttService.boot(props.host, 443, vrm.username, vrm.token, vrm.webhost, vrm.portalId, "live")
+        mqttService.boot(vrm.webhost, null, vrm.username, vrm.token, vrm.portalId, "live")
       }
     })
   }, [props.host, props.port, vrmState?.userId, vrmState?.token])
