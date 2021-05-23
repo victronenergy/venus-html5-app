@@ -47,6 +47,7 @@
     "@testing-library/dom": "^7.30.3",
     "@types/chart.js": "^2.9.32",
     "@types/enzyme": "^3.10.8",
+    "@types/hammerjs": "^2.0.39",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.0",
     "cypress": "^6.8.0",
     "enzyme": "^3.11.0",

@@ -32,13 +32,13 @@ export const Metrics = () => {
   let [currentPage, setCurrentPage] = useState(0)
   let [layout, setLayout] = useState(<></>)
   const metricsRef = useRef<HTMLDivElement>(null)
-  let [hammer, setHammer] = useState(undefined as Hammer.Manager)
+  let [hammer, setHammer] = useState<HammerManager>(null!)
 
   useEffect(() => {
     if (metricsRef.current) {
-      setHammer((prev: Hammer.Manager) => {
+      setHammer((prev: HammerManager) => {
         if (!prev) {
-          const newHammer = new Hammer.Manager(metricsRef.current)
+          const newHammer = new Hammer.Manager(metricsRef.current!)
           const Swipe = new Hammer.Swipe({ velocity: 0.5, direction: 2 | 4 })
           newHammer.add(Swipe)
           return newHammer
