@@ -3,7 +3,7 @@ import { AppState, appStore, AppStore } from "./App.store"
 
 export class AppQuery extends Query<AppState> {
   constructor(protected store: AppStore) {
-    super(store);
+    super(store)
   }
 
   all$ = this.select()

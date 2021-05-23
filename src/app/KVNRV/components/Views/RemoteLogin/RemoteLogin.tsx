@@ -58,7 +58,9 @@ export const RemoteLogin = () => {
             onInput={(e) => setPassword(e.currentTarget.value)}
           />
 
-          <button className={"login__form__button"} type={"submit"}>Log in</button>
+          <button className={"login__form__button"} type={"submit"}>
+            Log in
+          </button>
         </form>
 
         <div className={"login__bottom"}>

@@ -8,13 +8,13 @@ export interface AppState {
 
 export const APP_STORE_NAME = "App"
 
-@StoreConfig({name: APP_STORE_NAME})
+@StoreConfig({ name: APP_STORE_NAME })
 export class AppStore extends Store<AppState> {
   constructor() {
     super({
       page: VIEWS.METRICS,
       locked: false,
-    });
+    })
   }
 }
 
