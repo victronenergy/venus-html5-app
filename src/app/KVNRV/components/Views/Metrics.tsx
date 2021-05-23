@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from "react"
+import Hammer from "hammerjs"
+
 import Battery from "../Battery"
 import DcLoads from "../DcLoads"
 import PvCharger from "../PvCharger"
@@ -30,6 +32,35 @@ export const Metrics = () => {
   let [currentPage, setCurrentPage] = useState(0)
   let [layout, setLayout] = useState(<></>)
   const metricsRef = useRef<HTMLDivElement>(null)
+  let [hammer, setHammer] = useState(undefined as Hammer.Manager)
+
+  useEffect(() => {
+    if (metricsRef.current) {
+      setHammer((prev: Hammer.Manager) => {
+        if (!prev) {
+          const newHammer = new Hammer.Manager(metricsRef.current)
+          const Swipe = new Hammer.Swipe({ velocity: 0.5, direction: 2 | 4 })
+          newHammer.add(Swipe)
+          return newHammer
+        } else {
+          return prev
+        }
+      })
+    }
+  }, [currentPage, pages])
+
+  useEffect(() => {
+    if (hammer) {
+      const next = () => {
+        setCurrentPage((currentPage) => (currentPage > 0 ? currentPage - 1 : currentPage))
+      }
+      const prev = () => {
+        setCurrentPage((currentPage) => (currentPage < pages - 1 ? currentPage + 1 : currentPage))
+      }
+      hammer.on("swiperight", next)
+      hammer.on("swipeleft", prev)
+    }
+  }, [hammer])
 
   const computePages = () => {
     let pageNum = 1
