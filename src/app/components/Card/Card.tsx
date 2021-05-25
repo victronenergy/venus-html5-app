@@ -33,7 +33,11 @@ export const Card: FunctionComponent<CardProps> = ({ title, size, icon, onIconCl
           <div className="card__header__text">{title}</div>
           <div className={"row"}>
             <div className="card__header__info-text">{infoText}</div>
-            {icon && <button className={"card__header__icon " + icon} onClick={(e) => onIconClick && onIconClick(e)} />}
+            {icon && (
+              <button className={"card__header__icon " + icon} onClick={(e) => onIconClick && onIconClick(e)}>
+                {icon === ICON_SETTINGS && "Settings"}
+              </button>
+            )}
           </div>
         </div>
 
