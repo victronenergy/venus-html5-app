@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react"
+// @ts-ignore
 import Hammer from "hammerjs"
 
 import Battery from "../Battery"
@@ -16,11 +17,11 @@ export const SCREEN_SIZES = {
   TALL: {
     SIZE: 750,
     SM: 300,
-    MD: 650,
+    MD: 670,
     LG: 1280,
   },
   SHORT: {
-    SIZE: 600,
+    SIZE: 670,
     SM: 670,
     MD: 800,
     LG: 1200,
@@ -39,7 +40,7 @@ export const Metrics = () => {
       setHammer((prev: HammerManager) => {
         if (!prev) {
           const newHammer = new Hammer.Manager(metricsRef.current!)
-          const Swipe = new Hammer.Swipe({ velocity: 0.5, direction: 2 | 4 })
+          const Swipe = new Hammer.Swipe({ velocity: 0.6, direction: 2 | 4 })
           newHammer.add(Swipe)
           return newHammer
         } else {
@@ -52,13 +53,26 @@ export const Metrics = () => {
   useEffect(() => {
     if (hammer) {
       const next = () => {
+        console.log("next")
         setCurrentPage((currentPage) => (currentPage > 0 ? currentPage - 1 : currentPage))
+        metricsRef.current!.style.marginLeft = "0"
       }
       const prev = () => {
         setCurrentPage((currentPage) => (currentPage < pages - 1 ? currentPage + 1 : currentPage))
+        metricsRef.current!.style.marginLeft = "0"
       }
       hammer.on("swiperight", next)
       hammer.on("swipeleft", prev)
+      hammer.on("hammer.input", (ev: Hammer.Input) => {
+        if (metricsRef.current) {
+          if (Math.abs(ev.deltaX) > Math.abs(ev.deltaY)) {
+            metricsRef.current.style.marginLeft = ev.deltaX + "px"
+          }
+          if (ev.isFinal) {
+            metricsRef.current.style.marginLeft = "0"
+          }
+        }
+      })
     }
   }, [hammer])
 
@@ -76,7 +90,7 @@ export const Metrics = () => {
     }
     setPages(pageNum)
 
-    if (window.innerHeight < SCREEN_SIZES.SHORT.SIZE) {
+    if (window.innerHeight < SCREEN_SIZES.SHORT.SIZE && window.innerWidth > SCREEN_SIZES.TALL.MD) {
       setLayout(
         <div className="row">
           <div className={[getClassName(), "row", getIsHidden(0, pageNum)].join(" ")}>
@@ -167,6 +181,7 @@ export const Metrics = () => {
   }
 
   useEffect(() => {
+    window.scrollTo(0, 1)
     function resizeHandler() {
       setTimeout(() => {
         scaleMetrics()
