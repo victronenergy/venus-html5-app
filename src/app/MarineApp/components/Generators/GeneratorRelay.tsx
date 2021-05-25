@@ -102,20 +102,25 @@ export const GeneratorRelays = () => {
   const values = useGeneratorRelay()
 
   if (values.settings) {
-    return values.settings.includes(AC_SOURCE_TYPE.GENERATOR)
-      ? values.settings.map(
-          (source: number, i: number) =>
-            source === AC_SOURCE_TYPE.GENERATOR && (
-              <ColumnContainer key={"generator-relay-" + i}>
-                <GeneratorRelay {...values} active={values.activeInput === i} />
-              </ColumnContainer>
+    return (
+      <>
+        {values.settings.includes(AC_SOURCE_TYPE.GENERATOR)
+          ? values.settings.map(
+              (source: number, i: number) =>
+                source === AC_SOURCE_TYPE.GENERATOR && (
+                  <ColumnContainer key={"generator-relay-" + i}>
+                    <GeneratorRelay {...values} active={values.activeInput === i} />
+                  </ColumnContainer>
+                )
             )
-        )
-      : values.relayFunction === RELAY_FUNCTION.GENERATOR_START_STOP && values.statusCode !== undefined && (
-          <ColumnContainer key="generator-relay">
-            <GeneratorRelay {...values} />
-          </ColumnContainer>
-        )
+          : values.relayFunction === RELAY_FUNCTION.GENERATOR_START_STOP &&
+            values.statusCode !== undefined && (
+              <ColumnContainer key="generator-relay">
+                <GeneratorRelay {...values} />
+              </ColumnContainer>
+            )}
+      </>
+    )
   } else {
     return <ColumnContainer />
   }
