@@ -33,11 +33,11 @@ export const Metrics = () => {
   let [currentPage, setCurrentPage] = useState(0)
   let [layout, setLayout] = useState(<></>)
   const metricsRef = useRef<HTMLDivElement>(null)
-  let [hammer, setHammer] = useState<HammerManager>(null!)
+  let [hammer, setHammer] = useState<Hammer.Manager>(null!)
 
   useEffect(() => {
     if (metricsRef.current) {
-      setHammer((prev: HammerManager) => {
+      setHammer((prev: Hammer.Manager) => {
         if (!prev) {
           const newHammer = new Hammer.Manager(metricsRef.current!)
           const Swipe = new Hammer.Swipe({ velocity: 0.6, direction: 2 | 4 })
@@ -53,7 +53,6 @@ export const Metrics = () => {
   useEffect(() => {
     if (hammer) {
       const next = () => {
-        console.log("next")
         setCurrentPage((currentPage) => (currentPage > 0 ? currentPage - 1 : currentPage))
         metricsRef.current!.style.marginLeft = "0"
       }
@@ -78,22 +77,22 @@ export const Metrics = () => {
 
   const computePages = () => {
     let pageNum = 1
+    let currPage = currentPage
     let size = window.innerHeight < SCREEN_SIZES.SHORT.SIZE ? SCREEN_SIZES.SHORT : SCREEN_SIZES.TALL
     if (window.innerWidth < size.MD) {
       pageNum = 3
     } else if (window.innerWidth < size.LG || window.innerHeight < size.SIZE) {
       pageNum = 2
-      setCurrentPage(Math.min(1, currentPage))
+      currPage = Math.min(1, currentPage)
     } else if (window.innerWidth >= size.LG) {
       pageNum = 1
-      setCurrentPage(Math.min(0, currentPage))
+      currPage = Math.min(0, currentPage)
     }
-    setPages(pageNum)
 
-    if (window.innerHeight < SCREEN_SIZES.SHORT.SIZE && window.innerWidth > SCREEN_SIZES.TALL.MD) {
+    if (window.innerHeight < SCREEN_SIZES.SHORT.SIZE) {
       setLayout(
         <div className="row">
-          <div className={[getClassName(), "row", getIsHidden(0, pageNum)].join(" ")}>
+          <div className={[getClassName(), "row", getIsHidden(0, pageNum, currPage)].join(" ")}>
             <Status size={[SIZE_WIDE, SIZE_LONG]} />
 
             <div className={window.innerWidth < size.SM ? "row" : "col-span-4 grid"}>
@@ -101,7 +100,7 @@ export const Metrics = () => {
             </div>
           </div>
 
-          <div className={[getClassName(), getIsHidden(1, pageNum)].join(" ")}>
+          <div className={[getClassName(), getIsHidden(1, pageNum, currPage)].join(" ")}>
             <AcMode />
 
             <div className="row">
@@ -110,10 +109,10 @@ export const Metrics = () => {
             </div>
           </div>
 
-          <div className={["row", getClassName(), getIsHidden(2, pageNum)].join(" ")}>
+          <div className={["row", getClassName(), getIsHidden(2, pageNum, currPage)].join(" ")}>
             <BigTank tankId={TANKS_CONF.FRESH_WATER.DEVICE_ID!} conf={TANKS_CONF.FRESH_WATER} invert={true} />
 
-            <div className={window.innerWidth < size.SM ? "row" : "col-span-4 grid"}>
+            <div className={window.innerHeight > size.SM ? "row" : "col-span-4 grid"}>
               <SmallTank tankId={TANKS_CONF.GRAY_WATER.DEVICE_ID!} conf={TANKS_CONF.GRAY_WATER} invert={false} />
               <SmallTank tankId={TANKS_CONF.BLACK_WATER.DEVICE_ID!} conf={TANKS_CONF.BLACK_WATER} invert={false} />
             </div>
@@ -123,7 +122,7 @@ export const Metrics = () => {
     } else {
       setLayout(
         <div className="row">
-          <div className={[getClassName(), getIsHidden(0, pageNum)].join(" ")}>
+          <div className={[getClassName(), getIsHidden(0, pageNum, currPage)].join(" ")}>
             <Status size={[SIZE_WIDE, SIZE_LONG]} />
 
             <div className="row">
@@ -132,12 +131,12 @@ export const Metrics = () => {
             </div>
           </div>
 
-          <div className={["grid", getClassName(), getIsHidden(1, pageNum)].join(" ")}>
+          <div className={["grid", getClassName(), getIsHidden(1, pageNum, currPage)].join(" ")}>
             <Battery size={[SIZE_WIDE, SIZE_LONG]} />
             <AcMode />
           </div>
 
-          <div className={[getClassName(), getIsHidden(2, pageNum)].join(" ")}>
+          <div className={[getClassName(), getIsHidden(2, pageNum, currPage)].join(" ")}>
             <div className="row">
               <DcLoads />
               <SmallTank tankId={TANKS_CONF.FRESH_WATER.DEVICE_ID!} conf={TANKS_CONF.FRESH_WATER} invert={true} />
@@ -150,6 +149,9 @@ export const Metrics = () => {
         </div>
       )
     }
+
+    setCurrentPage(currPage)
+    setPages(pageNum)
   }
 
   const computeChildrenSize = (el: Element | null | undefined, property: string) => {
@@ -220,17 +222,18 @@ export const Metrics = () => {
     return c
   }
 
-  const getIsHidden = (elPage: number, pageNum: number) => {
+  const getIsHidden = (elPage: number, pageNum: number, currPage: number) => {
     let c = ""
+    console.log("getIsHidden", elPage, pageNum, currPage)
 
     if (pageNum === 2) {
-      if (currentPage === 0 && elPage === 2) {
+      if (currPage === 0 && elPage === 2) {
         c += " hidden"
-      } else if (currentPage === 1 && elPage <= 1) {
+      } else if (currPage === 1 && elPage <= 1) {
         c += " hidden"
       }
     } else if (pageNum === 3) {
-      if (elPage !== currentPage) {
+      if (elPage !== currPage) {
         c += " hidden"
       }
     }
