@@ -6,8 +6,12 @@
 
 
 @font-face {
-  font-family: Roboto;
+  font-family: MuseoSans;
   src: url("./MuseoSans-100.otf"), url("./MuseoSans-300.otf"), url("./MuseoSans-500.otf"), url("./MuseoSans-700.otf");
+}
+@font-face {
+  font-family: Tommy;
+  src: url("./MADE_TOMMY_Bold.otf");
 }
 
 html {
@@ -17,6 +21,10 @@ html {
       font-size: 20px - $i * 1px;
     }
   }
+}
+
+* {
+  font-family: MuseoSans, sans-serif;
 }
 
 body {
