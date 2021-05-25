@@ -21,6 +21,7 @@
     "node-sass": "^5.0.0",
     "observable-hooks": "^4.0.3",
     "react": "^17.0.2",
+    "react-app-polyfill": "^2.0.0",
     "react-dom": "^17.0.2",
     "react-error-boundary": "^3.1.1",
     "react-scripts": "^4.0.3",
@@ -93,6 +94,7 @@
       "last 2 versions"
     ],
     "development": [
+      "chrome >= 45",
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
