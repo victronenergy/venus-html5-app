@@ -33,11 +33,11 @@ export const Metrics = () => {
   let [currentPage, setCurrentPage] = useState(0)
   let [layout, setLayout] = useState(<></>)
   const metricsRef = useRef<HTMLDivElement>(null)
-  let [hammer, setHammer] = useState<Hammer.Manager>(null!)
+  let [hammer, setHammer] = useState<HammerManager>(null!)
 
   useEffect(() => {
     if (metricsRef.current) {
-      setHammer((prev: Hammer.Manager) => {
+      setHammer((prev) => {
         if (!prev) {
           const newHammer = new Hammer.Manager(metricsRef.current!)
           const Swipe = new Hammer.Swipe({ velocity: 0.6, direction: 2 | 4 })
@@ -62,7 +62,7 @@ export const Metrics = () => {
       }
       hammer.on("swiperight", next)
       hammer.on("swipeleft", prev)
-      hammer.on("hammer.input", (ev: Hammer.Input) => {
+      hammer.on("hammer.input", (ev: HammerInput) => {
         if (metricsRef.current) {
           if (Math.abs(ev.deltaX) > Math.abs(ev.deltaY)) {
             metricsRef.current.style.marginLeft = ev.deltaX + "px"
@@ -224,7 +224,6 @@ export const Metrics = () => {
 
   const getIsHidden = (elPage: number, pageNum: number, currPage: number) => {
     let c = ""
-    console.log("getIsHidden", elPage, pageNum, currPage)
 
     if (pageNum === 2) {
       if (currPage === 0 && elPage === 2) {
