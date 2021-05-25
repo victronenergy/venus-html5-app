@@ -5,7 +5,7 @@ export const formatNumber = ({ value, unit = "", precision = 0, factor = 1.0, de
     return defaultValue
   }
   let numericValue = Number(value) * factor
-  while (numericValue > 1000) {
+  if (numericValue > 1000) {
     numericValue = numericValue / 1000
     unit = "k" + unit
   }

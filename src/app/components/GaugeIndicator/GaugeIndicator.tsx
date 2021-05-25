@@ -87,7 +87,7 @@ export class GaugeIndicator extends PureComponent<GaugeIndicatorProps> {
                 ctx.textBaseline = "middle"
                 ctx.fillStyle = this.getColors().textColor
 
-                let text = formatNumber({ value: this.props.value, unit: this.props.unit, prefix: true }),
+                let text = formatNumber({ value: this.props.value, unit: this.props.unit }),
                   textX = Math.round((width - ctx.measureText(text).width) / 2),
                   textY = height / 2 + height * 0.25
 
