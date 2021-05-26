@@ -9,6 +9,7 @@ export interface TankState {
   remaining: number
   customName: string
   productName: string
+  unit: string
 }
 
 export interface TankTopics extends Topics {
@@ -17,6 +18,7 @@ export interface TankTopics extends Topics {
   remaining?: string
   customName?: string
   productName?: string
+  unit?: string
 }
 
 export function useTank(tankId: TankInstanceId): TankState {
@@ -26,6 +28,7 @@ export function useTank(tankId: TankInstanceId): TankState {
     remaining: `N/${portalId}/tank/${tankId}/Remaining`,
     customName: `N/${portalId}/tank/${tankId}/CustomName`,
     productName: `N/${portalId}/tank/${tankId}/ProductName`,
+    unit: `N/${portalId}/settings/0/Settings/System/VolumeUnit`,
   })
 
   const topics$ = useTopicsWithParameters<TankTopics>(getTopics, mqttQuery.portalId$, of(tankId))

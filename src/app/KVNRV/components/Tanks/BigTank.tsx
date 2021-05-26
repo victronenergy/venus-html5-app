@@ -6,6 +6,7 @@ import { TankProps } from "./index"
 
 import "./BigTank.scss"
 import { useEffect, useState } from "react"
+import { VOLUME_UNITS, VolumeUnit, VolumeUnits } from "../../utils/constants"
 
 export const BigTank = ({ tankId, conf, invert }: TankProps) => {
   const [height, setHeight] = useState(0)
@@ -16,6 +17,11 @@ export const BigTank = ({ tankId, conf, invert }: TankProps) => {
     setHeight(100 - (tank.level ?? 0))
   }, [tank.level, tankLevel])
 
+  const unit: VolumeUnit =
+    tank?.unit && Object.keys(VOLUME_UNITS).includes(tank.unit.toString())
+      ? VOLUME_UNITS[tank.unit.toString() as keyof VolumeUnits]
+      : VOLUME_UNITS.default
+
   return (
     <div className="">
       <Card title={tank?.customName ?? tank.productName} size={[SIZE_WIDE, SIZE_LONG]} footer={footer}>
@@ -24,7 +30,9 @@ export const BigTank = ({ tankId, conf, invert }: TankProps) => {
             <div className="indicator-main">
               <span>
                 <NumericValue value={tank.level} unit="%" defaultValue={"--"} precision={0} />
-                <div className="name">{formatNumber({ value: tank.remaining * 1000, unit: "L" })}</div>
+                <div className="name">
+                  {formatNumber({ value: tank.remaining * unit.factor, unit: unit.unit, precision: unit.precision })}
+                </div>
               </span>
             </div>
 

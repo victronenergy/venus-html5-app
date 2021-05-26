@@ -9,6 +9,7 @@ import "./SmallTank.scss"
 import { useTank } from "../../../modules"
 import { TankProps } from "./index"
 import { useSendUpdate } from "../../../modules"
+import { VOLUME_UNITS, VolumeUnit, VolumeUnits } from "../../utils/constants"
 
 export const SmallTank = ({ tankId, conf, invert }: TankProps) => {
   const tank = useTank(tankId)
@@ -17,6 +18,11 @@ export const SmallTank = ({ tankId, conf, invert }: TankProps) => {
     conf,
     tank.customName ?? tank.productName
   )
+
+  const unit: VolumeUnit =
+    tank?.unit && Object.keys(VOLUME_UNITS).includes(tank.unit.toString())
+      ? VOLUME_UNITS[tank.unit.toString() as keyof VolumeUnits]
+      : VOLUME_UNITS.default
 
   return (
     <div className="">
@@ -27,7 +33,9 @@ export const SmallTank = ({ tankId, conf, invert }: TankProps) => {
               <div className="indicator-main--small">
                 <span>
                   <NumericValue value={tank.level} unit="%" defaultValue={"--"} precision={0} />
-                  <span className="name">{formatNumber({ value: tank.remaining * 1000, unit: "L" })}</span>
+                  <span className="name">
+                    {formatNumber({ value: tank.remaining * unit.factor, unit: unit.unit, precision: unit.precision })}
+                  </span>
                 </span>
               </div>
 

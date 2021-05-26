@@ -76,7 +76,7 @@ export const TANKS_CONF = {
   FRESH_WATER: {
     DEVICE_ID: 1,
     MAX: 1,
-    THRESHOLDS: [0.6, 0.3, 0.1],
+    THRESHOLDS: [0.7, 0.2, 0.1],
     MESSAGES: {
       [WARNING]: "water level very low",
       [ALARM]: "water levels critically low",
