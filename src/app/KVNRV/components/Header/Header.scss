@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 1rem;
+  padding: 1em;
   align-items: center;
   background-color: $header-bg-color;
   color: $color-white;
@@ -16,17 +16,17 @@
 
 
     .header__logo {
-      padding-right: 1rem;
+      padding-right: 1em;
 
       .header__logo__image {
         vertical-align: middle;
-        margin-right: 0.5rem;
-        width: 3rem;
+        margin-right: 0.5em;
+        width: 3em;
       }
 
       .header__logo__text {
         font-family: Tommy, sans-serif;
-        font-size: 2rem;
+        font-size: 3em;
         font-weight: 900;
         vertical-align: middle;
       }
@@ -34,8 +34,8 @@
 
     .header__info {
       border-left: white solid 2px;
-      padding-left: 1rem;
-      font-size: 0.8rem;
+      padding-left: 1em;
+      font-size: 1em;
 
       @media #{$regular} {
         display: none;
@@ -51,21 +51,21 @@
     flex-direction: row;
 
     .header__buttons__remote-console, .header__buttons__remote-connection {
-      font-size: 1.2rem;
+      font-size: 1.4em;
       background-color: $header-button-color;
       color: $color-white;
-      padding: 0.5rem 0.8rem;
+      padding: 0.5em 0.8em;
       border: none;
       border-radius: 5px;
-      margin-right: 1rem;
+      margin-right: 1em;
 
       .header__buttons__icon {
         vertical-align: middle;
       }
       .header__buttons__text {
-        margin-left: 0.5rem;
+        margin-left: 0.5em;
         vertical-align: middle;
-        font-size: 0.9rem;
+        font-size: 0.9em;
 
         @media #{$hide-remote-console-breakpoint} {
           display: none;
@@ -73,8 +73,8 @@
       }
     }
 
-    $theme-slider-width: 3rem;
-    $theme-slider-height: 1rem;
+    $theme-slider-width: 6em;
+    $theme-slider-height: 1.75em;
     $theme-slider-circle-size: $theme-slider-height * 1.5;
 
     .header__buttons__darkmode {
@@ -100,7 +100,7 @@
         right: 0;
         top: 0;
         transition: .4s;
-        border-radius: 1rem;
+        border-radius: 1em;
 
         &:before {
           bottom: -1 * ($theme-slider-height * 0.5) / 2;
