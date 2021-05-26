@@ -7,7 +7,7 @@ import NumericValue from "../../../components/NumericValue"
 import { NotAvailable } from "../NotAvailable"
 
 import "./Battery.scss"
-import { BATTERY_CONF } from "../../utils/constants"
+import { BATTERY_CONF, CRITICAL_MULTIPLIER } from "../../utils/constants"
 import GaugeIndicator from "../../../components/GaugeIndicator"
 import { normalizePower } from "../../utils/helpers"
 
@@ -55,7 +55,7 @@ export const Batteries = ({ size }: BatteryProps) => {
     const battery = batteries[0]
     const batteryStateLabel = batteryStateFormatter(battery.state)
     const batteryLevelBars = Math.ceil(battery.soc / (100 / CELL_NUMBER))
-    const normalizedPower = normalizePower(battery.power, BATTERY_CONF.MAX)
+    const normalizedPower = normalizePower(battery.power, BATTERY_CONF.MAX * CRITICAL_MULTIPLIER)
 
     return (
       <Card title={"Battery"} size={size}>
@@ -97,9 +97,10 @@ export const Batteries = ({ size }: BatteryProps) => {
         </div>
         <div className="gauge">
           <GaugeIndicator
-            value={battery.current}
+            value={battery.power}
             percent={normalizedPower}
             parts={BATTERY_CONF.THRESHOLDS}
+            zeroOffset={BATTERY_CONF.ZERO_OFFSET}
             unit={"W"}
             size={"big"}
             gauge={true}
