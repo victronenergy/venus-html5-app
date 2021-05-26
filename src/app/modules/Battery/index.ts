@@ -1,1 +1,5 @@
 export * from "./Battery.provider"
+export * from "./Batteries.provider"
+export * from "./Batteries.store"
+export * from "./Batteries.query"
+export * from "./Batteries.service"
