@@ -20,10 +20,10 @@ $card-height-big: $card-height-small;
 $card-width-small: 11em;
 $card-width-big: ($card-width-small * 2) + ($card-margin * 2);
 
-$donut-size-small: $card-width-small / 1.7;
+$donut-size-small: $card-width-small / 1.4;
 $donut-width-big: $donut-size-small;
 $donut-height-big: $donut-width-big - $card-width-small / 6;
-$donut-offset: 0.24em;
+$donut-offset: 0.3em;
 
 
 // app specific variables
@@ -38,7 +38,7 @@ $water-tank-height: $card-height-small * 1.4;
 $water-tank-water-width: $water-tank-width * 0.75;
 $water-tank-color: #01BDFE;
 
-$progress-height: 1.5em;
+$progress-height: 1.2em;
 $progress-radius: 3em;
 
 $paginator-arrow-color: var(--paginator-arrow-color)
