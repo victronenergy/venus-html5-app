@@ -73,17 +73,6 @@ export const RemoteLogin = () => {
         </form>
 
         <div className={"login__bottom"}>
-          <div className={"login__bottom__remember"}>
-            <input
-              type={"checkbox"}
-              id={"login-remember"}
-              className={"login__checkbox"}
-              checked={remember}
-              onChange={(e) => setRemember(e.currentTarget.checked)}
-            />
-            <label htmlFor={"login-remember"}>Remember me</label>
-          </div>
-
           <a target={"_blank"} href={VRM_URL + "forgot-password"} rel="noreferrer">
             Forgot Password?
           </a>
