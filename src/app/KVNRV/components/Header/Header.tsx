@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react"
-import { useAppService, useTheme } from "../../../modules"
+import { appQuery, useAppService, useTheme } from "../../../modules"
 import KVNRVLogo from "../../images/KVNRV-Logo.svg"
 import RemoteIcon from "../../images/RemoteIcon.svg"
 
 import "./Header.scss"
 import { VIEWS } from "../../utils/constants"
+import { useObservableState } from "observable-hooks"
 
 const timer = () => {
   return new Date()
@@ -14,6 +15,7 @@ export const Header = () => {
   const [time, setTime] = useState(timer())
   const { darkMode, themeService } = useTheme()
   const appService = useAppService()
+  const remote = useObservableState(appQuery.remote$)
 
   useEffect(() => {
     const t = setTimeout(() => {
@@ -30,10 +32,9 @@ export const Header = () => {
     hour: "2-digit",
     minute: "2-digit",
   }
-  const [remote, setRemote] = useState(false)
 
   const handleRemoteSwitch = () => {
-    setRemote(!remote)
+    appService.toggleRemote()
   }
 
   useEffect(() => {

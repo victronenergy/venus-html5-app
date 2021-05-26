@@ -9,6 +9,7 @@ export class AppQuery extends Query<AppState> {
   all$ = this.select()
   page$ = this.select((s) => s.page)
   locked$ = this.select((s) => s.locked)
+  remote$ = this.select((s) => s.remote)
 }
 
 export const appQuery = new AppQuery(appStore)

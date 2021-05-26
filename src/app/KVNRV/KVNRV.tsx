@@ -20,12 +20,6 @@ export const KVNRV = (props: AppProps) => {
     <div className={"container " + (darkMode ? "dark" : "light")}>
       <Header />
       {(() => {
-        if (!isConnected || !portalId) {
-          return <Connecting />
-        } else if (error) {
-          return <Error />
-        }
-
         switch (appData?.page) {
           default:
           case VIEWS.CONSOLE:
@@ -38,6 +32,11 @@ export const KVNRV = (props: AppProps) => {
               />
             )
           case VIEWS.METRICS:
+            if (!isConnected || !portalId) {
+              return <Connecting />
+            } else if (error) {
+              return <Error />
+            }
             return <Metrics />
           case VIEWS.LOGIN:
             return <RemoteLogin />

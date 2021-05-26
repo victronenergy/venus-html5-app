@@ -4,6 +4,7 @@ import { VIEWS } from "../../utils/constants"
 export interface AppState {
   page: string
   locked: boolean
+  remote: boolean
 }
 
 export const APP_STORE_NAME = "App"
@@ -14,6 +15,7 @@ export class AppStore extends Store<AppState> {
     super({
       page: VIEWS.METRICS,
       locked: false,
+      remote: false,
     })
   }
 }
