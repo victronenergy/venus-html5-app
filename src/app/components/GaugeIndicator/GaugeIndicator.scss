@@ -1,16 +1,15 @@
 
 @import '../../KVNRV/css/variables';
 
-$size-multiplier: 3;
+$size-multiplier: 2.5;
 $small-chart-width-factor: 0.85;
-$small-chart-height-factor: 0.6;
+$small-chart-height-factor: 0.65;
 
 .gauge-indicator {
   position: relative;
   height: $donut-height-big;
   width: $donut-width-big;
   align-self: center;
-  margin-bottom: 0.5rem;
 
   .top-chart {
     position: absolute;
@@ -39,8 +38,8 @@ $small-chart-height-factor: 0.6;
     }
 
     .bottom-chart {
-      width: $donut-size-small * $small-chart-width-factor * 1.1 * $size-multiplier !important;
-      height: $donut-size-small * $small-chart-height-factor * 1.1 * $size-multiplier !important;
+      width: $donut-size-small * $small-chart-width-factor * $size-multiplier !important;
+      height: $donut-size-small * $small-chart-height-factor * $size-multiplier !important;
       top: calc(50% + #{$donut-offset * $size-multiplier});
     }
   }

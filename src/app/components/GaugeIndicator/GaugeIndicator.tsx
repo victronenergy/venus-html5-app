@@ -29,6 +29,7 @@ type GaugeIndicatorProps = {
   darkMode: boolean
   size?: string
   gauge?: boolean
+  zeroOffset?: number
 }
 
 type Colors = {
@@ -46,8 +47,10 @@ export class GaugeIndicator extends PureComponent<GaugeIndicatorProps> {
     this.thresholdsChartRef = React.createRef()
     this.indicatorChartRef = React.createRef()
     this.indicatorChart = null
+    this.thresholdsChart = null
   }
   indicatorChart: Chart | null
+  thresholdsChart: Chart | null
   thresholdsChartRef: React.RefObject<HTMLCanvasElement>
   indicatorChartRef: React.RefObject<HTMLCanvasElement>
 
@@ -60,7 +63,7 @@ export class GaugeIndicator extends PureComponent<GaugeIndicatorProps> {
         let { dataThresholds, dataIndicator } = this.getData()
         dataThresholds.datasets[0]!.data = this.props.parts
 
-        new Chart(thresholdsChartCanvas, {
+        this.thresholdsChart = new Chart(thresholdsChartCanvas, {
           type: "doughnut",
           data: dataThresholds,
           options: {
@@ -200,7 +203,7 @@ export class GaugeIndicator extends PureComponent<GaugeIndicatorProps> {
       if (this.indicatorChart.data.datasets) {
         let percent = this.props.percent
         if (this.props.gauge) {
-          percent = percent + (0.5 - INDICATOR_WIDTH / 2)
+          percent = percent + ((this.props?.zeroOffset ?? 0.5) - INDICATOR_WIDTH / 2)
           this.indicatorChart.data.datasets[0].data = [
             percent - INDICATOR_WIDTH,
             INDICATOR_WIDTH * 2,
@@ -223,9 +226,21 @@ export class GaugeIndicator extends PureComponent<GaugeIndicatorProps> {
     }
   }
 
+  updateOuter() {
+    if (this.thresholdsChart) {
+      if (this.thresholdsChart.data.datasets) {
+        this.thresholdsChart.data.datasets[0].data = this.props.parts
+      }
+      this.thresholdsChart.update()
+      this.updateInner()
+    }
+  }
+
   componentDidUpdate(prevProps: Readonly<GaugeIndicatorProps>) {
     if (prevProps.value !== this.props.value || prevProps.darkMode !== this.props.darkMode) {
       this.updateInner()
+    } else if (prevProps.parts !== this.props.parts) {
+      this.updateOuter()
     }
   }
 
