@@ -13,6 +13,8 @@ export const STATUS_LEVELS_MSG = {
   [ALARM]: "Critical",
 }
 
+export const CRITICAL_MULTIPLIER = 1.2
+
 export type MessagesObj = {
   warning: string
   alarm: string
