@@ -1,6 +1,7 @@
 import { vrmStore, VrmStore } from "./Vrm.store"
 import axios from "axios"
 import { InstallationsResponse, LoginResponse } from "./Vrm.types"
+import { AppService, appStore } from "../App"
 
 export class VrmService {
   constructor(protected store: VrmStore) {}
@@ -26,6 +27,18 @@ export class VrmService {
     })
 
     return data
+  }
+
+  logout = () => {
+    const appService = new AppService(appStore)
+
+    appService.setRemote(false)
+
+    this.store.update({
+      token: undefined,
+      userId: undefined,
+      username: undefined,
+    })
   }
 
   updateInstanceDetails = async (): Promise<void> => {
