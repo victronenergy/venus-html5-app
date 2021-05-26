@@ -157,6 +157,9 @@ export const VOLUME_UNITS: VolumeUnits = {
 }
 
 export const VIEWS = {
+  CONSOLE: "CONSOLE",
   METRICS: "METRICS",
   LOGIN: "LOGIN",
 }
+
+export const VRM_URL = "https://vrm.victronenergy.com/"

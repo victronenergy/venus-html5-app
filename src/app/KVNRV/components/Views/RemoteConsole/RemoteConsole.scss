@@ -1,6 +1,8 @@
 @import '../../../css/variables.scss';
 
 .remote-console__container {
+  margin-top: auto;
+  height: 85%;
   display: flex;
   align-items: center;
   justify-content: center;

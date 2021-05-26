@@ -33,7 +33,7 @@ const App = (props: AppProps) => {
   if (whitelabel === "KVNRV") {
     return (
       <React.Suspense fallback={<Loading />}>
-        <KVNRV />
+        <KVNRV {...props} />
       </React.Suspense>
     )
   } else {
