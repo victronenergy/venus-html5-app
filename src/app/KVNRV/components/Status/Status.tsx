@@ -5,8 +5,15 @@ import { Footer } from "../../../components/Card/Card"
 import IconWarning from "../../images/IconWarning.svg"
 import "./Status.scss"
 import { STATUS_LEVELS, STATUS_LEVELS_MSG } from "../../utils/constants"
-import { StatusUpdate, useStatus } from "../../../modules"
-import { useSystemState } from "../../../modules/SystemState/SystemState.provider"
+import {
+  BatteryAlarmsState,
+  StatusUpdate,
+  useBatteryAlarms,
+  useStatus,
+  useSystemState,
+  useVebusAlarms,
+  VebusAlarmsState,
+} from "../../../modules"
 
 const SYSTEM_STATE_MAP = {
   0: "Off",
@@ -24,6 +31,27 @@ const SYSTEM_STATE_MAP = {
   257: "Sustain",
 }
 
+const keyToString = (key: string) => {
+  return key
+    .split(/(?=[A-Z])/)
+    .map((s) => s.toLowerCase())
+    .join(" ")
+}
+
+const alarmsToUpdate = (alarms: BatteryAlarmsState | VebusAlarmsState, part?: string) => {
+  let updates: StatusUpdate[] = []
+  Object.keys(alarms).forEach((key) => {
+    if (alarms[key as keyof typeof alarms] > 0) {
+      updates.push({
+        part: part ? `Vebus (${part})` : "Vebus",
+        message: keyToString(key),
+        level: alarms[key as keyof typeof alarms] === 1 ? STATUS_LEVELS.WARNING : STATUS_LEVELS.ALARM,
+      } as StatusUpdate)
+    }
+  })
+  return updates
+}
+
 type StatusProps = {
   size: string[]
 }
@@ -32,11 +60,19 @@ export const Status = ({ size }: StatusProps) => {
   const { statuses } = useStatus()
   const { state } = useSystemState()
 
+  const batteryAlarms = useBatteryAlarms()
+  const vebusAlarms = useVebusAlarms()
+
   const footer: Footer = {
     status: STATUS_LEVELS.SUCCESS,
     property: "Connection",
     message: STATUS_LEVELS_MSG[STATUS_LEVELS.SUCCESS],
   }
+  let notifications: StatusUpdate[] = []
+
+  notifications = notifications.concat(alarmsToUpdate(batteryAlarms, "Battery"))
+  notifications = notifications.concat(alarmsToUpdate(vebusAlarms))
+  notifications = notifications.concat(statuses?.slice() ?? [])
 
   return (
     <div className="metrics__status">
@@ -49,19 +85,18 @@ export const Status = ({ size }: StatusProps) => {
         </div>
 
         <div className={"status-updates " + size.join(" ")}>
-          {statuses &&
-            statuses.map((update: StatusUpdate) => (
-              <div className={"status-update row " + update.level} key={"status-update-" + update.part}>
-                <span className={"row align-items-center"}>
-                  <div className={"status-update__icon"}>
-                    <img src={IconWarning} alt={"Status update icon"} />
-                  </div>
+          {notifications.map((update: StatusUpdate) => (
+            <div className={"status-update row " + update.level} key={"status-update-" + update.part}>
+              <span className={"row align-items-center"}>
+                <div className={"status-update__icon"}>
+                  <img src={IconWarning} alt={"Status update icon"} />
+                </div>
 
-                  <span>{update.part}: </span>
-                  <span className={"status-update__message"}>{update.message}</span>
-                </span>
-              </div>
-            ))}
+                <span>{update.part}: </span>
+                <span className={"status-update__message"}>{update.message}</span>
+              </span>
+            </div>
+          ))}
         </div>
       </Card>
     </div>
