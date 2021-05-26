@@ -38,7 +38,7 @@ export const Metrics = () => {
   useEffect(() => {
     if (metricsRef.current) {
       setHammer((prev) => {
-        if (!prev) {
+        if (pages > 1 && !prev) {
           const newHammer = new Hammer.Manager(metricsRef.current!)
           const Swipe = new Hammer.Swipe({ velocity: 0.6, direction: 2 | 4 })
           newHammer.add(Swipe)
@@ -175,7 +175,7 @@ export const Metrics = () => {
       let ratio = Math.max(heightRatio, widthRatio)
 
       if (metricsRef.current) {
-        ratio = ratio > 1 ? 0 : 1 - ratio * 1.1
+        ratio = ratio > 1 ? 0 : 1 - ratio
         let scaleFactor = 1 + ratio
         metricsRef.current.style.fontSize = scaleFactor + "rem"
       }
