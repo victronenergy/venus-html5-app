@@ -88,10 +88,11 @@ export class MqttService {
     console.log("MQTT booting")
 
     let client = this.store?.getValue()?.client
+    const topics = this.store?.getValue()?.topicsSubscribed
 
-    if (client?.connected) {
-      client.end()
-      this.store.update({ status: STATUS.DISCONNECTED })
+    if (client) {
+      client.end(true)
+      this.store.update({ client: undefined, topicsSubscribed: new Set<string>() })
     }
 
     let remote = false
@@ -130,6 +131,8 @@ export class MqttService {
       this.subscribeToTopic(`N/${(remote && portalId) || "+"}/system/0/Serial`) // Never use wildcard when connecting remotely
       this.sendKeepalive()
       this.setupKeepalive()
+
+      topics?.forEach((topic) => this.subscribeToTopic(topic))
     })
 
     client.on("message", async (topic, message) => {

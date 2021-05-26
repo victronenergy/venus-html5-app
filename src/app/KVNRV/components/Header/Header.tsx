@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { appQuery, useAppService, useTheme } from "../../../modules"
+import { appQuery, useAppService, useTheme, vrmQuery } from "../../../modules"
 import KVNRVLogo from "../../images/KVNRV-Logo.svg"
 import RemoteIcon from "../../images/RemoteIcon.svg"
 
@@ -16,6 +16,7 @@ export const Header = () => {
   const { darkMode, themeService } = useTheme()
   const appService = useAppService()
   const remote = useObservableState(appQuery.remote$)
+  const loggedIn = useObservableState(vrmQuery.loggedIn$)
 
   useEffect(() => {
     const t = setTimeout(() => {
@@ -38,12 +39,12 @@ export const Header = () => {
   }
 
   useEffect(() => {
-    if (remote) {
+    if (remote && !loggedIn) {
       appService.setPage(VIEWS.LOGIN)
     } else {
       appService.setPage(VIEWS.METRICS)
     }
-  }, [remote])
+  }, [remote, loggedIn])
 
   return (
     <div className={"header"}>
