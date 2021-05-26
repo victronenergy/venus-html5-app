@@ -2,8 +2,8 @@ import { useObservableState } from "observable-hooks"
 import { useSubscription } from "observable-hooks/dist/esm2015"
 import { useEffect } from "react"
 import Logger from "../../utils/logger"
-import { mqttQuery } from "../Mqtt"
-import { useMqtt } from "../Mqtt/Mqtt.provider"
+import { mqttQuery, PortalId } from "../Mqtt"
+import { useMqtt, useTopicsWithPortalId } from "../Mqtt/Mqtt.provider"
 import { vebusQuery } from "./Vebus.query"
 import { VebusService } from "./Vebus.service"
 import { VebusState, vebusStore } from "./Vebus.store"
@@ -15,16 +15,22 @@ export const useVebus = (): VebusState => {
   const instanceId = useObservableState(vebusQuery.instanceId$)
   const vebusService = useVebusService()
   const mqttService = useMqtt()
-  const topic = "N/dca632c080c9/vebus/+/DeviceInstance"
+
+  const getTopics = (portalId: PortalId) => ({
+    deviceInstances: `N/${portalId}/vebus/+/DeviceInstance`,
+  })
+
+  const topics$ = useTopicsWithPortalId(getTopics, mqttQuery.portalId$)
+  const topics = useObservableState(topics$)
 
   useEffect(() => {
-    mqttService.subscribeToTopic(topic)
+    mqttService.subscribeToTopic(topics?.deviceInstances)
 
-    return () => mqttService.unsubscribeFromTopic(topic)
+    return () => mqttService.unsubscribeFromTopic(topics?.deviceInstances)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [portalId])
 
-  useSubscription(mqttQuery.messagesByWildcard$(topic), (messages) => {
+  useSubscription(mqttQuery.messagesByWildcard$(topics?.deviceInstances ?? ""), (messages) => {
     if (!messages || Object.entries(messages).length === 0) {
       Logger.log("Waiting for VE.Bus device instance...")
     } else {

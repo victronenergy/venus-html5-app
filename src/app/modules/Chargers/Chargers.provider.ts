@@ -8,17 +8,17 @@ import { chargersQuery } from "./Chargers.query"
 
 export const useChargers = () => {
   const chargersService = useChargersService()
-  const topic = "N/dca632c080c9/charger/+/DeviceInstance" // TODO: Into getTopics
 
   const getTopics = (portalId: PortalId) => ({
     chargerInstances: `N/${portalId}/charger/+/DeviceInstance`,
   })
 
   const topics$ = useTopicsWithPortalId(getTopics, mqttQuery.portalId$)
+  const topics = useObservableState(topics$)
 
   useTopicSubscriptions(topics$)
 
-  useSubscription(mqttQuery.messagesByWildcard$(topic), (messages) => {
+  useSubscription(mqttQuery.messagesByWildcard$(topics?.chargerInstances ?? ""), (messages) => {
     if (!messages || Object.entries(messages).length === 0) {
       Logger.log("Waiting for chargers...")
     } else {
