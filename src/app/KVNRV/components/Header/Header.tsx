@@ -30,6 +30,19 @@ export const Header = () => {
     hour: "2-digit",
     minute: "2-digit",
   }
+  const [remote, setRemote] = useState(false)
+
+  const handleRemoteSwitch = () => {
+    setRemote(!remote)
+  }
+
+  useEffect(() => {
+    if (remote) {
+      appService.setPage(VIEWS.LOGIN)
+    } else {
+      appService.setPage(VIEWS.METRICS)
+    }
+  }, [remote])
 
   return (
     <div className={"header"}>
@@ -46,16 +59,10 @@ export const Header = () => {
       </div>
 
       <div className={"header__buttons"}>
-        {/*TODO: This button should actually lead to the remote console, but is set to metrics for convenience during dev*/}
-        <button className={"header__buttons__remote-console"} onClick={() => appService.setPage(VIEWS.METRICS)}>
-          <img src={RemoteIcon} className={"header__buttons__icon"} alt={"Remote Console icon"} />
-          <span className={"header__buttons__text"}>Remote console</span>
-        </button>
-
-        <button className={"header__buttons__remote-connection"} onClick={() => appService.setPage(VIEWS.LOGIN)}>
-          <img src={RemoteIcon} className={"header__buttons__icon"} alt={"Remote Connection icon"} />
-          <span className={"header__buttons__text"}>Remote connection</span>
-        </button>
+        <div className={"header__buttons__remote-connection"} onClick={() => handleRemoteSwitch()}>
+          <button className={"remote " + (remote ? "active" : "")}>Remote</button>
+          <button className={"local " + (!remote ? "active" : "")}>Local</button>
+        </div>
 
         <div className={"header__buttons__darkmode"}>
           <label htmlFor="header__buttons__darkmode__input" className="header__buttons__darkmode__switch">
@@ -68,6 +75,11 @@ export const Header = () => {
             <span className="header__buttons__darkmode__slider" />
           </label>
         </div>
+
+        <button className={"header__buttons__remote-console"} onClick={() => appService.setPage(VIEWS.CONSOLE)}>
+          <img src={RemoteIcon} className={"header__buttons__icon"} alt={"Remote Console icon"} />
+          <span className={"header__buttons__text"}>Remote console</span>
+        </button>
       </div>
     </div>
   )

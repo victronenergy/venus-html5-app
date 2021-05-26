@@ -49,15 +49,19 @@
   .header__buttons {
     display: flex;
     flex-direction: row;
+    height: 3em;
 
-    .header__buttons__remote-console, .header__buttons__remote-connection {
+    div {
+      margin-right: 1em;
+    }
+
+    .header__buttons__remote-console {
       font-size: 1.4em;
       background-color: $header-button-color;
       color: $color-white;
-      padding: 0.5em 0.8em;
+      padding: 0.2em 0.8em;
       border: none;
       border-radius: 5px;
-      margin-right: 1em;
 
       .header__buttons__icon {
         vertical-align: middle;
@@ -77,6 +81,55 @@
     $theme-slider-height: 1.75em;
     $theme-slider-circle-size: $theme-slider-height * 1.5;
 
+    .header__buttons__remote-connection {
+      display: flex;
+      flex-direction: row;
+      align-self: center;
+
+      button {
+        border-radius: 2em;
+        background-color: $header-button-color;
+        color: $color-white;
+        height: $theme-slider-height;
+        align-self: center;
+
+        display: block;
+        z-index: 1;
+        font-size: 1.2em;
+
+        &.active {
+          border-radius: 2em;
+          background-color: $color-white;
+          color: $header-bg-color;
+          height: 2.2em;
+
+          z-index: 2;
+        }
+      }
+
+      .remote {
+        padding-left: 0.8em;
+        padding-right: 1.2em;
+        margin-right: -1em;
+
+        &.active {
+          padding-right: 0.5em;
+          margin-right: 0;
+        }
+      }
+
+      .local {
+        padding-right: 0.8rem;
+        padding-left: 1.2em;
+        margin-left: -1em;
+
+        &.active {
+          padding-left: 0.5em;
+          margin-left: 0;
+        }
+      }
+    }
+
     .header__buttons__darkmode {
       align-self: center;
 
@@ -85,6 +138,7 @@
         display: inline-block;
         height: $theme-slider-height;
         width: $theme-slider-width;
+        vertical-align: middle;
       }
 
       #header__buttons__darkmode__input {
