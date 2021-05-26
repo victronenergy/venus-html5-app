@@ -107,7 +107,49 @@ export const AC_MODE = {
     ON: 3,
     OFF: 4,
   },
-  LIMITS: [6, 10, 13, 16, 25, 32, 63],
+  LIMITS_US: [10, 15, 20, 30, 50, 100],
+  LIMITS_EU: [3, 6, 10, 13, 16, 25, 32, 63],
+}
+
+export type VolumeUnit = {
+  precision: number
+  stepSize: number
+  unit: string
+  factor: number
+}
+
+export type VolumeUnits = {
+  1: VolumeUnit
+  2: VolumeUnit
+  3: VolumeUnit
+  default: VolumeUnit
+}
+
+export const VOLUME_UNITS: VolumeUnits = {
+  "1": {
+    precision: 0,
+    stepSize: 1,
+    unit: "L",
+    factor: 1000.0,
+  },
+  "2": {
+    precision: 0,
+    stepSize: 1,
+    unit: "gal",
+    factor: 219.969157,
+  },
+  "3": {
+    precision: 0,
+    stepSize: 1,
+    unit: "gal",
+    factor: 264.172052,
+  },
+  default: {
+    precision: 3,
+    stepSize: 0.005,
+    unit: "m3",
+    factor: 1.0,
+  },
 }
 
 export const VIEWS = {

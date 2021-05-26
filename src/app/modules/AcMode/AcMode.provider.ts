@@ -3,11 +3,12 @@ import { useMqtt, useTopicsState, useTopicSubscriptions, useTopicsWithParameters
 import { shorePowerInputQuery, useShorePowerInput } from "../ShorePowerInput"
 import { vebusQuery, InstanceId, useVebus } from "../Vebus"
 import { useObservableState } from "observable-hooks"
-import { HeaderTopics } from "../Header/Header.provider"
+import { HeaderTopics } from "../Header"
 
 export interface AcModeState {
-  mode: number
-  limit?: number
+  productId: number
+  mode: string
+  limit?: string
 }
 
 export interface AcModeProvider extends AcModeState {
@@ -16,6 +17,7 @@ export interface AcModeProvider extends AcModeState {
 }
 
 export interface AcModeTopics extends Topics {
+  productId?: string
   mode?: string
   limit?: string
   updateMode?: string
@@ -26,6 +28,7 @@ export function useAcMode(): AcModeProvider {
   const getTopics = (portalId: PortalId, deviceInstanceId: InstanceId, shorePowerInput: number) => {
     let res = {
       mode: `N/${portalId}/vebus/${deviceInstanceId}/Mode`,
+      productId: `N/${portalId}/vebus/${deviceInstanceId}/ProductId`,
       limit: undefined,
     } as AcModeTopics
 

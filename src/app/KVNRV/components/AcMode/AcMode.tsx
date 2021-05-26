@@ -1,12 +1,12 @@
 import React, { useState } from "react"
 
 import { Card, SIZE_WIDE, ICON_SETTINGS, SIZE_SHORT } from "../../../components/Card"
-import { AC_MODE, SHORE_POWER_CONF } from "../../utils/constants"
+import { AC_MODE, CRITICAL_MULTIPLIER, SHORE_POWER_CONF } from "../../utils/constants"
 import NumericValue, { formatNumber } from "../../../components/NumericValue"
 import { AcModeModal } from "./AcModeModal"
 
 import "./AcMode.scss"
-import { useAcMode, useActiveInValues, useSendUpdate } from "../../../modules"
+import { useAcMode, useActiveInValues, useActiveSource, useSendUpdate } from "../../../modules"
 import { normalizePower } from "../../utils/helpers"
 import { NotAvailable } from "../NotAvailable"
 import GaugeIndicator from "../../../components/GaugeIndicator"
@@ -27,9 +27,13 @@ export const acModeFormatter = (value: number) => {
 }
 
 export const AcMode = () => {
-  const { mode, limit, updateMode, updateLimit } = useAcMode()
+  const { mode, limit, productId, updateMode, updateLimit } = useAcMode()
+  const { activeInput } = useActiveSource()
   const { current, frequency, voltage, power } = useActiveInValues()
-  const normalizedPower = normalizePower(power && power[0] ? power[0] : 0, SHORE_POWER_CONF.MAX)
+
+  const inLimit = parseFloat(limit ?? "0")
+  const powerMax = inLimit * (voltage && voltage[0] ? voltage[0] : 0) * CRITICAL_MULTIPLIER
+  const normalizedPower = normalizePower(power && power[0] ? power[0] : 0, powerMax)
   useSendUpdate(normalizedPower, SHORE_POWER_CONF, "Shore Power")
 
   const [modalOpen, setModalOpen] = useState(false)
@@ -44,7 +48,7 @@ export const AcMode = () => {
         infoText={"Limit: " + formatNumber({ value: limit, unit: "A" })}
       >
         <div className="gauge">
-          {power ? (
+          {(activeInput === 0 || activeInput === 1) && power ? (
             <GaugeIndicator value={power[0]} percent={normalizedPower} parts={SHORE_POWER_CONF.THRESHOLDS} unit={"W"} />
           ) : (
             <NotAvailable />
@@ -69,6 +73,7 @@ export const AcMode = () => {
             mode={Number(mode)}
             limit={Number(limit)}
             onClose={() => setModalOpen(false)}
+            productId={productId}
             updateMode={updateMode}
             updateLimit={updateLimit}
           />

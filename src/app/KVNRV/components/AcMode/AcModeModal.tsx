@@ -1,8 +1,28 @@
 import Modal from "../../../components/Modal"
 import { AC_MODE } from "../../utils/constants"
 import { acModeFormatter } from "./AcMode"
+import Logger from "../../../utils/logger"
+
+/**
+ * - Mask the Product id with `0xFF00`
+ * - If the result is `0x1900` or `0x2600` it is an EU model (230VAC)
+ * - If the result is `0x2000` or `0x2700` it is an US model (120VAC)
+ */
+
+const getSuggestedAmperageValuesList = (productId: number) => {
+  const result = productId & 0xff00
+  if (result === 0x1900 || result === 0x2600) {
+    return AC_MODE.LIMITS_EU
+  } else if (result === 0x2000 || result === 0x2700) {
+    return AC_MODE.LIMITS_US
+  } else {
+    Logger.warn(`Could not determine amperage US/EU for product id ${productId}`)
+    return AC_MODE.LIMITS_US
+  }
+}
 
 type AcModeModalProps = {
+  productId: number
   mode: number
   limit?: number
   updateMode: Function
@@ -31,7 +51,7 @@ export const AcModeModal = (props: AcModeModalProps) => {
           <>
             <div className={"name"}>Select shore input limit</div>
             <div className={"ac_mode_modal__group"}>
-              {Object.values(AC_MODE.LIMITS).map((limit) => (
+              {Object.values(getSuggestedAmperageValuesList(props.productId)).map((limit) => (
                 <button
                   key={limit}
                   className={"ac_mode_modal__button" + (props.limit === limit ? " success" : "")}
