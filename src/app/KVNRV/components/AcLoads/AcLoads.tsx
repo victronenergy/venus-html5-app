@@ -67,7 +67,7 @@ export const AcLoads = () => {
   const inMode = Number(mode)
 
   useEffect(() => {
-    setConfig(acLimit(inMode, inLimit, state))
+    setConfig(acLimit(inMode, isNaN(inLimit) ? AC_MODE.LIMITS_US[0] : inLimit, state))
   }, [inMode, inLimit, state])
 
   const normalizedPower = normalizePower(power && power[0] ? power[0] : 0, config.MAX)
