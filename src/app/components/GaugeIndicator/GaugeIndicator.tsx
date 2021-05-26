@@ -204,7 +204,8 @@ export class GaugeIndicator extends PureComponent<GaugeIndicatorProps> {
       if (this.indicatorChart.data.datasets) {
         let percent = this.props.percent
         if (this.props.gauge) {
-          percent = percent + ((this.props?.zeroOffset ?? 0.5) - INDICATOR_WIDTH / 2)
+          const zeroOffset = this.props?.zeroOffset ?? 0.5
+          percent = Math.min(percent + zeroOffset, 1) - INDICATOR_WIDTH / 2
           this.indicatorChart.data.datasets[0].data = [
             percent - INDICATOR_WIDTH,
             INDICATOR_WIDTH * 2,

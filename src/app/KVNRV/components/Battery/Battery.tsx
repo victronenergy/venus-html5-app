@@ -55,7 +55,11 @@ export const Batteries = ({ size }: BatteryProps) => {
     const battery = batteries[0]
     const batteryStateLabel = batteryStateFormatter(battery.state)
     const batteryLevelBars = Math.ceil(battery.soc / (100 / CELL_NUMBER))
-    const normalizedPower = normalizePower(battery.power, BATTERY_CONF.MAX * CRITICAL_MULTIPLIER)
+    const normalizedPower = normalizePower(
+      battery.power,
+      BATTERY_CONF.MAX * CRITICAL_MULTIPLIER,
+      -1 * BATTERY_CONF.ZERO_OFFSET!
+    )
 
     return (
       <Card title={"Battery"} size={size}>
@@ -84,14 +88,15 @@ export const Batteries = ({ size }: BatteryProps) => {
           <div className="battery__charge">
             <div className="battery__charge__top" />
             <div className="battery__charge__body">
-              {Array.from(Array(batteryLevelBars).keys())
-                .reverse()
-                .map((idx) => (
-                  <div
-                    className={"battery__charge__body__cell" + getClassname(idx, batteryLevelBars)}
-                    key={"battery-cell-" + idx}
-                  />
-                ))}
+              {batteryLevelBars > 0 &&
+                Array.from(Array(batteryLevelBars).keys())
+                  .reverse()
+                  .map((idx) => (
+                    <div
+                      className={"battery__charge__body__cell" + getClassname(idx, batteryLevelBars)}
+                      key={"battery-cell-" + idx}
+                    />
+                  ))}
             </div>
           </div>
         </div>
