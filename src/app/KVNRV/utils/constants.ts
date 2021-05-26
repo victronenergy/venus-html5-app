@@ -67,7 +67,7 @@ export const PV_CONF: WidgetConfiguration = {
 
 export const SHORE_POWER_CONF: WidgetConfiguration = {
   MAX: 100,
-  THRESHOLDS: [0.8, 0.1, 0.1],
+  THRESHOLDS: [0.6, 0.2, 0.2],
   MESSAGES: {
     [WARNING]: "high power load",
     [ALARM]: "critically high power load",
