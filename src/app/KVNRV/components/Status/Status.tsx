@@ -44,8 +44,8 @@ export const Status = ({ size }: StatusProps) => {
         <div className={"title"}>Penny's House</div>
         <div className={"status"}>{SYSTEM_STATE_MAP[state?.toString() as keyof Object] ?? "--"}</div>
         <div className={"subheading row"}>
-          <div className={"subheading__model"}>Class A Motor Home</div>
-          <div className={"subheading__year"}>Model: 2016</div>
+          <div className={"subheading__model"}>Geo Pro Travel Trailer</div>
+          <div className={"subheading__year"}>Model: 2019</div>
         </div>
 
         <div className={"status-updates " + size.join(" ")}>
