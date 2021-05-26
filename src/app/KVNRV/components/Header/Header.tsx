@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { appQuery, useAppService, useTheme, vrmQuery } from "../../../modules"
+import { appQuery, useAppService, useTheme, useVrmService, vrmQuery } from "../../../modules"
 import KVNRVLogo from "../../images/KVNRV-Logo.svg"
 import RemoteIcon from "../../images/RemoteIcon.svg"
 
@@ -17,6 +17,7 @@ export const Header = () => {
   const appService = useAppService()
   const remote = useObservableState(appQuery.remote$)
   const loggedIn = useObservableState(vrmQuery.loggedIn$)
+  const vrmService = useVrmService()
 
   useEffect(() => {
     const t = setTimeout(() => {
@@ -44,6 +45,7 @@ export const Header = () => {
     } else {
       appService.setPage(VIEWS.METRICS)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [remote, loggedIn])
 
   return (
@@ -82,6 +84,13 @@ export const Header = () => {
           <img src={RemoteIcon} className={"header__buttons__icon"} alt={"Remote Console icon"} />
           <span className={"header__buttons__text"}>Remote console</span>
         </button>
+
+        {loggedIn && (
+          <button className={"header__buttons__logout"} onClick={() => vrmService.logout()}>
+            <img src={RemoteIcon} className={"header__buttons__icon"} alt={"Logout icon"} />
+            <span className={"header__buttons__text"}>Log out</span>
+          </button>
+        )}
       </div>
     </div>
   )

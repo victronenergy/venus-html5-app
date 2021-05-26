@@ -14,6 +14,7 @@ $low-landscape: "all and (min-aspect-ratio: 20/10)";
 $very-low-landscape: $low-landscape + " and (max-height: 350px)";
 
 $hide-remote-console-breakpoint: "all and (max-width: 549px), (max-height: 450px)";
+$hide-logout-breakpoint: "all and (max-width: 549px), (max-height: 450px)";
 
 $base: 0.05em;
 $topBottomPadding: 17 * $base;

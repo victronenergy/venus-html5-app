@@ -9,7 +9,6 @@ import KVNRVLogo from "../../../images/KVNRV-Logo.svg"
 export const RemoteLogin = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [remember, setRemember] = useState(true)
   const vrmService = useVrmService()
   const appService = useAppService()
 

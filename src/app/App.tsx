@@ -27,6 +27,7 @@ const App = (props: AppProps) => {
     if (remote && vrmState?.username && vrmState?.token && vrmState?.webhost && vrmState?.portalId) {
       mqttService.boot(vrmState.webhost, null, vrmState.username, vrmState.token, vrmState.portalId, "live")
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.host, props.port, vrmState?.userId, vrmState?.token, remote])
 
   if (whitelabel === "KVNRV") {
