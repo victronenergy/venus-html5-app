@@ -1,8 +1,10 @@
 import { FormEventHandler, useState } from "react"
-import KVNRVLogo from "../../../images/KVNRV-Logo.svg"
-import "./RemoteLogin.scss"
 import { useAppService, useVrmService } from "../../../../modules"
-import { VIEWS } from "../../../utils/constants"
+import { VIEWS, VRM_URL } from "../../../utils/constants"
+
+import "./RemoteLogin.scss"
+
+import KVNRVLogo from "../../../images/KVNRV-Logo.svg"
 
 export const RemoteLogin = () => {
   const [email, setEmail] = useState("")
@@ -58,8 +60,15 @@ export const RemoteLogin = () => {
             onInput={(e) => setPassword(e.currentTarget.value)}
           />
 
-          <button className={"login__form__button"} type={"submit"}>
+          <button className={"login__form__button login"} type={"submit"}>
             Log in
+          </button>
+          <button
+            className={"login__form__button go_back"}
+            type={"button"}
+            onClick={() => appService.setPage(VIEWS.METRICS)}
+          >
+            Back to dashboard
           </button>
         </form>
 
@@ -75,11 +84,16 @@ export const RemoteLogin = () => {
             <label htmlFor={"login-remember"}>Remember me</label>
           </div>
 
-          <a href={"victronenergy.com"}>Forgot Password?</a>
+          <a target={"_blank"} href={VRM_URL + "forgot-password"} rel="noreferrer">
+            Forgot Password?
+          </a>
         </div>
         <div className={"login__footer"}>
           <span>
-            Don't have an account yet? <a href={"victronenergy.com"}>Register your RV.</a>
+            Don't have an account yet?{" "}
+            <a target={"_blank"} href={VRM_URL + "register"} rel="noreferrer">
+              Register your RV.
+            </a>
           </span>
         </div>
       </div>
