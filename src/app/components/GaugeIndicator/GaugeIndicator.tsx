@@ -4,6 +4,7 @@ import "./GaugeIndicator.scss"
 import { formatNumber } from "../NumericValue"
 import { useTheme } from "../../modules"
 import { sum } from "../../KVNRV/utils/helpers"
+import { MessagesObj, STATUS_LEVELS, STATUS_LEVELS_MSG } from "../../KVNRV/utils/constants"
 
 const INDICATOR_WIDTH = 0.0075
 
@@ -187,9 +188,9 @@ export class GaugeIndicator extends PureComponent<GaugeIndicatorProps> {
       return this.props.darkMode ? "#fff" : "#000"
     }
 
-    if (percent < this.props.parts[0]) {
+    if (percent <= this.props.parts[0]) {
       return colors.colorGreen
-    } else if (percent < sum(this.props.parts.slice(0, 2))) {
+    } else if (percent <= sum(this.props.parts.slice(0, 2))) {
       return colors.colorYellow
     } else {
       return colors.colorRed
@@ -239,7 +240,8 @@ export class GaugeIndicator extends PureComponent<GaugeIndicatorProps> {
   componentDidUpdate(prevProps: Readonly<GaugeIndicatorProps>) {
     if (prevProps.value !== this.props.value || prevProps.darkMode !== this.props.darkMode) {
       this.updateInner()
-    } else if (prevProps.parts !== this.props.parts) {
+    }
+    if (prevProps.parts !== this.props.parts) {
       this.updateOuter()
     }
   }

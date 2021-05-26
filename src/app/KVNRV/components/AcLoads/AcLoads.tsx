@@ -53,7 +53,6 @@ const acLimit = (inverterMode: number, inPowerLimit: number, systemState: number
   let green = caution / barMax
   let yellow = overload / barMax - green
   let red = 1 - (yellow + green)
-  console.log("AcLoads@useEffect", inverterMode, caution, overload, barMax, green, yellow, red)
 
   return { ...AC_CONF, MAX: barMax, THRESHOLDS: [green, yellow, red] } as WidgetConfiguration
 }
@@ -77,7 +76,7 @@ export const AcLoads = () => {
   return (
     <Card title={"AC Loads"} size={[SIZE_SHORT, SIZE_NARROW]}>
       <div className="gauge">
-        {inMode !== AC_MODE.MODES.OFF && power ? (
+        {!isNaN(inMode) && inMode !== AC_MODE.MODES.OFF && power ? (
           <>
             <GaugeIndicator
               value={power[0] ?? 0}
