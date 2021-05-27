@@ -8,34 +8,13 @@ import "./Header.scss"
 import { VIEWS } from "../../utils/constants"
 import { useObservableState } from "observable-hooks"
 
-const timer = () => {
-  return new Date()
-}
-
 export const Header = () => {
-  const [time, setTime] = useState(timer())
   const { darkMode, themeService } = useTheme()
   const appService = useAppService()
   const remote = useObservableState(appQuery.remote$)
   const loggedIn = useObservableState(vrmQuery.loggedIn$)
   const username = useObservableState(vrmQuery.username$)
   const vrmService = useVrmService()
-
-  useEffect(() => {
-    const t = setTimeout(() => {
-      setTime(timer())
-    }, 1000 * 10)
-    // Clear timeout if the component is unmounted
-    return () => clearTimeout(t)
-  })
-
-  let dateFormat: Intl.DateTimeFormatOptions = {
-    weekday: "short",
-    month: "short",
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-  }
 
   const handleRemoteSwitch = () => {
     appService.toggleRemote()
