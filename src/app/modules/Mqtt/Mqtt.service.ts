@@ -3,6 +3,7 @@ import { IClientOptions } from "mqtt"
 import { MqttState, MqttStore, STATUS, Topics } from "."
 import Logger from "../../utils/logger"
 import { getMessageJson } from "../../utils/util"
+import { AppService, appStore } from "../App"
 
 export class MqttService {
   constructor(protected store: MqttStore) {}
@@ -124,6 +125,8 @@ export class MqttService {
 
     client.on("offline", () => {
       this.store.update({ error: true, status: STATUS.DISCONNECTED })
+      const appService = new AppService(appStore)
+      appService.setRemote(false)
     })
 
     client.on("connect", () => {
