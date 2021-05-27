@@ -125,10 +125,6 @@ export class MqttService {
 
     client.on("offline", () => {
       this.store.update({ error: true, status: STATUS.OFFLINE })
-      if (remote) {
-        const appService = new AppService(appStore)
-        appService.setRemote(false)
-      }
     })
 
     client.on("connect", () => {
