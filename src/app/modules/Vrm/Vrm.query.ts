@@ -10,6 +10,7 @@ export class VrmQuery extends Query<VrmState> {
   loggedIn$ = this.select((s) => {
     return s.username && s.token && s.webhost && s.portalId
   })
+  username$ = this.select((s) => s.username)
 }
 
 export const vrmQuery = new VrmQuery(vrmStore)

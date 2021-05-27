@@ -18,6 +18,7 @@ export const Header = () => {
   const appService = useAppService()
   const remote = useObservableState(appQuery.remote$)
   const loggedIn = useObservableState(vrmQuery.loggedIn$)
+  const username = useObservableState(vrmQuery.username$)
   const vrmService = useVrmService()
 
   useEffect(() => {
@@ -58,17 +59,31 @@ export const Header = () => {
         </div>
 
         <div className={"header__info"}>
-          <div>Calvin Hendricks</div>
-          <div>{time.toLocaleString("en-US", dateFormat)}</div>
+          <div>{username && "Logged in as"}</div>
+          <div>{username ?? "Not logged in"}</div>
+        </div>
+
+        <div className={"header__buttons"}>
+          <>
+            {loggedIn && (
+              <button className={"header__buttons__logout"} onClick={() => vrmService.logout()}>
+                <img src={LogOutIcon} className={"header__buttons__icon"} alt={"Logout icon"} />
+              </button>
+            )}
+          </>
+        </div>
+      </div>
+
+      <div className={"header__middle"}>
+        <div className={"header__buttons"}>
+          <div className={"header__buttons__remote-connection"} onClick={() => handleRemoteSwitch()}>
+            <button className={"remote " + (remote ? "active" : "")}>Remote</button>
+            <button className={"local " + (!remote ? "active" : "")}>Local</button>
+          </div>
         </div>
       </div>
 
       <div className={"header__buttons"}>
-        <div className={"header__buttons__remote-connection"} onClick={() => handleRemoteSwitch()}>
-          <button className={"remote " + (remote ? "active" : "")}>Remote</button>
-          <button className={"local " + (!remote ? "active" : "")}>Local</button>
-        </div>
-
         <div className={"header__buttons__darkmode"}>
           <label htmlFor="header__buttons__darkmode__input" className="header__buttons__darkmode__switch">
             <input
@@ -81,15 +96,14 @@ export const Header = () => {
           </label>
         </div>
 
-        <button className={"header__buttons__remote-console"} onClick={() => appService.setPage(VIEWS.CONSOLE)}>
-          <img src={RemoteIcon} className={"header__buttons__icon"} alt={"Remote Console icon"} />
-          <span className={"header__buttons__text"}>Remote console</span>
-        </button>
-
-        {loggedIn && (
-          <button className={"header__buttons__logout"} onClick={() => vrmService.logout()}>
-            <img src={LogOutIcon} className={"header__buttons__icon"} alt={"Logout icon"} />
-            <span className={"header__buttons__text"}>Log out</span>
+        {!remote && (
+          <button
+            className={"header__buttons__remote-console"}
+            onClick={() => appService.setPage(VIEWS.CONSOLE)}
+            disabled={remote}
+          >
+            <img src={RemoteIcon} className={"header__buttons__icon"} alt={"Remote Console icon"} />
+            <span className={"header__buttons__text"}>Remote console</span>
           </button>
         )}
       </div>
