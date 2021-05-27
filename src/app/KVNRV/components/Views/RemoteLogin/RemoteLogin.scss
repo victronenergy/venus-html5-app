@@ -84,10 +84,13 @@
           background-color: $main-bg-color;
           color: $text-color-main;
           border: 1px solid $text-color-main;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;
 
           .login__form__icon__go_back {
-            margin-right: 8px;
-            margin-left: -28px;
+            margin: auto 8px auto -24px;
           }
         }
       }
