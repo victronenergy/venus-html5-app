@@ -55,6 +55,14 @@ $battery-height: 5em;
       justify-content: flex-end;
       margin-top: -2px;
 
+      &.full {
+        .battery__charge__body__cell {
+          &:first-child {
+            border-radius: 4px 4px 0 0;
+          }
+        }
+      }
+
       .battery__charge__body__cell {
         width: 100%;
         height: $battery-height * 0.16;
@@ -62,7 +70,6 @@ $battery-height: 5em;
         margin-top: 0.2em;
 
         &:first-child {
-          border-radius: 4px 4px 0 0;
           margin-top: 0;
         }
         &:last-child {

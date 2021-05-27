@@ -87,7 +87,7 @@ export const Batteries = ({ size }: BatteryProps) => {
 
           <div className="battery__charge">
             <div className="battery__charge__top" />
-            <div className="battery__charge__body">
+            <div className={"battery__charge__body" + (batteryLevelBars === CELL_NUMBER ? " full" : "")}>
               {batteryLevelBars > 0 &&
                 Array.from(Array(batteryLevelBars).keys())
                   .reverse()
