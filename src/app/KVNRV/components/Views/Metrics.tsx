@@ -38,7 +38,10 @@ export const Metrics = () => {
   useEffect(() => {
     if (metricsRef.current) {
       setHammer((prev) => {
-        if (pages > 1 && !prev) {
+        if (prev) {
+          prev.destroy()
+        }
+        if (pages > 1) {
           const newHammer = new Hammer.Manager(metricsRef.current!)
           const Swipe = new Hammer.Swipe({ velocity: 0.6, direction: 2 | 4 })
           newHammer.add(Swipe)
