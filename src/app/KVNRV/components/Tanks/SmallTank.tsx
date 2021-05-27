@@ -9,14 +9,33 @@ import "./SmallTank.scss"
 import { useTank } from "../../../modules"
 import { TankProps } from "./index"
 import { useSendUpdate } from "../../../modules"
-import { VOLUME_UNITS, VolumeUnit, VolumeUnits } from "../../utils/constants"
+import { VOLUME_UNITS, VolumeUnit, VolumeUnits, FLUID_TYPES } from "../../utils/constants"
+
+export const fluidTypeFormatter = (fluidType: string) => {
+  switch (Number(fluidType)) {
+    case FLUID_TYPES.FUEL:
+      return "Fuel"
+    case FLUID_TYPES.FRESH_WATER:
+      return "Fresh water"
+    case FLUID_TYPES.WASTE_WATER:
+      return "Waste water"
+    case FLUID_TYPES.LIVE_WELL:
+      return "Live well"
+    case FLUID_TYPES.OIL:
+      return "Oil"
+    case FLUID_TYPES.BLACK_WATER:
+      return "Black water"
+    default:
+      return "Tank sensor"
+  }
+}
 
 export const SmallTank = ({ tankId, conf, invert }: TankProps) => {
   const tank = useTank(tankId)
   const footer = useSendUpdate(
     invert ? 1 - tank.level / 100 : tank.level / 100,
     conf,
-    tank.customName ?? tank.productName
+    tank.customName ?? fluidTypeFormatter(tank.fluidType)
   )
 
   const unit: VolumeUnit =
@@ -26,7 +45,11 @@ export const SmallTank = ({ tankId, conf, invert }: TankProps) => {
 
   return (
     <div className="">
-      <Card title={tank?.customName ?? tank.productName} size={[SIZE_SHORT, SIZE_NARROW]} footer={footer}>
+      <Card
+        title={tank?.customName ?? fluidTypeFormatter(tank.fluidType)}
+        size={[SIZE_SHORT, SIZE_NARROW]}
+        footer={footer}
+      >
         <div className="gauge">
           {tank ? (
             <div className={"small-tank"}>
