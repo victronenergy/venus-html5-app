@@ -40,13 +40,19 @@ export const useVebus = (): VebusState => {
         return acc
       }, {})
 
-      const [multiInstance] = Object.entries(subs).filter(([_, nAcInputs]) => {
-        // Take only "Multi" devices -> must have more than one AcInput
-        return nAcInputs && parseInt(nAcInputs) !== 0
-      })
+      const instances = Object.entries(subs)
+        .filter(([_, nAcInputs]) => {
+          // Take only "Multi" devices -> must have more than one AcInput
+          return nAcInputs && parseInt(nAcInputs) !== 0
+        })
+        .map((instance) => parseInt(instance[0]))
+        .sort((a, b) => b - a)
 
-      const newInstanceId = multiInstance ? parseInt(multiInstance[0]) : null
-      if (newInstanceId !== instanceId) {
+      if (!instances || instances.length === 0) return
+
+      const newInstanceId = instances[0]
+
+      if (newInstanceId && newInstanceId !== instanceId) {
         vebusService.setInstanceId(newInstanceId)
       }
     }
