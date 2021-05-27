@@ -29,6 +29,10 @@ export const RemoteLogin = () => {
     }
   }
 
+  const goBack = () => {
+    appService.setRemote(false)
+  }
+
   return (
     <div className={"login-page"}>
       <div className={"login__body"}>
@@ -65,11 +69,7 @@ export const RemoteLogin = () => {
           <button className={"login__form__button login"} type={"submit"}>
             Log in
           </button>
-          <button
-            className={"login__form__button go_back"}
-            type={"button"}
-            onClick={() => appService.setPage(VIEWS.METRICS)}
-          >
+          <button className={"login__form__button go_back"} type={"button"} onClick={goBack}>
             Back to dashboard
           </button>
         </form>
