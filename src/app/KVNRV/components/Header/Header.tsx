@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { appQuery, useAppService, useTheme, useVrmService, vrmQuery } from "../../../modules"
 import KVNRVLogo from "../../images/KVNRV-Logo.svg"
-import RemoteIcon from "../../images/RemoteIcon.svg"
+import RemoteConsoleIcon from "../../images/RemoteConsoleIcon.svg"
 import LogOutIcon from "../../images/LogOut.svg"
 
 import "./Header.scss"
@@ -102,7 +102,7 @@ export const Header = () => {
             onClick={() => appService.setPage(VIEWS.CONSOLE)}
             disabled={remote}
           >
-            <img src={RemoteIcon} className={"header__buttons__icon"} alt={"Remote Console icon"} />
+            <img src={RemoteConsoleIcon} className={"header__buttons__icon"} alt={"Remote Console icon"} />
             <span className={"header__buttons__text"}>Remote console</span>
           </button>
         )}
