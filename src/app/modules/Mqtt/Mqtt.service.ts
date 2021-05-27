@@ -13,6 +13,7 @@ export class MqttService {
 
   subscribeToTopic = (topic?: string) => {
     if (!topic) return
+    if (topic.includes("undefined")) return
 
     this.store.update((state) => {
       if (!state.topicsSubscribed.has(topic)) {
