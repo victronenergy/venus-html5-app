@@ -4,7 +4,6 @@ import "./GaugeIndicator.scss"
 import { formatNumber } from "../NumericValue"
 import { useTheme } from "../../modules"
 import { sum } from "../../KVNRV/utils/helpers"
-import { MessagesObj, STATUS_LEVELS, STATUS_LEVELS_MSG } from "../../KVNRV/utils/constants"
 
 const INDICATOR_WIDTH = 0.0075
 
@@ -86,7 +85,7 @@ export class GaugeIndicator extends PureComponent<GaugeIndicatorProps> {
                 }
 
                 ctx.restore()
-                let fontSize = Math.min(width / 90, 2.5).toFixed(2)
+                let fontSize = Math.min(width / 90, 1.4).toFixed(2)
                 ctx.font = fontSize + "em sans-serif"
                 ctx.textBaseline = "middle"
                 ctx.fillStyle = this.getColors().textColor
