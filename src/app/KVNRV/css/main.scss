@@ -66,6 +66,8 @@ body {
   color: $text-color-main;
   position: fixed;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 
   .header {
     max-height: 10%;

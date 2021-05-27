@@ -6,6 +6,7 @@ import "./RemoteLogin.scss"
 
 import KVNRVLogo from "../../../images/KVNRV-Logo.svg"
 import ArrowLeft from "../../../images/ArrowLeft.svg"
+import Splash from "../../../images/Splash.svg"
 
 export const RemoteLogin = () => {
   const [email, setEmail] = useState("")
@@ -89,6 +90,9 @@ export const RemoteLogin = () => {
             </a>
           </span>
         </div>
+      </div>
+      <div className={"login__splash"}>
+        <img src={Splash} alt={"Splash image"} className={"login__splash__image"} />
       </div>
     </div>
   )
