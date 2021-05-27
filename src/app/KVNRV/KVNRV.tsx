@@ -33,7 +33,7 @@ export const KVNRV = (props: AppProps) => {
           case VIEWS.METRICS:
             if (error && status === STATUS.OFFLINE) {
               return <MqttUnavailable />
-            } else if (error) {
+            } else if (error && status !== STATUS.CONNECTING) {
               return <Error error={error} />
             } else if (status === STATUS.CONNECTING) {
               return <Connecting />
