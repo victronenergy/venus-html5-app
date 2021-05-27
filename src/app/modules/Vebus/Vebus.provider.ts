@@ -40,6 +40,7 @@ export const useVebus = (): VebusState => {
         return acc
       }, {})
 
+      // Sometimes "ghost" instances of devices linger in MQTT, so we need to select the highest (ie. latest) instance ID
       const instances = Object.entries(subs)
         .filter(([_, nAcInputs]) => {
           // Take only "Multi" devices -> must have more than one AcInput
