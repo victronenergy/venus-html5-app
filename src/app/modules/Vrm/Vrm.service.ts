@@ -12,6 +12,7 @@ export class VrmService {
     const response = await axios.post(`${this.apiBaseUrl}/auth/login`, {
       username,
       password,
+      remember_me: true,
     })
 
     if (response.status !== 200) {

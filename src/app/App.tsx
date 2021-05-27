@@ -20,15 +20,13 @@ const App = (props: AppProps) => {
   useEffect(() => {
     const mqttService = new MqttService(mqttStore)
 
-    if (!remote || !vrmState?.userId || !vrmState?.token) {
+    if (!remote) {
       mqttService.boot(props.host, props.port)
-    }
-
-    if (remote && vrmState?.username && vrmState?.token && vrmState?.webhost && vrmState?.portalId) {
+    } else if (remote && vrmState?.username && vrmState?.token && vrmState?.webhost && vrmState?.portalId) {
       mqttService.boot(vrmState.webhost, null, vrmState.username, vrmState.token, vrmState.portalId, "live")
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.host, props.port, vrmState?.userId, vrmState?.token, remote])
+  }, [props.host, props.port, remote, vrmState])
 
   if (whitelabel === "KVNRV") {
     return (

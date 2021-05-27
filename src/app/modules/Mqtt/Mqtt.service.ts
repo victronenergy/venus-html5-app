@@ -3,6 +3,7 @@ import { IClientOptions } from "mqtt"
 import { MqttState, MqttStore, STATUS, Topics } from "."
 import Logger from "../../utils/logger"
 import { getMessageJson } from "../../utils/util"
+import { AppService, appStore } from "../App"
 
 export class MqttService {
   constructor(protected store: MqttStore) {}
@@ -13,6 +14,7 @@ export class MqttService {
 
   subscribeToTopic = (topic?: string) => {
     if (!topic) return
+    if (topic.includes("undefined")) return
 
     this.store.update((state) => {
       if (!state.topicsSubscribed.has(topic)) {
@@ -122,7 +124,9 @@ export class MqttService {
     })
 
     client.on("offline", () => {
-      this.store.update({ error: true, status: STATUS.DISCONNECTED })
+      this.store.update({ error: true, status: STATUS.OFFLINE })
+      const appService = new AppService(appStore)
+      appService.setRemote(false)
     })
 
     client.on("connect", () => {

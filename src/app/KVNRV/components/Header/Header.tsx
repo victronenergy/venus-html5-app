@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { appQuery, useAppService, useTheme, useVrmService, vrmQuery } from "../../../modules"
 import KVNRVLogo from "../../images/KVNRV-Logo.svg"
 import RemoteIcon from "../../images/RemoteIcon.svg"
+import LogOutIcon from "../../images/LogOut.svg"
 
 import "./Header.scss"
 import { VIEWS } from "../../utils/constants"
@@ -87,7 +88,7 @@ export const Header = () => {
 
         {loggedIn && (
           <button className={"header__buttons__logout"} onClick={() => vrmService.logout()}>
-            <img src={RemoteIcon} className={"header__buttons__icon"} alt={"Logout icon"} />
+            <img src={LogOutIcon} className={"header__buttons__icon"} alt={"Logout icon"} />
             <span className={"header__buttons__text"}>Log out</span>
           </button>
         )}
