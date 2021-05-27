@@ -76,30 +76,30 @@ export const SHORE_POWER_CONF: WidgetConfiguration = {
 
 export const TANKS_CONF = {
   FRESH_WATER: {
-    DEVICE_ID: 1,
-    MAX: 1,
-    THRESHOLDS: [0.7, 0.2, 0.1],
-    MESSAGES: {
-      [WARNING]: "water level very low",
-      [ALARM]: "water levels critically low",
-    },
-  } as WidgetConfiguration,
-  GRAY_WATER: {
     DEVICE_ID: 2,
     MAX: 1,
     THRESHOLDS: [0.7, 0.2, 0.1],
     MESSAGES: {
-      [WARNING]: "water level high",
-      [ALARM]: "critical levels of water",
+      [WARNING]: "level very low",
+      [ALARM]: "levels critically low",
     },
   } as WidgetConfiguration,
-  BLACK_WATER: {
-    DEVICE_ID: 5,
+  GRAY_WATER: {
+    DEVICE_ID: 0,
     MAX: 1,
     THRESHOLDS: [0.7, 0.2, 0.1],
     MESSAGES: {
-      [WARNING]: "water level very high",
-      [ALARM]: "critical levels of water",
+      [WARNING]: "level high",
+      [ALARM]: "levels critically high",
+    },
+  } as WidgetConfiguration,
+  BLACK_WATER: {
+    DEVICE_ID: 1,
+    MAX: 1,
+    THRESHOLDS: [0.7, 0.2, 0.1],
+    MESSAGES: {
+      [WARNING]: "level high",
+      [ALARM]: "levels critically high",
     },
   } as WidgetConfiguration,
 }
@@ -154,6 +154,15 @@ export const VOLUME_UNITS: VolumeUnits = {
     unit: "m3",
     factor: 1.0,
   },
+}
+
+export const FLUID_TYPES = {
+  FUEL: 0,
+  FRESH_WATER: 1,
+  WASTE_WATER: 2,
+  LIVE_WELL: 3,
+  OIL: 4,
+  BLACK_WATER: 5,
 }
 
 export const VIEWS = {
