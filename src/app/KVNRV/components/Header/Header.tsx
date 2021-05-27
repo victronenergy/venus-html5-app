@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { appQuery, useAppService, useTheme, useVrmService, vrmQuery } from "../../../modules"
 import KVNRVLogo from "../../images/KVNRV-Logo.svg"
 import RemoteConsoleIcon from "../../images/RemoteConsoleIcon.svg"

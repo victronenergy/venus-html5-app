@@ -9,25 +9,35 @@ export class VrmService {
   private readonly apiBaseUrl = "https://vrmapi.victronenergy.com/v2"
 
   login = async (username: string, password: string): Promise<LoginResponse> => {
-    const response = await axios.post(`${this.apiBaseUrl}/auth/login`, {
-      username,
-      password,
-      remember_me: true,
-    })
+    try {
+      const response = await axios.post(`${this.apiBaseUrl}/auth/login`, {
+        username,
+        password,
+        remember_me: true,
+      })
 
-    if (response.status !== 200) {
-      throw new Error(response.data)
+      const data: LoginResponse = response.data
+
+      this.store.update({
+        token: data.token,
+        userId: data.idUser,
+        username,
+      })
+
+      return data
+    } catch (e) {
+      const response = e.response
+
+      if (response?.data?.errors) {
+        throw new Error(response.data.errors)
+      }
+
+      if (response?.data) {
+        throw new Error(response.data)
+      }
+
+      throw new Error("Login failed")
     }
-
-    const data: LoginResponse = response.data
-
-    this.store.update({
-      token: data.token,
-      userId: data.idUser,
-      username,
-    })
-
-    return data
   }
 
   logout = () => {
