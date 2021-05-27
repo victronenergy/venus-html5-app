@@ -86,7 +86,7 @@ export class GaugeIndicator extends PureComponent<GaugeIndicatorProps> {
                 }
 
                 ctx.restore()
-                let fontSize = (width / 90).toFixed(2)
+                let fontSize = Math.min(width / 90, 2.5).toFixed(2)
                 ctx.font = fontSize + "em sans-serif"
                 ctx.textBaseline = "middle"
                 ctx.fillStyle = this.getColors().textColor
