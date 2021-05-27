@@ -3,14 +3,14 @@
 .metrics__status {
   .title {
     font-size: $indicator-main-font-value-big;
-    margin-bottom: 0.6em;
   }
 
   .subheading {
+    display: flex;
     font-size: $indicator-main-font-name-small;
     color: $color-gray;
-    justify-content: space-between !important;
-    margin-top: 0.5em;
+    justify-content: space-between;
+    margin-top: 0.6em;
   }
 
   .status-updates {

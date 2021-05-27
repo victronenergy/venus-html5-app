@@ -79,7 +79,7 @@ export const Status = ({ size }: StatusProps) => {
       <Card title={"Status"} size={size} footer={footer}>
         <div className={"title"}>Penny's House</div>
         <div className={"status"}>{SYSTEM_STATE_MAP[state?.toString() as keyof Object] ?? "--"}</div>
-        <div className={"subheading row"}>
+        <div className={"subheading"}>
           <div className={"subheading__model"}>Geo Pro Travel Trailer</div>
           <div className={"subheading__year"}>Model: 2019</div>
         </div>
