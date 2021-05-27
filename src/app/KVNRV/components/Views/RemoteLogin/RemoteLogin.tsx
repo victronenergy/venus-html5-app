@@ -5,6 +5,7 @@ import { VIEWS, VRM_URL } from "../../../utils/constants"
 import "./RemoteLogin.scss"
 
 import KVNRVLogo from "../../../images/KVNRV-Logo.svg"
+import ArrowLeft from "../../../images/ArrowLeft.svg"
 
 export const RemoteLogin = () => {
   const [email, setEmail] = useState("")
@@ -70,7 +71,8 @@ export const RemoteLogin = () => {
             Log in
           </button>
           <button className={"login__form__button go_back"} type={"button"} onClick={goBack}>
-            Back to dashboard
+            <img src={ArrowLeft} alt={"Left arrow"} className={"login__form__icon__go_back"} />
+            Go back
           </button>
         </form>
 

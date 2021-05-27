@@ -84,6 +84,11 @@
           background-color: $main-bg-color;
           color: $text-color-main;
           border: 1px solid $text-color-main;
+
+          .login__form__icon__go_back {
+            margin-right: 8px;
+            margin-left: -28px;
+          }
         }
       }
     }
