@@ -30,6 +30,10 @@
         font-size: 3em;
         font-weight: 900;
         vertical-align: middle;
+
+        @media #{$hide-remote-console-breakpoint} {
+          display: none;
+        }
       }
     }
 
@@ -56,6 +60,9 @@
 
     div {
       margin-right: 1em;
+    }
+    .header__buttons__icon {
+      max-height: 1.4em;
     }
 
     .header__buttons__remote-console {
