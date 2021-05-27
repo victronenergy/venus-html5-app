@@ -20,7 +20,6 @@ export const KVNRV = (props: AppProps) => {
       <Header />
       {(() => {
         switch (appData?.page) {
-          default:
           case VIEWS.CONSOLE:
             return (
               <RemoteConsole
@@ -30,6 +29,7 @@ export const KVNRV = (props: AppProps) => {
                 host={props.host}
               />
             )
+          default:
           case VIEWS.METRICS:
             if (error && status === STATUS.OFFLINE) {
               return <MqttUnavailable />

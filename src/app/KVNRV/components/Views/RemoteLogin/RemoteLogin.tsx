@@ -9,6 +9,7 @@ import KVNRVLogo from "../../../images/KVNRV-Logo.svg"
 export const RemoteLogin = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [error, setError] = useState<any>()
   const vrmService = useVrmService()
   const appService = useAppService()
 
@@ -24,7 +25,7 @@ export const RemoteLogin = () => {
       appService.setPage(VIEWS.METRICS)
     } catch (e) {
       console.error(e)
-      // TODO: Display error to user
+      setError(e)
     }
   }
 
@@ -37,13 +38,15 @@ export const RemoteLogin = () => {
         </div>
 
         <form className={"login__form"} onSubmit={submitLogin}>
+          {error && <div className={"login__form__error"}>{error?.message ?? "Login failed"}</div>}
+
           <label className={"login__form__label"} htmlFor={"login-email"}>
             Email
           </label>
           <input
             type="email"
             id={"login-email"}
-            className={"login__form__input"}
+            className={`login__form__input ${error ? "invalid" : ""}`}
             value={email}
             onInput={(e) => setEmail(e.currentTarget.value)}
           />
@@ -54,7 +57,7 @@ export const RemoteLogin = () => {
           <input
             type="password"
             id={"login-password"}
-            className={"login__form__input"}
+            className={`login__form__input ${error ? "invalid" : ""}`}
             value={password}
             onInput={(e) => setPassword(e.currentTarget.value)}
           />

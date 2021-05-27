@@ -48,6 +48,12 @@
         margin-top: 1em;
       }
 
+      .login__form__error {
+        color: $color-red;
+        text-align: center;
+        margin-top: 1em;
+      }
+
       .login__form__input {
         border: $color-lightgray solid 2px;
         border-radius: 5px;
@@ -56,6 +62,10 @@
         background-color: $main-bg-color;
         color: $text-color-main;
         padding: 0 0.5em;
+
+        &:invalid, &.invalid {
+          border: $color-red solid 4px;
+        }
       }
 
       .login__form__button {
