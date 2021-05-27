@@ -1,6 +1,9 @@
 import React, { FunctionComponent } from "react"
 
 import "./Card.scss"
+import CloseIcon from "../../images/IconClose.svg"
+import CloseIconDark from "../../images/IconClose-Dark.svg"
+import { useTheme } from "../../modules"
 
 export type Footer = {
   status: string
@@ -26,6 +29,7 @@ export const ICON_SETTINGS = "settings"
 export const ICON_CLOSE = "close"
 
 export const Card: FunctionComponent<CardProps> = ({ title, size, icon, onIconClick, footer, infoText, children }) => {
+  const { darkMode } = useTheme()
   return (
     <div className={"card " + (Array.isArray(size) ? size.join(" ") : size)}>
       <div className={"contents"}>
@@ -35,6 +39,13 @@ export const Card: FunctionComponent<CardProps> = ({ title, size, icon, onIconCl
             <div className="card__header__info-text">{infoText}</div>
             {icon && (
               <button className={"card__header__icon " + icon} onClick={(e) => onIconClick && onIconClick(e)}>
+                {icon === ICON_CLOSE && (
+                  <img
+                    src={darkMode ? CloseIconDark : CloseIcon}
+                    alt={"Close Icon"}
+                    className={"card__header__icon__img"}
+                  />
+                )}
                 {icon === ICON_SETTINGS && "Settings"}
               </button>
             )}

@@ -50,10 +50,30 @@
         width: 1.1em;
         height: 1.1em;
         border-radius: 5px;
+        font-size: inherit;
+        display: flex;
       }
 
-      .settings { width: auto; height: auto; color: $text-color-main; font-size: 1em }
-      .close { background: $color-lightgray var(--close-icon) center/0.75em no-repeat; }
+      .settings {
+        width: auto;
+        height: auto;
+        color: $text-color-main;
+        font-size: 1em;
+      }
+
+      .close {
+        background: $color-lightgray;
+        width: 1.3em;
+        height: 1.3em;
+        padding: 0;
+        justify-content: center;
+
+        .card__header__icon__img {
+          width: 1em;
+          height: 1em;
+          align-self: center;
+        }
+      }
     }
 
     .card__body {

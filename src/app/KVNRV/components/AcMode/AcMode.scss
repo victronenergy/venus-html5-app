@@ -6,7 +6,7 @@
   width: auto;
 
   .name {
-    font-size: 1rem;
+    font-size: 1em;
   }
 
   .ac_mode__mode {
@@ -38,10 +38,9 @@
       margin: 0.3em;
       border-radius: 5px;
       border: none;
-      color: $color-darkgray;
       background-color: $color-lightgray;
       padding: 0.7em;
-      font-size: 0.9rem;
+      font-size: 0.9em;
 
       &.success {
         color: $color-white;
