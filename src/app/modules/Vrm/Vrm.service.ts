@@ -59,7 +59,7 @@ export class VrmService {
       throw new Error("Not logged in")
     }
 
-    const response = await axios.get(`${this.apiBaseUrl}/users/${userId}/installations?extended=1&idSite=${siteId}`, {
+    const response = await axios.get(`${this.apiBaseUrl}/users/${userId}/installations?extended=1`, {
       headers: {
         "x-authorization": `Bearer ${token}`,
       },
