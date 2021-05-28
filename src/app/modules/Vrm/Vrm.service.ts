@@ -45,17 +45,13 @@ export class VrmService {
 
     appService.setRemote(false)
 
-    this.store.update({
-      token: undefined,
-      userId: undefined,
-      username: undefined,
-    })
+    this.store.reset()
   }
 
   updateInstanceDetails = async (): Promise<void> => {
-    const { userId, siteId, token } = this.store?.getValue()
+    const { userId, token } = this.store?.getValue()
 
-    if (!userId || !siteId || !token) {
+    if (!userId || !token) {
       throw new Error("Not logged in")
     }
 
@@ -71,13 +67,38 @@ export class VrmService {
 
     const data: InstallationsResponse = response.data
 
-    const site = data.records.find((s) => s.idSite === siteId)
+    if (data.records.length === 0) {
+      throw new Error("This account has no installations!")
+    }
+
+    this.store.update({
+      installations: data.records.map((v) => ({
+        idSite: v.idSite,
+        identifier: v.identifier,
+        mqtt_webhost: v.mqtt_webhost,
+        name: v.name,
+      })),
+    })
+
+    if (data.records.length === 1) {
+      this.setActiveInstallation(data.records[0].idSite)
+    }
+  }
+
+  setActiveInstallation = (siteId: number) => {
+    const installations = this.store?.getValue()?.installations
+
+    if (!installations) {
+      throw new Error("No installations, try logging in again!")
+    }
+
+    const site = installations.find((v) => v.idSite === siteId)
 
     if (!site) {
       throw new Error("Incorrect data - site with specified ID not found!")
     }
 
-    this.store.update({ portalId: site.identifier, webhost: site.mqtt_webhost })
+    this.store.update({ portalId: site.identifier, webhost: site.mqtt_webhost, siteId: siteId })
   }
 }
 

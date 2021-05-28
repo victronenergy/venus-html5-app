@@ -1,4 +1,5 @@
 import { Store, StoreConfig } from "@datorama/akita"
+import { Installation } from "./Vrm.types"
 
 export interface VrmState {
   userId?: number
@@ -8,16 +9,16 @@ export interface VrmState {
   portalId?: string
   siteId?: number
   webhost?: string
+  installations?: Installation[]
   environment: "live" | "acceptance"
 }
 
 export const VRM_STORE_NAME = "Vrm"
 
-@StoreConfig({ name: VRM_STORE_NAME })
+@StoreConfig({ name: VRM_STORE_NAME, resettable: true })
 export class VrmStore extends Store<VrmState> {
   constructor() {
     super({
-      siteId: 31112, // TODO: Allow user to choose a site
       environment: "live",
     })
   }

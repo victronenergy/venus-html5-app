@@ -14,6 +14,7 @@ export const Header = () => {
   const remote = useObservableState(appQuery.remote$)
   const loggedIn = useObservableState(vrmQuery.loggedIn$)
   const username = useObservableState(vrmQuery.username$)
+  const siteId = useObservableState(vrmQuery.siteId$)
   const vrmService = useVrmService()
 
   const handleRemoteSwitch = () => {
@@ -21,13 +22,13 @@ export const Header = () => {
   }
 
   useEffect(() => {
-    if (remote && !loggedIn) {
+    if (remote && (!loggedIn || !siteId)) {
       appService.setPage(VIEWS.LOGIN)
     } else {
       appService.setPage(VIEWS.METRICS)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [remote, loggedIn])
+  }, [remote, loggedIn, siteId])
 
   return (
     <div className={"header"}>

@@ -22,7 +22,14 @@ const App = (props: AppProps) => {
 
     if (!remote) {
       mqttService.boot(props.host, props.port)
-    } else if (remote && vrmState?.username && vrmState?.token && vrmState?.webhost && vrmState?.portalId) {
+    } else if (
+      remote &&
+      vrmState?.username &&
+      vrmState?.token &&
+      vrmState?.webhost &&
+      vrmState?.portalId &&
+      vrmState?.siteId
+    ) {
       mqttService.boot(vrmState.webhost, null, vrmState.username, vrmState.token, vrmState.portalId, "live")
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
