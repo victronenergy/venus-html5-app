@@ -21,7 +21,7 @@ export const SCREEN_SIZES = {
     LG: 1280,
   },
   SHORT: {
-    SIZE: 700,
+    SIZE: 500,
     XS: 500,
     SM: 700,
     MD: 800,
@@ -44,7 +44,7 @@ export const Metrics = () => {
         }
         if (pages > 1) {
           const newHammer = new Hammer.Manager(metricsRef.current!)
-          const Swipe = new Hammer.Swipe({ velocity: 1, direction: 2 | 4, threshold: 10 })
+          const Swipe = new Hammer.Swipe({ velocity: 0.2, direction: 2 | 4, threshold: 10 })
           newHammer.add(Swipe)
           return newHammer
         } else {
