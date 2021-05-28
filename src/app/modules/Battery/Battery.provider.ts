@@ -30,11 +30,6 @@ export function useBattery(): BatteryState {
   const topics$ = useTopicsWithPortalId<BatteryTopics>(getTopics, mqttQuery.portalId$)
 
   useTopicSubscriptions(topics$)
-  let { batteries } = useTopicsState<BatteryState>(topics$)
 
-  if (batteries) {
-    batteries = batteries.sort((a, b) => (a.state ? -1 : b.state ? 1 : 0))
-  }
-
-  return { batteries }
+  return useTopicsState<BatteryState>(topics$)
 }

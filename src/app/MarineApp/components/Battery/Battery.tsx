@@ -184,9 +184,10 @@ export const BatteriesWithData = () => {
   const { batteries } = useBattery()
 
   if (batteries) {
+    const sorted = batteries.sort((a, b) => (a.state ? -1 : b.state ? 1 : 0))
     return (
       <ColumnContainer>
-        <Batteries batteries={batteries} />
+        <Batteries batteries={sorted} />
       </ColumnContainer>
     )
   } else {
