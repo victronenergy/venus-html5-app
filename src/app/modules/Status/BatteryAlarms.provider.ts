@@ -1,7 +1,6 @@
 import { mqttQuery, PortalId, Topics } from "../Mqtt"
 import { useTopicsState, useTopicSubscriptions, useTopicsWithParameters } from "../Mqtt/Mqtt.provider"
-import { of } from "rxjs"
-import { batteriesQuery, BatteryId, useBatteries, useBattery } from "../Battery"
+import { batteriesQuery, BatteryId, useBatteries } from "../Battery"
 
 export interface BatteryAlarmsState {
   lowVoltage: number
