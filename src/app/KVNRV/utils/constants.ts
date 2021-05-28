@@ -57,7 +57,7 @@ export const AC_CONF: WidgetConfiguration = {
 }
 
 export const PV_CONF: WidgetConfiguration = {
-  MAX: 100,
+  MAX: 30 * 12,
   THRESHOLDS: [0.8, 0.1, 0.1],
   MESSAGES: {
     [WARNING]: "high power load",
