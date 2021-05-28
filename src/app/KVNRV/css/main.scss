@@ -16,9 +16,9 @@
 
 html {
   //scale rem down with screen height
-  @for $i from 1 through 6 {
-    @media all and (max-height: 600px - $i * 100px) {
-      font-size: 100% - $i * 18;
+  @for $i from 1 through 2 {
+    @media all and (max-height: 800px - $i * 100px) {
+      font-size: 100% - $i * 20;
     }
   }
 }

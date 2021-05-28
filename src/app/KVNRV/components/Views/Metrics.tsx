@@ -21,7 +21,7 @@ export const SCREEN_SIZES = {
     LG: 1280,
   },
   SHORT: {
-    SIZE: 500,
+    SIZE: 450,
     XS: 500,
     SM: 700,
     MD: 800,
