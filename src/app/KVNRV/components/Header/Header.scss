@@ -17,8 +17,6 @@
 
 
     .header__logo {
-      padding-right: 1rem;
-
       .header__logo__image {
         vertical-align: middle;
         margin-right: 0.5rem;
@@ -31,7 +29,7 @@
         font-weight: 900;
         vertical-align: middle;
 
-        @media #{$hide-remote-console-breakpoint} {
+        @media all and (max-width: 650px) {
           display: none;
         }
       }
@@ -41,6 +39,8 @@
       border-left: white solid 2px;
       padding-left: 1rem;
       font-size: 1rem;
+      margin-right: 0.8rem;
+      margin-left: 0.8rem;
 
       @media #{$regular} {
         display: none;
@@ -85,6 +85,10 @@
         margin-left: 0.5rem;
         vertical-align: middle;
         font-size: 0.9rem;
+
+        @media all and (max-width: 690px) {
+          display: none;
+        }
       }
     }
 
@@ -96,7 +100,6 @@
       background-color: $header-button-color;
       color: $color-white;
       padding: 0.2rem 1.2rem 0.2rem 0.8rem;
-      margin-left: 0.8rem;
       margin-right: auto;
       border: none;
       border-radius: 5px;
