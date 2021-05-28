@@ -66,10 +66,13 @@ export const Metrics = () => {
       }
       hammer.on("swiperight", next)
       hammer.on("swipeleft", prev)
+
       hammer.on("hammer.input", (ev: HammerInput) => {
         if (metricsRef.current) {
           if (Math.abs(ev.deltaX) > Math.abs(ev.deltaY)) {
-            metricsRef.current.style.marginLeft = ev.deltaX + "px"
+            if ((ev.deltaX > 0 && currentPage !== 0) || (ev.deltaX < 0 && currentPage + 1 !== pages)) {
+              metricsRef.current.style.marginLeft = ev.deltaX + "px"
+            }
           }
           if (ev.isFinal) {
             metricsRef.current.style.marginLeft = "0"
