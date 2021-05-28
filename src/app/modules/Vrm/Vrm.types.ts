@@ -7,9 +7,12 @@ export interface LoginResponse {
 
 export interface InstallationsResponse {
   success: boolean
-  records: {
-    idSite: number
-    identifier: string
-    mqtt_webhost: string
-  }[]
+  records: Installation[]
+}
+
+export interface Installation {
+  idSite: number
+  identifier: string
+  mqtt_webhost: string
+  name: string
 }

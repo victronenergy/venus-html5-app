@@ -3,7 +3,6 @@ import { IClientOptions } from "mqtt"
 import { MqttState, MqttStore, STATUS, Topics } from "."
 import Logger from "../../utils/logger"
 import { getMessageJson } from "../../utils/util"
-import { AppService, appStore } from "../App"
 
 export class MqttService {
   constructor(protected store: MqttStore) {}
@@ -90,14 +89,13 @@ export class MqttService {
     console.log("MQTT booting")
 
     let client = this.store?.getValue()?.client
-    const topics = this.store?.getValue()?.topicsSubscribed
 
     if (client) {
       client.end(true)
-      this.store.update({ client: undefined, topicsSubscribed: new Set<string>() })
+      this.store.update({ client: undefined, portalId: undefined, topicsSubscribed: new Set<string>() })
     }
 
-    let remote = false
+    const remote = host !== "localhost"
 
     if (username && password) {
       if (!host || !environment) {
@@ -110,8 +108,6 @@ export class MqttService {
         password: password,
       }
       client = mqtt.connect(`mqtts://${host}:443`, mqttClientOptions)
-
-      remote = true
     } else {
       client = mqtt.connect(`mqtt://${host}:${port}`)
     }
@@ -130,11 +126,9 @@ export class MqttService {
     client.on("connect", () => {
       console.log("MQTT connected")
       this.store.update({ error: null, status: STATUS.CONNECTED })
-      this.subscribeToTopic(`N/${(remote && portalId) || "+"}/system/0/Serial`) // Never use wildcard when connecting remotely
+      this.subscribeToTopic(`N/${remote ? portalId : "+"}/system/0/Serial`) // Never use wildcard when connecting remotely
       this.sendKeepalive()
       this.setupKeepalive()
-
-      topics?.forEach((topic) => this.subscribeToTopic(topic))
     })
 
     client.on("message", async (topic, message) => {
