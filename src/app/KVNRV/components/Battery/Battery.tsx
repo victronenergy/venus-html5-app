@@ -2,7 +2,7 @@ import React from "react"
 import { Card, SIZE_SHORT } from "../../../components/Card"
 
 import { BATTERY_STATE } from "../../../utils/constants"
-import { useBattery } from "../../../modules"
+import { useBattery, useSendUpdate } from "../../../modules"
 import NumericValue from "../../../components/NumericValue"
 import { NotAvailable } from "../NotAvailable"
 
@@ -50,16 +50,18 @@ type BatteryProps = {
 
 export const Batteries = ({ size }: BatteryProps) => {
   const { batteries } = useBattery()
+  const config = {
+    ...BATTERY_CONF,
+    MAX: BATTERY_CONF.MAX * (batteries && batteries[0] ? batteries[0].voltage : 1) * CRITICAL_MULTIPLIER,
+  }
+
+  const normalizedPower = normalizePower(batteries && batteries[0]?.power, config.MAX, -1 * BATTERY_CONF.ZERO_OFFSET!)
+  useSendUpdate(normalizedPower, config, "Battery")
 
   if (batteries && batteries[0]) {
     const battery = batteries[0]
     const batteryStateLabel = batteryStateFormatter(battery.state)
     const batteryLevelBars = Math.ceil(battery.soc / (100 / CELL_NUMBER))
-    const normalizedPower = normalizePower(
-      battery.power,
-      BATTERY_CONF.MAX * CRITICAL_MULTIPLIER,
-      -1 * BATTERY_CONF.ZERO_OFFSET!
-    )
 
     return (
       <Card title={"Battery"} size={size}>
@@ -100,7 +102,7 @@ export const Batteries = ({ size }: BatteryProps) => {
             </div>
           </div>
         </div>
-        <div className="gauge">
+        <div className="battery__gauge gauge">
           <GaugeIndicator
             value={battery.power}
             percent={normalizedPower}
