@@ -86,8 +86,9 @@
   .card__footer {
     bottom: 0;
     font-size: 0.9em;
+    font-weight: 600;
     padding: 0.2em 0.8em;
     border-radius: 0 0 5px 5px;
-    color: white;
+    color: $color-white;
   }
 }
