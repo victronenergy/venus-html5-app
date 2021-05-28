@@ -43,7 +43,7 @@ const alarmsToUpdate = (alarms: BatteryAlarmsState | VebusAlarmsState, part?: st
   Object.keys(alarms).forEach((key) => {
     if (alarms[key as keyof typeof alarms] > 0) {
       updates.push({
-        part: part ? `Vebus (${part})` : "Vebus",
+        part: part ? `Venus (${part})` : "Venus",
         message: keyToString(key),
         level: alarms[key as keyof typeof alarms] === 1 ? STATUS_LEVELS.WARNING : STATUS_LEVELS.ALARM,
       } as StatusUpdate)
@@ -88,7 +88,7 @@ export const Status = ({ size }: StatusProps) => {
           {notifications.map((update: StatusUpdate) => (
             <div className={"status-update row " + update.level} key={"status-update-" + update.part}>
               <span className={"row align-items-center"}>
-                <div className={"status-update__icon"}>
+                <div className={"row align-items-center status-update__icon"}>
                   <img src={IconWarning} alt={"Status update icon"} />
                 </div>
 
