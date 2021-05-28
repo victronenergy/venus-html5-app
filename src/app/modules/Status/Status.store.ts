@@ -12,7 +12,7 @@ export interface StatusState {
 
 export const STATUS_STORE_NAME = "Status"
 
-@StoreConfig({ name: STATUS_STORE_NAME })
+@StoreConfig({ name: STATUS_STORE_NAME, resettable: true })
 export class StatusStore extends Store<StatusState> {
   constructor() {
     super({ status: [] })

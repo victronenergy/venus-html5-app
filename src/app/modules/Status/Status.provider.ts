@@ -5,9 +5,18 @@ import { useStatusService } from "./Status.service"
 import { useEffect, useState } from "react"
 import { Footer } from "../../components/Card/Card"
 import { sum } from "../../KVNRV/utils/helpers"
+import { appQuery } from "../App"
 
 export const useStatus = () => {
   const statuses = useObservableState(statusQuery.status$)
+
+  const remote = useObservableState(appQuery.remote$)
+  const statusService = useStatusService()
+
+  useEffect(() => {
+    statusService.clear()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [remote])
 
   return { statuses }
 }

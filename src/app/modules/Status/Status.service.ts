@@ -30,6 +30,10 @@ export class StatusService {
       this.store.update({ status: sus })
     }
   }
+
+  clear = () => {
+    this.store.reset()
+  }
 }
 
 export const useStatusService = () => new StatusService(statusStore)
