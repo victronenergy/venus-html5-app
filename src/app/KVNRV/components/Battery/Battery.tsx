@@ -56,11 +56,13 @@ export const Batteries = ({ size }: BatteryProps) => {
       : batteries[0]
     : undefined
 
+  const power = battery?.power ?? 1
+
   const config = {
     ...BATTERY_CONF,
-    MAX: BATTERY_CONF.MAX * (battery ? battery.power : 0) * CRITICAL_MULTIPLIER,
+    MAX: BATTERY_CONF.MAX * (battery?.voltage ? battery.voltage : 1) * CRITICAL_MULTIPLIER,
   }
-  const normalizedPower = normalizePower(battery ? battery.power : 0, config.MAX, -1 * BATTERY_CONF.ZERO_OFFSET!)
+  const normalizedPower = normalizePower(power, config.MAX, -1 * BATTERY_CONF.ZERO_OFFSET!)
 
   useSendUpdate(normalizedPower, config, "Battery")
 
