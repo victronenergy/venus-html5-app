@@ -2,6 +2,7 @@ import { mqttQuery, PortalId, Topics } from "../Mqtt"
 import { useTopicsState, useTopicSubscriptions, useTopicsWithPortalId } from "../Mqtt/Mqtt.provider"
 
 export interface Battery {
+  active_battery_service: boolean
   current: number
   voltage: number
   soc: number
