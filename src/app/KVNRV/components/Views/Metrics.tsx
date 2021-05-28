@@ -44,7 +44,7 @@ export const Metrics = () => {
         }
         if (pages > 1) {
           const newHammer = new Hammer.Manager(metricsRef.current!)
-          const Swipe = new Hammer.Swipe({ velocity: 0.6, direction: 2 | 4 })
+          const Swipe = new Hammer.Swipe({ velocity: 1, direction: 2 | 4, threshold: 10 })
           newHammer.add(Swipe)
           return newHammer
         } else {
@@ -66,13 +66,16 @@ export const Metrics = () => {
       }
       hammer.on("swiperight", next)
       hammer.on("swipeleft", prev)
+
       hammer.on("hammer.input", (ev: HammerInput) => {
         if (metricsRef.current) {
           if (Math.abs(ev.deltaX) > Math.abs(ev.deltaY)) {
-            metricsRef.current.style.marginLeft = ev.deltaX + "px"
+            if ((ev.deltaX > 0 && currentPage !== 0) || (ev.deltaX < 0 && currentPage + 1 !== pages)) {
+              ;(metricsRef.current.children[0] as HTMLDivElement).style.transform = `translateX(${ev.deltaX}px)`
+            }
           }
           if (ev.isFinal) {
-            metricsRef.current.style.marginLeft = "0"
+            ;(metricsRef.current.children[0] as HTMLDivElement).style.transform = "translateX(0)"
           }
         }
       })

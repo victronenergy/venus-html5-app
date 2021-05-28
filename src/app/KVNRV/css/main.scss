@@ -69,12 +69,12 @@ body {
   flex-direction: column;
 
   .header {
-    max-height: 10%;
+    max-height: 15vh;
   }
 
   .metrics-container {
     height: stretch;
-    max-height: 90%;
+    max-height: 85vh;
     background-color: $main-bg-color;
     width: 100%;
     display: flex;
