@@ -32,7 +32,7 @@ export const AcMode = () => {
   const { current, frequency, voltage, power } = useActiveInValues()
 
   const inLimit = parseFloat(limit ?? "0")
-  const powerMax = inLimit * (voltage && voltage[0] ? voltage[0] : 0) * CRITICAL_MULTIPLIER
+  const powerMax = inLimit * (voltage && voltage[0] ? voltage[0] : 1) * CRITICAL_MULTIPLIER
   const normalizedPower = normalizePower(power && power[0] ? power[0] : 0, powerMax)
   useSendUpdate(normalizedPower, SHORE_POWER_CONF, "Shore Power")
 
@@ -41,7 +41,7 @@ export const AcMode = () => {
   return (
     <div className="ac_mode">
       <Card
-        title={"AC Mode"}
+        title={"Inverter / Charger"}
         icon={ICON_SETTINGS}
         size={[SIZE_WIDE, SIZE_SHORT]}
         onIconClick={() => setModalOpen(true)}
