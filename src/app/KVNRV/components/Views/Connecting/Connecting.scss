@@ -4,15 +4,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 3.5em;
+  margin-bottom: 3.5rem;
 }
 
 .connecting__dots {
   display: flex;
 
   .dot {
-    margin-left: 0.2em;
-    margin-right: 0.2em;
+    margin-left: 0.2rem;
+    margin-right: 0.2rem;
     line-height: 0;
     font-size: 3.5rem;
     opacity: 0;

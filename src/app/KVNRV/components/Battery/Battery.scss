@@ -1,8 +1,8 @@
 @import '../../css/variables.scss';
 
 
-$battery-width: 2.5em;
-$battery-height: 5em;
+$battery-width: 2.5rem;
+$battery-height: 5rem;
 
 .battery {
   display: flex;
@@ -14,7 +14,7 @@ $battery-height: 5em;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding-right: 1em;
+    padding-right: 1rem;
 
     .indicator-main {
       flex-direction: column;
@@ -49,7 +49,7 @@ $battery-height: 5em;
       height: $battery-height;
       border: $color-gray solid 2px;
       border-radius: 8px;
-      padding: 0.2em 0.15em 0.15em 0.15em;
+      padding: 0.2rem 0.15rem 0.15rem 0.15rem;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
@@ -67,7 +67,7 @@ $battery-height: 5em;
         width: 100%;
         height: $battery-height * 0.16;
         background-color: transparent;
-        margin-top: 0.2em;
+        margin-top: 0.2rem;
 
         &:first-child {
           margin-top: 0;
@@ -77,5 +77,8 @@ $battery-height: 5em;
         }
       }
     }
+  }
+
+  .battery__gauge {
   }
 }

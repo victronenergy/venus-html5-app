@@ -15,14 +15,13 @@
 }
 
 html {
-  font-size: 20px;
-  @for $i from 1 through 20 {
-    @media all and (max-height: 1920px - $i * 130px), (max-width: 1920px - $i * 130px) {
-      font-size: 20px - $i * 1px;
+  //scale rem down with screen height
+  @for $i from 1 through 6 {
+    @media all and (max-height: 600px - $i * 100px) {
+      font-size: 100% - $i * 18;
     }
   }
 }
-
 * {
   font-family: MuseoSans, sans-serif;
 }
@@ -89,7 +88,7 @@ body {
 
     .paginator {
       margin-top: auto;
-      margin-bottom: 1em;
+      margin-bottom: 1rem;
     }
   }
 }
@@ -108,7 +107,7 @@ button {
 .gauge {
   display: flex;
   flex-direction: column;
-  margin-top: -0.5em;
+  margin-top: -0.5rem;
 }
 
 
@@ -122,7 +121,7 @@ button {
 
   .info-bar__cell {
     width: 100%;
-    padding: 0.2rem;
+    padding: 0.15rem;
     white-space: nowrap;
     border: $color-gray solid 1px;
 
@@ -153,12 +152,12 @@ button {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2em;
+  padding: 2rem;
 
   margin: auto auto;
 
   .image-container {
-    margin: 2em 0;
+    margin: 2rem 0;
     max-width: 500px;
     img {
       border-radius: 5px;
@@ -172,7 +171,7 @@ button {
 
     .instructions-container {
       width: 50%;
-      margin: 1em;
+      margin: 1rem;
     }
 
     .image-container {
