@@ -7,13 +7,13 @@ import { AC_CONF, AC_MODE, CRITICAL_MULTIPLIER, WidgetConfiguration } from "../.
 import NumericValue from "../../../components/NumericValue"
 import { NotAvailable } from "../NotAvailable"
 import GaugeIndicator from "../../../components/GaugeIndicator"
-import { useSystemState } from "../../../modules/SystemState/SystemState.provider"
+import { useSystemState } from "../../../modules"
 
 const inverterPeakPower = 3000
 const inverterContinuousPower = 2000
 const inverterCautionPower = 1400
 
-const acLimit = (inverterMode: number, inPowerLimit: number, systemState: number) => {
+const acLimit = (inverterMode: number, inPowerLimit: number, systemState: number, voltage: number) => {
   const outPowerLimit = 30 * 120
   let barMax = 0,
     overload = 0,
@@ -27,9 +27,9 @@ const acLimit = (inverterMode: number, inPowerLimit: number, systemState: number
   }
   // Charger Only - only AC input contribution
   else if (inverterMode === 1) {
-    barMax = inPowerLimit * CRITICAL_MULTIPLIER
-    overload = inPowerLimit
-    caution = inPowerLimit * 0.8
+    barMax = inPowerLimit * voltage
+    overload = inPowerLimit * voltage
+    caution = inPowerLimit * voltage * 0.8
   }
   // On - AC input + multi contribution
   else if (inverterMode === 3 && systemState >= 3) {
@@ -47,9 +47,10 @@ const acLimit = (inverterMode: number, inPowerLimit: number, systemState: number
   if (overload > outPowerLimit) {
     caution = outPowerLimit * 0.8
     overload = outPowerLimit
-    barMax = outPowerLimit * CRITICAL_MULTIPLIER
+    barMax = outPowerLimit
   }
 
+  barMax = barMax * CRITICAL_MULTIPLIER
   let green = caution / barMax
   let yellow = overload / barMax - green
   let red = 1 - (yellow + green)
@@ -67,8 +68,8 @@ export const AcLoads = () => {
   const inMode = Number(mode)
 
   useEffect(() => {
-    setConfig(acLimit(inMode, isNaN(inLimit) ? AC_MODE.LIMITS_US[0] : inLimit, state))
-  }, [inMode, inLimit, state])
+    setConfig(acLimit(inMode, isNaN(inLimit) ? AC_MODE.LIMITS_US[0] : inLimit, state, voltage ? voltage[0] : 1))
+  }, [inMode, inLimit, state, voltage])
 
   const normalizedPower = normalizePower(power && power[0] ? power[0] : 0, config.MAX)
   useSendUpdate(normalizedPower, config, "AC Loads")
