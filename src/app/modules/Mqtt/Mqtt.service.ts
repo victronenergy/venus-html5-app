@@ -81,6 +81,7 @@ export class MqttService {
   boot = (
     host: string = "localhost",
     port: number | null,
+    remote: boolean = false,
     username?: string,
     password?: string,
     portalId?: string,
@@ -94,8 +95,6 @@ export class MqttService {
       client.end(true)
       this.store.update({ client: undefined, portalId: undefined, topicsSubscribed: new Set<string>() })
     }
-
-    const remote = host !== "localhost"
 
     if (username && password) {
       if (!host || !environment) {

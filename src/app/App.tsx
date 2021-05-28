@@ -30,7 +30,7 @@ const App = (props: AppProps) => {
       vrmState?.portalId &&
       vrmState?.siteId
     ) {
-      mqttService.boot(vrmState.webhost, null, vrmState.username, vrmState.token, vrmState.portalId, "live")
+      mqttService.boot(vrmState.webhost, null, true, vrmState.username, vrmState.token, vrmState.portalId, "live")
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.host, props.port, remote, vrmState])
