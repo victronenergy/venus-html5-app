@@ -9,20 +9,21 @@ import AcLoads from "../AcLoads"
 import Status from "../Status"
 import AcMode from "../AcMode"
 import Paginator from "../Paginator"
-import { BigTank, SmallTank } from "../Tanks"
+import { SmallTank } from "../Tanks"
 import { TANKS_CONF } from "../../utils/constants"
 import { SIZE_WIDE, SIZE_LONG } from "../../../components/Card"
 
 export const SCREEN_SIZES = {
   TALL: {
-    SIZE: 750,
+    SIZE: 700,
     SM: 300,
     MD: 670,
     LG: 1280,
   },
   SHORT: {
-    SIZE: 670,
-    SM: 670,
+    SIZE: 700,
+    XS: 500,
+    SM: 700,
     MD: 800,
     LG: 1200,
   },
@@ -83,7 +84,7 @@ export const Metrics = () => {
     let pageNum = 1
     let currPage = currentPage
     let size = window.innerHeight < SCREEN_SIZES.SHORT.SIZE ? SCREEN_SIZES.SHORT : SCREEN_SIZES.TALL
-    if (window.innerWidth < size.MD) {
+    if (window.innerWidth < size.MD || window.innerHeight < size.SIZE) {
       pageNum = 3
     } else if (window.innerWidth < size.LG || window.innerHeight < size.SIZE) {
       pageNum = 2
@@ -98,7 +99,6 @@ export const Metrics = () => {
         <div className="row">
           <div className={[getClassName(), "row", getIsHidden(0, pageNum, currPage)].join(" ")}>
             <Status size={[SIZE_WIDE, SIZE_LONG]} />
-
             <div className={window.innerWidth < size.SM ? "row" : "col-span-4 grid"}>
               <Battery size={[SIZE_WIDE, SIZE_LONG]} />
             </div>
@@ -106,17 +106,18 @@ export const Metrics = () => {
 
           <div className={[getClassName(), getIsHidden(1, pageNum, currPage)].join(" ")}>
             <AcMode />
-
             <div className="row">
               <DcLoads />
               <AcLoads />
             </div>
           </div>
 
-          <div className={["row", getClassName(), getIsHidden(2, pageNum, currPage)].join(" ")}>
-            <BigTank tankId={TANKS_CONF.FRESH_WATER.DEVICE_ID!} conf={TANKS_CONF.FRESH_WATER} invert={true} />
-
-            <div className={window.innerHeight > size.SM ? "row" : "col-span-4 grid"}>
+          <div className={["row", "grid", getClassName(), getIsHidden(2, pageNum, currPage)].join(" ")}>
+            <div className={"row"}>
+              <PvCharger />
+              <SmallTank tankId={TANKS_CONF.FRESH_WATER.DEVICE_ID!} conf={TANKS_CONF.FRESH_WATER} invert={true} />
+            </div>
+            <div className={"row"}>
               <SmallTank tankId={TANKS_CONF.GRAY_WATER.DEVICE_ID!} conf={TANKS_CONF.GRAY_WATER} invert={false} />
               <SmallTank tankId={TANKS_CONF.BLACK_WATER.DEVICE_ID!} conf={TANKS_CONF.BLACK_WATER} invert={false} />
             </div>
@@ -130,7 +131,7 @@ export const Metrics = () => {
             <Status size={[SIZE_WIDE, SIZE_LONG]} />
 
             <div className="row">
-              <PvCharger />
+              <DcLoads />
               <AcLoads />
             </div>
           </div>
@@ -142,7 +143,7 @@ export const Metrics = () => {
 
           <div className={[getClassName(), getIsHidden(2, pageNum, currPage)].join(" ")}>
             <div className="row">
-              <DcLoads />
+              <PvCharger />
               <SmallTank tankId={TANKS_CONF.FRESH_WATER.DEVICE_ID!} conf={TANKS_CONF.FRESH_WATER} invert={true} />
             </div>
             <div className="row">
@@ -158,48 +159,13 @@ export const Metrics = () => {
     setPages(pageNum)
   }
 
-  const computeChildrenSize = (el: Element | null | undefined, property: string) => {
-    if (!el) {
-      return null
-    }
-    return Array.from(el.children)
-      .map((child) => child[property as keyof Element] as number)
-      .reduce((a: number, b: number) => a + b, 0)
-  }
-
-  const scaleMetrics = () => {
-    let screenHeight = window.innerHeight * 0.8
-    let screenWidth = window.innerWidth * 0.95
-
-    let childrenWidth = computeChildrenSize(metricsRef.current?.children[0], "clientWidth")
-    let childrenHeight = computeChildrenSize(metricsRef.current, "clientHeight")
-    if (childrenWidth && childrenHeight) {
-      let heightRatio = childrenHeight / screenHeight
-      let widthRatio = childrenWidth / screenWidth
-      let ratio = Math.max(heightRatio, widthRatio)
-
-      if (metricsRef.current) {
-        ratio = ratio > 1 ? 0 : 1 - ratio
-        let scaleFactor = 1 + ratio
-        metricsRef.current.style.fontSize = scaleFactor + "rem"
-      }
-    }
-  }
-
   useEffect(() => {
-    window.scrollTo(0, 1)
-    function resizeHandler() {
-      setTimeout(() => {
-        scaleMetrics()
-        computePages()
-      }, 200)
-    }
-    window.addEventListener("resize", resizeHandler)
-    window.addEventListener("orientationchange", resizeHandler)
-    setTimeout(resizeHandler, 50)
+    window.addEventListener("resize", computePages)
+    window.addEventListener("orientationchange", computePages)
+    setTimeout(() => computePages(), 200)
     return () => {
-      window.removeEventListener("resize", resizeHandler)
-      window.removeEventListener("orientationchange", resizeHandler)
+      window.removeEventListener("resize", computePages)
+      window.removeEventListener("orientationchange", computePages)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -235,7 +201,7 @@ export const Metrics = () => {
       } else if (currPage === 1 && elPage <= 1) {
         c += " hidden"
       }
-    } else if (pageNum === 3) {
+    } else if (pageNum >= 3) {
       if (elPage !== currPage) {
         c += " hidden"
       }
@@ -246,7 +212,6 @@ export const Metrics = () => {
   return (
     <div className="metrics-container" ref={metricsRef}>
       {layout}
-
       {pages > 1 && <Paginator pages={pages} currentPage={currentPage} setCurrentPage={setCurrentPage} />}
     </div>
   )
