@@ -1,11 +1,11 @@
 import React, { Component } from "react"
 
 export const formatNumber = ({ value, unit = "", precision = 0, factor = 1.0, defaultValue = "--" }) => {
-  if (value === null || value === undefined) {
-    return defaultValue
+  if (value === null || value === undefined || isNaN(value)) {
+    return defaultValue + unit
   }
   let numericValue = Number(value) * factor
-  if (numericValue > 1000) {
+  if (Math.abs(numericValue) > 1000) {
     numericValue = numericValue / 1000
     unit = "k" + unit
   }
