@@ -1,7 +1,9 @@
 import { Query } from "@datorama/akita"
-import { distinctUntilChanged, filter, map, pluck } from "rxjs/operators"
+import { distinctUntilChanged, filter, map, pluck, tap } from "rxjs/operators"
 import { MqttMessage, STATUS, Topics } from "."
 import { MqttState, mqttStore, MqttStore } from "./Mqtt.store"
+import { isEqual } from "lodash-es"
+import { of } from "rxjs"
 
 export class MqttQuery extends Query<MqttState> {
   all$ = this.select()
@@ -57,17 +59,31 @@ export class MqttQuery extends Query<MqttState> {
     )
   }
 
-  messagesByWildcard$ = (wildcard: string) => {
-    const re = new RegExp(wildcard.replace(/\+/g, ".*")) // + in mqtt is anything -> .*
+  messagesByWildcard$ = (wildcard?: string) => {
+    if (wildcard === undefined || wildcard === "" || wildcard === null) return of({})
+    const topicRegex = new RegExp(wildcard.replace(/\+/g, "\\w*")) // + in mqtt is anything -> .*
     return this.select((s) => s.messages).pipe(
+      distinctUntilChanged((a, b) => isEqual(Object.entries(a), Object.entries(b))),
       map((messages) =>
         Object.fromEntries(
           Object.entries(messages)
-            .filter(([label]) => label.match(re))
-            .map(([label, topic]) => [label, messages[label]])
+            .filter(([topic]) => topic.match(topicRegex))
+            .map(([topic]) => [topic, messages[topic]])
         )
       ),
-      filter((value) => Object.values(value).length > 0)
+      filter((value) => Object.values(value).length > 0),
+      // Make sure we don't only have undefined and null values
+      filter(
+        (messages) =>
+          !Object.values(messages).every((value) => {
+            if (Array.isArray(value)) {
+              return value.length === 0 || value.every((v) => v === undefined || v === null)
+            } else {
+              return value === undefined || value === null
+            }
+          })
+      ),
+      distinctUntilChanged((a, b) => isEqual(Object.entries(a), Object.entries(b)))
     )
   }
 }
