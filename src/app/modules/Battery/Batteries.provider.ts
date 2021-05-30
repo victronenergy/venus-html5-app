@@ -22,6 +22,7 @@ export const useBatteries = () => {
     if (!messages || Object.entries(messages).length === 0) {
       Logger.log("Waiting for batteries...")
     } else {
+      // console.error(messages)
       const deviceInstances = Object.values(messages) as BatteryId[]
       if (!batteries || !deviceInstances.every((di) => batteries.includes(di))) {
         batteriesService.setBatteries(deviceInstances)
