@@ -194,23 +194,22 @@
         transition: .4s;
         border-radius: 1rem;
 
-        &:before {
+        .header__buttons__darkmode__slider__img {
           bottom: -1 * ($theme-slider-height * 0.5) / 2;
-          content: "";
           left: 0;
           position: absolute;
           transition: .1s;
           height: $theme-slider-circle-size;
           width: $theme-slider-circle-size;
           border-radius: 50%;
-          background: $color-white url("../../images/LightThemeIcon.svg") no-repeat center/75%;
+          background: $color-white;
+          padding: 0.4rem;
         }
       }
 
 
-      #header__buttons__darkmode__input:checked + .header__buttons__darkmode__slider:before {
+      #header__buttons__darkmode__input:checked + .header__buttons__darkmode__slider > .header__buttons__darkmode__slider__img {
         transform: translateX($theme-slider-width - $theme-slider-circle-size);
-        background: $color-white url("../../images/DarkThemeIcon.svg") no-repeat center/55%;
       }
     }
   }
