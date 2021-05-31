@@ -1,16 +1,18 @@
 import { useObservableState } from "observable-hooks"
 import { FormEventHandler, useState } from "react"
-import { useAppService, useVrmService, vrmQuery } from "../../../../modules"
+import { useAppService, useTheme, useVrmService, vrmQuery } from "../../../../modules"
+import { Installations } from "../../Installations"
 import { VRM_URL } from "../../../utils/constants"
 
 import "./RemoteLogin.scss"
 
 import KVNRVLogo from "../../../images/KVNRV-Logo.svg"
-import ArrowLeft from "../../../images/ArrowLeft.svg"
+import ArrowLeftDark from "../../../images/ArrowLeft-Dark.svg"
+import ArrowLeft from "../../../images/ArrowLeft-Dark.svg"
 import Splash from "../../../images/Splash.svg"
-import { Installations } from "../../Installations"
 
 export const RemoteLogin = () => {
+  const { darkMode } = useTheme()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState<any>()
@@ -77,7 +79,11 @@ export const RemoteLogin = () => {
                 Log in
               </button>
               <button className={"login__form__button go_back"} type={"button"} onClick={goBack}>
-                <img src={ArrowLeft} alt={"Left arrow"} className={"login__form__icon__go_back"} />
+                <img
+                  src={darkMode ? ArrowLeftDark : ArrowLeft}
+                  alt={"Left arrow"}
+                  className={"login__form__icon__go_back"}
+                />
                 Go back
               </button>
             </form>
