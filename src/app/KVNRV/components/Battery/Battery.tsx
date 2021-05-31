@@ -7,9 +7,10 @@ import NumericValue from "../../../components/NumericValue"
 import { NotAvailable } from "../NotAvailable"
 
 import "./Battery.scss"
-import { BATTERY_CONF, CRITICAL_MULTIPLIER } from "../../utils/constants"
+import { BATTERY_CONF, CRITICAL_MULTIPLIER, STATUS_LEVELS, STATUS_LEVELS_MSG } from "../../utils/constants"
 import GaugeIndicator from "../../../components/GaugeIndicator"
 import { normalizePower } from "../../utils/helpers"
+import { Footer } from "../../../components/Card/Card"
 
 const batteryStateFormatter = (value: number) => {
   switch (value) {
@@ -21,6 +22,27 @@ const batteryStateFormatter = (value: number) => {
       return "Idle"
     default:
       return null
+  }
+}
+
+const batteryTimeToGoFormatter = (timeToGo: number) => {
+  let secs = timeToGo
+  if (!isNaN(secs)) {
+    const days = Math.floor(secs / 86400)
+    secs = secs - days * 86400
+    const hours = Math.floor(secs / 3600)
+    secs = secs - hours * 3600
+    const minutes = Math.floor(secs / 60)
+
+    let time = []
+    if (days) time.push(`${days} days`)
+    if (hours) time.push(`${hours} hours`)
+    if (minutes) time.push(`${minutes} minutes`)
+    return time.join(", ")
+    // we are not interested in seconds, since it's an
+    // estimate anyways
+  } else {
+    return "--"
   }
 }
 
@@ -71,8 +93,16 @@ export const Batteries = ({ size }: BatteryProps) => {
       const batteryStateLabel = batteryStateFormatter(battery.state)
       const batteryLevelBars = Math.ceil(battery.soc / (100 / CELL_NUMBER))
 
+      const status =
+        batteryLevelBars <= ALARM_LEVEL
+          ? STATUS_LEVELS.ALARM
+          : batteryLevelBars <= WARNING_LEVEL
+          ? STATUS_LEVELS.WARNING
+          : STATUS_LEVELS.SUCCESS
+
+      const footer: Footer = { status: status, message: STATUS_LEVELS_MSG[status], property: "Charge" }
       return (
-        <Card title={"Battery"} size={size}>
+        <Card title={"Battery"} size={size} footer={footer}>
           <div className={"battery"}>
             <div className={"battery__group " + size}>
               <div className={"indicator-main" + (size.includes(SIZE_SHORT) ? "--small" : "")}>
@@ -120,6 +150,10 @@ export const Batteries = ({ size }: BatteryProps) => {
               size={"big"}
               gauge={true}
             />
+          </div>
+          <div className={"indicator"}>
+            <div className={"name"}>Remaining time</div>
+            <div className={"value"}>{batteryTimeToGoFormatter(battery.timeToGo)}</div>
           </div>
         </Card>
       )
