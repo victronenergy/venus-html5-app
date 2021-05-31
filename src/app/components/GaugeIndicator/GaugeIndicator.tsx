@@ -86,7 +86,8 @@ export class GaugeIndicator extends PureComponent<GaugeIndicatorProps> {
 
                 ctx.restore()
                 let fontSize = Math.min(width / 90, 1.8).toFixed(2)
-                ctx.font = fontSize + "rem sans-serif"
+                // For some reason in Safari rem results in tiny letters, so use em
+                ctx.font = fontSize + "em sans-serif"
                 ctx.textBaseline = "middle"
                 ctx.fillStyle = this.getColors().textColor
 
