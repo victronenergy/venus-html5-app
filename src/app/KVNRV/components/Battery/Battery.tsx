@@ -42,7 +42,7 @@ const batteryTimeToGoFormatter = (timeToGo: number) => {
     // we are not interested in seconds, since it's an
     // estimate anyways
   } else {
-    return "-"
+    return " - "
   }
 }
 
@@ -107,7 +107,7 @@ export const Batteries = ({ size }: BatteryProps) => {
             <div className={"battery__group " + size}>
               <div className={"indicator-main" + (size.includes(SIZE_SHORT) ? "--small" : "")}>
                 <div>
-                  <NumericValue value={battery.soc} unit="%" defaultValue={"--"} precision={1} />
+                  <NumericValue value={battery.soc} unit="%" defaultValue={" - "} precision={1} />
                   <br />
                 </div>
                 {batteryStateLabel && <div className="name">{batteryStateLabel}</div>}
@@ -116,11 +116,11 @@ export const Batteries = ({ size }: BatteryProps) => {
               <div>
                 <div className="indicator">
                   <span className="name">Voltage</span>
-                  <NumericValue value={battery.voltage} unit="V" defaultValue={"--"} precision={2} />
+                  <NumericValue value={battery.voltage} unit="V" defaultValue={" - "} precision={2} />
                 </div>
                 <div className="indicator">
                   <span className="name">Current</span>
-                  <NumericValue value={battery.current} unit="A" defaultValue={"--"} precision={1} />
+                  <NumericValue value={battery.current} unit="A" defaultValue={" - "} precision={2} />
                 </div>
               </div>
             </div>
