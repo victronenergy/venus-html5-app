@@ -76,7 +76,7 @@ export const SHORE_POWER_CONF: WidgetConfiguration = {
 
 export const TANKS_CONF = {
   FRESH_WATER: {
-    DEVICE_ID: 2,
+    DEVICE_ID: 1,
     MAX: 1,
     THRESHOLDS: [0.7, 0.2, 0.1],
     MESSAGES: {
@@ -85,7 +85,7 @@ export const TANKS_CONF = {
     },
   } as WidgetConfiguration,
   GRAY_WATER: {
-    DEVICE_ID: 0,
+    DEVICE_ID: 2,
     MAX: 1,
     THRESHOLDS: [0.7, 0.2, 0.1],
     MESSAGES: {
@@ -94,7 +94,7 @@ export const TANKS_CONF = {
     },
   } as WidgetConfiguration,
   BLACK_WATER: {
-    DEVICE_ID: 1,
+    DEVICE_ID: 5,
     MAX: 1,
     THRESHOLDS: [0.7, 0.2, 0.1],
     MESSAGES: {
