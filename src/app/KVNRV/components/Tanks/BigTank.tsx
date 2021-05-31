@@ -6,32 +6,19 @@ import { TankProps } from "./index"
 
 import "./BigTank.scss"
 import { useEffect, useState } from "react"
-import { VOLUME_UNITS, VolumeUnit, VolumeUnits, FLUID_TYPES } from "../../utils/constants"
+import { VOLUME_UNITS, VolumeUnit, VolumeUnits } from "../../utils/constants"
 
-export const fluidTypeFormatter = (fluidType: string) => {
-  switch (Number(fluidType)) {
-    case FLUID_TYPES.FUEL:
-      return "Fuel"
-    case FLUID_TYPES.FRESH_WATER:
-      return "Fresh water"
-    case FLUID_TYPES.WASTE_WATER:
-      return "Waste water"
-    case FLUID_TYPES.LIVE_WELL:
-      return "Live well"
-    case FLUID_TYPES.OIL:
-      return "Oil"
-    case FLUID_TYPES.BLACK_WATER:
-      return "Black water"
-    default:
-      return "Tank sensor"
-  }
-}
+import { fluidTypeFormatter } from "./SmallTank"
 
 export const BigTank = ({ tankId, conf, invert }: TankProps) => {
   const [height, setHeight] = useState(0)
   const tank = useTank(tankId)
   const tankLevel = (tank.level ?? 0) / 100
-  const footer = useSendUpdate(invert ? 1 - tankLevel : tankLevel, conf, fluidTypeFormatter(tank.fluidType))
+  const footer = useSendUpdate(
+    invert ? 1 - tankLevel : tankLevel,
+    conf,
+    tank.fluidType && fluidTypeFormatter(tank.fluidType)
+  )
   useEffect(() => {
     setHeight(100 - (tank.level ?? 0))
   }, [tank.level, tankLevel])

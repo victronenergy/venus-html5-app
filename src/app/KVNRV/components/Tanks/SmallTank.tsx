@@ -35,7 +35,7 @@ export const SmallTank = ({ tankId, conf, invert }: TankProps) => {
   const footer = useSendUpdate(
     invert ? 1 - tank.level / 100 : tank.level / 100,
     conf,
-    fluidTypeFormatter(tank.fluidType)
+    tank.fluidType && fluidTypeFormatter(tank.fluidType)
   )
 
   const unit: VolumeUnit =
