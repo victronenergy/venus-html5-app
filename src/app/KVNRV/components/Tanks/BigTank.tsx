@@ -31,11 +31,7 @@ export const BigTank = ({ tankId, conf, invert }: TankProps) => {
   const [height, setHeight] = useState(0)
   const tank = useTank(tankId)
   const tankLevel = (tank.level ?? 0) / 100
-  const footer = useSendUpdate(
-    invert ? 1 - tankLevel : tankLevel,
-    conf,
-    tank.customName ?? fluidTypeFormatter(tank.fluidType)
-  )
+  const footer = useSendUpdate(invert ? 1 - tankLevel : tankLevel, conf, fluidTypeFormatter(tank.fluidType))
   useEffect(() => {
     setHeight(100 - (tank.level ?? 0))
   }, [tank.level, tankLevel])
@@ -47,11 +43,7 @@ export const BigTank = ({ tankId, conf, invert }: TankProps) => {
 
   return (
     <div className="">
-      <Card
-        title={tank?.customName ?? fluidTypeFormatter(tank.fluidType)}
-        size={[SIZE_WIDE, SIZE_LONG]}
-        footer={footer}
-      >
+      <Card title={fluidTypeFormatter(tank.fluidType)} size={[SIZE_WIDE, SIZE_LONG]} footer={footer}>
         {tank ? (
           <div className="big-tank">
             <div className="indicator-main">
