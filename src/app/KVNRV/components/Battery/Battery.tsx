@@ -42,7 +42,7 @@ const batteryTimeToGoFormatter = (timeToGo: number) => {
     // we are not interested in seconds, since it's an
     // estimate anyways
   } else {
-    return "--"
+    return "-"
   }
 }
 
@@ -153,7 +153,7 @@ export const Batteries = ({ size }: BatteryProps) => {
           </div>
           <div className={"indicator"}>
             <div className={"name"}>Remaining time</div>
-            <div className={"value"}>{batteryTimeToGoFormatter(battery.timeToGo)}</div>
+            <div className={"value"}>{batteryTimeToGoFormatter(battery.timetogo)}</div>
           </div>
         </Card>
       )

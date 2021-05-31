@@ -8,7 +8,7 @@ export interface Battery {
   soc: number
   power: number
   temperature: number
-  timeToGo: number
+  timetogo: number
   instance: number
   state: number
   id: string
