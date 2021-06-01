@@ -51,7 +51,6 @@ export function useAcLoads(): AcLoadsState {
   )
 
   useTopicSubscriptions(topics$)
-  const { current, voltage, power, frequency, phases } = useTopicsState<AcLoadsState>(topics$)
 
-  return { current, voltage, power, frequency, phases }
+  return useTopicsState<AcLoadsState>(topics$)
 }

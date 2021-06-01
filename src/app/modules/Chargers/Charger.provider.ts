@@ -44,7 +44,7 @@ export const useCharger = (chargerId: ChargerInstanceId) => {
     ],
   })
 
-  const topics$ = useTopicsWithParameters<ChargerTopics>(getTopics, mqttQuery.portalId$)
+  const topics$ = useTopicsWithParameters<ChargerTopics>(getTopics, mqttQuery.portalId$, of(chargerId))
 
   useTopicSubscriptions(topics$)
 

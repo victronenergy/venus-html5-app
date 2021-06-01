@@ -25,7 +25,7 @@ export function useShorePowerInput(): ShorePowerInputState {
   const shorePowerInputService = useShorePowerInputService()
 
   useSubscription(mqttQuery.messagesByTopics$(topics!), ({ acInput1, acInput2 }) => {
-    let inputId = 0
+    let inputId = undefined
 
     if (Number(acInput1) === AC_SOURCE_TYPE.SHORE || Number(acInput1) === AC_SOURCE_TYPE.GRID) {
       inputId = 1
