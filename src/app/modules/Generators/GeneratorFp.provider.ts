@@ -46,8 +46,8 @@ export function useGeneratorFp(): GeneratorFpProvider {
   const writeTopics = useObservableState(writeTopics$)
 
   const mqtt = useMqtt()
-  const updateAutoMode = (mode: number) => mqtt.publish(writeTopics!.autoMode, mode.toString())
-  const updateManualMode = (currentLimit: number) => mqtt.publish(writeTopics!.manualMode, currentLimit.toString())
+  const updateAutoMode = (mode: number) => mqtt.publish(writeTopics!.autoMode, mode)
+  const updateManualMode = (currentLimit: number) => mqtt.publish(writeTopics!.manualMode, currentLimit)
 
   const topics$ = useTopicsWithPortalId<GeneratorFpTopics>(getTopics, mqttQuery.portalId$)
 

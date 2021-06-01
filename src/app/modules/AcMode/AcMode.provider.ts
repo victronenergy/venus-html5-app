@@ -72,9 +72,9 @@ export function useAcMode(): AcModeProvider {
   const writeTopics = useObservableState(writeTopics$)
 
   const mqtt = useMqtt()
-  const updateMode = (mode: number) => mqtt.publish(writeTopics!.updateMode!, mode.toString())
+  const updateMode = (mode: number) => mqtt.publish(writeTopics!.updateMode!, mode)
   const updateLimit = writeTopics?.updateLimit
-    ? (limit: number) => mqtt.publish(writeTopics!.updateLimit!, limit.toString())
+    ? (limit: number) => mqtt.publish(writeTopics!.updateLimit!, limit)
     : undefined
 
   return { ...useTopicsState<AcModeState>(topics$), updateMode, updateLimit }

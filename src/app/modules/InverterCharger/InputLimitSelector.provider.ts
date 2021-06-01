@@ -56,7 +56,7 @@ export function useInputLimitSelector(shorePowerInput: number): InputLimitSelect
   const writeTopics = useObservableState(writeTopics$)
 
   const mqtt = useMqtt()
-  const updateLimit = (limit: number) => mqtt.publish(writeTopics!.limit, limit.toString())
+  const updateLimit = (limit: number) => mqtt.publish(writeTopics!.limit, limit)
 
   return { ...useTopicsState<InputLimitSelectorState>(topics$), updateLimit } as InputLimitSelectorProvider
 }

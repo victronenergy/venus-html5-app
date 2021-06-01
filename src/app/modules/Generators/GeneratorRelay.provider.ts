@@ -68,8 +68,7 @@ export function useGeneratorRelay(): GeneratorRelayProvider {
 
   const mqtt = useMqtt()
   const updateAutoMode = (mode: string) => mqtt.publish(writeTopics!.autoMode, mode)
-  const updateManualMode = (currentLimit: number | string) =>
-    mqtt.publish(writeTopics!.manualMode, currentLimit.toString())
+  const updateManualMode = (currentLimit: number | string) => mqtt.publish(writeTopics!.manualMode, currentLimit)
 
   const topics$ = useTopicsWithParameters<GeneratorRelayTopics>(getTopics, mqttQuery.portalId$, vebusQuery.instanceId$)
 
