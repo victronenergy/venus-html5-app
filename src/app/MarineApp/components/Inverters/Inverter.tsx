@@ -43,12 +43,16 @@ const InverterSubtitle = (voltage: number, current: number, power: number, state
 )
 
 type InverterProps = {
+  instanceId: number
   isVebusInverter: boolean
 }
 
-export const Inverter = ({ isVebusInverter }: InverterProps) => {
+export const Inverter = ({ instanceId, isVebusInverter }: InverterProps) => {
   const source = isVebusInverter ? "vebus" : "inverter"
-  const { state, mode, voltage, current, power, customName, productName, nAcInputs, updateMode } = useInverter(source)
+  const { state, mode, voltage, current, power, customName, productName, nAcInputs, updateMode } = useInverter(
+    instanceId,
+    source
+  )
 
   // if nAcInputs === 0 it means it's an inverter, if not it's an inverter/charger => skip
   const show = !isVebusInverter || nAcInputs === 0
