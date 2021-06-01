@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 
 import { useInputLimitSelector, useShorePowerInput } from "../../../modules"
 
@@ -48,16 +48,19 @@ const InputLimitSelector = ({ inputId, onLimitSelected }: InputLimitSelectorProp
 
   const [showEmpties, toggleShowEmpties] = useState(false)
 
-  if (
-    amperageContainerNode &&
-    firstSelectorButtonNode &&
-    Number(amperageContainerNode.current?.clientHeight) > Number(firstSelectorButtonNode.current?.clientHeight) * 2
-  ) {
-    toggleShowEmpties(!showEmpties)
-  }
+  useEffect(() => {
+    if (
+      amperageContainerNode &&
+      firstSelectorButtonNode &&
+      Number(amperageContainerNode.current?.clientHeight) > Number(firstSelectorButtonNode.current?.clientHeight) * 2
+    ) {
+      toggleShowEmpties(!showEmpties)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const amperageList = getSuggestedAmperageValuesList(productId).filter((value) => {
-    return value <= currentLimitMax
+    return value <= (currentLimitMax ?? 100)
   })
 
   return (
