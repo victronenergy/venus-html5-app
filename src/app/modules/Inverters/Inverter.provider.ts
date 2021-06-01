@@ -30,8 +30,8 @@ export interface InverterProvider extends InverterState {
   updateMode: (mode: number) => void
 }
 
-export function useInverter(source: string): InverterProvider {
-  const getTopics = (portalId: PortalId, deviceInstanceId: InstanceId, source: string) => {
+export function useInverter(instanceId: number, source: string): InverterProvider {
+  const getTopics = (portalId: PortalId, source: string, deviceInstanceId: InstanceId) => {
     return {
       state: `N/${portalId}/${source}/${deviceInstanceId}/State`,
       mode: `N/${portalId}/${source}/${deviceInstanceId}/Mode`,
@@ -44,24 +44,19 @@ export function useInverter(source: string): InverterProvider {
     }
   }
 
-  const topics$ = useTopicsWithParameters<InverterTopics>(
-    getTopics,
-    mqttQuery.portalId$,
-    vebusQuery.instanceId$,
-    of(source)
-  )
+  const topics$ = useTopicsWithParameters<InverterTopics>(getTopics, mqttQuery.portalId$, of(source), of(instanceId))
 
   useTopicSubscriptions(topics$)
 
-  const getWriteTopics = (portalId: PortalId, deviceInstanceId: InstanceId, source: string) => ({
+  const getWriteTopics = (portalId: PortalId, source: string, deviceInstanceId: InstanceId) => ({
     mode: `W/${portalId}/${source}/${deviceInstanceId}/Mode`,
   })
 
-  const writeTopics$ = useTopicsWithParameters(getWriteTopics, mqttQuery.portalId$, vebusQuery.instanceId$, of(source))
+  const writeTopics$ = useTopicsWithParameters(getWriteTopics, mqttQuery.portalId$, of(source), of(instanceId))
   const writeTopics = useObservableState(writeTopics$)
 
   const mqtt = useMqtt()
-  const updateMode = (mode: number) => mqtt.publish(writeTopics!.mode, mode.toString())
+  const updateMode = (mode: number) => mqtt.publish(writeTopics!.mode, mode)
 
   return { ...useTopicsState<InverterState>(topics$), updateMode } as InverterProvider
 }
