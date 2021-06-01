@@ -45,7 +45,7 @@ export const AcMode = () => {
         icon={ICON_SETTINGS}
         size={[SIZE_WIDE, SIZE_SHORT]}
         onIconClick={() => setModalOpen(true)}
-        infoText={"Limit: " + formatNumber({ value: limit, unit: "A" })}
+        infoText={"Limit: " + formatNumber({ value: inLimit, unit: "A" })}
       >
         <div className="gauge">
           {(activeInput === 0 || activeInput === 1) && power ? (

@@ -79,6 +79,7 @@ export const Header = () => {
               <img
                 src={darkMode ? DarkThemeIcon : LightThemeIcon}
                 className={"header__buttons__darkmode__slider__img"}
+                alt={"Dark mode slider"}
               />
             </span>
           </label>

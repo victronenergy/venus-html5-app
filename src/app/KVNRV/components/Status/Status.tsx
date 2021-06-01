@@ -1,10 +1,9 @@
 import React from "react"
 
 import { Card } from "../../../components/Card"
-import { Footer } from "../../../components/Card/Card"
 import IconWarning from "../../images/IconWarning.svg"
 import "./Status.scss"
-import { STATUS_LEVELS, STATUS_LEVELS_MSG } from "../../utils/constants"
+import { STATUS_LEVELS } from "../../utils/constants"
 import {
   BatteryAlarmsState,
   StatusUpdate,
