@@ -67,6 +67,7 @@
   "scripts": {
     "clean": "rm -rf build",
     "start": "react-scripts start",
+    "prebuild": "rm -rf build/ dist/",
     "build": "react-scripts build",
     "postbuild": "mv build/ dist/",
     "eject": "react-scripts eject",
