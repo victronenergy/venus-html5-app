@@ -89,8 +89,8 @@ const GeneratorFp = () => {
               disabled={isAutoStartDisabled}
               active={statusCode === 8 && !autoStart}
               onClick={() => {
-                updateManualMode(GENERATOR_START_STOP.AUTO_OFF)
-                updateAutoMode(GENERATOR_START_STOP.START)
+                updateAutoMode(GENERATOR_START_STOP.AUTO_OFF)
+                updateManualMode(GENERATOR_START_STOP.START)
               }}
             >
               On
@@ -98,13 +98,13 @@ const GeneratorFp = () => {
             <SelectorButton
               active={statusCode < 8 && !autoStart}
               onClick={() => {
-                updateManualMode(GENERATOR_START_STOP.AUTO_OFF)
-                updateAutoMode(GENERATOR_START_STOP.STOP)
+                updateAutoMode(GENERATOR_START_STOP.AUTO_OFF)
+                updateManualMode(GENERATOR_START_STOP.STOP)
               }}
             >
               Off
             </SelectorButton>
-            <SelectorButton active={autoStart === 1} onClick={() => updateManualMode(GENERATOR_START_STOP.AUTO_ON)}>
+            <SelectorButton active={autoStart === 1} onClick={() => updateAutoMode(GENERATOR_START_STOP.AUTO_ON)}>
               Auto start/stop
             </SelectorButton>
           </div>

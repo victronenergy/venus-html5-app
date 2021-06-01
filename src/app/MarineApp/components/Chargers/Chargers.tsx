@@ -6,7 +6,7 @@ import { useChargers } from "../../../modules"
 const Chargers = () => {
   const { chargers } = useChargers()
 
-  return <div>{chargers && chargers.map((charger: number) => <Charger key={charger} chargerId={charger} />)}</div>
+  return <>{chargers && chargers.map((charger: number) => <Charger key={charger} chargerId={charger} />)}</>
 }
 
 export default Chargers

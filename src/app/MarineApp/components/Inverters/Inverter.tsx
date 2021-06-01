@@ -30,7 +30,7 @@ const stateFormatter = (state: number) => {
 }
 
 const InverterSubtitle = (voltage: number, current: number, power: number, state: number) => (
-  <MetricValues inflate={""}>
+  <MetricValues inflate>
     <div className="metrics__left">
       <NumericValue value={voltage} unit="V" />
       <NumericValue value={current} unit="A" precision={1} />

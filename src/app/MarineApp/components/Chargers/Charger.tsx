@@ -28,7 +28,7 @@ const chargerModeFormatter = (value: number) => {
 }
 
 const ChargerSubtitle = (current: [number?, number?, number?], state: number) => (
-  <MetricValues inflate={""}>
+  <MetricValues inflate>
     <div className="metrics__left">
       {current.map((_, i) => (
         <NumericValue key={i} value={current[i]} unit="A" precision={1} />
@@ -51,7 +51,7 @@ const Charger = ({ chargerId }: ChargerProps) => {
   // When a topic is invalid, it returns undefined -> no value means topic is not supported
   const chargerSupportsMode = mode !== undefined
   const chargerSupportsInputLimit = currentLimit !== undefined
-  const chargerMode = chargerModeFormatter(mode)
+  const chargerMode = chargerModeFormatter(Number(mode))
 
   const productNameShort = productName && productName.split(" ")[0]
 
@@ -74,7 +74,7 @@ const Charger = ({ chargerId }: ChargerProps) => {
             <SelectorButton active={chargerMode === "ON"} onClick={() => updateMode(CHARGER_MODE.ON)}>
               On
             </SelectorButton>
-            <SelectorButton active={chargerMode === "OFF"} onClick={() => updateMode(CHARGER_MODE.ON)}>
+            <SelectorButton active={chargerMode === "OFF"} onClick={() => updateMode(CHARGER_MODE.OFF)}>
               Off
             </SelectorButton>
             {chargerSupportsInputLimit && (

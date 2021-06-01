@@ -7,6 +7,8 @@ import SelectorButton from "../SelectorButton"
 import Logger from "../../../utils/logger"
 import Loading from "../Loading"
 
+import "./InputLimitSelector.scss"
+
 const USAmperage = [10, 15, 20, 30, 50, 100]
 const EUAmperage = [3, 6, 10, 13, 16, 25, 32, 63]
 
