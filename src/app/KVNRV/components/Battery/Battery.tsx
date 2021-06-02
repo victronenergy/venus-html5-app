@@ -120,7 +120,7 @@ export const Batteries = ({ size }: BatteryProps) => {
                 </div>
                 <div className="indicator">
                   <span className="name">Current</span>
-                  <NumericValue value={battery.current} unit="A" defaultValue={" - "} precision={2} />
+                  <NumericValue value={battery.current} unit="A" defaultValue={" - "} precision={1} />
                 </div>
               </div>
             </div>

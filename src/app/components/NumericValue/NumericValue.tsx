@@ -18,7 +18,7 @@ export const formatNumber = ({
   if (Math.abs(numericValue) > 1000) {
     numericValue = numericValue / 1000
     unit = "k" + unit
-    precision = 2
+    precision = 1
   }
   return precision === undefined ? numericValue.toString() + unit : numericValue.toFixed(precision) + unit
 }

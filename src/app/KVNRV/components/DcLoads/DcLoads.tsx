@@ -24,7 +24,7 @@ export const DcLoads = () => {
             <NumericValue value={voltage} unit={"V"} precision={2} />
           </div>
           <div className={"info-bar__cell"}>
-            <NumericValue value={current} unit={"A"} precision={2} />
+            <NumericValue value={current} unit={"A"} precision={1} />
           </div>
         </div>
       </div>
