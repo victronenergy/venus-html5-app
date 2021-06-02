@@ -35,7 +35,7 @@ export const BigTank = ({ tankId, conf, invert }: TankProps) => {
           <div className="big-tank">
             <div className="indicator-main">
               <span>
-                <NumericValue value={tank.level} unit="%" defaultValue={"--"} precision={0} />
+                <NumericValue value={tank.level} unit="%" defaultValue={" - "} precision={0} />
                 <div className="name">
                   {formatNumber({ value: tank.remaining * unit.factor, unit: unit.unit, precision: unit.precision })}
                 </div>
