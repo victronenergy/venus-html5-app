@@ -44,7 +44,6 @@ export const MarineApp = (props: AppProps) => {
   const portalId = useObservableState(mqttQuery.portalId$)
   const isConnected = useObservableState(mqttQuery.isConnected$)
   const error = useObservableState(mqttQuery.error$)
-  const { instanceId } = useVebus()
 
   const setPage = (currentPage: number) => {
     setCurrentPage(currentPage)
@@ -138,7 +137,6 @@ export const MarineApp = (props: AppProps) => {
               return (
                 <Fade key={VIEWS.METRICS} unmount={viewUnmounting} fullWidth>
                   <Metrics
-                    inverterChargerDeviceId={instanceId}
                     isConnected={isConnected}
                     onChangeInverterChargerInputLimitClicked={() =>
                       setView(VIEWS.INVERTER_CHARGER_INPUT_LIMIT_SELECTOR)

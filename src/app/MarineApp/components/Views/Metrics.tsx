@@ -1,3 +1,4 @@
+import { useObservableState } from "observable-hooks"
 import { useLayoutEffect, useRef, useState } from "react"
 import ActiveSource from "../ActiveSource"
 import AcLoads from "../AcLoads"
@@ -8,7 +9,7 @@ import Inverters from "../Inverters"
 import { InverterCharger } from "../InverterCharger"
 import Solar from "../Solar"
 import Generators from "../Generators"
-import { InstanceId } from "../../../modules"
+import { InstanceId, mqttQuery, useVebus } from "../../../modules"
 
 const HEADER_HEIGHT = 110
 
@@ -68,7 +69,6 @@ const getContainerHeight = (metrics: HTMLDivElement[]) => {
 }
 
 type MetricsProps = {
-  inverterChargerDeviceId: InstanceId
   isConnected: boolean
   onChangeInverterChargerInputLimitClicked: Function
   currentPage: number
@@ -78,7 +78,6 @@ type MetricsProps = {
 
 export const Metrics = ({
   isConnected,
-  inverterChargerDeviceId,
   onChangeInverterChargerInputLimitClicked,
   currentPage,
   pages,
@@ -86,6 +85,8 @@ export const Metrics = ({
 }: MetricsProps) => {
   const metricsRef = useRef<HTMLDivElement>(null)
   const [height, setHeight] = useState(0)
+  const messages = useObservableState(mqttQuery.messages$)
+  const { instanceId } = useVebus()
 
   useLayoutEffect(() => {
     computeResponsiveness()
@@ -93,7 +94,7 @@ export const Metrics = ({
     return () => {
       window.removeEventListener("resize", computeResponsiveness)
     }
-  })
+  }, [messages])
 
   const computeResponsiveness = () => {
     if (metricsRef.current) {
@@ -115,12 +116,12 @@ export const Metrics = ({
   return (
     <div className="metrics-container" ref={metricsRef} style={style}>
       <DcLoads />
-      {!!inverterChargerDeviceId && <AcLoads />}
+      {!!instanceId && <AcLoads />}
       <Battery />
-      {!!inverterChargerDeviceId && (
+      {!!instanceId && (
         <InverterCharger onChangeInputLimitClicked={onChangeInverterChargerInputLimitClicked} connected={isConnected} />
       )}
-      {!!inverterChargerDeviceId && <ActiveSource />}
+      {!!instanceId && <ActiveSource />}
       <Solar />
       <Chargers />
       <Inverters />
