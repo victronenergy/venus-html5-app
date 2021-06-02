@@ -89,6 +89,14 @@ export default class Metrics extends Component<MetricsProps, MetricsState> {
   }
 
   componentDidUpdate() {
+    this.computeResponsiveness()
+  }
+
+  componentDidMount() {
+    this.computeResponsiveness()
+  }
+
+  computeResponsiveness() {
     if (this.metricsRef.current) {
       const metrics = Array.from(this.metricsRef.current.children) as HTMLDivElement[]
 
