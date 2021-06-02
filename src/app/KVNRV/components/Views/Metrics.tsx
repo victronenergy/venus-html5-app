@@ -14,19 +14,8 @@ import { TANKS_CONF } from "../../utils/constants"
 import { SIZE_WIDE, SIZE_LONG } from "../../../components/Card"
 
 export const SCREEN_SIZES = {
-  TALL: {
-    SIZE: 700,
-    SM: 300,
-    MD: 670,
-    LG: 1280,
-  },
-  SHORT: {
-    SIZE: 450,
-    XS: 500,
-    SM: 700,
-    MD: 800,
-    LG: 1200,
-  },
+  MD: 700,
+  LG: 1230,
 }
 
 export const Metrics = () => {
@@ -84,27 +73,26 @@ export const Metrics = () => {
   }, [hammer])
 
   const computePages = () => {
-    let pageNum = 1
-    let currPage = currentPage
-    let size = window.innerHeight < SCREEN_SIZES.SHORT.SIZE ? SCREEN_SIZES.SHORT : SCREEN_SIZES.TALL
-    if (window.innerWidth < size.MD || window.innerHeight < size.SIZE) {
-      pageNum = 3
-    } else if (window.innerWidth < size.LG || window.innerHeight < size.SIZE) {
+    const isNarrow = window.innerWidth / window.innerHeight > 16 / 9 || window.innerHeight < 450
+
+    let pageNum = 3
+
+    if (window.innerWidth > SCREEN_SIZES.MD) {
       pageNum = 2
-      currPage = Math.min(1, currentPage)
-    } else if (window.innerWidth >= size.LG) {
-      pageNum = 1
-      currPage = Math.min(0, currentPage)
     }
 
-    if (window.innerHeight < SCREEN_SIZES.SHORT.SIZE) {
+    if (window.innerWidth > SCREEN_SIZES.LG) {
+      pageNum = 1
+    }
+
+    const currPage = Math.min(pageNum - 1, currentPage)
+
+    if (isNarrow) {
       setLayout(
         <div className="row">
           <div className={[getClassName(), "row", getIsHidden(0, pageNum, currPage)].join(" ")}>
             <Status size={[SIZE_WIDE, SIZE_LONG]} />
-            <div className={window.innerWidth < size.SM ? "row" : "col-span-4 grid"}>
-              <Battery size={[SIZE_WIDE, SIZE_LONG]} />
-            </div>
+            <Battery size={[SIZE_WIDE, SIZE_LONG]} />
           </div>
 
           <div className={[getClassName(), getIsHidden(1, pageNum, currPage)].join(" ")}>
