@@ -160,7 +160,7 @@ export class MqttService {
     this.store.update({ keepAliveHandlerRef: setInterval(this.sendKeepalive, 50000) })
   }
 
-  publish = (topic: string, data: string) => {
+  publish = (topic: string, data: string | number) => {
     if (this.store?.getValue().status !== STATUS.CONNECTED || !this.store?.getValue().client) {
       Logger.error("Could not publish value, not connected to MQTT broker")
     }

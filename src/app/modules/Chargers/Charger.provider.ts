@@ -44,7 +44,7 @@ export const useCharger = (chargerId: ChargerInstanceId) => {
     ],
   })
 
-  const topics$ = useTopicsWithParameters<ChargerTopics>(getTopics, mqttQuery.portalId$)
+  const topics$ = useTopicsWithParameters<ChargerTopics>(getTopics, mqttQuery.portalId$, of(chargerId))
 
   useTopicSubscriptions(topics$)
 
@@ -57,9 +57,8 @@ export const useCharger = (chargerId: ChargerInstanceId) => {
   const writeTopics = useObservableState(writeTopics$)
 
   const mqtt = useMqtt()
-  const updateMode = (mode: number) => mqtt.publish(writeTopics!.mode, mode.toString())
-  const updateCurrentLimit = (currentLimit: number | string) =>
-    mqtt.publish(writeTopics!.currentLimit, currentLimit.toString())
+  const updateMode = (mode: number) => mqtt.publish(writeTopics!.mode, mode)
+  const updateCurrentLimit = (currentLimit: number | string) => mqtt.publish(writeTopics!.currentLimit, currentLimit)
 
   return {
     ...useTopicsState<ChargerState>(topics$),

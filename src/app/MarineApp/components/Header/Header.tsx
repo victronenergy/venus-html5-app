@@ -4,7 +4,7 @@ import { useHeader } from "../../../modules"
 
 import SelectorButton from "../SelectorButton"
 import { VIEWS } from "../../../utils/constants"
-import { LockButtonHeader } from "../LockButton"
+import { LockButton } from "../LockButton"
 
 import "./Header.scss"
 
@@ -41,10 +41,10 @@ export const Header = (props: HeaderProps) => {
         )}
 
         <div className="header-button-container">
-          <LockButtonHeader currentView={currentView} header={true} showLockButton={showLockButton} />
+          <LockButton currentView={currentView} header={true} showLockButton={showLockButton} />
 
           {showRemoteConsoleSetting && (
-            <button className="remote-console-button" onClick={() => handleRemoteConsoleButtonClicked}>
+            <button className="remote-console-button" onClick={() => handleRemoteConsoleButtonClicked()}>
               {currentView !== VIEWS.REMOTE_CONSOLE ? "Remote Console" : "Close"}
             </button>
           )}

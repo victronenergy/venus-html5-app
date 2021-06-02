@@ -1,10 +1,10 @@
 import React from "react"
+import { useInputLimit } from "../../../modules"
 
 import SelectorButton from "../SelectorButton"
 
 import { formatNumber } from "../../../components/NumericValue"
 import "./InputLimit.scss"
-import { useInputLimit } from "../../../modules/InverterCharger/InputLimit.provider"
 
 type InputLimitProps = {
   onChangeInputLimitClicked: Function
@@ -14,15 +14,16 @@ export const InputLimit = ({ onChangeInputLimitClicked, shorePowerInput }: Input
   const { currentLimit, currentLimitIsAdjustable } = useInputLimit(shorePowerInput)
 
   let isAdjustable = currentLimitIsAdjustable || 0
-  let formattedLimit = formatNumber({ value: currentLimit, unit: "A" })
+
+  let formattedLimit = formatNumber({ value: Number(currentLimit), unit: "A", defaultValue: null })
 
   return (
     <div className="metric__current-input-limit">
       <div className="input-limit-header__wrapper">
-        {formattedLimit !== "--" && (
+        {formattedLimit != null && (
           <div className="text--large metric__current-input-limit__limit">{formattedLimit}</div>
         )}
-        {!isAdjustable && currentLimit !== "--" && <div className="text--subtitle">Input Limit</div>}
+        {!isAdjustable && formattedLimit != null && <div className="text--subtitle">Input Limit</div>}
       </div>
 
       {isAdjustable !== 0 && (

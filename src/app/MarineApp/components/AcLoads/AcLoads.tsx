@@ -40,7 +40,7 @@ const AcLoads = () => {
       </ColumnContainer>
     )
   } else {
-    return <ColumnContainer />
+    return <div />
   }
 }
 

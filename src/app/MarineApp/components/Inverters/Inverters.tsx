@@ -1,22 +1,20 @@
 import React from "react"
 
-import { useInverters } from "../../../modules"
+import { useInverters, useVebus } from "../../../modules"
 
 import Inverter from "./Inverter"
 import ColumnContainer from "../ColumnContainer"
 
 const Inverters = () => {
-  const { systemInverters, vebusInverters } = useInverters()
+  const { inverters } = useInverters()
+  const { instanceId } = useVebus()
 
-  if (systemInverters && vebusInverters) {
-    const systemInverterIds = Object.values(systemInverters)
-    const vebusInverterIds = Object.values(vebusInverters)
+  if (inverters || instanceId) {
     return (
-      <ColumnContainer>
-        {systemInverterIds.concat(vebusInverterIds).map((id) => (
-          <Inverter key={id} isVebusInverter={vebusInverterIds.includes(id)} />
-        ))}
-      </ColumnContainer>
+      <>
+        {inverters && inverters.map((id) => <Inverter key={id} instanceId={id} isVebusInverter={false} />)}
+        {instanceId && <Inverter key={instanceId} instanceId={instanceId} isVebusInverter={true} />}
+      </>
     )
   } else {
     return <ColumnContainer />

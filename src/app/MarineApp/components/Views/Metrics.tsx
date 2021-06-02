@@ -1,4 +1,5 @@
-import React, { Component } from "react"
+import { useObservableState } from "observable-hooks"
+import { useLayoutEffect, useRef, useState } from "react"
 import ActiveSource from "../ActiveSource"
 import AcLoads from "../AcLoads"
 import Battery from "../Battery"
@@ -8,7 +9,7 @@ import Inverters from "../Inverters"
 import { InverterCharger } from "../InverterCharger"
 import Solar from "../Solar"
 import Generators from "../Generators"
-import { InstanceId } from "../../../modules"
+import { InstanceId, mqttQuery, useVebus } from "../../../modules"
 
 const HEADER_HEIGHT = 110
 
@@ -51,6 +52,7 @@ const getContainerHeight = (metrics: HTMLDivElement[]) => {
    * but prefer left over right for aesthetics.
    */
   const metricsHeights = metrics.map((c: HTMLDivElement) => c.getBoundingClientRect().height)
+
   const reversed = [...metricsHeights].reverse()
   const minHeight = metricsHeights.reduce((a: number, b: number) => a + b, 0) / 2
   for (let i = 1; i <= metricsHeights.length; i++) {
@@ -67,7 +69,6 @@ const getContainerHeight = (metrics: HTMLDivElement[]) => {
 }
 
 type MetricsProps = {
-  inverterChargerDeviceId: InstanceId
   isConnected: boolean
   onChangeInverterChargerInputLimitClicked: Function
   currentPage: number
@@ -75,57 +76,58 @@ type MetricsProps = {
   pages: number
 }
 
-type MetricsState = {
-  height: number
-  layoutCols: number
-}
+export const Metrics = ({
+  isConnected,
+  onChangeInverterChargerInputLimitClicked,
+  currentPage,
+  pages,
+  setPages,
+}: MetricsProps) => {
+  const metricsRef = useRef<HTMLDivElement>(null)
+  const [height, setHeight] = useState(0)
+  const messages = useObservableState(mqttQuery.messages$)
+  const { instanceId } = useVebus()
 
-export default class Metrics extends Component<MetricsProps, MetricsState> {
-  metricsRef = React.createRef<HTMLDivElement>()
+  useLayoutEffect(() => {
+    computeResponsiveness()
+    window.addEventListener("resize", computeResponsiveness)
+    return () => {
+      window.removeEventListener("resize", computeResponsiveness)
+    }
+  }, [messages])
 
-  constructor(props: MetricsProps) {
-    super(props)
-    this.state = { height: 0, layoutCols: 1 }
-  }
+  const computeResponsiveness = () => {
+    if (metricsRef.current) {
+      const metrics = Array.from(metricsRef.current.children) as HTMLDivElement[]
 
-  componentDidUpdate() {
-    if (this.metricsRef.current) {
-      const metrics = Array.from(this.metricsRef.current.children) as HTMLDivElement[]
-
-      const cols = getRequiredCols(metrics)
-      if (this.state.layoutCols !== cols) this.setState({ layoutCols: cols })
+      const columns = getRequiredCols(metrics)
 
       const maxHeight = Math.floor(window.innerHeight - HEADER_HEIGHT)
-      const height = this.state.layoutCols === 2 ? Math.min(getContainerHeight(metrics)!, maxHeight) : maxHeight
-      if (height !== this.state.height) this.setState({ height })
+      const newHeight = columns === 2 ? Math.min(getContainerHeight(metrics)!, maxHeight) : maxHeight
+      setHeight(newHeight)
 
-      const pages = getRequiredPages(metrics, cols, this.state.height)
-      if (this.props.pages !== pages) this.props.setPages(pages)
+      const newPages = getRequiredPages(metrics, columns, newHeight)
+      if (newPages !== pages) setPages(newPages)
     }
   }
 
-  render() {
-    const { inverterChargerDeviceId, isConnected, onChangeInverterChargerInputLimitClicked, currentPage } = this.props
+  const style = { height: height, transform: `translate(-${currentPage * 100}%)` }
 
-    let style = { height: this.state.height, transform: `translate(-${currentPage * 100}%)` }
-
-    return (
-      <div className="metrics-container" ref={this.metricsRef} style={style}>
-        <DcLoads />
-        {!!inverterChargerDeviceId && <AcLoads />}
-        <Battery />
-        {!!inverterChargerDeviceId && (
-          <InverterCharger
-            onChangeInputLimitClicked={onChangeInverterChargerInputLimitClicked}
-            connected={isConnected}
-          />
-        )}
-        {!!inverterChargerDeviceId && <ActiveSource />}
-        <Solar />
-        <Chargers />
-        <Inverters />
-        <Generators />
-      </div>
-    )
-  }
+  return (
+    <div className="metrics-container" ref={metricsRef} style={style}>
+      <DcLoads />
+      {!!instanceId && <AcLoads />}
+      <Battery />
+      {!!instanceId && (
+        <InverterCharger onChangeInputLimitClicked={onChangeInverterChargerInputLimitClicked} connected={isConnected} />
+      )}
+      {!!instanceId && <ActiveSource />}
+      <Solar />
+      <Chargers />
+      <Inverters />
+      <Generators />
+    </div>
+  )
 }
+
+export default Metrics

@@ -11,7 +11,7 @@ import { mqttQuery, useVebus } from "../modules"
 import { VIEWS } from "../utils/constants"
 import { AppProps } from "../App"
 
-import { LockButtonFooter } from "./components/LockButton"
+import { LockButton } from "./components/LockButton"
 
 type MainProps = {
   isConnected?: boolean
@@ -44,7 +44,6 @@ export const MarineApp = (props: AppProps) => {
   const portalId = useObservableState(mqttQuery.portalId$)
   const isConnected = useObservableState(mqttQuery.isConnected$)
   const error = useObservableState(mqttQuery.error$)
-  const { instanceId: vebusInstanceId } = useVebus()
 
   const setPage = (currentPage: number) => {
     setCurrentPage(currentPage)
@@ -138,7 +137,6 @@ export const MarineApp = (props: AppProps) => {
               return (
                 <Fade key={VIEWS.METRICS} unmount={viewUnmounting} fullWidth>
                   <Metrics
-                    inverterChargerDeviceId={vebusInstanceId}
                     isConnected={isConnected}
                     onChangeInverterChargerInputLimitClicked={() =>
                       setView(VIEWS.INVERTER_CHARGER_INPUT_LIMIT_SELECTOR)
@@ -152,7 +150,7 @@ export const MarineApp = (props: AppProps) => {
           }
         })()}
       </Main>
-      <LockButtonFooter currentView={currentView} header={false} />
+      <LockButton currentView={currentView} header={false} />
     </>
   )
 }

@@ -1,32 +1,45 @@
 import { mqttQuery, PortalId, Topics } from "../Mqtt"
-import { useTopicsState, useTopicSubscriptions, useTopicsWithPortalIdAndInstanceId } from "../Mqtt/Mqtt.provider"
-import { vebusQuery } from "../Vebus"
+import { useTopicSubscriptions, useTopicsWithPortalId } from "../Mqtt/Mqtt.provider"
+import { useObservableState, useSubscription } from "observable-hooks"
+import Logger from "../../utils/logger"
+import { useInvertersService } from "./Inverters.service"
+import { InverterInstanceId } from "./Inverters.store"
+import { invertersQuery } from "./Inverters.query"
 
 export interface InvertersState {
-  systemInverters: any[]
-  vebusInverters: any[]
+  inverters: Array<number>
 }
 
 export interface InvertersTopics extends Topics {
-  systemInverters?: string
-  vebusInverters?: string
+  inverters?: string
 }
 
 export function useInverters(): InvertersState {
+  const invertersService = useInvertersService()
+
   const getTopics = (portalId: PortalId) => {
     return {
-      systemInverters: `N/${portalId}/inverter/+/DeviceInstance`,
-      vebusInverters: `N/${portalId}/vebus/+/DeviceInstance`,
+      inverters: `N/${portalId}/inverter/+/DeviceInstance`,
     }
   }
 
-  const topics$ = useTopicsWithPortalIdAndInstanceId<InvertersTopics>(
-    getTopics,
-    mqttQuery.portalId$,
-    vebusQuery.instanceId$
-  )
+  const topics$ = useTopicsWithPortalId<InvertersTopics>(getTopics, mqttQuery.portalId$)
+  const topics = useObservableState(topics$)
 
   useTopicSubscriptions(topics$)
 
-  return { ...useTopicsState<InvertersState>(topics$) }
+  useSubscription(mqttQuery.messagesByWildcard$(topics?.inverters ?? ""), (messages) => {
+    if (!messages || Object.entries(messages).length === 0) {
+      Logger.log("Waiting for inverters...")
+    } else {
+      const deviceInstances = Object.values(messages) as InverterInstanceId[]
+      if (!inverters || !deviceInstances.every((di) => inverters.includes(di))) {
+        invertersService.setInverters(deviceInstances)
+      }
+    }
+  })
+
+  const inverters = useObservableState(invertersQuery.inverters$)
+
+  return { inverters }
 }

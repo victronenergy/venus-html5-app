@@ -9,11 +9,11 @@ import { InstanceId, useVebus, vebusQuery } from "../Vebus"
 import { useObservableState } from "observable-hooks"
 
 export interface InverterChargerState {
-  state: number
-  mode: number
+  state: string
+  mode: string
   customName: string
   productName: string
-  modeIsAdjustable: boolean
+  modeIsAdjustable: number
 }
 
 export interface InverterChargerTopics extends Topics {
@@ -56,7 +56,7 @@ export function useInverterCharger(): InverterChargerProvider {
   const writeTopics = useObservableState(writeTopics$)
 
   const mqtt = useMqtt()
-  const updateMode = (mode: number) => mqtt.publish(writeTopics!.mode, mode.toString())
+  const updateMode = (mode: number) => mqtt.publish(writeTopics!.mode, mode)
 
   return { ...useTopicsState<InverterChargerState>(topics$), updateMode } as InverterChargerProvider
 }

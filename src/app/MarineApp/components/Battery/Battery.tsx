@@ -62,7 +62,7 @@ const BatteryHeader = ({ amount, paginate, setPage, currentPage, pageSize }: Bat
 
 const BatteryRow = (battery: Battery) => {
   return (
-    <MetricValues inflate={""}>
+    <MetricValues inflate>
       <div className="metrics__left">
         <NumericValue value={battery.voltage} unit="V" defaultValue={null} precision={1} />
         <NumericValue value={battery.current} unit="A" defaultValue={null} precision={1} />
