@@ -13,7 +13,7 @@ export type AppProps = {
 }
 
 const App = (props: AppProps) => {
-  const whitelabel = "KVNRV"
+  const whitelabel = process.env.REACT_APP_WHITELABEL
   const vrmState = useObservableState(vrmQuery.all$)
   const remote = useObservableState(appQuery.remote$)
 
