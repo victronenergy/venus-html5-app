@@ -6,26 +6,9 @@ import { TankProps } from "./index"
 
 import "./BigTank.scss"
 import { useEffect, useState } from "react"
-import { VOLUME_UNITS, VolumeUnit, VolumeUnits, FLUID_TYPES } from "../../utils/constants"
+import { VOLUME_UNITS, VolumeUnit, VolumeUnits } from "../../utils/constants"
 
-export const fluidTypeFormatter = (fluidType: string) => {
-  switch (Number(fluidType)) {
-    case FLUID_TYPES.FUEL:
-      return "Fuel"
-    case FLUID_TYPES.FRESH_WATER:
-      return "Fresh water"
-    case FLUID_TYPES.WASTE_WATER:
-      return "Waste water"
-    case FLUID_TYPES.LIVE_WELL:
-      return "Live well"
-    case FLUID_TYPES.OIL:
-      return "Oil"
-    case FLUID_TYPES.BLACK_WATER:
-      return "Black water"
-    default:
-      return "Tank sensor"
-  }
-}
+import { fluidTypeFormatter } from "./SmallTank"
 
 export const BigTank = ({ tankId, conf, invert }: TankProps) => {
   const [height, setHeight] = useState(0)
@@ -34,7 +17,7 @@ export const BigTank = ({ tankId, conf, invert }: TankProps) => {
   const footer = useSendUpdate(
     invert ? 1 - tankLevel : tankLevel,
     conf,
-    tank.customName ?? fluidTypeFormatter(tank.fluidType)
+    tank.fluidType && fluidTypeFormatter(tank.fluidType)
   )
   useEffect(() => {
     setHeight(100 - (tank.level ?? 0))
@@ -47,16 +30,12 @@ export const BigTank = ({ tankId, conf, invert }: TankProps) => {
 
   return (
     <div className="">
-      <Card
-        title={tank?.customName ?? fluidTypeFormatter(tank.fluidType)}
-        size={[SIZE_WIDE, SIZE_LONG]}
-        footer={footer}
-      >
+      <Card title={fluidTypeFormatter(tank.fluidType)} size={[SIZE_WIDE, SIZE_LONG]} footer={footer}>
         {tank ? (
           <div className="big-tank">
             <div className="indicator-main">
               <span>
-                <NumericValue value={tank.level} unit="%" defaultValue={"--"} precision={0} />
+                <NumericValue value={tank.level} unit="%" defaultValue={" - "} precision={0} />
                 <div className="name">
                   {formatNumber({ value: tank.remaining * unit.factor, unit: unit.unit, precision: unit.precision })}
                 </div>

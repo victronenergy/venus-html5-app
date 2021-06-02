@@ -45,7 +45,7 @@ export const AcMode = () => {
         icon={ICON_SETTINGS}
         size={[SIZE_WIDE, SIZE_SHORT]}
         onIconClick={() => setModalOpen(true)}
-        infoText={"Limit: " + formatNumber({ value: limit, unit: "A" })}
+        infoText={"Limit: " + formatNumber({ value: inLimit, unit: "A" })}
       >
         <div className="gauge">
           {(activeInput === 0 || activeInput === 1) && power ? (
@@ -59,7 +59,7 @@ export const AcMode = () => {
               <NumericValue value={voltage ? voltage[0] : undefined} unit={"V"} precision={0} />
             </div>
             <div className={"info-bar__cell"}>
-              <NumericValue value={current ? current[0] : undefined} unit={"A"} precision={0} />
+              <NumericValue value={current ? current[0] : undefined} unit={"A"} precision={1} />
             </div>
             <div className={"info-bar__cell"}>
               <NumericValue value={frequency ? frequency[0] : undefined} unit={"Hz"} precision={0} />

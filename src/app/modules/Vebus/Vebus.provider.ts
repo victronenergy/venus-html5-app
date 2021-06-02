@@ -61,7 +61,7 @@ export const useVebus = (): VebusState => {
       .subscribe()
 
     return () => subscription.unsubscribe()
-  }, [portalId])
+  }, [topics])
 
   return { instanceId }
 }

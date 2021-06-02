@@ -15,12 +15,8 @@
 
   .status-updates {
     margin-top: 1rem;
-    height: 9rem;
+    height: 12rem;
     overflow-y: auto;
-
-    &.small {
-      height: 7rem;
-    }
 
     .status-update {
       margin-top: 1rem;

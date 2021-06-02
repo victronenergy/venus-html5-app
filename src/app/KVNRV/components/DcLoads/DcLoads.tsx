@@ -21,10 +21,10 @@ export const DcLoads = () => {
         <GaugeIndicator value={power} percent={normalizedPower} parts={DC_CONF.THRESHOLDS} unit={"W"} gauge={false} />
         <div className={"info-bar"}>
           <div className={"info-bar__cell"}>
-            <NumericValue value={voltage} unit={"V"} precision={0} />
+            <NumericValue value={voltage} unit={"V"} precision={2} />
           </div>
           <div className={"info-bar__cell"}>
-            <NumericValue value={current} unit={"A"} precision={0} />
+            <NumericValue value={current} unit={"A"} precision={2} />
           </div>
         </div>
       </div>

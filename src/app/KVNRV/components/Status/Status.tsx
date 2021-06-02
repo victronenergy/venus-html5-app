@@ -1,10 +1,9 @@
 import React from "react"
 
 import { Card } from "../../../components/Card"
-import { Footer } from "../../../components/Card/Card"
 import IconWarning from "../../images/IconWarning.svg"
 import "./Status.scss"
-import { STATUS_LEVELS, STATUS_LEVELS_MSG } from "../../utils/constants"
+import { STATUS_LEVELS } from "../../utils/constants"
 import {
   BatteryAlarmsState,
   StatusUpdate,
@@ -63,11 +62,6 @@ export const Status = ({ size }: StatusProps) => {
   const batteryAlarms = useBatteryAlarms()
   const vebusAlarms = useVebusAlarms()
 
-  const footer: Footer = {
-    status: STATUS_LEVELS.SUCCESS,
-    property: "Connection",
-    message: STATUS_LEVELS_MSG[STATUS_LEVELS.SUCCESS],
-  }
   let notifications: StatusUpdate[] = []
 
   notifications = notifications.concat(alarmsToUpdate(batteryAlarms, "Battery"))
@@ -76,7 +70,7 @@ export const Status = ({ size }: StatusProps) => {
 
   return (
     <div className="metrics__status">
-      <Card title={"Status"} size={size} footer={footer}>
+      <Card title={"Status"} size={size}>
         <div className={"title"}>Penny's House</div>
         <div className={"status"}>{SYSTEM_STATE_MAP[state?.toString() as keyof Object] ?? "--"}</div>
         <div className={"subheading"}>

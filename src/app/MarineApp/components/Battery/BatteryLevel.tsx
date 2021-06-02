@@ -40,8 +40,8 @@ type BatteryLevelProps = {
 
 export const BatteryLevel = ({ battery }: BatteryLevelProps) => {
   const batteryStateLabel = batteryStateFormatter(battery.state!)
-  const timeToGoLabel = batteryTimeToGoFormatter(battery.timeToGo!)
-  const showTimetoGo = battery.state === BATTERY_STATE.DISCHARGING && battery.timeToGo
+  const timeToGoLabel = batteryTimeToGoFormatter(battery.timetogo!)
+  const showTimetoGo = battery.state === BATTERY_STATE.DISCHARGING && battery.timetogo
   const showSoc = battery.soc !== undefined && battery.soc !== null
 
   return (

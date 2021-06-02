@@ -35,7 +35,7 @@ export const SmallTank = ({ tankId, conf, invert }: TankProps) => {
   const footer = useSendUpdate(
     invert ? 1 - tank.level / 100 : tank.level / 100,
     conf,
-    tank.customName ?? fluidTypeFormatter(tank.fluidType)
+    tank.fluidType && fluidTypeFormatter(tank.fluidType)
   )
 
   const unit: VolumeUnit =
@@ -45,17 +45,13 @@ export const SmallTank = ({ tankId, conf, invert }: TankProps) => {
 
   return (
     <div className="">
-      <Card
-        title={tank?.customName ?? fluidTypeFormatter(tank.fluidType)}
-        size={[SIZE_SHORT, SIZE_NARROW]}
-        footer={footer}
-      >
+      <Card title={fluidTypeFormatter(tank.fluidType)} size={[SIZE_SHORT, SIZE_NARROW]} footer={footer}>
         <div className="gauge">
           {tank ? (
             <div className={"small-tank"}>
               <div className="indicator-main--small">
                 <span>
-                  <NumericValue value={tank.level} unit="%" defaultValue={"--"} precision={0} />
+                  <NumericValue value={tank.level} unit="%" defaultValue={" - "} precision={0} />
                   <span className="name">
                     {formatNumber({ value: tank.remaining * unit.factor, unit: unit.unit, precision: unit.precision })}
                   </span>

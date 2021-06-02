@@ -1,12 +1,15 @@
 import { useEffect } from "react"
 import { appQuery, useAppService, useTheme, useVrmService, vrmQuery } from "../../../modules"
+import { VIEWS } from "../../utils/constants"
+import { useObservableState } from "observable-hooks"
+
+import "./Header.scss"
+
 import KVNRVLogo from "../../images/KVNRV-Logo.svg"
 import RemoteConsoleIcon from "../../images/RemoteConsoleIcon.svg"
 import LogOutIcon from "../../images/LogOut.svg"
-
-import "./Header.scss"
-import { VIEWS } from "../../utils/constants"
-import { useObservableState } from "observable-hooks"
+import LightThemeIcon from "../../images/LightThemeIcon.svg"
+import DarkThemeIcon from "../../images/DarkThemeIcon.svg"
 
 export const Header = () => {
   const { darkMode, themeService } = useTheme()
@@ -72,7 +75,13 @@ export const Header = () => {
               onChange={(e) => themeService.setTheme(!darkMode)}
               id="header__buttons__darkmode__input"
             />
-            <span className="header__buttons__darkmode__slider" />
+            <span className="header__buttons__darkmode__slider">
+              <img
+                src={darkMode ? DarkThemeIcon : LightThemeIcon}
+                className={"header__buttons__darkmode__slider__img"}
+                alt={"Dark mode slider"}
+              />
+            </span>
           </label>
         </div>
 

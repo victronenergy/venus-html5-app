@@ -7,7 +7,6 @@ export interface TankState {
   capacity: number
   level: number
   remaining: number
-  customName: string
   fluidType: string
   unit: string
 }
@@ -16,7 +15,6 @@ export interface TankTopics extends Topics {
   capacity?: string
   level?: string
   remaining?: string
-  customName?: string
   fluidType?: string
   unit?: string
 }
@@ -26,7 +24,6 @@ export function useTank(tankId: TankInstanceId): TankState {
     capacity: `N/${portalId}/tank/${tankId}/Capacity`,
     level: `N/${portalId}/tank/${tankId}/Level`,
     remaining: `N/${portalId}/tank/${tankId}/Remaining`,
-    customName: `N/${portalId}/tank/${tankId}/CustomName`,
     fluidType: `N/${portalId}/tank/${tankId}/FluidType`,
     unit: `N/${portalId}/settings/0/Settings/System/VolumeUnit`,
   })
