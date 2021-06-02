@@ -20,7 +20,7 @@ export const PvCharger = () => {
           <GaugeIndicator value={power} percent={normalizedPower} parts={PV_CONF.THRESHOLDS} unit={"W"} gauge={false} />
           <div className={"info-bar"}>
             <div className={"info-bar__cell"}>
-              <NumericValue value={current} unit={"A"} precision={2} />
+              <NumericValue value={current} unit={"A"} precision={1} />
             </div>
           </div>
         </div>
