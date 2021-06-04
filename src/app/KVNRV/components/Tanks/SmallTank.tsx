@@ -6,9 +6,9 @@ import NumericValue, { formatNumber } from "../../../components/NumericValue"
 import ProgressIndicator from "../../components/ProgressIndicator"
 
 import "./SmallTank.scss"
-import { useTank } from "../../../modules"
+import { useTank } from "@victronenergy/mfd-modules"
 import { TankProps } from "./index"
-import { useSendUpdate } from "../../../modules"
+import { useSendUpdate } from "../../modules"
 import { VOLUME_UNITS, VolumeUnit, VolumeUnits, FLUID_TYPES } from "../../utils/constants"
 
 export const fluidTypeFormatter = (fluidType: string) => {

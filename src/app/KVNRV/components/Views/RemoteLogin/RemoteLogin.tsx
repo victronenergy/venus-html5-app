@@ -1,6 +1,6 @@
 import { useObservableState } from "observable-hooks"
 import { FormEventHandler, useState } from "react"
-import { useAppService, useTheme, useVrmService, vrmQuery } from "../../../../modules"
+import { useAppService, useTheme, useVrmService, vrmQuery } from "@victronenergy/mfd-modules"
 import { Installations } from "../../Installations"
 import { VRM_URL } from "../../../utils/constants"
 

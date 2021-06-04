@@ -1,11 +1,11 @@
 import { useObservableState } from "observable-hooks"
 import { statusQuery } from "./Status.query"
-import { WidgetConfiguration, MessagesObj, STATUS_LEVELS, STATUS_LEVELS_MSG } from "../../KVNRV/utils/constants"
+import { WidgetConfiguration, MessagesObj, STATUS_LEVELS, STATUS_LEVELS_MSG } from "../../utils/constants"
 import { useStatusService } from "./Status.service"
 import { useEffect, useState } from "react"
-import { Footer } from "../../components/Card/Card"
-import { sum } from "../../KVNRV/utils/helpers"
-import { appQuery } from "../App"
+import { Footer } from "../../../components/Card/Card"
+import { sum } from "../../utils/helpers"
+import { appQuery } from "@victronenergy/mfd-modules"
 
 export const useStatus = () => {
   const statuses = useObservableState(statusQuery.status$)

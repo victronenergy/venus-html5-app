@@ -1,7 +1,7 @@
 import React from "react"
 
 import Charger from "./Charger"
-import { useChargers } from "../../../modules"
+import { useChargers } from "@victronenergy/mfd-modules"
 
 const Chargers = () => {
   const { chargers } = useChargers()

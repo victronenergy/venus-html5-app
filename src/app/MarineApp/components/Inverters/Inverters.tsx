@@ -1,6 +1,6 @@
 import React from "react"
 
-import { useInverters, useVebus } from "../../../modules"
+import { useInverters, useVebus } from "@victronenergy/mfd-modules"
 
 import Inverter from "./Inverter"
 import ColumnContainer from "../ColumnContainer"

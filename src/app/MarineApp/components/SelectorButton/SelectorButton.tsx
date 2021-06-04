@@ -1,7 +1,7 @@
 import React from "react"
 import classNames from "classnames"
 import "./SelectorButton.scss"
-import { useApp } from "../../../modules"
+import { useApp } from "@victronenergy/mfd-modules"
 
 type SelectorButtonProps = {
   disabled?: boolean

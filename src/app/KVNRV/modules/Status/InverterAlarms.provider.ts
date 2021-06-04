@@ -1,5 +1,5 @@
-import { mqttQuery, PortalId, Topics } from "../Mqtt"
-import { useTopicsState, useTopicSubscriptions, useTopicsWithPortalId } from "../Mqtt/Mqtt.provider"
+import { mqttQuery, PortalId, Topics } from "@victronenergy/mfd-modules"
+import { useTopicsState, useTopicSubscriptions, useTopicsWithPortalId } from "@victronenergy/mfd-modules"
 
 export interface InverterAlarmsState {
   lowVoltage: number

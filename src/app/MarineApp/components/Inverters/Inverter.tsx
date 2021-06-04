@@ -1,6 +1,6 @@
 import React from "react"
 
-import { useInverter } from "../../../modules"
+import { useInverter } from "@victronenergy/mfd-modules"
 
 import { INVERTER_MODE } from "../../../utils/constants"
 

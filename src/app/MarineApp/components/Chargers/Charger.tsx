@@ -1,6 +1,6 @@
 import React from "react"
 
-import { useCharger, ChargerInstanceId } from "../../../modules"
+import { useCharger, ChargerInstanceId } from "@victronenergy/mfd-modules"
 
 import CurrentLimitIncrementor from "./CurrentLimitIncrementor"
 import HeaderView from "../HeaderView"

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react"
 
-import { useAcLoads, useAcMode, useSendUpdate } from "../../../modules"
+import { useAcLoads, useAcMode, useSystemState } from "@victronenergy/mfd-modules"
 import { Card, SIZE_NARROW, SIZE_SHORT } from "../../../components/Card"
 import { normalizePower } from "../../utils/helpers"
 import { AC_CONF, AC_MODE, CRITICAL_MULTIPLIER, WidgetConfiguration } from "../../utils/constants"
 import NumericValue from "../../../components/NumericValue"
 import { NotAvailable } from "../NotAvailable"
 import GaugeIndicator from "../../../components/GaugeIndicator"
-import { useSystemState } from "../../../modules"
+import { useSendUpdate } from "../../modules"
 
 const inverterPeakPower = 3000
 const inverterContinuousPower = 2000

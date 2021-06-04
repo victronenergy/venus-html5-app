@@ -4,15 +4,15 @@ import { Card } from "../../../components/Card"
 import IconWarning from "../../images/IconWarning.svg"
 import "./Status.scss"
 import { STATUS_LEVELS } from "../../utils/constants"
+import { useSystemState } from "@victronenergy/mfd-modules"
 import {
   BatteryAlarmsState,
   StatusUpdate,
   useBatteryAlarms,
   useStatus,
-  useSystemState,
   useVebusAlarms,
   VebusAlarmsState,
-} from "../../../modules"
+} from "../../modules"
 
 const SYSTEM_STATE_MAP = {
   0: "Off",

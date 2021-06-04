@@ -1,7 +1,8 @@
 import { Card, SIZE_WIDE, SIZE_LONG } from "../../../components/Card"
 import { NotAvailable } from "../NotAvailable"
 import NumericValue, { formatNumber } from "../../../components/NumericValue"
-import { useSendUpdate, useTank } from "../../../modules"
+import { useTank } from "@victronenergy/mfd-modules"
+import { useSendUpdate } from "../../modules"
 import { TankProps } from "./index"
 
 import "./BigTank.scss"

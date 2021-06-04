@@ -2,7 +2,7 @@ import React, { PureComponent } from "react"
 import { Chart } from "chart.js"
 import "./GaugeIndicator.scss"
 import { formatNumber } from "../NumericValue"
-import { useTheme } from "../../modules"
+import { useTheme } from "@victronenergy/mfd-modules"
 import { sum } from "../../KVNRV/utils/helpers"
 
 const INDICATOR_WIDTH = 0.0075

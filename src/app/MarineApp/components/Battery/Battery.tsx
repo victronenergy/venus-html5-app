@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 
-import { Battery, useBattery } from "../../../modules"
+import { Battery, useBattery } from "@victronenergy/mfd-modules"
 
 import ColumnContainer from "../ColumnContainer"
 import BatteryIcon from "../../images/icons/battery.svg"

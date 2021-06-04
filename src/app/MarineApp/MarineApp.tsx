@@ -7,7 +7,7 @@ import { InverterChargerInputLimitSelector } from "./components/InverterCharger"
 
 import { Connecting, Error, Metrics, MqttUnavailable, RemoteConsole } from "./components/Views"
 
-import { mqttQuery, useVebus } from "../modules"
+import { mqttQuery, useVebus } from "@victronenergy/mfd-modules"
 import { VIEWS } from "../utils/constants"
 import { AppProps } from "../App"
 

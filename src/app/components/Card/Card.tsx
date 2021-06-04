@@ -3,7 +3,7 @@ import React, { FunctionComponent } from "react"
 import "./Card.scss"
 import CloseIcon from "../../images/IconClose.svg"
 import CloseIconDark from "../../images/IconClose-Dark.svg"
-import { useTheme } from "../../modules"
+import { useTheme } from "@victronenergy/mfd-modules"
 
 export type Footer = {
   status: string

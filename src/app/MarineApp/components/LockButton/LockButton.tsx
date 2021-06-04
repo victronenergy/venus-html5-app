@@ -6,7 +6,7 @@ import UnlockIcon from "../../../../images/icons/unlock.svg"
 import LockIcon from "../../../../images/icons/lock.svg"
 
 import "./LockButton.scss"
-import { useApp, useAppService } from "../../../modules"
+import { useApp, useAppService } from "@victronenergy/mfd-modules"
 
 type LockButtonProps = {
   currentView: string

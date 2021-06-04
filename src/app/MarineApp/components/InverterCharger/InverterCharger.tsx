@@ -1,6 +1,6 @@
 import React from "react"
 import classnames from "classnames"
-import { useShorePowerInput, useInverterCharger } from "../../../modules"
+import { useShorePowerInput, useInverterCharger } from "@victronenergy/mfd-modules"
 
 import HeaderView from "../HeaderView"
 import InputLimit from "./InputLimit"

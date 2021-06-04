@@ -1,5 +1,0 @@
-export * from "./Tank.provider"
-export * from "./Tanks.query"
-export * from "./Tanks.service"
-export * from "./Tanks.store"
-export * from "./Tanks.provider"

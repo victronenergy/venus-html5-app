@@ -6,7 +6,7 @@ import MetricValues from "../MetricValues"
 import NumericValue from "../../../components/NumericValue"
 
 import SolarIcon from "../../images/icons/icon_solar.svg"
-import { usePvCharger } from "../../../modules"
+import { usePvCharger } from "@victronenergy/mfd-modules"
 
 const Solar = () => {
   const { current, power } = usePvCharger()
