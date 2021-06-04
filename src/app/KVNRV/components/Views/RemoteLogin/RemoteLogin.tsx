@@ -8,7 +8,7 @@ import "./RemoteLogin.scss"
 
 import KVNRVLogo from "../../../images/KVNRV-Logo.svg"
 import ArrowLeftDark from "../../../images/ArrowLeft-Dark.svg"
-import ArrowLeft from "../../../images/ArrowLeft-Dark.svg"
+import ArrowLeft from "../../../images/ArrowLeft.svg"
 import Splash from "../../../images/Splash.svg"
 
 export const RemoteLogin = () => {
