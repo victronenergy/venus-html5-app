@@ -13,8 +13,6 @@ const port = parseInt(getParameterByName("port") ?? "9001")
 
 akitaDevtools()
 
-// TODO: Implement storage strategy for devices that do not support localStorage
-// https://datorama.github.io/akita/docs/enhancers/persist-state
 persistState({
   include: [APP_STORE_NAME, VRM_STORE_NAME],
 })
