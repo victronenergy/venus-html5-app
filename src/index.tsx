@@ -6,7 +6,7 @@ import App from "./app/App"
 import { getParameterByName } from "./app/utils/util"
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration"
 import reportWebVitals from "./reportWebVitals"
-import { APP_STORE_NAME, VRM_STORE_NAME } from "@victronenergy/mfd-modules"
+import { APP_STORE_NAME, VRM_STORE_NAME } from "@elninotech/mfd-modules"
 
 const host = getParameterByName("host") || window.location.hostname || "localhost"
 const port = parseInt(getParameterByName("port") ?? "9001")
