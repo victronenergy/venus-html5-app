@@ -1,6 +1,6 @@
 import React from "react"
 
-import { useGeneratorFp } from "@victronenergy/mfd-modules"
+import { useGeneratorFp } from "@elninotech/mfd-modules"
 
 import GensetValues from "./GensetValues"
 import HeaderView from "../HeaderView/HeaderView"

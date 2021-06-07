@@ -1,6 +1,6 @@
 import React from "react"
 import DcIcon from "../../images/icons/dc.svg"
-import { useDcLoads } from "@victronenergy/mfd-modules"
+import { useDcLoads } from "@elninotech/mfd-modules"
 import HeaderView from "../HeaderView"
 import ColumnContainer from "../ColumnContainer"
 import MetricValues from "../MetricValues"

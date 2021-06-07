@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 
-import { useInputLimitSelector, useShorePowerInput } from "@victronenergy/mfd-modules"
+import { useInputLimitSelector, useShorePowerInput } from "@elninotech/mfd-modules"
 
 import SelectorButton from "../SelectorButton"
 

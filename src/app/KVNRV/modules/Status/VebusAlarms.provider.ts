@@ -1,6 +1,6 @@
-import { mqttQuery, PortalId, Topics } from "@victronenergy/mfd-modules"
-import { useTopicsState, useTopicSubscriptions, useTopicsWithParameters } from "@victronenergy/mfd-modules"
-import { InstanceId, vebusQuery } from "@victronenergy/mfd-modules"
+import { mqttQuery, PortalId, Topics } from "@elninotech/mfd-modules"
+import { useTopicsState, useTopicSubscriptions, useTopicsWithParameters } from "@elninotech/mfd-modules"
+import { InstanceId, vebusQuery } from "@elninotech/mfd-modules"
 
 export interface VebusAlarmsState {
   voltage: number

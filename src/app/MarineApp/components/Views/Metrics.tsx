@@ -9,7 +9,7 @@ import Inverters from "../Inverters"
 import { InverterCharger } from "../InverterCharger"
 import Solar from "../Solar"
 import Generators from "../Generators"
-import { InstanceId, mqttQuery, useVebus } from "@victronenergy/mfd-modules"
+import { InstanceId, mqttQuery, useVebus } from "@elninotech/mfd-modules"
 
 const HEADER_HEIGHT = 110
 

@@ -2,7 +2,7 @@ import React from "react"
 import { Card, SIZE_SHORT } from "../../../components/Card"
 
 import { BATTERY_STATE } from "../../../utils/constants"
-import { useBattery } from "@victronenergy/mfd-modules"
+import { useBattery } from "@elninotech/mfd-modules"
 import { useSendUpdate } from "../../modules"
 import NumericValue from "../../../components/NumericValue"
 import { NotAvailable } from "../NotAvailable"

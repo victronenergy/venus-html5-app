@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 
-import { useAcLoads, useAcMode, useSystemState } from "@victronenergy/mfd-modules"
+import { useAcLoads, useAcMode, useSystemState } from "@elninotech/mfd-modules"
 import { Card, SIZE_NARROW, SIZE_SHORT } from "../../../components/Card"
 import { normalizePower } from "../../utils/helpers"
 import { AC_CONF, AC_MODE, CRITICAL_MULTIPLIER, WidgetConfiguration } from "../../utils/constants"

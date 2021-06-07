@@ -5,7 +5,7 @@ import { useStatusService } from "./Status.service"
 import { useEffect, useState } from "react"
 import { Footer } from "../../../components/Card/Card"
 import { sum } from "../../utils/helpers"
-import { appQuery } from "@victronenergy/mfd-modules"
+import { appQuery } from "@elninotech/mfd-modules"
 
 export const useStatus = () => {
   const statuses = useObservableState(statusQuery.status$)

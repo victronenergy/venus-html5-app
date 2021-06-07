@@ -6,7 +6,7 @@ import NumericValue, { formatNumber } from "../../../components/NumericValue"
 import { AcModeModal } from "./AcModeModal"
 
 import "./AcMode.scss"
-import { useAcMode, useActiveInValues, useActiveSource } from "@victronenergy/mfd-modules"
+import { useAcMode, useActiveInValues, useActiveSource } from "@elninotech/mfd-modules"
 import { useSendUpdate } from "../../modules"
 import { normalizePower } from "../../utils/helpers"
 import { NotAvailable } from "../NotAvailable"

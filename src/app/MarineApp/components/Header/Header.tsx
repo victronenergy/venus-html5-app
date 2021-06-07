@@ -1,6 +1,6 @@
 import React, { Fragment } from "react"
 
-import { useHeader } from "@victronenergy/mfd-modules"
+import { useHeader } from "@elninotech/mfd-modules"
 
 import SelectorButton from "../SelectorButton"
 import { VIEWS } from "../../../utils/constants"

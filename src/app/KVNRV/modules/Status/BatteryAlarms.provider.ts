@@ -1,6 +1,6 @@
-import { mqttQuery, PortalId, Topics } from "@victronenergy/mfd-modules"
-import { useTopicsState, useTopicSubscriptions, useTopicsWithParameters } from "@victronenergy/mfd-modules"
-import { batteriesQuery, BatteryId, useBatteries } from "@victronenergy/mfd-modules"
+import { mqttQuery, PortalId, Topics } from "@elninotech/mfd-modules"
+import { useTopicsState, useTopicSubscriptions, useTopicsWithParameters } from "@elninotech/mfd-modules"
+import { batteriesQuery, BatteryId, useBatteries } from "@elninotech/mfd-modules"
 
 export interface BatteryAlarmsState {
   lowVoltage: number

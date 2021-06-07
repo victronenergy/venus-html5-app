@@ -1,7 +1,7 @@
 import "../css/index.scss"
 import React, { useEffect } from "react"
 import Loading from "./MarineApp/components/Loading"
-import { appQuery, MqttService, mqttStore, vrmQuery } from "@victronenergy/mfd-modules"
+import { appQuery, MqttService, mqttStore, vrmQuery } from "@elninotech/mfd-modules"
 import { useObservableState } from "observable-hooks"
 
 const KVNRV = React.lazy(() => import("./KVNRV"))

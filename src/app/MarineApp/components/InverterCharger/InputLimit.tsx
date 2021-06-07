@@ -1,5 +1,5 @@
 import React from "react"
-import { useInputLimit } from "@victronenergy/mfd-modules"
+import { useInputLimit } from "@elninotech/mfd-modules"
 
 import SelectorButton from "../SelectorButton"
 

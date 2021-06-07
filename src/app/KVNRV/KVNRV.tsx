@@ -1,7 +1,7 @@
 import React from "react"
 import { Header } from "./components/Header"
 import { Connecting, Error, Metrics, MqttUnavailable, RemoteConsole } from "./components/Views"
-import { mqttQuery, STATUS, useApp, useAppService, useTheme } from "@victronenergy/mfd-modules"
+import { mqttQuery, STATUS, useApp, useAppService, useTheme } from "@elninotech/mfd-modules"
 import { VIEWS } from "./utils/constants"
 import RemoteLogin from "./components/Views/RemoteLogin"
 import { AppProps } from "../App"

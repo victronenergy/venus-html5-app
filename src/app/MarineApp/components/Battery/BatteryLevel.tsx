@@ -1,5 +1,5 @@
 import { BATTERY_STATE } from "../../../utils/constants"
-import { Battery } from "@victronenergy/mfd-modules"
+import { Battery } from "@elninotech/mfd-modules"
 import React from "react"
 import { formatNumber } from "../../../components/NumericValue"
 

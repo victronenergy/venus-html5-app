@@ -1,5 +1,5 @@
 import { useObservableState } from "observable-hooks"
-import { useAppService, useVrmService, vrmQuery } from "@victronenergy/mfd-modules"
+import { useAppService, useVrmService, vrmQuery } from "@elninotech/mfd-modules"
 import "./Installations.scss"
 import { VIEWS } from "../../utils/constants"
 

@@ -1,6 +1,6 @@
 import React from "react"
 
-import { useGeneratorRelay } from "@victronenergy/mfd-modules"
+import { useGeneratorRelay } from "@elninotech/mfd-modules"
 
 import ActiveInValues from "../ActiveSource/ActiveInValues"
 import HeaderView from "../HeaderView/HeaderView"

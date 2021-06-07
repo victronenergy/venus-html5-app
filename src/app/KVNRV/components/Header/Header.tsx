@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import { appQuery, useAppService, useTheme, useVrmService, vrmQuery } from "@victronenergy/mfd-modules"
+import { appQuery, useAppService, useTheme, useVrmService, vrmQuery } from "@elninotech/mfd-modules"
 import { VIEWS } from "../../utils/constants"
 import { useObservableState } from "observable-hooks"
 
