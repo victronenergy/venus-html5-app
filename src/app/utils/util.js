@@ -34,31 +34,6 @@ export const parseTopic = (topic) => {
   }
 }
 
-export const getMessageJson = (message) => {
-  try {
-    return JSON.parse(message.toString())
-  } catch (e) {
-    Logger.error("Could not parse message: ", message.toString())
-    return { value: null }
-  }
-}
-
-export const objectValues = (data) => {
-  return Object.keys(data).map((key) => data[key])
-}
-
-export const isPathOfType = (dbusPath, enumObject) => {
-  const paths = objectValues(enumObject)
-  return paths.includes(dbusPath)
-}
-
-export const arrayToSubscriptionMap = (toSubscribe) => {
-  return toSubscribe.reduce((acc, value) => {
-    acc[value] = 0
-    return acc
-  }, {})
-}
-
 export const getParameterByName = (name, url) => {
   if (!url) url = window.location.href
   name = name.replace(/[[\]]/g, "\\$&")
