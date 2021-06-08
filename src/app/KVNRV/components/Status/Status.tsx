@@ -72,7 +72,7 @@ export const Status = ({ size }: StatusProps) => {
     <div className="metrics__status">
       <Card title={"Status"} size={size}>
         <div className={"title"}>Penny's House</div>
-        <div className={"status"}>{SYSTEM_STATE_MAP[state?.toString() as keyof Object] ?? "--"}</div>
+        <div className={"status"}>{SYSTEM_STATE_MAP[state?.toString() as keyof Object] ?? " - "}</div>
         <div className={"subheading"}>
           <div className={"subheading__model"}>Geo Pro Travel Trailer</div>
           <div className={"subheading__year"}>Model: 2019</div>

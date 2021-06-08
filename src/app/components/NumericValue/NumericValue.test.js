@@ -5,7 +5,7 @@ import NumericValue from "./NumericValue"
 describe("Number display", () => {
   it("shows dashes when no value given", () => {
     const context = shallow(<NumericValue />)
-    expect(context.find("span").text()).toBe("--")
+    expect(context.find("span").text()).toBe(" - ")
   })
 
   it("displays 0 values", () => {

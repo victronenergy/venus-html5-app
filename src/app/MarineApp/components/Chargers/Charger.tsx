@@ -23,7 +23,7 @@ const chargerModeFormatter = (value: number) => {
     case CHARGER_MODE.ON:
       return "ON"
     default:
-      return "--"
+      return " - "
   }
 }
 

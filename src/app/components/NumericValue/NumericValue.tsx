@@ -5,7 +5,7 @@ export const formatNumber = ({
   unit = "",
   precision = 0,
   factor = 1.0,
-  defaultValue = "--",
+  defaultValue = " - ",
 }: NumericValueProps) => {
   if (value === null || value === undefined || isNaN(value)) {
     if (defaultValue) {
@@ -36,7 +36,7 @@ export const NumericValue = ({
   unit = "",
   precision = 0,
   factor = 1.0,
-  defaultValue = "--",
+  defaultValue = " - ",
 }: NumericValueProps) => {
   return <span className="value">{formatNumber({ value, unit, precision, factor, defaultValue })}</span>
 }

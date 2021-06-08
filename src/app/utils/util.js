@@ -77,6 +77,6 @@ export const systemStateFormatter = (value) => {
     case VEBUS_SYSTEM_STATE.SUSTAIN:
       return "Sustain"
     default:
-      return "--"
+      return " - "
   }
 }

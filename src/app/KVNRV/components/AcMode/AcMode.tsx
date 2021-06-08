@@ -9,7 +9,6 @@ import "./AcMode.scss"
 import { useAcMode, useActiveInValues, useActiveSource } from "@elninotech/mfd-modules"
 import { useSendUpdate } from "../../modules"
 import { normalizePower } from "../../utils/helpers"
-import { NotAvailable } from "../NotAvailable"
 import GaugeIndicator from "../../../components/GaugeIndicator"
 
 export const acModeFormatter = (value: number) => {
@@ -23,7 +22,7 @@ export const acModeFormatter = (value: number) => {
     case AC_MODE.MODES.INVERTER_ONLY:
       return "Inverter only"
     default:
-      return "--"
+      return " - "
   }
 }
 
