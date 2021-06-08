@@ -1,5 +1,3 @@
-import Logger from "./logger"
-
 import { VEBUS_SYSTEM_STATE } from "./constants"
 
 /**

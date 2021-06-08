@@ -24,14 +24,15 @@ export const useStatus = () => {
 export const useSendUpdate = (percent: number, conf: WidgetConfiguration, part: string) => {
   const statusService = useStatusService()
   const [level, setLevel] = useState(STATUS_LEVELS.SUCCESS)
-  let currLevel = level
+
   const footer: Footer = {
     message: STATUS_LEVELS_MSG[level],
     property: "Status",
-    status: currLevel,
+    status: level,
   }
 
   useEffect(() => {
+    let currLevel = level
     if (conf.THRESHOLDS.length === 3) {
       if (percent > conf.THRESHOLDS[0]) {
         if (percent < conf.THRESHOLDS[0] + conf.THRESHOLDS[1]) {
@@ -80,8 +81,6 @@ export const useSendUpdate = (percent: number, conf: WidgetConfiguration, part: 
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [percent, part])
-
-  footer.status = currLevel
 
   return footer
 }

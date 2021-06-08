@@ -9,7 +9,7 @@ import Inverters from "../Inverters"
 import { InverterCharger } from "../InverterCharger"
 import Solar from "../Solar"
 import Generators from "../Generators"
-import { InstanceId, mqttQuery, useVebus } from "@elninotech/mfd-modules"
+import { mqttQuery, useVebus } from "@elninotech/mfd-modules"
 
 const HEADER_HEIGHT = 110
 
@@ -94,6 +94,7 @@ export const Metrics = ({
     return () => {
       window.removeEventListener("resize", computeResponsiveness)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [messages])
 
   const computeResponsiveness = () => {
