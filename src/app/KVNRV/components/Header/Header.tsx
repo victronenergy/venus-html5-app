@@ -21,6 +21,7 @@ export const Header = () => {
   const vrmService = useVrmService()
 
   const handleRemoteSwitch = () => {
+    window.location.replace(remote ? `http://venus.local/app` : `https://kvnrv-9ca32.web.app/app`)
     appService.toggleRemote()
   }
 
