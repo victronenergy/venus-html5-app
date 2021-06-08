@@ -111,7 +111,7 @@ export const AC_MODE = {
     ON: 3,
     OFF: 4,
   },
-  LIMITS_US: [10, 15, 20, 30, 50, 100],
+  LIMITS_US: [10, 12, 15, 20, 30],
   LIMITS_EU: [3, 6, 10, 13, 16, 25, 32, 63],
 }
 
