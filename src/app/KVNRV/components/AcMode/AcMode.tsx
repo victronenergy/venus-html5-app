@@ -65,7 +65,9 @@ export const AcMode = () => {
             <div className={"info-bar__cell"}>
               <NumericValue value={frequency ? frequency[0] : undefined} unit={"Hz"} precision={0} />
             </div>
-            <div className={"info-bar__cell ac_mode__mode"}>{acModeFormatter(Number(mode))}</div>
+            <div className={"info-bar__cell ac_mode__mode"} onClick={() => setModalOpen(true)}>
+              {acModeFormatter(Number(mode))}
+            </div>
           </div>
         </div>
 
