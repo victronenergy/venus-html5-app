@@ -20,7 +20,7 @@ const App = (props: AppProps) => {
   useEffect(() => {
     const mqttService = new MqttService(mqttStore)
 
-    if (!remote) {
+    if (remote === false) {
       mqttService.boot(props.host, props.port)
     } else if (
       remote &&
