@@ -42,7 +42,7 @@ export const AcMode = () => {
   return (
     <div className="ac_mode">
       <Card
-        title={"Inverter / Charger"}
+        title={"Shore Power"}
         icon={ICON_SETTINGS}
         size={[SIZE_WIDE, SIZE_SHORT]}
         onIconClick={() => setModalOpen(true)}
@@ -52,7 +52,7 @@ export const AcMode = () => {
           {(activeInput === 0 || activeInput === 1) && power ? (
             <GaugeIndicator value={power[0]} percent={normalizedPower} parts={SHORE_POWER_CONF.THRESHOLDS} unit={"W"} />
           ) : (
-            <NotAvailable />
+            <div className="not-available">No Shore Power</div>
           )}
 
           <div className={"info-bar"}>
