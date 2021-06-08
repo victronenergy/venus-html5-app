@@ -3,7 +3,10 @@
 
 @font-face {
   font-family: Roboto;
-  src: url("./Roboto-Light.ttf"), url("./Roboto-Normal.ttf"), url("./Roboto-Medium.ttf"), url("./Roboto-Bold.ttf");
+  src: url("./Roboto/Roboto-Light.ttf") font-weight-light, 
+    url("./Roboto/Roboto-Regular.ttf") font-weight-normal, 
+    url("./Roboto/Roboto-Medium.ttf") font-weight-medium, 
+    url("./Roboto/Roboto-Bold.ttf") font-weight-bold;
 }
 
 * {
