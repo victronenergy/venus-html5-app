@@ -42,20 +42,23 @@
       return decodeURIComponent(results[2].replace(/\+/g, " "))
     }
 
-    var host = getParameterByName("host") || window.location.hostname || "localhost"
-    var socket = new WebSocket("ws://" + host + ":7890")
-    window.onerror = function (msg, url, lineNo, columnNo, err) {
-      var data = {
-        time: new Date(),
-        error: msg
-      }
 
-      if (err) {
-        data.stack = err.stack
-      }
+    if (window.location.protocol === "http:") {
+      var host = getParameterByName("host") || window.location.hostname || "localhost"
+      var socket = new WebSocket("ws://" + host + ":7890")
+      window.onerror = function (msg, url, lineNo, columnNo, err) {
+        var data = {
+          time: new Date(),
+          error: msg
+        }
 
-      socket.send(JSON.stringify(data))
-      return true
+        if (err) {
+          data.stack = err.stack
+        }
+
+        socket.send(JSON.stringify(data))
+        return true
+      }
     }
 
     function debugLogFn(msg) {
