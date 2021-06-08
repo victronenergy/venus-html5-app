@@ -1,7 +1,5 @@
 @import "../../../css/variables.scss";
 
-$indent-base: 0.8;
-
 // override base variables
 $card-bg-color: var(--card-bg-color);
 $card-shadow-color: var(--card-shadow-color);
@@ -27,7 +25,6 @@ $donut-offset: 0.3rem;
 
 
 // app specific variables
-
 $indicator-main-font-value-big: 2rem;
 $indicator-main-font-name-big: 1.5rem;
 $indicator-main-font-value-small: 1.6rem;

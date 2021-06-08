@@ -1,7 +1,6 @@
 @import "../../../css/texts.scss";
 
 @import "./variables.scss";
-@import "./grid.scss";
 @import "./indicators.scss";
 
 
@@ -15,15 +14,20 @@
 }
 
 html {
+  box-sizing: border-box;
+
   //scale rem down with screen height
-  @for $i from 1 through 2 {
-    @media all and (max-height: 800px - $i * 100px) {
-      font-size: 100% - $i * 20;
+  @for $i from 1 through 3 {
+    @media all and (max-height: 1000px - $i * 100px) {
+      font-size: 100% - $i * 12;
     }
   }
 }
-* {
-  font-family: MuseoSans, sans-serif;
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
 }
 
 body {
@@ -93,16 +97,20 @@ body {
   }
 }
 
+.grid {
+  display: grid;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
 
 button {
   cursor: pointer;
   border: none;
 }
-
-.grid {
-  display: grid;
-}
-
 
 .gauge {
   display: flex;

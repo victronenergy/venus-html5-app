@@ -14,8 +14,9 @@ import { TANKS_CONF } from "../../utils/constants"
 import { SIZE_WIDE, SIZE_LONG } from "../../../components/Card"
 
 export const SCREEN_SIZES = {
-  MD: 700,
-  LG: 1230,
+  MD: 499,
+  LG: 760,
+  XL: 1366,
 }
 
 export const Metrics = () => {
@@ -73,16 +74,31 @@ export const Metrics = () => {
   }, [hammer])
 
   const computePages = () => {
-    const isNarrow = window.innerWidth / window.innerHeight > 16 / 9 || window.innerHeight < 450
+    // under 16/10 aspect ratio
+    const RATIO = 16 / 9
+    const isNarrow = window.innerWidth / window.innerHeight > RATIO || window.innerHeight < 480
+    const isTall =
+      !isNarrow &&
+      window.innerWidth > SCREEN_SIZES.LG &&
+      window.innerWidth < SCREEN_SIZES.XL &&
+      window.innerHeight > 900
 
     let pageNum = 3
 
-    if (window.innerWidth > SCREEN_SIZES.MD) {
-      pageNum = 2
-    }
-
-    if (window.innerWidth > SCREEN_SIZES.LG) {
-      pageNum = 1
+    if (isNarrow) {
+      if (window.innerWidth > SCREEN_SIZES.MD * RATIO) {
+        pageNum = 2
+      }
+      if (window.innerWidth > SCREEN_SIZES.LG * RATIO) {
+        pageNum = 1
+      }
+    } else {
+      if (window.innerWidth > SCREEN_SIZES.MD) {
+        pageNum = 2
+      }
+      if (window.innerWidth > SCREEN_SIZES.LG || isTall) {
+        pageNum = 1
+      }
     }
 
     const currPage = Math.min(pageNum - 1, currentPage)
@@ -90,12 +106,12 @@ export const Metrics = () => {
     if (isNarrow) {
       setLayout(
         <div className="row">
-          <div className={[getClassName(), "row", getIsHidden(0, pageNum, currPage)].join(" ")}>
+          <div className={["row", getIsHidden(0, pageNum, currPage)].join(" ")}>
             <Status size={[SIZE_WIDE, SIZE_LONG]} />
             <Battery size={[SIZE_WIDE, SIZE_LONG]} />
           </div>
 
-          <div className={[getClassName(), getIsHidden(1, pageNum, currPage)].join(" ")}>
+          <div className={getIsHidden(1, pageNum, currPage)}>
             <AcMode />
             <div className="row">
               <DcLoads />
@@ -103,12 +119,12 @@ export const Metrics = () => {
             </div>
           </div>
 
-          <div className={["row", "grid", getClassName(), getIsHidden(2, pageNum, currPage)].join(" ")}>
-            <div className={"row"}>
+          <div className={getIsHidden(2, pageNum, currPage)}>
+            <div className="row">
               <PvCharger />
               <SmallTank tankId={TANKS_CONF.FRESH_WATER.DEVICE_ID!} conf={TANKS_CONF.FRESH_WATER} invert={true} />
             </div>
-            <div className={"row"}>
+            <div className="row">
               <SmallTank tankId={TANKS_CONF.GRAY_WATER.DEVICE_ID!} conf={TANKS_CONF.GRAY_WATER} invert={false} />
               <SmallTank tankId={TANKS_CONF.BLACK_WATER.DEVICE_ID!} conf={TANKS_CONF.BLACK_WATER} invert={false} />
             </div>
@@ -118,30 +134,44 @@ export const Metrics = () => {
     } else {
       setLayout(
         <div className="row">
-          <div className={[getClassName(), getIsHidden(0, pageNum, currPage)].join(" ")}>
+          <div className={getIsHidden(0, pageNum, currPage)}>
             <Status size={[SIZE_WIDE, SIZE_LONG]} />
 
             <div className="row">
               <DcLoads />
               <AcLoads />
             </div>
+            {isTall && (
+              <div className="row">
+                <PvCharger />
+                <SmallTank tankId={TANKS_CONF.FRESH_WATER.DEVICE_ID!} conf={TANKS_CONF.FRESH_WATER} invert={true} />
+              </div>
+            )}
           </div>
 
-          <div className={["grid", getClassName(), getIsHidden(1, pageNum, currPage)].join(" ")}>
+          <div className={["grid", getIsHidden(1, pageNum, currPage)].join(" ")}>
             <Battery size={[SIZE_WIDE, SIZE_LONG]} />
             <AcMode />
+            {isTall && (
+              <div className="row">
+                <SmallTank tankId={TANKS_CONF.GRAY_WATER.DEVICE_ID!} conf={TANKS_CONF.GRAY_WATER} invert={false} />
+                <SmallTank tankId={TANKS_CONF.BLACK_WATER.DEVICE_ID!} conf={TANKS_CONF.BLACK_WATER} invert={false} />
+              </div>
+            )}
           </div>
 
-          <div className={[getClassName(), getIsHidden(2, pageNum, currPage)].join(" ")}>
-            <div className="row">
-              <PvCharger />
-              <SmallTank tankId={TANKS_CONF.FRESH_WATER.DEVICE_ID!} conf={TANKS_CONF.FRESH_WATER} invert={true} />
+          {!isTall && (
+            <div className={getIsHidden(2, pageNum, currPage)}>
+              <div className="row">
+                <PvCharger />
+                <SmallTank tankId={TANKS_CONF.FRESH_WATER.DEVICE_ID!} conf={TANKS_CONF.FRESH_WATER} invert={true} />
+              </div>
+              <div className="row">
+                <SmallTank tankId={TANKS_CONF.GRAY_WATER.DEVICE_ID!} conf={TANKS_CONF.GRAY_WATER} invert={false} />
+                <SmallTank tankId={TANKS_CONF.BLACK_WATER.DEVICE_ID!} conf={TANKS_CONF.BLACK_WATER} invert={false} />
+              </div>
             </div>
-            <div className="row">
-              <SmallTank tankId={TANKS_CONF.GRAY_WATER.DEVICE_ID!} conf={TANKS_CONF.GRAY_WATER} invert={false} />
-              <SmallTank tankId={TANKS_CONF.BLACK_WATER.DEVICE_ID!} conf={TANKS_CONF.BLACK_WATER} invert={false} />
-            </div>
-          </div>
+          )}
         </div>
       )
     }
@@ -165,23 +195,6 @@ export const Metrics = () => {
     computePages()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage])
-
-  const getClassName = () => {
-    let c = ""
-    switch (pages) {
-      case 1:
-        c = "col-span-4"
-        break
-      case 2:
-        c = "col-span-6"
-        break
-      case 3:
-        c = "col-span-12"
-        break
-    }
-
-    return c
-  }
 
   const getIsHidden = (elPage: number, pageNum: number, currPage: number) => {
     let c = ""
