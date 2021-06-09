@@ -57,8 +57,8 @@ export const useSendUpdate = (percent: number, conf: WidgetConfiguration, part: 
       const zeroOffset = conf.ZERO_OFFSET! * -1
       const green =
         percent > zeroOffset + sum(conf.THRESHOLDS.slice(0, 2)) &&
-        percent < zeroOffset + sum(conf.THRESHOLDS.slice(0, 4))
-      const red = percent < zeroOffset + conf.THRESHOLDS[0] || percent > zeroOffset + sum(conf.THRESHOLDS.slice(0, 5))
+        percent < zeroOffset + sum(conf.THRESHOLDS.slice(0, 3))
+      const red = percent < zeroOffset + conf.THRESHOLDS[0] || percent > zeroOffset + sum(conf.THRESHOLDS.slice(0, 4))
       if (!green) {
         if (red) {
           currLevel = STATUS_LEVELS.ALARM

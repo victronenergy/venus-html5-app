@@ -30,7 +30,7 @@ export type WidgetConfiguration = {
 
 export const BATTERY_CONF: WidgetConfiguration = {
   MAX: 300,
-  THRESHOLDS: [0.05, 0.1, 0.6, 0.075, 0.025],
+  THRESHOLDS: [0.05, 0.1, 0.75, 0.075, 0.025],
   MESSAGES: {
     [WARNING]: "battery usage high",
     [ALARM]: "critically high battery usage",
