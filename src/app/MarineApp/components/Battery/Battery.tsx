@@ -184,7 +184,8 @@ export const BatteriesWithData = () => {
   const { batteries } = useBattery()
 
   if (batteries) {
-    const sorted = batteries.sort((a, b) => (a.state ? -1 : b.state ? 1 : 0))
+    // Sort batteries first by state, and then by ID to keep order consistent
+    const sorted = batteries.sort((a, b) => (b.state - a.state ? b.state - a.state : parseInt(a.id) - parseInt(b.id)))
     return (
       <ColumnContainer>
         <Batteries batteries={sorted} />
