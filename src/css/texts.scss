@@ -1,10 +1,12 @@
-// Use 1920px screen as baseline and scale down when needed
-
 @import "./variables.scss";
+// Use 1920px screen as baseline and scale down when needed
 
 @font-face {
   font-family: Roboto;
-  src: url("./Roboto-Normal.ttf"), url("./Roboto-Medium.ttf") url("./Roboto-Bold.ttf");
+  src: url("./Roboto/Roboto-Light.ttf") font-weight-light, 
+    url("./Roboto/Roboto-Regular.ttf") font-weight-normal, 
+    url("./Roboto/Roboto-Medium.ttf") font-weight-medium, 
+    url("./Roboto/Roboto-Bold.ttf") font-weight-bold;
 }
 
 * {
@@ -15,21 +17,21 @@
  * Since we have a very weird scale of resolutions to support, from very narrow and tall
  * to very "flat" and wide. Relative font sizes to the viewport broke down in these edge
  * cases, hence there are 2 rules: html font size, which is the basis for everything and
- * scales the font when width decreases; and main element font-size which scales the 
- * font when height changes. The different em font sizes scale the component font sizes 
+ * scales the font when width decreases; and main element font-size which scales the
+ * font when height changes. The different em font sizes scale the component font sizes
  * relative to these two aforementioned baselines.
  */
 
 html {
   font-size: 20px;
-  @for $i from 1 through 5 {
+  @for $i from 1 through 8 {
     @media all and (max-width: 1920px - $i * 200px) {
       font-size: 20px - $i * 1px;
     }
   }
 }
 
-#app {
+#root {
   color: white;
   font-weight: 300;
   font-size: 100%;

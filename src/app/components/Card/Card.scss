@@ -1,0 +1,94 @@
+@import '../../KVNRV/css/variables';
+
+.card {
+  border-radius: 5px;
+  box-shadow: 2px 2px 8px $card-shadow-color;
+  background: $card-bg-color;
+  margin: $card-margin;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &.short {
+    height: $card-height-small;
+  }
+
+  &.narrow {
+    width: $card-width-small;
+  }
+
+  &.wide {
+    width: $card-width-big;
+  }
+
+  &.long {
+    height: ($card-height-small * 2) + ($card-margin * 2)
+  }
+
+  .contents {
+    padding: 0.8rem;
+
+    .card__header {
+      margin-bottom: 0.5em;
+      padding: 0 0.5em 0.5em;
+      border-bottom: 1px solid $color-gray;
+      justify-content: space-between;
+      height: 1.7em;
+
+      .card__header__text {
+        font-weight: 500;
+        align-self: center;
+      }
+
+      .card__header__info-text {
+        margin-right: 0.5rem;
+        align-self: center;
+      }
+
+      .card__header__icon {
+        background-color: $color-lightgray;
+        width: 1.1em;
+        height: 1.1em;
+        border-radius: 5px;
+        font-size: inherit;
+        display: flex;
+      }
+
+      .settings {
+        width: auto;
+        height: auto;
+        color: $text-color-main;
+        padding: 0.1rem 0.8rem;
+        font-size: 1em;
+      }
+
+      .close {
+        background: $color-lightgray;
+        width: 1.3em;
+        height: 1.3em;
+        padding: 0;
+        justify-content: center;
+
+        .card__header__icon__img {
+          width: 1em;
+          height: 1em;
+          align-self: center;
+        }
+      }
+    }
+
+    .card__body {
+      padding: 0.5rem;
+      height: 100%;
+    }
+  }
+
+  .card__footer {
+    bottom: 0;
+    font-size: 0.9em;
+    font-weight: 500;
+    padding: 0.2em 0.8em;
+    border-radius: 0 0 5px 5px;
+    color: $color-white;
+  }
+}

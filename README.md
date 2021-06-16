@@ -55,7 +55,7 @@ If it's the first time you run the app:
 
 To run the app locally for development, run:
 
-`npm run dev`
+`npm run start`
 
 And then open the app in the browser at `http://localhost:8000`.
 

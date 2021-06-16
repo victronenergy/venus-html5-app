@@ -1,0 +1,13 @@
+
+.inverter-charger__header {
+  display: flex;
+  justify-content: space-between;
+
+  &--column {
+    flex-direction: column;
+
+    span:last-of-type {
+      margin-top: 10px;
+    }
+  }
+}

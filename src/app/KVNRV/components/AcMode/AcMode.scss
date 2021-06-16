@@ -1,0 +1,50 @@
+@import '../../css/variables.scss';
+
+.ac_mode {
+  flex-direction: column;
+  text-align: center;
+  width: auto;
+
+  .name {
+    font-size: 1rem;
+  }
+
+  .ac_mode__mode {
+    border-radius: 5px;
+    border: $color-green solid 1px !important;
+    width: $card-width-big/2;
+    align-self: center;
+    color: $color-green;
+  }
+}
+
+.ac_mode_modal {
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  .name:nth-child(n+2) {
+    margin-top: 0.9rem;
+  }
+
+  .ac_mode_modal__group {
+    width: inherit;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    .ac_mode_modal__button {
+      flex-grow: 1;
+      margin: 0.3rem;
+      border-radius: 5px;
+      border: none;
+      background-color: $color-lightgray;
+      padding: 0.7rem;
+      font-size: 0.9rem;
+
+      &.success {
+        color: $color-white;
+      }
+    }
+  }
+}

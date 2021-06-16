@@ -5,14 +5,14 @@ export const viewChangeDelay = 500
 const viewChangeTransitionDuration = viewChangeDelay - 100
 const baseStyle = {
   transition: `opacity ${viewChangeTransitionDuration}ms ease`,
-  display: "flex"
+  display: "flex",
 }
 
 class Fade extends Component {
   state = {
     style: {
-      opacity: 0
-    }
+      opacity: 0,
+    },
   }
   timeoutRef
 

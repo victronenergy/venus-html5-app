@@ -1,0 +1,23 @@
+@import "../../../css/variables";
+
+
+.modal__background {
+  position: fixed;
+  z-index: 3;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+
+  .card {
+    z-index: 4;
+    margin: auto;
+    top: 20%;
+    position: relative;
+    height: auto;
+    width: 80%;
+  }
+}

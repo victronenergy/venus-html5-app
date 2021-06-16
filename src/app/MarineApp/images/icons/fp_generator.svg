@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="56px" height="56px" viewBox="0 0 56 56" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-350.000000, -456.000000)" fill="#FFFFFF">
+            <g id="fp_generator" transform="translate(350.000000, 456.000000)">
+                <rect id="Rectangle" x="15" y="33.89" width="26" height="2"></rect>
+                <rect id="Rectangle" x="11" y="33.89" width="4" height="2"></rect>
+                <polygon id="Path" points="17 26.89 18 26.89 18 12.89 10 12.89 10 13.89 9 13.89 9 27.89 17 27.89"></polygon>
+                <rect id="Rectangle" x="43" y="33.89" width="4" height="2"></rect>
+                <polygon id="Path" points="37 27.89 36 27.89 36 25.89 36 12.89 33 12.89 33 25.89 33 27.89 32 27.89 32 28.89 23 28.89 23 27.89 22 27.89 22 25.89 22 12.89 19 12.89 19 25.89 19 27.89 18 27.89 18 28.89 9 28.89 9 31.89 13 31.89 13 30.89 12 30.89 12 29.89 14 29.89 16 29.89 16 29.89 16 30.89 15 30.89 15 31.89 41 31.89 41 30.89 40 30.89 40 29.89 42 29.89 44 29.89 44 29.89 44 30.89 43 30.89 43 31.89 47 31.89 47 28.89 37 28.89"></polygon>
+                <polygon id="Path" points="24 27.89 31 27.89 31 26.89 32 26.89 32 12.89 23 12.89 23 26.89 24 26.89"></polygon>
+                <path d="M27.939,0 C12.509,0 0,12.509 0,27.94 C0,43.371 12.509,55.88 27.939,55.88 C43.371,55.88 55.879,43.37 55.879,27.94 C55.88,12.509 43.371,0 27.939,0 Z M48,32.89 L48,34.89 L48,36.89 L48,42.89 L47,42.89 L47,44.89 L44,44.89 L44,45.89 L40,45.89 L40,44.89 L16,44.89 L16,45.89 L12,45.89 L12,44.89 L9,44.89 L9,42.89 L8,42.89 L8,36.89 L8,34.89 L8,32.89 L7,32.89 L7,27.89 L8,27.89 L8,12.89 L9,12.89 L9,11.89 L18,11.89 L18,10.89 L23,10.89 L23,11.89 L32,11.89 L32,10.89 L37,10.89 L37,11.89 L47,11.89 L47,12.89 L48,12.89 L48,27.89 L49,27.89 L49,32.89 L48,32.89 Z" id="Shape" fill-rule="nonzero"></path>
+                <polygon id="Path" points="46 12.89 37 12.89 37 26.89 38 26.89 38 27.89 47 27.89 47 13.89 46 13.89"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

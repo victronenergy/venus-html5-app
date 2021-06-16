@@ -1,0 +1,84 @@
+@import '../../css/variables.scss';
+
+
+$battery-width: 2.5rem;
+$battery-height: 5rem;
+
+.battery {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .battery__group {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-right: 1rem;
+
+    .indicator-main {
+      flex-direction: column;
+    }
+
+    &.small {
+      flex-direction: column;
+      font-size: 0.9rem;
+      padding-right: 0;
+
+      .indicator-main--small {
+        flex-direction: column;
+      }
+    }
+
+  }
+
+  .battery__charge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .battery__charge__top {
+      width: $battery-width/2;
+      height: $battery-height/10;
+      border: $color-gray solid 2px;
+      border-radius: 3px 3px 0 0;
+    }
+
+    .battery__charge__body {
+      width: $battery-width;
+      height: $battery-height;
+      border: $color-gray solid 2px;
+      border-radius: 8px;
+      padding: 0.2rem 0.15rem 0.15rem 0.15rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      margin-top: -2px;
+
+      &.full {
+        .battery__charge__body__cell {
+          &:first-child {
+            border-radius: 4px 4px 0 0;
+          }
+        }
+      }
+
+      .battery__charge__body__cell {
+        width: 100%;
+        height: $battery-height * 0.16;
+        background-color: transparent;
+        margin-top: 0.2rem;
+
+        &:first-child {
+          margin-top: 0;
+        }
+        &:last-child {
+          border-radius: 0 0 4px 4px;
+        }
+      }
+    }
+  }
+
+  .battery__gauge {
+  }
+}
