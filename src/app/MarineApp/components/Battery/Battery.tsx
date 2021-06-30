@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 
 import { Battery, useBattery } from "@elninotech/mfd-modules"
+import { BATTERY_STATE } from "../../../utils/constants"
 
 import ColumnContainer from "../ColumnContainer"
 import BatteryIcon from "../../images/icons/battery.svg"
@@ -186,8 +187,20 @@ export const BatteriesWithData = () => {
   if (batteries) {
     // Sort batteries first by state, and then by ID to keep order consistent
     const sorted = batteries.sort((a, b) => {
-      if (a.state && !b.state) return -1
-      if (b.state) return 1
+      // Show charging batteries before discharging batteries
+      if (a.state === BATTERY_STATE.CHARGING && b.state !== BATTERY_STATE.CHARGING) return -1
+      if (a.state !== BATTERY_STATE.CHARGING && b.state === BATTERY_STATE.CHARGING) return 1
+      if (a.state === BATTERY_STATE.CHARGING && b.state === BATTERY_STATE.CHARGING) {
+        return parseInt(a.id) - parseInt(b.id)
+      }
+
+      // Show discharging batteries before idle batteries
+      if (a.state === BATTERY_STATE.DISCHARGING && b.state === BATTERY_STATE.IDLE) return -1
+      if (a.state === BATTERY_STATE.IDLE && b.state === BATTERY_STATE.DISCHARGING) return 1
+      if (a.state === BATTERY_STATE.DISCHARGING && b.state === BATTERY_STATE.DISCHARGING) {
+        return parseInt(a.id) - parseInt(b.id)
+      }
+
       return parseInt(a.id) - parseInt(b.id)
     })
     return (
