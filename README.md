@@ -32,7 +32,7 @@ Chapters in this readme:
 How certain devices are visualised/rendered on HTML5, ie. in to what box(es), and what topics are used for what parameter, and more is documented in three places:
 
 - [TOPICS.md](https://github.com/victronenergy/venus-html5-app/blob/master/TOPICS.md)
-- [wiki/Translating system components into the HTML5 app](https://github.com/victronenergy/venus-html5-app/wiki/Translating-system-components-into-the-HTML5-app.)
+- [wiki/Translating system components into the HTML5 app](https://github.com/victronenergy/venus-html5-app/wiki/Translating-system-components-into-the-HTML5-app)
 - [wiki/Dashboard overview](https://github.com/victronenergy/venus-html5-app/wiki/Dashboard-overview)
 
 ### 1.2 Handling disconnects
