@@ -19,6 +19,8 @@ jobs:
         run: npm ci
       - name: Build the bundle
         run: npm run build
+        env:
+          PUBLIC_URL: /
       - name: Serve the application
         run: npm run serve &
       - name: Run the Venus simulation
@@ -83,5 +85,3 @@ jobs:
           asset_path: ./venus-html5-app.tar.gz
           asset_name: venus-html5-app.tar.gz
           asset_content_type: application/zip
-
-
