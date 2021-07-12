@@ -74,7 +74,7 @@
     "postbuild": "mv build/ dist/",
     "eject": "react-scripts eject",
     "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!@elninotech/mfd-modules)/\"",
-    "serve": "serve -s dist -l 8000",
+    "serve": "serve -C -s dist -l 8000",
     "test:dev": "npm test -- --watchAll=false && cypress run",
     "test:unit": "npm test",
     "test:e2e": "cypress run",
