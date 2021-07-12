@@ -23,6 +23,10 @@ header {
 .logo {
   width: 170px;
 
+  @media #{$very-small} {
+    width: 140px;
+  }
+
   @media #{$minimum} {
     width: 120px;
     margin-right: 10px;

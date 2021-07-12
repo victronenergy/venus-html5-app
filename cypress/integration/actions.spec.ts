@@ -18,8 +18,8 @@ describe("Testing basic actions in the ui", () => {
   it("Selects shore input limit", () => {
     cy.get(".metric__current-input-limit > .selector-button").click()
     cy.get(".amperage-selector__container").should("be.visible")
-    cy.get(".amperage-selector > .selector-button.selector-button--active").as("active").should("have.length", 1)
-    cy.get(".amperage-selector > .selector-button:not(.selector-button--active)").as("buttons")
+    cy.get(".amperage-selector > div > .selector-button.selector-button--active").as("active").should("have.length", 1)
+    cy.get(".amperage-selector > div > .selector-button:not(.selector-button--active)").as("buttons")
     cy.get("@buttons").eq(0).click()
     cy.get("@active").should("not.have.class", "selector-button--active")
     cy.get(".amperage-selector__container").should("not.be.visible")

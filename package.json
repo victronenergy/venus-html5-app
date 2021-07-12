@@ -63,7 +63,8 @@
     "mochawesome": "^6.2.2",
     "mochawesome-merge": "^4.2.0",
     "mochawesome-report-generator": "^5.2.0",
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "react-test-renderer": "^17.0.2"
   },
   "scripts": {
     "clean": "rm -rf build",
@@ -72,12 +73,12 @@
     "build": "react-scripts build",
     "postbuild": "mv build/ dist/",
     "eject": "react-scripts eject",
-    "test": "react-scripts test",
+    "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!@elninotech/mfd-modules)/\"",
     "serve": "serve -s dist -l 8000",
-    "test:dev": "npm test && cypress run",
+    "test:dev": "npm test -- --watchAll=false && cypress run",
     "test:unit": "npm test",
     "test:e2e": "cypress run",
-    "test:ci": "npm test && cypress run",
+    "test:ci": "npm test -- --watchAll=false && cypress run",
     "generate-e2e-report": "npm run copy-e2e-assets && npm run merge-e2e-results && npm run create-e2e-html-report",
     "copy-e2e-assets": "rm -rf cypress/report && mkdir cypress/report && cp -r cypress/screenshots cypress/videos cypress/report/",
     "merge-e2e-results": "mochawesome-merge cypress/results/*.json > cypress/results/results.json",

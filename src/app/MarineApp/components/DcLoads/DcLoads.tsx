@@ -1,20 +1,22 @@
 import React from "react"
 import DcIcon from "../../images/icons/dc.svg"
-import { useDcLoads } from "@elninotech/mfd-modules"
+import { DcLoadsState, useDcLoads } from "@elninotech/mfd-modules"
 import HeaderView from "../HeaderView"
 import ColumnContainer from "../ColumnContainer"
 import MetricValues from "../MetricValues"
 import NumericValue from "../../../components/NumericValue"
 
-export const DcLoads = () => {
-  const { voltage, power } = useDcLoads()
+export const DcLoads = (props?: Partial<DcLoadsState>) => {
+  let { voltage, power } = useDcLoads()
+  voltage = props?.voltage ?? voltage
+  power = props?.power ?? power
 
   if (power) {
     return (
       <ColumnContainer>
         <HeaderView icon={DcIcon} title="DC Loads" showBoat>
           <MetricValues>
-            <NumericValue value={power / voltage} unit="A" precision={1} />
+            <NumericValue value={power / voltage || undefined} unit="A" precision={1} />
             <NumericValue value={power} unit="W" />
           </MetricValues>
         </HeaderView>

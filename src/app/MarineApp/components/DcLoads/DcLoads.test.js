@@ -32,12 +32,8 @@ describe("DC Loads", () => {
   describe("when values aren't loaded yet", () => {
     const wrapper = mount(<DcLoads />)
 
-    it("shows empty current", () => {
-      expect(wrapper.find("NumericValue").first().props().value).toBeUndefined()
-    })
-
-    it("shows empty power", () => {
-      expect(wrapper.find("NumericValue").at(1).props().value).toBeUndefined()
+    it("doesn't show the widget", () => {
+      expect(wrapper.find("NumericValue").length).toEqual(0)
     })
   })
 })

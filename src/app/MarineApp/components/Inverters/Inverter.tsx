@@ -1,6 +1,6 @@
 import React from "react"
 
-import { useInverter } from "@elninotech/mfd-modules"
+import { InverterState, useInverter } from "@elninotech/mfd-modules"
 
 import { INVERTER_MODE } from "../../../utils/constants"
 
@@ -47,12 +47,13 @@ type InverterProps = {
   isVebusInverter: boolean
 }
 
-export const Inverter = ({ instanceId, isVebusInverter }: InverterProps) => {
+export const Inverter = ({ instanceId, isVebusInverter, ...props }: InverterProps & Partial<InverterState>) => {
   const source = isVebusInverter ? "vebus" : "inverter"
-  const { state, mode, voltage, current, power, customName, productName, nAcInputs, updateMode } = useInverter(
+  let { state, mode, voltage, current, power, customName, productName, nAcInputs, updateMode } = useInverter(
     instanceId,
     source
   )
+  nAcInputs = props.nAcInputs ?? nAcInputs
 
   // if nAcInputs === 0 it means it's an inverter, if not it's an inverter/charger => skip
   const show = !isVebusInverter || nAcInputs === 0
