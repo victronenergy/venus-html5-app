@@ -74,6 +74,10 @@ header {
   background-color: #2a3341;
   outline: none;
   cursor: pointer;
+
+  @media #{$regular} {
+    padding: 10px 16px;
+  }
 }
 
 .remote-console-button {
