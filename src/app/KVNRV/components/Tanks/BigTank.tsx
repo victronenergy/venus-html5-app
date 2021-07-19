@@ -10,8 +10,9 @@ import { useEffect, useState } from "react"
 import { VOLUME_UNITS, VolumeUnit, VolumeUnits } from "../../utils/constants"
 
 import { fluidTypeFormatter } from "./SmallTank"
+import { observer } from "mobx-react"
 
-export const BigTank = ({ tankId, conf, invert }: TankProps) => {
+export const BigTank = observer(({ tankId, conf, invert }: TankProps) => {
   const [height, setHeight] = useState(0)
   const tank = useTank(tankId)
   const tankLevel = (tank.level ?? 0) / 100
@@ -67,4 +68,4 @@ export const BigTank = ({ tankId, conf, invert }: TankProps) => {
       </Card>
     </div>
   )
-}
+})

@@ -13,6 +13,7 @@ import {
   useVebusAlarms,
   VebusAlarmsState,
 } from "../../modules"
+import { observer } from "mobx-react"
 
 const SYSTEM_STATE_MAP = {
   0: "Off",
@@ -55,7 +56,7 @@ type StatusProps = {
   size: string[]
 }
 
-export const Status = ({ size }: StatusProps) => {
+export const Status = observer(({ size }: StatusProps) => {
   const { statuses } = useStatus()
   const { state } = useSystemState()
 
@@ -95,5 +96,6 @@ export const Status = ({ size }: StatusProps) => {
       </Card>
     </div>
   )
-}
+})
+
 export default Status

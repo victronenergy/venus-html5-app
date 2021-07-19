@@ -9,8 +9,9 @@ import { SHORE_POWER_CONF } from "../../utils/constants"
 import { normalizePower } from "../../utils/helpers"
 import { NotAvailable } from "../NotAvailable"
 import GaugeIndicator from "../../../components/GaugeIndicator"
+import { observer } from "mobx-react"
 
-export const ShorePower = () => {
+export const ShorePower = observer(() => {
   const { current, frequency, voltage, power } = useActiveInValues()
   const normalizedPower = normalizePower(power && power[0] ? power[0] : 0, SHORE_POWER_CONF.MAX)
   useSendUpdate(normalizedPower, SHORE_POWER_CONF, "Shore Power")
@@ -46,6 +47,6 @@ export const ShorePower = () => {
       </Card>
     </div>
   )
-}
+})
 
 export default ShorePower

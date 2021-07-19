@@ -4,8 +4,9 @@ import { useInverters, useVebus } from "@elninotech/mfd-modules"
 
 import Inverter from "./Inverter"
 import ColumnContainer from "../ColumnContainer"
+import { observer } from "mobx-react"
 
-const Inverters = () => {
+const Inverters = observer(() => {
   const { inverters } = useInverters()
   const { instanceId } = useVebus()
 
@@ -19,6 +20,6 @@ const Inverters = () => {
   } else {
     return <ColumnContainer />
   }
-}
+})
 
 export default Inverters

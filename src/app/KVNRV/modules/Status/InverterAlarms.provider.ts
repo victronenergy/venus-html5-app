@@ -1,5 +1,5 @@
-import { mqttQuery, PortalId, Topics } from "@elninotech/mfd-modules"
-import { useTopicsState, useTopicSubscriptions, useTopicsWithPortalId } from "@elninotech/mfd-modules"
+import { PortalId, Topics, useMqtt, useTopicsState, useTopicSubscriptions } from "@elninotech/mfd-modules"
+import { useMemo } from "react"
 
 export interface InverterAlarmsState {
   lowVoltage: number
@@ -35,9 +35,10 @@ export function useInverterAlarms(): InverterAlarmsState {
     highVoltageAcOut: `N/${portalId}/inverter/Alarms/HighVoltageAcOut`,
   })
 
-  const topics$ = useTopicsWithPortalId<InverterAlarmsTopics>(getTopics, mqttQuery.portalId$)
+  const { portalId } = useMqtt()
+  const topics = useMemo(() => getTopics(portalId), [portalId])
 
-  useTopicSubscriptions(topics$)
+  useTopicSubscriptions(topics)
 
-  return useTopicsState<InverterAlarmsState>(topics$)
+  return useTopicsState<InverterAlarmsState>(topics)
 }

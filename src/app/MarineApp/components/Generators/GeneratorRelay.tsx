@@ -14,6 +14,7 @@ import { GENERATOR_START_STOP, AC_SOURCE_TYPE, RELAY_FUNCTION } from "../../../u
 import "./Generator.scss"
 
 import GeneratorIcon from "../../images/icons/generator.svg"
+import { observer } from "mobx-react"
 
 function getGeneratorState(statusCode: number, active: boolean, phases: number) {
   if (active) {
@@ -98,7 +99,7 @@ const GeneratorRelay = ({
   )
 }
 
-export const GeneratorRelays = () => {
+export const GeneratorRelays = observer(() => {
   const values = useGeneratorRelay()
 
   if (values.settings) {
@@ -124,6 +125,6 @@ export const GeneratorRelays = () => {
   } else {
     return <ColumnContainer />
   }
-}
+})
 
 export default GeneratorRelays

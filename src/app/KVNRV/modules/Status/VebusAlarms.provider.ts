@@ -1,6 +1,13 @@
-import { mqttQuery, PortalId, Topics } from "@elninotech/mfd-modules"
-import { useTopicsState, useTopicSubscriptions, useTopicsWithParameters } from "@elninotech/mfd-modules"
-import { InstanceId, vebusQuery } from "@elninotech/mfd-modules"
+import {
+  InstanceId,
+  PortalId,
+  Topics,
+  useMqtt,
+  useTopicsState,
+  useTopicSubscriptions,
+  useVebusStore,
+} from "@elninotech/mfd-modules"
+import { useMemo } from "react"
 
 export interface VebusAlarmsState {
   voltage: number
@@ -43,9 +50,11 @@ export function useVebusAlarms(): VebusAlarmsState {
     ],
   })
 
-  const topics$ = useTopicsWithParameters<AlarmsTopics>(getTopics, mqttQuery.portalId$, vebusQuery.instanceId$)
+  const { portalId } = useMqtt()
+  const { instanceId } = useVebusStore()
+  const topics = useMemo(() => getTopics(portalId, instanceId), [portalId, instanceId])
 
-  useTopicSubscriptions(topics$)
+  useTopicSubscriptions(topics)
 
-  return useTopicsState<VebusAlarmsState>(topics$)
+  return useTopicsState<VebusAlarmsState>(topics)
 }

@@ -8,8 +8,9 @@ import "./DcLoads.scss"
 import NumericValue from "../../../components/NumericValue"
 import { normalizePower } from "../../utils/helpers"
 import GaugeIndicator from "../../../components/GaugeIndicator"
+import { observer } from "mobx-react"
 
-export const DcLoads = () => {
+export const DcLoads = observer(() => {
   const { voltage, current, power } = useDcLoads()
 
   const powerMax = (voltage ?? 1) * 60 * CRITICAL_MULTIPLIER
@@ -31,6 +32,6 @@ export const DcLoads = () => {
       </div>
     </Card>
   )
-}
+})
 
 export default DcLoads

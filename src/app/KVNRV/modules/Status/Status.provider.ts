@@ -1,20 +1,18 @@
-import { useObservableState } from "observable-hooks"
-import { statusQuery } from "./Status.query"
-import { WidgetConfiguration, MessagesObj, STATUS_LEVELS, STATUS_LEVELS_MSG } from "../../utils/constants"
-import { useStatusService } from "./Status.service"
+import { MessagesObj, STATUS_LEVELS, STATUS_LEVELS_MSG, WidgetConfiguration } from "../../utils/constants"
 import { useEffect, useState } from "react"
 import { Footer } from "../../../components/Card/Card"
 import { sum } from "../../utils/helpers"
-import { appQuery } from "@elninotech/mfd-modules"
+import { useApp } from "@elninotech/mfd-modules"
+import { useStatusStore } from "./Status.store"
 
 export const useStatus = () => {
-  const statuses = useObservableState(statusQuery.status$)
+  const { status: statuses } = useStatusStore()
 
-  const remote = useObservableState(appQuery.remote$)
-  const statusService = useStatusService()
+  const { remote } = useApp()
+  const statusStore = useStatusStore()
 
   useEffect(() => {
-    statusService.clear()
+    statusStore.clear()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [remote])
 
@@ -22,7 +20,7 @@ export const useStatus = () => {
 }
 
 export const useSendUpdate = (percent: number, conf: WidgetConfiguration, part: string) => {
-  const statusService = useStatusService()
+  const statusStore = useStatusStore()
   const [level, setLevel] = useState(STATUS_LEVELS.SUCCESS)
 
   const footer: Footer = {
@@ -32,7 +30,7 @@ export const useSendUpdate = (percent: number, conf: WidgetConfiguration, part: 
   }
 
   useEffect(() => {
-    let currLevel = level
+    let currLevel: string
     if (conf.THRESHOLDS.length === 3) {
       if (percent > conf.THRESHOLDS[0]) {
         if (percent < conf.THRESHOLDS[0] + conf.THRESHOLDS[1]) {
@@ -42,7 +40,7 @@ export const useSendUpdate = (percent: number, conf: WidgetConfiguration, part: 
         }
         footer.status = currLevel
         footer.message = STATUS_LEVELS_MSG[currLevel]
-        statusService.addStatus({
+        statusStore.addStatus({
           part,
           message: conf.MESSAGES[currLevel as keyof MessagesObj] ?? "",
           level: currLevel,
@@ -50,7 +48,7 @@ export const useSendUpdate = (percent: number, conf: WidgetConfiguration, part: 
         setLevel(currLevel)
       } else {
         currLevel = STATUS_LEVELS.SUCCESS
-        statusService.removeStatus(part)
+        statusStore.removeStatus(part)
         setLevel(currLevel)
       }
     } else {
@@ -67,7 +65,7 @@ export const useSendUpdate = (percent: number, conf: WidgetConfiguration, part: 
         }
         footer.status = currLevel
         footer.message = STATUS_LEVELS_MSG[currLevel]
-        statusService.addStatus({
+        statusStore.addStatus({
           part,
           message: conf.MESSAGES[currLevel as keyof MessagesObj] ?? "",
           level: currLevel,
@@ -75,7 +73,7 @@ export const useSendUpdate = (percent: number, conf: WidgetConfiguration, part: 
         setLevel(currLevel)
       } else {
         currLevel = STATUS_LEVELS.SUCCESS
-        statusService.removeStatus(part)
+        statusStore.removeStatus(part)
         setLevel(currLevel)
       }
     }

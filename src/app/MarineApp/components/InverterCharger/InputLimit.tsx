@@ -5,12 +5,13 @@ import SelectorButton from "../SelectorButton"
 
 import { formatNumber } from "../../../components/NumericValue"
 import "./InputLimit.scss"
+import { observer } from "mobx-react"
 
 type InputLimitProps = {
   onChangeInputLimitClicked: Function
   shorePowerInput: number
 }
-export const InputLimit = ({ onChangeInputLimitClicked, shorePowerInput }: InputLimitProps) => {
+export const InputLimit = observer(({ onChangeInputLimitClicked, shorePowerInput }: InputLimitProps) => {
   const { currentLimit, currentLimitIsAdjustable } = useInputLimit(shorePowerInput)
 
   let isAdjustable = currentLimitIsAdjustable || 0
@@ -33,6 +34,6 @@ export const InputLimit = ({ onChangeInputLimitClicked, shorePowerInput }: Input
       )}
     </div>
   )
-}
+})
 
 export default InputLimit

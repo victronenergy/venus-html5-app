@@ -11,6 +11,7 @@ import "./Header.scss"
 import Logo from "../../images/icons/logo.png"
 import LIcon from "../../images/icons/L.svg"
 import RIcon from "../../images/icons/R.svg"
+import { observer } from "mobx-react"
 
 type HeaderProps = {
   currentView: string
@@ -86,26 +87,22 @@ const Paginator = ({ setPage, currentPage, pages }: PaginatorProps) => {
   )
 }
 
-const HeaderWithData = ({
-  currentView,
-  handleRemoteConsoleButtonClicked,
-  setPage,
-  currentPage,
-  pages,
-}: HeaderProps) => {
-  const { showRemoteConsoleSetting } = useHeader()
+const HeaderWithData = observer(
+  ({ currentView, handleRemoteConsoleButtonClicked, setPage, currentPage, pages }: HeaderProps) => {
+    const { showRemoteConsoleSetting } = useHeader()
 
-  return (
-    <Header
-      showRemoteConsoleSetting={showRemoteConsoleSetting}
-      handleRemoteConsoleButtonClicked={handleRemoteConsoleButtonClicked}
-      currentView={currentView}
-      setPage={setPage}
-      currentPage={currentPage}
-      pages={pages}
-    />
-  )
-}
+    return (
+      <Header
+        showRemoteConsoleSetting={showRemoteConsoleSetting}
+        handleRemoteConsoleButtonClicked={handleRemoteConsoleButtonClicked}
+        currentView={currentView}
+        setPage={setPage}
+        currentPage={currentPage}
+        pages={pages}
+      />
+    )
+  }
+)
 
 const HeaderWithoutMQTTData = ({ currentView, handleRemoteConsoleButtonClicked }: HeaderProps) => {
   return (

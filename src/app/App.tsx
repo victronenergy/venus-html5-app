@@ -1,8 +1,8 @@
 import "../css/index.scss"
 import React, { useEffect } from "react"
 import Loading from "./MarineApp/components/Loading"
-import { appQuery, MqttService, mqttStore, vrmQuery } from "@elninotech/mfd-modules"
-import { useObservableState } from "observable-hooks"
+import { useAppStore, useMqtt, useVebus, useVrmStore } from "@elninotech/mfd-modules"
+import { observer } from "mobx-react"
 
 const KVNRV = React.lazy(() => import("./KVNRV"))
 const MarineApp = React.lazy(() => import("./MarineApp"))
@@ -12,28 +12,28 @@ export type AppProps = {
   port: number
 }
 
-const App = (props: AppProps) => {
+const App = observer((props: AppProps) => {
   const whitelabel = process.env.REACT_APP_WHITELABEL
-  const vrmState = useObservableState(vrmQuery.all$)
-  const remote = useObservableState(appQuery.remote$)
+  const vrmStore = useVrmStore()
+  const appStore = useAppStore()
+  const mqtt = useMqtt()
+  useVebus()
 
   useEffect(() => {
-    const mqttService = new MqttService(mqttStore)
-
-    if (remote === false) {
-      mqttService.boot(props.host, props.port)
+    if (!appStore.remote) {
+      mqtt.boot(props.host, props.port)
     } else if (
-      remote &&
-      vrmState?.username &&
-      vrmState?.token &&
-      vrmState?.webhost &&
-      vrmState?.portalId &&
-      vrmState?.siteId
+      appStore.remote &&
+      vrmStore?.username &&
+      vrmStore?.token &&
+      vrmStore?.webhost &&
+      vrmStore?.portalId &&
+      vrmStore?.siteId
     ) {
-      mqttService.boot(vrmState.webhost, null, true, vrmState.username, vrmState.token, vrmState.portalId, "live")
+      mqtt.boot(vrmStore.webhost, null, true, vrmStore.username, vrmStore.token, vrmStore.portalId, "live")
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.host, props.port, remote, vrmState])
+  }, [props.host, props.port, appStore.remote, vrmStore])
 
   if (whitelabel === "KVNRV") {
     return (
@@ -48,6 +48,6 @@ const App = (props: AppProps) => {
       </React.Suspense>
     )
   }
-}
+})
 
 export default App

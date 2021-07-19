@@ -10,6 +10,7 @@ import { useTank } from "@elninotech/mfd-modules"
 import { TankProps } from "./index"
 import { useSendUpdate } from "../../modules"
 import { VOLUME_UNITS, VolumeUnit, VolumeUnits, FLUID_TYPES } from "../../utils/constants"
+import { observer } from "mobx-react"
 
 export const fluidTypeFormatter = (fluidType: string) => {
   switch (Number(fluidType)) {
@@ -30,7 +31,7 @@ export const fluidTypeFormatter = (fluidType: string) => {
   }
 }
 
-export const SmallTank = ({ tankId, conf, invert }: TankProps) => {
+export const SmallTank = observer(({ tankId, conf, invert }: TankProps) => {
   const tank = useTank(tankId)
   const footer = useSendUpdate(
     invert ? 1 - tank.level / 100 : tank.level / 100,
@@ -67,4 +68,4 @@ export const SmallTank = ({ tankId, conf, invert }: TankProps) => {
       </Card>
     </div>
   )
-}
+})

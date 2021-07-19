@@ -13,13 +13,14 @@ import { SYSTEM_MODE } from "../../../utils/constants"
 import "./InverterCharger.scss"
 
 import MultiplusIcon from "../../images/icons/multiplus.svg"
+import { observer } from "mobx-react"
 
 type InverterChargerProps = {
   onChangeInputLimitClicked: Function
   connected: boolean
 }
 
-const InverterCharger = ({ connected, onChangeInputLimitClicked }: InverterChargerProps) => {
+const InverterCharger = observer(({ connected, onChangeInputLimitClicked }: InverterChargerProps) => {
   const { inputId } = useShorePowerInput()
 
   const { state, mode, customName, productName, modeIsAdjustable, updateMode } = useInverterCharger()
@@ -70,6 +71,6 @@ const InverterCharger = ({ connected, onChangeInputLimitClicked }: InverterCharg
       )}
     </>
   )
-}
+})
 
 export default InverterCharger

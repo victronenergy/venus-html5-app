@@ -1,16 +1,16 @@
-import { useObservableState } from "observable-hooks"
-import { useAppService, useVrmService, vrmQuery } from "@elninotech/mfd-modules"
+import { useAppStore, useVrmStore } from "@elninotech/mfd-modules"
 import "./Installations.scss"
 import { VIEWS } from "../../utils/constants"
+import { observer } from "mobx-react"
 
-export const Installations = () => {
-  const installations = useObservableState(vrmQuery.installations$)
-  const vrmService = useVrmService()
-  const appService = useAppService()
+export const Installations = observer(() => {
+  const vrmStore = useVrmStore()
+  const { installations } = vrmStore
+  const appStore = useAppStore()
 
   const selectInstallation = (id: number) => {
-    vrmService.setActiveInstallation(id)
-    appService.setPage(VIEWS.METRICS)
+    vrmStore.setActiveInstallation(id)
+    appStore.setPage(VIEWS.METRICS)
   }
 
   return (
@@ -29,4 +29,4 @@ export const Installations = () => {
       </div>
     </div>
   )
-}
+})

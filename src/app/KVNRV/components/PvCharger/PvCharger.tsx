@@ -7,8 +7,9 @@ import { Card, SIZE_NARROW, SIZE_SHORT } from "../../../components/Card"
 import NumericValue from "../../../components/NumericValue"
 import { normalizePower } from "../../utils/helpers"
 import GaugeIndicator from "../../../components/GaugeIndicator"
+import { observer } from "mobx-react"
 
-export const PvCharger = () => {
+export const PvCharger = observer(() => {
   const { current, power } = usePvCharger()
 
   const normalizedPower = normalizePower(power ?? 0, PV_CONF.MAX)
@@ -28,6 +29,6 @@ export const PvCharger = () => {
       </Card>
     </div>
   )
-}
+})
 
 export default PvCharger

@@ -4,12 +4,13 @@ import { useActiveInValues } from "@elninotech/mfd-modules"
 
 import { ListRow } from "../ListView"
 import NumericValue from "../../../components/NumericValue"
+import { observer } from "mobx-react"
 
 type ActiveInValuesProps = {
   phases: number
 }
 
-const ActiveInValues = ({ phases }: ActiveInValuesProps) => {
+const ActiveInValues = observer(({ phases }: ActiveInValuesProps) => {
   const { current, voltage, power } = useActiveInValues()
   if (current && voltage && power && phases) {
     return phases > 1 ? (
@@ -31,8 +32,8 @@ const ActiveInValues = ({ phases }: ActiveInValuesProps) => {
       </div>
     )
   } else {
-    return <div></div>
+    return <div />
   }
-}
+})
 
 export default ActiveInValues

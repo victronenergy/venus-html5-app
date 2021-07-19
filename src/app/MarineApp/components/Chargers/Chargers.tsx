@@ -1,12 +1,13 @@
 import React from "react"
 
 import Charger from "./Charger"
-import { useChargers } from "@elninotech/mfd-modules"
+import { ChargerInstanceId, useChargers } from "@elninotech/mfd-modules"
+import { observer } from "mobx-react"
 
-const Chargers = () => {
+const Chargers = observer(() => {
   const { chargers } = useChargers()
 
-  return <>{chargers && chargers.map((charger: number) => <Charger key={charger} chargerId={charger} />)}</>
-}
+  return <>{chargers && chargers.map((charger: ChargerInstanceId) => <Charger key={charger} chargerId={charger} />)}</>
+})
 
 export default Chargers

@@ -9,8 +9,9 @@ import NumericValue from "../../../components/NumericValue"
 import { ListView, ListRow } from "../ListView"
 
 import AcIcon from "../../images/icons/ac.svg"
+import { observer } from "mobx-react"
 
-const AcLoads = () => {
+const AcLoads = observer(() => {
   const { current, voltage, power, phases } = useAcLoads()
   const showAsList = phases > 1
 
@@ -42,6 +43,6 @@ const AcLoads = () => {
   } else {
     return <div />
   }
-}
+})
 
 export default AcLoads

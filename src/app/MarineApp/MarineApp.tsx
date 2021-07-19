@@ -1,17 +1,17 @@
 import classnames from "classnames"
-import { useObservableState } from "observable-hooks"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import Fade, { viewChangeDelay } from "../components/Fade"
 import Header, { HeaderWithoutMQTTData } from "./components/Header/Header"
 import { InverterChargerInputLimitSelector } from "./components/InverterCharger"
 
 import { Connecting, Error, Metrics, MqttUnavailable, RemoteConsole } from "./components/Views"
 
-import { mqttQuery } from "@elninotech/mfd-modules"
+import { useMqtt } from "@elninotech/mfd-modules"
 import { VIEWS } from "../utils/constants"
 import { AppProps } from "../App"
 
 import { LockButton } from "./components/LockButton"
+import { observer } from "mobx-react"
 
 type MainProps = {
   isConnected?: boolean
@@ -35,15 +35,20 @@ const Main = ({ isConnected, children, setView }: MainProps) => {
   )
 }
 
-export const MarineApp = (props: AppProps) => {
+export const MarineApp = observer((props: AppProps) => {
   const { host } = props
   const [currentView, setCurrentView] = useState(VIEWS.METRICS)
   const [viewUnmounting, setViewUnmounting] = useState(false)
   const [currentPage, setCurrentPage] = useState(0)
   const [pages, setTotalPages] = useState(1)
-  const portalId = useObservableState(mqttQuery.portalId$)
-  const isConnected = useObservableState(mqttQuery.isConnected$)
-  const error = useObservableState(mqttQuery.error$)
+  const mqtt = useMqtt()
+  const isConnected = mqtt.isConnected
+  const portalId = mqtt.portalId
+  const error = mqtt.error
+
+  useEffect(() => {
+    console.log(portalId, isConnected)
+  }, [portalId, isConnected])
 
   const setPage = (currentPage: number) => {
     setCurrentPage(currentPage)
@@ -153,4 +158,4 @@ export const MarineApp = (props: AppProps) => {
       <LockButton currentView={currentView} header={false} />
     </>
   )
-}
+})

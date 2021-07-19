@@ -6,7 +6,8 @@ import UnlockIcon from "../../../../images/icons/unlock.svg"
 import LockIcon from "../../../../images/icons/lock.svg"
 
 import "./LockButton.scss"
-import { useApp, useAppService } from "@elninotech/mfd-modules"
+import { useApp } from "@elninotech/mfd-modules"
+import { observer } from "mobx-react"
 
 type LockButtonProps = {
   currentView: string
@@ -14,18 +15,17 @@ type LockButtonProps = {
   showLockButton?: boolean
 }
 
-export const LockButton = ({ currentView, header, showLockButton = true }: LockButtonProps) => {
-  const state = useApp()
-  const appService = useAppService()
+export const LockButton = observer(({ currentView, header, showLockButton = true }: LockButtonProps) => {
+  const appStore = useApp()
 
   return (
     <>
       {currentView === VIEWS.METRICS && showLockButton && (
         <div
           className={classNames("text--smaller", header ? "lock-button" : "lock-button-footer")}
-          onClick={appService.toggleLocked}
+          onClick={appStore.toggleLocked}
         >
-          {state?.locked ? (
+          {appStore?.locked ? (
             <>
               <span>
                 <img src={LockIcon} className="lock-icon" alt={"Lock icon"} />
@@ -44,4 +44,4 @@ export const LockButton = ({ currentView, header, showLockButton = true }: LockB
       )}
     </>
   )
-}
+})

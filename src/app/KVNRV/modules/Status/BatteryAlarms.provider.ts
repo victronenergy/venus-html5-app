@@ -1,6 +1,13 @@
-import { mqttQuery, PortalId, Topics } from "@elninotech/mfd-modules"
-import { useTopicsState, useTopicSubscriptions, useTopicsWithParameters } from "@elninotech/mfd-modules"
-import { batteriesQuery, BatteryId, useBatteries } from "@elninotech/mfd-modules"
+import {
+  BatteryId,
+  PortalId,
+  Topics,
+  useBatteries,
+  useMqtt,
+  useTopicsState,
+  useTopicSubscriptions,
+} from "@elninotech/mfd-modules"
+import { useMemo } from "react"
 
 export interface BatteryAlarmsState {
   lowVoltage: number
@@ -60,15 +67,12 @@ export function useBatteryAlarms(): BatteryAlarmsState {
       midVoltage: `N/${portalId}/battery/${batteryInstance}/Alarms/MidVoltage`,
     }
   }
-  useBatteries()
+  const { batteries } = useBatteries()
 
-  const topics$ = useTopicsWithParameters<BatteryAlarmsTopics>(
-    getTopics,
-    mqttQuery.portalId$,
-    batteriesQuery.batteries$
-  )
+  const { portalId } = useMqtt()
+  const topics = useMemo(() => getTopics(portalId, batteries), [portalId, batteries])
 
-  useTopicSubscriptions(topics$)
+  useTopicSubscriptions(topics)
 
-  return useTopicsState<BatteryAlarmsState>(topics$)
+  return useTopicsState<BatteryAlarmsState>(topics)
 }

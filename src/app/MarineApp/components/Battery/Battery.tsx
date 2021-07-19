@@ -16,6 +16,7 @@ import "./Battery.scss"
 
 import LIcon from "../../images/icons/L.svg"
 import RIcon from "../../images/icons/R.svg"
+import { observer } from "mobx-react"
 
 type PaginatorProps = {
   setPage: Function
@@ -181,12 +182,12 @@ export class Batteries extends Component<BatteriesProps, BatteriesState> {
   }
 }
 
-export const BatteriesWithData = () => {
+export const BatteriesWithData = observer(() => {
   const { batteries } = useBattery()
 
   if (batteries) {
     // Sort batteries first by state, and then by ID to keep order consistent
-    const sorted = batteries.sort((a, b) => {
+    const sorted = batteries.slice().sort((a, b) => {
       // Show charging batteries before discharging batteries
       if (a.state === BATTERY_STATE.CHARGING && b.state !== BATTERY_STATE.CHARGING) return -1
       if (a.state !== BATTERY_STATE.CHARGING && b.state === BATTERY_STATE.CHARGING) return 1
@@ -211,6 +212,6 @@ export const BatteriesWithData = () => {
   } else {
     return <div />
   }
-}
+})
 
 export default BatteriesWithData

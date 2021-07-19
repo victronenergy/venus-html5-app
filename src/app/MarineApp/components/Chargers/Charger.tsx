@@ -15,6 +15,7 @@ import { CHARGER_MODE } from "../../../utils/constants"
 import "./Charger.scss"
 
 import MultiplusIcon from "../../images/icons/multiplus.svg"
+import { observer } from "mobx-react"
 
 const chargerModeFormatter = (value: number) => {
   switch (value) {
@@ -44,7 +45,7 @@ type ChargerProps = {
   chargerId: ChargerInstanceId
 }
 
-const Charger = ({ chargerId }: ChargerProps) => {
+const Charger = observer(({ chargerId }: ChargerProps) => {
   let { customName, productName, current, state, mode, currentLimit, updateMode, updateCurrentLimit } = useCharger(
     chargerId
   )
@@ -92,6 +93,6 @@ const Charger = ({ chargerId }: ChargerProps) => {
       </div>
     </ColumnContainer>
   )
-}
+})
 
 export default Charger

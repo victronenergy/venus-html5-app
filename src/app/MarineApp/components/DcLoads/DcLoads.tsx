@@ -5,8 +5,9 @@ import HeaderView from "../HeaderView"
 import ColumnContainer from "../ColumnContainer"
 import MetricValues from "../MetricValues"
 import NumericValue from "../../../components/NumericValue"
+import { observer } from "mobx-react"
 
-export const DcLoads = (props?: Partial<DcLoadsState>) => {
+export const DcLoads = observer((props?: Partial<DcLoadsState>) => {
   let { voltage, power } = useDcLoads()
   voltage = props?.voltage ?? voltage
   power = props?.power ?? power
@@ -25,6 +26,6 @@ export const DcLoads = (props?: Partial<DcLoadsState>) => {
   } else {
     return <div />
   }
-}
+})
 
 export default DcLoads

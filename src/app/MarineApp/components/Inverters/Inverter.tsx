@@ -1,6 +1,6 @@
 import React from "react"
 
-import { InverterState, useInverter } from "@elninotech/mfd-modules"
+import { InverterState, useInverter, InverterInstanceId } from "@elninotech/mfd-modules"
 
 import { INVERTER_MODE } from "../../../utils/constants"
 
@@ -13,6 +13,7 @@ import SelectorButton from "../SelectorButton"
 import "./Inverter.scss"
 
 import MultiplusIcon from "../../images/icons/multiplus.svg"
+import { observer } from "mobx-react"
 
 const stateFormatter = (state: number) => {
   switch (state) {
@@ -43,51 +44,53 @@ const InverterSubtitle = (voltage: number, current: number, power: number, state
 )
 
 type InverterProps = {
-  instanceId: number
+  instanceId: InverterInstanceId
   isVebusInverter: boolean
 }
 
-export const Inverter = ({ instanceId, isVebusInverter, ...props }: InverterProps & Partial<InverterState>) => {
-  const source = isVebusInverter ? "vebus" : "inverter"
-  let { state, mode, voltage, current, power, customName, productName, nAcInputs, updateMode } = useInverter(
-    instanceId,
-    source
-  )
-  nAcInputs = props.nAcInputs ?? nAcInputs
+export const Inverter = observer(
+  ({ instanceId, isVebusInverter, ...props }: InverterProps & Partial<InverterState>) => {
+    const source = isVebusInverter ? "vebus" : "inverter"
+    let { state, mode, voltage, current, power, customName, productName, nAcInputs, updateMode } = useInverter(
+      instanceId,
+      source
+    )
+    nAcInputs = props.nAcInputs ?? nAcInputs
 
-  // if nAcInputs === 0 it means it's an inverter, if not it's an inverter/charger => skip
-  const show = !isVebusInverter || nAcInputs === 0
-  // Vebus inverters use mode 3 in stead of 2 for ON.
-  const onMode = isVebusInverter ? INVERTER_MODE.VEBUS_ON : INVERTER_MODE.ON
+    // if nAcInputs === 0 it means it's an inverter, if not it's an inverter/charger => skip
+    const show = !isVebusInverter || nAcInputs === 0
+    // Vebus inverters use mode 3 in stead of 2 for ON.
+    const onMode = isVebusInverter ? INVERTER_MODE.VEBUS_ON : INVERTER_MODE.ON
 
-  const productNameShort = productName && productName.split(" ")[0]
+    const productNameShort = productName && productName.split(" ")[0]
 
-  return (
-    <>
-      {show && (
-        <ColumnContainer>
-          <div className="metric inverter">
-            <HeaderView icon={MultiplusIcon} title={customName || `Inverter: ${productNameShort}`} child>
-              {InverterSubtitle(voltage, current, power, state)}
-            </HeaderView>
-            <div className="inverter__mode-selector">
-              <SelectorButton active={mode === onMode} onClick={() => updateMode(onMode)}>
-                On
-              </SelectorButton>
-              <SelectorButton active={mode === INVERTER_MODE.OFF} onClick={() => updateMode(INVERTER_MODE.OFF)}>
-                Off
-              </SelectorButton>
-              {!isVebusInverter && (
-                <SelectorButton active={mode === INVERTER_MODE.ECO} onClick={() => updateMode(INVERTER_MODE.ECO)}>
-                  Eco
+    return (
+      <>
+        {show && (
+          <ColumnContainer>
+            <div className="metric inverter">
+              <HeaderView icon={MultiplusIcon} title={customName || `Inverter: ${productNameShort}`} child>
+                {InverterSubtitle(voltage, current, power, state)}
+              </HeaderView>
+              <div className="inverter__mode-selector">
+                <SelectorButton active={mode === onMode} onClick={() => updateMode(onMode)}>
+                  On
                 </SelectorButton>
-              )}
+                <SelectorButton active={mode === INVERTER_MODE.OFF} onClick={() => updateMode(INVERTER_MODE.OFF)}>
+                  Off
+                </SelectorButton>
+                {!isVebusInverter && (
+                  <SelectorButton active={mode === INVERTER_MODE.ECO} onClick={() => updateMode(INVERTER_MODE.ECO)}>
+                    Eco
+                  </SelectorButton>
+                )}
+              </div>
             </div>
-          </div>
-        </ColumnContainer>
-      )}
-    </>
-  )
-}
+          </ColumnContainer>
+        )}
+      </>
+    )
+  }
+)
 
 export default Inverter

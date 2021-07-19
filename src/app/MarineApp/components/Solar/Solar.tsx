@@ -7,8 +7,9 @@ import NumericValue from "../../../components/NumericValue"
 
 import SolarIcon from "../../images/icons/icon_solar.svg"
 import { usePvCharger } from "@elninotech/mfd-modules"
+import { observer } from "mobx-react"
 
-const Solar = () => {
+const Solar = observer(() => {
   const { current, power } = usePvCharger()
   if (current || power || power === 0) {
     return (
@@ -24,6 +25,6 @@ const Solar = () => {
   } else {
     return null
   }
-}
+})
 
 export default Solar

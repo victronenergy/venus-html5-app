@@ -19,6 +19,7 @@ import "./Generator.scss"
 
 import FpGeneratorIcon from "../../images/icons/fp_generator.svg"
 import GeneratorIcon from "../../images/icons/generator.svg"
+import { observer } from "mobx-react"
 
 const getIcon = (productId: number) => {
   switch (productId) {
@@ -52,7 +53,7 @@ function getGensetState(statusCode: number) {
   }
 }
 
-const GeneratorFp = () => {
+const GeneratorFp = observer(() => {
   const {
     productId,
     productName,
@@ -120,6 +121,6 @@ const GeneratorFp = () => {
   } else {
     return <ColumnContainer />
   }
-}
+})
 
 export default GeneratorFp

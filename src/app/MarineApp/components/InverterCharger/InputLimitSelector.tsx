@@ -8,6 +8,7 @@ import Logger from "../../../utils/logger"
 import Loading from "../Loading"
 
 import "./InputLimitSelector.scss"
+import { observer } from "mobx-react"
 
 const USAmperage = [10, 15, 20, 30, 50, 100]
 const EUAmperage = [3, 6, 10, 13, 16, 25, 32, 63]
@@ -35,7 +36,7 @@ type InputLimitSelectorProps = {
   inputId: number
 }
 
-const InputLimitSelector = ({ inputId, onLimitSelected }: InputLimitSelectorProps) => {
+const InputLimitSelector = observer(({ inputId, onLimitSelected }: InputLimitSelectorProps) => {
   const { currentLimit, currentLimitMax, productId, updateLimit } = useInputLimitSelector(inputId)
 
   const selectedHandler = (value: number) => {
@@ -92,15 +93,15 @@ const InputLimitSelector = ({ inputId, onLimitSelected }: InputLimitSelectorProp
       </div>
     </div>
   )
-}
+})
 
-const InputLimitSelectorWrapper = (props: any) => {
+const InputLimitSelectorWrapper = observer((props: any) => {
   const { inputId } = useShorePowerInput()
   if (inputId) {
     return <InputLimitSelector inputId={inputId} {...props} />
   } else {
     return <Loading />
   }
-}
+})
 
 export default InputLimitSelectorWrapper

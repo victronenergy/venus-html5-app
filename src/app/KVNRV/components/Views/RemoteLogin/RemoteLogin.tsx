@@ -1,6 +1,5 @@
-import { useObservableState } from "observable-hooks"
 import { FormEventHandler, useState } from "react"
-import { useAppService, useTheme, useVrmService, vrmQuery } from "@elninotech/mfd-modules"
+import { useAppStore, useTheme, useVrmStore } from "@elninotech/mfd-modules"
 import { Installations } from "../../Installations"
 import { VRM_URL } from "../../../utils/constants"
 
@@ -10,27 +9,25 @@ import KVNRVLogo from "../../../images/KVNRV-Logo.svg"
 import ArrowLeftDark from "../../../images/ArrowLeft-Dark.svg"
 import ArrowLeft from "../../../images/ArrowLeft.svg"
 import Splash from "../../../images/Splash.svg"
+import { observer } from "mobx-react"
 
-export const RemoteLogin = () => {
+export const RemoteLogin = observer(() => {
   const { darkMode } = useTheme()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState<any>()
-  const vrmService = useVrmService()
-  const appService = useAppService()
-  const userId = useObservableState(vrmQuery.userId$)
-  const loggedIn = useObservableState(vrmQuery.loggedIn$)
-  const siteId = useObservableState(vrmQuery.siteId$)
-  const installations = useObservableState(vrmQuery.installations$)
+  const vrmStore = useVrmStore()
+  const appStore = useAppStore()
+  const { userId, loggedIn, siteId, installations } = vrmStore
 
   const submitLogin: FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault()
 
     try {
-      await vrmService.login(email, password)
+      await vrmStore.login(email, password)
       setEmail("")
       setPassword("")
-      await vrmService.updateInstanceDetails()
+      await vrmStore.updateInstanceDetails()
     } catch (e) {
       console.error(e)
       setError(e)
@@ -38,7 +35,7 @@ export const RemoteLogin = () => {
   }
 
   const goBack = () => {
-    appService.setRemote(false)
+    appStore.setRemote(false)
   }
 
   return (
@@ -110,6 +107,6 @@ export const RemoteLogin = () => {
       </div>
     </div>
   )
-}
+})
 
 export default RemoteLogin

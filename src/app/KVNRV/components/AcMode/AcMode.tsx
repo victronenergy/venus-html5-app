@@ -10,6 +10,7 @@ import { useAcMode, useActiveInValues, useActiveSource } from "@elninotech/mfd-m
 import { useSendUpdate } from "../../modules"
 import { normalizePower } from "../../utils/helpers"
 import GaugeIndicator from "../../../components/GaugeIndicator"
+import { observer } from "mobx-react"
 
 export const acModeFormatter = (value: number) => {
   switch (value) {
@@ -26,7 +27,7 @@ export const acModeFormatter = (value: number) => {
   }
 }
 
-export const AcMode = () => {
+export const AcMode = observer(() => {
   const { mode, limit, productId, updateMode, updateLimit } = useAcMode()
   const { activeInput } = useActiveSource()
   const { current, frequency, voltage, power } = useActiveInValues()
@@ -83,6 +84,6 @@ export const AcMode = () => {
       </Card>
     </div>
   )
-}
+})
 
 export default AcMode

@@ -1,7 +1,6 @@
 import { useEffect } from "react"
-import { appQuery, useAppService, useTheme, useVrmService, vrmQuery } from "@elninotech/mfd-modules"
+import { useApp, useTheme, useVrmStore } from "@elninotech/mfd-modules"
 import { VIEWS } from "../../utils/constants"
-import { useObservableState } from "observable-hooks"
 
 import "./Header.scss"
 
@@ -10,26 +9,25 @@ import RemoteConsoleIcon from "../../images/RemoteConsoleIcon.svg"
 import LogOutIcon from "../../images/LogOut.svg"
 import LightThemeIcon from "../../images/LightThemeIcon.svg"
 import DarkThemeIcon from "../../images/DarkThemeIcon.svg"
+import { observer } from "mobx-react"
 
-export const Header = () => {
-  const { darkMode, themeService } = useTheme()
-  const appService = useAppService()
-  const remote = useObservableState(appQuery.remote$)
-  const loggedIn = useObservableState(vrmQuery.loggedIn$)
-  const username = useObservableState(vrmQuery.username$)
-  const siteId = useObservableState(vrmQuery.siteId$)
-  const vrmService = useVrmService()
+export const Header = observer(() => {
+  const { darkMode, themeStore } = useTheme()
+  const appStore = useApp()
+  const remote = appStore.remote
+  const vrmStore = useVrmStore()
+  const { loggedIn, username, siteId } = vrmStore
 
   const handleRemoteSwitch = () => {
     window.location.replace(remote ? `http://venus.local/app` : `https://kvnrv-9ca32.web.app/app`)
-    appService.toggleRemote()
+    appStore.toggleRemote()
   }
 
   useEffect(() => {
     if (remote && (!loggedIn || !siteId)) {
-      appService.setPage(VIEWS.LOGIN)
+      appStore.setPage(VIEWS.LOGIN)
     } else {
-      appService.setPage(VIEWS.METRICS)
+      appStore.setPage(VIEWS.METRICS)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [remote, loggedIn, siteId])
@@ -50,7 +48,7 @@ export const Header = () => {
         <div className={"header__buttons"}>
           <>
             {loggedIn && (
-              <button className={"header__buttons__logout"} onClick={() => vrmService.logout()}>
+              <button className={"header__buttons__logout"} onClick={() => vrmStore.logout()}>
                 <img src={LogOutIcon} className={"header__buttons__icon"} alt={"Logout icon"} />
               </button>
             )}
@@ -73,7 +71,7 @@ export const Header = () => {
             <input
               type="checkbox"
               checked={darkMode ?? true}
-              onChange={(e) => themeService.setTheme(!darkMode)}
+              onChange={(e) => themeStore.setDarkMode(!darkMode)}
               id="header__buttons__darkmode__input"
             />
             <span className="header__buttons__darkmode__slider">
@@ -89,7 +87,7 @@ export const Header = () => {
         {!remote && (
           <button
             className={"header__buttons__remote-console"}
-            onClick={() => appService.setPage(VIEWS.CONSOLE)}
+            onClick={() => appStore.setPage(VIEWS.CONSOLE)}
             disabled={remote}
           >
             <img src={RemoteConsoleIcon} className={"header__buttons__icon"} alt={"Remote Console icon"} />
@@ -99,6 +97,6 @@ export const Header = () => {
       </div>
     </div>
   )
-}
+})
 
 export default Header

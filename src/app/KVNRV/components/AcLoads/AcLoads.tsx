@@ -8,6 +8,7 @@ import NumericValue from "../../../components/NumericValue"
 import { NotAvailable } from "../NotAvailable"
 import GaugeIndicator from "../../../components/GaugeIndicator"
 import { useSendUpdate } from "../../modules"
+import { observer } from "mobx-react"
 
 const inverterPeakPower = 3000
 const inverterContinuousPower = 2000
@@ -58,7 +59,7 @@ const acLimit = (inverterMode: number, inPowerLimit: number, systemState: number
   return { ...AC_CONF, MAX: barMax, THRESHOLDS: [green, yellow, red] } as WidgetConfiguration
 }
 
-export const AcLoads = () => {
+export const AcLoads = observer(() => {
   const { state } = useSystemState()
   const { mode, limit } = useAcMode()
   const { current, voltage, power, frequency } = useAcLoads()
@@ -105,6 +106,6 @@ export const AcLoads = () => {
       </div>
     </Card>
   )
-}
+})
 
 export default AcLoads

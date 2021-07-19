@@ -14,6 +14,7 @@ import "./ActiveSource.scss"
 
 import ShorePowerIcon from "../../images/icons/shore-power.svg"
 import GeneratorIcon from "../../images/icons/generator.svg"
+import { observer } from "mobx-react"
 
 const activeSourceTitle = {
   [AC_SOURCE_TYPE.SHORE]: "Shore Power",
@@ -68,7 +69,7 @@ const ActiveSource = ({ source, active, phases }: ActiveSourceProps) => {
   )
 }
 
-const ActiveSourceList = () => {
+const ActiveSourceList = observer(() => {
   const { activeInput, phases, settings } = useActiveSource()
 
   return (
@@ -83,6 +84,6 @@ const ActiveSourceList = () => {
       )}
     </>
   )
-}
+})
 
 export default ActiveSourceList

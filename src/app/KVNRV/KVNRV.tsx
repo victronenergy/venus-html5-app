@@ -1,30 +1,27 @@
 import React from "react"
 import { Header } from "./components/Header"
 import { Connecting, Error, Metrics, MqttUnavailable, RemoteConsole } from "./components/Views"
-import { mqttQuery, STATUS, useApp, useAppService, useTheme } from "@elninotech/mfd-modules"
+import { STATUS, useApp, useMqtt, useTheme } from "@elninotech/mfd-modules"
 import { VIEWS } from "./utils/constants"
 import RemoteLogin from "./components/Views/RemoteLogin"
 import { AppProps } from "../App"
-import { useObservableState } from "observable-hooks"
+import { observer } from "mobx-react"
 
-export const KVNRV = (props: AppProps) => {
+export const KVNRV = observer((props: AppProps) => {
   const { darkMode } = useTheme()
-  const appData = useApp()
-  const appService = useAppService()
-
-  const error = useObservableState(mqttQuery.error$)
-  const status = useObservableState(mqttQuery.status$)
+  const appStore = useApp()
+  const { error, status } = useMqtt()
 
   return (
     <div className={"container " + (darkMode ? "dark" : "light")}>
       <Header />
       {(() => {
-        switch (appData?.page) {
+        switch (appStore?.page) {
           case VIEWS.CONSOLE:
             return (
               <RemoteConsole
                 onClickOutsideContainer={() => {
-                  appService.setPage(VIEWS.METRICS)
+                  appStore.setPage(VIEWS.METRICS)
                 }}
                 host={props.host}
               />
@@ -46,4 +43,4 @@ export const KVNRV = (props: AppProps) => {
       })()}
     </div>
   )
-}
+})

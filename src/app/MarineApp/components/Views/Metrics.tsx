@@ -1,5 +1,4 @@
-import { useObservableState } from "observable-hooks"
-import { useLayoutEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import ActiveSource from "../ActiveSource"
 import AcLoads from "../AcLoads"
 import Battery from "../Battery"
@@ -9,7 +8,8 @@ import Inverters from "../Inverters"
 import { InverterCharger } from "../InverterCharger"
 import Solar from "../Solar"
 import Generators from "../Generators"
-import { mqttQuery, useVebus } from "@elninotech/mfd-modules"
+import { useVebus } from "@elninotech/mfd-modules"
+import { observer } from "mobx-react"
 
 const HEADER_HEIGHT = 110
 
@@ -76,59 +76,57 @@ type MetricsProps = {
   pages: number
 }
 
-export const Metrics = ({
-  isConnected,
-  onChangeInverterChargerInputLimitClicked,
-  currentPage,
-  pages,
-  setPages,
-}: MetricsProps) => {
-  const metricsRef = useRef<HTMLDivElement>(null)
-  const [height, setHeight] = useState(0)
-  const messages = useObservableState(mqttQuery.messages$)
-  const { instanceId } = useVebus()
+export const Metrics = observer(
+  ({ isConnected, onChangeInverterChargerInputLimitClicked, currentPage, pages, setPages }: MetricsProps) => {
+    const metricsRef = useRef<HTMLDivElement>(null)
+    const [height, setHeight] = useState(0)
+    const { instanceId } = useVebus()
 
-  useLayoutEffect(() => {
-    computeResponsiveness()
-    window.addEventListener("resize", computeResponsiveness)
-    return () => {
-      window.removeEventListener("resize", computeResponsiveness)
+    useEffect(() => {
+      computeResponsiveness()
+      const interval = setInterval(() => computeResponsiveness(), 1000)
+      return () => {
+        clearInterval(interval)
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    })
+
+    const computeResponsiveness = () => {
+      if (metricsRef.current) {
+        const metrics = Array.from(metricsRef.current.children) as HTMLDivElement[]
+
+        const columns = getRequiredCols(metrics)
+
+        const maxHeight = Math.floor(window.innerHeight - HEADER_HEIGHT)
+        const newHeight = columns === 2 ? Math.min(getContainerHeight(metrics)!, maxHeight) : maxHeight
+        setHeight(newHeight)
+
+        const newPages = getRequiredPages(metrics, columns, newHeight)
+        if (newPages !== pages) setPages(newPages)
+      }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [messages])
 
-  const computeResponsiveness = () => {
-    if (metricsRef.current) {
-      const metrics = Array.from(metricsRef.current.children) as HTMLDivElement[]
+    const style = { height: height, transform: `translate(-${currentPage * 100}%)` }
 
-      const columns = getRequiredCols(metrics)
-
-      const maxHeight = Math.floor(window.innerHeight - HEADER_HEIGHT)
-      const newHeight = columns === 2 ? Math.min(getContainerHeight(metrics)!, maxHeight) : maxHeight
-      setHeight(newHeight)
-
-      const newPages = getRequiredPages(metrics, columns, newHeight)
-      if (newPages !== pages) setPages(newPages)
-    }
+    return (
+      <div className="metrics-container" ref={metricsRef} style={style}>
+        <DcLoads />
+        {!!instanceId && <AcLoads />}
+        <Battery />
+        {!!instanceId && (
+          <InverterCharger
+            onChangeInputLimitClicked={onChangeInverterChargerInputLimitClicked}
+            connected={isConnected}
+          />
+        )}
+        {!!instanceId && <ActiveSource />}
+        <Solar />
+        <Chargers />
+        <Inverters />
+        <Generators />
+      </div>
+    )
   }
-
-  const style = { height: height, transform: `translate(-${currentPage * 100}%)` }
-
-  return (
-    <div className="metrics-container" ref={metricsRef} style={style}>
-      <DcLoads />
-      {!!instanceId && <AcLoads />}
-      <Battery />
-      {!!instanceId && (
-        <InverterCharger onChangeInputLimitClicked={onChangeInverterChargerInputLimitClicked} connected={isConnected} />
-      )}
-      {!!instanceId && <ActiveSource />}
-      <Solar />
-      <Chargers />
-      <Inverters />
-      <Generators />
-    </div>
-  )
-}
+)
 
 export default Metrics

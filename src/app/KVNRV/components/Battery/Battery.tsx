@@ -12,6 +12,7 @@ import { BATTERY_CONF, CRITICAL_MULTIPLIER, STATUS_LEVELS, STATUS_LEVELS_MSG } f
 import GaugeIndicator from "../../../components/GaugeIndicator"
 import { normalizePower } from "../../utils/helpers"
 import { Footer } from "../../../components/Card/Card"
+import { observer } from "mobx-react"
 
 const batteryStateFormatter = (value: number) => {
   switch (value) {
@@ -71,7 +72,7 @@ type BatteryProps = {
   size: string[]
 }
 
-export const Batteries = ({ size }: BatteryProps) => {
+export const Batteries = observer(({ size }: BatteryProps) => {
   const { batteries } = useBattery()
   const battery = batteries
     ? batteries.length > 1
@@ -167,6 +168,6 @@ export const Batteries = ({ size }: BatteryProps) => {
       </div>
     </Card>
   )
-}
+})
 
 export default Batteries
