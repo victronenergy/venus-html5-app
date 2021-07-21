@@ -90,8 +90,8 @@
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "prepare": "husky install",
-    "po:push": "node src/app/locales/poeditor/push.js",
-    "po:pull": "node src/app/locales/poeditor/pull.js"
+    "poeditor:push": "node src/app/locales/poeditor/push.js",
+    "poeditor:pull": "node src/app/locales/poeditor/pull.js"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx,json,css,md}": [
