@@ -9,6 +9,7 @@ import NumericValue from "../../../components/NumericValue"
 import { ListView, ListRow } from "../ListView"
 
 import AcIcon from "../../images/icons/ac.svg"
+import { translate, Translate } from "react-i18nify"
 import { observer } from "mobx-react"
 
 const AcLoads = observer(() => {
@@ -18,7 +19,12 @@ const AcLoads = observer(() => {
   if (current && voltage && power && phases) {
     return showAsList ? (
       <ColumnContainer>
-        <ListView icon={AcIcon} title="AC Loads" subTitle={`${phases} phases`} child={false}>
+        <ListView
+          icon={AcIcon}
+          title={<Translate value="widgets.acLoads" />}
+          subTitle={<Translate value="common.nrOfPhases" phases={phases} />}
+          child={false}
+        >
           {voltage.slice(0, phases).map((v, i) => (
             <ListRow key={i}>
               <span className="value value__phase">L {i + 1}</span>
@@ -31,7 +37,7 @@ const AcLoads = observer(() => {
       </ColumnContainer>
     ) : (
       <ColumnContainer>
-        <HeaderView icon={AcIcon} title="AC Loads">
+        <HeaderView icon={AcIcon} title={translate("widgets.acLoads")}>
           <MetricValues>
             <NumericValue value={voltage[0]} unit="V" />
             <NumericValue value={current[0]} unit="A" precision={1} />

@@ -10,20 +10,21 @@ import { useAcMode, useActiveInValues, useActiveSource } from "@elninotech/mfd-m
 import { useSendUpdate } from "../../modules"
 import { normalizePower } from "../../utils/helpers"
 import GaugeIndicator from "../../../components/GaugeIndicator"
+import { Translate } from "react-i18nify"
 import { observer } from "mobx-react"
 
 export const acModeFormatter = (value: number) => {
   switch (value) {
     case AC_MODE.MODES.ON:
-      return "On"
+      return "on"
     case AC_MODE.MODES.OFF:
-      return "Off"
+      return "off"
     case AC_MODE.MODES.CHARGER_ONLY:
-      return "Charger only"
+      return "chargerOnly"
     case AC_MODE.MODES.INVERTER_ONLY:
-      return "Inverter only"
+      return "inverterOnly"
     default:
-      return " - "
+      return "emptyBar"
   }
 }
 
@@ -66,7 +67,7 @@ export const AcMode = observer(() => {
               <NumericValue value={frequency ? frequency[0] : undefined} unit={"Hz"} precision={0} />
             </div>
             <div className={"info-bar__cell ac_mode__mode"} onClick={() => setModalOpen(true)}>
-              {acModeFormatter(Number(mode))}
+              <Translate value={`common.${acModeFormatter(Number(mode))}`} />
             </div>
           </div>
         </div>

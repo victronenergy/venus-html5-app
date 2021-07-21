@@ -12,16 +12,17 @@ import { BATTERY_CONF, CRITICAL_MULTIPLIER, STATUS_LEVELS, STATUS_LEVELS_MSG } f
 import GaugeIndicator from "../../../components/GaugeIndicator"
 import { normalizePower } from "../../utils/helpers"
 import { Footer } from "../../../components/Card/Card"
+import { translate, Translate } from "react-i18nify"
 import { observer } from "mobx-react"
 
 const batteryStateFormatter = (value: number) => {
   switch (value) {
     case BATTERY_STATE.CHARGING:
-      return "Charging"
+      return "charging"
     case BATTERY_STATE.DISCHARGING:
-      return "Discharging"
+      return "discharging"
     case BATTERY_STATE.IDLE:
-      return "Idle"
+      return "idle"
     default:
       return null
   }
@@ -37,9 +38,9 @@ const batteryTimeToGoFormatter = (timeToGo: number) => {
     const minutes = Math.floor(secs / 60)
 
     let time = []
-    if (days) time.push(`${days} days`)
-    if (hours) time.push(`${hours} hours`)
-    if (minutes) time.push(`${minutes} minutes`)
+    if (days) time.push(`${days} ${translate("common.days")}`)
+    if (hours) time.push(`${hours} ${translate("common.hours")}`)
+    if (minutes) time.push(`${minutes} ${translate("common.minutes")}`)
     return time.join(", ")
     // we are not interested in seconds, since it's an
     // estimate anyways
@@ -104,7 +105,7 @@ export const Batteries = observer(({ size }: BatteryProps) => {
 
       const footer: Footer = { status: status, message: STATUS_LEVELS_MSG[status], property: "Charge" }
       return (
-        <Card title={"Battery"} size={size} footer={footer}>
+        <Card title={<Translate value="widgets.battery" />} size={size} footer={footer}>
           <div className={"battery"}>
             <div className={"battery__group " + size}>
               <div className={"indicator-main" + (size.includes(SIZE_SHORT) ? "--small" : "")}>
@@ -112,16 +113,24 @@ export const Batteries = observer(({ size }: BatteryProps) => {
                   <NumericValue value={battery.soc} unit="%" defaultValue={" - "} precision={1} />
                   <br />
                 </div>
-                {batteryStateLabel && <div className="name">{batteryStateLabel}</div>}
+                {batteryStateLabel && (
+                  <div className="name">
+                    <Translate value={`common.${batteryStateLabel}`} />
+                  </div>
+                )}
               </div>
 
               <div>
                 <div className="indicator">
-                  <span className="name">Voltage</span>
+                  <span className="name">
+                    <Translate value="common.voltage" />
+                  </span>
                   <NumericValue value={battery.voltage} unit="V" defaultValue={" - "} precision={2} />
                 </div>
                 <div className="indicator">
-                  <span className="name">Current</span>
+                  <span className="name">
+                    <Translate value="common.current" />
+                  </span>
                   <NumericValue value={battery.current} unit="A" defaultValue={" - "} precision={1} />
                 </div>
               </div>
@@ -154,7 +163,9 @@ export const Batteries = observer(({ size }: BatteryProps) => {
             />
           </div>
           <div className={"indicator"}>
-            <div className={"name"}>Remaining time</div>
+            <div className={"name"}>
+              <Translate value="common.remainingTime" />
+            </div>
             <div className={"value"}>{batteryTimeToGoFormatter(battery.timetogo)}</div>
           </div>
         </Card>
@@ -162,7 +173,7 @@ export const Batteries = observer(({ size }: BatteryProps) => {
     }
   }
   return (
-    <Card title={"Battery"} size={size}>
+    <Card title={<Translate value="widgets.battery" />} size={size}>
       <div className={"gauge"}>
         <NotAvailable />
       </div>

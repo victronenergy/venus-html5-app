@@ -10,6 +10,7 @@ import { useTank } from "@elninotech/mfd-modules"
 import { TankProps } from "./index"
 import { useSendUpdate } from "../../modules"
 import { VOLUME_UNITS, VolumeUnit, VolumeUnits, FLUID_TYPES } from "../../utils/constants"
+import { Translate } from "react-i18nify"
 import { observer } from "mobx-react"
 
 export const fluidTypeFormatter = (fluidType: string) => {
@@ -46,7 +47,11 @@ export const SmallTank = observer(({ tankId, conf, invert }: TankProps) => {
 
   return (
     <div className="">
-      <Card title={fluidTypeFormatter(tank.fluidType)} size={[SIZE_SHORT, SIZE_NARROW]} footer={footer}>
+      <Card
+        title={<Translate value={"tankWidget." + fluidTypeFormatter(tank.fluidType)} />}
+        size={[SIZE_SHORT, SIZE_NARROW]}
+        footer={footer}
+      >
         <div className="gauge">
           {tank ? (
             <div className={"small-tank"}>

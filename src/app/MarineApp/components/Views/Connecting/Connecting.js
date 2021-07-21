@@ -1,4 +1,5 @@
 import React from "react"
+import { Translate } from "react-i18nify"
 
 import Fade from "../../../../components/Fade"
 
@@ -8,7 +9,9 @@ const Connecting = ({ viewUnmounting }) => (
   <main>
     <Fade unmount={viewUnmounting}>
       <div className="connecting">
-        <p className="text text--very-large">Connecting</p>
+        <p className="text text--very-large">
+          <Translate value="header.connecting" />
+        </p>
         <div className="connecting__dots">
           <p className="dot">.</p>
           <p className="dot two">.</p>

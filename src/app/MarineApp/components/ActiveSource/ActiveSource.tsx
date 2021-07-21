@@ -14,13 +14,14 @@ import "./ActiveSource.scss"
 
 import ShorePowerIcon from "../../images/icons/shore-power.svg"
 import GeneratorIcon from "../../images/icons/generator.svg"
+import { Translate, translate } from "react-i18nify"
 import { observer } from "mobx-react"
 
 const activeSourceTitle = {
-  [AC_SOURCE_TYPE.SHORE]: "Shore Power",
-  [AC_SOURCE_TYPE.GRID]: "Grid Input",
-  [AC_SOURCE_TYPE.GENERATOR]: "Generator Input",
-  [AC_SOURCE_TYPE.NOT_IN_USE]: "Invalid Configuration", // You cannot have a source that isn't configured as active!
+  [AC_SOURCE_TYPE.SHORE]: "shorePower",
+  [AC_SOURCE_TYPE.GRID]: "gridInput",
+  [AC_SOURCE_TYPE.GENERATOR]: "generatorInput",
+  [AC_SOURCE_TYPE.NOT_IN_USE]: "invalidConfig", // You cannot have a source that isn't configured as active!
 }
 
 const activeSourceIcon = {
@@ -32,9 +33,9 @@ const activeSourceIcon = {
 
 const getSourceSubtitle = (active: boolean, phases: number) => {
   if (active) {
-    return phases > 1 ? `${phases} phases` : ""
+    return phases > 1 ? translate("common.phases", { phases }) : ""
   } else {
-    return "Unplugged"
+    return translate("common.unplugged")
   }
 }
 
@@ -46,17 +47,17 @@ type ActiveSourceProps = {
 
 const ActiveSource = ({ source, active, phases }: ActiveSourceProps) => {
   const icon = activeSourceIcon[source]
-  const title = activeSourceTitle[source] || "Unknown"
+  const title = activeSourceTitle[source] || "unknown"
   const subTitle = getSourceSubtitle(active, phases)
   return (
     <div className="metric metric__active-source">
       {phases > 1 ? (
-        <ListView icon={icon} title={title} subTitle={subTitle} child={true}>
+        <ListView icon={icon} title={<Translate value={`widgets.${title}`} />} subTitle={subTitle} child={true}>
           {active && <ActiveInValues phases={phases} />}
         </ListView>
       ) : (
         <>
-          <HeaderView icon={icon} title={title} subTitle={subTitle} child={true}>
+          <HeaderView icon={icon} title={translate(`widgets.${title}`)} subTitle={subTitle} child={true}>
             {active && (
               <MetricValues>
                 <ActiveInValues phases={phases} />

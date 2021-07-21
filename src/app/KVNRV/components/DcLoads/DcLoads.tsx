@@ -1,4 +1,3 @@
-import React from "react"
 import { Card, SIZE_NARROW, SIZE_SHORT } from "../../../components/Card"
 import { useDcLoads } from "@elninotech/mfd-modules"
 import { useSendUpdate } from "../../modules"
@@ -8,6 +7,7 @@ import "./DcLoads.scss"
 import NumericValue from "../../../components/NumericValue"
 import { normalizePower } from "../../utils/helpers"
 import GaugeIndicator from "../../../components/GaugeIndicator"
+import { Translate } from "react-i18nify"
 import { observer } from "mobx-react"
 
 export const DcLoads = observer(() => {
@@ -18,7 +18,7 @@ export const DcLoads = observer(() => {
   useSendUpdate(normalizedPower, DC_CONF, "DC Loads")
 
   return (
-    <Card title={"DC Loads"} size={[SIZE_SHORT, SIZE_NARROW]}>
+    <Card title={<Translate value="widgets.dcLoads" />} size={[SIZE_SHORT, SIZE_NARROW]}>
       <div className="gauge">
         <GaugeIndicator value={power} percent={normalizedPower} parts={DC_CONF.THRESHOLDS} unit={"W"} gauge={false} />
         <div className={"info-bar"}>

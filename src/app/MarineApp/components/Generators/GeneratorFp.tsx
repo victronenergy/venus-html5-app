@@ -19,6 +19,7 @@ import "./Generator.scss"
 
 import FpGeneratorIcon from "../../images/icons/fp_generator.svg"
 import GeneratorIcon from "../../images/icons/generator.svg"
+import { Translate, translate } from "react-i18nify"
 import { observer } from "mobx-react"
 
 const getIcon = (productId: number) => {
@@ -33,7 +34,7 @@ const getIcon = (productId: number) => {
 function getGensetState(statusCode: number) {
   switch (statusCode) {
     case 0:
-      return "Standby"
+      return "standby"
     case 1:
     case 2:
     case 3:
@@ -41,33 +42,26 @@ function getGensetState(statusCode: number) {
     case 5:
     case 6:
     case 7:
-      return "Starting"
+      return "starting"
     case 8:
-      return "Running"
+      return "running"
     case 9:
-      return "Stopping"
+      return "stopping"
     case 10:
-      return "Error"
+      return "error"
     default:
-      return "Not available"
+      return "notAvailable"
   }
 }
 
 const GeneratorFp = observer(() => {
-  const {
-    productId,
-    productName,
-    phases,
-    statusCode,
-    gensetAutoStart,
-    autoStart,
-    updateAutoMode,
-    updateManualMode,
-  } = useGeneratorFp()
+  const { productId, productName, phases, statusCode, gensetAutoStart, autoStart, updateAutoMode, updateManualMode } =
+    useGeneratorFp()
 
   const icon = getIcon(productId)
   const title = productName || "Genset"
   const subTitle = getGensetState(statusCode)
+  const translatedSubTitle = translate(`common.${subTitle}`)
   const isAutoStartDisabled = gensetAutoStart === FISCHER_PANDA_GENSET_AUTOSTART.DISABLED
 
   if (phases) {
@@ -75,11 +69,11 @@ const GeneratorFp = observer(() => {
       <ColumnContainer key="generator-fp">
         <div className="metric generator">
           {phases > 1 ? (
-            <ListView icon={icon} title={title} subTitle={subTitle} child={true}>
+            <ListView icon={icon} title={title} subTitle={translatedSubTitle} child={true}>
               <GensetValues phases={phases} />
             </ListView>
           ) : (
-            <HeaderView icon={icon} title={title} subTitle={subTitle} child>
+            <HeaderView icon={icon} title={title} subTitle={translatedSubTitle} child>
               <MetricValues>
                 <GensetValues phases={phases} />
               </MetricValues>
@@ -94,7 +88,7 @@ const GeneratorFp = observer(() => {
                 updateManualMode(GENERATOR_START_STOP.START)
               }}
             >
-              On
+              <Translate value="common.on" />
             </SelectorButton>
             <SelectorButton
               active={statusCode < 8 && !autoStart}
@@ -103,16 +97,15 @@ const GeneratorFp = observer(() => {
                 updateManualMode(GENERATOR_START_STOP.STOP)
               }}
             >
-              Off
+              <Translate value="common.off" />
             </SelectorButton>
             <SelectorButton active={autoStart === 1} onClick={() => updateAutoMode(GENERATOR_START_STOP.AUTO_ON)}>
-              Auto start/stop
+              <Translate value="common.autoStartStop" />
             </SelectorButton>
           </div>
           {isAutoStartDisabled && (
             <div className="generator__autostart-msg text--smaller text--opaque">
-              The Fisher Panda AutoStart functionality is currently disabled, enable it on the genset panel in order to
-              control the genset from this panel.
+              <Translate value="generator.fisherPandaAutoStartMessage" />
             </div>
           )}
         </div>

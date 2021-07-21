@@ -1,4 +1,5 @@
 import React from "react"
+import { Translate } from "react-i18nify"
 
 import "./Error.scss"
 
@@ -7,8 +8,7 @@ const Error = ({ error }: { error?: any }) => {
     <div className="error text--large">
       <div>
         <p>
-          An error occurred while rendering the application. Try reloading the page or contacting Victron Energy with
-          the following information:
+          <Translate value="error.genericMessage" />
         </p>
         <p className="text--smaller">{`Error: ${error}`}</p>
         <p className="text--smaller">{`User agent: ${navigator.userAgent}`}</p>

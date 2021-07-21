@@ -6,11 +6,12 @@ import { InverterChargerInputLimitSelector } from "./components/InverterCharger"
 
 import { Connecting, Error, Metrics, MqttUnavailable, RemoteConsole } from "./components/Views"
 
-import { useMqtt } from "@elninotech/mfd-modules"
+import { useLanguage, useMqtt } from "@elninotech/mfd-modules"
 import { VIEWS } from "../utils/constants"
 import { AppProps } from "../App"
 
 import { LockButton } from "./components/LockButton"
+import { mfdLanguageOptions } from "app/locales/constants"
 import { observer } from "mobx-react"
 
 type MainProps = {
@@ -37,6 +38,8 @@ const Main = ({ isConnected, children, setView }: MainProps) => {
 
 export const MarineApp = observer((props: AppProps) => {
   const { host } = props
+  // subscribe to language
+  useLanguage(mfdLanguageOptions)
   const [currentView, setCurrentView] = useState(VIEWS.METRICS)
   const [viewUnmounting, setViewUnmounting] = useState(false)
   const [currentPage, setCurrentPage] = useState(0)

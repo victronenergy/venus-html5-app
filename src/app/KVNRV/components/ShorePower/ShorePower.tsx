@@ -1,4 +1,3 @@
-import React from "react"
 import { Card, SIZE_NARROW, SIZE_SHORT } from "../../../components/Card"
 
 import "./ShorePower.scss"
@@ -9,6 +8,7 @@ import { SHORE_POWER_CONF } from "../../utils/constants"
 import { normalizePower } from "../../utils/helpers"
 import { NotAvailable } from "../NotAvailable"
 import GaugeIndicator from "../../../components/GaugeIndicator"
+import { Translate } from "react-i18nify"
 import { observer } from "mobx-react"
 
 export const ShorePower = observer(() => {
@@ -18,7 +18,7 @@ export const ShorePower = observer(() => {
 
   return (
     <div className="">
-      <Card title={"Shore Power"} size={[SIZE_SHORT, SIZE_NARROW]}>
+      <Card title={<Translate value="widgets.shorePower" />} size={[SIZE_SHORT, SIZE_NARROW]}>
         <div className="gauge">
           {power ? (
             <GaugeIndicator

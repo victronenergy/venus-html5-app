@@ -6,6 +6,7 @@ import UnlockIcon from "../../../../images/icons/unlock.svg"
 import LockIcon from "../../../../images/icons/lock.svg"
 
 import "./LockButton.scss"
+import { Translate } from "react-i18nify"
 import { useApp } from "@elninotech/mfd-modules"
 import { observer } from "mobx-react"
 
@@ -30,14 +31,18 @@ export const LockButton = observer(({ currentView, header, showLockButton = true
               <span>
                 <img src={LockIcon} className="lock-icon" alt={"Lock icon"} />
               </span>
-              <span className="lock-text">Unlock to make changes</span>
+              <span className="lock-text">
+                <Translate value="locker.unlockMessage" />
+              </span>
             </>
           ) : (
             <>
               <span>
                 <img src={UnlockIcon} className="lock-icon" alt={"Unlock icon"} />
               </span>
-              <span className="lock-text">Lock to prevent changes</span>
+              <span className="lock-text">
+                <Translate value="locker.lockMessage" />
+              </span>
             </>
           )}
         </div>

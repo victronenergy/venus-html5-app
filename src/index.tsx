@@ -4,6 +4,8 @@ import ReactDOM from "react-dom"
 import App from "./app/App"
 import { getParameterByName } from "./app/utils/util"
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration"
+// load languages
+import "./app/locales"
 
 const host = getParameterByName("host") || window.location.hostname || "localhost"
 const port = parseInt(getParameterByName("port") ?? "9001")

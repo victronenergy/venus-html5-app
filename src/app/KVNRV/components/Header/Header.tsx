@@ -9,6 +9,7 @@ import RemoteConsoleIcon from "../../images/RemoteConsoleIcon.svg"
 import LogOutIcon from "../../images/LogOut.svg"
 import LightThemeIcon from "../../images/LightThemeIcon.svg"
 import DarkThemeIcon from "../../images/DarkThemeIcon.svg"
+import { Translate } from "react-i18nify"
 import { observer } from "mobx-react"
 
 export const Header = observer(() => {
@@ -41,8 +42,8 @@ export const Header = observer(() => {
         </div>
 
         <div className={"header__info"}>
-          <div>{username && "Logged in as"}</div>
-          <div>{username ?? "Not logged in"}</div>
+          <div>{username && <Translate value="header.loggedIn" />}</div>
+          <div>{username ?? <Translate value="header.notLoggedIn" />}</div>
         </div>
 
         <div className={"header__buttons"}>
@@ -59,8 +60,12 @@ export const Header = observer(() => {
       <div className={"header__middle"}>
         <div className={"header__buttons"}>
           <div className={"header__buttons__remote-connection"} onClick={() => handleRemoteSwitch()}>
-            <button className={"remote " + (remote ? "active" : "")}>Remote</button>
-            <button className={"local " + (!remote ? "active" : "")}>Local</button>
+            <button className={"remote " + (remote ? "active" : "")}>
+              <Translate value="header.remote" />
+            </button>
+            <button className={"local " + (!remote ? "active" : "")}>
+              <Translate value="header.local" />
+            </button>
           </div>
         </div>
       </div>
@@ -91,7 +96,9 @@ export const Header = observer(() => {
             disabled={remote}
           >
             <img src={RemoteConsoleIcon} className={"header__buttons__icon"} alt={"Remote Console icon"} />
-            <span className={"header__buttons__text"}>Remote console</span>
+            <span className={"header__buttons__text"}>
+              <Translate value="header.remoteConsole" />
+            </span>
           </button>
         )}
       </div>

@@ -2,6 +2,7 @@ import Modal from "../../../components/Modal"
 import { AC_MODE } from "../../utils/constants"
 import { acModeFormatter } from "./AcMode"
 import Logger from "../../../utils/logger"
+import { Translate } from "react-i18nify"
 
 /**
  * - Mask the Product id with `0xFF00`
@@ -34,7 +35,9 @@ export const AcModeModal = (props: AcModeModalProps) => {
   return (
     <Modal title={"AC Mode"} onClose={props.onClose}>
       <div className="ac_mode_modal indicator-main--small">
-        <div className={"name"}>Select mode</div>
+        <div className={"name"}>
+          <Translate value="acMode.modal.name" />
+        </div>
         <div className={"ac_mode_modal__group"}>
           {Object.values(AC_MODE.MODES).map((mode) => (
             <button
@@ -42,14 +45,16 @@ export const AcModeModal = (props: AcModeModalProps) => {
               className={"ac_mode_modal__button" + (props.mode === mode ? " success" : "")}
               onClick={() => props.updateMode(mode)}
             >
-              {acModeFormatter(mode)}
+              <Translate value={`common.${acModeFormatter(mode)}`} />
             </button>
           ))}
         </div>
 
         {props.updateLimit && (
           <>
-            <div className={"name"}>Select shore input limit</div>
+            <div className={"name"}>
+              <Translate value="acMode.modal.updateLimit" />
+            </div>
             <div className={"ac_mode_modal__group"}>
               {Object.values(getSuggestedAmperageValuesList(props.productId)).map((limit) => (
                 <button

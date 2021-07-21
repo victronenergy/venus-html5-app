@@ -15,16 +15,17 @@ import { CHARGER_MODE } from "../../../utils/constants"
 import "./Charger.scss"
 
 import MultiplusIcon from "../../images/icons/multiplus.svg"
+import { translate, Translate } from "react-i18nify"
 import { observer } from "mobx-react"
 
 const chargerModeFormatter = (value: number) => {
   switch (value) {
     case CHARGER_MODE.OFF:
-      return "OFF"
+      return "off"
     case CHARGER_MODE.ON:
-      return "ON"
+      return "on"
     default:
-      return " - "
+      return "emptyBar"
   }
 }
 
@@ -36,7 +37,9 @@ const ChargerSubtitle = (current: [number?, number?, number?], state: number) =>
       ))}
     </div>
     <div className="metrics__right">
-      <span>{systemStateFormatter(state)}</span>
+      <span>
+        <Translate value={`common.${systemStateFormatter(state)}`} />
+      </span>
     </div>
   </MetricValues>
 )
@@ -46,9 +49,8 @@ type ChargerProps = {
 }
 
 const Charger = observer(({ chargerId }: ChargerProps) => {
-  let { customName, productName, current, state, mode, currentLimit, updateMode, updateCurrentLimit } = useCharger(
-    chargerId
-  )
+  let { customName, productName, current, state, mode, currentLimit, updateMode, updateCurrentLimit } =
+    useCharger(chargerId)
   // When a topic is invalid, it returns undefined -> no value means topic is not supported
   const chargerSupportsMode = mode !== undefined
   const chargerSupportsInputLimit = currentLimit !== undefined
@@ -65,18 +67,18 @@ const Charger = observer(({ chargerId }: ChargerProps) => {
         <div className="charger__header-wrapper">
           <HeaderView
             icon={MultiplusIcon}
-            title={customName || `Charger: ${productNameShort}`}
+            title={customName || translate("widgets.chargerWithName", { productNameShort })}
             children={ChargerSubtitle(current, state)}
             child
           />
         </div>
         {chargerSupportsMode && (
           <div className="charger__mode-selector">
-            <SelectorButton active={chargerMode === "ON"} onClick={() => updateMode(CHARGER_MODE.ON)}>
-              On
+            <SelectorButton active={chargerMode === "on"} onClick={() => updateMode(CHARGER_MODE.ON)}>
+              <Translate value={"common." + chargerMode} />
             </SelectorButton>
-            <SelectorButton active={chargerMode === "OFF"} onClick={() => updateMode(CHARGER_MODE.OFF)}>
-              Off
+            <SelectorButton active={chargerMode === "off"} onClick={() => updateMode(CHARGER_MODE.OFF)}>
+              <Translate value={"common." + chargerMode} />
             </SelectorButton>
             {chargerSupportsInputLimit && (
               <>

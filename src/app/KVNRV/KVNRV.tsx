@@ -1,7 +1,8 @@
 import React from "react"
 import { Header } from "./components/Header"
 import { Connecting, Error, Metrics, MqttUnavailable, RemoteConsole } from "./components/Views"
-import { STATUS, useApp, useMqtt, useTheme } from "@elninotech/mfd-modules"
+import { mfdLanguageOptions } from "app/locales/constants"
+import { STATUS, useApp, useMqtt, useTheme, useLanguage } from "@elninotech/mfd-modules"
 import { VIEWS } from "./utils/constants"
 import RemoteLogin from "./components/Views/RemoteLogin"
 import { AppProps } from "../App"
@@ -9,6 +10,8 @@ import { observer } from "mobx-react"
 
 export const KVNRV = observer((props: AppProps) => {
   const { darkMode } = useTheme()
+  // subscribe to language
+  useLanguage(mfdLanguageOptions)
   const appStore = useApp()
   const { error, status } = useMqtt()
 

@@ -16,6 +16,7 @@ import "./Battery.scss"
 
 import LIcon from "../../images/icons/L.svg"
 import RIcon from "../../images/icons/R.svg"
+import { Translate } from "react-i18nify"
 import { observer } from "mobx-react"
 
 type PaginatorProps = {
@@ -54,8 +55,16 @@ const BatteryHeader = ({ amount, paginate, setPage, currentPage, pageSize }: Bat
     <div className="battery-header">
       <img src={BatteryIcon} className="metric__icon" alt={"Battery Icon"} />
       <div className="battery-header__text">
-        <p className="text--title">{amount > 1 ? "Batteries" : "Battery"}</p>
-        <p className="text--subtitle">{amount > 1 && `${amount} Batteries`}</p>
+        <p className="text--title">
+          <Translate value={"widgets." + (amount > 1 ? "batteries" : "battery")} />
+        </p>
+        <p className="text--subtitle">
+          {amount > 1 && (
+            <>
+              {amount} <Translate value="widgets.batteries" />
+            </>
+          )}
+        </p>
       </div>
       {paginate && <Paginator setPage={setPage} currentPage={currentPage} pages={Math.ceil(amount / pageSize)} />}
     </div>

@@ -13,6 +13,7 @@ import {
   useVebusAlarms,
   VebusAlarmsState,
 } from "../../modules"
+import { Translate } from "react-i18nify"
 import { observer } from "mobx-react"
 
 const SYSTEM_STATE_MAP = {
@@ -68,12 +69,15 @@ export const Status = observer(({ size }: StatusProps) => {
   notifications = notifications.concat(alarmsToUpdate(batteryAlarms, "Battery"))
   notifications = notifications.concat(alarmsToUpdate(vebusAlarms))
   notifications = notifications.concat(statuses?.slice() ?? [])
+  const status = SYSTEM_STATE_MAP[state?.toString() as unknown as keyof typeof SYSTEM_STATE_MAP]
 
   return (
     <div className="metrics__status">
-      <Card title={"Status"} size={size}>
+      <Card title={<Translate value="widgets.status" />} size={size}>
         <div className={"title"}>Penny's House</div>
-        <div className={"status"}>{SYSTEM_STATE_MAP[state?.toString() as keyof Object] ?? " - "}</div>
+        <div className={"status"}>
+          <Translate value={status ? "statusWidget." + status : "common.emptyBar"} />
+        </div>
         <div className={"subheading"}>
           <div className={"subheading__model"}>Geo Pro Travel Trailer</div>
           <div className={"subheading__year"}>Model: 2019</div>
@@ -87,8 +91,12 @@ export const Status = observer(({ size }: StatusProps) => {
                   <img src={IconWarning} alt={"Status update icon"} />
                 </div>
 
-                <span>{update.part}: </span>
-                <span className={"status-update__message"}>{update.message}</span>
+                <span>
+                  <Translate value={`statusWidget.parts.${update.part}`} />:{" "}
+                </span>
+                <span className={"status-update__message"}>
+                  <Translate value={`statusWidget.messages.${update.message}`} />
+                </span>
               </span>
             </div>
           ))}

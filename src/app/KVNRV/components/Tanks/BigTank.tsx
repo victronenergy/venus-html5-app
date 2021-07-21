@@ -10,6 +10,7 @@ import { useEffect, useState } from "react"
 import { VOLUME_UNITS, VolumeUnit, VolumeUnits } from "../../utils/constants"
 
 import { fluidTypeFormatter } from "./SmallTank"
+import { Translate } from "react-i18nify"
 import { observer } from "mobx-react"
 
 export const BigTank = observer(({ tankId, conf, invert }: TankProps) => {
@@ -32,7 +33,11 @@ export const BigTank = observer(({ tankId, conf, invert }: TankProps) => {
 
   return (
     <div className="">
-      <Card title={fluidTypeFormatter(tank.fluidType)} size={[SIZE_WIDE, SIZE_LONG]} footer={footer}>
+      <Card
+        title={<Translate value={"tankWidget." + fluidTypeFormatter(tank.fluidType)} />}
+        size={[SIZE_WIDE, SIZE_LONG]}
+        footer={footer}
+      >
         {tank ? (
           <div className="big-tank">
             <div className="indicator-main">

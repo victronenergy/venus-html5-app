@@ -11,6 +11,7 @@ import "./Header.scss"
 import Logo from "../../images/icons/logo.png"
 import LIcon from "../../images/icons/L.svg"
 import RIcon from "../../images/icons/R.svg"
+import { Translate } from "react-i18nify"
 import { observer } from "mobx-react"
 
 type HeaderProps = {
@@ -46,7 +47,11 @@ export const Header = (props: HeaderProps) => {
 
           {showRemoteConsoleSetting && (
             <button className="remote-console-button" onClick={() => handleRemoteConsoleButtonClicked()}>
-              {currentView !== VIEWS.REMOTE_CONSOLE ? "Remote Console" : "Close"}
+              {currentView !== VIEWS.REMOTE_CONSOLE ? (
+                <Translate value="header.remoteConsole" />
+              ) : (
+                <Translate value="header.close" />
+              )}
             </button>
           )}
         </div>

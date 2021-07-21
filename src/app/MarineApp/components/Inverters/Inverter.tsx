@@ -1,5 +1,3 @@
-import React from "react"
-
 import { InverterState, useInverter, InverterInstanceId } from "@elninotech/mfd-modules"
 
 import { INVERTER_MODE } from "../../../utils/constants"
@@ -13,18 +11,19 @@ import SelectorButton from "../SelectorButton"
 import "./Inverter.scss"
 
 import MultiplusIcon from "../../images/icons/multiplus.svg"
+import { Translate } from "react-i18nify"
 import { observer } from "mobx-react"
 
 const stateFormatter = (state: number) => {
   switch (state) {
     case 0:
-      return "Off"
+      return "off"
     case 1:
-      return "Low Power"
+      return "lowPower"
     case 2:
-      return "Fault"
+      return "fault"
     case 9:
-      return "Inverting"
+      return "inverting"
     default:
       return null
   }
@@ -38,7 +37,9 @@ const InverterSubtitle = (voltage: number, current: number, power: number, state
       <NumericValue value={power || voltage * current} unit="W" />
     </div>
     <div className="metrics__right">
-      <span>{stateFormatter(state)}</span>
+      <span>
+        <Translate value={`common.${stateFormatter(state)}`} />
+      </span>
     </div>
   </MetricValues>
 )
@@ -74,14 +75,14 @@ export const Inverter = observer(
               </HeaderView>
               <div className="inverter__mode-selector">
                 <SelectorButton active={mode === onMode} onClick={() => updateMode(onMode)}>
-                  On
+                  <Translate value="common.on" />
                 </SelectorButton>
                 <SelectorButton active={mode === INVERTER_MODE.OFF} onClick={() => updateMode(INVERTER_MODE.OFF)}>
-                  Off
+                  <Translate value="common.off" />
                 </SelectorButton>
                 {!isVebusInverter && (
                   <SelectorButton active={mode === INVERTER_MODE.ECO} onClick={() => updateMode(INVERTER_MODE.ECO)}>
-                    Eco
+                    <Translate value="common.eco" />
                   </SelectorButton>
                 )}
               </div>
