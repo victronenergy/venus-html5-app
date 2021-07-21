@@ -48,7 +48,7 @@ export const BatteryLevel = ({ battery }: BatteryLevelProps) => {
     <div className="metrics__right">
       {batteryStateLabel && (
         <span>
-          <Translate value={"common." + batteryStateLabel} />
+          <Translate data-test-id="batteryStatus" value={"common." + batteryStateLabel} />
         </span>
       )}
       {showTimetoGo && <span>{timeToGoLabel}</span>}
