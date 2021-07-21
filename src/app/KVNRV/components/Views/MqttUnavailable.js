@@ -1,4 +1,5 @@
 import React from "react"
+import { Translate } from "react-i18nify"
 import Fade from "../../../components/Fade"
 import MqttSettingsGuide from "../../images/mqtt-settings-v2.42.png"
 
@@ -7,11 +8,16 @@ const MqttUnavailable = () => (
     <Fade>
       <div className="error-page">
         <div className="instructions-container text--bold">
-          Could not connect to the MQTT server. <br />
-          Please check that MQTT is enabled in your settings: <br />
-          <i>Remote Console &gt; Settings &gt; Services &gt; MQTT on LAN (Plaintext)</i> <br />
-          Try using the Remote Console button at the top of this screen to change your settings remotely. <br />
-          You can also try connecting to your device remotely by selecting Remote from the menu above.
+          <div className="instructions-container text--bold">
+            <Translate value="error.mqttUnavailable1" /> <br />
+            <Translate value="error.mqttUnavailable2" /> <br />
+            <i>
+              <Translate value="error.mqttUnavailable3" />
+            </i>
+            <br />
+            <Translate value="error.mqttUnavailable4" /> <br />
+            <Translate value="error.mqttUnavailable5" />
+          </div>
         </div>
         <div className="image-container">
           <img src={MqttSettingsGuide} alt={"MQTT Settings Guide"} />

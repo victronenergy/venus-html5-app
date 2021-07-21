@@ -13,6 +13,7 @@ import { SYSTEM_MODE } from "../../../utils/constants"
 import "./InverterCharger.scss"
 
 import MultiplusIcon from "../../images/icons/multiplus.svg"
+import { translate } from "react-i18nify"
 import { observer } from "mobx-react"
 
 type InverterChargerProps = {
@@ -29,9 +30,9 @@ const InverterCharger = observer(({ connected, onChangeInputLimitClicked }: Inve
   const productNameShort = productName && productName.split(" ")[0]
 
   function getModeTitle(modeNum: number) {
-    if (modeNum === 3) return "On"
-    else if (modeNum === 4) return "Off"
-    else if (modeNum === 1) return "Charger only"
+    if (modeNum === 3) return translate("common.on")
+    else if (modeNum === 4) return translate("common.off")
+    else if (modeNum === 1) return translate("common.chargerOnly")
     else return ""
   }
 
@@ -46,7 +47,9 @@ const InverterCharger = observer(({ connected, onChangeInputLimitClicked }: Inve
               <HeaderView
                 icon={MultiplusIcon}
                 title={customName || `Inverter / Charger: ${productNameShort}`}
-                subTitle={(!adjustable ? getModeTitle(currentMode) + " - " : "") + systemStateFormatter(state)}
+                subTitle={
+                  (!adjustable ? getModeTitle(currentMode) + " - " : "") + translate(systemStateFormatter(state))
+                }
                 child
               />
               {!!inputId && (

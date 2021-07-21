@@ -5,7 +5,7 @@
   "license": "ISC",
   "author": "",
   "dependencies": {
-    "@elninotech/mfd-modules": "^2.0.0",
+    "@elninotech/mfd-modules": "^2.1.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -28,6 +28,7 @@
     "react-app-polyfill": "^2.0.0",
     "react-dom": "^17.0.2",
     "react-error-boundary": "^3.1.1",
+    "react-i18nify": "^4.1.0",
     "react-scripts": "^4.0.3",
     "serve": "^11.3.2",
     "typescript": "^4.0.3",
@@ -88,7 +89,9 @@
     "cy:verify": "cypress verify",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "po:push": "node src/app/locales/poeditor/push.js",
+    "po:pull": "node src/app/locales/poeditor/pull.js"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx,json,css,md}": [

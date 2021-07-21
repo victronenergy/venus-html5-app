@@ -5,6 +5,7 @@ import SelectorButton from "../SelectorButton"
 
 import { formatNumber } from "../../../components/NumericValue"
 import "./InputLimit.scss"
+import { Translate } from "react-i18nify"
 import { observer } from "mobx-react"
 
 type InputLimitProps = {
@@ -24,12 +25,18 @@ export const InputLimit = observer(({ onChangeInputLimitClicked, shorePowerInput
         {formattedLimit != null && (
           <div className="text--large metric__current-input-limit__limit">{formattedLimit}</div>
         )}
-        {!isAdjustable && formattedLimit != null && <div className="text--subtitle">Input Limit</div>}
+        {!isAdjustable && formattedLimit != null && (
+          <div className="text--subtitle">
+            <Translate value="common.inputLimit" />
+          </div>
+        )}
       </div>
 
       {isAdjustable !== 0 && (
         <SelectorButton onClick={onChangeInputLimitClicked}>
-          <span className="text--small">Input Limit</span>
+          <span className="text--small">
+            <Translate value="common.inputLimit" />
+          </span>
         </SelectorButton>
       )}
     </div>

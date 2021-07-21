@@ -1,0 +1,142 @@
+{
+    "acMode": {
+        "modal": {
+            "name": "Select mode",
+            "updateLimit": "Select shore input limit"
+        }
+    },
+    "cardFooter": {
+        "Charge": "Charge",
+        "Critical": "Critical",
+        "Optimal": "Optimal",
+        "Status": "Status",
+        "Warning": "Warning"
+    },
+    "common": {
+        "absorptionCharging": "Absorption charging",
+        "assisting": "Assisting",
+        "autoStartStop": "Auto start/stop",
+        "bulkCharging": "Bulk charging",
+        "chargerOnly": "Charger Only",
+        "charging": "Charging",
+        "current": "Current",
+        "days": "days",
+        "discharging": "Discharging",
+        "eco": "Eco",
+        "emptyBar": " - ",
+        "equalisationCharging": "Equalisation charging",
+        "error": "Error",
+        "fault": "Fault",
+        "floatCharging": "Float charging",
+        "hours": "hours",
+        "idle": "Idle",
+        "inputLimit": "Input Limit",
+        "inverterOnly": "Inverter Only",
+        "inverting": "Inverting",
+        "lowPower": "Low Power",
+        "minutes": "minutes",
+        "notAvailable": "Not Available",
+        "nrOfPhases": "%{phases} phases",
+        "off": "Off",
+        "on": "On",
+        "passthru": "Passthru",
+        "powerSupplyMode": "Power supply mode",
+        "remainingTime": "Remaining time",
+        "running": "Running",
+        "standby": "Standby",
+        "starting": "Starting",
+        "stopped": "Stopped",
+        "stopping": "Stopping",
+        "storageMode": "Storage mode",
+        "sustain": "Sustain",
+        "unplugged": "Unplugged",
+        "veBusFault": "VE.Bus Fault condition",
+        "voltage": "Voltage"
+    },
+    "error": {
+        "genericMessage": "An error occurred while rendering the application. Try reloading the page or contacting Victron Energy with the following information:",
+        "mqttUnavailable1": "Could not connect to the MQTT server.",
+        "mqttUnavailable2": "Please check that MQTT is enabled in your settings:",
+        "mqttUnavailable3": "Remote Console > Settings > Services > MQTT on LAN (Plaintext)",
+        "mqttUnavailable4": "Try using the Remote Console button at the top of this screen to change your settings remotely.",
+        "mqttUnavailable5": "You can also try connecting to your device remotely by selecting Remote from the menu above."
+    },
+    "generator": {
+        "fisherPandaAutoStartMessage": "The Fisher Panda AutoStart functionality is currently disabled, enable it on the genset panel in order to control the genset from this panel.",
+        "temperature": {
+            "coolant": "Coolant",
+            "exhaust": "Exhaust",
+            "winding": "Winding"
+        }
+    },
+    "header": {
+        "close": "Close",
+        "connecting": "Connecting",
+        "local": "Local",
+        "loggedIn": "Logged in as",
+        "notLoggedIn": "Not logged in",
+        "remote": "Remote",
+        "remoteConsole": "Remote console",
+        "remoteMessage": "Open in a larger screen to view remote console"
+    },
+    "installations": {
+        "title": "Choose an installation"
+    },
+    "locker": {
+        "lockMessage": "Lock to prevent changes",
+        "unlockMessage": "Unlock to make changes"
+    },
+    "remoteLogin": {
+        "email": "Email",
+        "forgotPassword": "Forgot Password?",
+        "goBack": "Go Back",
+        "logIn": "Log in",
+        "loginFailed": "Login Failed",
+        "password": "Password",
+        "registerMessage1": "Don't have an account yet? ",
+        "registerMessage2": "Register your RV."
+    },
+    "statusWidget": {
+        "Absorption charging": "Absorption charging",
+        "Assisting": "Assisting",
+        "Bulk charging": "Bulk charging",
+        "Discharging": "Discharging",
+        "Equalisation charging": "Equalisation charging",
+        "Float charging": "Float charging",
+        "Inverting": "Inverting",
+        "Low power": "Low power",
+        "Off": "Off",
+        "Passthru": "Passthru",
+        "Storage mode": "Storage mode",
+        "Sustain": "Sustain",
+        "VE.Bus Fault condition": "VE.Bus Fault condition",
+        "parts": {
+            "Fresh water": "Fresh water",
+            "Shore Power": "Shore Power"
+        }
+    },
+    "tankWidget": {
+        "Black water": "Black water",
+        "Fresh water": "Fresh water",
+        "Fuel": "Fuel",
+        "Live well": "Live well",
+        "Oil": "Oil",
+        "Tank sensor": "Tank sensor",
+        "Waste water": "Waste water"
+    },
+    "widgets": {
+        "acLoads": "AC Loads",
+        "batteries": "Batteries",
+        "battery": "Battery",
+        "chargerWithName": "Charger: %{productNameShort}",
+        "dcLoads": "DC Loads",
+        "generatorInput": "Generator Input",
+        "gridInput": "Grid Input",
+        "invalidConfig": "Invalid Configuration",
+        "inverterWithName": "Inverter: %{productNameShort}",
+        "pvCharger": "PV Charger",
+        "shorePower": "Shore Power",
+        "status": "Status",
+        "unknown": "Unknown"
+    }
+}

@@ -6,8 +6,8 @@ import "./ListView.scss"
 type ListViewProps = {
   child: boolean
   icon: string
-  title: string
-  subTitle: string
+  title: string | React.ReactNode
+  subTitle: string | React.ReactNode
 }
 
 export const ListView: React.FunctionComponent<ListViewProps> = ({ child, icon, title, subTitle, children }) => (

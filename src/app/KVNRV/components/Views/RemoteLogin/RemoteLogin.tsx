@@ -9,6 +9,7 @@ import KVNRVLogo from "../../../images/KVNRV-Logo.svg"
 import ArrowLeftDark from "../../../images/ArrowLeft-Dark.svg"
 import ArrowLeft from "../../../images/ArrowLeft.svg"
 import Splash from "../../../images/Splash.svg"
+import { Translate } from "react-i18nify"
 import { observer } from "mobx-react"
 
 export const RemoteLogin = observer(() => {
@@ -48,10 +49,13 @@ export const RemoteLogin = observer(() => {
         {!userId && (
           <>
             <form className={"login__form"} onSubmit={submitLogin}>
-              {error && <div className={"login__form__error"}>{error?.message ?? "Login failed"}</div>}
-
+              {error && (
+                <div className={"login__form__error"}>
+                  {error?.message ?? <Translate value="remoteLogin.loginFailed" />}
+                </div>
+              )}
               <label className={"login__form__label"} htmlFor={"login-email"}>
-                Email
+                <Translate value="remoteLogin.email" />
               </label>
               <input
                 type="email"
@@ -62,7 +66,7 @@ export const RemoteLogin = observer(() => {
               />
 
               <label className={"login__form__label"} htmlFor={"login-password"}>
-                Password
+                <Translate value="remoteLogin.password" />
               </label>
               <input
                 type="password"
@@ -73,7 +77,7 @@ export const RemoteLogin = observer(() => {
               />
 
               <button className={"login__form__button login"} type={"submit"}>
-                Log in
+                <Translate value="remoteLogin.logIn" />
               </button>
               <button className={"login__form__button go_back"} type={"button"} onClick={goBack}>
                 <img
@@ -81,20 +85,20 @@ export const RemoteLogin = observer(() => {
                   alt={"Left arrow"}
                   className={"login__form__icon__go_back"}
                 />
-                Go back
+                <Translate value="remoteLogin.goBack" />
               </button>
             </form>
 
             <div className={"login__bottom"}>
               <a target={"_blank"} href={VRM_URL + "forgot-password"} rel="noreferrer">
-                Forgot Password?
+                <Translate value="remoteLogin.forgotPassword" />
               </a>
             </div>
             <div className={"login__footer"}>
               <span>
-                Don't have an account yet?{" "}
+                <Translate value="remoteLogin.registerMessage1" />{" "}
                 <a target={"_blank"} href={VRM_URL + "register"} rel="noreferrer">
-                  Register your RV.
+                  <Translate value="remoteLogin.registerMessage2" />
                 </a>
               </span>
             </div>

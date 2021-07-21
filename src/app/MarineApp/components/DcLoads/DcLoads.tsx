@@ -1,4 +1,3 @@
-import React from "react"
 import DcIcon from "../../images/icons/dc.svg"
 import { DcLoadsState, useDcLoads } from "@elninotech/mfd-modules"
 import HeaderView from "../HeaderView"

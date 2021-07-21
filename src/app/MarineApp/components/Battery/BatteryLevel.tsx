@@ -1,16 +1,16 @@
 import { BATTERY_STATE } from "../../../utils/constants"
 import { Battery } from "@elninotech/mfd-modules"
-import React from "react"
 import { formatNumber } from "../../../components/NumericValue"
+import { translate, Translate } from "react-i18nify"
 
 const batteryStateFormatter = (value: number) => {
   switch (value) {
     case BATTERY_STATE.CHARGING:
-      return "Charging"
+      return "charging"
     case BATTERY_STATE.DISCHARGING:
-      return "Discharging"
+      return "discharging"
     case BATTERY_STATE.IDLE:
-      return "Idle"
+      return "idle"
     default:
       return null
   }
@@ -24,9 +24,9 @@ const batteryTimeToGoFormatter = (timeToGo: number) => {
     const minutes = Math.floor((secs - hours * 3600) / 60)
     // const seconds = Math.floor(secs - minutes * 60)
 
-    if (days) return `${days} days`
-    else if (hours) return `${hours} hours`
-    else if (minutes) return `${minutes} minutes`
+    if (days) return `${days} ${translate("common.days")}`
+    else if (hours) return `${hours} ${translate("common.hours")}`
+    else if (minutes) return `${minutes} ${translate("common.minutes")}`
     // we are not interested in seconds, since it's an
     // estimate anyways
   } else {
@@ -46,7 +46,11 @@ export const BatteryLevel = ({ battery }: BatteryLevelProps) => {
 
   return (
     <div className="metrics__right">
-      {batteryStateLabel && <span>{batteryStateLabel}</span>}
+      {batteryStateLabel && (
+        <span>
+          <Translate value={"common." + batteryStateLabel} />
+        </span>
+      )}
       {showTimetoGo && <span>{timeToGoLabel}</span>}
       {showSoc && <span>{formatNumber({ value: battery.soc })}%</span>}
     </div>

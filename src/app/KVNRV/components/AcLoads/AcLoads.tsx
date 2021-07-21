@@ -8,6 +8,7 @@ import NumericValue from "../../../components/NumericValue"
 import { NotAvailable } from "../NotAvailable"
 import GaugeIndicator from "../../../components/GaugeIndicator"
 import { useSendUpdate } from "../../modules"
+import { Translate } from "react-i18nify"
 import { observer } from "mobx-react"
 
 const inverterPeakPower = 3000
@@ -76,7 +77,7 @@ export const AcLoads = observer(() => {
   useSendUpdate(normalizedPower, config, "AC Loads")
 
   return (
-    <Card title={"AC Loads"} size={[SIZE_SHORT, SIZE_NARROW]}>
+    <Card title={<Translate value="widgets.acLoads" />} size={[SIZE_SHORT, SIZE_NARROW]}>
       <div className="gauge">
         {!isNaN(inMode) && inMode !== AC_MODE.MODES.OFF && power ? (
           <>

@@ -1,6 +1,7 @@
 import { useAppStore, useVrmStore } from "@elninotech/mfd-modules"
 import "./Installations.scss"
 import { VIEWS } from "../../utils/constants"
+import { Translate } from "react-i18nify"
 import { observer } from "mobx-react"
 
 export const Installations = observer(() => {
@@ -15,7 +16,9 @@ export const Installations = observer(() => {
 
   return (
     <div className={"installations"}>
-      <div className={"installations__title"}>Choose an installation</div>
+      <div className={"installations__title"}>
+        <Translate value="installations.title" />
+      </div>
       <div className={"installations__list"}>
         {installations?.map((installation) => (
           <button

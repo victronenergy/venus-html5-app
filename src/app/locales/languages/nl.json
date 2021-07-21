@@ -1,0 +1,20 @@
+{
+    "acMode": {
+        "modal": {}
+    },
+    "cardFooter": {},
+    "common": {},
+    "error": {},
+    "generator": {
+        "temperature": {}
+    },
+    "header": {},
+    "installations": {},
+    "locker": {},
+    "remoteLogin": {},
+    "statusWidget": {
+        "parts": {}
+    },
+    "tankWidget": {},
+    "widgets": {}
+}

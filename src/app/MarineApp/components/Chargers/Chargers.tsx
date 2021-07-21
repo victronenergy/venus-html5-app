@@ -1,5 +1,3 @@
-import React from "react"
-
 import Charger from "./Charger"
 import { ChargerInstanceId, useChargers } from "@elninotech/mfd-modules"
 import { observer } from "mobx-react"

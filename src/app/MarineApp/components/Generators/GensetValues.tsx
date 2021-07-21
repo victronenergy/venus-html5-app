@@ -4,6 +4,7 @@ import { useGensetValues } from "@elninotech/mfd-modules"
 
 import { ListRow } from "../ListView"
 import NumericValue from "../../../components/NumericValue"
+import { Translate } from "react-i18nify"
 import { observer } from "mobx-react"
 
 type GensetValuesProps = {
@@ -14,11 +15,17 @@ export const GensetValues = observer(({ phases }: GensetValuesProps) => {
   const { voltage, current, power, frequency, coolant, winding, exhaust } = useGensetValues()
   const temperatures = (
     <ListRow key="temperatures">
-      <span className="value value__temperature">Coolant</span>
+      <span className="value value__temperature">
+        <Translate value="generator.temperature.coolant" />
+      </span>
       <NumericValue value={coolant} unit="°C" />
-      <span className="value value__temperature">Winding</span>
+      <span className="value value__temperature">
+        <Translate value="generator.temperature.winding" />
+      </span>
       <NumericValue value={winding} unit="°C" />
-      <span className="value value__temperature">Exhaust</span>
+      <span className="value value__temperature">
+        <Translate value="generator.temperature.exhaust" />
+      </span>
       <NumericValue value={exhaust} unit="°C" />
     </ListRow>
   )

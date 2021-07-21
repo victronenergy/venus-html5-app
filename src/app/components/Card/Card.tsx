@@ -1,9 +1,10 @@
-import React, { FunctionComponent } from "react"
+import React, { FunctionComponent, ReactNode } from "react"
 
 import "./Card.scss"
 import CloseIcon from "../../images/IconClose.svg"
 import CloseIconDark from "../../images/IconClose-Dark.svg"
 import { useTheme } from "@elninotech/mfd-modules"
+import { Translate } from "react-i18nify"
 
 export type Footer = {
   status: string
@@ -12,7 +13,7 @@ export type Footer = {
 }
 
 type CardProps = {
-  title: string
+  title: string | ReactNode
   size: string | Array<string>
   icon?: string
   onIconClick?: Function
@@ -57,8 +58,12 @@ export const Card: FunctionComponent<CardProps> = ({ title, size, icon, onIconCl
 
       {footer && (
         <div className={"card__footer " + footer.status}>
-          <span>{footer.property}: </span>
-          <span>{footer.message}</span>
+          <span>
+            <Translate value={"cardFooter." + footer.property} />:{" "}
+          </span>
+          <span>
+            <Translate value={"cardFooter." + footer.message} />
+          </span>
         </div>
       )}
     </div>

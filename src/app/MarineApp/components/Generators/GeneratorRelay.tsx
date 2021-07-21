@@ -14,20 +14,21 @@ import { GENERATOR_START_STOP, AC_SOURCE_TYPE, RELAY_FUNCTION } from "../../../u
 import "./Generator.scss"
 
 import GeneratorIcon from "../../images/icons/generator.svg"
+import { Translate, translate } from "react-i18nify"
 import { observer } from "mobx-react"
 
 function getGeneratorState(statusCode: number, active: boolean, phases: number) {
   if (active) {
-    return phases > 1 ? "3 phases" : "Running"
+    return phases > 1 ? translate("common.nrOfPhases", { phases }) : translate("common.running")
   }
 
   switch (statusCode) {
     case 1:
-      return "Running"
+      return translate("common.running")
     case 10:
-      return "Error"
+      return translate("common.error")
     default:
-      return "Stopped"
+      return translate("common.stopped")
   }
 }
 
@@ -79,7 +80,7 @@ const GeneratorRelay = ({
               updateManualMode(GENERATOR_START_STOP.START)
             }}
           >
-            On
+            <Translate value="common.on" />
           </SelectorButton>
           <SelectorButton
             active={!manualStart && !autoStart}
@@ -88,10 +89,10 @@ const GeneratorRelay = ({
               updateManualMode(GENERATOR_START_STOP.STOP)
             }}
           >
-            Off
+            <Translate value="common.off" />
           </SelectorButton>
           <SelectorButton active={autoStart === 1} onClick={() => updateAutoMode(GENERATOR_START_STOP.AUTO_ON)}>
-            Auto start/stop
+            <Translate value="common.autoStartStop" />
           </SelectorButton>
         </div>
       )}
