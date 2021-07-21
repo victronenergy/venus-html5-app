@@ -1,20 +1,74 @@
 {
     "acMode": {
-        "modal": {}
+        "modal": {
+            "name": "Nume"
+        }
     },
-    "cardFooter": {},
-    "common": {},
+    "cardFooter": {
+        "Charge": "Incarcare",
+        "Status": "Stare",
+        "Warning": "Avertizare"
+    },
+    "common": {
+        "assisting": "Assisting",
+        "charging": "incarcare",
+        "current": "Actual",
+        "discharging": "descarcare",
+        "eco": "Eco",
+        "error": "Eroare",
+        "fault": "Avarie",
+        "idle": "inactiv",
+        "inverting": "Dimensiune invertor",
+        "off": "Oprit",
+        "on": "Pornit",
+        "passthru": "Direct",
+        "running": "Functioneaza",
+        "standby": "In asteptare",
+        "stopped": "Oprit",
+        "stopping": "Oprire",
+        "sustain": "Sustine",
+        "unplugged": "Deconectat",
+        "voltage": "Tensiune"
+    },
     "error": {},
     "generator": {
         "temperature": {}
     },
-    "header": {},
+    "header": {
+        "connecting": "Conectare"
+    },
     "installations": {},
     "locker": {},
-    "remoteLogin": {},
-    "statusWidget": {
-        "parts": {}
+    "remoteLogin": {
+        "logIn": "Autentificare",
+        "password": "Parola"
     },
-    "tankWidget": {},
-    "widgets": {}
+    "statusWidget": {
+        "Assisting": "Assisting",
+        "Discharging": "descarcare",
+        "Inverting": "Dimensiune invertor",
+        "Low power": "Putere Scazuta",
+        "Off": "Oprit",
+        "Passthru": "Direct",
+        "Sustain": "Sustine",
+        "parts": {
+            "Fresh water": "Apă dulce",
+            "Shore Power": "Energie solară"
+        }
+    },
+    "tankWidget": {
+        "Black water": "APA REZIDUALA",
+        "Fresh water": "Apă dulce",
+        "Fuel": "Carburant",
+        "Live well": "Live well",
+        "Oil": "Ulei",
+        "Tank sensor": "Senzor rezervor",
+        "Waste water": "Apa reziduala"
+    },
+    "widgets": {
+        "batteries": "Baterii",
+        "battery": "Baterie",
+        "status": "Stare",
+        "unknown": "Necunoscut"
+    }
 }

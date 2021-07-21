@@ -1,20 +1,84 @@
 {
     "acMode": {
-        "modal": {}
+        "modal": {
+            "name": "Naam"
+        }
     },
-    "cardFooter": {},
-    "common": {},
+    "cardFooter": {
+        "Charge": "Laden",
+        "Status": "Status",
+        "Warning": "Waarschuwing"
+    },
+    "common": {
+        "assisting": "Assisteren",
+        "charging": "Opladen",
+        "current": "Stroom",
+        "discharging": "Ontladen",
+        "eco": "Eco",
+        "error": "Fout",
+        "fault": "Fout",
+        "hours": "uur",
+        "idle": "Inactief",
+        "inverting": "Omvormen",
+        "minutes": "minuten",
+        "off": "Uit",
+        "on": "Aan",
+        "passthru": "Doorvoer",
+        "running": "Loopt",
+        "standby": "Stand-by",
+        "starting": "Status: Verbonden, lijst met apparaten ophalen...",
+        "stopped": "Gestopt",
+        "stopping": "Stoppen",
+        "sustain": "Handhaven",
+        "unplugged": "Losgekoppeld",
+        "voltage": "Spanning"
+    },
     "error": {},
     "generator": {
         "temperature": {}
     },
-    "header": {},
-    "installations": {},
-    "locker": {},
-    "remoteLogin": {},
-    "statusWidget": {
-        "parts": {}
+    "header": {
+        "close": "Sluiten",
+        "connecting": "Verbinding wordt gemaakt",
+        "local": "Lokaal",
+        "remote": "Afstandsbediening"
     },
-    "tankWidget": {},
-    "widgets": {}
+    "installations": {
+        "title": "titel"
+    },
+    "locker": {},
+    "remoteLogin": {
+        "email": "Email",
+        "logIn": "Inloggen",
+        "password": "Wachtwoord"
+    },
+    "statusWidget": {
+        "Assisting": "Assisteren",
+        "Discharging": "Ontladen",
+        "Inverting": "Omvormen",
+        "Low power": "Lage spanning",
+        "Off": "Uit",
+        "Passthru": "Doorvoer",
+        "Storage mode": "Opslagmodus",
+        "Sustain": "Handhaven",
+        "parts": {
+            "Fresh water": "Vers water",
+            "Shore Power": "Walstroom"
+        }
+    },
+    "tankWidget": {
+        "Black water": "ZWARTWATER",
+        "Fresh water": "Vers water",
+        "Fuel": "Brandstof",
+        "Live well": "Bronwater",
+        "Oil": "Olie",
+        "Tank sensor": "Tanksensor",
+        "Waste water": "Afvalwater"
+    },
+    "widgets": {
+        "batteries": "Accu's",
+        "battery": "Accu",
+        "status": "Status",
+        "unknown": "Onbekend"
+    }
 }

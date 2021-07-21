@@ -1,20 +1,84 @@
 {
     "acMode": {
-        "modal": {}
+        "modal": {
+            "name": "Nom"
+        }
     },
-    "cardFooter": {},
-    "common": {},
+    "cardFooter": {
+        "Charge": "Charge",
+        "Status": "État",
+        "Warning": "Avertissement"
+    },
+    "common": {
+        "assisting": "Assistance",
+        "charging": "charge en cours",
+        "current": "Courant",
+        "discharging": "décharge en cours",
+        "eco": "Éco",
+        "error": "Erreur",
+        "fault": "Défaillance",
+        "hours": "heures",
+        "idle": "Inactif",
+        "inverting": "Conversion",
+        "minutes": "minutes",
+        "off": "Off",
+        "on": "On",
+        "passthru": "Capacité directe",
+        "running": "En marche",
+        "standby": "Pause",
+        "starting": "État : Interrogation des appareils commencée...",
+        "stopped": "Arrêté",
+        "stopping": "Arrêt en cours",
+        "sustain": "Maintenir",
+        "unplugged": "Débranché",
+        "voltage": "Tension"
+    },
     "error": {},
     "generator": {
         "temperature": {}
     },
-    "header": {},
-    "installations": {},
-    "locker": {},
-    "remoteLogin": {},
-    "statusWidget": {
-        "parts": {}
+    "header": {
+        "close": "Fermer",
+        "connecting": "Connexion en cours",
+        "local": "Local",
+        "remote": "À distance"
     },
-    "tankWidget": {},
-    "widgets": {}
+    "installations": {
+        "title": "Vue générale Attributs de données"
+    },
+    "locker": {},
+    "remoteLogin": {
+        "email": "Courriel",
+        "logIn": "Connexion",
+        "password": "Mot de passe"
+    },
+    "statusWidget": {
+        "Assisting": "Assistance",
+        "Discharging": "décharge en cours",
+        "Inverting": "Conversion",
+        "Low power": "Puiss. faible",
+        "Off": "Off",
+        "Passthru": "Capacité directe",
+        "Storage mode": "Mode stockage",
+        "Sustain": "Maintenir",
+        "parts": {
+            "Fresh water": "Eau douce",
+            "Shore Power": "Puissance de quai"
+        }
+    },
+    "tankWidget": {
+        "Black water": "Eaux Noires",
+        "Fresh water": "Eau douce",
+        "Fuel": "Carburant",
+        "Live well": "Vivier",
+        "Oil": "Huile",
+        "Tank sensor": "Sonde du réservoir",
+        "Waste water": "Eaux usées"
+    },
+    "widgets": {
+        "batteries": "Batteries",
+        "battery": "Batterie",
+        "status": "État",
+        "unknown": "Inconnu"
+    }
 }

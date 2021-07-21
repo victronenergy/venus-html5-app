@@ -1,20 +1,74 @@
 {
     "acMode": {
-        "modal": {}
+        "modal": {
+            "name": "Název"
+        }
     },
-    "cardFooter": {},
-    "common": {},
+    "cardFooter": {
+        "Charge": "Zátěž",
+        "Status": "Stav",
+        "Warning": "Upozornění"
+    },
+    "common": {
+        "assisting": "Asistence",
+        "charging": "nabíjení",
+        "current": "Proud",
+        "discharging": "vybíjení",
+        "eco": "Eco",
+        "error": "Chyba",
+        "fault": "Závada",
+        "idle": "Nečinný",
+        "inverting": "Měnič",
+        "off": "Vypnuto",
+        "on": "Zapnuto",
+        "passthru": "Průchozí",
+        "running": "Chod",
+        "standby": "Standby",
+        "stopped": "Zastavený",
+        "stopping": "Zastavení",
+        "sustain": "Udržování",
+        "unplugged": "Odpojeno",
+        "voltage": "Napětí"
+    },
     "error": {},
     "generator": {
         "temperature": {}
     },
-    "header": {},
+    "header": {
+        "connecting": "Připojení"
+    },
     "installations": {},
     "locker": {},
-    "remoteLogin": {},
-    "statusWidget": {
-        "parts": {}
+    "remoteLogin": {
+        "logIn": "Přihlásit se",
+        "password": "Heslo"
     },
-    "tankWidget": {},
-    "widgets": {}
+    "statusWidget": {
+        "Assisting": "Asistence",
+        "Discharging": "vybíjení",
+        "Inverting": "Měnič",
+        "Low power": "Nízký výkon",
+        "Off": "Vypnuto",
+        "Passthru": "Průchozí",
+        "Sustain": "Udržování",
+        "parts": {
+            "Fresh water": "Čistá voda",
+            "Shore Power": "Břehový proud"
+        }
+    },
+    "tankWidget": {
+        "Black water": "SPLAŠKY",
+        "Fresh water": "Čistá voda",
+        "Fuel": "Palivo",
+        "Live well": "Nádrž na vodu",
+        "Oil": "Olej",
+        "Tank sensor": "Čidlo nádrže",
+        "Waste water": "Odpadní voda"
+    },
+    "widgets": {
+        "batteries": "Baterie",
+        "battery": "Baterie",
+        "status": "Stav",
+        "unknown": "Neznámý"
+    }
 }

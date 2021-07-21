@@ -1,20 +1,73 @@
 {
     "acMode": {
-        "modal": {}
+        "modal": {
+            "name": "اسم"
+        }
     },
-    "cardFooter": {},
-    "common": {},
+    "cardFooter": {
+        "Charge": "تحميل",
+        "Status": "الحالة",
+        "Warning": "تحذير"
+    },
+    "common": {
+        "assisting": "مساندة",
+        "charging": "يقوم بالشحن",
+        "current": "التيار",
+        "discharging": "يقوم بتفريغ الشحن",
+        "eco": "بيئة",
+        "error": "خطأ",
+        "fault": "خلل",
+        "idle": "ساكن",
+        "inverting": "عكس",
+        "off": "مطفأ",
+        "on": "مشغل",
+        "passthru": "تمرير عبر",
+        "running": "مشغل",
+        "standby": "انتظار",
+        "stopped": "موقف",
+        "stopping": "توقف",
+        "sustain": "ركيزة",
+        "unplugged": "مفصول",
+        "voltage": "الجهد الكهربائي"
+    },
     "error": {},
     "generator": {
         "temperature": {}
     },
-    "header": {},
+    "header": {
+        "connecting": "جاري الاتصال"
+    },
     "installations": {},
     "locker": {},
-    "remoteLogin": {},
-    "statusWidget": {
-        "parts": {}
+    "remoteLogin": {
+        "password": "كلمة السر"
     },
-    "tankWidget": {},
-    "widgets": {}
+    "statusWidget": {
+        "Assisting": "مساندة",
+        "Discharging": "يقوم بتفريغ الشحن",
+        "Inverting": "عكس",
+        "Low power": "طاقة منخفضة",
+        "Off": "مطفأ",
+        "Passthru": "تمرير عبر",
+        "Sustain": "ركيزة",
+        "parts": {
+            "Fresh water": "ماء نقي",
+            "Shore Power": "دعم الطاقة"
+        }
+    },
+    "tankWidget": {
+        "Black water": "مياه سوداء",
+        "Fresh water": "ماء نقي",
+        "Fuel": "وقود",
+        "Live well": "حيوية جيدة",
+        "Oil": "زيت",
+        "Tank sensor": "حساس الخزان",
+        "Waste water": "ماء فاسد"
+    },
+    "widgets": {
+        "batteries": "البطاريات",
+        "battery": "بطارية",
+        "status": "الحالة",
+        "unknown": "مجهول"
+    }
 }

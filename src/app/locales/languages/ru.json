@@ -1,20 +1,80 @@
 {
     "acMode": {
-        "modal": {}
+        "modal": {
+            "name": "Имя"
+        }
     },
-    "cardFooter": {},
-    "common": {},
+    "cardFooter": {
+        "Charge": "Нагрузка",
+        "Status": "Состояние",
+        "Warning": "Предупреждение"
+    },
+    "common": {
+        "assisting": "Помощь",
+        "charging": "заряжается",
+        "current": "Ток",
+        "discharging": "разряжается",
+        "eco": "Эко",
+        "error": "Ошибка",
+        "fault": "Неисправность",
+        "idle": "без нагрузки",
+        "inverting": "Инвертирование",
+        "off": "Выкл",
+        "on": "Вкл",
+        "passthru": "Проход",
+        "running": "Работает",
+        "standby": "Ожидание",
+        "starting": "Статус: запуск опроса устройств...",
+        "stopped": "Остановлено",
+        "stopping": "Остановка",
+        "sustain": "Удержание",
+        "unplugged": "Отключено",
+        "voltage": "Напряжение"
+    },
     "error": {},
     "generator": {
         "temperature": {}
     },
-    "header": {},
-    "installations": {},
-    "locker": {},
-    "remoteLogin": {},
-    "statusWidget": {
-        "parts": {}
+    "header": {
+        "close": "Закрыть",
+        "connecting": "Подключение",
+        "remote": "Удаленный"
     },
-    "tankWidget": {},
-    "widgets": {}
+    "installations": {
+        "title": "Сбросить пароль"
+    },
+    "locker": {},
+    "remoteLogin": {
+        "email": "Эл. почта",
+        "logIn": "Вход",
+        "password": "Пароль"
+    },
+    "statusWidget": {
+        "Assisting": "Помощь",
+        "Discharging": "разряжается",
+        "Inverting": "Инвертирование",
+        "Low power": "Низкая мощность",
+        "Off": "Выкл",
+        "Passthru": "Проход",
+        "Sustain": "Удержание",
+        "parts": {
+            "Fresh water": "Свежая вода",
+            "Shore Power": "Мощность солнечной системы"
+        }
+    },
+    "tankWidget": {
+        "Black water": "Темная вода",
+        "Fresh water": "Свежая вода",
+        "Fuel": "Топливо",
+        "Live well": "Рабочая скважина",
+        "Oil": "Нефть",
+        "Tank sensor": "Датчик насоса",
+        "Waste water": "Грязная вода"
+    },
+    "widgets": {
+        "batteries": "Батареи",
+        "battery": "Батарея",
+        "status": "Состояние",
+        "unknown": "Неизвестно"
+    }
 }
