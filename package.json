@@ -71,9 +71,7 @@
   "scripts": {
     "clean": "rm -rf build",
     "start": "react-scripts start",
-    "prebuild": "rm -rf build/ dist/",
     "build": "react-scripts build",
-    "postbuild": "mv build/ dist/",
     "eject": "react-scripts eject",
     "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!@elninotech/mfd-modules)/\"",
     "serve": "serve -C -s -l 8000 dist",
