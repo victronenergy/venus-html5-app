@@ -106,62 +106,72 @@ export const Metrics = () => {
     if (isNarrow) {
       setLayout(
         <div className="row">
-          <div className={["row", getIsHidden(0, pageNum, currPage)].join(" ")}>
-            <Status size={[SIZE_WIDE, SIZE_LONG]} />
-            <Battery size={[SIZE_WIDE, SIZE_LONG]} />
-          </div>
+          {!isHidden(0, pageNum, currPage) && (
+            <div className={"row"}>
+              <Status size={[SIZE_WIDE, SIZE_LONG]} />
+              <Battery size={[SIZE_WIDE, SIZE_LONG]} />
+            </div>
+          )}
 
-          <div className={getIsHidden(1, pageNum, currPage)}>
-            <AcMode />
-            <div className="row">
-              <DcLoads />
-              <AcLoads />
+          {!isHidden(1, pageNum, currPage) && (
+            <div>
+              <AcMode />
+              <div className="row">
+                <DcLoads />
+                <AcLoads />
+              </div>
             </div>
-          </div>
+          )}
 
-          <div className={getIsHidden(2, pageNum, currPage)}>
-            <div className="row">
-              <PvCharger />
-              <SmallTank tankId={TANKS_CONF.FRESH_WATER.DEVICE_ID!} conf={TANKS_CONF.FRESH_WATER} invert={true} />
+          {!isHidden(2, pageNum, currPage) && (
+            <div>
+              <div className="row">
+                <PvCharger />
+                <SmallTank tankId={TANKS_CONF.FRESH_WATER.DEVICE_ID!} conf={TANKS_CONF.FRESH_WATER} invert={true} />
+              </div>
+              <div className="row">
+                <SmallTank tankId={TANKS_CONF.GRAY_WATER.DEVICE_ID!} conf={TANKS_CONF.GRAY_WATER} invert={false} />
+                <SmallTank tankId={TANKS_CONF.BLACK_WATER.DEVICE_ID!} conf={TANKS_CONF.BLACK_WATER} invert={false} />
+              </div>
             </div>
-            <div className="row">
-              <SmallTank tankId={TANKS_CONF.GRAY_WATER.DEVICE_ID!} conf={TANKS_CONF.GRAY_WATER} invert={false} />
-              <SmallTank tankId={TANKS_CONF.BLACK_WATER.DEVICE_ID!} conf={TANKS_CONF.BLACK_WATER} invert={false} />
-            </div>
-          </div>
+          )}
         </div>
       )
     } else {
       setLayout(
         <div className="row">
-          <div className={getIsHidden(0, pageNum, currPage)}>
-            <Status size={[SIZE_WIDE, SIZE_LONG]} />
+          {!isHidden(0, pageNum, currPage) && (
+            <div>
+              <Status size={[SIZE_WIDE, SIZE_LONG]} />
 
-            <div className="row">
-              <DcLoads />
-              <AcLoads />
+              <div className="row">
+                <DcLoads />
+                <AcLoads />
+              </div>
+              {isTall && (
+                <div className="row">
+                  <PvCharger />
+                  <SmallTank tankId={TANKS_CONF.FRESH_WATER.DEVICE_ID!} conf={TANKS_CONF.FRESH_WATER} invert={true} />
+                </div>
+              )}
             </div>
-            {isTall && (
-              <div className="row">
-                <PvCharger />
-                <SmallTank tankId={TANKS_CONF.FRESH_WATER.DEVICE_ID!} conf={TANKS_CONF.FRESH_WATER} invert={true} />
-              </div>
-            )}
-          </div>
+          )}
 
-          <div className={["grid", getIsHidden(1, pageNum, currPage)].join(" ")}>
-            <Battery size={[SIZE_WIDE, SIZE_LONG]} />
-            <AcMode />
-            {isTall && (
-              <div className="row">
-                <SmallTank tankId={TANKS_CONF.GRAY_WATER.DEVICE_ID!} conf={TANKS_CONF.GRAY_WATER} invert={false} />
-                <SmallTank tankId={TANKS_CONF.BLACK_WATER.DEVICE_ID!} conf={TANKS_CONF.BLACK_WATER} invert={false} />
-              </div>
-            )}
-          </div>
+          {!isHidden(1, pageNum, currPage) && (
+            <div className={"grid"}>
+              <Battery size={[SIZE_WIDE, SIZE_LONG]} />
+              <AcMode />
+              {isTall && (
+                <div className="row">
+                  <SmallTank tankId={TANKS_CONF.GRAY_WATER.DEVICE_ID!} conf={TANKS_CONF.GRAY_WATER} invert={false} />
+                  <SmallTank tankId={TANKS_CONF.BLACK_WATER.DEVICE_ID!} conf={TANKS_CONF.BLACK_WATER} invert={false} />
+                </div>
+              )}
+            </div>
+          )}
 
-          {!isTall && (
-            <div className={getIsHidden(2, pageNum, currPage)}>
+          {!isTall && !isHidden(2, pageNum, currPage) && (
+            <div>
               <div className="row">
                 <PvCharger />
                 <SmallTank tankId={TANKS_CONF.FRESH_WATER.DEVICE_ID!} conf={TANKS_CONF.FRESH_WATER} invert={true} />
@@ -196,21 +206,19 @@ export const Metrics = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage])
 
-  const getIsHidden = (elPage: number, pageNum: number, currPage: number) => {
-    let c = ""
-
+  const isHidden = (elPage: number, pageNum: number, currPage: number) => {
     if (pageNum === 2) {
       if (currPage === 0 && elPage === 2) {
-        c += " hidden"
+        return true
       } else if (currPage === 1 && elPage <= 1) {
-        c += " hidden"
+        return true
       }
     } else if (pageNum >= 3) {
       if (elPage !== currPage) {
-        c += " hidden"
+        return true
       }
     }
-    return c
+    return false
   }
 
   return (

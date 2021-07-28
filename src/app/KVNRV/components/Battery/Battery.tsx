@@ -87,7 +87,7 @@ export const Batteries = observer(({ size }: BatteryProps) => {
     ...BATTERY_CONF,
     MAX: BATTERY_CONF.MAX * (battery?.voltage ? battery.voltage : 1) * CRITICAL_MULTIPLIER,
   }
-
+  console.log({ power })
   const normalizedPower = normalizePower(power, config.MAX, -1 * BATTERY_CONF.ZERO_OFFSET!)
 
   useSendUpdate(normalizedPower, config, "Battery")
@@ -158,48 +158,38 @@ export const Batteries = observer(({ size }: BatteryProps) => {
             <div className={"value"}>{batteryTimeToGoFormatter(battery.timetogo)}</div>
           </div>
           <div className="battery__gauge gauge-double">
-            <KVNGauge
-              showNeedle={battery.power <= 0}
-              percent={battery.power <= 0 ? 1 - normalizedPower : 1}
-              from={-1 * Math.PI}
-              to={Math.PI / 2}
-              inverse
-              className="glue-gauges small"
-              parts={BATTERY_CONF.THRESHOLDS}
-              showText={false}
-            >
-              <>
-                <span className="gauge-label gauge-label--left">
-                  <Translate value="common.discharge" />
-                </span>
-                <div className="power-indicator">{formatNumber({ unit: "W", value: battery.power })?.toString()}</div>
-              </>
-            </KVNGauge>
-            <KVNGauge
-              showNeedle={battery.power > 0}
-              className="glue-gauges small"
-              percent={battery.power > 0 ? normalizedPower : 0}
-              from={(-1 * Math.PI) / 2}
-              to={Math.PI / 2}
-              parts={BATTERY_CONF.THRESHOLDS}
-              showText={false}
-            >
-              <span className="gauge-label gauge-label--right">
-                <Translate value="common.charge" />
-              </span>
-            </KVNGauge>
+            <span className="gauge-label gauge-label--left">
+              <Translate value="common.discharge" />
+            </span>
+            <div className="double-gauges">
+              <KVNGauge
+                showNeedle={battery.power <= 0}
+                percent={battery.power <= 0 ? 1 - normalizedPower : 1}
+                from={-1 * Math.PI}
+                to={Math.PI / 2}
+                inverse
+                className="glue-gauges"
+                parts={BATTERY_CONF.THRESHOLDS}
+                showText={false}
+              >
+                <>
+                  <div className="power-indicator">{formatNumber({ unit: "W", value: battery.power })?.toString()}</div>
+                </>
+              </KVNGauge>
+              <KVNGauge
+                showNeedle={battery.power > 0}
+                className="glue-gauges"
+                percent={battery.power > 0 ? normalizedPower : 0}
+                from={(-1 * Math.PI) / 2}
+                to={Math.PI / 2}
+                parts={BATTERY_CONF.THRESHOLDS}
+                showText={false}
+              />
+            </div>
+            <span className="gauge-label gauge-label--right">
+              <Translate value="common.charge" />
+            </span>
           </div>
-
-          {/* <div className="battery__gauge gauge">
-            <GaugeIndicator
-              value={battery.power}
-              percent={normalizedPower}
-              parts={[...BATTERY_CONF.THRESHOLDS]}
-              zeroOffset={BATTERY_CONF.ZERO_OFFSET}
-              size={"big"}
-              gauge={true}
-            />
-          </div> */}
         </Card>
       )
     }

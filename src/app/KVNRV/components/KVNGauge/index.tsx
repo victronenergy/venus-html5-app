@@ -2,7 +2,7 @@ import { sum } from "app/KVNRV/utils/helpers"
 import { useContainerColors } from "app/KVNRV/utils/hooks"
 import { Chart } from "chart.js"
 import { useCallback, useEffect, useMemo, useRef, memo, ReactNode } from "react"
-import "./GauceIndicator.scss"
+import "./GaugeIndicator.scss"
 import { TextPlugin } from "./plugins/TextPlugin"
 
 const defaultOptions = {
@@ -167,7 +167,9 @@ export const KVNGauge = memo(
     return (
       <div className={`gauge-indicator ${className}`}>
         {children}
-        <canvas className="top-chart" ref={canvasEl} />
+        <div className="canvas">
+          <canvas className="top-chart" ref={canvasEl} />
+        </div>
       </div>
     )
   }

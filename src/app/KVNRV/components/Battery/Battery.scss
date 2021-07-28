@@ -98,32 +98,39 @@ $battery-height: 5rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
+  height: 40%;
 }
 
 .gauge-indicator.glue-gauges {
-  width: $donut-width-big - 0.9rem;
+  flex: 0 0 auto;
+  width: 50%;
+}
+.double-gauges {
+  display: flex;
+  width: 60%;
 }
 
 $from-top-dnt: $donut-size-small * 0.85 - 2rem;
 
 .gauge-label {
-  position: relative;
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 5px;
   color: $color-gray;
   font-size: 0.8rem;
-  top: $from-top-dnt;
   &--left {
-    left: -$donut-width-big / 2 + 0.4rem;
+    margin-right: 0.25rem;
   }
   &--right {
-    right: -$donut-width-big + 0.75rem;
+    margin-left: 0.25rem;
   }
 }
 
 .power-indicator {
-  position: relative;
+  position: absolute;
   font-size: 1.4rem;
-  left: $donut-width-big / 4;
-  top: $from-top-dnt - 1rem;
-  transform: translate(50%, -50%);
+  left: 50%;
+  bottom: 0;
+  transform: translate(25%, -25%);
   font-weight: 500;
 }
