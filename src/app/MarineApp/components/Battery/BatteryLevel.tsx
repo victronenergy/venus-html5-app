@@ -45,14 +45,16 @@ export const BatteryLevel = ({ battery }: BatteryLevelProps) => {
   const showSoc = battery.soc !== undefined && battery.soc !== null
 
   return (
-    <div className="metrics__right">
+    <div className="metrics__right battery-level">
       {batteryStateLabel && (
         <span>
           <Translate data-test-id="batteryStatus" value={"common." + batteryStateLabel} />
         </span>
       )}
-      {showTimetoGo && <span>{timeToGoLabel}</span>}
-      {showSoc && <span>{formatNumber({ value: battery.soc })}%</span>}
+      <div className="charge-indicator">
+        {showTimetoGo && <span>{timeToGoLabel}</span>}
+        {showSoc && <span>{formatNumber({ value: battery.soc })}%</span>}
+      </div>
     </div>
   )
 }
