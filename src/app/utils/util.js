@@ -46,37 +46,38 @@ export const flatten = (arrays) => {
   return [].concat(...arrays)
 }
 
+// keys from common translations
 export const systemStateFormatter = (value) => {
   switch (value) {
     case VEBUS_SYSTEM_STATE.OFF:
-      return "Off"
+      return "off"
     case VEBUS_SYSTEM_STATE.LOW_POWER:
-      return "Low power"
+      return "lowPower"
     case VEBUS_SYSTEM_STATE.FAULT_CONDITION:
-      return "VE.Bus Fault condition"
+      return "veBusFault"
     case VEBUS_SYSTEM_STATE.BULK_CHARGING:
-      return "Bulk charging"
+      return "bulkCharging"
     case VEBUS_SYSTEM_STATE.ABSORPTION_CHARGINNG:
-      return "Absorption charging"
+      return "absorptionCharging"
     case VEBUS_SYSTEM_STATE.FLOAT_CHARGING:
-      return "Float charging"
+      return "floatCharging"
     case VEBUS_SYSTEM_STATE.STORAGE_MODE:
-      return "Storage mode"
+      return "storageMode"
     case VEBUS_SYSTEM_STATE.EQUALISATION_CHARGING:
-      return "Equalisation charging"
+      return "equalisationCharging"
     case VEBUS_SYSTEM_STATE.PASSTHRU:
-      return "Passthru"
+      return "passthru"
     case VEBUS_SYSTEM_STATE.INVERTING:
-      return "Inverting"
+      return "inverting"
     case VEBUS_SYSTEM_STATE.ASSISTING:
-      return "Assisting"
+      return "assisting"
     case VEBUS_SYSTEM_STATE.POWER_SUPPLY_MODE:
-      return "Power supply mode"
+      return "powerSupplyMode"
     case VEBUS_SYSTEM_STATE.DISCHARGING:
-      return "Discharging"
+      return "discharging"
     case VEBUS_SYSTEM_STATE.SUSTAIN:
-      return "Sustain"
+      return "sustain"
     default:
-      return " - "
+      return "emptyBar"
   }
 }

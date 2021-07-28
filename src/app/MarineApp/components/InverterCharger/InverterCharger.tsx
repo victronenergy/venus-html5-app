@@ -48,7 +48,8 @@ const InverterCharger = observer(({ connected, onChangeInputLimitClicked }: Inve
                 icon={MultiplusIcon}
                 title={customName || `Inverter / Charger: ${productNameShort}`}
                 subTitle={
-                  (!adjustable ? getModeTitle(currentMode) + " - " : "") + translate(systemStateFormatter(state))
+                  (!adjustable ? getModeTitle(currentMode) + " - " : "") +
+                  translate("common." + systemStateFormatter(state))
                 }
                 child
               />
