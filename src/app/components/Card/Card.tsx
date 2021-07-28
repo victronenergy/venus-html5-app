@@ -26,7 +26,6 @@ export const SIZE_WIDE = "wide"
 export const SIZE_NARROW = "narrow"
 export const SIZE_LONG = "long"
 
-export const ICON_SETTINGS = "settings"
 export const ICON_CLOSE = "close"
 
 export const Card: FunctionComponent<CardProps> = ({ title, size, icon, onIconClick, footer, infoText, children }) => {
@@ -47,7 +46,6 @@ export const Card: FunctionComponent<CardProps> = ({ title, size, icon, onIconCl
                     className={"card__header__icon__img"}
                   />
                 )}
-                {icon === ICON_SETTINGS && "Settings"}
               </button>
             )}
           </div>

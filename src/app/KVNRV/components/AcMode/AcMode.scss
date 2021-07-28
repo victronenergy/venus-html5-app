@@ -9,13 +9,10 @@
     font-size: 1rem;
   }
 
-  .ac_mode__mode {
-    border-radius: 5px;
-    border: $color-green solid 1px !important;
-    width: $card-width-big/2;
-    align-self: center;
-    color: $color-green;
+  .info-bar__cell {
+    padding: 0.15rem 1rem;
   }
+
 }
 
 .ac_mode_modal {
@@ -45,6 +42,34 @@
       &.success {
         color: $color-white;
       }
+    }
+  }
+}
+
+.ac-container {
+  display: flex;
+  width: 100%;
+  .ac-actions {
+    flex-grow: 1;
+    flex-shrink: 0;
+  }
+  .action {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    &:nth-child(2) {
+      margin-top: 0.4rem;
+    }
+    & > .name {
+      color: $color-gray-600;
+      font-family: MuseoSans;
+      font-size: 0.8rem;
+      letter-spacing: 0;
+      line-height: 1.1rem;
+    }
+    & > .btn {
+      margin-top: 0.3rem;
     }
   }
 }

@@ -1,8 +1,17 @@
 @import '../../css/variables.scss';
 
 
-$battery-width: 2.5rem;
+$battery-width: 3.5rem;
 $battery-height: 5rem;
+
+
+.remaining {
+  margin-top: 1rem;
+}
+
+.indicator-current {
+  margin-top: 0.6rem;
+}
 
 .battery {
   display: flex;
@@ -13,11 +22,16 @@ $battery-height: 5rem;
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    // justify-content: space-between;
     padding-right: 1rem;
 
     .indicator-main {
       flex-direction: column;
+      margin-left: 1rem;
+    }
+
+    .indicator-right {
+      margin-left: auto;
     }
 
     &.small {
@@ -49,7 +63,7 @@ $battery-height: 5rem;
       height: $battery-height;
       border: $color-gray solid 2px;
       border-radius: 8px;
-      padding: 0.2rem 0.15rem 0.15rem 0.15rem;
+      padding: 0.35rem 0.35rem 0.35rem 0.35rem;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
@@ -77,8 +91,39 @@ $battery-height: 5rem;
         }
       }
     }
-  }
+  }  
+}
 
-  .battery__gauge {
+.gauge-double {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.gauge-indicator.glue-gauges {
+  width: $donut-width-big - 0.9rem;
+}
+
+$from-top-dnt: $donut-size-small * 0.85 - 2rem;
+
+.gauge-label {
+  position: relative;
+  color: $color-gray;
+  font-size: 0.8rem;
+  top: $from-top-dnt;
+  &--left {
+    left: -$donut-width-big / 2 + 0.4rem;
   }
+  &--right {
+    right: -$donut-width-big + 0.75rem;
+  }
+}
+
+.power-indicator {
+  position: relative;
+  font-size: 1.4rem;
+  left: $donut-width-big / 4;
+  top: $from-top-dnt - 1rem;
+  transform: translate(50%, -50%);
+  font-weight: 500;
 }

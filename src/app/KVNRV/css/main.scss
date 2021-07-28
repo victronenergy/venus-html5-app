@@ -2,6 +2,7 @@
 
 @import "./variables.scss";
 @import "./indicators.scss";
+@import "./button.scss";
 
 
 @font-face {
@@ -43,6 +44,7 @@ body {
   --card-bg-color: #ffffff;
   --header-bg-color: #28348D;
   --header-button-color: #3E4DBE;
+  --btn-primary: #d1d1d1;
   --card-shadow-color: var(--color-lightgray);
   --settings-icon: url('../../images/SettingsIcon.svg');
   --close-icon: url('../../images/IconClose.svg');
@@ -56,6 +58,7 @@ body {
   --card-bg-color: #2D333F;
   --header-bg-color: #141B27;
   --header-button-color: #2D333F;
+  --btn-primary: rgba(255,255,255,0.15);
   --card-shadow-color: var(--color-black);
   --settings-icon: url('../../images/SettingsIcon-Dark.svg');
   --close-icon: url('../../images/IconClose-Dark.svg');

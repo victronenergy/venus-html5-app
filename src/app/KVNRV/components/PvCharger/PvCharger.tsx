@@ -6,9 +6,9 @@ import { useSendUpdate } from "../../modules"
 import { Card, SIZE_NARROW, SIZE_SHORT } from "../../../components/Card"
 import NumericValue from "../../../components/NumericValue"
 import { normalizePower } from "../../utils/helpers"
-import GaugeIndicator from "../../../components/GaugeIndicator"
 import { Translate } from "react-i18nify"
 import { observer } from "mobx-react"
+import { KVNGauge } from "../KVNGauge"
 
 export const PvCharger = observer(() => {
   const { current, power } = usePvCharger()
@@ -20,7 +20,7 @@ export const PvCharger = observer(() => {
     <div className="">
       <Card title={<Translate value="widgets.pvCharger" />} size={[SIZE_SHORT, SIZE_NARROW]}>
         <div className="pv_charger gauge">
-          <GaugeIndicator value={power} percent={normalizedPower} parts={PV_CONF.THRESHOLDS} unit={"W"} gauge={false} />
+          <KVNGauge value={power} percent={normalizedPower} parts={PV_CONF.THRESHOLDS} unit={"W"} />
           <div className={"info-bar"}>
             <div className={"info-bar__cell"}>
               <NumericValue value={current} unit={"A"} precision={1} />

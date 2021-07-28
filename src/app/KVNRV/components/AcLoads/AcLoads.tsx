@@ -6,10 +6,10 @@ import { normalizePower } from "../../utils/helpers"
 import { AC_CONF, AC_MODE, CRITICAL_MULTIPLIER, WidgetConfiguration } from "../../utils/constants"
 import NumericValue from "../../../components/NumericValue"
 import { NotAvailable } from "../NotAvailable"
-import GaugeIndicator from "../../../components/GaugeIndicator"
 import { useSendUpdate } from "../../modules"
 import { Translate } from "react-i18nify"
 import { observer } from "mobx-react"
+import { KVNGauge } from "../KVNGauge"
 
 const inverterPeakPower = 3000
 const inverterContinuousPower = 2000
@@ -81,13 +81,7 @@ export const AcLoads = observer(() => {
       <div className="gauge">
         {!isNaN(inMode) && inMode !== AC_MODE.MODES.OFF && power ? (
           <>
-            <GaugeIndicator
-              value={power[0] ?? 0}
-              percent={normalizedPower}
-              parts={config.THRESHOLDS}
-              unit={"W"}
-              gauge={false}
-            />
+            <KVNGauge value={power[0] ?? 0} percent={normalizedPower} parts={config.THRESHOLDS} unit={"W"} />
 
             <div className={"info-bar"}>
               <div className={"info-bar__cell"}>

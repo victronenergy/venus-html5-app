@@ -1,19 +1,18 @@
-import React from "react"
 import { Card, SIZE_SHORT } from "../../../components/Card"
 
 import { BATTERY_STATE } from "../../../utils/constants"
 import { useBattery } from "@elninotech/mfd-modules"
 import { useSendUpdate } from "../../modules"
-import NumericValue from "../../../components/NumericValue"
+import NumericValue, { formatNumber } from "../../../components/NumericValue"
 import { NotAvailable } from "../NotAvailable"
 
 import "./Battery.scss"
 import { BATTERY_CONF, CRITICAL_MULTIPLIER, STATUS_LEVELS, STATUS_LEVELS_MSG } from "../../utils/constants"
-import GaugeIndicator from "../../../components/GaugeIndicator"
 import { normalizePower } from "../../utils/helpers"
 import { Footer } from "../../../components/Card/Card"
 import { translate, Translate } from "react-i18nify"
 import { observer } from "mobx-react"
+import { KVNGauge } from "../KVNGauge"
 
 const batteryStateFormatter = (value: number) => {
   switch (value) {
@@ -75,6 +74,7 @@ type BatteryProps = {
 
 export const Batteries = observer(({ size }: BatteryProps) => {
   const { batteries } = useBattery()
+
   const battery = batteries
     ? batteries.length > 1
       ? batteries.filter((b) => b.active_battery_service)[0]
@@ -87,6 +87,7 @@ export const Batteries = observer(({ size }: BatteryProps) => {
     ...BATTERY_CONF,
     MAX: BATTERY_CONF.MAX * (battery?.voltage ? battery.voltage : 1) * CRITICAL_MULTIPLIER,
   }
+
   const normalizedPower = normalizePower(power, config.MAX, -1 * BATTERY_CONF.ZERO_OFFSET!)
 
   useSendUpdate(normalizedPower, config, "Battery")
@@ -108,6 +109,20 @@ export const Batteries = observer(({ size }: BatteryProps) => {
         <Card title={<Translate value="widgets.battery" />} size={size} footer={footer}>
           <div className={"battery"}>
             <div className={"battery__group " + size}>
+              <div className="battery__charge">
+                <div className="battery__charge__top" />
+                <div className={"battery__charge__body" + (batteryLevelBars === CELL_NUMBER ? " full" : "")}>
+                  {batteryLevelBars > 0 &&
+                    Array.from(Array(batteryLevelBars).keys())
+                      .reverse()
+                      .map((idx) => (
+                        <div
+                          className={"battery__charge__body__cell" + getClassname(idx, batteryLevelBars)}
+                          key={"battery-cell-" + idx}
+                        />
+                      ))}
+                </div>
+              </div>
               <div className={"indicator-main" + (size.includes(SIZE_SHORT) ? "--small" : "")}>
                 <div>
                   <NumericValue value={battery.soc} unit="%" defaultValue={" - "} precision={1} />
@@ -120,14 +135,14 @@ export const Batteries = observer(({ size }: BatteryProps) => {
                 )}
               </div>
 
-              <div>
+              <div className="indicator-right">
                 <div className="indicator">
                   <span className="name">
                     <Translate value="common.voltage" />
                   </span>
                   <NumericValue value={battery.voltage} unit="V" defaultValue={" - "} precision={2} />
                 </div>
-                <div className="indicator">
+                <div className="indicator indicator-current">
                   <span className="name">
                     <Translate value="common.current" />
                   </span>
@@ -135,39 +150,56 @@ export const Batteries = observer(({ size }: BatteryProps) => {
                 </div>
               </div>
             </div>
-
-            <div className="battery__charge">
-              <div className="battery__charge__top" />
-              <div className={"battery__charge__body" + (batteryLevelBars === CELL_NUMBER ? " full" : "")}>
-                {batteryLevelBars > 0 &&
-                  Array.from(Array(batteryLevelBars).keys())
-                    .reverse()
-                    .map((idx) => (
-                      <div
-                        className={"battery__charge__body__cell" + getClassname(idx, batteryLevelBars)}
-                        key={"battery-cell-" + idx}
-                      />
-                    ))}
-              </div>
-            </div>
           </div>
-          <div className="battery__gauge gauge">
-            <GaugeIndicator
-              value={battery.power}
-              percent={normalizedPower}
-              parts={BATTERY_CONF.THRESHOLDS}
-              zeroOffset={BATTERY_CONF.ZERO_OFFSET}
-              unit={"W"}
-              size={"big"}
-              gauge={true}
-            />
-          </div>
-          <div className={"indicator"}>
+          <div className={"indicator remaining"}>
             <div className={"name"}>
               <Translate value="common.remainingTime" />
             </div>
             <div className={"value"}>{batteryTimeToGoFormatter(battery.timetogo)}</div>
           </div>
+          <div className="battery__gauge gauge-double">
+            <KVNGauge
+              showNeedle={battery.power <= 0}
+              percent={battery.power <= 0 ? 1 - normalizedPower : 1}
+              from={-1 * Math.PI}
+              to={Math.PI / 2}
+              inverse
+              className="glue-gauges small"
+              parts={BATTERY_CONF.THRESHOLDS}
+              showText={false}
+            >
+              <>
+                <span className="gauge-label gauge-label--left">
+                  <Translate value="common.discharge" />
+                </span>
+                <div className="power-indicator">{formatNumber({ unit: "W", value: battery.power })?.toString()}</div>
+              </>
+            </KVNGauge>
+            <KVNGauge
+              showNeedle={battery.power > 0}
+              className="glue-gauges small"
+              percent={battery.power > 0 ? normalizedPower : 0}
+              from={(-1 * Math.PI) / 2}
+              to={Math.PI / 2}
+              parts={BATTERY_CONF.THRESHOLDS}
+              showText={false}
+            >
+              <span className="gauge-label gauge-label--right">
+                <Translate value="common.charge" />
+              </span>
+            </KVNGauge>
+          </div>
+
+          {/* <div className="battery__gauge gauge">
+            <GaugeIndicator
+              value={battery.power}
+              percent={normalizedPower}
+              parts={[...BATTERY_CONF.THRESHOLDS]}
+              zeroOffset={BATTERY_CONF.ZERO_OFFSET}
+              size={"big"}
+              gauge={true}
+            />
+          </div> */}
         </Card>
       )
     }
