@@ -10,7 +10,7 @@
   }
 
   .info-bar__cell {
-    padding: 0.15rem 1rem;
+    padding: 0.15rem 0.3rem;
   }
 
 }
@@ -47,11 +47,15 @@
 }
 
 .ac-container {
+  height: 100%;
   display: flex;
   width: 100%;
+  .gauge {
+    width: 40%;
+    height: 90%;
+  }
   .ac-actions {
-    flex-grow: 1;
-    flex-shrink: 0;
+    width: 60%;
   }
   .action {
     width: 100%;
