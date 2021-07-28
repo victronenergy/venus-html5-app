@@ -4,6 +4,7 @@ import { Chart } from "chart.js"
 import { useCallback, useEffect, useMemo, useRef, memo, ReactNode } from "react"
 import "./GaugeIndicator.scss"
 import { TextPlugin } from "./plugins/TextPlugin"
+import { debounce } from "lodash-es"
 
 const defaultOptions = {
   maintainAspectRatio: false,
@@ -13,7 +14,6 @@ const defaultOptions = {
   legend: {
     display: false,
   },
-  aspectRatio: 1,
   tooltips: {
     enabled: false,
   },
@@ -92,8 +92,7 @@ export const KVNGauge = memo(
       }
     }, [indicatorPoints, colors.textColor, showNeedle, indicatorColors])
 
-    // create chart entity on first mount
-    useEffect(() => {
+    const createChart = useCallback(() => {
       if (!canvasEl.current) {
         return
       }
@@ -103,39 +102,50 @@ export const KVNGauge = memo(
       if (!chartCanvas) {
         return
       }
+      chartRef.current = new Chart(chartCanvas, {
+        type: "doughnut",
+        plugins: [showText ? TextPlugin() : {}],
+        options: {
+          ...defaultOptions,
+          rotation: from,
+          circumference: to,
+        },
+        data: {
+          datasets: [
+            {
+              data: [...parts],
+              weight: 1,
+              backgroundColor: orderedColors,
+              hoverBackgroundColor: orderedColors,
+              borderColor: "transparent",
+            },
+            {
+              data: [1],
+              weight: 1,
+              borderColor: "transparent",
+              backgroundColor: "transparent",
+              hoverBackgroundColor: "transparent",
+            },
+            getIndicatorData(),
+          ],
+        },
+      })
+      // inject options for text plugin
+      //@ts-ignore
+      chartRef.current.options.textPlugin = { textColor: colors.textColor, value, unit }
+    }, [colors.textColor, from, getIndicatorData, orderedColors, parts, showText, to, unit, value])
+
+    // create chart entity on first mount
+    useEffect(() => {
+      if (!canvasEl.current) {
+        return
+      }
 
       // create chart only if it does not exist
       if (!chartRef.current) {
-        chartRef.current = new Chart(chartCanvas, {
-          type: "doughnut",
-          plugins: [showText ? TextPlugin() : {}],
-          options: {
-            ...defaultOptions,
-            rotation: from,
-            circumference: to,
-          },
-          data: {
-            datasets: [
-              {
-                data: [...parts],
-                weight: 1,
-                backgroundColor: orderedColors,
-                hoverBackgroundColor: orderedColors,
-                borderColor: "transparent",
-              },
-              {
-                data: [1],
-                weight: 1,
-                borderColor: "transparent",
-                backgroundColor: "transparent",
-                hoverBackgroundColor: "transparent",
-              },
-              getIndicatorData(),
-            ],
-          },
-        })
+        createChart()
       }
-    }, [from, to, parts, orderedColors, getIndicatorData, showText])
+    }, [createChart])
 
     // update threshold dataset
     useEffect(() => {
@@ -163,6 +173,22 @@ export const KVNGauge = memo(
 
       chartRef.current.update()
     }, [colors.textColor, indicatorColors, indicatorPoints, unit, value])
+
+    // Chart js was not updating it's height and width on resize
+    // below we destroy and create it again in order for it to resize accordingly
+    const onResize = function () {
+      if (chartRef.current) {
+        chartRef.current.destroy()
+        createChart()
+      }
+    }
+
+    useEffect(() => {
+      const debouncedResize = debounce(onResize, 500)
+      window.addEventListener("resize", debouncedResize)
+      return () => window.removeEventListener("resize", debouncedResize)
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
       <div className={`gauge-indicator ${className}`}>
