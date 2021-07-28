@@ -10,6 +10,7 @@ import { NotAvailable } from "../NotAvailable"
 import GaugeIndicator from "../../../components/GaugeIndicator"
 import { Translate } from "react-i18nify"
 import { observer } from "mobx-react"
+import { KVNGauge } from "../KVNGauge"
 
 export const ShorePower = observer(() => {
   const { current, frequency, voltage, power } = useActiveInValues()
@@ -21,17 +22,12 @@ export const ShorePower = observer(() => {
       <Card title={<Translate value="widgets.shorePower" />} size={[SIZE_SHORT, SIZE_NARROW]}>
         <div className="gauge">
           {power ? (
-            <GaugeIndicator
-              value={power[0]}
-              percent={normalizedPower}
-              parts={SHORE_POWER_CONF.THRESHOLDS}
-              unit={"W"}
-              gauge={false}
-            />
+            <>
+              <KVNGauge value={power[0]} percent={normalizedPower} parts={SHORE_POWER_CONF.THRESHOLDS} unit={"W"} />
+            </>
           ) : (
             <NotAvailable />
           )}
-
           <div className={"info-bar"}>
             <div className={"info-bar__cell"}>
               <NumericValue value={voltage ? voltage[0] : undefined} unit={"V"} precision={0} />

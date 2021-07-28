@@ -20,7 +20,7 @@ export const Header = observer(() => {
   const { loggedIn, username, siteId } = vrmStore
 
   const handleRemoteSwitch = () => {
-    window.location.replace(remote ? `http://venus.local/app` : `https://kvnrv-9ca32.web.app/app`)
+    // window.location.replace(remote ? `http://venus.local/app` : `https://kvnrv-9ca32.web.app/app`)
     appStore.toggleRemote()
   }
 
@@ -57,20 +57,15 @@ export const Header = observer(() => {
         </div>
       </div>
 
-      <div className={"header__middle"}>
-        <div className={"header__buttons"}>
-          <div className={"header__buttons__remote-connection"} onClick={() => handleRemoteSwitch()}>
-            <button className={"remote " + (remote ? "active" : "")}>
-              <Translate value="header.remote" />
-            </button>
-            <button className={"local " + (!remote ? "active" : "")}>
-              <Translate value="header.local" />
-            </button>
-          </div>
-        </div>
-      </div>
-
       <div className={"header__buttons"}>
+        <div className={"header__buttons__remote-connection"} onClick={() => handleRemoteSwitch()}>
+          <button className={"remote " + (remote ? "active" : "")}>
+            <Translate value="header.remote" />
+          </button>
+          <button className={"local " + (!remote ? "active" : "")}>
+            <Translate value="header.local" />
+          </button>
+        </div>
         <div className={"header__buttons__darkmode"}>
           <label htmlFor="header__buttons__darkmode__input" className="header__buttons__darkmode__switch">
             <input
