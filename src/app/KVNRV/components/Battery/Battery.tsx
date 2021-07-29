@@ -87,7 +87,7 @@ export const Batteries = observer(({ size }: BatteryProps) => {
     ...BATTERY_CONF,
     MAX: BATTERY_CONF.MAX * (battery?.voltage ? battery.voltage : 1) * CRITICAL_MULTIPLIER,
   }
-  console.log({ power })
+
   const normalizedPower = normalizePower(power, config.MAX, -1 * BATTERY_CONF.ZERO_OFFSET!)
 
   useSendUpdate(normalizedPower, config, "Battery")

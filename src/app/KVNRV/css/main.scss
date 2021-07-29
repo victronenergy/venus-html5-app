@@ -34,7 +34,7 @@ html {
 body {
   --color-lightgray: #D8D8D8;
   --color-green: #00C564;
-  --color-yellow: #eda63e;
+  --color-orange: #F4960F;
   --color-red: #ea5b57;
 }
 
@@ -154,7 +154,7 @@ button {
 }
 
 .success { background-color: $color-green !important; }
-.warning { background-color: $color-yellow !important; }
+.warning { background-color: $color-orange !important; }
 .alarm { background-color: $color-red !important; }
 
 .hidden { display: none; }
