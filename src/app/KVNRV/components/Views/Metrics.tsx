@@ -106,14 +106,14 @@ export const Metrics = () => {
     if (isNarrow) {
       setLayout(
         <div className="row">
-          {!isHidden(0, pageNum, currPage) && (
+          {isVisible(0, pageNum, currPage) && (
             <div className={"row"}>
               <Status size={[SIZE_WIDE, SIZE_LONG]} />
               <Battery size={[SIZE_WIDE, SIZE_LONG]} />
             </div>
           )}
 
-          {!isHidden(1, pageNum, currPage) && (
+          {isVisible(1, pageNum, currPage) && (
             <div>
               <AcMode />
               <div className="row">
@@ -123,7 +123,7 @@ export const Metrics = () => {
             </div>
           )}
 
-          {!isHidden(2, pageNum, currPage) && (
+          {isVisible(2, pageNum, currPage) && (
             <div>
               <div className="row">
                 <PvCharger />
@@ -140,7 +140,7 @@ export const Metrics = () => {
     } else {
       setLayout(
         <div className="row">
-          {!isHidden(0, pageNum, currPage) && (
+          {isVisible(0, pageNum, currPage) && (
             <div>
               <Status size={[SIZE_WIDE, SIZE_LONG]} />
 
@@ -157,7 +157,7 @@ export const Metrics = () => {
             </div>
           )}
 
-          {!isHidden(1, pageNum, currPage) && (
+          {isVisible(1, pageNum, currPage) && (
             <div className={"grid"}>
               <Battery size={[SIZE_WIDE, SIZE_LONG]} />
               <AcMode />
@@ -170,7 +170,7 @@ export const Metrics = () => {
             </div>
           )}
 
-          {!isTall && !isHidden(2, pageNum, currPage) && (
+          {!isTall && isVisible(2, pageNum, currPage) && (
             <div>
               <div className="row">
                 <PvCharger />
@@ -206,19 +206,19 @@ export const Metrics = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage])
 
-  const isHidden = (elPage: number, pageNum: number, currPage: number) => {
+  const isVisible = (elPage: number, pageNum: number, currPage: number) => {
     if (pageNum === 2) {
       if (currPage === 0 && elPage === 2) {
-        return true
+        return false
       } else if (currPage === 1 && elPage <= 1) {
-        return true
+        return false
       }
     } else if (pageNum >= 3) {
       if (elPage !== currPage) {
-        return true
+        return false
       }
     }
-    return false
+    return true
   }
 
   return (

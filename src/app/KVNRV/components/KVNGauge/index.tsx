@@ -56,20 +56,23 @@ export const KVNGauge = memo(
     const chartRef = useRef<Chart | null>()
     const colors = useContainerColors()
 
+    // colors used for threshold circle
     const orderedColors = useMemo(() => {
-      const { colorGreen, colorYellow, colorRed } = colors
-      const clrs = [colorGreen, colorYellow, colorRed]
+      const { colorGreen, colorOrange, colorRed } = colors
+      const clrs = [colorGreen, colorOrange, colorRed]
       return !inverse ? clrs : clrs.reverse()
     }, [colors, inverse])
 
+    // color used for the left part of the needle
     const indicatorColor = useMemo(() => {
       const indexOfPart = parts.findIndex((_, idx, arr) => sum(arr.slice(0, idx + 1)) >= percent)
       const usedColor = orderedColors[indexOfPart] || colors.colorGray
       return usedColor
     }, [colors.colorGray, orderedColors, parts, percent])
 
+    // colors of inner circle
     const indicatorColors = useMemo(() => {
-      const clrs = [indicatorColor, colors.textColor, colors.colorGray]
+      const clrs = [indicatorColor, colors.textColor /* needle color */, colors.colorGray /* empty zone color */]
       return !inverse ? clrs : clrs.reverse()
     }, [indicatorColor, colors.textColor, colors.colorGray, inverse])
 
@@ -84,9 +87,12 @@ export const KVNGauge = memo(
         data: indicatorPoints,
         weight: 4,
         spacing: 10,
+
+        // add white border to the needle
         borderColor: ["transparent", colors.textColor, "transparent"],
         hoverBorderColor: ["transparent", colors.textColor, "transparent"],
         borderWidth: [0, showNeedle ? 1 : 0, 0],
+
         backgroundColor: indicatorColors,
         hoverBackgroundColor: indicatorColors,
       }
@@ -102,6 +108,7 @@ export const KVNGauge = memo(
       if (!chartCanvas) {
         return
       }
+
       chartRef.current = new Chart(chartCanvas, {
         type: "doughnut",
         plugins: [showText ? TextPlugin() : {}],
@@ -167,7 +174,7 @@ export const KVNGauge = memo(
       chartRef.current.data.datasets[2].backgroundColor = indicatorColors
       chartRef.current.data.datasets[2].hoverBackgroundColor = indicatorColors
 
-      // inject options for text plugin
+      // update options for text plugin
       //@ts-ignore
       chartRef.current.options.textPlugin = { textColor: colors.textColor, value, unit }
 

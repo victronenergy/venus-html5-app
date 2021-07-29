@@ -11,6 +11,7 @@ import { useSendUpdate } from "../../modules"
 import { normalizePower } from "../../utils/helpers"
 import { observer } from "mobx-react"
 import { KVNGauge } from "../KVNGauge"
+import { Translate } from "react-i18nify"
 
 export const acModeFormatter = (value: number) => {
   switch (value) {
@@ -45,13 +46,17 @@ export const AcMode = observer(() => {
         <div className="ac-container">
           <div className="ac-actions">
             <div className="action">
-              <span className="name">Mode</span>
+              <span className="name">
+                <Translate value="common.mode" />
+              </span>
               <button onClick={() => setModalOpen(true)} className="btn">
-                Charger only {">"}
+                <Translate value="common.chargerOnly" /> {">"}
               </button>
             </div>
             <div className="action">
-              <span className="name">Limit</span>
+              <span className="name">
+                <Translate value="common.limit" />
+              </span>
               <button onClick={() => setModalOpen(true)} className="btn">
                 {formatNumber({ value: inLimit, unit: "A" })} {">"}
               </button>
@@ -61,7 +66,9 @@ export const AcMode = observer(() => {
             {(activeInput === 0 || activeInput === 1) && power ? (
               <KVNGauge value={power[0]} percent={normalizedPower} parts={SHORE_POWER_CONF.THRESHOLDS} unit={"W"} />
             ) : (
-              <div className="not-available">No Shore Power</div>
+              <div className="not-available">
+                <Translate value="common.noShorePower" />
+              </div>
             )}
 
             <div className={"info-bar"}>
