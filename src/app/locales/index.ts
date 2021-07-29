@@ -14,6 +14,10 @@ const languagesJSONS: LangObj = LANGAUGES.reduce(
   {}
 )
 
+// add chinese mapping to corespond with possibleValues from: https://github.com/victronenergy/gui/blob/master/qml/PageSettingsDisplay.qml#L73
+// because poeditor uses zh-CN for chinese
+languagesJSONS["zh"] = languagesJSONS["zh-CN"]
+
 setHandleMissingTranslation((key, replacements) => {
   if (!get(languagesJSONS[DEFAULT_LANGUAGE], key)) {
     console.warn(`Missing translation for ${key}`)
