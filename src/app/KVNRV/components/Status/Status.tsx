@@ -86,8 +86,8 @@ export const Status = observer(({ size }: StatusProps) => {
         <div className={"status-updates " + size.join(" ")}>
           {notifications.map((update: StatusUpdate) => (
             <div className={"status-update row " + update.level} key={"status-update-" + update.part}>
-              <span className={"row align-items-center"}>
-                <div className={"row align-items-center status-update__icon"}>
+              <span className={"row items-center"}>
+                <div className={"row items-center status-update__icon"}>
                   <img src={IconWarning} alt={"Status update icon"} />
                 </div>
 

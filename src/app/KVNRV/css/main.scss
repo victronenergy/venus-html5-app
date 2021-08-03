@@ -110,6 +110,12 @@ body {
   flex-wrap: wrap;
 }
 
+.items {
+  &-center {
+    align-items: center;
+  }
+}
+
 button {
   cursor: pointer;
   border: none;

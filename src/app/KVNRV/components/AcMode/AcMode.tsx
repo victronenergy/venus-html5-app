@@ -12,6 +12,7 @@ import { normalizePower } from "../../utils/helpers"
 import { observer } from "mobx-react"
 import { KVNGauge } from "../KVNGauge"
 import { Translate } from "react-i18nify"
+import RIcon from "../../../../images/icons/R.svg"
 
 export const acModeFormatter = (value: number) => {
   switch (value) {
@@ -50,7 +51,9 @@ export const AcMode = observer(() => {
                 <Translate value="common.mode" />
               </span>
               <button onClick={() => setModalOpen(true)} className="btn">
-                <Translate value="common.chargerOnly" /> {">"}
+                <div className="action-btn-content">
+                  <Translate value="common.chargerOnly" /> <img src={RIcon} alt="right arrow" />
+                </div>
               </button>
             </div>
             <div className="action">
@@ -58,7 +61,9 @@ export const AcMode = observer(() => {
                 <Translate value="common.limit" />
               </span>
               <button onClick={() => setModalOpen(true)} className="btn">
-                {formatNumber({ value: inLimit, unit: "A" })} {">"}
+                <div className="action-btn-content">
+                  {formatNumber({ value: inLimit, unit: "A" })} <img src={RIcon} alt="right arrow" />
+                </div>
               </button>
             </div>
           </div>
