@@ -1,0 +1,38 @@
+@import "../../css/variables";
+
+.installations {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 1em;
+}
+
+.installations__title {
+  text-align: center;
+  margin: 1em auto;
+}
+
+.installations__list {
+  display: flex;
+  flex-direction: column;
+  max-height: 40vh;
+  width: 24em;
+  max-width: 90vw;
+  overflow-y: scroll;
+}
+
+.installations__list__item {
+  display: flex;
+  flex-direction: row;
+  padding: 12px 8px;
+  border: none;
+  border-radius: 0;
+  background-color: $card-bg-color;
+  color: $text-color-main;
+  font-size: 1em;
+
+  &:hover {
+    color: $color-white;
+    background-color: $color-login-blue;
+  }
+}

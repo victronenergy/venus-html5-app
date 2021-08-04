@@ -55,7 +55,7 @@ If it's the first time you run the app:
 
 To run the app locally for development, run:
 
-`npm run dev`
+`npm run start`
 
 And then open the app in the browser at `http://localhost:8000`.
 
@@ -69,7 +69,10 @@ This way you can run the local app against venus device data if the venus device
 
 ### 2.3 Running the app with no Venus device available
 
-The mqtt mock is no longer mainainted. Use [venus-docker](https://github.com/victronenergy/venus-docker) instead or a Venus GX in demo mode (below).
+The MQTT mock is no longer maintained. Use [venus-docker](https://github.com/victronenergy/venus-docker) instead or a Venus GX in demo mode (below).
+
+You can run multiple `venus-docker` simulations by executing: `echo {a..z} | xargs -n1 ./run.sh -s`. Each container running a simulation will expose MQTT on
+an increasing port number starting from `9001`.
 
 ~~If there is no real device to be used for MQTT data, you can run the app with a fake MQTT broker:~~
 
@@ -111,6 +114,39 @@ The deploy script also bundles the app. Nore that the script assumes that it's r
 Once deployed reload the page by navigating to the Venus host IP on the target device.
 If you have enabled dev features and have previously deployed a new version of the UI to the device you can
 press the `reload page` on the top left corner of the page.
+
+
+### 2.7 Translations
+
+#### 2.7.1 Syncronizing the translations files with the POEditor Project
+
+[POEditor](https://poeditor.com/) is used as localization management platform for this project. In order to sync the translations using the scripts from the `poeditor` folder, an API key has to be placed in the `.env.local` according to the `.env.local.example` file.
+
+#### 2.7.2 Pushing the local translation files to POEditor
+
+```
+yarn poeditor:push
+```
+
+Running the command will trigger the following actions:
+1. Add the terms of the main language file (default: en)
+1. Add new languges to the POEditor project if they are available locally but missing in POEditor
+1. Add the local translations for all the languages
+1. Mark translations as fuzzy if there are changes in the translation of the main language
+
+
+```
+yarn poeditor:push -f
+```
+
+Running the comamnd with the `-f` flag will delete the terms from POEditor that are not present in the local file.
+Please use with caution. If wrong data is sent, existing terms and their translations might be irreversibly lost.
+
+#### 2.7.3 Pulling the POEditor translations locally
+
+```
+yarn poeditor:pull
+```
 
 ## 3. Testing
 

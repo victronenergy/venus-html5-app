@@ -1,0 +1,80 @@
+{
+    "acMode": {
+        "modal": {
+            "name": "Namn"
+        }
+    },
+    "cardFooter": {
+        "Charge": "Belastning",
+        "Status": "Status",
+        "Warning": "Varning"
+    },
+    "common": {
+        "assisting": "Hjälpström",
+        "charging": "laddar",
+        "current": "Ström",
+        "discharging": "laddar ur",
+        "eco": "Eco",
+        "error": "Fel",
+        "fault": "Fel",
+        "idle": "Tomgång",
+        "inverting": "Växelriktning",
+        "off": "Av",
+        "on": "På",
+        "passthru": "Förbikoppling",
+        "running": "I drift",
+        "standby": "Standby",
+        "starting": "<mrk mtype=\"seg\" mid=\"477\">Status: Påbörjar sökning efter enheter ...</mrk>",
+        "stopped": "Stoppad",
+        "stopping": "Stoppar",
+        "sustain": "Upprätthålla",
+        "unplugged": "Urkopplad",
+        "voltage": "Spänning"
+    },
+    "error": {},
+    "generator": {
+        "temperature": {}
+    },
+    "header": {
+        "close": "stäng",
+        "connecting": "Ansluter...",
+        "remote": "Fjärr"
+    },
+    "installations": {
+        "title": "Remote VEConfigure"
+    },
+    "locker": {},
+    "remoteLogin": {
+        "email": "E-post",
+        "logIn": "Inloggning",
+        "password": "Lösenord"
+    },
+    "statusWidget": {
+        "Assisting": "Hjälpström",
+        "Discharging": "laddar ur",
+        "Inverting": "Växelriktning",
+        "Low power": "Låg effekt",
+        "Off": "Av",
+        "Passthru": "Förbikoppling",
+        "Sustain": "Upprätthålla",
+        "parts": {
+            "Fresh water": "Färskvatten",
+            "Shore Power": "Landström"
+        }
+    },
+    "tankWidget": {
+        "Black water": "SVARTVATTEN",
+        "Fresh water": "Färskvatten",
+        "Fuel": "Bränsle",
+        "Live well": "Vattentank",
+        "Oil": "Olja",
+        "Tank sensor": "Tanksensor",
+        "Waste water": "Spillvatten"
+    },
+    "widgets": {
+        "batteries": "Batterier",
+        "battery": "Batteri",
+        "status": "Status",
+        "unknown": "Okänd"
+    }
+}

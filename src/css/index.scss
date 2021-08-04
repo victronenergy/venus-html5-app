@@ -1,0 +1,30 @@
+
+:root {
+  --color-lightgray: #AAAAAA;
+  --color-gray: #999999;
+  --color-gray-600: #9A9A9A;
+  --color-darkgray: #555555;
+  --color-black: #000000;
+  --color-white: #FFFFFF;
+  --color-offwhite: #EEEEEE;
+
+  --color-active: #30afff;
+  --header-bg-color: #1f2535;
+  --header-button-color: #1f2535;
+  --main-bg-color: #1f2535;
+  --text-color-main: #1f2535;
+
+  --color-green: #00C564;
+  --color-orange: #F4960F;
+  --color-red: #ea5b57;
+}
+
+
+body {
+  margin: 0;
+  height: 100vh;
+}
+
+#root {
+  height: 100%;
+}

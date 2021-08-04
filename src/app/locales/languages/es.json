@@ -1,0 +1,84 @@
+{
+    "acMode": {
+        "modal": {
+            "name": "Nombre"
+        }
+    },
+    "cardFooter": {
+        "Charge": "Carga",
+        "Status": "Estado",
+        "Warning": "Advertencia"
+    },
+    "common": {
+        "assisting": "Asistiendo",
+        "charging": "Cargando",
+        "current": "Corriente",
+        "discharging": "descargando",
+        "eco": "Eco",
+        "error": "Error",
+        "fault": "Fallo",
+        "hours": "horas",
+        "idle": "reposo",
+        "inverting": "Invirtiendo",
+        "minutes": "minutos",
+        "off": "Apagado",
+        "on": "Encendido",
+        "passthru": "Paso libre",
+        "running": "En marcha",
+        "standby": "En espera",
+        "starting": "<mrk mtype=\"seg\" mid=\"477\">Estado: Iniciando la consulta de dispositivos…</mrk>",
+        "stopped": "Parado",
+        "stopping": "Parando",
+        "sustain": "Sostener",
+        "unplugged": "Desconectado",
+        "voltage": "Tensión"
+    },
+    "error": {},
+    "generator": {
+        "temperature": {}
+    },
+    "header": {
+        "close": "Cerrar",
+        "connecting": "Conectando",
+        "local": "Local",
+        "remote": "Remoto"
+    },
+    "installations": {
+        "title": "Título"
+    },
+    "locker": {},
+    "remoteLogin": {
+        "email": "Email",
+        "logIn": "Iniciar sesión",
+        "password": "Contraseña"
+    },
+    "statusWidget": {
+        "Assisting": "Asistiendo",
+        "Discharging": "descargando",
+        "Inverting": "Invirtiendo",
+        "Low power": "Baja potencia",
+        "Off": "Apagado",
+        "Passthru": "Paso libre",
+        "Storage mode": "Modo de almacenamiento",
+        "Sustain": "Sostener",
+        "parts": {
+            "Fresh water": "Agua potable",
+            "Shore Power": "Energía solar"
+        }
+    },
+    "tankWidget": {
+        "Black water": "AGUAS NEGRAS",
+        "Fresh water": "Agua potable",
+        "Fuel": "Combustible",
+        "Live well": "Vivero",
+        "Oil": "Aceite",
+        "Tank sensor": "Sensor nivel tanque",
+        "Waste water": "Aguas grises"
+    },
+    "widgets": {
+        "batteries": "Baterías",
+        "battery": "Batería",
+        "status": "Estado",
+        "unknown": "Desconocido"
+    }
+}

@@ -14,6 +14,7 @@ $low-landscape: "all and (min-aspect-ratio: 20/10)";
 $very-low-landscape: $low-landscape + " and (max-height: 350px)";
 
 $hide-remote-console-breakpoint: "all and (max-width: 549px), (max-height: 450px)";
+$hide-logout-breakpoint: "all and (max-width: 549px), (max-height: 450px)";
 
 $base: 0.05em;
 $topBottomPadding: 17 * $base;
@@ -21,9 +22,44 @@ $rightLeftPadding: 20 * $base;
 $borderRadius: 17 * $base;
 $marginBottom: 2vh;
 $metricHeaderMarginBottom: 17 * $base;
-$color-active: #30afff;
 
-$color-lightgray: #AAAAAA;
-$color-gray: #999999;
-$color-darkgray: #555555;
-$color-white: #EEEEEE;
+$color-active: #30afff;
+$color-inactive-grey: #2a3341;
+$color-inactive-blue: #30afff;
+
+$color-lightgray: var(--color-lightgray);
+$color-gray: var(--color-gray);
+$color-gray-600: var(--color-gray-600);
+$color-darkgray: var(--color-darkgray);
+$color-black: var(--color-black);
+$color-white: var(--color-white);
+$color-offwhite: var(--color-offwhite);
+
+$color-active: var(--color-active);
+$header-bg-color: var(--header-bg-color);
+$header-button-color: var(--header-button-color);
+$main-bg-color: var(--main-bg-color);
+$text-color-main: var(--text-color-main);
+
+$btn-primary: var(--btn-primary);
+
+// card related variables
+$card-bg-color: var(--card-bg-color);
+$card-shadow-color: var(--card-shadow-color);
+$color-green: var(--color-green);
+$color-orange: var(--color-orange);
+$color-red: var(--color-red);
+
+$card-margin: 0.5rem;
+
+$card-height-small: 11rem;
+$card-height-big: $card-height-small;
+
+$card-width-small: 11rem;
+$card-width-big: ($card-width-small * 2) + ($card-margin * 2);
+
+// donut indicator variables
+$donut-size-small: $card-width-small / 1.7;
+$donut-width-big: $donut-size-small;
+$donut-height-big: $donut-width-big - $card-width-small / 6;
+$donut-offset: 0.24rem;

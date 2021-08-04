@@ -1,0 +1,84 @@
+{
+    "acMode": {
+        "modal": {
+            "name": "Nome"
+        }
+    },
+    "cardFooter": {
+        "Charge": "Carica",
+        "Status": "Stato",
+        "Warning": "Avvertenza"
+    },
+    "common": {
+        "assisting": "Assistenza",
+        "charging": "Caricamento",
+        "current": "Corrente",
+        "discharging": "in esaurimento",
+        "eco": "Eco",
+        "error": "Errore",
+        "fault": "Errore",
+        "hours": "ore",
+        "idle": "folle",
+        "inverting": "Inversione",
+        "minutes": "minuti",
+        "off": "Spento",
+        "on": "Acceso",
+        "passthru": "Accedi",
+        "running": "In funzionamento",
+        "standby": "Standby",
+        "starting": "Stato: Avvio individuazione dispositivi in corso...",
+        "stopped": "Interrotto",
+        "stopping": "In interruzione",
+        "sustain": "Supporto",
+        "unplugged": "Scollegato",
+        "voltage": "Tensione"
+    },
+    "error": {},
+    "generator": {
+        "temperature": {}
+    },
+    "header": {
+        "close": "Chiudi",
+        "connecting": "Collegamento in corso",
+        "local": "Locale",
+        "remote": "Remoto"
+    },
+    "installations": {
+        "title": "Titolo"
+    },
+    "locker": {},
+    "remoteLogin": {
+        "email": "E-mail",
+        "logIn": "Login",
+        "password": "Password"
+    },
+    "statusWidget": {
+        "Assisting": "Assistenza",
+        "Discharging": "in esaurimento",
+        "Inverting": "Inversione",
+        "Low power": "Bassa potenza",
+        "Off": "Spento",
+        "Passthru": "Accedi",
+        "Storage mode": "Modalità conservazione",
+        "Sustain": "Supporto",
+        "parts": {
+            "Fresh water": "Acqua dolce",
+            "Shore Power": "Potenza banchina"
+        }
+    },
+    "tankWidget": {
+        "Black water": "ACQUE NERE",
+        "Fresh water": "Acqua dolce",
+        "Fuel": "Carburante",
+        "Live well": "Serbatoio",
+        "Oil": "Carburante",
+        "Tank sensor": "Sensore serbatoio",
+        "Waste water": "Acque reflue"
+    },
+    "widgets": {
+        "batteries": "Batterie",
+        "battery": "Batteria",
+        "status": "Stato",
+        "unknown": "Sconosciuto"
+    }
+}

@@ -5,6 +5,7 @@
   "viewportHeight": 720,
   "projectId": "gho3jq",
   "reporter": "mochawesome",
+  "chromeWebSecurity": false,
   "reporterOptions": {
     "reportDir": "cypress/results",
     "reportFilename": "result",

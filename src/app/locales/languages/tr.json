@@ -1,0 +1,84 @@
+{
+    "acMode": {
+        "modal": {
+            "name": "İsim"
+        }
+    },
+    "cardFooter": {
+        "Charge": "Yük",
+        "Status": "Durum",
+        "Warning": "Uyarı"
+    },
+    "common": {
+        "assisting": "Yardım ediyor",
+        "charging": "şarj oluyor",
+        "current": "Akım",
+        "discharging": "deşarj oluyor",
+        "eco": "Eko",
+        "error": "Hata",
+        "fault": "Hata",
+        "hours": "saatler",
+        "idle": "Atıl",
+        "inverting": "Çevriliyor",
+        "minutes": "dakika",
+        "off": "Kapalı",
+        "on": "Açık",
+        "passthru": "Düz geçme",
+        "running": "Çalışıyor",
+        "standby": "Bekleme",
+        "starting": "Durum: Bağlantı kuruldu, cihaz listesi alınıyor ...",
+        "stopped": "Durduruldu",
+        "stopping": "Duruyor",
+        "sustain": "Sürdür",
+        "unplugged": "Fiş takılı değil",
+        "voltage": "Gerilim"
+    },
+    "error": {},
+    "generator": {
+        "temperature": {}
+    },
+    "header": {
+        "close": "Kapat",
+        "connecting": "Bağlanıyor",
+        "local": "Yerel",
+        "remote": "Uzaktan kumanda"
+    },
+    "installations": {
+        "title": "Başlık"
+    },
+    "locker": {},
+    "remoteLogin": {
+        "email": "E",
+        "logIn": "Oturum Aç",
+        "password": "Parola"
+    },
+    "statusWidget": {
+        "Assisting": "Yardım ediyor",
+        "Discharging": "deşarj oluyor",
+        "Inverting": "Çevriliyor",
+        "Low power": "Düşük Güç",
+        "Off": "Kapalı",
+        "Passthru": "Düz geçme",
+        "Storage mode": "Depolama modu",
+        "Sustain": "Sürdür",
+        "parts": {
+            "Fresh water": "Temiz su",
+            "Shore Power": "Sahil"
+        }
+    },
+    "tankWidget": {
+        "Black water": "Pis Su",
+        "Fresh water": "Temiz su",
+        "Fuel": "Yakıt",
+        "Live well": "Faal kuyu",
+        "Oil": "Yağ",
+        "Tank sensor": "Tank sensörü",
+        "Waste water": "Atık su"
+    },
+    "widgets": {
+        "batteries": "Aküler",
+        "battery": "Akü",
+        "status": "Durum",
+        "unknown": "Bilinmiyor"
+    }
+}

@@ -1,0 +1,84 @@
+{
+    "acMode": {
+        "modal": {
+            "name": "名字"
+        }
+    },
+    "cardFooter": {
+        "Charge": "充电",
+        "Status": "状态",
+        "Warning": "警告"
+    },
+    "common": {
+        "assisting": "辅助供电",
+        "charging": "充电",
+        "current": "电流",
+        "discharging": "放电",
+        "eco": "节能",
+        "error": "错误",
+        "fault": "错误",
+        "hours": "小时",
+        "idle": "空闲",
+        "inverting": "逆变",
+        "minutes": "分",
+        "off": "关",
+        "on": "开",
+        "passthru": "旁路",
+        "running": "运行",
+        "standby": "待机",
+        "starting": "状态：开始查询设备...",
+        "stopped": "已停止",
+        "stopping": "停止",
+        "sustain": "维持",
+        "unplugged": "未插电",
+        "voltage": "电压"
+    },
+    "error": {},
+    "generator": {
+        "temperature": {}
+    },
+    "header": {
+        "close": "关闭",
+        "connecting": "正在连接",
+        "local": "本地",
+        "remote": "远程"
+    },
+    "installations": {
+        "title": "活动推送"
+    },
+    "locker": {},
+    "remoteLogin": {
+        "email": "邮箱",
+        "logIn": "登录",
+        "password": "密码"
+    },
+    "statusWidget": {
+        "Assisting": "辅助供电",
+        "Discharging": "放电",
+        "Inverting": "逆变",
+        "Low power": "低功率",
+        "Off": "关",
+        "Passthru": "旁路",
+        "Storage mode": "存储模式",
+        "Sustain": "维持",
+        "parts": {
+            "Fresh water": "淡水",
+            "Shore Power": "太阳能"
+        }
+    },
+    "tankWidget": {
+        "Black water": "黑水",
+        "Fresh water": "淡水",
+        "Fuel": "燃料",
+        "Live well": "活鱼池",
+        "Oil": "石油",
+        "Tank sensor": "水箱传感器",
+        "Waste water": "废水"
+    },
+    "widgets": {
+        "batteries": "电池",
+        "battery": "电池",
+        "status": "状态",
+        "unknown": "未知"
+    }
+}

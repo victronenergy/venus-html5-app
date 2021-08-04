@@ -1,0 +1,84 @@
+{
+    "acMode": {
+        "modal": {
+            "name": "Name"
+        }
+    },
+    "cardFooter": {
+        "Charge": "Laden",
+        "Status": "Status",
+        "Warning": "Warnung"
+    },
+    "common": {
+        "assisting": "Unterstützen",
+        "charging": "Es wird geladen",
+        "current": "Strom",
+        "discharging": "Entladen",
+        "eco": "Eco",
+        "error": "Fehler",
+        "fault": "Störung",
+        "hours": "Stunden",
+        "idle": "Idle",
+        "inverting": "Inverting",
+        "minutes": "Minuten",
+        "off": "Aus",
+        "on": "Ein",
+        "passthru": "Durchleiten",
+        "running": "In Betrieb",
+        "standby": "Standby",
+        "starting": "Status: Starten der Geräteabfrage...",
+        "stopped": "Angehalten",
+        "stopping": "Es wird gestoppt",
+        "sustain": "Erhaltung",
+        "unplugged": "Ausgesteckt",
+        "voltage": "Spannung"
+    },
+    "error": {},
+    "generator": {
+        "temperature": {}
+    },
+    "header": {
+        "close": "Schließen",
+        "connecting": "Es wird verbunden",
+        "local": "Lokal",
+        "remote": "<mrk mtype=\"seg\" mid=\"744\">Ferngest. Schalter</mrk>"
+    },
+    "installations": {
+        "title": "Titel"
+    },
+    "locker": {},
+    "remoteLogin": {
+        "email": "E-Mail",
+        "logIn": "Anmelden",
+        "password": "Passwort"
+    },
+    "statusWidget": {
+        "Assisting": "Unterstützen",
+        "Discharging": "Entladen",
+        "Inverting": "Inverting",
+        "Low power": "Leist. niedr.",
+        "Off": "Aus",
+        "Passthru": "Durchleiten",
+        "Storage mode": "Lagerungsmodus",
+        "Sustain": "Erhaltung",
+        "parts": {
+            "Fresh water": "Frischwasser",
+            "Shore Power": "Landstrom"
+        }
+    },
+    "tankWidget": {
+        "Black water": "Schwarzwasser",
+        "Fresh water": "Frischwasser",
+        "Fuel": "Treibstoff",
+        "Live well": "Fischkasten",
+        "Oil": "Öl",
+        "Tank sensor": "Tanksensor",
+        "Waste water": "Abwasser"
+    },
+    "widgets": {
+        "batteries": "Batterien",
+        "battery": "Batterie",
+        "status": "Status",
+        "unknown": "Unbekannt"
+    }
+}

@@ -1,5 +1,3 @@
-import Logger from "./logger"
-
 import { VEBUS_SYSTEM_STATE } from "./constants"
 
 /**
@@ -21,7 +19,7 @@ import { VEBUS_SYSTEM_STATE } from "./constants"
  * See details at https://github.com/victronenergy/dbus-mqtt
  * @returns {Topic}
  */
-export const parseTopic = topic => {
+export const parseTopic = (topic) => {
   const parts = topic.split("/")
   const dbusPathParts = parts.splice(4)
   const isAcIn = dbusPathParts[0] === "Ac" && dbusPathParts[1] === "In"
@@ -30,38 +28,13 @@ export const parseTopic = topic => {
     portalId: parts[1],
     serviceType: parts[2],
     deviceInstance: parts[3] === "+" ? "+" : parseInt(parts[3]),
-    dbusPath: "/" + (isAcIn ? dbusPathParts.splice(3).join("/") : dbusPathParts.join("/"))
+    dbusPath: "/" + (isAcIn ? dbusPathParts.splice(3).join("/") : dbusPathParts.join("/")),
   }
-}
-
-export const getMessageJson = message => {
-  try {
-    return JSON.parse(message.toString())
-  } catch (e) {
-    Logger.error("Could not parse message: ", message.toString())
-    return { value: null }
-  }
-}
-
-export const objectValues = data => {
-  return Object.keys(data).map(key => data[key])
-}
-
-export const isPathOfType = (dbusPath, enumObject) => {
-  const paths = objectValues(enumObject)
-  return paths.includes(dbusPath)
-}
-
-export const arrayToSubscriptionMap = toSubscribe => {
-  return toSubscribe.reduce((acc, value) => {
-    acc[value] = 0
-    return acc
-  }, {})
 }
 
 export const getParameterByName = (name, url) => {
   if (!url) url = window.location.href
-  name = name.replace(/[\[\]]/g, "\\$&")
+  name = name.replace(/[[\]]/g, "\\$&")
   var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
     results = regex.exec(url)
   if (!results) return null
@@ -69,41 +42,42 @@ export const getParameterByName = (name, url) => {
   return decodeURIComponent(results[2].replace(/\+/g, " "))
 }
 
-export const flatten = arrays => {
+export const flatten = (arrays) => {
   return [].concat(...arrays)
 }
 
-export const systemStateFormatter = value => {
+// keys from common translations
+export const systemStateFormatter = (value) => {
   switch (value) {
     case VEBUS_SYSTEM_STATE.OFF:
-      return "Off"
+      return "off"
     case VEBUS_SYSTEM_STATE.LOW_POWER:
-      return "Low power"
+      return "lowPower"
     case VEBUS_SYSTEM_STATE.FAULT_CONDITION:
-      return "VE.Bus Fault condition"
+      return "veBusFault"
     case VEBUS_SYSTEM_STATE.BULK_CHARGING:
-      return "Bulk charging"
+      return "bulkCharging"
     case VEBUS_SYSTEM_STATE.ABSORPTION_CHARGINNG:
-      return "Absorption charging"
+      return "absorptionCharging"
     case VEBUS_SYSTEM_STATE.FLOAT_CHARGING:
-      return "Float charging"
+      return "floatCharging"
     case VEBUS_SYSTEM_STATE.STORAGE_MODE:
-      return "Storage mode"
+      return "storageMode"
     case VEBUS_SYSTEM_STATE.EQUALISATION_CHARGING:
-      return "Equalisation charging"
+      return "equalisationCharging"
     case VEBUS_SYSTEM_STATE.PASSTHRU:
-      return "Passthru"
+      return "passthru"
     case VEBUS_SYSTEM_STATE.INVERTING:
-      return "Inverting"
+      return "inverting"
     case VEBUS_SYSTEM_STATE.ASSISTING:
-      return "Assisting"
+      return "assisting"
     case VEBUS_SYSTEM_STATE.POWER_SUPPLY_MODE:
-      return "Power supply mode"
+      return "powerSupplyMode"
     case VEBUS_SYSTEM_STATE.DISCHARGING:
-      return "Discharging"
+      return "discharging"
     case VEBUS_SYSTEM_STATE.SUSTAIN:
-      return "Sustain"
+      return "sustain"
     default:
-      return "--"
+      return "emptyBar"
   }
 }

@@ -1,0 +1,5 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target" : { "namespace": "android_app", "package_name": "app.web.kvnrv_9ca32.twa",
+                   "sha256_cert_fingerprints": ["70:F3:DF:87:D5:A0:2A:28:A5:C0:BF:A6:54:57:A4:7E:09:15:67:C7:16:78:F3:77:03:78:2F:89:73:49:A9:21"] }
+    }]
