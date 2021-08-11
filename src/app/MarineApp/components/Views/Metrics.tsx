@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import ActiveSource from "../ActiveSource"
 import AcLoads from "../AcLoads"
 import Battery from "../Battery"
@@ -10,7 +10,7 @@ import Solar from "../Solar"
 import Generators from "../Generators"
 import { useVebus } from "@elninotech/mfd-modules"
 import { observer } from "mobx-react"
-import { MetricsContext, MetricsProvider } from "../MetricsContext"
+import { MetricsProvider } from "../MetricsContext"
 import { NoWidgets } from "../NoWidgets"
 
 const HEADER_HEIGHT = 110

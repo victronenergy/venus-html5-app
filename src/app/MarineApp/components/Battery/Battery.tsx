@@ -1,4 +1,4 @@
-import React, { Component, useContext, useEffect } from "react"
+import React, { Component } from "react"
 
 import { Battery, useBattery } from "@elninotech/mfd-modules"
 import { BATTERY_STATE } from "../../../utils/constants"
@@ -18,7 +18,6 @@ import LIcon from "../../images/icons/L.svg"
 import RIcon from "../../images/icons/R.svg"
 import { Translate } from "react-i18nify"
 import { observer } from "mobx-react"
-import { MetricsContext } from "../MetricsContext"
 import { useVisibilityNotifier } from "../MetricsContext/MetricsContext"
 
 type PaginatorProps = {
