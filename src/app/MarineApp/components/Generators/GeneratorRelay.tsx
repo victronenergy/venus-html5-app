@@ -16,6 +16,7 @@ import "./Generator.scss"
 import GeneratorIcon from "../../images/icons/generator.svg"
 import { Translate, translate } from "react-i18nify"
 import { observer } from "mobx-react"
+import { useVisibilityNotifier } from "../MetricsContext/MetricsContext"
 
 function getGeneratorState(statusCode: number, active: boolean, phases: number) {
   if (active) {
@@ -103,6 +104,9 @@ const GeneratorRelay = ({
 export const GeneratorRelays = observer(() => {
   const values = useGeneratorRelay()
 
+  // for Metrics Context
+  useVisibilityNotifier({ widgetName: "GeneratorRelays", visible: !!values.settings })
+
   if (values.settings) {
     return (
       <>
@@ -124,7 +128,7 @@ export const GeneratorRelays = observer(() => {
       </>
     )
   } else {
-    return <ColumnContainer />
+    return null
   }
 })
 

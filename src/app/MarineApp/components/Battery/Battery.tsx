@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React, { Component, useContext, useEffect } from "react"
 
 import { Battery, useBattery } from "@elninotech/mfd-modules"
 import { BATTERY_STATE } from "../../../utils/constants"
@@ -18,6 +18,8 @@ import LIcon from "../../images/icons/L.svg"
 import RIcon from "../../images/icons/R.svg"
 import { Translate } from "react-i18nify"
 import { observer } from "mobx-react"
+import { MetricsContext } from "../MetricsContext"
+import { useVisibilityNotifier } from "../MetricsContext/MetricsContext"
 
 type PaginatorProps = {
   setPage: Function
@@ -193,6 +195,9 @@ export class Batteries extends Component<BatteriesProps, BatteriesState> {
 
 export const BatteriesWithData = observer(() => {
   const { batteries } = useBattery()
+
+  // for Metrics Context
+  useVisibilityNotifier({ widgetName: "Bateries", visible: !!batteries })
 
   if (batteries) {
     // Sort batteries first by state, and then by ID to keep order consistent

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useContext, useEffect } from "react"
 import classnames from "classnames"
 import { useShorePowerInput, useInverterCharger } from "@elninotech/mfd-modules"
 
@@ -15,6 +15,8 @@ import "./InverterCharger.scss"
 import MultiplusIcon from "../../images/icons/multiplus.svg"
 import { translate } from "react-i18nify"
 import { observer } from "mobx-react"
+import { MetricsContext } from "../MetricsContext"
+import { useVisibilityNotifier } from "../MetricsContext/MetricsContext"
 
 type InverterChargerProps = {
   onChangeInputLimitClicked: Function
@@ -37,6 +39,9 @@ const InverterCharger = observer(({ connected, onChangeInputLimitClicked }: Inve
   }
 
   const currentMode = parseInt(mode)
+
+  // for Metrics Context
+  useVisibilityNotifier({ widgetName: "InverterCharger", visible: !!inputId })
 
   return (
     <>

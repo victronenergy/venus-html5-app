@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import ActiveSource from "../ActiveSource"
 import AcLoads from "../AcLoads"
 import Battery from "../Battery"
@@ -10,6 +10,8 @@ import Solar from "../Solar"
 import Generators from "../Generators"
 import { useVebus } from "@elninotech/mfd-modules"
 import { observer } from "mobx-react"
+import { MetricsContext, MetricsProvider } from "../MetricsContext"
+import { NoWidgets } from "../NoWidgets"
 
 const HEADER_HEIGHT = 110
 
@@ -109,22 +111,27 @@ export const Metrics = observer(
     const style = { height: height, transform: `translate(-${currentPage * 100}%)` }
 
     return (
-      <div className="metrics-container" ref={metricsRef} style={style}>
-        <DcLoads />
-        {!!instanceId && <AcLoads />}
-        <Battery />
-        {!!instanceId && (
-          <InverterCharger
-            onChangeInputLimitClicked={onChangeInverterChargerInputLimitClicked}
-            connected={isConnected}
-          />
-        )}
-        {!!instanceId && <ActiveSource />}
-        <Solar />
-        <Chargers />
-        <Inverters />
-        <Generators />
-      </div>
+      <MetricsProvider>
+        <>
+          <div className="metrics-container" ref={metricsRef} style={style}>
+            <DcLoads />
+            {!!instanceId && <AcLoads />}
+            <Battery />
+            {!!instanceId && (
+              <InverterCharger
+                onChangeInputLimitClicked={onChangeInverterChargerInputLimitClicked}
+                connected={isConnected}
+              />
+            )}
+            {!!instanceId && <ActiveSource />}
+            <Solar />
+            <Chargers />
+            <Inverters />
+            <Generators />
+            <NoWidgets />
+          </div>
+        </>
+      </MetricsProvider>
     )
   }
 )

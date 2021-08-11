@@ -8,10 +8,16 @@ import NumericValue from "../../../components/NumericValue"
 import SolarIcon from "../../images/icons/icon_solar.svg"
 import { usePvCharger } from "@elninotech/mfd-modules"
 import { observer } from "mobx-react"
+import { useVisibilityNotifier } from "../MetricsContext/MetricsContext"
 
 const Solar = observer(() => {
   const { current, power } = usePvCharger()
-  if (current || power || power === 0) {
+  const visible = !!(current || power || power === 0)
+
+  // for Metrics Context
+  useVisibilityNotifier({ widgetName: "Solar", visible })
+
+  if (visible) {
     return (
       <ColumnContainer>
         <HeaderView icon={SolarIcon} title="Solar">

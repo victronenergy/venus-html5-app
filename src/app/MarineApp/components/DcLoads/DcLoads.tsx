@@ -5,11 +5,15 @@ import ColumnContainer from "../ColumnContainer"
 import MetricValues from "../MetricValues"
 import NumericValue from "../../../components/NumericValue"
 import { observer } from "mobx-react"
+import { useVisibilityNotifier } from "../MetricsContext/MetricsContext"
 
 export const DcLoads = observer((props?: Partial<DcLoadsState>) => {
   let { voltage, power } = useDcLoads()
   voltage = props?.voltage ?? voltage
   power = props?.power ?? power
+
+  // for Metrics Context
+  useVisibilityNotifier({ widgetName: "DcLoads", visible: !!power })
 
   if (power) {
     return (

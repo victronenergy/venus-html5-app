@@ -85,6 +85,10 @@
         "remoteMessage": "Open in a larger screen to view remote console",
         "versionInfo": "Version Information"
     },
+    "noWidgets": {
+        "title": "Your dashboard is empty",
+        "subtitle": "Make sure your devices are properly connected to display widgets"
+    },
     "installations": {
         "title": "Choose an installation"
     },
