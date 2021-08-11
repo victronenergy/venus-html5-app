@@ -9,7 +9,7 @@ import { useVisibilityNotifier } from "../MetricsContext/MetricsContext"
 const Inverters = observer(() => {
   const { inverters } = useInverters()
   const { instanceId } = useVebus()
-  const visible = !!(inverters || instanceId)
+  const visible = !!(inverters.length || instanceId)
 
   // for Metrics Context
   useVisibilityNotifier({ widgetName: "Inverters", visible })

@@ -105,7 +105,7 @@ export const GeneratorRelays = observer(() => {
   const values = useGeneratorRelay()
 
   // for Metrics Context
-  useVisibilityNotifier({ widgetName: "GeneratorRelays", visible: !!values.settings })
+  useVisibilityNotifier({ widgetName: "GeneratorRelays", visible: !!(values.settings && values.settings.length) })
 
   if (values.settings) {
     return (

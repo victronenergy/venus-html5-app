@@ -196,7 +196,7 @@ export const BatteriesWithData = observer(() => {
   const { batteries } = useBattery()
 
   // for Metrics Context
-  useVisibilityNotifier({ widgetName: "Bateries", visible: !!batteries })
+  useVisibilityNotifier({ widgetName: "Bateries", visible: !!(batteries && batteries.length) })
 
   if (batteries) {
     // Sort batteries first by state, and then by ID to keep order consistent
