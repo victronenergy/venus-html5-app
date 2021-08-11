@@ -65,6 +65,7 @@
         "Tank sensor": "Čidlo nádrže",
         "Waste water": "Odpadní voda"
     },
+    "versionInfo": {},
     "widgets": {
         "batteries": "Baterie",
         "battery": "Baterie",

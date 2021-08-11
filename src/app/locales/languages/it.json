@@ -75,6 +75,7 @@
         "Tank sensor": "Sensore serbatoio",
         "Waste water": "Acque reflue"
     },
+    "versionInfo": {},
     "widgets": {
         "batteries": "Batterie",
         "battery": "Batteria",

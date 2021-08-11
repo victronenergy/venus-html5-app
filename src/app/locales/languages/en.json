@@ -44,9 +44,7 @@
         "nrOfPhases": "%{phases} phases",
         "off": "Off",
         "on": "On",
-        "limit": "Limit",
         "passthru": "Passthru",
-        "mode": "Mode",
         "powerSupplyMode": "Power supply mode",
         "remainingTime": "Remaining time",
         "running": "Running",
@@ -77,7 +75,6 @@
         }
     },
     "header": {
-        "versionInfo": "Version Information",
         "close": "Close",
         "connecting": "Connecting",
         "local": "Local",
@@ -85,14 +82,8 @@
         "notLoggedIn": "Not logged in",
         "remote": "Remote",
         "remoteConsole": "Remote console",
-        "remoteMessage": "Open in a larger screen to view remote console"
-    },
-    "versionInfo": {
-        "version": "Version %{version}",
-        "buildDate": "Build Date",
-        "venusOs": "Venus OS",
-        "identifier": "Identifier",
-        "vrmPortID": "VRM Portal ID"
+        "remoteMessage": "Open in a larger screen to view remote console",
+        "versionInfo": "Version Information"
     },
     "installations": {
         "title": "Choose an installation"
@@ -138,6 +129,13 @@
         "Oil": "Oil",
         "Tank sensor": "Tank sensor",
         "Waste water": "Waste water"
+    },
+    "versionInfo": {
+        "buildDate": "Build Date",
+        "identifier": "Identifier",
+        "venusOs": "Venus OS",
+        "version": "Version %{version}",
+        "vrmPortID": "VRM Portal ID"
     },
     "widgets": {
         "acLoads": "AC Loads",

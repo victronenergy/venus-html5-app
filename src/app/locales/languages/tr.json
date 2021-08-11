@@ -1,66 +1,120 @@
 {
     "acMode": {
         "modal": {
-            "name": "İsim"
+            "name": "İsim",
+            "updateLimit": "updateLimit"
         }
     },
     "cardFooter": {
         "Charge": "Yük",
+        "Critical": "Kritik",
+        "Optimal": "En iyi",
         "Status": "Durum",
         "Warning": "Uyarı"
     },
     "common": {
+        "absorptionCharging": "emilim Şarjı",
         "assisting": "Yardım ediyor",
+        "autoStartStop": "autoStartStop",
+        "bulkCharging": "toplu Şarj",
+        "charge": "ücret",
+        "chargerOnly": "şarj cihazıOnly",
         "charging": "şarj oluyor",
         "current": "Akım",
+        "days": "Gün",
+        "discharge": "akıntı",
         "discharging": "deşarj oluyor",
         "eco": "Eko",
+        "emptyBar": "boş Çubuk",
+        "equalisationCharging": "eşitleme Şarj etme",
         "error": "Hata",
         "fault": "Hata",
+        "floatCharging": "float Şarj etme",
         "hours": "saatler",
         "idle": "Atıl",
+        "inputLimit": "inputLimit",
+        "inverterOnly": "inverterOnly",
         "inverting": "Çevriliyor",
+        "limit": "sınırlamak",
+        "lowPower": "lowPower",
         "minutes": "dakika",
+        "mode": "mod",
+        "noShorePower": "noShorePower",
+        "notAvailable": "notAvailable",
+        "nrOfPhases": "nrOfPhases",
         "off": "Kapalı",
         "on": "Açık",
         "passthru": "Düz geçme",
+        "powerSupplyMode": "powerSupplyMode",
+        "remainingTime": "kalan Saat",
         "running": "Çalışıyor",
         "standby": "Bekleme",
         "starting": "Durum: Bağlantı kuruldu, cihaz listesi alınıyor ...",
         "stopped": "Durduruldu",
         "stopping": "Duruyor",
+        "storageMode": "depolamaMode",
         "sustain": "Sürdür",
         "unplugged": "Fiş takılı değil",
+        "veBusFault": "veBusFault",
         "voltage": "Gerilim"
     },
-    "error": {},
+    "error": {
+        "genericMessage": "genericMessage",
+        "mqttUnavailable1": "mqttUnavailable1",
+        "mqttUnavailable2": "mqttUnavailable2",
+        "mqttUnavailable3": "mqttUnavailable3",
+        "mqttUnavailable4": "mqttUnavailable4",
+        "mqttUnavailable5": "mqttUnavailable5"
+    },
     "generator": {
-        "temperature": {}
+        "fisherPandaAutoStartMessage": "fisherPandaAutoStartMessage",
+        "temperature": {
+            "coolant": "soğutucu",
+            "exhaust": "tüketmek",
+            "winding": "Sarma"
+        }
     },
     "header": {
         "close": "Kapat",
         "connecting": "Bağlanıyor",
         "local": "Yerel",
-        "remote": "Uzaktan kumanda"
+        "loggedIn": "günlüğe kaydedildiIn",
+        "notLoggedIn": "notLoggedIn",
+        "remote": "Uzaktan kumanda",
+        "remoteConsole": "remoteConsole",
+        "remoteMessage": "remoteMessage"
     },
     "installations": {
         "title": "Başlık"
     },
-    "locker": {},
+    "locker": {
+        "lockMessage": "lockMessage",
+        "unlockMessage": "unlockMessage"
+    },
     "remoteLogin": {
         "email": "E",
+        "forgotPassword": "forgotPassword",
+        "goBack": "Goback",
         "logIn": "Oturum Aç",
-        "password": "Parola"
+        "loginFailed": "loginFailed",
+        "password": "Parola",
+        "registerMessage1": "registerMessage1",
+        "registerMessage2": "registerMessage2"
     },
     "statusWidget": {
+        "Absorption charging": "Emilim şarjı",
         "Assisting": "Yardım ediyor",
+        "Bulk charging": "Toplu şarj",
         "Discharging": "deşarj oluyor",
+        "Equalisation charging": "Eşitleme şarjı",
+        "Float charging": "Şamandıra şarjı",
         "Inverting": "Çevriliyor",
         "Low power": "Düşük Güç",
         "Off": "Kapalı",
         "Passthru": "Düz geçme",
         "Storage mode": "Depolama modu",
         "Sustain": "Sürdür",
+        "VE.Bus Fault condition": "SEK Veri Yolu Arızası durumu",
         "parts": {
             "Fresh water": "Temiz su",
             "Shore Power": "Sahil"
@@ -75,9 +129,19 @@
         "Tank sensor": "Tank sensörü",
         "Waste water": "Atık su"
     },
+    "versionInfo": {},
     "widgets": {
+        "acLoads": "acLoads",
         "batteries": "Aküler",
         "battery": "Akü",
+        "chargerWithName": "chargerWithName",
+        "dcLoads": "dcLoads",
+        "generatorInput": "jeneratörInput",
+        "gridInput": "gridInput",
+        "invalidConfig": "invalidConfig",
+        "inverterWithName": "inverterWithName",
+        "pvCharger": "pvŞarj",
+        "shorePower": "shorePower",
         "status": "Durum",
         "unknown": "Bilinmiyor"
     }

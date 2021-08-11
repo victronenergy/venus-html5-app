@@ -65,6 +65,7 @@
         "Tank sensor": "Senzor rezervor",
         "Waste water": "Apa reziduala"
     },
+    "versionInfo": {},
     "widgets": {
         "batteries": "Baterii",
         "battery": "Baterie",

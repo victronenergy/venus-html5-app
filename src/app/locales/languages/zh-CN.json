@@ -1,66 +1,121 @@
 {
     "acMode": {
         "modal": {
-            "name": "名字"
+            "name": "名字",
+            "updateLimit": "更新限额"
         }
     },
     "cardFooter": {
         "Charge": "充电",
+        "Critical": "关键",
+        "Optimal": "最优",
         "Status": "状态",
         "Warning": "警告"
     },
     "common": {
+        "absorptionCharging": "均充",
         "assisting": "辅助供电",
+        "autoStartStop": "自动启动和停止",
+        "bulkCharging": "快充",
+        "charge": "充电",
+        "chargerOnly": "只充电",
         "charging": "充电",
         "current": "电流",
+        "days": "天",
+        "discharge": "放电",
         "discharging": "放电",
         "eco": "节能",
+        "emptyBar": "空栏",
+        "equalisationCharging": "均衡充电",
         "error": "错误",
         "fault": "错误",
+        "floatCharging": "浮充",
         "hours": "小时",
         "idle": "空闲",
+        "inputLimit": "输入限值",
+        "inverterOnly": "仅逆变",
         "inverting": "逆变",
+        "limit": "限制",
+        "lowPower": "低功率",
         "minutes": "分",
+        "mode": "模式",
+        "noShorePower": "无岸电",
+        "notAvailable": "不可用",
+        "nrOfPhases": "相数",
         "off": "关",
         "on": "开",
         "passthru": "旁路",
+        "powerSupplyMode": "电源模式",
+        "remainingTime": "剩余时间",
         "running": "运行",
         "standby": "待机",
         "starting": "状态：开始查询设备...",
         "stopped": "已停止",
         "stopping": "停止",
+        "storageMode": "存储模式",
         "sustain": "维持",
         "unplugged": "未插电",
+        "veBusFault": "VE Bus故障",
         "voltage": "电压"
     },
-    "error": {},
+    "error": {
+        "genericMessage": "通用信息",
+        "mqttUnavailable1": "MQTT不可用1",
+        "mqttUnavailable2": "MQTT不可用2",
+        "mqttUnavailable3": "MQTT不可用3",
+        "mqttUnavailable4": "MQTT不可用4",
+        "mqttUnavailable5": "MQTT不可用5"
+    },
     "generator": {
-        "temperature": {}
+        "fisherPandaAutoStartMessage": "熊猫发电机自动启动消息",
+        "temperature": {
+            "coolant": "冷却剂",
+            "exhaust": "废气",
+            "winding": "缠绕"
+        }
     },
     "header": {
         "close": "关闭",
         "connecting": "正在连接",
         "local": "本地",
-        "remote": "远程"
+        "loggedIn": "已登录",
+        "notLoggedIn": "未登录",
+        "remote": "远程",
+        "remoteConsole": "远程控制台",
+        "remoteMessage": "远程信息",
+        "versionInfo": "版本信息"
     },
     "installations": {
         "title": "活动推送"
     },
-    "locker": {},
+    "locker": {
+        "lockMessage": "锁定信息",
+        "unlockMessage": "解锁信息"
+    },
     "remoteLogin": {
         "email": "邮箱",
+        "forgotPassword": "忘记密码",
+        "goBack": "返回",
         "logIn": "登录",
-        "password": "密码"
+        "loginFailed": "登录失败",
+        "password": "密码",
+        "registerMessage1": "注册信息1",
+        "registerMessage2": "注册信息2"
     },
     "statusWidget": {
+        "Absorption charging": "均充",
         "Assisting": "辅助供电",
+        "Bulk charging": "快充",
         "Discharging": "放电",
+        "Equalisation charging": "均衡充电",
+        "Float charging": "浮充",
         "Inverting": "逆变",
         "Low power": "低功率",
         "Off": "关",
         "Passthru": "旁路",
         "Storage mode": "存储模式",
         "Sustain": "维持",
+        "VE.Bus Fault condition": "VE.BUS故障条件",
         "parts": {
             "Fresh water": "淡水",
             "Shore Power": "太阳能"
@@ -75,9 +130,19 @@
         "Tank sensor": "水箱传感器",
         "Waste water": "废水"
     },
+    "versionInfo": {},
     "widgets": {
+        "acLoads": "交流负载",
         "batteries": "电池",
         "battery": "电池",
+        "chargerWithName": "充电器名称",
+        "dcLoads": "直流负载",
+        "generatorInput": "发电机输入",
+        "gridInput": "电网输入",
+        "invalidConfig": "无效的配置",
+        "inverterWithName": "逆变器名称",
+        "pvCharger": "太阳能充电器",
+        "shorePower": "岸电",
         "status": "状态",
         "unknown": "未知"
     }

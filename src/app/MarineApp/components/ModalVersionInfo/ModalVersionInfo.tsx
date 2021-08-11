@@ -14,7 +14,7 @@ export const ModalVersionInfo = observer(
   forwardRef((_, ref) => {
     const [isOpen, setOpen] = useState(false)
     const { portalId = "-" } = useVrmStore()
-    const { commons } = useAppStore()
+    const { firmwareVersion = "-", productId = "-" } = useAppStore()
 
     useImperativeHandle(ref, () => ({
       open: () => setOpen(true),
@@ -57,8 +57,8 @@ export const ModalVersionInfo = observer(
                 </div>
                 <div className="second-column">
                   <p>{BUILD_TIMESTAMP}</p>
-                  <p>{commons?.firmwareVersion || "-"}</p>
-                  <p>{commons?.productId || "-"}</p>
+                  <p>{firmwareVersion}</p>
+                  <p>{productId}</p>
                   <p>{portalId}</p>
                 </div>
               </div>

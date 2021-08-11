@@ -7,12 +7,13 @@ import { SIZE_EXTRA_WIDE } from "app/components/Card"
 import { useVrmStore, useAppStore } from "@elninotech/mfd-modules"
 import { BUILD_TIMESTAMP } from "app/utils/constants"
 import { observer } from "mobx-react"
+import packageInfo from "../../../../../package.json"
 
 export const ModalVersionInfo = observer(
   forwardRef((_, ref) => {
     const [isOpen, setOpen] = useState(false)
     const { portalId = "-" } = useVrmStore()
-    const { commons } = useAppStore()
+    const { firmwareVersion = "-", productId = "-" } = useAppStore()
 
     useImperativeHandle(ref, () => ({
       open: () => setOpen(true),
@@ -33,7 +34,12 @@ export const ModalVersionInfo = observer(
                     <img src={KVNRVLogo} alt={"KVNRV logo"} />
                     <span>KVNRV</span>
                   </div>
-                  <div className="version-item">Version.2..7.</div>
+                  <div className="version-item">
+                    <Translate
+                      value="versionInfo.version"
+                      version={`${packageInfo.version} ${process.env.REACT_APP_WHITELABEL}`}
+                    />
+                  </div>
                 </div>
               </div>
               <div className="right-info">
@@ -53,8 +59,8 @@ export const ModalVersionInfo = observer(
                 </div>
                 <div className="second-column">
                   <p>{BUILD_TIMESTAMP}</p>
-                  <p>{commons?.firmwareVersion || "-"}</p>
-                  <p>{commons?.productId || "-"}</p>
+                  <p>{firmwareVersion}</p>
+                  <p>{productId}</p>
                   <p>{portalId}</p>
                 </div>
               </div>

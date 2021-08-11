@@ -71,6 +71,7 @@
         "Tank sensor": "Датчик насоса",
         "Waste water": "Грязная вода"
     },
+    "versionInfo": {},
     "widgets": {
         "batteries": "Батареи",
         "battery": "Батарея",

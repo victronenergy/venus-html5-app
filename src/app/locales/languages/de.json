@@ -1,66 +1,120 @@
 {
     "acMode": {
         "modal": {
-            "name": "Name"
+            "name": "Name",
+            "updateLimit": "updateLimit"
         }
     },
     "cardFooter": {
         "Charge": "Laden",
+        "Critical": "Kritisch",
+        "Optimal": "Optimal",
         "Status": "Status",
         "Warning": "Warnung"
     },
     "common": {
+        "absorptionCharging": "AbsorptionLaden",
         "assisting": "Unterstützen",
+        "autoStartStop": "autoStartStop",
+        "bulkCharging": "bulkCharging",
+        "charge": "Gebühr",
+        "chargerOnly": "LadegerätNur",
         "charging": "Es wird geladen",
         "current": "Strom",
+        "days": "Tage",
+        "discharge": "Entladung",
         "discharging": "Entladen",
         "eco": "Eco",
+        "emptyBar": "emptyBar",
+        "equalisationCharging": "equalisationLaden",
         "error": "Fehler",
         "fault": "Störung",
+        "floatCharging": "floatCharging",
         "hours": "Stunden",
         "idle": "Idle",
+        "inputLimit": "inputLimit",
+        "inverterOnly": "WechselrichterNur",
         "inverting": "Inverting",
+        "limit": "Grenze",
+        "lowPower": "lowPower",
         "minutes": "Minuten",
+        "mode": "Modus",
+        "noShorePower": "noShorePower",
+        "notAvailable": "notAvailable",
+        "nrOfPhases": "nrOfPhases",
         "off": "Aus",
         "on": "Ein",
         "passthru": "Durchleiten",
+        "powerSupplyMode": "powerSupplyMode",
+        "remainingTime": "Restzeit",
         "running": "In Betrieb",
         "standby": "Standby",
         "starting": "Status: Starten der Geräteabfrage...",
         "stopped": "Angehalten",
         "stopping": "Es wird gestoppt",
+        "storageMode": "storageMode",
         "sustain": "Erhaltung",
         "unplugged": "Ausgesteckt",
+        "veBusFault": "veBusFault",
         "voltage": "Spannung"
     },
-    "error": {},
+    "error": {
+        "genericMessage": "genericMessage",
+        "mqttUnavailable1": "mqttUnverfügbar1",
+        "mqttUnavailable2": "mqttUnverfügbar2",
+        "mqttUnavailable3": "mqttUnverfügbar3",
+        "mqttUnavailable4": "mqttUnverfügbar4",
+        "mqttUnavailable5": "mqttUnverfügbar5"
+    },
     "generator": {
-        "temperature": {}
+        "fisherPandaAutoStartMessage": "fisherPandaAutoStartMessage",
+        "temperature": {
+            "coolant": "Kühlmittel",
+            "exhaust": "Auspuff",
+            "winding": "Wicklung"
+        }
     },
     "header": {
         "close": "Schließen",
         "connecting": "Es wird verbunden",
         "local": "Lokal",
-        "remote": "<mrk mtype=\"seg\" mid=\"744\">Ferngest. Schalter</mrk>"
+        "loggedIn": "eingeloggt",
+        "notLoggedIn": "notLoggedIn",
+        "remote": "<mrk mtype=\"seg\" mid=\"744\">Ferngest. Schalter</mrk>",
+        "remoteConsole": "remoteConsole",
+        "remoteMessage": "remoteMessage"
     },
     "installations": {
         "title": "Titel"
     },
-    "locker": {},
+    "locker": {
+        "lockMessage": "lockMessage",
+        "unlockMessage": "unlockMessage"
+    },
     "remoteLogin": {
         "email": "E-Mail",
+        "forgotPassword": "vergessenesPasswort",
+        "goBack": "goBack",
         "logIn": "Anmelden",
-        "password": "Passwort"
+        "loginFailed": "loginFailed",
+        "password": "Passwort",
+        "registerMessage1": "registerMessage1",
+        "registerMessage2": "registerMessage2"
     },
     "statusWidget": {
+        "Absorption charging": "Absorptionsladung",
         "Assisting": "Unterstützen",
+        "Bulk charging": "Bulkladung",
         "Discharging": "Entladen",
+        "Equalisation charging": "Ausgleichsladung",
+        "Float charging": "Erhaltungsladung",
         "Inverting": "Inverting",
         "Low power": "Leist. niedr.",
         "Off": "Aus",
         "Passthru": "Durchleiten",
         "Storage mode": "Lagerungsmodus",
         "Sustain": "Erhaltung",
+        "VE.Bus Fault condition": "VE.Bus Fehlerzustand",
         "parts": {
             "Fresh water": "Frischwasser",
             "Shore Power": "Landstrom"
@@ -75,9 +129,19 @@
         "Tank sensor": "Tanksensor",
         "Waste water": "Abwasser"
     },
+    "versionInfo": {},
     "widgets": {
+        "acLoads": "acLoads",
         "batteries": "Batterien",
         "battery": "Batterie",
+        "chargerWithName": "chargerWithName",
+        "dcLoads": "dcLoads",
+        "generatorInput": "GeneratorEingabe",
+        "gridInput": "gridInput",
+        "invalidConfig": "invalidConfig",
+        "inverterWithName": "inverterWithName",
+        "pvCharger": "pvCharger",
+        "shorePower": "shorePower",
         "status": "Status",
         "unknown": "Unbekannt"
     }
