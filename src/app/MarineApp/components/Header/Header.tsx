@@ -1,4 +1,4 @@
-import React, { Fragment } from "react"
+import React, { Fragment, useRef } from "react"
 
 import { useHeader } from "@elninotech/mfd-modules"
 
@@ -13,6 +13,7 @@ import LIcon from "../../images/icons/L.svg"
 import RIcon from "../../images/icons/R.svg"
 import { Translate } from "react-i18nify"
 import { observer } from "mobx-react"
+import { ModalVersionInfo } from "../ModalVersionInfo"
 
 type HeaderProps = {
   currentView: string
@@ -34,10 +35,12 @@ export const Header = (props: HeaderProps) => {
     currentPage,
     pages,
   } = props
+  const modalVersionInfoRef = useRef<any>()
+
   return (
     <Fragment>
       <header>
-        <img src={Logo} className="logo" alt={"Logo"} />
+        <img onClick={() => modalVersionInfoRef.current.open()} src={Logo} className="logo" alt={"Logo"} />
         {currentView === VIEWS.METRICS && pages && pages > 1 && (
           <Paginator setPage={setPage!} currentPage={currentPage!} pages={pages} />
         )}
@@ -56,6 +59,7 @@ export const Header = (props: HeaderProps) => {
           )}
         </div>
       </header>
+      <ModalVersionInfo ref={modalVersionInfoRef} />
     </Fragment>
   )
 }

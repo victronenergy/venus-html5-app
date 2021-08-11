@@ -77,6 +77,7 @@
         }
     },
     "header": {
+        "versionInfo": "Version Information",
         "close": "Close",
         "connecting": "Connecting",
         "local": "Local",
@@ -85,6 +86,13 @@
         "remote": "Remote",
         "remoteConsole": "Remote console",
         "remoteMessage": "Open in a larger screen to view remote console"
+    },
+    "versionInfo": {
+        "version": "Version %{version}",
+        "buildDate": "Build Date",
+        "venusOs": "Venus OS",
+        "identifier": "Identifier",
+        "vrmPortID": "VRM Portal ID"
     },
     "installations": {
         "title": "Choose an installation"

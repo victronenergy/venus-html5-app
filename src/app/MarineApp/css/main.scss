@@ -67,6 +67,12 @@ main {
 
 }
 
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
 .metric {
   padding: $topBottomPadding $rightLeftPadding;
   margin-right: 10px;
