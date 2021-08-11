@@ -96,10 +96,6 @@
         "lockMessage": "Lock to prevent changes",
         "unlockMessage": "Unlock to make changes"
     },
-    "noWidgets": {
-        "subtitle": "Make sure your devices are properly connected to display widgets",
-        "title": "Your dashboard is empty"
-    },
     "remoteLogin": {
         "email": "Email",
         "forgotPassword": "Forgot Password?",

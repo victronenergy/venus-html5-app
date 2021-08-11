@@ -6,7 +6,7 @@ import "./NoWidgets.scss"
 
 export const NoWidgets = () => {
   const { elementsVisible } = useContext(MetricsContext)
-  console.log({ elementsVisible })
+
   return (
     <>
       {!elementsVisible && (
