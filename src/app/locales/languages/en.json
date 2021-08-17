@@ -44,9 +44,7 @@
         "nrOfPhases": "%{phases} phases",
         "off": "Off",
         "on": "On",
-        "limit": "Limit",
         "passthru": "Passthru",
-        "mode": "Mode",
         "powerSupplyMode": "Power supply mode",
         "remainingTime": "Remaining time",
         "running": "Running",
@@ -84,7 +82,8 @@
         "notLoggedIn": "Not logged in",
         "remote": "Remote",
         "remoteConsole": "Remote console",
-        "remoteMessage": "Open in a larger screen to view remote console"
+        "remoteMessage": "Open in a larger screen to view remote console",
+        "versionInfo": "Version Information"
     },
     "installations": {
         "title": "Choose an installation"
@@ -92,6 +91,10 @@
     "locker": {
         "lockMessage": "Lock to prevent changes",
         "unlockMessage": "Unlock to make changes"
+    },
+    "noWidgets": {
+        "subtitle": "Make sure your devices are properly connected to display widgets",
+        "title": "Your dashboard is empty"
     },
     "remoteLogin": {
         "email": "Email",
@@ -119,7 +122,16 @@
         "VE.Bus Fault condition": "VE.Bus Fault condition",
         "parts": {
             "Fresh water": "Fresh water",
-            "Shore Power": "Shore Power"
+            "Shore Power": "Shore Power",
+            "Black water": "Black water",
+            "Tank sensor": "Tank sensor",
+            "Oil": "Oil",
+            "Live well": "Live well",
+            "Waste water": "Waste water",
+            "Fuel": "Fuel",
+            "Battery": "Battery",
+            "DC Loads": "DC Loads",
+            "PV Charger": "PV Charger"
         }
     },
     "tankWidget": {
@@ -130,6 +142,13 @@
         "Oil": "Oil",
         "Tank sensor": "Tank sensor",
         "Waste water": "Waste water"
+    },
+    "versionInfo": {
+        "buildDate": "Build Date",
+        "identifier": "Identifier",
+        "venusOs": "Venus OS",
+        "version": "Version %{version}",
+        "vrmPortID": "VRM Portal ID"
     },
     "widgets": {
         "acLoads": "AC Loads",

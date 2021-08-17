@@ -47,6 +47,7 @@
         "title": "Titolo"
     },
     "locker": {},
+    "noWidgets": {},
     "remoteLogin": {
         "email": "E-mail",
         "logIn": "Login",
@@ -75,6 +76,7 @@
         "Tank sensor": "Sensore serbatoio",
         "Waste water": "Acque reflue"
     },
+    "versionInfo": {},
     "widgets": {
         "batteries": "Batterie",
         "battery": "Batteria",

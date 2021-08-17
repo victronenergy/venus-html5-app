@@ -39,6 +39,7 @@
     },
     "installations": {},
     "locker": {},
+    "noWidgets": {},
     "remoteLogin": {
         "logIn": "Přihlásit se",
         "password": "Heslo"
@@ -65,6 +66,7 @@
         "Tank sensor": "Čidlo nádrže",
         "Waste water": "Odpadní voda"
     },
+    "versionInfo": {},
     "widgets": {
         "batteries": "Baterie",
         "battery": "Baterie",

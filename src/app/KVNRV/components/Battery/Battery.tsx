@@ -164,7 +164,7 @@ export const Batteries = observer(({ size }: BatteryProps) => {
             <div className="double-gauges">
               <KVNGauge
                 showNeedle={battery.power <= 0}
-                percent={battery.power <= 0 ? 1 - normalizedPower : 1}
+                percent={battery.power <= 0 ? 1 - Math.abs(normalizedPower) : 1}
                 from={-1 * Math.PI}
                 to={Math.PI / 2}
                 inverse
@@ -173,7 +173,9 @@ export const Batteries = observer(({ size }: BatteryProps) => {
                 showText={false}
               >
                 <>
-                  <div className="power-indicator">{formatNumber({ unit: "W", value: battery.power })?.toString()}</div>
+                  <div className="power-indicator">
+                    {formatNumber({ unit: "W", value: Math.abs(battery.power) })?.toString()}
+                  </div>
                 </>
               </KVNGauge>
               <KVNGauge
