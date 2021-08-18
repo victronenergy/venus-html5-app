@@ -17,7 +17,7 @@
         "assisting": "Unterstützen",
         "autoStartStop": "Auto Start/Stop",
         "bulkCharging": "Bulkladung",
-        "charge": "Gebühr",
+        "charge": "Ladung",
         "chargerOnly": "Nur Ladegerät",
         "charging": "Es wird geladen",
         "current": "Strom",
@@ -35,11 +35,11 @@
         "inputLimit": "Eingangsgrenze",
         "inverterOnly": "Nur Wechselrichter",
         "inverting": "Wechselrichten",
-        "limit": "Grenze",
+        "limit": "Limit",
         "lowPower": "Energiesparmodus",
         "minutes": "Minuten",
         "mode": "Modus",
-        "noShorePower": "noShorePower",
+        "noShorePower": "Kein Landstrom",
         "notAvailable": "Nicht verfügbar",
         "nrOfPhases": "Nr. der Phasen",
         "off": "Aus",
@@ -64,10 +64,10 @@
         "mqttUnavailable2": "MQTT nicht verfügbar 2",
         "mqttUnavailable3": "MQTT nicht verfügbar 3",
         "mqttUnavailable4": "MQTT nicht verfügbar 4",
-        "mqttUnavailable5": "mqttUnverfügbar5"
+        "mqttUnavailable5": "MQTT nicht verfügbar 5"
     },
     "generator": {
-        "fisherPandaAutoStartMessage": "fisherPandaAutoStartMessage",
+        "fisherPandaAutoStartMessage": "Fisher Panda Autostart Nachricht",
         "temperature": {
             "coolant": "Kühlmittel",
             "exhaust": "Auspuff",
@@ -82,7 +82,8 @@
         "notLoggedIn": "Nicht eingeloggt",
         "remote": "<mrk mtype=\"seg\" mid=\"744\">Ferngest. Schalter</mrk>",
         "remoteConsole": "Remote-Konsole",
-        "remoteMessage": "Fernnachricht"
+        "remoteMessage": "Fernnachricht",
+        "versionInfo": "Versionsinformation"
     },
     "installations": {
         "title": "Titel"
@@ -91,16 +92,19 @@
         "lockMessage": "Nachricht sperren",
         "unlockMessage": "Nachricht entsperren"
     },
-    "noWidgets": {},
+    "noWidgets": {
+        "subtitle": "Untertitel",
+        "title": "Titel"
+    },
     "remoteLogin": {
         "email": "E-Mail",
-        "forgotPassword": "vergessenesPasswort",
+        "forgotPassword": "Passwort vergessen",
         "goBack": "Zurück",
         "logIn": "Anmelden",
-        "loginFailed": "loginFailed",
+        "loginFailed": "Fehler bei der Anmeldung",
         "password": "Passwort",
-        "registerMessage1": "registerMessage1",
-        "registerMessage2": "registerMessage2"
+        "registerMessage1": "Nachricht 1 registrieren",
+        "registerMessage2": "Nachricht 2 registrieren"
     },
     "statusWidget": {
         "Absorption charging": "Absorptionsladung",
@@ -140,7 +144,11 @@
         "Waste water": "Abwasser"
     },
     "versionInfo": {
-        "version": "Version"
+        "buildDate": "Build Datum",
+        "identifier": "Kennung",
+        "venusOs": "Venus OS",
+        "version": "Version",
+        "vrmPortID": "VRM Portal-ID"
     },
     "widgets": {
         "acLoads": "AC Lasten",
