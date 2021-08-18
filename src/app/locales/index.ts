@@ -1,12 +1,12 @@
 import { setTranslations, setLocale, setHandleMissingTranslation, translate } from "react-i18nify"
-import { __LOCAL_STORAGE_LANG_KEY__, LANGAUGES, DEFAULT_LANGUAGE } from "./constants"
+import { __LOCAL_STORAGE_LANG_KEY__, LANGUAGES, DEFAULT_LANGUAGE } from "./constants"
 import { get } from "lodash-es"
 
 type LangObj = {
   [key: string]: Record<string, any>
 }
 
-const languagesJSONS: LangObj = LANGAUGES.reduce(
+const languagesJSONS: LangObj = LANGUAGES.reduce(
   (rx, l) => ({
     ...rx,
     [l]: require(`./languages/${l}.json`),
