@@ -8,5 +8,9 @@ export const mfdLanguageOptions = {
   supportedLanguages: LANGUAGES,
   localStorageKey: __LOCAL_STORAGE_LANG_KEY__,
   defaultLanguage: DEFAULT_LANGUAGE,
-  onLangChange: setLocale,
+  onLangChange: (lang) => {
+    // override the language with the value of the lang URL parameter, if present
+    const languageOverride = (window.location.search.match(/[?&]lang=([a-zA-Z-_]{2,5})/) || [])[1]
+    setLocale(languageOverride || lang)
+  },
 }
