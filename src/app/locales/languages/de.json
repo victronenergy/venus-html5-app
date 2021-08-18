@@ -2,68 +2,68 @@
     "acMode": {
         "modal": {
             "name": "Name",
-            "updateLimit": "updateLimit"
+            "updateLimit": "Update-Limit"
         }
     },
     "cardFooter": {
-        "Charge": "Laden",
+        "Charge": "Ladung",
         "Critical": "Kritisch",
         "Optimal": "Optimal",
         "Status": "Status",
         "Warning": "Warnung"
     },
     "common": {
-        "absorptionCharging": "AbsorptionLaden",
+        "absorptionCharging": "Absorptionsladung",
         "assisting": "Unterstützen",
-        "autoStartStop": "autoStartStop",
-        "bulkCharging": "bulkCharging",
+        "autoStartStop": "Auto Start/Stop",
+        "bulkCharging": "Bulkladung",
         "charge": "Gebühr",
-        "chargerOnly": "LadegerätNur",
+        "chargerOnly": "Nur Ladegerät",
         "charging": "Es wird geladen",
         "current": "Strom",
         "days": "Tage",
         "discharge": "Entladung",
         "discharging": "Entladen",
         "eco": "Eco",
-        "emptyBar": "emptyBar",
-        "equalisationCharging": "equalisationLaden",
+        "emptyBar": "Leere Leiste",
+        "equalisationCharging": "Ausgleichsladung",
         "error": "Fehler",
         "fault": "Störung",
-        "floatCharging": "floatCharging",
+        "floatCharging": "Floatladung",
         "hours": "Stunden",
-        "idle": "Idle",
-        "inputLimit": "inputLimit",
-        "inverterOnly": "WechselrichterNur",
-        "inverting": "Inverting",
+        "idle": "Leerlauf",
+        "inputLimit": "Eingangsgrenze",
+        "inverterOnly": "Nur Wechselrichter",
+        "inverting": "Wechselrichten",
         "limit": "Grenze",
-        "lowPower": "lowPower",
+        "lowPower": "Energiesparmodus",
         "minutes": "Minuten",
         "mode": "Modus",
         "noShorePower": "noShorePower",
-        "notAvailable": "notAvailable",
-        "nrOfPhases": "nrOfPhases",
+        "notAvailable": "Nicht verfügbar",
+        "nrOfPhases": "Nr. der Phasen",
         "off": "Aus",
         "on": "Ein",
-        "passthru": "Durchleiten",
-        "powerSupplyMode": "powerSupplyMode",
+        "passthru": "Durchleitung",
+        "powerSupplyMode": "Stromversorgungsmodus",
         "remainingTime": "Restzeit",
         "running": "In Betrieb",
         "standby": "Standby",
         "starting": "Status: Starten der Geräteabfrage...",
         "stopped": "Angehalten",
         "stopping": "Es wird gestoppt",
-        "storageMode": "storageMode",
+        "storageMode": "Lagerungsmodus",
         "sustain": "Erhaltung",
         "unplugged": "Ausgesteckt",
-        "veBusFault": "veBusFault",
+        "veBusFault": "VE.Bus Fehler",
         "voltage": "Spannung"
     },
     "error": {
-        "genericMessage": "genericMessage",
-        "mqttUnavailable1": "mqttUnverfügbar1",
-        "mqttUnavailable2": "mqttUnverfügbar2",
-        "mqttUnavailable3": "mqttUnverfügbar3",
-        "mqttUnavailable4": "mqttUnverfügbar4",
+        "genericMessage": "Generische Nachricht",
+        "mqttUnavailable1": "MQTT nicht verfügbar 1",
+        "mqttUnavailable2": "MQTT nicht verfügbar 2",
+        "mqttUnavailable3": "MQTT nicht verfügbar 3",
+        "mqttUnavailable4": "MQTT nicht verfügbar 4",
         "mqttUnavailable5": "mqttUnverfügbar5"
     },
     "generator": {
@@ -79,23 +79,23 @@
         "connecting": "Es wird verbunden",
         "local": "Lokal",
         "loggedIn": "eingeloggt",
-        "notLoggedIn": "notLoggedIn",
+        "notLoggedIn": "Nicht eingeloggt",
         "remote": "<mrk mtype=\"seg\" mid=\"744\">Ferngest. Schalter</mrk>",
-        "remoteConsole": "remoteConsole",
-        "remoteMessage": "remoteMessage"
+        "remoteConsole": "Remote-Konsole",
+        "remoteMessage": "Fernnachricht"
     },
     "installations": {
         "title": "Titel"
     },
     "locker": {
-        "lockMessage": "lockMessage",
-        "unlockMessage": "unlockMessage"
+        "lockMessage": "Nachricht sperren",
+        "unlockMessage": "Nachricht entsperren"
     },
     "noWidgets": {},
     "remoteLogin": {
         "email": "E-Mail",
         "forgotPassword": "vergessenesPasswort",
-        "goBack": "goBack",
+        "goBack": "Zurück",
         "logIn": "Anmelden",
         "loginFailed": "loginFailed",
         "password": "Passwort",
@@ -117,8 +117,17 @@
         "Sustain": "Erhaltung",
         "VE.Bus Fault condition": "VE.Bus Fehlerzustand",
         "parts": {
+            "Battery": "Batterie",
+            "Black water": "Schwarzwasser",
+            "DC Loads": "DC Lasten",
             "Fresh water": "Frischwasser",
-            "Shore Power": "Landstrom"
+            "Fuel": "Treibstoff",
+            "Live well": "Fischkasten",
+            "Oil": "Öl",
+            "PV Charger": "PV-Ladegerät",
+            "Shore Power": "Landstrom",
+            "Tank sensor": "Tanksensor",
+            "Waste water": "Abwasser"
         }
     },
     "tankWidget": {
@@ -130,19 +139,21 @@
         "Tank sensor": "Tanksensor",
         "Waste water": "Abwasser"
     },
-    "versionInfo": {},
+    "versionInfo": {
+        "version": "Version"
+    },
     "widgets": {
-        "acLoads": "acLoads",
+        "acLoads": "AC Lasten",
         "batteries": "Batterien",
         "battery": "Batterie",
-        "chargerWithName": "chargerWithName",
-        "dcLoads": "dcLoads",
-        "generatorInput": "GeneratorEingabe",
-        "gridInput": "gridInput",
-        "invalidConfig": "invalidConfig",
-        "inverterWithName": "inverterWithName",
-        "pvCharger": "pvCharger",
-        "shorePower": "shorePower",
+        "chargerWithName": "Ladegerät mit Namen",
+        "dcLoads": "DC Lasten",
+        "generatorInput": "Generatoreingang",
+        "gridInput": "Netzeingang",
+        "invalidConfig": "Ungültige Konfiguration",
+        "inverterWithName": "Inverter mit Namen",
+        "pvCharger": "PV-Ladegerät",
+        "shorePower": "Landstrom",
         "status": "Status",
         "unknown": "Unbekannt"
     }

@@ -121,17 +121,17 @@
         "Sustain": "Sustain",
         "VE.Bus Fault condition": "VE.Bus Fault condition",
         "parts": {
-            "Fresh water": "Fresh water",
-            "Shore Power": "Shore Power",
-            "Black water": "Black water",
-            "Tank sensor": "Tank sensor",
-            "Oil": "Oil",
-            "Live well": "Live well",
-            "Waste water": "Waste water",
-            "Fuel": "Fuel",
             "Battery": "Battery",
+            "Black water": "Black water",
             "DC Loads": "DC Loads",
-            "PV Charger": "PV Charger"
+            "Fresh water": "Fresh water",
+            "Fuel": "Fuel",
+            "Live well": "Live well",
+            "Oil": "Oil",
+            "PV Charger": "PV Charger",
+            "Shore Power": "Shore Power",
+            "Tank sensor": "Tank sensor",
+            "Waste water": "Waste water"
         }
     },
     "tankWidget": {

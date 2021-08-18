@@ -121,8 +121,17 @@
         "Sustain": "维持",
         "VE.Bus Fault condition": "VE.BUS故障条件",
         "parts": {
+            "Battery": "电池",
+            "Black water": "黑水",
+            "DC Loads": "直流负载",
             "Fresh water": "淡水",
-            "Shore Power": "太阳能"
+            "Fuel": "燃料",
+            "Live well": "活鱼池",
+            "Oil": "石油",
+            "PV Charger": "太阳能充电器",
+            "Shore Power": "太阳能",
+            "Tank sensor": "水箱传感器",
+            "Waste water": "废水"
         }
     },
     "tankWidget": {
