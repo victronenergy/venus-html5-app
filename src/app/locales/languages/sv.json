@@ -11,6 +11,7 @@
     },
     "common": {
         "assisting": "Hjälpström",
+        "charge": "Belastning",
         "charging": "laddar",
         "current": "Ström",
         "discharging": "laddar ur",
@@ -19,6 +20,7 @@
         "fault": "Fel",
         "idle": "Tomgång",
         "inverting": "Växelriktning",
+        "mode": "Läge",
         "off": "Av",
         "on": "På",
         "passthru": "Förbikoppling",
@@ -44,6 +46,7 @@
         "title": "Remote VEConfigure"
     },
     "locker": {},
+    "noWidgets": {},
     "remoteLogin": {
         "email": "E-post",
         "logIn": "Inloggning",
@@ -71,6 +74,7 @@
         "Tank sensor": "Tanksensor",
         "Waste water": "Spillvatten"
     },
+    "versionInfo": {},
     "widgets": {
         "batteries": "Batterier",
         "battery": "Batteri",

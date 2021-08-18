@@ -39,6 +39,7 @@
     },
     "installations": {},
     "locker": {},
+    "noWidgets": {},
     "remoteLogin": {
         "password": "كلمة السر"
     },
@@ -64,6 +65,7 @@
         "Tank sensor": "حساس الخزان",
         "Waste water": "ماء فاسد"
     },
+    "versionInfo": {},
     "widgets": {
         "batteries": "البطاريات",
         "battery": "بطارية",

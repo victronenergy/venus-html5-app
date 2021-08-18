@@ -47,6 +47,7 @@
         "title": "Título"
     },
     "locker": {},
+    "noWidgets": {},
     "remoteLogin": {
         "email": "Email",
         "logIn": "Iniciar sesión",
@@ -75,6 +76,7 @@
         "Tank sensor": "Sensor nivel tanque",
         "Waste water": "Aguas grises"
     },
+    "versionInfo": {},
     "widgets": {
         "batteries": "Baterías",
         "battery": "Batería",

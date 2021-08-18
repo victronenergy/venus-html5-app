@@ -128,5 +128,10 @@
 }
 
 .charge-indicator {
-  margin-left: 1rem;
+  margin-left: 0.5rem;
+  display: flex;
+  .time-to-go {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
 }

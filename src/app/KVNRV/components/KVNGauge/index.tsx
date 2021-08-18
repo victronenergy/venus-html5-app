@@ -1,10 +1,11 @@
 import { sum } from "app/KVNRV/utils/helpers"
 import { useContainerColors } from "app/KVNRV/utils/hooks"
 import { Chart } from "chart.js"
-import { useCallback, useEffect, useMemo, useRef, memo, ReactNode } from "react"
+import { useCallback, useEffect, useMemo, useRef, ReactNode } from "react"
 import "./GaugeIndicator.scss"
 import { TextPlugin } from "./plugins/TextPlugin"
 import { debounce } from "lodash-es"
+import { observer } from "mobx-react"
 
 const defaultOptions = {
   maintainAspectRatio: false,
@@ -37,7 +38,7 @@ type GaugeIndicatorProps = {
 
 const INDICATOR_WIDTH = 0.015
 
-export const KVNGauge = memo(
+export const KVNGauge = observer(
   ({
     value,
     percent,
@@ -160,9 +161,12 @@ export const KVNGauge = memo(
         return
       }
 
+      chartRef.current.data.datasets[0].backgroundColor = orderedColors
+      chartRef.current.data.datasets[0].hoverBackgroundColor = orderedColors
+
       chartRef.current.data.datasets[0].data = parts
       chartRef.current.update()
-    }, [parts])
+    }, [orderedColors, parts])
 
     // update indicator dataset
     useEffect(() => {
@@ -173,6 +177,8 @@ export const KVNGauge = memo(
       chartRef.current.data.datasets[2].data = indicatorPoints
       chartRef.current.data.datasets[2].backgroundColor = indicatorColors
       chartRef.current.data.datasets[2].hoverBackgroundColor = indicatorColors
+      chartRef.current.data.datasets[2].borderColor = ["transparent", colors.textColor, "transparent"]
+      chartRef.current.data.datasets[2].hoverBorderColor = ["transparent", colors.textColor, "transparent"]
 
       // update options for text plugin
       //@ts-ignore
@@ -181,17 +187,17 @@ export const KVNGauge = memo(
       chartRef.current.update()
     }, [colors.textColor, indicatorColors, indicatorPoints, unit, value])
 
-    // Chart js was not updating it's height and width on resize
-    // below we destroy and create it again in order for it to resize accordingly
-    const onResize = function () {
+    const onRespawn = function () {
       if (chartRef.current) {
         chartRef.current.destroy()
         createChart()
       }
     }
 
+    // Chart js was not updating it's height and width on resize
+    // below we destroy and create it again in order for it to resize accordingly
     useEffect(() => {
-      const debouncedResize = debounce(onResize, 500)
+      const debouncedResize = debounce(onRespawn, 500)
       window.addEventListener("resize", debouncedResize)
       return () => window.removeEventListener("resize", debouncedResize)
       // eslint-disable-next-line react-hooks/exhaustive-deps
