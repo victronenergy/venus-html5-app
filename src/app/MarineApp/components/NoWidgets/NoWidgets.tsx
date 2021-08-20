@@ -2,8 +2,9 @@ import CompassImg from "../../images/compass.png"
 import { Translate } from "react-i18nify"
 import "./NoWidgets.scss"
 import { useVisibleWidgetsStore } from "app/MarineApp/modules"
+import { observer } from "mobx-react"
 
-export const NoWidgets = () => {
+export const NoWidgets = observer(() => {
   const visibleWidgetsStore = useVisibleWidgetsStore()
 
   return (
@@ -21,4 +22,4 @@ export const NoWidgets = () => {
       )}
     </>
   )
-}
+})
