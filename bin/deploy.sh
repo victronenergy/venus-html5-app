@@ -29,6 +29,6 @@ HOST="$1"
 echo "Building app.."
 npm run build
 
-echo "Uploading build/* to ${USERNAME}@${HOST}:/var/www/venus/app"
+echo "Uploading build/* to ${USERNAME}@${HOST}:/data/www/app/"
 
-rsync --delete -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" -r dist/* ${USERNAME}@${HOST}:/var/www/venus/app
+rsync --delete -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" -r dist/* ${USERNAME}@${HOST}:/data/www/app/
