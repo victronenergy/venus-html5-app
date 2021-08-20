@@ -29,6 +29,8 @@ HOST="$1"
 echo "Building app.."
 npm run build
 
-echo "Uploading build/* to ${USERNAME}@${HOST}:/data/www/app/"
+echo "Uploading dist/* to ${USERNAME}@${HOST}:/data/www/app/"
+
+ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${USERNAME}@${HOST} "mkdir -p /data/www/app/"
 
 rsync --delete -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" -r dist/* ${USERNAME}@${HOST}:/data/www/app/
