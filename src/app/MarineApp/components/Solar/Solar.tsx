@@ -8,13 +8,12 @@ import NumericValue from "../../../components/NumericValue"
 import SolarIcon from "../../images/icons/icon_solar.svg"
 import { usePvCharger } from "@elninotech/mfd-modules"
 import { observer } from "mobx-react"
-import { useVisibilityNotifier } from "../MetricsContext/MetricsContext"
+import { useVisibilityNotifier } from "app/MarineApp/modules"
 
 const Solar = observer(() => {
   const { current, power } = usePvCharger()
   const visible = !!(current || power || power === 0)
 
-  // for Metrics Context
   useVisibilityNotifier({ widgetName: "Solar", visible })
 
   if (visible) {

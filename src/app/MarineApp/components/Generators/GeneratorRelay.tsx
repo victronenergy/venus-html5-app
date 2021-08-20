@@ -16,7 +16,7 @@ import "./Generator.scss"
 import GeneratorIcon from "../../images/icons/generator.svg"
 import { Translate, translate } from "react-i18nify"
 import { observer } from "mobx-react"
-import { useVisibilityNotifier } from "../MetricsContext/MetricsContext"
+import { useVisibilityNotifier } from "app/MarineApp/modules"
 
 function getGeneratorState(statusCode: number, active: boolean, phases: number) {
   if (active) {
@@ -104,7 +104,6 @@ const GeneratorRelay = ({
 export const GeneratorRelays = observer(() => {
   const values = useGeneratorRelay()
 
-  // for Metrics Context
   useVisibilityNotifier({ widgetName: "GeneratorRelays", visible: !!(values.settings && values.settings.length) })
 
   if (values.settings) {

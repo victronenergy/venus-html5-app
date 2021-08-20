@@ -14,7 +14,7 @@ import "./InverterCharger.scss"
 import MultiplusIcon from "../../images/icons/multiplus.svg"
 import { translate } from "react-i18nify"
 import { observer } from "mobx-react"
-import { useVisibilityNotifier } from "../MetricsContext/MetricsContext"
+import { useVisibilityNotifier } from "app/MarineApp/modules"
 
 type InverterChargerProps = {
   onChangeInputLimitClicked: Function
@@ -38,7 +38,6 @@ const InverterCharger = observer(({ connected, onChangeInputLimitClicked }: Inve
 
   const currentMode = parseInt(mode)
 
-  // for Metrics Context
   useVisibilityNotifier({ widgetName: "InverterCharger", visible: !!inputId })
 
   return (

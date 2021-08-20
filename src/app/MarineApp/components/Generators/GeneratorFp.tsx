@@ -21,7 +21,7 @@ import FpGeneratorIcon from "../../images/icons/fp_generator.svg"
 import GeneratorIcon from "../../images/icons/generator.svg"
 import { Translate, translate } from "react-i18nify"
 import { observer } from "mobx-react"
-import { useVisibilityNotifier } from "../MetricsContext/MetricsContext"
+import { useVisibilityNotifier } from "app/MarineApp/modules"
 
 const getIcon = (productId: number) => {
   switch (productId) {
@@ -65,7 +65,6 @@ const GeneratorFp = observer(() => {
   const translatedSubTitle = translate(`common.${subTitle}`)
   const isAutoStartDisabled = gensetAutoStart === FISCHER_PANDA_GENSET_AUTOSTART.DISABLED
 
-  // for Metrics Context
   useVisibilityNotifier({ widgetName: "GeneratorRelays", visible: !!phases })
 
   if (phases) {

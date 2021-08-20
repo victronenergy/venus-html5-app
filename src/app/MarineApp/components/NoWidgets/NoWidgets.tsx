@@ -1,15 +1,14 @@
-import { useContext } from "react"
-import { MetricsContext } from "../MetricsContext"
 import CompassImg from "../../images/compass.png"
 import { Translate } from "react-i18nify"
 import "./NoWidgets.scss"
+import { useVisibleWidgetsStore } from "app/MarineApp/modules"
 
 export const NoWidgets = () => {
-  const { elementsVisible } = useContext(MetricsContext)
+  const visibleWidgetsStore = useVisibleWidgetsStore()
 
   return (
     <>
-      {!elementsVisible && (
+      {visibleWidgetsStore.noVisibleElements && (
         <div className="no-widgets-container">
           <img src={CompassImg} alt="compass" />
           <h3>

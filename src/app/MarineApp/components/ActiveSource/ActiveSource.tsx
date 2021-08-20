@@ -16,7 +16,7 @@ import ShorePowerIcon from "../../images/icons/shore-power.svg"
 import GeneratorIcon from "../../images/icons/generator.svg"
 import { Translate, translate } from "react-i18nify"
 import { observer } from "mobx-react"
-import { useVisibilityNotifier } from "../MetricsContext/MetricsContext"
+import { useVisibilityNotifier } from "app/MarineApp/modules"
 
 const activeSourceTitle = {
   [AC_SOURCE_TYPE.SHORE]: "shorePower",
@@ -76,7 +76,6 @@ const ActiveSourceList = observer(() => {
 
   const visible = !!settings.some((item) => [AC_SOURCE_TYPE.GRID, AC_SOURCE_TYPE.SHORE].includes(item))
 
-  // for Metrics Context
   useVisibilityNotifier({ widgetName: "ActiveSourceList", visible })
 
   return (
