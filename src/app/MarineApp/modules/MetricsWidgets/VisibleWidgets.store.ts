@@ -1,8 +1,9 @@
+import { WIDGET_TYPES } from "app/MarineApp/utils/constants"
 import { makeAutoObservable } from "mobx"
 import { useMemo } from "react"
 
 export type notifyParams = {
-  widgetName: string
+  widgetName: typeof WIDGET_TYPES[keyof typeof WIDGET_TYPES]
   visible: boolean
 }
 

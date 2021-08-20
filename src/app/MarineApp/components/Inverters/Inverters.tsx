@@ -5,13 +5,14 @@ import { useInverters, useVebus } from "@elninotech/mfd-modules"
 import Inverter from "./Inverter"
 import { observer } from "mobx-react"
 import { useVisibilityNotifier } from "app/MarineApp/modules"
+import { WIDGET_TYPES } from "app/MarineApp/utils/constants"
 
 const Inverters = observer(() => {
   const { inverters } = useInverters()
   const { instanceId } = useVebus()
   const visible = !!(inverters.length || instanceId)
 
-  useVisibilityNotifier({ widgetName: "Inverters", visible })
+  useVisibilityNotifier({ widgetName: WIDGET_TYPES.INVERTERS, visible })
 
   if (visible) {
     return (

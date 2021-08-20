@@ -10,6 +10,7 @@ import AcIcon from "../../images/icons/ac.svg"
 import { translate, Translate } from "react-i18nify"
 import { observer } from "mobx-react"
 import { useVisibilityNotifier } from "app/MarineApp/modules"
+import { WIDGET_TYPES } from "app/MarineApp/utils/constants"
 
 const AcLoads = observer(() => {
   const { current, voltage, power, phases } = useAcLoads()
@@ -17,7 +18,7 @@ const AcLoads = observer(() => {
 
   const isVisible = !!(current && voltage && power && phases)
 
-  useVisibilityNotifier({ widgetName: "AcLoads", visible: isVisible })
+  useVisibilityNotifier({ widgetName: WIDGET_TYPES.AC_LOADS, visible: isVisible })
 
   if (isVisible) {
     return showAsList ? (

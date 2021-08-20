@@ -19,6 +19,7 @@ import RIcon from "../../images/icons/R.svg"
 import { Translate } from "react-i18nify"
 import { observer } from "mobx-react"
 import { useVisibilityNotifier } from "app/MarineApp/modules"
+import { WIDGET_TYPES } from "app/MarineApp/utils/constants"
 
 type PaginatorProps = {
   setPage: Function
@@ -195,7 +196,7 @@ export class Batteries extends Component<BatteriesProps, BatteriesState> {
 export const BatteriesWithData = observer(() => {
   const { batteries } = useBattery()
 
-  useVisibilityNotifier({ widgetName: "Bateries", visible: !!(batteries && batteries.length) })
+  useVisibilityNotifier({ widgetName: WIDGET_TYPES.BATTERY, visible: !!(batteries && batteries.length) })
 
   if (batteries) {
     // Sort batteries first by state, and then by ID to keep order consistent

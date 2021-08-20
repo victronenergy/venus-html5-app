@@ -6,5 +6,6 @@ export const useVisibilityNotifier = ({ widgetName, visible }: notifyParams) => 
 
   useEffect(() => {
     visibleWidgetsStore.notifyVisibility({ widgetName, visible })
-  }, [visibleWidgetsStore, visible, widgetName])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [visible, widgetName])
 }
