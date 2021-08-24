@@ -1,8 +1,8 @@
 {
     "acMode": {
         "modal": {
-            "name": "Name",
-            "updateLimit": "Update-Limit"
+            "name": "Auswahlmodus",
+            "updateLimit": "Wählen Sie die Eingabegrenze für Landstrom"
         }
     },
     "cardFooter": {
@@ -19,20 +19,20 @@
         "bulkCharging": "Bulkladung",
         "charge": "Ladung",
         "chargerOnly": "Nur Ladegerät",
-        "charging": "Es wird geladen",
+        "charging": "Aufladen",
         "current": "Strom",
         "days": "Tage",
         "discharge": "Entladung",
         "discharging": "Entladen",
         "eco": "Eco",
-        "emptyBar": "Leere Leiste",
+        "emptyBar": " - ",
         "equalisationCharging": "Ausgleichsladung",
         "error": "Fehler",
         "fault": "Störung",
         "floatCharging": "Floatladung",
         "hours": "Stunden",
         "idle": "Leerlauf",
-        "inputLimit": "Eingangsgrenze",
+        "inputLimit": "Eingangsstrombegrenzung",
         "inverterOnly": "Nur Wechselrichter",
         "inverting": "Wechselrichten",
         "limit": "Limit",
@@ -41,7 +41,7 @@
         "mode": "Modus",
         "noShorePower": "Kein Landstrom",
         "notAvailable": "Nicht verfügbar",
-        "nrOfPhases": "Nr. der Phasen",
+        "nrOfPhases": "%{phases} Phasen",
         "off": "Aus",
         "on": "Ein",
         "passthru": "Durchleitung",
@@ -50,24 +50,24 @@
         "running": "In Betrieb",
         "standby": "Standby",
         "starting": "Status: Starten der Geräteabfrage...",
-        "stopped": "Angehalten",
+        "stopped": "Gestoppt",
         "stopping": "Es wird gestoppt",
         "storageMode": "Lagerungsmodus",
         "sustain": "Erhaltung",
-        "unplugged": "Ausgesteckt",
-        "veBusFault": "VE.Bus Fehler",
+        "unplugged": "Nicht angeschlossen",
+        "veBusFault": "VE.Bus-Fehlerzustand",
         "voltage": "Spannung"
     },
     "error": {
-        "genericMessage": "Generische Nachricht",
-        "mqttUnavailable1": "MQTT nicht verfügbar 1",
-        "mqttUnavailable2": "MQTT nicht verfügbar 2",
-        "mqttUnavailable3": "MQTT nicht verfügbar 3",
-        "mqttUnavailable4": "MQTT nicht verfügbar 4",
-        "mqttUnavailable5": "MQTT nicht verfügbar 5"
+        "genericMessage": "Beim Rendern der Anwendung ist ein Fehler aufgetreten. Versuchen Sie die Seite neu zu laden oder kontaktieren Sie Victron Energy mit den folgenden Informationen:",
+        "mqttUnavailable1": "Es konnte keine Verbindung zum MQTT-Server hergestellt werden.",
+        "mqttUnavailable2": "Bitte überprüfen Sie, ob MQTT in Ihren Einstellungen aktiviert ist:",
+        "mqttUnavailable3": "Remote Console > Einstellungen > Dienste > MQTT im LAN (Klartext)",
+        "mqttUnavailable4": "Versuchen Sie es mit der Schaltfläche Remote Console oben auf diesem Bildschirm, um Ihre Einstellungen aus der Ferne zu ändern.",
+        "mqttUnavailable5": "Sie können auch versuchen, eine Remote-Verbindung zu Ihrem Gerät herzustellen, indem Sie im Menü oben Remote auswählen."
     },
     "generator": {
-        "fisherPandaAutoStartMessage": "Fisher Panda Autostart Nachricht",
+        "fisherPandaAutoStartMessage": "Die AutoStart-Funktion von Fisher Panda ist derzeit deaktiviert. Aktivieren Sie sie im Aggregate-Bedienfeld, um das Aggregat über dieses Bedienfeld zu steuern.",
         "temperature": {
             "coolant": "Kühlmittel",
             "exhaust": "Auspuff",
@@ -78,41 +78,41 @@
         "close": "Schließen",
         "connecting": "Es wird verbunden",
         "local": "Lokal",
-        "loggedIn": "eingeloggt",
+        "loggedIn": "Eingeloggt als",
         "notLoggedIn": "Nicht eingeloggt",
         "remote": "<mrk mtype=\"seg\" mid=\"744\">Ferngest. Schalter</mrk>",
         "remoteConsole": "Remote-Konsole",
-        "remoteMessage": "Fernnachricht",
+        "remoteMessage": "Auf einem größeren Bildschirm öffnen, um die Remote-Konsole anzuzeigen",
         "versionInfo": "Versionsinformation"
     },
     "installations": {
-        "title": "Titel"
+        "title": "Wählen Sie eine Installation"
     },
     "locker": {
-        "lockMessage": "Nachricht sperren",
-        "unlockMessage": "Nachricht entsperren"
+        "lockMessage": "Sperren, um Änderungen zu verhindern",
+        "unlockMessage": "Entsperren, um Änderungen zuzulassen"
     },
     "noWidgets": {
-        "subtitle": "Untertitel",
-        "title": "Titel"
+        "subtitle": "Stellen Sie sicher, dass Ihre Geräte richtig verbunden sind, um Widgets anzuzeigen",
+        "title": "Ihr Dashboard ist leer"
     },
     "remoteLogin": {
         "email": "E-Mail",
-        "forgotPassword": "Passwort vergessen",
+        "forgotPassword": "Passwort vergessen?",
         "goBack": "Zurück",
         "logIn": "Anmelden",
         "loginFailed": "Fehler bei der Anmeldung",
         "password": "Passwort",
-        "registerMessage1": "Nachricht 1 registrieren",
-        "registerMessage2": "Nachricht 2 registrieren"
+        "registerMessage1": "Sie haben noch kein Konto? ",
+        "registerMessage2": "Registrieren Sie Ihr Wohnmobil."
     },
     "statusWidget": {
-        "Absorption charging": "Absorptionsladung",
+        "Absorption charging": "Absorption",
         "Assisting": "Unterstützen",
-        "Bulk charging": "Bulkladung",
+        "Bulk charging": "Bulk",
         "Discharging": "Entladen",
         "Equalisation charging": "Ausgleichsladung",
-        "Float charging": "Erhaltungsladung",
+        "Float charging": "Float",
         "Inverting": "Inverting",
         "Low power": "Leist. niedr.",
         "Off": "Aus",
@@ -154,12 +154,12 @@
         "acLoads": "AC Lasten",
         "batteries": "Batterien",
         "battery": "Batterie",
-        "chargerWithName": "Ladegerät mit Namen",
+        "chargerWithName": "Ladegerät: %{productNameShort}",
         "dcLoads": "DC Lasten",
         "generatorInput": "Generatoreingang",
         "gridInput": "Netzeingang",
         "invalidConfig": "Ungültige Konfiguration",
-        "inverterWithName": "Inverter mit Namen",
+        "inverterWithName": "Inverter: %{productNameShort}",
         "pvCharger": "PV-Ladegerät",
         "shorePower": "Landstrom",
         "status": "Status",

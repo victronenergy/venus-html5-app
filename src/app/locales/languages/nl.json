@@ -1,8 +1,8 @@
 {
     "acMode": {
         "modal": {
-            "name": "Naam",
-            "updateLimit": "update Limiet"
+            "name": "Kies modus",
+            "updateLimit": "Kies maximum walstroom"
         }
     },
     "cardFooter": {
@@ -15,41 +15,41 @@
     "common": {
         "absorptionCharging": "Absorptie laden",
         "assisting": "Assisteren",
-        "autoStartStop": "automatisch Start / Stop",
+        "autoStartStop": "Automatisch Start / Stop",
         "bulkCharging": "Bulk laden",
-        "charge": "opladen",
-        "chargerOnly": "alleen lader",
-        "charging": "Opladen",
+        "charge": "Laden",
+        "chargerOnly": "Alleen Lader",
+        "charging": "Laden",
         "current": "Stroom",
         "days": "dagen",
-        "discharge": "ontladen",
+        "discharge": "Ontladen",
         "discharging": "Ontladen",
         "eco": "Eco",
-        "emptyBar": "emptyBar",
+        "emptyBar": " - ",
         "equalisationCharging": "Egalisatie laden",
         "error": "Fout",
         "fault": "Fout",
         "floatCharging": "Druppel laden",
         "hours": "uur",
         "idle": "Inactief",
-        "inputLimit": "ingang limiet",
-        "inverterOnly": "alleen omvormer",
+        "inputLimit": "Maximum",
+        "inverterOnly": "Alleen Omvormer",
         "inverting": "Omvormen",
-        "limit": "beperken",
+        "limit": "Beperken",
         "lowPower": "Laag vermogen",
         "minutes": "minuten",
-        "mode": "modus",
-        "noShorePower": "geen walstroom",
-        "notAvailable": "niet beschikbaar",
-        "nrOfPhases": "aantal fasen",
+        "mode": "Modus",
+        "noShorePower": "Geen Walstroom",
+        "notAvailable": "Niet beschikbaar",
+        "nrOfPhases": "%{phases} fasen",
         "off": "Uit",
         "on": "Aan",
         "passthru": "Doorvoer",
         "powerSupplyMode": "Voeding Modus",
-        "remainingTime": "ResterendeTijd",
+        "remainingTime": "Resterende tijd",
         "running": "Loopt",
         "standby": "Stand-by",
-        "starting": "Status: Verbonden, lijst met apparaten ophalen...",
+        "starting": "Opstarten",
         "stopped": "Gestopt",
         "stopping": "Stoppen",
         "storageMode": "Opslagmodus ",
@@ -59,52 +59,52 @@
         "voltage": "Spanning"
     },
     "error": {
-        "genericMessage": "algemeen bericht",
-        "mqttUnavailable1": "mqtt niet beschikbaar 1",
-        "mqttUnavailable2": "mqtt niet beschikbaar 2",
-        "mqttUnavailable3": "mqtt niet beschikbaar 3",
-        "mqttUnavailable4": "mqtt niet beschikbaar 4",
-        "mqttUnavailable5": "mqtt niet beschikbaar 5"
+        "genericMessage": "Fout tijdens het laden van de applicatie. Probeer de pagina opnieuw te laden of neem contact op met Victron Energy met de volgende informatie:",
+        "mqttUnavailable1": "Kan niet met de MQTT server verbinden.",
+        "mqttUnavailable2": "Controleer of MQTT is ingeschakeld in de instellingen:",
+        "mqttUnavailable3": "Remote Console > Instellingen > Services > MQTT on LAN (Plaintext)\n",
+        "mqttUnavailable4": "Probeer de Remote Control knop bovenaan het scherm om de instellingen remote te veranderen.",
+        "mqttUnavailable5": "Verbind Remote met het apparaat door de knop Remote bovenaan het scherm te drukken."
     },
     "generator": {
-        "fisherPandaAutoStartMessage": "FisherPanda AutoStart Bericht",
+        "fisherPandaAutoStartMessage": "FisherPanda AutoStart is op dit moment uitgeschakeld, zet dat eerst aan op het paneel van de aggregaat om vanaf dit scherm te kunnen schakelen.",
         "temperature": {
-            "coolant": "koelvloeistof",
-            "exhaust": "uitlaat",
-            "winding": "wikkeling"
+            "coolant": "Koelvloeistof",
+            "exhaust": "Uitlaat",
+            "winding": "Wikkeling"
         }
     },
     "header": {
         "close": "Sluiten",
-        "connecting": "Verbinding wordt gemaakt",
+        "connecting": "Verbinden",
         "local": "Lokaal",
-        "loggedIn": "ingelogd",
+        "loggedIn": "Ingelogd als",
         "notLoggedIn": "niet ingelogd",
         "remote": "Afstandsbediening",
         "remoteConsole": "Remote Console",
-        "remoteMessage": "Remote Bericht",
+        "remoteMessage": "Open in een groter scherm om het Remote Console te zien",
         "versionInfo": "Versie informatie"
     },
     "installations": {
-        "title": "titel"
+        "title": "Kies een installatie"
     },
     "locker": {
-        "lockMessage": "lockMessage",
-        "unlockMessage": "unlockMessage"
+        "lockMessage": "Alleen Lezen",
+        "unlockMessage": "Wijzigen"
     },
     "noWidgets": {
-        "subtitle": "subtitel",
-        "title": "titel"
+        "subtitle": "Controleer of de apparaten goed zijn aangesloten om ze hier weer te geven",
+        "title": "Het dashboard is leeg"
     },
     "remoteLogin": {
         "email": "Email",
-        "forgotPassword": "Wachtwoord vergeten",
+        "forgotPassword": "Wachtwoord vergeten?",
         "goBack": "Terug",
         "logIn": "Inloggen",
-        "loginFailed": "login mislukt",
+        "loginFailed": "Inloggen mislukt",
         "password": "Wachtwoord",
-        "registerMessage1": "registeren Bericht 1",
-        "registerMessage2": "registeren Bericht 2"
+        "registerMessage1": "Nog geen account?",
+        "registerMessage2": "Inschrijven."
     },
     "statusWidget": {
         "Absorption charging": "Absorptie laden",
@@ -121,12 +121,21 @@
         "Sustain": "Handhaven",
         "VE.Bus Fault condition": "VE.Bus Fout",
         "parts": {
+            "Battery": "Accu",
+            "Black water": "Vuilwater",
+            "DC Loads": "DC Belastingen",
             "Fresh water": "Vers water",
-            "Shore Power": "Walstroom"
+            "Fuel": "Brandstof",
+            "Live well": "Bronwater",
+            "Oil": "Olie",
+            "PV Charger": "PV Lader",
+            "Shore Power": "Walstroom",
+            "Tank sensor": "Tanksensor",
+            "Waste water": "Vuilwater"
         }
     },
     "tankWidget": {
-        "Black water": "ZWARTWATER",
+        "Black water": "Zwartwater",
         "Fresh water": "Vers water",
         "Fuel": "Brandstof",
         "Live well": "Bronwater",
@@ -138,21 +147,21 @@
         "buildDate": "Datum",
         "identifier": "ID",
         "venusOs": "VenusOS",
-        "version": "Versie",
+        "version": "Versie  %{version}",
         "vrmPortID": "VRM poort ID"
     },
     "widgets": {
         "acLoads": "AC Belastingen",
         "batteries": "Accu's",
         "battery": "Accu",
-        "chargerWithName": "Lader met naam",
+        "chargerWithName": "Lader naam",
         "dcLoads": "DC Belastingen",
         "generatorInput": "Aggregaat",
         "gridInput": "Net",
         "invalidConfig": "Ongeldige configuratie",
-        "inverterWithName": "Omvormer met naam",
-        "pvCharger": "PV lader",
-        "shorePower": "walstroom",
+        "inverterWithName": "Omvormer %{productNameShort}",
+        "pvCharger": "PV Lader",
+        "shorePower": "Walstroom",
         "status": "Status",
         "unknown": "Onbekend"
     }

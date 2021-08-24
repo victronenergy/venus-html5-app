@@ -1,8 +1,8 @@
 {
     "acMode": {
         "modal": {
-            "name": "Nom",
-            "updateLimit": "updateLimit"
+            "name": "Sélectionner Mode",
+            "updateLimit": "Sélectionner la limite d'entrée quai"
         }
     },
     "cardFooter": {
@@ -13,109 +13,110 @@
         "Warning": "Avertissement"
     },
     "common": {
-        "absorptionCharging": "absorptionChargage",
+        "absorptionCharging": "Charge Absorption",
         "assisting": "Assistance",
-        "autoStartStop": "autoStartStop",
-        "bulkCharging": "facturation en gros",
-        "charge": "charge",
+        "autoStartStop": "Start/Stop Automatique",
+        "bulkCharging": "Charge Bulk",
+        "charge": "Charge",
         "chargerOnly": "Chargeur uniquement",
         "charging": "charge en cours",
         "current": "Courant",
         "days": "jours",
-        "discharge": "décharge",
+        "discharge": "Décharge",
         "discharging": "décharge en cours",
         "eco": "Éco",
-        "emptyBar": "emptyBar",
-        "equalisationCharging": "PéréquationPrix",
+        "emptyBar": " - ",
+        "equalisationCharging": "Charge Egalisation",
         "error": "Erreur",
         "fault": "Défaillance",
-        "floatCharging": "floatCharging",
+        "floatCharging": "Charge Float",
         "hours": "heures",
         "idle": "Inactif",
-        "inputLimit": "limite d'entrée",
-        "inverterOnly": "inverterOnly",
+        "inputLimit": "Limite d'entrée",
+        "inverterOnly": "Onduleur uniquement",
         "inverting": "Conversion",
-        "limit": "limite",
-        "lowPower": "basse consommation",
+        "limit": "Limite",
+        "lowPower": "Puiss. basse",
         "minutes": "minutes",
-        "mode": "mode",
-        "noShorePower": "noShorePower",
-        "notAvailable": "non disponible",
-        "nrOfPhases": "nrOfPhases",
+        "mode": "Mode",
+        "noShorePower": "Pas de puissance de quai",
+        "notAvailable": "Non Disponible",
+        "nrOfPhases": "%{phases} phases",
         "off": "Off",
         "on": "On",
         "passthru": "Capacité directe",
         "powerSupplyMode": "powerSupplyMode",
         "remainingTime": "Temps restant",
         "running": "En marche",
-        "standby": "Pause",
-        "starting": "État : Interrogation des appareils commencée...",
+        "standby": "Standby",
+        "starting": "Démarrage",
         "stopped": "Arrêté",
         "stopping": "Arrêt en cours",
-        "storageMode": "storageMode",
+        "storageMode": "Mode stockage",
         "sustain": "Maintenir",
         "unplugged": "Débranché",
-        "veBusFault": "veBusFault",
+        "veBusFault": "Condition de défaut VE.Bus",
         "voltage": "Tension"
     },
     "error": {
-        "genericMessage": "message générique",
-        "mqttUnavailable1": "mqttUnavailable1",
-        "mqttUnavailable2": "mqttUnavailable2",
-        "mqttUnavailable3": "mqttUnavailable3",
-        "mqttUnavailable4": "mqttUnavailable4",
-        "mqttUnavailable5": "mqttUnavailable5"
+        "genericMessage": "Une erreur s'est produite lors du rendu de l'application. Essayez de réactualiser la page ou de contacter Victron Energy avec les informations suivantes :",
+        "mqttUnavailable1": "Ne peut pas se connecter sur le serveur MQTT.",
+        "mqttUnavailable2": "Vérifier que MQTT est activé dans vos paramètres :",
+        "mqttUnavailable3": "Console à distance > Paramètres > Services > MQTT sur LAN (Texte simple)",
+        "mqttUnavailable4": "Essayez d'utiliser le bouton Console à Distance en haut de cet écran pour changer vos réglages à distance.",
+        "mqttUnavailable5": "Vous pouvez aussi essayer de vous connecter à votre appareil à distance en sélectionnant A distance dans le menu ci-dessus."
     },
     "generator": {
-        "fisherPandaAutoStartMessage": "fisherPandaAutoStartMessage",
+        "fisherPandaAutoStartMessage": "La fonctionnalité Fisher Panda AutoStart est actuellement désactivée, activez-la sur la console du groupe électrogène afin de contrôler le groupe électrogène à partir de cette console.",
         "temperature": {
-            "coolant": "liquide de refroidissement",
-            "exhaust": "échappement",
-            "winding": "enroulement"
+            "coolant": "L. Refroid.",
+            "exhaust": "Echappement",
+            "winding": "Enroulement"
         }
     },
     "header": {
         "close": "Fermer",
         "connecting": "Connexion en cours",
         "local": "Local",
-        "loggedIn": "connecté",
-        "notLoggedIn": "notLoggedIn",
+        "loggedIn": "Connecté en tant que",
+        "notLoggedIn": "Déconnecté",
         "remote": "À distance",
-        "remoteConsole": "remoteConsole",
-        "remoteMessage": "remoteMessage"
+        "remoteConsole": "Console à distance",
+        "remoteMessage": "Ouvrir dans un écran plus large pour visualiser la console à distance",
+        "versionInfo": "Information sur la version"
     },
     "installations": {
-        "title": "Vue générale Attributs de données"
+        "title": "Choisissez un installation"
     },
     "locker": {
-        "lockMessage": "lockMessage",
-        "unlockMessage": "déverrouiller le message"
+        "lockMessage": "Verrouiller pour éviter les changements",
+        "unlockMessage": "Déverrouiller pour faire des changements"
     },
     "noWidgets": {},
     "remoteLogin": {
-        "email": "Courriel",
-        "forgotPassword": "forgotPassword",
+        "email": "Email",
+        "forgotPassword": "Mot de passe oublié ?",
         "goBack": "goBack",
         "logIn": "Connexion",
-        "loginFailed": "loginFailed",
+        "loginFailed": "Echec de connexion",
         "password": "Mot de passe",
-        "registerMessage1": "registerMessage1",
-        "registerMessage2": "registerMessage2"
+        "registerMessage1": "Pas encore de compte ? ",
+        "registerMessage2": "Enregistrez votre véhicule."
     },
     "statusWidget": {
         "Absorption charging": "Charge d'absorption",
         "Assisting": "Assistance",
-        "Bulk charging": "Chargement en vrac",
-        "Discharging": "décharge en cours",
-        "Equalisation charging": "Frais de péréquation",
-        "Float charging": "Chargement du flotteur",
+        "Bulk charging": "Charge Bulk",
+        "Discharging": "Décharge",
+        "Equalisation charging": "Charge d'égalisation",
+        "Float charging": "Charge Float",
         "Inverting": "Conversion",
         "Low power": "Puiss. faible",
         "Off": "Off",
-        "Passthru": "Capacité directe",
+        "Passthru": "Passant",
         "Storage mode": "Mode stockage",
         "Sustain": "Maintenir",
-        "VE.Bus Fault condition": "VE.Bus Condition de défaut",
+        "VE.Bus Fault condition": "Condition de défaut VE.Bus",
         "parts": {
             "Fresh water": "Eau douce",
             "Shore Power": "Puissance de quai"
@@ -130,19 +131,24 @@
         "Tank sensor": "Sonde du réservoir",
         "Waste water": "Eaux usées"
     },
-    "versionInfo": {},
+    "versionInfo": {
+        "buildDate": "Date de fabrication",
+        "venusOs": "Venus OS",
+        "version": "Version %{version}",
+        "vrmPortID": "ID Portail VRM"
+    },
     "widgets": {
-        "acLoads": "acLoads",
+        "acLoads": "Charges AC",
         "batteries": "Batteries",
         "battery": "Batterie",
-        "chargerWithName": "chargeur avec nom",
-        "dcLoads": "dcLoads",
-        "generatorInput": "générateurEntrée",
-        "gridInput": "gridInput",
-        "invalidConfig": "invalidConfig",
-        "inverterWithName": "inverterWithName",
-        "pvCharger": "pvCharger",
-        "shorePower": "alimentation à quai",
+        "chargerWithName": "Chargeur: %{productNameShort}",
+        "dcLoads": "Charges DC",
+        "generatorInput": "Entrée générateur",
+        "gridInput": "Entrée réseau",
+        "invalidConfig": "Configuration invalide",
+        "inverterWithName": "Convertisseur: %{productNameShort}",
+        "pvCharger": "Chargeur PV",
+        "shorePower": "Alimentation du quai",
         "status": "État",
         "unknown": "Inconnu"
     }
