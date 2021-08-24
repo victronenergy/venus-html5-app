@@ -28,4 +28,7 @@ setHandleMissingTranslation((key, replacements) => {
 
 setTranslations(languagesJSONS)
 
-setLocale(localStorage.getItem(__LOCAL_STORAGE_LANG_KEY__) || DEFAULT_LANGUAGE)
+// override the language with the value of the lang URL parameter, if present
+const languageOverride = (window.location.search.match(/[?&]lang=([a-zA-Z-_]{2,5})/) || [])[1]
+
+setLocale(languageOverride || localStorage.getItem(__LOCAL_STORAGE_LANG_KEY__) || DEFAULT_LANGUAGE)
