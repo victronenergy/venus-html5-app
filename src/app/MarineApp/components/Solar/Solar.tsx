@@ -8,10 +8,16 @@ import NumericValue from "../../../components/NumericValue"
 import SolarIcon from "../../images/icons/icon_solar.svg"
 import { usePvCharger } from "@elninotech/mfd-modules"
 import { observer } from "mobx-react"
+import { useVisibilityNotifier } from "app/MarineApp/modules"
+import { WIDGET_TYPES } from "app/MarineApp/utils/constants"
 
 const Solar = observer(() => {
   const { current, power } = usePvCharger()
-  if (current || power || power === 0) {
+  const visible = !!(current || power || power === 0)
+
+  useVisibilityNotifier({ widgetName: WIDGET_TYPES.SOLAR, visible })
+
+  if (visible) {
     return (
       <ColumnContainer>
         <HeaderView icon={SolarIcon} title="Solar">

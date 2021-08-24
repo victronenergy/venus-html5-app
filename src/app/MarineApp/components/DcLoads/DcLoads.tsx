@@ -5,11 +5,15 @@ import ColumnContainer from "../ColumnContainer"
 import MetricValues from "../MetricValues"
 import NumericValue from "../../../components/NumericValue"
 import { observer } from "mobx-react"
+import { useVisibilityNotifier } from "app/MarineApp/modules"
+import { WIDGET_TYPES } from "app/MarineApp/utils/constants"
 
 export const DcLoads = observer((props?: Partial<DcLoadsState>) => {
   let { voltage, power } = useDcLoads()
   voltage = props?.voltage ?? voltage
   power = props?.power ?? power
+
+  useVisibilityNotifier({ widgetName: WIDGET_TYPES.DC_LOADS, visible: !!power })
 
   if (power) {
     return (
