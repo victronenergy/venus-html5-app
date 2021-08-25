@@ -55,7 +55,7 @@ const GeneratorRelay = ({
   updateManualMode,
   updateAutoMode,
 }: GeneratorRelayProps) => {
-  const title = "Generator"
+  const title = translate("widgets.generator")
   const subTitle = getGeneratorState(statusCode, active ?? false, phases)
 
   return (

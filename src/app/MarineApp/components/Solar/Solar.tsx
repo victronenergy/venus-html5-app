@@ -10,6 +10,7 @@ import { usePvCharger } from "@elninotech/mfd-modules"
 import { observer } from "mobx-react"
 import { useVisibilityNotifier } from "app/MarineApp/modules"
 import { WIDGET_TYPES } from "app/MarineApp/utils/constants"
+import { translate } from "react-i18nify"
 
 const Solar = observer(() => {
   const { current, power } = usePvCharger()
@@ -20,7 +21,7 @@ const Solar = observer(() => {
   if (visible) {
     return (
       <ColumnContainer>
-        <HeaderView icon={SolarIcon} title="Solar">
+        <HeaderView icon={SolarIcon} title={translate("widgets.solar")}>
           <MetricValues>
             <NumericValue value={current} unit="A" precision={1} />
             <NumericValue value={power} unit="W" />

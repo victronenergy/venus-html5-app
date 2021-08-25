@@ -92,7 +92,10 @@
         "lockMessage": "Verrouiller pour éviter les changements",
         "unlockMessage": "Déverrouiller pour faire des changements"
     },
-    "noWidgets": {},
+    "noWidgets": {
+        "subtitle": "Assurez vous que vos appareils sont bien connectés pour afficher les widgets",
+        "title": "Votre tableau de bord est vide"
+    },
     "remoteLogin": {
         "email": "Email",
         "forgotPassword": "Mot de passe oublié ?",
@@ -118,8 +121,17 @@
         "Sustain": "Maintenir",
         "VE.Bus Fault condition": "Condition de défaut VE.Bus",
         "parts": {
+            "Battery": "Batterie",
+            "Black water": "Eaux Noires",
+            "DC Loads": "Charges DC",
             "Fresh water": "Eau douce",
-            "Shore Power": "Puissance de quai"
+            "Fuel": "Carburant",
+            "Live well": "Vivier",
+            "Oil": "Huile",
+            "PV Charger": "Chargeur PV",
+            "Shore Power": "Puissance de quai",
+            "Tank sensor": "Sonde du réservoir",
+            "Waste water": "Eaux usées"
         }
     },
     "tankWidget": {
@@ -133,6 +145,7 @@
     },
     "versionInfo": {
         "buildDate": "Date de fabrication",
+        "identifier": "Identificateur",
         "venusOs": "Venus OS",
         "version": "Version %{version}",
         "vrmPortID": "ID Portail VRM"

@@ -201,7 +201,7 @@ export const KVNGauge = observer(
       window.addEventListener("resize", debouncedResize)
       return () => window.removeEventListener("resize", debouncedResize)
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [createChart])
 
     return (
       <div className={`gauge-indicator ${className}`}>

@@ -11,7 +11,7 @@ import SelectorButton from "../SelectorButton"
 import "./Inverter.scss"
 
 import MultiplusIcon from "../../images/icons/multiplus.svg"
-import { Translate } from "react-i18nify"
+import { translate, Translate } from "react-i18nify"
 import { observer } from "mobx-react"
 
 const stateFormatter = (state: number) => {
@@ -70,7 +70,11 @@ export const Inverter = observer(
         {show && (
           <ColumnContainer>
             <div className="metric inverter">
-              <HeaderView icon={MultiplusIcon} title={customName || `Inverter: ${productNameShort}`} child>
+              <HeaderView
+                icon={MultiplusIcon}
+                title={customName || translate("widgets.inverterWithName", { productNameShort })}
+                child
+              >
                 {InverterSubtitle(voltage, current, power, state)}
               </HeaderView>
               <div className="inverter__mode-selector">
