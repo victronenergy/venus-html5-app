@@ -1,9 +1,5 @@
 {
-    "acMode": {
-        "modal": {
-            "name": "Nombre"
-        }
-    },
+    "acMode": {},
     "cardFooter": {
         "Charge": "Carga",
         "Status": "Estado",

@@ -1,9 +1,5 @@
 {
-    "acMode": {
-        "modal": {
-            "name": "اسم"
-        }
-    },
+    "acMode": {},
     "cardFooter": {
         "Charge": "تحميل",
         "Status": "الحالة",

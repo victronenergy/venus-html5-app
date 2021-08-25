@@ -2,7 +2,7 @@ import Modal from "../../../components/Modal"
 import { AC_MODE } from "../../utils/constants"
 import { acModeFormatter } from "./AcMode"
 import Logger from "../../../utils/logger"
-import { Translate } from "react-i18nify"
+import { translate, Translate } from "react-i18nify"
 
 /**
  * - Mask the Product id with `0xFF00`
@@ -33,7 +33,7 @@ type AcModeModalProps = {
 
 export const AcModeModal = (props: AcModeModalProps) => {
   return (
-    <Modal title={"AC Mode"} onClose={props.onClose}>
+    <Modal title={translate("acMode.title")} onClose={props.onClose}>
       <div className="ac_mode_modal indicator-main--small">
         <div className={"name"}>
           <Translate value="acMode.modal.name" />

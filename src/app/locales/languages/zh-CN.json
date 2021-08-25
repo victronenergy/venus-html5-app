@@ -1,10 +1,5 @@
 {
-    "acMode": {
-        "modal": {
-            "name": "名字",
-            "updateLimit": "更新限额"
-        }
-    },
+    "acMode": {},
     "cardFooter": {
         "Charge": "充电",
         "Critical": "关键",

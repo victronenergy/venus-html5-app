@@ -1,10 +1,5 @@
 {
-    "acMode": {
-        "modal": {
-            "name": "İsim",
-            "updateLimit": "updateLimit"
-        }
-    },
+    "acMode": {},
     "cardFooter": {
         "Charge": "Yük",
         "Critical": "Kritik",
