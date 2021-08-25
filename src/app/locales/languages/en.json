@@ -59,6 +59,9 @@
     "voltage": "Voltage"
   },
   "error": {
+    "userAgent": "User agent: %{userAgent}",
+    "windowSize": "Window: %{width} x %{height}",
+    "queryParams": "Query params: %{queryParams}",
     "genericMessage": "An error occurred while rendering the application. Try reloading the page or contacting Victron Energy with the following information:",
     "mqttUnavailable1": "Could not connect to the MQTT server.",
     "mqttUnavailable2": "Please check that MQTT is enabled in your settings:",
@@ -154,6 +157,7 @@
     "acLoads": "AC Loads",
     "batteries": "Batteries",
     "battery": "Battery",
+    "batteryWithName": "Battery: %{name}",
     "chargerWithName": "Charger: %{productNameShort}",
     "dcLoads": "DC Loads",
     "generator": "Generator",

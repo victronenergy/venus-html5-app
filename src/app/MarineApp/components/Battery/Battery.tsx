@@ -16,7 +16,7 @@ import "./Battery.scss"
 
 import LIcon from "../../images/icons/L.svg"
 import RIcon from "../../images/icons/R.svg"
-import { Translate } from "react-i18nify"
+import { translate, Translate } from "react-i18nify"
 import { observer } from "mobx-react"
 import { useVisibilityNotifier } from "app/MarineApp/modules"
 import { WIDGET_TYPES } from "app/MarineApp/utils/constants"
@@ -87,7 +87,7 @@ const BatteryRow = (battery: Battery) => {
 }
 
 const SingleBattery = (battery: Battery) => (
-  <HeaderView icon={BatteryIcon} title={`Battery: ${battery.name}`}>
+  <HeaderView icon={BatteryIcon} title={translate("widgets.batteryWithName", { name: battery.name })}>
     <BatteryRow {...battery} />
   </HeaderView>
 )
