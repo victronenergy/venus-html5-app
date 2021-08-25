@@ -1,5 +1,10 @@
 {
-    "acMode": {},
+    "acMode": {
+        "modal": {
+            "name": "Kies modus",
+            "updateLimit": "Kies maximum walstroom"
+        }
+    },
     "cardFooter": {
         "Charge": "Laden",
         "Critical": "Kritisch",

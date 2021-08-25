@@ -1,5 +1,10 @@
 {
-    "acMode": {},
+    "acMode": {
+        "modal": {
+            "name": "Sélectionner Mode",
+            "updateLimit": "Sélectionner la limite d'entrée quai"
+        }
+    },
     "cardFooter": {
         "Charge": "Charge",
         "Critical": "Critique",

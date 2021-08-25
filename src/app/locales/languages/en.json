@@ -1,5 +1,9 @@
 {
     "acMode": {
+        "modal": {
+            "name": "Select mode",
+            "updateLimit": "Select shore input limit"
+        },
         "title": "AC Mode"
     },
     "cardFooter": {

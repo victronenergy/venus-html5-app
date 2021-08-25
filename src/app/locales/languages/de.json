@@ -1,5 +1,10 @@
 {
-    "acMode": {},
+    "acMode": {
+        "modal": {
+            "name": "Auswahlmodus",
+            "updateLimit": "Wählen Sie die Eingabegrenze für Landstrom"
+        }
+    },
     "cardFooter": {
         "Charge": "Ladung",
         "Critical": "Kritisch",
