@@ -43,7 +43,7 @@ export const AcMode = observer(() => {
 
   return (
     <div className="ac_mode">
-      <Card title={"Shore Power"} size={[SIZE_WIDE, SIZE_SHORT]}>
+      <Card title={<Translate value="widgets.shorePower" />} size={[SIZE_WIDE, SIZE_SHORT]}>
         <div className="ac-container">
           <div className="ac-actions">
             <div className="action">

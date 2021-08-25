@@ -2,8 +2,9 @@
     "acMode": {
         "modal": {
             "name": "Kies modus",
-            "updateLimit": "Kies maximum walstroom"
-        }
+            "updateLimit": "Kies maximum Walstroom"
+        },
+        "title": "AC Modus"
     },
     "cardFooter": {
         "Charge": "Laden",
@@ -59,12 +60,16 @@
         "voltage": "Spanning"
     },
     "error": {
+        "errorWithMessage": "Fout : %{message}",
         "genericMessage": "Fout tijdens het laden van de applicatie. Probeer de pagina opnieuw te laden of neem contact op met Victron Energy met de volgende informatie:",
         "mqttUnavailable1": "Kan niet met de MQTT server verbinden.",
         "mqttUnavailable2": "Controleer of MQTT is ingeschakeld in de instellingen:",
         "mqttUnavailable3": "Remote Console > Instellingen > Services > MQTT on LAN (Plaintext)\n",
         "mqttUnavailable4": "Probeer de Remote Control knop bovenaan het scherm om de instellingen remote te veranderen.",
-        "mqttUnavailable5": "Verbind Remote met het apparaat door de knop Remote bovenaan het scherm te drukken."
+        "mqttUnavailable5": "Verbind Remote met het apparaat door de knop Remote bovenaan het scherm te drukken.",
+        "queryParams": "Zoek :  %{queryParams}",
+        "userAgent": "Gebruiker : %{userAgent}",
+        "windowSize": "Venster :  %{width} x %{height}"
     },
     "generator": {
         "fisherPandaAutoStartMessage": "FisherPanda AutoStart is op dit moment uitgeschakeld, zet dat eerst aan op het paneel van de aggregaat om vanaf dit scherm te kunnen schakelen.",
@@ -154,14 +159,18 @@
         "acLoads": "AC Belastingen",
         "batteries": "Accu's",
         "battery": "Accu",
+        "batteryWithName": "Accu : %{name}",
         "chargerWithName": "Lader naam",
         "dcLoads": "DC Belastingen",
+        "generator": "Aggregaat",
         "generatorInput": "Aggregaat",
         "gridInput": "Net",
         "invalidConfig": "Ongeldige configuratie",
+        "inverterCharger": "Omvormer / Lader : %{productNameShort}",
         "inverterWithName": "Omvormer %{productNameShort}",
         "pvCharger": "PV Lader",
         "shorePower": "Walstroom",
+        "solar": "Zon",
         "status": "Status",
         "unknown": "Onbekend"
     }

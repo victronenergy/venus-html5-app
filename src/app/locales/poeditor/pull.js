@@ -49,7 +49,7 @@ const unflatten = (data) => {
   if (Object(data) !== data || Array.isArray(data)) return data
   var regex = /\.?([^.\[\]]+)|\[(\d+)\]/g,
     resultholder = {}
-  for (var p in data) {
+  for (var p of Object.keys(data).sort()) {
     var cur = resultholder,
       prop = "",
       m
