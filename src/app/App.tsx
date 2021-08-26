@@ -1,8 +1,8 @@
-import "../css/index.scss"
-import React, { useEffect } from "react"
-import Loading from "./MarineApp/components/Loading"
 import { useAppStore, useMqtt, useVebus, useVrmStore } from "@elninotech/mfd-modules"
 import { observer } from "mobx-react"
+import React, { useEffect } from "react"
+import "../css/index.scss"
+import Loading from "./MarineApp/components/Loading"
 
 const KVNRV = React.lazy(() => import("./KVNRV"))
 const MarineApp = React.lazy(() => import("./MarineApp"))
@@ -33,7 +33,16 @@ const App = observer((props: AppProps) => {
       mqtt.boot(vrmStore.webhost, null, true, vrmStore.username, vrmStore.token, vrmStore.portalId, "live")
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.host, props.port, appStore.remote, vrmStore])
+  }, [
+    props.host,
+    props.port,
+    appStore.remote,
+    vrmStore.username,
+    vrmStore.token,
+    vrmStore.webhost,
+    vrmStore.portalId,
+    vrmStore.siteId,
+  ])
 
   if (whitelabel === "KVNRV") {
     return (
