@@ -21,22 +21,34 @@ type CardProps = {
   onIconClick?: Function
   footer?: Footer
   infoText?: string
+  className?: string
 }
 
 export const SIZE_SHORT = "short"
 export const SIZE_WIDE = "wide"
+export const SIZE_EXTRA_WIDE = "extra-wide"
+
 export const SIZE_NARROW = "narrow"
 export const SIZE_LONG = "long"
 
 export const ICON_CLOSE = "close"
 
-export const Card: FunctionComponent<CardProps> = ({ title, size, icon, onIconClick, footer, infoText, children }) => {
+export const Card: FunctionComponent<CardProps> = ({
+  title,
+  size,
+  icon,
+  onIconClick,
+  footer,
+  infoText,
+  children,
+  className = "",
+}) => {
   const { darkMode } = useTheme()
   const { WARNING, ALARM } = STATUS_LEVELS
   const showAlarmIconInFooter = footer && [WARNING, ALARM].includes(footer.status)
 
   return (
-    <div className={"card " + (Array.isArray(size) ? size.join(" ") : size)}>
+    <div className={"card " + (Array.isArray(size) ? size.join(" ") : size) + " " + className}>
       <div className={"contents"}>
         <div className="card__header row">
           <div className="card__header__text">{title}</div>

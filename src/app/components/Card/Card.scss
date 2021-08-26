@@ -21,6 +21,13 @@
     width: $card-width-big;
   }
 
+  &.extra-wide {
+    width: $card-width-extra-big;
+    @media #{$minimum} {
+      width: 95%;
+    }
+  }
+
   &.long {
     height: ($card-height-small * 2) + ($card-margin * 2)
   }

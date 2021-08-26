@@ -3,7 +3,8 @@
         "modal": {
             "name": "Auswahlmodus",
             "updateLimit": "Wählen Sie die Eingabegrenze für Landstrom"
-        }
+        },
+        "title": "AC-Modus"
     },
     "cardFooter": {
         "Charge": "Ladung",
@@ -59,12 +60,16 @@
         "voltage": "Spannung"
     },
     "error": {
+        "errorWithMessage": "Fehler: %{message}",
         "genericMessage": "Beim Rendern der Anwendung ist ein Fehler aufgetreten. Versuchen Sie die Seite neu zu laden oder kontaktieren Sie Victron Energy mit den folgenden Informationen:",
         "mqttUnavailable1": "Es konnte keine Verbindung zum MQTT-Server hergestellt werden.",
         "mqttUnavailable2": "Bitte überprüfen Sie, ob MQTT in Ihren Einstellungen aktiviert ist:",
         "mqttUnavailable3": "Remote Console > Einstellungen > Dienste > MQTT im LAN (Klartext)",
         "mqttUnavailable4": "Versuchen Sie es mit der Schaltfläche Remote Console oben auf diesem Bildschirm, um Ihre Einstellungen aus der Ferne zu ändern.",
-        "mqttUnavailable5": "Sie können auch versuchen, eine Remote-Verbindung zu Ihrem Gerät herzustellen, indem Sie im Menü oben Remote auswählen."
+        "mqttUnavailable5": "Sie können auch versuchen, eine Remote-Verbindung zu Ihrem Gerät herzustellen, indem Sie im Menü oben Remote auswählen.",
+        "queryParams": "Abfrageparameter: %{queryParams}",
+        "userAgent": "User agent: %{userAgent}",
+        "windowSize": "Fenster: %{width} x %{height}"
     },
     "generator": {
         "fisherPandaAutoStartMessage": "Die AutoStart-Funktion von Fisher Panda ist derzeit deaktiviert. Aktivieren Sie sie im Aggregate-Bedienfeld, um das Aggregat über dieses Bedienfeld zu steuern.",
@@ -154,14 +159,18 @@
         "acLoads": "AC Lasten",
         "batteries": "Batterien",
         "battery": "Batterie",
+        "batteryWithName": "Batterie: %{name}",
         "chargerWithName": "Ladegerät: %{productNameShort}",
         "dcLoads": "DC Lasten",
+        "generator": "Generator",
         "generatorInput": "Generatoreingang",
         "gridInput": "Netzeingang",
         "invalidConfig": "Ungültige Konfiguration",
+        "inverterCharger": "Wechselrichter / Ladegerät: %{productNameShort}",
         "inverterWithName": "Inverter: %{productNameShort}",
         "pvCharger": "PV-Ladegerät",
         "shorePower": "Landstrom",
+        "solar": "Solar",
         "status": "Status",
         "unknown": "Unbekannt"
     }

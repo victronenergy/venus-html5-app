@@ -1,3 +1,7 @@
+import preval from "preval.macro"
+
+export const BUILD_TIMESTAMP = preval`module.exports = new Date().toLocaleDateString();`
+
 export const BATTERY_STATE = {
   IDLE: 0,
   CHARGING: 1,

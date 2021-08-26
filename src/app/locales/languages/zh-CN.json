@@ -3,7 +3,8 @@
         "modal": {
             "name": "名字",
             "updateLimit": "更新限额"
-        }
+        },
+        "title": "交流模式"
     },
     "cardFooter": {
         "Charge": "充电",
@@ -32,7 +33,7 @@
         "floatCharging": "浮充",
         "hours": "小时",
         "idle": "空闲",
-        "inputLimit": "输入限值",
+        "inputLimit": "输入限制",
         "inverterOnly": "仅逆变",
         "inverting": "逆变",
         "limit": "限制",
@@ -59,12 +60,16 @@
         "voltage": "电压"
     },
     "error": {
+        "errorWithMessage": "错误: %{message}",
         "genericMessage": "通用信息",
         "mqttUnavailable1": "MQTT不可用1",
         "mqttUnavailable2": "MQTT不可用2",
         "mqttUnavailable3": "MQTT不可用3",
         "mqttUnavailable4": "MQTT不可用4",
-        "mqttUnavailable5": "MQTT不可用5"
+        "mqttUnavailable5": "MQTT不可用5",
+        "queryParams": "查询参数: %{queryParams}",
+        "userAgent": "用户代理: %{userAgent}",
+        "windowSize": "窗口: %{width} x %{height}"
     },
     "generator": {
         "fisherPandaAutoStartMessage": "熊猫发电机自动启动消息",
@@ -154,14 +159,18 @@
         "acLoads": "交流负载",
         "batteries": "电池",
         "battery": "电池",
+        "batteryWithName": "电池: %{name}",
         "chargerWithName": "充电器名称",
         "dcLoads": "直流负载",
+        "generator": "发电机",
         "generatorInput": "发电机输入",
         "gridInput": "电网输入",
         "invalidConfig": "无效的配置",
+        "inverterCharger": "逆变充电器：%{productNameShort}",
         "inverterWithName": "逆变器名称",
         "pvCharger": "太阳能充电器",
         "shorePower": "岸电",
+        "solar": "太阳能",
         "status": "状态",
         "unknown": "未知"
     }
