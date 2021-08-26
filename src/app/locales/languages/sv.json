@@ -46,6 +46,7 @@
         "title": "Remote VEConfigure"
     },
     "locker": {},
+    "noWidgets": {},
     "remoteLogin": {
         "email": "E-post",
         "logIn": "Inloggning",

@@ -10,6 +10,7 @@ import Solar from "../Solar"
 import Generators from "../Generators"
 import { useVebus } from "@elninotech/mfd-modules"
 import { observer } from "mobx-react"
+import { NoWidgets } from "../NoWidgets"
 
 const HEADER_HEIGHT = 110
 
@@ -109,22 +110,25 @@ export const Metrics = observer(
     const style = { height: height, transform: `translate(-${currentPage * 100}%)` }
 
     return (
-      <div className="metrics-container" ref={metricsRef} style={style}>
-        <DcLoads />
-        {!!instanceId && <AcLoads />}
-        <Battery />
-        {!!instanceId && (
-          <InverterCharger
-            onChangeInputLimitClicked={onChangeInverterChargerInputLimitClicked}
-            connected={isConnected}
-          />
-        )}
-        {!!instanceId && <ActiveSource />}
-        <Solar />
-        <Chargers />
-        <Inverters />
-        <Generators />
-      </div>
+      <>
+        <div className="metrics-container" ref={metricsRef} style={style}>
+          <DcLoads />
+          {!!instanceId && <AcLoads />}
+          <Battery />
+          {!!instanceId && (
+            <InverterCharger
+              onChangeInputLimitClicked={onChangeInverterChargerInputLimitClicked}
+              connected={isConnected}
+            />
+          )}
+          {!!instanceId && <ActiveSource />}
+          <Solar />
+          <Chargers />
+          <Inverters />
+          <Generators />
+          <NoWidgets />
+        </div>
+      </>
     )
   }
 )

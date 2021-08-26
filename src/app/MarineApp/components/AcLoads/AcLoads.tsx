@@ -1,5 +1,3 @@
-import React from "react"
-
 import { useAcLoads } from "@elninotech/mfd-modules"
 
 import HeaderView from "../HeaderView"
@@ -11,12 +9,18 @@ import { ListView, ListRow } from "../ListView"
 import AcIcon from "../../images/icons/ac.svg"
 import { translate, Translate } from "react-i18nify"
 import { observer } from "mobx-react"
+import { useVisibilityNotifier } from "app/MarineApp/modules"
+import { WIDGET_TYPES } from "app/MarineApp/utils/constants"
 
 const AcLoads = observer(() => {
   const { current, voltage, power, phases } = useAcLoads()
   const showAsList = phases > 1
 
-  if (current && voltage && power && phases) {
+  const isVisible = !!(current && voltage && power && phases)
+
+  useVisibilityNotifier({ widgetName: WIDGET_TYPES.AC_LOADS, visible: isVisible })
+
+  if (isVisible) {
     return showAsList ? (
       <ColumnContainer>
         <ListView

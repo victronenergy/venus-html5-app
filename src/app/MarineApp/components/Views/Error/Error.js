@@ -1,4 +1,3 @@
-import React from "react"
 import { Translate } from "react-i18nify"
 
 import "./Error.scss"
@@ -10,12 +9,18 @@ const Error = () => {
         <p>
           <Translate value="error.genericMessage" />
         </p>
-        <p className="text--smaller">{`User agent: ${navigator.userAgent}`}</p>
-        <p className="text--smaller">{`Window: ${window.innerWidth} x ${window.innerHeight}`}</p>
-        <p className="text--smaller">{`Query params: ${window.location.search
-          .slice(1)
-          .replace(/=/g, "=")
-          .replace(/&/g, ", ")}`}</p>
+        <p className="text--smaller">
+          <Translate value="error.userAgent" userAgent={navigator.userAgent} />
+        </p>
+        <p className="text--smaller">
+          <Translate value="error.windowSize" width={window.innerWidth} height={window.innerHeight} />
+        </p>
+        <p className="text--smaller">
+          <Translate
+            value="error.queryParams"
+            queryParams={window.location.search.slice(1).replace(/=/g, "=").replace(/&/g, ", ")}
+          />
+        </p>
       </div>
     </div>
   )

@@ -92,9 +92,13 @@ export const Status = observer(({ size }: StatusProps) => {
                 </div>
 
                 <span>
-                  <Translate value={`statusWidget.parts.${update.part}`} />:{" "}
+                  {!update.part.toLowerCase().includes("venus") ? (
+                    <Translate value={`statusWidget.parts.${update.part}`} />
+                  ) : (
+                    update.part
+                  )}
+                  : <span className={"status-update__message"}>{update.message}</span>
                 </span>
-                <span className={"status-update__message"}>{update.message}</span>
               </span>
             </div>
           ))}

@@ -16,8 +16,10 @@ import "./Battery.scss"
 
 import LIcon from "../../images/icons/L.svg"
 import RIcon from "../../images/icons/R.svg"
-import { Translate } from "react-i18nify"
+import { translate, Translate } from "react-i18nify"
 import { observer } from "mobx-react"
+import { useVisibilityNotifier } from "app/MarineApp/modules"
+import { WIDGET_TYPES } from "app/MarineApp/utils/constants"
 
 type PaginatorProps = {
   setPage: Function
@@ -85,7 +87,7 @@ const BatteryRow = (battery: Battery) => {
 }
 
 const SingleBattery = (battery: Battery) => (
-  <HeaderView icon={BatteryIcon} title={`Battery: ${battery.name}`}>
+  <HeaderView icon={BatteryIcon} title={translate("widgets.batteryWithName", { name: battery.name })}>
     <BatteryRow {...battery} />
   </HeaderView>
 )
@@ -193,6 +195,8 @@ export class Batteries extends Component<BatteriesProps, BatteriesState> {
 
 export const BatteriesWithData = observer(() => {
   const { batteries } = useBattery()
+
+  useVisibilityNotifier({ widgetName: WIDGET_TYPES.BATTERY, visible: !!(batteries && batteries.length) })
 
   if (batteries) {
     // Sort batteries first by state, and then by ID to keep order consistent

@@ -9,6 +9,7 @@ import Loading from "../Loading"
 
 import "./InputLimitSelector.scss"
 import { observer } from "mobx-react"
+import { Translate } from "react-i18nify"
 
 const USAmperage = [10, 15, 20, 30, 50, 100]
 const EUAmperage = [3, 6, 10, 13, 16, 25, 32, 63]
@@ -67,7 +68,9 @@ const InputLimitSelector = observer(({ inputId, onLimitSelected }: InputLimitSel
   return (
     <div className="amperage-selector__container">
       <div className="amperage-selector" ref={amperageContainerNode}>
-        <div className="text text--large text--center amperage-selector__description">Select shore input limit</div>
+        <div className="text text--large text--center amperage-selector__description">
+          <Translate value="acMode.modal.updateLimit" />
+        </div>
         {amperageList.map((currentValue, index) => {
           const ref = index === 0 ? firstSelectorButtonNode : null
           return (

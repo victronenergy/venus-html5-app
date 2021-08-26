@@ -1,5 +1,4 @@
-import React from "react"
-import { Translate } from "react-i18nify"
+import { translate, Translate } from "react-i18nify"
 
 import "./RemoteConsole.scss"
 
@@ -13,7 +12,7 @@ const RemoteConsole = ({ onClickOutsideContainer, host }: RemoteConsoleProps) =>
     <iframe
       id="remote-console"
       className="remote-console"
-      title="Remote Console"
+      title={translate("header.remoteConsole")}
       src={"http://" + host}
       onLoad={() => document.getElementById("remote-console")!.focus()}
     />

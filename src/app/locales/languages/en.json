@@ -3,7 +3,8 @@
         "modal": {
             "name": "Select mode",
             "updateLimit": "Select shore input limit"
-        }
+        },
+        "title": "AC Mode"
     },
     "cardFooter": {
         "Charge": "Charge",
@@ -59,12 +60,16 @@
         "voltage": "Voltage"
     },
     "error": {
+        "errorWithMessage": "Error: %{message}",
         "genericMessage": "An error occurred while rendering the application. Try reloading the page or contacting Victron Energy with the following information:",
         "mqttUnavailable1": "Could not connect to the MQTT server.",
         "mqttUnavailable2": "Please check that MQTT is enabled in your settings:",
         "mqttUnavailable3": "Remote Console > Settings > Services > MQTT on LAN (Plaintext)",
         "mqttUnavailable4": "Try using the Remote Console button at the top of this screen to change your settings remotely.",
-        "mqttUnavailable5": "You can also try connecting to your device remotely by selecting Remote from the menu above."
+        "mqttUnavailable5": "You can also try connecting to your device remotely by selecting Remote from the menu above.",
+        "queryParams": "Query params: %{queryParams}",
+        "userAgent": "User agent: %{userAgent}",
+        "windowSize": "Window: %{width} x %{height}"
     },
     "generator": {
         "fisherPandaAutoStartMessage": "The Fisher Panda AutoStart functionality is currently disabled, enable it on the genset panel in order to control the genset from this panel.",
@@ -92,6 +97,10 @@
         "lockMessage": "Lock to prevent changes",
         "unlockMessage": "Unlock to make changes"
     },
+    "noWidgets": {
+        "subtitle": "Make sure your devices are properly connected to display widgets",
+        "title": "Your dashboard is empty"
+    },
     "remoteLogin": {
         "email": "Email",
         "forgotPassword": "Forgot Password?",
@@ -117,8 +126,17 @@
         "Sustain": "Sustain",
         "VE.Bus Fault condition": "VE.Bus Fault condition",
         "parts": {
+            "Battery": "Battery",
+            "Black water": "Black water",
+            "DC Loads": "DC Loads",
             "Fresh water": "Fresh water",
-            "Shore Power": "Shore Power"
+            "Fuel": "Fuel",
+            "Live well": "Live well",
+            "Oil": "Oil",
+            "PV Charger": "PV Charger",
+            "Shore Power": "Shore Power",
+            "Tank sensor": "Tank sensor",
+            "Waste water": "Waste water"
         }
     },
     "tankWidget": {
@@ -141,14 +159,18 @@
         "acLoads": "AC Loads",
         "batteries": "Batteries",
         "battery": "Battery",
+        "batteryWithName": "Battery: %{name}",
         "chargerWithName": "Charger: %{productNameShort}",
         "dcLoads": "DC Loads",
+        "generator": "Generator",
         "generatorInput": "Generator Input",
         "gridInput": "Grid Input",
         "invalidConfig": "Invalid Configuration",
+        "inverterCharger": "Inverter / Charger: %{productNameShort}",
         "inverterWithName": "Inverter: %{productNameShort}",
         "pvCharger": "PV Charger",
         "shorePower": "Shore Power",
+        "solar": "Solar",
         "status": "Status",
         "unknown": "Unknown"
     }

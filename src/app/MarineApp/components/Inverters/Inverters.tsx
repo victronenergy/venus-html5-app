@@ -3,14 +3,18 @@ import React from "react"
 import { useInverters, useVebus } from "@elninotech/mfd-modules"
 
 import Inverter from "./Inverter"
-import ColumnContainer from "../ColumnContainer"
 import { observer } from "mobx-react"
+import { useVisibilityNotifier } from "app/MarineApp/modules"
+import { WIDGET_TYPES } from "app/MarineApp/utils/constants"
 
 const Inverters = observer(() => {
   const { inverters } = useInverters()
   const { instanceId } = useVebus()
+  const visible = !!(inverters.length || instanceId)
 
-  if (inverters || instanceId) {
+  useVisibilityNotifier({ widgetName: WIDGET_TYPES.INVERTERS, visible })
+
+  if (visible) {
     return (
       <>
         {inverters && inverters.map((id) => <Inverter key={id} instanceId={id} isVebusInverter={false} />)}
@@ -18,7 +22,7 @@ const Inverters = observer(() => {
       </>
     )
   } else {
-    return <ColumnContainer />
+    return null
   }
 })
 

@@ -1,5 +1,5 @@
 import classnames from "classnames"
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import Fade, { viewChangeDelay } from "../components/Fade"
 import Header, { HeaderWithoutMQTTData } from "./components/Header/Header"
 import { InverterChargerInputLimitSelector } from "./components/InverterCharger"
@@ -48,10 +48,6 @@ export const MarineApp = observer((props: AppProps) => {
   const isConnected = mqtt.isConnected
   const portalId = mqtt.portalId
   const error = mqtt.error
-
-  useEffect(() => {
-    console.log(portalId, isConnected)
-  }, [portalId, isConnected])
 
   const setPage = (currentPage: number) => {
     setCurrentPage(currentPage)

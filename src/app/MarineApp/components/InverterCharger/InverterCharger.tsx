@@ -1,4 +1,3 @@
-import React from "react"
 import classnames from "classnames"
 import { useShorePowerInput, useInverterCharger } from "@elninotech/mfd-modules"
 
@@ -15,6 +14,8 @@ import "./InverterCharger.scss"
 import MultiplusIcon from "../../images/icons/multiplus.svg"
 import { translate } from "react-i18nify"
 import { observer } from "mobx-react"
+import { useVisibilityNotifier } from "app/MarineApp/modules"
+import { WIDGET_TYPES } from "app/MarineApp/utils/constants"
 
 type InverterChargerProps = {
   onChangeInputLimitClicked: Function
@@ -38,6 +39,8 @@ const InverterCharger = observer(({ connected, onChangeInputLimitClicked }: Inve
 
   const currentMode = parseInt(mode)
 
+  useVisibilityNotifier({ widgetName: WIDGET_TYPES.INVERTER_CHARGER, visible: !!inputId })
+
   return (
     <>
       {inputId && (
@@ -46,7 +49,7 @@ const InverterCharger = observer(({ connected, onChangeInputLimitClicked }: Inve
             <div className={classnames("inverter-charger__header", { "inverter-charger__header--column": !inputId })}>
               <HeaderView
                 icon={MultiplusIcon}
-                title={customName || `Inverter / Charger: ${productNameShort}`}
+                title={customName || translate("widgets.inverterCharger", { productNameShort })}
                 subTitle={
                   (!adjustable ? getModeTitle(currentMode) + " - " : "") +
                   translate("common." + systemStateFormatter(state))

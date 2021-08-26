@@ -92,6 +92,10 @@
         "lockMessage": "锁定信息",
         "unlockMessage": "解锁信息"
     },
+    "noWidgets": {
+        "subtitle": "副标题",
+        "title": "标题"
+    },
     "remoteLogin": {
         "email": "邮箱",
         "forgotPassword": "忘记密码",
@@ -117,8 +121,17 @@
         "Sustain": "维持",
         "VE.Bus Fault condition": "VE.BUS故障条件",
         "parts": {
+            "Battery": "电池",
+            "Black water": "黑水",
+            "DC Loads": "直流负载",
             "Fresh water": "淡水",
-            "Shore Power": "太阳能"
+            "Fuel": "燃料",
+            "Live well": "活鱼池",
+            "Oil": "石油",
+            "PV Charger": "太阳能充电器",
+            "Shore Power": "太阳能",
+            "Tank sensor": "水箱传感器",
+            "Waste water": "废水"
         }
     },
     "tankWidget": {
@@ -130,7 +143,13 @@
         "Tank sensor": "水箱传感器",
         "Waste water": "废水"
     },
-    "versionInfo": {},
+    "versionInfo": {
+        "buildDate": "版本日期",
+        "identifier": "标示",
+        "venusOs": "VenusOS",
+        "version": "版本",
+        "vrmPortID": "VRM门户ID"
+    },
     "widgets": {
         "acLoads": "交流负载",
         "batteries": "电池",

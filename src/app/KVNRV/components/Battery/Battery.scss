@@ -126,8 +126,8 @@ $battery-height: 5rem;
 .power-indicator {
   position: absolute;
   font-size: 1.4rem;
-  left: 50%;
   bottom: 0;
-  transform: translate(25%, -25%);
+  left: 100%;
+  transform: translate(-50%, -25%);
   font-weight: 500;
 }

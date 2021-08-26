@@ -1,7 +1,9 @@
 import { BATTERY_STATE } from "../../../utils/constants"
-import { Battery } from "@elninotech/mfd-modules"
+import { Battery, useLanguage } from "@elninotech/mfd-modules"
 import { formatNumber } from "../../../components/NumericValue"
 import { translate, Translate } from "react-i18nify"
+import { mfdLanguageOptions } from "app/locales/constants"
+import { observer } from "mobx-react"
 
 const batteryStateFormatter = (value: number) => {
   switch (value) {
@@ -38,7 +40,11 @@ type BatteryLevelProps = {
   battery: Battery
 }
 
-export const BatteryLevel = ({ battery }: BatteryLevelProps) => {
+export const BatteryLevel = observer(({ battery }: BatteryLevelProps) => {
+  // listen for language change to re-render component
+  // since we are using translate func and need to rerun it again
+  useLanguage(mfdLanguageOptions)
+
   const batteryStateLabel = batteryStateFormatter(battery.state!)
   const timeToGoLabel = batteryTimeToGoFormatter(battery.timetogo!) + " "
   const showTimetoGo = battery.state === BATTERY_STATE.DISCHARGING && battery.timetogo
@@ -52,9 +58,14 @@ export const BatteryLevel = ({ battery }: BatteryLevelProps) => {
         </span>
       )}
       <div className="charge-indicator">
-        {showTimetoGo && <span>{timeToGoLabel}</span>}
-        {showSoc && <span>{formatNumber({ value: battery.soc })}%</span>}
+        {showTimetoGo && <div className="time-to-go">{timeToGoLabel}</div>}
+        {showSoc && (
+          <>
+            <span>{formatNumber({ value: battery.soc })}</span>
+            <span>%</span>
+          </>
+        )}
       </div>
     </div>
   )
-}
+})

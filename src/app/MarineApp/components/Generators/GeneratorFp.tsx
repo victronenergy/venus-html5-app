@@ -21,6 +21,8 @@ import FpGeneratorIcon from "../../images/icons/fp_generator.svg"
 import GeneratorIcon from "../../images/icons/generator.svg"
 import { Translate, translate } from "react-i18nify"
 import { observer } from "mobx-react"
+import { useVisibilityNotifier } from "app/MarineApp/modules"
+import { WIDGET_TYPES } from "app/MarineApp/utils/constants"
 
 const getIcon = (productId: number) => {
   switch (productId) {
@@ -63,6 +65,8 @@ const GeneratorFp = observer(() => {
   const subTitle = getGensetState(statusCode)
   const translatedSubTitle = translate(`common.${subTitle}`)
   const isAutoStartDisabled = gensetAutoStart === FISCHER_PANDA_GENSET_AUTOSTART.DISABLED
+
+  useVisibilityNotifier({ widgetName: WIDGET_TYPES.GENERATOR_FP, visible: !!phases })
 
   if (phases) {
     return (
@@ -112,7 +116,7 @@ const GeneratorFp = observer(() => {
       </ColumnContainer>
     )
   } else {
-    return <ColumnContainer />
+    return null
   }
 })
 

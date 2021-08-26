@@ -16,6 +16,8 @@ import "./Generator.scss"
 import GeneratorIcon from "../../images/icons/generator.svg"
 import { Translate, translate } from "react-i18nify"
 import { observer } from "mobx-react"
+import { useVisibilityNotifier } from "app/MarineApp/modules"
+import { WIDGET_TYPES } from "app/MarineApp/utils/constants"
 
 function getGeneratorState(statusCode: number, active: boolean, phases: number) {
   if (active) {
@@ -53,7 +55,7 @@ const GeneratorRelay = ({
   updateManualMode,
   updateAutoMode,
 }: GeneratorRelayProps) => {
-  const title = "Generator"
+  const title = translate("widgets.generator")
   const subTitle = getGeneratorState(statusCode, active ?? false, phases)
 
   return (
@@ -103,6 +105,11 @@ const GeneratorRelay = ({
 export const GeneratorRelays = observer(() => {
   const values = useGeneratorRelay()
 
+  useVisibilityNotifier({
+    widgetName: WIDGET_TYPES.GENERATOR_RELAY,
+    visible: !!(values.settings && values.settings.length),
+  })
+
   if (values.settings) {
     return (
       <>
@@ -124,7 +131,7 @@ export const GeneratorRelays = observer(() => {
       </>
     )
   } else {
-    return <ColumnContainer />
+    return null
   }
 })
 

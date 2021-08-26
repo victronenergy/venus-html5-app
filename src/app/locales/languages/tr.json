@@ -91,6 +91,7 @@
         "lockMessage": "lockMessage",
         "unlockMessage": "unlockMessage"
     },
+    "noWidgets": {},
     "remoteLogin": {
         "email": "E",
         "forgotPassword": "forgotPassword",

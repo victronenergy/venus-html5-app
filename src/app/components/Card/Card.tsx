@@ -74,7 +74,7 @@ export const Card: FunctionComponent<CardProps> = ({
       {footer && (
         <div className={"card__footer items-center " + footer.status}>
           {showAlarmIconInFooter && (
-            <div className={`row items-center status-update__icon status-update__icon-${footer.status}`}>
+            <div className={`row items-center card-status-update__icon card-status-update__icon-${footer.status}`}>
               <img src={IconWarning} alt={"Status update icon"} />
             </div>
           )}
