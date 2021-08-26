@@ -13,8 +13,8 @@ import { observer } from "mobx-react"
 export const ModalVersionInfo = observer(
   forwardRef((_, ref) => {
     const [isOpen, setOpen] = useState(false)
-    const { portalId = "-" } = useVrmStore()
-    const { firmwareVersion = "-", productId = "-" } = useAppStore()
+    const { portalId = "-", siteId = "-" } = useVrmStore()
+    const { firmwareVersion = "-" } = useAppStore()
 
     useImperativeHandle(ref, () => ({
       open: () => setOpen(true),
@@ -58,8 +58,8 @@ export const ModalVersionInfo = observer(
                 <div className="second-column">
                   <p>{BUILD_TIMESTAMP}</p>
                   <p>{firmwareVersion}</p>
-                  <p>{productId}</p>
                   <p>{portalId}</p>
+                  <p>{siteId}</p>
                 </div>
               </div>
             </div>
