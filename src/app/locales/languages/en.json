@@ -153,7 +153,7 @@
         "identifier": "Identifier",
         "venusOs": "Venus OS",
         "version": "Version %{version}",
-        "vrmPortID": "VRM Portal ID"
+        "vrmPortID": "VRM Site ID"
     },
     "widgets": {
         "acLoads": "AC Loads",
