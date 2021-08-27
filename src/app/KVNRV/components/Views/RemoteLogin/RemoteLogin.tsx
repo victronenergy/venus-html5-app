@@ -118,7 +118,6 @@ export const RemoteLogin = observer(() => {
             </div>
           </>
         )}
-        {console.log({ loggedIn, siteId, installations })}
         {(loggedIn || (!siteId && installations)) && <Installations />}
       </div>
       <div className={"login__splash"}>
