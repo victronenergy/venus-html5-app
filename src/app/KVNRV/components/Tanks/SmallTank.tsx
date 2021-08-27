@@ -9,7 +9,14 @@ import "./SmallTank.scss"
 import { useTank } from "@elninotech/mfd-modules"
 import { TankProps } from "./index"
 import { useSendUpdate } from "../../modules"
-import { VOLUME_UNITS, VolumeUnit, VolumeUnits, FLUID_TYPES } from "../../utils/constants"
+import {
+  VOLUME_UNITS,
+  VolumeUnit,
+  VolumeUnits,
+  FLUID_TYPES,
+  REVERSE_CONFIG_FLUID_TYPES,
+  TANKS_CONF,
+} from "../../utils/constants"
 import { Translate } from "react-i18nify"
 import { observer } from "mobx-react"
 
@@ -32,11 +39,13 @@ export const fluidTypeFormatter = (fluidType: string) => {
   }
 }
 
-export const SmallTank = observer(({ tankId, conf, invert }: TankProps) => {
+export const SmallTank = observer(({ tankId }: TankProps) => {
   const tank = useTank(tankId)
+  const hasReverseConfig = REVERSE_CONFIG_FLUID_TYPES.includes(+tank.fluidType)
+
   const footer = useSendUpdate(
-    invert ? 1 - tank.level / 100 : tank.level / 100,
-    conf,
+    !hasReverseConfig ? 1 - tank.level / 100 : tank.level / 100,
+    hasReverseConfig ? TANKS_CONF.REVERSE_TANK : TANKS_CONF.STANDART_TANK,
     tank.fluidType && fluidTypeFormatter(tank.fluidType)
   )
 
