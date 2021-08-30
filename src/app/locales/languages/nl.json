@@ -53,7 +53,7 @@
         "starting": "Opstarten",
         "stopped": "Gestopt",
         "stopping": "Stoppen",
-        "storageMode": "Opslagmodus ",
+        "storageMode": "Opslagmodus",
         "sustain": "Handhaven",
         "unplugged": "Losgekoppeld",
         "veBusFault": "VE.Bus fout",
@@ -84,7 +84,7 @@
         "connecting": "Verbinden",
         "local": "Lokaal",
         "loggedIn": "Ingelogd als",
-        "notLoggedIn": "niet ingelogd",
+        "notLoggedIn": "Niet ingelogd",
         "remote": "Afstandsbediening",
         "remoteConsole": "Remote Console",
         "remoteMessage": "Open in een groter scherm om het Remote Console te zien",
@@ -153,7 +153,7 @@
         "identifier": "ID",
         "venusOs": "VenusOS",
         "version": "Versie  %{version}",
-        "vrmPortID": "VRM poort ID"
+        "vrmPortID": "VRM installatie ID"
     },
     "widgets": {
         "acLoads": "AC Belastingen",
