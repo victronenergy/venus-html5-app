@@ -85,7 +85,7 @@
         "local": "Lokal",
         "loggedIn": "Eingeloggt als",
         "notLoggedIn": "Nicht eingeloggt",
-        "remote": "<mrk mtype=\"seg\" mid=\"744\">Ferngest. Schalter</mrk>",
+        "remote": "Remote",
         "remoteConsole": "Remote-Konsole",
         "remoteMessage": "Auf einem größeren Bildschirm öffnen, um die Remote-Konsole anzuzeigen",
         "versionInfo": "Versionsinformation"
@@ -153,7 +153,7 @@
         "identifier": "Kennung",
         "venusOs": "Venus OS",
         "version": "Version",
-        "vrmPortID": "VRM Portal-ID"
+        "vrmPortID": "VRM Site-ID"
     },
     "widgets": {
         "acLoads": "AC Lasten",
