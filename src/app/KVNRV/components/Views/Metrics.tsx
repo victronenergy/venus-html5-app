@@ -10,7 +10,6 @@ import Status from "../Status"
 import AcMode from "../AcMode"
 import Paginator from "../Paginator"
 import { SmallTank } from "../Tanks"
-import { TANKS_CONF } from "../../utils/constants"
 import { SIZE_WIDE, SIZE_LONG } from "../../../components/Card"
 
 export const SCREEN_SIZES = {
@@ -127,11 +126,11 @@ export const Metrics = () => {
             <div>
               <div className="row">
                 <PvCharger />
-                <SmallTank tankId={TANKS_CONF.FRESH_WATER.DEVICE_ID!} conf={TANKS_CONF.FRESH_WATER} invert={true} />
+                <SmallTank tankId={0} />
               </div>
               <div className="row">
-                <SmallTank tankId={TANKS_CONF.GRAY_WATER.DEVICE_ID!} conf={TANKS_CONF.GRAY_WATER} invert={false} />
-                <SmallTank tankId={TANKS_CONF.BLACK_WATER.DEVICE_ID!} conf={TANKS_CONF.BLACK_WATER} invert={false} />
+                <SmallTank tankId={1} />
+                <SmallTank tankId={2} />
               </div>
             </div>
           )}
@@ -151,7 +150,7 @@ export const Metrics = () => {
               {isTall && (
                 <div className="row">
                   <PvCharger />
-                  <SmallTank tankId={TANKS_CONF.FRESH_WATER.DEVICE_ID!} conf={TANKS_CONF.FRESH_WATER} invert={true} />
+                  <SmallTank tankId={0} />
                 </div>
               )}
             </div>
@@ -163,8 +162,8 @@ export const Metrics = () => {
               <AcMode />
               {isTall && (
                 <div className="row">
-                  <SmallTank tankId={TANKS_CONF.GRAY_WATER.DEVICE_ID!} conf={TANKS_CONF.GRAY_WATER} invert={false} />
-                  <SmallTank tankId={TANKS_CONF.BLACK_WATER.DEVICE_ID!} conf={TANKS_CONF.BLACK_WATER} invert={false} />
+                  <SmallTank tankId={1} />
+                  <SmallTank tankId={2} />
                 </div>
               )}
             </div>
@@ -174,11 +173,11 @@ export const Metrics = () => {
             <div>
               <div className="row">
                 <PvCharger />
-                <SmallTank tankId={TANKS_CONF.FRESH_WATER.DEVICE_ID!} conf={TANKS_CONF.FRESH_WATER} invert={true} />
+                <SmallTank tankId={0} />
               </div>
               <div className="row">
-                <SmallTank tankId={TANKS_CONF.GRAY_WATER.DEVICE_ID!} conf={TANKS_CONF.GRAY_WATER} invert={false} />
-                <SmallTank tankId={TANKS_CONF.BLACK_WATER.DEVICE_ID!} conf={TANKS_CONF.BLACK_WATER} invert={false} />
+                <SmallTank tankId={1} />
+                <SmallTank tankId={2} />
               </div>
             </div>
           )}

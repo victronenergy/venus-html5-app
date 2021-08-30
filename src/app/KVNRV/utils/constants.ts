@@ -75,8 +75,7 @@ export const SHORE_POWER_CONF: WidgetConfiguration = {
 }
 
 export const TANKS_CONF = {
-  FRESH_WATER: {
-    DEVICE_ID: 2,
+  STANDART_TANK: {
     MAX: 1,
     THRESHOLDS: [0.7, 0.2, 0.1],
     MESSAGES: {
@@ -84,17 +83,7 @@ export const TANKS_CONF = {
       [ALARM]: "levels critically low",
     },
   } as WidgetConfiguration,
-  GRAY_WATER: {
-    DEVICE_ID: 0,
-    MAX: 1,
-    THRESHOLDS: [0.7, 0.2, 0.1],
-    MESSAGES: {
-      [WARNING]: "level high",
-      [ALARM]: "levels critically high",
-    },
-  } as WidgetConfiguration,
-  BLACK_WATER: {
-    DEVICE_ID: 1,
+  REVERSE_TANK: {
     MAX: 1,
     THRESHOLDS: [0.7, 0.2, 0.1],
     MESSAGES: {
@@ -172,3 +161,5 @@ export const VIEWS = {
 }
 
 export const VRM_URL = "https://vrm.victronenergy.com/"
+
+export const REVERSE_CONFIG_FLUID_TYPES = [FLUID_TYPES.WASTE_WATER, FLUID_TYPES.BLACK_WATER, FLUID_TYPES.LIVE_WELL]

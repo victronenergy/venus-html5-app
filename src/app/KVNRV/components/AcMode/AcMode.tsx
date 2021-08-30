@@ -52,7 +52,7 @@ export const AcMode = observer(() => {
               </span>
               <button onClick={() => setModalOpen(true)} className="btn">
                 <div className="action-btn-content">
-                  <Translate value="common.chargerOnly" /> <img src={RIcon} alt="right arrow" />
+                  <Translate value={`common.${acModeFormatter(+mode)}`} /> <img src={RIcon} alt="right arrow" />
                 </div>
               </button>
             </div>

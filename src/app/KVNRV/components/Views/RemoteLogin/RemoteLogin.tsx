@@ -1,4 +1,4 @@
-import { FormEventHandler, useState } from "react"
+import { FormEventHandler, useCallback, useEffect, useState } from "react"
 import { useAppStore, useTheme, useVrmStore } from "@elninotech/mfd-modules"
 import { Installations } from "../../Installations"
 import { VRM_URL } from "../../../utils/constants"
@@ -20,6 +20,20 @@ export const RemoteLogin = observer(() => {
   const vrmStore = useVrmStore()
   const appStore = useAppStore()
   const { userId, loggedIn, siteId, installations } = vrmStore
+
+  const updateInstanceDetailsCb = useCallback(async () => {
+    try {
+      await vrmStore.updateInstanceDetails()
+    } catch (_e) {
+      // was not possible to update instance details
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  // try to update instance details if already possible on first mount
+  useEffect(() => {
+    updateInstanceDetailsCb()
+  }, [updateInstanceDetailsCb])
 
   const submitLogin: FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault()
