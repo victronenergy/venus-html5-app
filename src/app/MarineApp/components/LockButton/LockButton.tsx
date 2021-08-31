@@ -9,6 +9,7 @@ import "./LockButton.scss"
 import { Translate } from "react-i18nify"
 import { useApp } from "@elninotech/mfd-modules"
 import { observer } from "mobx-react"
+import { useVisibleWidgetsStore } from "app/MarineApp/modules"
 
 type LockButtonProps = {
   currentView: string
@@ -18,10 +19,11 @@ type LockButtonProps = {
 
 export const LockButton = observer(({ currentView, header, showLockButton = true }: LockButtonProps) => {
   const appStore = useApp()
+  const visibleWidgetsStore = useVisibleWidgetsStore()
 
   return (
     <>
-      {currentView === VIEWS.METRICS && showLockButton && (
+      {currentView === VIEWS.METRICS && showLockButton && !visibleWidgetsStore.noVisibleElements && (
         <div
           className={classNames("text--smaller", header ? "lock-button" : "lock-button-footer")}
           onClick={appStore.toggleLocked}
