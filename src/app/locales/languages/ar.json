@@ -2,7 +2,8 @@
     "acMode": {
         "modal": {
             "name": "اسم"
-        }
+        },
+        "title": "وضعية التيار المتردد"
     },
     "cardFooter": {
         "Charge": "تحميل",
@@ -11,6 +12,9 @@
     },
     "common": {
         "assisting": "مساندة",
+        "autoStartStop": "بدء/توقف آلي",
+        "charge": "تحميل",
+        "chargerOnly": "الشاحن فقط",
         "charging": "يقوم بالشحن",
         "current": "التيار",
         "discharging": "يقوم بتفريغ الشحن",
@@ -18,10 +22,15 @@
         "error": "خطأ",
         "fault": "خلل",
         "idle": "ساكن",
+        "inverterOnly": "فقط المعاكس",
         "inverting": "عكس",
+        "lowPower": "طاقة منخفضة",
+        "mode": "وضعية",
+        "notAvailable": "غير متوفر",
         "off": "مطفأ",
         "on": "مشغل",
         "passthru": "تمرير عبر",
+        "powerSupplyMode": "وضع إمدادات الطاقة",
         "running": "مشغل",
         "standby": "انتظار",
         "stopped": "موقف",
@@ -35,7 +44,8 @@
         "temperature": {}
     },
     "header": {
-        "connecting": "جاري الاتصال"
+        "connecting": "جاري الاتصال",
+        "remoteConsole": "وحدة التحكم عن بعد"
     },
     "installations": {},
     "locker": {},
@@ -52,8 +62,16 @@
         "Passthru": "تمرير عبر",
         "Sustain": "ركيزة",
         "parts": {
+            "Battery": "بطارية",
+            "Black water": "مياه سوداء",
             "Fresh water": "ماء نقي",
-            "Shore Power": "دعم الطاقة"
+            "Fuel": "وقود",
+            "Live well": "حيوية جيدة",
+            "Oil": "زيت",
+            "PV Charger": "شاحن ضوئي",
+            "Shore Power": "دعم الطاقة",
+            "Tank sensor": "حساس الخزان",
+            "Waste water": "ماء فاسد"
         }
     },
     "tankWidget": {
@@ -67,8 +85,12 @@
     },
     "versionInfo": {},
     "widgets": {
+        "acLoads": "تحميلات التيار المتردد",
         "batteries": "البطاريات",
         "battery": "بطارية",
+        "generator": "مولد",
+        "pvCharger": "شاحن ضوئي",
+        "shorePower": "دعم الطاقة",
         "status": "الحالة",
         "unknown": "مجهول"
     }

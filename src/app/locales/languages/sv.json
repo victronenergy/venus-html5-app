@@ -2,7 +2,8 @@
     "acMode": {
         "modal": {
             "name": "Namn"
-        }
+        },
+        "title": "Remote VEConfigure"
     },
     "cardFooter": {
         "Charge": "Belastning",
@@ -11,7 +12,9 @@
     },
     "common": {
         "assisting": "Hjälpström",
+        "autoStartStop": "Auto start/stopp",
         "charge": "Belastning",
+        "chargerOnly": "Endast laddare",
         "charging": "laddar",
         "current": "Ström",
         "discharging": "laddar ur",
@@ -19,11 +22,15 @@
         "error": "Fel",
         "fault": "Fel",
         "idle": "Tomgång",
+        "inverterOnly": "Endast växelriktare",
         "inverting": "Växelriktning",
+        "lowPower": "Låg effekt",
         "mode": "Läge",
+        "notAvailable": "Inte tillgänglig",
         "off": "Av",
         "on": "På",
         "passthru": "Förbikoppling",
+        "powerSupplyMode": "Strömförsörjningsläge",
         "running": "I drift",
         "standby": "Standby",
         "starting": "<mrk mtype=\"seg\" mid=\"477\">Status: Påbörjar sökning efter enheter ...</mrk>",
@@ -40,16 +47,21 @@
     "header": {
         "close": "stäng",
         "connecting": "Ansluter...",
-        "remote": "Fjärr"
+        "remote": "Fjärr",
+        "remoteConsole": "Fjärrkonsol"
     },
     "installations": {
         "title": "Remote VEConfigure"
     },
     "locker": {},
-    "noWidgets": {},
+    "noWidgets": {
+        "title": "Remote VEConfigure"
+    },
     "remoteLogin": {
         "email": "E-post",
+        "goBack": "Gå tillbaka",
         "logIn": "Inloggning",
+        "loginFailed": "<mrk mtype=\"seg\" mid=\"638\">Inloggningen misslyckades</mrk>",
         "password": "Lösenord"
     },
     "statusWidget": {
@@ -61,8 +73,16 @@
         "Passthru": "Förbikoppling",
         "Sustain": "Upprätthålla",
         "parts": {
+            "Battery": "Batteri",
+            "Black water": "SVARTVATTEN",
             "Fresh water": "Färskvatten",
-            "Shore Power": "Landström"
+            "Fuel": "Bränsle",
+            "Live well": "Vattentank",
+            "Oil": "Olja",
+            "PV Charger": "Solcellsladdare",
+            "Shore Power": "Landström",
+            "Tank sensor": "Tanksensor",
+            "Waste water": "Spillvatten"
         }
     },
     "tankWidget": {
@@ -74,10 +94,19 @@
         "Tank sensor": "Tanksensor",
         "Waste water": "Spillvatten"
     },
-    "versionInfo": {},
+    "versionInfo": {
+        "buildDate": "Upprättandedatum",
+        "identifier": "<mrk mtype=\"seg\" mid=\"49\">Id-nummer</mrk>",
+        "version": "<mrk mtype=\"seg\" mid=\"72\">Version</mrk>"
+    },
     "widgets": {
+        "acLoads": "AC belastningar",
         "batteries": "Batterier",
         "battery": "Batteri",
+        "generator": "Generator",
+        "pvCharger": "Solcellsladdare",
+        "shorePower": "Landström",
+        "solar": "Solceller",
         "status": "Status",
         "unknown": "Okänd"
     }

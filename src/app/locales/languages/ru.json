@@ -2,7 +2,8 @@
     "acMode": {
         "modal": {
             "name": "Имя"
-        }
+        },
+        "title": "Сбросить пароль"
     },
     "cardFooter": {
         "Charge": "Нагрузка",
@@ -11,6 +12,9 @@
     },
     "common": {
         "assisting": "Помощь",
+        "autoStartStop": "Автоматический старт/стоп",
+        "charge": "Нагрузка",
+        "chargerOnly": "Только зарядное устройство",
         "charging": "заряжается",
         "current": "Ток",
         "discharging": "разряжается",
@@ -18,10 +22,15 @@
         "error": "Ошибка",
         "fault": "Неисправность",
         "idle": "без нагрузки",
+        "inverterOnly": "Только инвертер",
         "inverting": "Инвертирование",
+        "lowPower": "Низкая мощность",
+        "mode": "Режим",
+        "notAvailable": "Недоступно",
         "off": "Выкл",
         "on": "Вкл",
         "passthru": "Проход",
+        "powerSupplyMode": "Режим поддержки мощности",
         "running": "Работает",
         "standby": "Ожидание",
         "starting": "Статус: запуск опроса устройств...",
@@ -38,16 +47,20 @@
     "header": {
         "close": "Закрыть",
         "connecting": "Подключение",
-        "remote": "Удаленный"
+        "remote": "Удаленный",
+        "remoteConsole": "Дистанционная консоль"
     },
     "installations": {
         "title": "Сбросить пароль"
     },
     "locker": {},
-    "noWidgets": {},
+    "noWidgets": {
+        "title": "Сбросить пароль"
+    },
     "remoteLogin": {
         "email": "Эл. почта",
         "logIn": "Вход",
+        "loginFailed": "<mrk mtype=\"seg\" mid=\"640\">Ошибка входа</mrk>",
         "password": "Пароль"
     },
     "statusWidget": {
@@ -59,8 +72,16 @@
         "Passthru": "Проход",
         "Sustain": "Удержание",
         "parts": {
+            "Battery": "Батарея",
+            "Black water": "Темная вода",
             "Fresh water": "Свежая вода",
-            "Shore Power": "Мощность солнечной системы"
+            "Fuel": "Топливо",
+            "Live well": "Рабочая скважина",
+            "Oil": "Нефть",
+            "PV Charger": "PV зарядное устройство",
+            "Shore Power": "Мощность солнечной системы",
+            "Tank sensor": "Датчик насоса",
+            "Waste water": "Грязная вода"
         }
     },
     "tankWidget": {
@@ -72,10 +93,19 @@
         "Tank sensor": "Датчик насоса",
         "Waste water": "Грязная вода"
     },
-    "versionInfo": {},
+    "versionInfo": {
+        "buildDate": "<mrk mtype=\"seg\" mid=\"52\">Дата билда</mrk>",
+        "identifier": "<mrk mtype=\"seg\" mid=\"50\">Идентификатор</mrk>",
+        "version": "<mrk mtype=\"seg\" mid=\"73\">Версия</mrk>"
+    },
     "widgets": {
+        "acLoads": "AC нагрузки",
         "batteries": "Батареи",
         "battery": "Батарея",
+        "generator": "Генератор",
+        "pvCharger": "PV зарядное устройство",
+        "shorePower": "Мощность солнечной системы",
+        "solar": "Солнечная установка",
         "status": "Состояние",
         "unknown": "Неизвестно"
     }

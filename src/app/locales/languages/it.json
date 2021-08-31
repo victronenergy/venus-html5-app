@@ -1,74 +1,146 @@
 {
     "acMode": {
         "modal": {
-            "name": "Nome"
-        }
+            "name": "Nome",
+            "updateLimit": "limite Aggiornamento"
+        },
+        "title": "Titolo"
     },
     "cardFooter": {
         "Charge": "Carica",
+        "Critical": "Critico",
+        "Optimal": "Ottimale",
         "Status": "Stato",
         "Warning": "Avvertenza"
     },
     "common": {
+        "absorptionCharging": "carica Absorption",
         "assisting": "Assistenza",
+        "autoStartStop": "Avvio/arresto automatico",
+        "bulkCharging": "carica Bulk",
+        "charge": "Carica",
+        "chargerOnly": "Solo caricabatterie",
         "charging": "Caricamento",
         "current": "Corrente",
+        "days": "giorni",
+        "discharge": "Scarica",
         "discharging": "in esaurimento",
         "eco": "Eco",
+        "emptyBar": "barra Vuota",
+        "equalisationCharging": "carica Compensazione",
         "error": "Errore",
         "fault": "Errore",
+        "floatCharging": "carica Float",
         "hours": "ore",
         "idle": "folle",
+        "inputLimit": "limite Entrata",
+        "inverterOnly": "Solo inverter",
         "inverting": "Inversione",
+        "limit": "limite",
+        "lowPower": "Bassa potenza",
         "minutes": "minuti",
+        "mode": "Modalità",
+        "noShorePower": "potenza Banchina Assente",
+        "notAvailable": "Non disponibile",
+        "nrOfPhases": "num. Fasi",
         "off": "Spento",
         "on": "Acceso",
         "passthru": "Accedi",
+        "powerSupplyMode": "Modalità alimentazione",
+        "remainingTime": "tempo Rimanente",
         "running": "In funzionamento",
         "standby": "Standby",
         "starting": "Stato: Avvio individuazione dispositivi in corso...",
         "stopped": "Interrotto",
         "stopping": "In interruzione",
+        "storageMode": "Modalità conservazione",
         "sustain": "Supporto",
         "unplugged": "Scollegato",
+        "veBusFault": "errore VEBus",
         "voltage": "Tensione"
     },
-    "error": {},
+    "error": {
+        "errorWithMessage": "errore Di Messaggio",
+        "genericMessage": "messaggio Generico",
+        "mqttUnavailable1": "mqtt Non disponibile 1",
+        "mqttUnavailable2": "mqtt Non disponibile 2",
+        "mqttUnavailable3": "mqtt Non disponibile 3",
+        "mqttUnavailable4": "mqtt Non disponibile 4",
+        "mqttUnavailable5": "mqtt Non disponibile 5",
+        "queryParams": "parametri Richiesta",
+        "userAgent": "agente Utente",
+        "windowSize": "dimensioni Finestra"
+    },
     "generator": {
-        "temperature": {}
+        "fisherPandaAutoStartMessage": "messaggio avvio automatico Fisher Panda",
+        "temperature": {
+            "coolant": "refrigerante",
+            "exhaust": "scarico",
+            "winding": "avvolgimento"
+        }
     },
     "header": {
         "close": "Chiudi",
         "connecting": "Collegamento in corso",
         "local": "Locale",
-        "remote": "Remoto"
+        "loggedIn": "Registrato",
+        "notLoggedIn": "Non registrato",
+        "remote": "Remoto",
+        "remoteConsole": "Console Remota",
+        "remoteMessage": "messaggio Remoto",
+        "versionInfo": "informazioni Versione"
     },
     "installations": {
         "title": "Titolo"
     },
-    "locker": {},
-    "noWidgets": {},
+    "locker": {
+        "lockMessage": "messaggio Blocco",
+        "unlockMessage": "messaggio Sblocco"
+    },
+    "noWidgets": {
+        "subtitle": "sottotitolo",
+        "title": "Titolo"
+    },
     "remoteLogin": {
         "email": "E-mail",
+        "forgotPassword": "Hai dimenticato la password?",
+        "goBack": "Indietro",
         "logIn": "Login",
-        "password": "Password"
+        "loginFailed": "Login non riuscito",
+        "password": "Password",
+        "registerMessage1": "messaggio Registrazione 1",
+        "registerMessage2": "messaggio Registrazione 2"
     },
     "statusWidget": {
+        "Absorption charging": "Carica Absorption",
         "Assisting": "Assistenza",
+        "Bulk charging": "Carica Bulk",
         "Discharging": "in esaurimento",
+        "Equalisation charging": "Carica compensazione",
+        "Float charging": "Carica Float",
         "Inverting": "Inversione",
         "Low power": "Bassa potenza",
         "Off": "Spento",
         "Passthru": "Accedi",
         "Storage mode": "Modalità conservazione",
         "Sustain": "Supporto",
+        "VE.Bus Fault condition": "Condizione Errore VE.Bus",
         "parts": {
+            "Battery": "Batteria",
+            "Black water": "ACQUE NERE",
+            "DC Loads": "Carichi CC",
             "Fresh water": "Acqua dolce",
-            "Shore Power": "Potenza banchina"
+            "Fuel": "Carburante",
+            "Live well": "Serbatoio",
+            "Oil": "Carburante",
+            "PV Charger": "Caricabatt. FV",
+            "Shore Power": "Potenza banchina",
+            "Tank sensor": "Sensore serbatoio",
+            "Waste water": "Acque reflue"
         }
     },
     "tankWidget": {
-        "Black water": "ACQUE NERE",
+        "Black water": "Acque nere",
         "Fresh water": "Acqua dolce",
         "Fuel": "Carburante",
         "Live well": "Serbatoio",
@@ -76,10 +148,29 @@
         "Tank sensor": "Sensore serbatoio",
         "Waste water": "Acque reflue"
     },
-    "versionInfo": {},
+    "versionInfo": {
+        "buildDate": "<mrk mtype=\"seg\" mid=\"51\">Data di costruzione</mrk>",
+        "identifier": "Identifica",
+        "venusOs": "os Venus",
+        "version": "<mrk mtype=\"seg\" mid=\"72\">Versione</mrk>",
+        "vrmPortID": "id Porta VRM"
+    },
     "widgets": {
+        "acLoads": "Carichi CA",
         "batteries": "Batterie",
         "battery": "Batteria",
+        "batteryWithName": "batteria Con Nome",
+        "chargerWithName": "Caricatore: %{productNameShort}",
+        "dcLoads": "Carichi CC",
+        "generator": "Generatore",
+        "generatorInput": "Entrata Generatore",
+        "gridInput": "Entrata Rete",
+        "invalidConfig": "Config. non valida",
+        "inverterCharger": "inverter Caricabatterie",
+        "inverterWithName": "Inverter: %{productNameShort}",
+        "pvCharger": "Caricabatt. FV",
+        "shorePower": "Potenza banchina",
+        "solar": "Solare",
         "status": "Stato",
         "unknown": "Sconosciuto"
     }

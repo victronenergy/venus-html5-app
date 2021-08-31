@@ -3,7 +3,8 @@
         "modal": {
             "name": "İsim",
             "updateLimit": "updateLimit"
-        }
+        },
+        "title": "Başlık"
     },
     "cardFooter": {
         "Charge": "Yük",
@@ -91,7 +92,9 @@
         "lockMessage": "lockMessage",
         "unlockMessage": "unlockMessage"
     },
-    "noWidgets": {},
+    "noWidgets": {
+        "title": "Başlık"
+    },
     "remoteLogin": {
         "email": "E",
         "forgotPassword": "forgotPassword",
@@ -117,8 +120,17 @@
         "Sustain": "Sürdür",
         "VE.Bus Fault condition": "SEK Veri Yolu Arızası durumu",
         "parts": {
+            "Battery": "Akü",
+            "Black water": "Pis Su",
+            "DC Loads": "dcLoads",
             "Fresh water": "Temiz su",
-            "Shore Power": "Sahil"
+            "Fuel": "Yakıt",
+            "Live well": "Faal kuyu",
+            "Oil": "Yağ",
+            "PV Charger": "PV Şarj Cihazı",
+            "Shore Power": "Sahil",
+            "Tank sensor": "Tank sensörü",
+            "Waste water": "Atık su"
         }
     },
     "tankWidget": {
@@ -130,19 +142,25 @@
         "Tank sensor": "Tank sensörü",
         "Waste water": "Atık su"
     },
-    "versionInfo": {},
+    "versionInfo": {
+        "buildDate": "Kuruluş zamanı",
+        "identifier": "Tanımla",
+        "version": "Versiyon"
+    },
     "widgets": {
         "acLoads": "acLoads",
         "batteries": "Aküler",
         "battery": "Akü",
         "chargerWithName": "chargerWithName",
         "dcLoads": "dcLoads",
+        "generator": "Jeneratör",
         "generatorInput": "jeneratörInput",
         "gridInput": "gridInput",
         "invalidConfig": "invalidConfig",
         "inverterWithName": "inverterWithName",
         "pvCharger": "pvŞarj",
         "shorePower": "shorePower",
+        "solar": "Solar",
         "status": "Durum",
         "unknown": "Bilinmiyor"
     }

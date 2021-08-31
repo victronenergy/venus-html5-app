@@ -98,7 +98,7 @@
         "unlockMessage": "Unlock to make changes"
     },
     "noWidgets": {
-        "subtitle": "Make sure your devices are properly connected to display widgets",
+        "subtitle": "Make sure your devices are properly connected",
         "title": "Your dashboard is empty"
     },
     "remoteLogin": {
