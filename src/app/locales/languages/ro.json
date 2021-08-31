@@ -2,7 +2,8 @@
     "acMode": {
         "modal": {
             "name": "Nume"
-        }
+        },
+        "title": "MOD AC"
     },
     "cardFooter": {
         "Charge": "Incarcare",
@@ -11,6 +12,9 @@
     },
     "common": {
         "assisting": "Assisting",
+        "autoStartStop": "Start/Stop automat",
+        "charge": "Incarcare",
+        "chargerOnly": "Doar incarcator",
         "charging": "incarcare",
         "current": "Actual",
         "discharging": "descarcare",
@@ -18,10 +22,15 @@
         "error": "Eroare",
         "fault": "Avarie",
         "idle": "inactiv",
+        "inverterOnly": "Doar invertor",
         "inverting": "Dimensiune invertor",
+        "lowPower": "Putere Scazuta",
+        "mode": "Mod",
+        "notAvailable": "Indisponibil",
         "off": "Oprit",
         "on": "Pornit",
         "passthru": "Direct",
+        "powerSupplyMode": "Mod sursa de alimentare",
         "running": "Functioneaza",
         "standby": "In asteptare",
         "stopped": "Oprit",
@@ -35,7 +44,8 @@
         "temperature": {}
     },
     "header": {
-        "connecting": "Conectare"
+        "connecting": "Conectare",
+        "remoteConsole": "Consola la distanta"
     },
     "installations": {},
     "locker": {},
@@ -53,8 +63,16 @@
         "Passthru": "Direct",
         "Sustain": "Sustine",
         "parts": {
+            "Battery": "Baterie",
+            "Black water": "APA REZIDUALA",
             "Fresh water": "Apă dulce",
-            "Shore Power": "Energie solară"
+            "Fuel": "Carburant",
+            "Live well": "Live well",
+            "Oil": "Ulei",
+            "PV Charger": "Incarcator PV",
+            "Shore Power": "Energie solară",
+            "Tank sensor": "Senzor rezervor",
+            "Waste water": "Apa reziduala"
         }
     },
     "tankWidget": {
@@ -68,8 +86,13 @@
     },
     "versionInfo": {},
     "widgets": {
+        "acLoads": "Consumatori AC",
         "batteries": "Baterii",
         "battery": "Baterie",
+        "generator": "Generator",
+        "pvCharger": "Incarcator PV",
+        "shorePower": "Energie solară",
+        "solar": "Solar",
         "status": "Stare",
         "unknown": "Necunoscut"
     }

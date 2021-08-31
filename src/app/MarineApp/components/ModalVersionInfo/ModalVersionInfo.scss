@@ -3,6 +3,10 @@
 
 .modal-marine-card {
   background-color: #2b3341;
+  .card__header .card__header__icon.close {
+    background-color: transparent;
+    border: 0;
+  }
 }
 
 .modal-ver-container {

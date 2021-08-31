@@ -2,7 +2,8 @@
     "acMode": {
         "modal": {
             "name": "Název"
-        }
+        },
+        "title": "AC REŽIM"
     },
     "cardFooter": {
         "Charge": "Zátěž",
@@ -11,6 +12,9 @@
     },
     "common": {
         "assisting": "Asistence",
+        "autoStartStop": "Auto start/stop",
+        "charge": "Zátěž",
+        "chargerOnly": "Pouze nabíječka",
         "charging": "nabíjení",
         "current": "Proud",
         "discharging": "vybíjení",
@@ -18,10 +22,15 @@
         "error": "Chyba",
         "fault": "Závada",
         "idle": "Nečinný",
+        "inverterOnly": "Pouze měnič",
         "inverting": "Měnič",
+        "lowPower": "Nízký výkon",
+        "mode": "Režim",
+        "notAvailable": "Nedostupný",
         "off": "Vypnuto",
         "on": "Zapnuto",
         "passthru": "Průchozí",
+        "powerSupplyMode": "Režim dodávky energie",
         "running": "Chod",
         "standby": "Standby",
         "stopped": "Zastavený",
@@ -35,7 +44,8 @@
         "temperature": {}
     },
     "header": {
-        "connecting": "Připojení"
+        "connecting": "Připojení",
+        "remoteConsole": "Vzdálené ovládání"
     },
     "installations": {},
     "locker": {},
@@ -53,8 +63,16 @@
         "Passthru": "Průchozí",
         "Sustain": "Udržování",
         "parts": {
+            "Battery": "Baterie",
+            "Black water": "SPLAŠKY",
             "Fresh water": "Čistá voda",
-            "Shore Power": "Břehový proud"
+            "Fuel": "Palivo",
+            "Live well": "Nádrž na vodu",
+            "Oil": "Olej",
+            "PV Charger": "FV regulátor",
+            "Shore Power": "Břehový proud",
+            "Tank sensor": "Čidlo nádrže",
+            "Waste water": "Odpadní voda"
         }
     },
     "tankWidget": {
@@ -68,8 +86,13 @@
     },
     "versionInfo": {},
     "widgets": {
+        "acLoads": "AC zátěž",
         "batteries": "Baterie",
         "battery": "Baterie",
+        "generator": "Generátor",
+        "pvCharger": "FV regulátor",
+        "shorePower": "Břehový proud",
+        "solar": "Solární energie",
         "status": "Stav",
         "unknown": "Neznámý"
     }
