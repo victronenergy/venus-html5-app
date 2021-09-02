@@ -22,7 +22,7 @@ export const Header = observer(() => {
   const modalVersionInfoRef = useRef<any>()
 
   const handleRemoteSwitch = () => {
-    // window.location.replace(remote ? `http://venus.local/app` : `https://kvnrv-9ca32.web.app/app`)
+    window.location.replace(remote ? `http://venus.local/app` : `https://kvnrv-9ca32.web.app/app`)
     appStore.toggleRemote()
   }
 
