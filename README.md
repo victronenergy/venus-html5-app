@@ -109,12 +109,19 @@ In the project main folder run `./bin/deploy.sh <ip>` where ip is the target dev
 
 The deploy script also bundles the app. Nore that the script assumes that it's run from the root folder of the application.
 
+#### 2.6.3 Deploying using a USB stick
+
+Since Venus OS 2.80, placing the build of the app in `/data/www/app` allows for serving a different version of the app than the one bundled with Venus OS at `/var/www/venus/app`. When the `/data/www/app` is present, it'll be server at `venus.local/app` and the original application at `venus.local/default/app`.
+
+By creating an archive named `venus-data.zip` that contains the build files from the `dist` inside an `www/app/` folder will ensure that the `/data/www/app` folder will be created and the content of the archived extracted when the GX device is rebooted.
+
+The content of the `/data` partition is persistent across firmware updates.
+
 #### 2.6.3 Navigate to the app address again on the target device
 
 Once deployed reload the page by navigating to the Venus host IP on the target device.
 If you have enabled dev features and have previously deployed a new version of the UI to the device you can
 press the `reload page` on the top left corner of the page.
-
 
 ### 2.7 Translations
 
@@ -129,11 +136,11 @@ yarn poeditor:push
 ```
 
 Running the command will trigger the following actions:
+
 1. Add the terms of the main language file (default: en)
 1. Add new languges to the POEditor project if they are available locally but missing in POEditor
 1. Add the local translations for all the languages
 1. Mark translations as fuzzy if there are changes in the translation of the main language
-
 
 ```
 yarn poeditor:push -f
