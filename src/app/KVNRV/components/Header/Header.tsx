@@ -50,8 +50,12 @@ export const Header = observer(() => {
           </div>
 
           <div className={"header__info"}>
-            <div>{username && <Translate value="header.loggedIn" />}</div>
-            <div>{username ?? <Translate value="header.notLoggedIn" />}</div>
+            {loggedIn && (
+              <>
+                <div>{username && <Translate value="header.loggedIn" />}</div>
+                <div>{username ?? <Translate value="header.notLoggedIn" />}</div>
+              </>
+            )}
           </div>
 
           <div className={"header__buttons"}>
