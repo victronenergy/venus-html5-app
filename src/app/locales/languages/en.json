@@ -102,14 +102,20 @@
         "title": "Your dashboard is empty"
     },
     "remoteLogin": {
+        "2fa": "Two-factor authentication token",
         "email": "Email",
         "forgotPassword": "Forgot Password?",
         "goBack": "Go Back",
         "logIn": "Log in",
+        "logOut": "Log Out",
         "loginFailed": "Login Failed",
+        "mobileVerification": "Authenticator app token",
+        "noInstallations": "This account has no installations, Do you wish to log out?",
         "password": "Password",
         "registerMessage1": "Don't have an account yet? ",
-        "registerMessage2": "Register your RV."
+        "registerMessage2": "Register your RV.",
+        "smsVerification": "Sms Verification token",
+        "wrong2fa": "Wrong two-factor verification code"
     },
     "statusWidget": {
         "Absorption charging": "Absorption charging",

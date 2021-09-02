@@ -22,7 +22,7 @@ export const Header = observer(() => {
   const modalVersionInfoRef = useRef<any>()
 
   const handleRemoteSwitch = () => {
-    window.location.replace(remote ? `http://venus.local/app` : `https://kvnrv-9ca32.web.app/app`)
+    // window.location.replace(remote ? `http://venus.local/app` : `https://kvnrv-9ca32.web.app/app`)
     appStore.toggleRemote()
   }
 
@@ -50,8 +50,12 @@ export const Header = observer(() => {
           </div>
 
           <div className={"header__info"}>
-            <div>{username && <Translate value="header.loggedIn" />}</div>
-            <div>{username ?? <Translate value="header.notLoggedIn" />}</div>
+            {loggedIn && (
+              <>
+                <div>{username && <Translate value="header.loggedIn" />}</div>
+                <div>{username ?? <Translate value="header.notLoggedIn" />}</div>
+              </>
+            )}
           </div>
 
           <div className={"header__buttons"}>
