@@ -102,14 +102,20 @@
         "title": "Votre tableau de bord est vide"
     },
     "remoteLogin": {
+        "2fa": "Code de vérification en 2 étapes",
         "email": "Email",
         "forgotPassword": "Mot de passe oublié ?",
         "goBack": "Go Back",
         "logIn": "Connexion",
+        "logOut": "Déconnexion",
         "loginFailed": "Echec de connexion",
+        "mobileVerification": "Code d'application d'authentification",
+        "noInstallations": "Ce compte n'a pas d'installations.",
         "password": "Mot de passe",
         "registerMessage1": "Pas encore de compte ? ",
-        "registerMessage2": "Enregistrez votre véhicule."
+        "registerMessage2": "Enregistrez votre véhicule.",
+        "smsVerification": "Code de vérification SMS",
+        "wrong2fa": "Mauvais code de vérification en 2 étapes"
     },
     "statusWidget": {
         "Absorption charging": "Charge d'absorption",
