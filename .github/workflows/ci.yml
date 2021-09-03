@@ -65,7 +65,7 @@ jobs:
           fi
       - name: Build the production bundle
         if: steps.check_tag.outputs.match == 'true'
-        run: tar -zcvf venus-html5-app.tar.gz dist/
+        run: npm run build
         env:
           PUBLIC_URL: /app
       - name: Archive bundle
