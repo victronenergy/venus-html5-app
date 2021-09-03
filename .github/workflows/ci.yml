@@ -15,9 +15,9 @@ jobs:
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-      - name: Install the dependecies
+      - name: Install the dependencies
         run: npm ci
-      - name: Build the bundle
+      - name: Build the test bundle
         run: npm run build
         env:
           PUBLIC_URL: /
@@ -63,6 +63,11 @@ jobs:
           if [[ ${{ github.event.ref }} =~ ^refs/tags/[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
               echo ::set-output name=match::true
           fi
+      - name: Build the production bundle
+        if: steps.check_tag.outputs.match == 'true'
+        run: tar -zcvf venus-html5-app.tar.gz dist/
+        env:
+          PUBLIC_URL: /app
       - name: Archive bundle
         if: steps.check_tag.outputs.match == 'true'
         run: tar -zcvf venus-html5-app.tar.gz dist/
