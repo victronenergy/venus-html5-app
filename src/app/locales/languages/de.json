@@ -102,14 +102,20 @@
         "title": "Ihr Dashboard ist leer"
     },
     "remoteLogin": {
+        "2fa": "Zwei-Faktor-Authentifizierungs-Token",
         "email": "E-Mail",
         "forgotPassword": "Passwort vergessen?",
         "goBack": "Zurück",
         "logIn": "Anmelden",
+        "logOut": "Abmelden",
         "loginFailed": "Fehler bei der Anmeldung",
+        "mobileVerification": "Authentifizierungs-App-Token",
+        "noInstallations": "Dieses Konto hat keine Installationen. Möchten Sie sich abmelden?",
         "password": "Passwort",
         "registerMessage1": "Sie haben noch kein Konto? ",
-        "registerMessage2": "Registrieren Sie Ihr Wohnmobil."
+        "registerMessage2": "Registrieren Sie Ihr Wohnmobil.",
+        "smsVerification": "SMS-Verifizierungs-Token",
+        "wrong2fa": "Falscher Zwei-Faktor-Authentifizierungscode"
     },
     "statusWidget": {
         "Absorption charging": "Absorption",

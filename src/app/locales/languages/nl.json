@@ -102,14 +102,20 @@
         "title": "Het dashboard is leeg"
     },
     "remoteLogin": {
+        "2fa": "2 Staps verificatie token",
         "email": "Email",
         "forgotPassword": "Wachtwoord vergeten?",
         "goBack": "Terug",
         "logIn": "Inloggen",
+        "logOut": "Uitloggen",
         "loginFailed": "Inloggen mislukt",
+        "mobileVerification": "Authenticator app token",
+        "noInstallations": "Dit account heeft geen installaties, uitloggen?",
         "password": "Wachtwoord",
         "registerMessage1": "Nog geen account?",
-        "registerMessage2": "Inschrijven."
+        "registerMessage2": "Inschrijven.",
+        "smsVerification": "SMS verificatie token",
+        "wrong2fa": "Verkeerde 2 staps verificatie code"
     },
     "statusWidget": {
         "Absorption charging": "Absorptie laden",

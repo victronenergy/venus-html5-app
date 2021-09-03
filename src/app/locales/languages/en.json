@@ -110,11 +110,11 @@
         "logOut": "Log Out",
         "loginFailed": "Login Failed",
         "mobileVerification": "Authenticator app token",
-        "noInstallations": "This account has no installations, Do you wish to log out?",
+        "noInstallations": "This account has no installations.",
         "password": "Password",
         "registerMessage1": "Don't have an account yet? ",
         "registerMessage2": "Register your RV.",
-        "smsVerification": "Sms Verification token",
+        "smsVerification": "SMS Verification token",
         "wrong2fa": "Wrong two-factor verification code"
     },
     "statusWidget": {
