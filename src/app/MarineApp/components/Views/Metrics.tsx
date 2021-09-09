@@ -17,8 +17,6 @@ const HEADER_HEIGHT = 110
 const getMetricsTotalHeight = (metrics: HTMLDivElement[]) =>
   metrics.map((c) => Math.ceil(c.clientHeight)).reduce((a, b) => a + b, 0)
 
-const getMetricsHeigths = (metrics: HTMLDivElement[]) => metrics.map((c) => c.getBoundingClientRect().height)
-
 const getRequiredCols = (metrics: HTMLDivElement[]) => {
   if (metrics.length < 2) return 1
   if (window.innerWidth / window.innerHeight < 9 / 10) return 1
@@ -29,32 +27,11 @@ const getRequiredCols = (metrics: HTMLDivElement[]) => {
   return getMetricsTotalHeight(metrics) > Math.floor(window.innerHeight - HEADER_HEIGHT) ? 2 : 1
 }
 
-// returns number of widgets on the last page
-const getLastPageWidgetsNr = (metrics: HTMLDivElement[], containerHeight?: number) => {
-  if (!containerHeight) return 0
-
-  const metricsHeights = getMetricsHeigths(metrics)
-
-  let columnHeight = 0
-  let nrWidgets = 0
-
-  metricsHeights.forEach((height) => {
-    columnHeight += height
-    nrWidgets++
-    if (columnHeight > containerHeight) {
-      columnHeight = height
-      nrWidgets = 1
-    }
-  })
-
-  return nrWidgets
-}
-
 const getRequiredPages = (metrics: HTMLDivElement[], cols: number, containerHeight?: number) => {
   if (metrics.length < 2) return 1
   if (!containerHeight) return 1
 
-  const metricsHeights = getMetricsHeigths(metrics)
+  const metricsHeights = metrics.map((c) => c.getBoundingClientRect().height)
   let columns = 1
   let columnHeight = 0
 
@@ -126,22 +103,11 @@ export const Metrics = observer(
         setHeight(newHeight)
 
         const newPages = getRequiredPages(metrics, columns, newHeight)
-
         if (newPages !== pages) setPages(newPages)
-
-        if (newPages === 2 && columns === 1 && getLastPageWidgetsNr(metrics, newHeight) === 1) {
-          // force a widget to go on the last page as well
-          setHeight(
-            Math.max(
-              newHeight - metrics[metrics.length - 1].getBoundingClientRect().height,
-              ...getMetricsHeigths(metrics)
-            )
-          )
-        }
       }
     }
 
-    const style = { height, transform: `translate(-${currentPage * 100}%)` }
+    const style = { height: height, transform: `translate(-${currentPage * 100}%)` }
 
     return (
       <>
