@@ -1,11 +1,11 @@
 {
   "name": "victron-venus-metrics",
-  "version": "2.0.4",
+  "version": "2.0.3",
   "description": "Metric framework for Victron VenusOS",
   "license": "ISC",
   "author": "",
   "dependencies": {
-    "@elninotech/mfd-modules": "^2.3.8",
+    "@elninotech/mfd-modules": "^2.3.7",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -72,8 +72,7 @@
   "scripts": {
     "clean": "rm -rf build",
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "zip": "npm run build && rimraf www && mkdir www && mkdir www/app && cp -r dist/* www/app && compress-archive www venus-data.zip",
+    "build": "GENERATE_SOURCEMAP=false react-scripts build",
     "eject": "react-scripts eject",
     "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!@elninotech/mfd-modules)/\"",
     "serve": "serve -C -s -l 8000 dist",
