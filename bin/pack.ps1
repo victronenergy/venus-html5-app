@@ -1,5 +1,6 @@
-npm run build
-remove-item -re www
+$env:GENERATE_SOURCEMAP="false"
+react-scripts build
+if (test-path www) { remove-item -re www }
 new-item -it d www
 new-item -it d www/app
 copy-item -re dist/* www/app
