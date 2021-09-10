@@ -21,6 +21,7 @@ jobs:
         run: npm run build
         env:
           PUBLIC_URL: /
+          REACT_APP_ENABLE_LANG_OVERRIDE: false
       - name: Serve the application
         run: npm run serve &
       - name: Run the Venus simulation
@@ -68,6 +69,7 @@ jobs:
         run: npm run build
         env:
           PUBLIC_URL: /app
+          REACT_APP_ENABLE_LANG_OVERRIDE: false
       - name: Archive bundle
         if: steps.check_tag.outputs.match == 'true'
         run: tar -zcvf venus-html5-app.tar.gz dist/

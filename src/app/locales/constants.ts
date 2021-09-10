@@ -9,8 +9,8 @@ export const mfdLanguageOptions = {
   localStorageKey: __LOCAL_STORAGE_LANG_KEY__,
   defaultLanguage: DEFAULT_LANGUAGE,
   onLangChange: (lang: string) => {
-    // override the language with the value of the lang URL parameter, if present
+    // override the language with the value of the lang URL parameter, if present and enabled
     const languageOverride = (window.location.search.match(/[?&]lang=([a-zA-Z-_]{2,5})/) || [])[1]
-    setLocale(languageOverride || lang)
+    setLocale((process.env.REACT_APP_ENABLE_LANG_OVERRIDE === "true" && languageOverride) || lang)
   },
 }

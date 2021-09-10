@@ -41,4 +41,8 @@ setHandleMissingTranslation((key, replacements) => {
 
 setTranslations(translations)
 
-setLocale(languageOverride || localStorage.getItem(__LOCAL_STORAGE_LANG_KEY__) || DEFAULT_LANGUAGE)
+setLocale(
+  (process.env.REACT_APP_ENABLE_LANG_OVERRIDE === "true" && languageOverride) ||
+    localStorage.getItem(__LOCAL_STORAGE_LANG_KEY__) ||
+    DEFAULT_LANGUAGE
+)
