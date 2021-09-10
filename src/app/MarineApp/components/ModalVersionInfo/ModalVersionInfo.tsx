@@ -38,6 +38,13 @@ export const ModalVersionInfo = observer(
                       version={`${packageInfo.version} ${process.env.REACT_APP_WHITELABEL}`}
                     />
                   </div>
+                  <br />
+                  <button
+                    className="selector-button selector-button--active"
+                    onClick={() => window.location.replace("/app/prototype.png")}
+                  >
+                    Prototype
+                  </button>
                 </div>
               </div>
               <div className="right-info">
