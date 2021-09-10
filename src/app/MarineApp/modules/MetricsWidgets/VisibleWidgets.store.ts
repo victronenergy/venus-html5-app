@@ -25,6 +25,10 @@ export class VisibleWidgets {
   get noVisibleElements() {
     return !this.visibleElements.size
   }
+
+  clearVisibleElements() {
+    this.visibleElements.clear()
+  }
 }
 
 let store: VisibleWidgets
