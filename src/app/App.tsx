@@ -2,6 +2,7 @@ import { useAppStore, useMqtt, useVebus, useVrmStore } from "@elninotech/mfd-mod
 import { observer } from "mobx-react"
 import React, { useEffect } from "react"
 import "../css/index.scss"
+import { getLocale } from "react-i18nify"
 import Loading from "./MarineApp/components/Loading"
 
 const KVNRV = React.lazy(() => import("./KVNRV"))
@@ -17,6 +18,7 @@ const App = observer((props: AppProps) => {
   const vrmStore = useVrmStore()
   const appStore = useAppStore()
   const mqtt = useMqtt()
+  const locale = getLocale()
   useVebus()
 
   useEffect(() => {
@@ -37,11 +39,13 @@ const App = observer((props: AppProps) => {
     props.host,
     props.port,
     appStore.remote,
+    appStore.language,
     vrmStore.username,
     vrmStore.token,
     vrmStore.webhost,
     vrmStore.portalId,
     vrmStore.siteId,
+    locale,
   ])
 
   if (whitelabel === "KVNRV") {
