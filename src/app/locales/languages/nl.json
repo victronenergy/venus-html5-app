@@ -72,7 +72,7 @@
         "windowSize": "Venster :  %{width} x %{height}"
     },
     "generator": {
-        "fisherPandaAutoStartMessage": "FisherPanda AutoStart is op dit moment uitgeschakeld, zet dat eerst aan op het paneel van de aggregaat om vanaf dit scherm te kunnen schakelen.",
+        "fisherPandaAutoStartMessage": "FisherPanda AutoStart is op dit moment uitgeschakeld, zet dat eerst aan op het paneel van het aggregaat om vanaf dit scherm te kunnen schakelen.",
         "temperature": {
             "coolant": "Koelvloeistof",
             "exhaust": "Uitlaat",
