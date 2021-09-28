@@ -54,7 +54,7 @@ export const systemStateFormatter = (value) => {
     case VEBUS_SYSTEM_STATE.LOW_POWER:
       return "lowPower"
     case VEBUS_SYSTEM_STATE.FAULT_CONDITION:
-      return "veBusFault"
+      return "fault"
     case VEBUS_SYSTEM_STATE.BULK_CHARGING:
       return "bulkCharging"
     case VEBUS_SYSTEM_STATE.ABSORPTION_CHARGINNG:
