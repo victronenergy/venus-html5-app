@@ -84,10 +84,10 @@ const Charger = observer(({ chargerId }: ChargerProps) => {
         {chargerSupportsMode && (
           <div className="charger__mode-selector">
             <SelectorButton active={chargerMode === "on"} onClick={() => updateMode(CHARGER_MODE.ON)}>
-              <Translate value={"common." + chargerMode} />
+              <Translate value={"common.on"} />
             </SelectorButton>
             <SelectorButton active={chargerMode === "off"} onClick={() => updateMode(CHARGER_MODE.OFF)}>
-              <Translate value={"common." + chargerMode} />
+              <Translate value={"common.off"} />
             </SelectorButton>
             {chargerSupportsInputLimit && (
               <>
