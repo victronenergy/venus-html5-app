@@ -60,12 +60,16 @@
         "voltage": "Gerilim"
     },
     "error": {
+        "errorWithMessage": "Error: %{message}",
         "genericMessage": "genericMessage",
         "mqttUnavailable1": "mqttUnavailable1",
         "mqttUnavailable2": "mqttUnavailable2",
         "mqttUnavailable3": "mqttUnavailable3",
         "mqttUnavailable4": "mqttUnavailable4",
-        "mqttUnavailable5": "mqttUnavailable5"
+        "mqttUnavailable5": "mqttUnavailable5",
+        "queryParams": "Query params: %{queryParams}",
+        "userAgent": "User agent: %{userAgent}",
+        "windowSize": "Window: %{width} x %{height}"
     },
     "generator": {
         "fisherPandaAutoStartMessage": "fisherPandaAutoStartMessage",
@@ -83,7 +87,8 @@
         "notLoggedIn": "notLoggedIn",
         "remote": "Uzaktan kumanda",
         "remoteConsole": "remoteConsole",
-        "remoteMessage": "remoteMessage"
+        "remoteMessage": "remoteMessage",
+        "versionInfo": "Version Information\n"
     },
     "installations": {
         "title": "Başlık"
@@ -93,17 +98,24 @@
         "unlockMessage": "unlockMessage"
     },
     "noWidgets": {
+        "subtitle": "Cihazlarınızın doğru şekilde bağlandığından emin olun",
         "title": "Başlık"
     },
     "remoteLogin": {
+        "2fa": "İki-faktörlü kimlik doğrulama jetonu\n",
         "email": "E",
         "forgotPassword": "forgotPassword",
         "goBack": "Goback",
         "logIn": "Oturum Aç",
+        "logOut": "Çıkış Yap",
         "loginFailed": "loginFailed",
+        "mobileVerification": "Authenticator uygulama jetonu",
+        "noInstallations": "Bu hesapta kurulum yok.",
         "password": "Parola",
         "registerMessage1": "registerMessage1",
-        "registerMessage2": "registerMessage2"
+        "registerMessage2": "registerMessage2",
+        "smsVerification": "SMS doğrulama jetonu",
+        "wrong2fa": "Yanlış iki-faktörlü doğrulama kodu\n"
     },
     "statusWidget": {
         "Absorption charging": "Emilim şarjı",
@@ -145,18 +157,22 @@
     "versionInfo": {
         "buildDate": "Kuruluş zamanı",
         "identifier": "Tanımla",
-        "version": "Versiyon"
+        "venusOs": "Venus OS",
+        "version": "Versiyon",
+        "vrmPortID": "VRM Site ID"
     },
     "widgets": {
         "acLoads": "acLoads",
         "batteries": "Aküler",
         "battery": "Akü",
+        "batteryWithName": "Battery: %{name}",
         "chargerWithName": "chargerWithName",
         "dcLoads": "dcLoads",
         "generator": "Jeneratör",
         "generatorInput": "jeneratörInput",
         "gridInput": "gridInput",
         "invalidConfig": "invalidConfig",
+        "inverterCharger": "Inverter / Charger: %{productNameShort}",
         "inverterWithName": "inverterWithName",
         "pvCharger": "pvŞarj",
         "shorePower": "shorePower",
