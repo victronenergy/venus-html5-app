@@ -15,12 +15,13 @@ jobs:
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-      - name: Install the dependecies
+      - name: Install the dependencies
         run: npm ci
-      - name: Build the bundle
+      - name: Build the test bundle
         run: npm run build
         env:
           PUBLIC_URL: /
+          REACT_APP_ENABLE_LANG_OVERRIDE: false
       - name: Serve the application
         run: npm run serve &
       - name: Run the Venus simulation
@@ -63,6 +64,12 @@ jobs:
           if [[ ${{ github.event.ref }} =~ ^refs/tags/[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
               echo ::set-output name=match::true
           fi
+      - name: Build the production bundle
+        if: steps.check_tag.outputs.match == 'true'
+        run: npm run build
+        env:
+          PUBLIC_URL: /app
+          REACT_APP_ENABLE_LANG_OVERRIDE: false
       - name: Archive bundle
         if: steps.check_tag.outputs.match == 'true'
         run: tar -zcvf venus-html5-app.tar.gz dist/

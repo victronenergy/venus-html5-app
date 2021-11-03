@@ -29,10 +29,10 @@ const chargerModeFormatter = (value: number) => {
   }
 }
 
-const ChargerSubtitle = (current: [number?, number?, number?], state: number) => (
+const ChargerSubtitle = (current: [number?, number?, number?], state: number, nrOfOutputs: number) => (
   <MetricValues inflate>
     <div className="metrics__left">
-      {current.map((_, i) => (
+      {current.slice(0, nrOfOutputs).map((_, i) => (
         <NumericValue key={i} value={current[i]} unit="A" precision={1} />
       ))}
     </div>
@@ -49,8 +49,17 @@ type ChargerProps = {
 }
 
 const Charger = observer(({ chargerId }: ChargerProps) => {
-  let { customName, productName, current, state, mode, currentLimit, updateMode, updateCurrentLimit } =
-    useCharger(chargerId)
+  let {
+    customName,
+    nrOfOutputs = 3,
+    productName,
+    current,
+    state,
+    mode,
+    currentLimit,
+    updateMode,
+    updateCurrentLimit,
+  } = useCharger(chargerId)
   // When a topic is invalid, it returns undefined -> no value means topic is not supported
   const chargerSupportsMode = mode !== undefined
   const chargerSupportsInputLimit = currentLimit !== undefined
@@ -68,17 +77,17 @@ const Charger = observer(({ chargerId }: ChargerProps) => {
           <HeaderView
             icon={MultiplusIcon}
             title={customName || translate("widgets.chargerWithName", { productNameShort })}
-            children={ChargerSubtitle(current, state)}
+            children={ChargerSubtitle(current, state, nrOfOutputs)}
             child
           />
         </div>
         {chargerSupportsMode && (
           <div className="charger__mode-selector">
             <SelectorButton active={chargerMode === "on"} onClick={() => updateMode(CHARGER_MODE.ON)}>
-              <Translate value={"common." + chargerMode} />
+              <Translate value={"common.on"} />
             </SelectorButton>
             <SelectorButton active={chargerMode === "off"} onClick={() => updateMode(CHARGER_MODE.OFF)}>
-              <Translate value={"common." + chargerMode} />
+              <Translate value={"common.off"} />
             </SelectorButton>
             {chargerSupportsInputLimit && (
               <>

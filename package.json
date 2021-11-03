@@ -1,11 +1,11 @@
 {
   "name": "victron-venus-metrics",
-  "version": "2.0.0",
+  "version": "2.0.10",
   "description": "Metric framework for Victron VenusOS",
   "license": "ISC",
   "author": "",
   "dependencies": {
-    "@elninotech/mfd-modules": "^2.3.7",
+    "@elninotech/mfd-modules": "^2.3.11",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -22,7 +22,7 @@
     "mobx-react": "^7.2.0",
     "mobx-utils": "^6.0.4",
     "mqtt": "^4.2.8",
-    "node-sass": "^5.0.0",
+    "node-sass": "^6.0.0",
     "preval.macro": "^5.0.0",
     "react": "^17.0.2",
     "react-app-polyfill": "^2.0.0",

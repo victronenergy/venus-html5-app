@@ -43,6 +43,7 @@
         "noShorePower": "No Shore Power",
         "notAvailable": "Not Available",
         "nrOfPhases": "%{phases} phases",
+        "null": " ",
         "off": "Off",
         "on": "On",
         "passthru": "Passthru",

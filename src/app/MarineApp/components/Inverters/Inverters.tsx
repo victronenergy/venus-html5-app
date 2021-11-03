@@ -9,8 +9,9 @@ import { WIDGET_TYPES } from "app/MarineApp/utils/constants"
 
 const Inverters = observer(() => {
   const { inverters } = useInverters()
-  const { instanceId } = useVebus()
-  const visible = !!(inverters.length || instanceId)
+  const { vebusInverters } = useVebus()
+
+  const visible = !!(inverters.length + vebusInverters.length)
 
   useVisibilityNotifier({ widgetName: WIDGET_TYPES.INVERTERS, visible })
 
@@ -18,7 +19,8 @@ const Inverters = observer(() => {
     return (
       <>
         {inverters && inverters.map((id) => <Inverter key={id} instanceId={id} isVebusInverter={false} />)}
-        {instanceId && <Inverter key={instanceId} instanceId={instanceId} isVebusInverter={true} />}
+        {!!vebusInverters.length &&
+          vebusInverters.map((id) => <Inverter key={id} instanceId={id} isVebusInverter={true} />)}
       </>
     )
   } else {

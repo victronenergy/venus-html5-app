@@ -39,44 +39,38 @@ const InverterCharger = observer(({ connected, onChangeInputLimitClicked }: Inve
 
   const currentMode = parseInt(mode)
 
-  useVisibilityNotifier({ widgetName: WIDGET_TYPES.INVERTER_CHARGER, visible: !!inputId })
+  useVisibilityNotifier({ widgetName: WIDGET_TYPES.INVERTER_CHARGER, visible: true })
 
   return (
-    <>
-      {inputId && (
-        <ColumnContainer>
-          <div className="metric charger inverter-charger">
-            <div className={classnames("inverter-charger__header", { "inverter-charger__header--column": !inputId })}>
-              <HeaderView
-                icon={MultiplusIcon}
-                title={customName || translate("widgets.inverterCharger", { productNameShort })}
-                subTitle={
-                  (!adjustable ? getModeTitle(currentMode) + " - " : "") +
-                  translate("common." + systemStateFormatter(state))
-                }
-                child
-              />
-              {!!inputId && (
-                <InputLimit onChangeInputLimitClicked={onChangeInputLimitClicked} shorePowerInput={inputId} />
-              )}
-            </div>
-            {adjustable && (
-              <div className="charger__mode-selector">
-                <SelectorButton active={currentMode === 3} onClick={() => updateMode(SYSTEM_MODE.ON)}>
-                  {getModeTitle(3)}
-                </SelectorButton>
-                <SelectorButton active={currentMode === 4} onClick={() => updateMode(SYSTEM_MODE.OFF)}>
-                  {getModeTitle(4)}
-                </SelectorButton>
-                <SelectorButton active={currentMode === 1} onClick={() => updateMode(SYSTEM_MODE.CHARGER_ONLY)}>
-                  {getModeTitle(1)}
-                </SelectorButton>
-              </div>
-            )}
+    <ColumnContainer>
+      <div className="metric charger inverter-charger">
+        <div className={classnames("inverter-charger__header", { "inverter-charger__header--column": !inputId })}>
+          <HeaderView
+            icon={MultiplusIcon}
+            title={customName || translate("widgets.inverterCharger", { productNameShort })}
+            subTitle={
+              (!adjustable ? getModeTitle(currentMode) + " - " : "") +
+              translate("common." + systemStateFormatter(state))
+            }
+            child
+          />
+          {!!inputId && <InputLimit onChangeInputLimitClicked={onChangeInputLimitClicked} shorePowerInput={inputId} />}
+        </div>
+        {adjustable && (
+          <div className="charger__mode-selector">
+            <SelectorButton active={currentMode === 3} onClick={() => updateMode(SYSTEM_MODE.ON)}>
+              {getModeTitle(3)}
+            </SelectorButton>
+            <SelectorButton active={currentMode === 4} onClick={() => updateMode(SYSTEM_MODE.OFF)}>
+              {getModeTitle(4)}
+            </SelectorButton>
+            <SelectorButton active={currentMode === 1} onClick={() => updateMode(SYSTEM_MODE.CHARGER_ONLY)}>
+              {getModeTitle(1)}
+            </SelectorButton>
           </div>
-        </ColumnContainer>
-      )}
-    </>
+        )}
+      </div>
+    </ColumnContainer>
   )
 })
 

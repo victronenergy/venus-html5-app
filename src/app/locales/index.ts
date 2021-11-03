@@ -6,20 +6,19 @@ type TranslationRecord = {
   [key: string]: Record<string, any>
 }
 
-const translations: TranslationRecord = LANGUAGES.reduce(
-  (rx, l) => ({
-    ...rx,
-    [l]: require(`./languages/${l}.json`),
-  }),
-  {}
+// Override language file names
+const fileNameOverrides: { [language: string]: string } = {
+  // add chinese mapping to correspond with possibleValues from: https://github.com/victronenergy/gui/blob/master/qml/PageSettingsDisplay.qml#L73
+  // because POEditor uses zh-CN for chinese
+  zh: "zh-CN",
+}
+
+const translations: TranslationRecord = Object.fromEntries(
+  LANGUAGES.map((language) => [language, require(`./languages/${fileNameOverrides[language] || language}.json`)])
 )
 
 // override the language with the value of the lang URL parameter, if present
 const languageOverride = (window.location.search.match(/[?&]lang=([a-zA-Z-_]{2,5})/) || [])[1]
-
-// add chinese mapping to correspond with possibleValues from: https://github.com/victronenergy/gui/blob/master/qml/PageSettingsDisplay.qml#L73
-// because POEditor uses zh-CN for chinese
-translations["zh"] = translations["zh-CN"]
 
 // set the partially translated languages to fall back to English
 if (!languageOverride) {
@@ -42,4 +41,8 @@ setHandleMissingTranslation((key, replacements) => {
 
 setTranslations(translations)
 
-setLocale(languageOverride || localStorage.getItem(__LOCAL_STORAGE_LANG_KEY__) || DEFAULT_LANGUAGE)
+setLocale(
+  (process.env.REACT_APP_ENABLE_LANG_OVERRIDE === "true" && languageOverride) ||
+    localStorage.getItem(__LOCAL_STORAGE_LANG_KEY__) ||
+    DEFAULT_LANGUAGE
+)
