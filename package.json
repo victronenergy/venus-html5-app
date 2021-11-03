@@ -22,7 +22,7 @@
     "mobx-react": "^7.2.0",
     "mobx-utils": "^6.0.4",
     "mqtt": "^4.2.8",
-    "node-sass": "^5.0.0",
+    "node-sass": "^6.0.0",
     "preval.macro": "^5.0.0",
     "react": "^17.0.2",
     "react-app-polyfill": "^2.0.0",
