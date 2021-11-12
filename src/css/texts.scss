@@ -3,14 +3,19 @@
 
 @font-face {
   font-family: Roboto;
-  src: url("./Roboto/Roboto-Light.ttf") font-weight-light, 
-    url("./Roboto/Roboto-Regular.ttf") font-weight-normal, 
-    url("./Roboto/Roboto-Medium.ttf") font-weight-medium, 
-    url("./Roboto/Roboto-Bold.ttf") font-weight-bold;
+  src: url("./Roboto/Roboto-Light.ttf"),
+    url("./Roboto/Roboto-Regular.ttf"),
+    url("./Roboto/Roboto-Medium.ttf"),
+    url("./Roboto/Roboto-Bold.ttf");
+}
+
+@font-face {
+  font-family: 'Noto Sans SC';
+  src: url("./NotoSansSC/NotoSansSC-Regular.otf");
 }
 
 * {
-  font-family: Roboto, sans-serif;
+  font-family: Roboto, 'Noto Sans SC', sans-serif;
 }
 
 /*
