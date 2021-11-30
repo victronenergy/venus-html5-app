@@ -142,7 +142,7 @@
     "cy:version": "cypress version",
     "cy:verify": "cypress verify",
     "cy:open": "cypress open",
-    "cy:run": "cypress run",
+    "cy:run": "NODE_ENV=test cypress run",
     "prepare": "husky install",
     "poeditor:push": "node src/app/locales/poeditor/push.js",
     "poeditor:pull": "node src/app/locales/poeditor/pull.js"
