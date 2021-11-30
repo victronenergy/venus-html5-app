@@ -134,7 +134,7 @@
     "test:dev": "npm test -- --watchAll=false && npm run cy:run",
     "test:unit": "npm test",
     "test:e2e": "npm run cy:run",
-    "test:ci": "npm test -- --watchAll=false && cnpm run cy:run",
+    "test:ci": "npm test -- --watchAll=false && npm run cy:run",
     "generate-e2e-report": "npm run copy-e2e-assets && npm run merge-e2e-results && npm run create-e2e-html-report",
     "copy-e2e-assets": "rm -rf cypress/report && mkdir cypress/report && cp -r cypress/screenshots cypress/videos cypress/report/",
     "merge-e2e-results": "mochawesome-merge cypress/results/*.json > cypress/results/results.json",
