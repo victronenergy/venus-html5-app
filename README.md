@@ -190,7 +190,7 @@ To include the HTML5 app in the next Venus OS version:
 2. Create & push a tag for the version (do not use `v` in the version name, just the number)
 3. Update the [todo](https://github.com/victronenergy/venus-private/wiki/todo) page for the build
 
-You should add a note under "waiting for recipe", containing the tag name and the changes included:
+You should add a note under `Done - waiting for recipe / venus maintainer`, containing the tag name and the changes included:
 
 ```md
 html5-app - <tag name>
@@ -200,7 +200,8 @@ html5-app - <tag name>
 For example:
 
 ```md
-html5-app - 0.2 \* Reworked the UI
+html5-app - 0.2 \
+  * Reworked the UI
 ```
 
 If you need any changes to the how the app is included inside Venus, please specify in the TODO file as well what changes need to be made to the recipe.
