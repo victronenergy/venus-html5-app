@@ -1,0 +1,29 @@
+@import "../../css/variables.scss";
+
+.error-modal {
+  .error {
+    > div {
+      width: 100%;
+    }
+  }
+}
+
+.modal-marine-error .contents .card__header {
+  border-bottom: 0;
+}
+
+.modal-marine-error.card {
+  width: 80%;
+  padding-left: 5rem;
+  padding-right: 5rem;
+  @media #{$minimum} {
+    width: 95%;
+    padding: 0;
+  }
+}
+
+.modal-marine-error {
+  .error {
+    margin-top: 0;
+  }
+}

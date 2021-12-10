@@ -4,11 +4,32 @@ import ReactDOM from "react-dom"
 import App from "./app/App"
 import { getParameterByName } from "./app/utils/util"
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration"
+import * as Sentry from "@sentry/react"
+import { Integrations } from "@sentry/tracing"
+
 // load languages
 import "./app/locales"
+import { initializeErrorHandlerStore } from "app/components/ErrorHandlerModule/ErrorHandler.store"
 
 const host = getParameterByName("host") || window.location.hostname || "localhost"
 const port = parseInt(getParameterByName("port") ?? "9001")
+
+const errorHandlerStore = initializeErrorHandlerStore()
+
+Sentry.init({
+  dsn: "https://d6ece5d73cd3468cb6ec32eb7024a6bb@o1078662.ingest.sentry.io/6082731",
+  integrations: [new Integrations.BrowserTracing()],
+  sampleRate: 1,
+  debug: process.env.NODE_ENV === "development",
+  beforeSend(event, hint) {
+    const sendError = hint && hint.captureContext === "captured"
+    if (!sendError) {
+      errorHandlerStore.setError(event)
+      return null
+    }
+    return event
+  },
+})
 
 ReactDOM.render(
   <React.StrictMode>
