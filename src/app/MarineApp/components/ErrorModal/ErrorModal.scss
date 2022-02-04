@@ -14,11 +14,16 @@
 
 .modal-marine-error.card {
   width: 80%;
-  padding-left: 5rem;
-  padding-right: 5rem;
   @media #{$minimum} {
     width: 95%;
-    padding: 0;
+  }
+  .card__body {
+    padding-left: 3rem;
+    padding-right: 3rem;
+    @media #{$minimum} {
+      padding-left: 0rem;
+      padding-right: 0rem;
+    }
   }
 }
 
