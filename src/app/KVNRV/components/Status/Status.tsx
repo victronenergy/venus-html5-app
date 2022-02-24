@@ -1,7 +1,7 @@
 import React from "react"
 
 import { Card } from "../../../components/Card"
-import IconWarning from "../../images/IconWarning.svg"
+import IconWarning from "../../../images/IconWarning.svg"
 import "./Status.scss"
 import { STATUS_LEVELS } from "../../utils/constants"
 import { useSystemState } from "@elninotech/mfd-modules"
