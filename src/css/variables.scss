@@ -1,3 +1,5 @@
+@use "sass:math";
+
 $regular: "all and (min-width: 501px) and (max-width: 1000px)";
 $minimum: "all and (max-width: 500px)";
 
@@ -59,7 +61,7 @@ $card-width-small: 11rem;
 $card-width-big: ($card-width-small * 2) + ($card-margin * 2);
 
 // donut indicator variables
-$donut-size-small: $card-width-small / 1.7;
+$donut-size-small: math.div($card-width-small, 1.7);
 $donut-width-big: $donut-size-small;
-$donut-height-big: $donut-width-big - $card-width-small / 6;
+$donut-height-big: $donut-width-big - math.div($card-width-small, 6);
 $donut-offset: 0.24rem;

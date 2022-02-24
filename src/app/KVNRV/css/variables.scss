@@ -1,3 +1,5 @@
+@use "sass:math";
+
 @import "../../../css/variables.scss";
 
 // override base variables
@@ -19,9 +21,9 @@ $card-width-small: 11rem;
 $card-width-big: ($card-width-small * 2) + ($card-margin * 2);
 $card-width-extra-big: ($card-width-small * 3.5) + ($card-margin * 2);
 
-$donut-size-small: $card-width-small / 1.4;
+$donut-size-small: math.div($card-width-small, 1.4);
 $donut-width-big: $donut-size-small;
-$donut-height-big: $donut-width-big - $card-width-small / 6;
+$donut-height-big: $donut-width-big - math.div($card-width-small, 6);
 $donut-offset: 0.3rem;
 
 
