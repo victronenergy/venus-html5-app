@@ -1,6 +1,7 @@
 import { setTranslations, setLocale, setHandleMissingTranslation, translate } from "react-i18nify"
 import { __LOCAL_STORAGE_LANG_KEY__, LANGUAGES, DEFAULT_LANGUAGE } from "./constants"
 import { get } from "lodash-es"
+import { Storage } from "@elninotech/mfd-modules"
 
 type TranslationRecord = {
   [key: string]: Record<string, any>
@@ -41,8 +42,12 @@ setHandleMissingTranslation((key, replacements) => {
 
 setTranslations(translations)
 
-setLocale(
-  (process.env.REACT_APP_ENABLE_LANG_OVERRIDE === "true" && languageOverride) ||
-    localStorage.getItem(__LOCAL_STORAGE_LANG_KEY__) ||
-    DEFAULT_LANGUAGE
-)
+const setupLocale = async () => {
+  setLocale(
+    (process.env.REACT_APP_ENABLE_LANG_OVERRIDE === "true" && languageOverride) ||
+      (await Storage.getItem(__LOCAL_STORAGE_LANG_KEY__)) ||
+      DEFAULT_LANGUAGE
+  )
+}
+
+setupLocale().then()
