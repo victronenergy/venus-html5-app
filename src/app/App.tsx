@@ -5,6 +5,7 @@ import "../css/index.scss"
 import { getLocale } from "react-i18nify"
 import Loading from "./MarineApp/components/Loading"
 import { useVisibleWidgetsStore } from "./MarineApp/modules"
+import { ErrorModal } from "./MarineApp/components/ErrorModal"
 
 const KVNRV = React.lazy(() => import("./KVNRV"))
 const MarineApp = React.lazy(() => import("./MarineApp"))
@@ -65,6 +66,7 @@ const App = observer((props: AppProps) => {
     return (
       <React.Suspense fallback={<Loading />}>
         <MarineApp {...props} />
+        <ErrorModal />
       </React.Suspense>
     )
   }

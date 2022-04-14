@@ -29,56 +29,56 @@
       onclick="window.location.href = 'browser-info.html' + window.location.search" />
   </div>
   <div id="debugLog"
-    style="color: white; background-color: rgba(18, 26, 40, 1); max-height: 200px; overflow: auto; position: fixed; bottom: 0">
-  </div>
-  <script>
-    function getParameterByName(name, url) {
-      if (!url) url = window.location.href
-      name = name.replace(/[\[\]]/g, "\\$&")
-      var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-        results = regex.exec(url)
-      if (!results) return null
-      if (!results[2]) return ""
-      return decodeURIComponent(results[2].replace(/\+/g, " "))
-    }
+  style="color: white; background-color: rgba(18, 26, 40, 1); max-height: 200px; overflow: auto; position: fixed; bottom: 0">
+</div>
+<script>
+  function getParameterByName(name, url) {
+    if (!url) url = window.location.href
+    name = name.replace(/[\[\]]/g, "\\$&")
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+      results = regex.exec(url)
+    if (!results) return null
+    if (!results[2]) return ""
+    return decodeURIComponent(results[2].replace(/\+/g, " "))
+  }
 
 
-    if (window.location.protocol === "http:") {
-      var host = getParameterByName("host") || window.location.hostname || "localhost"
-      var socket = new WebSocket("ws://" + host + ":7890")
-      window.onerror = function (msg, url, lineNo, columnNo, err) {
-        var data = {
-          time: new Date(),
-          error: msg
-        }
-
-        if (err) {
-          data.stack = err.stack
-        }
-
-        socket.send(JSON.stringify(data))
-        return true
+  if (window.location.protocol === "http:") {
+    var host = getParameterByName("host") || window.location.hostname || "localhost"
+    var socket = new WebSocket("ws://" + host + ":7890")
+    window.onerror = function (msg, url, lineNo, columnNo, err) {
+      var data = {
+        time: new Date(),
+        error: msg
       }
-    }
 
-    function debugLogFn(msg) {
-      document.getElementById("debugLog").innerHTML += msg + "<br/>"
-      return false
-    }
-
-    function debug(name, url) {
-      console.log = debugLogFn
-      console.error = debugLogFn
-      document.getElementById("debugLog").style.display = "block"
-    }
-
-    window.onload = function () {
-      if (getParameterByName("debug")) {
-        debug()
-        document.getElementById("debugReload").style.display = "block"
+      if (err) {
+        data.stack = err.stack
       }
+
+      socket.send(JSON.stringify(data))
+      return true
     }
-  </script>
+  }
+
+  function debugLogFn(msg) {
+    document.getElementById("debugLog").innerHTML += msg + "<br/>"
+    return false
+  }
+
+  function debug(name, url) {
+    console.log = debugLogFn
+    console.error = debugLogFn
+    document.getElementById("debugLog").style.display = "block"
+  }
+
+  window.onload = function () {
+    if (getParameterByName("debug")) {
+      debug()
+      document.getElementById("debugReload").style.display = "block"
+    }
+  }
+</script>
 </body>
 
 </html>

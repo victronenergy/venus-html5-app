@@ -11,6 +11,7 @@ import Generators from "../Generators"
 import { useVebus } from "@elninotech/mfd-modules"
 import { observer } from "mobx-react"
 import { NoWidgets } from "../NoWidgets"
+import { useVisibleWidgetsStore } from "app/MarineApp/modules"
 
 const HEADER_HEIGHT = 110
 
@@ -82,6 +83,7 @@ export const Metrics = observer(
     const metricsRef = useRef<HTMLDivElement>(null)
     const [height, setHeight] = useState(0)
     const { instanceId } = useVebus()
+    const visibleWidgetsStore = useVisibleWidgetsStore()
 
     useEffect(() => {
       computeResponsiveness()
@@ -103,7 +105,8 @@ export const Metrics = observer(
         setHeight(newHeight)
 
         const newPages = getRequiredPages(metrics, columns, newHeight)
-        if (newPages !== pages) setPages(newPages)
+        // set pages only if widgets are visible
+        if (newPages !== pages && !visibleWidgetsStore.noVisibleElements) setPages(newPages)
       }
     }
 

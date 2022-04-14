@@ -1,18 +1,19 @@
 import classnames from "classnames"
-import React, { useState } from "react"
+import { useState } from "react"
 import Fade, { viewChangeDelay } from "../components/Fade"
 import Header, { HeaderWithoutMQTTData } from "./components/Header/Header"
 import { InverterChargerInputLimitSelector } from "./components/InverterCharger"
 
 import { Connecting, Error, Metrics, MqttUnavailable, RemoteConsole } from "./components/Views"
 
-import { useLanguage, useMqtt } from "@elninotech/mfd-modules"
+import { useLanguage, useMqtt, STATUS } from "@elninotech/mfd-modules"
 import { VIEWS } from "../utils/constants"
 import { AppProps } from "../App"
 
 import { LockButton } from "./components/LockButton"
 import { mfdLanguageOptions } from "app/locales/constants"
 import { observer } from "mobx-react"
+import { isError } from "app/utils/util"
 
 type MainProps = {
   isConnected?: boolean
@@ -47,7 +48,7 @@ export const MarineApp = observer((props: AppProps) => {
   const mqtt = useMqtt()
   const isConnected = mqtt.isConnected
   const portalId = mqtt.portalId
-  const error = mqtt.error
+  const { error, status } = mqtt
 
   const setPage = (currentPage: number) => {
     setCurrentPage(currentPage)
@@ -78,10 +79,10 @@ export const MarineApp = observer((props: AppProps) => {
     } else setView(VIEWS.METRICS)
   }
 
-  if (currentView === VIEWS.ERROR) {
+  if (error && isError(error) && status !== STATUS.CONNECTING) {
     return (
       <Fade key={VIEWS.ERROR} unmount={viewUnmounting} fullWidth>
-        <Error />
+        <Error error={error} />
       </Fade>
     )
   }

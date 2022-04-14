@@ -1,5 +1,5 @@
 import { FunctionComponent, ReactNode } from "react"
-import IconWarning from "../../KVNRV/images/IconWarning.svg"
+import IconWarning from "../../images/IconWarning.svg"
 
 import "./Card.scss"
 import CloseIcon from "../../images/IconClose.svg"
