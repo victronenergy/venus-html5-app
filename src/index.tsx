@@ -17,7 +17,7 @@ const port = parseInt(getParameterByName("port") ?? "9001")
 const errorHandlerStore = initializeErrorHandlerStore()
 
 Sentry.init({
-  dsn: "https://d6ece5d73cd3468cb6ec32eb7024a6bb@o1078662.ingest.sentry.io/6082731",
+  dsn: "https://1582bd830f4349f1889999f8b3466a2e@o81300.ingest.sentry.io/6331073",
   integrations: [new Integrations.BrowserTracing()],
   sampleRate: 1,
   debug: process.env.NODE_ENV === "development",
