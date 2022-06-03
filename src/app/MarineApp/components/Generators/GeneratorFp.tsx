@@ -86,7 +86,7 @@ const GeneratorFp = observer(() => {
           <div className="generator__mode-selector">
             <SelectorButton
               disabled={isAutoStartDisabled}
-              active={statusCode === 8 && !autoStart}
+              active={statusCode >= 1 && statusCode <= 8 && !autoStart}
               onClick={() => {
                 updateAutoMode(GENERATOR_START_STOP.AUTO_OFF)
                 updateManualMode(GENERATOR_START_STOP.START)
@@ -95,7 +95,7 @@ const GeneratorFp = observer(() => {
               <Translate value="common.on" />
             </SelectorButton>
             <SelectorButton
-              active={statusCode < 8 && !autoStart}
+              active={(statusCode < 1 || statusCode > 8) && !autoStart}
               onClick={() => {
                 updateAutoMode(GENERATOR_START_STOP.AUTO_OFF)
                 updateManualMode(GENERATOR_START_STOP.STOP)
