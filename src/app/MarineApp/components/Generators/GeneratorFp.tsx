@@ -57,16 +57,26 @@ function getGensetState(statusCode: number) {
 }
 
 const GeneratorFp = observer(() => {
-  const { productId, productName, phases, statusCode, gensetAutoStart, autoStart, updateAutoMode, updateManualMode } =
-    useGeneratorFp()
+  const {
+    productId,
+    productName,
+    phases,
+    statusCode,
+    gensetAutoStart,
+    autoStart,
+    dcGenerator,
+    updateAutoMode,
+    updateManualMode,
+  } = useGeneratorFp()
 
   const icon = getIcon(productId)
   const title = productName || "Genset"
   const subTitle = getGensetState(statusCode)
   const translatedSubTitle = translate(`common.${subTitle}`)
   const isAutoStartDisabled = gensetAutoStart === FISCHER_PANDA_GENSET_AUTOSTART.DISABLED
+  const isDcGenerator = dcGenerator === 1
 
-  useVisibilityNotifier({ widgetName: WIDGET_TYPES.GENERATOR_FP, visible: !!phases })
+  useVisibilityNotifier({ widgetName: WIDGET_TYPES.GENERATOR_FP, visible: !!phases || isDcGenerator })
 
   if (phases) {
     return (
@@ -74,12 +84,12 @@ const GeneratorFp = observer(() => {
         <div className="metric generator">
           {phases > 1 ? (
             <ListView icon={icon} title={title} subTitle={translatedSubTitle} child={true}>
-              <GensetValues phases={phases} />
+              <GensetValues phases={phases} dcGenerator={isDcGenerator} />
             </ListView>
           ) : (
             <HeaderView icon={icon} title={title} subTitle={translatedSubTitle} child>
               <MetricValues>
-                <GensetValues phases={phases} />
+                <GensetValues phases={phases} dcGenerator={isDcGenerator} />
               </MetricValues>
             </HeaderView>
           )}

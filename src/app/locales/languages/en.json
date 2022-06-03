@@ -86,7 +86,8 @@
         "temperature": {
             "coolant": "Coolant",
             "exhaust": "Exhaust",
-            "winding": "Winding"
+            "winding": "Winding",
+            "heatsink": "Heatsink"
         }
     },
     "header": {

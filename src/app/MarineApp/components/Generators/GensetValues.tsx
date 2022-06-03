@@ -9,10 +9,12 @@ import { observer } from "mobx-react"
 
 type GensetValuesProps = {
   phases: number
+  dcGenerator: boolean
 }
 
-export const GensetValues = observer(({ phases }: GensetValuesProps) => {
-  const { voltage, current, power, frequency, coolant, winding, exhaust } = useGensetValues()
+export const GensetValues = observer(({ phases, dcGenerator }: GensetValuesProps) => {
+  const { voltage, current, power, frequency, dcVoltage, dcCurrent, dcPower, coolant, winding, exhaust, heatsink } =
+    useGensetValues()
   const temperatures = (
     <ListRow key="temperatures">
       <span className="value value__temperature">
@@ -27,9 +29,19 @@ export const GensetValues = observer(({ phases }: GensetValuesProps) => {
         <Translate value="generator.temperature.exhaust" />
       </span>
       <NumericValue value={exhaust} unit="°C" />
+      {dcGenerator ? (
+        <>
+          <span className="value value__temperature">
+            <Translate value="generator.temperature.heatsink" />
+          </span>
+          <NumericValue value={heatsink} unit="°C" />
+        </>
+      ) : (
+        <></>
+      )}
     </ListRow>
   )
-  if (voltage) {
+  if (voltage && !dcGenerator) {
     return (
       <div>
         {phases > 1 ? (
@@ -54,6 +66,15 @@ export const GensetValues = observer(({ phases }: GensetValuesProps) => {
             <div className="metric__values__temperatures">{temperatures}</div>
           </>
         )}
+      </div>
+    )
+  } else if (dcGenerator) {
+    return (
+      <div>
+        <NumericValue value={dcVoltage} unit={"V"} />
+        <NumericValue value={dcCurrent} unit="A" precision={1} />
+        <NumericValue value={dcPower} unit="W" />
+        <div className="metric__values__temperatures">{temperatures}</div>
       </div>
     )
   } else {
