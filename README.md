@@ -63,7 +63,7 @@ This will start the webpack dev server, which will recompile the app on code cha
 
 You can change the `host` and `port` (although the default 9001 is usually correct) query parameters to point to your Venus device:
 
-`http://localhost:8000?host=localhost&host=<VENUS_DEVICE_IP>&port=9001`
+`http://localhost:8000?host=<VENUS_DEVICE_IP>&port=9001`
 
 This way you can run the local app against venus device data if the venus device is on the same network as your computer.
 
