@@ -132,7 +132,7 @@ press the `reload page` on the top left corner of the page.
 #### 2.7.2 Pushing the local translation files to POEditor
 
 ```
-yarn poeditor:push
+npm run poeditor:push
 ```
 
 Running the command will trigger the following actions:
@@ -143,7 +143,7 @@ Running the command will trigger the following actions:
 1. Mark translations as fuzzy if there are changes in the translation of the main language
 
 ```
-yarn poeditor:push -f
+npm run poeditor:push -f
 ```
 
 Running the comamnd with the `-f` flag will delete the terms from POEditor that are not present in the local file.
@@ -152,7 +152,7 @@ Please use with caution. If wrong data is sent, existing terms and their transla
 #### 2.7.3 Pulling the POEditor translations locally
 
 ```
-yarn poeditor:pull
+npm run poeditor:pull
 ```
 
 ## 3. Testing
