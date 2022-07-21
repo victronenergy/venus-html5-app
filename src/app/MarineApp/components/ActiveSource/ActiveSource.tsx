@@ -75,7 +75,7 @@ const ActiveSource = ({ source, active, phases }: ActiveSourceProps) => {
 const ActiveSourceList = observer(() => {
   const { activeInput, phases, settings } = useActiveSource()
 
-  const visible = settings.some((item) => [AC_SOURCE_TYPE.GRID, AC_SOURCE_TYPE.SHORE].includes(item))
+  const visible = !!settings.some((item) => [AC_SOURCE_TYPE.GRID, AC_SOURCE_TYPE.SHORE].includes(item))
 
   useVisibilityNotifier({ widgetName: WIDGET_TYPES.ACTIVE_SOURCE, visible })
 
