@@ -1,4 +1,5 @@
 import React from "react"
+import { translate } from "react-i18nify"
 
 import { useActiveInValues } from "@elninotech/mfd-modules"
 
@@ -15,6 +16,7 @@ const ActiveInValues = observer(({ phases }: ActiveInValuesProps) => {
   if (current && voltage && power && phases) {
     return phases > 1 ? (
       <div>
+        {translate("common.total")} &nbsp; {<NumericValue value={power[0] + power[1] + power[2]} unit={"W"} />}
         {voltage.slice(0, phases).map((v, i) => (
           <ListRow key={i}>
             <span className="value value__phase">L {i + 1}</span>

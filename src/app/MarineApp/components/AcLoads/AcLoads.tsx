@@ -29,6 +29,10 @@ const AcLoads = observer(() => {
           subTitle={<Translate value="common.nrOfPhases" phases={phases} />}
           child={false}
         >
+          <MetricValues>
+            {translate("common.total")}: &nbsp;
+            <NumericValue value={power[0] + power[1] + power[2]} unit={"W"} />
+          </MetricValues>
           {voltage.slice(0, phases).map((v, i) => (
             <ListRow key={i}>
               <span className="value value__phase">L {i + 1}</span>

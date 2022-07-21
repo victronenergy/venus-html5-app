@@ -86,6 +86,16 @@ const BatteryRow = (battery: Battery) => {
   )
 }
 
+const BatteryRow2 = (battery: Battery) => {
+  return (
+    <MetricValues inflate>
+      <div className="metrics__left">
+        <NumericValue value={battery.temperature} unit="°C" defaultValue={null} precision={1} />
+      </div>
+    </MetricValues>
+  )
+}
+
 const SingleBattery = (battery: Battery) => (
   <HeaderView icon={BatteryIcon} title={translate("widgets.batteryWithName", { name: battery.name })}>
     <BatteryRow {...battery} />
@@ -116,6 +126,7 @@ class BatteryList extends Component<BatteryListProps> {
                 <div className="battery__data">
                   <div className="battery__title-row text--subtitle-upper">{battery.name}</div>
                   <BatteryRow {...(battery as Battery)} />
+                  <BatteryRow2 {...(battery as Battery)} />
                 </div>
               )}
             </div>
