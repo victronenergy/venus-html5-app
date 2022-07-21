@@ -1,11 +1,16 @@
+# Venus OS hosted web app
+
+#### Single Phase Screenshot
 ![screenshot](/victron-webapp-screenshot.png?raw=true)
 
-# Venus OS hosted web app
+#### Multi-Phase hybrid grid-tied with ESS Screenshot
+
+![screenshot](/victron-webapp-screenshot2.png?raw=true)
 
 The "app" is a single page application that communicates to the rest of Venus OS via MQTT over websockets.
 It uses React with ES6 for the UI layer and also includes a wrapper service for the MQTT interface.
 
-Its primary purpose is to be a simple to use and nice looking UI for a Victron system on
+Its primary purpose is to be a simple-to-use and nice looking UI for a Victron system on
 marine Multi Functional Displays, such as the ones from Garmin, Simrad and others. This
 removes the need for a Victron panel at the helm: less clutter on the dashboard.
 
@@ -107,7 +112,7 @@ for the Venus GX device.
 In the project main folder run `./bin/deploy.sh <ip>` where ip is the target device's IP. The script also accepts an additional
 `--user|-u` param that defines the user for the deployment connection. This defaults to `root`.
 
-The deploy script also bundles the app. Nore that the script assumes that it's run from the root folder of the application.
+The deploy script also bundles the app. Note that the script assumes that it's run from the root folder of the application.
 
 #### 2.6.3 Deploying using a USB stick
 
@@ -121,11 +126,11 @@ The content of the `/data` partition is persistent across firmware updates.
 
 Once deployed reload the page by navigating to the Venus host IP on the target device.
 If you have enabled dev features and have previously deployed a new version of the UI to the device you can
-press the `reload page` on the top left corner of the page.
+press the `reload page` in the top left corner of the page.
 
 ### 2.7 Translations
 
-#### 2.7.1 Syncronizing the translations files with the POEditor Project
+#### 2.7.1 Synchronizing the translations files with the POEditor Project
 
 [POEditor](https://poeditor.com/) is used as localization management platform for this project. In order to sync the translations using the scripts from the `poeditor` folder, an API key has to be placed in the `.env.local` according to the `.env.local.example` file.
 
@@ -138,7 +143,7 @@ npm run poeditor:push
 Running the command will trigger the following actions:
 
 1. Add the terms of the main language file (default: en)
-1. Add new languges to the POEditor project if they are available locally but missing in POEditor
+1. Add new languages to the POEditor project if they are available locally but missing in POEditor
 1. Add the local translations for all the languages
 1. Mark translations as fuzzy if there are changes in the translation of the main language
 
@@ -146,7 +151,7 @@ Running the command will trigger the following actions:
 npm run poeditor:push -f
 ```
 
-Running the comamnd with the `-f` flag will delete the terms from POEditor that are not present in the local file.
+Running the command with the `-f` flag will delete the terms from POEditor that are not present in the local file.
 Please use with caution. If wrong data is sent, existing terms and their translations might be irreversibly lost.
 
 #### 2.7.3 Pulling the POEditor translations locally
@@ -180,7 +185,7 @@ To run the ui tests in CI-style use `npm run test:e2e`
 
 ## 4. Making a release
 
-Whenever a new tag is created, GitHub Actions will build the app, archive the built files and upload them as `venus-html5-app.tar.gz` to the Github Release associated with the tag.
+Whenever a new tag is created, GitHub Actions will build the app, archive the built files and upload them as `venus-html5-app.tar.gz` to the GitHub Release associated with the tag.
 The app can then be downloaded from `https://github.com/victronenergy/venus-html5-app/releases/download/<TAG_NAME>/venus-html5-app.tar.gz`.
 The build script expects the tags to follow semantic versioning (e.g. `1.2.3`, `1.2`, etc.) and will not trigger for tags that don't follow this convention (e.g. `v1.0`, `test`).
 
@@ -204,7 +209,7 @@ html5-app - 0.2 \
   * Reworked the UI
 ```
 
-If you need any changes to the how the app is included inside Venus, please specify in the TODO file as well what changes need to be made to the recipe.
+If you need any changes to how the app is included inside Venus, please specify in the TODO file as well what changes need to be made to the recipe.
 All Venus recipes are found [here](https://github.com/victronenergy/meta-victronenergy/tree/master/meta-ve-software/recipes-ve).
 A sample recipe for the HTML5 app is [here](https://github.com/victronenergy/meta-victronenergy/tree/master/meta-ve-software/recipes-ve)
 
