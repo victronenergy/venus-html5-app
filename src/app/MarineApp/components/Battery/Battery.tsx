@@ -73,7 +73,7 @@ const BatteryHeader = ({ amount, paginate, setPage, currentPage, pageSize }: Bat
   )
 }
 
-const BatteryRow = (battery: Battery) => {
+const BatteryRowMainInfo = (battery: Battery) => {
   return (
     <MetricValues inflate>
       <div className="metrics__left">
@@ -86,7 +86,7 @@ const BatteryRow = (battery: Battery) => {
   )
 }
 
-const BatteryRow2 = (battery: Battery) => {
+const BatteryRowAdditionalInfo = (battery: Battery) => {
   return (
     <MetricValues inflate>
       <div className="metrics__left">
@@ -98,7 +98,7 @@ const BatteryRow2 = (battery: Battery) => {
 
 const SingleBattery = (battery: Battery) => (
   <HeaderView icon={BatteryIcon} title={translate("widgets.batteryWithName", { name: battery.name })}>
-    <BatteryRow {...battery} />
+    <BatteryRowMainInfo {...battery} />
   </HeaderView>
 )
 
@@ -125,8 +125,8 @@ class BatteryList extends Component<BatteryListProps> {
               {!battery.dummy && (
                 <div className="battery__data">
                   <div className="battery__title-row text--subtitle-upper">{battery.name}</div>
-                  <BatteryRow {...(battery as Battery)} />
-                  <BatteryRow2 {...(battery as Battery)} />
+                  <BatteryRowMainInfo {...(battery as Battery)} />
+                  <BatteryRowAdditionalInfo {...(battery as Battery)} />
                 </div>
               )}
             </div>
