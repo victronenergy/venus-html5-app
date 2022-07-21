@@ -6,6 +6,7 @@ import ColumnContainer from "../ColumnContainer"
 describe("Inverter", () => {
   it("exists as a regular inverter", () => {
     const wrapper = shallow(<Inverter isVebusInverter={false} />)
+    // Todo: should this be removed?
     console.log(wrapper)
     expect(wrapper.childAt(0).type()).toBe(ColumnContainer)
   })
