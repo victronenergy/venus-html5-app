@@ -123,8 +123,18 @@
   height: 1rem;
 }
 
-.battery-level {
+.battery-level-idle {
   display: flex;
+}
+
+.battery-level-charging {
+  display: flex;
+  color: darkseagreen;
+}
+
+.battery-level-discharging {
+  display: flex;
+  color: crimson;
 }
 
 .charge-indicator {

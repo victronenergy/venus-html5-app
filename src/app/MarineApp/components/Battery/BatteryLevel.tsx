@@ -30,7 +30,7 @@ const batteryTimeToGoFormatter = (timeToGo: number) => {
     else if (hours) return `${hours} ${translate("common.hours")}`
     else if (minutes) return `${minutes} ${translate("common.minutes")}`
     // we are not interested in seconds, since it's an
-    // estimate anyways
+    // estimate anyway
   } else {
     return null
   }
@@ -50,8 +50,10 @@ export const BatteryLevel = observer(({ battery }: BatteryLevelProps) => {
   const showTimetoGo = battery.state === BATTERY_STATE.DISCHARGING && battery.timetogo
   const showSoc = battery.soc !== undefined && battery.soc !== null
 
+  let batteryLabelClass = typeof batteryStateLabel === "string" ? "-" + batteryStateLabel.toLowerCase() : "idle"
+
   return (
-    <div className="metrics__right battery-level">
+    <div className={"metrics__right battery-level" + batteryLabelClass}>
       {batteryStateLabel && (
         <span>
           <Translate data-test-id="batteryStatus" value={"common." + batteryStateLabel} />

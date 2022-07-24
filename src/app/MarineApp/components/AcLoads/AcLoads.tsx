@@ -4,7 +4,7 @@ import HeaderView from "../HeaderView"
 import ColumnContainer from "../ColumnContainer"
 import MetricValues from "../MetricValues"
 import NumericValue from "../../../components/NumericValue"
-import { ListView, ListRow } from "../ListView"
+import { ListViewWithTotals, ListRow } from "../ListViewWithTotals"
 
 import AcIcon from "../../images/icons/ac.svg"
 import { translate, Translate } from "react-i18nify"
@@ -17,31 +17,29 @@ const AcLoads = observer(() => {
   const showAsList = phases > 1
 
   const isVisible = !!(current && voltage && power && phases)
+  let phaseTotals = power.reduce((a, b) => a + b, 0)
 
   useVisibilityNotifier({ widgetName: WIDGET_TYPES.AC_LOADS, visible: isVisible })
 
   if (isVisible) {
     return showAsList ? (
       <ColumnContainer>
-        <ListView
+        <ListViewWithTotals
           icon={AcIcon}
           title={<Translate value="widgets.acLoads" />}
+          totals={phaseTotals}
           subTitle={<Translate value="common.nrOfPhases" phases={phases} />}
           child={false}
         >
-          <MetricValues>
-            {translate("common.total")}: &nbsp;
-            <NumericValue value={power[0] + power[1] + power[2]} unit={"W"} />
-          </MetricValues>
           {voltage.slice(0, phases).map((v, i) => (
             <ListRow key={i}>
-              <span className="value value__phase">L {i + 1}</span>
+              <span className="value value__phase">L{i + 1}</span>
               <NumericValue value={v} unit="V" />
               <NumericValue value={current[i]} unit="A" precision={1} />
               <NumericValue value={power[i]} unit={"W"} />
             </ListRow>
           ))}
-        </ListView>
+        </ListViewWithTotals>
       </ColumnContainer>
     ) : (
       <ColumnContainer>

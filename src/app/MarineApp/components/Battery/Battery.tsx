@@ -44,6 +44,7 @@ const Paginator = ({ setPage, currentPage, pages }: PaginatorProps) => {
     </div>
   )
 }
+
 type BatteryHeaderProps = {
   amount: number
   paginate: boolean
@@ -53,12 +54,15 @@ type BatteryHeaderProps = {
 }
 
 const BatteryHeader = ({ amount, paginate, setPage, currentPage, pageSize }: BatteryHeaderProps) => {
+  let primaryBatteryPower = useBattery().batteries[amount - amount].power
+
   return (
     <div className="battery-header">
       <img src={BatteryIcon} className="metric__icon" alt={"Battery Icon"} />
       <div className="battery-header__text">
         <p className="text--title">
           <Translate value={"widgets." + (amount > 1 ? "batteries" : "battery")} />
+          <span className="text--title text text--power--totals">{primaryBatteryPower} W</span>
         </p>
         <p className="text--subtitle">
           {amount > 1 && (

@@ -1,6 +1,5 @@
 import React from "react"
 
-import HeaderView from "../HeaderView/HeaderView"
 import ColumnContainer from "../ColumnContainer"
 import MetricValues from "../MetricValues"
 import NumericValue from "../../../components/NumericValue"
@@ -11,6 +10,7 @@ import { observer } from "mobx-react"
 import { useVisibilityNotifier } from "app/MarineApp/modules"
 import { WIDGET_TYPES } from "app/MarineApp/utils/constants"
 import { translate } from "react-i18nify"
+import { ListViewWithTotals, ListRow } from "../ListViewWithTotals"
 
 const Solar = observer(() => {
   const { current, power } = usePvCharger()
@@ -21,12 +21,20 @@ const Solar = observer(() => {
   if (visible) {
     return (
       <ColumnContainer>
-        <HeaderView icon={SolarIcon} title={translate("widgets.solar")}>
-          <MetricValues>
-            <NumericValue value={current} unit="A" precision={1} />
-            <NumericValue value={power} unit="W" />
-          </MetricValues>
-        </HeaderView>
+        <ListViewWithTotals
+          icon={SolarIcon}
+          title={translate("widgets.solar")}
+          totals={power}
+          subTitle={false}
+          child={false}
+        >
+          <ListRow>
+            <MetricValues>
+              <NumericValue value={current} unit="A" precision={1} />
+              <NumericValue value={power} unit={"W"} />
+            </MetricValues>
+          </ListRow>
+        </ListViewWithTotals>
       </ColumnContainer>
     )
   } else {

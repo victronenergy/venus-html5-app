@@ -187,7 +187,7 @@
         "inverterWithName": "Inverter: %{productNameShort}",
         "pvCharger": "PV Charger",
         "shorePower": "Shore Power",
-        "solar": "Solar",
+        "solar": "PV Charger",
         "status": "Status",
         "unknown": "Unknown"
     }

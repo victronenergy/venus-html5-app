@@ -115,7 +115,8 @@ export const Metrics = observer(
     return (
       <>
         <div className="metrics-container" ref={metricsRef} style={style}>
-          <DcLoads />
+          {!!instanceId && <ActiveSource />}
+          <Solar />
           {!!instanceId && <AcLoads />}
           <Battery />
           {!!instanceId && (
@@ -124,9 +125,8 @@ export const Metrics = observer(
               connected={isConnected}
             />
           )}
-          {!!instanceId && <ActiveSource />}
-          <Solar />
           <Chargers />
+          <DcLoads />
           <Inverters />
           <Generators />
           <NoWidgets />

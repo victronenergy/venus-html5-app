@@ -1,11 +1,11 @@
 import React from "react"
 
-import { useActiveSource } from "@elninotech/mfd-modules"
+import { useActiveInValues, useActiveSource } from "@elninotech/mfd-modules"
 
 import ActiveInValues from "./ActiveInValues"
 import HeaderView from "../HeaderView/HeaderView"
 import ColumnContainer from "../ColumnContainer"
-import { ListView } from "../ListView"
+import { ListViewWithTotals } from "../ListViewWithTotals"
 import MetricValues from "../MetricValues"
 
 import { AC_SOURCE_TYPE } from "../../../utils/constants"
@@ -45,18 +45,28 @@ type ActiveSourceProps = {
   phases: number
   source: number
   active: boolean
+  power: number
 }
 
-const ActiveSource = ({ source, active, phases }: ActiveSourceProps) => {
+const ActiveSource = ({ source, active, phases, power }: ActiveSourceProps) => {
   const icon = activeSourceIcon[source]
   const title = activeSourceTitle[source] || "unknown"
   const subTitle = getSourceSubtitle(active, phases)
+
   return (
     <div className="metric metric__active-source">
       {phases > 1 ? (
-        <ListView icon={icon} title={<Translate value={`widgets.${title}`} />} subTitle={subTitle} child={true}>
-          {active && <ActiveInValues phases={phases} />}
-        </ListView>
+        <ColumnContainer>
+          <ListViewWithTotals
+            icon={icon}
+            title={<Translate value={`widgets.${title}`} />}
+            totals={power}
+            subTitle={subTitle}
+            child={true}
+          >
+            {active && <ActiveInValues phases={phases} />}
+          </ListViewWithTotals>
+        </ColumnContainer>
       ) : (
         <>
           <HeaderView icon={icon} title={translate(`widgets.${title}`)} subTitle={subTitle} child={true}>
@@ -74,6 +84,8 @@ const ActiveSource = ({ source, active, phases }: ActiveSourceProps) => {
 
 const ActiveSourceList = observer(() => {
   const { activeInput, phases, settings } = useActiveSource()
+  const { power } = useActiveInValues()
+  let phaseTotals = power.reduce((a, b) => a + b, 0)
 
   const visible = !!settings.some((item) => [AC_SOURCE_TYPE.GRID, AC_SOURCE_TYPE.SHORE].includes(item))
 
@@ -85,7 +97,7 @@ const ActiveSourceList = observer(() => {
         (source, i) =>
           [AC_SOURCE_TYPE.GRID, AC_SOURCE_TYPE.SHORE].includes(source) && (
             <ColumnContainer key={i}>
-              <ActiveSource source={source} phases={phases} active={activeInput === i} />
+              <ActiveSource source={source} phases={phases} active={activeInput === i} power={phaseTotals} />
             </ColumnContainer>
           )
       )}
