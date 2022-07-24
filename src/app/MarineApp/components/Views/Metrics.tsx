@@ -129,7 +129,7 @@ export const Metrics = observer(
           <DcLoads />
           <Inverters />
           <Generators />
-          <NoWidgets />
+          {!!instanceId && <NoWidgets />}
         </div>
       </>
     )
