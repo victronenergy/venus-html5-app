@@ -8,8 +8,13 @@
 }
 
 .remote-console {
-  height: 350px;
-  flex-basis: 800px;
+  width: 100%;
+  height: 400px;
+  display: block;
+  border-style: none;
+  margin: 0 auto;
+  -webkit-transform: scale(1.40);
+
 
   @media #{$hide-remote-console-breakpoint} {
     display: none;

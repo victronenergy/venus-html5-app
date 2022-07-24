@@ -60,10 +60,16 @@ const BatteryHeader = ({ amount, paginate, setPage, currentPage, pageSize }: Bat
     <div className="battery-header">
       <img src={BatteryIcon} className="metric__icon" alt={"Battery Icon"} />
       <div className="battery-header__text">
-        <p className="text--title">
-          <Translate value={"widgets." + (amount > 1 ? "batteries" : "battery")} />
-          <span className="text--title text text--power--totals">{primaryBatteryPower} W</span>
-        </p>
+        <div className="widget--header">
+          <div className="text text--title text--bold">
+            <p className="text--title--left">
+              <Translate value={"widgets." + (amount > 1 ? "batteries" : "battery")} />
+            </p>
+          </div>
+          <div className="text text--title text--bold">
+            <p className="text--power--totals">{primaryBatteryPower} W</p>
+          </div>
+        </div>
         <p className="text--subtitle">
           {amount > 1 && (
             <>

@@ -181,7 +181,7 @@
         "dcLoads": "DC Loads",
         "generator": "Generator",
         "generatorInput": "Generator Input",
-        "gridInput": "Grid Input",
+        "gridInput": "Grid",
         "invalidConfig": "Invalid Configuration",
         "inverterCharger": "Inverter / Charger: %{productNameShort}",
         "inverterWithName": "Inverter: %{productNameShort}",

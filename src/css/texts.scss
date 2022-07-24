@@ -95,12 +95,16 @@ html {
   font-size: 1rem;
   font-weight: 600;
   color: $color-lightgray;
-  // line-height: 1.2em;
+  line-height: 1.2em;
   padding-bottom: 2px;
 }
 
+.text--title--left {
+  width: fit-content;
+}
+
 .text--power--totals {
-  padding-left: 5px;
+  padding-left: 15px;
   color: ivory;
 }
 

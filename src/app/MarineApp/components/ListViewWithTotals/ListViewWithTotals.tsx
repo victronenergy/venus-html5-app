@@ -23,9 +23,14 @@ export const ListViewWithTotals: React.FunctionComponent<ListViewWithTotalsProps
     <div className="list-view__header">
       <img src={icon} className="metric__icon" alt={"List View Icon"} />
       <div className="metric__value-container">
-        <p className="text text--title text--bold">
-          {title} <span className="text text--title text--bold text--power--totals">{totals.toFixed()} W</span>
-        </p>
+        <div className="widget--header">
+          <div className="text text--title text--bold">
+            <p className="text--title--left">{title}</p>
+          </div>
+          <div className="text text--title text--bold">
+            <p className="text--power--totals">{totals.toFixed()} W</p>
+          </div>
+        </div>
         {subTitle && <span className="text text--smaller text--opaque">{subTitle}</span>}
       </div>
     </div>
