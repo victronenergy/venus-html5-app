@@ -7,6 +7,7 @@ import ColumnContainer from "../ColumnContainer"
 import BatteryIcon from "../../images/icons/battery.svg"
 import classnames from "classnames"
 import HeaderView from "../HeaderView"
+import { ListViewWithTotals, ListRow } from "../ListViewWithTotals"
 import NumericValue from "../../../components/NumericValue"
 import MetricValues from "../MetricValues"
 import SelectorButton from "../SelectorButton"
@@ -16,7 +17,7 @@ import "./Battery.scss"
 
 import LIcon from "../../images/icons/L.svg"
 import RIcon from "../../images/icons/R.svg"
-import { translate, Translate } from "react-i18nify"
+import { translate } from "react-i18nify"
 import { observer } from "mobx-react"
 import { useVisibilityNotifier } from "app/MarineApp/modules"
 import { WIDGET_TYPES } from "app/MarineApp/utils/constants"
@@ -57,29 +58,17 @@ const BatteryHeader = ({ amount, paginate, setPage, currentPage, pageSize }: Bat
   let primaryBatteryPower = useBattery().batteries[amount - amount].power
 
   return (
-    <div className="battery-header">
-      <img src={BatteryIcon} className="metric__icon" alt={"Battery Icon"} />
-      <div className="battery-header__text">
-        <div className="widget--header">
-          <div className="text text--title text--bold">
-            <p className="text--title--left">
-              <Translate value={"widgets." + (amount > 1 ? "batteries" : "battery")} />
-            </p>
-          </div>
-          <div className="text text--title text--bold">
-            <p className="text--power--totals">{primaryBatteryPower} W</p>
-          </div>
-        </div>
-        <p className="text--subtitle">
-          {amount > 1 && (
-            <>
-              {amount} <Translate value="widgets.batteries" />
-            </>
-          )}
-        </p>
-      </div>
-      {paginate && <Paginator setPage={setPage} currentPage={currentPage} pages={Math.ceil(amount / pageSize)} />}
-    </div>
+    <ListViewWithTotals
+      icon={BatteryIcon}
+      title={translate("widgets." + (amount > 1 ? "batteries" : "battery"))}
+      totals={primaryBatteryPower}
+      subTitle={amount + " " + translate("widgets." + (amount > 1 ? "batteries" : "battery"))}
+      child={true}
+    >
+      <ListRow>
+        {paginate && <Paginator setPage={setPage} currentPage={currentPage} pages={Math.ceil(amount / pageSize)} />}
+      </ListRow>
+    </ListViewWithTotals>
   )
 }
 
