@@ -6,7 +6,6 @@ import { BATTERY_STATE } from "../../../utils/constants"
 import ColumnContainer from "../ColumnContainer"
 import BatteryIcon from "../../images/icons/battery.svg"
 import classnames from "classnames"
-import HeaderView from "../HeaderView"
 import { ListViewWithTotals, ListRow } from "../ListViewWithTotals"
 import NumericValue from "../../../components/NumericValue"
 import MetricValues from "../MetricValues"
@@ -96,9 +95,17 @@ const BatteryRowAdditionalInfo = (battery: Battery) => {
 }
 
 const SingleBattery = (battery: Battery) => (
-  <HeaderView icon={BatteryIcon} title={translate("widgets.batteryWithName", { name: battery.name })}>
-    <BatteryRowMainInfo {...battery} />
-  </HeaderView>
+  <ListViewWithTotals
+    icon={BatteryIcon}
+    title={translate("widgets.battery")}
+    totals={battery.power}
+    subTitle={battery.name}
+    child={false}
+  >
+    <ListRow>
+      <BatteryRowMainInfo {...battery} />
+    </ListRow>
+  </ListViewWithTotals>
 )
 
 type BatteryListProps = {
