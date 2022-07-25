@@ -2,7 +2,7 @@ import { InverterState, useInverter, InverterInstanceId } from "@elninotech/mfd-
 
 import { INVERTER_MODE } from "../../../utils/constants"
 
-import HeaderView from "../HeaderView"
+import { ListViewWithTotals, ListRow } from "../ListViewWithTotals"
 import ColumnContainer from "../../components/ColumnContainer"
 import MetricValues from "../MetricValues"
 import NumericValue from "../../../components/NumericValue"
@@ -29,17 +29,12 @@ const stateFormatter = (state: number) => {
   }
 }
 
-const InverterSubtitle = (voltage: number, current: number, power: number, state: number) => (
+const InverterSubtitle = (voltage: number, current: number, power: number) => (
   <MetricValues inflate>
     <div className="metrics__left">
       <NumericValue value={voltage} unit="V" />
       <NumericValue value={current} unit="A" precision={1} />
       <NumericValue value={power || voltage * current} unit="W" />
-    </div>
-    <div className="metrics__right">
-      <span>
-        <Translate value={`common.${stateFormatter(state)}`} />
-      </span>
     </div>
   </MetricValues>
 )
@@ -70,13 +65,15 @@ export const Inverter = observer(
         {show && (
           <ColumnContainer>
             <div className="metric inverter">
-              <HeaderView
+              <ListViewWithTotals
                 icon={MultiplusIcon}
                 title={customName || translate("widgets.inverterWithName", { productNameShort })}
-                child
+                totals={power || voltage * current}
+                subTitle={<Translate value={`common.${stateFormatter(state)}`} />}
+                child={true}
               >
-                {InverterSubtitle(voltage, current, power, state)}
-              </HeaderView>
+                <ListRow>{InverterSubtitle(voltage, current, power)}</ListRow>
+              </ListViewWithTotals>
               <div className="inverter__mode-selector">
                 <SelectorButton active={mode === onMode} onClick={() => updateMode(onMode)}>
                   <Translate value="common.on" />
