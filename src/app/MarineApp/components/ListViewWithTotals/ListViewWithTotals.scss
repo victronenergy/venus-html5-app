@@ -12,16 +12,6 @@
   align-items: center;
 }
 
-.widget--header {
-  display: table;
-  width: fit-content;
-}
-
-.widget--header > div {
-  display: table-cell;
-  vertical-align: top;
-}
-
 .list-view__rows {
   margin-top: $metricHeaderMarginBottom;
   display: flex;
