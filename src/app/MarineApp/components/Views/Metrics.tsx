@@ -117,8 +117,8 @@ export const Metrics = observer(
         <div className="metrics-container" ref={metricsRef} style={style}>
           {!!instanceId && <ActiveSource />}
           <Battery />
-          {!!instanceId && <AcLoads />}
           <Solar />
+          {!!instanceId && <AcLoads />}
           {!!instanceId && (
             <InverterCharger
               onChangeInputLimitClicked={onChangeInverterChargerInputLimitClicked}
