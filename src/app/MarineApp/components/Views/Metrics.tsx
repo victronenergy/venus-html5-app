@@ -118,7 +118,7 @@ export const Metrics = observer(
           <DcLoads />
           {!!instanceId && <AcLoads />}
           <Battery />
-          {!!instanceId && (
+          {!!(instanceId !== null) && (
             <InverterCharger
               onChangeInputLimitClicked={onChangeInverterChargerInputLimitClicked}
               connected={isConnected}

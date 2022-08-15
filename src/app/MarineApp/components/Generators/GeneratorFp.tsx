@@ -1,6 +1,6 @@
 import React from "react"
 
-import { useGeneratorFp } from "@elninotech/mfd-modules"
+import { useGeneratorFp, GeneratorInstanceId } from "@elninotech/mfd-modules"
 
 import GensetValues from "./GensetValues"
 import HeaderView from "../HeaderView/HeaderView"
@@ -23,6 +23,10 @@ import { Translate, translate } from "react-i18nify"
 import { observer } from "mobx-react"
 import { useVisibilityNotifier } from "app/MarineApp/modules"
 import { WIDGET_TYPES } from "app/MarineApp/utils/constants"
+
+type GeneratorFpProps = {
+  instanceId: GeneratorInstanceId
+}
 
 const getIcon = (productId: number) => {
   switch (productId) {
@@ -56,9 +60,9 @@ function getGensetState(statusCode: number) {
   }
 }
 
-const GeneratorFp = observer(() => {
+const GeneratorFp = observer(({ instanceId }: GeneratorFpProps) => {
   const { productId, productName, phases, statusCode, gensetAutoStart, autoStart, updateAutoMode, updateManualMode } =
-    useGeneratorFp()
+    useGeneratorFp(instanceId)
 
   const icon = getIcon(productId)
   const title = productName || "Genset"
@@ -66,9 +70,9 @@ const GeneratorFp = observer(() => {
   const translatedSubTitle = translate(`common.${subTitle}`)
   const isAutoStartDisabled = gensetAutoStart === FISCHER_PANDA_GENSET_AUTOSTART.DISABLED
 
-  useVisibilityNotifier({ widgetName: WIDGET_TYPES.GENERATOR_FP, visible: !!phases })
+  useVisibilityNotifier({ widgetName: WIDGET_TYPES.GENERATOR_FP, visible: !!gensetAutoStart !== undefined })
 
-  if (phases) {
+  if (gensetAutoStart !== undefined) {
     return (
       <ColumnContainer key="generator-fp">
         <div className="metric generator">
@@ -86,7 +90,7 @@ const GeneratorFp = observer(() => {
           <div className="generator__mode-selector">
             <SelectorButton
               disabled={isAutoStartDisabled}
-              active={statusCode === 8 && !autoStart}
+              active={statusCode === 8 && !gensetAutoStart}
               onClick={() => {
                 updateAutoMode(GENERATOR_START_STOP.AUTO_OFF)
                 updateManualMode(GENERATOR_START_STOP.START)
@@ -95,7 +99,7 @@ const GeneratorFp = observer(() => {
               <Translate value="common.on" />
             </SelectorButton>
             <SelectorButton
-              active={statusCode < 8 && !autoStart}
+              active={statusCode < 8 && !gensetAutoStart}
               onClick={() => {
                 updateAutoMode(GENERATOR_START_STOP.AUTO_OFF)
                 updateManualMode(GENERATOR_START_STOP.STOP)
@@ -103,7 +107,7 @@ const GeneratorFp = observer(() => {
             >
               <Translate value="common.off" />
             </SelectorButton>
-            <SelectorButton active={autoStart === 1} onClick={() => updateAutoMode(GENERATOR_START_STOP.AUTO_ON)}>
+            <SelectorButton active={gensetAutoStart === 1} onClick={() => updateAutoMode(GENERATOR_START_STOP.AUTO_ON)}>
               <Translate value="common.autoStartStop" />
             </SelectorButton>
           </div>
