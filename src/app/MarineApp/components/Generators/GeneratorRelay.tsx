@@ -1,6 +1,6 @@
 import React from "react"
 
-import { useGeneratorRelay } from "@elninotech/mfd-modules"
+import { useGeneratorRelay, GeneratorInstanceId } from "@elninotech/mfd-modules"
 
 import ActiveInValues from "../ActiveSource/ActiveInValues"
 import HeaderView from "../HeaderView/HeaderView"
@@ -43,6 +43,10 @@ type GeneratorRelayProps = {
   updateManualMode: Function
   updateAutoMode: Function
   active?: boolean
+}
+
+type GeneratorRelaysProps = {
+  instanceId: GeneratorInstanceId
 }
 
 const GeneratorRelay = ({
@@ -102,8 +106,8 @@ const GeneratorRelay = ({
   )
 }
 
-export const GeneratorRelays = observer(() => {
-  const values = useGeneratorRelay()
+export const GeneratorRelays = observer(({ instanceId }: GeneratorRelaysProps) => {
+  const values = useGeneratorRelay(instanceId)
 
   useVisibilityNotifier({
     widgetName: WIDGET_TYPES.GENERATOR_RELAY,
