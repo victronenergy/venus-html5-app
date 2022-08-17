@@ -70,9 +70,9 @@ const GeneratorFp = observer(({ instanceId }: GeneratorFpProps) => {
   const translatedSubTitle = translate(`common.${subTitle}`)
   const isAutoStartDisabled = gensetAutoStart === FISCHER_PANDA_GENSET_AUTOSTART.DISABLED
 
-  useVisibilityNotifier({ widgetName: WIDGET_TYPES.GENERATOR_FP, visible: !!gensetAutoStart !== undefined })
+  useVisibilityNotifier({ widgetName: WIDGET_TYPES.GENERATOR_FP, visible: !!phases })
 
-  if (gensetAutoStart !== undefined) {
+  if (phases) {
     return (
       <ColumnContainer key="generator-fp">
         <div className="metric generator">
@@ -90,7 +90,7 @@ const GeneratorFp = observer(({ instanceId }: GeneratorFpProps) => {
           <div className="generator__mode-selector">
             <SelectorButton
               disabled={isAutoStartDisabled}
-              active={statusCode === 8 && !gensetAutoStart}
+              active={statusCode === 8 && !autoStart}
               onClick={() => {
                 updateAutoMode(GENERATOR_START_STOP.AUTO_OFF)
                 updateManualMode(GENERATOR_START_STOP.START)
@@ -99,7 +99,7 @@ const GeneratorFp = observer(({ instanceId }: GeneratorFpProps) => {
               <Translate value="common.on" />
             </SelectorButton>
             <SelectorButton
-              active={statusCode < 8 && !gensetAutoStart}
+              active={statusCode < 8 && !autoStart}
               onClick={() => {
                 updateAutoMode(GENERATOR_START_STOP.AUTO_OFF)
                 updateManualMode(GENERATOR_START_STOP.STOP)
@@ -107,7 +107,7 @@ const GeneratorFp = observer(({ instanceId }: GeneratorFpProps) => {
             >
               <Translate value="common.off" />
             </SelectorButton>
-            <SelectorButton active={gensetAutoStart === 1} onClick={() => updateAutoMode(GENERATOR_START_STOP.AUTO_ON)}>
+            <SelectorButton active={autoStart === 1} onClick={() => updateAutoMode(GENERATOR_START_STOP.AUTO_ON)}>
               <Translate value="common.autoStartStop" />
             </SelectorButton>
           </div>
