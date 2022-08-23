@@ -1,6 +1,6 @@
 import React from "react"
 
-import { useGeneratorFp, GeneratorInstanceId } from "@elninotech/mfd-modules"
+import { useGeneratorFp } from "@elninotech/mfd-modules"
 
 import GensetValues from "./GensetValues"
 import HeaderView from "../HeaderView/HeaderView"
@@ -23,10 +23,6 @@ import { Translate, translate } from "react-i18nify"
 import { observer } from "mobx-react"
 import { useVisibilityNotifier } from "app/MarineApp/modules"
 import { WIDGET_TYPES } from "app/MarineApp/utils/constants"
-
-type GeneratorFpProps = {
-  instanceId: GeneratorInstanceId
-}
 
 const getIcon = (productId: number) => {
   switch (productId) {
@@ -60,9 +56,9 @@ function getGensetState(statusCode: number) {
   }
 }
 
-const GeneratorFp = observer(({ instanceId }: GeneratorFpProps) => {
+const GeneratorFp = observer(() => {
   const { productId, productName, phases, statusCode, gensetAutoStart, autoStart, updateAutoMode, updateManualMode } =
-    useGeneratorFp(instanceId)
+    useGeneratorFp()
 
   const icon = getIcon(productId)
   const title = productName || "Genset"
