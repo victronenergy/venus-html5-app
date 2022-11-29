@@ -9,6 +9,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['var(--font-roboto)', ...defaultTheme.fontFamily.sans],
+      },
     },
   },
   plugins: [

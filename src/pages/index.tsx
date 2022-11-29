@@ -1,3 +1,4 @@
+import { observer } from "mobx-react"
 import type { NextPage } from 'next'
 import Head from 'next/head'
 
@@ -5,7 +6,7 @@ const Home: NextPage = () => {
   return (
     <div>
       <Head>
-        <title>Next.js Boilerplate | El Nino</title>
+        <title>Victron Venus MFD</title>
       </Head>
 
       <main>
@@ -17,4 +18,4 @@ const Home: NextPage = () => {
   )
 }
 
-export default Home
+export default observer(Home)

@@ -1,0 +1,9 @@
+version: "3.8"
+services:
+  nginx: # Make sure you run "npm run export" to generate the files
+    image: nginx:stable-alpine
+    ports:
+      - "3001:80"
+    volumes:
+      - ./out:/usr/share/nginx/html
+

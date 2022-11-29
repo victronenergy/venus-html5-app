@@ -4,11 +4,12 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
     "lint": "next lint",
+    "export": "next build && next export",
     "prepare": "husky install"
   },
   "dependencies": {
+    "@next/font": "^13.0.5",
     "mobx": "^6.7.0",
     "mobx-react": "^7.6.0",
     "mobx-utils": "^6.0.5",
