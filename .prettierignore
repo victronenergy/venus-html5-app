@@ -1,0 +1,6 @@
+out
+dist
+.idea
+node_modules
+.husky
+.git
