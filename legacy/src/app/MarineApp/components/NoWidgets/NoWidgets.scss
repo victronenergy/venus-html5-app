@@ -1,0 +1,27 @@
+@import "../../css/variables";
+
+.no-widgets-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  color: $color-lightgray;
+  align-items: center;
+  img {
+    background-color: rgba(35,43,57,0.7);
+    border-radius: 50%;
+    padding: 0.5rem;
+    width: 15rem;
+  }
+  h3 {
+    font-size: 1.4rem;
+    margin-top: 3rem;
+    margin-bottom: 0.2rem;
+  }
+  h4 {
+    margin-top: 0.3rem;
+    font-size: 1.1rem;
+    font-weight: 300;
+  }
+}

@@ -1,0 +1,32 @@
+@import "../../../css/variables";
+
+.remote-console__container {
+  margin-top: auto;
+  height: 85%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.remote-console {
+  height: 355px;
+  flex-basis: 800px;
+  overflow: hidden;
+
+  @media #{$hide-remote-console-breakpoint} {
+    display: none;
+  }
+}
+
+.remote-console__small_screen_info {
+  display: none;
+
+  padding: 1rem;
+  text-align: center;
+
+  @media #{$hide-remote-console-breakpoint} {
+    display: inline;
+  }
+}

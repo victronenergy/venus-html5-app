@@ -1,0 +1,31 @@
+@import "../../css/variables";
+
+
+.metric__current-input-limit {
+  display: flex;
+  max-height: 45px;
+}
+
+.metric__current-input-limit .selector-button {
+  width: 6rem;
+  margin-left: 1rem;
+}
+
+.metric__current-input-limit__limit {
+  color: $color-active;
+  text-align: center;
+  white-space: nowrap;
+  align-self: center;
+}
+
+.metric__current-input-limit__label {
+  padding: 0 0em;
+  display: flex;
+}
+
+.input-limit-header__wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  white-space: nowrap;
+}

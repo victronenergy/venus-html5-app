@@ -1,0 +1,46 @@
+@use "sass:math";
+
+@import "../../../css/variables";
+
+// override base variables
+$card-bg-color: var(--card-bg-color);
+$card-shadow-color: var(--card-shadow-color);
+$color-green: var(--color-green);
+$color-orange: var(--color-orange);
+$color-red: var(--color-red);
+
+$color-yellow-fade: #f0c587;
+$color-red-fade: #ed9895;
+
+$card-margin: 0.5rem;
+
+$card-height-small: 11rem;
+$card-height-big: $card-height-small;
+
+$card-width-small: 11rem;
+$card-width-big: ($card-width-small * 2) + ($card-margin * 2);
+$card-width-extra-big: ($card-width-small * 3.5) + ($card-margin * 2);
+
+$donut-size-small: math.div($card-width-small, 1.4);
+$donut-width-big: $donut-size-small;
+$donut-height-big: $donut-width-big - math.div($card-width-small, 6);
+$donut-offset: 0.3rem;
+
+
+// app specific variables
+$indicator-main-font-value-big: 2rem;
+$indicator-main-font-name-big: 1.5rem;
+$indicator-main-font-value-small: 1.6rem;
+$indicator-main-font-name-small: 1rem;
+
+$water-tank-width: $card-width-small;
+$water-tank-height: $card-height-small * 1.4;
+$water-tank-water-width: $water-tank-width * 0.75;
+$water-tank-color: #01BDFE;
+
+$progress-height: 1.2rem;
+$progress-radius: 3rem;
+
+$paginator-arrow-color: var(--paginator-arrow-color);
+
+$color-login-blue: #3C48CC;

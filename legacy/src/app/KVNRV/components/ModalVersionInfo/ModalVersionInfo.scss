@@ -1,0 +1,47 @@
+@import "../../css/variables";
+
+.modal-ver-container {
+  display: flex;
+  width: 100%;
+  margin-top: 1rem;
+  .left-info {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+
+    &-content {
+      .version-logo {
+        display: flex;
+        align-items: center;
+        span {
+          margin-left: 0.6rem;
+          font-size: 1.3rem;
+        }
+      }
+      .version-item {
+        margin-top: 0.5rem;
+        font-size: 0.8rem;
+        color: $color-gray;
+      }
+    }
+  }
+
+  .right-info {
+    width: 100%;
+    display: flex;
+    .first-column, .second-column {
+      display: flex;
+      flex-direction: column;
+      & p {
+        margin-top: 0;
+        margin-bottom: 0.7rem;
+      }
+    }
+    .second-column {
+      margin-left: 2rem;
+      color: $color-gray;
+    }
+  }
+}

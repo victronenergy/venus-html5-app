@@ -1,0 +1,124 @@
+@import "../../KVNRV/css/variables";
+
+.card {
+  border-radius: 5px;
+  box-shadow: 2px 2px 8px $card-shadow-color;
+  background: $card-bg-color;
+  margin: $card-margin;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &.short {
+    height: $card-height-small;
+  }
+
+  &.narrow {
+    width: $card-width-small;
+  }
+
+  &.wide {
+    width: $card-width-big;
+  }
+
+  &.extra-wide {
+    width: $card-width-extra-big;
+    @media #{$minimum} {
+      width: 95%;
+    }
+  }
+
+  &.long {
+    height: ($card-height-small * 2) + ($card-margin * 2)
+  }
+
+  .contents {
+    padding: 0.8rem;
+    height: 100%;
+
+    .card__header {
+      margin-bottom: 0.5em;
+      padding: 0 0.5em 0.5em;
+      border-bottom: 1px solid $color-gray;
+      justify-content: space-between;
+      height: 1.7em;
+
+      .card__header__text {
+        font-weight: 500;
+        align-self: center;
+      }
+
+      .card__header__info-text {
+        margin-right: 0.5rem;
+        align-self: center;
+      }
+
+      .card__header__icon {
+        background-color: $color-lightgray;
+        width: 1.1em;
+        height: 1.1em;
+        border-radius: 5px;
+        font-size: inherit;
+        display: flex;
+      }
+
+      .settings {
+        width: auto;
+        height: auto;
+        color: $text-color-main;
+        padding: 0.1rem 0.8rem;
+        font-size: 1em;
+      }
+
+      .close {
+        background: $color-lightgray;
+        width: 1.3em;
+        height: 1.3em;
+        padding: 0;
+        justify-content: center;
+
+        .card__header__icon__img {
+          width: 1em;
+          height: 1em;
+          align-self: center;
+        }
+      }
+    }
+
+    .card__body {
+      padding: 0.5rem;
+      height: 80%;
+    }
+  }
+
+  .card__footer {
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    font-size: 0.9em;
+    font-weight: 500;
+    padding: 0.2em 0.8em;
+    border-radius: 0 0 5px 5px;
+    color: $color-white;
+  }
+
+  .card-status-update__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    width: 1.3rem;
+    height: 1.3rem;
+    margin-right: 0.2rem;
+    img {
+      width: 1rem;
+      height: 1rem;
+    }
+    &-alarm {
+      background-color: $color-red-fade;
+    }
+    &-warning {
+      background-color: $color-yellow-fade;
+    }
+  }
+}

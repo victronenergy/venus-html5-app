@@ -1,0 +1,114 @@
+@import "variables";
+// Use 1920px screen as baseline and scale down when needed
+
+@font-face {
+  font-family: Roboto;
+  src: url("fonts/Roboto/Roboto-Light.ttf"),
+    url("fonts/Roboto/Roboto-Regular.ttf"),
+    url("fonts/Roboto/Roboto-Medium.ttf"),
+    url("fonts/Roboto/Roboto-Bold.ttf");
+}
+
+@font-face {
+  font-family: "Noto Sans SC";
+  src: url("fonts/NotoSansSC/NotoSansSC-Regular.otf");
+}
+
+* {
+  font-family: Roboto, "Noto Sans SC", sans-serif;
+}
+
+/*
+ * Since we have a very weird scale of resolutions to support, from very narrow and tall
+ * to very "flat" and wide. Relative font sizes to the viewport broke down in these edge
+ * cases, hence there are 2 rules: html font size, which is the basis for everything and
+ * scales the font when width decreases; and main element font-size which scales the
+ * font when height changes. The different em font sizes scale the component font sizes
+ * relative to these two aforementioned baselines.
+ */
+
+html {
+  font-size: 20px;
+  @for $i from 1 through 8 {
+    @media all and (max-width: 1920px - $i * 200px) {
+      font-size: 20px - $i * 1px;
+    }
+  }
+}
+
+#root {
+  color: white;
+  font-weight: 300;
+  font-size: 100%;
+
+  @for $i from 1 through 5 {
+    @media all and (max-height: 900px - $i * 150px) {
+      font-size: 100% - $i * 3;
+    }
+  }
+}
+
+.text {
+  font-size: 1rem;
+}
+
+.text--very-large {
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+
+.text--large {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.text--medium {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.text--smaller {
+  font-size: 0.85rem;
+}
+
+.text--small {
+  font-size: 0.8rem;
+}
+
+.text--very-small {
+  font-size: 0.7rem;
+}
+
+.text--bold {
+  font-weight: 700;
+}
+
+.text--center {
+  text-align: center;
+}
+
+.text--opaque {
+  opacity: 0.7;
+}
+
+.text--title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: $color-lightgray;
+  // line-height: 1.2em;
+  padding-bottom: 2px;
+}
+
+.text--subtitle {
+  font-size: 0.9rem;
+  color: $color-gray;
+  // line-height: 1.2em;
+  padding-bottom: 2px;
+}
+
+.text--subtitle-upper {
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: $color-lightgray;
+}

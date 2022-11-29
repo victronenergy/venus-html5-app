@@ -1,0 +1,62 @@
+@import "../../css/variables";
+@import "../../css/main";
+
+.modal-marine-card {
+  background-color: #202534;
+  .card__header .card__header__icon.close {
+    background-color: transparent;
+    border: 0;
+  }
+}
+
+.modal-ver-container {
+  display: flex;
+  width: 100%;
+  margin-top: 1rem;
+  @media #{$minimum} {
+    flex-direction: column;
+  }
+  .left-info {
+    @media #{$minimum} {
+      margin-bottom: 2rem;
+    }
+    width: 100%;
+    display: flex;
+    &-content {
+      justify-content: center;
+      display: flex;
+      margin-left: 2rem;
+      flex-direction: column;
+      img {
+        width: 80%;
+        @media #{$minimum} {
+          width: 100%;
+        }
+      }
+      .version-item {
+        margin-top: 1rem;
+        font-size: 0.8rem;
+      }
+    }
+  }
+
+  .right-info {
+    width: 100%;
+    display: flex;
+    .first-column,
+    .second-column {
+      display: flex;
+      flex-direction: column;
+      & p {
+        margin-top: 0;
+        margin-bottom: 0.7rem;
+      }
+    }
+    .first-column {
+      color: $color-lightgray;
+    }
+    .second-column {
+      margin-left: 2rem;
+    }
+  }
+}

@@ -1,0 +1,28 @@
+@import "../../../css/variables";
+
+.remote-console__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.remote-console {
+  height: 350px;
+  flex-basis: 800px;
+
+  @media #{$hide-remote-console-breakpoint} {
+    display: none;
+  }
+}
+
+.remote-console__small_screen_info {
+  display: none;
+
+  padding: 1rem;
+  text-align: center;
+
+  @media #{$hide-remote-console-breakpoint} {
+    display: inline;
+  }
+}

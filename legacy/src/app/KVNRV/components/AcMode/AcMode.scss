@@ -1,0 +1,89 @@
+@import "../../css/variables";
+
+.ac_mode {
+  flex-direction: column;
+  text-align: center;
+  width: auto;
+
+  .name {
+    font-size: 1rem;
+  }
+
+  .info-bar__cell {
+    padding: 0.15rem 0.3rem;
+  }
+
+}
+
+.ac_mode_modal {
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  .name:nth-child(n+2) {
+    margin-top: 0.9rem;
+  }
+
+  .ac_mode_modal__group {
+    width: inherit;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    .ac_mode_modal__button {
+      flex-grow: 1;
+      margin: 0.3rem;
+      border-radius: 5px;
+      border: none;
+      background-color: $color-lightgray;
+      padding: 0.7rem;
+      font-size: 0.9rem;
+
+      &.success {
+        color: $color-white;
+      }
+    }
+  }
+}
+
+.ac-container {
+  height: 100%;
+  display: flex;
+  width: 100%;
+  .gauge {
+    width: 40%;
+    height: 90%;
+  }
+  .ac-actions {
+    width: 60%;
+  }
+  .action {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    &:nth-child(2) {
+      margin-top: 0.4rem;
+    }
+    & > .name {
+      color: $color-gray-600;
+      font-family: MuseoSans;
+      font-size: 0.8rem;
+      letter-spacing: 0;
+      line-height: 1.1rem;
+    }
+    & > .btn {
+      margin-top: 0.3rem;
+    }
+
+    &-btn-content {
+      display: flex;
+      width: 100%;
+      & > img {
+        width: 0.5rem;
+        margin-left: 0.5rem;
+      }
+    }
+  }
+}

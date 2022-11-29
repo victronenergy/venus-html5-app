@@ -1,0 +1,211 @@
+@import "../../css/variables";
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 1rem;
+  align-items: center;
+  background-color: $header-bg-color;
+  color: $color-white;
+
+  .header__left {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+
+    .header__logo {
+      .header__logo__image {
+        vertical-align: middle;
+        margin-right: 0.5rem;
+        width: 3rem;
+      }
+
+      .header__logo__text {
+        font-family: Tommy, sans-serif;
+        font-size: 2rem;
+        font-weight: 900;
+        vertical-align: middle;
+
+        @media all and (max-width: 650px) {
+          display: none;
+        }
+      }
+    }
+
+    .header__info {
+      border-left: white solid 2px;
+      padding-left: 1rem;
+      font-size: 1rem;
+      margin-right: 0.8rem;
+      margin-left: 0.8rem;
+
+      @media #{$regular} {
+        display: none;
+      }
+      @media #{$minimum} {
+        display: none;
+      }
+    }
+  }
+
+  .header__buttons {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    height: 3rem;
+    justify-content: flex-end;
+
+    div {
+      margin-right: 1rem;
+    }
+    .header__buttons__icon {
+      max-height: 1.4rem;
+    }
+
+    .header__buttons__remote-console {
+      font-size: 1.4rem;
+      background-color: $header-button-color;
+      color: $color-white;
+      padding: 0.2rem 0.8rem;
+      border: none;
+      border-radius: 5px;
+      margin-right: 0.8rem;
+
+      @media #{$hide-remote-console-breakpoint} {
+        display: none;
+      }
+
+      .header__buttons__icon {
+        vertical-align: middle;
+      }
+      .header__buttons__text {
+        margin-left: 0.5rem;
+        vertical-align: middle;
+        font-size: 0.9rem;
+
+        @media all and (max-width: 690px) {
+          display: none;
+        }
+      }
+    }
+
+    .header__buttons__logout {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      justify-self: flex-start;
+      background-color: $header-button-color;
+      color: $color-white;
+      padding: 0.2rem 1.2rem 0.2rem 0.8rem;
+      margin-right: auto;
+      border: none;
+      border-radius: 5px;
+
+      .header__buttons__icon {
+        width: 2rem;
+        vertical-align: middle;
+      }
+    }
+
+    $theme-slider-width: 6rem;
+    $theme-slider-height: 1.75rem;
+    $theme-slider-circle-size: $theme-slider-height * 1.5;
+
+    .header__buttons__remote-connection {
+      display: flex;
+      flex-direction: row;
+      align-self: center;
+
+      button {
+        border-radius: 2rem;
+        background-color: $header-button-color;
+        color: $color-white;
+        height: $theme-slider-height;
+        align-self: center;
+
+        display: block;
+        z-index: 1;
+        font-size: 1.2rem;
+
+        &.active {
+          border-radius: 2rem;
+          background-color: $color-white;
+          color: $header-bg-color;
+          height: 2.2rem;
+
+          z-index: 2;
+        }
+      }
+
+      .remote {
+        padding-left: 0.8rem;
+        padding-right: 1.2rem;
+        margin-right: -1rem;
+
+        &.active {
+          padding-right: 0.5rem;
+          margin-right: 0;
+        }
+      }
+
+      .local {
+        padding-right: 0.8rem;
+        padding-left: 1.2rem;
+        margin-left: -1rem;
+
+        &.active {
+          padding-left: 0.5rem;
+          margin-left: 0;
+        }
+      }
+    }
+
+    .header__buttons__darkmode {
+      align-self: center;
+
+      .header__buttons__darkmode__switch {
+        position: relative;
+        display: inline-block;
+        height: $theme-slider-height;
+        width: $theme-slider-width;
+        vertical-align: middle;
+      }
+
+      #header__buttons__darkmode__input {
+        display: none;
+      }
+
+      .header__buttons__darkmode__slider {
+        background-color: $header-button-color;
+        bottom: 0;
+        cursor: pointer;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transition: .4s;
+        border-radius: 1rem;
+
+        .header__buttons__darkmode__slider__img {
+          bottom: -1 * ($theme-slider-height * 0.5) * 0.5;
+          left: 0;
+          position: absolute;
+          transition: .1s;
+          height: $theme-slider-circle-size;
+          width: $theme-slider-circle-size;
+          border-radius: 50%;
+          background: $color-white;
+          padding: 0.4rem;
+        }
+      }
+
+
+      #header__buttons__darkmode__input:checked + .header__buttons__darkmode__slider > .header__buttons__darkmode__slider__img {
+        transform: translateX($theme-slider-width - $theme-slider-circle-size);
+      }
+    }
+  }
+}

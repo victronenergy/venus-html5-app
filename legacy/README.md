@@ -1,12 +1,11 @@
-![screenshot](/screenshot.png?raw=true)
+![screenshot](/legacy/victron-webapp-screenshot.png?raw=true)
 
 # Venus OS hosted web app
-*Version 3*
 
 The "app" is a single page application that communicates to the rest of Venus OS via MQTT over websockets.
-It uses React for the UI layer and also includes a wrapper service for the MQTT interface.
+It uses React with ES6 for the UI layer and also includes a wrapper service for the MQTT interface.
 
-Its primary purpose is to be a simple-to-use and nice looking UI for a Victron system on
+Its primary purpose is to be a simple to use and nice looking UI for a Victron system on
 marine Multi Functional Displays, such as the ones from Garmin, Simrad and others. This
 removes the need for a Victron panel at the helm: less clutter on the dashboard.
 

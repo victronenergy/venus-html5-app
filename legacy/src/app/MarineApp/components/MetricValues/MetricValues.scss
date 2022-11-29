@@ -1,0 +1,59 @@
+@import "../../css/variables";
+
+
+.metric__values {
+  display: flex;
+  flex-wrap: wrap;
+
+  color: $color-white;
+  font-size: 1.1rem;
+
+  .metric__values__temperatures {
+    flex-basis: 100%;
+  }
+}
+
+.metrics__left {
+  display: flex;
+  flex: 1 1 auto;
+}
+
+.metrics__right > span:not(:first-child) {
+  margin-left: 16px;
+}
+
+.value:not(:first-child) {
+  min-width: 4.5rem;
+}
+
+.value {
+  text-align: right;
+  margin-right: 1rem;
+  letter-spacing: 0.05em;
+}
+
+.value__phase {
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  color: $color-gray;
+}
+
+.value__temperature {
+  font-size: 0.8rem;
+  margin-right: -0.75rem;
+  color: $color-gray;
+}
+
+.inflate {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+
+.battery__data .metric__values {
+  @media #{$minimum} {
+    font-size: 1rem;
+    height: 2rem;
+  }
+}

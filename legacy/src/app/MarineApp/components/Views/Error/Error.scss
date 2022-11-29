@@ -1,0 +1,75 @@
+@import "../../../css/variables";
+
+.error {
+  margin-top: 20vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &-title {
+    display: flex;
+    justify-content: flex-start;
+    img {
+      margin-right: 1rem;
+    }
+    span {
+      font-size: 1.5rem;
+      line-height: 1.75rem;
+    }
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #2A3341;
+  }
+  &-subtitle {
+    line-height: 1.18rem;
+    font-size: 1rem;
+    margin-top: 2rem;
+  }
+  &-info {
+    margin-top: 2rem;
+    border-radius: 6px;
+    font-family: Roboto;
+    font-weight: 200;
+    color: #E5E5E5;
+    font-size: 0.875rem;
+    background-color: rgba(42, 51, 65, 0.5);
+    &-inside {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 5.25rem;
+    }
+  }
+  &-data-charges {
+    color: #AAAAAA;
+    line-height: 0.8125rem;
+    font-size: 0.6875rem;
+    margin-top: 1rem;
+    &--estimate {
+      margin-left: 0.5rem;
+    }
+  }
+  &-send-report {
+    margin-top: 2rem;
+    display: flex;
+  }
+  .selector-button {
+    max-width: 12rem;
+    height: 2.25rem;
+    &:nth-child(2) {
+      margin-left: 1rem;
+    }
+  }
+
+  > div {
+    width: 50%;
+  }
+
+  @media #{$minimum} {
+    > div {
+      width: 90%;
+    }
+  }
+
+}

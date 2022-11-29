@@ -1,0 +1,14 @@
+@import "../../css/variables";
+
+.progress-indicator {
+  border-radius: $progress-radius;
+  width: 100%;
+  height: $progress-height;
+  background-color: $color-lightgray;
+
+
+  .progress-indicator__bar {
+    border-radius: $progress-radius;
+    height: $progress-height;
+  }
+}

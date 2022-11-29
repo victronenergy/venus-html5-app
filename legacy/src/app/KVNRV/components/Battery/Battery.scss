@@ -1,0 +1,133 @@
+@import "../../css/variables";
+
+
+$battery-width: 3.5rem;
+$battery-height: 5rem;
+
+
+.remaining {
+  margin-top: 1rem;
+}
+
+.indicator-current {
+  margin-top: 0.6rem;
+}
+
+.battery {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .battery__group {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding-right: 1rem;
+
+    .indicator-main {
+      flex-direction: column;
+      margin-left: 1rem;
+    }
+
+    .indicator-right {
+      margin-left: auto;
+    }
+
+    &.small {
+      flex-direction: column;
+      font-size: 0.9rem;
+      padding-right: 0;
+
+      .indicator-main--small {
+        flex-direction: column;
+      }
+    }
+
+  }
+
+  .battery__charge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .battery__charge__top {
+      width: $battery-width*0.5;
+      height: $battery-height*0.1;
+      border: $color-gray solid 2px;
+      border-radius: 3px 3px 0 0;
+    }
+
+    .battery__charge__body {
+      width: $battery-width;
+      height: $battery-height;
+      border: $color-gray solid 2px;
+      border-radius: 8px;
+      padding: 0.35rem 0.35rem 0.35rem 0.35rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      margin-top: -2px;
+
+      &.full {
+        .battery__charge__body__cell {
+          &:first-child {
+            border-radius: 4px 4px 0 0;
+          }
+        }
+      }
+
+      .battery__charge__body__cell {
+        width: 100%;
+        height: $battery-height * 0.16;
+        background-color: transparent;
+        margin-top: 0.2rem;
+
+        &:first-child {
+          margin-top: 0;
+        }
+        &:last-child {
+          border-radius: 0 0 4px 4px;
+        }
+      }
+    }
+  }  
+}
+
+.gauge-double {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 40%;
+}
+
+.gauge-indicator.glue-gauges {
+  flex: 0 0 auto;
+  width: 50%;
+}
+.double-gauges {
+  display: flex;
+  width: 50%;
+}
+
+.gauge-label {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 5px;
+  color: $color-gray;
+  font-size: 0.8rem;
+  &--left {
+    margin-right: 0.25rem;
+  }
+  &--right {
+    margin-left: 0.25rem;
+  }
+}
+
+.power-indicator {
+  position: absolute;
+  font-size: 1.4rem;
+  bottom: 0;
+  left: 100%;
+  transform: translate(-50%, -25%);
+  font-weight: 500;
+}
