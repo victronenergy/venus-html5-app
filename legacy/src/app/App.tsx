@@ -9,7 +9,6 @@ import { ErrorModal } from "./MarineApp/components/ErrorModal"
 
 const KVNRV = React.lazy(() => import("./KVNRV"))
 const MarineApp = React.lazy(() => import("./MarineApp"))
-const Marine2 = React.lazy(() => import("./Marine2"))
 
 export type AppProps = {
   host: string
@@ -62,12 +61,6 @@ const App = observer((props: AppProps) => {
       return (
         <React.Suspense fallback={<Loading />}>
           <KVNRV {...props} />
-        </React.Suspense>
-      )
-    case "Marine2":
-      return (
-        <React.Suspense fallback={<Loading />}>
-          <Marine2 {...props} />
         </React.Suspense>
       )
     default:
