@@ -22,7 +22,7 @@ Sentry.init({
   sampleRate: 1,
   debug: process.env.NODE_ENV === "development",
   beforeSend(event, hint) {
-    const sendError = hint && hint.captureContext === "captured"
+    const sendError = hint && (hint.captureContext as string) === "captured"
     if (!sendError) {
       errorHandlerStore.setError(event)
       return null
