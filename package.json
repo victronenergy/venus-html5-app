@@ -129,8 +129,8 @@
   },
   "scripts": {
     "clean": "rm -rf build",
-    "start": "node scripts/start.js",
-    "build": "GENERATE_SOURCEMAP=false node scripts/build.js",
+    "start": ". ./node-options.sh && node scripts/start.js",
+    "build": ". ./node-options.sh && GENERATE_SOURCEMAP=false node scripts/build.js",
     "test": "node scripts/test.js --transformIgnorePatterns \"node_modules/(?!@elninotech/mfd-modules)/\"",
     "serve": "serve -C -s -l 8000 dist",
     "test:dev": "npm test -- --watchAll=false && npm run cy:run",
