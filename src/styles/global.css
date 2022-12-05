@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.min-safe-h-screen {
+    min-height: 100vh;
+}
+
+@supports (-webkit-touch-callout: none) {
+    .min-safe-h-screen {
+        min-height: -webkit-fill-available;
+    }
+}
+
+.safe-h-screen {
+    height: 100vh;
+}
+
+@supports (-webkit-touch-callout: none) {
+    .safe-h-screen {
+        height: -webkit-fill-available;
+    }
+}
