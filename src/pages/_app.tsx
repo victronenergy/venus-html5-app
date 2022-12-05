@@ -1,8 +1,11 @@
-import "~/styles/global.css"
-import type { AppProps } from "next/app"
-import { MuseoSans } from "~/fonts"
+import '~/styles/global.css'
+import type { AppProps } from 'next/app'
+import classnames from 'classnames'
+import { observer } from 'mobx-react-lite'
 import { configurePersistable } from 'mobx-persist-store'
 import * as localForage from 'localforage'
+import { MuseoSans } from '~/fonts'
+import { useStore } from '~/stores'
 
 // Common configuration for MobX persistable stores, you can override them in each store configuration
 configurePersistable({
@@ -14,11 +17,13 @@ configurePersistable({
 })
 
 const MfdApp = ({ Component, pageProps }: AppProps) => {
+  const { themeStore } = useStore()
+
   return (
-    <main className={`${MuseoSans.variable} font-sans`}>
+    <main className={classnames(`${MuseoSans.variable} font-sans`, { dark: themeStore.mode === 'dark' })}>
       <Component {...pageProps} />
     </main>
   )
 }
 
-export default MfdApp
+export default observer(MfdApp)
