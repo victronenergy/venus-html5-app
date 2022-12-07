@@ -9,6 +9,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@elninotech/mfd-modules": "^3.0.0",
     "@next/font": "^13.0.5",
     "classnames": "^2.3.2",
     "localforage": "^1.10.0",
