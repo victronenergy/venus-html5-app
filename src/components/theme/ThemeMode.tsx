@@ -1,21 +1,21 @@
 import React from 'react'
 import { observer } from 'mobx-react-lite'
-import { useStore } from '~/stores'
+import { useTheme } from '@elninotech/mfd-modules'
 
-const ThemeMode = observer(() => {
-  const { themeStore } = useStore()
+const ThemeMode = () => {
+  const { themeStore } = useTheme()
 
   const toggleMode = () => {
-    themeStore.toggleMode()
+    themeStore.setDarkMode(!themeStore.darkMode)
   }
 
   return (
     <div className='dark:text-white cursor-pointer'>
-      <div onClick={toggleMode}>{themeStore.mode === 'dark' ? 'Light' : 'Dark'}</div>
+      <div onClick={toggleMode}>{themeStore.darkMode ? 'Light' : 'Dark'}</div>
     </div>
   )
-})
+}
 
 interface Props {}
 
-export default ThemeMode
+export default observer(ThemeMode)
