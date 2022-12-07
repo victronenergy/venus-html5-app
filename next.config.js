@@ -1,7 +1,6 @@
-// @ts-check
+const withTM = require('next-transpile-modules')(['@elninotech/mfd-modules'])
 
-/** @type {import('next').NextConfig} */
-module.exports = {
+module.exports = withTM({
   reactStrictMode: true,
   poweredByHeader: false,
-}
+})
