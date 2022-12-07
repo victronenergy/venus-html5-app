@@ -1,9 +1,10 @@
-import { ThemeStore } from '~/stores/ThemeStore'
+import { ExampleStore } from '~/stores/ExampleStore'
 
 export class RootStore {
-  themeStore: ThemeStore
+  // exampleStore: ExampleStore
 
   constructor() {
-    this.themeStore = new ThemeStore(this)
+    // TODO: remove this after real stores are implemented
+    // this.exampleStore = new ExampleStore(this)
   }
 }

@@ -2,13 +2,13 @@ import { makeAutoObservable } from 'mobx'
 import { makePersistable, isHydrated, clearPersistedStore } from 'mobx-persist-store'
 import { RootStore } from '~/stores/RootStore'
 
-export class ThemeStore {
+export class ExampleStore {
   mode: 'dark' | 'light' = 'light'
 
   constructor(private _rootStore: RootStore) {
     makeAutoObservable(this)
     makePersistable(this, {
-      name: 'ThemeStore',
+      name: 'ExampleStore',
       properties: ['mode'],
     })
   }
