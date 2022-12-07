@@ -24,8 +24,8 @@ const Grid = ({ children, className, flow = 'row' }: Props) => {
         children.map((child, i) => (
           <div
             className={classnames('w-full h-full', {
-              'col-span-2': flow === 'row' && childrenCount === 3 && i === 2,
-              'row-span-2': flow === 'col' && childrenCount === 3 && i === 2,
+              'col-span-2': flow === 'row' && childrenCount === 3 && i === childrenCount - 1,
+              'row-span-2': flow === 'col' && childrenCount === 3 && i === childrenCount - 1,
             })}
             key={child.key || i}
           >
