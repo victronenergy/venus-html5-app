@@ -1,15 +1,20 @@
 import React from 'react'
-import BasicPageLayout from '@components/layout/page/BasicPageLayout'
+import Head from 'next/head'
+import Header from '@components/layout/page/Header'
+import Footer from '@components/layout/page/Footer'
 
 const CommonPageLayout = ({ title, children }: Props) => {
   return (
-    <BasicPageLayout title={title}>
-      <div className='safe-h-screen min-safe-h-screen flex flex-col'>
-        <div>header</div>
-        <div>{children}</div>
-        <div>footer</div>
+    <>
+      <Head>
+        <title>{`${title ? `${title} — ` : ''} Victron Venus MFD`}</title>
+      </Head>
+      <div className='dark:bg-black dark:text-white safe-h-screen min-safe-h-screen flex flex-col'>
+        <Header title={title} />
+        <div className={'h-full'}>{children}</div>
+        <Footer />
       </div>
-    </BasicPageLayout>
+    </>
   )
 }
 
