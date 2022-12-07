@@ -7,7 +7,7 @@ const BasicPageLayout: React.FC<Props> = ({ title, children }) => {
       <Head>
         <title>{`${title ? `${title} — ` : ''} Victron Venus MFD`}</title>
       </Head>
-      <main>{children}</main>
+      <main className={'dark:bg-black dark:text-white'}>{children}</main>
     </>
   )
 }
