@@ -4,6 +4,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "start": "next start",
+    "b+s": "next build && next start",
     "lint": "next lint",
     "export": "next build && next export",
     "prepare": "husky install"
