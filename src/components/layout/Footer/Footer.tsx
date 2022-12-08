@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <div className='flex w-full flex-row justify-between p-4'>
       <div>
-        <LogoIcon width={125} className={'text-black dark:text-white'} />
+        <LogoIcon className={'w-32 text-black dark:text-white'} />
       </div>
       <ThemeMode />
     </div>
