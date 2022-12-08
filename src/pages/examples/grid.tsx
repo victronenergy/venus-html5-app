@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Grid from '@components/ui/Grid'
-import Box from '@components/ui/Box'
+import Container from '@components/ui/Container'
 
 const Home: NextPage = () => {
   return (
@@ -11,51 +11,51 @@ const Home: NextPage = () => {
         <title>Victron Venus MFD</title>
       </Head>
 
-      <main className={'safe-h-screen dark:bg-black'}>
+      <main className={'safe-h-screen dark:bg-black dark:text-white'}>
         <div className={'flex grid grid-cols-2 w-full h-full gap-4'}>
           <div className={'flex flex-col w-full h-full'}>
             <div>4 boxes</div>
             <Grid>
-              <Box className={'bg-amber-300'}>Box 1</Box>
-              <Box className={'bg-blue-300'}>Box 2</Box>
-              <Box className={'bg-green-300'}>Box 3</Box>
-              <Box className={'bg-fuchsia-300'}>Box 4</Box>
+              <Container className={'bg-amber-300'}>Box 1</Container>
+              <Container className={'bg-blue-300'}>Box 2</Container>
+              <Container className={'bg-green-300'}>Box 3</Container>
+              <Container className={'bg-fuchsia-300'}>Box 4</Container>
             </Grid>
           </div>
           <div className={'flex flex-col w-full h-full'}>
             <div>3 boxes col</div>
             <Grid>
-              <Box className={'bg-amber-300'}>Box 1</Box>
-              <Box className={'bg-blue-300'}>Box 2</Box>
-              <Box className={'bg-green-300'}>Box 3</Box>
+              <Container className={'bg-amber-300'}>Box 1</Container>
+              <Container className={'bg-blue-300'}>Box 2</Container>
+              <Container className={'bg-green-300'}>Box 3</Container>
             </Grid>
           </div>
           <div className={'flex flex-col w-full h-full'}>
             <div>3 boxes row</div>
             <Grid flow={'col'}>
-              <Box className={'bg-amber-300'}>Box 1</Box>
-              <Box className={'bg-blue-300'}>Box 2</Box>
-              <Box className={'bg-green-300'}>Box 3</Box>
+              <Container className={'bg-amber-300'}>Box 1</Container>
+              <Container className={'bg-blue-300'}>Box 2</Container>
+              <Container className={'bg-green-300'}>Box 3</Container>
             </Grid>
           </div>
           <div className={'flex flex-col w-full h-full'}>
             <div>2 boxes row</div>
             <Grid>
-              <Box className={'bg-amber-300'}>Box 1</Box>
-              <Box className={'bg-blue-300'}>Box 2</Box>
+              <Container className={'bg-amber-300'}>Box 1</Container>
+              <Container className={'bg-blue-300'}>Box 2</Container>
             </Grid>
           </div>
           <div className={'flex flex-col w-full h-full'}>
             <div>2 boxes col</div>
             <Grid flow={'col'}>
-              <Box className={'bg-amber-300'}>Box 1</Box>
-              <Box className={'bg-blue-300'}>Box 2</Box>
+              <Container className={'bg-amber-300'}>Box 1</Container>
+              <Container className={'bg-blue-300'}>Box 2</Container>
             </Grid>
           </div>
           <div className={'flex flex-col w-full h-full'}>
             <div>1 box</div>
             <Grid>
-              <Box className={'bg-amber-300'}>Box 1</Box>
+              <Container className={'bg-amber-300'}>Box 1</Container>
             </Grid>
           </div>
         </div>
