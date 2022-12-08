@@ -1,8 +1,8 @@
 import { observer } from 'mobx-react-lite'
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Grid from '@components/layout/Grid'
-import Box from '@components/layout/Box'
+import Grid from '@components/ui/Grid'
+import Box from '@components/ui/Box'
 
 const Home: NextPage = () => {
   return (
