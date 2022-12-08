@@ -1,8 +1,8 @@
 import { observer } from 'mobx-react-lite'
 import { NextPageWithLayout } from '@pages/_app'
-import CommonPageLayout from '@components/layout/page/CommonPageLayout'
-import Box from '@components/layout/Box'
-import Grid from '@components/layout/Grid'
+import CommonPageLayout from '@components/layout/CommonPageLayout'
+import Box from '@components/ui/Box'
+import Grid from '@components/ui/Grid'
 
 const Home: NextPageWithLayout = () => {
   return (

@@ -1,7 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
-import Header from '@components/layout/page/Header'
-import Footer from '@components/layout/page/Footer'
+import Header from '@components/layout/Header'
+import Footer from '@components/layout/Footer'
 
 const CommonPageLayout = ({ title, children }: Props) => {
   return (
