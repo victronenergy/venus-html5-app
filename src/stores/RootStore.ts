@@ -1,10 +1,9 @@
-import { ExampleStore } from '~/stores/ExampleStore'
+import { NavigationStore } from '~/stores/NavigationStore'
 
 export class RootStore {
-  // exampleStore: ExampleStore
+  navigationStore: NavigationStore
 
   constructor() {
-    // TODO: remove this after real stores are implemented
-    // this.exampleStore = new ExampleStore(this)
+    this.navigationStore = new NavigationStore(this)
   }
 }
