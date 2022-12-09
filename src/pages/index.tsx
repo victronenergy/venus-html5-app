@@ -4,13 +4,13 @@ import CommonPageLayout from '@components/layout/CommonPageLayout'
 import Box from '@components/ui/Box'
 import Grid from '@components/ui/Grid'
 import Energy from '@components/boxes/Energy'
-import { useLayoutEffect } from 'react'
+import { useEffect } from 'react'
 import { useStore } from '~/stores'
 
 const Home: NextPageWithLayout = () => {
   const { navigationStore } = useStore()
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     // TODO: add translations
     navigationStore.setTitle('System Overview')
   }, [])
