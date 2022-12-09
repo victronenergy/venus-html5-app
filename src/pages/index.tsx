@@ -4,8 +4,17 @@ import CommonPageLayout from '@components/layout/CommonPageLayout'
 import Box from '@components/ui/Box'
 import Grid from '@components/ui/Grid'
 import Energy from '@components/boxes/Energy'
+import { useLayoutEffect } from 'react'
+import { useStore } from '~/stores'
 
 const Home: NextPageWithLayout = () => {
+  const { navigationStore } = useStore()
+
+  useLayoutEffect(() => {
+    // TODO: add translations
+    navigationStore.setTitle('System Overview')
+  }, [])
+
   return (
     <div className={'p-4 h-full'}>
       <Grid className={'gap-2'}>
@@ -19,8 +28,7 @@ const Home: NextPageWithLayout = () => {
 }
 
 Home.getLayout = (page: JSX.Element) => {
-  // TODO: add translations
-  return <CommonPageLayout title='System Overview'>{page}</CommonPageLayout>
+  return <CommonPageLayout>{page}</CommonPageLayout>
 }
 
 export default observer(Home)
