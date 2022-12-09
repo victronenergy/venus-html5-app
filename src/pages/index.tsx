@@ -3,7 +3,7 @@ import { NextPageWithLayout } from '@pages/_app'
 import CommonPageLayout from '@components/layout/CommonPageLayout'
 import Box from '@components/ui/Box'
 import Grid from '@components/ui/Grid'
-import Energy from '@components/boxes/Energy'
+import EnergyOverview from '@components/boxes/EnergyOverview'
 import { useEffect } from 'react'
 import { useStore } from '~/stores'
 
@@ -18,7 +18,7 @@ const Home: NextPageWithLayout = () => {
   return (
     <div className={'p-4 h-full'}>
       <Grid className={'gap-2'}>
-        <Energy />
+        <EnergyOverview />
         <Box className={'bg-blue-300 dark:bg-blue-700'}>Box 2</Box>
         <Box className={'bg-green-300 dark:bg-green-700'}>Box 3</Box>
         <Box className={'bg-fuchsia-300 dark:bg-fuchsia-700'}>Box 4</Box>

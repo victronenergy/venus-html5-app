@@ -1,10 +1,15 @@
 import React from 'react'
 import classNames from 'classnames'
 
-const Box = ({ children, icon, title, className, headerActions }: Props) => {
+const Box = ({ children, icon, title, className, headerActions, onClick }: Props) => {
   return (
     <div
-      className={classNames('w-full h-full p-4 flex flex-col bg-neutral-100 dark:bg-neutral-900 rounded-md', className)}
+      className={classNames(
+        'w-full h-full p-4 flex flex-col bg-neutral-100 dark:bg-neutral-900 rounded-md',
+        { 'cursor-pointer': onClick },
+        className
+      )}
+      onClick={onClick}
     >
       <div className={'flex flex-row justify-between'}>
         <div className={'flex flex-row items-center justify-start text-neutral-600 dark:text-neutral-400'}>
