@@ -1,4 +1,4 @@
-import { ComponentType, useLayoutEffect } from 'react'
+import { ComponentType, useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { observer } from 'mobx-react-lite'
@@ -13,7 +13,7 @@ const BoxPage: NextPageWithLayout = () => {
 
   const name = router.query?.name?.[0]
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (name) {
       // TODO: add translations
       navigationStore.setTitle(name)
