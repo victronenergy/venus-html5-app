@@ -1,7 +1,7 @@
 import React from 'react'
-import Box from '@components/ui/Box'
-import { BoxProps } from '@type/boxes'
-import EnergyIcon from '@public/icons/energy.svg'
+import Box from '~/components/ui/Box'
+import { BoxProps } from '~/type/boxes'
+import EnergyIcon from '~/public/icons/energy.svg'
 
 const EnergyShore = ({ mode = 'compact' }: BoxProps) => {
   if (mode === 'compact') {

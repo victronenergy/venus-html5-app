@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { observer } from 'mobx-react-lite'
 import { useRouter } from 'next/router'
-import BackIcon from '@public/icons/back.svg'
+import BackIcon from '~/public/icons/back.svg'
 
 const Header = ({ title }: Props) => {
   const router = useRouter()

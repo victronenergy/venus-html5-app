@@ -1,6 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
-import ExpandIcon from '@public/icons/expand.svg'
+import ExpandIcon from '~/public/icons/expand.svg'
 
 const Box = ({ children, icon, title, className, onExpandClick }: Props) => {
   return (

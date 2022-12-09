@@ -2,9 +2,9 @@ import { ComponentType, useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { observer } from 'mobx-react-lite'
-import { NextPageWithLayout } from '@pages/_app'
-import CommonPageLayout from '@components/layout/CommonPageLayout'
-import { BoxProps } from '@type/boxes'
+import { NextPageWithLayout } from '~/pages/_app'
+import CommonPageLayout from '~/components/layout/CommonPageLayout'
+import { BoxProps } from '~/type/boxes'
 import { useStore } from '~/stores'
 
 const BoxPage: NextPageWithLayout = () => {
@@ -24,7 +24,7 @@ const BoxPage: NextPageWithLayout = () => {
     return null
   }
 
-  const BoxItem: ComponentType<BoxProps> = dynamic(() => import(`@components/boxes/${name}`), {
+  const BoxItem: ComponentType<BoxProps> = dynamic(() => import(`~/components/boxes/${name}`), {
     ssr: false,
   })
 
