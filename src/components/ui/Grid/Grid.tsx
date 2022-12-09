@@ -7,7 +7,7 @@ const Grid = ({ children, className, flow = 'row' }: Props) => {
   return (
     <div
       className={classnames(
-        'h-full w-full grid',
+        'h-full w-full grid auto-rows-fr auto-cols-fr',
         {
           'grid-cols-2': flow === 'row' && childrenCount > 1,
           'grid-cols-1': flow === 'row' && childrenCount <= 1,
