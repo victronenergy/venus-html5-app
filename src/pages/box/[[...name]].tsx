@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import { observer } from 'mobx-react-lite'
 import { NextPageWithLayout } from '~/pages/_app'
 import CommonPageLayout from '~/components/layout/CommonPageLayout'
-import { BoxProps } from '~/type/boxes'
+import { BoxProps } from '~/types/boxes'
 import { useStore } from '~/stores'
 
 const BoxPage: NextPageWithLayout = () => {

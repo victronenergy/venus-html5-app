@@ -1,6 +1,6 @@
 import React from 'react'
 import Box from '~/components/ui/Box'
-import { BoxProps } from '~/type/boxes'
+import { BoxProps } from '~/types/boxes'
 import EnergyIcon from '~/public/icons/energy.svg'
 
 const EnergyAC = ({ mode = 'compact' }: BoxProps) => {

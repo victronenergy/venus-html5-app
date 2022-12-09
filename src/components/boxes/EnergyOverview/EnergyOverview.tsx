@@ -1,14 +1,14 @@
 import React from 'react'
 import Box from '~/components/ui/Box'
 import EnergyIcon from '~/public/icons/energy.svg'
-import { BoxProps } from '~/type/boxes'
+import { BoxProps } from '~/types/boxes'
 import { useRouter } from 'next/router'
 import EnergyAC from '~/components/boxes/EnergyAC'
 import Grid from '~/components/ui/Grid'
 import EnergyDC from '~/components/boxes/EnergyDC/EnergyDC'
 import EnergySolar from '~/components/boxes/EnergySolar/EnergySolar'
 import EnergyShore from '~/components/boxes/EnergyShore/EnergyShore'
-import { RouterPath } from '~/type/routes'
+import { RouterPath } from '~/types/routes'
 
 const EnergyOverview = ({ mode = 'compact' }: BoxProps) => {
   const router = useRouter()
