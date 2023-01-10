@@ -22,7 +22,7 @@ configurePersistable({
   expireIn: 1000 * 60 * 60 * 24 * 180, // 180 days (ms),
   removeOnExpiration: true,
   stringify: false,
-  // debugMode: true, // switch it on to have console debug messages
+  debugMode: true, // switch it on to have console debug messages
 })
 
 const MfdApp = ({ Component, pageProps }: AppPropsWithLayout) => {
