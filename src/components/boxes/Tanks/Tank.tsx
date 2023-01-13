@@ -189,3 +189,5 @@ interface Props {
 }
 
 export default observer(Tank)
+
+export default observer(Tank)
