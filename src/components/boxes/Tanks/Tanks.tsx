@@ -1,6 +1,6 @@
 import React from 'react'
 import Box from '~/components/ui/Box'
-import EnergyIcon from '~/public/icons/energy.svg'
+import TanksIcon from '~/public/icons/tanks.svg'
 import { RouterPath } from '~/types/routes'
 import { useRouter } from 'next/router'
 import { BoxProps } from '~/types/boxes'
@@ -15,7 +15,7 @@ const Tanks = ({ mode = 'compact' }: BoxProps) => {
   return (
     <Box
       title={'Tanks'}
-      icon={<EnergyIcon className={'w-6 text-black dark:text-white'} />}
+      icon={<TanksIcon className={'w-6 text-black dark:text-white'} />}
       onExpandClick={mode === 'compact' ? () => router.push(`${RouterPath.BOX}/Tanks`) : undefined}
     >
       <>
