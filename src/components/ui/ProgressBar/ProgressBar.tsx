@@ -27,7 +27,7 @@ const ProgressBar = ({percentage, color}: Props) => {
 
 interface Props {
   percentage: number;
-  color?: 'tank-fuel' | 'tank-fresh-water' | 'tank-live-well' | 'tank-oil' | 'tank-black-water';
+  color?: 'tank-fuel' | 'tank-fresh-water' | 'tank-live-well' | 'tank-oil' | 'tank-black-water' | 'tank-gray-water';
 }
 
 export default ProgressBar;
