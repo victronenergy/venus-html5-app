@@ -9,6 +9,7 @@ import EnergyDC from '~/components/boxes/EnergyDC/EnergyDC'
 import EnergySolar from '~/components/boxes/EnergySolar/EnergySolar'
 import EnergyShore from '~/components/boxes/EnergyShore/EnergyShore'
 import { RouterPath } from '~/types/routes'
+import EnergyLoads from '~/components/boxes/EnergyOverview/EnergyLoads'
 
 const EnergyOverview = ({ mode = 'compact' }: BoxProps) => {
   const router = useRouter()
@@ -21,10 +22,7 @@ const EnergyOverview = ({ mode = 'compact' }: BoxProps) => {
         onExpandClick={() => router.push(`${RouterPath.BOX}/EnergyOverview`)}
       >
         <Grid>
-          <EnergyShore />
-          <EnergyAC />
-          <EnergySolar />
-          <EnergyDC />
+          <EnergyLoads />
         </Grid>
       </Box>
     )
