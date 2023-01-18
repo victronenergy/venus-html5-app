@@ -9,10 +9,15 @@ import EnergyDC from '~/components/boxes/EnergyDC/EnergyDC'
 import EnergySolar from '~/components/boxes/EnergySolar/EnergySolar'
 import EnergyShore from '~/components/boxes/EnergyShore/EnergyShore'
 import { RouterPath } from '~/types/routes'
-import EnergyLoads from '~/components/boxes/EnergyOverview/EnergyLoads'
+import ActiveInput from '~/components/boxes/EnergyOverview/ActiveInput'
+import Solar from '~/components/boxes/EnergyOverview/Solar'
+import AcLoads from '~/components/boxes/EnergyOverview/AcLoads'
+import DcLoads from '~/components/boxes/EnergyOverview/DcLoads'
+import { useVebus } from '@elninotech/mfd-modules'
 
 const EnergyOverview = ({ mode = 'compact' }: BoxProps) => {
   const router = useRouter()
+  const vebus = useVebus() // We need this hook to enable some MQTT subscriptions
 
   if (mode === 'compact') {
     return (
@@ -21,9 +26,12 @@ const EnergyOverview = ({ mode = 'compact' }: BoxProps) => {
         icon={<EnergyIcon className={'w-6 text-black dark:text-white'} />}
         onExpandClick={() => router.push(`${RouterPath.BOX}/EnergyOverview`)}
       >
-        <Grid>
-          <EnergyLoads />
-        </Grid>
+        <>
+          <ActiveInput />
+          <Solar />
+          <AcLoads />
+          <DcLoads />
+        </>
       </Box>
     )
   }
