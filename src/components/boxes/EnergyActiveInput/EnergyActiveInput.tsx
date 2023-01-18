@@ -8,17 +8,16 @@ import Box from '~/components/ui/Box'
 
 const EnergyActiveInput = ({ mode = 'compact', inputType, source }: Props) => {
   const { activeInput, phases } = source
-  const { current, power } = useActiveInValues()
+  const { current, power, voltage } = useActiveInValues()
   const unplugged = (!activeInput && activeInput !== 0)
     || activeInput === ACTIVE_INPUT.NONE
-  const summedCurrent = current.reduce((sum, val) => val ? sum + val : sum)
   const title = inputType === AC_SOURCE.SHORE ? 'Shore' : 'Grid'
 
   if (mode === 'compact') {
     return <>
       <p>
         { title + ': ' }
-        { !unplugged && summedCurrent ? summedCurrent + 'A' : '--A'}
+        { current.slice(0, phases ?? 1).map(c => c ? c + 'A ' : '--A ')}
       </p>
       { unplugged && <small>Unplugged</small> }
       { !unplugged && phases !== 1 && <small>{phases}-phase input</small> }
@@ -28,16 +27,11 @@ const EnergyActiveInput = ({ mode = 'compact', inputType, source }: Props) => {
   return <Box title={title} icon={<EnergyIcon className={'w-6 text-black dark:text-white'} />}>
     <>
       { unplugged && <p>Unplugged</p> }
-      { !unplugged && phases === 1 &&
+      { !unplugged &&
         <>
-          <p>{current[0] ? current[0] + 'A' : '--A'}</p>
-          <p>{power[0] ? power[0] + 'W' : '--W'}</p>
-        </>
-      }
-      { !unplugged && phases > 1 &&
-        <>
-          <p>{current.map(c => c ? c + 'A ' : '')}</p>
-          <p>{power.map(p => p ? p + 'W ' : '')}</p>
+          <p>{current.slice(0, phases ?? 1).map(c => c ? c + 'A ' : '--A ')}</p>
+          <p>{power.slice(0, phases ?? 1).map(p => p ? p + 'W ' : '--W ')}</p>
+          <p>{voltage.slice(0, phases ?? 1).map(v => v ? v + 'V ' : '--V ')}</p>
         </>
       }
     </>
