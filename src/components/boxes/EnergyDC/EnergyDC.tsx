@@ -2,25 +2,27 @@ import React from 'react'
 import Box from '~/components/ui/Box'
 import { BoxProps } from '~/types/boxes'
 import EnergyIcon from '~/public/icons/energy.svg'
+import { DcLoadsState } from '@elninotech/mfd-modules'
 
-const EnergyDC = ({ mode = 'compact' }: BoxProps) => {
+const EnergyDC = ({ mode = 'compact', dcLoads }: Props) => {
+  const { power, voltage } = dcLoads
+
   if (mode === 'compact') {
-    return (
-      <Box title={'DC Loads'}>
-        <>
-          <div>DC Loads compact</div>
-        </>
-      </Box>
-    )
+    return <p> DC: {Math.round(power / voltage) + 'A'}</p>
   }
 
   return (
     <Box title={'DC Loads'} icon={<EnergyIcon className={'w-6 text-black dark:text-white'} />}>
       <>
-        <div>DC Loads full content</div>
+        <p>{Math.round(power / voltage) + 'A'}</p>
+        <p>{Math.round(power) + 'W'}</p>
       </>
     </Box>
   )
+}
+
+interface Props extends BoxProps {
+  dcLoads: DcLoadsState
 }
 
 export default EnergyDC
