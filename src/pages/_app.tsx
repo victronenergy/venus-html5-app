@@ -33,12 +33,13 @@ const MfdApp = ({ Component, pageProps }: AppPropsWithLayout) => {
 
   // connect to mqtt
   useEffect(() => {
+    if (!router.isReady) return
     const host = typeof router.query.host !== 'string' ?
-      (window.location.hostname || 'localhost') : router.query.host;
+      (window.location.hostname || 'localhost') : router.query.host
     const port = typeof router.query.port !== 'string' ?
-      9001 : +router.query.port;
+      9001 : +router.query.port
     mqtt.boot(host, port)
-  }, [])
+  }, [router.query, router.isReady])
 
   // try to use layout defined at the page level, if available
   const getLayout = useMemo(() => {

@@ -1,29 +1,37 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { observer } from 'mobx-react-lite'
 import classnames from 'classnames'
 import { useRouter } from 'next/router'
-import RemoteConsoleInstructions from '~/components/remote-console/RemoteConsoleInstructions'
+import { STATUS, useMqtt } from '@elninotech/mfd-modules'
 
 const RemoteConsole = () => {
   const router = useRouter()
-  const [loaded, setLoaded] = useState(false);
-  const [error, setError] = useState(false);
+  const mqtt = useMqtt()
+
+  const loading = mqtt.status === STATUS.CONNECTING
+  const error = mqtt.error && [STATUS.OFFLINE, STATUS.DISCONNECTED]
+    .some(v => v === mqtt.status)
+
+  let url = 'http://' + (router.query['host'] ||
+    (typeof window !== 'undefined' && window.location.hostname) ||
+    'localhost')
 
   return (
     <>
-      <iframe
-        onLoad={() => setLoaded(true)}
-        className={classnames('flex-grow remote-console', {'hidden': !loaded || error})}
-        src={'http://' + router.query['host'] || window.location.hostname || 'localhost'}
-      />
+      { mqtt.status === STATUS.CONNECTED &&
+        <iframe
+          className={classnames('flex-grow remote-console', {'hidden': loading || error})}
+          src={url}
+        />
+      }
 
-      { !loaded && !error ? (
+      { loading && !error ? (
         <div className={'text-center p-4'}>Loading...</div>
       ) : error ? (
-        <RemoteConsoleInstructions />
+        <div className={'hidden text-center p-4 remote-console-warning'}>Unable to connect to the GX device</div>
       ) : null }
 
-      { loaded && !error ?
+      { loading && !error ?
         <div className={'hidden text-center p-4 remote-console-warning'}>Open in a larger screen to view remote console</div>
         : null }
     </>
