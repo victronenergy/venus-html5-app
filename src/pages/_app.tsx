@@ -1,12 +1,13 @@
 import '~/styles/global.css'
 import type { AppProps } from 'next/app'
-import { ReactElement, ReactNode, useMemo } from 'react'
+import { ReactElement, ReactNode, useEffect, useMemo } from 'react'
 import classnames from 'classnames'
 import { observer } from 'mobx-react-lite'
 import { configurePersistable } from 'mobx-persist-store'
 import { MuseoSans } from '~/fonts'
-import { Storage, useTheme } from '@elninotech/mfd-modules'
+import { Storage, useMqtt, useTheme } from '@elninotech/mfd-modules'
 import { NextPage } from 'next'
+import { useRouter } from 'next/router'
 
 export type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode
@@ -27,6 +28,17 @@ configurePersistable({
 
 const MfdApp = ({ Component, pageProps }: AppPropsWithLayout) => {
   const { darkMode } = useTheme()
+  const mqtt = useMqtt()
+  const router = useRouter()
+
+  // connect to mqtt
+  useEffect(() => {
+    const host = typeof router.query.host !== 'string' ?
+      (window.location.hostname || 'localhost') : router.query.host;
+    const port = typeof router.query.port !== 'string' ?
+      9001 : +router.query.port;
+    mqtt.boot(host, port)
+  }, [])
 
   // try to use layout defined at the page level, if available
   const getLayout = useMemo(() => {
