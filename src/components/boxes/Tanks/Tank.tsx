@@ -28,9 +28,10 @@ const Tank = ({ tankInstanceId, mode = "compact" }: Props) => {
           <div className={classnames('text-3xl flex flex-row', {
             'text-v-red': level > 75,
           })}>
-            <div>{level}</div>
-            <div className={classnames('text-gray-5', {
+            <div>{levelFormatter(level)}</div>
+            <div className={classnames({
               'text-v-red': level > 75,
+              'text-gray-5': level <= 75,
             })}>{" %"}</div>
           </div>
         </div>
@@ -54,15 +55,20 @@ const Tank = ({ tankInstanceId, mode = "compact" }: Props) => {
           <div className={classnames('text-3xl flex flex-row', {
             'text-v-red': level > 75,
           })}>
-            <div>{level}</div>
-            <div className={classnames('text-gray-5', {
+            <div>{levelFormatter(level)}</div>
+            <div className={classnames({
               'text-v-red': level > 75,
+              'text-gray-5': level <= 75,
             })}>{" %"}</div>
           </div>
         </div>
       </div>
     </div>
   ))
+}
+
+const levelFormatter = function (level: number) {
+  return Math.round(level)
 }
 
 const fluidIcon = function (type: number) {
