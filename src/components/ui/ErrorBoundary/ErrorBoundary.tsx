@@ -15,7 +15,6 @@ class ErrorBoundary extends Component<Props, State> {
 
   public static getDerivedStateFromError(_: Error): State {
     // Update state so the next render will show the fallback UI.
-    console.log("getDerivedStateFromError");
     return { hasError: true };
   }
 
@@ -23,6 +22,7 @@ class ErrorBoundary extends Component<Props, State> {
     console.error("Uncaught error:", error, errorInfo);
   }
 
+  // TODO: add translations
   public render() {
     if (this.state.hasError) {
       return (
