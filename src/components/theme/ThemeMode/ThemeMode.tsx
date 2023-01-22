@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { observer } from 'mobx-react-lite'
 import { useTheme } from '@elninotech/mfd-modules'
 import { Modal } from '~/components/modals/Modal'
@@ -27,44 +27,53 @@ const ThemeMode = () => {
       themeStore.setDarkMode(false)
     }
   }
-
+  // TODO: Add translations
   return (
     <div className='dark:text-white cursor-pointer'>
-    <div className="flex justify-center items-center w-full">
-      <button onClick={() => setModal(!modal)}> <PreferencesIcon /> </button>
-      <Modal.Frame
-        open={modal}
-        onClose={() => {
-            setModal(false);
-        }}
-      >
-        <Modal.Body>
-          <div className="flex flex-col">
-            <div className="text-xl mb-4 dark:text-white">
-              <label className="flex justify-between items-center pb-4">
-                <span className="mr-2">Lock to prevent changes</span>
-                  <ToggleSwitch onChange={toggleLock} selected={lock}/>
-              </label>
-              <div className="border border-gray-300"></div>
-              <label className="text-base text-gray-5 pb-4">Mode</label>
-              <label className="flex justify-between items-center pb-8">
-                <span className="mr-2">Auto</span>
-                <ToggleSwitch onChange={setAutoMode} disabled={lock}/>
-              </label>
-              <label className="flex justify-between items-center pb-8">
-                <span className="mr-2">Light</span>
-                <RadioButton onChange={toggleMode} selected={!themeStore.darkMode} disabled={lock}/>
-              </label>
-              <label className="flex justify-between items-center pb-8">
-                <span className="mr-2">Dark</span>  
-                <RadioButton onChange={toggleMode} selected={themeStore.darkMode} disabled={lock}/>
-              </label>
-              <div className="border border-gray-300"></div>
+      <div className='flex justify-center items-center w-full'>
+        <button onClick={() => setModal(!modal)}>
+          {' '}
+          <PreferencesIcon />{' '}
+        </button>
+        <Modal.Frame
+          open={modal}
+          onClose={() => {
+            setModal(false)
+          }}
+        >
+          <Modal.Body>
+            <div className='flex flex-col'>
+              <div className='text-xl mb-4 dark:text-white'>
+                <label className='flex justify-between items-center pb-4'>
+                  <span className='mr-2'>Lock to prevent changes</span>
+                  <ToggleSwitch onChange={toggleLock} selected={lock} />
+                </label>
+                <div className='border border-gray-300'></div>
+                <label className='text-base text-gray-5 pb-4'>Mode</label>
+                <label className='flex justify-between items-center pb-8'>
+                  <span className='mr-2'>Auto</span>
+                  <ToggleSwitch onChange={setAutoMode} disabled={lock} />
+                </label>
+                <label className='flex justify-between items-center pb-8'>
+                  <span className='mr-2'>Light</span>
+                  <RadioButton onChange={toggleMode} selected={!themeStore.darkMode} disabled={lock} />
+                </label>
+                <label className='flex justify-between items-center pb-8'>
+                  <span className='mr-2'>Dark</span>
+                  <RadioButton onChange={toggleMode} selected={themeStore.darkMode} disabled={lock} />
+                </label>
+                <div className='border border-gray-300'></div>
+              </div>
             </div>
-          </div>
-        </Modal.Body>
-      </Modal.Frame>
-    </div>
+          </Modal.Body>
+          <button
+            onClick={() => setModal(false)}
+            className='w-full border-2 border-v-blue bg-v-blue/30 rounded-md pt-2 pb-2'
+          >
+            Remote Console
+          </button>
+        </Modal.Frame>
+      </div>
     </div>
   )
 }
