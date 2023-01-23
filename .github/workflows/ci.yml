@@ -2,7 +2,7 @@ name: Continous Integration Workflow
 on: [push]
 
 jobs:
-  build:
+  build-legacy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -16,48 +16,54 @@ jobs:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
       - name: Install the dependencies
+        working-directory: ./legacy
         run: npm ci
       - name: Build the test bundle
         run: npm run build
+        working-directory: ./legacy
         env:
           PUBLIC_URL: /
           REACT_APP_ENABLE_LANG_OVERRIDE: false
       - name: Serve the application
         run: npm run serve &
+        working-directory: ./legacy
       - name: Run the Venus simulation
         run: >
           docker run -d --rm -p 9001:9001 -p 1883:1883 -p 3000:3000 -p 8080:80
           --name venus-docker victronenergy/venus-docker:latest
           /root/run_with_simulation.sh z
+        working-directory: ./legacy
       - name: Run unit and E2E tests
         run: npm run test:ci
+        working-directory: ./legacy
       - name: Generate E2E Report
         run: npm run generate-e2e-report
         if: always()
+        working-directory: ./legacy
       - name: Upload E2E Results
         uses: actions/upload-artifact@v1
         if: always()
         with:
           name: e2e-tests-results
-          path: cypress/results/results.json
+          path: legacy/cypress/results/results.json
       - name: Upload E2E Report
         uses: actions/upload-artifact@v1
         if: always()
         with:
           name: e2e-tests-report
-          path: cypress/report
+          path: legacy/cypress/report
       - name: Upload Cypress Screenshots
         uses: actions/upload-artifact@v1
         if: always()
         with:
           name: cypress-screenshots
-          path: cypress/screenshots
+          path: legacy/cypress/screenshots
       - name: Upload Cypress Videos
         uses: actions/upload-artifact@v1
         if: always()
         with:
           name: cypress-videos
-          path: cypress/videos
+          path: legacy/cypress/videos
       - name: Check Tag
         id: check_tag
         run: |
@@ -70,9 +76,11 @@ jobs:
         env:
           PUBLIC_URL: /app
           REACT_APP_ENABLE_LANG_OVERRIDE: false
+        working-directory: ./legacy
       - name: Archive bundle
         if: steps.check_tag.outputs.match == 'true'
         run: tar -zcvf venus-html5-app.tar.gz dist/
+        working-directory: ./legacy
       - name: Create Release
         id: create_release
         if: steps.check_tag.outputs.match == 'true'
@@ -89,6 +97,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./venus-html5-app.tar.gz
+          asset_path: ./legacy/venus-html5-app.tar.gz
           asset_name: venus-html5-app.tar.gz
           asset_content_type: application/zip
