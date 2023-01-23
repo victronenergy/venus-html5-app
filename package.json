@@ -7,7 +7,7 @@
     "start": "next start",
     "b+s": "next build && next start",
     "lint": "next lint",
-    "export": "next build && next export",
+    "export": "next build && next export"
   },
   "dependencies": {
     "@elninotech/mfd-modules": "^3.0.0",
