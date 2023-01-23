@@ -326,6 +326,8 @@ module.exports = function (webpackEnv) {
         net: false,
         tls: false,
         child_process: false,
+        "stream": require.resolve("stream-browserify"),
+        "buffer": require.resolve("buffer"),
       }
     },
     resolveLoader: {
@@ -675,7 +677,13 @@ module.exports = function (webpackEnv) {
             },
           },
         }),
-      new MiniCssExtractPlugin()
+      new MiniCssExtractPlugin(),
+      new webpack.ProvidePlugin({
+        Buffer: ['buffer', 'Buffer'],
+      }),
+      new webpack.ProvidePlugin({
+        process: 'process/browser',
+      }),
     ].filter(Boolean),
     // Turn off performance processing because we utilize
     // our own hints via the FileSizeReporter
