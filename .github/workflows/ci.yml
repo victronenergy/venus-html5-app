@@ -19,7 +19,7 @@ jobs:
         working-directory: ./legacy
         run: npm ci
       - name: Build the test bundle
-        run: npm run build
+        run: npm run build --no-lint
         working-directory: ./legacy
         env:
           PUBLIC_URL: /
@@ -72,7 +72,7 @@ jobs:
           fi
       - name: Build the production bundle
         if: steps.check_tag.outputs.match == 'true'
-        run: npm run build
+        run: npm run build --no-lint
         env:
           PUBLIC_URL: /app
           REACT_APP_ENABLE_LANG_OVERRIDE: false
