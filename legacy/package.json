@@ -14,10 +14,9 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
-    "@types/jest": "^26.0.15",
     "@types/node": "^12.0.0",
-    "@types/react": "^16.9.53",
-    "@types/react-dom": "^16.9.8",
+    "@types/react": "^17.0.53",
+    "@types/react-dom": "^17.0.18",
     "@typescript-eslint/eslint-plugin": "^4.5.0",
     "@typescript-eslint/parser": "^4.5.0",
     "axios": "^0.21.1",
@@ -112,6 +111,7 @@
     "@types/chart.js": "^2.9.32",
     "@types/enzyme": "^3.10.8",
     "@types/hammerjs": "^2.0.39",
+    "@types/jest": "^29.2.6",
     "@types/lodash-es": "^4.17.4",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.0",
     "cypress": "^6.8.0",
@@ -129,20 +129,20 @@
   "scripts": {
     "clean": "rm -rf build",
     "start": "node scripts/start.js",
-    "build": "GENERATE_SOURCEMAP=false node scripts/build.js",
-    "test": "node scripts/test.js --transformIgnorePatterns \\\"node_modules/(?!@elninotech/mfd-modules)/\\\"",
-    "serve": "../node_modules/.bin/serve -C -s -l 8000 dist",
+    "build": "node scripts/build.js",
+    "test": "node scripts/test.js --config ./jest.config.js",
+    "serve": "./node_modules/.bin/serve -C -s -l 8000 dist",
     "test:dev": "npm test -- --watchAll=false && npm run cy:run",
     "test:unit": "npm test",
     "test:e2e": "npm run cy:run",
     "test:ci": "npm test -- --watchAll=false && npm run cy:run",
     "generate-e2e-report": "npm run copy-e2e-assets && npm run merge-e2e-results && npm run create-e2e-html-report",
-    "copy-e2e-assets": "rm -rf cypress/report && mkdir cypress/report && cp -r cypress/screenshots cypress/videos cypress/report/",
-    "merge-e2e-results": "../node_modules/.bin/mochawesome-merge cypress/results/*.json > cypress/results/results.json",
-    "create-e2e-html-report": "../node_modules/.bin/marge cypress/results/results.json -f index.html -o cypress/report --cdn",
-    "cy:version": "../node_modules/.bin/cypress version",
-    "cy:verify": "../node_modules/.bin/cypress verify",
-    "cy:open": "../node_modules/.bin/cypress open",
+    "copy-e2e-assets": "rm -rf ./cypress/report && mkdir ./cypress/report && cp -r ./cypress/screenshots ./cypress/videos ./cypress/report/",
+    "merge-e2e-results": "./node_modules/.bin/mochawesome-merge ./cypress/results/*.json > ./cypress/results/results.json",
+    "create-e2e-html-report": "./node_modules/.bin/marge ./cypress/results/results.json -f index.html -o ./cypress/report --cdn",
+    "cy:version": "./node_modules/.bin/cypress version",
+    "cy:verify": "./node_modules/.bin/cypress verify",
+    "cy:open": "./node_modules/.bin/cypress open",
     "cy:run": "NODE_ENV=test cypress run",
     "poeditor:push": "node src/app/locales/poeditor/push.js",
     "poeditor:pull": "node src/app/locales/poeditor/pull.js"
@@ -158,60 +158,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "jest": {
-    "roots": [
-      "<rootDir>/src"
-    ],
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx,ts,tsx}",
-      "!src/**/*.d.ts"
-    ],
-    "setupFiles": [
-      "react-app-polyfill/jsdom"
-    ],
-    "setupFilesAfterEnv": [
-      "<rootDir>/src/setupTests.ts"
-    ],
-    "testMatch": [
-      "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
-      "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"
-    ],
-    "testEnvironment": "jsdom",
-    "testRunner": "<rootDir>/node_modules/jest-circus/runner.js",
-    "transform": {
-      "^.+\\.(js|jsx|mjs|cjs|ts|tsx)$": "<rootDir>/config/jest/babelTransform.js",
-      "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-      "^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
-    },
-    "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|cjs|ts|tsx)$",
-      "^.+\\.module\\.(css|sass|scss)$"
-    ],
-    "modulePaths": [
-      "./src"
-    ],
-    "moduleNameMapper": {
-      "^react-native$": "react-native-web",
-      "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy"
-    },
-    "moduleFileExtensions": [
-      "web.js",
-      "js",
-      "web.ts",
-      "ts",
-      "web.tsx",
-      "tsx",
-      "json",
-      "web.jsx",
-      "jsx",
-      "node"
-    ],
-    "watchPlugins": [
-      "jest-watch-typeahead/filename",
-      "jest-watch-typeahead/testname"
-    ],
-    "resetMocks": true
   },
   "babel": {
     "presets": [

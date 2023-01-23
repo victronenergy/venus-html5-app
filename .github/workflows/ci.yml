@@ -16,17 +16,14 @@ jobs:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
       - name: Install the dependencies
-        working-directory: ./legacy
-        run: npm ci
+        run: npm ci --workspace=legacy
       - name: Build the test bundle
-        run: npm run build --no-lint
-        working-directory: ./legacy
+        run: npm run build --workspace=legacy
         env:
           PUBLIC_URL: /
           REACT_APP_ENABLE_LANG_OVERRIDE: false
       - name: Serve the application
-        run: npm run serve &
-        working-directory: ./legacy
+        run: npm run serve --workspace=legacy &
       - name: Run the Venus simulation
         run: >
           docker run -d --rm -p 9001:9001 -p 1883:1883 -p 3000:3000 -p 8080:80
@@ -34,12 +31,10 @@ jobs:
           /root/run_with_simulation.sh z
         working-directory: ./legacy
       - name: Run unit and E2E tests
-        run: npm run test:ci
-        working-directory: ./legacy
+        run: npm run test:ci --workspace=legacy
       - name: Generate E2E Report
-        run: npm run generate-e2e-report
+        run: npm run generate-e2e-report --workspace=legacy
         if: always()
-        working-directory: ./legacy
       - name: Upload E2E Results
         uses: actions/upload-artifact@v1
         if: always()
@@ -72,11 +67,10 @@ jobs:
           fi
       - name: Build the production bundle
         if: steps.check_tag.outputs.match == 'true'
-        run: npm run build --no-lint
+        run: npm run build --no-lint  --workspace=legacy
         env:
           PUBLIC_URL: /app
           REACT_APP_ENABLE_LANG_OVERRIDE: false
-        working-directory: ./legacy
       - name: Archive bundle
         if: steps.check_tag.outputs.match == 'true'
         run: tar -zcvf venus-html5-app.tar.gz dist/

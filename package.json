@@ -9,6 +9,9 @@
     "lint": "next lint",
     "export": "next build && next export"
   },
+  "workspaces": [
+    "legacy"
+  ],
   "dependencies": {
     "@elninotech/mfd-modules": "^3.0.0",
     "@next/font": "^13.0.5",
