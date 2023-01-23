@@ -147,11 +147,6 @@
     "poeditor:push": "node src/app/locales/poeditor/push.js",
     "poeditor:pull": "node src/app/locales/poeditor/pull.js"
   },
-  "lint-staged": {
-    "src/**/*.{js,jsx,ts,json,tsx,css,md}": [
-      "eslint --fix"
-    ]
-  },
   "browserslist": {
     "production": [
       ">1%",
