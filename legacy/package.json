@@ -63,6 +63,7 @@
     "postcss-preset-env": "^6.7.0",
     "postcss-safe-parser": "^5.0.2",
     "preval.macro": "^5.0.0",
+    "process": "^0.11.10",
     "prompts": "2.4.0",
     "react": "^17.0.2",
     "react-app-polyfill": "^2.0.0",
