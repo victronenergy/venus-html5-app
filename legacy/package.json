@@ -118,7 +118,6 @@
     "enzyme": "^3.11.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
-    "husky": "^6.0.0",
     "lint-staged": "^10.5.4",
     "mocha": "^8.3.2",
     "mochawesome": "^6.2.2",
@@ -145,7 +144,6 @@
     "cy:verify": "../node_modules/.bin/cypress verify",
     "cy:open": "../node_modules/.bin/cypress open",
     "cy:run": "NODE_ENV=test cypress run",
-    "prepare": "../node_modules/.bin/husky install",
     "poeditor:push": "node src/app/locales/poeditor/push.js",
     "poeditor:pull": "node src/app/locales/poeditor/pull.js"
   },
