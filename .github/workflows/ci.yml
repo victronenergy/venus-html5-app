@@ -6,24 +6,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Setup Node.js 14.x
+      - name: Setup Node.js 18.x
         uses: actions/setup-node@master
         with:
-          node-version: 14.x
+          node-version: 18.x
       - name: Node modules cache
         uses: actions/cache@v1
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
       - name: Install the dependencies
-        run: npm ci --workspace=legacy
+        run: npm ci
+        working-directory: ./legacy
       - name: Build the test bundle
-        run: npm run build --workspace=legacy
+        run: npm run build
+        working-directory: ./legacy
         env:
           PUBLIC_URL: /
           REACT_APP_ENABLE_LANG_OVERRIDE: false
       - name: Serve the application
-        run: npm run serve --workspace=legacy &
+        run: npm run serve &
+        working-directory: ./legacy
       - name: Run the Venus simulation
         run: >
           docker run -d --rm -p 9001:9001 -p 1883:1883 -p 3000:3000 -p 8080:80
@@ -31,9 +34,11 @@ jobs:
           /root/run_with_simulation.sh z
         working-directory: ./legacy
       - name: Run unit and E2E tests
-        run: npm run test:ci --workspace=legacy
+        run: npm run test:ci
+        working-directory: ./legacy
       - name: Generate E2E Report
-        run: npm run generate-e2e-report --workspace=legacy
+        run: npm run generate-e2e-report
+        working-directory: ./legacy
         if: always()
       - name: Upload E2E Results
         uses: actions/upload-artifact@v1
@@ -67,7 +72,8 @@ jobs:
           fi
       - name: Build the production bundle
         if: steps.check_tag.outputs.match == 'true'
-        run: npm run build --no-lint  --workspace=legacy
+        run: npm run build --no-lint
+        working-directory: ./legacy
         env:
           PUBLIC_URL: /app
           REACT_APP_ENABLE_LANG_OVERRIDE: false
