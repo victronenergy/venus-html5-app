@@ -8,12 +8,10 @@ const CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin")
 const InlineChunkHtmlPlugin = require("react-dev-utils/InlineChunkHtmlPlugin")
 const TerserPlugin = require("terser-webpack-plugin")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
-const safePostCssParser = require("postcss-safe-parser")
-const ManifestPlugin = require("webpack-manifest-plugin")
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const { WebpackManifestPlugin } = require("webpack-manifest-plugin")
 const InterpolateHtmlPlugin = require("react-dev-utils/InterpolateHtmlPlugin")
 const WorkboxWebpackPlugin = require("workbox-webpack-plugin")
-const WatchMissingNodeModulesPlugin = require("react-dev-utils/WatchMissingNodeModulesPlugin")
 const ModuleScopePlugin = require("react-dev-utils/ModuleScopePlugin")
 const getCSSModuleLocalIdent = require("react-dev-utils/getCSSModuleLocalIdent")
 const ESLintPlugin = require("eslint-webpack-plugin")
@@ -22,7 +20,6 @@ const modules = require("./modules")
 const getClientEnvironment = require("./env")
 const ModuleNotFoundPlugin = require("react-dev-utils/ModuleNotFoundPlugin")
 const ForkTsCheckerWebpackPlugin = require("react-dev-utils/ForkTsCheckerWebpackPlugin")
-const typescriptFormatter = require("react-dev-utils/typescriptFormatter")
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin")
 
 const postcssNormalize = require("postcss-normalize")
@@ -190,9 +187,7 @@ module.exports = function (webpackEnv) {
       pathinfo: isEnvDevelopment,
       // There will be one main bundle, and one file per asynchronous chunk.
       // In development, it does not produce real files.
-      filename: isEnvProduction ? "static/js/[name].[contenthash:8].js" : isEnvDevelopment && "static/js/bundle.js",
-      // TODO: remove this when upgrading to webpack 5
-      futureEmitAssets: true,
+      filename: isEnvProduction ? "static/js/[name].[contenthash:8].js" : isEnvDevelopment && "static/js/[name].bundle.js",
       // There are also additional JS chunk files if you use code splitting.
       chunkFilename: isEnvProduction
         ? "static/js/[name].[contenthash:8].chunk.js"
@@ -207,7 +202,7 @@ module.exports = function (webpackEnv) {
         : isEnvDevelopment && ((info) => path.resolve(info.absoluteResourcePath).replace(/\\/g, "/")),
       // Prevents conflicts when multiple webpack runtimes (from different apps)
       // are used on the same page.
-      jsonpFunction: `webpackJsonp${appPackageJson.name}`,
+      chunkLoadingGlobal: `webpackJsonp${appPackageJson.name}`,
       // this defaults to 'window', but by setting it to 'this' then
       // module chunks which are built will work in web workers as well.
       globalObject: "this",
@@ -256,23 +251,16 @@ module.exports = function (webpackEnv) {
           },
           sourceMap: shouldUseSourceMap,
         }),
-        // This is only used in production mode
-        new OptimizeCSSAssetsPlugin({
-          cssProcessorOptions: {
-            parser: safePostCssParser,
-            map: shouldUseSourceMap
-              ? {
-                  // `inline: false` forces the sourcemap to be output into a
-                  // separate file
-                  inline: false,
-                  // `annotation: true` appends the sourceMappingURL to the end of
-                  // the css file, helping the browser find the sourcemap
-                  annotation: true,
-                }
-              : false,
-          },
-          cssProcessorPluginOptions: {
-            preset: ["default", { minifyFontValues: { removeQuotes: false } }],
+        new CssMinimizerPlugin({
+          minimizerOptions: {
+            // Other options are available https://webpack.js.org/plugins/css-minimizer-webpack-plugin/#minify
+            minify: CssMinimizerPlugin.cleanCssMinify,
+            preset: [
+              "default",
+              {
+                discardComments: { removeAll: true },
+              },
+            ],
           },
         }),
       ],
@@ -281,7 +269,7 @@ module.exports = function (webpackEnv) {
       // https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
       splitChunks: {
         chunks: "all",
-        name: isEnvDevelopment,
+        name: false,
       },
       // Keep the runtime chunk separated to enable long term caching
       // https://twitter.com/wSokra/status/969679223278505985
@@ -296,6 +284,7 @@ module.exports = function (webpackEnv) {
       // if there are any conflicts. This matches Node resolution mechanism.
       // https://github.com/facebook/create-react-app/issues/253
       modules: ["node_modules", paths.appNodeModules].concat(modules.additionalModulePaths || []),
+      preferRelative: true,
       // These are the reasonable defaults supported by the Node ecosystem.
       // We also include JSX as a common component filename extension to support
       // some tools, although we do not recommend using it, see:
@@ -327,6 +316,17 @@ module.exports = function (webpackEnv) {
         // Make sure your source files are compiled, as they will not be processed in any way.
         new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson, reactRefreshOverlayEntry]),
       ],
+      // Some libraries import Node modules but don't use them in the browser.
+      // Tell webpack to provide empty mocks for them so importing them works.
+      fallback: {
+        module: false,
+        dgram: false,
+        fs: false,
+        http2: false,
+        net: false,
+        tls: false,
+        child_process: false,
+      }
     },
     resolveLoader: {
       plugins: [
@@ -339,7 +339,11 @@ module.exports = function (webpackEnv) {
       strictExportPresence: true,
       rules: [
         // Disable require.ensure as it's not a standard language feature.
-        { parser: { requireEnsure: false } },
+        {
+          // The new webpack5 parser rules applies both for Js and Json, but Json module 
+          // hasn't `requireEnsure` parameter in config, therefore we apply this rule only for Js
+          test: /\.[cm]?js$/,
+          parser: { requireEnsure: false } },
         {
           // "oneOf" will traverse all following loaders until one will
           // match the requirements. When no loader matches it will fall
@@ -583,11 +587,6 @@ module.exports = function (webpackEnv) {
       // a plugin that prints an error when you attempt to do this.
       // See https://github.com/facebook/create-react-app/issues/240
       isEnvDevelopment && new CaseSensitivePathsPlugin(),
-      // If you require a missing module and then `npm install` it, you still have
-      // to restart the development server for webpack to discover it. This plugin
-      // makes the discovery automatic so you don't have to restart.
-      // See https://github.com/facebook/create-react-app/issues/186
-      isEnvDevelopment && new WatchMissingNodeModulesPlugin(paths.appNodeModules),
       isEnvProduction &&
         new MiniCssExtractPlugin({
           // Options similar to the same options in webpackOptions.output
@@ -601,7 +600,7 @@ module.exports = function (webpackEnv) {
       //   `index.html`
       // - "entrypoints" key: Array of files which are included in `index.html`,
       //   can be used to reconstruct the HTML if necessary
-      new ManifestPlugin({
+      new WebpackManifestPlugin({
         fileName: "asset-manifest.json",
         publicPath: paths.publicUrlOrPath,
         generate: (seed, files, entrypoints) => {
@@ -622,7 +621,7 @@ module.exports = function (webpackEnv) {
       // solution that requires the user to opt into importing specific locales.
       // https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
       // You can remove this if you don't use Moment.js:
-      new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+      new webpack.IgnorePlugin({resourceRegExp: /^\.\/locale$/, contextRegExp: /moment$/}),
       // Generate a service worker script that will precache, and keep up to date,
       // the HTML & assets that are part of the webpack build.
       isEnvProduction &&
@@ -639,29 +638,20 @@ module.exports = function (webpackEnv) {
       // TypeScript type checking
       useTypeScript &&
         new ForkTsCheckerWebpackPlugin({
-          typescript: resolve.sync("typescript", {
-            basedir: paths.appNodeModules,
-          }),
           async: isEnvDevelopment,
-          checkSyntacticErrors: true,
-          resolveModuleNameModule: process.versions.pnp ? `${__dirname}/pnpTs.js` : undefined,
-          resolveTypeReferenceDirectiveModule: process.versions.pnp ? `${__dirname}/pnpTs.js` : undefined,
-          tsconfig: paths.appTsConfig,
-          reportFiles: [
-            // This one is specifically to match during CI tests,
-            // as micromatch doesn't match
-            // '../cra-template-typescript/template/src/App.tsx'
-            // otherwise.
-            "../**/src/**/*.{ts,tsx}",
-            "**/src/**/*.{ts,tsx}",
-            "!**/src/**/__tests__/**",
-            "!**/src/**/?(*.)(spec|test).*",
-            "!**/src/setupProxy.*",
-            "!**/src/setupTests.*",
-          ],
-          silent: true,
-          // The formatter is invoked directly in WebpackDevServerUtils during development
-          formatter: isEnvProduction ? typescriptFormatter : undefined,
+          typescript: {
+            configFile: paths.appTsConfig,
+            typescriptPath: resolve.sync("typescript", {
+              basedir: paths.appNodeModules,
+            }),
+            diagnosticOptions: {
+              semantic: true,
+              syntactic: true,
+            },
+          },
+          // todo: what's the new config for this?
+          // resolveModuleNameModule: process.versions.pnp ? `${__dirname}/pnpTs.js` : undefined,
+          // resolveTypeReferenceDirectiveModule: process.versions.pnp ? `${__dirname}/pnpTs.js` : undefined,
         }),
       !disableESLintPlugin &&
         new ESLintPlugin({
@@ -685,19 +675,8 @@ module.exports = function (webpackEnv) {
             },
           },
         }),
+      new MiniCssExtractPlugin()
     ].filter(Boolean),
-    // Some libraries import Node modules but don't use them in the browser.
-    // Tell webpack to provide empty mocks for them so importing them works.
-    node: {
-      module: "empty",
-      dgram: "empty",
-      dns: "mock",
-      fs: "empty",
-      http2: "empty",
-      net: "empty",
-      tls: "empty",
-      child_process: "empty",
-    },
     // Turn off performance processing because we utilize
     // our own hints via the FileSizeReporter
     performance: false,
