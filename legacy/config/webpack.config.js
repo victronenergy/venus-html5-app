@@ -146,6 +146,7 @@ module.exports = function (webpackEnv) {
 
   return {
     mode: isEnvProduction ? "production" : isEnvDevelopment && "development",
+    target: 'web',
     // Stop compilation early in production
     bail: isEnvProduction,
     devtool: isEnvProduction
@@ -683,6 +684,9 @@ module.exports = function (webpackEnv) {
       }),
       new webpack.ProvidePlugin({
         process: 'process/browser',
+      }),
+      new webpack.optimize.LimitChunkCountPlugin({
+        maxChunks: 1
       }),
     ].filter(Boolean),
     // Turn off performance processing because we utilize
