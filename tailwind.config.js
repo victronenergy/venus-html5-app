@@ -12,6 +12,12 @@ module.exports = {
   // see https://tailwindcss.com/docs/theme
   theme: {
     extend: {
+      screens: {
+        sm: '540px',
+        md: '800px',
+        lg: '1400px',
+        xl: '1800px',
+      },
       colors: {
         victron: {
           heavyBlack: {
