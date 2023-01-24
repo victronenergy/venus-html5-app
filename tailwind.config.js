@@ -14,8 +14,14 @@ module.exports = {
     extend: {
       colors: {
         victron: {
-          white: '#FFFFFF',
-          black: '#000000',
+          heavyBlack: {
+            DEFAULT: '#141414',
+            dark: '#141414',
+          },
+          lightGray: {
+            DEFAULT: '#F5F5F5',
+            dark: '#F5F5F5',
+          },
           darkGray: {
             DEFAULT: '#141414',
             dark: '#141414',
