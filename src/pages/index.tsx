@@ -5,13 +5,11 @@ import Grid from '~/components/ui/Grid'
 import EnergyOverview from '~/components/boxes/EnergyOverview'
 import { useEffect } from 'react'
 import { useStore } from '~/stores'
-import EnergyAC from '~/components/boxes/EnergyAC'
-import EnergyShore from '~/components/boxes/EnergyShore'
-import EnergySolar from '~/components/boxes/EnergySolar'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
 import TanksOverview from '~/components/boxes/TanksOverview'
 import BatteriesOverview from '~/components/boxes/BatteriesOverview'
+import DevicesOverview from '~/components/boxes/DevicesOverview'
 
 const Home: NextPageWithLayout = () => {
   const { navigationStore } = useStore()
@@ -23,7 +21,7 @@ const Home: NextPageWithLayout = () => {
       case 'simple':
         return [<EnergyOverview />, <BatteriesOverview />, <TanksOverview />]
       case 'absolute':
-        return [<EnergyOverview />, <EnergyAC mode={'full'} />, <EnergyShore />, <EnergySolar mode={'full'} />]
+        return [<EnergyOverview />, <BatteriesOverview />, <DevicesOverview />, <TanksOverview />]
     }
 
     return []
