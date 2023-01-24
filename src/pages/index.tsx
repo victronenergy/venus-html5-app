@@ -11,6 +11,7 @@ import EnergySolar from '~/components/boxes/EnergySolar'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
 import TanksOverview from '~/components/boxes/TanksOverview'
+import BatteriesOverview from '~/components/boxes/BatteriesOverview'
 
 const Home: NextPageWithLayout = () => {
   const { navigationStore } = useStore()
@@ -20,7 +21,7 @@ const Home: NextPageWithLayout = () => {
   const getBoxes = (type: 'simple' | 'absolute') => {
     switch (type) {
       case 'simple':
-        return [<EnergyOverview />, <TanksOverview />, <EnergyShore />]
+        return [<EnergyOverview />, <BatteriesOverview />, <TanksOverview />]
       case 'absolute':
         return [<EnergyOverview />, <EnergyAC mode={'full'} />, <EnergyShore />, <EnergySolar mode={'full'} />]
     }
