@@ -19,7 +19,7 @@ const EnergyOverview = ({ mode = 'compact' }: BoxProps) => {
     return (
       <Box
         title={t('boxes.energy')}
-        icon={<EnergyIcon className={'w-6 text-black dark:text-white'} />}
+        icon={<EnergyIcon className={'w-6 text-victron-gray dark:text-victron-gray-dark'} />}
         onExpandClick={() => router.push(`${RouterPath.BOX}/EnergyOverview`)}
       >
         <Grid>

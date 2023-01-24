@@ -15,6 +15,18 @@ const Home: NextPageWithLayout = () => {
   const { navigationStore } = useStore()
   const { t } = useTranslation()
 
+  // TODO: replace this code with real data depending on the system type
+  const getBoxes = (type: 'simple' | 'absolute') => {
+    switch (type) {
+      case 'simple':
+        return [<EnergyOverview />, <EnergyAC mode={'full'} />, <EnergyShore />]
+      case 'absolute':
+        return [<EnergyOverview />, <EnergyAC mode={'full'} />, <EnergyShore />, <EnergySolar mode={'full'} />]
+    }
+
+    return []
+  }
+
   useEffect(() => {
     navigationStore.setTitle(t('pages.systemOverview'))
   }, [navigationStore, t])
@@ -22,10 +34,9 @@ const Home: NextPageWithLayout = () => {
   return (
     <div className={'p-4 h-full'}>
       <Grid className={'gap-2'} flow={'col'}>
-        <EnergyOverview />
-        <EnergyAC mode={'full'} />
-        <EnergyShore />
-        {/*<EnergySolar mode={'full'} />*/}
+        {/* you can use different mocks to view the components layouts */}
+        {/* TODO: replace this code with real data depending on the system type */}
+        {getBoxes('simple').map((box) => box)}
       </Grid>
     </div>
   )
