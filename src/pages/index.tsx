@@ -21,11 +21,11 @@ const Home: NextPageWithLayout = () => {
 
   return (
     <div className={'p-4 h-full'}>
-      <Grid className={'gap-2'}>
+      <Grid className={'gap-2'} flow={'col'}>
         <EnergyOverview />
         <EnergyAC mode={'full'} />
         <EnergyShore />
-        <EnergySolar mode={'full'} />
+        {/*<EnergySolar mode={'full'} />*/}
       </Grid>
     </div>
   )
