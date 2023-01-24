@@ -156,11 +156,6 @@ Please use with caution. If wrong data is sent, existing terms and their transla
 npm run poeditor:pull
 ```
 
-#### 2.7.4 Overriding local language
-
-The language automatically synchronizes with the configuration on the GX device, but if you want to use a different
-language locally you can set it in the url, like `http://localhost:8000/nl/`
-
 ## 3. Testing
 
 ### 3.1 Venus OS Release test plan
