@@ -20,10 +20,6 @@ module.exports = {
       },
       colors: {
         victron: {
-          heavyBlack: {
-            DEFAULT: '#141414',
-            dark: '#141414',
-          },
           lightGray: {
             DEFAULT: '#F5F5F5',
             dark: '#F5F5F5',

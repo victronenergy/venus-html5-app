@@ -6,12 +6,12 @@ const Box = ({ children, icon, title, className, onExpandClick }: Props) => {
   return (
     <div
       className={classNames(
-        'w-full h-full p-4 flex flex-col bg-victron-lightGray dark:bg-victron-heavyBlack rounded-md',
+        'w-full h-full p-4 flex flex-col bg-victron-lightGray dark:bg-victron-darkGray rounded-md',
         className
       )}
     >
       <div className={'flex flex-row justify-between'}>
-        <div className={'flex flex-row items-center justify-start text-black dark:text-white'}>
+        <div className={'flex flex-row items-center justify-start text-victron-gray dark:text-victron-gray-dark'}>
           {icon && <span className={'mr-1'}>{icon}</span>}
           <span className={'text-2xl'}>{title}</span>
         </div>
