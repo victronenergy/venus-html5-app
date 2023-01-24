@@ -10,6 +10,7 @@ import EnergyShore from '~/components/boxes/EnergyShore'
 import EnergySolar from '~/components/boxes/EnergySolar'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
+import TanksOverview from '~/components/boxes/TanksOverview'
 
 const Home: NextPageWithLayout = () => {
   const { navigationStore } = useStore()
@@ -19,7 +20,7 @@ const Home: NextPageWithLayout = () => {
   const getBoxes = (type: 'simple' | 'absolute') => {
     switch (type) {
       case 'simple':
-        return [<EnergyOverview />, <EnergyAC mode={'full'} />, <EnergyShore />]
+        return [<EnergyOverview />, <TanksOverview />, <EnergyShore />]
       case 'absolute':
         return [<EnergyOverview />, <EnergyAC mode={'full'} />, <EnergyShore />, <EnergySolar mode={'full'} />]
     }
@@ -36,7 +37,7 @@ const Home: NextPageWithLayout = () => {
       <Grid className={'gap-2'} flow={'col'}>
         {/* you can use different mocks to view the components layouts */}
         {/* TODO: replace this code with real data depending on the system type */}
-        {getBoxes('simple').map((box) => box)}
+        {getBoxes('simple').map((box, key) => box)}
       </Grid>
     </div>
   )
