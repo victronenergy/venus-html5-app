@@ -1,6 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
-import ExpandIcon from '~/public/icons/expand.svg'
+import ArrowRightIcon from '~/public/icons/arrow-right.svg'
 
 const Box = ({ children, icon, title, className, onExpandClick }: Props) => {
   return (
@@ -14,7 +14,7 @@ const Box = ({ children, icon, title, className, onExpandClick }: Props) => {
         </div>
         {onExpandClick && (
           <div onClick={onExpandClick}>
-            <ExpandIcon className={'w-6 text-blue-600 dark:text-blue-400 cursor-pointer'} />
+            <ArrowRightIcon className={'w-6 text-blue-600 dark:text-blue-400 cursor-pointer'} />
           </div>
         )}
       </div>
