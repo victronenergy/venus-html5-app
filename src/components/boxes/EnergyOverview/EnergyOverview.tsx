@@ -40,4 +40,11 @@ const EnergyOverview = ({ mode = 'compact' }: BoxProps) => {
   )
 }
 
-export default EnergyOverview
+const ComponentWithErrorBoundary = withErrorBoundary(EnergyOverview, {
+  FallbackComponent: ErrorFallback,
+  onError(error, info) {
+    console.error(error, info)
+  },
+})
+
+export default ComponentWithErrorBoundary
