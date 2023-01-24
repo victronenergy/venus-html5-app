@@ -1,0 +1,198 @@
+{
+    "acMode": {
+        "modal": {
+            "name": "Select mode",
+            "updateLimit": "Select shore input limit"
+        },
+        "title": "AC Mode"
+    },
+    "cardFooter": {
+        "Charge": "Charge",
+        "Critical": "Critical",
+        "Optimal": "Optimal",
+        "Status": "Status",
+        "Warning": "Warning"
+    },
+    "common": {
+        "absorptionCharging": "Absorption charging",
+        "assisting": "Assisting",
+        "autoStartStop": "Auto start/stop",
+        "bulkCharging": "Bulk charging",
+        "charge": "Charge",
+        "chargerOnly": "Charger Only",
+        "charging": "Charging",
+        "current": "Current",
+        "days": "days",
+        "discharge": "Discharge",
+        "discharging": "Discharging",
+        "eco": "Eco",
+        "emptyBar": " - ",
+        "equalisationCharging": "Equalisation charging",
+        "error": "Error",
+        "fault": "Fault",
+        "floatCharging": "Float charging",
+        "hours": "hours",
+        "idle": "Idle",
+        "inputLimit": "Input Limit",
+        "inverterOnly": "Inverter Only",
+        "inverting": "Inverting",
+        "limit": "Limit",
+        "lowPower": "Low Power",
+        "minutes": "minutes",
+        "mode": "Mode",
+        "noShorePower": "No Shore Power",
+        "notAvailable": "Not Available",
+        "nrOfPhases": "%{phases} phases",
+        "null": " ",
+        "off": "Off",
+        "on": "On",
+        "passthru": "Passthru",
+        "powerSupplyMode": "Power supply mode",
+        "remainingTime": "Remaining time",
+        "running": "Running",
+        "standby": "Standby",
+        "starting": "Starting",
+        "stopped": "Stopped",
+        "stopping": "Stopping",
+        "storageMode": "Storage mode",
+        "sustain": "Sustain",
+        "unplugged": "Unplugged",
+        "veBusFault": "VE.Bus Fault condition",
+        "voltage": "Voltage"
+    },
+    "error": {
+        "errorWithMessage": "Error: %{message}",
+        "genericMessage": "An error occurred while rendering the application. Try reloading the page or contacting Victron Energy with the following information:",
+        "marine": {
+            "cta": "Send this error report directly to the Victron Energy support team:",
+            "dataCharges": "Standard data charges apply.",
+            "estimate": "Estimated data: %{size} Bytes.",
+            "hint": "Try reloading the page or contacting Victron Energy with the following information:",
+            "ignore": "Ignore error",
+            "sendReport": "Send error report",
+            "title": "An error occured while rendering the application."
+        },
+        "mqttUnavailable1": "Could not connect to the MQTT server.",
+        "mqttUnavailable2": "Please check that MQTT is enabled in your settings:",
+        "mqttUnavailable3": "Remote Console > Settings > Services > MQTT on LAN (Plaintext)",
+        "mqttUnavailable4": "Try using the Remote Console button at the top of this screen to change your settings remotely.",
+        "mqttUnavailable5": "You can also try connecting to your device remotely by selecting Remote from the menu above.",
+        "queryParams": "Query params: %{queryParams}",
+        "userAgent": "User agent: %{userAgent}",
+        "windowSize": "Window: %{width} x %{height}"
+    },
+    "generator": {
+        "fisherPandaAutoStartMessage": "The Fisher Panda AutoStart functionality is currently disabled, enable it on the genset panel in order to control the genset from this panel.",
+        "temperature": {
+            "coolant": "Coolant",
+            "exhaust": "Exhaust",
+            "winding": "Winding"
+        }
+    },
+    "header": {
+        "close": "Close",
+        "connecting": "Connecting",
+        "local": "Local",
+        "loggedIn": "Logged in as",
+        "notLoggedIn": "Not logged in",
+        "remote": "Remote",
+        "remoteConsole": "Remote console",
+        "remoteMessage": "Open in a larger screen to view remote console",
+        "versionInfo": "Version Information"
+    },
+    "installations": {
+        "title": "Choose an installation"
+    },
+    "locker": {
+        "lockMessage": "Lock to prevent changes",
+        "unlockMessage": "Unlock to make changes"
+    },
+    "noWidgets": {
+        "subtitle": "Make sure your devices are properly connected",
+        "title": "Your dashboard is empty"
+    },
+    "remoteLogin": {
+        "2fa": "Two-factor authentication token",
+        "email": "Email",
+        "forgotPassword": "Forgot Password?",
+        "goBack": "Go Back",
+        "logIn": "Log in",
+        "logOut": "Log Out",
+        "loginFailed": "Login Failed",
+        "mobileVerification": "Authenticator app token",
+        "noInstallations": "This account has no installations.",
+        "password": "Password",
+        "registerMessage1": "Don't have an account yet? ",
+        "registerMessage2": "Register your RV.",
+        "smsVerification": "SMS Verification token",
+        "wrong2fa": "Wrong two-factor verification code"
+    },
+    "status": {
+        "Absorption charging": "Absorption charging",
+        "Assisting": "Assisting",
+        "Bulk charging": "Bulk charging",
+        "Discharging": "Discharging",
+        "Equalisation charging": "Equalisation charging",
+        "Float charging": "Float charging",
+        "Inverting": "Inverting",
+        "Low power": "Low power",
+        "Off": "Off",
+        "Passthru": "Passthru",
+        "Storage mode": "Storage mode",
+        "Sustain": "Sustain",
+        "VE.Bus Fault condition": "VE.Bus Fault condition",
+        "parts": {
+            "Battery": "Battery",
+            "Black water": "Black water",
+            "DC Loads": "DC Loads",
+            "Fresh water": "Fresh water",
+            "Fuel": "Fuel",
+            "Live well": "Live well",
+            "Oil": "Oil",
+            "PV Charger": "PV Charger",
+            "Shore Power": "Shore Power",
+            "Tank sensor": "Tank sensor",
+            "Waste water": "Waste water"
+        }
+    },
+    "tank": {
+        "Black water": "Black water",
+        "Fresh water": "Fresh water",
+        "Fuel": "Fuel",
+        "Live well": "Live well",
+        "Oil": "Oil",
+        "Tank sensor": "Tank sensor",
+        "Waste water": "Waste water"
+    },
+    "versionInfo": {
+        "buildDate": "Build Date",
+        "identifier": "Identifier",
+        "venusOs": "Venus OS",
+        "version": "Version %{version}",
+        "vrmPortID": "VRM Site ID"
+    },
+    "boxes": {
+        "acLoads": "AC Loads",
+        "batteries": "Batteries",
+        "battery": "Battery",
+        "batteryWithName": "Battery: %{name}",
+        "chargerWithName": "Charger: %{productNameShort}",
+        "dcLoads": "DC Loads",
+        "energy": "Energy",
+        "EnergyOverview": "Energy Overview",
+        "generator": "Generator",
+        "generatorInput": "Generator Input",
+        "gridInput": "Grid Input",
+        "invalidConfig": "Invalid Configuration",
+        "inverterCharger": "Inverter / Charger: %{productNameShort}",
+        "inverterWithName": "Inverter: %{productNameShort}",
+        "pvCharger": "PV Charger",
+        "shorePower": "Shore Power",
+        "solar": "Solar",
+        "status": "Status",
+        "unknown": "Unknown"
+    },
+    "pages": {
+        "systemOverview": "System Overview"
+    }
+}

@@ -8,6 +8,7 @@ import { MuseoSans } from '~/fonts'
 import { Storage, useMqtt, useTheme } from '@elninotech/mfd-modules'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
+import { appWithTranslation } from 'next-i18next'
 
 export type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode
@@ -52,4 +53,4 @@ const MfdApp = ({ Component, pageProps }: AppPropsWithLayout) => {
   )
 }
 
-export default observer(MfdApp)
+export default appWithTranslation(observer(MfdApp))

@@ -26,7 +26,7 @@ const Box = ({ children, icon, title, className, onExpandClick }: Props) => {
 interface Props {
   children: JSX.Element | string
   icon?: JSX.Element
-  title?: string
+  title: string
   onExpandClick?: () => void
   className?: string
   headerActions?: JSX.Element

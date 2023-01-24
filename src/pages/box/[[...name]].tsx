@@ -6,19 +6,21 @@ import { NextPageWithLayout } from '~/pages/_app'
 import CommonPageLayout from '~/components/layout/CommonPageLayout'
 import { BoxProps } from '~/types/boxes'
 import { useStore } from '~/stores'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { useTranslation } from 'next-i18next'
 
 const BoxPage: NextPageWithLayout = () => {
   const router = useRouter()
+  const { t } = useTranslation()
   const { navigationStore } = useStore()
 
   const name = router.query?.name?.[0]
 
   useEffect(() => {
     if (name) {
-      // TODO: add translations
-      navigationStore.setTitle(name)
+      navigationStore.setTitle(t(`boxes.${name}`))
     }
-  }, [name])
+  }, [name, t, navigationStore])
 
   if (!name) {
     return null
@@ -38,5 +40,16 @@ const BoxPage: NextPageWithLayout = () => {
 BoxPage.getLayout = (page: JSX.Element) => {
   return <CommonPageLayout>{page}</CommonPageLayout>
 }
+
+export const getStaticProps = async ({ locale }: { locale: string }) => ({
+  props: {
+    ...(await serverSideTranslations(locale)),
+  },
+})
+
+export const getStaticPaths = () => ({
+  paths: [],
+  fallback: true,
+})
 
 export default observer(BoxPage)

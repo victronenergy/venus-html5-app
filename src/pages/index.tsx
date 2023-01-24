@@ -8,14 +8,16 @@ import { useStore } from '~/stores'
 import EnergyAC from '~/components/boxes/EnergyAC'
 import EnergyShore from '~/components/boxes/EnergyShore'
 import EnergySolar from '~/components/boxes/EnergySolar'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { useTranslation } from 'next-i18next'
 
 const Home: NextPageWithLayout = () => {
   const { navigationStore } = useStore()
+  const { t } = useTranslation()
 
   useEffect(() => {
-    // TODO: add translations
-    navigationStore.setTitle('System Overview')
-  }, [])
+    navigationStore.setTitle(t('pages.systemOverview'))
+  }, [navigationStore, t])
 
   return (
     <div className={'p-4 h-full'}>
@@ -32,5 +34,11 @@ const Home: NextPageWithLayout = () => {
 Home.getLayout = (page: JSX.Element) => {
   return <CommonPageLayout>{page}</CommonPageLayout>
 }
+
+export const getStaticProps = async ({ locale }: { locale: string }) => ({
+  props: {
+    ...(await serverSideTranslations(locale)),
+  },
+})
 
 export default observer(Home)
