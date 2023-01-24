@@ -5,10 +5,11 @@ import classnames from 'classnames'
 import { observer } from 'mobx-react-lite'
 import { configurePersistable } from 'mobx-persist-store'
 import { MuseoSans } from '~/fonts'
-import { Storage, useMqtt, useTheme } from '@elninotech/mfd-modules'
+import { Storage, useLanguage, useMqtt, useTheme } from '@elninotech/mfd-modules'
 import { NextPage } from 'next'
-import { useRouter } from 'next/router'
+import { NextRouter, useRouter } from 'next/router'
 import { appWithTranslation } from 'next-i18next'
+import { DEFAULT_LANGUAGE, LANGUAGE_KEY_LOCAL_STORAGE, LANGUAGE_OVERRIDES, SUPPORTED_LANGUAGES } from '~/util/constants'
 
 export type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode
@@ -31,15 +32,25 @@ const MfdApp = ({ Component, pageProps }: AppPropsWithLayout) => {
   const { darkMode } = useTheme()
   const mqtt = useMqtt()
   const router = useRouter()
+  const host = typeof router.query.host !== 'string' ?
+    (typeof window !== 'undefined' && window.location.hostname || 'localhost') :
+    router.query.host
+  const port = typeof router.query.port !== 'string' ?
+    9001 : +router.query.port
 
   // connect to mqtt
   useEffect(() => {
-    const host = typeof router.query.host !== 'string' ?
-      (window.location.hostname || 'localhost') : router.query.host;
-    const port = typeof router.query.port !== 'string' ?
-      9001 : +router.query.port;
+    if (!router.isReady) return
     mqtt.boot(host, port)
-  }, [])
+  }, [mqtt, host, port, router.isReady])
+
+  // automatically use language from the GX device
+  useLanguage({
+    defaultLanguage: DEFAULT_LANGUAGE,
+    supportedLanguages: SUPPORTED_LANGUAGES,
+    localStorageKey: LANGUAGE_KEY_LOCAL_STORAGE,
+    onLangChange: (newLanguage: string) => onLanguageChange(router, newLanguage),
+  })
 
   // try to use layout defined at the page level, if available
   const getLayout = useMemo(() => {
@@ -51,6 +62,17 @@ const MfdApp = ({ Component, pageProps }: AppPropsWithLayout) => {
       {getLayout(<Component {...pageProps} />)}
     </main>
   )
+}
+
+const onLanguageChange = async (router: NextRouter, newLanguage: string) => {
+  const { pathname, query, asPath } = router;
+  const currentLanguage = localStorage.getItem(LANGUAGE_KEY_LOCAL_STORAGE) || DEFAULT_LANGUAGE
+
+  if (newLanguage === currentLanguage) return;
+
+  await router.push({ pathname, query }, asPath, {
+    locale: LANGUAGE_OVERRIDES[newLanguage] ?? newLanguage
+  })
 }
 
 export default appWithTranslation(observer(MfdApp))

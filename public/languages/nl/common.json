@@ -178,6 +178,8 @@
         "batteryWithName": "Accu : %{name}",
         "chargerWithName": "Lader naam",
         "dcLoads": "DC Belastingen",
+        "energy": "Energie",
+        "EnergyOverview": "Energie Overzicht",
         "generator": "Aggregaat",
         "generatorInput": "Aggregaat",
         "gridInput": "Net",
