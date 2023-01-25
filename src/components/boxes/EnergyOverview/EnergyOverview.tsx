@@ -21,6 +21,7 @@ import {
 import EnergyActiveInput from '~/components/boxes/EnergyActiveInput'
 import { observer } from 'mobx-react-lite'
 import { AC_SOURCE, ACTIVE_INPUT } from '~/utils/constants'
+import { useTranslation } from 'next-i18next'
 
 const EnergyOverview = ({ mode = 'compact' }: BoxProps) => {
   const router = useRouter()
@@ -29,11 +30,12 @@ const EnergyOverview = ({ mode = 'compact' }: BoxProps) => {
   const acLoads = useAcLoads()
   const dcLoads = useDcLoads()
   const pvCharger = usePvCharger()
+  const { t } = useTranslation()
 
   if (mode === 'compact') {
     return (
       <Box
-        title={'Energy'}
+        title={t('boxes.energy')}
         icon={<EnergyIcon className={'w-6 text-black dark:text-white'} />}
         onExpandClick={() => router.push(`${RouterPath.BOX}/EnergyOverview`)}
       >

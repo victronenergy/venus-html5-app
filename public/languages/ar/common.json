@@ -1,0 +1,193 @@
+{
+    "acMode": {
+        "modal": {
+            "name": "تحديد الوضع",
+            "updateLimit": "تحديد حد المدخل الشاطئي"
+        },
+        "title": "وضع التيار المتردد"
+    },
+    "cardFooter": {
+        "Charge": "شحن",
+        "Critical": "حساس",
+        "Optimal": "نموذجي",
+        "Status": "الحالة",
+        "Warning": "تحذير"
+    },
+    "common": {
+        "absorptionCharging": "شحن الامتصاص",
+        "assisting": "مساندة",
+        "autoStartStop": "بدء/ توقف آلي",
+        "bulkCharging": "الشحن المبدئي",
+        "charge": "تحميل",
+        "chargerOnly": "الشاحن فقط",
+        "charging": "جاري الشحن",
+        "current": "التيار",
+        "days": "أيام",
+        "discharge": "تفريغ",
+        "discharging": "جاري تفريغ الشحن",
+        "eco": "بيئة",
+        "emptyBar": " - ",
+        "equalisationCharging": "الشحن المتوازن",
+        "error": "خطأ",
+        "fault": "خلل",
+        "floatCharging": "الشحن العائم",
+        "hours": "ساعات",
+        "idle": "ساكن",
+        "inputLimit": "حد المدخلات",
+        "inverterOnly": "محول التردد فقط",
+        "inverting": "عكس",
+        "limit": "حد",
+        "lowPower": "طاقة منخفضة",
+        "minutes": "دقائق",
+        "mode": "وضع",
+        "noShorePower": "لا توجد طاقة شاطئية",
+        "notAvailable": "غير متوفر",
+        "nrOfPhases": "%{phases} أطوار",
+        "null": " ",
+        "off": "مطفأ",
+        "on": "مشغل",
+        "passthru": "اختراق",
+        "powerSupplyMode": "وضع إمدادات الطاقة",
+        "remainingTime": "الوقت المتبقي",
+        "running": "مشغل",
+        "standby": "انتظار",
+        "starting": "بدء",
+        "stopped": "متوقف",
+        "stopping": "توقف",
+        "storageMode": "وضع التخزين",
+        "sustain": "محافظة ",
+        "unplugged": "مفصول",
+        "veBusFault": "حالة تعطل VE.Bus",
+        "voltage": "الجهد الكهربائي"
+    },
+    "error": {
+        "errorWithMessage": "خطأ: %{message}",
+        "genericMessage": "حدث خطأ في أثناء عرض التطبيق. حاول إعادة تحميل الصفحة أو الاتصال بفيكترون إينرجي باستخدام المعلومات التالية:",
+        "marine": {
+            "cta": "أرسل تقرير الخطأ مباشرة إلى فريق دعم فيكترون إينرجي:",
+            "dataCharges": "تطبق رسوم البيانات القياسية.",
+            "estimate": "البيانات المقدرة: %{size} بايت",
+            "hint": "حاول إعادة تحميل الصفحة أو الاتصال بفيكترون إينرجي باستخدام المعلومات التالية:",
+            "ignore": "تجاهل الخطأ",
+            "sendReport": "إرسال تقرير خطأ",
+            "title": "حدث خطأ في أثناء عرض التطبيق."
+        },
+        "mqttUnavailable1": "لا يمكن الاتصال بوحدة خدمة MQTT",
+        "mqttUnavailable2": "يرجى التحقق من تفعيل MQTT في إعداداتك:",
+        "mqttUnavailable3": "وحدة التحكم عن بعد < إعدادات < الخدمات < MQTT أو الشبكة المحلية (نص عادي)",
+        "mqttUnavailable4": "حاول استخدام زر \"وحدة التحكم عن بعد\" أعلى هذه الشاشة لتغيير إعداداتك عن بعد.",
+        "mqttUnavailable5": "يمكنك كذلك محاول الاتصال بجهازك عن بعد من خلال تحديد \"عن بعد\" من القائمة أعلاه.",
+        "queryParams": "معاملات الاستعلام: %{queryParams}",
+        "userAgent": "وكيل المستخدم: %{userAgent}",
+        "windowSize": "إطار: %{width} x %{height}"
+    },
+    "generator": {
+        "fisherPandaAutoStartMessage": "تم تعطيل إمكانية البدء الآلي لفيشر باندا في الوقت الحالي، قم بتشغيلها على لوحة مجموعة المولد بهدف التحكم في مجموعة المولد من هذه اللوحة.",
+        "temperature": {
+            "coolant": "سائل التبريد",
+            "exhaust": "عادم",
+            "winding": "حلزوني"
+        }
+    },
+    "header": {
+        "close": "إغلاق",
+        "connecting": "جاري الاتصال",
+        "local": "محلي",
+        "loggedIn": "تسجيل الدخول كـ",
+        "notLoggedIn": "لم يتم تسجيل الدخول في",
+        "remote": "عن بعد",
+        "remoteConsole": "وحدة التحكم عن بعد",
+        "remoteMessage": "مفتوح في شاشة أكبر لعرض وحدة التحكم عن بعد",
+        "versionInfo": "معلومات النسخة"
+    },
+    "installations": {
+        "title": "اختيار تثبيت"
+    },
+    "locker": {
+        "lockMessage": "القفل لمنع التغييرات",
+        "unlockMessage": "الفتح لإجراء تغييرات "
+    },
+    "noWidgets": {
+        "subtitle": "تأكد من توصيل أجهزتك بشكل مناسب",
+        "title": "لوحة القياس الخاصة بك فارغة"
+    },
+    "remoteLogin": {
+        "2fa": "رمز التوثيق ذي معاملين",
+        "email": "بريد إلكتروني",
+        "forgotPassword": "هل نسيت كلمة المرور؟",
+        "goBack": "العودة",
+        "logIn": "تسجيل الدخول",
+        "logOut": "تسجيل الخروج",
+        "loginFailed": "فشل تسجيل الدخول",
+        "mobileVerification": "رمز تطبيق الموثق",
+        "noInstallations": "لا يتضمن هذا الحساب أية أعمال تركيب.",
+        "password": "كلمة المرور",
+        "registerMessage1": "أليس لديك حسابًا حتى الآن؟ ",
+        "registerMessage2": "تسجيل المقاوم المتغير الخاص بك.",
+        "smsVerification": "رمز التحقق بالرسائل النصية القصيرة",
+        "wrong2fa": "رمز تحقق عاملين خاطئ"
+    },
+    "status": {
+        "Absorption charging": "شحن الامتصاص",
+        "Assisting": "المساندة",
+        "Bulk charging": "الشحن المبدئي",
+        "Discharging": "تفريغ الشحن",
+        "Equalisation charging": "الشحن المتوازن",
+        "Float charging": "الشحن المساند",
+        "Inverting": "العكس",
+        "Low power": "طاقة منخفضة",
+        "Off": "مطفأ",
+        "Passthru": "الاختراق",
+        "Storage mode": "وضع التخزين",
+        "Sustain": "محافظة ",
+        "VE.Bus Fault condition": "حالة تعطل VE.Bus",
+        "parts": {
+            "Battery": "بطارية",
+            "Black water": "المياه السوداء",
+            "DC Loads": "أحمال التيار المستمر",
+            "Fresh water": "ماء نقي",
+            "Fuel": "وقود",
+            "Live well": "حياة جيدة",
+            "Oil": "زيت",
+            "PV Charger": "شاحن كهروضوئي",
+            "Shore Power": "الطاقة الشاطئية",
+            "Tank sensor": "حساس الخزان",
+            "Waste water": "مياه الصرف"
+        }
+    },
+    "tank": {
+        "Black water": "مياه سوداء",
+        "Fresh water": "ماء نقي",
+        "Fuel": "وقود",
+        "Live well": "حياة جيدة",
+        "Oil": "زيت",
+        "Tank sensor": "حساس الخزان",
+        "Waste water": "مياه صرف"
+    },
+    "versionInfo": {
+        "buildDate": "تاريخ الإنشاء",
+        "identifier": "المعرف",
+        "venusOs": "نظام تشغيل فينوس",
+        "version": "النسخة %{version}",
+        "vrmPortID": "رمز موقع في آر إم"
+    },
+    "boxes": {
+        "acLoads": "أحمال التيار المناوب",
+        "batteries": "بطاريات",
+        "battery": "بطارية",
+        "batteryWithName": "بطارية: %{name}",
+        "chargerWithName": "شاحن: %{productNameShort}",
+        "dcLoads": "أحمال التيار المستمر",
+        "generator": "مولد",
+        "generatorInput": "مدخلات المولد",
+        "gridInput": "مدخلات الشبكة",
+        "invalidConfig": "إعداد غير صالح",
+        "inverterCharger": "محول تردد/ شاحن: %{productNameShort}",
+        "inverterWithName": "محول تردد: %{productNameShort}",
+        "pvCharger": "شاحن كهروضوئي",
+        "shorePower": "الطاقة الشاطئية",
+        "solar": "شمسي",
+        "status": "الحالة",
+        "unknown": "مجهول"
+    }
+}

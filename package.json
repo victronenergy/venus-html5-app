@@ -7,18 +7,22 @@
     "start": "next start",
     "b+s": "next build && next start",
     "lint": "next lint",
-    "export": "next build && next export"
+    "export": "next build && next export",
+    "poeditor:pull": "node poeditor/pull.js",
+    "poeditor:push": "node poeditor/push.js"
   },
   "dependencies": {
-    "@elninotech/mfd-modules": "^3.0.0",
+    "@elninotech/mfd-modules": "^3.0.2",
     "@next/font": "^13.0.5",
     "classnames": "^2.3.2",
+    "dotenv": "^16.0.3",
     "localforage": "^1.10.0",
     "mobx": "^6.7.0",
     "mobx-persist-store": "^1.1.2",
     "mobx-react": "^7.6.0",
     "mobx-utils": "^6.0.5",
     "next": "^13.0.5",
+    "next-i18next": "^13.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

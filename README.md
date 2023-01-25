@@ -90,7 +90,7 @@ and multiple split screen variations available relative to the "base" size.
 To run this ui it is recommended to use mocked data. Run the mocked mqtt as described above and navigate to the radiator ui with `http://localhost/radiator.html`.
 Since it is still served through the webpack dev server, the app will hot reload any time there are code changes.
 
-## 2.5 Metrics available
+### 2.5 Metrics available
 
 - Identify the D-bus channel that you want to read [from here](https://github.com/victronenergy/venus/wiki/dbus)
 - Create a component using MqttSubscriptions or MqttTopicWildcard and pass the topic as the wrapper topi. See examples in other components
