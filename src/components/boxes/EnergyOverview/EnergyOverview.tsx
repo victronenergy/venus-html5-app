@@ -10,28 +10,24 @@ import EnergySolar from '~/components/boxes/EnergySolar/EnergySolar'
 import { RouterPath } from '~/types/routes'
 import {
   AcLoadsState,
-  ActiveSourceState,
   DcLoadsState, PvChargerState,
   useAcLoads,
-  useActiveSource,
   useDcLoads,
-  usePvCharger,
+  usePvCharger, useShorePowerInput,
   useVebus
 } from '@elninotech/mfd-modules'
-import EnergyActiveInput from '~/components/boxes/EnergyActiveInput'
+import EnergyShore from '~/components/boxes/EnergyShore'
 import { observer } from 'mobx-react-lite'
-import { AC_SOURCE, ACTIVE_INPUT } from '~/utils/constants'
 import { useTranslation } from 'next-i18next'
 
 const EnergyOverview = ({ mode = 'compact' }: BoxProps) => {
   const router = useRouter()
   const vebus = useVebus() // We need this hook to enable some MQTT subscriptions
-  const activeSource = useActiveSource()
+  const { inputId: shoreInputId } = useShorePowerInput()
   const acLoads = useAcLoads()
   const dcLoads = useDcLoads()
   const pvCharger = usePvCharger()
   const { t } = useTranslation()
-
   if (mode === 'compact') {
     return (
       <Box
@@ -40,7 +36,7 @@ const EnergyOverview = ({ mode = 'compact' }: BoxProps) => {
         onExpandClick={() => router.push(`${RouterPath.BOX}/EnergyOverview`)}
       >
         <>{
-          getAvailableEnergyBoxes(mode, activeSource, acLoads, pvCharger, dcLoads)
+          getAvailableEnergyBoxes(mode, shoreInputId, acLoads, pvCharger, dcLoads)
         }</>
       </Box>
     )
@@ -48,23 +44,22 @@ const EnergyOverview = ({ mode = 'compact' }: BoxProps) => {
 
   return (
     <Grid>{
-      getAvailableEnergyBoxes(mode, activeSource, acLoads, pvCharger, dcLoads)
+      getAvailableEnergyBoxes(mode, shoreInputId, acLoads, pvCharger, dcLoads)
     }</Grid>
   )
 }
 
 const getAvailableEnergyBoxes = function (
   mode: 'compact' | 'full' | undefined,
-  activeSource: ActiveSourceState,
+  shoreInputId: number | null | undefined,
   acLoads: AcLoadsState,
   pvCharger: PvChargerState,
   dcLoads: DcLoadsState
 ) {
   const boxes = [];
 
-  const activeInputType = getInputType(activeSource.activeInput, activeSource.settings)
-  if (activeInputType !== null) {
-    boxes.push(<EnergyActiveInput mode={mode} inputType={activeInputType} source={activeSource}/>)
+  if (shoreInputId) {
+    boxes.push(<EnergyShore mode={mode} inputId={shoreInputId} />)
   }
 
   if ((pvCharger.current || pvCharger.current === 0) &&
@@ -80,18 +75,6 @@ const getAvailableEnergyBoxes = function (
   }
 
   return boxes;
-}
-
-/*
-  Returns the type of the active input, if none shore, if that is not found
-  then grid, and otherwise null.
- */
-const getInputType = function (activeInput: number, settings: number[]) {
-  if (activeInput && activeInput !== ACTIVE_INPUT.NONE) {
-    return settings[activeInput]
-  }
-  return settings.find(input => input === AC_SOURCE.SHORE) ??
-    settings.find(input => input === AC_SOURCE.GRID) ?? null
 }
 
 export default observer(EnergyOverview)
