@@ -11,6 +11,7 @@ import { RouterPath } from '~/types/routes'
 import { useRouter } from 'next/router'
 import AuxiliaryBatteries from '~/components/boxes/AuxiliaryBatteries'
 import { useTranslation } from 'next-i18next'
+import BatteriesIcon from '~/public/icons/batteries.svg'
 
 const BatteriesOverview = ({ mode = 'compact' }: BoxProps) => {
   const { batteries } = useBattery()
@@ -28,6 +29,7 @@ const BatteriesOverview = ({ mode = 'compact' }: BoxProps) => {
   if (mode === 'compact') {
     return (
       <Box
+        icon={<BatteriesIcon className={'w-6 text-victron-gray dark:text-victron-gray-dark'} />}
         title={t('boxes.batteries')}
         onExpandClick={() => router.push(`${RouterPath.BOX}/BatteriesOverview`)}
       >
