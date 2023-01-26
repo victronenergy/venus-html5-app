@@ -97,12 +97,28 @@ const getAvailableEnergyBoxes = function (
     boxes.push(<EnergyDC mode={mode} dcLoads={dcLoads} />)
   }
 
-  if (alternators && alternators.length > 0) {
-    boxes.push(<EnergyAlternator mode={mode} alternators={alternators} />)
+  const alternatorsPresent = alternators.filter(v => v || v === 0)
+  if (alternatorsPresent && alternatorsPresent.length > 0) {
+    boxes.push(...alternatorsPresent.map(alternator =>
+      <EnergyAlternator
+        key={alternator}
+        mode={mode}
+        alternator={alternator ?? 0}
+        showInstance={alternators.length > 1}
+      />
+    ))
   }
 
-  if (windGenerators && windGenerators.length > 0) {
-    boxes.push(<EnergyWind mode={mode} windGenerators={windGenerators} />)
+  const windGeneratorsPresent = windGenerators.filter(v => v || v === 0)
+  if (windGeneratorsPresent && windGeneratorsPresent.length > 0) {
+    boxes.push(...windGeneratorsPresent.map(windGenerator =>
+      <EnergyWind
+        key={windGenerator}
+        mode={mode}
+        windGenerator={windGenerator ?? 0}
+        showInstance={alternators.length > 1}
+      />
+    ))
   }
 
   return boxes;
