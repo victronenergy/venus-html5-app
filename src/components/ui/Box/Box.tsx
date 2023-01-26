@@ -1,8 +1,9 @@
 import React from 'react'
 import classNames from 'classnames'
 import ArrowRightIcon from '~/public/icons/arrow-right.svg'
+import Link from '~/components/ui/Link'
 
-const Box = ({ children, icon, title, className, onExpandClick }: Props) => {
+const Box = ({ children, icon, title, className, onExpandHref }: Props) => {
   return (
     <div
       className={classNames(
@@ -15,10 +16,10 @@ const Box = ({ children, icon, title, className, onExpandClick }: Props) => {
           {icon && <span className={'mr-1'}>{icon}</span>}
           <span className={'text-2xl'}>{title}</span>
         </div>
-        {onExpandClick && (
-          <div onClick={onExpandClick}>
+        {onExpandHref && (
+          <Link href={onExpandHref} shallow={true}>
             <ArrowRightIcon className={'w-6 text-victron-blue dark:text-victron-blue-dark cursor-pointer'} />
-          </div>
+          </Link>
         )}
       </div>
       <div className={'w-full h-full pt-2'}>{children}</div>
@@ -30,7 +31,7 @@ interface Props {
   children: JSX.Element | string
   icon?: JSX.Element
   title: string
-  onExpandClick?: () => void
+  onExpandHref?: string
   className?: string
   headerActions?: JSX.Element
 }
