@@ -9,16 +9,18 @@ import EnergyDC from '~/components/boxes/EnergyDC/EnergyDC'
 import EnergySolar from '~/components/boxes/EnergySolar/EnergySolar'
 import { RouterPath } from '~/types/routes'
 import {
-  AcLoadsState,
+  AcLoadsState, AlternatorId,
   DcLoadsState, PvChargerState,
-  useAcLoads,
+  useAcLoads, useAlternators,
   useDcLoads,
   usePvCharger, useShorePowerInput,
-  useVebus
+  useVebus, useWindGenerators, WindGeneratorId
 } from '@elninotech/mfd-modules'
 import EnergyShore from '~/components/boxes/EnergyShore'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'next-i18next'
+import EnergyWind from '~/components/boxes/EnergyWind'
+import EnergyAlternator from '~/components/boxes/EnergyAlternator'
 
 const EnergyOverview = ({ mode = 'compact' }: BoxProps) => {
   const router = useRouter()
@@ -27,7 +29,10 @@ const EnergyOverview = ({ mode = 'compact' }: BoxProps) => {
   const acLoads = useAcLoads()
   const dcLoads = useDcLoads()
   const pvCharger = usePvCharger()
+  const { alternators } = useAlternators()
+  const { windGenerators } = useWindGenerators()
   const { t } = useTranslation()
+
   if (mode === 'compact') {
     return (
       <Box
@@ -36,7 +41,15 @@ const EnergyOverview = ({ mode = 'compact' }: BoxProps) => {
         onExpandClick={() => router.push(`${RouterPath.BOX}/EnergyOverview`)}
       >
         <>{
-          getAvailableEnergyBoxes(mode, shoreInputId, acLoads, pvCharger, dcLoads)
+          getAvailableEnergyBoxes(
+            mode,
+            shoreInputId,
+            acLoads,
+            pvCharger,
+            dcLoads,
+            alternators,
+            windGenerators
+          )
         }</>
       </Box>
     )
@@ -44,7 +57,15 @@ const EnergyOverview = ({ mode = 'compact' }: BoxProps) => {
 
   return (
     <Grid>{
-      getAvailableEnergyBoxes(mode, shoreInputId, acLoads, pvCharger, dcLoads)
+      getAvailableEnergyBoxes(
+        mode,
+        shoreInputId,
+        acLoads,
+        pvCharger,
+        dcLoads,
+        alternators,
+        windGenerators
+      )
     }</Grid>
   )
 }
@@ -54,7 +75,9 @@ const getAvailableEnergyBoxes = function (
   shoreInputId: number | null | undefined,
   acLoads: AcLoadsState,
   pvCharger: PvChargerState,
-  dcLoads: DcLoadsState
+  dcLoads: DcLoadsState,
+  alternators: AlternatorId[],
+  windGenerators: WindGeneratorId[]
 ) {
   const boxes = [];
 
@@ -72,6 +95,14 @@ const getAvailableEnergyBoxes = function (
   if ((dcLoads.current || dcLoads.current === 0) &&
     (dcLoads.voltage || dcLoads.voltage === 0)) {
     boxes.push(<EnergyDC mode={mode} dcLoads={dcLoads} />)
+  }
+
+  if (alternators && alternators.length > 0) {
+    boxes.push(<EnergyAlternator mode={mode} alternators={alternators} />)
+  }
+
+  if (windGenerators && windGenerators.length > 0) {
+    boxes.push(<EnergyWind mode={mode} windGenerators={windGenerators} />)
   }
 
   return boxes;

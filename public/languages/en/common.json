@@ -173,6 +173,7 @@
     },
     "boxes": {
         "acLoads": "AC Loads",
+        "alternator": "Alternator",
         "batteries": "Batteries",
         "battery": "Battery",
         "batteryWithName": "Battery: %{name}",
@@ -190,7 +191,8 @@
         "shorePower": "Shore Power",
         "solar": "Solar",
         "status": "Status",
-        "unknown": "Unknown"
+        "unknown": "Unknown",
+        "windGenerator": "Wind Generator"
     },
     "pages": {
         "systemOverview": "System Overview"
