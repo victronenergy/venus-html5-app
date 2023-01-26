@@ -222,3 +222,29 @@ By adding `debug=true` to the query params you can enable some convenience featu
 - A debug log element, which redirects all console messages to a visible element in the ui
 
 To enable this on a device set the debugReload and debugLog elements to visible in index.html and deploy to the device.
+
+
+## 7. Theming
+
+The app supports theming. We try to use the [default](https://tailwindcss.com/docs/theme) Tailwind theme settings as much as possible. The theme overrides is defined in the `tailwing.config.js` file.
+
+### 7.1. Colors
+
+Theme support dark and light mode. To add support of the dark mode to a Component, add the `dark:{param}` classes to the `html` elements. Every color, except white and black, has its corresponding value for the dark theme mode. For example
+
+```html
+<div className="bg-victron-white text-victron-black dark:bg-victron-black dark:text-victron-white">
+    <div>Normal text</div>
+    <div className="text-victron-green dark:text-victron-green-dark">Green color for light and dark theme</div>
+</div>
+```
+
+The dark mode is enabled by default on the Venus GX devices.
+
+### 7.2. Icons
+
+Icons are defined in the `public/icons` folder. Icons don't have predefined sizes and colors. To set the size and color of the icon, use the appropriate Tailwind classes. For example
+
+```html
+<ExpandIcon className='w-6 text-victron-blue dark:text-victron-blue-dark cursor-pointer' />
+```
