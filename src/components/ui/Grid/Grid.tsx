@@ -2,7 +2,7 @@ import React, { useLayoutEffect, useRef, useState } from 'react'
 import classnames from 'classnames'
 import { useComponentSize } from '~/utils/hooks'
 
-const Grid = ({ children, className, flow = 'row', gapWidth = 'small', forceOneDimensionRatio = 3 }: Props) => {
+const Grid = ({ children, className, flow = 'row', forceOneDimensionRatio = 3 }: Props) => {
   const childrenCount = Array.isArray(children) ? children.length : 1
 
   const gridRef = useRef<HTMLDivElement>(null)
@@ -35,10 +35,6 @@ const Grid = ({ children, className, flow = 'row', gapWidth = 'small', forceOneD
           // base direction
           'grid-flow-col': gridFlow === 'col',
           'grid-flow-row': gridFlow === 'row',
-          // gaps
-          'gap-2': gapWidth === 'small',
-          'gap-4': gapWidth === 'medium',
-          'gap-8': gapWidth === 'large',
           // columns
           'grid-cols-1': gridFlow === 'row' && childrenCount <= 1,
           'grid-rows-1': gridFlow === 'col' && childrenCount <= 1,
@@ -74,7 +70,6 @@ interface Props {
   onClick?: () => void
   className?: string
   flow?: 'row' | 'col'
-  gapWidth?: 'none' | 'small' | 'medium' | 'large'
   /** Force the grid to use only 1 row or column if the ratio of the grid is higher than this value */
   forceOneDimensionRatio?: number
 }
