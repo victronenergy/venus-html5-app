@@ -85,11 +85,6 @@ const getAvailableEnergyBoxes = function (
     boxes.push(<EnergyShore mode={mode} inputId={shoreInputId} />)
   }
 
-  if ((pvCharger.current || pvCharger.current === 0) &&
-    (pvCharger.power || pvCharger.power === 0)) {
-    boxes.push(<EnergySolar mode={mode} pvCharger={pvCharger} />)
-  }
-
   if (acLoads.phases) boxes.push(<EnergyAC mode={mode} acLoads={acLoads} />)
 
   if ((dcLoads.current || dcLoads.current === 0) &&
@@ -97,11 +92,16 @@ const getAvailableEnergyBoxes = function (
     boxes.push(<EnergyDC mode={mode} dcLoads={dcLoads} />)
   }
 
+  if ((pvCharger.current || pvCharger.current === 0) &&
+    (pvCharger.power || pvCharger.power === 0)) {
+    boxes.push(<EnergySolar mode={mode} pvCharger={pvCharger} />)
+  }
+
   const alternatorsPresent = alternators.filter(v => v || v === 0)
   if (alternatorsPresent && alternatorsPresent.length > 0) {
     boxes.push(...alternatorsPresent.map(alternator =>
       <EnergyAlternator
-        key={alternator}
+        key={`alternator_${alternator}`}
         mode={mode}
         alternator={alternator ?? 0}
         showInstance={alternators.length > 1}
@@ -113,7 +113,7 @@ const getAvailableEnergyBoxes = function (
   if (windGeneratorsPresent && windGeneratorsPresent.length > 0) {
     boxes.push(...windGeneratorsPresent.map(windGenerator =>
       <EnergyWind
-        key={windGenerator}
+        key={`wind_${windGenerator}`}
         mode={mode}
         windGenerator={windGenerator ?? 0}
         showInstance={alternators.length > 1}

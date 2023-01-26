@@ -7,8 +7,9 @@ import { useTranslation } from 'next-i18next'
 import { observer } from 'mobx-react-lite'
 
 const EnergyWind = ({ mode = 'compact', windGenerator, showInstance }: Props) => {
-  const { current } = useWindGenerator(windGenerator)
-  const instance = showInstance ? ` [${windGenerator}]` : null
+  const { current, voltage } = useWindGenerator(windGenerator)
+  const instance = showInstance ? ` [${windGenerator}]` : ''
+  const power = current * voltage
   const { t } = useTranslation()
 
   if (mode === 'compact') {
@@ -25,6 +26,8 @@ const EnergyWind = ({ mode = 'compact', windGenerator, showInstance }: Props) =>
       icon={<WindIcon className={'w-6 text-black dark:text-white'} />}
     >
       <>
+        <p>{ Math.round(current) }A</p>
+        <p>{ Math.round(power) }W</p>
       </>
     </Box>
   )

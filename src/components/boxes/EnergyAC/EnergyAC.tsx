@@ -7,10 +7,18 @@ import { useTranslation } from 'next-i18next'
 
 const EnergyAC = ({ mode = 'compact', acLoads }: Props) => {
   const { current, power, phases, voltage } = acLoads
+  const totalPower = power.reduce(
+    (total, power) => power ? total + power : total
+  )
   const { t } = useTranslation()
 
   if (mode === 'compact') {
-    return <p>{t('boxes.acLoads')}: {current.slice(0, phases ?? 1).map(c => c ? c + 'A ' : '--A ')}</p>
+    return <p>{t('boxes.acLoads') + ': '}
+      {(phases ?? 1) === 1 ?
+        (current[0] ?? '--') + 'A' :
+        (totalPower ?? '--') + 'W'
+      }
+    </p>
   }
 
   return <Box title={t('boxes.acLoads')} icon={<EnergyIcon className={'w-6 text-black dark:text-white'} />}>
