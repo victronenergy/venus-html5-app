@@ -1,4 +1,4 @@
-import { RefObject, useCallback, useLayoutEffect, useState } from 'react'
+import { RefObject, useCallback, useEffect, useState } from 'react'
 
 export const useWindowSize = () => {
   const [windowSize, setWindowSize] = useState<{ width?: number; height?: number }>({
@@ -6,7 +6,7 @@ export const useWindowSize = () => {
     height: undefined,
   })
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     let isMounted = true
 
     function handleResize() {
@@ -47,7 +47,7 @@ export const useComponentSize = (ref: RefObject<HTMLElement>) => {
     })
   }, [ref])
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     handleResize()
     window.addEventListener('resize', handleResize)
 

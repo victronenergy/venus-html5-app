@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import classnames from 'classnames'
 import { useComponentSize } from '~/utils/hooks'
 
@@ -11,7 +11,7 @@ const Grid = ({ children, className, flow = 'row', forceOneDimensionRatio = 3 }:
   const [gridFlow, setGridFlow] = useState<'row' | 'col'>(flow)
   const [forceOneDimension, setForceOneDimension] = useState(false)
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!gridSize.width || !gridSize.height || forceOneDimensionRatio <= 0) {
       return
     }
