@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react'
 import PageSelector from '~/components/ui/PageSelector'
 import classnames from 'classnames'
-import useWindowSize from '~/hooks/useWindowSize'
+import useWindowSize from '~/utils/hooks/useWindowSize'
 
 const Paginator = ({ children, orientation = 'horizontal', selectorLocation = 'bottom-full' }: Props) => {
   const childrenArray = Array.isArray(children) ? children : [children]
