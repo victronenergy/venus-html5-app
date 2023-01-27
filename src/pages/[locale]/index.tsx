@@ -19,9 +19,18 @@ const Home: NextPageWithLayout = ({}) => {
   const getBoxes = (type: 'simple' | 'absolute') => {
     switch (type) {
       case 'simple':
-        return [<EnergyOverview />, <BatteriesOverview />, <TanksOverview />]
+        return [
+          <EnergyOverview key={'energy'} />,
+          <BatteriesOverview key={'batteries'} />,
+          <TanksOverview key={'tanks'} />
+        ]
       case 'absolute':
-        return [<EnergyOverview />, <BatteriesOverview />, <DevicesOverview />, <TanksOverview />]
+        return [
+          <EnergyOverview key={'energy'} />,
+          <BatteriesOverview key={'batteries'} />,
+          <DevicesOverview key={'devices'} />,
+          <TanksOverview key={'tanks'} />
+        ]
     }
 
     return []

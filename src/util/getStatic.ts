@@ -3,7 +3,7 @@ import { GetStaticPropsContext } from 'next'
 import { DEFAULT_LANGUAGE } from '~/util/constants'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
-export const getI18nPaths = function (): { params: { [k: string]: string | number | [] } }[] {
+export const getI18nPaths = function (): { params: { [k: string]: any } }[] {
   return i18nextConfig.i18n.locales.map((locale) => ({
     params: {
       locale: locale

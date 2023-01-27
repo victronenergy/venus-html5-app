@@ -8,6 +8,8 @@ import { BoxProps } from '~/types/boxes'
 import { useStore } from '~/stores'
 import { useTranslation } from 'next-i18next'
 import { makeStaticProps, getStaticPaths as makeStaticPaths } from '~/util/getStatic'
+import * as fs from 'fs'
+import { BOX_DIRECTORY } from '~/util/constants'
 
 const BoxPage: NextPageWithLayout = () => {
   const router = useRouter()
@@ -26,7 +28,7 @@ const BoxPage: NextPageWithLayout = () => {
     return null
   }
 
-  const BoxItem: ComponentType<BoxProps> = dynamic(() => import(`~/components/boxes/${name}`), {
+  const BoxItem: ComponentType<BoxProps> = dynamic(() => import(BOX_DIRECTORY + name), {
     ssr: false,
   })
 
@@ -40,12 +42,17 @@ const BoxPage: NextPageWithLayout = () => {
 const getStaticProps = makeStaticProps()
 const getStaticPaths = () => {
   const obj = makeStaticPaths()
-  obj.paths = obj.paths.map(
-    path => {
-      path.params = { name: [], ...path.params }
-      return path
-    }
-  )
+  const boxes = fs.readdirSync(BOX_DIRECTORY)
+  const paths: { params: { [k: string]: any } }[] = []
+  obj.paths.forEach(path => {
+    paths.push(...boxes.map(box => ({
+      params: {
+        name: [box],
+        ...path.params
+      }
+    })))
+  })
+  obj.paths = paths
   return obj
 }
 export { getStaticPaths, getStaticProps }
