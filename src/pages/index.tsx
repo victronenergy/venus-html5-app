@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { DEFAULT_LANGUAGE, LANGUAGE_KEY_LOCAL_STORAGE } from '~/util/constants'
+import { DEFAULT_LANGUAGE, LANGUAGE_KEY_LOCAL_STORAGE } from '~/utils/constants'
 import { useEffect } from 'react'
 
 const Redirect = () => {

@@ -9,7 +9,7 @@ import { useTranslation } from 'next-i18next'
 import TanksOverview from '~/components/boxes/TanksOverview'
 import BatteriesOverview from '~/components/boxes/BatteriesOverview'
 import DevicesOverview from '~/components/boxes/DevicesOverview'
-import { getStaticPaths, makeStaticProps } from '~/util/getStatic'
+import { getStaticPaths, makeStaticProps } from '~/utils/getStatic'
 
 const Home: NextPageWithLayout = ({}) => {
   const { navigationStore } = useStore()
@@ -22,14 +22,14 @@ const Home: NextPageWithLayout = ({}) => {
         return [
           <EnergyOverview key={'energy'} />,
           <BatteriesOverview key={'batteries'} />,
-          <TanksOverview key={'tanks'} />
+          <TanksOverview key={'tanks'} />,
         ]
       case 'absolute':
         return [
           <EnergyOverview key={'energy'} />,
           <BatteriesOverview key={'batteries'} />,
           <DevicesOverview key={'devices'} />,
-          <TanksOverview key={'tanks'} />
+          <TanksOverview key={'tanks'} />,
         ]
     }
 
