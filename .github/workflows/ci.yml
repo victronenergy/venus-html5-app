@@ -118,7 +118,7 @@ jobs:
       - name: Build the test bundle
         run: npm run build
         env:
-          BASE_PATH: /
+          BASE_PATH: ''
       - name: Serve the application
         run: npm run start &
       - name: Run the Venus simulation
