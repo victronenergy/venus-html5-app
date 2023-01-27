@@ -191,5 +191,8 @@
         "solar": "Zon",
         "status": "Status",
         "unknown": "Onbekend"
+    },
+    "pages": {
+        "systemOverview": "Systeem Overzicht"
     }
 }
