@@ -3,7 +3,8 @@ services:
   nginx: # Make sure you run "npm run export" to generate the files
     image: nginx:stable-alpine
     ports:
-      - "3001:80"
+      - "3001:3001"
     volumes:
-      - ./out:/usr/share/nginx/html
+      - ./out:/usr/share/nginx/html/app
+      - ./docker/nginx/venus.conf:/etc/nginx/conf.d/venus.conf
 
