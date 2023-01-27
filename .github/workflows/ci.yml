@@ -120,7 +120,7 @@ jobs:
         env:
           BASE_PATH: ''
       - name: Serve the application
-        run: npm run start &
+        run: npm run start -p 8000 &
       - name: Run the Venus simulation
         run: >
           docker run -d --rm -p 9001:9001 -p 1883:1883 -p 3000:3000 -p 8080:80
