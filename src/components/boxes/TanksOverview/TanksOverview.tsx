@@ -1,30 +1,48 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Box from '~/components/ui/Box'
-import { BoxProps } from '~/types/boxes'
-import LevelsIcon from '~/public/icons/levels.svg'
+import TanksIcon from '~/public/icons/tanks.svg'
 import { RouterPath } from '~/types/routes'
 import { withErrorBoundary } from 'react-error-boundary'
 import ErrorFallback from '~/components/ui/ErrorBoundary/ErrorFallback'
+import { useRouter } from 'next/router'
+import { BoxProps } from '~/types/boxes'
+import { useTanks } from '@elninotech/mfd-modules'
+import Tank from '~/components/boxes/Tanks/Tank'
 
 const TanksOverview = ({ mode = 'compact' }: BoxProps) => {
+  const router = useRouter()
+  const { tanks } = useTanks()
+  useEffect(() => {
+    console.log('tanks', tanks)
+  }, [tanks])
+
   if (mode === 'compact') {
     return (
       <Box
         title={'Tanks'}
-        icon={<LevelsIcon className={'w-6 text-victron-gray dark:text-victron-gray-dark'} />}
-        onExpandHref={`${RouterPath.BOX}/TanksOverview`}
+        icon={<TanksIcon className={'w-6 text-black dark:text-white'} />}
+        onExpandHref={`${RouterPath.BOX}/TanksOverview/`}
       >
         <>
-          <div>Tanks compact</div>
+          <div>Tanks</div>
+          <div>
+            {tanks &&
+              tanks.map((tank, index) => {
+                return tank ? <Tank key={index} tankInstanceId={tank} /> : null
+              })}
+          </div>
         </>
       </Box>
     )
   }
 
   return (
-    <Box title={'Tanks'} icon={<LevelsIcon className={'w-6 text-black dark:text-white'} />}>
+    <Box title={'Tanks'} icon={<TanksIcon className={'w-6 text-black dark:text-white'} />}>
       <>
-        <div>Tanks full content</div>
+        {tanks &&
+        tanks.map((tank, index) => {
+          return tank ? <Tank key={index} tankInstanceId={tank} mode='full' /> : null
+        })}
       </>
     </Box>
   )

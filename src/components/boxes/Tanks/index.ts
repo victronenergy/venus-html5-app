@@ -1,2 +1,2 @@
-export { default } from './Tanks'
-export * from './Tanks'
+export { default } from './Tank'
+export * from './Tank'
