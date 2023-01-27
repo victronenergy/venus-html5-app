@@ -33,7 +33,7 @@ const BoxPage: NextPageWithLayout = () => {
   })
 
   return (
-    <div className={'p-4 h-full'}>
+    <div className={'p-4 h-full min-h-0'}>
       <BoxItem mode={'full'} />
     </div>
   )

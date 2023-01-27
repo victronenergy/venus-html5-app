@@ -7,7 +7,7 @@ const Box = ({ children, icon, title, className, onExpandHref }: Props) => {
   return (
     <div
       className={classNames(
-        'w-full h-full p-4 flex flex-col bg-victron-lightGray dark:bg-victron-darkGray rounded-md',
+        'w-full h-full min-h-0 p-4 flex flex-col bg-victron-lightGray dark:bg-victron-darkGray rounded-md',
         className
       )}
     >
@@ -22,7 +22,7 @@ const Box = ({ children, icon, title, className, onExpandHref }: Props) => {
           </Link>
         )}
       </div>
-      <div className={'w-full h-full pt-2'}>{children}</div>
+      <div className={'w-full min-h-0 h-full pt-2'}>{children}</div>
     </div>
   )
 }

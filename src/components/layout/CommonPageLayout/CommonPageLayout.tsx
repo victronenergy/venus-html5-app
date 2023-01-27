@@ -16,7 +16,7 @@ const CommonPageLayout = ({ children }: Props) => {
       </Head>
       <div className='dark:bg-black dark:text-white safe-h-screen min-safe-h-screen flex flex-col'>
         <Header title={navigationStore.title} />
-        <div className={'h-full'}>{children}</div>
+        <div className={'h-full min-h-0'}>{children}</div>
         <Footer />
       </div>
     </>

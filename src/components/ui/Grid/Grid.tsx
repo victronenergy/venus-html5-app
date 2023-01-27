@@ -30,7 +30,7 @@ const Grid = ({ children, className, flow = 'row', forceOneDimensionRatio = 3 }:
     <div
       ref={gridRef}
       className={classnames(
-        'h-full w-full grid auto-rows-fr auto-cols-fr',
+        'h-full min-h-0 w-full grid auto-rows-fr auto-cols-fr',
         {
           // base direction
           'grid-flow-col': gridFlow === 'col',
@@ -49,7 +49,7 @@ const Grid = ({ children, className, flow = 'row', forceOneDimensionRatio = 3 }:
         // TODO: display max 4 children and show navigation element for rest
         children.map((child, i) => (
           <div
-            className={classnames('w-full h-full', {
+            className={classnames('w-full min-h-0 h-full', {
               'col-span-2': !forceOneDimension && gridFlow === 'row' && childrenCount === 3 && i === childrenCount - 1,
               'row-span-2': !forceOneDimension && gridFlow === 'col' && childrenCount === 3 && i === childrenCount - 1,
             })}
