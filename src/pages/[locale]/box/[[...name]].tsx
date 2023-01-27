@@ -6,8 +6,10 @@ import { NextPageWithLayout } from '~/pages/_app'
 import CommonPageLayout from '~/components/layout/CommonPageLayout'
 import { BoxProps } from '~/types/boxes'
 import { useStore } from '~/stores'
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
+import { makeStaticProps, getStaticPaths as makeStaticPaths } from '~/util/getStatic'
+import * as fs from 'fs'
+import { BOX_DIRECTORY } from '~/util/constants'
 
 const BoxPage: NextPageWithLayout = () => {
   const router = useRouter()
@@ -26,7 +28,7 @@ const BoxPage: NextPageWithLayout = () => {
     return null
   }
 
-  const BoxItem: ComponentType<BoxProps> = dynamic(() => import(`~/components/boxes/${name}`), {
+  const BoxItem: ComponentType<BoxProps> = dynamic(() => import(BOX_DIRECTORY + name), {
     ssr: false,
   })
 
@@ -37,19 +39,26 @@ const BoxPage: NextPageWithLayout = () => {
   )
 }
 
+const getStaticProps = makeStaticProps()
+const getStaticPaths = () => {
+  const obj = makeStaticPaths()
+  const boxes = fs.readdirSync(BOX_DIRECTORY)
+  const paths: { params: { [k: string]: any } }[] = []
+  obj.paths.forEach(path => {
+    paths.push(...boxes.map(box => ({
+      params: {
+        name: [box],
+        ...path.params
+      }
+    })))
+  })
+  obj.paths = paths
+  return obj
+}
+export { getStaticPaths, getStaticProps }
+
 BoxPage.getLayout = (page: JSX.Element) => {
   return <CommonPageLayout>{page}</CommonPageLayout>
 }
-
-export const getStaticProps = async ({ locale }: { locale: string }) => ({
-  props: {
-    ...(await serverSideTranslations(locale)),
-  },
-})
-
-export const getStaticPaths = () => ({
-  paths: [],
-  fallback: true,
-})
 
 export default observer(BoxPage)
