@@ -12,23 +12,33 @@ const Tanks = ({ mode = 'compact' }: BoxProps) => {
   const router = useRouter()
   const { tanks } = useTanks()
 
+  if (mode === 'compact') {
+    return (
+      <Box
+        title={'Tanks'}
+        icon={<TanksIcon className={'w-6 text-black dark:text-white'} />}
+        onExpandClick={() => router.push(`${RouterPath.BOX}/Tanks`)}
+      >
+        <>
+          <div>Tanks</div>
+          <div>
+            {tanks &&
+              tanks.map((tank, index) => {
+                return tank ? <Tank key={index} tankInstanceId={tank} /> : null
+              })}
+          </div>
+        </>
+      </Box>
+    )
+  }
+
   return (
-    <Box
-      title={'Tanks'}
-      icon={<TanksIcon className={'w-6 text-black dark:text-white'} />}
-      onExpandClick={mode === 'compact' ? () => router.push(`${RouterPath.BOX}/Tanks`) : undefined}
-    >
-      <>
-        <div>Tanks</div>
-        <div>
-          {
-            tanks && tanks.map((tank, index) => {
-              return tank ? (<Tank key={index} tankInstanceId={tank} />) : null
-            })
-          }
-        </div>
-      </>
-    </Box>
+    <>
+      {tanks &&
+        tanks.map((tank, index) => {
+          return tank ? <Tank key={index} tankInstanceId={tank} mode='full' /> : null
+        })}
+    </>
   )
 }
 
