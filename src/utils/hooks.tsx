@@ -37,7 +37,7 @@ export const useComponentSize = (ref: RefObject<HTMLElement>) => {
   const [size, setSize] = useState({ width: 0, height: 0 })
 
   const handleResize = useCallback(() => {
-    if (!ref.current) {
+    if (!ref?.current) {
       return
     }
 
@@ -48,13 +48,26 @@ export const useComponentSize = (ref: RefObject<HTMLElement>) => {
   }, [ref])
 
   useEffect(() => {
-    handleResize()
-    window.addEventListener('resize', handleResize)
+    if (!ref?.current) {
+      return
+    }
 
+    handleResize()
+
+    // check if resizeObserver is supported
+    if (window.ResizeObserver) {
+      const resizeObserver = new ResizeObserver(handleResize)
+      resizeObserver.observe(ref.current)
+      return () => {
+        resizeObserver.disconnect()
+      }
+    }
+
+    window.addEventListener('resize', handleResize)
     return () => {
       window.removeEventListener('resize', handleResize)
     }
-  }, [])
+  }, [ref])
 
   return size
 }
