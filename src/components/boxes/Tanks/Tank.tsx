@@ -33,19 +33,19 @@ const Tank = ({ tankInstanceId, mode = 'compact' }: Props) => {
             </div>
           </div>
           <div className='flex items-center justify-center invisible sm:visible sm:col-span-4 lg:col-span-5'>
-            <ProgressBar percentage={level} color={progressBarColorFormatter(+fluidType)} />
+            <ProgressBar percentage={levelFormatter(level)} type={+fluidType} />
           </div>
           <div className='col-span-1 flex items-center justify-center'>
             <div
               className={classnames('text-3xl flex flex-row pr-2', {
-                'text-v-red': level > 75,
+                'text-victron-red': level > 75,
               })}
             >
               <div>{levelFormatter(level)}</div>
               <div
                 className={classnames({
-                  'text-v-red': level > 75,
-                  'text-gray-5': level <= 75,
+                  'text-victron-red': level > 75,
+                  'text-victron-gray': level <= 75,
                 })}
               >
                 {' %'}
@@ -68,19 +68,19 @@ const Tank = ({ tankInstanceId, mode = 'compact' }: Props) => {
           </div>
         </div>
         <div className='flex items-center justify-center col-span-4 md:col-span-5'>
-          <ProgressBar percentage={level} color={progressBarColorFormatter(+fluidType)} />
+          <ProgressBar percentage={levelFormatter(level)} type={+fluidType} />
         </div>
         <div className='col-span-1 flex items-center justify-center'>
           <div
             className={classnames('text-3xl flex flex-row', {
-              'text-v-red': level > 75,
+              'text-victron-red': level > 75,
             })}
           >
             <div>{levelFormatter(level)}</div>
             <div
               className={classnames({
-                'text-v-red': level > 75,
-                'text-gray-5': level <= 75,
+                'text-victron-red': level > 75,
+                'text-victron-gray': level <= 75,
               })}
             >
               {' %'}
@@ -129,35 +129,6 @@ const fluidIcon = function (type: number) {
       return <FuelIcon />
     default:
       return null
-  }
-}
-
-const progressBarColorFormatter = function (type: number) {
-  switch (type) {
-    case 0:
-      return 'tank-fuel'
-    case 1:
-      return 'tank-fresh-water'
-    case 2:
-      return 'tank-gray-water'
-    case 3:
-      return 'tank-live-well'
-    case 4:
-      return 'tank-oil'
-    case 5:
-      return 'tank-black-water'
-    case 6:
-      return 'tank-fuel'
-    case 7:
-      return 'tank-fuel'
-    case 8:
-      return 'tank-fuel'
-    case 9:
-      return 'tank-fuel'
-    case 10:
-      return 'tank-oil'
-    case 11:
-      return 'tank-gray-water'
   }
 }
 
