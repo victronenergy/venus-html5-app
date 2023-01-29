@@ -8,13 +8,10 @@ import { useRouter } from 'next/router'
 import { BoxProps } from '~/types/boxes'
 import { useTanks } from '@elninotech/mfd-modules'
 import Tank from '~/components/boxes/Tanks/Tank'
+import { observer } from 'mobx-react-lite'
 
 const TanksOverview = ({ mode = 'compact' }: BoxProps) => {
-  const router = useRouter()
   const { tanks } = useTanks()
-  useEffect(() => {
-    console.log('tanks', tanks)
-  }, [tanks])
 
   if (mode === 'compact') {
     return (
