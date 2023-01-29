@@ -42,6 +42,19 @@ const TanksOverview = ({ mode = 'compact' }: BoxProps) => {
                 return tank ? <Tank key={index} tankInstanceId={tank} /> : null
               })}
           </div>
+        </>
+      </Box>
+    )
+  }
+
+  if (orientation == 'vertical') {
+    return (
+      <Box title={'Tanks'} icon={<TanksIcon className={'w-6 text-black dark:text-white'} />}>
+        <div ref={gridRef}>
+          {tanks &&
+            tanks.map((tank, index) => {
+              return tank ? <Tank key={index} tankInstanceId={tank} mode='full' orientation={orientation} /> : <></>
+            })}
         </div>
       </Box>
     )
