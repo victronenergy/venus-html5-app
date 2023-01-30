@@ -28,7 +28,7 @@ const BoxPage: NextPageWithLayout = () => {
     return null
   }
 
-  const BoxItem: ComponentType<BoxProps> = dynamic(() => import(BOX_DIRECTORY + name), {
+  const BoxItem: ComponentType<BoxProps> = dynamic(() => import(`src/components/boxes/${name}`), {
     ssr: false,
   })
 
