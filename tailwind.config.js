@@ -32,6 +32,10 @@ module.exports = {
             DEFAULT: '#969591',
             dark: '#969591',
           },
+          'gray-4': {
+            DEFAULT: '#64635F',
+            dark: '#64635F'
+          },
           blue: {
             DEFAULT: '#387DC5',
             dark: '#387DC5',
@@ -60,6 +64,10 @@ module.exports = {
             DEFAULT: '#7F7F9C',
             dark: '#7F7F9C',
           },
+          yellow: {
+            DEFAULT: '#F0962E',
+            dark: '#F0962E',
+          }
         },
       },
       fontFamily: {

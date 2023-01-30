@@ -5,42 +5,51 @@ import Box from '~/components/ui/Box'
 import { BATTERY } from '~/utils/constants'
 import { BoxProps } from '~/types/boxes'
 import Grid from '~/components/ui/Grid'
-import BatterySummary from '~/components/boxes/BatteriesOverview/BatterySummary'
 import Battery from '~/components/boxes/Battery/Battery'
 import { RouterPath } from '~/types/routes'
-import { useRouter } from 'next/router'
-import AuxiliaryBatteries from '~/components/boxes/AuxiliaryBatteries'
 import { useTranslation } from 'next-i18next'
 import BatteriesIcon from '~/public/icons/batteries.svg'
+import ProgressCircle from '~/components/ui/ProgressCircle'
+import { batteryStateNameFormatter } from '~/utils/formatters'
 
 const BatteriesOverview = ({ mode = 'compact' }: BoxProps) => {
   const { batteries } = useBattery()
-  const router = useRouter()
   const { t } = useTranslation()
 
   if (!batteries) {
     return <Box title={t('boxes.batteries')}>none</Box>
   }
 
-  // Separate 'auxiliary batteries', the ones do not give us a state of charge.
-  const auxiliaryBatteries = sortBatteries(batteries.filter(b => !b.state && b.state !== 0))
-  const regularBatteries = sortBatteries(batteries.filter(b => b.state || b.state === 0))
+  const sortedBatteries = sortBatteries(batteries)
 
   if (mode === 'compact') {
     return (
       <Box
         icon={<BatteriesIcon className={'w-6 text-victron-gray dark:text-victron-gray-dark'} />}
         title={t('boxes.batteries')}
-        onExpandClick={() => router.push(`${RouterPath.BOX}/BatteriesOverview`)}
+        onExpandHref={`${RouterPath.BOX}/BatteriesOverview`}
       >
-        <>{ regularBatteries.map(b => <BatterySummary key={b.id} battery={b} />) }</>
+        <div className={'w-full h-full flex flex-col justify-center items-center'}>
+          <ProgressCircle percentage={sortedBatteries[0].soc}>
+            <div className={'text-victron-gray dark:text-victron-gray-dark text-2xl'}>
+              { (Math.round(sortedBatteries[0].voltage * 10) / 10).toString().padStart(4, '0') }
+              <span className={'text-victron-gray-4 dark:text-victron-gray-4-dark'}>V</span>
+            </div>
+          </ProgressCircle>
+          <span className={'text-xl mt-3.5'}>
+            { sortedBatteries[0].name }
+          </span>
+          <span className={'text-victron-gray dark:text-victron-gray-dark text-lg'}>
+            { batteryStateNameFormatter(t, sortedBatteries[0].state) }
+          </span>
+        </div>
       </Box>
     )
   }
 
   return (
     <Grid flow={'col'}>
-      { getGridElements(regularBatteries, auxiliaryBatteries) }
+      { batteries.map(b => <Battery key={b.id} battery={b} />) }
     </Grid>
   )
 }
@@ -59,14 +68,6 @@ const sortBatteries = function (batteries: BatteryType[]) {
 
     return +a.id - +b.id
   })
-}
-
-const getGridElements = function (batteries: BatteryType[], auxiliaryBatteries: BatteryType[]) {
-  const elements = batteries.map(b => <Battery key={b.id} battery={b} />)
-  if (auxiliaryBatteries.length) {
-    elements.push(<AuxiliaryBatteries key={'auxiliary'} batteries={auxiliaryBatteries}/>)
-  }
-  return elements
 }
 
 export default observer(BatteriesOverview)
