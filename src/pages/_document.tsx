@@ -1,6 +1,6 @@
 import NextDocument, { Head, Html, Main, NextScript } from 'next/document'
 import React from 'react'
-import { DEFAULT_LANGUAGE } from '~/util/constants'
+import { DEFAULT_LANGUAGE } from '~/utils/constants'
 
 export default class Document extends NextDocument {
   render() {
