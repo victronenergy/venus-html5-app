@@ -41,6 +41,10 @@ body {
         display: none;
     }
 
+    .remote-console-info {
+        display: none;
+    }
+
     .remote-console-warning {
         display: block;
     }

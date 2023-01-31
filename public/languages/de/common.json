@@ -6,6 +6,25 @@
         },
         "title": "AC-Modus"
     },
+    "boxes": {
+        "acLoads": "AC Lasten",
+        "batteries": "Batterien",
+        "battery": "Batterie",
+        "batteryWithName": "Batterie: %{name}",
+        "chargerWithName": "Ladegerät: %{productNameShort}",
+        "dcLoads": "DC Lasten",
+        "generator": "Generator",
+        "generatorInput": "Generatoreingang",
+        "gridInput": "Netzeingang",
+        "invalidConfig": "Ungültige Konfiguration",
+        "inverterCharger": "Wechselrichter / Ladegerät: %{productNameShort}",
+        "inverterWithName": "Inverter: %{productNameShort}",
+        "pvCharger": "PV-Ladegerät",
+        "shorePower": "Landstrom",
+        "solar": "Solar",
+        "status": "Status",
+        "unknown": "Unbekannt"
+    },
     "cardFooter": {
         "Charge": "Ladung",
         "Critical": "Kritisch",
@@ -111,6 +130,7 @@
         "subtitle": "Stellen Sie sicher, dass Ihre Geräte richtig verbunden sind, um Widgets anzuzeigen",
         "title": "Ihr Dashboard ist leer"
     },
+    "pages": {},
     "remoteLogin": {
         "2fa": "Zwei-Faktor-Authentifizierungs-Token",
         "email": "E-Mail",
@@ -170,24 +190,5 @@
         "venusOs": "Venus OS",
         "version": "Version",
         "vrmPortID": "VRM Site-ID"
-    },
-    "boxes": {
-        "acLoads": "AC Lasten",
-        "batteries": "Batterien",
-        "battery": "Batterie",
-        "batteryWithName": "Batterie: %{name}",
-        "chargerWithName": "Ladegerät: %{productNameShort}",
-        "dcLoads": "DC Lasten",
-        "generator": "Generator",
-        "generatorInput": "Generatoreingang",
-        "gridInput": "Netzeingang",
-        "invalidConfig": "Ungültige Konfiguration",
-        "inverterCharger": "Wechselrichter / Ladegerät: %{productNameShort}",
-        "inverterWithName": "Inverter: %{productNameShort}",
-        "pvCharger": "PV-Ladegerät",
-        "shorePower": "Landstrom",
-        "solar": "Solar",
-        "status": "Status",
-        "unknown": "Unbekannt"
     }
 }

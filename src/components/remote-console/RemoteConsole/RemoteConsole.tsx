@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { observer } from 'mobx-react-lite'
 import classnames from 'classnames'
 import { useRouter } from 'next/router'
 import { STATUS, useMqtt } from '@elninotech/mfd-modules'
+import { useTranslation } from 'next-i18next'
 
 const RemoteConsole = () => {
+  const { t } = useTranslation()
   const router = useRouter()
   const mqtt = useMqtt()
 
@@ -25,15 +27,18 @@ const RemoteConsole = () => {
         />
       }
 
-      { loading && !error ? (
-        <div className={'text-center p-4'}>Loading...</div>
-      ) : error ? (
-        <div className={'hidden text-center p-4 remote-console-warning'}>Unable to connect to the GX device</div>
-      ) : null }
+      { loading && !error &&
+        <div className={'text-center p-4 remote-console-info'}>{t('common.loading')}...</div>
+      }
+      { error &&
+        <div className={'text-center p-4 remote-console-info'}>
+          {t('error.remoteConsole.connectionFailed')}
+        </div>
+      }
 
-      { loading && !error ?
-        <div className={'hidden text-center p-4 remote-console-warning'}>Open in a larger screen to view remote console</div>
-        : null }
+      <div className={'hidden text-center p-4 remote-console-warning'}>
+        {t('error.remoteConsole.screenTooSmall')}
+      </div>
     </>
   )
 }

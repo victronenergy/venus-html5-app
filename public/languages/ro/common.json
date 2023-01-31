@@ -6,6 +6,25 @@
         },
         "title": "Mod AC"
     },
+    "boxes": {
+        "acLoads": "Consumatori AC",
+        "batteries": "Baterii",
+        "battery": "Baterie",
+        "batteryWithName": "Baterie: %{name}",
+        "chargerWithName": "Încărcător: %{productNameShort}",
+        "dcLoads": "Consumatori DC",
+        "generator": "Generator",
+        "generatorInput": "Intrare generator",
+        "gridInput": "Intrare rețea",
+        "invalidConfig": "Configurație nevalidă",
+        "inverterCharger": "Invertor/Încărcător: %{productNameShort}",
+        "inverterWithName": "Invertor: %{productNameShort}",
+        "pvCharger": "Încărcător PV",
+        "shorePower": "Alimentare din rețea",
+        "solar": "Solar",
+        "status": "Stare",
+        "unknown": "Necunoscut"
+    },
     "cardFooter": {
         "Charge": "Încărcare",
         "Critical": "Sever",
@@ -111,6 +130,7 @@
         "subtitle": "Asigurați-vă că dispozitivele sunt conectate în mod corect",
         "title": "Consola este goală"
     },
+    "pages": {},
     "remoteLogin": {
         "2fa": "Token de autentificare cu doi factori",
         "email": "Email",
@@ -170,24 +190,5 @@
         "venusOs": "Venus OS",
         "version": "Versiune %{version}",
         "vrmPortID": "ID site VRM"
-    },
-    "boxes": {
-        "acLoads": "Consumatori AC",
-        "batteries": "Baterii",
-        "battery": "Baterie",
-        "batteryWithName": "Baterie: %{name}",
-        "chargerWithName": "Încărcător: %{productNameShort}",
-        "dcLoads": "Consumatori DC",
-        "generator": "Generator",
-        "generatorInput": "Intrare generator",
-        "gridInput": "Intrare rețea",
-        "invalidConfig": "Configurație nevalidă",
-        "inverterCharger": "Invertor/Încărcător: %{productNameShort}",
-        "inverterWithName": "Invertor: %{productNameShort}",
-        "pvCharger": "Încărcător PV",
-        "shorePower": "Alimentare din rețea",
-        "solar": "Solar",
-        "status": "Stare",
-        "unknown": "Necunoscut"
     }
 }

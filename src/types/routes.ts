@@ -3,5 +3,5 @@ export enum RouterPath {
   BOX = '/box',
 
   // Pages
-  REMOTE_CONSOLE = '/box/RemoteConsole'
+  REMOTE_CONSOLE = '/remote-console'
 }
