@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react'
 import PageSelector, { SelectorLocation } from '~/components/ui/PageSelector'
 import classnames from 'classnames'
-import useWindowSize from '~/utils/hooks/useWindowSize'
+import { useComponentSize } from '~/utils/hooks'
 
 const Paginator = ({ children, orientation = 'horizontal', selectorLocation = 'bottom-full' }: Props) => {
   const childrenArray = Array.isArray(children) ? children : [children]
@@ -18,7 +18,7 @@ const Paginator = ({ children, orientation = 'horizontal', selectorLocation = 'b
   const [pages, setPages] = useState<Array<Array<PageElement>>>([])
   const [currentPage, setCurrentPage] = useState(0)
 
-  const windowSize = useWindowSize()
+  const componentSize = useComponentSize(wrapperRef)
 
   // On the first render, save the children sizes to an array for calculations after resizing
   useEffect(() => {
@@ -32,10 +32,10 @@ const Paginator = ({ children, orientation = 'horizontal', selectorLocation = 'b
     setChildrenSizeArray(newChildrenSizeArray)
   }, [])
 
-  // on window resize, split the children elements into pages differently
+  // on component resize, split the children elements into pages differently
   useEffect(() => {
     splitIntoPages()
-  }, [windowSize])
+  }, [componentSize])
 
   const splitIntoPages = () => {
     // if content is not scrollable return
