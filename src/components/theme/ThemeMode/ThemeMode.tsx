@@ -32,8 +32,7 @@ const ThemeMode = () => {
     <div className='dark:text-white cursor-pointer'>
       <div className='flex justify-center items-center w-full'>
         <button onClick={() => setModal(!modal)}>
-          {' '}
-          <PreferencesIcon />{' '}
+          <PreferencesIcon />
         </button>
         <Modal.Frame
           open={modal}
@@ -43,17 +42,13 @@ const ThemeMode = () => {
         >
           <Modal.Body>
             <div className='flex flex-col'>
-              <div className='text-xl mb-4 dark:text-white'>
+              <div className='text-lg mb-4 dark:text-white md:text-xl'>
                 <label className='flex justify-between items-center pb-4'>
                   <span className='mr-2'>Lock to prevent changes</span>
                   <ToggleSwitch onChange={toggleLock} selected={lock} />
                 </label>
                 <div className='border border-gray-300'></div>
-                <label className='text-base text-gray-5 pb-4'>Mode</label>
-                <label className='flex justify-between items-center pb-8'>
-                  <span className='mr-2'>Auto</span>
-                  <ToggleSwitch onChange={setAutoMode} disabled={lock} />
-                </label>
+                <label className='text-base text-victron-gray pb-4'>Mode</label>
                 <label className='flex justify-between items-center pb-8'>
                   <span className='mr-2'>Light</span>
                   <RadioButton onChange={toggleMode} selected={!themeStore.darkMode} disabled={lock} />
@@ -62,13 +57,17 @@ const ThemeMode = () => {
                   <span className='mr-2'>Dark</span>
                   <RadioButton onChange={toggleMode} selected={themeStore.darkMode} disabled={lock} />
                 </label>
+                <label className='flex justify-between items-center pb-8'>
+                  <span className='mr-2'>Auto</span>
+                  <ToggleSwitch onChange={setAutoMode} disabled={lock} />
+                </label>
                 <div className='border border-gray-300'></div>
               </div>
             </div>
           </Modal.Body>
           <button
             onClick={() => setModal(false)}
-            className='w-full border-2 border-v-blue bg-v-blue/30 rounded-md pt-2 pb-2'
+            className='w-full border-2 border-victron-blue bg-victron-blue/30 rounded-md pt-2 pb-2'
           >
             Remote Console
           </button>
@@ -77,7 +76,5 @@ const ThemeMode = () => {
     </div>
   )
 }
-
-interface Props {}
 
 export default observer(ThemeMode)
