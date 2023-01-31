@@ -9,6 +9,8 @@ import EnergySolar from '~/components/boxes/EnergySolar/EnergySolar'
 import EnergyShore from '~/components/boxes/EnergyShore/EnergyShore'
 import { RouterPath } from '~/types/routes'
 import { useTranslation } from 'next-i18next'
+import { withErrorBoundary } from 'react-error-boundary'
+import ErrorFallback from '~/components/ui/ErrorBoundary/ErrorFallback'
 
 const EnergyOverview = ({ mode = 'compact' }: BoxProps) => {
   const { t } = useTranslation()
