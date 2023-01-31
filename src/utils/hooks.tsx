@@ -67,7 +67,7 @@ export const useComponentSize = (ref: RefObject<HTMLElement>) => {
     return () => {
       window.removeEventListener('resize', handleResize)
     }
-  }, [ref])
+  }, [ref, handleResize])
 
   return size
 }

@@ -10,7 +10,7 @@ const Redirect = () => {
     if (!router.pathname.startsWith('/[locale]')) {
       router.replace('/' + language + router.asPath)
     }
-  }, [])
+  }, [router])
 
   return <></>
 }

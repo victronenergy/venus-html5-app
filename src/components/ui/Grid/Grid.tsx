@@ -24,7 +24,7 @@ const Grid = ({ children, className, flow = 'row', forceOneDimensionRatio = 3 }:
     if (isOneDimension) {
       setGridFlow(ratio > 1 ? 'col' : 'row')
     }
-  }, [gridSize])
+  }, [gridSize, forceOneDimensionRatio])
 
   return (
     <div
