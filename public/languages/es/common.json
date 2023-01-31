@@ -1,0 +1,193 @@
+{
+    "acMode": {
+        "modal": {
+            "name": "Seleccionar modo",
+            "updateLimit": "Seleccionar límite de entrada de la red"
+        },
+        "title": "Modo CA"
+    },
+    "cardFooter": {
+        "Charge": "Carga",
+        "Critical": "Crítica",
+        "Optimal": "Óptima",
+        "Status": "Estado",
+        "Warning": "Advertencia"
+    },
+    "common": {
+        "absorptionCharging": "En carga de absorción",
+        "assisting": "Asistiendo",
+        "autoStartStop": "Arranque/parada automático",
+        "bulkCharging": "En carga inicial",
+        "charge": "Carga",
+        "chargerOnly": "Solo cargador",
+        "charging": "Cargando",
+        "current": "Corriente",
+        "days": "días",
+        "discharge": "Descarga",
+        "discharging": "Descargando",
+        "eco": "Eco",
+        "emptyBar": " - ",
+        "equalisationCharging": "En carga de ecualización",
+        "error": "Error",
+        "fault": "Fallo",
+        "floatCharging": "En carga de flotación",
+        "hours": "horas",
+        "idle": "En reposo",
+        "inputLimit": "Límite de entrada",
+        "inverterOnly": "Solo inversor",
+        "inverting": "Invirtiendo",
+        "limit": "Límite",
+        "lowPower": "Baja potencia",
+        "minutes": "minutos",
+        "mode": "Modo",
+        "noShorePower": "Sin alimentación de la red",
+        "notAvailable": "No disponible",
+        "nrOfPhases": "%{phases} fases",
+        "null": " ",
+        "off": "Apagado",
+        "on": "Encendido",
+        "passthru": "Paso libre",
+        "powerSupplyMode": "Modo fuente de alimentación",
+        "remainingTime": "Tiempo restante",
+        "running": "En funcionamiento",
+        "standby": "En espera",
+        "starting": "Arrancando",
+        "stopped": "Parado",
+        "stopping": "Parando",
+        "storageMode": "Modo de almacenamiento",
+        "sustain": "Sostenimiento",
+        "unplugged": "Desconectado",
+        "veBusFault": "Fallo del VE.Bus",
+        "voltage": "Tensión"
+    },
+    "error": {
+        "errorWithMessage": "Error: %{message}",
+        "genericMessage": "Se ha producido un error al cargar la aplicación. Intente volver a cargar la página o póngase en contacto con Victron Energy con la siguiente información:",
+        "marine": {
+            "cta": "Enviar este informe de error directamente al equipo de asistencia técnica de Victron Energy:",
+            "dataCharges": "Se aplicarán los cargos normales por los datos.",
+            "estimate": "Datos estimados: %{size} bytes.",
+            "hint": "Intente volver a cargar la página o póngase en contacto con Victron Energy con la siguiente información:",
+            "ignore": "Ignorar el error",
+            "sendReport": "Enviar informe del error",
+            "title": "Se ha producido un error al cargar la aplicación."
+        },
+        "mqttUnavailable1": "No se ha podido conectar el servidor MQTT.",
+        "mqttUnavailable2": "Compruebe que MQTT está habilitado en sus ajustes:",
+        "mqttUnavailable3": "Consola remota > Ajustes > Servicios > MQTT en LAN (Plaintext)",
+        "mqttUnavailable4": "Intente usar el botón de Consola remota de la parte superior de esta pantalla para cambiar sus ajustes a distancia.",
+        "mqttUnavailable5": "También puede intentar conectar su dispositivo a distancia seleccionando Remoto en el menú anterior.",
+        "queryParams": "Parámetros de consulta: %{queryParams}",
+        "userAgent": "Agente del usuario: %{userAgent}",
+        "windowSize": "Ventana: %{width} x %{height}"
+    },
+    "generator": {
+        "fisherPandaAutoStartMessage": "La función AutoStart (arranque automático) Fisher Panda está deshabilitada en este momento, habilítela en el panel del generador para poder controlar el generador desde este panel.",
+        "temperature": {
+            "coolant": "Refrigerante",
+            "exhaust": "Escape",
+            "winding": "Devanado"
+        }
+    },
+    "header": {
+        "close": "Cerrar",
+        "connecting": "Conectando",
+        "local": "Local",
+        "loggedIn": "Sesión iniciada como",
+        "notLoggedIn": "No se ha iniciado sesión",
+        "remote": "Remoto",
+        "remoteConsole": "Consola remota",
+        "remoteMessage": "Abrir en una pantalla más grande para ver la consola remota",
+        "versionInfo": "Información de la versión"
+    },
+    "installations": {
+        "title": "Elegir una instalación"
+    },
+    "locker": {
+        "lockMessage": "Bloquear para impedir cambios",
+        "unlockMessage": "Desbloquear para hacer cambios"
+    },
+    "noWidgets": {
+        "subtitle": "Asegúrese de que sus dispositivos estén bien conectados",
+        "title": "Su panel de control está vacío."
+    },
+    "remoteLogin": {
+        "2fa": "Token de autenticación de dos factores",
+        "email": "Email",
+        "forgotPassword": "¿Ha olvidado la contraseña?",
+        "goBack": "Volver",
+        "logIn": "Iniciar sesión",
+        "logOut": "Cerrar sesión",
+        "loginFailed": "Error de inicio de sesión",
+        "mobileVerification": "Token de la app de autenticación",
+        "noInstallations": "Esta cuenta no tiene instalaciones.",
+        "password": "Contraseña",
+        "registerMessage1": "¿Aún no tiene una cuenta? ",
+        "registerMessage2": "Registre su RV.",
+        "smsVerification": "Token de verificación de SMS",
+        "wrong2fa": "Código de verificación de dos factores incorrecto"
+    },
+    "status": {
+        "Absorption charging": "En carga de absorción",
+        "Assisting": "Asistiendo",
+        "Bulk charging": "En carga inicial",
+        "Discharging": "Descargando",
+        "Equalisation charging": "En carga de ecualización",
+        "Float charging": "En carga de flotación",
+        "Inverting": "Invirtiendo",
+        "Low power": "Baja potencia",
+        "Off": "Apagado",
+        "Passthru": "Paso libre",
+        "Storage mode": "Modo de almacenamiento",
+        "Sustain": "Sostenimiento",
+        "VE.Bus Fault condition": "Fallo del VE.Bus",
+        "parts": {
+            "Battery": "Batería",
+            "Black water": "Aguas negras",
+            "DC Loads": "Cargas CC",
+            "Fresh water": "Agua potable",
+            "Fuel": "Combustible",
+            "Live well": "Vivero",
+            "Oil": "Aceite",
+            "PV Charger": "Cargador FV",
+            "Shore Power": "Alimentación de la red",
+            "Tank sensor": "Sensor del depósito",
+            "Waste water": "Aguas residuales"
+        }
+    },
+    "tank": {
+        "Black water": "Aguas negras",
+        "Fresh water": "Agua potable",
+        "Fuel": "Combustible",
+        "Live well": "Vivero",
+        "Oil": "Aceite",
+        "Tank sensor": "Sensor del depósito",
+        "Waste water": "Aguas residuales"
+    },
+    "versionInfo": {
+        "buildDate": "Fecha de creación",
+        "identifier": "Identificador",
+        "venusOs": "Venus OS",
+        "version": "Versión %{version}",
+        "vrmPortID": "ID portal VRM"
+    },
+    "boxes": {
+        "acLoads": "Cargas CA",
+        "batteries": "Baterías",
+        "battery": "Batería",
+        "batteryWithName": "Batería: %{name}",
+        "chargerWithName": "Cargador: %{productNameShort}",
+        "dcLoads": "Cargas CC",
+        "generator": "Generador",
+        "generatorInput": "Entrada del generador",
+        "gridInput": "Entrada de la red",
+        "invalidConfig": "Configuración no válida",
+        "inverterCharger": "Inversor / cargador: %{productNameShort}",
+        "inverterWithName": "Inversor: %{productNameShort}",
+        "pvCharger": "Cargador FV",
+        "shorePower": "Alimentación de la red",
+        "solar": "Solar",
+        "status": "Estado",
+        "unknown": "Desconocido"
+    }
+}
