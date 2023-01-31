@@ -20,7 +20,7 @@ const EnergyOverview = ({ mode = 'compact' }: BoxProps) => {
         icon={<EnergyIcon className={'w-6 text-victron-gray dark:text-victron-gray-dark'} />}
         onExpandHref={`${RouterPath.BOX}/EnergyOverview`}
       >
-        <Grid>
+        <Grid className={'gap-2'}>
           <EnergyShore />
           <EnergyAC />
           <EnergySolar />
@@ -31,7 +31,7 @@ const EnergyOverview = ({ mode = 'compact' }: BoxProps) => {
   }
 
   return (
-    <Grid>
+    <Grid className={'gap-2'}>
       <EnergyShore mode={'full'} />
       <EnergyAC mode={'full'} />
       <EnergySolar mode={'full'} />
