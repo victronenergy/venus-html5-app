@@ -6,6 +6,25 @@
         },
         "title": "وضع التيار المتردد"
     },
+    "boxes": {
+        "acLoads": "أحمال التيار المناوب",
+        "batteries": "بطاريات",
+        "battery": "بطارية",
+        "batteryWithName": "بطارية: %{name}",
+        "chargerWithName": "شاحن: %{productNameShort}",
+        "dcLoads": "أحمال التيار المستمر",
+        "generator": "مولد",
+        "generatorInput": "مدخلات المولد",
+        "gridInput": "مدخلات الشبكة",
+        "invalidConfig": "إعداد غير صالح",
+        "inverterCharger": "محول تردد/ شاحن: %{productNameShort}",
+        "inverterWithName": "محول تردد: %{productNameShort}",
+        "pvCharger": "شاحن كهروضوئي",
+        "shorePower": "الطاقة الشاطئية",
+        "solar": "شمسي",
+        "status": "الحالة",
+        "unknown": "مجهول"
+    },
     "cardFooter": {
         "Charge": "شحن",
         "Critical": "حساس",
@@ -111,6 +130,7 @@
         "subtitle": "تأكد من توصيل أجهزتك بشكل مناسب",
         "title": "لوحة القياس الخاصة بك فارغة"
     },
+    "pages": {},
     "remoteLogin": {
         "2fa": "رمز التوثيق ذي معاملين",
         "email": "بريد إلكتروني",
@@ -170,24 +190,5 @@
         "venusOs": "نظام تشغيل فينوس",
         "version": "النسخة %{version}",
         "vrmPortID": "رمز موقع في آر إم"
-    },
-    "boxes": {
-        "acLoads": "أحمال التيار المناوب",
-        "batteries": "بطاريات",
-        "battery": "بطارية",
-        "batteryWithName": "بطارية: %{name}",
-        "chargerWithName": "شاحن: %{productNameShort}",
-        "dcLoads": "أحمال التيار المستمر",
-        "generator": "مولد",
-        "generatorInput": "مدخلات المولد",
-        "gridInput": "مدخلات الشبكة",
-        "invalidConfig": "إعداد غير صالح",
-        "inverterCharger": "محول تردد/ شاحن: %{productNameShort}",
-        "inverterWithName": "محول تردد: %{productNameShort}",
-        "pvCharger": "شاحن كهروضوئي",
-        "shorePower": "الطاقة الشاطئية",
-        "solar": "شمسي",
-        "status": "الحالة",
-        "unknown": "مجهول"
     }
 }

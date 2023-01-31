@@ -6,6 +6,25 @@
         },
         "title": "Mode AC"
     },
+    "boxes": {
+        "acLoads": "Charges AC",
+        "batteries": "Batteries",
+        "battery": "Batterie",
+        "batteryWithName": "Batterie: : %{name}",
+        "chargerWithName": "Chargeur: %{productNameShort}",
+        "dcLoads": "Charges DC",
+        "generator": "Générateur",
+        "generatorInput": "Entrée générateur",
+        "gridInput": "Entrée réseau",
+        "invalidConfig": "Configuration invalide",
+        "inverterCharger": "Onduleur / Chargeur",
+        "inverterWithName": "Convertisseur: %{productNameShort}",
+        "pvCharger": "Chargeur PV",
+        "shorePower": "Alimentation du quai",
+        "solar": "Solaire",
+        "status": "État",
+        "unknown": "Inconnu"
+    },
     "cardFooter": {
         "Charge": "Charge",
         "Critical": "Critique",
@@ -111,6 +130,7 @@
         "subtitle": "Assurez vous que vos appareils sont bien connectés pour afficher les widgets",
         "title": "Votre tableau de bord est vide"
     },
+    "pages": {},
     "remoteLogin": {
         "2fa": "Code de vérification en 2 étapes",
         "email": "Email",
@@ -170,24 +190,5 @@
         "venusOs": "Venus OS",
         "version": "Version %{version}",
         "vrmPortID": "ID Portail VRM"
-    },
-    "boxes": {
-        "acLoads": "Charges AC",
-        "batteries": "Batteries",
-        "battery": "Batterie",
-        "batteryWithName": "Batterie: : %{name}",
-        "chargerWithName": "Chargeur: %{productNameShort}",
-        "dcLoads": "Charges DC",
-        "generator": "Générateur",
-        "generatorInput": "Entrée générateur",
-        "gridInput": "Entrée réseau",
-        "invalidConfig": "Configuration invalide",
-        "inverterCharger": "Onduleur / Chargeur",
-        "inverterWithName": "Convertisseur: %{productNameShort}",
-        "pvCharger": "Chargeur PV",
-        "shorePower": "Alimentation du quai",
-        "solar": "Solaire",
-        "status": "État",
-        "unknown": "Inconnu"
     }
 }

@@ -6,6 +6,29 @@
         },
         "title": "AC Mode"
     },
+    "boxes": {
+        "EnergyOverview": "Energy Overview",
+        "acLoads": "AC Loads",
+        "alternator": "Alternator",
+        "batteries": "Batteries",
+        "battery": "Battery",
+        "batteryWithName": "Battery: %{name}",
+        "chargerWithName": "Charger: %{productNameShort}",
+        "dcLoads": "DC Loads",
+        "energy": "Energy",
+        "generator": "Generator",
+        "generatorInput": "Generator Input",
+        "gridInput": "Grid Input",
+        "invalidConfig": "Invalid Configuration",
+        "inverterCharger": "Inverter / Charger: %{productNameShort}",
+        "inverterWithName": "Inverter: %{productNameShort}",
+        "pvCharger": "PV Charger",
+        "shorePower": "Shore Power",
+        "solar": "Solar",
+        "status": "Status",
+        "unknown": "Unknown",
+        "windGenerator": "Wind Generator"
+    },
     "cardFooter": {
         "Charge": "Charge",
         "Critical": "Critical",
@@ -20,9 +43,11 @@
         "bulkCharging": "Bulk charging",
         "charge": "Charge",
         "chargerOnly": "Charger Only",
+        "charged": "Charged",
         "charging": "Charging",
         "current": "Current",
         "days": "days",
+        "days_short": "d",
         "discharge": "Discharge",
         "discharging": "Discharging",
         "eco": "Eco",
@@ -32,6 +57,7 @@
         "fault": "Fault",
         "floatCharging": "Float charging",
         "hours": "hours",
+        "hours_short": "h",
         "idle": "Idle",
         "inputLimit": "Input Limit",
         "inverterOnly": "Inverter Only",
@@ -39,6 +65,7 @@
         "limit": "Limit",
         "lowPower": "Low Power",
         "minutes": "minutes",
+        "minutes_short": "m",
         "mode": "Mode",
         "noShorePower": "No Shore Power",
         "notAvailable": "Not Available",
@@ -111,6 +138,9 @@
         "subtitle": "Make sure your devices are properly connected",
         "title": "Your dashboard is empty"
     },
+    "pages": {
+        "systemOverview": "System Overview"
+    },
     "remoteLogin": {
         "2fa": "Two-factor authentication token",
         "email": "Email",
@@ -170,30 +200,5 @@
         "venusOs": "Venus OS",
         "version": "Version %{version}",
         "vrmPortID": "VRM Site ID"
-    },
-    "boxes": {
-        "acLoads": "AC Loads",
-        "batteries": "Batteries",
-        "BatteriesOverview": "Batteries",
-        "battery": "Battery",
-        "batteryWithName": "Battery: %{name}",
-        "chargerWithName": "Charger: %{productNameShort}",
-        "dcLoads": "DC Loads",
-        "energy": "Energy",
-        "EnergyOverview": "Energy Overview",
-        "generator": "Generator",
-        "generatorInput": "Generator Input",
-        "gridInput": "Grid Input",
-        "invalidConfig": "Invalid Configuration",
-        "inverterCharger": "Inverter / Charger: %{productNameShort}",
-        "inverterWithName": "Inverter: %{productNameShort}",
-        "pvCharger": "PV Charger",
-        "shorePower": "Shore Power",
-        "solar": "Solar",
-        "status": "Status",
-        "unknown": "Unknown"
-    },
-    "pages": {
-        "systemOverview": "System Overview"
     }
 }

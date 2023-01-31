@@ -6,6 +6,25 @@
         },
         "title": "Modalità CA"
     },
+    "boxes": {
+        "acLoads": "Carichi CA",
+        "batteries": "Batterie",
+        "battery": "Batteria",
+        "batteryWithName": "Batteria: %{name}",
+        "chargerWithName": "Caricatore: %{productNameShort}",
+        "dcLoads": "Carichi CC",
+        "generator": "Generatore",
+        "generatorInput": "Entrata Generatore",
+        "gridInput": "Entrata di rete",
+        "invalidConfig": "Configurazione non valida",
+        "inverterCharger": "Inverter / Caricabatterie: %{productNameShort}",
+        "inverterWithName": "Inverter: %{productNameShort}",
+        "pvCharger": "Caricabatterie FV",
+        "shorePower": "Alimentazione banchina",
+        "solar": "Fotovoltaico",
+        "status": "Stato",
+        "unknown": "Sconosciuto"
+    },
     "cardFooter": {
         "Charge": "Carica",
         "Critical": "Critico",
@@ -111,6 +130,7 @@
         "subtitle": "Assicurarsi che i dispositivi siano correttamente collegati",
         "title": "La vostra Dashboard è vuota"
     },
+    "pages": {},
     "remoteLogin": {
         "2fa": "Token di autenticazione a due fattori",
         "email": "E-mail",
@@ -170,24 +190,5 @@
         "venusOs": "Venus OS",
         "version": "Versione %{version}",
         "vrmPortID": "ID Sito VRM"
-    },
-    "boxes": {
-        "acLoads": "Carichi CA",
-        "batteries": "Batterie",
-        "battery": "Batteria",
-        "batteryWithName": "Batteria: %{name}",
-        "chargerWithName": "Caricatore: %{productNameShort}",
-        "dcLoads": "Carichi CC",
-        "generator": "Generatore",
-        "generatorInput": "Entrata Generatore",
-        "gridInput": "Entrata di rete",
-        "invalidConfig": "Configurazione non valida",
-        "inverterCharger": "Inverter / Caricabatterie: %{productNameShort}",
-        "inverterWithName": "Inverter: %{productNameShort}",
-        "pvCharger": "Caricabatterie FV",
-        "shorePower": "Alimentazione banchina",
-        "solar": "Fotovoltaico",
-        "status": "Stato",
-        "unknown": "Sconosciuto"
     }
 }

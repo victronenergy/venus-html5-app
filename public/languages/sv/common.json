@@ -6,6 +6,25 @@
         },
         "title": "AC-läge"
     },
+    "boxes": {
+        "acLoads": "AC-belastningar",
+        "batteries": "Batterier",
+        "battery": "Batteri",
+        "batteryWithName": "Batteri: %{name}",
+        "chargerWithName": "Laddare: %{productNameShort}",
+        "dcLoads": "DC-belastningar",
+        "generator": "Generator",
+        "generatorInput": "Generatoringång",
+        "gridInput": "Nätingång",
+        "invalidConfig": "Ogiltig konfiguration",
+        "inverterCharger": "Växelriktare/ laddare %{productNameShort}",
+        "inverterWithName": "Växelriktare: %{productNameShort}",
+        "pvCharger": "Solcellsladdare",
+        "shorePower": "Landström",
+        "solar": "Solceller",
+        "status": "Status",
+        "unknown": "Okänd"
+    },
     "cardFooter": {
         "Charge": "Laddning",
         "Critical": "Kritisk",
@@ -111,6 +130,7 @@
         "subtitle": "Säkerställ att dina enheter är korrekt anslutna",
         "title": "Din panel är tom"
     },
+    "pages": {},
     "remoteLogin": {
         "2fa": "Tvåstegsbekräftelsekod",
         "email": "E-post",
@@ -170,24 +190,5 @@
         "venusOs": "Venus OS",
         "version": "Version %{version}",
         "vrmPortID": "VRM plats-id"
-    },
-    "boxes": {
-        "acLoads": "AC-belastningar",
-        "batteries": "Batterier",
-        "battery": "Batteri",
-        "batteryWithName": "Batteri: %{name}",
-        "chargerWithName": "Laddare: %{productNameShort}",
-        "dcLoads": "DC-belastningar",
-        "generator": "Generator",
-        "generatorInput": "Generatoringång",
-        "gridInput": "Nätingång",
-        "invalidConfig": "Ogiltig konfiguration",
-        "inverterCharger": "Växelriktare/ laddare %{productNameShort}",
-        "inverterWithName": "Växelriktare: %{productNameShort}",
-        "pvCharger": "Solcellsladdare",
-        "shorePower": "Landström",
-        "solar": "Solceller",
-        "status": "Status",
-        "unknown": "Okänd"
     }
 }

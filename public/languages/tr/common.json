@@ -6,6 +6,25 @@
         },
         "title": "Başlık"
     },
+    "boxes": {
+        "acLoads": "acLoads",
+        "batteries": "Aküler",
+        "battery": "Akü",
+        "batteryWithName": "Battery: %{name}",
+        "chargerWithName": "chargerWithName",
+        "dcLoads": "dcLoads",
+        "generator": "Jeneratör",
+        "generatorInput": "jeneratörInput",
+        "gridInput": "gridInput",
+        "invalidConfig": "invalidConfig",
+        "inverterCharger": "Inverter / Charger: %{productNameShort}",
+        "inverterWithName": "inverterWithName",
+        "pvCharger": "pvŞarj",
+        "shorePower": "shorePower",
+        "solar": "Solar",
+        "status": "Durum",
+        "unknown": "Bilinmiyor"
+    },
     "cardFooter": {
         "Charge": "Yük",
         "Critical": "Kritik",
@@ -111,6 +130,7 @@
         "subtitle": "Cihazlarınızın doğru şekilde bağlandığından emin olun",
         "title": "Başlık"
     },
+    "pages": {},
     "remoteLogin": {
         "2fa": "İki-faktörlü kimlik doğrulama jetonu\n",
         "email": "E",
@@ -170,24 +190,5 @@
         "venusOs": "Venus OS",
         "version": "Versiyon",
         "vrmPortID": "VRM Site ID"
-    },
-    "boxes": {
-        "acLoads": "acLoads",
-        "batteries": "Aküler",
-        "battery": "Akü",
-        "batteryWithName": "Battery: %{name}",
-        "chargerWithName": "chargerWithName",
-        "dcLoads": "dcLoads",
-        "generator": "Jeneratör",
-        "generatorInput": "jeneratörInput",
-        "gridInput": "gridInput",
-        "invalidConfig": "invalidConfig",
-        "inverterCharger": "Inverter / Charger: %{productNameShort}",
-        "inverterWithName": "inverterWithName",
-        "pvCharger": "pvŞarj",
-        "shorePower": "shorePower",
-        "solar": "Solar",
-        "status": "Durum",
-        "unknown": "Bilinmiyor"
     }
 }

@@ -6,6 +6,25 @@
         },
         "title": "Modo CA"
     },
+    "boxes": {
+        "acLoads": "Cargas CA",
+        "batteries": "Baterías",
+        "battery": "Batería",
+        "batteryWithName": "Batería: %{name}",
+        "chargerWithName": "Cargador: %{productNameShort}",
+        "dcLoads": "Cargas CC",
+        "generator": "Generador",
+        "generatorInput": "Entrada del generador",
+        "gridInput": "Entrada de la red",
+        "invalidConfig": "Configuración no válida",
+        "inverterCharger": "Inversor / cargador: %{productNameShort}",
+        "inverterWithName": "Inversor: %{productNameShort}",
+        "pvCharger": "Cargador FV",
+        "shorePower": "Alimentación de la red",
+        "solar": "Solar",
+        "status": "Estado",
+        "unknown": "Desconocido"
+    },
     "cardFooter": {
         "Charge": "Carga",
         "Critical": "Crítica",
@@ -111,6 +130,7 @@
         "subtitle": "Asegúrese de que sus dispositivos estén bien conectados",
         "title": "Su panel de control está vacío."
     },
+    "pages": {},
     "remoteLogin": {
         "2fa": "Token de autenticación de dos factores",
         "email": "Email",
@@ -170,24 +190,5 @@
         "venusOs": "Venus OS",
         "version": "Versión %{version}",
         "vrmPortID": "ID portal VRM"
-    },
-    "boxes": {
-        "acLoads": "Cargas CA",
-        "batteries": "Baterías",
-        "battery": "Batería",
-        "batteryWithName": "Batería: %{name}",
-        "chargerWithName": "Cargador: %{productNameShort}",
-        "dcLoads": "Cargas CC",
-        "generator": "Generador",
-        "generatorInput": "Entrada del generador",
-        "gridInput": "Entrada de la red",
-        "invalidConfig": "Configuración no válida",
-        "inverterCharger": "Inversor / cargador: %{productNameShort}",
-        "inverterWithName": "Inversor: %{productNameShort}",
-        "pvCharger": "Cargador FV",
-        "shorePower": "Alimentación de la red",
-        "solar": "Solar",
-        "status": "Estado",
-        "unknown": "Desconocido"
     }
 }

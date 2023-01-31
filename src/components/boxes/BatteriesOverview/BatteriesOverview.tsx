@@ -9,18 +9,14 @@ import Battery from '~/components/boxes/Battery/Battery'
 import { RouterPath } from '~/types/routes'
 import { useTranslation } from 'next-i18next'
 import BatteriesIcon from '~/public/icons/batteries.svg'
-import ProgressCircle from '~/components/ui/ProgressCircle'
-import { batteryStateNameFormatter } from '~/utils/formatters'
+import BatterySummary from '~/components/ui/BatterySummary'
 
 const BatteriesOverview = ({ mode = 'compact' }: BoxProps) => {
   const { batteries } = useBattery()
   const { t } = useTranslation()
 
-  if (!batteries) {
-    return <Box title={t('boxes.batteries')}>none</Box>
-  }
-
-  const sortedBatteries = sortBatteries(batteries)
+  const sortedBatteries = sortBatteries(batteries ?? [])
+  const overviewBatteries = getOverviewBatteries(sortedBatteries)
 
   if (mode === 'compact') {
     return (
@@ -29,19 +25,14 @@ const BatteriesOverview = ({ mode = 'compact' }: BoxProps) => {
         title={t('boxes.batteries')}
         onExpandHref={`${RouterPath.BOX}/BatteriesOverview`}
       >
-        <div className={'w-full h-full flex flex-col justify-center items-center'}>
-          <ProgressCircle percentage={sortedBatteries[0].soc}>
-            <div className={'text-victron-gray dark:text-victron-gray-dark text-2xl'}>
-              { (Math.round(sortedBatteries[0].voltage * 10) / 10).toString().padStart(4, '0') }
-              <span className={'text-victron-gray-4 dark:text-victron-gray-4-dark'}>V</span>
-            </div>
-          </ProgressCircle>
-          <span className={'text-xl mt-3.5'}>
-            { sortedBatteries[0].name }
-          </span>
-          <span className={'text-victron-gray dark:text-victron-gray-dark text-lg'}>
-            { batteryStateNameFormatter(t, sortedBatteries[0].state) }
-          </span>
+        <div className={'flex justify-center items-center h-full -mx-2'}>
+          { overviewBatteries.map(
+            b => <BatterySummary
+              key={b.id}
+              battery={b}
+              size={'large'}
+              className={overviewBatteries.length > 1 ? 'w-6/12' : ''} />
+          ) }
         </div>
       </Box>
     )
@@ -49,7 +40,7 @@ const BatteriesOverview = ({ mode = 'compact' }: BoxProps) => {
 
   return (
     <Grid flow={'col'}>
-      { batteries.map(b => <Battery key={b.id} battery={b} />) }
+      { sortedBatteries.map(b => <Battery key={b.id} battery={b} />) }
     </Grid>
   )
 }
@@ -61,13 +52,28 @@ const sortBatteries = function (batteries: BatteryType[]) {
   return batteries.slice().sort((a, b) => {
 
     if ((a.state === BATTERY.CHARGING && b.state !== BATTERY.CHARGING) ||
-      (a.state === BATTERY.DISCHARGING && b.state === BATTERY.IDLE)) return -1
+      (a.state === BATTERY.DISCHARGING && b.state === BATTERY.IDLE) ||
+      ((a.state || a.state === 0) && (!b.state && b.state !== 0))) return -1
 
     if ((a.state !== BATTERY.CHARGING && b.state === BATTERY.CHARGING) ||
-      (a.state === BATTERY.IDLE && b.state === BATTERY.DISCHARGING)) return 1
+      (a.state === BATTERY.IDLE && b.state === BATTERY.DISCHARGING) ||
+      ((!a.state && a.state !== 0) && (b.state || b.state === 0))) return 1
 
     return +a.id - +b.id
   })
+}
+
+
+/*
+  We show only batteries with state data on the overview, but if we don't
+  have any we will show any batteries.
+ */
+const getOverviewBatteries = function (batteries: BatteryType[]) {
+  const withStateCount = batteries.filter(b => b.state || b.state === 0).length
+  if (withStateCount === 0) {
+    return batteries.slice(0, 2)
+  }
+  return batteries.slice(0, Math.min(withStateCount, 2))
 }
 
 export default observer(BatteriesOverview)
