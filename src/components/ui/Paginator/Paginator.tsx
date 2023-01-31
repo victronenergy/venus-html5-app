@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react'
-import PageSelector from '~/components/ui/PageSelector'
+import PageSelector, { SelectorLocation } from '~/components/ui/PageSelector'
 import classnames from 'classnames'
 import useWindowSize from '~/utils/hooks/useWindowSize'
 
@@ -190,24 +190,8 @@ const Paginator = ({ children, orientation = 'horizontal', selectorLocation = 'b
 
 interface Props {
   children: JSX.Element[] | JSX.Element
-  orientation: 'vertical' | 'horizontal'
-  selectorLocation:
-    | 'bottom-full'
-    | 'top-full'
-    | 'right-full'
-    | 'left-full'
-    | 'bottom-right'
-    | 'bottom-left'
-    | 'bottom-center'
-    | 'top-right'
-    | 'top-left'
-    | 'top-center'
-    | 'right-top'
-    | 'right-bottom'
-    | 'right-center'
-    | 'left-top'
-    | 'left-bottom'
-    | 'left-center'
+  orientation?: 'vertical' | 'horizontal'
+  selectorLocation?: SelectorLocation
 }
 
 export default Paginator
