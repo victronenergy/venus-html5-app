@@ -73,6 +73,7 @@ const TanksOverview = ({ mode = 'compact' }: BoxProps) => {
     )
   }
 
+  if (orientation == "vertical") {
   return (
     <Box title={'Tanks'} icon={<TanksIcon className={'w-6 text-black dark:text-white'} />}>
       <div className='grid grid-cols-4 h-full'>
