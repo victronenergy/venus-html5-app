@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef } from 'react'
+import React, { BaseSyntheticEvent, useCallback, useEffect, useMemo, useRef } from 'react'
 import classnames from 'classnames'
 import LeftSelectorIcon from '~/public/icons/selectors/selector-left.svg'
 import RightSelectorIcon from '~/public/icons/selectors/selector-right.svg'
@@ -41,6 +41,22 @@ const PageSelector = ({ currentPage, maxPages, onClickLeft, onClickRight, select
     })
   }, [currentPage, maxPages, isHorizontal])
 
+  const onLeftSelectorClick = useCallback(
+    (e: BaseSyntheticEvent) => {
+      e.preventDefault()
+      if (currentPage > 0) onClickLeft()
+    },
+    [currentPage, onClickLeft]
+  )
+
+  const onRightSelectorClick = useCallback(
+    (e: BaseSyntheticEvent) => {
+      e.preventDefault()
+      if (currentPage < maxPages - 1) onClickRight()
+    },
+    [currentPage, maxPages, onClickRight]
+  )
+
   return (
     <div
       className={classnames('flex items-center select-none', {
@@ -53,13 +69,7 @@ const PageSelector = ({ currentPage, maxPages, onClickLeft, onClickRight, select
         'space-y-4 ': !selectorLocation.endsWith('full') && !isHorizontal,
       })}
     >
-      <div
-        onClick={(e) => {
-          e.preventDefault()
-          if (currentPage > 0) onClickLeft()
-        }}
-        className={'w-11 h-11'}
-      >
+      <div onClick={onLeftSelectorClick} className={'w-11 h-11'}>
         {(isHorizontal && ((currentPage > 0 && <LeftSelectorBlueIcon />) || <LeftSelectorIcon />)) ||
           (currentPage > 0 && <UpSelectorBlueIcon />) || <UpSelectorIcon />}
       </div>
@@ -88,13 +98,7 @@ const PageSelector = ({ currentPage, maxPages, onClickLeft, onClickRight, select
           </div>
         )}
       </div>
-      <div
-        onClick={(e) => {
-          e.preventDefault()
-          if (currentPage < maxPages - 1) onClickRight()
-        }}
-        className={'w-42 text-victron-gray dark:text-victron-gray-dark'}
-      >
+      <div onClick={onRightSelectorClick} className={'w-42 text-victron-gray dark:text-victron-gray-dark'}>
         {(isHorizontal && ((currentPage < maxPages - 1 && <RightSelectorBlueIcon />) || <RightSelectorIcon />)) ||
           (currentPage < maxPages - 1 && <DownSelectorBlueIcon />) || <DownSelectorIcon />}
       </div>
