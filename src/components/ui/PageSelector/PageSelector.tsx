@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useMemo, useRef } from 'react'
 import classnames from 'classnames'
 import LeftSelectorIcon from '~/public/icons/selectors/selector-left.svg'
 import RightSelectorIcon from '~/public/icons/selectors/selector-right.svg'
@@ -16,7 +16,10 @@ const PageSelector = ({ currentPage, maxPages, onClickLeft, onClickRight, select
   const dotsVertRef = useRef<HTMLDivElement>(null)
   const dotsHorRef = useRef<HTMLDivElement>(null)
 
-  const isHorizontal = selectorLocation.startsWith('bottom') || selectorLocation.startsWith('top')
+  const isHorizontal = useMemo(
+    () => selectorLocation.startsWith('bottom') || selectorLocation.startsWith('top'),
+    [selectorLocation]
+  )
 
   const dot = (i: number) => {
     if (i === currentPage) {
