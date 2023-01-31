@@ -25,3 +25,14 @@ export const dcVoltageFormatter = function(voltage?: number): string {
   return Math.floor(voltage).toString().padStart(2, '0') + '.' +
     (Math.round((voltage % 1) * 10))
 }
+
+export const colorForPercentageFormatter = function(percentage: number) {
+  if (percentage <= 12) {
+    return 'victron-red'
+  } else if (percentage <= 40) {
+    return 'victron-yellow'
+  } else if (percentage === 100) {
+    return 'victron-blue'
+  }
+  return 'victron-green'
+}

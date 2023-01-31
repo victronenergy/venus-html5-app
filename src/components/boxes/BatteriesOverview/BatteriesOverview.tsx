@@ -10,13 +10,20 @@ import { RouterPath } from '~/types/routes'
 import { useTranslation } from 'next-i18next'
 import BatteriesIcon from '~/public/icons/batteries.svg'
 import BatterySummary from '~/components/ui/BatterySummary'
+import { useRef } from 'react'
+import { useComponentSize } from '~/utils/hooks'
 
 const BatteriesOverview = ({ mode = 'compact' }: BoxProps) => {
   const { batteries } = useBattery()
   const { t } = useTranslation()
+  const overviewRef = useRef<HTMLDivElement>(null)
+  const overviewSize = useComponentSize(overviewRef)
+
+  const size = overviewSize.width < BREAKPOINT_WIDTH ||
+    overviewSize.height < BREAKPOINT_HEIGHT ? 'small' : 'large'
 
   const sortedBatteries = sortBatteries(batteries ?? [])
-  const overviewBatteries = getOverviewBatteries(sortedBatteries)
+  const overviewBatteries = getOverviewBatteries(sortedBatteries, 2)
 
   if (mode === 'compact') {
     return (
@@ -25,12 +32,12 @@ const BatteriesOverview = ({ mode = 'compact' }: BoxProps) => {
         title={t('boxes.batteries')}
         onExpandHref={`${RouterPath.BOX}/BatteriesOverview`}
       >
-        <div className={'flex justify-center items-center h-full -mx-2'}>
+        <div className={'flex justify-center items-center h-full -mx-2'} ref={overviewRef}>
           { overviewBatteries.map(
             b => <BatterySummary
               key={b.id}
               battery={b}
-              size={'large'}
+              size={size}
               className={overviewBatteries.length > 1 ? 'w-6/12' : ''} />
           ) }
         </div>
@@ -44,6 +51,9 @@ const BatteriesOverview = ({ mode = 'compact' }: BoxProps) => {
     </Grid>
   )
 }
+
+const BREAKPOINT_WIDTH = 312
+const BREAKPOINT_HEIGHT = 214
 
 /*
  Sort batteries by state (charging > discharging > idle) and within that by id.
@@ -68,12 +78,12 @@ const sortBatteries = function (batteries: BatteryType[]) {
   We show only batteries with state data on the overview, but if we don't
   have any we will show any batteries.
  */
-const getOverviewBatteries = function (batteries: BatteryType[]) {
+const getOverviewBatteries = function (batteries: BatteryType[], max: number) {
   const withStateCount = batteries.filter(b => b.state || b.state === 0).length
   if (withStateCount === 0) {
-    return batteries.slice(0, 2)
+    return batteries.slice(0, max)
   }
-  return batteries.slice(0, Math.min(withStateCount, 2))
+  return batteries.slice(0, Math.min(withStateCount, max))
 }
 
 export default observer(BatteriesOverview)

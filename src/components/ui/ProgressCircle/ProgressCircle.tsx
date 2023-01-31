@@ -1,9 +1,10 @@
 import classNames from 'classnames'
+import { colorForPercentageFormatter } from '~/utils/formatters'
 
 const ProgressCircle = ({ percentage, size = 'large', children }: Props) => {
   const hasPercentage = percentage !== null
   const roundedPercentage = Math.round(percentage)
-  const color = hasPercentage ? getColorForPercentage(roundedPercentage) : 'victron-gray-4'
+  const color = hasPercentage ? colorForPercentageFormatter(roundedPercentage) : 'victron-gray-4'
   const diameter = size === 'large' ? 144 : 90
   const stroke = size === 'large' ? 8 : 6
   const strokeClasses = classNames('fill-none', {
@@ -54,17 +55,6 @@ const ProgressCircle = ({ percentage, size = 'large', children }: Props) => {
       { children }
     </div>
   </div>
-}
-
-const getColorForPercentage = function(percentage: number) {
-  if (percentage <= 12) {
-    return 'victron-red'
-  } else if (percentage <= 40) {
-    return 'victron-yellow'
-  } else if (percentage === 100) {
-    return 'victron-blue'
-  }
-  return 'victron-green'
 }
 
 interface Props {
