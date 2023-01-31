@@ -1,16 +1,16 @@
 import React, { useEffect, useRef } from 'react'
 import classnames from 'classnames'
-import LeftSelector from '~/public/icons/selectors/selector-left.svg'
-import RightSelector from '~/public/icons/selectors/selector-right.svg'
-import LeftSelectorBlue from '~/public/icons/selectors/selector-left-blue.svg'
-import RightSelectorBlue from '~/public/icons/selectors/selector-right-blue.svg'
-import DownSelector from '~/public/icons/selectors/selector-down.svg'
-import UpSelector from '~/public/icons/selectors/selector-up.svg'
-import DownSelectorBlue from '~/public/icons/selectors/selector-down-blue.svg'
-import UpSelectorBlue from '~/public/icons/selectors/selector-up-blue.svg'
-import Dot from '~/public/icons/selectors/dot.svg'
-import DotSelected from '~/public/icons/selectors/dot-selected.svg'
-import DotSelectedVertical from '~/public/icons/selectors/dot-selected-vert.svg'
+import LeftSelectorIcon from '~/public/icons/selectors/selector-left.svg'
+import RightSelectorIcon from '~/public/icons/selectors/selector-right.svg'
+import LeftSelectorBlueIcon from '~/public/icons/selectors/selector-left-blue.svg'
+import RightSelectorBlueIcon from '~/public/icons/selectors/selector-right-blue.svg'
+import DownSelectorIcon from '~/public/icons/selectors/selector-down.svg'
+import UpSelectorIcon from '~/public/icons/selectors/selector-up.svg'
+import DownSelectorBlueIcon from '~/public/icons/selectors/selector-down-blue.svg'
+import UpSelectorBlueIcon from '~/public/icons/selectors/selector-up-blue.svg'
+import DotIcon from '~/public/icons/selectors/dot.svg'
+import DotSelectedIcon from '~/public/icons/selectors/dot-selected.svg'
+import DotSelectedVerticalIcon from '~/public/icons/selectors/dot-selected-vert.svg'
 
 const PageSelector = ({ currentPage, maxPages, onClickLeft, onClickRight, selectorLocation }: Props) => {
   const dotsVertRef = useRef<HTMLDivElement>(null)
@@ -20,10 +20,10 @@ const PageSelector = ({ currentPage, maxPages, onClickLeft, onClickRight, select
 
   const dot = (i: number) => {
     if (i === currentPage) {
-      if (isHorizontal) return <DotSelected></DotSelected>
-      return <DotSelectedVertical></DotSelectedVertical>
+      if (isHorizontal) return <DotSelectedIcon></DotSelectedIcon>
+      return <DotSelectedVerticalIcon></DotSelectedVerticalIcon>
     } else {
-      return <Dot></Dot>
+      return <DotIcon></DotIcon>
     }
   }
 
@@ -57,8 +57,8 @@ const PageSelector = ({ currentPage, maxPages, onClickLeft, onClickRight, select
         }}
         className={'w-11 h-11'}
       >
-        {(isHorizontal && ((currentPage > 0 && <LeftSelectorBlue />) || <LeftSelector />)) ||
-          (currentPage > 0 && <UpSelectorBlue />) || <UpSelector />}
+        {(isHorizontal && ((currentPage > 0 && <LeftSelectorBlueIcon />) || <LeftSelectorIcon />)) ||
+          (currentPage > 0 && <UpSelectorBlueIcon />) || <UpSelectorIcon />}
       </div>
       <div
         ref={dotsVertRef}
@@ -92,8 +92,8 @@ const PageSelector = ({ currentPage, maxPages, onClickLeft, onClickRight, select
         }}
         className={'w-42 text-victron-gray dark:text-victron-gray-dark'}
       >
-        {(isHorizontal && ((currentPage < maxPages - 1 && <RightSelectorBlue />) || <RightSelector />)) ||
-          (currentPage < maxPages - 1 && <DownSelectorBlue />) || <DownSelector />}
+        {(isHorizontal && ((currentPage < maxPages - 1 && <RightSelectorBlueIcon />) || <RightSelectorIcon />)) ||
+          (currentPage < maxPages - 1 && <DownSelectorBlueIcon />) || <DownSelectorIcon />}
       </div>
     </div>
   )
