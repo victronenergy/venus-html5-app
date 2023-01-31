@@ -15,12 +15,12 @@ const AdaptiveGridExamplePage: NextPage = () => {
           <div>
             This is an example of using adaptive `Grid` component using this code:
             <div className={'bg-victron-darkGray dark:bg-victron-darkGray-dark rounded-md p-2 my-2'}>
-              &lt;Grid className='gap-2' flow='col'&gt; <br />
-              &nbsp;&nbsp;&lt;Container className='bg-amber-300 p-2'&gt;Box 1&lt;/Container&gt;
+              &lt;Grid className=&apos;gap-2&apos; flow=&apos;col&apos;&gt; <br />
+              &nbsp;&nbsp;&lt;Container className=&apos;bg-amber-300 p-2&apos;&gt;Box 1&lt;/Container&gt;
               <br />
-              &nbsp;&nbsp;&lt;Container className='bg-blue-300 p-2'&gt;Box 2&lt;/Container&gt;
+              &nbsp;&nbsp;&lt;Container className=&apos;bg-blue-300 p-2&apos;&gt;Box 2&lt;/Container&gt;
               <br />
-              &nbsp;&nbsp;&lt;Container className='bg-green-300 p-2'&gt;Box 3&lt;/Container&gt;
+              &nbsp;&nbsp;&lt;Container className=&apos;bg-green-300 p-2&apos;&gt;Box 3&lt;/Container&gt;
               <br />
               &lt;/Grid&gt;
             </div>
