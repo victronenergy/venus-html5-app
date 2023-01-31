@@ -3,17 +3,14 @@ import Box from '~/components/ui/Box'
 import { BoxProps } from '~/types/boxes'
 import DevicesIcon from '~/public/icons/devices.svg'
 import { RouterPath } from '~/types/routes'
-import { useRouter } from 'next/router'
 
 const DevicesOverview = ({ mode = 'compact' }: BoxProps) => {
-  const router = useRouter()
-
   if (mode === 'compact') {
     return (
       <Box
         title={'Devices'}
         icon={<DevicesIcon className={'w-6 text-victron-gray dark:text-victron-gray-dark'} />}
-        onExpandClick={() => router.push(`${RouterPath.BOX}/DevicesOverview`)}
+        onExpandHref={`${RouterPath.BOX}/DevicesOverview`}
       >
         <>
           <div>Devices compact</div>

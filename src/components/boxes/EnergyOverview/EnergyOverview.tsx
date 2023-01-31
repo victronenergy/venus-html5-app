@@ -38,7 +38,7 @@ const EnergyOverview = ({ mode = 'compact' }: BoxProps) => {
       <Box
         title={t('boxes.energy')}
         icon={<EnergyIcon className={'w-6 text-victron-gray dark:text-victron-gray-dark'} />}
-        onExpandClick={() => router.push(`${RouterPath.BOX}/EnergyOverview`)}
+        onExpandHref={`${RouterPath.BOX}/EnergyOverview`}
       >
         <>{
           getAvailableEnergyBoxes(
@@ -56,7 +56,7 @@ const EnergyOverview = ({ mode = 'compact' }: BoxProps) => {
   }
 
   return (
-    <Grid>{
+    <Grid className={'gap-2'}>{
       getAvailableEnergyBoxes(
         mode,
         shoreInputId,
