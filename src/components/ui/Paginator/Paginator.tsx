@@ -11,7 +11,11 @@ const Paginator = ({ children, orientation = 'horizontal', selectorLocation = 'b
   const wrapperRef = useRef<HTMLDivElement>(null)
   const pageRef = useRef<HTMLDivElement>(null)
 
-  const [pages, setPages] = useState<Array<Array<Node>>>([])
+  type PageElement = {
+    childIndex: number
+    scrollTo?: number
+  }
+  const [pages, setPages] = useState<Array<Array<PageElement>>>([])
   const [currentPage, setCurrentPage] = useState(0)
 
   const windowSize = useWindowSize()
@@ -53,12 +57,12 @@ const Paginator = ({ children, orientation = 'horizontal', selectorLocation = 'b
       (orientation === 'horizontal' ? wrapperRef.current.offsetWidth : wrapperRef.current.offsetHeight) -
       (selectorIsTakingUpSpace ? 56 : 0)
 
-    let newPagesArray: Array<Array<Node>> = []
+    let newPagesArray: Array<Array<PageElement>> = []
     let currentPageSize: number = 0
-    let currentPageElements: Array<Node> = []
+    let currentPageElements: Array<PageElement> = []
 
-    childrenRef.current.forEach((ref, i) => {
-      const refSize = childrenSizes[i]
+    childrenRef.current.forEach((ref, childIndex) => {
+      const refSize = childrenSizes[childIndex]
 
       // if the current page would overflow after adding this element, push it to the array and start a new page
       if (currentPageSize + refSize > parentSize && currentPageElements.length > 0) {
@@ -72,20 +76,15 @@ const Paginator = ({ children, orientation = 'horizontal', selectorLocation = 'b
         // split into pages and save where to scroll on changing page
         let i = 0
         while ((i + 1) * parentSize < refSize) {
-          let pageDom = ref.cloneNode(true) as HTMLDivElement
-
-          pageDom.setAttribute('scrollTo', String(i * parentSize))
-          newPagesArray.push([pageDom])
+          newPagesArray.push([{ childIndex: childIndex, scrollTo: i * parentSize }])
           i++
         }
 
         // avoid having the last part of the element be very small, instead, make it the size of parent element
-        let lastPageDom = ref.cloneNode(true) as HTMLDivElement
-        lastPageDom.setAttribute('scrollTo', String(refSize - parentSize))
-        newPagesArray.push([lastPageDom])
+        newPagesArray.push([{ childIndex: childIndex, scrollTo: refSize - parentSize }])
       } else if (currentPageSize + refSize <= parentSize) {
         // if even after adding this element the page is not overflowing, add it to current page
-        currentPageElements.push(ref.cloneNode(true))
+        currentPageElements.push({ childIndex: childIndex })
         currentPageSize += refSize
       }
     })
@@ -101,33 +100,19 @@ const Paginator = ({ children, orientation = 'horizontal', selectorLocation = 'b
   }
 
   useEffect(() => {
-    if (pages.length > 0 && pageRef.current !== null) {
-      // remove all elements of previous page
-      while (pageRef.current.firstChild) {
-        pageRef.current.removeChild(pageRef.current.firstChild)
-      }
-
+    if (
+      pages.length > 0 &&
+      pageRef.current !== null &&
+      pages[currentPage].length === 1 &&
+      pages[currentPage][0].scrollTo !== undefined
+    ) {
       // if there is only one element, and it has a scrollTo attribute, add that element and scroll it
-      if (
-        pages[currentPage].length == 1 &&
-        (pages[currentPage][0] as HTMLDivElement).getAttribute('scrollTo') !== null
-      ) {
-        const pageDiv = pages[currentPage][0] as HTMLDivElement
-        const scrollTo = pageDiv.getAttribute('scrollTo')
-
-        pageRef.current.appendChild(pageDiv)
-
-        pageRef.current.scrollTo({
-          left: orientation === 'horizontal' ? Number(scrollTo) : 0,
-          top: orientation === 'vertical' ? Number(scrollTo) : 0,
-          behavior: 'smooth',
-        })
-      } else {
-        // otherwise, just add all the current page elements
-        pages[currentPage].forEach((el: Node) => {
-          if (pageRef.current !== null) pageRef.current.appendChild(el)
-        })
-      }
+      const scrollTo = pages[currentPage][0].scrollTo
+      pageRef.current.scrollTo({
+        left: orientation === 'horizontal' ? scrollTo : 0,
+        top: orientation === 'vertical' ? scrollTo : 0,
+        behavior: 'smooth',
+      })
     }
   }, [pages, currentPage, orientation])
 
@@ -160,7 +145,7 @@ const Paginator = ({ children, orientation = 'horizontal', selectorLocation = 'b
           ))}
         </div>
       )}
-      {pages.length > 1 && (
+      {pages && pages.length > 1 && (
         <div
           ref={pageRef}
           className={classnames('overflow-hidden flex', {
@@ -169,7 +154,13 @@ const Paginator = ({ children, orientation = 'horizontal', selectorLocation = 'b
             'h-[calc(100%-3.5rem)] w-full': selectorLocation.startsWith('bottom') || selectorLocation.startsWith('top'),
             'w-[calc(100%-3.5rem)] h-full': selectorLocation.startsWith('right') || selectorLocation.startsWith('left'),
           })}
-        ></div>
+        >
+          {childrenArray
+            .slice(pages[currentPage][0].childIndex, pages[currentPage][pages[currentPage].length - 1].childIndex + 1)
+            .map((child, i) => (
+              <div key={i}>{child}</div>
+            ))}
+        </div>
       )}
       {pages.length > 1 && (
         <PageSelector
