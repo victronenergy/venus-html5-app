@@ -41,13 +41,13 @@ const PageSelector = ({ currentPage, maxPages, onClickLeft, onClickRight, select
   return (
     <div
       className={classnames('flex items-center select-none', {
-        'h-[42px] w-full flex-row': isHorizontal,
-        'w-[42px] h-full flex-col': !isHorizontal,
+        'h-11 w-full flex-row': isHorizontal,
+        'w-11 h-full flex-col': !isHorizontal,
         'justify-between': selectorLocation.endsWith('full'),
         'justify-end': selectorLocation.endsWith('right') || selectorLocation.endsWith('bottom'),
         'justify-start': selectorLocation.endsWith('left') || selectorLocation.endsWith('top'),
-        'space-x-[16px] ': !selectorLocation.endsWith('full') && isHorizontal,
-        'space-y-[16px] ': !selectorLocation.endsWith('full') && !isHorizontal,
+        'space-x-4 ': !selectorLocation.endsWith('full') && isHorizontal,
+        'space-y-4 ': !selectorLocation.endsWith('full') && !isHorizontal,
       })}
     >
       <div
@@ -55,7 +55,7 @@ const PageSelector = ({ currentPage, maxPages, onClickLeft, onClickRight, select
           e.preventDefault()
           if (currentPage > 0) onClickLeft()
         }}
-        className={'w-[42px] h-[42px]'}
+        className={'w-11 h-11'}
       >
         {(isHorizontal && ((currentPage > 0 && <LeftSelectorBlue />) || <LeftSelector />)) ||
           (currentPage > 0 && <UpSelectorBlue />) || <UpSelector />}
@@ -63,21 +63,21 @@ const PageSelector = ({ currentPage, maxPages, onClickLeft, onClickRight, select
       <div
         ref={dotsVertRef}
         className={classnames('flex justify-center overflow-hidden', {
-          'w-[calc(100%-116px)]': isHorizontal && selectorLocation.endsWith('full'),
-          'h-[calc(100%-116px)] items-center': !isHorizontal && selectorLocation.endsWith('full'),
+          'w-[calc(100%-7.25rem)]': isHorizontal && selectorLocation.endsWith('full'),
+          'h-[calc(100%-7.25rem)] items-center': !isHorizontal && selectorLocation.endsWith('full'),
           'h-max items-center': !isHorizontal && !selectorLocation.endsWith('full'),
           'w-max items-center': isHorizontal && !selectorLocation.endsWith('full'),
         })}
       >
         {(isHorizontal && (
-          <div ref={dotsHorRef} className={'flex overflow-hidden w-max flex-row justify-left space-x-[9px]'}>
+          <div ref={dotsHorRef} className={'flex overflow-hidden w-max flex-row justify-left space-x-2'}>
             {[...Array(maxPages)].map((e, i) => (
               <span key={i}>{dot(i)}</span>
             ))}
           </div>
         )) || (
           <div className={'m-auto'}>
-            <div className={'flex overflow-hidden h-max flex-col items-start space-y-[9px]'}>
+            <div className={'flex overflow-hidden h-max flex-col items-start space-y-2'}>
               {[...Array(maxPages)].map((e, i) => (
                 <span key={i}>{dot(i)}</span>
               ))}
