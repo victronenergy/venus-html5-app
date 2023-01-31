@@ -107,23 +107,25 @@ interface Props {
   maxPages: number
   onClickLeft: () => void
   onClickRight: () => void
-  selectorLocation:
-    | 'bottom-full'
-    | 'top-full'
-    | 'right-full'
-    | 'left-full'
-    | 'bottom-right'
-    | 'bottom-left'
-    | 'bottom-center'
-    | 'top-right'
-    | 'top-left'
-    | 'top-center'
-    | 'right-top'
-    | 'right-bottom'
-    | 'right-center'
-    | 'left-top'
-    | 'left-bottom'
-    | 'left-center'
+  selectorLocation: SelectorLocation
 }
+
+export type SelectorLocation =
+  | 'bottom-full'
+  | 'top-full'
+  | 'right-full'
+  | 'left-full'
+  | 'bottom-right'
+  | 'bottom-left'
+  | 'bottom-center'
+  | 'top-right'
+  | 'top-left'
+  | 'top-center'
+  | 'right-top'
+  | 'right-bottom'
+  | 'right-center'
+  | 'left-top'
+  | 'left-bottom'
+  | 'left-center'
 
 export default PageSelector
