@@ -9,7 +9,12 @@ import { Storage, useLanguage, useMqtt, useTheme } from '@elninotech/mfd-modules
 import { NextPage } from 'next'
 import { NextRouter, useRouter } from 'next/router'
 import { appWithTranslation } from 'next-i18next'
-import { DEFAULT_LANGUAGE, LANGUAGE_KEY_LOCAL_STORAGE, LANGUAGE_OVERRIDES, SUPPORTED_LANGUAGES } from '~/util/constants'
+import {
+  DEFAULT_LANGUAGE,
+  LANGUAGE_KEY_LOCAL_STORAGE,
+  LANGUAGE_OVERRIDES,
+  SUPPORTED_LANGUAGES,
+} from '~/utils/constants'
 
 export type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode
@@ -32,15 +37,15 @@ const MfdApp = ({ Component, pageProps }: AppPropsWithLayout) => {
   const { darkMode } = useTheme()
   const mqtt = useMqtt()
   const router = useRouter()
-  const host = typeof router.query.host !== 'string' ?
-    (typeof window !== 'undefined' && window.location.hostname || 'localhost') :
-    router.query.host
-  const port = typeof router.query.port !== 'string' ?
-    9001 : +router.query.port
+  const host =
+    typeof router.query.host !== 'string'
+      ? (typeof window !== 'undefined' && window.location.hostname) || 'localhost'
+      : router.query.host
+  const port = typeof router.query.port !== 'string' ? 9001 : +router.query.port
 
   // connect to mqtt
   useEffect(() => {
-    if (!router.isReady) return
+    if (!router.isReady || mqtt.isConnected) return
     mqtt.boot(host, port)
   }, [mqtt, host, port, router.isReady])
 
@@ -65,14 +70,16 @@ const MfdApp = ({ Component, pageProps }: AppPropsWithLayout) => {
 }
 
 const onLanguageChange = async (router: NextRouter, newLanguage: string) => {
-  const { pathname, query, asPath } = router;
-  const currentLanguage = localStorage.getItem(LANGUAGE_KEY_LOCAL_STORAGE) || DEFAULT_LANGUAGE
+  const { pathname, query, isReady, asPath } = router
+  newLanguage = LANGUAGE_OVERRIDES[newLanguage] ?? newLanguage
 
-  if (newLanguage === currentLanguage) return;
+  // Avoid losing query parameters and only route on language change
+  if (!isReady || asPath.startsWith(`/${newLanguage}`)) return
 
-  await router.push({ pathname, query }, asPath, {
-    locale: LANGUAGE_OVERRIDES[newLanguage] ?? newLanguage
-  })
+  query.locale = newLanguage
+  const newPathname = pathname.startsWith('/[locale]') ?
+    pathname : '/[locale]' + pathname
+  await router.replace({ pathname: newPathname, query })
 }
 
 export default appWithTranslation(observer(MfdApp))

@@ -64,11 +64,14 @@ This will start the webpack dev server, which will recompile the app on code cha
 
 You can change the `host` and `port` (although the default 9001 is usually correct) query parameters to point to your Venus device:
 
-`http://localhost:8000?host=<VENUS_DEVICE_IP>&port=9001`
+`http://localhost:8000/?host=<VENUS_DEVICE_IP>&port=9001`
 
 This way you can run the local app against venus device data if the venus device is on the same network as your computer.
 
-### 2.3 Running the app with no Venus device available
+### 2.3 Routing
+Every route is prefixed with the current locale, i.e. `http://localhost:8000/en/box/EnergyOverview`. This is done automatically based on the language setting of the GX device, and stays in place when using the custom `<Link>` component.
+
+### 2.4 Running the app with no Venus device available
 
 The MQTT mock is no longer maintained. Use [venus-docker](https://github.com/victronenergy/venus-docker) instead or a Venus GX in demo mode (below).
 
@@ -81,7 +84,7 @@ an increasing port number starting from `9001`.
 
 Also keep in mind the Venus device also has a Demo mode, which allows you to get useful data if you only have the Venus device available, without requiring various Victron devices to be connected to the Venus device. To enable it, navigate to the Venus Remote Console -> Settings -> General.
 
-### 2.4 Device radiator
+### 2.5 Device radiator
 
 Since the app will be run on a plethora of different resolutions and split screens there is a "radiator" available which has iframes for all the
 basic combinations of display "splits". The base 1/1 ui is 1280 x 720, which can be changed in the header. In the radiator there are the basic ui
@@ -90,27 +93,27 @@ and multiple split screen variations available relative to the "base" size.
 To run this ui it is recommended to use mocked data. Run the mocked mqtt as described above and navigate to the radiator ui with `http://localhost/radiator.html`.
 Since it is still served through the webpack dev server, the app will hot reload any time there are code changes.
 
-### 2.5 Metrics available
+### 2.6 Metrics available
 
 - Identify the D-bus channel that you want to read [from here](https://github.com/victronenergy/venus/wiki/dbus)
 - Create a component using MqttSubscriptions or MqttTopicWildcard and pass the topic as the wrapper topi. See examples in other components
 
-### 2.6 Deploying to a device during development
+### 2.7 Deploying to a device during development
 
-#### 2.6.1 Get the device ip
+#### 2.7.1 Get the device ip
 
 In order to deploy you need to know the target device's IP. It can be connected to by ethernet, LAN or the device's own WLAN.
 Instructions on how to find the IPs can be found [here](https://www.victronenergy.com/live/venus-gx:start#accessing_the_device)
 for the Venus GX device.
 
-#### 2.6.2 Run deploy script
+#### 2.7.2 Run deploy script
 
 In the project main folder run `./bin/deploy.sh <ip>` where ip is the target device's IP. The script also accepts an additional
 `--user|-u` param that defines the user for the deployment connection. This defaults to `root`.
 
 The deploy script also bundles the app. Nore that the script assumes that it's run from the root folder of the application.
 
-#### 2.6.3 Deploying using a USB stick
+#### 2.7.3 Deploying using a USB stick
 
 Since Venus OS 2.80, placing the build of the app in `/data/www/app` allows for serving a different version of the app than the one bundled with Venus OS at `/var/www/venus/app`. When the `/data/www/app` is present, it'll be server at `venus.local/app` and the original application at `venus.local/default/app`.
 
@@ -118,19 +121,19 @@ By creating an archive named `venus-data.zip` that contains the build files from
 
 The content of the `/data` partition is persistent across firmware updates.
 
-#### 2.6.3 Navigate to the app address again on the target device
+#### 2.7.4 Navigate to the app address again on the target device
 
 Once deployed reload the page by navigating to the Venus host IP on the target device.
 If you have enabled dev features and have previously deployed a new version of the UI to the device you can
 press the `reload page` on the top left corner of the page.
 
-### 2.7 Translations
+### 2.8 Translations
 
-#### 2.7.1 Syncronizing the translations files with the POEditor Project
+#### 2.8.1 Syncronizing the translations files with the POEditor Project
 
 [POEditor](https://poeditor.com/) is used as localization management platform for this project. In order to sync the translations using the scripts from the `poeditor` folder, an API key has to be placed in the `.env.local` according to the `.env.local.example` file.
 
-#### 2.7.2 Pushing the local translation files to POEditor
+#### 2.8.2 Pushing the local translation files to POEditor
 
 ```
 npm run poeditor:push

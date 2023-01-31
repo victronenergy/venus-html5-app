@@ -1,14 +1,13 @@
-import { observer } from 'mobx-react-lite'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Grid from '~/components/ui/Grid'
 import Container from '~/components/ui/Container'
 
-const Home: NextPage = () => {
+const ExampleGridPage: NextPage = () => {
   return (
     <div>
       <Head>
-        <title>Victron Venus MFD</title>
+        <title>Victron Venus MFD Grid example</title>
       </Head>
 
       <main className={'safe-h-screen dark:bg-black dark:text-white'}>
@@ -64,4 +63,4 @@ const Home: NextPage = () => {
   )
 }
 
-export default observer(Home)
+export default ExampleGridPage
