@@ -22,7 +22,7 @@ const Paginator = ({ children, orientation = 'horizontal', selectorLocation = 'b
 
   // On the first render, save the children sizes to an array for calculations after resizing
   useEffect(() => {
-    let newChildrenSizeArray: Array<number> = []
+    const newChildrenSizeArray: number[] = []
 
     childrenRef.current.forEach((ref) => {
       const refSize = orientation === 'horizontal' ? ref.scrollWidth : ref.scrollHeight
@@ -47,7 +47,6 @@ const Paginator = ({ children, orientation = 'horizontal', selectorLocation = 'b
       return
     }
 
-    const childrenSizes = childrenSizeArray
     const selectorIsHorizontal = selectorLocation.startsWith('bottom') || selectorLocation.startsWith('top')
     const selectorIsTakingUpSpace =
       (orientation === 'horizontal' && !selectorIsHorizontal) || (orientation === 'vertical' && selectorIsHorizontal)
@@ -57,12 +56,12 @@ const Paginator = ({ children, orientation = 'horizontal', selectorLocation = 'b
       (orientation === 'horizontal' ? wrapperRef.current.offsetWidth : wrapperRef.current.offsetHeight) -
       (selectorIsTakingUpSpace ? 56 : 0)
 
-    let newPagesArray: Array<Array<PageElement>> = []
+    const newPagesArray: Array<Array<PageElement>> = []
     let currentPageSize: number = 0
     let currentPageElements: Array<PageElement> = []
 
     childrenRef.current.forEach((ref, childIndex) => {
-      const refSize = childrenSizes[childIndex]
+      const refSize = childrenSizeArray[childIndex]
 
       // if the current page would overflow after adding this element, push it to the array and start a new page
       if (currentPageSize + refSize > parentSize && currentPageElements.length > 0) {
