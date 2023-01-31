@@ -44,8 +44,8 @@ const Tank = ({ tankInstanceId, mode = 'compact', orientation = 'vertical' }: Pr
               <div>{levelFormatter(level)}</div>
               <div
                 className={classnames({
-                  'text-victron-red': level > 75,
-                  'text-victron-gray': level <= 75,
+                  'text-victron-red/70': level > 75,
+                  'text-victron-gray/70': level <= 75,
                 })}
               >
                 {' %'}
@@ -82,8 +82,8 @@ const Tank = ({ tankInstanceId, mode = 'compact', orientation = 'vertical' }: Pr
               <div>{levelFormatter(level)}</div>
               <div
                 className={classnames({
-                  'text-victron-red': level > 75,
-                  'text-victron-gray': level <= 75,
+                  'text-victron-red/70': level > 75,
+                  'text-victron-gray/70': level <= 75,
                 })}
               >
                 {' %'}
@@ -115,8 +115,8 @@ const Tank = ({ tankInstanceId, mode = 'compact', orientation = 'vertical' }: Pr
               <div>{levelFormatter(level)}</div>
               <div
                 className={classnames({
-                  'text-victron-red': level > 75,
-                  'text-victron-gray': level <= 75,
+                  'text-victron-red/70': level > 75,
+                  'text-victron-gray/70': level <= 75,
                 })}
               >
                 {' %'}
