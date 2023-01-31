@@ -48,10 +48,10 @@ const Paginator = ({ children, orientation = 'horizontal', selectorLocation = 'b
     const selectorIsTakingUpSpace =
       (orientation === 'horizontal' && !selectorIsHorizontal) || (orientation === 'vertical' && selectorIsHorizontal)
     // Calculating parent size (selector might be taking part of the size if it is of the opposite orientation, we
-    // should then subtract its size (42px + 12px padding)
+    // should then subtract its size (3.5rem = 56px)
     const parentSize =
       (orientation === 'horizontal' ? wrapperRef.current.offsetWidth : wrapperRef.current.offsetHeight) -
-      (selectorIsTakingUpSpace ? 54 : 0)
+      (selectorIsTakingUpSpace ? 56 : 0)
 
     let newPagesArray: Array<Array<Node>> = []
     let currentPageSize: number = 0
@@ -166,8 +166,8 @@ const Paginator = ({ children, orientation = 'horizontal', selectorLocation = 'b
           className={classnames('overflow-hidden flex', {
             'flex-row': orientation === 'horizontal',
             'flex-col': orientation === 'vertical',
-            'h-[calc(100%-54px)] w-full': selectorLocation.startsWith('bottom') || selectorLocation.startsWith('top'),
-            'w-[calc(100%-54px)] h-full': selectorLocation.startsWith('right') || selectorLocation.startsWith('left'),
+            'h-[calc(100%-3.5rem)] w-full': selectorLocation.startsWith('bottom') || selectorLocation.startsWith('top'),
+            'w-[calc(100%-3.5rem)] h-full': selectorLocation.startsWith('right') || selectorLocation.startsWith('left'),
           })}
         ></div>
       )}
