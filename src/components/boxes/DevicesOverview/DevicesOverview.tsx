@@ -3,6 +3,8 @@ import Box from '~/components/ui/Box'
 import { BoxProps } from '~/types/boxes'
 import DevicesIcon from '~/public/icons/devices.svg'
 import { RouterPath } from '~/types/routes'
+import { withErrorBoundary } from 'react-error-boundary'
+import ErrorFallback from '~/components/ui/ErrorBoundary/ErrorFallback'
 
 const DevicesOverview = ({ mode = 'compact' }: BoxProps) => {
   if (mode === 'compact') {
@@ -28,4 +30,11 @@ const DevicesOverview = ({ mode = 'compact' }: BoxProps) => {
   )
 }
 
-export default DevicesOverview
+const ComponentWithErrorBoundary = withErrorBoundary(DevicesOverview, {
+  FallbackComponent: ErrorFallback,
+  onError(error, info) {
+    console.error(error, info)
+  },
+})
+
+export default ComponentWithErrorBoundary
