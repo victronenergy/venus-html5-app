@@ -22,21 +22,21 @@ const RemoteConsole = () => {
     <>
       { mqtt.status === STATUS.CONNECTED &&
         <iframe
-          className={classnames('flex-grow max-w-screen-md h-[354px] hidden md:block', {'hidden': loading || error})}
+          className={classnames('flex-grow max-w-screen-md h-[354px] block hide-remote-console:hidden', {'hidden': loading || error})}
           src={url}
         />
       }
 
       { loading && !error &&
-        <div className={'hidden text-center p-4 md:block'}>{t('common.loading')}…</div>
+        <div className={'text-center p-4 block hide-remote-console:hidden'}>{t('common.loading')}…</div>
       }
       { error &&
-        <div className={'hidden text-center p-4 md:block'}>
+        <div className={'text-center p-4 block hide-remote-console:hidden'}>
           {t('error.remoteConsole.connectionFailed')}
         </div>
       }
 
-      <div className={'text-center p-4 md:hidden'}>
+      <div className={'text-center p-4 hidden hide-remote-console:block'}>
         {t('error.remoteConsole.screenTooSmall')}
       </div>
     </>
