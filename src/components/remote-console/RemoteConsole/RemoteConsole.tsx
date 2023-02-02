@@ -21,10 +21,10 @@ const RemoteConsole = () => {
   return (
     <>
       { mqtt.status === STATUS.CONNECTED &&
-        <iframe
-          className={classnames('flex-grow max-w-screen-md h-[354px] block hide-remote-console:hidden', {'hidden': loading || error})}
-          src={url}
-        />
+          <iframe
+            className={classnames('max-w-screen-md flex-grow h-96 py-3.5 block hide-remote-console:hidden', {'hidden': loading || error})}
+            src={url}
+          />
       }
 
       { loading && !error &&
