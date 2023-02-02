@@ -30,22 +30,3 @@ body {
         height: -webkit-fill-available;
     }
 }
-
-.remote-console {
-    max-width: 796px;
-    height: 354px;
-}
-
-@media (max-width: 600px), (max-height: 550px) {
-    .remote-console {
-        display: none;
-    }
-
-    .remote-console-info {
-        display: none;
-    }
-
-    .remote-console-warning {
-        display: block;
-    }
-}
