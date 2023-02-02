@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import Container from '../Container'
+import Container from '~/components/ui/Container'
 
 test('renders component inside Container', async () => {
   render(

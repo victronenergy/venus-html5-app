@@ -9,6 +9,8 @@ module.exports = {
   modulePaths: ['./src'],
   moduleNameMapper: {
     '\\.(jpg|jpeg|png|gif)$': '<rootDir>/__mocks__/fileMock.js',
+    '^~/public/(.*)$': '<rootDir>/public/$1',
+    '^~/(.*)$': '<rootDir>/src/$1',
   },
   testMatch: ['<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}', '<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}'],
   testEnvironment: 'jsdom',
