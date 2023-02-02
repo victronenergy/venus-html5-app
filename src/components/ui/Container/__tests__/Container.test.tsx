@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import Container from '~/components/ui/Container'
 
-test('renders component inside Container', async () => {
+test('renders children', async () => {
   render(
     <Container>
       <div>test content</div>
