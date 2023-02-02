@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { observer } from 'mobx-react-lite'
 import classnames from 'classnames'
 import { useRouter } from 'next/router'
@@ -14,9 +14,9 @@ const RemoteConsole = () => {
   const error = mqtt.error && [STATUS.OFFLINE, STATUS.DISCONNECTED]
     .some(v => v === mqtt.status)
 
-  let url = 'http://' + (router.query['host'] ||
-    (typeof window !== 'undefined' && window.location.hostname) ||
-    'localhost')
+  const protocol = (typeof window !== 'undefined' && window.location.protocol) || 'http:'
+  const hostname = router.query['host'] || (typeof window !== 'undefined' && window.location.hostname) || 'localhost'
+  const url = protocol + '//' + hostname
 
   return (
     <>
