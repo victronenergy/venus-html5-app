@@ -28,7 +28,7 @@ const RemoteConsole = () => {
       }
 
       { loading && !error &&
-        <div className={'text-center p-4 remote-console-info'}>{t('common.loading')}...</div>
+        <div className={'text-center p-4 remote-console-info'}>{t('common.loading')}…</div>
       }
       { error &&
         <div className={'text-center p-4 remote-console-info'}>
