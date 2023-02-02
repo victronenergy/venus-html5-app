@@ -5,31 +5,24 @@ import { useTranslation } from 'next-i18next'
 import { Battery } from '@elninotech/mfd-modules'
 import classNames from 'classnames'
 
-const BatterySummary = ({ battery, size = 'large', className }: Props) => {
+const BatterySummary = ({ battery, className }: Props) => {
   const { t } = useTranslation()
 
   return (
-    <div className={classNames('flex flex-col justify-center items-center px-2', className)}>
-      <ProgressCircle percentage={battery.soc ?? null} size={size}>
-        { (size === 'large' || (!battery.soc && battery.soc !== 0)) &&
-          (battery.voltage || battery.voltage === 0) ?
-          <div className={classNames(
-            'text-victron-gray dark:text-victron-gray-dark',
-            size === 'large' ? 'text-3xl' : 'text-xl'
-          )}>
+    <div className={classNames('flex flex-col justify-center items-center px-4', className)}>
+      <ProgressCircle percentage={battery.soc ?? null}>
+        { (battery.voltage || battery.voltage === 0) ?
+          <div className={'text-victron-gray dark:text-victron-gray-dark text-xl md:text-2xl lg:text-3xl hidden md:block'}>
             { dcVoltageFormatter(battery.voltage) }
             <span className={'text-victron-gray-4 dark:text-victron-gray-4-dark'}>V</span>
           </div> : <></>
         }
       </ProgressCircle>
-      <span className={'text-xl mt-3.5 truncate w-full text-center'}>
+      <span className={'mt-3.5 truncate w-full text-center text-xl lg:text-4xl'}>
         { battery.name }
       </span>
       {
-        <span className={classNames('text-victron-gray dark:text-victron-gray-dark', {
-          'text-lg': size === 'large',
-          'text-md': size === 'small'
-        })}>
+        <span className={'text-victron-gray dark:text-victron-gray-dark md:text-lg lg:text-xl'}>
           { battery.state === BATTERY.DISCHARGING && battery.timetogo ?
             (
               timeAsStringFormatter(t, battery.timetogo)
@@ -44,7 +37,6 @@ const BatterySummary = ({ battery, size = 'large', className }: Props) => {
 
 interface Props {
   battery: Battery
-  size: 'small' | 'large'
   className?: string
 }
 

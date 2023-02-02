@@ -81,6 +81,9 @@ module.exports = {
         full: '9999px',
         DEFAULT: '0.25rem',
       },
+      strokeWidth: {
+        '16': '16px',
+      }
     },
   },
   plugins: [require('@tailwindcss/aspect-ratio'), require('@tailwindcss/line-clamp')],
