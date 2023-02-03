@@ -18,6 +18,7 @@ const ThemeMode = () => {
     setLock(!lock)
   }
 
+  // TODO: Move logic to utils 
   const setAutoMode = () => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
 
