@@ -10,7 +10,8 @@
     "export": "next build && next export",
     "poeditor:pull": "node poeditor/pull.js",
     "poeditor:push": "node poeditor/push.js",
-    "test": "jest --watch"
+    "test": "jest --watch",
+    "test:ci": "jest --ci --coverage --reporters=default"
   },
   "dependencies": {
     "@elninotech/mfd-modules": "^3.0.2",
