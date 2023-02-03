@@ -33,7 +33,7 @@ const ThemeMode = () => {
     <div className='dark:text-white cursor-pointer'>
       <div className='flex justify-center items-center w-full'>
         <button onClick={() => setModal(!modal)}>
-          <PreferencesIcon />
+          <PreferencesIcon className='w-1'/>
         </button>
         <Modal.Frame
           open={modal}
