@@ -17,7 +17,7 @@ const EnergyDC = ({ mode = 'compact', dcLoads }: Props) => {
           <DCIcon className={'w-7 text-black dark:text-white'} />
           <p className='text-2xl pl-3'>{t('boxes.dcLoads')}</p>
         </div>
-        <p className='text-2xl'>{Math.round(power / voltage)}<span className='text-victron-gray dark:text-victron-gray-dark'>A</span></p>
+        <p className='text-2xl'>{(power / voltage).toFixed(1)}<span className='text-victron-gray dark:text-victron-gray-dark'> A</span></p>
       </div>
     ) 
   }
