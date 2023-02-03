@@ -6,7 +6,7 @@ export const routerMock: NextRouter = {
   route: '/',
   asPath: '/',
   query: {},
-  // push, replace и prefetch must be async functions
+  // push, replace and prefetch must be async functions
   push: async () => true,
   replace: async () => true,
   prefetch: async () => undefined,
