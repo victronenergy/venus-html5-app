@@ -36,12 +36,12 @@ const TanksOverview = ({ mode = 'compact' }: BoxProps) => {
       >
         <div>
           <div>Tanks</div>
-            <div>
-              {tanks &&
-                tanks.map((tank, index) => {
-                  return tank ? <Tank key={index} tankInstanceId={tank} /> : null
-                })}
-            </div>
+          <div>
+            {tanks &&
+              tanks.map((tank, index) => {
+                return tank ? <Tank key={index} tankInstanceId={tank} /> : null
+              })}
+          </div>
         </div>
       </Box>
     )
