@@ -1,15 +1,23 @@
 import React from 'react'
 import Box from '~/components/ui/Box'
 import { BoxProps } from '~/types/boxes'
-import EnergyIcon from '~/public/icons/energy.svg'
 import { AcLoadsState } from '@elninotech/mfd-modules'
 import { useTranslation } from 'next-i18next'
 import ACIcon from '~/public/icons/ac.svg'
 
 const EnergyAC = ({ mode = 'compact', acLoads }: Props) => {
   const { current, power, phases, voltage } = acLoads
+
   const totalPower = power.reduce((total, power) => (power ? total + power : total))
   const { t } = useTranslation()
+
+  const formatPower = (power: number) => {
+    if (power >= 1000) {
+      return (power / 1000).toFixed(1)
+    }
+
+    return power.toFixed(1)
+  }
 
   if (mode === 'compact') {
     return (
@@ -27,8 +35,8 @@ const EnergyAC = ({ mode = 'compact', acLoads }: Props) => {
           )}
           {(phases ?? 1) !== 1 && (
             <p>
-              {totalPower.toFixed(1) ?? '--'}
-              <span className='text-victron-gray dark:text-victron-gray-dark'> W</span>
+              {formatPower(totalPower) ?? '--'}
+              <span className='text-victron-gray dark:text-victron-gray-dark'>{totalPower > 1000 ? " kW" : " W"}</span>
             </p>
           )}
         </p>
@@ -37,12 +45,33 @@ const EnergyAC = ({ mode = 'compact', acLoads }: Props) => {
   }
 
   return (
-    <Box title={t('boxes.acLoads')} icon={<EnergyIcon className={'w-6 text-black dark:text-white'} />}>
-      <>
-        <p>{current.slice(0, phases ?? 1).map((c) => (c ? c + 'A ' : '--A '))}</p>
-        <p>{power.slice(0, phases ?? 1).map((p) => (p ? p + 'W ' : '--W '))}</p>
-        <p>{voltage.slice(0, phases ?? 1).map((v) => (v ? v + 'V ' : '--V '))}</p>
-      </>
+    <Box title={t('boxes.acLoads')} icon={<ACIcon className={'w-5 text-black dark:text-white'} />}>
+      <div className='w-full h-full py-2 flex flex-col'>
+        <div className='text-6xl text-victron-gray dark:text-white'>
+          {formatPower(totalPower)}
+          <span className='text-victron-gray2 dark:text-victron-gray2-dark'>{totalPower > 1000 ? "kW" : "W"}</span>
+        </div>
+        <div className='w-full h-full flex content-end flex-wrap'>
+          {Array.from(Array(phases ?? 1).keys()).map((i) => (
+            <div key={i} className='w-full grid grid-cols-7 p-1 md:grid-cols-10'>
+              <hr className='col-span-10 h-1 p-1 border-victron-gray2 dark:border-victron-gray2-dark' />
+              <p className='col-span-1 text-2xl text-victron-gray dark:text-victron-gray-dark'>{'L' + (i + 1)}</p>
+              <div className='col-span-3 text-left text-2xl text-victron-gray dark:text-victron-gray-dark'>
+                {voltage[i] ? voltage[i].toFixed(1) : '--'}
+                <span className='text-victron-gray2 dark:text-victron-gray2-dark'> V</span>
+              </div>
+              <div className='col-span-3 text-center text-2xl text-victron-gray dark:text-victron-gray-dark'>
+                {current[i] ? current[i].toFixed(1) : '--'}
+                <span className='text-victron-gray2 dark:text-victron-gray2-dark'> A</span>
+              </div>
+              <div className='hidden text-right text-2xl text-victron-gray dark:text-victron-gray-dark md:col-span-3 md:block'>
+                {power[i] ? formatPower(power[i]) : '--'}
+                <span className='text-victron-gray2 dark:text-victron-gray2-dark'>{power[i] > 1000 ? " kW" : " W"}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </Box>
   )
 }
