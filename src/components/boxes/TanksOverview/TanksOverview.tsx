@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Box from '~/components/ui/Box'
 import TanksIcon from '~/public/icons/tanks.svg'
 import { RouterPath } from '~/types/routes'
@@ -15,7 +15,7 @@ import { useComponentSize, useWindowSize } from '~/utils/hooks'
 const TanksOverview = ({ mode = 'compact' }: BoxProps) => {
   const { tanks } = useTanks()
   const gridRef = useRef<HTMLDivElement>(null)
-  const [orientation, setOrientation] = React.useState<'horizontal' | 'vertical'>('vertical')
+  const [orientation, setOrientation] = useState<'horizontal' | 'vertical'>('vertical')
 
   const componentSize = useComponentSize(gridRef)
   const windowSize = useWindowSize()
@@ -36,7 +36,7 @@ const TanksOverview = ({ mode = 'compact' }: BoxProps) => {
         icon={<TanksIcon className={'w-6 text-black dark:text-white'} />}
         onExpandHref={`${RouterPath.BOX}/TanksOverview/`}
       >
-        <>
+        <div>
           <div>Tanks</div>
             <div>
               {tanks &&
@@ -44,7 +44,7 @@ const TanksOverview = ({ mode = 'compact' }: BoxProps) => {
                   return tank ? <Tank key={index} tankInstanceId={tank} /> : null
                 })}
             </div>
-        </>
+        </div>
       </Box>
     )
   }
