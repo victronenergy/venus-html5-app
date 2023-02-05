@@ -21,6 +21,7 @@ import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'next-i18next'
 import EnergyWind from '~/components/boxes/EnergyWind'
 import EnergyAlternator from '~/components/boxes/EnergyAlternator'
+import Divider from '~/components/ui/Divider'
 
 const EnergyOverview = ({ mode = 'compact' }: BoxProps) => {
   const router = useRouter()
@@ -84,6 +85,12 @@ const getAvailableEnergyBoxes = function (
   if (shoreInputId) {
     boxes.push(<EnergyShore mode={mode} inputId={shoreInputId} />)
   }
+  
+  // Add a divider if there are any AC loads or DC loads in the compact mode
+  if (mode === 'compact' && (acLoads.phases || (dcLoads.current || dcLoads.current === 0) &&
+    (dcLoads.voltage || dcLoads.voltage === 0))) {
+      boxes.push(<Divider text={'Loads'} />)
+    }
 
   if (acLoads.phases) boxes.push(<EnergyAC mode={mode} acLoads={acLoads} />)
 

@@ -21,7 +21,7 @@ const EnergyAC = ({ mode = 'compact', acLoads }: Props) => {
         <p className='text-2xl'>
           {(phases ?? 1) === 1 && (
             <p>
-              {current[0].toFixed(1) ?? '--'}
+              {current[0] ? current[0].toFixed(1) : '--'}
               <span className='text-victron-gray dark:text-victron-gray-dark'> A</span>
             </p>
           )}

@@ -25,7 +25,7 @@ const EnergyShore = ({ mode = 'compact', inputId }: Props) => {
           </div>
         </div>
         {!unplugged ? (
-          (phases ?? 1) === 1 ? <p className='text-2xl'>{current[0].toFixed(1) ?? '--'}<span className='text-victron-gray dark:text-victron-gray-dark'> W</span></p>
+          (phases ?? 1) === 1 ? <p className='text-2xl'>{current[0] ? current[0].toFixed(1) : '--'}<span className='text-victron-gray dark:text-victron-gray-dark'> W</span></p>
             : <p className='text-2xl'>{totalPower.toFixed(1) ?? '--'}<span className='text-victron-gray dark:text-victron-gray-dark'> W</span></p>
         ) : <p className='text-2xl'>--<span className='text-victron-gray dark:text-victron-gray-dark'> A</span></p>}
       </div>
