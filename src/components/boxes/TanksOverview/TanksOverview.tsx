@@ -42,7 +42,7 @@ const TanksOverview = ({ mode = 'compact' }: BoxProps) => {
                   return tank ? <Tank key={index} tankInstanceId={tank} /> : null
                 })}
             </div>
-        </>
+        </div>
       </Box>
     )
   }
