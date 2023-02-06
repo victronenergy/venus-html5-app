@@ -4,20 +4,13 @@ import { BoxProps } from '~/types/boxes'
 import { AcLoadsState } from '@elninotech/mfd-modules'
 import { useTranslation } from 'next-i18next'
 import ACIcon from '~/public/icons/ac.svg'
+import { formatPower, formatValue } from '~/utils/format'
 
 const EnergyAC = ({ mode = 'compact', acLoads }: Props) => {
   const { current, power, phases, voltage } = acLoads
 
   const totalPower = power.reduce((total, power) => (power ? total + power : total))
   const { t } = useTranslation()
-
-  const formatPower = (power: number) => {
-    if (power >= 1000) {
-      return (power / 1000).toFixed(1)
-    }
-
-    return power.toFixed(1)
-  }
 
   if (mode === 'compact') {
     return (
@@ -35,7 +28,7 @@ const EnergyAC = ({ mode = 'compact', acLoads }: Props) => {
           )}
           {(phases ?? 1) !== 1 && (
             <p>
-              {formatPower(totalPower) ?? '--'}
+              {formatPower(totalPower)}
               <span className='text-victron-gray dark:text-victron-gray-dark'>{totalPower > 1000 ? " kW" : " W"}</span>
             </p>
           )}
@@ -54,18 +47,18 @@ const EnergyAC = ({ mode = 'compact', acLoads }: Props) => {
         <div className='w-full h-full flex content-end flex-wrap'>
           {Array.from(Array(phases ?? 1).keys()).map((i) => (
             <div key={i} className='w-full grid grid-cols-7 p-1 md:grid-cols-10'>
-              <hr className='col-span-10 h-1 p-1 border-victron-gray2 dark:border-victron-gray2-dark' />
+              <hr className='col-span-10 h-1 border-victron-gray2 dark:border-victron-gray2-dark' />
               <p className='col-span-1 text-2xl text-victron-gray dark:text-victron-gray-dark'>{'L' + (i + 1)}</p>
               <div className='col-span-3 text-left text-2xl text-victron-gray dark:text-victron-gray-dark'>
-                {voltage[i] ? voltage[i].toFixed(1) : '--'}
+                {formatValue(voltage[i])}
                 <span className='text-victron-gray2 dark:text-victron-gray2-dark'> V</span>
               </div>
               <div className='col-span-3 text-center text-2xl text-victron-gray dark:text-victron-gray-dark'>
-                {current[i] ? current[i].toFixed(1) : '--'}
+                {formatValue(current[i])}
                 <span className='text-victron-gray2 dark:text-victron-gray2-dark'> A</span>
               </div>
               <div className='hidden text-right text-2xl text-victron-gray dark:text-victron-gray-dark md:col-span-3 md:block'>
-                {power[i] ? formatPower(power[i]) : '--'}
+                {formatValue(power[i])}
                 <span className='text-victron-gray2 dark:text-victron-gray2-dark'>{power[i] > 1000 ? " kW" : " W"}</span>
               </div>
             </div>

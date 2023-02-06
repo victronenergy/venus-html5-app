@@ -6,6 +6,7 @@ import EnergyIcon from '~/public/icons/energy.svg'
 import Box from '~/components/ui/Box'
 import { useTranslation } from 'next-i18next'
 import ShorePowerIcon from '~/public/icons/shore-power.svg'
+import { formatValue, formatPower } from '~/utils/format'
 
 const EnergyShore = ({ mode = 'compact', inputId }: Props) => {
   const { current, power, voltage } = useActiveInValues()
@@ -25,9 +26,22 @@ const EnergyShore = ({ mode = 'compact', inputId }: Props) => {
           </div>
         </div>
         {!unplugged ? (
-          (phases ?? 1) === 1 ? <p className='text-2xl'>{current[0] ? current[0].toFixed(1) : '--'}<span className='text-victron-gray dark:text-victron-gray-dark'> W</span></p>
-            : <p className='text-2xl'>{totalPower.toFixed(1) ?? '--'}<span className='text-victron-gray dark:text-victron-gray-dark'> W</span></p>
-        ) : <p className='text-2xl'>--<span className='text-victron-gray dark:text-victron-gray-dark'> A</span></p>}
+          (phases ?? 1) === 1 ? (
+            <p className='text-2xl'>
+              {formatValue(current[0])}
+              <span className='text-victron-gray dark:text-victron-gray-dark'> W</span>
+            </p>
+          ) : (
+            <p className='text-2xl'>
+              {formatPower(totalPower)}
+              <span className='text-victron-gray dark:text-victron-gray-dark'> W</span>
+            </p>
+          )
+        ) : (
+          <p className='text-2xl'>
+            --<span className='text-victron-gray dark:text-victron-gray-dark'> A</span>
+          </p>
+        )}
       </div>
     )
   }
