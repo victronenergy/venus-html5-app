@@ -2,7 +2,6 @@ import React from 'react'
 import { useActiveInValues, useActiveSource } from '@elninotech/mfd-modules'
 import { observer } from 'mobx-react-lite'
 import { BoxProps } from '~/types/boxes'
-import EnergyIcon from '~/public/icons/energy.svg'
 import Box from '~/components/ui/Box'
 import { useTranslation } from 'next-i18next'
 import ShorePowerIcon from '~/public/icons/shore-power.svg'
@@ -29,7 +28,7 @@ const EnergyShore = ({ mode = 'compact', inputId }: Props) => {
           (phases ?? 1) === 1 ? (
             <p className='text-2xl'>
               {formatValue(current[0])}
-              <span className='text-victron-gray dark:text-victron-gray-dark'> W</span>
+              <span className='text-victron-gray dark:text-victron-gray-dark'> A</span>
             </p>
           ) : (
             <p className='text-2xl'>
@@ -47,17 +46,37 @@ const EnergyShore = ({ mode = 'compact', inputId }: Props) => {
   }
 
   return (
-    <Box title={t('boxes.shorePower')} icon={<EnergyIcon className={'w-6 text-black dark:text-white'} />}>
-      <>
-        {unplugged && <p>{t('common.unplugged')}</p>}
-        {!unplugged && (
-          <>
-            <p>{current.slice(0, phases ?? 1).map((c) => (c ? c + 'A ' : '--A '))}</p>
-            <p>{power.slice(0, phases ?? 1).map((p) => (p ? p + 'W ' : '--W '))}</p>
-            <p>{voltage.slice(0, phases ?? 1).map((v) => (v ? v + 'V ' : '--V '))}</p>
-          </>
-        )}
-      </>
+    <Box title={t('boxes.shorePower')} icon={<ShorePowerIcon className={'w-5 text-black dark:text-white'} />}>
+      <div className='w-full h-full py-2 flex flex-col'>
+        {unplugged && <p className='text-2xl text-victron-gray dark:text-white'>{t('common.unplugged')}</p>}
+        {!unplugged &&
+          ((phases ?? 1) === 1 ? (
+            <div className='text-6xl text-victron-gray dark:text-white'>
+              {formatValue(current[0])}
+              <span className='text-victron-gray dark:text-victron-gray-dark'> A</span>
+            </div>
+          ) : (
+            <div className='w-full h-full flex content-end flex-wrap'>
+              <div className='w-full'>
+                <hr className='w-full h-1 border-victron-gray2 dark:border-victron-gray2-dark' />
+                <div className='text-left text-2xl text-victron-gray dark:text-victron-gray-dark'>
+                  {formatPower(totalPower)}
+                  <span className='text-victron-gray2 dark:text-victron-gray2-dark'> W</span>
+                </div>
+              </div>
+            </div>
+          ))}
+
+          <div className='w-full h-full flex content-end flex-wrap'>
+            <div className='w-full'>
+              <hr className='w-full h-1 border-victron-gray2 dark:border-victron-gray2-dark' />
+              <div className='text-left text-2xl text-victron-gray dark:text-victron-gray-dark'>
+                {formatPower(totalPower)}
+                <span className='text-victron-gray2 dark:text-victron-gray2-dark'> W</span>
+              </div>
+            </div>
+        </div>
+      </div>
     </Box>
   )
 }
