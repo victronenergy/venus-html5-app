@@ -74,6 +74,10 @@ const getAvailableEnergyBoxes = function (
     boxes.push(<EnergyShore mode={mode} inputId={shoreInputId} />)
   }
 
+  if ((pvCharger.current || pvCharger.current === 0) && (pvCharger.power || pvCharger.power === 0)) {
+    boxes.push(<EnergySolar mode={mode} pvCharger={pvCharger} />)
+  }
+
   // Add a divider if there are any AC loads or DC loads in the compact mode
   if (
     mode === 'compact' &&
@@ -93,10 +97,6 @@ const getAvailableEnergyBoxes = function (
 
   if ((dcLoads.current || dcLoads.current === 0) && (dcLoads.voltage || dcLoads.voltage === 0)) {
     boxes.push(<EnergyDC mode={mode} dcLoads={dcLoads} />)
-  }
-
-  if ((pvCharger.current || pvCharger.current === 0) && (pvCharger.power || pvCharger.power === 0)) {
-    boxes.push(<EnergySolar mode={mode} pvCharger={pvCharger} />)
   }
 
   const alternatorsPresent = alternators.filter((v) => v || v === 0)
