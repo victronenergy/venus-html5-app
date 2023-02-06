@@ -19,7 +19,7 @@ const EnergySolar = ({ mode = 'compact', pvCharger }: Props) => {
         </div>
         <p className='text-xl md:text-2xl'>
           {formatValue(current)}
-          <span className='text-victron-gray dark:text-victron-gray-dark'> A</span>
+          <span className='p-0.5 text-victron-gray dark:text-victron-gray-dark'>A</span>
         </p>
       </div>
     )
@@ -30,14 +30,14 @@ const EnergySolar = ({ mode = 'compact', pvCharger }: Props) => {
       <div className='w-full h-full py-2 flex flex-col'>
         <div className='text-xl text-victron-gray dark:text-white md:text-6xl'>
           {formatValue(current)}
-          <span className='text-victron-gray dark:text-victron-gray-dark'> A</span>
+          <span className='p-0.5 text-victron-gray dark:text-victron-gray-dark'>A</span>
         </div>
         <div className='w-full h-full flex content-end flex-wrap'>
           <div className='w-full'>
             <hr className='w-full h-1 border-victron-gray2 dark:border-victron-gray2-dark' />
             <div className='text-left text-xl text-victron-gray dark:text-victron-gray-dark md:text-2xl'>
               {formatPower(power)}
-              <span className='text-victron-gray2 dark:text-victron-gray2-dark'> W</span>
+              <span className='p-0.5 text-victron-gray2 dark:text-victron-gray2-dark'>W</span>
             </div>
           </div>
         </div>

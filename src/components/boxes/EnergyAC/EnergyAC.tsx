@@ -23,13 +23,13 @@ const EnergyAC = ({ mode = 'compact', acLoads }: Props) => {
           {(phases ?? 1) === 1 && (
             <p>
               {formatValue(current[0])}
-              <span className='text-victron-gray dark:text-victron-gray-dark'> A</span>
+              <span className='p-0.5 text-victron-gray dark:text-victron-gray-dark'>A</span>
             </p>
           )}
           {(phases ?? 1) !== 1 && (
             <p>
               {formatPower(totalPower)}
-              <span className='text-victron-gray dark:text-victron-gray-dark'>{totalPower > 1000 ? ' kW' : ' W'}</span>
+              <span className='p-0.5 text-victron-gray dark:text-victron-gray-dark'>{totalPower > 1000 ? 'kW' : 'W'}</span>
             </p>
           )}
         </p>
@@ -42,7 +42,7 @@ const EnergyAC = ({ mode = 'compact', acLoads }: Props) => {
       <div className='w-full h-full py-2 flex flex-col'>
         <div className='text-4xl text-victron-gray dark:text-white md:text-6xl'>
           {formatPower(totalPower)}
-          <span className='text-victron-gray2 dark:text-victron-gray2-dark'>{totalPower > 1000 ? 'kW' : 'W'}</span>
+          <span className='p-0.5 text-victron-gray2 dark:text-victron-gray2-dark'>{totalPower > 1000 ? 'kW' : 'W'}</span>
         </div>
         <div className='w-full h-full flex content-end flex-wrap'>
           {Array.from(Array(phases ?? 1).keys()).map((i) => (
@@ -53,16 +53,16 @@ const EnergyAC = ({ mode = 'compact', acLoads }: Props) => {
               </p>
               <div className='col-span-3 text-left text-xl md:text-2xl text-victron-gray dark:text-victron-gray-dark'>
                 {formatValue(voltage[i])}
-                <span className='text-victron-gray2 dark:text-victron-gray2-dark'> V</span>
+                <span className='p-0.5 text-victron-gray2 dark:text-victron-gray2-dark'>V</span>
               </div>
               <div className='col-span-3 text-center text-xl md:text-2xl text-victron-gray dark:text-victron-gray-dark'>
                 {formatValue(current[i])}
-                <span className='text-victron-gray2 dark:text-victron-gray2-dark'> A</span>
+                <span className='p-0.5 text-victron-gray2 dark:text-victron-gray2-dark'>A</span>
               </div>
               <div className='hidden text-right text-xl md:text-2xl text-victron-gray dark:text-victron-gray-dark md:col-span-3 md:block'>
                 {formatValue(power[i])}
-                <span className='text-victron-gray2 dark:text-victron-gray2-dark'>
-                  {power[i] > 1000 ? ' kW' : ' W'}
+                <span className='tp-0.5 ext-victron-gray2 dark:text-victron-gray2-dark'>
+                  {power[i] > 1000 ? 'kW' : 'W'}
                 </span>
               </div>
             </div>
