@@ -40,7 +40,7 @@ const EnergyAC = ({ mode = 'compact', acLoads }: Props) => {
   return (
     <Box title={t('boxes.acLoads')} icon={<ACIcon className={'w-5 text-black dark:text-white'} />}>
       <div className='w-full h-full py-2 flex flex-col'>
-        <div className='text-6xl text-victron-gray dark:text-white'>
+        <div className='text-4xl text-victron-gray dark:text-white md:text-6xl'>
           {formatPower(totalPower)}
           <span className='text-victron-gray2 dark:text-victron-gray2-dark'>{totalPower > 1000 ? "kW" : "W"}</span>
         </div>
@@ -48,16 +48,16 @@ const EnergyAC = ({ mode = 'compact', acLoads }: Props) => {
           {Array.from(Array(phases ?? 1).keys()).map((i) => (
             <div key={i} className='w-full grid grid-cols-7 p-1 md:grid-cols-10'>
               <hr className='col-span-10 h-1 border-victron-gray2 dark:border-victron-gray2-dark' />
-              <p className='col-span-1 text-2xl text-victron-gray dark:text-victron-gray-dark'>{'L' + (i + 1)}</p>
-              <div className='col-span-3 text-left text-2xl text-victron-gray dark:text-victron-gray-dark'>
+              <p className='col-span-1 text-xl md:text-2xl text-victron-gray dark:text-victron-gray-dark'>{'L' + (i + 1)}</p>
+              <div className='col-span-3 text-left text-xl md:text-2xl text-victron-gray dark:text-victron-gray-dark'>
                 {formatValue(voltage[i])}
                 <span className='text-victron-gray2 dark:text-victron-gray2-dark'> V</span>
               </div>
-              <div className='col-span-3 text-center text-2xl text-victron-gray dark:text-victron-gray-dark'>
+              <div className='col-span-3 text-center text-xl md:text-2xl text-victron-gray dark:text-victron-gray-dark'>
                 {formatValue(current[i])}
                 <span className='text-victron-gray2 dark:text-victron-gray2-dark'> A</span>
               </div>
-              <div className='hidden text-right text-2xl text-victron-gray dark:text-victron-gray-dark md:col-span-3 md:block'>
+              <div className='hidden text-right text-xl md:text-2xl text-victron-gray dark:text-victron-gray-dark md:col-span-3 md:block'>
                 {formatValue(power[i])}
                 <span className='text-victron-gray2 dark:text-victron-gray2-dark'>{power[i] > 1000 ? " kW" : " W"}</span>
               </div>
