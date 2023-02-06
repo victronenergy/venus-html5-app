@@ -9,19 +9,25 @@ import EnergyDC from '~/components/boxes/EnergyDC/EnergyDC'
 import EnergySolar from '~/components/boxes/EnergySolar/EnergySolar'
 import { RouterPath } from '~/types/routes'
 import {
-  AcLoadsState, AlternatorId,
-  DcLoadsState, PvChargerState,
-  useAcLoads, useAlternators,
+  AcLoadsState,
+  AlternatorId,
+  DcLoadsState,
+  PvChargerState,
+  useAcLoads,
+  useAlternators,
   useDcLoads,
-  usePvCharger, useShorePowerInput,
-  useVebus, useWindGenerators, WindGeneratorId
+  usePvCharger,
+  useShorePowerInput,
+  useVebus,
+  useWindGenerators,
+  WindGeneratorId,
 } from '@elninotech/mfd-modules'
 import EnergyShore from '~/components/boxes/EnergyShore'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'next-i18next'
 import EnergyWind from '~/components/boxes/EnergyWind'
 import EnergyAlternator from '~/components/boxes/EnergyAlternator'
-import Divider from '~/components/ui/Divider'
+import { t } from 'i18next'
 
 const EnergyOverview = ({ mode = 'compact' }: BoxProps) => {
   const router = useRouter()
@@ -41,33 +47,15 @@ const EnergyOverview = ({ mode = 'compact' }: BoxProps) => {
         icon={<EnergyIcon className={'w-6 text-victron-gray dark:text-victron-gray-dark'} />}
         onExpandHref={`${RouterPath.BOX}/EnergyOverview`}
       >
-        <>{
-          getAvailableEnergyBoxes(
-            mode,
-            shoreInputId,
-            acLoads,
-            pvCharger,
-            dcLoads,
-            alternators,
-            windGenerators
-          )
-        }</>
+        <>{getAvailableEnergyBoxes(mode, shoreInputId, acLoads, pvCharger, dcLoads, alternators, windGenerators)}</>
       </Box>
     )
   }
 
   return (
-    <Grid className={'gap-2'}>{
-      getAvailableEnergyBoxes(
-        mode,
-        shoreInputId,
-        acLoads,
-        pvCharger,
-        dcLoads,
-        alternators,
-        windGenerators
-      )
-    }</Grid>
+    <Grid className={'gap-2'}>
+      {getAvailableEnergyBoxes(mode, shoreInputId, acLoads, pvCharger, dcLoads, alternators, windGenerators)}
+    </Grid>
   )
 }
 
@@ -80,55 +68,66 @@ const getAvailableEnergyBoxes = function (
   alternators: AlternatorId[],
   windGenerators: WindGeneratorId[]
 ) {
-  const boxes = [];
+  const boxes = []
 
   if (shoreInputId) {
     boxes.push(<EnergyShore mode={mode} inputId={shoreInputId} />)
   }
-  
+
   // Add a divider if there are any AC loads or DC loads in the compact mode
-  if (mode === 'compact' && (acLoads.phases || (dcLoads.current || dcLoads.current === 0) &&
-    (dcLoads.voltage || dcLoads.voltage === 0))) {
-      boxes.push(<Divider text={'Loads'} />)
-    }
+  if (
+    mode === 'compact' &&
+    (acLoads.phases || ((dcLoads.current || dcLoads.current === 0) && (dcLoads.voltage || dcLoads.voltage === 0)))
+  ) {
+    boxes.push(
+      <div className='flex flex-row justify-between'>
+        <p className='text-sm md:text-base text-victron-gray2 dark:text-victron-gray2-dark'>
+          {t('common.loads') ? t('common.loads') : 'Loads'}
+        </p>
+        <div className='w-full ml-2 mb-2 border-b border-victron-gray2 dark:border-victron-gray2-dark' />
+      </div>
+    )
+  }
 
   if (acLoads.phases) boxes.push(<EnergyAC mode={mode} acLoads={acLoads} />)
 
-  if ((dcLoads.current || dcLoads.current === 0) &&
-    (dcLoads.voltage || dcLoads.voltage === 0)) {
+  if ((dcLoads.current || dcLoads.current === 0) && (dcLoads.voltage || dcLoads.voltage === 0)) {
     boxes.push(<EnergyDC mode={mode} dcLoads={dcLoads} />)
   }
 
-  if ((pvCharger.current || pvCharger.current === 0) &&
-    (pvCharger.power || pvCharger.power === 0)) {
+  if ((pvCharger.current || pvCharger.current === 0) && (pvCharger.power || pvCharger.power === 0)) {
     boxes.push(<EnergySolar mode={mode} pvCharger={pvCharger} />)
   }
 
-  const alternatorsPresent = alternators.filter(v => v || v === 0)
+  const alternatorsPresent = alternators.filter((v) => v || v === 0)
   if (alternatorsPresent && alternatorsPresent.length > 0) {
-    boxes.push(...alternatorsPresent.map(alternator =>
-      <EnergyAlternator
-        key={`alternator_${alternator}`}
-        mode={mode}
-        alternator={alternator ?? 0}
-        showInstance={alternators.length > 1}
-      />
-    ))
+    boxes.push(
+      ...alternatorsPresent.map((alternator) => (
+        <EnergyAlternator
+          key={`alternator_${alternator}`}
+          mode={mode}
+          alternator={alternator ?? 0}
+          showInstance={alternators.length > 1}
+        />
+      ))
+    )
   }
 
-  const windGeneratorsPresent = windGenerators.filter(v => v || v === 0)
+  const windGeneratorsPresent = windGenerators.filter((v) => v || v === 0)
   if (windGeneratorsPresent && windGeneratorsPresent.length > 0) {
-    boxes.push(...windGeneratorsPresent.map(windGenerator =>
-      <EnergyWind
-        key={`wind_${windGenerator}`}
-        mode={mode}
-        windGenerator={windGenerator ?? 0}
-        showInstance={alternators.length > 1}
-      />
-    ))
+    boxes.push(
+      ...windGeneratorsPresent.map((windGenerator) => (
+        <EnergyWind
+          key={`wind_${windGenerator}`}
+          mode={mode}
+          windGenerator={windGenerator ?? 0}
+          showInstance={alternators.length > 1}
+        />
+      ))
+    )
   }
 
-  return boxes;
+  return boxes
 }
 
 export default observer(EnergyOverview)

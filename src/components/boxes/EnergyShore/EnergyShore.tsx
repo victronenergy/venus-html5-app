@@ -19,25 +19,25 @@ const EnergyShore = ({ mode = 'compact', inputId }: Props) => {
       <div className='flex items-center justify-between'>
         <div className='flex'>
           <ShorePowerIcon className={'w-7 text-black dark:text-white'} />
-          <div className='flex flex-col pl-3'>
-            <p className='text-2xl'>{t('boxes.shorePower')}</p>
+          <div className='flex flex-col pl-2 md:pl-3'>
+            <p className='text-xl md:text-2xl'>{t('boxes.shorePower')}</p>
             {unplugged && <small>{t('common.unplugged')}</small>}
           </div>
         </div>
         {!unplugged ? (
           (phases ?? 1) === 1 ? (
-            <p className='text-2xl'>
+            <p className='text-xl md:text-2xl'>
               {formatValue(current[0])}
               <span className='text-victron-gray dark:text-victron-gray-dark'> A</span>
             </p>
           ) : (
-            <p className='text-2xl'>
+            <p className='text-xl md:text-2xl'>
               {formatPower(totalPower)}
               <span className='text-victron-gray dark:text-victron-gray-dark'> W</span>
             </p>
           )
         ) : (
-          <p className='text-2xl'>
+          <p className='text-xl md:text-2xl'>
             --<span className='text-victron-gray dark:text-victron-gray-dark'> A</span>
           </p>
         )}
@@ -62,14 +62,14 @@ const EnergyShore = ({ mode = 'compact', inputId }: Props) => {
             </div>
           ))}
 
-          <div className='w-full h-full flex content-end flex-wrap'>
-            <div className='w-full'>
-              <hr className='w-full h-1 border-victron-gray2 dark:border-victron-gray2-dark' />
-              <div className='text-left text-xl text-victron-gray dark:text-victron-gray-dark md:text-2xl'>
-                {formatPower(totalPower)}
-                <span className='text-victron-gray2 dark:text-victron-gray2-dark'> W</span>
-              </div>
+        <div className='w-full h-full flex content-end flex-wrap'>
+          <div className='w-full'>
+            <hr className='w-full h-1 border-victron-gray2 dark:border-victron-gray2-dark' />
+            <div className='text-left text-xl text-victron-gray dark:text-victron-gray-dark md:text-2xl'>
+              {formatPower(totalPower)}
+              <span className='text-victron-gray2 dark:text-victron-gray2-dark'> W</span>
             </div>
+          </div>
         </div>
       </div>
     </Box>
