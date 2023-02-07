@@ -41,3 +41,5 @@ yarn-error.log*
 
 # Jetbrains config
 .idea
+
+networks.csv

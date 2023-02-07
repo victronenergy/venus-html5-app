@@ -5,6 +5,7 @@ if [ -z "$1" ]; then
     exit -1
 fi
 
+BUILD=false
 POSITIONAL=()
 while [[ $# -gt 0 ]]; do
     key="$1"
@@ -15,6 +16,9 @@ while [[ $# -gt 0 ]]; do
             shift # past argument
             shift # past value
         ;;
+        -b|--build)
+            BUILD=true
+            shift # past argument
         *)  # unknown option
             POSITIONAL+=("$1") # save it in an array for later
             shift # past argument
@@ -26,8 +30,10 @@ set -- "${POSITIONAL[@]}" # restore positional parameters
 USERNAME=${USERNAME:-root}
 HOST="$1"
 
-echo "Building app.."
-npm run build
+if $BUILD; then
+  echo "Building app.."
+  npm run build
+fi
 
 echo "Uploading dist/* to ${USERNAME}@${HOST}:/data/www/app/"
 
