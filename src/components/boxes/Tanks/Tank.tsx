@@ -2,7 +2,7 @@ import { useTank } from '@elninotech/mfd-modules'
 import { observer } from 'mobx-react-lite'
 import ProgressBar from '~/components/ui/ProgressBar'
 import classnames from 'classnames'
-
+import { useTranslation } from 'react-i18next'
 import FuelIcon from '~/public/icons/fuel.svg'
 import WaterIcon from '~/public/icons/fresh-water.svg'
 import BlackWaterIcon from '~/public/icons/black-water.svg'
@@ -11,6 +11,26 @@ import GrayWaterIcon from '~/public/icons/waste-water.svg'
 const Tank = ({ tankInstanceId, mode = 'compact', orientation = 'vertical' }: Props) => {
   let { capacity, fluidType, level, remaining, unit } = useTank(tankInstanceId)
   let fluidTypeNum = +fluidType
+  const { t } = useTranslation()
+
+  const fluidTypeFormatter = (type: number) => {
+    const fluids = [
+      t('tank.Fuel'),
+      t('tank.Fresh water'),
+      t('tank.Waste water'),
+      t('tank.Live well'),
+      t('tank.Oil'),
+      t('tank.Black water'),
+      t('tank.Gasoline'),
+      t('Diesel'),
+      t('Liquid  Petroleum Gas (LPG)'),
+      t('Liquid Natural Gas (LNG)'),
+      t('Hydraulic oil'),
+      t('Raw water'),
+    ]
+
+    return fluids[type]
+  }
   // check if tank values are not undefined
   if (
     capacity === undefined ||
@@ -160,26 +180,6 @@ const fluidIcon = (type: number, mode: string = 'compact') => {
     default:
       return null
   }
-}
-
-// TODO: Add translations
-const fluidTypeFormatter = (type: number) => {
-  const fluids = [
-    'Fuel',
-    'Fresh water',
-    'Waste water',
-    'Live well',
-    'Oil',
-    'Black water',
-    'Gasoline',
-    'Diesel',
-    'Liquid  Petroleum Gas (LPG)',
-    'Liquid Natural Gas (LNG)',
-    'Hydraulic oil',
-    'Raw water',
-  ]
-
-  return fluids[type]
 }
 
 interface Props {
