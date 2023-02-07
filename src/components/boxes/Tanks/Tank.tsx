@@ -126,8 +126,8 @@ const Tank = ({ tankInstanceId, mode = 'compact', orientation = 'vertical' }: Pr
           <div className='text-victron-gray'>{formatCapacity(remaining) + '/' + formatCapacity(capacity) + ' l'}</div>
         </div>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 // Convert remaining and total capacity to liters from m3
@@ -187,7 +187,5 @@ interface Props {
   mode?: 'compact' | 'full'
   orientation?: 'vertical' | 'horizontal'
 }
-
-export default observer(Tank)
 
 export default observer(Tank)
