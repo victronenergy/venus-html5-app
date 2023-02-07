@@ -23,9 +23,9 @@ const ThemeMode = () => {
   }
 
   return (
-    <div className='dark:text-white cursor-pointer'>
+    <div className='w-10 dark:text-white cursor-pointer'>
       <div className='flex justify-center items-center w-full'>
-        <button onClick={() => setModal(!modal)}>
+        <button onClick={() => setModal(!modal)} className="pl-5">
           <PreferencesIcon className='w-1'/>
         </button>
         <Modal.Frame
