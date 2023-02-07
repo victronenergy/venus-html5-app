@@ -46,7 +46,7 @@ const EnergyAC = ({ mode = 'compact', acLoads }: Props) => {
         </div>
         <div className='w-full h-full flex content-end flex-wrap'>
           {Array.from(Array(phases ?? 1).keys()).map((i) => (
-            <div key={i} className='w-full grid grid-cols-7 p-1 md:grid-cols-10'>
+            <div key={i} className='w-full grid grid-cols-7 md:grid-cols-10'>
               <hr className='col-span-10 h-1 border-victron-gray2 dark:border-victron-gray2-dark' />
               <p className='col-span-1 text-xl md:text-2xl text-victron-gray dark:text-victron-gray-dark'>
                 {'L' + (i + 1)}
