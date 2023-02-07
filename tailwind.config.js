@@ -76,10 +76,4 @@ module.exports = {
     },
   },
   plugins: [require('@tailwindcss/aspect-ratio'), require('@tailwindcss/line-clamp')],
-  safelist: [
-    {
-      // Generate css classes for all colors that start with 'tank-'
-      pattern: /(bg|text|border)-tank-/, 
-    },
-  ],
 }
