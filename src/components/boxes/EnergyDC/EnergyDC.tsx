@@ -34,10 +34,10 @@ const EnergyDC = ({ mode = 'compact', dcLoads }: Props) => {
         </div>
         <div className='w-full h-full flex content-end flex-wrap'>
           <div className='w-full'>
-            <hr className='w-full h-1 border-victron-gray2 dark:border-victron-gray2-dark' />
+            <hr className='w-full h-1 border-victron-gray-100 dark:border-victron-gray-900' />
             <div className='text-left text-xl text-victron-gray dark:text-victron-gray-dark md:text-2xl'>
               {formatPower(power)}
-              <span className='p-0.5 text-victron-gray2 dark:text-victron-gray2-dark'>W</span>
+              <span className='p-0.5 text-victron-gray-100 dark:text-victron-gray-900'>W</span>
             </div>
           </div>
         </div>

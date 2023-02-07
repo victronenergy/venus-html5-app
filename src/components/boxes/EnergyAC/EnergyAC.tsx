@@ -42,26 +42,26 @@ const EnergyAC = ({ mode = 'compact', acLoads }: Props) => {
       <div className='w-full h-full py-2 flex flex-col'>
         <div className='text-4xl text-victron-gray dark:text-white md:text-6xl'>
           {formatPower(totalPower)}
-          <span className='p-0.5 text-victron-gray2 dark:text-victron-gray2-dark'>{totalPower > 1000 ? 'kW' : 'W'}</span>
+          <span className='p-0.5 text-victron-gray-100 dark:text-victron-gray-900'>{totalPower > 1000 ? 'kW' : 'W'}</span>
         </div>
         <div className='w-full h-full flex content-end flex-wrap'>
           {Array.from(Array(phases ?? 1).keys()).map((i) => (
             <div key={i} className='w-full grid grid-cols-7 md:grid-cols-10'>
-              <hr className='col-span-10 h-1 border-victron-gray2 dark:border-victron-gray2-dark' />
+              <hr className='col-span-10 h-1 border-victron-gray-100 dark:border-victron-gray-900' />
               <p className='col-span-1 text-xl md:text-2xl text-victron-gray dark:text-victron-gray-dark'>
                 {'L' + (i + 1)}
               </p>
               <div className='col-span-3 text-left text-xl md:text-2xl text-victron-gray dark:text-victron-gray-dark'>
                 {formatValue(voltage[i])}
-                <span className='p-0.5 text-victron-gray2 dark:text-victron-gray2-dark'>V</span>
+                <span className='p-0.5 text-victron-gray-100 dark:text-victron-gray-900'>V</span>
               </div>
               <div className='col-span-3 text-center text-xl md:text-2xl text-victron-gray dark:text-victron-gray-dark'>
                 {formatValue(current[i])}
-                <span className='p-0.5 text-victron-gray2 dark:text-victron-gray2-dark'>A</span>
+                <span className='p-0.5 text-victron-gray-100 dark:text-victron-gray-900'>A</span>
               </div>
               <div className='hidden text-right text-xl md:text-2xl text-victron-gray dark:text-victron-gray-dark md:col-span-3 md:block'>
                 {formatValue(power[i])}
-                <span className='tp-0.5 ext-victron-gray2 dark:text-victron-gray2-dark'>
+                <span className='tp-0.5 ext-victron-gray-100 dark:text-victron-gray-900'>
                   {power[i] > 1000 ? 'kW' : 'W'}
                 </span>
               </div>
