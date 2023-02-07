@@ -7,6 +7,8 @@ import { useTanks } from '@elninotech/mfd-modules'
 import Tank from '~/components/boxes/Tanks/Tank'
 import { observer } from 'mobx-react-lite'
 import { useComponentSize, useWindowSize } from '~/utils/hooks'
+import { withErrorBoundary } from 'react-error-boundary'
+import ErrorFallback from '~/components/ui/ErrorBoundary/ErrorFallback'
 
 const TanksOverview = ({ mode = 'compact' }: BoxProps) => {
   const { tanks } = useTanks()
