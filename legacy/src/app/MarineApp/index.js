@@ -1,4 +1,4 @@
 import "./css/main.scss"
-import { MarineApp } from "./MarineApp"
+import { Marine } from "./Marine"
 
-export default MarineApp
+export default Marine

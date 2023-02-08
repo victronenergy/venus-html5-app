@@ -5,7 +5,7 @@ import { mfdLanguageOptions } from "app/locales/constants"
 import { STATUS, useApp, useMqtt, useTheme, useLanguage } from "@elninotech/mfd-modules"
 import { VIEWS } from "./utils/constants"
 import RemoteLogin from "./components/Views/RemoteLogin"
-import { AppProps } from "../App"
+import { AppProps } from "./App"
 import { observer } from "mobx-react"
 
 export const KVNRV = observer((props: AppProps) => {
