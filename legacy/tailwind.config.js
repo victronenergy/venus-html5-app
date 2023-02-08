@@ -4,9 +4,8 @@ const defaultTheme = require("tailwindcss/defaultTheme")
 module.exports = {
   darkMode: "class",
   content: [
-    // './src/components/**/*.{js,ts,jsx,tsx}',
-    // './src/pages/**/*.{js,ts,jsx,tsx}',
-    "./src/app/**/*.{js,ts,jsx,tsx}",
+    // only Marine2 uses TailwindCSS, so we only need to include the files from that folder
+    "./src/app/Marine2/**/*.{js,ts,jsx,tsx}",
   ],
   // we try to use the default theme as much as possible,
   // see https://tailwindcss.com/docs/theme
@@ -74,6 +73,16 @@ module.exports = {
         DEFAULT: "0.25rem",
       },
     },
+  },
+  // Garmin and Furuno devices don't support the RGB colors with opacity,
+  // so we disable the CSS opacity variants for all colors
+  corePlugins: {
+    textOpacity: false,
+    backgroundOpacity: false,
+    borderOpacity: false,
+    divideOpacity: false,
+    placeholderOpacity: false,
+    ringOpacity: false,
   },
   plugins: [require("@tailwindcss/aspect-ratio"), require("@tailwindcss/line-clamp")],
 }
