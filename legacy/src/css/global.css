@@ -30,3 +30,13 @@ body {
         height: -webkit-fill-available;
     }
 }
+
+@font-face {
+    font-family: MuseoSans;
+    src: url("fonts/MuseoSans/MuseoSans-300.otf"),
+    url("fonts/MuseoSans/MuseoSans-300Italic.otf"),
+    url("fonts/MuseoSans/MuseoSans-500.otf"),
+    url("fonts/MuseoSans/MuseoSans-500Italic.otf"),
+    url("fonts/MuseoSans/MuseoSans-700.otf"),
+    url("fonts/MuseoSans/MuseoSans-700Italic.otf");
+}

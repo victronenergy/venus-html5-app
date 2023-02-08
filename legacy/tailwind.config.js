@@ -62,7 +62,7 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ["var(--font-museo-sans)", ...defaultTheme.fontFamily.sans],
+        sans: ["MuseoSans", ...defaultTheme.fontFamily.sans],
       },
       borderRadius: {
         none: "0",
