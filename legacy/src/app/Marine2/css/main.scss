@@ -1,0 +1,175 @@
+@import "../../../css/texts";
+
+@import "variables";
+
+* {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+html {
+  background: $main-bg-color;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body,
+p {
+  margin: 0;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+#root {
+  align-items: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+main {
+  height: 100%;
+  width: 100%;
+  max-width: 1920px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.metrics-container {
+  width: 100%;
+  max-height: calc(100vh - 110px);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+
+
+  @media #{$smaller}, #{$portrait} {
+    justify-content: center;
+  }
+
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.metric {
+  padding: $topBottomPadding $rightLeftPadding;
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-bottom: $marginBottom;
+  display: flex;
+  box-sizing: border-box;
+  border-radius: $borderRadius;
+  background-color:#121a28;
+}
+
+.metric__icon {
+  height: 45px;
+  margin-right: $rightLeftPadding;
+
+  @media #{$tiny} {
+    height: 35px;
+  }
+
+  @media #{$minimum} {
+    display: none;
+  }
+}
+
+.metric__value-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+}
+
+.disconnected {
+  .metric__value-container > :last-child,
+  button span {
+    opacity: 0.5;
+  }
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.error-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2em;
+
+  .image-container {
+    margin: 2em 0;
+    max-width: 500px;
+    img {
+      border-radius: 5px;
+      width: 100%;
+    }
+  }
+
+
+  @media #{$low-landscape} {
+    flex-direction: row;
+
+    .instructions-container {
+      width: 50%;
+      margin: 1em;
+    }
+
+    .image-container {
+      width: 50%;
+    }
+  }
+
+  @media #{$small},  #{$very-low-landscape} {
+    .image-container {
+      max-width: 400px;
+    }
+  }
+
+  @media #{$very-small} {
+    .image-container {
+      max-width: 300px;
+    }
+  }
+}
+
+.column-container {
+  @media #{$portrait}, #{$smaller} {
+    width: 100%;
+  }
+  width: 50%;
+}
+
+.boat-image {
+  background: #121a28 url("../images/boat.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: right;
+}

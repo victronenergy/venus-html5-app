@@ -1,0 +1,46 @@
+@import "../../css/variables";
+
+.charger {
+  flex-direction: column;
+  height: auto;
+}
+
+.charger__mode-selector {
+  margin-top: $metricHeaderMarginBottom;
+  height: 45px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.charger__mode-selector > .selector-button {
+  &:not(:first-child) {
+    margin-left: 10px;
+  }
+
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.charger__output {
+  margin-top: $metricHeaderMarginBottom;
+}
+
+.charger__header-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.charger__input-limit-selector {
+  display: flex;
+  flex-direction: row;
+  margin-left: 10px;
+  flex: 2;
+  max-width: 16rem;
+}
+
+.charger__input-limit-selector__label {
+  padding: 0 1em;
+  display: flex;
+  align-items: center;
+}

@@ -1,0 +1,89 @@
+@import "../../css/variables";
+
+
+header {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1920px;
+  padding: 50px 10px 10px;
+
+  @media #{$hide-remote-console-breakpoint} {
+    padding: 20px 10px 10px;
+  }
+
+  @media #{$minimum} {
+    padding: 20px 10px 10px;
+  }
+}
+
+.logo {
+  width: 170px;
+
+  @media #{$very-small} {
+    width: 140px;
+  }
+
+  @media #{$minimum} {
+    width: 120px;
+    margin-right: 10px;
+  }
+}
+
+.header__paginator {
+  display: flex;
+
+  .selector-button {
+    padding: 10px 24px;
+  }
+
+  .header__paginator-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px;
+  }
+
+  .header__paginator-button {
+    display: flex;
+    height: 1rem;
+  }
+}
+
+.header-button-container {
+  display: flex;
+  margin-left: 10px;
+
+  @media #{$minimum} {
+    display: none;
+  }
+}
+
+.header-button {
+  display: flex;
+  padding: 15px 24px;
+  font-size: 0.85rem;
+  text-decoration: none;
+  align-items: center;
+  border-radius: 6px;
+  border: none;
+  color: $color-lightgray;
+  background-color: #2a3341;
+  outline: none;
+  cursor: pointer;
+
+  @media #{$regular} {
+    padding: 10px 16px;
+  }
+}
+
+.remote-console-button {
+  @extend .header-button;
+
+  @media #{$hide-remote-console-breakpoint} {
+    display: none;
+  }
+}

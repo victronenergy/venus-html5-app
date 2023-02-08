@@ -1,0 +1,40 @@
+@import "../../../css/variables";
+
+.connecting {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 3.5em;
+}
+
+.connecting__dots {
+  display: flex;
+
+  .dot {
+    margin-left: 0.2em;
+    margin-right: 0.2em;
+    line-height: 0;
+    font-size: 3.5em;
+    opacity: 0;
+    animation: showHideDot 1.2s ease-in-out infinite;
+  }
+  .two {
+    animation-delay: 0.25s;
+  }
+  .three {
+    animation-delay: 0.5s;
+  }
+}
+
+@keyframes showHideDot {
+  0% {
+    opacity: 0;
+  }
+  40%,
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

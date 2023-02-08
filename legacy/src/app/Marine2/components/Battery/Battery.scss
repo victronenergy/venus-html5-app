@@ -1,0 +1,137 @@
+@import "../../css/variables";
+
+.metric__battery {
+  height: auto;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.battery-header {
+  display: flex;
+  margin-bottom: $metricHeaderMarginBottom;
+  box-sizing: content-box;
+  width: 100%;
+}
+
+.battery-header__text {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  white-space: nowrap
+}
+
+.battery-header__show-all {
+  flex-grow: 0;
+  margin-left: auto;
+  align-items: center;
+
+  &:active {
+    background-color: $color-active;
+  }
+}
+
+.metric__battery-level-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-right: 20px;
+
+  &--col {
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+  }
+}
+
+.disconnected .metric__battery-level-container {
+  opacity: 0.5;
+}
+
+.batteries {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.battery {
+  display: flex;
+  background-color: #1d2433;
+  border-radius: 2px;
+
+  &:not(:last-child) {
+    margin-bottom: 9px;
+  }
+
+  width: 100%;
+}
+
+.battery--dummy {
+  flex-grow: 1;
+}
+
+.battery__title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.battery__index {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  margin: 10px 0;
+  border-right: solid 1px #131a28;
+
+  @media #{$minimum} {
+    display: none;
+  }
+}
+
+.battery__data {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+  padding: 0px 14px;
+  width: 100%;
+}
+
+.battery-level__time-to-go {
+  white-space: nowrap;
+}
+
+.battery__paginator {
+  margin-left: auto;
+  display: flex;
+
+  .selector-button {
+    padding: 0 24px;
+  }
+}
+
+.battery__paginator-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 20px;
+}
+
+.battery__paginator-button {
+  display: flex;
+  height: 1rem;
+}
+
+.battery-level {
+  display: flex;
+}
+
+.charge-indicator {
+  margin-left: 0.5rem;
+  display: flex;
+  .time-to-go {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+}

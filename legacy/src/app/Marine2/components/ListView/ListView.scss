@@ -1,0 +1,28 @@
+@import "../../css/variables";
+
+
+.list-view {
+  flex-direction: column;
+  align-items: flex-start;
+  flex-grow: 1;
+}
+
+.list-view__header {
+  display: flex;
+  align-items: center;
+}
+
+.list-view__rows {
+  margin-top: $metricHeaderMarginBottom;
+  display: flex;
+  flex-direction: column;
+}
+
+.list-row {
+  display: flex;
+  align-items: center;
+}
+
+.list-row:not(:first-child) {
+  margin-top: 5px;
+}

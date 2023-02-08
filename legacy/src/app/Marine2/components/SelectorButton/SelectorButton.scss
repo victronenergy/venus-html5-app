@@ -1,0 +1,62 @@
+@import "../../css/variables";
+
+
+.selector-button {
+  background-color: #2a3341;
+  color: $color-gray;
+  border-radius: 6px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+
+  cursor: pointer;
+
+  &:not(.selector-button--disabled):active {
+    background-color: $color-active;
+    color: $color-white;
+  }
+}
+
+.selector-button:focus {
+  outline: 0;
+}
+
+.selector-button--active {
+  background-color: $color-active;
+  color: $color-white;
+
+}
+
+.selector-button--disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.selector-button--left {
+  border-radius: 6px 0 0 6px;
+  flex: 1;
+  min-width: 2.5rem;
+}
+
+.selector-button--right {
+  border-radius: 0 6px 6px 0;
+  flex: 1;
+  min-width: 2.5rem;
+}
+
+.selector-button--middle {
+  background-color: #2a3341;
+  line-height: 1.2;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1.25;
+
+  margin: 0 1px;
+  border-radius: 0;
+  min-width: 2.5rem;
+}
