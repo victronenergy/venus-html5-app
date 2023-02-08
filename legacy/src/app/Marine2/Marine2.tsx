@@ -1,19 +1,19 @@
 import classnames from "classnames"
 import { useState } from "react"
 import Fade, { viewChangeDelay } from "../components/Fade"
-import Header, { HeaderWithoutMQTTData } from "./components/Header/Header"
-import { InverterChargerInputLimitSelector } from "./components/InverterCharger"
+import { HeaderWithoutMQTTData } from "./components/Header/Header"
 
-import { Connecting, Error, Metrics, MqttUnavailable, RemoteConsole } from "./components/Views"
+import { Connecting, Error, MqttUnavailable, RemoteConsole } from "./components/Views"
 
 import { useLanguage, useMqtt, STATUS } from "@elninotech/mfd-modules"
 import { VIEWS } from "../utils/constants"
 import { AppProps } from "./App"
 
-import { LockButton } from "./components/LockButton"
 import { mfdLanguageOptions } from "app/locales/constants"
 import { observer } from "mobx-react"
 import { isError } from "app/utils/util"
+import Container from "./components/ui/Container"
+import Box from "./components/ui/Box"
 
 type MainProps = {
   isConnected?: boolean
@@ -69,10 +69,6 @@ export const Marine2 = observer((props: AppProps) => {
     }
   }
 
-  const handleShorePowerLimitSelected = () => {
-    setView(VIEWS.METRICS)
-  }
-
   const toggleRemoteConsole = () => {
     if (currentView !== VIEWS.REMOTE_CONSOLE) {
       setView(VIEWS.REMOTE_CONSOLE)
@@ -114,50 +110,19 @@ export const Marine2 = observer((props: AppProps) => {
   }
 
   return (
-    <div className={"w-full h-full"}>
-      {/*<Header*/}
-      {/*  handleRemoteConsoleButtonClicked={toggleRemoteConsole}*/}
-      {/*  currentView={currentView}*/}
-      {/*  setPage={setPage}*/}
-      {/*  currentPage={currentPage}*/}
-      {/*  pages={pages}*/}
-      {/*/>*/}
-      <div className={"font-bold text-2xl"}>New Marine2</div>
-      <div className={"text-victron-blue"}>Text red</div>
-      {/*<Main isConnected={isConnected} setView={setView}>*/}
-      {/*  {(() => {*/}
-      {/*    switch (currentView) {*/}
-      {/*      case VIEWS.INVERTER_CHARGER_INPUT_LIMIT_SELECTOR:*/}
-      {/*        return (*/}
-      {/*          <Fade key={VIEWS.INVERTER_CHARGER_INPUT_LIMIT_SELECTOR} unmount={viewUnmounting}>*/}
-      {/*            <InverterChargerInputLimitSelector onLimitSelected={handleShorePowerLimitSelected} />*/}
-      {/*          </Fade>*/}
-      {/*        )*/}
-      {/*      case VIEWS.REMOTE_CONSOLE:*/}
-      {/*        return (*/}
-      {/*          <Fade key={VIEWS.REMOTE_CONSOLE} unmount={viewUnmounting} fullWidth>*/}
-      {/*            <RemoteConsole host={host} onClickOutsideContainer={() => setView(VIEWS.METRICS)} />*/}
-      {/*          </Fade>*/}
-      {/*        )*/}
-      {/*      case VIEWS.METRICS:*/}
-      {/*      default:*/}
-      {/*        return (*/}
-      {/*          <Fade key={VIEWS.METRICS} unmount={viewUnmounting} fullWidth>*/}
-      {/*            <Metrics*/}
-      {/*              isConnected={isConnected}*/}
-      {/*              onChangeInverterChargerInputLimitClicked={() =>*/}
-      {/*                setView(VIEWS.INVERTER_CHARGER_INPUT_LIMIT_SELECTOR)*/}
-      {/*              }*/}
-      {/*              setPages={setPages}*/}
-      {/*              currentPage={currentPage}*/}
-      {/*              pages={pages}*/}
-      {/*            />*/}
-      {/*          </Fade>*/}
-      {/*        )*/}
-      {/*    }*/}
-      {/*  })()}*/}
-      {/*</Main>*/}
-      {/*<LockButton currentView={currentView} header={false} />*/}
-    </div>
+    <Container>
+      <>
+        <div className={"font-bold text-2xl text-neutral-600"}>New Marine2</div>
+        <div className={"text-victron-red"}>Text red</div>
+        <div className={"flex flex-col w-full h-full p-4"}>
+          <Box title={"Box"} onExpandHref={"/path1"}>
+            Box content
+          </Box>
+          <Box title={"Box2"} onExpandHref={"/path1"}>
+            Box2 content
+          </Box>
+        </div>
+      </>
+    </Container>
   )
 })
