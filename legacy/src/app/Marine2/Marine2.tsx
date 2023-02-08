@@ -1,12 +1,12 @@
-import classnames from "classnames"
-import { useState } from "react"
-import Fade, { viewChangeDelay } from "../components/Fade"
+// import classnames from "classnames"
+// import { useState } from "react"
+// import Fade, { viewChangeDelay } from "../components/Fade"
 
 // import { HeaderWithoutMQTTData } from "./components/Header/Header"
 // import { Connecting, Error, MqttUnavailable, RemoteConsole } from "./components/Views"
 
 import { useLanguage, useMqtt, STATUS } from "@elninotech/mfd-modules"
-import { VIEWS } from "../utils/constants"
+// import { VIEWS } from "../utils/constants"
 import { AppProps } from "./App"
 
 import { mfdLanguageOptions } from "app/locales/constants"
@@ -15,36 +15,36 @@ import { isError } from "app/utils/util"
 import Container from "./components/ui/Container"
 import Box from "./components/ui/Box"
 
-type MainProps = {
-  isConnected?: boolean
-  children: any
-  setView: Function
-}
-const Main = ({ isConnected, children, setView }: MainProps) => {
-  return (
-    <main
-      className={classnames({ disconnected: !isConnected })}
-      onClick={(e) => {
-        // Bit of a hack to close "overlays" but doing it without adding event preventDefaults everywhere
-        // @ts-ignore
-        if (e.target.nodeName === "MAIN") {
-          setView(VIEWS.METRICS)
-        }
-      }}
-    >
-      {children}
-    </main>
-  )
-}
+// type MainProps = {
+//   isConnected?: boolean
+//   children: any
+//   setView: Function
+// }
+// const Main = ({ isConnected, children, setView }: MainProps) => {
+//   return (
+//     <main
+//       className={classnames({ disconnected: !isConnected })}
+//       onClick={(e) => {
+//         // Bit of a hack to close "overlays" but doing it without adding event preventDefaults everywhere
+//         // @ts-ignore
+//         if (e.target.nodeName === "MAIN") {
+//           setView(VIEWS.METRICS)
+//         }
+//       }}
+//     >
+//       {children}
+//     </main>
+//   )
+// }
 
 export const Marine2 = observer((props: AppProps) => {
-  const { host } = props
+  // const { host } = props
   // subscribe to language
   useLanguage(mfdLanguageOptions)
-  const [currentView, setCurrentView] = useState(VIEWS.METRICS)
-  const [viewUnmounting, setViewUnmounting] = useState(false)
-  const [currentPage, setCurrentPage] = useState(0)
-  const [pages, setTotalPages] = useState(1)
+  // const [currentView, setCurrentView] = useState(VIEWS.METRICS)
+  // const [viewUnmounting, setViewUnmounting] = useState(false)
+  // const [currentPage, setCurrentPage] = useState(0)
+  // const [pages, setTotalPages] = useState(1)
   const mqtt = useMqtt()
   const isConnected = mqtt.isConnected
   const portalId = mqtt.portalId
@@ -59,28 +59,28 @@ export const Marine2 = observer((props: AppProps) => {
   //   setCurrentPage(0)
   // }
 
-  const setView = (view: string) => {
-    if (currentView !== view) {
-      setViewUnmounting(true)
-      setTimeout(() => {
-        setCurrentView(view)
-        setViewUnmounting(false)
-      }, viewChangeDelay)
-    }
-  }
+  // const setView = (view: string) => {
+  //   if (currentView !== view) {
+  //     setViewUnmounting(true)
+  //     setTimeout(() => {
+  //       setCurrentView(view)
+  //       setViewUnmounting(false)
+  //     }, viewChangeDelay)
+  //   }
+  // }
 
-  const toggleRemoteConsole = () => {
-    if (currentView !== VIEWS.REMOTE_CONSOLE) {
-      setView(VIEWS.REMOTE_CONSOLE)
-    } else setView(VIEWS.METRICS)
-  }
+  // const toggleRemoteConsole = () => {
+  //   if (currentView !== VIEWS.REMOTE_CONSOLE) {
+  //     setView(VIEWS.REMOTE_CONSOLE)
+  //   } else setView(VIEWS.METRICS)
+  // }
 
   if (error && isError(error) && status !== STATUS.CONNECTING) {
     return (
-      <Fade key={VIEWS.ERROR} unmount={viewUnmounting} fullWidth>
-        <div>Error</div>
-        {/*<Error error={error} />*/}
-      </Fade>
+      // <Fade key={VIEWS.ERROR} unmount={viewUnmounting} fullWidth>
+      <div>Error</div>
+      // {/*<Error error={error} />*/}
+      // </Fade>
     )
   }
 
