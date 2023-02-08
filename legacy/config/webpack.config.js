@@ -8,7 +8,7 @@ const CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin")
 const InlineChunkHtmlPlugin = require("react-dev-utils/InlineChunkHtmlPlugin")
 const TerserPlugin = require("terser-webpack-plugin")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin")
 const { WebpackManifestPlugin } = require("webpack-manifest-plugin")
 const InterpolateHtmlPlugin = require("react-dev-utils/InterpolateHtmlPlugin")
 const WorkboxWebpackPlugin = require("workbox-webpack-plugin")
@@ -21,8 +21,6 @@ const getClientEnvironment = require("./env")
 const ModuleNotFoundPlugin = require("react-dev-utils/ModuleNotFoundPlugin")
 const ForkTsCheckerWebpackPlugin = require("react-dev-utils/ForkTsCheckerWebpackPlugin")
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin")
-
-const postcssNormalize = require("postcss-normalize")
 
 const appPackageJson = require(paths.appPackageJson)
 
@@ -104,22 +102,6 @@ module.exports = function (webpackEnv) {
         // package.json
         loader: require.resolve("postcss-loader"),
         options: {
-          // Necessary for external CSS imports to work
-          // https://github.com/facebook/create-react-app/issues/2677
-          ident: "postcss",
-          plugins: () => [
-            require("postcss-flexbugs-fixes"),
-            require("postcss-preset-env")({
-              autoprefixer: {
-                flexbox: "no-2009",
-              },
-              stage: 3,
-            }),
-            // Adds PostCSS Normalize as the reset css with default options,
-            // so that it honors browserslist config in package.json
-            // which in turn let's users customize the target behavior as per their needs.
-            postcssNormalize(),
-          ],
           sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
         },
       },
@@ -146,7 +128,7 @@ module.exports = function (webpackEnv) {
 
   return {
     mode: isEnvProduction ? "production" : isEnvDevelopment && "development",
-    target: 'web',
+    target: "web",
     // Stop compilation early in production
     bail: isEnvProduction,
     devtool: isEnvProduction
@@ -188,7 +170,9 @@ module.exports = function (webpackEnv) {
       pathinfo: isEnvDevelopment,
       // There will be one main bundle, and one file per asynchronous chunk.
       // In development, it does not produce real files.
-      filename: isEnvProduction ? "static/js/[name].[contenthash:8].js" : isEnvDevelopment && "static/js/[name].bundle.js",
+      filename: isEnvProduction
+        ? "static/js/[name].[contenthash:8].js"
+        : isEnvDevelopment && "static/js/[name].bundle.js",
       // There are also additional JS chunk files if you use code splitting.
       chunkFilename: isEnvProduction
         ? "static/js/[name].[contenthash:8].chunk.js"
@@ -327,9 +311,9 @@ module.exports = function (webpackEnv) {
         net: false,
         tls: false,
         child_process: false,
-        "stream": require.resolve("stream-browserify"),
-        "buffer": require.resolve("buffer"),
-      }
+        stream: require.resolve("stream-browserify"),
+        buffer: require.resolve("buffer"),
+      },
     },
     resolveLoader: {
       plugins: [
@@ -343,10 +327,11 @@ module.exports = function (webpackEnv) {
       rules: [
         // Disable require.ensure as it's not a standard language feature.
         {
-          // The new webpack5 parser rules applies both for Js and Json, but Json module 
+          // The new webpack5 parser rules applies both for Js and Json, but Json module
           // hasn't `requireEnsure` parameter in config, therefore we apply this rule only for Js
           test: /\.[cm]?js$/,
-          parser: { requireEnsure: false } },
+          parser: { requireEnsure: false },
+        },
         {
           // "oneOf" will traverse all following loaders until one will
           // match the requirements. When no loader matches it will fall
@@ -624,7 +609,7 @@ module.exports = function (webpackEnv) {
       // solution that requires the user to opt into importing specific locales.
       // https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
       // You can remove this if you don't use Moment.js:
-      new webpack.IgnorePlugin({resourceRegExp: /^\.\/locale$/, contextRegExp: /moment$/}),
+      new webpack.IgnorePlugin({ resourceRegExp: /^\.\/locale$/, contextRegExp: /moment$/ }),
       // Generate a service worker script that will precache, and keep up to date,
       // the HTML & assets that are part of the webpack build.
       isEnvProduction &&
@@ -680,13 +665,13 @@ module.exports = function (webpackEnv) {
         }),
       new MiniCssExtractPlugin(),
       new webpack.ProvidePlugin({
-        Buffer: ['buffer', 'Buffer'],
+        Buffer: ["buffer", "Buffer"],
       }),
       new webpack.ProvidePlugin({
-        process: 'process/browser',
+        process: "process/browser",
       }),
       new webpack.optimize.LimitChunkCountPlugin({
-        maxChunks: 1
+        maxChunks: 1,
       }),
     ].filter(Boolean),
     // Turn off performance processing because we utilize
