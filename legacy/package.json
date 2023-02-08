@@ -159,13 +159,11 @@
   "browserslist": {
     "production": [
       ">1%",
-      "last 2 versions"
+      "last 10 versions"
     ],
     "development": [
       "chrome >= 45",
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
+      "last 2 versions"
     ]
   },
   "babel": {
