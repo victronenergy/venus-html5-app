@@ -1,9 +1,9 @@
 import classnames from "classnames"
 import { useState } from "react"
 import Fade, { viewChangeDelay } from "../components/Fade"
-import { HeaderWithoutMQTTData } from "./components/Header/Header"
 
-import { Connecting, Error, MqttUnavailable, RemoteConsole } from "./components/Views"
+// import { HeaderWithoutMQTTData } from "./components/Header/Header"
+// import { Connecting, Error, MqttUnavailable, RemoteConsole } from "./components/Views"
 
 import { useLanguage, useMqtt, STATUS } from "@elninotech/mfd-modules"
 import { VIEWS } from "../utils/constants"
@@ -50,14 +50,14 @@ export const Marine2 = observer((props: AppProps) => {
   const portalId = mqtt.portalId
   const { error, status } = mqtt
 
-  const setPage = (currentPage: number) => {
-    setCurrentPage(currentPage)
-  }
-
-  const setPages = (pages: number) => {
-    setTotalPages(pages)
-    setCurrentPage(0)
-  }
+  // const setPage = (currentPage: number) => {
+  //   setCurrentPage(currentPage)
+  // }
+  //
+  // const setPages = (pages: number) => {
+  //   setTotalPages(pages)
+  //   setCurrentPage(0)
+  // }
 
   const setView = (view: string) => {
     if (currentView !== view) {
@@ -78,51 +78,56 @@ export const Marine2 = observer((props: AppProps) => {
   if (error && isError(error) && status !== STATUS.CONNECTING) {
     return (
       <Fade key={VIEWS.ERROR} unmount={viewUnmounting} fullWidth>
-        <Error error={error} />
+        <div>Error</div>
+        {/*<Error error={error} />*/}
       </Fade>
     )
   }
 
   if (error) {
     return (
-      <>
-        <HeaderWithoutMQTTData handleRemoteConsoleButtonClicked={toggleRemoteConsole} currentView={currentView} />
-        {(() => {
-          switch (currentView) {
-            case VIEWS.REMOTE_CONSOLE:
-              return (
-                <Main isConnected={isConnected} setView={setView}>
-                  <Fade key={VIEWS.REMOTE_CONSOLE} unmount={viewUnmounting} fullWidth>
-                    <RemoteConsole host={host} onClickOutsideContainer={() => setView(VIEWS.METRICS)} />
-                  </Fade>
-                </Main>
-              )
-            default:
-              return <MqttUnavailable viewUnmounting={viewUnmounting} />
-          }
-        })()}
-      </>
+      <div>Error</div>
+      // <>
+      //   <HeaderWithoutMQTTData handleRemoteConsoleButtonClicked={toggleRemoteConsole} currentView={currentView} />
+      //   {(() => {
+      //     switch (currentView) {
+      //       case VIEWS.REMOTE_CONSOLE:
+      //         return (
+      //           <Main isConnected={isConnected} setView={setView}>
+      //             <Fade key={VIEWS.REMOTE_CONSOLE} unmount={viewUnmounting} fullWidth>
+      //               <RemoteConsole host={host} onClickOutsideContainer={() => setView(VIEWS.METRICS)} />
+      //             </Fade>
+      //           </Main>
+      //         )
+      //       default:
+      //         return <MqttUnavailable viewUnmounting={viewUnmounting} />
+      //     }
+      //   })()}
+      // </>
     )
   }
 
   if (!isConnected || !portalId) {
-    return <Connecting viewUnmounting={viewUnmounting} />
+    return <div>Connecting</div>
+    // return <Connecting viewUnmounting={viewUnmounting} />
   }
 
   return (
     <Container>
-      <>
-        <div className={"font-bold text-2xl text-neutral-600"}>New Marine2</div>
-        <div className={"text-victron-red"}>Text red</div>
-        <div className={"flex flex-col w-full h-full p-4"}>
-          <Box title={"Box"} onExpandHref={"/path1"}>
+      <div className={"flex flex-col w-full h-full"}>
+        <div className={"flex flex-row w-full h-full grow-0 basis-0"}>
+          <div className={"font-bold text-2xl text-neutral-600"}>New Marine2</div>
+          <div className={"text-victron-red"}>Text red</div>
+        </div>
+        <div className={"flex flex-col grow p-4 w-full h-full"}>
+          <Box title={"Box"} onExpandHref={"/path1"} className={"my-1"}>
             Box content
           </Box>
-          <Box title={"Box2"} onExpandHref={"/path1"}>
+          <Box title={"Box2"} onExpandHref={"/path1"} className={"my-1"}>
             Box2 content
           </Box>
         </div>
-      </>
+      </div>
     </Container>
   )
 })
