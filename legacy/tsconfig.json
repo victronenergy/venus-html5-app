@@ -22,6 +22,9 @@
     "sourceMap": false,
     "jsx": "react-jsx",
     "baseUrl": "./src",
+    "paths": {
+      "~/*": ["./src/*"],
+    },
     "types": [
       "cypress",
       "@testing-library/cypress"
