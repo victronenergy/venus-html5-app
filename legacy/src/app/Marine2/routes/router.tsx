@@ -5,18 +5,21 @@ import NotFoundPage from "./NotFoundPage"
 
 const Root = React.lazy(() => import("./Root"))
 
-export const router = createBrowserRouter([
-  {
-    path: "/app",
-    element: (
-      <React.Suspense fallback={<div>Loading</div>}>
-        <Root />
-      </React.Suspense>
-    ),
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "*",
-    element: <NotFoundPage />,
-  },
-])
+export const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: (
+        <React.Suspense fallback={<div>Loading</div>}>
+          <Root />
+        </React.Suspense>
+      ),
+      errorElement: <ErrorPage />,
+    },
+    {
+      path: "*",
+      element: <NotFoundPage />,
+    },
+  ],
+  { basename: "/app" }
+)
