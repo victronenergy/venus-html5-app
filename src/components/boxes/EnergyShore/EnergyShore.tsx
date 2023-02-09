@@ -50,16 +50,16 @@ const EnergyShore = ({ mode = 'compact', inputId }: Props) => {
 
   return (
     <Box title={t('boxes.shorePower')} icon={<ShorePowerIcon className={'w-5 text-black dark:text-white'} />}>
-      <div className='w-full h-full py-2 flex flex-col'>
+      <div className='w-full h-full flex flex-col'>
         {unplugged && <p className='text-2xl text-victron-gray dark:text-white'>{t('common.unplugged')}</p>}
         {!unplugged &&
           ((phases ?? 1) === 1 ? (
-            <div className='text-4xl text-victron-gray dark:text-white md:text-6xl'>
+            <div className='text-5xl text-victron-gray dark:text-white md-m:text-6xl'>
               {formatValue(current[0])}
               <span className='p-0.5 text-victron-gray dark:text-victron-gray-dark'>A</span>
             </div>
           ) : (
-            <div className='text-4xl text-victron-gray dark:text-white md:text-6xl'>
+            <div className='text-5xl text-victron-gray dark:text-white md-m:text-6xl'>
               {formatValue(totalPower)}
               <span className='p-0.5 text-victron-gray dark:text-victron-gray-dark'>W</span>
             </div>
@@ -67,10 +67,10 @@ const EnergyShore = ({ mode = 'compact', inputId }: Props) => {
 
         <div className='w-full h-full flex content-end flex-wrap'>
           <div className='w-full'>
-            <hr className='w-full h-1 border-victron-gray-100 dark:border-victron-gray-900' />
-            <div className='text-left text-xl text-victron-gray dark:text-victron-gray-dark md:text-2xl'>
+            <hr className='w-full h-1 border-victron-gray' />
+            <div className='text-left text-base text-victron-gray dark:text-victron-gray-dark md-m:text-2xl'>
               {formatPower(totalPower)}
-              <span className='p-0.5 text-victron-gray-100 dark:text-victron-gray-900'>W</span>
+              <span className='p-0.5 text-victron-gray'>W</span>
             </div>
           </div>
         </div>
