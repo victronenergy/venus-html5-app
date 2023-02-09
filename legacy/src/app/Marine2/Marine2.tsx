@@ -1,3 +1,4 @@
+import React from "react"
 // import classnames from "classnames"
 // import { useState } from "react"
 // import Fade, { viewChangeDelay } from "../components/Fade"
@@ -14,6 +15,8 @@ import { observer } from "mobx-react"
 import { isError } from "app/utils/util"
 import Box from "./components/ui/Box"
 import MainLayout from "./components/ui/MainLayout/MainLayout"
+import { RouterProvider } from "react-router-dom"
+import { router } from "./routes/router"
 
 // type MainProps = {
 //   isConnected?: boolean
@@ -112,16 +115,5 @@ export const Marine2 = observer((props: AppProps) => {
     // return <Connecting viewUnmounting={viewUnmounting} />
   }
 
-  return (
-    <MainLayout>
-      <>
-        <Box title={"Box"} onExpandHref={"/path1"} className={"my-1"}>
-          Box content
-        </Box>
-        <Box title={"Box2"} onExpandHref={"/path1"} className={"my-1"}>
-          Box2 content
-        </Box>
-      </>
-    </MainLayout>
-  )
+  return <RouterProvider router={router} />
 })
