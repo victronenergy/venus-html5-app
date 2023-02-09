@@ -8,7 +8,7 @@ const EnergyDC = ({ mode }: EnergyDCProps) => {
       <Box
         title={"DC Loads"}
         icon={<img src={EnergyIcon} className={"w-6 text-black dark:text-white"} alt={"DC Loads"} />}
-        onExpandHref={`/app/box/energy-dc`}
+        onExpandHref={`/box/energy-dc`}
       >
         <>
           <div>DC Loads compact</div>

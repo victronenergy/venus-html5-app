@@ -1,6 +1,7 @@
 import React from "react"
 import classNames from "classnames"
 import ArrowRightIcon from "../../../images/icons/arrow-right.svg"
+import { Link } from "react-router-dom"
 
 const Box = ({ children, icon, title, className, onExpandHref }: Props) => {
   return (
@@ -16,13 +17,13 @@ const Box = ({ children, icon, title, className, onExpandHref }: Props) => {
           <span className={"text-2xl"}>{title}</span>
         </div>
         {onExpandHref && (
-          <a href={onExpandHref}>
+          <Link to={onExpandHref}>
             <img
               src={ArrowRightIcon}
               className={"w-6 text-victron-blue dark:text-victron-blue-dark cursor-pointer"}
               alt={"Expand"}
             />
-          </a>
+          </Link>
         )}
       </div>
       <div className={"w-full min-h-0 h-full pt-2"}>{children}</div>
