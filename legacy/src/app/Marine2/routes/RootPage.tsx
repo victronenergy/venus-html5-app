@@ -8,7 +8,7 @@ const RootPage = () => {
   return (
     <MainLayout>
       <>
-        <EnergyAC mode="compact" />
+        <EnergyAC mode="compact" className={"mb-2"} />
         <EnergyDC mode="compact" />
       </>
     </MainLayout>
