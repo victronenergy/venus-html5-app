@@ -17,6 +17,7 @@ import Box from "./components/ui/Box"
 import MainLayout from "./components/ui/MainLayout/MainLayout"
 import { RouterProvider } from "react-router-dom"
 import { router } from "./routes/router"
+import Loading from "./routes/Loading"
 
 // type MainProps = {
 //   isConnected?: boolean
@@ -115,5 +116,5 @@ export const Marine2 = observer((props: AppProps) => {
     // return <Connecting viewUnmounting={viewUnmounting} />
   }
 
-  return <RouterProvider router={router} />
+  return <RouterProvider router={router} fallbackElement={<Loading />} />
 })

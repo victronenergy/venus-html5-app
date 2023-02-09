@@ -4,11 +4,11 @@ import React, { useEffect } from "react"
 import "../../css/global.css"
 // import "../../css/index.scss"
 import { getLocale } from "react-i18nify"
-// import Loading from "./components/Loading"
 import { useVisibleWidgetsStore } from "./modules"
 // import { ErrorModal } from "./components/ErrorModal"
 
 import { Marine2 } from "./Marine2"
+import Loading from "./routes/Loading"
 
 export type AppProps = {
   host: string
@@ -56,14 +56,10 @@ const App = observer((props: AppProps) => {
   }, [locale])
 
   return (
-    <React.Suspense fallback={<div>Loading</div>}>
+    <React.Suspense fallback={<Loading />}>
       <Marine2 {...props} />
       {/*<ErrorModal />*/}
     </React.Suspense>
-    // <React.Suspense fallback={<Loading />}>
-    //   <Marine2 {...props} />
-    //   <ErrorModal />
-    // </React.Suspense>
   )
 })
 
