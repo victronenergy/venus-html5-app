@@ -6,6 +6,29 @@
         },
         "title": "AC Mode"
     },
+    "boxes": {
+        "EnergyOverview": "Energy Overview",
+        "acLoads": "AC Loads",
+        "alternator": "Alternator",
+        "batteries": "Batteries",
+        "battery": "Battery",
+        "batteryWithName": "Battery: %{name}",
+        "chargerWithName": "Charger: %{productNameShort}",
+        "dcLoads": "DC Loads",
+        "energy": "Energy",
+        "generator": "Generator",
+        "generatorInput": "Generator Input",
+        "gridInput": "Grid Input",
+        "invalidConfig": "Invalid Configuration",
+        "inverterCharger": "Inverter / Charger: %{productNameShort}",
+        "inverterWithName": "Inverter: %{productNameShort}",
+        "pvCharger": "PV Charger",
+        "shorePower": "Shore Power",
+        "solar": "Solar",
+        "status": "Status",
+        "unknown": "Unknown",
+        "windGenerator": "Wind Generator"
+    },
     "cardFooter": {
         "Charge": "Charge",
         "Critical": "Critical",
@@ -16,13 +39,17 @@
     "common": {
         "absorptionCharging": "Absorption charging",
         "assisting": "Assisting",
+        "auto": "Auto",
         "autoStartStop": "Auto start/stop",
         "bulkCharging": "Bulk charging",
         "charge": "Charge",
+        "charged": "Charged",
         "chargerOnly": "Charger Only",
         "charging": "Charging",
         "current": "Current",
+        "dark": "Dark",
         "days": "days",
+        "days_short": "d",
         "discharge": "Discharge",
         "discharging": "Discharging",
         "eco": "Eco",
@@ -32,13 +59,17 @@
         "fault": "Fault",
         "floatCharging": "Float charging",
         "hours": "hours",
+        "hours_short": "h",
         "idle": "Idle",
         "inputLimit": "Input Limit",
         "inverterOnly": "Inverter Only",
         "inverting": "Inverting",
+        "light": "Light",
         "limit": "Limit",
+        "loading": "Loading",
         "lowPower": "Low Power",
         "minutes": "minutes",
+        "minutes_short": "m",
         "mode": "Mode",
         "noShorePower": "No Shore Power",
         "notAvailable": "Not Available",
@@ -78,6 +109,10 @@
         "mqttUnavailable4": "Try using the Remote Console button at the top of this screen to change your settings remotely.",
         "mqttUnavailable5": "You can also try connecting to your device remotely by selecting Remote from the menu above.",
         "queryParams": "Query params: %{queryParams}",
+        "remoteConsole": {
+            "connectionFailed": "Unable to connect to the GX device",
+            "screenToSmall": "Open in a larger screen to view remote console"
+        },
         "userAgent": "User agent: %{userAgent}",
         "windowSize": "Window: %{width} x %{height}"
     },
@@ -110,6 +145,9 @@
     "noWidgets": {
         "subtitle": "Make sure your devices are properly connected",
         "title": "Your dashboard is empty"
+    },
+    "pages": {
+        "systemOverview": "System Overview"
     },
     "remoteLogin": {
         "2fa": "Two-factor authentication token",

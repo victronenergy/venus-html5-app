@@ -6,6 +6,25 @@
         },
         "title": "Mod AC"
     },
+    "boxes": {
+        "acLoads": "Consumatori AC",
+        "batteries": "Baterii",
+        "battery": "Baterie",
+        "batteryWithName": "Baterie: %{name}",
+        "chargerWithName": "Încărcător: %{productNameShort}",
+        "dcLoads": "Consumatori DC",
+        "generator": "Generator",
+        "generatorInput": "Intrare generator",
+        "gridInput": "Intrare rețea",
+        "invalidConfig": "Configurație nevalidă",
+        "inverterCharger": "Invertor/Încărcător: %{productNameShort}",
+        "inverterWithName": "Invertor: %{productNameShort}",
+        "pvCharger": "Încărcător PV",
+        "shorePower": "Alimentare din rețea",
+        "solar": "Solar",
+        "status": "Stare",
+        "unknown": "Necunoscut"
+    },
     "cardFooter": {
         "Charge": "Încărcare",
         "Critical": "Sever",
@@ -78,6 +97,7 @@
         "mqttUnavailable4": "Încercați să utilizați butonul Consolă la distanţă situat pe partea de sus a acestui ecran pentru a vă schimba setările de la distanţă.",
         "mqttUnavailable5": "De asemenea, puteți încerca să vă conectați la dispozitivul dumneavoastră de la distanţă selectând Remote (de la distanţă) din meniul de mai sus.",
         "queryParams": "Parametrii solicitării: %{queryParams}",
+        "remoteConsole": {},
         "userAgent": "Agent utilizator: %{userAgent}",
         "windowSize": "Fereastră: %{width} x %{height}"
     },
@@ -111,6 +131,7 @@
         "subtitle": "Asigurați-vă că dispozitivele sunt conectate în mod corect",
         "title": "Consola este goală"
     },
+    "pages": {},
     "remoteLogin": {
         "2fa": "Token de autentificare cu doi factori",
         "email": "Email",
@@ -170,24 +191,5 @@
         "venusOs": "Venus OS",
         "version": "Versiune %{version}",
         "vrmPortID": "ID site VRM"
-    },
-    "boxes": {
-        "acLoads": "Consumatori AC",
-        "batteries": "Baterii",
-        "battery": "Baterie",
-        "batteryWithName": "Baterie: %{name}",
-        "chargerWithName": "Încărcător: %{productNameShort}",
-        "dcLoads": "Consumatori DC",
-        "generator": "Generator",
-        "generatorInput": "Intrare generator",
-        "gridInput": "Intrare rețea",
-        "invalidConfig": "Configurație nevalidă",
-        "inverterCharger": "Invertor/Încărcător: %{productNameShort}",
-        "inverterWithName": "Invertor: %{productNameShort}",
-        "pvCharger": "Încărcător PV",
-        "shorePower": "Alimentare din rețea",
-        "solar": "Solar",
-        "status": "Stare",
-        "unknown": "Necunoscut"
     }
 }
