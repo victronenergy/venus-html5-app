@@ -14,6 +14,7 @@ import { observer } from "mobx-react"
 import { isError } from "app/utils/util"
 import Container from "./components/ui/Container"
 import Box from "./components/ui/Box"
+import MainLayout from "./components/ui/MainLayout/MainLayout"
 
 // type MainProps = {
 //   isConnected?: boolean
@@ -113,21 +114,15 @@ export const Marine2 = observer((props: AppProps) => {
   }
 
   return (
-    <Container>
-      <div className={"flex flex-col w-full h-full"}>
-        <div className={"flex flex-row w-full h-full grow-0 basis-0"}>
-          <div className={"font-bold text-2xl text-neutral-600"}>New Marine2</div>
-          <div className={"text-victron-red"}>Text red</div>
-        </div>
-        <div className={"flex flex-col grow p-4 w-full h-full"}>
-          <Box title={"Box"} onExpandHref={"/path1"} className={"my-1"}>
-            Box content
-          </Box>
-          <Box title={"Box2"} onExpandHref={"/path1"} className={"my-1"}>
-            Box2 content
-          </Box>
-        </div>
-      </div>
-    </Container>
+    <MainLayout>
+      <>
+        <Box title={"Box"} onExpandHref={"/path1"} className={"my-1"}>
+          Box content
+        </Box>
+        <Box title={"Box2"} onExpandHref={"/path1"} className={"my-1"}>
+          Box2 content
+        </Box>
+      </>
+    </MainLayout>
   )
 })
