@@ -15,9 +15,9 @@ const EnergyDC = ({ mode = 'compact', dcLoads }: Props) => {
       <div className='flex flex-row justify-between items-center'>
         <div className='flex'>
           <DCIcon className={'w-7 text-black dark:text-white'} />
-          <p className='text-xl md:text-2xl pl-2 md:pl-3'>{t('boxes.dcLoads')}</p>
+          <p className='text-base md:text-xl lg:text-2xl pl-2 md:pl-3'>{t('boxes.dcLoads')}</p>
         </div>
-        <p className='text-xl md:text-2xl'>
+        <p className='text-base md:text-xl lg:text-2xl'>
           {formatValue(power / voltage)}
           <span className='p-0.5 text-victron-gray dark:text-victron-gray-dark'>A</span>
         </p>

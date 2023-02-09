@@ -47,7 +47,7 @@ const EnergyOverview = ({ mode = 'compact' }: BoxProps) => {
         icon={<EnergyIcon className={'w-6 text-victron-gray dark:text-victron-gray-dark'} />}
         onExpandHref={`${RouterPath.BOX}/EnergyOverview`}
       >
-        <>{getAvailableEnergyBoxes(mode, shoreInputId, acLoads, pvCharger, dcLoads, alternators, windGenerators)}</>
+        <div className='h-full flex flex-col gap-1'>{getAvailableEnergyBoxes(mode, shoreInputId, acLoads, pvCharger, dcLoads, alternators, windGenerators)}</div>
       </Box>
     )
   }

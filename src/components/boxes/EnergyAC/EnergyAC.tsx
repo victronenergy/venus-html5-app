@@ -17,9 +17,9 @@ const EnergyAC = ({ mode = 'compact', acLoads }: Props) => {
       <div className='flex flex-row justify-between items-center'>
         <div className='flex'>
           <ACIcon className={'w-7 text-black dark:text-white'} />
-          <p className='text-xl md:text-2xl pl-2 md:pl-3'>{t('boxes.acLoads')}</p>
+          <p className='text-base md:text-xl lg:text-2xl pl-2 md:pl-3'>{t('boxes.acLoads')}</p>
         </div>
-        <p className='text-xl md:text-2xl'>
+        <p className='text-base md:text-xl lg:text-2xl'>
           {(phases ?? 1) === 1 && (
             <p>
               {formatValue(current[0])}
