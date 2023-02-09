@@ -1,5 +1,4 @@
 import React from "react"
-import { observer } from "mobx-react-lite"
 import LogoIcon from "../../../images/logo.svg"
 
 const Footer = () => {
@@ -14,4 +13,4 @@ const Footer = () => {
   )
 }
 
-export default observer(Footer)
+export default Footer

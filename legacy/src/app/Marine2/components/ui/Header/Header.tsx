@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { observer } from "mobx-react-lite"
+import { observer } from "mobx-react"
 import BackIcon from "../../../images/icons/back.svg"
 
 const Header = ({ title }: Props) => {
