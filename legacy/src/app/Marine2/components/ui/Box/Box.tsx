@@ -1,7 +1,6 @@
 import React from "react"
 import classNames from "classnames"
 import ArrowRightIcon from "../../../images/icons/arrow-right.svg"
-import { translate } from "react-i18nify"
 
 const Box = ({ children, icon, title, className, onExpandHref }: Props) => {
   return (
@@ -14,9 +13,7 @@ const Box = ({ children, icon, title, className, onExpandHref }: Props) => {
       <div className={"flex flex-row justify-between"}>
         <div className={"flex flex-row items-center justify-start text-victron-gray dark:text-victron-gray-dark"}>
           {icon && <span className={"mr-1"}>{icon}</span>}
-          <span className={"text-2xl"}>
-            {translate("header.versionInfo")} {title}
-          </span>
+          <span className={"text-2xl"}>{title}</span>
         </div>
         {onExpandHref && (
           <a href={onExpandHref}>
