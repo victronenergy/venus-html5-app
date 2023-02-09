@@ -16,16 +16,14 @@ export const RadioButton: React.FC<Props> = ({ selected, onChange, disabled }) =
         className={classNames('w-4 h-4 border-[1px] bg-inherit rounded-full', {
           'border-victron-gray': !selected,
           'border-victron-blue': selected,
-          'md-m:w-6 md-m:h-6 md-m:border-2': true, // large
-          'md-s:w-5 md-s:h-5 md-s:border-[1.5px]': true, // medium
+          'md-l:w-6 md-l:h-6 md-l:border-2': true, // large
           'sm-s:w-4 sm-s:h-4 :border-[1px]': true, // small
         })}
       >
         {selected && (
           <div
             className={classNames('w-2 h-2 mt-[3px] ml-[3px] rounded-full bg-victron-blue', {
-              'md-m:w-4 md-m:h-4 md-m:mt-[2px] md-m:ml-[2px]': true, // large
-              'md-s:w-3 md-s:h-3 md-s:mt-[3px] md-s:ml-[3px]': true, // medium
+              'md-l:w-4 md-l:h-4 md-l:mt-[2px] md-l:ml-[2px]': true, // large
               'sm-s:w-2 sm-s:h-2 sm-s:mt-[3px] sm-s:ml-[3px]': true, // small
             })}
           ></div>
