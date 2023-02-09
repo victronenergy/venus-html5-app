@@ -12,7 +12,6 @@ import { AppProps } from "./App"
 import { mfdLanguageOptions } from "app/locales/constants"
 import { observer } from "mobx-react"
 import { isError } from "app/utils/util"
-import Container from "./components/ui/Container"
 import Box from "./components/ui/Box"
 import MainLayout from "./components/ui/MainLayout/MainLayout"
 

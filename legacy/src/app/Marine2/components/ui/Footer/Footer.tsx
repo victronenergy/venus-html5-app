@@ -14,6 +14,4 @@ const Footer = () => {
   )
 }
 
-interface Props {}
-
 export default observer(Footer)
