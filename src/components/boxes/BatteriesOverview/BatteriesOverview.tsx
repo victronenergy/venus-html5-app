@@ -10,14 +10,28 @@ import { RouterPath } from '~/types/routes'
 import { useTranslation } from 'next-i18next'
 import BatteriesIcon from '~/public/icons/batteries.svg'
 import BatterySummary from '~/components/ui/BatterySummary'
-
+import AuxiliaryBatteries from '../Batteries/AuxiliaryBatteries'
 const BatteriesOverview = ({ mode = 'compact' }: BoxProps) => {
   const { batteries } = useBattery()
   const { t } = useTranslation()
 
   const sortedBatteries = sortBatteries(batteries ?? [])
   const overviewBatteries = getOverviewBatteries(sortedBatteries, 2)
+  const auxiliaryBatteries = sortedBatteries.filter(b => !overviewBatteries.includes(b))
 
+  const getDetailBatteries = function () {
+    let boxes = []
+
+    overviewBatteries.forEach((b) => {
+      boxes.push(<Battery key={b.id} battery={b} />)
+    })
+
+    if (auxiliaryBatteries.length > 0) {
+      boxes.push(<AuxiliaryBatteries key={'auxiliary'} batteries={auxiliaryBatteries} />)
+    }
+
+    return boxes
+  }
   if (mode === 'compact') {
     return (
       <Box
@@ -37,11 +51,7 @@ const BatteriesOverview = ({ mode = 'compact' }: BoxProps) => {
     )
   }
 
-  return (
-    <Grid flow={'col'}>
-      { sortedBatteries.map(b => <Battery key={b.id} battery={b} />) }
-    </Grid>
-  )
+  return <Grid className={'gap-2'}>{getDetailBatteries()}</Grid>
 }
 
 /*
