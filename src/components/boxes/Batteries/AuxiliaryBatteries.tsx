@@ -13,8 +13,10 @@ const AuxiliaryBatteries = ({ batteries, mode = 'full' }: Props) => {
     >
       <>
         {batteries.map((battery, idx) => (
-          <div key={battery.name} className='grid grid-cols-9'>
-            <p className='text-white text-left text-base sm:text-lg md:text-xl lg:text-2xl  col-span-3'>{battery.name}</p>
+          <div key={battery.name} className='grid grid-cols-9 items-center'>
+            <p className='text-victron-gray dark:text-white text-left text-base sm:text-lg md:text-xl lg:text-2xl  col-span-3'>
+              {battery.name}
+            </p>
             <p className='text-victron-gray text-left text-base sm:text-lg md:text-xl lg:text-2xl  col-span-2'>
               {battery.voltage.toFixed(1)} <span className='text-victron-gray-400'>V</span>
             </p>
@@ -30,7 +32,7 @@ const AuxiliaryBatteries = ({ batteries, mode = 'full' }: Props) => {
       </>
     </Box>
   )
-  }
+}
 
 interface Props {
   batteries: BatteryType[]

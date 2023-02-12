@@ -17,13 +17,13 @@ const BatteriesOverview = ({ mode = 'compact' }: BoxProps) => {
 
   const sortedBatteries = sortBatteries(batteries ?? [])
   const overviewBatteries = getOverviewBatteries(sortedBatteries, 2)
-  const auxiliaryBatteries = sortedBatteries.filter(b => !overviewBatteries.includes(b))
+  const auxiliaryBatteries = sortedBatteries.filter((b) => !overviewBatteries.includes(b))
 
   const getDetailBatteries = function () {
     let boxes = []
 
     overviewBatteries.forEach((b) => {
-      boxes.push(<Battery key={b.id} battery={b} />)
+      boxes.push(<Battery key={b.id} battery={b} mode='full' />)
     })
 
     if (auxiliaryBatteries.length > 0) {
@@ -40,12 +40,9 @@ const BatteriesOverview = ({ mode = 'compact' }: BoxProps) => {
         onExpandHref={`${RouterPath.BOX}/BatteriesOverview`}
       >
         <div className={'flex justify-center items-center h-full -mx-4'}>
-          { overviewBatteries.map(
-            b => <BatterySummary
-              key={b.id}
-              battery={b}
-              className={overviewBatteries.length > 1 ? 'w-6/12' : ''} />
-          ) }
+          {overviewBatteries.map((b) => (
+            <BatterySummary key={b.id} battery={b} className={overviewBatteries.length > 1 ? 'w-6/12' : ''} />
+          ))}
         </div>
       </Box>
     )
@@ -59,26 +56,30 @@ const BatteriesOverview = ({ mode = 'compact' }: BoxProps) => {
  */
 const sortBatteries = function (batteries: BatteryType[]) {
   return batteries.slice().sort((a, b) => {
-
-    if ((a.state === BATTERY.CHARGING && b.state !== BATTERY.CHARGING) ||
+    if (
+      (a.state === BATTERY.CHARGING && b.state !== BATTERY.CHARGING) ||
       (a.state === BATTERY.DISCHARGING && b.state === BATTERY.IDLE) ||
-      ((a.state || a.state === 0) && (!b.state && b.state !== 0))) return -1
+      ((a.state || a.state === 0) && !b.state && b.state !== 0)
+    )
+      return -1
 
-    if ((a.state !== BATTERY.CHARGING && b.state === BATTERY.CHARGING) ||
+    if (
+      (a.state !== BATTERY.CHARGING && b.state === BATTERY.CHARGING) ||
       (a.state === BATTERY.IDLE && b.state === BATTERY.DISCHARGING) ||
-      ((!a.state && a.state !== 0) && (b.state || b.state === 0))) return 1
+      (!a.state && a.state !== 0 && (b.state || b.state === 0))
+    )
+      return 1
 
     return +a.id - +b.id
   })
 }
-
 
 /*
   We show only batteries with state data on the overview, but if we don't
   have any we will show any batteries.
  */
 const getOverviewBatteries = function (batteries: BatteryType[], max: number) {
-  const withStateCount = batteries.filter(b => b.state || b.state === 0).length
+  const withStateCount = batteries.filter((b) => b.state || b.state === 0).length
   if (withStateCount === 0) {
     return batteries.slice(0, max)
   }
