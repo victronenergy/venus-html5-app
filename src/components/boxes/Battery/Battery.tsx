@@ -27,7 +27,7 @@ const Battery = ({ battery, mode = 'compact' }: Props) => {
       <div className='w-full h-full flex flex-col'>
         <div className={`text-${color} text-5xl md-m:text-6xl`}>
           {battery.soc ?? '--'}
-          <span>%</span>
+          <span className='opacity-70'>%</span> 
         </div>
         <p className='text-base md:text-lg lg:text-xl xl:text-2xl text-victron-gray dark:text-victron-gray-dark'>
           {batteryStateNameFormatter(t, battery.state)}
