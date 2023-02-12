@@ -39,7 +39,7 @@ const Battery = ({ battery, mode = 'compact' }: Props) => {
 
         <div className='w-full h-full flex content-end flex-wrap'>
           <div className='w-full'>
-            <hr className='w-full h-1 border-victron-gray' />
+            <div className='my-1 border-[1px] border-victron-gray-200' />
             <div key={battery.name} className='grid grid-cols-9 whitespace-nowrap'>
               <p className='text-victron-gray dark:text-white truncate text-left text-base sm:text-lg md:text-xl lg:text-2xl col-span-3'>
                 {battery.name}
