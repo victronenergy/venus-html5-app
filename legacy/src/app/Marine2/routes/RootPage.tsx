@@ -4,7 +4,6 @@ import EnergyAC from "../components/boxes/EnergyAC"
 import EnergyDC from "../components/boxes/EnergyDC"
 
 const RootPage = () => {
-  console.log("-> root page")
   return (
     <MainLayout>
       <>
