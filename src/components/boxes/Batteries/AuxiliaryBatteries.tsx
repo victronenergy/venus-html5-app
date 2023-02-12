@@ -10,8 +10,9 @@ const AuxiliaryBatteries = ({ batteries, mode = 'full' }: Props) => {
     <Box
       icon={<BatteryIcon className='w-6 text-victron-gray dark:text-victron-gray-dark' />}
       title='Auxiliary Batteries'
+      className='truncate'
     >
-      <>
+      <div className='whitespace-pre-wrap'>
         {batteries.map((battery, idx) => (
           <div key={battery.name} className='grid grid-cols-9 items-center'>
             <p className='text-victron-gray dark:text-white text-left text-base sm:text-lg md:text-xl lg:text-2xl  col-span-3'>
@@ -29,7 +30,7 @@ const AuxiliaryBatteries = ({ batteries, mode = 'full' }: Props) => {
             {idx < batteries.length - 1 && <div className='col-span-9 my-1 border-[1px] border-victron-gray-200' />}
           </div>
         ))}
-      </>
+      </div>
     </Box>
   )
 }
