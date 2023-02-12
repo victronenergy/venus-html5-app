@@ -1,7 +1,7 @@
 import React from "react"
 import EnergyIcon from "../../../images/icons/energy.svg"
 import Box from "../../ui/Box"
-import { RouterPath } from "../../../routes/paths"
+import { AppViews } from "../../../modules/AppViews"
 
 const EnergyDC = ({ mode, className }: EnergyDCProps) => {
   if (mode === "compact") {
@@ -9,7 +9,7 @@ const EnergyDC = ({ mode, className }: EnergyDCProps) => {
       <Box
         title={"DC Loads"}
         icon={<img src={EnergyIcon} className={"w-6 text-black dark:text-white"} alt={"DC Loads"} />}
-        onExpandHref={RouterPath.BOX_ENERGY_DC}
+        linkedView={AppViews.BOX_ENERGY_DC}
         className={className}
       >
         <>

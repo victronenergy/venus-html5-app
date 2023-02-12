@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from "react"
 import { observer } from "mobx-react"
 import BackIcon from "../../../images/icons/back.svg"
-import { useLocation } from "react-router-dom"
+import { AppViews, useAppViewsStore } from "../../../modules/AppViews"
 
 const Header = ({ title }: Props) => {
-  const [isShowBack, setShowBack] = useState(false)
-  const location = useLocation()
-  const { pathname } = location || {}
+  const appViewsStore = useAppViewsStore()
+  const [isShowBack, setShowBack] = useState(appViewsStore.currentView !== AppViews.ROOT)
 
   const handleBackClick = () => {
-    window.history.back()
+    appViewsStore.setView(AppViews.ROOT)
   }
 
   useEffect(() => {
-    setShowBack(Boolean(pathname) && pathname !== "/")
-  }, [pathname])
+    setShowBack(appViewsStore.currentView !== AppViews.ROOT)
+  }, [appViewsStore.currentView])
 
   return (
     <div className={"flex flex-row justify-between w-full items-center pb-4"}>

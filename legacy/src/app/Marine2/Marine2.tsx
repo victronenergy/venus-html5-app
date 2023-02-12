@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 // import classnames from "classnames"
 // import { useState } from "react"
 // import Fade, { viewChangeDelay } from "../components/Fade"
@@ -13,9 +13,13 @@ import { AppProps } from "./App"
 import { mfdLanguageOptions } from "app/locales/constants"
 import { observer } from "mobx-react"
 import { isError } from "app/utils/util"
-import { RouterProvider } from "react-router-dom"
-import { router } from "./routes/router"
-import Loading from "./routes/Loading"
+// import { RouterProvider } from "react-router-dom"
+// import { router } from "./routes/router"
+// import Loading from "./routes/Loading"
+
+import { useAppViewsStore } from "./modules/AppViews"
+import BoxView from "./components/views/BoxView"
+import RootView from "./components/views/RootView"
 
 // type MainProps = {
 //   isConnected?: boolean
@@ -43,7 +47,6 @@ export const Marine2 = observer((props: AppProps) => {
   // const { host } = props
   // subscribe to language
   useLanguage(mfdLanguageOptions)
-  // const [currentView, setCurrentView] = useState(VIEWS.METRICS)
   // const [viewUnmounting, setViewUnmounting] = useState(false)
   // const [currentPage, setCurrentPage] = useState(0)
   // const [pages, setTotalPages] = useState(1)
@@ -51,6 +54,28 @@ export const Marine2 = observer((props: AppProps) => {
   const isConnected = mqtt.isConnected
   const portalId = mqtt.portalId
   const { error, status } = mqtt
+
+  const appViewsStore = useAppViewsStore()
+  const [currentView, setCurrentView] = useState(appViewsStore.currentView)
+
+  useEffect(() => {
+    setCurrentView(appViewsStore.currentView)
+  }, [appViewsStore.currentView])
+
+  const renderView = () => {
+    console.log("-> currentView", currentView, /^box_/i.test(currentView))
+    if (/^box\//i.test(currentView)) {
+      return <BoxView boxId={currentView} />
+    }
+
+    switch (currentView) {
+      // todo: add other views
+      // case AppViews.OTHER_VIEW:
+      //   return <OtherView />
+      default:
+        return <RootView />
+    }
+  }
 
   // const setPage = (currentPage: number) => {
   //   setCurrentPage(currentPage)
@@ -114,5 +139,8 @@ export const Marine2 = observer((props: AppProps) => {
     // return <Connecting viewUnmounting={viewUnmounting} />
   }
 
-  return <RouterProvider router={router} fallbackElement={<Loading />} />
+  // todo: remove this when we have a proper views router
+  // return <RouterProvider router={router} fallbackElement={<Loading />} />
+
+  return renderView()
 })
