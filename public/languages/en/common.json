@@ -39,13 +39,16 @@
     "common": {
         "absorptionCharging": "Absorption charging",
         "assisting": "Assisting",
+        "auto": "Auto",
         "autoStartStop": "Auto start/stop",
         "bulkCharging": "Bulk charging",
         "charge": "Charge",
+        "charged": "Charged",
         "chargerOnly": "Charger Only",
         "charged": "Charged",
         "charging": "Charging",
         "current": "Current",
+        "dark": "Dark",
         "days": "days",
         "days_short": "d",
         "discharge": "Discharge",
@@ -62,7 +65,9 @@
         "inputLimit": "Input Limit",
         "inverterOnly": "Inverter Only",
         "inverting": "Inverting",
+        "light": "Light",
         "limit": "Limit",
+        "loading": "Loading",
         "lowPower": "Low Power",
         "minutes": "minutes",
         "minutes_short": "m",
@@ -105,6 +110,10 @@
         "mqttUnavailable4": "Try using the Remote Console button at the top of this screen to change your settings remotely.",
         "mqttUnavailable5": "You can also try connecting to your device remotely by selecting Remote from the menu above.",
         "queryParams": "Query params: %{queryParams}",
+        "remoteConsole": {
+            "connectionFailed": "Unable to connect to the GX device",
+            "screenToSmall": "Open in a larger screen to view remote console"
+        },
         "userAgent": "User agent: %{userAgent}",
         "windowSize": "Window: %{width} x %{height}"
     },

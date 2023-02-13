@@ -99,6 +99,7 @@
         "mqttUnavailable4": "Probeer de Remote Control knop bovenaan het scherm om de instellingen remote te veranderen.",
         "mqttUnavailable5": "Verbind Remote met het apparaat door de knop Remote bovenaan het scherm te drukken.",
         "queryParams": "Zoek :  %{queryParams}",
+        "remoteConsole": {},
         "userAgent": "Gebruiker : %{userAgent}",
         "windowSize": "Venster :  %{width} x %{height}"
     },

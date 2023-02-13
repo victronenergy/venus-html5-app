@@ -97,6 +97,7 @@
         "mqttUnavailable4": "حاول استخدام زر \"وحدة التحكم عن بعد\" أعلى هذه الشاشة لتغيير إعداداتك عن بعد.",
         "mqttUnavailable5": "يمكنك كذلك محاول الاتصال بجهازك عن بعد من خلال تحديد \"عن بعد\" من القائمة أعلاه.",
         "queryParams": "معاملات الاستعلام: %{queryParams}",
+        "remoteConsole": {},
         "userAgent": "وكيل المستخدم: %{userAgent}",
         "windowSize": "إطار: %{width} x %{height}"
     },

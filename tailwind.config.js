@@ -17,6 +17,43 @@ module.exports = {
         md: '800px',
         lg: '1400px',
         xl: '1800px',
+        // custom media queries that also use the min-height property
+        'sm-s' : {
+          raw : '(min-width: 540px) and (min-height: 400px)'
+        },
+        'sm-m' : {
+          raw : '(min-width: 540px) and (min-height: 550px)'
+        },
+        'sm-l' : {
+          raw : '(min-width: 540px) and (min-height: 700px)'
+        },
+        'md-s' : {
+          raw : '(min-width: 800px) and (min-height: 400px)'
+        },
+        'md-m' : {
+          raw : '(min-width: 800px) and (min-height: 550px)'
+        },
+        'md-l' : {
+          raw : '(min-width: 800px) and  (min-height: 700px)'
+        },
+        'lg-s' : {
+          raw : '(min-width: 1400px) and (min-height: 400px)'
+        },
+        'lg-m' : {
+          raw : '(min-width: 1400px) and (min-height: 550px)'
+        },
+        'lg-l' : {
+          raw : '(min-width: 1400px) and (min-height: 700px)'
+        },
+        'xl-s' : {
+          raw : '(min-width: 1800px) and (min-height: 400px)'
+        },
+        'xl-m' : {
+          raw : '(min-width: 1800px) and (min-height: 550px)'
+        },
+        'xl-l' : {
+          raw : '(min-width: 1800px) and (min-height: 700px)'
+        },
       },
       colors: {
         victron: {
@@ -32,11 +69,8 @@ module.exports = {
             DEFAULT: '#969591',
             dark: '#969591',
             "400": '#64635F',
+            '300' : '#504F4B',
             "200": '#272622',
-          },
-          'gray-4': {
-            DEFAULT: '#64635F',
-            dark: '#64635F'
           },
           blue: {
             DEFAULT: '#387DC5',

@@ -97,6 +97,7 @@
         "mqttUnavailable4": "Provare a utilizzare il pulsante della Consolle Remota sito nella parte alta di questa schermata per cambiare le impostazioni da remoto.",
         "mqttUnavailable5": "Si può provare anche a collegarsi al proprio dispositivo da remoto, selezionando Remoto nel menù qui sopra.",
         "queryParams": "Parametri richiesta: %{queryParams}",
+        "remoteConsole": {},
         "userAgent": "Agente utente: %{userAgent}",
         "windowSize": "Finestra: %{width} x %{height}"
     },

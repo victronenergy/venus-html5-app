@@ -11,6 +11,9 @@ import { useTranslation } from 'next-i18next'
 import BatteriesIcon from '~/public/icons/batteries.svg'
 import BatterySummary from '~/components/ui/BatterySummary'
 import AuxiliaryBatteries from '../Batteries/AuxiliaryBatteries'
+import { withErrorBoundary } from 'react-error-boundary'
+import ErrorFallback from '~/components/ui/ErrorBoundary/ErrorFallback'
+
 const BatteriesOverview = ({ mode = 'compact' }: BoxProps) => {
   const { batteries } = useBattery()
   const { t } = useTranslation()
@@ -86,4 +89,11 @@ const getOverviewBatteries = function (batteries: BatteryType[], max: number) {
   return batteries.slice(0, Math.min(withStateCount, max))
 }
 
-export default observer(BatteriesOverview)
+const ComponentWithErrorBoundary = withErrorBoundary(observer(BatteriesOverview), {
+  FallbackComponent: ErrorFallback,
+  onError(error, info) {
+    console.error(error, info)
+  },
+})
+
+export default ComponentWithErrorBoundary

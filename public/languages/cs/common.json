@@ -97,6 +97,7 @@
         "mqttUnavailable4": "Zkuste pomocí tlačítka Konzola dálkového ovládání v horní části této obrazovky změnit nastavení dálkově.",
         "mqttUnavailable5": "Můžete také zkusit dálkové připojení k zařízení výběrem možnosti Dálkové z nabídky výše",
         "queryParams": "Parametry dotazu: %{queryParams}",
+        "remoteConsole": {},
         "userAgent": "Agent uživatele: %{userAgent}",
         "windowSize": "Okno: %{width} x %{height}"
     },
