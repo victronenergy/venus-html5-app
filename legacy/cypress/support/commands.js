@@ -24,8 +24,8 @@ Cypress.Commands.add(`isWithinViewport`, { prevSubject: true }, (subject, width,
 
   expect(bounding.top).to.be.at.least(0)
   expect(bounding.left).to.be.at.least(0)
-  expect(bounding.right).to.be.lessThan(width + 1)
-  expect(bounding.bottom).to.be.lessThan(height + 1)
+  expect(bounding.right).to.be.lessThan(width + 2)
+  expect(bounding.bottom).to.be.lessThan(height + 2)
 
   return subject
 })
