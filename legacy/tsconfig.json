@@ -33,6 +33,7 @@
   "include": [
     "../node_modules/cypress",
     "cypress/**/*.ts",
-    "src"
+    "src",
+    "custom.d.ts"
   ]
 }
