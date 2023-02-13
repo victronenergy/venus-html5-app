@@ -44,6 +44,7 @@ const Grid = ({ children, className, flow = 'row', forceOneDimensionRatio = 3 }:
         },
         className
       )}
+      role={'container'}
     >
       {Array.isArray(children) ? (
         // TODO: display max 4 children and show navigation element for rest

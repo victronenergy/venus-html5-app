@@ -103,6 +103,10 @@
             "sendReport": "Send error report",
             "title": "An error occured while rendering the application."
         },
+        "remoteConsole": {
+            "connectionFailed": "Unable to connect to the GX device",
+            "screenTooSmall": "Open in a larger screen to view remote console"
+        },
         "mqttUnavailable1": "Could not connect to the MQTT server.",
         "mqttUnavailable2": "Please check that MQTT is enabled in your settings:",
         "mqttUnavailable3": "Remote Console > Settings > Services > MQTT on LAN (Plaintext)",
@@ -208,5 +212,31 @@
         "venusOs": "Venus OS",
         "version": "Version %{version}",
         "vrmPortID": "VRM Site ID"
+    },
+    "boxes": {
+        "acLoads": "AC Loads",
+        "alternator": "Alternator",
+        "batteries": "Batteries",
+        "battery": "Battery",
+        "batteryWithName": "Battery: %{name}",
+        "chargerWithName": "Charger: %{productNameShort}",
+        "dcLoads": "DC Loads",
+        "energy": "Energy",
+        "EnergyOverview": "Energy Overview",
+        "generator": "Generator",
+        "generatorInput": "Generator Input",
+        "gridInput": "Grid Input",
+        "invalidConfig": "Invalid Configuration",
+        "inverterCharger": "Inverter / Charger: %{productNameShort}",
+        "inverterWithName": "Inverter: %{productNameShort}",
+        "pvCharger": "PV Charger",
+        "shorePower": "Shore Power",
+        "solar": "Solar",
+        "status": "Status",
+        "unknown": "Unknown",
+        "windGenerator": "Wind Generator"
+    },
+    "pages": {
+        "systemOverview": "System Overview"
     }
 }
