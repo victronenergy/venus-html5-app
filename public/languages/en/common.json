@@ -103,6 +103,10 @@
             "sendReport": "Send error report",
             "title": "An error occured while rendering the application."
         },
+        "remoteConsole": {
+            "connectionFailed": "Unable to connect to the GX device",
+            "screenTooSmall": "Open in a larger screen to view remote console"
+        },
         "mqttUnavailable1": "Could not connect to the MQTT server.",
         "mqttUnavailable2": "Please check that MQTT is enabled in your settings:",
         "mqttUnavailable3": "Remote Console > Settings > Services > MQTT on LAN (Plaintext)",
