@@ -10,11 +10,19 @@ const Box = ({ children, icon, title, className, onExpandHref }: Props) => {
         'w-full h-full min-h-0 p-4 flex flex-col bg-victron-lightGray dark:bg-victron-darkGray rounded-md',
         className
       )}
+      role={'container'}
     >
       <div className={'flex flex-row justify-between'}>
         <div className={'flex flex-row items-center justify-start text-victron-gray dark:text-victron-gray-dark'}>
-          {icon && <span className={'mr-1'}>{icon}</span>}
-          <span className={'text-2xl'}>{title}</span>
+          {icon && (
+            <span className={'mr-1'} role={'img'}>
+              {icon}
+            </span>
+          )}
+          {/* TODO: replace with semantic header */}
+          <span className={'text-2xl'} role={'heading'}>
+            {title}
+          </span>
         </div>
         {onExpandHref && (
           <Link href={onExpandHref} shallow={true}>
@@ -33,7 +41,6 @@ interface Props {
   title: string
   onExpandHref?: string
   className?: string
-  headerActions?: JSX.Element
 }
 
 export default Box
