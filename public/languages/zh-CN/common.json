@@ -97,6 +97,7 @@
         "mqttUnavailable4": "尝试使用此屏幕顶部的远程控制台按钮远程更改设置。",
         "mqttUnavailable5": "您也可以通过从上面的菜单中选择远程来尝试远程连接到您的设备。",
         "queryParams": "查询参数: %{queryParams}",
+        "remoteConsole": {},
         "userAgent": "用户代理: %{userAgent}",
         "windowSize": "窗口: %{width} x %{height}"
     },

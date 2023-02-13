@@ -97,6 +97,7 @@
         "mqttUnavailable4": "Försök att använda knappen för fjärrkonsol (Remote Console) längst upp på den här skärmen för att ändra dina inställningar på distans.",
         "mqttUnavailable5": "Du kan även försöka att fjärransluta till din enhet genom att välja Fjärr (Remote) från menyn ovan.",
         "queryParams": "Frågeparametrar: %{queryParams}",
+        "remoteConsole": {},
         "userAgent": "Användaragent: %{userAgent}",
         "windowSize": "Fönster: %{width} x %{height}"
     },

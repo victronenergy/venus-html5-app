@@ -2,6 +2,8 @@ import React from 'react'
 import Box from '~/components/ui/Box'
 import { BoxProps } from '~/types/boxes'
 import EnergyIcon from '~/public/icons/energy.svg'
+import { withErrorBoundary } from 'react-error-boundary'
+import ErrorFallback from '~/components/ui/ErrorBoundary/ErrorFallback'
 
 const EnergyAC = ({ mode = 'compact' }: BoxProps) => {
   if (mode === 'compact') {
@@ -23,4 +25,11 @@ const EnergyAC = ({ mode = 'compact' }: BoxProps) => {
   )
 }
 
-export default EnergyAC
+const ComponentWithErrorBoundary = withErrorBoundary(EnergyAC, {
+  FallbackComponent: ErrorFallback,
+  onError(error, info) {
+    console.error(error, info)
+  },
+})
+
+export default ComponentWithErrorBoundary

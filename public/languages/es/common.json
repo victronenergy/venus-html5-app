@@ -97,6 +97,7 @@
         "mqttUnavailable4": "Intente usar el botón de Consola remota de la parte superior de esta pantalla para cambiar sus ajustes a distancia.",
         "mqttUnavailable5": "También puede intentar conectar su dispositivo a distancia seleccionando Remoto en el menú anterior.",
         "queryParams": "Parámetros de consulta: %{queryParams}",
+        "remoteConsole": {},
         "userAgent": "Agente del usuario: %{userAgent}",
         "windowSize": "Ventana: %{width} x %{height}"
     },

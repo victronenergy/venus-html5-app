@@ -97,6 +97,7 @@
         "mqttUnavailable4": "mqttUnavailable4",
         "mqttUnavailable5": "mqttUnavailable5",
         "queryParams": "Query params: %{queryParams}",
+        "remoteConsole": {},
         "userAgent": "User agent: %{userAgent}",
         "windowSize": "Window: %{width} x %{height}"
     },

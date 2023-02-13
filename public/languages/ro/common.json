@@ -97,6 +97,7 @@
         "mqttUnavailable4": "Încercați să utilizați butonul Consolă la distanţă situat pe partea de sus a acestui ecran pentru a vă schimba setările de la distanţă.",
         "mqttUnavailable5": "De asemenea, puteți încerca să vă conectați la dispozitivul dumneavoastră de la distanţă selectând Remote (de la distanţă) din meniul de mai sus.",
         "queryParams": "Parametrii solicitării: %{queryParams}",
+        "remoteConsole": {},
         "userAgent": "Agent utilizator: %{userAgent}",
         "windowSize": "Fereastră: %{width} x %{height}"
     },
