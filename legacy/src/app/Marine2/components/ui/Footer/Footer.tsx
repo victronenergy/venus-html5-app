@@ -1,14 +1,16 @@
 import React from "react"
 import LogoIcon from "../../../images/logo.svg"
+import Settings from "../Settings"
 
 const Footer = () => {
   return (
     <div className="flex w-full flex-row justify-between p-4">
       <div>
-        <img src={LogoIcon} className={"w-32 text-black dark:text-white"} alt={"Victron"} />
+        {/* todo: fix types for svg */}
+        {/* @ts-ignore */}
+        <LogoIcon className={"w-32 text-black dark:text-white"} alt={"Victron Energy"} />
       </div>
-      {/* TODO: add popup modal menu */}
-      <div>Menu</div>
+      <Settings />
     </div>
   )
 }
