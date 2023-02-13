@@ -4,7 +4,7 @@ import Settings from "../Settings"
 
 const Footer = () => {
   return (
-    <div className="flex w-full flex-row justify-between p-4">
+    <div className="flex w-full flex-row justify-between pt-6 pb-4">
       <div>
         {/* todo: fix types for svg */}
         {/* @ts-ignore */}

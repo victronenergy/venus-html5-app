@@ -8,7 +8,9 @@ const EnergyDC = ({ mode, className }: EnergyDCProps) => {
     return (
       <Box
         title={"DC Loads"}
-        icon={<img src={EnergyIcon} className={"w-6 text-black dark:text-white"} alt={"DC Loads"} />}
+        /* todo: fix types for svg */
+        /* @ts-ignore */
+        icon={<EnergyIcon className={"w-6 text-black dark:text-white"} alt={"DC Loads"} />}
         linkedView={AppViews.BOX_ENERGY_DC}
         className={className}
       >
@@ -22,7 +24,9 @@ const EnergyDC = ({ mode, className }: EnergyDCProps) => {
   return (
     <Box
       title={"DC Loads"}
-      icon={<img src={EnergyIcon} className={"w-6 text-black dark:text-white"} alt={"DC Loads"} />}
+      /* todo: fix types for svg */
+      /* @ts-ignore */
+      icon={<EnergyIcon className={"w-6 text-black dark:text-white"} alt={"DC Loads"} />}
     >
       <>
         <div>DC Loads full content</div>

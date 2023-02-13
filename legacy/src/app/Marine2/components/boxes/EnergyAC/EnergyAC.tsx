@@ -8,7 +8,9 @@ const EnergyAC = ({ mode, className }: EnergyACProps) => {
     return (
       <Box
         title={"AC Loads"}
-        icon={<img src={EnergyIcon} className={"w-6 text-black dark:text-white"} alt={"AC Loads"} />}
+        /* todo: fix types for svg */
+        /* @ts-ignore */
+        icon={<EnergyIcon className={"w-6 text-black dark:text-white"} alt={"AC Loads"} />}
         linkedView={AppViews.BOX_ENERGY_AC}
         className={className}
       >
@@ -22,7 +24,9 @@ const EnergyAC = ({ mode, className }: EnergyACProps) => {
   return (
     <Box
       title={"AC Loads"}
-      icon={<img src={EnergyIcon} className={"w-6 text-black dark:text-white"} alt={"AC Loads"} />}
+      /* todo: fix types for svg */
+      /* @ts-ignore */
+      icon={<EnergyIcon className={"w-6 text-black dark:text-white"} alt={"AC Loads"} />}
     >
       <>
         <div>AC Loads full content</div>

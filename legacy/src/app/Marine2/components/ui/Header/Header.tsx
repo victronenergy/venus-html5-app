@@ -20,7 +20,9 @@ const Header = ({ title }: Props) => {
       <div className={"grow text-center text-xl"}>{title}</div>
       {isShowBack && (
         <div onClick={handleBackClick} className={"grow-0 cursor-pointer"}>
-          <img src={BackIcon} className={"w-6 text-blue-600 dark:text-blue-400"} alt={"Back"} />
+          {/* todo: fix types for svg */}
+          {/* @ts-ignore */}
+          <BackIcon className={"w-6 text-blue-600 dark:text-blue-400"} alt={"Back"} />
         </div>
       )}
     </div>

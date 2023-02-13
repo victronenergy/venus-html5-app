@@ -30,8 +30,9 @@ const Box = ({ children, icon, title, className, linkedView }: Props) => {
         </div>
         {linkedView && (
           <div onClick={handleClick}>
-            <img
-              src={ArrowRightIcon}
+            <ArrowRightIcon
+              /* todo: fix types for svg */
+              /* @ts-ignore */
               className={"w-6 text-victron-blue dark:text-victron-blue-dark cursor-pointer"}
               alt={"Expand"}
             />

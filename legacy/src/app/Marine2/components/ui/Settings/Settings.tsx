@@ -26,7 +26,9 @@ const Settings = () => {
     <div className="w-10 dark:text-white cursor-pointer">
       <div className="flex justify-center items-center w-full">
         <button onClick={() => setIsModalOpen(!isModalOpen)} className="pl-5 w-10">
-          <img src={PreferencesIcon} className="w-1" alt={"Settings"} />
+          {/* todo: fix types for svg */}
+          {/* @ts-ignore */}
+          <PreferencesIcon className="w-1" alt={"Settings"} />
         </button>
         <Modal.Frame
           open={isModalOpen}
