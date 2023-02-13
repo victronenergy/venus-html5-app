@@ -337,6 +337,19 @@ module.exports = function (webpackEnv) {
           // match the requirements. When no loader matches it will fall
           // back to the "file" loader at the end of the loader list.
           oneOf: [
+            {
+              test: /\.svg$/,
+              // inline SVGs only for Marine2 app
+              include: [paths.appSrc + "/app/Marine2"],
+              use: [
+                { loader: require.resolve("babel-loader") },
+                {
+                  loader: require.resolve("react-svg-loader"),
+                  options: { jsx: true },
+                },
+              ],
+            },
+
             // TODO: Merge this config once `image/avif` is in the mime-db
             // https://github.com/jshttp/mime-db
             {
@@ -389,6 +402,7 @@ module.exports = function (webpackEnv) {
                   ],
                   isEnvDevelopment && shouldUseReactRefresh && require.resolve("react-refresh/babel"),
                 ].filter(Boolean),
+
                 // This is a feature of `babel-loader` for webpack (not Babel itself).
                 // It enables caching results in ./node_modules/.cache/babel-loader/
                 // directory for faster rebuilds.
