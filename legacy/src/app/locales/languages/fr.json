@@ -43,6 +43,7 @@
         "noShorePower": "Pas de puissance de quai",
         "notAvailable": "Non Disponible",
         "nrOfPhases": "%{phases} phases",
+        "null": " ",
         "off": "Off",
         "on": "On",
         "passthru": "Passant",
@@ -62,6 +63,15 @@
     "error": {
         "errorWithMessage": "Erreur: %{message}",
         "genericMessage": "Une erreur s'est produite lors du rendu de l'application. Essayez de réactualiser la page ou de contacter Victron Energy avec les informations suivantes :",
+        "marine": {
+            "cta": "Envoyez ce rapport d'erreur directement à l'équipe d'assistance de Victron Energy :",
+            "dataCharges": "Des frais de données standard s'appliquent.",
+            "estimate": "Données estimées : %{size} octets",
+            "hint": "Essayez de recharger la page ou de contacter Victron Energy avec les informations suivantes :",
+            "ignore": "Ignorer erreur",
+            "sendReport": "Envoyer rapport d'erreur",
+            "title": "Une erreur s'est produite lors du rendu de l'application."
+        },
         "mqttUnavailable1": "Ne peut pas se connecter sur le serveur MQTT.",
         "mqttUnavailable2": "Vérifier que MQTT est activé dans vos paramètres :",
         "mqttUnavailable3": "Console à distance > Paramètres > Services > MQTT sur LAN (Texte simple)",
@@ -159,7 +169,7 @@
         "identifier": "Identificateur",
         "venusOs": "Venus OS",
         "version": "Version %{version}",
-        "vrmPortID": "ID Portail VRM"
+        "vrmPortID": "ID site VRM"
     },
     "widgets": {
         "acLoads": "Charges AC",
