@@ -70,7 +70,6 @@
     "react-error-boundary": "^3.1.1",
     "react-i18nify": "^6.0.0",
     "react-refresh": "^0.10.0",
-    "react-router-dom": "^6.8.1",
     "resolve": "^1.18.1",
     "resolve-url-loader": "^5.0.0",
     "rxjs": "^7.2.0",

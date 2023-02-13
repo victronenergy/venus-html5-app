@@ -13,9 +13,6 @@ import { AppProps } from "./App"
 import { mfdLanguageOptions } from "app/locales/constants"
 import { observer } from "mobx-react"
 import { isError } from "app/utils/util"
-// import { RouterProvider } from "react-router-dom"
-// import { router } from "./routes/router"
-// import Loading from "./routes/Loading"
 
 import { useAppViewsStore } from "./modules/AppViews"
 import BoxView from "./components/views/BoxView"
@@ -63,11 +60,12 @@ export const Marine2 = observer((props: AppProps) => {
   }, [appViewsStore.currentView])
 
   const renderView = () => {
-    console.log("-> currentView", currentView, /^box_/i.test(currentView))
+    // Boxes
     if (/^box\//i.test(currentView)) {
       return <BoxView boxId={currentView} />
     }
 
+    // Other views
     switch (currentView) {
       // todo: add other views
       // case AppViews.OTHER_VIEW:
@@ -138,9 +136,6 @@ export const Marine2 = observer((props: AppProps) => {
     return <div>Connecting</div>
     // return <Connecting viewUnmounting={viewUnmounting} />
   }
-
-  // todo: remove this when we have a proper views router
-  // return <RouterProvider router={router} fallbackElement={<Loading />} />
 
   return renderView()
 })
