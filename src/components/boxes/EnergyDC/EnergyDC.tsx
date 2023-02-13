@@ -1,35 +1,53 @@
 import React from 'react'
 import Box from '~/components/ui/Box'
 import { BoxProps } from '~/types/boxes'
-import EnergyIcon from '~/public/icons/energy.svg'
-import { withErrorBoundary } from 'react-error-boundary'
-import ErrorFallback from '~/components/ui/ErrorBoundary/ErrorFallback'
+import { DcLoadsState } from '@elninotech/mfd-modules'
+import { useTranslation } from 'next-i18next'
+import DCIcon from '~/public/icons/dc.svg'
+import { formatPower, formatValue } from '~/utils/format'
 
-const EnergyDC = ({ mode = 'compact' }: BoxProps) => {
+const EnergyDC = ({ mode = 'compact', dcLoads }: Props) => {
+  const { power, voltage } = dcLoads
+  const { t } = useTranslation()
+
   if (mode === 'compact') {
     return (
-      <Box title={'DC Loads'}>
-        <>
-          <div>DC Loads compact</div>
-        </>
-      </Box>
+      <div className='flex flex-row justify-between items-center'>
+        <div className='flex'>
+          <DCIcon className={'w-7 text-black dark:text-white'} />
+          <p className='text-base md:text-xl lg:text-2xl pl-2 md:pl-3'>{t('boxes.dcLoads')}</p>
+        </div>
+        <p className='text-base md:text-xl lg:text-2xl'>
+          {formatValue(power / voltage)}
+          <span className='p-0.5 text-victron-gray dark:text-victron-gray-dark'>A</span>
+        </p>
+      </div>
     )
   }
 
   return (
-    <Box title={'DC Loads'} icon={<EnergyIcon className={'w-6 text-black dark:text-white'} />}>
-      <>
-        <div>DC Loads full content</div>
-      </>
+    <Box title={t('boxes.dcLoads')} icon={<DCIcon className={'w-5 text-black dark:text-white'} />}>
+      <div className='w-full h-full flex flex-col'>
+        <div className='text-5xl text-victron-gray dark:text-white md-m:text-6xl'>
+          {formatValue(power / voltage)}
+          <span className='p-0.5 text-victron-gray dark:text-victron-gray-dark'>A</span>
+        </div>
+        <div className='w-full h-full flex content-end flex-wrap'>
+          <div className='w-full'>
+            <hr className='w-full h-1 border-victron-gray' />
+            <div className='text-left text-base text-victron-gray dark:text-victron-gray-dark md-m:text-2xl'>
+              {formatPower(power)}
+              <span className='p-0.5 text-victron-gray'>W</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </Box>
   )
 }
 
-const ComponentWithErrorBoundary = withErrorBoundary(EnergyDC, {
-  FallbackComponent: ErrorFallback,
-  onError(error, info) {
-    console.error(error, info)
-  },
-})
+interface Props extends BoxProps {
+  dcLoads: DcLoadsState
+}
 
-export default ComponentWithErrorBoundary
+export default EnergyDC

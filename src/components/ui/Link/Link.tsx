@@ -17,7 +17,7 @@ const LinkComponent = ({ children, href, ...rest }: Props) => {
 }
 
 interface Props extends LinkProps {
-  children: JSX.Element | string
+  children?: JSX.Element | string
 }
 
 export default LinkComponent

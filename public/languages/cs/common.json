@@ -6,6 +6,25 @@
         },
         "title": "Režim AC"
     },
+    "boxes": {
+        "acLoads": "AC zátěže",
+        "batteries": "Baterie",
+        "battery": "Baterie",
+        "batteryWithName": "Baterie: %{name}",
+        "chargerWithName": "Nabíječka: %{productNameShort}",
+        "dcLoads": "DC zátěže",
+        "generator": "Generátor",
+        "generatorInput": "Vstup generátoru",
+        "gridInput": "Vstup sítě",
+        "invalidConfig": "Nesprávná konfigurace",
+        "inverterCharger": "Měnič / nabíječka: %{productNameShort}",
+        "inverterWithName": "Střídač: %{productNameShort}",
+        "pvCharger": "FV nabíječka",
+        "shorePower": "Napájení ze sítě",
+        "solar": "Solární energie",
+        "status": "Stav",
+        "unknown": "Neznámý"
+    },
     "cardFooter": {
         "Charge": "Nabíjet",
         "Critical": "Kritický",
@@ -78,6 +97,7 @@
         "mqttUnavailable4": "Zkuste pomocí tlačítka Konzola dálkového ovládání v horní části této obrazovky změnit nastavení dálkově.",
         "mqttUnavailable5": "Můžete také zkusit dálkové připojení k zařízení výběrem možnosti Dálkové z nabídky výše",
         "queryParams": "Parametry dotazu: %{queryParams}",
+        "remoteConsole": {},
         "userAgent": "Agent uživatele: %{userAgent}",
         "windowSize": "Okno: %{width} x %{height}"
     },
@@ -111,6 +131,7 @@
         "subtitle": "Ujistěte se, že vaše zařízení jsou správně připojena",
         "title": "Váš řídicí panel je prázdný"
     },
+    "pages": {},
     "remoteLogin": {
         "2fa": "Token dvoufaktorové autentizace",
         "email": "E-mail",
@@ -170,24 +191,5 @@
         "venusOs": "Venus OS",
         "version": "Verze %{version}",
         "vrmPortID": "ID portálu VRM"
-    },
-    "boxes": {
-        "acLoads": "AC zátěže",
-        "batteries": "Baterie",
-        "battery": "Baterie",
-        "batteryWithName": "Baterie: %{name}",
-        "chargerWithName": "Nabíječka: %{productNameShort}",
-        "dcLoads": "DC zátěže",
-        "generator": "Generátor",
-        "generatorInput": "Vstup generátoru",
-        "gridInput": "Vstup sítě",
-        "invalidConfig": "Nesprávná konfigurace",
-        "inverterCharger": "Měnič / nabíječka: %{productNameShort}",
-        "inverterWithName": "Střídač: %{productNameShort}",
-        "pvCharger": "FV nabíječka",
-        "shorePower": "Napájení ze sítě",
-        "solar": "Solární energie",
-        "status": "Stav",
-        "unknown": "Neznámý"
     }
 }

@@ -6,6 +6,27 @@
         },
         "title": "AC Modus"
     },
+    "boxes": {
+        "EnergyOverview": "Energie Overzicht",
+        "acLoads": "AC Belastingen",
+        "batteries": "Accu's",
+        "battery": "Accu",
+        "batteryWithName": "Accu : %{name}",
+        "chargerWithName": "Lader naam",
+        "dcLoads": "DC Belastingen",
+        "energy": "Energie",
+        "generator": "Aggregaat",
+        "generatorInput": "Aggregaat",
+        "gridInput": "Net",
+        "invalidConfig": "Ongeldige configuratie",
+        "inverterCharger": "Omvormer / Lader : %{productNameShort}",
+        "inverterWithName": "Omvormer %{productNameShort}",
+        "pvCharger": "PV Lader",
+        "shorePower": "Walstroom",
+        "solar": "Zon",
+        "status": "Status",
+        "unknown": "Onbekend"
+    },
     "cardFooter": {
         "Charge": "Laden",
         "Critical": "Kritisch",
@@ -78,6 +99,7 @@
         "mqttUnavailable4": "Probeer de Remote Control knop bovenaan het scherm om de instellingen remote te veranderen.",
         "mqttUnavailable5": "Verbind Remote met het apparaat door de knop Remote bovenaan het scherm te drukken.",
         "queryParams": "Zoek :  %{queryParams}",
+        "remoteConsole": {},
         "userAgent": "Gebruiker : %{userAgent}",
         "windowSize": "Venster :  %{width} x %{height}"
     },
@@ -111,6 +133,7 @@
         "subtitle": "Controleer of de apparaten goed zijn aangesloten om ze hier weer te geven",
         "title": "Het dashboard is leeg"
     },
+    "pages": {},
     "remoteLogin": {
         "2fa": "2 Staps verificatie token",
         "email": "Email",
@@ -170,29 +193,5 @@
         "venusOs": "VenusOS",
         "version": "Versie  %{version}",
         "vrmPortID": "VRM installatie ID"
-    },
-    "boxes": {
-        "acLoads": "AC Belastingen",
-        "batteries": "Accu's",
-        "battery": "Accu",
-        "batteryWithName": "Accu : %{name}",
-        "chargerWithName": "Lader naam",
-        "dcLoads": "DC Belastingen",
-        "energy": "Energie",
-        "EnergyOverview": "Energie Overzicht",
-        "generator": "Aggregaat",
-        "generatorInput": "Aggregaat",
-        "gridInput": "Net",
-        "invalidConfig": "Ongeldige configuratie",
-        "inverterCharger": "Omvormer / Lader : %{productNameShort}",
-        "inverterWithName": "Omvormer %{productNameShort}",
-        "pvCharger": "PV Lader",
-        "shorePower": "Walstroom",
-        "solar": "Zon",
-        "status": "Status",
-        "unknown": "Onbekend"
-    },
-    "pages": {
-        "systemOverview": "Systeem Overzicht"
     }
 }

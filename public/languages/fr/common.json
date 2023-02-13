@@ -6,6 +6,25 @@
         },
         "title": "Mode AC"
     },
+    "boxes": {
+        "acLoads": "Charges AC",
+        "batteries": "Batteries",
+        "battery": "Batterie",
+        "batteryWithName": "Batterie: : %{name}",
+        "chargerWithName": "Chargeur: %{productNameShort}",
+        "dcLoads": "Charges DC",
+        "generator": "Générateur",
+        "generatorInput": "Entrée générateur",
+        "gridInput": "Entrée réseau",
+        "invalidConfig": "Configuration invalide",
+        "inverterCharger": "Onduleur / Chargeur",
+        "inverterWithName": "Convertisseur: %{productNameShort}",
+        "pvCharger": "Chargeur PV",
+        "shorePower": "Alimentation du quai",
+        "solar": "Solaire",
+        "status": "État",
+        "unknown": "Inconnu"
+    },
     "cardFooter": {
         "Charge": "Charge",
         "Critical": "Critique",
@@ -78,6 +97,7 @@
         "mqttUnavailable4": "Essayez d'utiliser le bouton Console à Distance en haut de cet écran pour changer vos réglages à distance.",
         "mqttUnavailable5": "Vous pouvez aussi essayer de vous connecter à votre appareil à distance en sélectionnant A distance dans le menu ci-dessus.",
         "queryParams": "Query params: %{queryParams}",
+        "remoteConsole": {},
         "userAgent": "User agent: %{userAgent}",
         "windowSize": "Fenêtre: %{width} x %{height}"
     },
@@ -111,6 +131,7 @@
         "subtitle": "Assurez vous que vos appareils sont bien connectés pour afficher les widgets",
         "title": "Votre tableau de bord est vide"
     },
+    "pages": {},
     "remoteLogin": {
         "2fa": "Code de vérification en 2 étapes",
         "email": "Email",
@@ -170,24 +191,5 @@
         "venusOs": "Venus OS",
         "version": "Version %{version}",
         "vrmPortID": "ID Portail VRM"
-    },
-    "boxes": {
-        "acLoads": "Charges AC",
-        "batteries": "Batteries",
-        "battery": "Batterie",
-        "batteryWithName": "Batterie: : %{name}",
-        "chargerWithName": "Chargeur: %{productNameShort}",
-        "dcLoads": "Charges DC",
-        "generator": "Générateur",
-        "generatorInput": "Entrée générateur",
-        "gridInput": "Entrée réseau",
-        "invalidConfig": "Configuration invalide",
-        "inverterCharger": "Onduleur / Chargeur",
-        "inverterWithName": "Convertisseur: %{productNameShort}",
-        "pvCharger": "Chargeur PV",
-        "shorePower": "Alimentation du quai",
-        "solar": "Solaire",
-        "status": "État",
-        "unknown": "Inconnu"
     }
 }
