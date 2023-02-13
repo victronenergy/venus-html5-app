@@ -1,4 +1,4 @@
-import { useAppStore, useMqtt, useVebus, useVrmStore } from "@elninotech/mfd-modules"
+import { useAppStore, useMqtt, useTheme, useVebus, useVrmStore } from "@elninotech/mfd-modules"
 import { observer } from "mobx-react"
 import React, { useEffect } from "react"
 import "./css/global.css"
@@ -20,6 +20,8 @@ const App = observer((props: AppProps) => {
   const mqtt = useMqtt()
   const locale = getLocale()
   const visibleWidgetsStore = useVisibleWidgetsStore()
+  const { themeStore } = useTheme()
+
   useVebus()
 
   useEffect(() => {
@@ -53,6 +55,14 @@ const App = observer((props: AppProps) => {
     visibleWidgetsStore.clearVisibleElements()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [locale])
+
+  useEffect(() => {
+    if (themeStore.darkMode) {
+      document.body.classList.add("dark")
+    } else {
+      document.body.classList.remove("dark")
+    }
+  }, [themeStore.darkMode])
 
   return (
     // todo: replace with Loader component
