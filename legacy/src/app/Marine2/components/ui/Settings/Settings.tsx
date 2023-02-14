@@ -50,9 +50,9 @@ const Settings = () => {
                   <ToggleSwitch onChange={toggleLocked} selected={locked} />
                 </label>
                 <div className="border border-victron-gray-300"></div>
-                <label className="text-sm text-victron-gray pb-4 sm-m:text-base">{translate("common.mode")}</label>
+                <label className="text-sm text-victron-gray sm-m:text-base">{translate("common.mode")}</label>
                 <label
-                  className="flex justify-between items-center pb-4 sm-m:pb-6 sm-l:pb-8"
+                  className="flex justify-between items-center pt-2 pb-4 sm-m:pb-6 sm-l:pb-8"
                   onClick={() => themeStore.setDarkMode(false)}
                 >
                   <span className="mr-1 text-base sm-m:mr-2 sm-l:text-xl">{translate("common.light")}</span>
