@@ -85,8 +85,8 @@ const Tank = ({ tankInstanceId, mode = "compact", orientation = "vertical" }: Pr
         <div className="grid grid-cols-8 gap-2">
           <div className="col-span-3 flex items-center md:col-span-2">
             <div>{fluidIcon(fluidTypeNum, orientation)}</div>
-            <div className="flex flex-col p-2">
-              <div className="text-2xl">{fluidTypeFormatter(fluidTypeNum)}</div>
+            <div className="flex flex-col p-2 w-full">
+              <div className="text-2xl truncate text-ellipsis overflow-hidden">{fluidTypeFormatter(fluidTypeNum)}</div>
               <div className="text-victron-gray">
                 {formatCapacity(remaining) + "/" + formatCapacity(capacity) + " l"}
               </div>
@@ -125,8 +125,8 @@ const Tank = ({ tankInstanceId, mode = "compact", orientation = "vertical" }: Pr
       <div className="col-span-7 flex flex-col justify-between">
         <div className="pt-2">
           <div>{fluidIcon(fluidTypeNum, orientation)}</div>
-          <div className="">
-            <div className="text-2xl">{fluidTypeFormatter(fluidTypeNum)}</div>
+          <div className="w-full">
+            <div className="text-2xl truncate text-ellipsis overflow-hidden">{fluidTypeFormatter(fluidTypeNum)}</div>
           </div>
         </div>
         <div className="flex flex-col">
