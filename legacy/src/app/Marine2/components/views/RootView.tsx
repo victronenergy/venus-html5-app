@@ -3,7 +3,7 @@ import MainLayout from "../ui/MainLayout"
 import EnergyAC from "../boxes/EnergyAC"
 import EnergyDC from "../boxes/EnergyDC"
 import Grid from "../ui/Grid"
-import TanksOverview from "../boxes/TanksOverview"
+import Tanks from "../boxes/Tanks/Tanks"
 
 const RootView = () => {
   // TODO: replace this code with real data depending on the system type
@@ -13,7 +13,7 @@ const RootView = () => {
         return [
           <EnergyAC mode="compact" key={"energy-ac"} />,
           <EnergyDC mode="compact" key={"energy-dc"} />,
-          <TanksOverview mode="compact" key={"tanks"} />,
+          <Tanks mode="compact" key={"tanks"} />,
           // <EnergyAC mode="compact" key={"energy-ac"} />,
           // <EnergyDC mode="compact" key={"energy-dc"} />,
         ]
@@ -21,7 +21,7 @@ const RootView = () => {
         return [
           <EnergyAC mode="compact" key={"energy"} />,
           <EnergyDC mode="compact" key={"batteries"} />,
-          <TanksOverview mode="compact" key={"tanks"} />,
+          <Tanks mode="compact" key={"tanks"} />,
         ]
     }
 

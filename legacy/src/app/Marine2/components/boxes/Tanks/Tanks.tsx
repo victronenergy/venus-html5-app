@@ -4,7 +4,7 @@ import { useTanks } from "@elninotech/mfd-modules"
 import { observer } from "mobx-react"
 import { useComponentSize, useWindowSize } from "../../../utils/hooks"
 import Box from "../../ui/Box"
-import Tank from "../Tanks"
+import Tank from "./Tank"
 import { AppViews } from "../../../modules/AppViews"
 
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
   className?: string
 }
 
-const TanksOverview = ({ mode, className }: Props) => {
+const Tanks = ({ mode, className }: Props) => {
   const { tanks } = useTanks()
   const gridRef = useRef<HTMLDivElement>(null)
   const [orientation, setOrientation] = useState<"horizontal" | "vertical">("vertical")
@@ -93,4 +93,4 @@ const TanksOverview = ({ mode, className }: Props) => {
   )
 }
 
-export default observer(TanksOverview)
+export default observer(Tanks)
