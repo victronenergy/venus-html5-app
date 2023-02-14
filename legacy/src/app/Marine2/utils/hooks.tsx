@@ -1,4 +1,4 @@
-import { RefObject, useCallback, useEffect, useState } from 'react'
+import { RefObject, useCallback, useEffect, useState } from "react"
 
 export const useWindowSize = () => {
   const [windowSize, setWindowSize] = useState<{ width?: number; height?: number }>({
@@ -20,13 +20,13 @@ export const useWindowSize = () => {
       })
     }
 
-    window.addEventListener('resize', handleResize)
+    window.addEventListener("resize", handleResize)
 
     handleResize()
 
     return () => {
       isMounted = false
-      window.removeEventListener('resize', handleResize)
+      window.removeEventListener("resize", handleResize)
     }
   }, [])
 
@@ -63,9 +63,9 @@ export const useComponentSize = (ref: RefObject<HTMLElement>) => {
       }
     }
 
-    window.addEventListener('resize', handleResize)
+    window.addEventListener("resize", handleResize)
     return () => {
-      window.removeEventListener('resize', handleResize)
+      window.removeEventListener("resize", handleResize)
     }
   }, [ref, handleResize])
 
