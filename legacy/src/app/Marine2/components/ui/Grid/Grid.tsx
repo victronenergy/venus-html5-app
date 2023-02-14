@@ -44,9 +44,6 @@ const Grid = ({ children, className, flow = "row", forceOneDimensionRatio = 3 }:
         },
         className
       )}
-      // TODO: fix actual issue
-      /* eslint-disable-next-line jsx-a11y/aria-role */
-      role={"container"}
     >
       {Array.isArray(children) ? (
         // TODO: display max 4 children and show navigation element for rest

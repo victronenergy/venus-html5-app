@@ -7,6 +7,7 @@ export enum AppViews {
   BOX_ENERGY_AC = "box/energy-ac",
   BOX_ENERGY_DC = "box/energy-dc",
   BOX_BATTERIES_OVERVIEW = "box/batteries-overview",
+  BOX_TANKS = "box/tanks",
 }
 
 export class AppViewsStore {
