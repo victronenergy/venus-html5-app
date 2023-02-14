@@ -6,6 +6,7 @@
         },
         "title": "交流模式"
     },
+    "boxes": {},
     "cardFooter": {
         "Charge": "充电",
         "Critical": "关键",
@@ -78,6 +79,7 @@
         "mqttUnavailable4": "尝试使用此屏幕顶部的远程控制台按钮远程更改设置。",
         "mqttUnavailable5": "您也可以通过从上面的菜单中选择远程来尝试远程连接到您的设备。",
         "queryParams": "查询参数: %{queryParams}",
+        "remoteConsole": {},
         "userAgent": "用户代理: %{userAgent}",
         "windowSize": "窗口: %{width} x %{height}"
     },
@@ -111,6 +113,7 @@
         "subtitle": "确保您的设备已正确连接",
         "title": "仪表盘空白"
     },
+    "pages": {},
     "remoteLogin": {
         "2fa": "两步验证令牌",
         "email": "邮箱",

@@ -6,6 +6,7 @@
         },
         "title": "AC-Modus"
     },
+    "boxes": {},
     "cardFooter": {
         "Charge": "Ladung",
         "Critical": "Kritisch",
@@ -16,12 +17,14 @@
     "common": {
         "absorptionCharging": "Absorptionsladung",
         "assisting": "Unterstützen",
+        "auto": "Auto",
         "autoStartStop": "Auto Start/Stop",
         "bulkCharging": "Bulkladung",
         "charge": "Ladung",
         "chargerOnly": "Nur Ladegerät",
         "charging": "Aufladen",
         "current": "Strom",
+        "dark": "Dunkel",
         "days": "Tage",
         "discharge": "Entladung",
         "discharging": "Entladen",
@@ -36,6 +39,7 @@
         "inputLimit": "Input Limit",
         "inverterOnly": "Nur Wechselrichter",
         "inverting": "Wechselrichten",
+        "light": "Hell",
         "limit": "Limit",
         "lowPower": "Energiesparmodus",
         "minutes": "Minuten",
@@ -78,6 +82,7 @@
         "mqttUnavailable4": "Versuchen Sie es mit der Schaltfläche Remote Console oben auf diesem Bildschirm, um Ihre Einstellungen aus der Ferne zu ändern.",
         "mqttUnavailable5": "Sie können auch versuchen, eine Remote-Verbindung zu Ihrem Gerät herzustellen, indem Sie im Menü oben Remote auswählen.",
         "queryParams": "Abfrageparameter: %{queryParams}",
+        "remoteConsole": {},
         "userAgent": "User agent: %{userAgent}",
         "windowSize": "Fenster: %{width} x %{height}"
     },
@@ -111,6 +116,7 @@
         "subtitle": "Stellen Sie sicher, dass Ihre Geräte richtig verbunden sind, um Widgets anzuzeigen",
         "title": "Ihr Dashboard ist leer"
     },
+    "pages": {},
     "remoteLogin": {
         "2fa": "Zwei-Faktor-Authentifizierungs-Token",
         "email": "E-Mail",

@@ -5,6 +5,7 @@
         },
         "title": "Сбросить пароль"
     },
+    "boxes": {},
     "cardFooter": {
         "Charge": "Нагрузка",
         "Status": "Состояние",
@@ -40,7 +41,10 @@
         "unplugged": "Отключено",
         "voltage": "Напряжение"
     },
-    "error": {},
+    "error": {
+        "marine": {},
+        "remoteConsole": {}
+    },
     "generator": {
         "temperature": {}
     },
@@ -57,6 +61,7 @@
     "noWidgets": {
         "title": "Сбросить пароль"
     },
+    "pages": {},
     "remoteLogin": {
         "email": "Эл. почта",
         "logIn": "Вход",

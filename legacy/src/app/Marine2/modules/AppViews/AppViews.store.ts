@@ -4,8 +4,9 @@ import { useMemo } from "react"
 export enum AppViews {
   ROOT = "root",
   REMOTE_CONSOLE = "remote-console",
-  BOX_ENERGY_AC = `box/energy-ac`,
+  BOX_ENERGY_AC = "box/energy-ac",
   BOX_ENERGY_DC = "box/energy-dc",
+  BOX_BATTERIES_OVERVIEW = "box/batteries-overview",
 }
 
 export class AppViewsStore {
