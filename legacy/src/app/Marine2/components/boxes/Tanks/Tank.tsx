@@ -15,13 +15,13 @@ const Tank = ({ tankInstanceId, mode, orientation = "vertical" }: Props) => {
 
   const fluidTypeTitle = useMemo(() => {
     const fluids = [
-      translate("tank.Fuel"),
-      translate("tank.Fresh water"),
-      translate("tank.Waste water"),
-      translate("tank.Live well"),
-      translate("tank.Oil"),
-      translate("tank.Black water"),
-      translate("tank.Gasoline"),
+      translate("tankWidget.Fuel"),
+      translate("tankWidget.Fresh water"),
+      translate("tankWidget.Waste water"),
+      translate("tankWidget.Live well"),
+      translate("tankWidget.Oil"),
+      translate("tankWidget.Black water"),
+      translate("tankWidget.Gasoline"),
       translate("Diesel"),
       translate("Liquid Petroleum Gas (LPG)"),
       translate("Liquid Natural Gas (LNG)"),
