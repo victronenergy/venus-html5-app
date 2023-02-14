@@ -3,10 +3,13 @@ import { AppViews } from "../../modules/AppViews"
 import MainLayout from "../ui/MainLayout"
 
 const EnergyOverview = React.lazy(() => import("../boxes/EnergyOverview"))
+const Tanks = React.lazy(() => import("../boxes/Tanks"))
 
 const BoxView = ({ boxId }: BoxViewProps) => {
   const getBox = useMemo(() => {
     switch (boxId) {
+      case AppViews.BOX_TANKS:
+        return <Tanks />
       case AppViews.BOX_ENERGY_OVERVIEW:
         return <EnergyOverview mode={"full"} />
       default:

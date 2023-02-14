@@ -4,6 +4,7 @@ import { useMemo } from "react"
 export enum AppViews {
   ROOT = "root",
   REMOTE_CONSOLE = "remote-console",
+  BOX_TANKS = "box/tanks",
   BOX_ENERGY_OVERVIEW = "box/energy-overview",
 }
 
