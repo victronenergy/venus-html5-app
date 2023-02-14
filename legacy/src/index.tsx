@@ -1,7 +1,6 @@
 import "react-app-polyfill/stable"
 import React from "react"
 import ReactDOM from "react-dom"
-import App from "./app/App"
 import { getParameterByName } from "./app/utils/util"
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration"
 import * as Sentry from "@sentry/react"
@@ -10,6 +9,36 @@ import { Integrations } from "@sentry/tracing"
 // load languages
 import "./app/locales"
 import { initializeErrorHandlerStore } from "app/components/ErrorHandlerModule/ErrorHandler.store"
+import Loading from "./app/MarineApp/components/Loading"
+
+// Get app according to whitelabel
+const KvnrvApp = React.lazy(() => import("./app/KVNRV/App"))
+const MarineApp = React.lazy(() => import("./app/MarineApp/App"))
+const Marine2App = React.lazy(() => import("./app/Marine2/App"))
+
+const whitelabel = process.env.REACT_APP_WHITELABEL
+const getApp = () => {
+  switch (whitelabel) {
+    case "KVNRV":
+      return (
+        <React.Suspense fallback={<Loading />}>
+          <KvnrvApp host={host} port={port} />
+        </React.Suspense>
+      )
+    case "Marine":
+      return (
+        <React.Suspense fallback={<Loading />}>
+          <MarineApp host={host} port={port} />
+        </React.Suspense>
+      )
+    default:
+      return (
+        <React.Suspense fallback={<Loading />}>
+          <Marine2App host={host} port={port} />
+        </React.Suspense>
+      )
+  }
+}
 
 const host = getParameterByName("host") || window.location.hostname || "localhost"
 const port = parseInt(getParameterByName("port") ?? "9001")
@@ -31,12 +60,7 @@ Sentry.init({
   },
 })
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App host={host} port={port} />
-  </React.StrictMode>,
-  document.getElementById("root")
-)
+ReactDOM.render(<React.StrictMode>{getApp()}</React.StrictMode>, document.getElementById("root"))
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

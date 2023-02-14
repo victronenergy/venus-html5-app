@@ -43,6 +43,7 @@
         "noShorePower": "Potenza Banchina Assente",
         "notAvailable": "Non Disponibile",
         "nrOfPhases": "%{phases} fasi",
+        "null": " ",
         "off": "Off",
         "on": "On",
         "passthru": "Accedi",
@@ -62,6 +63,15 @@
     "error": {
         "errorWithMessage": "Errore: %{message}",
         "genericMessage": "Si è verificato un errore durante il render dell’applicazione. Provare a ricaricare la pagina o rivolgersi a Victron Energy fornendo le seguenti informazioni:",
+        "marine": {
+            "cta": "Inviare questo rapporto di errore direttamente alla squadra di supporto di Victron Energy:",
+            "dataCharges": "Si applicano le tariffe standard per i dati.",
+            "estimate": "Dati stimati: %{size} Bytes.",
+            "hint": "Provare a ricaricare la pagina o rivolgersi a Victron Energy fornendo le seguenti informazioni:",
+            "ignore": "Ignora errore",
+            "sendReport": "Invia segnalazione errore",
+            "title": "Si è verificato un errore durante il render dell’applicazione."
+        },
         "mqttUnavailable1": "Non è stato possibile collegarsi al server MQTT.",
         "mqttUnavailable2": "Si prega di verificare che MQTT sia attivo nelle impostazioni:",
         "mqttUnavailable3": "Consolle Remota > Impostazioni > Servizi > MQTT su LAN (Plaintext)",
@@ -102,14 +112,20 @@
         "title": "La vostra Dashboard è vuota"
     },
     "remoteLogin": {
+        "2fa": "Token di autenticazione a due fattori",
         "email": "E-mail",
         "forgotPassword": "Password dimenticata?",
         "goBack": "Indietro",
         "logIn": "Login",
+        "logOut": "Esci",
         "loginFailed": "Login Non Riuscito",
+        "mobileVerification": "Token di autenticazione della app",
+        "noInstallations": "Questo account non ha impianti.",
         "password": "Password",
         "registerMessage1": "Non si possiede ancora un account? ",
-        "registerMessage2": "Registrare il proprio RV."
+        "registerMessage2": "Registrare il proprio RV.",
+        "smsVerification": "Token di verifica SMS",
+        "wrong2fa": "Codice di verifica a due fattori erroneo"
     },
     "statusWidget": {
         "Absorption charging": "Carica Absorption",

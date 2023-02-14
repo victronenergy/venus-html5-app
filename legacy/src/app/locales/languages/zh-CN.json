@@ -43,6 +43,7 @@
         "noShorePower": "无岸电",
         "notAvailable": "不可用",
         "nrOfPhases": "%{phases}相数",
+        "null": " ",
         "off": "关",
         "on": "开",
         "passthru": "旁路",
@@ -62,6 +63,15 @@
     "error": {
         "errorWithMessage": "错误: %{message}",
         "genericMessage": "呈现应用程序时出错。 尝试重新加载页面或联系 Victron Energy 并提供以下信息：",
+        "marine": {
+            "cta": "将此错误报告直接发送给 Victron Energy 支持团队：",
+            "dataCharges": "标准数据费用适用。",
+            "estimate": "估计数据：%{size} 字节。",
+            "hint": "尝试重新加载页面或联系 Victron Energy 并提供以下信息：",
+            "ignore": "忽略错误",
+            "sendReport": "发送错误报告",
+            "title": "呈现应用程序时发生错误。"
+        },
         "mqttUnavailable1": "无法连接到 MQTT 服务器。",
         "mqttUnavailable2": "请检查您的设置中是否启用了 MQTT：",
         "mqttUnavailable3": "远程终端 > 设置 > 服务 > MQTT on LAN (Plaintext)\n",
