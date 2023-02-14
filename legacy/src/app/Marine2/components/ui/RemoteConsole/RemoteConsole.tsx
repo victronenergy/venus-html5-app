@@ -2,7 +2,7 @@ import React from "react"
 import { observer } from "mobx-react-lite"
 import classnames from "classnames"
 import { STATUS, useMqtt } from "@elninotech/mfd-modules"
-import { Translate } from "react-i18nify"
+import { translate, Translate } from "react-i18nify"
 
 const RemoteConsole = ({ host }: Props) => {
   const mqtt = useMqtt()
@@ -21,6 +21,7 @@ const RemoteConsole = ({ host }: Props) => {
             hidden: loading || error,
           })}
           src={url}
+          title={translate("pages.remoteConsole")}
         />
       )}
 
