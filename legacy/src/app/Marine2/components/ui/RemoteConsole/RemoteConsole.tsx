@@ -2,9 +2,9 @@ import React from "react"
 import { observer } from "mobx-react-lite"
 import classnames from "classnames"
 import { STATUS, useMqtt } from "@elninotech/mfd-modules"
+import { Translate } from "react-i18nify"
 
 const RemoteConsole = ({ host }: Props) => {
-  const t = (key: string) => key
   const mqtt = useMqtt()
 
   const loading = mqtt.status === STATUS.CONNECTING
@@ -25,16 +25,18 @@ const RemoteConsole = ({ host }: Props) => {
       )}
 
       {loading && !error && (
-        <div className={"text-center p-4 block hide-remote-console:hidden"}>{t("common.loading")}…</div>
+        <div className={"text-center p-4 block hide-remote-console:hidden"}>
+          <Translate value={"common.loading"} />…
+        </div>
       )}
       {error && (
         <div className={"text-center p-4 block hide-remote-console:hidden"}>
-          {t("error.remoteConsole.connectionFailed")}
+          <Translate value={"error.remoteConsole.connectionFailed"} />
         </div>
       )}
 
       <div className={"text-center p-4 hidden hide-remote-console:block"}>
-        {t("error.remoteConsole.screenTooSmall")}
+        <Translate value={"error.remoteConsole.screenTooSmall"} />
       </div>
     </>
   )
