@@ -14,8 +14,6 @@ const RootView = () => {
           <EnergyAC mode="compact" key={"energy-ac"} />,
           <EnergyDC mode="compact" key={"energy-dc"} />,
           <Tanks mode="compact" key={"tanks"} />,
-          // <EnergyAC mode="compact" key={"energy-ac"} />,
-          // <EnergyDC mode="compact" key={"energy-dc"} />,
         ]
       case "absolute":
         return [
