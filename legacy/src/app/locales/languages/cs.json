@@ -6,6 +6,7 @@
         },
         "title": "Režim AC"
     },
+    "boxes": {},
     "cardFooter": {
         "Charge": "Nabíjet",
         "Critical": "Kritický",
@@ -78,6 +79,7 @@
         "mqttUnavailable4": "Zkuste pomocí tlačítka Konzola dálkového ovládání v horní části této obrazovky změnit nastavení dálkově.",
         "mqttUnavailable5": "Můžete také zkusit dálkové připojení k zařízení výběrem možnosti Dálkové z nabídky výše",
         "queryParams": "Parametry dotazu: %{queryParams}",
+        "remoteConsole": {},
         "userAgent": "Agent uživatele: %{userAgent}",
         "windowSize": "Okno: %{width} x %{height}"
     },
@@ -111,6 +113,7 @@
         "subtitle": "Ujistěte se, že vaše zařízení jsou správně připojena",
         "title": "Váš řídicí panel je prázdný"
     },
+    "pages": {},
     "remoteLogin": {
         "2fa": "Token dvoufaktorové autentizace",
         "email": "E-mail",

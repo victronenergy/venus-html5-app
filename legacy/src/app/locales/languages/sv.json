@@ -6,6 +6,7 @@
         },
         "title": "AC-läge"
     },
+    "boxes": {},
     "cardFooter": {
         "Charge": "Laddning",
         "Critical": "Kritisk",
@@ -78,6 +79,7 @@
         "mqttUnavailable4": "Försök att använda knappen för fjärrkonsol (Remote Console) längst upp på den här skärmen för att ändra dina inställningar på distans.",
         "mqttUnavailable5": "Du kan även försöka att fjärransluta till din enhet genom att välja Fjärr (Remote) från menyn ovan.",
         "queryParams": "Frågeparametrar: %{queryParams}",
+        "remoteConsole": {},
         "userAgent": "Användaragent: %{userAgent}",
         "windowSize": "Fönster: %{width} x %{height}"
     },
@@ -111,6 +113,7 @@
         "subtitle": "Säkerställ att dina enheter är korrekt anslutna",
         "title": "Din panel är tom"
     },
+    "pages": {},
     "remoteLogin": {
         "2fa": "Tvåstegsbekräftelsekod",
         "email": "E-post",

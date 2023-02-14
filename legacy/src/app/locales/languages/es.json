@@ -6,6 +6,7 @@
         },
         "title": "Modo CA"
     },
+    "boxes": {},
     "cardFooter": {
         "Charge": "Carga",
         "Critical": "Crítica",
@@ -78,6 +79,7 @@
         "mqttUnavailable4": "Intente usar el botón de Consola remota de la parte superior de esta pantalla para cambiar sus ajustes a distancia.",
         "mqttUnavailable5": "También puede intentar conectar su dispositivo a distancia seleccionando Remoto en el menú anterior.",
         "queryParams": "Parámetros de consulta: %{queryParams}",
+        "remoteConsole": {},
         "userAgent": "Agente del usuario: %{userAgent}",
         "windowSize": "Ventana: %{width} x %{height}"
     },
@@ -111,6 +113,7 @@
         "subtitle": "Asegúrese de que sus dispositivos estén bien conectados",
         "title": "Su panel de control está vacío."
     },
+    "pages": {},
     "remoteLogin": {
         "2fa": "Token de autenticación de dos factores",
         "email": "Email",
