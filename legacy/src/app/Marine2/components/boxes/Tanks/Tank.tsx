@@ -1,3 +1,4 @@
+import { useMemo } from "react"
 import { useTank } from "@elninotech/mfd-modules"
 import { observer } from "mobx-react-lite"
 import ProgressBar from "../../ui/ProgressBar"
@@ -10,9 +11,9 @@ import GrayWaterIcon from "../../../images/icons/waste-water.svg"
 
 const Tank = ({ tankInstanceId, mode = "compact", orientation = "vertical" }: Props) => {
   let { capacity, fluidType, level, remaining, unit } = useTank(tankInstanceId)
-  let fluidTypeNum = +fluidType
+  const fluidTypeNum = +fluidType
 
-  const fluidTypeFormatter = (type: number) => {
+  const fluidTypeTitle = useMemo(() => {
     const fluids = [
       translate("tank.Fuel"),
       translate("tank.Fresh water"),
@@ -28,8 +29,8 @@ const Tank = ({ tankInstanceId, mode = "compact", orientation = "vertical" }: Pr
       translate("Raw water"),
     ]
 
-    return fluids[type]
-  }
+    return fluids[fluidTypeNum]
+  }, [fluidTypeNum])
 
   // check if tank values are not undefined
   if (
@@ -50,7 +51,7 @@ const Tank = ({ tankInstanceId, mode = "compact", orientation = "vertical" }: Pr
             <div>{fluidIcon(fluidTypeNum, orientation)}</div>
             <div className="flex flex-col p-1 sm:p-2 w-full">
               <div className="text-base md:text-lg lg:text-xl truncate text-ellipsis overflow-hidden">
-                {fluidTypeFormatter(fluidTypeNum)}
+                {fluidTypeTitle}
               </div>
             </div>
           </div>
@@ -86,7 +87,7 @@ const Tank = ({ tankInstanceId, mode = "compact", orientation = "vertical" }: Pr
           <div className="col-span-3 flex items-center md:col-span-2">
             <div>{fluidIcon(fluidTypeNum, orientation)}</div>
             <div className="flex flex-col p-2 w-full">
-              <div className="text-2xl truncate text-ellipsis overflow-hidden">{fluidTypeFormatter(fluidTypeNum)}</div>
+              <div className="text-2xl truncate text-ellipsis overflow-hidden">{fluidTypeTitle}</div>
               <div className="text-victron-gray">
                 {formatCapacity(remaining) + "/" + formatCapacity(capacity) + " l"}
               </div>
@@ -126,7 +127,7 @@ const Tank = ({ tankInstanceId, mode = "compact", orientation = "vertical" }: Pr
         <div className="pt-2">
           <div>{fluidIcon(fluidTypeNum, orientation)}</div>
           <div className="w-full">
-            <div className="text-2xl truncate text-ellipsis overflow-hidden">{fluidTypeFormatter(fluidTypeNum)}</div>
+            <div className="text-2xl truncate text-ellipsis overflow-hidden">{fluidTypeTitle}</div>
           </div>
         </div>
         <div className="flex flex-col">
