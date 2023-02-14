@@ -6,7 +6,29 @@
         },
         "title": "交流模式"
     },
-    "boxes": {},
+    "boxes": {
+        "EnergyOverview": "能源概览",
+        "acLoads": "交流负载",
+        "alternator": "交流发电机",
+        "batteries": "电池",
+        "battery": "电池",
+        "batteryWithName": "电池：%{name}",
+        "chargerWithName": "充电器：%{productNameShort}",
+        "dcLoads": "直流负载",
+        "energy": "能源",
+        "generator": "发电机",
+        "generatorInput": "发电机输入",
+        "gridInput": "电网输入",
+        "invalidConfig": "无效配置",
+        "inverterCharger": "逆变器/充电器：%{productNameShort}",
+        "inverterWithName": "逆变器：%{productNameShort}",
+        "pvCharger": "光伏充电器",
+        "shorePower": "岸电",
+        "solar": "太阳能",
+        "status": "状态",
+        "unknown": "未知",
+        "windGenerator": "风力发电机"
+    },
     "cardFooter": {
         "Charge": "充电",
         "Critical": "关键",
@@ -17,12 +39,15 @@
     "common": {
         "absorptionCharging": "均充",
         "assisting": "辅助供电",
+        "auto": "自动",
         "autoStartStop": "自动启动和停止",
         "bulkCharging": "快充",
         "charge": "充电",
+        "charged": "已充电",
         "chargerOnly": "只充电",
         "charging": "充电",
         "current": "电流",
+        "dark": "黑暗的",
         "days": "天",
         "discharge": "放电",
         "discharging": "放电",
@@ -37,6 +62,7 @@
         "inputLimit": "输入限制",
         "inverterOnly": "仅逆变",
         "inverting": "逆变",
+        "light": "光",
         "limit": "限制",
         "lowPower": "低功率",
         "minutes": "分",
@@ -79,7 +105,10 @@
         "mqttUnavailable4": "尝试使用此屏幕顶部的远程控制台按钮远程更改设置。",
         "mqttUnavailable5": "您也可以通过从上面的菜单中选择远程来尝试远程连接到您的设备。",
         "queryParams": "查询参数: %{queryParams}",
-        "remoteConsole": {},
+        "remoteConsole": {
+            "connectionFailed": "无法连接到 GX 设备",
+            "screenTooSmall": "在大屏幕中打开以查看远程控制台"
+        },
         "userAgent": "用户代理: %{userAgent}",
         "windowSize": "窗口: %{width} x %{height}"
     },
@@ -113,7 +142,10 @@
         "subtitle": "确保您的设备已正确连接",
         "title": "仪表盘空白"
     },
-    "pages": {},
+    "pages": {
+        "remoteConsole": "远程控制台",
+        "systemOverview": "系统总览"
+    },
     "remoteLogin": {
         "2fa": "两步验证令牌",
         "email": "邮箱",
