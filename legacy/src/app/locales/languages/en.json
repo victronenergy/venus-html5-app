@@ -81,6 +81,10 @@
         "mqttUnavailable4": "Try using the Remote Console button at the top of this screen to change your settings remotely.",
         "mqttUnavailable5": "You can also try connecting to your device remotely by selecting Remote from the menu above.",
         "queryParams": "Query params: %{queryParams}",
+        "remoteConsole": {
+            "connectionFailed": "Unable to connect to the GX device",
+            "screenTooSmall": "Open in a larger screen to view remote console"
+        },
         "userAgent": "User agent: %{userAgent}",
         "windowSize": "Window: %{width} x %{height}"
     },
@@ -192,5 +196,32 @@
         "solar": "Solar",
         "status": "Status",
         "unknown": "Unknown"
+    },
+    "boxes": {
+        "acLoads": "AC Loads",
+        "alternator": "Alternator",
+        "batteries": "Batteries",
+        "battery": "Battery",
+        "batteryWithName": "Battery: %{name}",
+        "chargerWithName": "Charger: %{productNameShort}",
+        "dcLoads": "DC Loads",
+        "energy": "Energy",
+        "EnergyOverview": "Energy Overview",
+        "generator": "Generator",
+        "generatorInput": "Generator Input",
+        "gridInput": "Grid Input",
+        "invalidConfig": "Invalid Configuration",
+        "inverterCharger": "Inverter / Charger: %{productNameShort}",
+        "inverterWithName": "Inverter: %{productNameShort}",
+        "pvCharger": "PV Charger",
+        "shorePower": "Shore Power",
+        "solar": "Solar",
+        "status": "Status",
+        "unknown": "Unknown",
+        "windGenerator": "Wind Generator"
+    },
+    "pages": {
+        "systemOverview": "System Overview",
+        "remoteConsole": "Remote Console"
     }
 }
