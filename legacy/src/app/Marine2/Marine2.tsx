@@ -14,9 +14,10 @@ import { mfdLanguageOptions } from "app/locales/constants"
 import { observer } from "mobx-react"
 import { isError } from "app/utils/util"
 
-import { useAppViewsStore } from "./modules/AppViews"
+import { AppViews, useAppViewsStore } from "./modules/AppViews"
 import BoxView from "./components/views/BoxView"
 import RootView from "./components/views/RootView"
+import RemoteConsoleView from "./components/views/RemoteConsoleView"
 
 // type MainProps = {
 //   isConnected?: boolean
@@ -41,7 +42,7 @@ import RootView from "./components/views/RootView"
 // }
 
 export const Marine2 = observer((props: AppProps) => {
-  // const { host } = props
+  const { host } = props
   // subscribe to language
   useLanguage(mfdLanguageOptions)
   // const [viewUnmounting, setViewUnmounting] = useState(false)
@@ -68,8 +69,8 @@ export const Marine2 = observer((props: AppProps) => {
     // Other views
     switch (currentView) {
       // todo: add other views
-      // case AppViews.OTHER_VIEW:
-      //   return <OtherView />
+      case AppViews.REMOTE_CONSOLE:
+        return <RemoteConsoleView host={host} />
       default:
         return <RootView />
     }

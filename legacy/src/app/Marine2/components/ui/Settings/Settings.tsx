@@ -1,15 +1,17 @@
 import React, { useState } from "react"
 import { observer } from "mobx-react"
-import { useTheme, useAppStore } from "@elninotech/mfd-modules"
+import { useAppStore, useTheme } from "@elninotech/mfd-modules"
 import { translate } from "react-i18nify"
 import { Modal } from "../Modal"
 import PreferencesIcon from "../../../images/icons/preferences.svg"
 import ToggleSwitch from "../ToggleSwitch"
 import RadioButton from "../RadioButton"
+import { AppViews, useAppViewsStore } from "../../../modules/AppViews"
 
 const Settings = () => {
   const { locked, toggleLocked } = useAppStore()
   const { themeStore } = useTheme()
+  const appViewsStore = useAppViewsStore()
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const setAutoMode = () => {
@@ -20,6 +22,10 @@ const Settings = () => {
     } else if (!mediaQuery.matches && themeStore.darkMode) {
       themeStore.setDarkMode(false)
     }
+  }
+
+  const openRemoteConsole = () => {
+    appViewsStore.setView(AppViews.REMOTE_CONSOLE)
   }
 
   return (
@@ -76,7 +82,7 @@ const Settings = () => {
             </div>
           </Modal.Body>
           <button
-            onClick={() => setIsModalOpen(false)}
+            onClick={() => openRemoteConsole()}
             className="w-full border-2 border-victron-blue bg-victron-blue/30 rounded-md pt-1 pb-1 sm-m:pt-2 sm-m:pb-2"
           >
             <div className="text-base sm-m:text-lg">{translate("header.remoteConsole")}</div>
