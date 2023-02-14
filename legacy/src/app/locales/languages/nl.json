@@ -43,6 +43,7 @@
         "noShorePower": "Geen Walstroom",
         "notAvailable": "Niet beschikbaar",
         "nrOfPhases": "%{phases} fasen",
+        "null": " ",
         "off": "Uit",
         "on": "Aan",
         "passthru": "Doorvoer",
@@ -62,6 +63,15 @@
     "error": {
         "errorWithMessage": "Fout : %{message}",
         "genericMessage": "Fout tijdens het laden van de applicatie. Probeer de pagina opnieuw te laden of neem contact op met Victron Energy met de volgende informatie:",
+        "marine": {
+            "cta": "Stuur dit fout rapport direct aan het support team van Victron Energy:",
+            "dataCharges": "Standaard data tarieven zijn van toepassing.",
+            "estimate": "Geschatte hoeveelheid data: %{size} Bytes.",
+            "hint": "Probeer de pagina opnieuw te laden of neem contact op met Victron Energy met de volgende informatie:\n",
+            "ignore": "Negeer fout",
+            "sendReport": "Stuur fout rapport",
+            "title": "Weergave fout."
+        },
         "mqttUnavailable1": "Kan niet met de MQTT server verbinden.",
         "mqttUnavailable2": "Controleer of MQTT is ingeschakeld in de instellingen:",
         "mqttUnavailable3": "Remote Console > Instellingen > Services > MQTT on LAN (Plaintext)\n",
@@ -159,7 +169,7 @@
         "identifier": "ID",
         "venusOs": "VenusOS",
         "version": "Versie  %{version}",
-        "vrmPortID": "VRM installatie ID"
+        "vrmPortID": "VRM Installatie ID"
     },
     "widgets": {
         "acLoads": "AC Belastingen",

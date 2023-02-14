@@ -8,7 +8,7 @@ import { Connecting, Error, Metrics, MqttUnavailable, RemoteConsole } from "./co
 
 import { useLanguage, useMqtt, STATUS } from "@elninotech/mfd-modules"
 import { VIEWS } from "../utils/constants"
-import { AppProps } from "../App"
+import { AppProps } from "./App"
 
 import { LockButton } from "./components/LockButton"
 import { mfdLanguageOptions } from "app/locales/constants"
@@ -37,7 +37,7 @@ const Main = ({ isConnected, children, setView }: MainProps) => {
   )
 }
 
-export const MarineApp = observer((props: AppProps) => {
+export const Marine = observer((props: AppProps) => {
   const { host } = props
   // subscribe to language
   useLanguage(mfdLanguageOptions)

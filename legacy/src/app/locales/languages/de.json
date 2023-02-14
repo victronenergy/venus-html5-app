@@ -43,6 +43,7 @@
         "noShorePower": "Kein Landstrom",
         "notAvailable": "Nicht verfügbar",
         "nrOfPhases": "%{phases} Phasen",
+        "null": " ",
         "off": "Aus",
         "on": "Ein",
         "passthru": "Durchleitung",
@@ -62,6 +63,15 @@
     "error": {
         "errorWithMessage": "Fehler: %{message}",
         "genericMessage": "Beim Rendern der Anwendung ist ein Fehler aufgetreten. Versuchen Sie die Seite neu zu laden oder kontaktieren Sie Victron Energy mit den folgenden Informationen:",
+        "marine": {
+            "cta": "Senden Sie diesen Fehlerbericht direkt an das Victron Energy-Supportteam:",
+            "dataCharges": "Es fallen die üblichen Datengebühren an.",
+            "estimate": "Geschätzte Daten: %{size} Bytes.",
+            "hint": "Versuchen Sie die Seite neu zu laden oder kontaktieren Sie Victron Energy mit den folgenden Informationen:",
+            "ignore": "Fehler ignorieren",
+            "sendReport": "Fehlermeldung senden",
+            "title": "Beim Rendern der Anwendung ist ein Fehler aufgetreten."
+        },
         "mqttUnavailable1": "Es konnte keine Verbindung zum MQTT-Server hergestellt werden.",
         "mqttUnavailable2": "Bitte überprüfen Sie, ob MQTT in Ihren Einstellungen aktiviert ist:",
         "mqttUnavailable3": "Remote Console > Einstellungen > Dienste > MQTT im LAN (Klartext)",

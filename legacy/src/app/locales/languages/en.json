@@ -16,12 +16,14 @@
     "common": {
         "absorptionCharging": "Absorption charging",
         "assisting": "Assisting",
+        "auto": "Auto",
         "autoStartStop": "Auto start/stop",
         "bulkCharging": "Bulk charging",
         "charge": "Charge",
         "chargerOnly": "Charger Only",
         "charging": "Charging",
         "current": "Current",
+        "dark": "Dark",
         "days": "days",
         "discharge": "Discharge",
         "discharging": "Discharging",
@@ -36,6 +38,7 @@
         "inputLimit": "Input Limit",
         "inverterOnly": "Inverter Only",
         "inverting": "Inverting",
+        "light": "Light",
         "limit": "Limit",
         "lowPower": "Low Power",
         "minutes": "minutes",
@@ -63,6 +66,15 @@
     "error": {
         "errorWithMessage": "Error: %{message}",
         "genericMessage": "An error occurred while rendering the application. Try reloading the page or contacting Victron Energy with the following information:",
+        "marine": {
+            "cta": "Send this error report directly to the Victron Energy support team:",
+            "dataCharges": "Standard data charges apply.",
+            "estimate": "Estimated data: %{size} Bytes.",
+            "hint": "Try reloading the page or contacting Victron Energy with the following information:",
+            "ignore": "Ignore error",
+            "sendReport": "Send error report",
+            "title": "An error occured while rendering the application."
+        },
         "mqttUnavailable1": "Could not connect to the MQTT server.",
         "mqttUnavailable2": "Please check that MQTT is enabled in your settings:",
         "mqttUnavailable3": "Remote Console > Settings > Services > MQTT on LAN (Plaintext)",
@@ -70,16 +82,7 @@
         "mqttUnavailable5": "You can also try connecting to your device remotely by selecting Remote from the menu above.",
         "queryParams": "Query params: %{queryParams}",
         "userAgent": "User agent: %{userAgent}",
-        "windowSize": "Window: %{width} x %{height}",
-        "marine": {
-            "title": "An error occured while rendering the application.",
-            "hint": "Try reloading the page or contacting Victron Energy with the following information:",
-            "cta": "Send this error report directly to the Victron Energy support team:",
-            "dataCharges": "Standard data charges apply.",
-            "estimate": "Estimated data: %{size} Bytes.",
-            "sendReport": "Send error report",
-            "ignore": "Ignore error"
-        }
+        "windowSize": "Window: %{width} x %{height}"
     },
     "generator": {
         "fisherPandaAutoStartMessage": "The Fisher Panda AutoStart functionality is currently disabled, enable it on the genset panel in order to control the genset from this panel.",

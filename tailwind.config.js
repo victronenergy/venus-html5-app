@@ -17,6 +17,7 @@ module.exports = {
         md: '800px',
         lg: '1400px',
         xl: '1800px',
+        'hide-remote-console': {'raw': '(max-width: 600px), (max-height: 550px)'},
         // custom media queries that also use the min-height property
         'sm-s' : {
           raw : '(min-width: 540px) and (min-height: 400px)'
