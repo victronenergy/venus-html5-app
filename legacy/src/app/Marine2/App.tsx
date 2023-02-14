@@ -8,6 +8,7 @@ import { useVisibleWidgetsStore } from "./modules"
 // import { ErrorModal } from "./components/ErrorModal"
 
 import { Marine2 } from "./Marine2"
+import Connecting from "./components/ui/Connecting"
 
 export type AppProps = {
   host: string
@@ -65,8 +66,7 @@ const App = observer((props: AppProps) => {
   }, [themeStore.darkMode])
 
   return (
-    // todo: replace with Loader component
-    <React.Suspense fallback={<div>Loading</div>}>
+    <React.Suspense fallback={<Connecting />}>
       <Marine2 {...props} />
       {/*<ErrorModal />*/}
     </React.Suspense>
