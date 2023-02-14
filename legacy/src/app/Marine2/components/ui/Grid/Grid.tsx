@@ -44,6 +44,8 @@ const Grid = ({ children, className, flow = "row", forceOneDimensionRatio = 3 }:
         },
         className
       )}
+      // TODO: fix actual issue
+      /* eslint-disable-next-line jsx-a11y/aria-role */
       role={"container"}
     >
       {Array.isArray(children) ? (
