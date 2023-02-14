@@ -13,7 +13,7 @@ import ErrorFallback from "../../../components/ui/ErrorBoundary/ErrorFallback"
 import { AppViews } from "../../../modules/AppViews"
 import { translate } from "react-i18nify"
 
-const BatteriesOverview = ({ mode = "compact" }: Props) => {
+const BatteriesOverview = ({ mode = "full" }: Props) => {
   const { batteries } = useBattery()
 
   const sortedBatteries = sortBatteries(batteries ?? [])

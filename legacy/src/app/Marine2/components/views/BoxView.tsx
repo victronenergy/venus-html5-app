@@ -5,6 +5,7 @@ import MainLayout from "../ui/MainLayout"
 const EnergyAC = React.lazy(() => import("../boxes/EnergyAC"))
 const EnergyDC = React.lazy(() => import("../boxes/EnergyDC"))
 const Tanks = React.lazy(() => import("../boxes/Tanks"))
+const BatteriesOverview = React.lazy(() => import("../boxes/BatteriesOverview"))
 
 const BoxView = ({ boxId }: BoxViewProps) => {
   const getBox = useMemo(() => {
@@ -15,6 +16,8 @@ const BoxView = ({ boxId }: BoxViewProps) => {
         return <EnergyDC />
       case AppViews.BOX_TANKS:
         return <Tanks />
+      case AppViews.BOX_BATTERIES_OVERVIEW:
+        return <BatteriesOverview />
       default:
         // todo: replace with component
         return <div>Not found</div>
