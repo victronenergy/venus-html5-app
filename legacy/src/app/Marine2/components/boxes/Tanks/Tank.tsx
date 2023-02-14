@@ -9,7 +9,7 @@ import WaterIcon from "../../../images/icons/fresh-water.svg"
 import BlackWaterIcon from "../../../images/icons/black-water.svg"
 import GrayWaterIcon from "../../../images/icons/waste-water.svg"
 
-const Tank = ({ tankInstanceId, mode = "compact", orientation = "vertical" }: Props) => {
+const Tank = ({ tankInstanceId, mode, orientation = "vertical" }: Props) => {
   let { capacity, fluidType, level, remaining, unit } = useTank(tankInstanceId)
   const fluidTypeNum = +fluidType
 

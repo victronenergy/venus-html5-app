@@ -44,7 +44,7 @@ const Tanks = ({ mode, className }: Props) => {
       >
         <div>
           {tanks?.map((tank) => {
-            return tank ? <Tank key={tank} tankInstanceId={tank} /> : null
+            return tank ? <Tank mode={"compact"} key={tank} tankInstanceId={tank} /> : null
           })}
         </div>
       </Box>
