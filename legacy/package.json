@@ -159,7 +159,7 @@
   },
   "browserslist": {
     "production": [
-      ">1%",
+      "chrome >= 45",
       "last 10 versions"
     ],
     "development": [
