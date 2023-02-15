@@ -8,8 +8,8 @@ import Battery from "../../../components/boxes/Battery/Battery"
 import BatteriesIcon from "../../../images/icons/batteries.svg"
 import BatterySummary from "../../../components/ui/BatterySummary"
 import AuxiliaryBatteries from "../Batteries/AuxiliaryBatteries"
-import { withErrorBoundary } from "react-error-boundary"
-import ErrorFallback from "../../../components/ui/ErrorBoundary/ErrorFallback"
+// import { withErrorBoundary } from "react-error-boundary"
+// import ErrorFallback from "../../../components/ui/ErrorBoundary/ErrorFallback"
 import { AppViews } from "../../../modules/AppViews"
 import { translate } from "react-i18nify"
 
@@ -91,12 +91,12 @@ const getOverviewBatteries = function (batteries: BatteryType[], max: number) {
 }
 
 // fixme: this causes type errors in the RootView component
-const ComponentWithErrorBoundary = withErrorBoundary(observer(BatteriesOverview), {
-  FallbackComponent: ErrorFallback,
-  onError(error, info) {
-    console.error(error, info)
-  },
-})
+// const ComponentWithErrorBoundary = withErrorBoundary(observer(BatteriesOverview), {
+//   FallbackComponent: ErrorFallback,
+//   onError(error, info) {
+//     console.error(error, info)
+//   },
+// })
 
 interface Props {
   mode?: "compact" | "full"

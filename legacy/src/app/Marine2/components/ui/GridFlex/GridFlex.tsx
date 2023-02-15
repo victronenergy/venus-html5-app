@@ -25,7 +25,7 @@ const GridFlex = ({ children, className, childClassName, flow = "row", forceOneD
 
     setForceOneDimension(isOneDimension)
     setGridFlow(isOneDimension ? (ratio > 1 ? "row" : "col") : flow)
-  }, [gridSize, forceOneDimensionRatio])
+  }, [gridSize, forceOneDimensionRatio, flow])
 
   return (
     <div ref={gridRef} className={classnames("w-full h-full", className)}>
