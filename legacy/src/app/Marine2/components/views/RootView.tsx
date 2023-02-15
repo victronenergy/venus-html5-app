@@ -28,7 +28,7 @@ const RootView = () => {
 
   return (
     <MainLayout>
-      <Grid className={"gap-2"} flow={"col"}>
+      <Grid childClassName={"p-1"} flow={"col"}>
         {/* you can use different mocks to view the components layouts */}
         {/* TODO: replace this code with real data depending on the system type */}
         {getBoxes("simple").map((box, key) => box)}

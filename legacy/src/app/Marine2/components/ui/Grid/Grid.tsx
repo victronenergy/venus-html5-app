@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react"
 import classnames from "classnames"
 import { useComponentSize } from "../../../utils/hooks"
 
-const Grid = ({ children, className, flow = "row", forceOneDimensionRatio = 3 }: Props) => {
+const Grid = ({ children, className, childClassName, flow = "row", forceOneDimensionRatio = 3 }: Props) => {
   const childrenCount = Array.isArray(children) ? children.length : 1
 
   const gridRef = useRef<HTMLDivElement>(null)
@@ -17,20 +17,17 @@ const Grid = ({ children, className, flow = "row", forceOneDimensionRatio = 3 }:
     }
 
     const ratio = gridSize.width / gridSize.height
-
     const isOneDimension = ratio > 1 ? ratio > forceOneDimensionRatio : 1 - 1 / forceOneDimensionRatio > ratio
-    setForceOneDimension(isOneDimension)
 
-    if (isOneDimension) {
-      setGridFlow(ratio > 1 ? "col" : "row")
-    }
+    setForceOneDimension(isOneDimension)
+    setGridFlow(isOneDimension ? (ratio > 1 ? "col" : "row") : flow)
   }, [gridSize, forceOneDimensionRatio])
 
   return (
     <div
       ref={gridRef}
       className={classnames(
-        "h-full min-h-0 w-full grid auto-rows-fr auto-cols-fr",
+        "w-full h-full min-h-0 grid auto-rows-fr auto-cols-fr",
         {
           // base direction
           "grid-flow-col": gridFlow === "col",
@@ -49,17 +46,23 @@ const Grid = ({ children, className, flow = "row", forceOneDimensionRatio = 3 }:
         // TODO: display max 4 children and show navigation element for rest
         children.map((child, i) => (
           <div
-            className={classnames("w-full min-h-0 h-full", {
-              "col-span-2": !forceOneDimension && gridFlow === "row" && childrenCount === 3 && i === childrenCount - 1,
-              "row-span-2": !forceOneDimension && gridFlow === "col" && childrenCount === 3 && i === childrenCount - 1,
-            })}
+            className={classnames(
+              "w-full min-h-0 h-full",
+              {
+                "col-span-2":
+                  !forceOneDimension && gridFlow === "row" && childrenCount === 3 && i === childrenCount - 1,
+                "row-span-2":
+                  !forceOneDimension && gridFlow === "col" && childrenCount === 3 && i === childrenCount - 1,
+              },
+              childClassName
+            )}
             key={child.key || i}
           >
             {child}
           </div>
         ))
       ) : (
-        <div>{children}</div>
+        <div className={classnames("w-full h-full", childClassName)}>{children}</div>
       )}
     </div>
   )
@@ -69,6 +72,7 @@ interface Props {
   children: JSX.Element[] | JSX.Element
   onClick?: () => void
   className?: string
+  childClassName?: string
   flow?: "row" | "col"
   /** Force the grid to use only 1 row or column if the ratio of the grid is higher than this value */
   forceOneDimensionRatio?: number
