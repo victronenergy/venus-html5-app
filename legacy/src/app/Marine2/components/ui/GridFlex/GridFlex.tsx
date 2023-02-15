@@ -8,11 +8,7 @@ const GridFlex = ({ children, className, childClassName, flow = "row", forceOneD
   const gridRef = useRef<HTMLDivElement>(null)
   const gridSize = useComponentSize(gridRef)
 
-  const [width, setWidth] = useState(gridSize.width)
-  const [height, setHeight] = useState(gridSize.height)
-
   const [gridFlow, setGridFlow] = useState<"row" | "col">(flow)
-
   const [forceOneDimension, setForceOneDimension] = useState(false)
 
   const elementsInRow = useMemo(() => {
@@ -31,11 +27,6 @@ const GridFlex = ({ children, className, childClassName, flow = "row", forceOneD
     setGridFlow(isOneDimension ? (ratio > 1 ? "row" : "col") : flow)
   }, [gridSize, forceOneDimensionRatio])
 
-  useEffect(() => {
-    setWidth(gridSize.width)
-    setHeight(gridSize.height)
-  }, [gridSize])
-
   return (
     <div ref={gridRef} className={classnames("w-full h-full", className)}>
       <div
@@ -44,7 +35,7 @@ const GridFlex = ({ children, className, childClassName, flow = "row", forceOneD
           "flex-row": gridFlow === "row",
           "flex-wrap": !forceOneDimension,
         })}
-        style={{ width, height }}
+        style={{ width: gridSize.width || undefined, height: gridSize.height || undefined }}
       >
         {Array.isArray(children) ? (
           children.map((child, i) => (
