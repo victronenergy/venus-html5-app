@@ -33,6 +33,7 @@ const BatteriesOverview = ({ mode = "full" }: Props) => {
 
     return boxes
   }
+
   if (mode === "compact") {
     return (
       <Box
@@ -89,6 +90,7 @@ const getOverviewBatteries = function (batteries: BatteryType[], max: number) {
   return batteries.slice(0, Math.min(withStateCount, max))
 }
 
+// fixme: this causes type errors in the RootView component
 const ComponentWithErrorBoundary = withErrorBoundary(observer(BatteriesOverview), {
   FallbackComponent: ErrorFallback,
   onError(error, info) {
@@ -100,4 +102,5 @@ interface Props {
   mode?: "compact" | "full"
 }
 
-export default ComponentWithErrorBoundary
+export default observer(BatteriesOverview)
+// export default ComponentWithErrorBoundary
