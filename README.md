@@ -165,9 +165,14 @@ npm run poeditor:pull
 
 In the Venus OS release test plan there is a tab containing all tests.
 
-### 3.2 Enzyme
+### 3.2 Jest
 
-Most components have Enzyme unit tests. Run all of these tests with `npm run test:unit`
+Component (unit) testing is implemented using [Jest](https://jestjs.io/), [react-testing-library](https://testing-library.com/docs/react-testing-library/example-intro), and [jest-dom](https://github.com/testing-library/jest-dom):
+
+- every component must have tests under `__tests__` folder
+- tests should check the isolated behaviour of the component using its different props
+
+To run tests locally in watch mode use `npm run test`
 
 ### 3.3 Cypress
 
