@@ -1,6 +1,6 @@
 import React from "react"
 import MainLayout from "../ui/MainLayout"
-import Grid from "../ui/GridFlex"
+import Grid from "../ui/Grid"
 import Tanks from "../boxes/Tanks/Tanks"
 import BatteriesOverview from "../boxes/BatteriesOverview"
 import EnergyOverview from "../boxes/EnergyOverview"
