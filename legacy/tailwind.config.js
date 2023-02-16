@@ -16,6 +16,7 @@ module.exports = {
         md: "800px",
         lg: "1400px",
         xl: "1800px",
+        'hide-remote-console': {'raw': '(max-width: 600px), (max-height: 550px)'},
       },
       colors: {
         victron: {
@@ -71,6 +72,9 @@ module.exports = {
         lg: "0.75rem",
         full: "9999px",
         DEFAULT: "0.25rem",
+      },
+      strokeWidth: {
+        "16": "16px",
       },
     },
   },

@@ -3,7 +3,7 @@ import classNames from "classnames"
 import ArrowRightIcon from "../../../images/icons/arrow-right.svg"
 import { AppViews, useAppViewsStore } from "../../../modules/AppViews"
 
-const Box = ({ children, icon, title, className, linkedView }: Props) => {
+const Box = ({ children, icon, title, className, linkedView }: BoxProps) => {
   const appViewsStore = useAppViewsStore()
   const handleClick = () => {
     if (linkedView) {
@@ -44,7 +44,7 @@ const Box = ({ children, icon, title, className, linkedView }: Props) => {
   )
 }
 
-interface Props {
+export interface BoxProps {
   children: JSX.Element | string
   icon?: JSX.Element
   title: string

@@ -6,6 +6,30 @@
         },
         "title": "AC Mode"
     },
+    "boxes": {
+        "EnergyOverview": "Energy Overview",
+        "acLoads": "AC Loads",
+        "alternator": "Alternator",
+        "batteries": "Batteries",
+        "battery": "Battery",
+        "batteryWithName": "Battery: %{name}",
+        "chargerWithName": "Charger: %{productNameShort}",
+        "dcLoads": "DC Loads",
+        "energy": "Energy",
+        "generator": "Generator",
+        "generatorInput": "Generator Input",
+        "gridInput": "Grid Input",
+        "invalidConfig": "Invalid Configuration",
+        "inverterCharger": "Inverter / Charger: %{productNameShort}",
+        "inverterWithName": "Inverter: %{productNameShort}",
+        "pvCharger": "PV Charger",
+        "shorePower": "Shore Power",
+        "solar": "Solar",
+        "status": "Status",
+        "tanks": "Tanks",
+        "unknown": "Unknown",
+        "windGenerator": "Wind Generator"
+    },
     "cardFooter": {
         "Charge": "Charge",
         "Critical": "Critical",
@@ -20,6 +44,7 @@
         "autoStartStop": "Auto start/stop",
         "bulkCharging": "Bulk charging",
         "charge": "Charge",
+        "charged": "Charged",
         "chargerOnly": "Charger Only",
         "charging": "Charging",
         "current": "Current",
@@ -40,6 +65,7 @@
         "inverting": "Inverting",
         "light": "Light",
         "limit": "Limit",
+        "loads": "Loads",
         "lowPower": "Low Power",
         "minutes": "minutes",
         "mode": "Mode",
@@ -81,6 +107,10 @@
         "mqttUnavailable4": "Try using the Remote Console button at the top of this screen to change your settings remotely.",
         "mqttUnavailable5": "You can also try connecting to your device remotely by selecting Remote from the menu above.",
         "queryParams": "Query params: %{queryParams}",
+        "remoteConsole": {
+            "connectionFailed": "Unable to connect to the GX device",
+            "screenTooSmall": "Open in a larger screen to view remote console"
+        },
         "userAgent": "User agent: %{userAgent}",
         "windowSize": "Window: %{width} x %{height}"
     },
@@ -113,6 +143,10 @@
     "noWidgets": {
         "subtitle": "Make sure your devices are properly connected",
         "title": "Your dashboard is empty"
+    },
+    "pages": {
+        "remoteConsole": "Remote Console",
+        "systemOverview": "System Overview"
     },
     "remoteLogin": {
         "2fa": "Two-factor authentication token",

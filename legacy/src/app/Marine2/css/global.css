@@ -11,6 +11,11 @@ body {
     text-rendering: geometricPrecision;
 }
 
+p {
+    margin: 0;
+    padding: 0;
+}
+
 .min-safe-h-screen {
     min-height: 100vh;
 }

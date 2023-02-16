@@ -69,7 +69,9 @@ module.exports = {
           gray: {
             DEFAULT: '#969591',
             dark: '#969591',
+            "400": '#64635F',
             '300' : '#504F4B',
+            "200": '#272622',
           },
           blue: {
             DEFAULT: '#387DC5',
@@ -99,6 +101,10 @@ module.exports = {
             DEFAULT: '#7F7F9C',
             dark: '#7F7F9C',
           },
+          yellow: {
+            DEFAULT: '#F0962E',
+            dark: '#F0962E',
+          }
         },
       },
       fontFamily: {
@@ -112,6 +118,9 @@ module.exports = {
         full: '9999px',
         DEFAULT: '0.25rem',
       },
+      strokeWidth: {
+        '16': '16px',
+      }
     },
   },
   plugins: [require('@tailwindcss/aspect-ratio'), require('@tailwindcss/line-clamp')],

@@ -6,6 +6,7 @@
         },
         "title": "Başlık"
     },
+    "boxes": {},
     "cardFooter": {
         "Charge": "Yük",
         "Critical": "Kritik",
@@ -78,6 +79,7 @@
         "mqttUnavailable4": "mqttUnavailable4",
         "mqttUnavailable5": "mqttUnavailable5",
         "queryParams": "Query params: %{queryParams}",
+        "remoteConsole": {},
         "userAgent": "User agent: %{userAgent}",
         "windowSize": "Window: %{width} x %{height}"
     },
@@ -111,6 +113,7 @@
         "subtitle": "Cihazlarınızın doğru şekilde bağlandığından emin olun",
         "title": "Başlık"
     },
+    "pages": {},
     "remoteLogin": {
         "2fa": "İki-faktörlü kimlik doğrulama jetonu\n",
         "email": "E",
