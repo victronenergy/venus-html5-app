@@ -16,7 +16,7 @@ const MainLayout = ({ children, title }: Props) => {
       <div className={"flex flex-row w-full h-full grow-0 basis-0 min-h-fit"}>
         <Header title={getTitle} />
       </div>
-      <div className={"flex flex-col grow w-full h-full"}>{children}</div>
+      <div className={"flex flex-col grow w-full h-full min-h-0"}>{children}</div>
       <div className={"flex flex-row w-full h-full grow-0 basis-0 min-h-fit"}>
         <Footer />
       </div>
