@@ -45,7 +45,7 @@ const EnergyOverview = ({ mode = "compact" }: Props) => {
         icon={<EnergyIcon className={"w-6 text-victron-gray dark:text-victron-gray-dark"} />}
         linkedView={AppViews.BOX_ENERGY_OVERVIEW}
       >
-        <div className="h-full flex flex-col gap-1">
+        <div className="flex flex-col">
           {getAvailableEnergyBoxes(mode, shoreInputId, acLoads, pvCharger, dcLoads, alternators, windGenerators)}
         </div>
       </Box>
@@ -53,7 +53,7 @@ const EnergyOverview = ({ mode = "compact" }: Props) => {
   }
 
   return (
-    <Grid className={"gap-2"}>
+    <Grid childClassName={"p-1"}>
       {getAvailableEnergyBoxes(mode, shoreInputId, acLoads, pvCharger, dcLoads, alternators, windGenerators)}
     </Grid>
   )
@@ -85,7 +85,7 @@ const getAvailableEnergyBoxes = function (
   ) {
     boxes.push(
       <div className="flex flex-row justify-between">
-        <p className="text-sm md:text-base text-victron-gray">{translate("common.loads")}</p>
+        <div className="text-sm md:text-base text-victron-gray">{translate("common.loads")}</div>
         <div className="w-full ml-2 mb-2 border-b border-victron-gray" />
       </div>
     )
