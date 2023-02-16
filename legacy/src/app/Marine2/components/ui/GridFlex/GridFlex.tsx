@@ -15,6 +15,30 @@ const GridFlex = ({ children, className, childClassName, flow = "row", forceOneD
     return Math.ceil(Math.sqrt(childrenCount))
   }, [childrenCount])
 
+  const getChildWidth = () => {
+    if (gridFlow === "row" || !forceOneDimension) {
+      return `${100 / (forceOneDimension ? childrenCount : elementsInRow)}%`
+    }
+    return undefined
+  }
+
+  const getChildHeight = () => {
+    if (gridFlow === "col" && forceOneDimension) {
+      return `${100 / (forceOneDimension ? childrenCount : elementsInRow)}%`
+    }
+    return undefined
+  }
+
+  const getChildFlexBasis = (i: number) => {
+    if (forceOneDimension) {
+      return `${100 / childrenCount}%`
+    }
+    if (childrenCount > elementsInRow && childrenCount % elementsInRow && i === childrenCount - 1) {
+      return `100%`
+    }
+    return `${100 / elementsInRow}%`
+  }
+
   useEffect(() => {
     if (!gridSize.width || !gridSize.height || forceOneDimensionRatio <= 0) {
       return
@@ -46,25 +70,9 @@ const GridFlex = ({ children, className, childClassName, flow = "row", forceOneD
                 https://stackoverflow.com/questions/69687530/dynamically-build-classnames-in-tailwindcss
               */
               style={{
-                width:
-                  gridFlow === "row" || !forceOneDimension
-                    ? `${100 / (forceOneDimension ? childrenCount : elementsInRow)}%`
-                    : undefined,
-                height:
-                  gridFlow === "col" && forceOneDimension
-                    ? `${100 / (forceOneDimension ? childrenCount : elementsInRow)}%`
-                    : undefined,
-                flexBasis: `${
-                  100 /
-                  (!forceOneDimension &&
-                  childrenCount > elementsInRow &&
-                  childrenCount % elementsInRow &&
-                  i === childrenCount - 1
-                    ? 1
-                    : forceOneDimension
-                    ? childrenCount
-                    : elementsInRow)
-                }%`,
+                width: getChildWidth(),
+                height: getChildHeight(),
+                flexBasis: getChildFlexBasis(i),
               }}
               key={child.key || i}
             >
