@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useMemo, useRef, useState } from "react"
 import classnames from "classnames"
 import { useComponentSize } from "../../../utils/hooks"
 
@@ -11,6 +11,34 @@ const Grid = ({ children, className, childClassName, flow = "row", forceOneDimen
   const [gridFlow, setGridFlow] = useState<"row" | "col">(flow)
   const [forceOneDimension, setForceOneDimension] = useState(false)
 
+  const elementsInRow = useMemo(() => {
+    return Math.ceil(Math.sqrt(childrenCount))
+  }, [childrenCount])
+
+  const getChildWidth = () => {
+    if (forceOneDimension || childrenCount === elementsInRow) {
+      return `100%`
+    }
+    return `${100 / elementsInRow}%`
+  }
+
+  const getChildHeight = () => {
+    if (forceOneDimension || childrenCount === elementsInRow) {
+      return `100%`
+    }
+    return `${100 / elementsInRow}%`
+  }
+
+  const getChildFlexBasis = (i: number) => {
+    if (forceOneDimension) {
+      return `${100 / childrenCount}%`
+    }
+    if (childrenCount > elementsInRow && childrenCount % elementsInRow && i === childrenCount - 1) {
+      return `100%`
+    }
+    return `${100 / elementsInRow}%`
+  }
+
   useEffect(() => {
     if (!gridSize.width || !gridSize.height || forceOneDimensionRatio <= 0) {
       return
@@ -20,50 +48,43 @@ const Grid = ({ children, className, childClassName, flow = "row", forceOneDimen
     const isOneDimension = ratio > 1 ? ratio > forceOneDimensionRatio : 1 - 1 / forceOneDimensionRatio > ratio
 
     setForceOneDimension(isOneDimension)
-    setGridFlow(isOneDimension ? (ratio > 1 ? "col" : "row") : flow)
+    setGridFlow(isOneDimension ? (ratio > 1 ? "row" : "col") : flow)
   }, [gridSize, forceOneDimensionRatio, flow])
 
   return (
-    <div
-      ref={gridRef}
-      className={classnames(
-        "w-full h-full min-h-0 grid auto-rows-fr auto-cols-fr",
-        {
-          // base direction
-          "grid-flow-col": gridFlow === "col",
-          "grid-flow-row": gridFlow === "row",
-          // columns
-          "grid-cols-1": gridFlow === "row" && childrenCount <= 1,
-          "grid-rows-1": gridFlow === "col" && childrenCount <= 1,
-          // use only 1 row or column if proportion is too high
-          "grid-cols-2": !forceOneDimension && gridFlow === "row" && childrenCount > 1,
-          "grid-rows-2": !forceOneDimension && gridFlow === "col" && childrenCount > 1,
-        },
-        className
-      )}
-    >
-      {Array.isArray(children) ? (
-        // TODO: display max 4 children and show navigation element for rest
-        children.map((child, i) => (
-          <div
-            className={classnames(
-              "w-full min-h-0 h-full",
-              {
-                "col-span-2":
-                  !forceOneDimension && gridFlow === "row" && childrenCount === 3 && i === childrenCount - 1,
-                "row-span-2":
-                  !forceOneDimension && gridFlow === "col" && childrenCount === 3 && i === childrenCount - 1,
-              },
-              childClassName
-            )}
-            key={child.key || i}
-          >
-            {child}
-          </div>
-        ))
-      ) : (
-        <div className={classnames("w-full h-full", childClassName)}>{children}</div>
-      )}
+    <div ref={gridRef} className={classnames("w-full h-full", className)}>
+      <div
+        className={classnames("flex", {
+          "flex-col": gridFlow === "col",
+          "flex-row": gridFlow === "row",
+          "flex-wrap": !forceOneDimension,
+        })}
+        style={{ width: gridSize.width || undefined, height: gridSize.height || undefined }}
+      >
+        {Array.isArray(children) ? (
+          children.map((child, i) => (
+            <div
+              className={classnames(childClassName)}
+              /* 
+                We have to use native styles here, because Tailwind can't do JIT css styles compilation for dynamic values:
+                https://stackoverflow.com/questions/69687530/dynamically-build-classnames-in-tailwindcss
+              */
+              style={{
+                width: gridFlow === "col" ? getChildWidth() : getChildFlexBasis(i),
+                maxWidth: gridFlow === "col" ? getChildWidth() : getChildFlexBasis(i),
+                height: gridFlow === "row" ? getChildHeight() : getChildFlexBasis(i),
+                maxHeight: gridFlow === "row" ? getChildHeight() : getChildFlexBasis(i),
+                flexBasis: getChildFlexBasis(i),
+              }}
+              key={child.key || i}
+            >
+              {child}
+            </div>
+          ))
+        ) : (
+          <div className={classnames("basis-full", childClassName)}>{children}</div>
+        )}
+      </div>
     </div>
   )
 }
