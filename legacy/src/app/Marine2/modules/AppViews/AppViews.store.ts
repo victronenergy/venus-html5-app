@@ -8,6 +8,7 @@ export enum AppViews {
   BOX_BATTERIES_OVERVIEW = "box/batteries-overview",
   BOX_TANKS = "box/tanks",
   BOX_ENERGY_OVERVIEW = "box/energy-overview",
+  BOX_DEVICES_OVERVIEW = "box/devices-overview",
 }
 
 export const AppViewTitles = new Map<AppViews, string>([
@@ -16,6 +17,7 @@ export const AppViewTitles = new Map<AppViews, string>([
   [AppViews.BOX_BATTERIES_OVERVIEW, translate("boxes.batteries")],
   [AppViews.BOX_TANKS, translate("boxes.tanks")],
   [AppViews.BOX_ENERGY_OVERVIEW, translate("boxes.EnergyOverview")],
+  [AppViews.BOX_DEVICES_OVERVIEW, translate("boxes.devices")],
 ])
 
 export class AppViewsStore {

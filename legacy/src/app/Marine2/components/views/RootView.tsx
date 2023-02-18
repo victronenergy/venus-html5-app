@@ -4,6 +4,7 @@ import Grid from "../ui/Grid"
 import Tanks from "../boxes/Tanks/Tanks"
 import BatteriesOverview from "../boxes/BatteriesOverview"
 import EnergyOverview from "../boxes/EnergyOverview"
+import DevicesOverview from "../boxes/DevicesOverview"
 
 const RootView = () => {
   // TODO: replace this code with real data depending on the system type
@@ -13,12 +14,14 @@ const RootView = () => {
         return [
           <EnergyOverview mode="compact" key={"energy-overview"} />,
           <Tanks mode="compact" key={"tanks"} />,
+          <DevicesOverview mode="compact" key={"devices-overview"} />,
           <BatteriesOverview mode="compact" key={"batteries-overview"} />,
         ]
       case "absolute":
         return [
           <EnergyOverview mode="compact" key={"energy-overview"} />,
           <Tanks mode="compact" key={"tanks"} />,
+          <DevicesOverview mode="compact" key={"devices-overview"} />,
           <BatteriesOverview mode="compact" key={"batteries-overview"} />,
         ]
     }
