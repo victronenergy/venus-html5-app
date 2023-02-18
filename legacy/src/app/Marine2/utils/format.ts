@@ -5,41 +5,41 @@ export const formatStateForTranslation = (state: number) => {
     case VEBUS_SYSTEM_STATE.OFF:
       return "common.off"
     case VEBUS_SYSTEM_STATE.LOW_POWER:
-      return "status.Low power"
+      return "statusWidget.Low power"
     case VEBUS_SYSTEM_STATE.FAULT_CONDITION:
       return "common.fault"
     case VEBUS_SYSTEM_STATE.BULK_CHARGING:
-      return "status.Bulk charging"
+      return "statusWidget.Bulk charging"
     case VEBUS_SYSTEM_STATE.ABSORPTION_CHARGING:
-      return "status.Absorption charging"
+      return "statusWidget.Absorption charging"
     case VEBUS_SYSTEM_STATE.FLOAT_CHARGING:
-      return "status.Float charging"
+      return "statusWidget.Float charging"
     case VEBUS_SYSTEM_STATE.STORAGE_MODE:
-      return "status.Storage mode"
+      return "statusWidget.Storage mode"
     case VEBUS_SYSTEM_STATE.EQUALISATION_CHARGING:
-      return "status.Equalisation charging"
+      return "statusWidget.Equalisation charging"
     case VEBUS_SYSTEM_STATE.PASSTHRU:
-      return "status.Passthru"
+      return "statusWidget.Passthru"
     case VEBUS_SYSTEM_STATE.INVERTING:
-      return "status.Inverting"
+      return "statusWidget.Inverting"
     case VEBUS_SYSTEM_STATE.ASSISTING:
-      return "status.Assisting"
+      return "statusWidget.Assisting"
     case VEBUS_SYSTEM_STATE.POWER_SUPPLY_MODE:
       return "common.powerSupplyMode"
     case VEBUS_SYSTEM_STATE.WAKE_UP:
-      return "status.Wake-up"
+      return "statusWidget.Wake-up"
     case VEBUS_SYSTEM_STATE.REPEATED_ABSORPTION:
-      return "status.Repeated absorption"
+      return "statusWidget.Repeated absorption"
     case VEBUS_SYSTEM_STATE.AUTO_EQUALIZE_RECONDITION:
-      return "status.Auto equalize/Recondition"
+      return "statusWidget.Auto equalize/Recondition"
     case VEBUS_SYSTEM_STATE.BATTERYSAFE:
-      return "status.BatterySafe"
+      return "statusWidget.BatterySafe"
     case VEBUS_SYSTEM_STATE.EXTERNAL_CONTROL:
-      return "status.External control"
+      return "statusWidget.External control"
     case VEBUS_SYSTEM_STATE.DISCHARGING:
       return "common.discharging"
     case VEBUS_SYSTEM_STATE.SUSTAIN:
-      return "status.Sustain"
+      return "statusWidget.Sustain"
     default:
       return "common.emptyBar"
   }

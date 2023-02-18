@@ -1,9 +1,3 @@
-export const SUPPORTED_LANGUAGES = ['en', 'fr', 'ar', 'cs', 'de', 'es', 'it', 'nl', 'ro', 'ru', 'sv', 'tr', 'zh']
-export const LANGUAGE_OVERRIDES: { [k: string]: string } = {'zh': 'zh-CN'}
-export const DEFAULT_LANGUAGE = 'en'
-export const LANGUAGE_KEY_LOCAL_STORAGE = '_last_received_language'
-export const BOX_DIRECTORY = 'src/components/boxes/'
-
 export const WIDGET_TYPES = {
   AC_LOADS: "AcLoads",
   ACTIVE_SOURCE: "ActiveSource",
@@ -73,4 +67,16 @@ export const INVERTER_MODE = {
   VEBUS_ON: 3, // Vebus inverters use mode 3 in stead of 2 for ON.
   OFF: 4,
   ECO: 5,
+}
+
+export const GENSET_STATE = {
+  STANDBY: 0,
+  STARTING: [1, 2, 3, 4, 5, 6, 7],
+  RUNNING: 8,
+  STOPPING: 9,
+  ERROR: 10,
+}
+
+export const RELAY_FUNCTION = {
+  GENERATOR_START_STOP: 1,
 }
