@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    text-rendering: geometricPrecision;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+.min-safe-h-screen {
+    min-height: 100vh;
+}
+
+@supports (-webkit-touch-callout: none) {
+    .min-safe-h-screen {
+        min-height: -webkit-fill-available;
+    }
+}
+
+.safe-h-screen {
+    height: 100vh;
+}
+
+@supports (-webkit-touch-callout: none) {
+    .safe-h-screen {
+        height: -webkit-fill-available;
+    }
+}
+
+@font-face {
+    font-family: MuseoSans;
+    src: url("fonts/MuseoSans/MuseoSans-300.otf"),
+    url("fonts/MuseoSans/MuseoSans-300Italic.otf"),
+    url("fonts/MuseoSans/MuseoSans-500.otf"),
+    url("fonts/MuseoSans/MuseoSans-500Italic.otf"),
+    url("fonts/MuseoSans/MuseoSans-700.otf"),
+    url("fonts/MuseoSans/MuseoSans-700Italic.otf");
+}
