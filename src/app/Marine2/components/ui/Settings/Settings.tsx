@@ -41,6 +41,7 @@ const Settings = () => {
           onClose={() => {
             setIsModalOpen(false)
           }}
+          className="w-full max-w-sm mb-20 mr-6 bottom-0 right-0"
         >
           <Modal.Body>
             <div className="flex flex-col">
@@ -82,7 +83,7 @@ const Settings = () => {
             </div>
           </Modal.Body>
           <button
-            onClick={() => openRemoteConsole()}
+            onClick={openRemoteConsole}
             className="w-full border-2 border-victron-blue bg-victron-blue/30 rounded-md pt-1 pb-1 sm-m:pt-2 sm-m:pb-2"
           >
             <div className="text-base sm-m:text-lg">{translate("header.remoteConsole")}</div>

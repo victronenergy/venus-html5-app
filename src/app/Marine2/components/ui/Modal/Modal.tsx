@@ -1,22 +1,23 @@
-import classNames from "classnames"
+import classnames from "classnames"
 import React from "react"
 
 interface Props {
   open?: boolean
   onClose: () => void
   children: React.ReactNode
+  className?: string
 }
 
-const Frame: React.FC<Props> = ({ children, open = true, onClose }) => {
+const Frame: React.FC<Props> = ({ children, open = true, onClose, className }) => {
   return (
     <div
-      className={classNames(
-        "fixed inset-0 z-10 p-8 text-neutral-600 bg-neutral-100/70 dark:text-white dark:bg-victron-darkGray/70",
-        `${open ? "block" : "hidden"}` // control visibility via `open` attribute (or render conditionally)
+      className={classnames(
+        "fixed inset-0 z-10 p-8 text-neutral-600 bg-neutral-100/70 dark:text-white dark:bg-victron-darkGray/70 items-center justify-center",
+        `${open ? "flex" : "hidden"}` // control visibility via `open` attribute (or render conditionally)
       )}
       onClick={onClose}
     >
-      <div className="absolute w-full max-w-sm mb-20 mr-6 bottom-0 right-0" onClick={(e) => e.stopPropagation()}>
+      <div className={classnames("absolute", className)} onClick={(e) => e.stopPropagation()}>
         <div className="overflow-hidden p-4 bg-white dark:bg-victron-darkGray rounded-md shadow-[0_8px_24px_-15px_rgba(0,0,0,0.75)]">
           {children}
         </div>
