@@ -26,6 +26,7 @@
         "shorePower": "岸电",
         "solar": "太阳能",
         "status": "状态",
+        "tanks": "液位",
         "unknown": "未知",
         "windGenerator": "风力发电机"
     },
@@ -64,6 +65,7 @@
         "inverting": "逆变",
         "light": "光",
         "limit": "限制",
+        "loads": "负载",
         "lowPower": "低功率",
         "minutes": "分",
         "mode": "模式",

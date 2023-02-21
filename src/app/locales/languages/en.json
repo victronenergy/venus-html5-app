@@ -89,6 +89,22 @@
         "veBusFault": "VE.Bus Fault condition",
         "voltage": "Voltage"
     },
+    "diagnostics": {
+        "connection": {
+            "connection": "Connection",
+            "error": "Error",
+            "host": "Host",
+            "portalId": "Portal ID",
+            "status": "Status"
+        },
+        "device": {
+            "device": "Device",
+            "userAgent": "User agent",
+            "viewportHeight": "Viewport height",
+            "viewportWidth": "Viewport width"
+        },
+        "diagnostics": "Diagnostics"
+    },
     "error": {
         "errorWithMessage": "Error: %{message}",
         "genericMessage": "An error occurred while rendering the application. Try reloading the page or contacting Victron Energy with the following information:",
@@ -146,7 +162,8 @@
     },
     "pages": {
         "remoteConsole": "Remote Console",
-        "systemOverview": "System Overview"
+        "systemOverview": "System Overview",
+        "diagnostics": "Diagnostics"
     },
     "remoteLogin": {
         "2fa": "Two-factor authentication token",

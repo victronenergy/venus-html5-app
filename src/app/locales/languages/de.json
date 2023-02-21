@@ -6,7 +6,30 @@
         },
         "title": "AC-Modus"
     },
-    "boxes": {},
+    "boxes": {
+        "EnergyOverview": "Energieübersicht",
+        "acLoads": "AC-Lasten",
+        "alternator": "Lichtmaschine",
+        "batteries": "Batterien",
+        "battery": "Batterie",
+        "batteryWithName": "Batterie: %{name}",
+        "chargerWithName": "Ladegerät: %{productNameShort}",
+        "dcLoads": "DC-Lasten",
+        "energy": "Energie",
+        "generator": "Generator",
+        "generatorInput": "Generatoreingang",
+        "gridInput": "Netzeingang",
+        "invalidConfig": "Ungültige Konfiguration",
+        "inverterCharger": "Wechselrichter / Ladegerät: %{productNameShort}",
+        "inverterWithName": "Wechselrichter: %{productNameShort}",
+        "pvCharger": "PV-Ladegerät",
+        "shorePower": "Landstrom",
+        "solar": "Solar",
+        "status": "Status",
+        "tanks": "Tanks",
+        "unknown": "Unbekannt",
+        "windGenerator": "Windgenerator"
+    },
     "cardFooter": {
         "Charge": "Ladung",
         "Critical": "Kritisch",
@@ -21,6 +44,7 @@
         "autoStartStop": "Auto Start/Stop",
         "bulkCharging": "Bulkladung",
         "charge": "Ladung",
+        "charged": "Geladen",
         "chargerOnly": "Nur Ladegerät",
         "charging": "Aufladen",
         "current": "Strom",
@@ -41,6 +65,7 @@
         "inverting": "Wechselrichten",
         "light": "Hell",
         "limit": "Limit",
+        "loads": "Lasten",
         "lowPower": "Energiesparmodus",
         "minutes": "Minuten",
         "mode": "Modus",
@@ -82,7 +107,10 @@
         "mqttUnavailable4": "Versuchen Sie es mit der Schaltfläche Remote Console oben auf diesem Bildschirm, um Ihre Einstellungen aus der Ferne zu ändern.",
         "mqttUnavailable5": "Sie können auch versuchen, eine Remote-Verbindung zu Ihrem Gerät herzustellen, indem Sie im Menü oben Remote auswählen.",
         "queryParams": "Abfrageparameter: %{queryParams}",
-        "remoteConsole": {},
+        "remoteConsole": {
+            "connectionFailed": "Verbindung zum GX-Gerät nicht möglich",
+            "screenTooSmall": "Auf einem größeren Bildschirm öffnen, um die Remote-Konsole anzuzeigen"
+        },
         "userAgent": "User agent: %{userAgent}",
         "windowSize": "Fenster: %{width} x %{height}"
     },
@@ -116,7 +144,10 @@
         "subtitle": "Stellen Sie sicher, dass Ihre Geräte richtig verbunden sind, um Widgets anzuzeigen",
         "title": "Ihr Dashboard ist leer"
     },
-    "pages": {},
+    "pages": {
+        "remoteConsole": "Remote-Konsole",
+        "systemOverview": "Systemübersicht"
+    },
     "remoteLogin": {
         "2fa": "Zwei-Faktor-Authentifizierungs-Token",
         "email": "E-Mail",

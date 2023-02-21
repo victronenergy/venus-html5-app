@@ -6,7 +6,30 @@
         },
         "title": "Başlık"
     },
-    "boxes": {},
+    "boxes": {
+        "EnergyOverview": "Enerji Genel Bakış",
+        "acLoads": "AC Yükler",
+        "alternator": "Alternatör",
+        "batteries": "Aküler",
+        "battery": "Akü",
+        "batteryWithName": "Akü: %{name}",
+        "chargerWithName": "Şarjer: %{productNameShort}",
+        "dcLoads": "DC Yükler",
+        "energy": "Enerji",
+        "generator": "Jeneratör",
+        "generatorInput": "Jeneratör Girişi",
+        "gridInput": "Ṣebeke Girişi",
+        "invalidConfig": "Geçersiz Yapılandırma",
+        "inverterCharger": "Inverter / Charger: %{productNameShort}",
+        "inverterWithName": "Inverter: %{productNameShort}\n",
+        "pvCharger": "PV Şarj cihaz",
+        "shorePower": "Sahil Gücü",
+        "solar": "Solar",
+        "status": "Durum",
+        "tanks": "Tanklar",
+        "unknown": "Bilinmiyor",
+        "windGenerator": "Rüzgar jeneratörü"
+    },
     "cardFooter": {
         "Charge": "Yük",
         "Critical": "Kritik",
@@ -17,12 +40,15 @@
     "common": {
         "absorptionCharging": "Absorption Şarjı",
         "assisting": "Yardım ediyor",
+        "auto": "Otomatik",
         "autoStartStop": "autoStartStop",
         "bulkCharging": "Bulk Şarj",
         "charge": "ücret",
+        "charged": "Ṣarj edildi",
         "chargerOnly": "şarj cihazıOnly",
         "charging": "Şarj",
         "current": "Akım",
+        "dark": "Koyu",
         "days": "Gün",
         "discharge": "akıntı",
         "discharging": "Deşarj",
@@ -37,7 +63,9 @@
         "inputLimit": "inputLimit",
         "inverterOnly": "inverterOnly",
         "inverting": "Çevriliyor",
+        "light": "Renkli",
         "limit": "sınırlamak",
+        "loads": "Yükler",
         "lowPower": "lowPower",
         "minutes": "dakika",
         "mode": "mod",
@@ -79,7 +107,10 @@
         "mqttUnavailable4": "mqttUnavailable4",
         "mqttUnavailable5": "mqttUnavailable5",
         "queryParams": "Query params: %{queryParams}",
-        "remoteConsole": {},
+        "remoteConsole": {
+            "connectionFailed": "GX cihazına bağlanılamıyor",
+            "screenTooSmall": "Uzak konsolu görüntülemek için daha büyük bir ekranda açın"
+        },
         "userAgent": "User agent: %{userAgent}",
         "windowSize": "Window: %{width} x %{height}"
     },
@@ -113,7 +144,10 @@
         "subtitle": "Cihazlarınızın doğru şekilde bağlandığından emin olun",
         "title": "Başlık"
     },
-    "pages": {},
+    "pages": {
+        "remoteConsole": "Uzak Konsol",
+        "systemOverview": "Sistem görünümü"
+    },
     "remoteLogin": {
         "2fa": "İki-faktörlü kimlik doğrulama jetonu\n",
         "email": "E",
