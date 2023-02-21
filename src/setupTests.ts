@@ -1,25 +1,9 @@
-import '@testing-library/jest-dom/extend-expect'
-import { setConfig } from 'next/config'
-import { routerMock } from '../__mocks__/router'
-import { FC } from 'react'
+// jest-dom adds custom jest matchers for asserting on DOM nodes.
+// allows you to do things like:
+// expect(element).toHaveTextContent(/react/i)
+// learn more: https://github.com/testing-library/jest-dom
+import "@testing-library/jest-dom"
+import { configure } from "enzyme"
+import Adapter from "@wojtekmaj/enzyme-adapter-react-17"
 
-// mocks for next.config.js
-setConfig({
-  publicRuntimeConfig: {},
-  serverRuntimeConfig: {},
-})
-
-// mocks for next/router
-jest.mock('next/router', () => ({
-  ...routerMock,
-  withRouter: (component: FC) => {
-    component.defaultProps = {
-      ...component.defaultProps,
-      router: routerMock,
-    }
-    return component
-  },
-  useRouter: () => {
-    return { ...routerMock }
-  },
-}))
+configure({ adapter: new Adapter() })
