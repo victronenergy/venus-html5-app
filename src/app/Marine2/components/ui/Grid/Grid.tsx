@@ -52,7 +52,7 @@ const Grid = ({ children, className, childClassName, flow = "row", forceOneDimen
   }, [gridSize, forceOneDimensionRatio, flow])
 
   return (
-    <div ref={gridRef} className={classnames("w-full h-full", className)}>
+    <div ref={gridRef} className={classnames("w-full h-full min-w-0", className)}>
       <div
         className={classnames("flex", {
           "flex-col": gridFlow === "col",
@@ -66,9 +66,9 @@ const Grid = ({ children, className, childClassName, flow = "row", forceOneDimen
             <div
               className={classnames(childClassName)}
               /* 
-                We have to use native styles here, because Tailwind can't do JIT css styles compilation for dynamic values:
-                https://stackoverflow.com/questions/69687530/dynamically-build-classnames-in-tailwindcss
-              */
+                              We have to use native styles here, because Tailwind can't do JIT css styles compilation for dynamic values:
+                              https://stackoverflow.com/questions/69687530/dynamically-build-classnames-in-tailwindcss
+                            */
               style={{
                 width: gridFlow === "col" ? getChildWidth() : getChildFlexBasis(i),
                 maxWidth: gridFlow === "col" ? getChildWidth() : getChildFlexBasis(i),
