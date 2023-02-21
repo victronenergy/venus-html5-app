@@ -2,7 +2,7 @@ name: Continous Integration Workflow
 on: [push]
 
 jobs:
-  build-legacy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -17,53 +17,47 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
       - name: Install the dependencies
         run: npm ci
-        working-directory: ./legacy
       - name: Build the test bundle
         run: npm run build
-        working-directory: ./legacy
         env:
           PUBLIC_URL: /
           REACT_APP_ENABLE_LANG_OVERRIDE: false
       - name: Serve the application
         run: npm run serve &
-        working-directory: ./legacy
       - name: Run the Venus simulation
         run: >
           docker run -d --rm -p 9001:9001 -p 1883:1883 -p 3000:3000 -p 8080:80
           --name venus-docker victronenergy/venus-docker:latest
           /root/run_with_simulation.sh z
-        working-directory: ./legacy
       - name: Run unit and E2E tests
         run: npm run test:ci
-        working-directory: ./legacy
       - name: Generate E2E Report
         run: npm run generate-e2e-report
-        working-directory: ./legacy
         if: always()
       - name: Upload E2E Results
         uses: actions/upload-artifact@v1
         if: always()
         with:
           name: e2e-tests-results
-          path: legacy/cypress/results/results.json
+          path: cypress/results/results.json
       - name: Upload E2E Report
         uses: actions/upload-artifact@v1
         if: always()
         with:
           name: e2e-tests-report
-          path: legacy/cypress/report
+          path: cypress/report
       - name: Upload Cypress Screenshots
         uses: actions/upload-artifact@v1
         if: always()
         with:
           name: cypress-screenshots
-          path: legacy/cypress/screenshots
+          path: cypress/screenshots
       - name: Upload Cypress Videos
         uses: actions/upload-artifact@v1
         if: always()
         with:
           name: cypress-videos
-          path: legacy/cypress/videos
+          path: cypress/videos
       - name: Check Tag
         id: check_tag
         run: |
@@ -73,72 +67,12 @@ jobs:
       - name: Build the production bundle
         if: steps.check_tag.outputs.match == 'true'
         run: npm run build --no-lint
-        working-directory: ./legacy
         env:
           PUBLIC_URL: /app
           REACT_APP_ENABLE_LANG_OVERRIDE: false
       - name: Archive bundle
         if: steps.check_tag.outputs.match == 'true'
-        run: tar -zcvf venus-html5-app-legacy.tar.gz dist/
-        working-directory: ./legacy
-      - name: Create Release
-        id: create_release
-        if: steps.check_tag.outputs.match == 'true'
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-      - name: Upload Release Archive
-        if: steps.check_tag.outputs.match == 'true'
-        uses: actions/upload-release-asset@v1.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./legacy/venus-html5-app-legacy.tar.gz
-          asset_name: venus-html5-app-legacy.tar.gz
-          asset_content_type: application/zip
-  build-marine2:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Setup Node.js 18.x
-        uses: actions/setup-node@master
-        with:
-          node-version: 18
-      - name: Node modules cache
-        uses: actions/cache@v3
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-      - name: Install the dependencies
-        run: npm ci
-      - name: Build the test bundle
-        run: npm run build
-        env:
-          BASE_PATH: ''
-      - name: Serve the application
-        run: npm run start -- -p 8000 &
-      - name: Run the Venus simulation
-        run: >
-          docker run -d --rm -p 9001:9001 -p 1883:1883 -p 3000:3000 -p 8080:80
-          --name venus-docker victronenergy/venus-docker:latest
-          /root/run_with_simulation.sh z
-#     TODO: Run tests once they are available
-      - name: Check Tag
-        id: check_tag
-        run: |
-          if [[ ${{ github.event.ref }} =~ ^refs/tags/[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-              echo ::set-output name=match::true
-          fi
-      - name: Build the production bundle
-        if: steps.check_tag.outputs.match == 'true'
-        run: npm run export
-      - name: Archive bundle
-        if: steps.check_tag.outputs.match == 'true'
-        run: tar -zcvf venus-html5-app.tar.gz out/
+        run: tar -zcvf venus-html5-app.tar.gz dist/
       - name: Create Release
         id: create_release
         if: steps.check_tag.outputs.match == 'true'
@@ -158,3 +92,4 @@ jobs:
           asset_path: ./venus-html5-app.tar.gz
           asset_name: venus-html5-app.tar.gz
           asset_content_type: application/zip
+  

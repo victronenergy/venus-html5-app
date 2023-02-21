@@ -1,0 +1,196 @@
+{
+    "acMode": {
+        "modal": {
+            "name": "Välj läge",
+            "updateLimit": "Välj ingångsbegränsning för landström"
+        },
+        "title": "AC-läge"
+    },
+    "boxes": {},
+    "cardFooter": {
+        "Charge": "Laddning",
+        "Critical": "Kritisk",
+        "Optimal": "Optimal",
+        "Status": "Status",
+        "Warning": "Varning"
+    },
+    "common": {
+        "absorptionCharging": "Absorptionsladdning",
+        "assisting": "Assisterar",
+        "autoStartStop": "Auto start/stopp",
+        "bulkCharging": "Bulkladdning",
+        "charge": "Laddning",
+        "chargerOnly": "Endast laddare",
+        "charging": "Laddning",
+        "current": "Ström",
+        "days": "dagar",
+        "discharge": "Urladdning",
+        "discharging": "Urladdning",
+        "eco": "Eco",
+        "emptyBar": " - ",
+        "equalisationCharging": "Utjämningsladdning",
+        "error": "Fel",
+        "fault": "Fel",
+        "floatCharging": "Floatladdning.",
+        "hours": "timmar",
+        "idle": "Tomgång",
+        "inputLimit": "Ingångsbegränsning",
+        "inverterOnly": "Endast växelriktare",
+        "inverting": "Växelriktning",
+        "limit": "Begränsning",
+        "lowPower": "Låg effekt",
+        "minutes": "minuter",
+        "mode": "Läge",
+        "noShorePower": "Ingen landström",
+        "notAvailable": "Ej tillgängligt",
+        "nrOfPhases": "%{phases} faser",
+        "null": " ",
+        "off": "Av",
+        "on": "På",
+        "passthru": "Förbikoppling",
+        "powerSupplyMode": "Nätströmsläge",
+        "remainingTime": "Kvarvarande tid",
+        "running": "I drift",
+        "standby": "Standby",
+        "starting": "Startar",
+        "stopped": "Stoppad",
+        "stopping": "Stoppar",
+        "storageMode": "Förvaringsläge",
+        "sustain": "Upprätthålla",
+        "unplugged": "Urkopplad",
+        "veBusFault": "VE-Bus feltillstånd",
+        "voltage": "Spänning"
+    },
+    "error": {
+        "errorWithMessage": "Fel: %{message}",
+        "genericMessage": "Ett fel inträffade vid anpassningen av applikationen. Försök att ladda om sidan eller kontakta Victron Energy med följande information:",
+        "marine": {
+            "cta": "Skicka den här felrapporten direkt till Victron Energys supportteam:",
+            "dataCharges": "Normala datakostnader tillkommer.",
+            "estimate": "Uppskattad data: %{size} Bytes.",
+            "hint": "Försök att ladda om sidan eller kontakta Victron Energy med följande information:",
+            "ignore": "Ignorera fel",
+            "sendReport": "Skicka felrapport",
+            "title": "Ett fel inträffade vid anpassningen av applikationen."
+        },
+        "mqttUnavailable1": "Kunde inte ansluta till MQTT-servern.",
+        "mqttUnavailable2": "Kontrollera om MQTT är aktiverad i dina inställningar:",
+        "mqttUnavailable3": "Fjärrkonsol > Inställningar > Tjänster >MQTT på LAN (ren text)",
+        "mqttUnavailable4": "Försök att använda knappen för fjärrkonsol (Remote Console) längst upp på den här skärmen för att ändra dina inställningar på distans.",
+        "mqttUnavailable5": "Du kan även försöka att fjärransluta till din enhet genom att välja Fjärr (Remote) från menyn ovan.",
+        "queryParams": "Frågeparametrar: %{queryParams}",
+        "remoteConsole": {},
+        "userAgent": "Användaragent: %{userAgent}",
+        "windowSize": "Fönster: %{width} x %{height}"
+    },
+    "generator": {
+        "fisherPandaAutoStartMessage": "Fisher Pandas autostart-funktion är för närvarande inaktiverad, aktivera den på generatorpanelen för att styra generatorn från denna panel.",
+        "temperature": {
+            "coolant": "Kylmedel",
+            "exhaust": "Avgas",
+            "winding": "Lindning"
+        }
+    },
+    "header": {
+        "close": "Stäng",
+        "connecting": "Ansluter",
+        "local": "Lokal",
+        "loggedIn": "Inloggad som",
+        "notLoggedIn": "Inte inloggad",
+        "remote": "Fjärr",
+        "remoteConsole": "Fjärrkonsol",
+        "remoteMessage": "Öppna på en större skärm för att se fjärrkonsol",
+        "versionInfo": "Versioninformation"
+    },
+    "installations": {
+        "title": "Välj en installation"
+    },
+    "locker": {
+        "lockMessage": "Lås för att förhindra ändringar",
+        "unlockMessage": "Lås upp för att göra ändringar"
+    },
+    "noWidgets": {
+        "subtitle": "Säkerställ att dina enheter är korrekt anslutna",
+        "title": "Din panel är tom"
+    },
+    "pages": {},
+    "remoteLogin": {
+        "2fa": "Tvåstegsbekräftelsekod",
+        "email": "E-post",
+        "forgotPassword": "Glömt ditt lösenord?",
+        "goBack": "Gå tillbaka",
+        "logIn": "Logga in",
+        "logOut": "Logga ut",
+        "loginFailed": "Inloggningen misslyckades",
+        "mobileVerification": "Kod till auktoriseringsapp",
+        "noInstallations": "Detta konto har inga installationer.",
+        "password": "Lösenord",
+        "registerMessage1": "Har du inget konto än? ",
+        "registerMessage2": "Registrera din husbil.",
+        "smsVerification": "SMS-verifieringskod",
+        "wrong2fa": "Felaktig tvåfaktorsverifieringskod"
+    },
+    "statusWidget": {
+        "Absorption charging": "Absorptionsladdning",
+        "Assisting": "Assisterar",
+        "Bulk charging": "Bulkladdning",
+        "Discharging": "Urladdning",
+        "Equalisation charging": "Utjämningsladdning",
+        "Float charging": "Floatladdning.",
+        "Inverting": "Växelriktning",
+        "Low power": "Låg effekt",
+        "Off": "Av",
+        "Passthru": "Förbikoppling",
+        "Storage mode": "Förvaringsläge",
+        "Sustain": "Upprätthålla",
+        "VE.Bus Fault condition": "VE-Bus feltillstånd",
+        "parts": {
+            "Battery": "Batteri",
+            "Black water": "Avloppsvatten",
+            "DC Loads": "DC-belastningar",
+            "Fresh water": "Färskvatten",
+            "Fuel": "Bränsle",
+            "Live well": "Livewell (vattentank)",
+            "Oil": "Olja",
+            "PV Charger": "Solcellsladdare",
+            "Shore Power": "Landström",
+            "Tank sensor": "Tanksensor",
+            "Waste water": "Avfallsvatten"
+        }
+    },
+    "tankWidget": {
+        "Black water": "Avloppsvatten",
+        "Fresh water": "Färskvatten",
+        "Fuel": "Bränsle",
+        "Live well": "Livewell (vattentank)",
+        "Oil": "Olja",
+        "Tank sensor": "Tanksensor",
+        "Waste water": "Avfallsvatten"
+    },
+    "versionInfo": {
+        "buildDate": "Upprättandedatum",
+        "identifier": "Id-nummer",
+        "venusOs": "Venus OS",
+        "version": "Version %{version}",
+        "vrmPortID": "VRM plats-id"
+    },
+    "widgets": {
+        "acLoads": "AC-belastningar",
+        "batteries": "Batterier",
+        "battery": "Batteri",
+        "batteryWithName": "Batteri: %{name}",
+        "chargerWithName": "Laddare: %{productNameShort}",
+        "dcLoads": "DC-belastningar",
+        "generator": "Generator",
+        "generatorInput": "Generatoringång",
+        "gridInput": "Nätingång",
+        "invalidConfig": "Ogiltig konfiguration",
+        "inverterCharger": "Växelriktare/ laddare %{productNameShort}",
+        "inverterWithName": "Växelriktare: %{productNameShort}",
+        "pvCharger": "Solcellsladdare",
+        "shorePower": "Landström",
+        "solar": "Solceller",
+        "status": "Status",
+        "unknown": "Okänd"
+    }
+}
