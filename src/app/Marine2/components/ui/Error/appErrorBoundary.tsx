@@ -4,7 +4,7 @@ import ErrorFallback from "./ErrorFallback"
 export const appErrorBoundaryProps: ErrorBoundaryProps = {
   FallbackComponent: ErrorFallback,
   onError(error, info) {
-    console.log("-> error", error)
-    console.log("-> info", info)
+    console.error("-> error", error)
+    console.info("-> info", info)
   },
 }
