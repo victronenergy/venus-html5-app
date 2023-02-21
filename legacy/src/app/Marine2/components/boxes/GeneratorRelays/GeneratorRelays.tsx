@@ -1,4 +1,5 @@
 import { useGeneratorRelay } from "@elninotech/mfd-modules"
+import { observer } from "mobx-react"
 import { AC_SOURCE, RELAY_FUNCTION } from "../../../utils/constants"
 import GeneratorRelay from "./GeneratorRelay"
 
@@ -32,4 +33,4 @@ interface Props {
   mode?: "compact" | "full"
 }
 
-export default GeneratorRelays
+export default observer(GeneratorRelays)
