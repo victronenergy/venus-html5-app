@@ -16,12 +16,13 @@ import Charger from "../Charger"
 import Inverter from "../Inverter"
 import GeneratorFp from "../GeneratorFp"
 import GeneratorRelays from "../GeneratorRelays"
+import InverterCharger from "../InverterCharger"
 // import { withErrorBoundary } from "react-error-boundary"
 // import ErrorFallback from "../../../components/ui/ErrorBoundary/ErrorFallback"
 
 const DevicesOverview = ({ mode = "compact" }: Props) => {
   const { inverters } = useInverters()
-  const { vebusInverters } = useVebus()
+  const { instanceId, vebusInverters } = useVebus()
   const { chargers } = useChargers()
   // const { state, customName, productName, modeIsAdjustable, updateMode } = useInverterCharger()
 
@@ -44,6 +45,7 @@ const DevicesOverview = ({ mode = "compact" }: Props) => {
           {inverters && inverters.map((id) => <Inverter key={id} instanceId={id} isVebusInverter={false} />)}
           {!!vebusInverters.length &&
             vebusInverters.map((id) => <Inverter key={id} instanceId={id} isVebusInverter={true} />)}
+          {!!instanceId && <InverterCharger />}
           <GeneratorFp />
           <GeneratorRelays />
         </>
