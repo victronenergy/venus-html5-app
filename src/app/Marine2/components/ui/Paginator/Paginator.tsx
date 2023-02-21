@@ -1,9 +1,14 @@
-import React, { useRef, useEffect, useState } from 'react'
-import PageSelector, { SelectorLocation } from '~/components/ui/PageSelector'
-import classnames from 'classnames'
-import { useComponentSize } from '~/utils/hooks'
+import React, { useRef, useEffect, useState } from "react"
+import classnames from "classnames"
+import { useComponentSize } from "../../../utils/hooks"
+import PageSelector, { SelectorLocation } from "../PageSelector"
 
-const Paginator = ({ children, orientation = 'horizontal', selectorLocation = 'bottom-full' }: Props) => {
+const Paginator = ({
+  children,
+  childrenPerPage,
+  orientation = "horizontal",
+  selectorLocation = "bottom-full",
+}: Props) => {
   const childrenArray = Array.isArray(children) ? children : [children]
   const [childrenSizeArray, setChildrenSizeArray] = useState<Array<number>>([])
 
@@ -22,38 +27,57 @@ const Paginator = ({ children, orientation = 'horizontal', selectorLocation = 'b
 
   // On the first render, save the children sizes to an array for calculations after resizing
   useEffect(() => {
-    const newChildrenSizeArray: number[] = []
+    // no need to check sizes when children array split into predefined length chunks
+    if (childrenPerPage) {
+      splitChildren()
+    } else {
+      const newChildrenSizeArray: number[] = []
 
-    childrenRef.current.forEach((ref) => {
-      const refSize = orientation === 'horizontal' ? ref.scrollWidth : ref.scrollHeight
-      newChildrenSizeArray.push(refSize)
-    })
+      childrenRef.current.forEach((ref) => {
+        const refSize = orientation === "horizontal" ? ref.scrollWidth : ref.scrollHeight
+        newChildrenSizeArray.push(refSize)
+      })
 
-    setChildrenSizeArray(newChildrenSizeArray)
+      setChildrenSizeArray(newChildrenSizeArray)
+    }
   }, [])
 
   // on component resize, split the children elements into pages differently
   useEffect(() => {
-    splitIntoPages()
+    if (!childrenPerPage) autoSplitIntoPages()
   }, [componentSize])
 
-  const splitIntoPages = () => {
+  const splitChildren = () => {
+    if (!childrenPerPage) return
+
+    const childrenPageArray: PageElement[] = childrenArray.map((_, i) => {
+      return { childIndex: i }
+    })
+    const newPagesArray: Array<Array<PageElement>> = []
+
+    for (let i = 0; i < childrenPageArray.length; i += childrenPerPage) {
+      newPagesArray.push(childrenPageArray.slice(i, i + childrenPerPage))
+    }
+    setPages(newPagesArray)
+  }
+
+  const autoSplitIntoPages = () => {
     // if content is not scrollable return
     if (
       wrapperRef.current === null ||
       childrenSizeArray.reduce((sizeSum, size) => sizeSum + size, 0) <
-        (orientation === 'horizontal' ? wrapperRef.current.offsetWidth : wrapperRef.current.offsetHeight)
+        (orientation === "horizontal" ? wrapperRef.current.offsetWidth : wrapperRef.current.offsetHeight)
     ) {
       return
     }
 
-    const selectorIsHorizontal = selectorLocation.startsWith('bottom') || selectorLocation.startsWith('top')
+    const selectorIsHorizontal = selectorLocation.startsWith("bottom") || selectorLocation.startsWith("top")
     const selectorIsTakingUpSpace =
-      (orientation === 'horizontal' && !selectorIsHorizontal) || (orientation === 'vertical' && selectorIsHorizontal)
+      (orientation === "horizontal" && !selectorIsHorizontal) || (orientation === "vertical" && selectorIsHorizontal)
     // Calculating parent size (selector might be taking part of the size if it is of the opposite orientation, we
     // should then subtract its size (3.5rem = 56px)
     const parentSize =
-      (orientation === 'horizontal' ? wrapperRef.current.offsetWidth : wrapperRef.current.offsetHeight) -
+      (orientation === "horizontal" ? wrapperRef.current.offsetWidth : wrapperRef.current.offsetHeight) -
       (selectorIsTakingUpSpace ? 56 : 0)
 
     const newPagesArray: Array<Array<PageElement>> = []
@@ -108,9 +132,9 @@ const Paginator = ({ children, orientation = 'horizontal', selectorLocation = 'b
       // if there is only one element, and it has a scrollTo attribute, add that element and scroll it
       const scrollTo = pages[currentPage][0].scrollTo
       pageRef.current.scrollTo({
-        left: orientation === 'horizontal' ? scrollTo : 0,
-        top: orientation === 'vertical' ? scrollTo : 0,
-        behavior: 'smooth',
+        left: orientation === "horizontal" ? scrollTo : 0,
+        top: orientation === "vertical" ? scrollTo : 0,
+        behavior: "smooth",
       })
     }
   }, [pages, currentPage, orientation])
@@ -118,18 +142,18 @@ const Paginator = ({ children, orientation = 'horizontal', selectorLocation = 'b
   return (
     <div
       ref={wrapperRef}
-      className={classnames('w-full h-full flex justify-between', {
-        'flex-row': selectorLocation.startsWith('right'),
-        'flex-col': selectorLocation.startsWith('bottom'),
-        'flex-row-reverse': selectorLocation.startsWith('left'),
-        'flex-col-reverse': selectorLocation.startsWith('top'),
+      className={classnames("w-full h-full flex justify-between", {
+        "flex-row": selectorLocation.startsWith("right"),
+        "flex-col": selectorLocation.startsWith("bottom"),
+        "flex-row-reverse": selectorLocation.startsWith("left"),
+        "flex-col-reverse": selectorLocation.startsWith("top"),
       })}
     >
-      {(pages.length == 0 || pages.length == 1) && (
+      {(pages.length === 0 || pages.length === 1) && (
         <div
-          className={classnames('flex', {
-            'flex-row': orientation === 'horizontal',
-            'flex-col': orientation === 'vertical',
+          className={classnames("flex", {
+            "flex-row": orientation === "horizontal",
+            "flex-col": orientation === "vertical",
           })}
         >
           {childrenArray.map((child, i) => (
@@ -147,11 +171,11 @@ const Paginator = ({ children, orientation = 'horizontal', selectorLocation = 'b
       {pages && pages.length > 1 && (
         <div
           ref={pageRef}
-          className={classnames('overflow-hidden flex', {
-            'flex-row': orientation === 'horizontal',
-            'flex-col': orientation === 'vertical',
-            'h-[calc(100%-3.5rem)] w-full': selectorLocation.startsWith('bottom') || selectorLocation.startsWith('top'),
-            'w-[calc(100%-3.5rem)] h-full': selectorLocation.startsWith('right') || selectorLocation.startsWith('left'),
+          className={classnames("overflow-hidden flex", {
+            "flex-row": orientation === "horizontal",
+            "flex-col": orientation === "vertical",
+            "h-[calc(100%-3.5rem)] w-full": selectorLocation.startsWith("bottom") || selectorLocation.startsWith("top"),
+            "w-[calc(100%-3.5rem)] h-full": selectorLocation.startsWith("right") || selectorLocation.startsWith("left"),
           })}
         >
           {childrenArray
@@ -180,7 +204,8 @@ const Paginator = ({ children, orientation = 'horizontal', selectorLocation = 'b
 
 interface Props {
   children: JSX.Element[] | JSX.Element
-  orientation?: 'vertical' | 'horizontal'
+  childrenPerPage?: number
+  orientation?: "vertical" | "horizontal"
   selectorLocation?: SelectorLocation
 }
 
