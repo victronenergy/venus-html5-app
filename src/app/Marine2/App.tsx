@@ -1,14 +1,13 @@
 import { useAppStore, useMqtt, useTheme, useVebus, useVrmStore } from "@elninotech/mfd-modules"
 import { observer } from "mobx-react"
 import React, { useEffect } from "react"
-import "./css/global.css"
+import { withErrorBoundary } from "react-error-boundary"
 import { getLocale } from "react-i18nify"
 import { useVisibleWidgetsStore } from "./modules"
-
 import { Marine2 } from "./Marine2"
 import Connecting from "./components/ui/Connecting"
-import { withErrorBoundary } from "react-error-boundary"
 import { appErrorBoundaryProps } from "./components/ui/Error/appErrorBoundary"
+import "./css/global.css"
 
 export type AppProps = {
   host: string
