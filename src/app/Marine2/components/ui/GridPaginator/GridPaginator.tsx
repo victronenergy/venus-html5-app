@@ -1,7 +1,5 @@
-import React, { useRef, useEffect, useState } from "react"
-import classnames from "classnames"
-import { useComponentSize } from "../../../utils/hooks"
-import PageSelector, { SelectorLocation } from "../PageSelector"
+import React from "react"
+import { SelectorLocation } from "../PageSelector"
 import Grid from "../Grid"
 import Paginator from "../Paginator"
 import { range } from "lodash-es"
@@ -18,22 +16,19 @@ const GridPaginator = ({
   selectorLocation = "bottom-full",
 }: Props) => {
   const childrenArray = Array.isArray(children) ? children : [children]
+  const pages = Math.ceil(childrenArray.length / childrenPerPage)
 
-  const wrapperRef = useRef<HTMLDivElement>(null)
-  const pageRef = useRef<HTMLDivElement>(null)
-  const [pages, setPages] = useState<Array<Array<number>>>([])
-
-  if (pages.length === 1) {
+  if (pages === 1) {
     return (
       <Grid childClassName={"p-1"} flow={"col"}>
-        {childrenArray.map((child, key) => child)}
+        {childrenArray}
       </Grid>
     )
   }
   return (
     <div className={"h-full w-full h-min-0"}>
-      <Paginator orientation={orientation} selectorLocation={selectorLocation}>
-        <div ref={pageRef} className={`flex flex-none flex-row w-[300%] h-full`}>
+      <Paginator orientation={orientation} selectorLocation={selectorLocation} pageNumber={pages}>
+        <div className={`flex flex-row w-[${Math.ceil(childrenArray.length / childrenPerPage)}00%] h-full`}>
           {range(Math.ceil(childrenArray.length / childrenPerPage)).map((page) => {
             return (
               <Grid
@@ -44,7 +39,7 @@ const GridPaginator = ({
                 forceOneDimensionRatio={forceOneDimensionRatio}
                 onClick={onClick}
               >
-                {childrenArray.slice(page * childrenPerPage, (page + 1) * childrenPerPage).map((el, key) => el)}
+                {childrenArray.slice(page * childrenPerPage, (page + 1) * childrenPerPage)}
               </Grid>
             )
           })}

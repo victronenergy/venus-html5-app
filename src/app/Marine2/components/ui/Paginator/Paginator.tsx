@@ -3,7 +3,7 @@ import classnames from "classnames"
 import { useComponentSize } from "../../../utils/hooks"
 import PageSelector, { SelectorLocation } from "../PageSelector"
 
-const Paginator = ({ children, orientation = "horizontal", selectorLocation = "bottom-full" }: Props) => {
+const Paginator = ({ children, orientation = "horizontal", selectorLocation = "bottom-full", pageNumber }: Props) => {
   const childrenArray = Array.isArray(children) ? children : [children]
   const [childrenSizeArray, setChildrenSizeArray] = useState<Array<number>>([])
 
@@ -61,7 +61,7 @@ const Paginator = ({ children, orientation = "horizontal", selectorLocation = "b
     let currentPageElements: Array<PageElement> = []
 
     childrenRef.current.forEach((ref, childIndex) => {
-      const refSize = childrenSizeArray[childIndex]
+      const refSize = !!pageNumber ? parentSize * pageNumber : childrenSizeArray[childIndex]
 
       // if the current page would overflow after adding this element, push it to the array and start a new page
       if (currentPageSize + refSize > parentSize && currentPageElements.length > 0) {
@@ -81,7 +81,6 @@ const Paginator = ({ children, orientation = "horizontal", selectorLocation = "b
 
         // avoid having the last part of the element be very small, instead, make it the size of parent element
         newPagesArray.push([{ childIndex: childIndex, scrollTo: refSize - parentSize }])
-        console.log(refSize)
       } else if (currentPageSize + refSize <= parentSize) {
         // if even after adding this element the page is not overflowing, add it to current page
         currentPageElements.push({ childIndex: childIndex })
@@ -185,6 +184,7 @@ const Paginator = ({ children, orientation = "horizontal", selectorLocation = "b
 interface Props {
   children: JSX.Element[] | JSX.Element
   orientation?: "vertical" | "horizontal"
+  pageNumber?: number
   selectorLocation?: SelectorLocation
 }
 
