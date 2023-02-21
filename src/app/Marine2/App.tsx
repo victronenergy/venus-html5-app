@@ -5,17 +5,18 @@ import "./css/global.css"
 // import "../../css/index.scss"
 import { getLocale } from "react-i18nify"
 import { useVisibleWidgetsStore } from "./modules"
-// import { ErrorModal } from "./components/ErrorModal"
 
 import { Marine2 } from "./Marine2"
 import Connecting from "./components/ui/Connecting"
+import { withErrorBoundary } from "react-error-boundary"
+import { appErrorBoundaryProps } from "./components/ui/Error/appErrorBoundary"
 
 export type AppProps = {
   host: string
   port: number
 }
 
-const App = observer((props: AppProps) => {
+const App = (props: AppProps) => {
   const vrmStore = useVrmStore()
   const appStore = useAppStore()
   const mqtt = useMqtt()
@@ -68,9 +69,8 @@ const App = observer((props: AppProps) => {
   return (
     <React.Suspense fallback={<Connecting />}>
       <Marine2 {...props} />
-      {/*<ErrorModal />*/}
     </React.Suspense>
   )
-})
+}
 
-export default App
+export default withErrorBoundary(observer(App), appErrorBoundaryProps)
