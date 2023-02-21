@@ -2,7 +2,6 @@ import { useAppStore, useMqtt, useTheme, useVebus, useVrmStore } from "@elninote
 import { observer } from "mobx-react"
 import React, { useEffect } from "react"
 import "./css/global.css"
-// import "../../css/index.scss"
 import { getLocale } from "react-i18nify"
 import { useVisibleWidgetsStore } from "./modules"
 
