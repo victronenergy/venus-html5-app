@@ -3,12 +3,7 @@ import classnames from "classnames"
 import { useComponentSize } from "../../../utils/hooks"
 import PageSelector, { SelectorLocation } from "../PageSelector"
 
-const Paginator = ({
-  children,
-  childrenPerPage,
-  orientation = "horizontal",
-  selectorLocation = "bottom-full",
-}: Props) => {
+const Paginator = ({ children, orientation = "horizontal", selectorLocation = "bottom-full" }: Props) => {
   const childrenArray = Array.isArray(children) ? children : [children]
   const [childrenSizeArray, setChildrenSizeArray] = useState<Array<number>>([])
 
@@ -27,39 +22,20 @@ const Paginator = ({
 
   // On the first render, save the children sizes to an array for calculations after resizing
   useEffect(() => {
-    // no need to check sizes when children array split into predefined length chunks
-    if (childrenPerPage) {
-      splitChildren()
-    } else {
-      const newChildrenSizeArray: number[] = []
+    const newChildrenSizeArray: number[] = []
 
-      childrenRef.current.forEach((ref) => {
-        const refSize = orientation === "horizontal" ? ref.scrollWidth : ref.scrollHeight
-        newChildrenSizeArray.push(refSize)
-      })
+    childrenRef.current.forEach((ref) => {
+      const refSize = orientation === "horizontal" ? ref.scrollWidth : ref.scrollHeight
+      newChildrenSizeArray.push(refSize)
+    })
 
-      setChildrenSizeArray(newChildrenSizeArray)
-    }
+    setChildrenSizeArray(newChildrenSizeArray)
   }, [])
 
   // on component resize, split the children elements into pages differently
   useEffect(() => {
-    if (!childrenPerPage) autoSplitIntoPages()
+    autoSplitIntoPages()
   }, [componentSize])
-
-  const splitChildren = () => {
-    if (!childrenPerPage) return
-
-    const childrenPageArray: PageElement[] = childrenArray.map((_, i) => {
-      return { childIndex: i }
-    })
-    const newPagesArray: Array<Array<PageElement>> = []
-
-    for (let i = 0; i < childrenPageArray.length; i += childrenPerPage) {
-      newPagesArray.push(childrenPageArray.slice(i, i + childrenPerPage))
-    }
-    setPages(newPagesArray)
-  }
 
   const autoSplitIntoPages = () => {
     // if content is not scrollable return
@@ -105,6 +81,7 @@ const Paginator = ({
 
         // avoid having the last part of the element be very small, instead, make it the size of parent element
         newPagesArray.push([{ childIndex: childIndex, scrollTo: refSize - parentSize }])
+        console.log(refSize)
       } else if (currentPageSize + refSize <= parentSize) {
         // if even after adding this element the page is not overflowing, add it to current page
         currentPageElements.push({ childIndex: childIndex })
@@ -151,13 +128,14 @@ const Paginator = ({
     >
       {(pages.length === 0 || pages.length === 1) && (
         <div
-          className={classnames("flex", {
+          className={classnames("flex h-full w-full", {
             "flex-row": orientation === "horizontal",
             "flex-col": orientation === "vertical",
           })}
         >
           {childrenArray.map((child, i) => (
             <div
+              className={"w-full h-full h-min-0"}
               key={i}
               ref={(el) => {
                 if (el !== null) childrenRef.current[i] = el as HTMLDivElement
@@ -181,7 +159,9 @@ const Paginator = ({
           {childrenArray
             .slice(pages[currentPage][0].childIndex, pages[currentPage][pages[currentPage].length - 1].childIndex + 1)
             .map((child, i) => (
-              <div key={i}>{child}</div>
+              <div className={"w-full h-full h-min-0"} key={i}>
+                {child}
+              </div>
             ))}
         </div>
       )}
@@ -204,7 +184,6 @@ const Paginator = ({
 
 interface Props {
   children: JSX.Element[] | JSX.Element
-  childrenPerPage?: number
   orientation?: "vertical" | "horizontal"
   selectorLocation?: SelectorLocation
 }

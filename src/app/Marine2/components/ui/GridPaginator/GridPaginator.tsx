@@ -3,9 +3,16 @@ import classnames from "classnames"
 import { useComponentSize } from "../../../utils/hooks"
 import PageSelector, { SelectorLocation } from "../PageSelector"
 import Grid from "../Grid"
+import Paginator from "../Paginator"
+import { range } from "lodash-es"
 
 const GridPaginator = ({
   children,
+  className,
+  childClassName,
+  flow,
+  forceOneDimensionRatio,
+  onClick,
   childrenPerPage,
   orientation = "horizontal",
   selectorLocation = "bottom-full",
@@ -14,86 +21,47 @@ const GridPaginator = ({
 
   const wrapperRef = useRef<HTMLDivElement>(null)
   const pageRef = useRef<HTMLDivElement>(null)
+  const [pages, setPages] = useState<Array<Array<number>>>([])
 
-  type PageElement = {
-    childIndex: number
-    scrollTo?: number
+  if (pages.length === 1) {
+    return (
+      <Grid childClassName={"p-1"} flow={"col"}>
+        {childrenArray.map((child, key) => child)}
+      </Grid>
+    )
   }
-  const [pages, setPages] = useState<Array<Array<PageElement>>>([])
-  const [currentPage, setCurrentPage] = useState(0)
-
-  // On the first render, save the children sizes to an array for calculations after resizing
-  useEffect(() => {
-    splitChildren()
-  }, [])
-
-  const splitChildren = () => {
-    if (!childrenPerPage) return
-
-    const childrenPageArray: PageElement[] = childrenArray.map((_, i) => {
-      return { childIndex: i }
-    })
-    const newPagesArray: Array<Array<PageElement>> = []
-
-    for (let i = 0; i < childrenPageArray.length; i += childrenPerPage) {
-      newPagesArray.push(childrenPageArray.slice(i, i + childrenPerPage))
-    }
-    setPages(newPagesArray)
-  }
-
   return (
-    <div
-      ref={wrapperRef}
-      className={classnames("w-full h-full flex justify-between", {
-        "flex-row": selectorLocation.startsWith("right"),
-        "flex-col": selectorLocation.startsWith("bottom"),
-        "flex-row-reverse": selectorLocation.startsWith("left"),
-        "flex-col-reverse": selectorLocation.startsWith("top"),
-      })}
-    >
-      {pages.length === 1 && (
-        <Grid childClassName={"p-1"} flow={"col"}>
-          {childrenArray.map((child, i) => (
-            <>{child}</>
-          ))}
-        </Grid>
-      )}
-      {pages && pages.length > 1 && (
-        <div
-          ref={pageRef}
-          className={classnames("overflow-hidden flex", {
-            "h-[calc(100%-3.5rem)] w-full": selectorLocation.startsWith("bottom") || selectorLocation.startsWith("top"),
-            "w-[calc(100%-3.5rem)] h-full": selectorLocation.startsWith("right") || selectorLocation.startsWith("left"),
+    <div className={"h-full w-full h-min-0"}>
+      <Paginator orientation={orientation} selectorLocation={selectorLocation}>
+        <div ref={pageRef} className={`flex flex-none flex-row w-[300%] h-full`}>
+          {range(Math.ceil(childrenArray.length / childrenPerPage)).map((page) => {
+            return (
+              <Grid
+                key={page}
+                className={className}
+                childClassName={childClassName}
+                flow={flow}
+                forceOneDimensionRatio={forceOneDimensionRatio}
+                onClick={onClick}
+              >
+                {childrenArray.slice(page * childrenPerPage, (page + 1) * childrenPerPage).map((el, key) => el)}
+              </Grid>
+            )
           })}
-        >
-          <Grid childClassName={"p-1"} flow={"col"}>
-            {childrenArray
-              .slice(pages[currentPage][0].childIndex, pages[currentPage][pages[currentPage].length - 1].childIndex + 1)
-              .map((child, i) => (
-                <>{child}</>
-              ))}
-          </Grid>
         </div>
-      )}
-      {pages.length > 1 && (
-        <PageSelector
-          onClickLeft={() => {
-            setCurrentPage(currentPage - 1)
-          }}
-          onClickRight={() => {
-            setCurrentPage(currentPage + 1)
-          }}
-          currentPage={currentPage}
-          maxPages={pages.length}
-          selectorLocation={selectorLocation}
-        ></PageSelector>
-      )}
+      </Paginator>
     </div>
   )
 }
 
 interface Props {
   children: JSX.Element[] | JSX.Element
+  onClick?: () => void
+  className?: string
+  childClassName?: string
+  flow?: "row" | "col"
+  /** Force the grid to use only 1 row or column if the ratio of the grid is higher than this value */
+  forceOneDimensionRatio?: number
   childrenPerPage: number
   orientation?: "vertical" | "horizontal"
   selectorLocation?: SelectorLocation
