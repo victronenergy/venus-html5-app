@@ -7,7 +7,7 @@ import Box from "../../ui/Box"
 import Tank from "./Tank"
 import { AppViews } from "../../../modules/AppViews"
 import { withErrorBoundary } from "react-error-boundary"
-import ErrorFallback from "../../ui/ErrorFallback"
+import { appErrorBoundaryProps } from "../../ui/Error/appErrorBoundary"
 
 interface Props {
   mode?: string
@@ -95,9 +95,4 @@ const Tanks = ({ mode, className }: Props) => {
   )
 }
 
-export default withErrorBoundary(observer(Tanks), {
-  FallbackComponent: ErrorFallback,
-  onError(error, info) {
-    console.error(error, info)
-  },
-})
+export default withErrorBoundary(observer(Tanks), appErrorBoundaryProps)

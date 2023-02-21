@@ -9,9 +9,9 @@ import BatteriesIcon from "../../../images/icons/batteries.svg"
 import BatterySummary from "../../ui/BatterySummary"
 import AuxiliaryBatteries from "../Batteries/AuxiliaryBatteries"
 import { withErrorBoundary } from "react-error-boundary"
-import ErrorFallback from "../../ui/ErrorFallback"
 import { AppViews } from "../../../modules/AppViews"
 import { translate } from "react-i18nify"
+import { appErrorBoundaryProps } from "../../ui/Error/appErrorBoundary"
 
 interface Props {
   mode?: "compact" | "full"
@@ -96,9 +96,4 @@ const getOverviewBatteries = function (batteries: BatteryType[], max: number) {
   return batteries.slice(0, Math.min(withStateCount, max))
 }
 
-export default withErrorBoundary(observer(BatteriesOverview), {
-  FallbackComponent: ErrorFallback,
-  onError(error, info) {
-    console.error(error, info)
-  },
-})
+export default withErrorBoundary(observer(BatteriesOverview), appErrorBoundaryProps)
