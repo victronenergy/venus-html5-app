@@ -2,7 +2,7 @@ import React from "react"
 import { SelectorLocation } from "../PageSelector"
 import Grid, { GridProps } from "../Grid"
 import Paginator from "../Paginator"
-import { range } from "lodash-es"
+import range from "lodash-es/range"
 
 const GridPaginator = ({
   children,
