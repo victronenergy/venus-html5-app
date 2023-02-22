@@ -61,6 +61,10 @@
         "veBusFault": "Condizione di errore VE.Bus",
         "voltage": "Tensione"
     },
+    "diagnostics": {
+        "connection": {},
+        "device": {}
+    },
     "error": {
         "errorWithMessage": "Errore: %{message}",
         "genericMessage": "Si è verificato un errore durante il render dell’applicazione. Provare a ricaricare la pagina o rivolgersi a Victron Energy fornendo le seguenti informazioni:",

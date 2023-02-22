@@ -65,11 +65,11 @@ const ErrorFallback = ({ error, resetErrorBoundary, showReset = false }: Props) 
           </Button>
           {showReset && (
             <Button className="mx-2 w-full" size="md" onClick={reset}>
-              Reset error
+              {translate("error.marine.resetError")}
             </Button>
           )}
           <Button className="w-full" size="md" onClick={restart}>
-            Restart app
+            {translate("error.marine.restartApp")}
           </Button>
         </div>
       </div>

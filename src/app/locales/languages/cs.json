@@ -61,6 +61,10 @@
         "veBusFault": "Chybový stav sběrnice VE.Bus",
         "voltage": "Napětí"
     },
+    "diagnostics": {
+        "connection": {},
+        "device": {}
+    },
     "error": {
         "errorWithMessage": "Chyba: %{message}",
         "genericMessage": "Při vykreslování aplikace došlo k chybě. Zkuste znovu načíst stránku nebo kontaktovat společnost Victron Energy s následujícími informacemi:",
