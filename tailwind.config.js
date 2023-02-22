@@ -16,7 +16,7 @@ module.exports = {
         md: "800px",
         lg: "1400px",
         xl: "1800px",
-        'hide-remote-console': {'raw': '(max-width: 600px), (max-height: 550px)'},
+        "hide-remote-console": { raw: "(max-width: 600px), (max-height: 550px)" },
       },
       colors: {
         victron: {
@@ -31,7 +31,7 @@ module.exports = {
           gray: {
             DEFAULT: "#969591",
             dark: "#969591",
-            "400": '#64635F',
+            400: "#64635F",
           },
           blue: {
             DEFAULT: "#387DC5",
@@ -62,9 +62,9 @@ module.exports = {
             dark: "#7F7F9C",
           },
           yellow: {
-            DEFAULT: '#F0962E',
-            dark: '#F0962E',
-          }
+            DEFAULT: "#F0962E",
+            dark: "#F0962E",
+          },
         },
       },
       fontFamily: {
@@ -78,8 +78,20 @@ module.exports = {
         full: "9999px",
         DEFAULT: "0.25rem",
       },
+      fontSize: {
+        xs: "0.75rem",
+        sm: "0.875rem",
+        base: "1rem",
+        md: "1.125rem",
+        lg: "1.25rem",
+        xl: "1.375rem",
+        "2xl": "1.5rem",
+        "3xl": "1.875rem",
+        "4xl": "2.25rem",
+        "5xl": "3rem",
+      },
       strokeWidth: {
-        "16": "16px",
+        16: "16px",
       },
     },
   },

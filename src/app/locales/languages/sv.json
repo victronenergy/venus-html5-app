@@ -61,6 +61,10 @@
         "veBusFault": "VE-Bus feltillstånd",
         "voltage": "Spänning"
     },
+    "diagnostics": {
+        "connection": {},
+        "device": {}
+    },
     "error": {
         "errorWithMessage": "Fel: %{message}",
         "genericMessage": "Ett fel inträffade vid anpassningen av applikationen. Försök att ladda om sidan eller kontakta Victron Energy med följande information:",

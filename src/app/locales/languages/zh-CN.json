@@ -26,6 +26,7 @@
         "shorePower": "岸电",
         "solar": "太阳能",
         "status": "状态",
+        "tanks": "液位",
         "unknown": "未知",
         "windGenerator": "风力发电机"
     },
@@ -64,6 +65,7 @@
         "inverting": "逆变",
         "light": "光",
         "limit": "限制",
+        "loads": "负载",
         "lowPower": "低功率",
         "minutes": "分",
         "mode": "模式",
@@ -86,6 +88,22 @@
         "unplugged": "未插电",
         "veBusFault": "VE Bus故障",
         "voltage": "电压"
+    },
+    "diagnostics": {
+        "connection": {
+            "connection": "连接",
+            "error": "错误",
+            "host": "主机",
+            "portalId": "门户ID",
+            "status": "状态"
+        },
+        "device": {
+            "device": "设备",
+            "userAgent": "用户代理",
+            "viewportHeight": "视口高度",
+            "viewportWidth": "视口宽度"
+        },
+        "diagnostics": "诊断"
     },
     "error": {
         "errorWithMessage": "错误: %{message}",
@@ -143,6 +161,7 @@
         "title": "仪表盘空白"
     },
     "pages": {
+        "diagnostics": "诊断",
         "remoteConsole": "远程控制台",
         "systemOverview": "系统总览"
     },

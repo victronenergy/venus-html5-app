@@ -41,8 +41,14 @@
         "unplugged": "Отключено",
         "voltage": "Напряжение"
     },
+    "diagnostics": {
+        "connection": {},
+        "device": {}
+    },
     "error": {
-        "marine": {},
+        "marine": {
+            "resetError": "Reset Error"
+        },
         "remoteConsole": {}
     },
     "generator": {

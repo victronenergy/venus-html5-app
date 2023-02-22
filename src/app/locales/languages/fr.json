@@ -61,6 +61,10 @@
         "veBusFault": "Condition de défaut VE.Bus",
         "voltage": "Tension"
     },
+    "diagnostics": {
+        "connection": {},
+        "device": {}
+    },
     "error": {
         "errorWithMessage": "Erreur: %{message}",
         "genericMessage": "Une erreur s'est produite lors du rendu de l'application. Essayez de réactualiser la page ou de contacter Victron Energy avec les informations suivantes :",

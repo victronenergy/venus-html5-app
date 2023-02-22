@@ -61,6 +61,10 @@
         "veBusFault": "Eroare convertor VE.Bus",
         "voltage": "Tensiune"
     },
+    "diagnostics": {
+        "connection": {},
+        "device": {}
+    },
     "error": {
         "errorWithMessage": "Eroare: %{message}",
         "genericMessage": "A apărut o eroare la afișarea aplicației. Încercați să reîncărcați pagina sau să contactați Victron Energy cu următoarele informații:",
