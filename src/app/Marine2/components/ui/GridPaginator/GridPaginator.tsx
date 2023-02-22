@@ -3,6 +3,7 @@ import { SelectorLocation } from "../PageSelector"
 import Grid, { GridProps } from "../Grid"
 import Paginator from "../Paginator"
 import range from "lodash-es/range"
+import classnames from "classnames"
 
 const GridPaginator = ({
   children,
@@ -26,10 +27,19 @@ const GridPaginator = ({
     )
   }
   return (
-    <div className={"h-full w-full h-min-0"}>
+    <div className={"h-full w-full min-h-0 min-w-0"}>
       <Paginator orientation={orientation} selectorLocation={selectorLocation} pageNumber={pages}>
-        <div className={`flex flex-row w-[${Math.ceil(childrenArray.length / childrenPerPage)}00%] h-full`}>
-          {range(Math.ceil(childrenArray.length / childrenPerPage)).map((page) => {
+        <div
+          className={classnames(`flex`, {
+            "flex-row": orientation === "horizontal",
+            "flex-col": orientation === "vertical",
+          })}
+          style={{
+            width: orientation === "horizontal" ? `${pages}00%` : "100%",
+            height: orientation === "vertical" ? `${pages}00%` : "100%",
+          }}
+        >
+          {range(pages).map((page) => {
             return (
               <Grid
                 key={page}

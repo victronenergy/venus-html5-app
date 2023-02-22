@@ -134,7 +134,7 @@ const Paginator = ({ children, orientation = "horizontal", selectorLocation = "b
         >
           {childrenArray.map((child, i) => (
             <div
-              className={"w-full h-full h-min-0"}
+              className={"w-full h-full min-h-0"}
               key={i}
               ref={(el) => {
                 if (el !== null) childrenRef.current[i] = el as HTMLDivElement
@@ -158,7 +158,7 @@ const Paginator = ({ children, orientation = "horizontal", selectorLocation = "b
           {childrenArray
             .slice(pages[currentPage][0].childIndex, pages[currentPage][pages[currentPage].length - 1].childIndex + 1)
             .map((child, i) => (
-              <div className={"w-full h-full h-min-0"} key={i}>
+              <div className={"w-full h-full min-h-0"} key={i}>
                 {child}
               </div>
             ))}
