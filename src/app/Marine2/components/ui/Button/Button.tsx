@@ -13,7 +13,7 @@ const Button = ({ children, onClick, className, disabled, size = "lg", ...props 
   return (
     <button
       className={classnames(
-        "w-full rounded-md px-4 py-2 border-2 cursor-pointer whitespace-nowrap",
+        "rounded-md px-4 py-1.5 border-2 cursor-pointer whitespace-nowrap",
         {
           "bg-victron-blue/30 dark:bg-victron-blue-dark/30 border-victron-blue text-black dark:text-white": !disabled,
           "bg-victron-gray/30 dark:bg-victron-gray-dark/30 border-victron-gray": disabled,
