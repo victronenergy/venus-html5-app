@@ -7,6 +7,7 @@ import PreferencesIcon from "../../../images/icons/preferences.svg"
 import ToggleSwitch from "../ToggleSwitch"
 import RadioButton from "../RadioButton"
 import { AppViews, useAppViewsStore } from "../../../modules/AppViews"
+import Button from "../Button"
 
 const Settings = () => {
   const { locked, toggleLocked } = useAppStore()
@@ -82,12 +83,9 @@ const Settings = () => {
               </div>
             </div>
           </Modal.Body>
-          <button
-            onClick={openRemoteConsole}
-            className="w-full border-2 border-victron-blue bg-victron-blue/30 rounded-md pt-1 pb-1 sm-m:pt-2 sm-m:pb-2"
-          >
-            <div className="text-base sm-m:text-lg">{translate("header.remoteConsole")}</div>
-          </button>
+          <Button onClick={openRemoteConsole} className="w-full" size="md">
+            {translate("header.remoteConsole")}
+          </Button>
         </Modal.Frame>
       </div>
     </div>
