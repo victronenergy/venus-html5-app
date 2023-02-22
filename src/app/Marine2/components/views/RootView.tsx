@@ -1,9 +1,9 @@
 import React from "react"
 import MainLayout from "../ui/MainLayout"
-import Grid from "../ui/Grid"
 import Tanks from "../boxes/Tanks/Tanks"
 import BatteriesOverview from "../boxes/BatteriesOverview"
 import EnergyOverview from "../boxes/EnergyOverview"
+import GridPaginator from "../ui/GridPaginator"
 
 const RootView = () => {
   // TODO: replace this code with real data depending on the system type
@@ -14,6 +14,12 @@ const RootView = () => {
           <EnergyOverview mode="compact" key={"energy-overview"} />,
           <Tanks mode="compact" key={"tanks"} />,
           <BatteriesOverview mode="compact" key={"batteries-overview"} />,
+          <EnergyOverview mode="compact" key={"energy-overview2"} />,
+          <Tanks mode="compact" key={"tanks2"} />,
+          <BatteriesOverview mode="compact" key={"batteries-overview2"} />,
+          <EnergyOverview mode="compact" key={"energy-overview3"} />,
+          <Tanks mode="compact" key={"tanks3"} />,
+          <BatteriesOverview mode="compact" key={"batteries-overview3"} />,
         ]
       case "absolute":
         return [
@@ -28,11 +34,17 @@ const RootView = () => {
 
   return (
     <MainLayout>
-      <Grid childClassName={"p-1"} flow={"col"}>
+      <GridPaginator
+        childrenPerPage={4}
+        childClassName={"p-1"}
+        flow={"col"}
+        orientation={"horizontal"}
+        selectorLocation={"bottom-full"}
+      >
         {/* you can use different mocks to view the components layouts */}
         {/* TODO: replace this code with real data depending on the system type */}
         {getBoxes("simple").map((box, key) => box)}
-      </Grid>
+      </GridPaginator>
     </MainLayout>
   )
 }
