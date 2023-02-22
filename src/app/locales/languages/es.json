@@ -61,6 +61,10 @@
         "veBusFault": "Fallo del VE.Bus",
         "voltage": "Tensión"
     },
+    "diagnostics": {
+        "connection": {},
+        "device": {}
+    },
     "error": {
         "errorWithMessage": "Error: %{message}",
         "genericMessage": "Se ha producido un error al cargar la aplicación. Intente volver a cargar la página o póngase en contacto con Victron Energy con la siguiente información:",

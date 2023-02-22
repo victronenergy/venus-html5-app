@@ -6,7 +6,30 @@
         },
         "title": "AC Modus"
     },
-    "boxes": {},
+    "boxes": {
+        "EnergyOverview": "Energie overzicht",
+        "acLoads": "AC Belastingen",
+        "alternator": "Dynamo",
+        "batteries": "Accu's",
+        "battery": "Accu",
+        "batteryWithName": "Accu : %{name}",
+        "chargerWithName": "Lader : %{productNameShort}",
+        "dcLoads": "DC Belastingen",
+        "energy": "Energie",
+        "generator": "Aggregaat",
+        "generatorInput": "Aggregaat",
+        "gridInput": "Net ",
+        "invalidConfig": "Ongeldige configuratie",
+        "inverterCharger": "Omvormer / Lader : %{productNameShort}",
+        "inverterWithName": "Omvormer : %{productNameShort}",
+        "pvCharger": "PV Lader",
+        "shorePower": "Walstroom",
+        "solar": "Zon",
+        "status": "Status",
+        "tanks": "Tanks",
+        "unknown": "Onbekend",
+        "windGenerator": "Wind Generator"
+    },
     "cardFooter": {
         "Charge": "Laden",
         "Critical": "Kritisch",
@@ -17,12 +40,15 @@
     "common": {
         "absorptionCharging": "Absorptie laden",
         "assisting": "Assisteren",
+        "auto": "Automatisch",
         "autoStartStop": "Automatisch Start / Stop",
         "bulkCharging": "Bulk laden",
         "charge": "Laden",
+        "charged": "Geladen",
         "chargerOnly": "Alleen Lader",
         "charging": "Laden",
         "current": "Stroom",
+        "dark": "Donker",
         "days": "dagen",
         "discharge": "Ontladen",
         "discharging": "Ontladen",
@@ -37,7 +63,9 @@
         "inputLimit": "Maximum",
         "inverterOnly": "Alleen Omvormer",
         "inverting": "Omvormen",
+        "light": "Licht",
         "limit": "Beperken",
+        "loads": "Belastingen",
         "lowPower": "Laag vermogen",
         "minutes": "minuten",
         "mode": "Modus",
@@ -61,6 +89,10 @@
         "veBusFault": "VE.Bus fout",
         "voltage": "Spanning"
     },
+    "diagnostics": {
+        "connection": {},
+        "device": {}
+    },
     "error": {
         "errorWithMessage": "Fout : %{message}",
         "genericMessage": "Fout tijdens het laden van de applicatie. Probeer de pagina opnieuw te laden of neem contact op met Victron Energy met de volgende informatie:",
@@ -79,7 +111,10 @@
         "mqttUnavailable4": "Probeer de Remote Control knop bovenaan het scherm om de instellingen remote te veranderen.",
         "mqttUnavailable5": "Verbind Remote met het apparaat door de knop Remote bovenaan het scherm te drukken.",
         "queryParams": "Zoek :  %{queryParams}",
-        "remoteConsole": {},
+        "remoteConsole": {
+            "connectionFailed": "Verbinding met GX apparaat mislukt",
+            "screenTooSmall": "Open in een groter scherm om het Remote Console te zien"
+        },
         "userAgent": "Gebruiker : %{userAgent}",
         "windowSize": "Venster :  %{width} x %{height}"
     },
@@ -113,7 +148,10 @@
         "subtitle": "Controleer of de apparaten goed zijn aangesloten om ze hier weer te geven",
         "title": "Het dashboard is leeg"
     },
-    "pages": {},
+    "pages": {
+        "remoteConsole": "Remote Console",
+        "systemOverview": "Systeem Overzicht"
+    },
     "remoteLogin": {
         "2fa": "2 Staps verificatie token",
         "email": "Email",

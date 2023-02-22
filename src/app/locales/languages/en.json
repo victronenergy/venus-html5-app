@@ -89,6 +89,22 @@
         "veBusFault": "VE.Bus Fault condition",
         "voltage": "Voltage"
     },
+    "diagnostics": {
+        "connection": {
+            "connection": "Connection",
+            "error": "Error",
+            "host": "Host",
+            "portalId": "Portal ID",
+            "status": "Status"
+        },
+        "device": {
+            "device": "Device",
+            "userAgent": "User agent",
+            "viewportHeight": "Viewport height",
+            "viewportWidth": "Viewport width"
+        },
+        "diagnostics": "Diagnostics"
+    },
     "error": {
         "errorWithMessage": "Error: %{message}",
         "genericMessage": "An error occurred while rendering the application. Try reloading the page or contacting Victron Energy with the following information:",
@@ -98,6 +114,8 @@
             "estimate": "Estimated data: %{size} Bytes.",
             "hint": "Try reloading the page or contacting Victron Energy with the following information:",
             "ignore": "Ignore error",
+            "resetError": "Reset error",
+            "restartApp": "Restart app",
             "sendReport": "Send error report",
             "title": "An error occured while rendering the application."
         },
@@ -145,6 +163,7 @@
         "title": "Your dashboard is empty"
     },
     "pages": {
+        "diagnostics": "Diagnostics",
         "remoteConsole": "Remote Console",
         "systemOverview": "System Overview"
     },
