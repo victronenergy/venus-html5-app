@@ -34,14 +34,14 @@ const ErrorFallback = ({ error, resetErrorBoundary, showReset = false }: Props) 
   }
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center border-4 border-victron-red rounded-md p-4 text-black dark:text-white bg-white dark:bg-black">
-      <div>
+    <div className="w-full h-full flex flex-col items-center justify-center border-4 border-victron-red rounded-md px-4 py-6 text-black dark:text-white bg-white dark:bg-black">
+      <div className="flex flex-col justify-between h-full">
+        <div className="mb-1 self-center grow">
+          {/* todo: fix types for svg */}
+          {/* @ts-ignore */}
+          <WarningIcon className="w-12 text-victron-red" alt={"warning"} />
+        </div>
         <div className="flex flex-col align-top mb-2">
-          <div className="mb-1">
-            {/* todo: fix types for svg */}
-            {/* @ts-ignore */}
-            <WarningIcon className="w-10 text-victron-red" alt={"warning"} />
-          </div>
           <div>{translate("error.genericMessage")}</div>
         </div>
 
@@ -54,7 +54,7 @@ const ErrorFallback = ({ error, resetErrorBoundary, showReset = false }: Props) 
           </div>
         </div>
 
-        <div className="">
+        <div className="grow">
           {translate("error.marine.cta")} {translate("error.marine.dataCharges")}{" "}
           {translate("error.marine.estimate", { size })}
         </div>
