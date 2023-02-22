@@ -4,6 +4,7 @@ import { FallbackProps } from "react-error-boundary"
 import { byteSize, isError } from "../../../../utils/util"
 import * as Sentry from "@sentry/react"
 import WarningIcon from "../../../images/icons/warning.svg"
+import Button from "../Button"
 
 interface Props extends FallbackProps {
   showReset?: boolean
@@ -59,17 +60,17 @@ const ErrorFallback = ({ error, resetErrorBoundary, showReset = false }: Props) 
         </div>
 
         <div className="flex flex-row mt-2">
-          <button className="mr-8 cursor-pointer rounded p-2 bg-victron-blue-dark" onClick={sendError}>
+          <Button className="mr-4" size="md" onClick={sendError}>
             {translate("error.marine.sendReport")}
-          </button>
+          </Button>
           {showReset && (
-            <button className="mx-4 rounded bg-victron-blue dark:bg-victron-blue-dark p-1" onClick={reset}>
+            <Button className="mx-2" size="md" onClick={reset}>
               Reset error
-            </button>
+            </Button>
           )}
-          <button className="cursor-pointer rounded p-2 bg-victron-blue-dark" onClick={restart}>
+          <Button size="md" onClick={restart}>
             Restart app
-          </button>
+          </Button>
         </div>
       </div>
     </div>
