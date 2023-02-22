@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react"
 import classnames from "classnames"
 import { useComponentSize } from "../../../utils/hooks"
 
-const Grid = ({ children, className, childClassName, flow = "row", forceOneDimensionRatio = 3 }: Props) => {
+const Grid = ({ children, className, childClassName, flow = "row", forceOneDimensionRatio = 3 }: GridProps) => {
   const childrenCount = Array.isArray(children) ? children.length : 1
 
   const gridRef = useRef<HTMLDivElement>(null)
@@ -52,7 +52,7 @@ const Grid = ({ children, className, childClassName, flow = "row", forceOneDimen
   }, [gridSize, forceOneDimensionRatio, flow])
 
   return (
-    <div ref={gridRef} className={classnames("w-full h-full min-w-0", className)}>
+    <div ref={gridRef} className={classnames("w-full h-full min-w-0 min-h-0", className)}>
       <div
         className={classnames("flex", {
           "flex-col": gridFlow === "col",
@@ -66,9 +66,9 @@ const Grid = ({ children, className, childClassName, flow = "row", forceOneDimen
             <div
               className={classnames(childClassName)}
               /* 
-                              We have to use native styles here, because Tailwind can't do JIT css styles compilation for dynamic values:
-                              https://stackoverflow.com/questions/69687530/dynamically-build-classnames-in-tailwindcss
-                            */
+                                            We have to use native styles here, because Tailwind can't do JIT css styles compilation for dynamic values:
+                                            https://stackoverflow.com/questions/69687530/dynamically-build-classnames-in-tailwindcss
+                                          */
               style={{
                 width: gridFlow === "col" ? getChildWidth() : getChildFlexBasis(i),
                 maxWidth: gridFlow === "col" ? getChildWidth() : getChildFlexBasis(i),
@@ -89,7 +89,7 @@ const Grid = ({ children, className, childClassName, flow = "row", forceOneDimen
   )
 }
 
-interface Props {
+export interface GridProps {
   children: JSX.Element[] | JSX.Element
   onClick?: () => void
   className?: string
