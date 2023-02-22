@@ -3,7 +3,7 @@ const DeviceCompact = ({ icon, title, subTitle, value, unit }: Props) => {
     <div className={"flex flex-row items-center justify-between w-full mb-2"}>
       <div className={"flex flex-row items-center justify-start"}>
         <div className={"w-11"}>{icon}</div>
-        <div className={"col-span-7 flex flex-col"}>
+        <div className={"flex flex-col"}>
           <div className={"text-base md:text-lg lg:text-xl leading-none md:leading-none lg:leading-none pb-1"}>
             {title}
           </div>
@@ -16,7 +16,7 @@ const DeviceCompact = ({ icon, title, subTitle, value, unit }: Props) => {
           </div>
         </div>
       </div>
-      <div className={"col-span-2 justify-self-end text-3xl flex flex-row pr-2"}>
+      <div className={"justify-self-end text-3xl flex flex-row pr-2"}>
         <div>{value}</div>
         <div className={"text-victron-gray/70 pl-1"}>{unit}</div>
       </div>
