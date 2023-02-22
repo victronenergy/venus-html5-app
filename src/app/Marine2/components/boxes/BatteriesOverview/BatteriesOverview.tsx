@@ -20,9 +20,7 @@ interface Props {
 const BatteriesOverview = ({ mode = "full" }: Props) => {
   const { batteries } = useBattery()
 
-  // FIXME: restore
-  // const sortedBatteries = sortBatteries(batteries ?? [])
-  const sortedBatteries = sortBatteries(batteries)
+  const sortedBatteries = sortBatteries(batteries ?? [])
   const overviewBatteries = getOverviewBatteries(sortedBatteries, 2)
   const auxiliaryBatteries = sortedBatteries.filter((b) => !overviewBatteries.includes(b))
 
