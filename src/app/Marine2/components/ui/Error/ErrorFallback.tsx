@@ -34,7 +34,7 @@ const ErrorFallback = ({ error, resetErrorBoundary, showReset = false }: Props) 
   }
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center border-4 border-victron-red rounded-md p-4">
+    <div className="w-full h-full flex flex-col items-center justify-center border-4 border-victron-red rounded-md p-4 text-black dark:text-white bg-white dark:bg-black">
       <div>
         <div className="flex flex-col align-top mb-2">
           <div className="mb-1">
@@ -59,7 +59,7 @@ const ErrorFallback = ({ error, resetErrorBoundary, showReset = false }: Props) 
           {translate("error.marine.estimate", { size })}
         </div>
 
-        <div className="flex flex-row mt-2">
+        <div className="flex flex-row mt-3">
           <Button className="mr-4 w-full" size="md" onClick={sendError}>
             {translate("error.marine.sendReport")}
           </Button>
