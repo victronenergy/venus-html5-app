@@ -32,28 +32,28 @@ const DevicesOverview = ({ mode = "compact" }: Props) => {
 
     if (!!chargers) {
       inverters.forEach((charger) => {
-        boxes.push(<Charger key={charger} instanceId={charger} />)
+        boxes.push(<Charger key={charger} componentMode={"full"} instanceId={charger} />)
       })
     }
 
     if (!!inverters) {
       inverters.forEach((id) => {
-        boxes.push(<Inverter key={id} instanceId={id} isVebusInverter={false} />)
+        boxes.push(<Inverter key={id} componentMode={"full"} instanceId={id} isVebusInverter={false} />)
       })
     }
 
     if (!!vebusInverters) {
       vebusInverters.forEach((id) => {
-        boxes.push(<Inverter key={id} instanceId={id} isVebusInverter={true} />)
+        boxes.push(<Inverter key={id} componentMode={"full"} instanceId={id} isVebusInverter={true} />)
       })
     }
 
     if (!!instanceId) {
-      boxes.push(<InverterCharger />)
+      boxes.push(<InverterCharger componentMode={"full"} />)
     }
 
-    if (!!generatorFp.phases) boxes.push(<GeneratorFp generatorFp={generatorFp} />)
-    if (!!generatorRelay.settings) boxes.push(<GeneratorRelays generatorRelay={generatorRelay} />)
+    if (!!generatorFp.phases) boxes.push(<GeneratorFp generatorFp={generatorFp} mode={"full"} />)
+    if (!!generatorRelay.settings) boxes.push(<GeneratorRelays generatorRelay={generatorRelay} mode={"full"} />)
 
     return boxes
   }
