@@ -60,15 +60,15 @@ const ErrorFallback = ({ error, resetErrorBoundary, showReset = false }: Props) 
         </div>
 
         <div className="flex flex-row mt-2">
-          <Button className="mr-4" size="md" onClick={sendError}>
+          <Button className="mr-4 w-full" size="md" onClick={sendError}>
             {translate("error.marine.sendReport")}
           </Button>
           {showReset && (
-            <Button className="mx-2" size="md" onClick={reset}>
+            <Button className="mx-2 w-full" size="md" onClick={reset}>
               Reset error
             </Button>
           )}
-          <Button size="md" onClick={restart}>
+          <Button className="w-full" size="md" onClick={restart}>
             Restart app
           </Button>
         </div>
