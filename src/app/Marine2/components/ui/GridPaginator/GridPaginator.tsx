@@ -1,6 +1,6 @@
 import React from "react"
 import { SelectorLocation } from "../PageSelector"
-import Grid from "../Grid"
+import Grid, { GridProps } from "../Grid"
 import Paginator from "../Paginator"
 import { range } from "lodash-es"
 
@@ -49,14 +49,7 @@ const GridPaginator = ({
   )
 }
 
-interface Props {
-  children: JSX.Element[] | JSX.Element
-  onClick?: () => void
-  className?: string
-  childClassName?: string
-  flow?: "row" | "col"
-  /** Force the grid to use only 1 row or column if the ratio of the grid is higher than this value */
-  forceOneDimensionRatio?: number
+interface Props extends GridProps {
   childrenPerPage: number
   orientation?: "vertical" | "horizontal"
   selectorLocation?: SelectorLocation
