@@ -13,16 +13,18 @@ const Button = ({ children, onClick, className, disabled, size = "lg", ...props 
   return (
     <button
       className={classnames(
-        "rounded-md px-4 py-1.5 border-2 cursor-pointer whitespace-nowrap",
+        "rounded-md px-4 py-1.5 border-2 whitespace-nowrap",
         {
-          "bg-victron-blue/30 dark:bg-victron-blue-dark/30 border-victron-blue text-black dark:text-white": !disabled,
-          "bg-victron-gray/30 dark:bg-victron-gray-dark/30 border-victron-gray": disabled,
+          "bg-victron-blue/30 dark:bg-victron-blue-dark/30 border-victron-blue text-black dark:text-white cursor-pointer":
+            !disabled,
+          "bg-victron-gray/30 dark:bg-victron-gray-dark/30 border-victron-gray text-victron-gray dark:text-victron-gray-dark":
+            disabled,
           "text-lg": size === "lg",
           "text-md": size === "md",
         },
         className
       )}
-      onClick={onClick}
+      onClick={disabled ? undefined : onClick}
       disabled={disabled}
       {...props}
     >
