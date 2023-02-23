@@ -28,7 +28,7 @@ interface Props {
   icon: JSX.Element
   title: string
   subTitle: string | false
-  value: number | string | false
+  value: number | string | false | JSX.Element
   unit: string
 }
 
