@@ -35,7 +35,7 @@ const ErrorFallback = ({ error, resetErrorBoundary, showReset = false }: Props) 
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-center border-4 border-victron-red rounded-md px-4 py-6 text-black dark:text-white bg-white dark:bg-black">
-      <div className="flex flex-col justify-between h-full">
+      <div className="flex flex-col justify-between h-full text-sm">
         <div className="mb-1 self-center grow">
           {/* todo: fix types for svg */}
           {/* @ts-ignore */}
@@ -45,13 +45,11 @@ const ErrorFallback = ({ error, resetErrorBoundary, showReset = false }: Props) 
           <div>{translate("error.genericMessage")}</div>
         </div>
 
-        <div className="text-base py-2">
-          <Translate value="error.errorWithMessage" message={error.message || "Unknown"} />
-          <div className="error-info-inside">
-            <p>{translate("error.userAgent", { userAgent: navigator.userAgent })}</p>
-            <p>{translate("error.windowSize", { width: window.innerWidth, height: window.innerHeight })}</p>
-            <p>{Boolean(queryParams) ? translate("error.queryParams", { queryParams }) : null}</p>
-          </div>
+        <div className="py-2 text-xs">
+          <p>{translate("error.errorWithMessage", { message: error.message || "Unknown" })}</p>
+          <p>{translate("error.userAgent", { userAgent: navigator.userAgent })}</p>
+          <p>{translate("error.windowSize", { width: window.innerWidth, height: window.innerHeight })}</p>
+          <p>{Boolean(queryParams) ? translate("error.queryParams", { queryParams }) : null}</p>
         </div>
 
         <div className="grow">
