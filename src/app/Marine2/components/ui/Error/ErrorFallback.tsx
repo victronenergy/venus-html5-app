@@ -1,5 +1,5 @@
 import React from "react"
-import { Translate, translate } from "react-i18nify"
+import { translate } from "react-i18nify"
 import { FallbackProps } from "react-error-boundary"
 import { byteSize, isError } from "../../../../utils/util"
 import * as Sentry from "@sentry/react"
