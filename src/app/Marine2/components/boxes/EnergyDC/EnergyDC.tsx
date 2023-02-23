@@ -11,7 +11,7 @@ const EnergyDC = ({ mode = "compact", dcLoads }: Props) => {
   if (mode === "compact") {
     return (
       <div className="flex flex-row justify-between items-center">
-        <div className="flex">
+        <div className="flex items-center">
           {/* todo: fix types for svg */}
           {/* @ts-ignore */}
           <DCIcon className={"w-7 text-black dark:text-white"} />
