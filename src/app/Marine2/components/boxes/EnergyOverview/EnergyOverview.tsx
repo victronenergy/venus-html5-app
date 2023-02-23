@@ -85,7 +85,7 @@ const getAvailableEnergyBoxes = function (
   ) {
     boxes.push(
       <div className="flex flex-row justify-between">
-        <div className="text-sm md:text-base text-victron-gray">{translate("common.loads")}</div>
+        <div className="text-xs text-victron-gray">{translate("common.loads")}</div>
         <div className="w-full ml-2 mb-2 border-b border-victron-gray" />
       </div>
     )

@@ -45,7 +45,7 @@ const ErrorFallback = ({ error, resetErrorBoundary, showReset = false }: Props) 
           <div>{translate("error.genericMessage")}</div>
         </div>
 
-        <div className="text-sm py-2">
+        <div className="text-base py-2">
           <Translate value="error.errorWithMessage" message={error.message || "Unknown"} />
           <div className="error-info-inside">
             <p>{translate("error.userAgent", { userAgent: navigator.userAgent })}</p>

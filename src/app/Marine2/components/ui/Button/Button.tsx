@@ -19,8 +19,8 @@ const Button = ({ children, onClick, className, disabled, size = "lg", ...props 
             !disabled,
           "bg-victron-gray/30 dark:bg-victron-gray-dark/30 border-victron-gray text-victron-gray dark:text-victron-gray-dark":
             disabled,
-          "text-lg": size === "lg",
-          "text-md": size === "md",
+          "text-base": size === "lg",
+          "text-sm": size === "md",
         },
         className
       )}

@@ -46,18 +46,18 @@ const Settings = () => {
         >
           <Modal.Body>
             <div className="flex flex-col">
-              <div className="text-base mb-2 dark:text-white md:mb-4 md-m:text-lg lg-s:text-base lg-l:text-xl">
+              <div className="text-sm mb-2 dark:text-white md:mb-4 md-m:text-base">
                 <label className="flex justify-between items-center pb-4">
-                  <span className="mr-1 text-base sm-m:mr-2 sm-l:text-xl">{translate("locker.lockMessage")}</span>
+                  <span className="mr-1 text-sm sm-m:mr-2 sm-l:text-base">{translate("locker.lockMessage")}</span>
                   <ToggleSwitch onChange={toggleLocked} selected={locked} />
                 </label>
                 <div className="border border-victron-gray-300"></div>
-                <label className="text-sm text-victron-gray sm-m:text-base">{translate("common.mode")}</label>
+                <label className="text-xs text-victron-gray sm-l:text-sm">{translate("common.mode")}</label>
                 <label
                   className="flex justify-between items-center pt-2 pb-4 sm-m:pb-6 sm-l:pb-8"
                   onClick={() => themeStore.setDarkMode(false)}
                 >
-                  <span className="mr-1 text-base sm-m:mr-2 sm-l:text-xl">{translate("common.light")}</span>
+                  <span className="mr-1 text-sm sm-m:mr-2 sm-l:text-base">{translate("common.light")}</span>
                   <RadioButton
                     onChange={() => themeStore.setDarkMode(false)}
                     selected={!themeStore.darkMode}
@@ -68,7 +68,7 @@ const Settings = () => {
                   className="flex justify-between items-center pb-4 sm-m:pb-6 sm-l:pb-8"
                   onClick={() => themeStore.setDarkMode(true)}
                 >
-                  <span className="mr-1 text-base sm-m:mr-2 sm-l:text-xl">{translate("common.dark")}</span>
+                  <span className="mr-1 text-sm sm-m:mr-2 sm-l:text-base">{translate("common.dark")}</span>
                   <RadioButton
                     onChange={() => themeStore.setDarkMode(true)}
                     selected={themeStore.darkMode}
@@ -76,7 +76,7 @@ const Settings = () => {
                   />
                 </label>
                 <label className="flex justify-between items-center pb-4 sm-m:pb-6 sm-l:pb-8">
-                  <span className="mr-1 text-base sm-m:mr-2 sm-l:text-xl">{translate("common.auto")}</span>
+                  <span className="mr-1 text-sm sm-m:mr-2 sm-l:text-base">{translate("common.auto")}</span>
                   <ToggleSwitch onChange={setAutoMode} disabled={locked} />
                 </label>
                 <div className="border border-victron-gray-300"></div>

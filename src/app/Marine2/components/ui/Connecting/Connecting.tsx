@@ -10,7 +10,7 @@ const Connecting = () => {
           <Spinner />
         </div>
         <div className="relative mt-28">
-          <div className="text-2xl text-victron-blue">{translate("header.connecting")}...</div>
+          <div className="text-md text-victron-blue">{translate("header.connecting")}...</div>
         </div>
       </div>
     </div>

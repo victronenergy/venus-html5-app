@@ -12,14 +12,14 @@ const EnergyAC = ({ mode = "compact", acLoads }: Props) => {
 
   if (mode === "compact") {
     return (
-      <div className="flex flex-row justify-between items-center">
+      <div className="flex flex-row justify-between items-center text-sm md-m:text-base lg-l:text-lg">
         <div className="flex">
           {/* todo: fix types for svg */}
           {/* @ts-ignore */}
           <ACIcon className={"w-7 text-black dark:text-white"} />
-          <p className="text-base md-m:text-xl lg:text-2xl pl-2 md-m:pl-3">{translate("boxes.acLoads")}</p>
+          <p className="pl-2 md-m:pl-3">{translate("boxes.acLoads")}</p>
         </div>
-        <p className="text-base md-m:text-xl lg:text-2xl">
+        <p>
           {(phases ?? 1) === 1 && (
             <p>
               {formatValue(current[0])}
@@ -47,26 +47,27 @@ const EnergyAC = ({ mode = "compact", acLoads }: Props) => {
       icon={<ACIcon className={"w-5 text-black dark:text-white"} />}
     >
       <div className="w-full h-full flex flex-col">
-        <div className="text-5xl text-victron-gray dark:text-white md-m:text-6xl">
+        <div className="text-victron-gray dark:text-white text-2xl md-m:text-3xl lg-l:text-4xl">
           {formatPower(totalPower)}
           <span className="p-0.5 text-victron-gray">{totalPower > 1000 ? "kW" : "W"}</span>
         </div>
         <div className="w-full h-full flex content-end flex-wrap">
           {Array.from(Array(phases ?? 1).keys()).map((i) => (
-            <div key={i} className="w-full grid grid-cols-7 md-m:grid-cols-10">
+            <div
+              key={i}
+              className="w-full grid grid-cols-7 md-m:grid-cols-10 text-base md-m:text-lg lg-l:text-xl text-victron-gray dark:text-victron-gray-dark"
+            >
               <hr className="col-span-10 h-1 border-victron-gray" />
-              <p className="col-span-1 text-base md-m:text-2xl text-victron-gray dark:text-victron-gray-dark">
-                {"L" + (i + 1)}
-              </p>
-              <div className="col-span-3 text-left text-base md-m:text-2xl text-victron-gray dark:text-victron-gray-dark">
+              <p className="col-span-1 text-left">{"L" + (i + 1)}</p>
+              <div className="col-span-3 text-left">
                 {formatValue(voltage[i])}
                 <span className="p-0.5 text-victron-gray ">V</span>
               </div>
-              <div className="col-span-3 text-center text-base md-m:text-2xl text-victron-gray dark:text-victron-gray-dark">
+              <div className="col-span-3 text-center">
                 {formatValue(current[i])}
                 <span className="p-0.5 text-victron-gray ">A</span>
               </div>
-              <div className="hidden text-right text-base md-m:text-2xl text-victron-gray dark:text-victron-gray-dark md-m:col-span-3 md-m:block">
+              <div className="hidden text-right md-m:col-span-3 md-m:block">
                 {formatValue(power[i])}
                 <span className="tp-0.5 text-victron-gray ">{power[i] > 1000 ? "kW" : "W"}</span>
               </div>
