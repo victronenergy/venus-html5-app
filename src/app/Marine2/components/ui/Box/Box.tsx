@@ -26,7 +26,7 @@ const Box = ({ children, icon, title, className, linkedView }: BoxProps) => {
           onClick={handleClick}
         >
           {icon && <span className={"mr-1"}>{icon}</span>}
-          <span className={"text-2xl"}>{title}</span>
+          <span className={"text-base"}>{title}</span>
         </div>
         {linkedView && (
           <div onClick={handleClick}>

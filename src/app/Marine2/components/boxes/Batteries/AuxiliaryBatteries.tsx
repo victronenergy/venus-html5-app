@@ -13,17 +13,18 @@ const AuxiliaryBatteries = ({ batteries }: Props) => {
     >
       <div className="whitespace-pre-wrap">
         {batteries.map((battery, idx) => (
-          <div key={battery.name} className="grid grid-cols-9 items-center">
-            <p className="text-victron-gray dark:text-white text-left text-base sm:text-lg md:text-xl lg:text-2xl  col-span-3">
-              {battery.name}
-            </p>
-            <p className="text-victron-gray text-left text-base sm:text-lg md:text-xl lg:text-2xl  col-span-2">
+          <div
+            key={battery.name}
+            className="grid grid-cols-9 items-center text-victron-gray text-base md-m:text-lg lg-l:text-xl"
+          >
+            <p className="text-left dark:text-white col-span-3">{battery.name}</p>
+            <p className="text-left col-span-2">
               {battery.voltage.toFixed(1)} <span className="text-victron-gray-400">V</span>
             </p>
-            <p className="text-victron-gray text-center text-base sm:text-lg md:text-xl lg:text-2xl  col-span-2">
+            <p className="text-center col-span-2">
               {battery.current.toFixed(1)} <span className="text-victron-gray-400">A</span>
             </p>
-            <p className="text-victron-gray text-right text-base sm:text-lg md:text-xl lg:text-2xl  col-span-2">
+            <p className="text-right col-span-2">
               {battery.power.toFixed(1)} <span className="text-victron-gray-400">W</span>
             </p>
             {idx < batteries.length - 1 && <div className="col-span-9 my-1 border-[1px] border-victron-gray-200" />}

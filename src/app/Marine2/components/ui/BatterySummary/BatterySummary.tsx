@@ -10,9 +10,7 @@ const BatterySummary = ({ battery, className }: Props) => {
     <div className={classNames("flex flex-col justify-center items-center px-4", className)}>
       <ProgressCircle percentage={battery.soc ?? null}>
         {battery.voltage || battery.voltage === 0 ? (
-          <div
-            className={"text-victron-gray dark:text-victron-gray-dark text-xl md:text-2xl lg:text-3xl hidden md:block"}
-          >
+          <div className={"text-victron-gray dark:text-victron-gray-dark text-base lg-xl:text-lg hidden md-l:block"}>
             {dcVoltageFormatter(battery.voltage)}
             <span className={"text-victron-gray-4 dark:text-victron-gray-4-dark"}>V</span>
           </div>
@@ -20,9 +18,9 @@ const BatterySummary = ({ battery, className }: Props) => {
           <></>
         )}
       </ProgressCircle>
-      <span className={"mt-3.5 truncate w-full text-center text-xl lg:text-4xl"}>{battery.name}</span>
+      <span className={"mt-3.5 truncate w-full text-center text-base lg-xl:text-xl"}>{battery.name}</span>
       {
-        <span className={"text-victron-gray dark:text-victron-gray-dark md:text-lg lg:text-xl"}>
+        <span className={"text-victron-gray dark:text-victron-gray-dark text-xs md-l:text-sm lg-xl:text-base"}>
           {battery.state === BATTERY.DISCHARGING && battery.timetogo
             ? timeAsStringFormatter(translate, battery.timetogo)
             : batteryStateNameFormatter(translate, battery.state, battery.soc ?? null)}

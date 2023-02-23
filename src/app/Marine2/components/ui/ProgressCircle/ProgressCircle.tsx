@@ -23,7 +23,7 @@ const ProgressCircle = ({ percentage, children }: Props) => {
   return (
     <div
       className={
-        "relative flex justify-center items-center w-[90px] h-[90px] md:w-[144px] md:h-[144px] lg:w-[238px] lg:h-[238px]"
+        "relative flex justify-center items-center w-[90px] h-[90px] md-l:w-[144px] md-l:h-[144px] lg-xl:w-[238px] lg-xl:h-[238px]"
       }
     >
       <svg className={"absolute w-full h-full -rotate-90"} viewBox={"0 0 238 238"}>
@@ -43,7 +43,7 @@ const ProgressCircle = ({ percentage, children }: Props) => {
       </svg>
       <div className={"flex flex-col items-center"}>
         {hasPercentage && (
-          <div className={"text-xl md:text-3xl lg:text-6xl"}>
+          <div className={"text-base md-l:text-lg lg-xl:text-2xl"}>
             {roundedPercentage}
             <span className={"text-victron-gray dark:text-victron-gray-dark"}>%</span>
           </div>

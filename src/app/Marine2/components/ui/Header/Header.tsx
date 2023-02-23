@@ -17,7 +17,7 @@ const Header = ({ title }: Props) => {
 
   return (
     <div className={"flex flex-row justify-between w-full items-center pb-4"}>
-      <div className={"grow text-center text-xl"}>{title}</div>
+      <div className={"grow text-center text-base"}>{title}</div>
       {isShowBack && (
         <div onClick={handleBackClick} className={"grow-0 cursor-pointer"}>
           {/* todo: fix types for svg */}
