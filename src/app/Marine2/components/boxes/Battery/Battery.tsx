@@ -7,10 +7,18 @@ import BatteryIcon from "../../../images/icons/battery.svg"
 import BatteryDischargingIcon from "../../../images/icons/battery-discharging.svg"
 import { colorForPercentageFormatter } from "../../../utils/formatters"
 import { translate } from "react-i18nify"
+import classNames from "classnames"
 
 const Battery = ({ battery, mode = "compact" }: Props) => {
   const hasPercentage = battery.soc !== undefined && battery.soc !== null
-  const color = hasPercentage ? colorForPercentageFormatter(Math.round(battery.soc)) : "victron-gray-4"
+  const color = hasPercentage ? colorForPercentageFormatter(Math.round(battery.soc)) : "victron-gray-400"
+  const colorClasses = classNames({
+    "text-victron-red dark:text-victron-red-dark": color === "victron-red",
+    "text-victron-yellow dark:text-victron-yellow-dark": color === "victron-yellow",
+    "text-victron-green dark:text-victron-green-dark": color === "victron-green",
+    "text-victron-blue dark:text-victron-blue-dark": color === "victron-blue",
+    "text-victron-gray-400 dark:text-victron-gray-dark": color === "victron-gray-400",
+  })
 
   if (mode === "compact") {
     return (
@@ -23,7 +31,7 @@ const Battery = ({ battery, mode = "compact" }: Props) => {
   return (
     <Box icon={batteryStateIconFormatter(battery.state)} title={battery.name} className="truncate">
       <div className="w-full h-full flex flex-col">
-        <div className={`text-${color} text-5xl md-m:text-6xl`}>
+        <div className={`${colorClasses} text-5xl md-m:text-6xl`}>
           {Math.round(battery.soc) ?? "--"}
           <span className="opacity-70">%</span>
         </div>
