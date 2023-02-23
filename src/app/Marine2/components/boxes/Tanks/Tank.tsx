@@ -48,7 +48,7 @@ const Tank = ({ tankInstanceId, mode, orientation = "vertical" }: Props) => {
       <div>
         <div className="grid grid-cols-8 gap-2">
           <div className="col-span-6 flex items-center sm:col-span-4 lg:col-span-3">
-            <div>{fluidIcon(fluidTypeNum, orientation)}</div>
+            <div>{fluidIcon(fluidTypeNum, mode)}</div>
             <div className="flex flex-col p-1 sm:p-2 w-full">
               <div className="text-sm md-m:text-base lg-l:text-lg truncate text-ellipsis overflow-hidden">
                 {fluidTypeTitle}
@@ -85,7 +85,7 @@ const Tank = ({ tankInstanceId, mode, orientation = "vertical" }: Props) => {
       <div>
         <div className="grid grid-cols-8 gap-2">
           <div className="col-span-3 flex items-center md:col-span-2">
-            <div>{fluidIcon(fluidTypeNum, orientation)}</div>
+            <div>{fluidIcon(fluidTypeNum, mode)}</div>
             <div className="flex flex-col p-2 w-full">
               <div className="text-base md-m:text-lg lg-l:text-xl truncate text-ellipsis overflow-hidden">
                 {fluidTypeTitle}
@@ -127,7 +127,7 @@ const Tank = ({ tankInstanceId, mode, orientation = "vertical" }: Props) => {
       </div>
       <div className="col-span-7 flex flex-col justify-between">
         <div className="pt-2">
-          <div>{fluidIcon(fluidTypeNum, orientation)}</div>
+          <div>{fluidIcon(fluidTypeNum, mode)}</div>
           <div className="w-full">
             <div className="text-base md-m:text-lg lg-l:text-xl truncate text-ellipsis overflow-hidden">
               {fluidTypeTitle}

@@ -13,28 +13,28 @@ const EnergyAC = ({ mode = "compact", acLoads }: Props) => {
   if (mode === "compact") {
     return (
       <div className="flex flex-row justify-between items-center text-sm md-m:text-base lg-l:text-lg">
-        <div className="flex">
+        <div className="flex items-center">
           {/* todo: fix types for svg */}
           {/* @ts-ignore */}
           <ACIcon className={"w-7 text-black dark:text-white"} />
           <p className="pl-2 md-m:pl-3">{translate("boxes.acLoads")}</p>
         </div>
-        <p>
+        <div>
           {(phases ?? 1) === 1 && (
-            <p>
+            <p className="text-base md:text-xl lg:text-2xl">
               {formatValue(current[0])}
               <span className="p-0.5 text-victron-gray dark:text-victron-gray-dark">A</span>
             </p>
           )}
           {(phases ?? 1) !== 1 && (
-            <p>
+            <p className="text-base md:text-xl lg:text-2xl">
               {formatPower(totalPower)}
               <span className="p-0.5 text-victron-gray dark:text-victron-gray-dark">
                 {totalPower > 1000 ? "kW" : "W"}
               </span>
             </p>
           )}
-        </p>
+        </div>
       </div>
     )
   }
