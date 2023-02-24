@@ -1,9 +1,9 @@
 import React, { useEffect } from "react"
 import MainLayout from "../ui/MainLayout"
-import Grid from "../ui/Grid"
 import Tanks from "../boxes/Tanks/Tanks"
 import BatteriesOverview from "../boxes/BatteriesOverview"
 import EnergyOverview from "../boxes/EnergyOverview"
+import GridPaginator from "../ui/GridPaginator"
 import { useVisibleWidgetsStore } from "../../modules"
 import { BoxTypes } from "../../utils/constants"
 import { observer } from "mobx-react"
@@ -50,9 +50,15 @@ const RootView = () => {
       {/* We need to have hidden boxes mounted to listen to mqtt data and manage boxes visibility */}
       <div className="hidden">{initialBoxes.map((box) => box)}</div>
       <MainLayout>
-        <Grid childClassName={"p-1"} flow={"col"}>
+        <GridPaginator
+          childrenPerPage={4}
+          childClassName={"p-1"}
+          flow={"col"}
+          orientation={"horizontal"}
+          selectorLocation={"bottom-full"}
+        >
           {boxes.map((box) => box)}
-        </Grid>
+        </GridPaginator>
       </MainLayout>
     </>
   )
