@@ -5,33 +5,40 @@ import Tanks from "../boxes/Tanks/Tanks"
 import BatteriesOverview from "../boxes/BatteriesOverview"
 import EnergyOverview from "../boxes/EnergyOverview"
 import { useVisibleWidgetsStore } from "../../modules"
-import { WIDGET_TYPES } from "../../utils/constants"
+import { BoxTypes } from "../../utils/constants"
 import { observer } from "mobx-react"
 
 const RootView = () => {
   const visibleWidgetsStore = useVisibleWidgetsStore()
 
   const [boxes, setBoxes] = React.useState<JSX.Element[]>([])
+  const [initialBoxes, setInitialBoxes] = React.useState<JSX.Element[]>([])
 
   useEffect(() => {
-    const boxes: JSX.Element[] = []
-    visibleWidgetsStore.visibleElements.forEach((element) => {
-      const elem = getBoxes(element)
-      if (elem) {
-        boxes.push(elem)
-      }
-    })
+    const visibleBoxes: JSX.Element[] = []
+    const hiddenBoxes: JSX.Element[] = []
+    for (const type of Object.values(BoxTypes)) {
+      const elem = getBoxes(type)
+      if (!elem) continue
 
-    setBoxes(boxes)
+      if (visibleWidgetsStore.visibleElements.has(type)) {
+        visibleBoxes.push(elem)
+      } else {
+        hiddenBoxes.push(elem)
+      }
+    }
+
+    setBoxes(visibleBoxes)
+    setInitialBoxes(hiddenBoxes)
   }, [visibleWidgetsStore.visibleElements.size])
 
-  const getBoxes = (type: string) => {
+  const getBoxes = (type: BoxTypes) => {
     switch (type) {
-      case WIDGET_TYPES.ENERGY:
+      case BoxTypes.ENERGY:
         return <EnergyOverview mode="compact" key={"energy-overview"} />
-      case WIDGET_TYPES.TANK:
+      case BoxTypes.TANKS:
         return <Tanks mode="compact" key={"tanks"} />
-      case WIDGET_TYPES.BATTERY:
+      case BoxTypes.BATTERIES:
         return <BatteriesOverview mode="compact" key={"batteries-overview"} />
       default:
         return null
@@ -40,13 +47,8 @@ const RootView = () => {
 
   return (
     <>
-      {/* TODO: add hidden boxes array and filter the visible boxes */}
-      <div className="hidden">
-        <BatteriesOverview mode="compact" key={"batteries-overview"} />
-        <EnergyOverview mode="compact" key={"energy-overview"} />
-        <Tanks mode="compact" key={"tanks"} />
-      </div>
-      {/* TODO: add loading indicator if boxes are empty */}
+      {/* We need to have hidden boxes mounted to listen to mqtt data and manage boxes visibility */}
+      <div className="hidden">{initialBoxes.map((box) => box)}</div>
       <MainLayout>
         <Grid childClassName={"p-1"} flow={"col"}>
           {boxes.map((box) => box)}
