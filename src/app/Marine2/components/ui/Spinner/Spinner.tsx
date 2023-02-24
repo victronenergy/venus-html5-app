@@ -4,7 +4,7 @@ import React from "react"
 
 const Spinner = () => {
   return (
-    <div className="relative">
+    <div className="w-24 h-24 -ml-12">
       <div className="w-24 h-24 rounded-full absolute border-8 border-solid border-victron-blue/50"></div>
       <div className="w-24 h-24 rounded-full animate-spin absolute border-8 border-solid border-victron-blue border-t-transparent"></div>
     </div>
