@@ -1,40 +1,59 @@
-import React from "react"
+import React, { useEffect } from "react"
 import MainLayout from "../ui/MainLayout"
 import Grid from "../ui/Grid"
 import Tanks from "../boxes/Tanks/Tanks"
 import BatteriesOverview from "../boxes/BatteriesOverview"
 import EnergyOverview from "../boxes/EnergyOverview"
+import { useVisibleWidgetsStore } from "../../modules"
+import { WIDGET_TYPES } from "../../utils/constants"
+import { observer } from "mobx-react"
 
 const RootView = () => {
-  // TODO: replace this code with real data depending on the system type
-  const getBoxes = (type: "simple" | "absolute") => {
-    switch (type) {
-      case "simple":
-        return [
-          <EnergyOverview mode="compact" key={"energy-overview"} />,
-          <Tanks mode="compact" key={"tanks"} />,
-          <BatteriesOverview mode="compact" key={"batteries-overview"} />,
-        ]
-      case "absolute":
-        return [
-          <EnergyOverview mode="compact" key={"energy-overview"} />,
-          <Tanks mode="compact" key={"tanks"} />,
-          <BatteriesOverview mode="compact" key={"batteries-overview"} />,
-        ]
-    }
+  const visibleWidgetsStore = useVisibleWidgetsStore()
 
-    return []
+  const [boxes, setBoxes] = React.useState<JSX.Element[]>([])
+
+  useEffect(() => {
+    const boxes: JSX.Element[] = []
+    visibleWidgetsStore.visibleElements.forEach((element) => {
+      const elem = getBoxes(element)
+      if (elem) {
+        boxes.push(elem)
+      }
+    })
+
+    setBoxes(boxes)
+  }, [visibleWidgetsStore.visibleElements.size])
+
+  const getBoxes = (type: string) => {
+    switch (type) {
+      case WIDGET_TYPES.ENERGY:
+        return <EnergyOverview mode="compact" key={"energy-overview"} />
+      case WIDGET_TYPES.TANK:
+        return <Tanks mode="compact" key={"tanks"} />
+      case WIDGET_TYPES.BATTERY:
+        return <BatteriesOverview mode="compact" key={"batteries-overview"} />
+      default:
+        return null
+    }
   }
 
   return (
-    <MainLayout>
-      <Grid childClassName={"p-1"} flow={"col"}>
-        {/* you can use different mocks to view the components layouts */}
-        {/* TODO: replace this code with real data depending on the system type */}
-        {getBoxes("simple").map((box, key) => box)}
-      </Grid>
-    </MainLayout>
+    <>
+      {/* TODO: add hidden boxes array and filter the visible boxes */}
+      <div className="hidden">
+        <BatteriesOverview mode="compact" key={"batteries-overview"} />
+        <EnergyOverview mode="compact" key={"energy-overview"} />
+        <Tanks mode="compact" key={"tanks"} />
+      </div>
+      {/* TODO: add loading indicator if boxes are empty */}
+      <MainLayout>
+        <Grid childClassName={"p-1"} flow={"col"}>
+          {boxes.map((box) => box)}
+        </Grid>
+      </MainLayout>
+    </>
   )
 }
 
-export default RootView
+export default observer(RootView)
