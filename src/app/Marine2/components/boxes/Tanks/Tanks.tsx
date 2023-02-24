@@ -9,7 +9,7 @@ import { AppViews } from "../../../modules/AppViews"
 import { withErrorBoundary } from "react-error-boundary"
 import { appErrorBoundaryProps } from "../../ui/Error/appErrorBoundary"
 import { useVisibilityNotifier } from "../../../modules"
-import { WIDGET_TYPES } from "../../../utils/constants"
+import { BoxTypes } from "../../../utils/constants"
 
 interface Props {
   mode?: string
@@ -19,7 +19,7 @@ interface Props {
 const Tanks = ({ mode, className }: Props) => {
   const { tanks } = useTanks()
 
-  useVisibilityNotifier({ widgetName: WIDGET_TYPES.TANK, visible: !!(tanks && tanks.length) })
+  useVisibilityNotifier({ widgetName: BoxTypes.TANKS, visible: !!(tanks && tanks.length) })
 
   const gridRef = useRef<HTMLDivElement>(null)
   const [orientation, setOrientation] = useState<"horizontal" | "vertical">("vertical")

@@ -26,7 +26,7 @@ import EnergyAlternator from "../EnergyAlternator"
 import { translate } from "react-i18nify"
 import { AppViews } from "../../../modules/AppViews"
 import { useVisibilityNotifier } from "../../../modules"
-import { WIDGET_TYPES } from "../../../utils/constants"
+import { BoxTypes } from "../../../utils/constants"
 
 const EnergyOverview = ({ mode = "compact" }: Props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -41,7 +41,7 @@ const EnergyOverview = ({ mode = "compact" }: Props) => {
   const boxes = getAvailableEnergyBoxes(mode, shoreInputId, acLoads, pvCharger, dcLoads, alternators, windGenerators)
 
   // TODO: it seems that visibility logic can be improved since the energy component always has an overview box
-  useVisibilityNotifier({ widgetName: WIDGET_TYPES.ENERGY, visible: boxes.length > 0 })
+  useVisibilityNotifier({ widgetName: BoxTypes.ENERGY, visible: boxes.length > 0 })
 
   if (!boxes.length) {
     return null

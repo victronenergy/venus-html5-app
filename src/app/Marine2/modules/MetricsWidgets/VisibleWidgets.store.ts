@@ -1,14 +1,15 @@
 import { makeAutoObservable } from "mobx"
 import { useMemo } from "react"
-import { WIDGET_TYPES } from "../../utils/constants"
+import { BoxTypes } from "../../utils/constants"
 
 export type notifyParams = {
-  widgetName: (typeof WIDGET_TYPES)[keyof typeof WIDGET_TYPES]
+  widgetName: BoxTypes
   visible: boolean
 }
 
 export class VisibleWidgets {
-  visibleElements: Set<string> = new Set()
+  // TODO: add order prop to have a consistent order of boxes
+  visibleElements: Set<BoxTypes> = new Set()
 
   constructor() {
     makeAutoObservable(this)
