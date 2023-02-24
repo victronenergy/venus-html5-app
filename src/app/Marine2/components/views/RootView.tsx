@@ -30,7 +30,7 @@ const RootView = () => {
 
     setBoxes(visibleBoxes)
     setInitialBoxes(hiddenBoxes)
-  }, [visibleWidgetsStore.visibleElements.size])
+  }, [visibleWidgetsStore.visibleElements, visibleWidgetsStore.visibleElements.size])
 
   const getBoxes = (type: BoxTypes) => {
     switch (type) {
