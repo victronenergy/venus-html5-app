@@ -13,6 +13,8 @@ export const WIDGET_TYPES = {
   INVERTER_CHARGER: "InverterCharger",
   INVERTERS: "Inverters",
   SOLAR: "Solar",
+  ENERGY: "Energy",
+  TANK: "Tank",
 } as const
 
 export const BATTERY = {
