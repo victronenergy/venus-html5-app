@@ -11,17 +11,17 @@ const DeviceSettingModal = ({ open, onClose, children, onSet, width = "md" }: Pr
       onClose={onClose}
       className={classnames(" border-victron-darkerGray border rounded-md", {
         "w-96": width === "md",
-        "w-[40rem]": width === "lg",
+        "w-[30rem] md:w-[40rem] lg:w-[40rem]": width === "lg",
       })}
     >
       <Modal.Body>
         <div className="flex flex-col">
-          <div className="dark:text-white text-lg">
+          <div className="dark:text-white text-base">
             {children}
             <div
               className={classnames("-ml-4 h-0 mt-3 border-b border-victron-darkerGray", {
                 "w-96": width === "md",
-                "w-[40rem]": width === "lg",
+                "w-[30rem] md:w-[40rem] lg:w-[40rem]": width === "lg",
               })}
             />
             <div className={"flex flex-row justify-between -mb-2"}>

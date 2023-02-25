@@ -106,8 +106,8 @@ const InverterCharger = ({ componentMode = "compact" }: Props) => {
         <div className={""}>
           <div
             className={classnames("flex flex-row pr-2", {
-              "text-8xl": isFullHeight,
-              "text-4xl md:text-6xl lg:text-6xl": !isFullHeight,
+              "text-4xl": isFullHeight,
+              "text-2xl md:text-3xl lg:text-3xl": !isFullHeight,
             })}
           >
             <div>{!!inputId ? <InputLimitValue inputId={inputId} /> : 0}</div>
@@ -115,8 +115,8 @@ const InverterCharger = ({ componentMode = "compact" }: Props) => {
           </div>
           <div
             className={classnames("text-victron-gray/70", {
-              "text-4xl": isFullHeight,
-              "text-2xl md:text-3xl lg:text-3xl": !isFullHeight,
+              "text-2xl": isFullHeight,
+              "text-lg md:text-xl lg:text-xl": !isFullHeight,
             })}
           >
             {subTitle}
@@ -124,58 +124,11 @@ const InverterCharger = ({ componentMode = "compact" }: Props) => {
         </div>
         <div className={"flex flex-row"}>
           {!!inputId && <InputLimitSelector inputId={inputId} />}
-          <DeviceSettingModal open={isModeModalOpen} onClose={closeModeModal} onSet={submitMode}>
-            <label className="flex w-full justify-center text-xl mb-3">{translate("common.mode")}</label>
-            <label
-              className="flex justify-between items-center pt-2 pb-4 sm-m:pb-6 sm-l:pb-8"
-              onClick={() => setModeForSubmission(SYSTEM_MODE.ON)}
-            >
-              <span>{translate("common.on")}</span>
-              <RadioButton
-                onChange={() => setModeForSubmission(SYSTEM_MODE.ON)}
-                selected={modeForSubmission === SYSTEM_MODE.ON}
-                size={"lg"}
-              />
-            </label>
-            <label
-              className="flex justify-between items-center pt-2 pb-4 sm-m:pb-6 sm-l:pb-8"
-              onClick={() => setModeForSubmission(SYSTEM_MODE.OFF)}
-            >
-              <span>{translate("common.off")}</span>
-              <RadioButton
-                onChange={() => setModeForSubmission(SYSTEM_MODE.OFF)}
-                selected={modeForSubmission === SYSTEM_MODE.OFF}
-                size={"lg"}
-              />
-            </label>
-            <label
-              className="flex justify-between items-center pt-2 pb-4 sm-m:pb-6 sm-l:pb-8"
-              onClick={() => setModeForSubmission(SYSTEM_MODE.CHARGER_ONLY)}
-            >
-              <span>{translate("common.chargerOnly")}</span>
-              <RadioButton
-                onChange={() => setModeForSubmission(SYSTEM_MODE.CHARGER_ONLY)}
-                selected={modeForSubmission === SYSTEM_MODE.CHARGER_ONLY}
-                size={"lg"}
-              />
-            </label>
-            <label
-              className="flex justify-between items-center pt-2 pb-4 sm-m:pb-6 sm-l:pb-8"
-              onClick={() => setModeForSubmission(SYSTEM_MODE.INVERTER_ONLY)}
-            >
-              <span>{translate("common.inverterOnly")}</span>
-              <RadioButton
-                onChange={() => setModeForSubmission(SYSTEM_MODE.INVERTER_ONLY)}
-                selected={modeForSubmission === SYSTEM_MODE.INVERTER_ONLY}
-                size={"lg"}
-              />
-            </label>
-          </DeviceSettingModal>
           <Button className="w-full" size="md" onClick={() => setIsModeModalOpen(!isModeModalOpen)}>
             {inverterChargerModeFormatter(parseInt(mode))}
           </Button>
-          <DeviceSettingModal open={false} onClose={closeModeModal} onSet={submitMode}>
-            <label className="flex w-full justify-center text-xl mb-3">{translate("common.mode")}</label>
+          <DeviceSettingModal open={isModeModalOpen} onClose={closeModeModal} onSet={submitMode}>
+            <label className="flex w-full justify-center text-lg mb-3">{translate("common.mode")}</label>
             <label
               className="flex justify-between items-center pt-2 pb-4 sm-m:pb-6 sm-l:pb-8"
               onClick={() => setModeForSubmission(SYSTEM_MODE.ON)}

@@ -8,7 +8,7 @@ import { observer } from "mobx-react"
 
 const InputLimitSelector = ({ inputId }: Props) => {
   const USAmperage = [10, 15, 20, 30, 50, 100]
-  const EUAmperage = [6, 10, 13, 16, 25, 32, 63]
+  const EUAmperage = [3, 6, 10, 13, 16, 25, 32, 63]
 
   /**
    * - Mask the Product id with `0xFF00`
@@ -67,28 +67,34 @@ const InputLimitSelector = ({ inputId }: Props) => {
         {!!currentLimit ? Number(currentLimit) : 0}
       </Button>
       <DeviceSettingModal open={isLimitModalOpen} onClose={closeLimitModal} onSet={submitLimit} width={"lg"}>
-        <label className="flex w-full justify-center text-xl mb-3">{translate("devices.Input current limit")}</label>
+        <label className="flex w-full justify-center text-lg mb-3">{translate("devices.Input current limit")}</label>
         <div className="flex flex-row justify-center mt-10">
-          <button className="w-36 h-20 bg-victron-blue/70 border-0 rounded-md text-3xl mr-14" onClick={decreaseLimit}>
+          <button
+            className="w-28 md:w-36 lg:w-36 h-20 bg-victron-blue/70 border-0 rounded-md text-xl mr-14"
+            onClick={decreaseLimit}
+          >
             -
           </button>
-          <div className={classnames("w-32 flex flex-row pr-2 items-center text-6xl", {})}>
+          <div className="w-24 md:w-32 lg:w-32 flex flex-row pr-2 items-center text-2xl md:text-3xl lg:text-3xl">
             <div>{limitForSubmission ?? 0}</div>
             <div className={"text-victron-gray/70 pl-1"}>A</div>
           </div>
-          <button className="w-36 h-20 bg-victron-blue/70 border-0 rounded-md text-3xl ml-14" onClick={increaseLimit}>
+          <button
+            className="w-28 md:w-36 lg:w-36 h-20 bg-victron-blue/70 border-0 rounded-md text-xl ml-14"
+            onClick={increaseLimit}
+          >
             +
           </button>
         </div>
         <div className="flex w-full justify-center mt-10 mb-12">
-          <div className="w-[33rem] h-12 bg-victron-blue/30 border-2 border-victron-blue rounded-md flex flex-row justify-between">
+          <div className="w-[27rem] md:w-[33rem] lg:w-[33rem] h-12 bg-victron-blue/30 border-2 border-victron-blue rounded-md flex flex-row justify-between">
             {amperageList.map((value) => (
               <button
                 key={value}
                 style={{ width: `${33 / amperageList.length}rem` }}
                 className={classnames("h-12 flex justify-center items-center -mt-0.5", {
-                  " text-2xl": amperageList.length === 8,
-                  " text-3xl": amperageList.length === 7,
+                  " text-base": amperageList.length === 8,
+                  " text-lg": amperageList.length === 7,
                   " bg-victron-blue rounded-md": value === limitForSubmission,
                 })}
                 onClick={() => {

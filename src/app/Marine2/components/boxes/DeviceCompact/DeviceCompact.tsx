@@ -4,19 +4,13 @@ const DeviceCompact = ({ icon, title, subTitle, value, unit }: Props) => {
       <div className={"flex flex-row items-center justify-start"}>
         <div className={"w-11"}>{icon}</div>
         <div className={"flex flex-col"}>
-          <div className={"text-base md:text-lg lg:text-xl leading-none md:leading-none lg:leading-none pb-1"}>
-            {title}
-          </div>
-          <div
-            className={
-              "dark:text-victron-gray-dark text-xs md:text-sm lg:text-sm leading-none md:leading-none lg:leading-none "
-            }
-          >
+          <div className={"text-base leading-none md:leading-none lg:leading-none pb-1"}>{title}</div>
+          <div className={"dark:text-victron-gray-dark text-sm leading-none md:leading-none lg:leading-none "}>
             {!!subTitle && subTitle}
           </div>
         </div>
       </div>
-      <div className={"justify-self-end text-3xl flex flex-row pr-2"}>
+      <div className={"justify-self-end text-xl flex flex-row pr-2"}>
         <div>{value}</div>
         <div className={"text-victron-gray/70 pl-1"}>{unit}</div>
       </div>
