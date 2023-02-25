@@ -17,10 +17,12 @@ import GeneratorFp from "../GeneratorFp"
 import GeneratorRelays from "../GeneratorRelays"
 import InverterCharger from "../InverterCharger"
 import Grid from "../../ui/Grid"
-// import { withErrorBoundary } from "react-error-boundary"
-// import ErrorFallback from "../../../components/ui/ErrorBoundary/ErrorFallback"
+import { useVisibilityNotifier } from "../../../modules"
+import { BoxTypes } from "../../../utils/constants"
+import { withErrorBoundary } from "react-error-boundary"
+import { appErrorBoundaryProps } from "../../ui/Error/appErrorBoundary"
 
-const DevicesOverview = ({ mode = "compact" }: Props) => {
+const DevicesOverview = ({ mode = "full" }: Props) => {
   const { inverters } = useInverters()
   const { instanceId, vebusInverters } = useVebus()
   const { chargers } = useChargers()
@@ -58,6 +60,9 @@ const DevicesOverview = ({ mode = "compact" }: Props) => {
 
     return boxes
   }
+
+  useVisibilityNotifier({ widgetName: BoxTypes.DEVICES, visible: !!getDetailDevices().length })
+
   if (mode === "compact") {
     return (
       <Box
@@ -91,13 +96,4 @@ interface Props {
   mode?: "compact" | "full"
 }
 
-// fixme: this causes type errors in the RootView component
-// const ComponentWithErrorBoundary = withErrorBoundary(DevicesOverview, {
-//   FallbackComponent: ErrorFallback,
-//   onError(error, info) {
-//     console.error(error, info)
-//   },
-// })
-
-//export default ComponentWithErrorBoundary
-export default observer(DevicesOverview)
+export default withErrorBoundary(observer(DevicesOverview), appErrorBoundaryProps)
