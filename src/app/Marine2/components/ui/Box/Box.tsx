@@ -18,15 +18,15 @@ const Box = ({ children, icon, title, className, linkedView }: BoxProps) => {
         className
       )}
     >
-      <div className={"flex flex-row justify-between"}>
+      <div className={"flex flex-row justify-between w-full"}>
         <div
           className={
-            "flex flex-row items-center justify-start text-victron-gray dark:text-victron-gray-dark cursor-pointer"
+            "flex flex-row items-center justify-start text-victron-gray dark:text-victron-gray-dark cursor-pointer w-full min-w-0"
           }
           onClick={handleClick}
         >
-          {icon && <span className={"mr-1"}>{icon}</span>}
-          <span className={"text-base"}>{title}</span>
+          {icon && <span className={"mr-1 shrink-0"}>{icon}</span>}
+          <span className={"shrink min-w-0 text-base truncate"}>{title}</span>
         </div>
         {linkedView && (
           <div onClick={handleClick}>
