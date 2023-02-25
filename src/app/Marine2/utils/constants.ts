@@ -2,18 +2,11 @@ import preval from "preval.macro"
 
 export const BUILD_TIMESTAMP = preval`module.exports = new Date().toLocaleDateString();`
 
-export const WIDGET_TYPES = {
-  AC_LOADS: "AcLoads",
-  ACTIVE_SOURCE: "ActiveSource",
-  BATTERY: "Battery",
-  CHARGERS: "Chargers",
-  DC_LOADS: "DcLoads",
-  GENERATOR_FP: "GeneratorFp",
-  GENERATOR_RELAY: "GeneratorRelay",
-  INVERTER_CHARGER: "InverterCharger",
-  INVERTERS: "Inverters",
-  SOLAR: "Solar",
-} as const
+export enum BoxTypes {
+  BATTERIES = "Batteries",
+  ENERGY = "Energy",
+  TANKS = "Tanks",
+}
 
 export const BATTERY = {
   IDLE: 0,

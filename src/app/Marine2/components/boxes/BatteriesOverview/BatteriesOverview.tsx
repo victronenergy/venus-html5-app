@@ -1,8 +1,7 @@
 import { observer } from "mobx-react-lite"
-import { useBattery } from "@elninotech/mfd-modules"
-import { Battery as BatteryType } from "@elninotech/mfd-modules"
+import { Battery as BatteryType, useBattery } from "@elninotech/mfd-modules"
 import Box from "../../ui/Box"
-import { BATTERY } from "../../../utils/constants"
+import { BATTERY, BoxTypes } from "../../../utils/constants"
 import Grid from "../../ui/Grid"
 import Battery from "../Battery/Battery"
 import BatteriesIcon from "../../../images/icons/batteries.svg"
@@ -12,6 +11,7 @@ import { withErrorBoundary } from "react-error-boundary"
 import { AppViews } from "../../../modules/AppViews"
 import { translate } from "react-i18nify"
 import { appErrorBoundaryProps } from "../../ui/Error/appErrorBoundary"
+import { useVisibilityNotifier } from "../../../modules"
 
 interface Props {
   mode?: "compact" | "full"
@@ -19,6 +19,8 @@ interface Props {
 
 const BatteriesOverview = ({ mode = "full" }: Props) => {
   const { batteries } = useBattery()
+
+  useVisibilityNotifier({ widgetName: BoxTypes.BATTERIES, visible: !!(batteries && batteries.length) })
 
   const sortedBatteries = sortBatteries(batteries ?? [])
   const overviewBatteries = getOverviewBatteries(sortedBatteries, 2)

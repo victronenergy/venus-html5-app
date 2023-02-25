@@ -17,6 +17,55 @@ module.exports = {
         lg: "1400px",
         xl: "1800px",
         "hide-remote-console": { raw: "(max-width: 600px), (max-height: 550px)" },
+        // custom media queries that also use the min-height property
+        'sm-s' : {
+          raw : '(min-width: 540px) and (min-height: 400px)'
+        },
+        'sm-m' : {
+          raw : '(min-width: 540px) and (min-height: 550px)'
+        },
+        'sm-l' : {
+          raw : '(min-width: 540px) and (min-height: 700px)'
+        },
+        'sm-xl' : {
+          raw : '(min-width: 540px) and (min-height: 1000px)'
+        },
+        'md-s' : {
+          raw : '(min-width: 800px) and (min-height: 400px)'
+        },
+        'md-m' : {
+          raw : '(min-width: 800px) and (min-height: 550px)'
+        },
+        'md-l' : {
+          raw : '(min-width: 800px) and  (min-height: 700px)'
+        },
+        'md-xl' : {
+          raw : '(min-width: 800px) and  (min-height: 1000px)'
+        },
+        'lg-s' : {
+          raw : '(min-width: 1400px) and (min-height: 400px)'
+        },
+        'lg-m' : {
+          raw : '(min-width: 1400px) and (min-height: 550px)'
+        },
+        'lg-l' : {
+          raw : '(min-width: 1400px) and (min-height: 700px)'
+        },
+        'lg-xl' : {
+          raw : '(min-width: 1400px) and (min-height: 1000px)'
+        },
+        'xl-s' : {
+          raw : '(min-width: 1800px) and (min-height: 400px)'
+        },
+        'xl-m' : {
+          raw : '(min-width: 1800px) and (min-height: 550px)'
+        },
+        'xl-l' : {
+          raw : '(min-width: 1800px) and (min-height: 700px)'
+        },
+        'xl-xl' : {
+          raw : '(min-width: 1800px) and (min-height: 1000px)'
+        },
       },
       colors: {
         victron: {
@@ -83,16 +132,16 @@ module.exports = {
         DEFAULT: "0.25rem",
       },
       fontSize: {
-        xs: "0.75rem",
-        sm: "0.875rem",
-        base: "1rem",
-        md: "1.125rem",
-        lg: "1.25rem",
-        xl: "1.375rem",
-        "2xl": "1.5rem",
-        "3xl": "1.875rem",
-        "4xl": "2.25rem",
-        "5xl": "3rem",
+        // Font sizes corresponding with design, px values for easy reference. Line height is always 120%.
+        xs: ["1rem", { lineHeight: "1.2rem" }], // 16px
+        sm: ["1.125rem", { lineHeight: "1.35rem" }], // 18px
+        base: ["1.375rem", { lineHeight: "1.65rem" }], // 22px
+        md: ["1.625rem", { lineHeight: "1.95rem" }], // 26px
+        lg: ["1.75rem", { lineHeight: "2.1rem" }], // 28px
+        xl: ["2.125rem", { lineHeight: "2.55rem" }], // 34px
+        "2xl": ["3.5rem", { lineHeight: "4.2rem" }], // 56px
+        "3xl": ["4.25rem", { lineHeight: "5.1rem" }], // 68px
+        "4xl": ["5.375rem", { lineHeight: "6.45rem" }], // 86px
       },
       strokeWidth: {
         16: "16px",
