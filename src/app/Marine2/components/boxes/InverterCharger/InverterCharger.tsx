@@ -1,4 +1,4 @@
-import { useInputLimit, useInverterCharger, useShorePowerInput } from "@elninotech/mfd-modules"
+import { useInputLimit, useInputLimitSelector, useInverterCharger, useShorePowerInput } from "@elninotech/mfd-modules"
 import { observer } from "mobx-react-lite"
 import InverterChargerIcon from "../../../images/icons/inverter-charger.svg"
 import { translate } from "react-i18nify"
@@ -11,12 +11,103 @@ import { useComponentSize, useWindowSize } from "../../../utils/hooks"
 import { useEffect, useRef, useState } from "react"
 import Button from "../../ui/Button"
 import RadioButton from "../../ui/RadioButton"
-import { Modal } from "../../ui/Modal"
+import DeviceSettingModal from "../../ui/DeviceSettingModal"
 
 const InverterCharger = ({ componentMode = "compact" }: Props) => {
   const InputLimitValue = ({ inputId }: InputProps) => {
     const { currentLimit } = useInputLimit(inputId)
     return <>{!!currentLimit ? Number(currentLimit) : 0}</>
+  }
+
+  const InputLimitSelector = ({ inputId }: InputProps) => {
+    const USAmperage = [10, 15, 20, 30, 50, 100]
+    const EUAmperage = [6, 10, 13, 16, 25, 32, 63]
+
+    /**
+     * - Mask the Product id with `0xFF00`
+     * - If the result is `0x1900` or `0x2600` it is an EU model (230VAC)
+     * - If the result is `0x2000` or `0x2700` it is an US model (120VAC)
+     */
+
+    const getSuggestedAmperageValuesList = (productId: number) => {
+      const result = productId & 0xff00
+      if (result === 0x1900 || result === 0x2600) {
+        return EUAmperage
+      } else if (result === 0x2000 || result === 0x2700) {
+        return USAmperage
+      } else {
+        console.log(`Could not determine amperage US/EU for product id ${productId}`)
+        return USAmperage
+      }
+    }
+
+    const { currentLimitIsAdjustable } = useInputLimit(inputId)
+    const { currentLimit, currentLimitMax, productId, updateLimit } = useInputLimitSelector(inputId)
+    const amperageList = getSuggestedAmperageValuesList(productId).filter((value) => {
+      return value <= (currentLimitMax ?? 100)
+    })
+
+    const [limitForSubmission, setLimitForSubmission] = useState(Number(currentLimit))
+
+    const [isLimitModalOpen, setIsLimitModalOpen] = useState(false)
+
+    useEffect(() => {
+      setLimitForSubmission(Number(currentLimit))
+    }, [currentLimit])
+
+    const closeLimitModal = () => {
+      setIsLimitModalOpen(false)
+      setModeForSubmission(Number(currentLimit))
+    }
+
+    const submitLimit = () => {
+      updateLimit(limitForSubmission)
+      closeLimitModal()
+    }
+
+    if (!currentLimitIsAdjustable) return null
+    return (
+      <>
+        <Button className="w-full mr-4" size="md" onClick={() => setIsLimitModalOpen(!isModeModalOpen)}>
+          {!!currentLimit ? Number(currentLimit) : 0}
+        </Button>
+        <DeviceSettingModal open={isLimitModalOpen} onClose={closeLimitModal} onSet={submitLimit} width={"lg"}>
+          <label className="flex w-full justify-center text-xl mb-3">{translate("devices.Input current limit")}</label>
+          <div className="flex flex-row justify-center mt-10">
+            <button className="w-36 h-20 bg-victron-blue/70 border-0 rounded-md text-3xl mr-14">-</button>
+            <div
+              className={classnames("w-32 flex flex-row pr-2 items-center", {
+                "text-8xl": isFullHeight,
+                "text-4xl md:text-6xl lg:text-6xl": !isFullHeight,
+              })}
+            >
+              <div>{limitForSubmission ?? 0}</div>
+              <div className={"text-victron-gray/70 pl-1"}>A</div>
+            </div>
+            <button className="w-36 h-20 bg-victron-blue/70 border-0 rounded-md text-3xl ml-14">+</button>
+          </div>
+          <div className="flex w-full justify-center mt-10 mb-12">
+            <div className="w-[33rem] h-12 bg-victron-blue/30 border-2 border-victron-blue rounded-md flex flex-row justify-between">
+              {amperageList.map((value) => (
+                <button
+                  style={{ width: `${33 / amperageList.length}rem` }}
+                  className={classnames("h-12 flex justify-center items-center -mt-0.5", {
+                    " text-2xl": amperageList.length === 8,
+                    " text-3xl": amperageList.length === 7,
+                    " bg-victron-blue rounded-md": value === limitForSubmission,
+                  })}
+                  onClick={() => {
+                    setLimitForSubmission(value)
+                  }}
+                >
+                  {value}
+                </button>
+              ))}
+            </div>
+          </div>
+        </DeviceSettingModal>
+      </>
+    )
   }
 
   const inverterChargerModeFormatter = (value: number) => {
@@ -59,21 +150,21 @@ const InverterCharger = ({ componentMode = "compact" }: Props) => {
     !!state || parseInt(state) === 0 ? translate(formatStateForTranslation(Number(state))) : ""
   const subTitle = (!adjustable ? inverterChargerModeFormatter(parseInt(mode)) + " - " : "") + inverterChargerState
 
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isModeModalOpen, setIsModeModalOpen] = useState(false)
   const [modeForSubmission, setModeForSubmission] = useState(Number(mode))
 
   useEffect(() => {
     setModeForSubmission(Number(mode))
   }, [mode])
 
-  const closeModal = () => {
-    setIsModalOpen(false)
+  const closeModeModal = () => {
+    setIsModeModalOpen(false)
     setModeForSubmission(Number(mode))
   }
 
   const submitMode = () => {
     updateMode(modeForSubmission)
-    closeModal()
+    closeModeModal()
   }
 
   if (componentMode === "compact") {
@@ -125,76 +216,106 @@ const InverterCharger = ({ componentMode = "compact" }: Props) => {
             {subTitle}
           </div>
         </div>
-        <Button className="w-full" size="lg" onClick={() => setIsModalOpen(!isModalOpen)}>
-          {inverterChargerModeFormatter(parseInt(mode))}
-        </Button>
-        <Modal.Frame
-          open={isModalOpen}
-          onClose={closeModal}
-          className="w-96 border-victron-darkerGray border rounded-md"
-        >
-          <Modal.Body>
-            <div className="flex flex-col">
-              <div className="dark:text-white text-lg">
-                <label className="flex w-full justify-center text-xl mb-3">{translate("common.mode")}</label>
-                <label
-                  className="flex justify-between items-center pt-2 pb-4 sm-m:pb-6 sm-l:pb-8"
-                  onClick={() => setModeForSubmission(SYSTEM_MODE.ON)}
-                >
-                  <span>{translate("common.on")}</span>
-                  <RadioButton
-                    onChange={() => setModeForSubmission(SYSTEM_MODE.ON)}
-                    selected={modeForSubmission === SYSTEM_MODE.ON}
-                    size={"lg"}
-                  />
-                </label>
-                <label
-                  className="flex justify-between items-center pt-2 pb-4 sm-m:pb-6 sm-l:pb-8"
-                  onClick={() => setModeForSubmission(SYSTEM_MODE.OFF)}
-                >
-                  <span>{translate("common.off")}</span>
-                  <RadioButton
-                    onChange={() => setModeForSubmission(SYSTEM_MODE.OFF)}
-                    selected={modeForSubmission === SYSTEM_MODE.OFF}
-                    size={"lg"}
-                  />
-                </label>
-                <label
-                  className="flex justify-between items-center pt-2 pb-4 sm-m:pb-6 sm-l:pb-8"
-                  onClick={() => setModeForSubmission(SYSTEM_MODE.CHARGER_ONLY)}
-                >
-                  <span>{translate("common.chargerOnly")}</span>
-                  <RadioButton
-                    onChange={() => setModeForSubmission(SYSTEM_MODE.CHARGER_ONLY)}
-                    selected={modeForSubmission === SYSTEM_MODE.CHARGER_ONLY}
-                    size={"lg"}
-                  />
-                </label>
-                <label
-                  className="flex justify-between items-center pt-2 pb-4 sm-m:pb-6 sm-l:pb-8"
-                  onClick={() => setModeForSubmission(SYSTEM_MODE.INVERTER_ONLY)}
-                >
-                  <span>{translate("common.inverterOnly")}</span>
-                  <RadioButton
-                    onChange={() => setModeForSubmission(SYSTEM_MODE.INVERTER_ONLY)}
-                    selected={modeForSubmission === SYSTEM_MODE.INVERTER_ONLY}
-                    size={"lg"}
-                  />
-                </label>
-                <div className={"w-96 -ml-4 h-0 mt-3 border-b border-victron-darkerGray"} />
-                <div className={"flex flex-row justify-between -mb-2"}>
-                  <button onClick={closeModal} className={"w-full -ml-4 -mb-2"}>
-                    {translate("common.close")}
-                  </button>
-                  <div className={"w-0 h-10 mt-2 border-r border-victron-darkerGray"} />
-                  <button onClick={submitMode} className={"w-full -mr-4 -mb-2"}>
-                    {translate("common.set")}
-                  </button>
-                </div>
-              </div>
-            </div>
-          </Modal.Body>
-        </Modal.Frame>
+        <div className={"flex flex-row"}>
+          {!!inputId && <InputLimitSelector inputId={inputId} />}
+          <DeviceSettingModal open={isModeModalOpen} onClose={closeModeModal} onSet={submitMode}>
+            <label className="flex w-full justify-center text-xl mb-3">{translate("common.mode")}</label>
+            <label
+              className="flex justify-between items-center pt-2 pb-4 sm-m:pb-6 sm-l:pb-8"
+              onClick={() => setModeForSubmission(SYSTEM_MODE.ON)}
+            >
+              <span>{translate("common.on")}</span>
+              <RadioButton
+                onChange={() => setModeForSubmission(SYSTEM_MODE.ON)}
+                selected={modeForSubmission === SYSTEM_MODE.ON}
+                size={"lg"}
+              />
+            </label>
+            <label
+              className="flex justify-between items-center pt-2 pb-4 sm-m:pb-6 sm-l:pb-8"
+              onClick={() => setModeForSubmission(SYSTEM_MODE.OFF)}
+            >
+              <span>{translate("common.off")}</span>
+              <RadioButton
+                onChange={() => setModeForSubmission(SYSTEM_MODE.OFF)}
+                selected={modeForSubmission === SYSTEM_MODE.OFF}
+                size={"lg"}
+              />
+            </label>
+            <label
+              className="flex justify-between items-center pt-2 pb-4 sm-m:pb-6 sm-l:pb-8"
+              onClick={() => setModeForSubmission(SYSTEM_MODE.CHARGER_ONLY)}
+            >
+              <span>{translate("common.chargerOnly")}</span>
+              <RadioButton
+                onChange={() => setModeForSubmission(SYSTEM_MODE.CHARGER_ONLY)}
+                selected={modeForSubmission === SYSTEM_MODE.CHARGER_ONLY}
+                size={"lg"}
+              />
+            </label>
+            <label
+              className="flex justify-between items-center pt-2 pb-4 sm-m:pb-6 sm-l:pb-8"
+              onClick={() => setModeForSubmission(SYSTEM_MODE.INVERTER_ONLY)}
+            >
+              <span>{translate("common.inverterOnly")}</span>
+              <RadioButton
+                onChange={() => setModeForSubmission(SYSTEM_MODE.INVERTER_ONLY)}
+                selected={modeForSubmission === SYSTEM_MODE.INVERTER_ONLY}
+                size={"lg"}
+              />
+            </label>
+          </DeviceSettingModal>
+          <Button className="w-full" size="md" onClick={() => setIsModeModalOpen(!isModeModalOpen)}>
+            {inverterChargerModeFormatter(parseInt(mode))}
+          </Button>
+          <DeviceSettingModal open={false} onClose={closeModeModal} onSet={submitMode}>
+            <label className="flex w-full justify-center text-xl mb-3">{translate("common.mode")}</label>
+            <label
+              className="flex justify-between items-center pt-2 pb-4 sm-m:pb-6 sm-l:pb-8"
+              onClick={() => setModeForSubmission(SYSTEM_MODE.ON)}
+            >
+              <span>{translate("common.on")}</span>
+              <RadioButton
+                onChange={() => setModeForSubmission(SYSTEM_MODE.ON)}
+                selected={modeForSubmission === SYSTEM_MODE.ON}
+                size={"lg"}
+              />
+            </label>
+            <label
+              className="flex justify-between items-center pt-2 pb-4 sm-m:pb-6 sm-l:pb-8"
+              onClick={() => setModeForSubmission(SYSTEM_MODE.OFF)}
+            >
+              <span>{translate("common.off")}</span>
+              <RadioButton
+                onChange={() => setModeForSubmission(SYSTEM_MODE.OFF)}
+                selected={modeForSubmission === SYSTEM_MODE.OFF}
+                size={"lg"}
+              />
+            </label>
+            <label
+              className="flex justify-between items-center pt-2 pb-4 sm-m:pb-6 sm-l:pb-8"
+              onClick={() => setModeForSubmission(SYSTEM_MODE.CHARGER_ONLY)}
+            >
+              <span>{translate("common.chargerOnly")}</span>
+              <RadioButton
+                onChange={() => setModeForSubmission(SYSTEM_MODE.CHARGER_ONLY)}
+                selected={modeForSubmission === SYSTEM_MODE.CHARGER_ONLY}
+                size={"lg"}
+              />
+            </label>
+            <label
+              className="flex justify-between items-center pt-2 pb-4 sm-m:pb-6 sm-l:pb-8"
+              onClick={() => setModeForSubmission(SYSTEM_MODE.INVERTER_ONLY)}
+            >
+              <span>{translate("common.inverterOnly")}</span>
+              <RadioButton
+                onChange={() => setModeForSubmission(SYSTEM_MODE.INVERTER_ONLY)}
+                selected={modeForSubmission === SYSTEM_MODE.INVERTER_ONLY}
+                size={"lg"}
+              />
+            </label>
+          </DeviceSettingModal>
+        </div>
       </div>
     </Box>
   )

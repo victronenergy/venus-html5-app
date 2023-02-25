@@ -253,5 +253,8 @@
         "solar": "Solar",
         "status": "Status",
         "unknown": "Unknown"
+    },
+    "devices": {
+        "Input current limit": "Input current limit"
     }
 }
