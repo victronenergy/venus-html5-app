@@ -20,7 +20,7 @@ const DeviceCompact = ({ icon, title, subTitle, value, unit }: Props) => {
           </div>
         </div>
       </div>
-      <div className={"justify-self-end text-sm sm:text-base md:text-lg lg:text-xl flex flex-row pr-2 w-max"}>
+      <div className={"justify-self-end text-base md:text-lg lg:text-xl flex flex-row pr-2 w-max"}>
         <div>{value}</div>
         <div className={"text-victron-gray/70 pl-1"}>{unit}</div>
       </div>
