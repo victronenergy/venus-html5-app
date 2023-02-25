@@ -31,7 +31,7 @@ const DevicesOverview = ({ mode = "compact" }: Props) => {
     let boxes = []
 
     if (!!chargers) {
-      inverters.forEach((charger) => {
+      chargers.forEach((charger) => {
         boxes.push(<Charger key={charger} componentMode={"full"} instanceId={charger} />)
       })
     }
@@ -49,11 +49,12 @@ const DevicesOverview = ({ mode = "compact" }: Props) => {
     }
 
     if (!!instanceId) {
-      boxes.push(<InverterCharger componentMode={"full"} />)
+      boxes.push(<InverterCharger key={"inverterCharger"} componentMode={"full"} />)
     }
 
-    if (!!generatorFp.phases) boxes.push(<GeneratorFp generatorFp={generatorFp} mode={"full"} />)
-    if (!!generatorRelay.settings) boxes.push(<GeneratorRelays generatorRelay={generatorRelay} mode={"full"} />)
+    if (!!generatorFp.phases) boxes.push(<GeneratorFp key={"generatorFp"} generatorFp={generatorFp} mode={"full"} />)
+    if (!!generatorRelay.settings)
+      boxes.push(<GeneratorRelays key={"generatorRelay"} generatorRelay={generatorRelay} mode={"full"} />)
 
     return boxes
   }
