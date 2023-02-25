@@ -7,6 +7,7 @@ import GridPaginator from "../ui/GridPaginator"
 import { useVisibleWidgetsStore } from "../../modules"
 import { BoxTypes } from "../../utils/constants"
 import { observer } from "mobx-react"
+import DevicesOverview from "../boxes/DevicesOverview"
 
 const RootView = () => {
   const visibleWidgetsStore = useVisibleWidgetsStore()
@@ -40,6 +41,8 @@ const RootView = () => {
         return <Tanks mode="compact" key={"tanks"} />
       case BoxTypes.BATTERIES:
         return <BatteriesOverview mode="compact" key={"batteries-overview"} />
+      case BoxTypes.DEVICES:
+        return <DevicesOverview mode="compact" key={"devices-overview"} />
       default:
         return null
     }
