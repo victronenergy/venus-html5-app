@@ -107,7 +107,7 @@ const InverterCharger = ({ componentMode = "compact" }: Props) => {
           <div
             className={classnames("flex flex-row pr-2", {
               "text-4xl": isFullHeight,
-              "text-2xl md:text-3xl lg:text-3xl": !isFullHeight,
+              "text-xl sm:text-2xl md:text-3xl lg:text-3xl": !isFullHeight,
             })}
           >
             <div>{!!inputId ? <InputLimitValue inputId={inputId} /> : 0}</div>
@@ -116,7 +116,7 @@ const InverterCharger = ({ componentMode = "compact" }: Props) => {
           <div
             className={classnames("text-victron-gray/70", {
               "text-2xl": isFullHeight,
-              "text-lg md:text-xl lg:text-xl": !isFullHeight,
+              "text-base sm:text-lg md:text-xl lg:text-xl": !isFullHeight,
             })}
           >
             {subTitle}
