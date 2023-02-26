@@ -20,6 +20,10 @@ const Tanks = ({ mode, className }: Props) => {
   const { tanks } = useTanks()
   const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
 
+  useEffect(() => {
+    if (!boxSize) return
+    console.log("boxSize", boxSize)
+  }, [boxSize])
   useVisibilityNotifier({ widgetName: BoxTypes.TANKS, visible: !!(tanks && tanks.length) })
 
   const gridRef = useRef<HTMLDivElement>(null)
