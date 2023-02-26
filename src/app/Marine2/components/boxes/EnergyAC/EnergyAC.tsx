@@ -1,14 +1,30 @@
-import React from "react"
+import { useState } from "react"
 import Box from "../../../components/ui/Box"
 import { AcLoadsState } from "@elninotech/mfd-modules"
 import ACIcon from "../../../images/icons/ac.svg"
 import { formatPower, formatValue } from "../../../utils/formatters"
 import { translate } from "react-i18nify"
+import { applyStyles, StylesType } from "app/Marine2/utils/media"
+import classNames from "classnames"
+
+const styles: StylesType = {
+  "sm-s": {
+    mainValue: "text-2xl",
+    subValue: "text-base",
+  },
+  "md-s": {
+    mainValue: "text-3xl",
+    subValue: "text-lg",
+  },
+}
 
 const EnergyAC = ({ mode = "compact", acLoads }: Props) => {
   const { current, power, phases, voltage } = acLoads
 
   const totalPower = power.reduce((total, power) => (power ? total + power : total))
+
+  const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
+  const activeStyles: StylesType = applyStyles(boxSize, styles)
 
   if (mode === "compact") {
     return (
@@ -45,9 +61,10 @@ const EnergyAC = ({ mode = "compact", acLoads }: Props) => {
       /* todo: fix types for svg */
       /* @ts-ignore */
       icon={<ACIcon className={"w-5 text-black dark:text-white"} />}
+      getBoxSizeCallback={setBoxSize}
     >
       <div className="w-full h-full flex flex-col">
-        <div className="text-victron-gray dark:text-white text-2xl md-m:text-3xl lg-l:text-4xl">
+        <div className={classNames("text-victron-gray dark:text-white", activeStyles?.mainValue)}>
           {formatPower(totalPower)}
           <span className="p-0.5 text-victron-gray">{totalPower > 1000 ? "kW" : "W"}</span>
         </div>
@@ -55,7 +72,10 @@ const EnergyAC = ({ mode = "compact", acLoads }: Props) => {
           {Array.from(Array(phases ?? 1).keys()).map((i) => (
             <div
               key={i}
-              className="w-full grid grid-cols-7 md-m:grid-cols-10 text-base md-m:text-lg lg-l:text-xl text-victron-gray dark:text-victron-gray-dark"
+              className={classNames(
+                "w-full grid grid-cols-7 md-m:grid-cols-10 text-victron-gray dark:text-victron-gray-dark",
+                activeStyles?.subValue
+              )}
             >
               <hr className="col-span-10 h-1 border-victron-gray" />
               <p className="col-span-1 text-left">{"L" + (i + 1)}</p>
