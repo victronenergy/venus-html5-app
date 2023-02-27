@@ -38,6 +38,7 @@ interface Props {
   windGenerator: number
   showInstance: boolean
   mode?: "compact" | "full"
+  compactBoxSize?: { width: number; height: number }
 }
 
 export default observer(EnergyWind)

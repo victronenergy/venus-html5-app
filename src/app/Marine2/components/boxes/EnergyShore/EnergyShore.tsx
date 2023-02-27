@@ -19,7 +19,22 @@ const styles: StylesType = {
   },
 }
 
-const EnergyShore = ({ mode = "compact", inputId }: Props) => {
+const compactStyles: StylesType = {
+  "sm-s": {
+    name: "text-sm",
+    namePadding: "pl-2",
+    description: "text-xs",
+    value: "text-base",
+  },
+  "md-s": {
+    name: "text-base",
+    namePadding: "pl-3",
+    description: "text-sm",
+    value: "text-lg",
+  },
+}
+
+const EnergyShore = ({ mode = "compact", inputId, compactBoxSize }: Props) => {
   const { current, power } = useActiveInValues()
   const { activeInput, phases } = useActiveSource()
   const unplugged = activeInput + 1 !== inputId // Active in = 0 -> AC1 is active
@@ -27,20 +42,28 @@ const EnergyShore = ({ mode = "compact", inputId }: Props) => {
 
   const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
   const activeStyles: StylesType = applyStyles(boxSize, styles)
-
+  let compactActiveStyles: StylesType = {}
+  if (compactBoxSize) {
+    compactActiveStyles = applyStyles(compactBoxSize, compactStyles)
+  }
   if (mode === "compact") {
     return (
-      <div className="flex items-center justify-between text-sm md-m:text-base lg-l:text-lg">
-        <div className="flex">
+      <div className={classNames("flex items-center justify-between", compactActiveStyles?.name)}>
+        <div className="flex items-center">
           <ShorePowerIcon
             /* todo: fix types for svg */
             /* @ts-ignore */
             className={"w-7 text-black dark:text-white"}
           />
-          <div className="flex flex-col pl-2 md:pl-3">
+          <div className={classNames("flex flex-col", compactActiveStyles?.namePadding)}>
             <p>{translate("boxes.shorePower")}</p>
             {unplugged && (
-              <small className={"text-sm text-victron-gray dark:text-victron-gray-dark"}>
+              <small
+                className={classNames(
+                  "text-victron-gray dark:text-victron-gray-dark",
+                  compactActiveStyles?.description
+                )}
+              >
                 {translate("common.unplugged")}
               </small>
             )}
@@ -48,19 +71,19 @@ const EnergyShore = ({ mode = "compact", inputId }: Props) => {
         </div>
         {!unplugged ? (
           (phases ?? 1) === 1 ? (
-            <p>
+            <p className={classNames(compactActiveStyles?.value)}>
               {formatValue(current[0])}
               <span className="p-0.5 text-victron-gray dark:text-victron-gray-dark">A</span>
             </p>
           ) : (
-            <p>
+            <p className={classNames(compactActiveStyles?.value)}>
               {formatPower(totalPower)}
               <span className="p-0.5 text-victron-gray dark:text-victron-gray-dark">W</span>
             </p>
           )
         ) : (
-          <div>
-            <p className="hidden text-sm md:block">{translate("common.unplugged")}</p>
+          <div className={classNames(compactActiveStyles?.value)}>
+            <p className="hidden md:block">{translate("common.unplugged")}</p>
             <p className="md:hidden">
               --<span className="p-0.5 text-victron-gray dark:text-victron-gray-dark">A</span>
             </p>
@@ -116,6 +139,7 @@ const EnergyShore = ({ mode = "compact", inputId }: Props) => {
 interface Props {
   inputId: number
   mode?: "compact" | "full"
+  compactBoxSize?: { width: number; height: number }
 }
 
 export default observer(EnergyShore)

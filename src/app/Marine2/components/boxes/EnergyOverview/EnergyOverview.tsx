@@ -37,8 +37,18 @@ const EnergyOverview = ({ mode = "compact" }: Props) => {
   const pvCharger = usePvCharger()
   const { alternators } = useAlternators()
   const { windGenerators } = useWindGenerators()
+  const [compactBoxSize, setCompactBoxSize] = React.useState<{ width: number; height: number }>({ width: 0, height: 0 })
 
-  const boxes = getAvailableEnergyBoxes(mode, shoreInputId, acLoads, pvCharger, dcLoads, alternators, windGenerators)
+  const boxes = getAvailableEnergyBoxes(
+    mode,
+    shoreInputId,
+    acLoads,
+    pvCharger,
+    dcLoads,
+    alternators,
+    windGenerators,
+    compactBoxSize
+  )
 
   // TODO: it seems that visibility logic can be improved since the energy component always has an overview box
   useVisibilityNotifier({ widgetName: BoxTypes.ENERGY, visible: boxes.length > 0 })
@@ -55,6 +65,7 @@ const EnergyOverview = ({ mode = "compact" }: Props) => {
         /* @ts-ignore */
         icon={<EnergyIcon className={"w-6 text-victron-gray dark:text-victron-gray-dark"} />}
         linkedView={AppViews.BOX_ENERGY_OVERVIEW}
+        getBoxSizeCallback={setCompactBoxSize}
       >
         <div className="flex flex-col">{boxes}</div>
       </Box>
@@ -71,16 +82,17 @@ const getAvailableEnergyBoxes = function (
   pvCharger: PvChargerState,
   dcLoads: DcLoadsState,
   alternators: AlternatorId[],
-  windGenerators: WindGeneratorId[]
+  windGenerators: WindGeneratorId[],
+  compactBoxSize: { width: number; height: number }
 ) {
   const boxes = []
 
   if (shoreInputId) {
-    boxes.push(<EnergyShore mode={mode} inputId={shoreInputId} />)
+    boxes.push(<EnergyShore mode={mode} inputId={shoreInputId} compactBoxSize={compactBoxSize} />)
   }
 
   if ((pvCharger.current || pvCharger.current === 0) && (pvCharger.power || pvCharger.power === 0)) {
-    boxes.push(<EnergySolar mode={mode} pvCharger={pvCharger} />)
+    boxes.push(<EnergySolar mode={mode} pvCharger={pvCharger} compactBoxSize={compactBoxSize} />)
   }
 
   // Add a divider if there are any AC loads or DC loads in the compact mode
@@ -96,10 +108,10 @@ const getAvailableEnergyBoxes = function (
     )
   }
 
-  if (acLoads.phases) boxes.push(<EnergyAC mode={mode} acLoads={acLoads} />)
+  if (acLoads.phases) boxes.push(<EnergyAC mode={mode} acLoads={acLoads} compactBoxSize={compactBoxSize} />)
 
   if ((dcLoads.current || dcLoads.current === 0) && (dcLoads.voltage || dcLoads.voltage === 0)) {
-    boxes.push(<EnergyDC mode={mode} dcLoads={dcLoads} />)
+    boxes.push(<EnergyDC mode={mode} dcLoads={dcLoads} compactBoxSize={compactBoxSize} />)
   }
 
   const alternatorsPresent = alternators.filter((v) => v || v === 0)
@@ -111,6 +123,7 @@ const getAvailableEnergyBoxes = function (
           mode={mode}
           alternator={alternator ?? 0}
           showInstance={alternators.length > 1}
+          compactBoxSize={compactBoxSize}
         />
       ))
     )
@@ -125,6 +138,7 @@ const getAvailableEnergyBoxes = function (
           mode={mode}
           windGenerator={windGenerator ?? 0}
           showInstance={alternators.length > 1}
+          compactBoxSize={compactBoxSize}
         />
       ))
     )
