@@ -18,32 +18,48 @@ const styles: StylesType = {
   },
 }
 
-const EnergyAC = ({ mode = "compact", acLoads }: Props) => {
+const compactStyles: StylesType = {
+  "sm-s": {
+    name: "text-sm",
+    value: "text-base",
+    namePadding: "pl-2",
+  },
+  "md-s": {
+    name: "text-base",
+    value: "text-lg",
+    namePadding: "pl-3",
+  },
+}
+
+const EnergyAC = ({ mode = "compact", acLoads, compactBoxSize }: Props) => {
   const { current, power, phases, voltage } = acLoads
 
   const totalPower = power.reduce((total, power) => (power ? total + power : total))
 
   const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
   const activeStyles: StylesType = applyStyles(boxSize, styles)
-
+  let compactActiveStyles: StylesType = {}
+  if (compactBoxSize) {
+    compactActiveStyles = applyStyles(compactBoxSize, compactStyles)
+  }
   if (mode === "compact") {
     return (
-      <div className="flex flex-row justify-between items-center text-sm md-m:text-base lg-l:text-lg">
+      <div className={classNames("flex flex-row justify-between items-center", compactActiveStyles?.name)}>
         <div className="flex items-center">
           {/* todo: fix types for svg */}
           {/* @ts-ignore */}
           <ACIcon className={"w-7 text-black dark:text-white"} />
-          <p className="pl-2 md-m:pl-3">{translate("boxes.acLoads")}</p>
+          <p className={classNames(compactActiveStyles?.namePadding)}>{translate("boxes.acLoads")}</p>
         </div>
         <div>
           {(phases ?? 1) === 1 && (
-            <p className="text-base md:text-xl lg:text-2xl">
+            <p className={classNames(compactActiveStyles?.value)}>
               {formatValue(current[0])}
               <span className="p-0.5 text-victron-gray dark:text-victron-gray-dark">A</span>
             </p>
           )}
           {(phases ?? 1) !== 1 && (
-            <p className="text-base md:text-xl lg:text-2xl">
+            <p className={classNames(compactActiveStyles?.value)}>
               {formatPower(totalPower)}
               <span className="p-0.5 text-victron-gray dark:text-victron-gray-dark">
                 {totalPower > 1000 ? "kW" : "W"}
@@ -102,6 +118,7 @@ const EnergyAC = ({ mode = "compact", acLoads }: Props) => {
 interface Props {
   acLoads: AcLoadsState
   mode?: "compact" | "full"
+  compactBoxSize?: { width: number; height: number }
 }
 
 export default EnergyAC

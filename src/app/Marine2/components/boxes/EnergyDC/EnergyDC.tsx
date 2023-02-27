@@ -18,26 +18,42 @@ const styles: StylesType = {
   },
 }
 
-const EnergyDC = ({ mode = "compact", dcLoads }: Props) => {
+const compactStyles: StylesType = {
+  "sm-s": {
+    name: "text-sm",
+    value: "text-base",
+    namePadding: "pl-2",
+  },
+  "md-s": {
+    name: "text-base",
+    value: "text-lg",
+    namePadding: "pl-3",
+  },
+}
+
+const EnergyDC = ({ mode = "compact", dcLoads, compactBoxSize }: Props) => {
   const { power, voltage } = dcLoads
 
   const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
   const activeStyles: StylesType = applyStyles(boxSize, styles)
-
+  let compactActiveStyles: StylesType = {}
+  if (compactBoxSize) {
+    compactActiveStyles = applyStyles(compactBoxSize, compactStyles)
+  }
   if (isNaN(power) || isNaN(voltage)) {
     return <></>
   }
 
   if (mode === "compact") {
     return (
-      <div className="flex flex-row justify-between items-center text-sm md-m:text-base lg-l:text-lg">
-        <div className="flex">
+      <div className={classNames("flex flex-row justify-between items-center", compactActiveStyles?.name)}>
+        <div className="flex items-center">
           {/* todo: fix types for svg */}
           {/* @ts-ignore */}
           <DCIcon className={"w-7 text-black dark:text-white"} />
-          <p className="pl-2 md:pl-3">{translate("boxes.dcLoads")}</p>
+          <p className={classNames(compactActiveStyles?.namePadding)}>{translate("boxes.dcLoads")}</p>
         </div>
-        <p>
+        <p className={classNames(compactActiveStyles?.value)}>
           {formatValue(power / voltage)}
           <span className="p-0.5 text-victron-gray dark:text-victron-gray-dark">A</span>
         </p>
@@ -77,6 +93,7 @@ const EnergyDC = ({ mode = "compact", dcLoads }: Props) => {
 interface Props {
   dcLoads: DcLoadsState
   mode?: "compact" | "full"
+  compactBoxSize?: { width: number; height: number }
 }
 
 export default EnergyDC
