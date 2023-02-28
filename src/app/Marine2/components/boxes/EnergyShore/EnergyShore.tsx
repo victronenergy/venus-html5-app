@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import { useActiveInValues, useActiveSource } from "@elninotech/mfd-modules"
 import { observer } from "mobx-react-lite"
 import Box from "../../../components/ui/Box"
