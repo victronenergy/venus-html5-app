@@ -5,6 +5,7 @@ import { MqttStore, useMqtt } from "@elninotech/mfd-modules"
 import { translate } from "react-i18nify"
 import { observer } from "mobx-react"
 import { useWindowSize } from "../../utils/hooks"
+import Paginator from "../ui/Paginator"
 
 const DiagnosticsView = () => {
   const mqtt = useMqtt()
@@ -16,14 +17,17 @@ const DiagnosticsView = () => {
     <MainLayout title={translate("diagnostics.diagnostics")}>
       {/* TODO: pagination */}
       <div className={"w-full h-full overflow-hidden"}>
-        <div className={"mx-auto flex flex-col items-stretch max-w-screen-md"}>
-          <DiagnosticsTable
-            title={translate("diagnostics.connection.connection")}
-            diagnostics={connectionDiagnostics}
-          />
-          <span className={"my-2"} />
-          <DiagnosticsTable title={translate("diagnostics.device.device")} diagnostics={deviceDiagnostics} />
-        </div>
+        <Paginator orientation={"vertical"}>
+          <div className={"container mx-auto max-w-screen-md"}>
+            <DiagnosticsTable
+              title={translate("diagnostics.connection.connection")}
+              diagnostics={connectionDiagnostics}
+            />
+          </div>
+          <div className={"container mx-auto max-w-screen-md"}>
+            <DiagnosticsTable title={translate("diagnostics.device.device")} diagnostics={deviceDiagnostics} />
+          </div>
+        </Paginator>
       </div>
     </MainLayout>
   )
