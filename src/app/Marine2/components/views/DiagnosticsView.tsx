@@ -15,7 +15,6 @@ const DiagnosticsView = () => {
 
   return (
     <MainLayout title={translate("diagnostics.diagnostics")}>
-      {/* TODO: pagination */}
       <div className={"w-full h-full overflow-hidden"}>
         <Paginator orientation={"vertical"}>
           <div className={"container mx-auto max-w-screen-md"}>
@@ -37,7 +36,7 @@ const getConnectionDiagnostics = (mqtt: MqttStore) => {
   return [
     {
       property: translate("diagnostics.connection.portalId"),
-      value: mqtt.portalId ?? "none",
+      value: mqtt.portalId ?? "-",
     },
     {
       property: translate("diagnostics.connection.status"),
@@ -49,7 +48,7 @@ const getConnectionDiagnostics = (mqtt: MqttStore) => {
     },
     {
       property: translate("diagnostics.connection.host"),
-      value: mqtt.client?.options?.host ?? "not available",
+      value: mqtt.client?.options?.host ?? "-",
     },
   ]
 }
