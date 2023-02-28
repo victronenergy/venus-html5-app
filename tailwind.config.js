@@ -18,53 +18,53 @@ module.exports = {
         xl: "1800px",
         "hide-remote-console": { raw: "(max-width: 600px), (max-height: 550px)" },
         // custom media queries that also use the min-height property
-        'sm-s' : {
-          raw : '(min-width: 540px) and (min-height: 400px)'
+        "sm-s": {
+          raw: "(min-width: 540px) and (min-height: 400px)",
         },
-        'sm-m' : {
-          raw : '(min-width: 540px) and (min-height: 550px)'
+        "sm-m": {
+          raw: "(min-width: 540px) and (min-height: 550px)",
         },
-        'sm-l' : {
-          raw : '(min-width: 540px) and (min-height: 700px)'
+        "sm-l": {
+          raw: "(min-width: 540px) and (min-height: 700px)",
         },
-        'sm-xl' : {
-          raw : '(min-width: 540px) and (min-height: 1000px)'
+        "sm-xl": {
+          raw: "(min-width: 540px) and (min-height: 1000px)",
         },
-        'md-s' : {
-          raw : '(min-width: 800px) and (min-height: 400px)'
+        "md-s": {
+          raw: "(min-width: 800px) and (min-height: 400px)",
         },
-        'md-m' : {
-          raw : '(min-width: 800px) and (min-height: 550px)'
+        "md-m": {
+          raw: "(min-width: 800px) and (min-height: 550px)",
         },
-        'md-l' : {
-          raw : '(min-width: 800px) and  (min-height: 700px)'
+        "md-l": {
+          raw: "(min-width: 800px) and  (min-height: 700px)",
         },
-        'md-xl' : {
-          raw : '(min-width: 800px) and  (min-height: 1000px)'
+        "md-xl": {
+          raw: "(min-width: 800px) and  (min-height: 1000px)",
         },
-        'lg-s' : {
-          raw : '(min-width: 1400px) and (min-height: 400px)'
+        "lg-s": {
+          raw: "(min-width: 1400px) and (min-height: 400px)",
         },
-        'lg-m' : {
-          raw : '(min-width: 1400px) and (min-height: 550px)'
+        "lg-m": {
+          raw: "(min-width: 1400px) and (min-height: 550px)",
         },
-        'lg-l' : {
-          raw : '(min-width: 1400px) and (min-height: 700px)'
+        "lg-l": {
+          raw: "(min-width: 1400px) and (min-height: 700px)",
         },
-        'lg-xl' : {
-          raw : '(min-width: 1400px) and (min-height: 1000px)'
+        "lg-xl": {
+          raw: "(min-width: 1400px) and (min-height: 1000px)",
         },
-        'xl-s' : {
-          raw : '(min-width: 1800px) and (min-height: 400px)'
+        "xl-s": {
+          raw: "(min-width: 1800px) and (min-height: 400px)",
         },
-        'xl-m' : {
-          raw : '(min-width: 1800px) and (min-height: 550px)'
+        "xl-m": {
+          raw: "(min-width: 1800px) and (min-height: 550px)",
         },
-        'xl-l' : {
-          raw : '(min-width: 1800px) and (min-height: 700px)'
+        "xl-l": {
+          raw: "(min-width: 1800px) and (min-height: 700px)",
         },
-        'xl-xl' : {
-          raw : '(min-width: 1800px) and (min-height: 1000px)'
+        "xl-xl": {
+          raw: "(min-width: 1800px) and (min-height: 1000px)",
         },
       },
       colors: {
@@ -76,10 +76,7 @@ module.exports = {
           darkGray: {
             DEFAULT: "#141414",
             dark: "#141414",
-          },
-          darkerGray: {
-            DEFAULT: "#272622",
-            dark: "#272622",
+            2: "#272622",
           },
           gray: {
             DEFAULT: "#969591",
