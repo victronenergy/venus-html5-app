@@ -12,6 +12,7 @@ import { AppViews } from "../../../modules/AppViews"
 import { translate } from "react-i18nify"
 import { appErrorBoundaryProps } from "../../ui/Error/appErrorBoundary"
 import { useVisibilityNotifier } from "../../../modules"
+import Paginator from "../../ui/Paginator"
 
 interface Props {
   mode?: "compact" | "full"
@@ -23,7 +24,7 @@ const BatteriesOverview = ({ mode = "full" }: Props) => {
   useVisibilityNotifier({ widgetName: BoxTypes.BATTERIES, visible: !!(batteries && batteries.length) })
 
   const sortedBatteries = sortBatteries(batteries ?? [])
-  const overviewBatteries = getOverviewBatteries(sortedBatteries, 2)
+  const overviewBatteries = getOverviewBatteries(sortedBatteries)
   const auxiliaryBatteries = sortedBatteries.filter((b) => !overviewBatteries.includes(b))
 
   const getDetailBatteries = function () {
@@ -49,11 +50,13 @@ const BatteriesOverview = ({ mode = "full" }: Props) => {
         title={translate("boxes.batteries")}
         linkedView={AppViews.BOX_BATTERIES_OVERVIEW}
       >
-        <div className={"flex justify-center items-center h-full -mx-4"}>
+        <Paginator selectorLocation={"top-center"}>
           {overviewBatteries.map((b) => (
-            <BatterySummary key={b.id} battery={b} className={overviewBatteries.length > 1 ? "w-6/12" : ""} />
+            <div className={"h-full flex items-center mx-auto"}>
+              <BatterySummary key={b.id} battery={b} />
+            </div>
           ))}
-        </div>
+        </Paginator>
       </Box>
     )
   }
@@ -88,12 +91,12 @@ const sortBatteries = function (batteries: BatteryType[]) {
   We show only batteries with state data on the overview, but if we don't
   have any we will show any batteries.
  */
-const getOverviewBatteries = function (batteries: BatteryType[], max: number) {
+const getOverviewBatteries = function (batteries: BatteryType[]) {
   const withStateCount = batteries.filter((b) => b.state || b.state === 0).length
   if (withStateCount === 0) {
-    return batteries.slice(0, max)
+    return batteries
   }
-  return batteries.slice(0, Math.min(withStateCount, max))
+  return batteries.slice(0, withStateCount)
 }
 
 export default withErrorBoundary(observer(BatteriesOverview), appErrorBoundaryProps)
