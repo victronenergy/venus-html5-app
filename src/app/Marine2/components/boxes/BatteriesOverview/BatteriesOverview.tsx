@@ -6,7 +6,6 @@ import Grid from "../../ui/Grid"
 import Battery from "../Battery/Battery"
 import BatteriesIcon from "../../../images/icons/batteries.svg"
 import BatterySummary from "../../ui/BatterySummary"
-import AuxiliaryBatteries from "../Batteries/AuxiliaryBatteries"
 import { withErrorBoundary } from "react-error-boundary"
 import { AppViews } from "../../../modules/AppViews"
 import { translate } from "react-i18nify"
@@ -24,21 +23,13 @@ const BatteriesOverview = ({ mode = "full" }: Props) => {
 
   const sortedBatteries = sortBatteries(batteries ?? [])
   const overviewBatteries = getOverviewBatteries(sortedBatteries, 2)
-  const auxiliaryBatteries = getAuxiliaryBatteries(sortedBatteries)
 
   const getDetailBatteries = function () {
-    let boxes = []
+    let boxes: JSX.Element[] = []
 
-    overviewBatteries.forEach((b) => {
-      if (b.state === BATTERY.CHARGING || b.state === BATTERY.DISCHARGING) {
-        boxes.push(<Battery key={b.id} battery={b} mode="full" />)
-      }
+    batteries.forEach((b) => {
+      boxes.push(<Battery key={b.id} battery={b} mode="full" />)
     })
-
-    if (auxiliaryBatteries.length > 0) {
-      boxes.push(<AuxiliaryBatteries key={"auxiliary"} batteries={auxiliaryBatteries} />)
-    }
-
     return boxes
   }
 
@@ -96,11 +87,6 @@ const getOverviewBatteries = function (batteries: BatteryType[], max: number) {
     return batteries.slice(0, max)
   }
   return batteries.slice(0, Math.min(withStateCount, max))
-}
-
-// Auxiliary batteries are batteries that are not charging or discharging
-const getAuxiliaryBatteries = function (batteries: BatteryType[]) {
-  return batteries.filter((b) => b.state === BATTERY.IDLE)
 }
 
 export default withErrorBoundary(observer(BatteriesOverview), appErrorBoundaryProps)

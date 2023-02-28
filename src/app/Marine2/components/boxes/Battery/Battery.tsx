@@ -28,36 +28,51 @@ const Battery = ({ battery, mode = "compact" }: Props) => {
     )
   }
 
+  // main batteries (state is charging or discharging)
+  if (battery.state !== BATTERY.IDLE) {
+    return (
+      <Box icon={batteryStateIconFormatter(battery.state)} title={battery.name} className="truncate">
+        <div className="w-full h-full flex flex-col">
+          <div className={`${colorClasses} text-2xl md-m:text-3xl lg-l:text-4xl`}>
+            {Math.round(battery.soc) ?? "--"}
+            <span className="opacity-70">%</span>
+          </div>
+          <p className="text-base md-m:text-lg lg-l:text-xl text-victron-gray dark:text-victron-gray-dark">
+            {batteryStateNameFormatter(translate, battery.state)}
+          </p>
+          <p className="text-base md-m:text-lg lg-l:text-xl  text-victron-gray dark:text-victron-gray-dark">
+            {battery.temperature ?? "--"}
+            <span className="text-victron-gray-400">°C</span>
+          </p>
+
+          <div className="w-full h-full flex content-end flex-wrap">
+            <div className="w-full">
+              <div className="my-1 border-[1px] border-victron-gray-200" />
+              <div className="flex justify-between whitespace-nowrap text-victron-gray text-base md-m:text-lg lg-l:text-xl">
+                <p>
+                  {battery.voltage.toFixed(1)} <span className="text-victron-gray-400">V</span>
+                </p>
+                <p>
+                  {battery.current.toFixed(1)} <span className="text-victron-gray-400">A</span>
+                </p>
+                <p>
+                  {battery.power.toFixed(1)} <span className="text-victron-gray-400">W</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Box>
+    )
+  }
+
+  // aux batteries (state is idle)
   return (
     <Box icon={batteryStateIconFormatter(battery.state)} title={battery.name} className="truncate">
       <div className="w-full h-full flex flex-col">
-        <div className={`${colorClasses} text-2xl md-m:text-3xl lg-l:text-4xl`}>
-          {Math.round(battery.soc) ?? "--"}
-          <span className="opacity-70">%</span>
-        </div>
-        <p className="text-base md-m:text-lg lg-l:text-xl text-victron-gray dark:text-victron-gray-dark">
-          {batteryStateNameFormatter(translate, battery.state)}
-        </p>
-        <p className="text-base md-m:text-lg lg-l:text-xl  text-victron-gray dark:text-victron-gray-dark">
-          {battery.temperature ?? "--"}
-          <span className="text-victron-gray-400">°C</span>
-        </p>
-
-        <div className="w-full h-full flex content-end flex-wrap">
-          <div className="w-full">
-            <div className="my-1 border-[1px] border-victron-gray-200" />
-            <div className="flex justify-between whitespace-nowrap text-victron-gray text-base md-m:text-lg lg-l:text-xl">
-              <p>
-                {battery.voltage.toFixed(1)} <span className="text-victron-gray-400">V</span>
-              </p>
-              <p>
-                {battery.current.toFixed(1)} <span className="text-victron-gray-400">A</span>
-              </p>
-              <p>
-                {battery.power.toFixed(1)} <span className="text-victron-gray-400">W</span>
-              </p>
-            </div>
-          </div>
+        <div className={`text-black dark:text-white text-2xl md-m:text-3xl lg-l:text-4xl`}>
+          {battery.voltage.toFixed(1)}
+          <span className="opacity-70 text-victron-gray dark:text-victron-gray-dark">V</span>
         </div>
       </div>
     </Box>
