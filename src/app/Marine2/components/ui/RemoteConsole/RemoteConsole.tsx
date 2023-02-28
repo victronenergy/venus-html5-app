@@ -7,7 +7,7 @@ import { translate, Translate } from "react-i18nify"
 const RemoteConsole = ({ host }: Props) => {
   const mqtt = useMqtt()
 
-  const loading = mqtt.status === STATUS.CONNECTING
+  const loading = mqtt.status !== STATUS.CONNECTED
   const error = mqtt.error && [STATUS.OFFLINE, STATUS.DISCONNECTED].some((v) => v === mqtt.status)
 
   const protocol = (typeof window !== "undefined" && window.location.protocol) || "http:"
@@ -26,17 +26,17 @@ const RemoteConsole = ({ host }: Props) => {
       )}
 
       {loading && !error && (
-        <div className={"text-center p-4 block hide-remote-console:hidden"}>
+        <div className={"text-center text-base p-4 block hide-remote-console:hidden"}>
           <Translate value={"common.loading"} />…
         </div>
       )}
       {error && (
-        <div className={"text-center p-4 block hide-remote-console:hidden"}>
+        <div className={"text-center text-base p-4 block hide-remote-console:hidden"}>
           <Translate value={"error.remoteConsole.connectionFailed"} />
         </div>
       )}
 
-      <div className={"text-center p-4 hidden hide-remote-console:block"}>
+      <div className={"text-center text-base p-4 hidden hide-remote-console:block"}>
         <Translate value={"error.remoteConsole.screenTooSmall"} />
       </div>
     </>

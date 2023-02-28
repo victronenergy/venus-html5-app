@@ -14,7 +14,7 @@ const EnergyShore = ({ mode = "compact", inputId }: Props) => {
 
   if (mode === "compact") {
     return (
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between text-sm md-m:text-base lg-l:text-lg">
         <div className="flex">
           <ShorePowerIcon
             /* todo: fix types for svg */
@@ -22,26 +22,30 @@ const EnergyShore = ({ mode = "compact", inputId }: Props) => {
             className={"w-7 text-black dark:text-white"}
           />
           <div className="flex flex-col pl-2 md:pl-3">
-            <p className="text-base md:text-xl lg:text-2xl">{translate("boxes.shorePower")}</p>
-            {unplugged && <small>{translate("common.unplugged")}</small>}
+            <p>{translate("boxes.shorePower")}</p>
+            {unplugged && (
+              <small className={"text-sm text-victron-gray dark:text-victron-gray-dark"}>
+                {translate("common.unplugged")}
+              </small>
+            )}
           </div>
         </div>
         {!unplugged ? (
           (phases ?? 1) === 1 ? (
-            <p className="text-base md:text-xl lg:text-2xl">
+            <p>
               {formatValue(current[0])}
               <span className="p-0.5 text-victron-gray dark:text-victron-gray-dark">A</span>
             </p>
           ) : (
-            <p className="text-base md:text-xl lg:text-2xl">
+            <p>
               {formatPower(totalPower)}
               <span className="p-0.5 text-victron-gray dark:text-victron-gray-dark">W</span>
             </p>
           )
         ) : (
           <div>
-            <p className="hidden text-2xl md:block">{translate("common.unplugged")}</p>
-            <p className="text-base md:text-xl lg:text-2xl md:hidden">
+            <p className="hidden text-sm md:block">{translate("common.unplugged")}</p>
+            <p className="md:hidden">
               --<span className="p-0.5 text-victron-gray dark:text-victron-gray-dark">A</span>
             </p>
           </div>
@@ -57,16 +61,16 @@ const EnergyShore = ({ mode = "compact", inputId }: Props) => {
       /* @ts-ignore */
       icon={<ShorePowerIcon className={"w-5 text-black dark:text-white"} />}
     >
-      <div className="w-full h-full flex flex-col">
-        {unplugged && <p className="text-2xl text-victron-gray dark:text-white">{translate("common.unplugged")}</p>}
+      <div className="w-full h-full flex flex-col text-2xl md-m:text-3xl lg-l:text-4xl">
+        {unplugged && <p className="text-victron-gray dark:text-white">{translate("common.unplugged")}</p>}
         {!unplugged &&
           ((phases ?? 1) === 1 ? (
-            <div className="text-5xl text-victron-gray dark:text-white md-m:text-6xl">
+            <div className="text-victron-gray dark:text-white">
               {formatValue(current[0])}
               <span className="p-0.5 text-victron-gray dark:text-victron-gray-dark">A</span>
             </div>
           ) : (
-            <div className="text-5xl text-victron-gray dark:text-white md-m:text-6xl">
+            <div className="text-victron-gray dark:text-white">
               {formatValue(totalPower)}
               <span className="p-0.5 text-victron-gray dark:text-victron-gray-dark">W</span>
             </div>
@@ -75,7 +79,7 @@ const EnergyShore = ({ mode = "compact", inputId }: Props) => {
         <div className="w-full h-full flex content-end flex-wrap">
           <div className="w-full">
             <hr className="w-full h-1 border-victron-gray" />
-            <div className="text-left text-base text-victron-gray dark:text-victron-gray-dark md-m:text-2xl">
+            <div className="text-left text-base md-m:text-lg lg-l:text-xl text-victron-gray dark:text-victron-gray-dark">
               {formatPower(totalPower)}
               <span className="p-0.5 text-victron-gray">W</span>
             </div>

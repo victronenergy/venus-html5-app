@@ -61,6 +61,10 @@
         "veBusFault": "حالة تعطل VE.Bus",
         "voltage": "الجهد الكهربائي"
     },
+    "diagnostics": {
+        "connection": {},
+        "device": {}
+    },
     "error": {
         "errorWithMessage": "خطأ: %{message}",
         "genericMessage": "حدث خطأ في أثناء عرض التطبيق. حاول إعادة تحميل الصفحة أو الاتصال بفيكترون إينرجي باستخدام المعلومات التالية:",

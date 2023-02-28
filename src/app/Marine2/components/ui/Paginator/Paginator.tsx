@@ -30,11 +30,12 @@ const Paginator = ({ children, orientation = "horizontal", selectorLocation = "b
     })
 
     setChildrenSizeArray(newChildrenSizeArray)
-  }, [])
+  }, [orientation])
 
   // on component resize, split the children elements into pages differently
   useEffect(() => {
     autoSplitIntoPages()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [componentSize])
 
   const autoSplitIntoPages = () => {
