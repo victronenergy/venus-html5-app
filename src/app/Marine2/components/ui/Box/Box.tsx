@@ -18,7 +18,7 @@ const Box = ({ children, icon, title, className, linkedView, getBoxSizeCallback 
     if (getBoxSizeCallback) {
       getBoxSizeCallback(componentSize)
     }
-  }, [componentSize])
+  }, [componentSize, getBoxSizeCallback])
 
   return (
     <div
