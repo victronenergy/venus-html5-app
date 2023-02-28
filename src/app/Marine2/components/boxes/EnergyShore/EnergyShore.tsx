@@ -17,6 +17,11 @@ const styles: StylesType = {
     mainValue: "text-3xl",
     subValue: "text-lg",
   },
+  // smaller than "sm-s"
+  default: {
+    mainValue: "text-xl",
+    subValue: "text-sm",
+  },
 }
 
 const compactStyles: StylesType = {
