@@ -24,13 +24,15 @@ const BatteriesOverview = ({ mode = "full" }: Props) => {
 
   const sortedBatteries = sortBatteries(batteries ?? [])
   const overviewBatteries = getOverviewBatteries(sortedBatteries, 2)
-  const auxiliaryBatteries = sortedBatteries.filter((b) => !overviewBatteries.includes(b))
+  const auxiliaryBatteries = getAuxiliaryBatteries(sortedBatteries)
 
   const getDetailBatteries = function () {
     let boxes = []
 
     overviewBatteries.forEach((b) => {
-      boxes.push(<Battery key={b.id} battery={b} mode="full" />)
+      if (b.state === BATTERY.CHARGING || b.state === BATTERY.DISCHARGING) {
+        boxes.push(<Battery key={b.id} battery={b} mode="full" />)
+      }
     })
 
     if (auxiliaryBatteries.length > 0) {
@@ -94,6 +96,11 @@ const getOverviewBatteries = function (batteries: BatteryType[], max: number) {
     return batteries.slice(0, max)
   }
   return batteries.slice(0, Math.min(withStateCount, max))
+}
+
+// Auxiliary batteries are batteries that are not charging or discharging
+const getAuxiliaryBatteries = function (batteries: BatteryType[]) {
+  return batteries.filter((b) => b.state === BATTERY.IDLE)
 }
 
 export default withErrorBoundary(observer(BatteriesOverview), appErrorBoundaryProps)
