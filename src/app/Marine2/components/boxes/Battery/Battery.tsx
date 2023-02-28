@@ -23,6 +23,10 @@ const styles: StylesType = {
     mainValue: "text-3xl",
     subValue: "text-lg",
   },
+  default: {
+    mainValue: "text-xl",
+    subValue: "text-base",
+  },
 }
 
 const Battery = ({ battery, mode = "compact" }: Props) => {
@@ -49,11 +53,11 @@ const Battery = ({ battery, mode = "compact" }: Props) => {
   if (battery.state !== BATTERY.IDLE) {
     return (
       <Box
-      icon={batteryStateIconFormatter(battery.state)}
-      title={battery.name}
-      className="truncate"
-      getBoxSizeCallback={setBoxSize}
-    >
+        icon={batteryStateIconFormatter(battery.state)}
+        title={battery.name}
+        className="truncate"
+        getBoxSizeCallback={setBoxSize}
+      >
         <div className="w-full h-full flex flex-col">
           <div className={classNames(`${colorClasses}`, activeStyles?.mainValue)}>
             {Math.round(battery.soc) ?? "--"}
@@ -67,23 +71,44 @@ const Battery = ({ battery, mode = "compact" }: Props) => {
             <span className="text-victron-gray-400">°C</span>
           </p>
 
-        <div className="w-full h-full flex content-end flex-wrap">
-          <div className="w-full">
-            <div className="my-1 border-[1px] border-victron-gray-200" />
-            <div
-              className={classNames("flex justify-between whitespace-nowrap text-victron-gray", activeStyles?.subValue)}
-            >
-              <p>
-                {battery.voltage.toFixed(1)} <span className="text-victron-gray-400">V</span>
-              </p>
-              <p>
-                {battery.current.toFixed(1)} <span className="text-victron-gray-400">A</span>
-              </p>
-              <p>
-                {battery.power.toFixed(1)} <span className="text-victron-gray-400">W</span>
-              </p>
+          <div className="w-full h-full flex content-end flex-wrap">
+            <div className="w-full">
+              <div className="my-1 border-[1px] border-victron-gray-200" />
+              <div
+                className={classNames(
+                  "flex justify-between whitespace-nowrap text-victron-gray",
+                  activeStyles?.subValue
+                )}
+              >
+                <p>
+                  {battery.voltage.toFixed(1)} <span className="text-victron-gray-400">V</span>
+                </p>
+                <p>
+                  {battery.current.toFixed(1)} <span className="text-victron-gray-400">A</span>
+                </p>
+                <p>
+                  {battery.power.toFixed(1)} <span className="text-victron-gray-400">W</span>
+                </p>
+              </div>
             </div>
           </div>
+        </div>
+      </Box>
+    )
+  }
+
+  // aux batteries (state is idle)
+  return (
+    <Box
+      icon={batteryStateIconFormatter(battery.state)}
+      title={battery.name}
+      className="truncate"
+      getBoxSizeCallback={setBoxSize}
+    >
+      <div className="w-full h-full flex flex-col">
+        <div className={classNames(`text-black dark:text-white`, activeStyles?.mainValue)}>
+          {battery.voltage.toFixed(1)}
+          <span className="text-victron-gray dark:text-victron-gray">V</span>
         </div>
       </div>
     </Box>
@@ -106,7 +131,6 @@ const batteryStateIconFormatter = function (state: number): JSX.Element {
   /* @ts-ignore */
   return <BatteryIcon className={className} />
 }
-
 interface Props {
   battery: BatteryType
   mode?: "compact" | "full"
