@@ -89,6 +89,22 @@
         "veBusFault": "VE Bus故障",
         "voltage": "电压"
     },
+    "diagnostics": {
+        "connection": {
+            "connection": "连接",
+            "error": "错误",
+            "host": "主机",
+            "portalId": "门户ID",
+            "status": "状态"
+        },
+        "device": {
+            "device": "设备",
+            "userAgent": "用户代理",
+            "viewportHeight": "视口高度",
+            "viewportWidth": "视口宽度"
+        },
+        "diagnostics": "诊断"
+    },
     "error": {
         "errorWithMessage": "错误: %{message}",
         "genericMessage": "呈现应用程序时出错。 尝试重新加载页面或联系 Victron Energy 并提供以下信息：",
@@ -145,6 +161,7 @@
         "title": "仪表盘空白"
     },
     "pages": {
+        "diagnostics": "诊断",
         "remoteConsole": "远程控制台",
         "systemOverview": "系统总览"
     },

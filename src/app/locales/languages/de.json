@@ -89,6 +89,22 @@
         "veBusFault": "VE.Bus-Fehlerzustand",
         "voltage": "Spannung"
     },
+    "diagnostics": {
+        "connection": {
+            "connection": "Verbindung",
+            "error": "Fehler",
+            "host": "Host",
+            "portalId": "Portal-ID",
+            "status": "Status"
+        },
+        "device": {
+            "device": "Gerät",
+            "userAgent": "User-Agent",
+            "viewportHeight": "Sichtfensterhöhe",
+            "viewportWidth": "Scihtfensterbreite"
+        },
+        "diagnostics": "Diagnostik"
+    },
     "error": {
         "errorWithMessage": "Fehler: %{message}",
         "genericMessage": "Beim Rendern der Anwendung ist ein Fehler aufgetreten. Versuchen Sie die Seite neu zu laden oder kontaktieren Sie Victron Energy mit den folgenden Informationen:",
@@ -145,6 +161,7 @@
         "title": "Ihr Dashboard ist leer"
     },
     "pages": {
+        "diagnostics": "Diagnostik",
         "remoteConsole": "Remote-Konsole",
         "systemOverview": "Systemübersicht"
     },

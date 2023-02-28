@@ -26,17 +26,17 @@ const RemoteConsole = ({ host }: Props) => {
       )}
 
       {loading && !error && (
-        <div className={"text-center p-4 block hide-remote-console:hidden"}>
+        <div className={"text-center text-base p-4 block hide-remote-console:hidden"}>
           <Translate value={"common.loading"} />…
         </div>
       )}
       {error && (
-        <div className={"text-center p-4 block hide-remote-console:hidden"}>
+        <div className={"text-center text-base p-4 block hide-remote-console:hidden"}>
           <Translate value={"error.remoteConsole.connectionFailed"} />
         </div>
       )}
 
-      <div className={"text-center p-4 hidden hide-remote-console:block"}>
+      <div className={"text-center text-base p-4 hidden hide-remote-console:block"}>
         <Translate value={"error.remoteConsole.screenTooSmall"} />
       </div>
     </>

@@ -50,6 +50,9 @@ Sentry.init({
   integrations: [new Integrations.BrowserTracing()],
   sampleRate: 1,
   debug: process.env.NODE_ENV === "development",
+  // Since this app can be used on remote devices such as a boat, we want to
+  // capture errors and then allow the user to decide if they want to send them,
+  // because they may have only limited or satellite internet access
   beforeSend(event, hint) {
     const sendError = hint && (hint.captureContext as string) === "captured"
     if (!sendError) {

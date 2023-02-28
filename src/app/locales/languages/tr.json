@@ -89,6 +89,10 @@
         "veBusFault": "veBusFault",
         "voltage": "Gerilim"
     },
+    "diagnostics": {
+        "connection": {},
+        "device": {}
+    },
     "error": {
         "errorWithMessage": "Error: %{message}",
         "genericMessage": "genericMessage",

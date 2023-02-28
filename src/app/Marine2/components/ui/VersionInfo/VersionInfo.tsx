@@ -35,7 +35,7 @@ const VersionInfo = () => {
         >
           <Modal.Body>
             <div className="flex flex-col">
-              <div className="text-base mb-2 dark:text-white md:mb-4 md-m:text-lg lg-s:text-base lg-l:text-xl">
+              <div className="text-sm mb-2 dark:text-white md:mb-4 md-m:text-base lg-s:text-sm lg-l:text-base">
                 <div className="flex flex-col">
                   <div>
                     {/* todo: fix types for svg */}

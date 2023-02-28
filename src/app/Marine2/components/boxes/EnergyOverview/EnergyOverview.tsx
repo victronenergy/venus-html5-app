@@ -25,6 +25,8 @@ import EnergyWind from "../EnergyWind"
 import EnergyAlternator from "../EnergyAlternator"
 import { translate } from "react-i18nify"
 import { AppViews } from "../../../modules/AppViews"
+import { useVisibilityNotifier } from "../../../modules"
+import { BoxTypes } from "../../../utils/constants"
 
 const EnergyOverview = ({ mode = "compact" }: Props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -36,6 +38,15 @@ const EnergyOverview = ({ mode = "compact" }: Props) => {
   const { alternators } = useAlternators()
   const { windGenerators } = useWindGenerators()
 
+  const boxes = getAvailableEnergyBoxes(mode, shoreInputId, acLoads, pvCharger, dcLoads, alternators, windGenerators)
+
+  // TODO: it seems that visibility logic can be improved since the energy component always has an overview box
+  useVisibilityNotifier({ widgetName: BoxTypes.ENERGY, visible: boxes.length > 0 })
+
+  if (!boxes.length) {
+    return null
+  }
+
   if (mode === "compact") {
     return (
       <Box
@@ -45,18 +56,12 @@ const EnergyOverview = ({ mode = "compact" }: Props) => {
         icon={<EnergyIcon className={"w-6 text-victron-gray dark:text-victron-gray-dark"} />}
         linkedView={AppViews.BOX_ENERGY_OVERVIEW}
       >
-        <div className="flex flex-col">
-          {getAvailableEnergyBoxes(mode, shoreInputId, acLoads, pvCharger, dcLoads, alternators, windGenerators)}
-        </div>
+        <div className="flex flex-col">{boxes}</div>
       </Box>
     )
   }
 
-  return (
-    <Grid childClassName={"p-1"}>
-      {getAvailableEnergyBoxes(mode, shoreInputId, acLoads, pvCharger, dcLoads, alternators, windGenerators)}
-    </Grid>
-  )
+  return <Grid childClassName={"p-1"}>{boxes}</Grid>
 }
 
 const getAvailableEnergyBoxes = function (
@@ -85,7 +90,7 @@ const getAvailableEnergyBoxes = function (
   ) {
     boxes.push(
       <div className="flex flex-row justify-between">
-        <div className="text-sm md:text-base text-victron-gray">{translate("common.loads")}</div>
+        <div className="text-xs text-victron-gray">{translate("common.loads")}</div>
         <div className="w-full ml-2 mb-2 border-b border-victron-gray" />
       </div>
     )

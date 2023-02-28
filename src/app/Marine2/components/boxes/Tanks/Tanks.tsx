@@ -6,6 +6,10 @@ import { useComponentSize, useWindowSize } from "../../../utils/hooks"
 import Box from "../../ui/Box"
 import Tank from "./Tank"
 import { AppViews } from "../../../modules/AppViews"
+import { withErrorBoundary } from "react-error-boundary"
+import { appErrorBoundaryProps } from "../../ui/Error/appErrorBoundary"
+import { useVisibilityNotifier } from "../../../modules"
+import { BoxTypes } from "../../../utils/constants"
 
 interface Props {
   mode?: string
@@ -14,6 +18,9 @@ interface Props {
 
 const Tanks = ({ mode, className }: Props) => {
   const { tanks } = useTanks()
+
+  useVisibilityNotifier({ widgetName: BoxTypes.TANKS, visible: !!(tanks && tanks.length) })
+
   const gridRef = useRef<HTMLDivElement>(null)
   const [orientation, setOrientation] = useState<"horizontal" | "vertical">("vertical")
 
@@ -93,4 +100,4 @@ const Tanks = ({ mode, className }: Props) => {
   )
 }
 
-export default observer(Tanks)
+export default withErrorBoundary(observer(Tanks), appErrorBoundaryProps)

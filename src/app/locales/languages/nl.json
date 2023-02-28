@@ -89,6 +89,10 @@
         "veBusFault": "VE.Bus fout",
         "voltage": "Spanning"
     },
+    "diagnostics": {
+        "connection": {},
+        "device": {}
+    },
     "error": {
         "errorWithMessage": "Fout : %{message}",
         "genericMessage": "Fout tijdens het laden van de applicatie. Probeer de pagina opnieuw te laden of neem contact op met Victron Energy met de volgende informatie:",

@@ -51,6 +51,14 @@ If it's the first time you run the app:
 - make sure to have `node` & `npm` installed on your machine
 - run `npm install` in the root folder
 
+This repository contains several white-label apps. To work with a specific app, set the correct `APP` environment variable in the `.env.local` file. For example, to build the `Marine2` app, use:
+
+```
+REACT_APP_WHITELABEL=Marine2
+```
+
+You can find the list of available apps in the `.env.local.example` file.
+
 ### 2.2 Development
 
 To run the app locally for development, run:
@@ -69,25 +77,12 @@ This way you can run the local app against venus device data if the venus device
 
 ### 2.3 Running the app with no Venus device available
 
-The MQTT mock is no longer maintained. Use [venus-docker](https://github.com/victronenergy/venus-docker) instead or a Venus GX in demo mode (below).
+Use [venus-docker](https://github.com/victronenergy/venus-docker) in demo mode.
 
 You can run multiple `venus-docker` simulations by executing: `echo {a..z} | xargs -n1 ./run.sh -s`. Each container running a simulation will expose MQTT on
 an increasing port number starting from `9001`.
 
-~~If there is no real device to be used for MQTT data, you can run the app with a fake MQTT broker:~~
-
-~~`npm run dev:mocked` This shallowly fakes the MQTT implementation in the Venus device.~~
-
 Also keep in mind the Venus device also has a Demo mode, which allows you to get useful data if you only have the Venus device available, without requiring various Victron devices to be connected to the Venus device. To enable it, navigate to the Venus Remote Console -> Settings -> General.
-
-### 2.4 Device radiator
-
-Since the app will be run on a plethora of different resolutions and split screens there is a "radiator" available which has iframes for all the
-basic combinations of display "splits". The base 1/1 ui is 1280 x 720, which can be changed in the header. In the radiator there are the basic ui
-and multiple split screen variations available relative to the "base" size.
-
-To run this ui it is recommended to use mocked data. Run the mocked mqtt as described above and navigate to the radiator ui with `http://localhost/radiator.html`.
-Since it is still served through the webpack dev server, the app will hot reload any time there are code changes.
 
 ## 2.5 Metrics available
 

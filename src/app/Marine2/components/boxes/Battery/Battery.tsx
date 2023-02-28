@@ -7,10 +7,18 @@ import BatteryIcon from "../../../images/icons/battery.svg"
 import BatteryDischargingIcon from "../../../images/icons/battery-discharging.svg"
 import { colorForPercentageFormatter } from "../../../utils/formatters"
 import { translate } from "react-i18nify"
+import classNames from "classnames"
 
 const Battery = ({ battery, mode = "compact" }: Props) => {
   const hasPercentage = battery.soc !== undefined && battery.soc !== null
-  const color = hasPercentage ? colorForPercentageFormatter(Math.round(battery.soc)) : "victron-gray-4"
+  const color = hasPercentage ? colorForPercentageFormatter(Math.round(battery.soc)) : "victron-gray-400"
+  const colorClasses = classNames({
+    "text-victron-red dark:text-victron-red-dark": color === "victron-red",
+    "text-victron-yellow dark:text-victron-yellow-dark": color === "victron-yellow",
+    "text-victron-green dark:text-victron-green-dark": color === "victron-green",
+    "text-victron-blue dark:text-victron-blue-dark": color === "victron-blue",
+    "text-victron-gray-400 dark:text-victron-gray-dark": color === "victron-gray-400",
+  })
 
   if (mode === "compact") {
     return (
@@ -23,14 +31,14 @@ const Battery = ({ battery, mode = "compact" }: Props) => {
   return (
     <Box icon={batteryStateIconFormatter(battery.state)} title={battery.name} className="truncate">
       <div className="w-full h-full flex flex-col">
-        <div className={`text-${color} text-5xl md-m:text-6xl`}>
+        <div className={`${colorClasses} text-2xl md-m:text-3xl lg-l:text-4xl`}>
           {Math.round(battery.soc) ?? "--"}
           <span className="opacity-70">%</span>
         </div>
-        <p className="text-base md:text-lg lg:text-xl xl:text-2xl text-victron-gray dark:text-victron-gray-dark">
+        <p className="text-base md-m:text-lg lg-l:text-xl text-victron-gray dark:text-victron-gray-dark">
           {batteryStateNameFormatter(translate, battery.state)}
         </p>
-        <p className="text-base md:text-lg lg:text-xl xl:text-2xl text-victron-gray dark:text-victron-gray-dark">
+        <p className="text-base md-m:text-lg lg-l:text-xl  text-victron-gray dark:text-victron-gray-dark">
           {battery.temperature ?? "--"}
           <span className="text-victron-gray-400">°C</span>
         </p>
@@ -38,17 +46,14 @@ const Battery = ({ battery, mode = "compact" }: Props) => {
         <div className="w-full h-full flex content-end flex-wrap">
           <div className="w-full">
             <div className="my-1 border-[1px] border-victron-gray-200" />
-            <div key={battery.name} className="grid grid-cols-9 whitespace-nowrap">
-              <p className="text-victron-gray dark:text-white truncate text-left text-base sm:text-lg md:text-xl lg:text-2xl col-span-3">
-                {battery.name}
-              </p>
-              <p className="text-victron-gray text-left text-base sm:text-lg md:text-xl lg:text-2xl  col-span-2">
+            <div className="flex justify-between whitespace-nowrap text-victron-gray text-base md-m:text-lg lg-l:text-xl">
+              <p>
                 {battery.voltage.toFixed(1)} <span className="text-victron-gray-400">V</span>
               </p>
-              <p className="text-victron-gray text-center text-base sm:text-lg md:text-xl lg:text-2xl  col-span-2">
+              <p>
                 {battery.current.toFixed(1)} <span className="text-victron-gray-400">A</span>
               </p>
-              <p className="text-victron-gray text-right text-base sm:text-lg md:text-xl lg:text-2xl  col-span-2">
+              <p>
                 {battery.power.toFixed(1)} <span className="text-victron-gray-400">W</span>
               </p>
             </div>
