@@ -8,6 +8,10 @@ import { translate } from "react-i18nify"
 const EnergyDC = ({ mode = "compact", dcLoads }: Props) => {
   const { power, voltage } = dcLoads
 
+  if (isNaN(power) || isNaN(voltage)) {
+    return
+  }
+
   if (mode === "compact") {
     return (
       <div className="flex flex-row justify-between items-center text-sm md-m:text-base lg-l:text-lg">
