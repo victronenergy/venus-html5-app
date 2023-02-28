@@ -35,5 +35,10 @@ export const applyStyles = (size: ComponentSizeType, stylesObject: StylesType) =
       styles = { ...styles, ...stylesObject[breakpoint] }
     }
   })
+
+  if (Object.keys(styles).length === 0) {
+    styles = stylesObject["default"]
+  }
+
   return styles
 }
