@@ -9,7 +9,7 @@ const EnergyDC = ({ mode = "compact", dcLoads }: Props) => {
   const { power, voltage } = dcLoads
 
   if (isNaN(power) || isNaN(voltage)) {
-    return
+    return <></>
   }
 
   if (mode === "compact") {
