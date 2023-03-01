@@ -25,18 +25,10 @@ const DiagnosticsView = () => {
   return (
     <MainLayout title={translate("diagnostics.diagnostics")}>
       <div className={"h-full w-full overflow-hidden"}>
-        <div className={"container mx-auto max-w-screen-md hidden sm-s:block"}>
-          {connectionDiagnostics}
-          <div className={"my-4"}></div>
-          {deviceDiagnostics}
-        </div>
-        {/* We don't use display: none as the paginator needs to have a size */}
-        <div className={"w-full h-full sm-s:invisible"}>
-          <Paginator orientation={"vertical"}>
-            <div className={"container mx-auto max-w-screen-md"}>{connectionDiagnostics}</div>
-            <div className={"container mx-auto max-w-screen-md"}>{deviceDiagnostics}</div>
-          </Paginator>
-        </div>
+        <Paginator orientation={"vertical"}>
+          <div className={"container mx-auto max-w-screen-md mb-4"}>{connectionDiagnostics}</div>
+          <div className={"container mx-auto max-w-screen-md"}>{deviceDiagnostics}</div>
+        </Paginator>
       </div>
     </MainLayout>
   )
