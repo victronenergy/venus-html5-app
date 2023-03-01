@@ -10,23 +10,33 @@ import Paginator from "../ui/Paginator"
 const DiagnosticsView = () => {
   const mqtt = useMqtt()
   const windowSize = useWindowSize()
-  const connectionDiagnostics = getConnectionDiagnostics(mqtt)
-  const deviceDiagnostics = getDeviceDiagnostics(windowSize)
+
+  const connectionDiagnostics = (
+    <DiagnosticsTable
+      title={translate("diagnostics.connection.connection")}
+      diagnostics={getConnectionDiagnostics(mqtt)}
+    />
+  )
+
+  const deviceDiagnostics = (
+    <DiagnosticsTable title={translate("diagnostics.device.device")} diagnostics={getDeviceDiagnostics(windowSize)} />
+  )
 
   return (
     <MainLayout title={translate("diagnostics.diagnostics")}>
-      <div className={"w-full h-full overflow-hidden"}>
-        <Paginator orientation={"vertical"}>
-          <div className={"container mx-auto max-w-screen-md"}>
-            <DiagnosticsTable
-              title={translate("diagnostics.connection.connection")}
-              diagnostics={connectionDiagnostics}
-            />
-          </div>
-          <div className={"container mx-auto max-w-screen-md"}>
-            <DiagnosticsTable title={translate("diagnostics.device.device")} diagnostics={deviceDiagnostics} />
-          </div>
-        </Paginator>
+      <div className={"h-full w-full overflow-hidden"}>
+        <div className={"container mx-auto max-w-screen-md hidden sm-s:block"}>
+          {connectionDiagnostics}
+          <div className={"my-4"}></div>
+          {deviceDiagnostics}
+        </div>
+        {/* We don't use display: none as the paginator needs to have a size */}
+        <div className={"w-full h-full sm-s:invisible"}>
+          <Paginator orientation={"vertical"}>
+            <div className={"container mx-auto max-w-screen-md"}>{connectionDiagnostics}</div>
+            <div className={"container mx-auto max-w-screen-md"}>{deviceDiagnostics}</div>
+          </Paginator>
+        </div>
       </div>
     </MainLayout>
   )
