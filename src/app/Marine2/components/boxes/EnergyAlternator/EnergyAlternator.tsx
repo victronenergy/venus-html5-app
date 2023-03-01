@@ -37,6 +37,7 @@ interface Props {
   alternator: number
   showInstance: boolean
   mode?: "compact" | "full"
+  compactBoxSize?: { width: number; height: number }
 }
 
 export default EnergyAlternator

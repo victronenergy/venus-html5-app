@@ -6,7 +6,6 @@ import Grid from "../../ui/Grid"
 import Battery from "../Battery/Battery"
 import BatteriesIcon from "../../../images/icons/batteries.svg"
 import BatterySummary from "../../ui/BatterySummary"
-import AuxiliaryBatteries from "../Batteries/AuxiliaryBatteries"
 import { withErrorBoundary } from "react-error-boundary"
 import { AppViews } from "../../../modules/AppViews"
 import { translate } from "react-i18nify"
@@ -24,19 +23,13 @@ const BatteriesOverview = ({ mode = "full" }: Props) => {
 
   const sortedBatteries = sortBatteries(batteries ?? [])
   const overviewBatteries = getOverviewBatteries(sortedBatteries, 2)
-  const auxiliaryBatteries = sortedBatteries.filter((b) => !overviewBatteries.includes(b))
 
   const getDetailBatteries = function () {
-    let boxes = []
+    let boxes: JSX.Element[] = []
 
-    overviewBatteries.forEach((b) => {
+    batteries.forEach((b) => {
       boxes.push(<Battery key={b.id} battery={b} mode="full" />)
     })
-
-    if (auxiliaryBatteries.length > 0) {
-      boxes.push(<AuxiliaryBatteries key={"auxiliary"} batteries={auxiliaryBatteries} />)
-    }
-
     return boxes
   }
 
