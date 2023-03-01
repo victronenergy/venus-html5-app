@@ -18,6 +18,7 @@ interface Props {
 
 const Tanks = ({ mode, className }: Props) => {
   const { tanks } = useTanks()
+  const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
 
   useVisibilityNotifier({ widgetName: BoxTypes.TANKS, visible: !!(tanks && tanks.length) })
 
@@ -48,10 +49,11 @@ const Tanks = ({ mode, className }: Props) => {
         icon={<TanksIcon className={"w-6 text-black dark:text-white"} />}
         linkedView={AppViews.BOX_TANKS}
         className={className}
+        getBoxSizeCallback={setBoxSize}
       >
         <div>
           {tanks?.map((tank) => {
-            return tank ? <Tank mode={"compact"} key={tank} tankInstanceId={tank} /> : null
+            return tank ? <Tank mode={"compact"} key={tank} tankInstanceId={tank} parentSize={boxSize} /> : null
           })}
         </div>
       </Box>

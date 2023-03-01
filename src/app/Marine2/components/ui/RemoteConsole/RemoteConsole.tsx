@@ -7,7 +7,7 @@ import { translate, Translate } from "react-i18nify"
 const RemoteConsole = ({ host }: Props) => {
   const mqtt = useMqtt()
 
-  const loading = mqtt.status === STATUS.CONNECTING
+  const loading = mqtt.status !== STATUS.CONNECTED
   const error = mqtt.error && [STATUS.OFFLINE, STATUS.DISCONNECTED].some((v) => v === mqtt.status)
 
   const protocol = (typeof window !== "undefined" && window.location.protocol) || "http:"
