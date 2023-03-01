@@ -1,30 +1,14 @@
-import React, { useState } from "react"
+import React from "react"
 import { useActiveInValues, useActiveSource } from "@elninotech/mfd-modules"
 import { observer } from "mobx-react-lite"
-import Box from "../../../components/ui/Box"
 import ShorePowerIcon from "../../../images/icons/shore-power.svg"
 import { formatValue, formatPower } from "../../../utils/formatters"
 import { translate } from "react-i18nify"
-import { applyStyles, StylesType } from "app/Marine2/utils/media"
+import { applyStyles, BreakpointStylesType, StylesType } from "app/Marine2/utils/media"
 import classNames from "classnames"
+import ValueBox from "../../ui/ValueBox"
 
-const styles: StylesType = {
-  "sm-s": {
-    mainValue: "text-2xl",
-    subValue: "text-base",
-  },
-  "md-s": {
-    mainValue: "text-3xl",
-    subValue: "text-lg",
-  },
-  // smaller than "sm-s"
-  default: {
-    mainValue: "text-xl",
-    subValue: "text-sm",
-  },
-}
-
-const compactStyles: StylesType = {
+const compactStyles: BreakpointStylesType = {
   "sm-s": {
     name: "text-sm",
     namePadding: "pl-2",
@@ -40,17 +24,25 @@ const compactStyles: StylesType = {
 }
 
 const EnergyShore = ({ mode = "compact", inputId, compactBoxSize }: Props) => {
-  const { current, power } = useActiveInValues()
+  const { current, power, voltage } = useActiveInValues()
   const { activeInput, phases } = useActiveSource()
   const unplugged = activeInput + 1 !== inputId // Active in = 0 -> AC1 is active
   const totalPower = power.reduce((total, power) => (power ? total + power : total))
 
-  const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
-  const activeStyles: StylesType = applyStyles(boxSize, styles)
   let compactActiveStyles: StylesType = {}
   if (compactBoxSize) {
     compactActiveStyles = applyStyles(compactBoxSize, compactStyles)
   }
+
+  const phasesOverview = []
+  for (let phase = 0; phase < phases; phase++) {
+    phasesOverview.push([
+      { value: voltage[phase], unit: "V" },
+      { value: current[phase], unit: "A" },
+      { value: power[phase], unit: "W" },
+    ])
+  }
+
   if (mode === "compact") {
     return (
       <div className={classNames("flex items-center justify-between", compactActiveStyles?.name)}>
@@ -99,45 +91,17 @@ const EnergyShore = ({ mode = "compact", inputId, compactBoxSize }: Props) => {
   }
 
   return (
-    <Box
+    <ValueBox
       title={translate("boxes.shorePower")}
       /* todo: fix types for svg */
       /* @ts-ignore */
-      icon={<ShorePowerIcon className={"w-5 text-black dark:text-white"} />}
-      getBoxSizeCallback={setBoxSize}
+      icon={<ShorePowerIcon className={"w-5"} />}
+      value={(phases ?? 1) === 1 ? current[0] : totalPower}
+      unit={(phases ?? 1) === 1 ? "A" : "W"}
+      bottomValues={phasesOverview}
     >
-      <div className={classNames("w-full h-full flex flex-col", activeStyles?.mainValue)}>
-        {unplugged && (
-          <p>
-            --<span className="p-0.5 text-victron-gray dark:text-victron-gray-dark">A</span>
-          </p>
-        )}
-        {!unplugged &&
-          ((phases ?? 1) === 1 ? (
-            <div className="text-victron-gray dark:text-white">
-              {formatValue(current[0])}
-              <span className="p-0.5 text-victron-gray dark:text-victron-gray-dark">A</span>
-            </div>
-          ) : (
-            <div className="text-victron-gray dark:text-white">
-              {formatValue(totalPower)}
-              <span className="p-0.5 text-victron-gray dark:text-victron-gray-dark">W</span>
-            </div>
-          ))}
-
-        <div className="w-full h-full flex content-end flex-wrap">
-          <div className="w-full">
-            <hr className="w-full h-1 border-victron-gray" />
-            <div
-              className={classNames("text-left text-victron-gray dark:text-victron-gray-dark", activeStyles?.subValue)}
-            >
-              {formatPower(totalPower)}
-              <span className="p-0.5 text-victron-gray">W</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </Box>
+      <div>{unplugged && translate("common.unplugged")}</div>
+    </ValueBox>
   )
 }
 

@@ -1,8 +1,8 @@
 import React from "react"
-import Box from "../../../components/ui/Box"
 import AlternatorIcon from "../../../images/icons/alternator.svg"
 import { useAlternator } from "@elninotech/mfd-modules"
 import { translate } from "react-i18nify"
+import ValueBox from "../../ui/ValueBox"
 
 const EnergyAlternator = ({ mode = "compact", alternator, showInstance }: Props) => {
   const { current, voltage } = useAlternator(alternator)
@@ -19,17 +19,15 @@ const EnergyAlternator = ({ mode = "compact", alternator, showInstance }: Props)
   }
 
   return (
-    <Box
+    <ValueBox
       title={translate("boxes.alternator") + instance}
       /* todo: fix types for svg */
       /* @ts-ignore */
-      icon={<AlternatorIcon className={"w-6 text-black dark:text-white"} />}
-    >
-      <>
-        <p>{Math.round(current)}A</p>
-        <p>{Math.round(power)}W</p>
-      </>
-    </Box>
+      icon={<AlternatorIcon className={"w-5"} />}
+      value={current}
+      unit={"A"}
+      bottomValues={[[{ value: power, unit: "W" }]]}
+    />
   )
 }
 

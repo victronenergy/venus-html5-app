@@ -51,7 +51,7 @@ const BatteriesOverview = ({ mode = "full" }: Props) => {
     )
   }
 
-  return <Grid childClassName={"p-1"}>{getDetailBatteries()}</Grid>
+  return <Grid childClassName={"p-2"}>{getDetailBatteries()}</Grid>
 }
 
 /*

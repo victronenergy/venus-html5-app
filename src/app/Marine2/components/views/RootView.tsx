@@ -52,10 +52,10 @@ const RootView = () => {
       <MainLayout>
         <GridPaginator
           childrenPerPage={4}
-          childClassName={"p-1"}
           flow={"col"}
           orientation={"horizontal"}
           selectorLocation={"bottom-full"}
+          childClassName={"p-2"}
         >
           {boxes.map((box) => box)}
         </GridPaginator>

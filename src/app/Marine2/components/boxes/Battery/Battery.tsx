@@ -7,10 +7,10 @@ import BatteryIcon from "../../../images/icons/battery.svg"
 import BatteryDischargingIcon from "../../../images/icons/battery-discharging.svg"
 import { translate } from "react-i18nify"
 import classNames from "classnames"
-import { applyStyles, StylesType } from "app/Marine2/utils/media"
+import { applyStyles, BreakpointStylesType, StylesType } from "app/Marine2/utils/media"
 import { useState } from "react"
 
-const styles: StylesType = {
+const styles: BreakpointStylesType = {
   "sm-s": {
     mainValue: "text-2xl",
     subValue: "text-base",

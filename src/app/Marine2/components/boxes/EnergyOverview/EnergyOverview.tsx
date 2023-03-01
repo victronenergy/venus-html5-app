@@ -72,7 +72,7 @@ const EnergyOverview = ({ mode = "compact" }: Props) => {
     )
   }
 
-  return <Grid childClassName={"p-1"}>{boxes}</Grid>
+  return <Grid childClassName={"p-2"}>{boxes}</Grid>
 }
 
 const getAvailableEnergyBoxes = function (
