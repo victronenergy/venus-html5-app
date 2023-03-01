@@ -8,7 +8,7 @@ import FuelIcon from "../../../images/icons/fuel.svg"
 import WaterIcon from "../../../images/icons/fresh-water.svg"
 import BlackWaterIcon from "../../../images/icons/black-water.svg"
 import GrayWaterIcon from "../../../images/icons/waste-water.svg"
-import { applyStyles, BreakpointStylesType } from "app/Marine2/utils/media"
+import { applyStyles, BreakpointStylesType, StylesType } from "app/Marine2/utils/media"
 
 const styles: BreakpointStylesType = {
   "sm-s": {
@@ -25,7 +25,7 @@ const Tank = ({ tankInstanceId, mode, orientation = "vertical", parentSize }: Pr
   let { capacity, fluidType, level, remaining, unit } = useTank(tankInstanceId)
   const fluidTypeNum = +fluidType
 
-  let activeStyles: BreakpointStylesType = {}
+  let activeStyles: StylesType = {}
   if (parentSize) {
     activeStyles = applyStyles(parentSize, styles)
   }
