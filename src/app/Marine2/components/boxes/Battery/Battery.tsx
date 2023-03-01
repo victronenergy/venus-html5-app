@@ -9,27 +9,53 @@ import { translate } from "react-i18nify"
 import classNames from "classnames"
 import { applyStyles, BreakpointStylesType, StylesType } from "app/Marine2/utils/media"
 import { useState } from "react"
+import ValueBar from "../../ui/ValueBar"
+import ValueBox from "../../ui/ValueBox"
 
 const styles: BreakpointStylesType = {
+  default: {
+    value: "text-2xl",
+    valueSubtitle: "text-base",
+    valueBar: "text-sm",
+    valueBars: "text-sm",
+  },
   "sm-s": {
-    mainValue: "text-2xl",
-    subValue: "text-base",
+    value: "text-3xl",
+    valueSubtitle: "text-lg",
+    valueBar: "text-sm",
+    valueBars: "text-sm",
   },
   "md-s": {
-    mainValue: "text-3xl",
-    subValue: "text-base",
+    value: "text-3xl",
+    valueSubtitle: "text-lg",
+    valueBar: "text-lg",
+    valueBars: "text-lg",
   },
-  "lg-s": {
-    mainValue: "text-3xl",
-    subValue: "text-lg",
-  },
-  default: {
-    mainValue: "text-xl",
-    subValue: "text-base",
+  "md-m": {
+    value: "text-4xl",
+    valueSubtitle: "text-xl",
+    valueBar: "text-xl",
+    valueBars: "text-lg",
   },
 }
 
-const Battery = ({ battery, mode = "compact" }: Props) => {
+const Battery = ({ battery }: Props) => {
+  const isSimpleBattery = !(battery.state || battery.state === 0)
+  const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
+
+  if (isSimpleBattery) {
+    return (
+      <ValueBox
+        /* @ts-ignore */
+        icon={<BatteryIcon className={"w-6"} />}
+        title={battery.name}
+        unit={"V"}
+        value={battery.voltage}
+        bottomValues={[]}
+      ></ValueBox>
+    )
+  }
+
   const hasPercentage = battery.soc !== undefined && battery.soc !== null
   const color = hasPercentage ? colorForPercentageFormatter(Math.round(battery.soc)) : "victron-gray-400"
   const colorClasses = classNames({
@@ -39,76 +65,31 @@ const Battery = ({ battery, mode = "compact" }: Props) => {
     "text-victron-blue dark:text-victron-blue-dark": color === "victron-blue",
     "text-victron-gray-400 dark:text-victron-gray-dark": color === "victron-gray-400",
   })
-  const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
   const activeStyles: StylesType = applyStyles(boxSize, styles)
-  if (mode === "compact") {
-    return (
-      <Box icon={batteryStateIconFormatter(battery.state)} title={battery.name}>
-        <></>
-      </Box>
-    )
-  }
+  const bottomValues = [
+    { value: battery.voltage, unit: "V" },
+    { value: battery.current, unit: "A" },
+    { value: battery.power, unit: "W" },
+  ]
 
-  // main batteries (state is charging or discharging)
-  if (battery.state !== BATTERY.IDLE) {
-    return (
-      <Box
-        icon={batteryStateIconFormatter(battery.state)}
-        title={battery.name}
-        className="truncate"
-        getBoxSizeCallback={setBoxSize}
-      >
-        <div className="w-full h-full flex flex-col">
-          <div className={classNames(`${colorClasses}`, activeStyles?.mainValue)}>
-            {Math.round(battery.soc) ?? "--"}
-            <span className="opacity-70">%</span>
+  return (
+    <Box title={battery.name} icon={batteryStateIconFormatter(battery.state)} getBoxSizeCallback={setBoxSize}>
+      <div className="w-full h-full flex flex-col justify-between">
+        <div>
+          <div className={classNames("text-victron-gray dark:text-white", colorClasses, activeStyles?.value)}>
+            {battery.soc ? Math.round(battery.soc) : battery.soc ?? "--"}
+            <span className={"pl-0.5 opacity-70"}>%</span>
           </div>
-          <p className={classNames("text-victron-gray dark:text-victron-gray-dark", activeStyles?.subValue)}>
-            {batteryStateNameFormatter(translate, battery.state)}
-          </p>
-          <p className={classNames("text-victron-gray dark:text-victron-gray-dark", activeStyles?.subValue)}>
-            {battery.temperature ?? "--"}
-            <span className="text-victron-gray-400">°C</span>
-          </p>
-
-          <div className="w-full h-full flex content-end flex-wrap">
-            <div className="w-full">
-              <div className="my-1 border-[1px] border-victron-gray-200" />
-              <div
-                className={classNames(
-                  "flex justify-between whitespace-nowrap text-victron-gray",
-                  activeStyles?.subValue
-                )}
-              >
-                <p>
-                  {battery.voltage.toFixed(1)} <span className="text-victron-gray-400">V</span>
-                </p>
-                <p>
-                  {battery.current.toFixed(1)} <span className="text-victron-gray-400">A</span>
-                </p>
-                <p>
-                  {battery.power.toFixed(1)} <span className="text-victron-gray-400">W</span>
-                </p>
-              </div>
-            </div>
+          <div className={classNames("text-victron-gray dark:text-victron-gray-500", activeStyles.valueSubtitle)}>
+            <p>{batteryStateNameFormatter(translate, battery.state)}</p>
+            <p>
+              {battery.temperature ? Math.round(battery.temperature) : battery.temperature ?? "--"}
+              <span className={"text-victron-gray-400"}>°C</span>
+            </p>
           </div>
         </div>
-      </Box>
-    )
-  }
-
-  // aux batteries (state is idle)
-  return (
-    <Box
-      icon={batteryStateIconFormatter(battery.state)}
-      title={battery.name}
-      className="truncate"
-      getBoxSizeCallback={setBoxSize}
-    >
-      <div className="w-full h-full flex flex-col">
-        <div className={classNames(`text-black dark:text-white`, activeStyles?.mainValue)}>
-          {battery.voltage.toFixed(1)}
-          <span className="text-victron-gray dark:text-victron-gray">V</span>
+        <div className={classNames("-mb-1", activeStyles.valueBars)}>
+          <ValueBar values={bottomValues} />
         </div>
       </div>
     </Box>
@@ -116,7 +97,7 @@ const Battery = ({ battery, mode = "compact" }: Props) => {
 }
 
 const batteryStateIconFormatter = function (state: number): JSX.Element {
-  const className = "w-6 text-victron-gray dark:text-victron-gray-dark"
+  const className = "w-6"
   switch (state) {
     case BATTERY.CHARGING:
       /* todo: fix types for svg */
@@ -133,7 +114,6 @@ const batteryStateIconFormatter = function (state: number): JSX.Element {
 }
 interface Props {
   battery: BatteryType
-  mode?: "compact" | "full"
 }
 
 export default Battery
