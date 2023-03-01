@@ -39,7 +39,7 @@ const ValueBox = ({ title, icon, value, unit, bottomValues, children }: Props) =
 
   if (unit === "W" && value && value > 1000) {
     unit = "kW"
-    value = value / 1000
+    value = value ? value / 1000 : value
   }
 
   return (
@@ -56,7 +56,7 @@ const ValueBox = ({ title, icon, value, unit, bottomValues, children }: Props) =
         </div>
         <div className={classNames("-mb-2", activeStyles.valueBars)}>
           {bottomValues.map((v, i) => (
-            <ValueBar key={i} prefix={isMultiPhase ? "L" + i : undefined} values={v} />
+            <ValueBar key={i} prefix={isMultiPhase ? "L" + (i + 1) : undefined} values={v} />
           ))}
         </div>
       </div>

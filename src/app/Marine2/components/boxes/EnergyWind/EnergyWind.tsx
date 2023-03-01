@@ -4,18 +4,24 @@ import { useWindGenerator } from "@elninotech/mfd-modules"
 import { observer } from "mobx-react-lite"
 import { translate } from "react-i18nify"
 import ValueBox from "../../ui/ValueBox"
+import ValueOverview from "../../ui/ValueOverview"
 
-const EnergyWind = ({ mode = "compact", windGenerator, showInstance }: Props) => {
+const EnergyWind = ({ mode = "compact", windGenerator, showInstance, compactBoxSize }: Props) => {
   const { current, voltage } = useWindGenerator(windGenerator)
   const instance = showInstance ? ` [${windGenerator}]` : ""
   const power = current * voltage
 
-  if (mode === "compact") {
+  if (mode === "compact" && compactBoxSize) {
     return (
-      <p>
-        {translate("boxes.windGenerator")}
-        {instance}: {current || current === 0 ? Math.round(current) : "--"}A
-      </p>
+      <ValueOverview
+        /* todo: fix types for svg */
+        /* @ts-ignore */
+        Icon={WindIcon}
+        title={translate("boxes.windGenerator")}
+        value={current}
+        unit={"A"}
+        boxSize={compactBoxSize}
+      />
     )
   }
 

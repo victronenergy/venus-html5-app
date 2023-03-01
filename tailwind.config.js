@@ -144,6 +144,10 @@ module.exports = {
       strokeWidth: {
         16: "16px",
       },
+      minWidth: {
+        '5': '1.25rem',
+        '7': '1.75rem',
+      }
     },
   },
   // Garmin and Furuno devices don't support the RGB colors with opacity,

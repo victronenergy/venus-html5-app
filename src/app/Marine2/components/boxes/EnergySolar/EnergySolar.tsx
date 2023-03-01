@@ -1,45 +1,24 @@
 import { PvChargerState } from "@elninotech/mfd-modules"
 import SolarIcon from "../../../images/icons/solar.svg"
-import { formatValue } from "../../../utils/formatters"
 import { translate } from "react-i18nify"
-import { applyStyles, BreakpointStylesType, StylesType } from "app/Marine2/utils/media"
-import classNames from "classnames"
 import ValueBox from "../../ui/ValueBox"
-
-const compactStyles: BreakpointStylesType = {
-  "sm-s": {
-    name: "text-sm",
-    value: "text-base",
-    namePadding: "pl-2",
-  },
-  "md-s": {
-    name: "text-base",
-    value: "text-lg",
-    namePadding: "pl-3",
-  },
-}
+import ValueOverview from "../../ui/ValueOverview"
+import React from "react"
 
 const EnergySolar = ({ mode = "compact", pvCharger, compactBoxSize }: Props) => {
   const { current, power } = pvCharger
 
-  let compactActiveStyles: StylesType = {}
-  if (compactBoxSize) {
-    compactActiveStyles = applyStyles(compactBoxSize, compactStyles)
-  }
-  if (mode === "compact") {
+  if (mode === "compact" && compactBoxSize) {
     return (
-      <div className={classNames("flex flex-row justify-between items-center", compactActiveStyles?.name)}>
-        <div className="flex items-center">
-          {/* todo: fix types for svg */}
-          {/* @ts-ignore */}
-          <SolarIcon className={"w-7 text-black dark:text-white"} />
-          <p className={classNames(compactActiveStyles?.namePadding)}>{translate("boxes.solar")}</p>
-        </div>
-        <p className={classNames(compactActiveStyles?.value)}>
-          {formatValue(current)}
-          <span className="p-0.5 text-victron-gray dark:text-victron-gray-dark">A</span>
-        </p>
-      </div>
+      <ValueOverview
+        /* todo: fix types for svg */
+        /* @ts-ignore */
+        Icon={SolarIcon}
+        title={translate("boxes.solar")}
+        value={current}
+        unit={"A"}
+        boxSize={compactBoxSize}
+      />
     )
   }
 
