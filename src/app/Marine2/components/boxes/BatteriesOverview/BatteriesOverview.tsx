@@ -12,6 +12,7 @@ import { translate } from "react-i18nify"
 import { appErrorBoundaryProps } from "../../ui/Error/appErrorBoundary"
 import { useVisibilityNotifier } from "../../../modules"
 import Paginator from "../../ui/Paginator"
+import { useState } from "react"
 
 interface Props {
   mode?: "compact" | "full"
@@ -19,6 +20,7 @@ interface Props {
 
 const BatteriesOverview = ({ mode = "full" }: Props) => {
   const { batteries } = useBattery()
+  const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
 
   useVisibilityNotifier({ widgetName: BoxTypes.BATTERIES, visible: !!(batteries && batteries.length) })
 
@@ -42,11 +44,12 @@ const BatteriesOverview = ({ mode = "full" }: Props) => {
         icon={<BatteriesIcon className={"w-6 text-victron-gray dark:text-victron-gray-dark"} />}
         title={translate("boxes.batteries")}
         linkedView={AppViews.BOX_BATTERIES_OVERVIEW}
+        getBoxSizeCallback={setBoxSize}
       >
         <Paginator selectorLocation={"top-center"}>
           {overviewBatteries.map((b) => (
-            <div className={"h-full flex items-center mx-auto"}>
-              <BatterySummary key={b.id} battery={b} />
+            <div className={"h-full flex items-center justify-center"}>
+              <BatterySummary key={b.id} battery={b} boxSize={boxSize} />
             </div>
           ))}
         </Paginator>
