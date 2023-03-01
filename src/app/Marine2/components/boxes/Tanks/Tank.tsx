@@ -10,14 +10,30 @@ import BlackWaterIcon from "../../../images/icons/black-water.svg"
 import GrayWaterIcon from "../../../images/icons/waste-water.svg"
 import { applyStyles, StylesType } from "app/Marine2/utils/media"
 
-const styles: StylesType = {
+const compactStyles: StylesType = {
   "sm-s": {
     tankName: "text-sm",
     level: "text-base",
+    nameCols: "col-span-7",
+    progressCols: "hidden",
+    levelCols: "col-span-2",
   },
   "md-s": {
     tankName: "text-base",
     level: "text-lg",
+    nameCols: "col-span-4",
+    progressCols: "col-span-3",
+    levelCols: "col-span-2",
+  },
+  "lg-s": {
+    nameCols: "col-span-4",
+    progressCols: "col-span-4",
+    levelCols: "col-span-1",
+  },
+  default: {
+    nameCols: "col-span-7",
+    progressCols: "hidden",
+    levelCols: "col-span-2",
   },
 }
 
@@ -25,9 +41,9 @@ const Tank = ({ tankInstanceId, mode, orientation = "vertical", parentSize }: Pr
   let { capacity, fluidType, level, remaining, unit } = useTank(tankInstanceId)
   const fluidTypeNum = +fluidType
 
-  let activeStyles: StylesType = {}
+  let compactActiveStyles: StylesType = {}
   if (parentSize) {
-    activeStyles = applyStyles(parentSize, styles)
+    compactActiveStyles = applyStyles(parentSize, compactStyles)
   }
 
   const fluidTypeTitle = useMemo(() => {
@@ -63,21 +79,21 @@ const Tank = ({ tankInstanceId, mode, orientation = "vertical", parentSize }: Pr
   if (mode === "compact") {
     return (
       <div>
-        <div className="grid grid-cols-8 gap-2">
-          <div className="col-span-6 flex items-center sm:col-span-4 lg:col-span-3">
+        <div className="grid grid-cols-9">
+          <div className={classnames("flex items-center", compactActiveStyles?.nameCols)}>
             <div>{fluidIcon(fluidTypeNum, mode)}</div>
-            <div className="flex flex-col p-1 sm:p-2 w-full">
-              <div className={classnames("truncate text-ellipsis overflow-hidden", activeStyles?.tankName)}>
+            <div className={"flex flex-col w-full p-2"}>
+              <div className={classnames("truncate text-ellipsis overflow-hidden", compactActiveStyles?.tankName)}>
                 {fluidTypeTitle}
               </div>
             </div>
           </div>
-          <div className="flex items-center justify-center invisible sm:visible sm:col-span-3 lg:col-span-4">
+          <div className={classnames("flex items-center justify-center", compactActiveStyles?.progressCols)}>
             <ProgressBar percentage={levelFormatter(level)} type={fluidTypeNum} />
           </div>
-          <div className="col-span-1 flex items-center justify-center">
+          <div className={classnames("flex items-center justify-end", compactActiveStyles?.levelCols)}>
             <div
-              className={classnames("flex flex-row pr-2", activeStyles?.level, {
+              className={classnames("flex flex-row", compactActiveStyles?.level, {
                 "text-victron-red": level > 75,
               })}
             >
