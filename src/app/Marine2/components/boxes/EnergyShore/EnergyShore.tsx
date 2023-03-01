@@ -41,7 +41,7 @@ const EnergyShore = ({ mode = "compact", inputId, compactBoxSize }: Props) => {
       title={translate("boxes.shorePower")}
       /* todo: fix types for svg */
       /* @ts-ignore */
-      icon={<ShorePowerIcon className={"w-5"} />}
+      icon={<ShorePowerIcon className={"w-6"} />}
       value={!unplugged ? ((phases ?? 1) === 1 ? current[0] : totalPower) : undefined}
       unit={(phases ?? 1) === 1 ? "A" : "W"}
       bottomValues={phasesOverview}

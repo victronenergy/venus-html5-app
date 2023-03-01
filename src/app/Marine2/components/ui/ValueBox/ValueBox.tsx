@@ -48,13 +48,13 @@ const ValueBox = ({ title, icon, value, unit, bottomValues, children }: Props) =
         <div>
           <div className={classNames("text-victron-gray dark:text-white", activeStyles?.value)}>
             {formatValue(value)}
-            <span className={"p-0.5 text-victron-gray dark:text-victron-gray-500"}>{unit}</span>
+            <span className={"pl-0.5 text-victron-gray dark:text-victron-gray-500"}>{unit}</span>
           </div>
           <div className={classNames("text-victron-gray dark:text-victron-gray-500", activeStyles.valueSubtitle)}>
             {children}
           </div>
         </div>
-        <div className={classNames("-mb-2", activeStyles.valueBars)}>
+        <div className={classNames("-mb-1", activeStyles.valueBars)}>
           {bottomValues.map((v, i) => (
             <ValueBar key={i} prefix={isMultiPhase ? "L" + (i + 1) : undefined} values={v} />
           ))}

@@ -29,7 +29,7 @@ const EnergyAlternator = ({ mode = "compact", alternator, showInstance, compactB
       title={translate("boxes.alternator") + instance}
       /* todo: fix types for svg */
       /* @ts-ignore */
-      icon={<AlternatorIcon className={"w-5"} />}
+      icon={<AlternatorIcon className={"w-6"} />}
       value={current}
       unit={"A"}
       bottomValues={[[{ value: power, unit: "W" }]]}
