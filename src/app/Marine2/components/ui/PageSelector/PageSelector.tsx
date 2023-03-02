@@ -12,7 +12,13 @@ import DotIcon from "../../../images/icons/selectors/dot.svg"
 import DotSelectedIcon from "../../../images/icons/selectors/dot-selected.svg"
 import DotSelectedVerticalIcon from "../../../images/icons/selectors/dot-selected-vert.svg"
 
-const PageSelector = ({ currentPage, maxPages, onClickLeft, onClickRight, selectorLocation }: Props) => {
+const PageSelector = ({
+  currentPage = 0,
+  maxPages = 1,
+  onClickLeft = () => {},
+  onClickRight = () => {},
+  selectorLocation = "bottom-full",
+}: PageSelectorProps) => {
   const dotsVertRef = useRef<HTMLDivElement>(null)
   const dotsHorRef = useRef<HTMLDivElement>(null)
 
@@ -60,8 +66,8 @@ const PageSelector = ({ currentPage, maxPages, onClickLeft, onClickRight, select
   return (
     <div
       className={classnames("flex items-center select-none", {
-        "h-11 w-full flex-row": isHorizontal,
-        "w-11 h-full flex-col": !isHorizontal,
+        "h-11 w-full min-w-0 flex-row": isHorizontal,
+        "w-11 h-full min-h-0 flex-col": !isHorizontal,
         "justify-between": selectorLocation.endsWith("full"),
         "justify-end": selectorLocation.endsWith("right") || selectorLocation.endsWith("bottom"),
         "justify-start": selectorLocation.endsWith("left") || selectorLocation.endsWith("top"),
@@ -69,7 +75,7 @@ const PageSelector = ({ currentPage, maxPages, onClickLeft, onClickRight, select
         "space-y-4 ": !selectorLocation.endsWith("full") && !isHorizontal,
       })}
     >
-      <div onClick={onLeftSelectorClick} className={"w-11 h-11"}>
+      <div onClick={onLeftSelectorClick} className={"w-11 h-11 shrink-0"}>
         {(isHorizontal && ((currentPage > 0 && <LeftSelectorBlueIcon />) || <LeftSelectorIcon />)) ||
           (currentPage > 0 && <UpSelectorBlueIcon />) || <UpSelectorIcon />}
       </div>
@@ -78,8 +84,8 @@ const PageSelector = ({ currentPage, maxPages, onClickLeft, onClickRight, select
         className={classnames("flex justify-center overflow-hidden", {
           "w-[calc(100%-7.25rem)]": isHorizontal && selectorLocation.endsWith("full"),
           "h-[calc(100%-7.25rem)] items-center": !isHorizontal && selectorLocation.endsWith("full"),
-          "h-max items-center": !isHorizontal && !selectorLocation.endsWith("full"),
-          "w-max items-center": isHorizontal && !selectorLocation.endsWith("full"),
+          "h-fit max-h-[calc(100%-7.25rem)] min-h-0 items-center": !isHorizontal && !selectorLocation.endsWith("full"),
+          "w-fit max-w-[calc(100%-7.25rem)] min-w-0 items-center": isHorizontal && !selectorLocation.endsWith("full"),
         })}
       >
         {(isHorizontal && (
@@ -98,7 +104,7 @@ const PageSelector = ({ currentPage, maxPages, onClickLeft, onClickRight, select
           </div>
         )}
       </div>
-      <div onClick={onRightSelectorClick} className={"w-42 text-victron-gray dark:text-victron-gray-dark"}>
+      <div onClick={onRightSelectorClick} className={"w-11 h-11 shrink-0"}>
         {(isHorizontal && ((currentPage < maxPages - 1 && <RightSelectorBlueIcon />) || <RightSelectorIcon />)) ||
           (currentPage < maxPages - 1 && <DownSelectorBlueIcon />) || <DownSelectorIcon />}
       </div>
@@ -106,12 +112,12 @@ const PageSelector = ({ currentPage, maxPages, onClickLeft, onClickRight, select
   )
 }
 
-interface Props {
-  currentPage: number
-  maxPages: number
-  onClickLeft: () => void
-  onClickRight: () => void
-  selectorLocation: SelectorLocation
+export interface PageSelectorProps {
+  currentPage?: number
+  maxPages?: number
+  onClickLeft?: () => void
+  onClickRight?: () => void
+  selectorLocation?: SelectorLocation
 }
 
 export type SelectorLocation =
