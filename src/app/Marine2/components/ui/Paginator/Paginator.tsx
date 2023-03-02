@@ -272,4 +272,4 @@ interface Props {
   pageSelectorPropsSetter?: (arg0: PageSelectorProps) => void
 }
 
-export default Paginator
+export default observer(Paginator)
