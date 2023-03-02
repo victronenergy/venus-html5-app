@@ -4,23 +4,54 @@ import { BATTERY } from "../../../utils/constants"
 import { Battery } from "@elninotech/mfd-modules"
 import classNames from "classnames"
 import { translate } from "react-i18nify"
+import { applyStyles, BreakpointStylesType } from "../../../utils/media"
 
-const BatterySummary = ({ battery, className }: Props) => {
+const styles: BreakpointStylesType = {
+  default: {
+    circle: "w-[110px]",
+    circleWrapper: "px-2.5 h-[90px]",
+    voltage: "text-base hidden",
+    name: "text-base",
+    state: "text-xs",
+  },
+  "md-s": {
+    circle: "w-[198px]",
+    circleWrapper: "px-3 h-[144px]",
+    voltage: "block",
+    name: "text-base",
+    state: "text-sm",
+  },
+  "lg-m": {
+    circle: "w-[270px]",
+    circleWrapper: "px-4 h-[238px]",
+    voltage: "text-lg",
+    name: "text-xl",
+    state: "text-base",
+  },
+}
+
+const BatterySummary = ({ battery, boxSize }: Props) => {
+  const activeStyles = applyStyles(boxSize, styles)
+
   return (
-    <div className={classNames("flex flex-col justify-center items-center px-4", className)}>
-      <ProgressCircle percentage={battery.soc ?? null}>
-        {battery.voltage || battery.voltage === 0 ? (
-          <div className={"text-victron-gray dark:text-victron-gray-dark text-base lg-xl:text-lg hidden md-l:block"}>
-            {formatValue(battery.voltage)}
-            <span className={"text-victron-gray-4 dark:text-victron-gray-4-dark"}>V</span>
-          </div>
-        ) : (
-          <></>
-        )}
-      </ProgressCircle>
-      <span className={"mt-3.5 truncate w-full text-center text-base lg-xl:text-xl"}>{battery.name}</span>
+    <div className={classNames("flex flex-col justify-center items-center mx-4", activeStyles.circle)}>
+      <div className={classNames("w-full", activeStyles.circleWrapper)}>
+        <ProgressCircle percentage={battery.soc ?? null} boxSize={boxSize}>
+          {battery.voltage || battery.voltage === 0 ? (
+            <div className={classNames("text-victron-gray dark:text-victron-gray-dark", activeStyles.voltage)}>
+              {formatValue(battery.voltage)}
+              <span className={"text-victron-gray-4 dark:text-victron-gray-4-dark"}>V</span>
+            </div>
+          ) : (
+            <></>
+          )}
+        </ProgressCircle>
+      </div>
+      <span className={classNames("mt-3.5 truncate w-full text-center max-w-full", activeStyles.name)}>
+        {battery.name}
+      </span>
       {
-        <span className={"text-victron-gray dark:text-victron-gray-dark text-xs md-l:text-sm lg-xl:text-base"}>
+        <span className={classNames("text-victron-gray dark:text-victron-gray-dark", activeStyles.state)}>
           {battery.state === BATTERY.DISCHARGING && battery.timetogo
             ? timeAsStringFormatter(translate, battery.timetogo)
             : batteryStateNameFormatter(translate, battery.state, battery.soc ?? null)}
@@ -32,7 +63,7 @@ const BatterySummary = ({ battery, className }: Props) => {
 
 interface Props {
   battery: Battery
-  className?: string
+  boxSize: { width: number; height: number }
 }
 
 export default BatterySummary

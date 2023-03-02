@@ -1,7 +1,21 @@
 import classNames from "classnames"
 import { colorForPercentageFormatter } from "../../../utils/formatters"
+import { applyStyles, BreakpointStylesType } from "../../../utils/media"
 
-const ProgressCircle = ({ percentage, children }: Props) => {
+const styles: BreakpointStylesType = {
+  default: {
+    percentage: "text-base",
+  },
+  "md-s": {
+    percentage: "text-lg",
+  },
+  "lg-m": {
+    percentage: "text-2xl",
+  },
+}
+
+const ProgressCircle = ({ percentage, children, boxSize }: Props) => {
+  const activeStyles = applyStyles(boxSize, styles)
   const hasPercentage = percentage !== null
   const roundedPercentage = Math.round(percentage)
   const color = hasPercentage ? colorForPercentageFormatter(roundedPercentage) : "victron-gray-400"
@@ -21,11 +35,7 @@ const ProgressCircle = ({ percentage, children }: Props) => {
     : circlePathLength
 
   return (
-    <div
-      className={
-        "relative flex justify-center items-center w-[90px] h-[90px] md-l:w-[144px] md-l:h-[144px] lg-xl:w-[238px] lg-xl:h-[238px]"
-      }
-    >
+    <div className={"relative flex justify-center items-center w-full h-full"}>
       <svg className={"absolute w-full h-full -rotate-90"} viewBox={"0 0 238 238"}>
         <circle r={circleRadius} cx={"50%"} cy={"50%"} className={classNames("opacity-30", strokeClasses)} />
         {roundedPercentage !== 0 && (
@@ -43,7 +53,7 @@ const ProgressCircle = ({ percentage, children }: Props) => {
       </svg>
       <div className={"flex flex-col items-center"}>
         {hasPercentage && (
-          <div className={"text-base md-l:text-lg lg-xl:text-2xl"}>
+          <div className={classNames(activeStyles.percentage)}>
             {roundedPercentage}
             <span className={"text-victron-gray dark:text-victron-gray-dark"}>%</span>
           </div>
@@ -57,6 +67,7 @@ const ProgressCircle = ({ percentage, children }: Props) => {
 interface Props {
   percentage: number
   children?: JSX.Element
+  boxSize: { width: number; height: number }
 }
 
 export default ProgressCircle

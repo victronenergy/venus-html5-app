@@ -90,8 +90,20 @@
         "voltage": "Gerilim"
     },
     "diagnostics": {
-        "connection": {},
-        "device": {}
+        "connection": {
+            "connection": "Bağlantı",
+            "error": "Hata",
+            "host": "Host",
+            "portalId": "Portal ID",
+            "status": "Durum"
+        },
+        "device": {
+            "device": "Cihaz",
+            "userAgent": "User agent",
+            "viewportHeight": "Viewport height",
+            "viewportWidth": "Viewport width"
+        },
+        "diagnostics": "Diagnostics"
     },
     "error": {
         "errorWithMessage": "Error: %{message}",
@@ -102,6 +114,8 @@
             "estimate": "Tahmini veri: %{size} Bayt.",
             "hint": "Sayfayı yeniden yüklemeyi veya aşağıdaki bilgilerle Victron Energy ile iletişime geçmeyi deneyin:",
             "ignore": "Hatayı yoksay",
+            "resetError": "Error resetle",
+            "restartApp": "Uygulamayı yeniden başlat",
             "sendReport": "Hata raporu gönder",
             "title": "Uygulama oluşturulurken bir hata oluştu."
         },
@@ -149,6 +163,7 @@
         "title": "Başlık"
     },
     "pages": {
+        "diagnostics": "Diagnostics",
         "remoteConsole": "Uzak Konsol",
         "systemOverview": "Sistem görünümü"
     },

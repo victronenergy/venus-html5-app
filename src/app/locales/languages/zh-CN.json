@@ -72,7 +72,7 @@
         "noShorePower": "无岸电",
         "notAvailable": "不可用",
         "nrOfPhases": "%{phases}相数",
-        "null": " ",
+        "null": "无效的",
         "off": "关",
         "on": "开",
         "passthru": "旁路",
@@ -114,6 +114,8 @@
             "estimate": "估计数据：%{size} 字节。",
             "hint": "尝试重新加载页面或联系 Victron Energy 并提供以下信息：",
             "ignore": "忽略错误",
+            "resetError": "重置错误",
+            "restartApp": "重启应用",
             "sendReport": "发送错误报告",
             "title": "呈现应用程序时发生错误。"
         },
