@@ -21,7 +21,7 @@ const GridPaginator = ({
 
   if (pages === 1) {
     return (
-      <Grid childClassName={"p-1"} flow={"col"}>
+      <Grid childClassName={"p-1"} flow={flow}>
         {childrenArray}
       </Grid>
     )
