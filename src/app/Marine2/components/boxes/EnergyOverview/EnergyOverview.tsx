@@ -106,7 +106,7 @@ const getAvailableEnergyBoxes = function (
 
   if (acLoads.phases) boxes.push(<EnergyAC mode={mode} acLoads={acLoads} compactBoxSize={compactBoxSize} />)
 
-  if ((dcLoads.current || dcLoads.current === 0) && (dcLoads.voltage || dcLoads.voltage === 0)) {
+  if ((dcLoads.current || dcLoads.current === 0) && (dcLoads.voltage || dcLoads.voltage === 0) && dcLoads.power) {
     boxes.push(<EnergyDC mode={mode} dcLoads={dcLoads} compactBoxSize={compactBoxSize} />)
   }
 
