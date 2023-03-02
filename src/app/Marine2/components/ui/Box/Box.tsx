@@ -6,7 +6,15 @@ import { useComponentSize } from "app/Marine2/utils/hooks"
 import PageSelector, { PageSelectorProps } from "../PageSelector"
 import Paginator from "../Paginator"
 
-const Box = ({ children, icon, title, className, linkedView, getBoxSizeCallback, withPagination = false }: BoxProps) => {
+const Box = ({
+  children,
+  icon,
+  title,
+  className,
+  linkedView,
+  getBoxSizeCallback,
+  withPagination = false,
+}: BoxProps) => {
   const appViewsStore = useAppViewsStore()
   const handleClick = () => {
     if (linkedView) {
@@ -57,7 +65,8 @@ const Box = ({ children, icon, title, className, linkedView, getBoxSizeCallback,
         )}
       </div>
       <div className={"w-full min-h-0 h-full pt-2"}>
-        <Paginator pageSelectorPropsSetter={setPageSelectorProps}>{children}</Paginator>
+        {withPagination && <Paginator pageSelectorPropsSetter={setPageSelectorProps}>{children}</Paginator>}
+        {!withPagination && children}
       </div>
     </div>
   )
