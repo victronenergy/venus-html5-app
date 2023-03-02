@@ -57,14 +57,15 @@ const Battery = ({ battery }: Props) => {
   }
 
   const hasPercentage = battery.soc !== undefined && battery.soc !== null
-  const color = hasPercentage ? colorForPercentageFormatter(Math.round(battery.soc)) : "victron-gray-400"
+  const color = hasPercentage ? colorForPercentageFormatter(Math.round(battery.soc)) : "victron-gray"
   const colorClasses = classNames({
     "text-victron-red dark:text-victron-red-dark": color === "victron-red",
     "text-victron-yellow dark:text-victron-yellow-dark": color === "victron-yellow",
     "text-victron-green dark:text-victron-green-dark": color === "victron-green",
     "text-victron-blue dark:text-victron-blue-dark": color === "victron-blue",
-    "text-victron-gray-400 dark:text-victron-gray-dark": color === "victron-gray-400",
+    "text-victron-gray dark:text-white": color === "victron-gray",
   })
+
   const activeStyles: StylesType = applyStyles(boxSize, styles)
   const bottomValues = [
     { value: battery.voltage, unit: "V" },
@@ -76,7 +77,7 @@ const Battery = ({ battery }: Props) => {
     <Box title={battery.name} icon={batteryStateIconFormatter(battery.state)} getBoxSizeCallback={setBoxSize}>
       <div className="w-full h-full flex flex-col justify-between">
         <div>
-          <div className={classNames("text-victron-gray dark:text-white", colorClasses, activeStyles?.value)}>
+          <div className={classNames(colorClasses, activeStyles?.value)}>
             {battery.soc ? Math.round(battery.soc) : battery.soc ?? "--"}
             <span className={"pl-0.5 opacity-70"}>%</span>
           </div>

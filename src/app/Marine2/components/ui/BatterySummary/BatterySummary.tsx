@@ -1,5 +1,5 @@
 import ProgressCircle from "../../../components/ui/ProgressCircle"
-import { batteryStateNameFormatter, dcVoltageFormatter, timeAsStringFormatter } from "../../../utils/formatters"
+import { batteryStateNameFormatter, formatValue, timeAsStringFormatter } from "../../../utils/formatters"
 import { BATTERY } from "../../../utils/constants"
 import { Battery } from "@elninotech/mfd-modules"
 import classNames from "classnames"
@@ -11,7 +11,7 @@ const BatterySummary = ({ battery, className }: Props) => {
       <ProgressCircle percentage={battery.soc ?? null}>
         {battery.voltage || battery.voltage === 0 ? (
           <div className={"text-victron-gray dark:text-victron-gray-dark text-base lg-xl:text-lg hidden md-l:block"}>
-            {dcVoltageFormatter(battery.voltage)}
+            {formatValue(battery.voltage)}
             <span className={"text-victron-gray-4 dark:text-victron-gray-4-dark"}>V</span>
           </div>
         ) : (
