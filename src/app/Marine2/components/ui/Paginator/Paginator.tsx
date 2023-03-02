@@ -168,6 +168,7 @@ const Paginator = ({
         <ScrollSizeObserver orientation={orientation} onSizeChange={paginate}>
           {childrenArray.map((child, i) => (
             <div
+              className="w-full h-full min-w-fit min-h-fit"
               key={i}
               ref={(el) => {
                 if (el !== null) childrenRef.current[i] = el as HTMLDivElement
