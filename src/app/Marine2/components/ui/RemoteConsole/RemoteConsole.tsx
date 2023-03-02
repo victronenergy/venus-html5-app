@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { observer } from "mobx-react-lite"
 import classnames from "classnames"
 import { STATUS, useMqtt } from "@elninotech/mfd-modules"
@@ -7,7 +7,8 @@ import { translate, Translate } from "react-i18nify"
 const RemoteConsole = ({ host }: Props) => {
   const mqtt = useMqtt()
 
-  const loading = mqtt.status !== STATUS.CONNECTED
+  const [iframeLoaded, setIframeLoaded] = useState(false)
+  const loading = mqtt.status !== STATUS.CONNECTED || !iframeLoaded
   const error = mqtt.error && [STATUS.OFFLINE, STATUS.DISCONNECTED].some((v) => v === mqtt.status)
 
   const protocol = (typeof window !== "undefined" && window.location.protocol) || "http:"
@@ -22,6 +23,7 @@ const RemoteConsole = ({ host }: Props) => {
           })}
           src={url}
           title={translate("pages.remoteConsole")}
+          onLoad={() => setIframeLoaded(true)}
         />
       )}
 

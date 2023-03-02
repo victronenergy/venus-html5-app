@@ -8,10 +8,27 @@ import FuelIcon from "../../../images/icons/fuel.svg"
 import WaterIcon from "../../../images/icons/fresh-water.svg"
 import BlackWaterIcon from "../../../images/icons/black-water.svg"
 import GrayWaterIcon from "../../../images/icons/waste-water.svg"
+import { applyStyles, BreakpointStylesType, StylesType } from "app/Marine2/utils/media"
 
-const Tank = ({ tankInstanceId, mode, orientation = "vertical" }: Props) => {
+const styles: BreakpointStylesType = {
+  "sm-s": {
+    tankName: "text-sm",
+    level: "text-base",
+  },
+  "md-s": {
+    tankName: "text-base",
+    level: "text-lg",
+  },
+}
+
+const Tank = ({ tankInstanceId, mode, orientation = "vertical", parentSize }: Props) => {
   let { capacity, fluidType, level, remaining, unit } = useTank(tankInstanceId)
   const fluidTypeNum = +fluidType
+
+  let activeStyles: StylesType = {}
+  if (parentSize) {
+    activeStyles = applyStyles(parentSize, styles)
+  }
 
   const fluidTypeTitle = useMemo(() => {
     const fluids = [
@@ -50,7 +67,7 @@ const Tank = ({ tankInstanceId, mode, orientation = "vertical" }: Props) => {
           <div className="col-span-6 flex items-center sm:col-span-4 lg:col-span-3">
             <div>{fluidIcon(fluidTypeNum, mode)}</div>
             <div className="flex flex-col p-1 sm:p-2 w-full">
-              <div className="text-sm md-m:text-base lg-l:text-lg truncate text-ellipsis overflow-hidden">
+              <div className={classnames("truncate text-ellipsis overflow-hidden", activeStyles?.tankName)}>
                 {fluidTypeTitle}
               </div>
             </div>
@@ -60,7 +77,7 @@ const Tank = ({ tankInstanceId, mode, orientation = "vertical" }: Props) => {
           </div>
           <div className="col-span-1 flex items-center justify-center">
             <div
-              className={classnames("text-base md-m:text-lg lg-l:text-xl flex flex-row pr-2", {
+              className={classnames("flex flex-row pr-2", activeStyles?.level, {
                 "text-victron-red": level > 75,
               })}
             >
@@ -201,6 +218,7 @@ interface Props {
   tankInstanceId: number
   mode?: "compact" | "full"
   orientation?: "vertical" | "horizontal"
+  parentSize?: { width: number; height: number }
 }
 
 export default observer(Tank)

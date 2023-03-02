@@ -1,7 +1,6 @@
 import React from "react"
 import Box from "../../../components/ui/Box"
 import EnergyIcon from "../../../images/icons/energy.svg"
-import Grid from "../../../components/ui/Grid"
 import EnergyAC from "../EnergyAC"
 import EnergyDC from "../EnergyDC"
 import EnergySolar from "../EnergySolar"
@@ -27,6 +26,7 @@ import { translate } from "react-i18nify"
 import { AppViews } from "../../../modules/AppViews"
 import { useVisibilityNotifier } from "../../../modules"
 import { BoxTypes } from "../../../utils/constants"
+import GridPaginator from "../../ui/GridPaginator"
 
 const EnergyOverview = ({ mode = "compact" }: Props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -37,8 +37,18 @@ const EnergyOverview = ({ mode = "compact" }: Props) => {
   const pvCharger = usePvCharger()
   const { alternators } = useAlternators()
   const { windGenerators } = useWindGenerators()
+  const [compactBoxSize, setCompactBoxSize] = React.useState<{ width: number; height: number }>({ width: 0, height: 0 })
 
-  const boxes = getAvailableEnergyBoxes(mode, shoreInputId, acLoads, pvCharger, dcLoads, alternators, windGenerators)
+  const boxes = getAvailableEnergyBoxes(
+    mode,
+    shoreInputId,
+    acLoads,
+    pvCharger,
+    dcLoads,
+    alternators,
+    windGenerators,
+    compactBoxSize
+  )
 
   // TODO: it seems that visibility logic can be improved since the energy component always has an overview box
   useVisibilityNotifier({ widgetName: BoxTypes.ENERGY, visible: boxes.length > 0 })
@@ -55,13 +65,23 @@ const EnergyOverview = ({ mode = "compact" }: Props) => {
         /* @ts-ignore */
         icon={<EnergyIcon className={"w-6 text-victron-gray dark:text-victron-gray-dark"} />}
         linkedView={AppViews.BOX_ENERGY_OVERVIEW}
+        getBoxSizeCallback={setCompactBoxSize}
       >
-        <div className="flex flex-col">{boxes}</div>
+        <div className="flex flex-col mt-2">{boxes}</div>
       </Box>
     )
   }
 
-  return <Grid childClassName={"p-1"}>{boxes}</Grid>
+  return (
+    <GridPaginator
+      childClassName={"p-2"}
+      childrenPerPage={4}
+      orientation={"horizontal"}
+      selectorLocation={"bottom-full"}
+    >
+      {boxes}
+    </GridPaginator>
+  )
 }
 
 const getAvailableEnergyBoxes = function (
@@ -71,35 +91,23 @@ const getAvailableEnergyBoxes = function (
   pvCharger: PvChargerState,
   dcLoads: DcLoadsState,
   alternators: AlternatorId[],
-  windGenerators: WindGeneratorId[]
+  windGenerators: WindGeneratorId[],
+  compactBoxSize: { width: number; height: number }
 ) {
   const boxes = []
 
   if (shoreInputId) {
-    boxes.push(<EnergyShore mode={mode} inputId={shoreInputId} />)
+    boxes.push(<EnergyShore mode={mode} inputId={shoreInputId} compactBoxSize={compactBoxSize} />)
   }
 
   if ((pvCharger.current || pvCharger.current === 0) && (pvCharger.power || pvCharger.power === 0)) {
-    boxes.push(<EnergySolar mode={mode} pvCharger={pvCharger} />)
+    boxes.push(<EnergySolar mode={mode} pvCharger={pvCharger} compactBoxSize={compactBoxSize} />)
   }
 
-  // Add a divider if there are any AC loads or DC loads in the compact mode
-  if (
-    mode === "compact" &&
-    (acLoads.phases || ((dcLoads.current || dcLoads.current === 0) && (dcLoads.voltage || dcLoads.voltage === 0)))
-  ) {
-    boxes.push(
-      <div className="flex flex-row justify-between">
-        <div className="text-xs text-victron-gray">{translate("common.loads")}</div>
-        <div className="w-full ml-2 mb-2 border-b border-victron-gray" />
-      </div>
-    )
-  }
+  if (acLoads.phases) boxes.push(<EnergyAC mode={mode} acLoads={acLoads} compactBoxSize={compactBoxSize} />)
 
-  if (acLoads.phases) boxes.push(<EnergyAC mode={mode} acLoads={acLoads} />)
-
-  if ((dcLoads.current || dcLoads.current === 0) && (dcLoads.voltage || dcLoads.voltage === 0)) {
-    boxes.push(<EnergyDC mode={mode} dcLoads={dcLoads} />)
+  if ((dcLoads.current || dcLoads.current === 0) && (dcLoads.voltage || dcLoads.voltage === 0) && dcLoads.power) {
+    boxes.push(<EnergyDC mode={mode} dcLoads={dcLoads} compactBoxSize={compactBoxSize} />)
   }
 
   const alternatorsPresent = alternators.filter((v) => v || v === 0)
@@ -111,6 +119,7 @@ const getAvailableEnergyBoxes = function (
           mode={mode}
           alternator={alternator ?? 0}
           showInstance={alternators.length > 1}
+          compactBoxSize={compactBoxSize}
         />
       ))
     )
@@ -125,6 +134,7 @@ const getAvailableEnergyBoxes = function (
           mode={mode}
           windGenerator={windGenerator ?? 0}
           showInstance={alternators.length > 1}
+          compactBoxSize={compactBoxSize}
         />
       ))
     )
