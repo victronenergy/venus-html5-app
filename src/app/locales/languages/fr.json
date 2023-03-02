@@ -6,7 +6,30 @@
         },
         "title": "Mode AC"
     },
-    "boxes": {},
+    "boxes": {
+        "EnergyOverview": "Vue générale énergie",
+        "acLoads": "Charges AC",
+        "alternator": "Alternateur",
+        "batteries": "Batteries",
+        "battery": "Batterie",
+        "batteryWithName": "Batterie : %{name}",
+        "chargerWithName": "Chargeur : %{productNameShort}",
+        "dcLoads": "Charges DC",
+        "energy": "Énergie",
+        "generator": "Générateur",
+        "generatorInput": "Entrée générateur",
+        "gridInput": "Entrée réseau",
+        "invalidConfig": "Configuration invalide",
+        "inverterCharger": "Onduleur / Chargeur : %{productNameShort}",
+        "inverterWithName": "Convertisseur : %{productNameShort}",
+        "pvCharger": "Chargeur PV",
+        "shorePower": "Alimentation du quai",
+        "solar": "Solaire",
+        "status": "État",
+        "tanks": "Réservoirs",
+        "unknown": "Inconnu",
+        "windGenerator": "Eolienne"
+    },
     "cardFooter": {
         "Charge": "Charge",
         "Critical": "Critique",
@@ -17,12 +40,15 @@
     "common": {
         "absorptionCharging": "Charge Absorption",
         "assisting": "Assistance",
+        "auto": "Auto",
         "autoStartStop": "Start/Stop Automatique",
         "bulkCharging": "Charge Bulk",
         "charge": "Charge",
+        "charged": "Chargé",
         "chargerOnly": "Chargeur uniquement",
         "charging": "Charge en cours",
         "current": "Courant",
+        "dark": "Sombre",
         "days": "jours",
         "discharge": "Décharge",
         "discharging": "Décharge en cours",
@@ -37,7 +63,9 @@
         "inputLimit": "Limite d'entrée",
         "inverterOnly": "Onduleur uniquement",
         "inverting": "Conversion",
+        "light": "Clair",
         "limit": "Limite",
+        "loads": "Charges",
         "lowPower": "Puiss. basse",
         "minutes": "minutes",
         "mode": "Mode",
@@ -62,8 +90,20 @@
         "voltage": "Tension"
     },
     "diagnostics": {
-        "connection": {},
-        "device": {}
+        "connection": {
+            "connection": "Connexion",
+            "error": "Erreur",
+            "host": "Hôte",
+            "portalId": "IP Portail",
+            "status": "État"
+        },
+        "device": {
+            "device": "Appareil",
+            "userAgent": "Agent utilisateur",
+            "viewportHeight": "Hauteur de la fenêtre",
+            "viewportWidth": "Largeur de la fenêtre"
+        },
+        "diagnostics": "Diagnostics"
     },
     "error": {
         "errorWithMessage": "Erreur: %{message}",
@@ -74,6 +114,8 @@
             "estimate": "Données estimées : %{size} octets",
             "hint": "Essayez de recharger la page ou de contacter Victron Energy avec les informations suivantes :",
             "ignore": "Ignorer erreur",
+            "resetError": "Reset erreur",
+            "restartApp": "Rédémarrer l'app",
             "sendReport": "Envoyer rapport d'erreur",
             "title": "Une erreur s'est produite lors du rendu de l'application."
         },
@@ -83,7 +125,10 @@
         "mqttUnavailable4": "Essayez d'utiliser le bouton Console à Distance en haut de cet écran pour changer vos réglages à distance.",
         "mqttUnavailable5": "Vous pouvez aussi essayer de vous connecter à votre appareil à distance en sélectionnant A distance dans le menu ci-dessus.",
         "queryParams": "Query params: %{queryParams}",
-        "remoteConsole": {},
+        "remoteConsole": {
+            "connectionFailed": "Pas possible de se connecter à l'appareil GX",
+            "screenTooSmall": "Ouvrir dans un écran plus large pour visualiser la console à distance"
+        },
         "userAgent": "User agent: %{userAgent}",
         "windowSize": "Fenêtre: %{width} x %{height}"
     },
@@ -117,7 +162,11 @@
         "subtitle": "Assurez vous que vos appareils sont bien connectés pour afficher les widgets",
         "title": "Votre tableau de bord est vide"
     },
-    "pages": {},
+    "pages": {
+        "diagnostics": "Diagnostics",
+        "remoteConsole": "Console à distance",
+        "systemOverview": "Vue générale du système"
+    },
     "remoteLogin": {
         "2fa": "Code de vérification en 2 étapes",
         "email": "Email",

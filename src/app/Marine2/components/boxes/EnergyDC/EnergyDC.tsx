@@ -4,10 +4,10 @@ import { DcLoadsState } from "@elninotech/mfd-modules"
 import DCIcon from "../../../images/icons/dc.svg"
 import { formatPower, formatValue } from "../../../utils/formatters"
 import { translate } from "react-i18nify"
-import { applyStyles, StylesType } from "app/Marine2/utils/media"
+import { applyStyles, BreakpointStylesType, StylesType } from "app/Marine2/utils/media"
 import classNames from "classnames"
 
-const styles: StylesType = {
+const styles: BreakpointStylesType = {
   "sm-s": {
     mainValue: "text-2xl",
     subValue: "text-base",
@@ -23,7 +23,7 @@ const styles: StylesType = {
   },
 }
 
-const compactStyles: StylesType = {
+const compactStyles: BreakpointStylesType = {
   "sm-s": {
     name: "text-sm",
     value: "text-base",
@@ -40,7 +40,7 @@ const EnergyDC = ({ mode = "compact", dcLoads, compactBoxSize }: Props) => {
   const { power, voltage } = dcLoads
 
   const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
-  const activeStyles: StylesType = applyStyles(boxSize, styles)
+  const activeStyles = applyStyles(boxSize, styles)
   let compactActiveStyles: StylesType = {}
   if (compactBoxSize) {
     compactActiveStyles = applyStyles(compactBoxSize, compactStyles)

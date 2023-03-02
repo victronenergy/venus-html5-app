@@ -7,10 +7,10 @@ import BatteryIcon from "../../../images/icons/battery.svg"
 import BatteryDischargingIcon from "../../../images/icons/battery-discharging.svg"
 import { translate } from "react-i18nify"
 import classNames from "classnames"
-import { applyStyles, StylesType } from "app/Marine2/utils/media"
+import { applyStyles, BreakpointStylesType } from "app/Marine2/utils/media"
 import { useState } from "react"
 
-const styles: StylesType = {
+const styles: BreakpointStylesType = {
   "sm-s": {
     mainValue: "text-2xl",
     subValue: "text-base",
@@ -40,7 +40,7 @@ const Battery = ({ battery, mode = "compact" }: Props) => {
     "text-victron-gray-400 dark:text-victron-gray-dark": color === "victron-gray-400",
   })
   const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
-  const activeStyles: StylesType = applyStyles(boxSize, styles)
+  const activeStyles = applyStyles(boxSize, styles)
   if (mode === "compact") {
     return (
       <Box icon={batteryStateIconFormatter(battery.state)} title={battery.name}>
