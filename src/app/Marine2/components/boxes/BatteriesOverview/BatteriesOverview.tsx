@@ -39,7 +39,7 @@ const BatteriesOverview = ({ mode = "full" }: Props) => {
       >
         <Paginator selectorLocation={"top-center"}>
           {overviewBatteries.map((b) => (
-            <div className={"h-full flex items-center justify-center"}>
+            <div key={b.id} className={"h-full flex items-center justify-center"}>
               <BatterySummary key={b.id} battery={b} boxSize={boxSize} />
             </div>
           ))}

@@ -10,8 +10,8 @@ const ValueBar = ({ values, prefix }: Props) => {
     <div className={"border-victron-gray-200 border-t-2 text-victron-gray dark:text-victron-gray-500 px-2 -mx-2 flex"}>
       {prefix && <div className={"w-10"}>{prefix}</div>}
       <div className={"flex justify-between grow"}>
-        {values.map((v) => (
-          <div>
+        {values.map((v, idx) => (
+          <div key={idx}>
             {v.value && useKw && v.unit === "W" ? formatValue(v.value / 1000) : formatValue(v.value)}
             <span className={"ml-px text-victron-gray-400"}>{v.unit}</span>
           </div>
