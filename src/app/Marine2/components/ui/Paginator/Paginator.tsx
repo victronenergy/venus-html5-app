@@ -154,10 +154,14 @@ const Paginator = ({
     <div
       ref={wrapperRef}
       className={classnames("w-full h-full", {
-        "flex flex-row justify-between": !pageSelectorPropsSetter && selectorLocation.startsWith("right"),
-        "flex flex-col justify-between": !pageSelectorPropsSetter && selectorLocation.startsWith("bottom"),
-        "flex flex-row-reverse justify-between": !pageSelectorPropsSetter && selectorLocation.startsWith("left"),
-        "flex flex-col-reverse justify-between": !pageSelectorPropsSetter && selectorLocation.startsWith("top"),
+        "flex flex-row justify-between":
+          pages.length > 1 && !pageSelectorPropsSetter && selectorLocation.startsWith("right"),
+        "flex flex-col justify-between":
+          pages.length > 1 && !pageSelectorPropsSetter && selectorLocation.startsWith("bottom"),
+        "flex flex-row-reverse justify-between":
+          pages.length > 1 && !pageSelectorPropsSetter && selectorLocation.startsWith("left"),
+        "flex flex-col-reverse justify-between":
+          pages.length > 1 && !pageSelectorPropsSetter && selectorLocation.startsWith("top"),
       })}
     >
       {!pageNumber && (pages.length === 0 || pages.length === 1) && (
