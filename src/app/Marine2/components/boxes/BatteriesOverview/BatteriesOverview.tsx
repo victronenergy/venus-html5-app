@@ -2,7 +2,6 @@ import { observer } from "mobx-react-lite"
 import { Battery as BatteryType, useBattery } from "@elninotech/mfd-modules"
 import Box from "../../ui/Box"
 import { BATTERY, BoxTypes } from "../../../utils/constants"
-import Grid from "../../ui/Grid"
 import Battery from "../Battery/Battery"
 import BatteriesIcon from "../../../images/icons/batteries.svg"
 import BatterySummary from "../../ui/BatterySummary"
@@ -11,6 +10,7 @@ import { AppViews } from "../../../modules/AppViews"
 import { translate } from "react-i18nify"
 import { appErrorBoundaryProps } from "../../ui/Error/appErrorBoundary"
 import { useVisibilityNotifier } from "../../../modules"
+import GridPaginator from "../../ui/GridPaginator"
 import Paginator from "../../ui/Paginator"
 import { useState } from "react"
 
@@ -26,15 +26,6 @@ const BatteriesOverview = ({ mode = "full" }: Props) => {
 
   const sortedBatteries = sortBatteries(batteries ?? [])
   const overviewBatteries = getOverviewBatteries(sortedBatteries)
-
-  const getDetailBatteries = function () {
-    let boxes: JSX.Element[] = []
-
-    batteries.forEach((b) => {
-      boxes.push(<Battery key={b.id} battery={b} mode="full" />)
-    })
-    return boxes
-  }
 
   if (mode === "compact") {
     return (
@@ -57,7 +48,19 @@ const BatteriesOverview = ({ mode = "full" }: Props) => {
     )
   }
 
-  return <Grid childClassName={"p-1"}>{getDetailBatteries()}</Grid>
+  return (
+    <GridPaginator
+      childClassName={"p-2"}
+      childrenPerPage={4}
+      orientation={"horizontal"}
+      selectorLocation={"bottom-full"}
+      flow={"col"}
+    >
+      {sortedBatteries.map((b) => (
+        <Battery key={b.id} battery={b} />
+      ))}
+    </GridPaginator>
+  )
 }
 
 /*
