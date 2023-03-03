@@ -11,7 +11,6 @@ import { translate } from "react-i18nify"
 import { appErrorBoundaryProps } from "../../ui/Error/appErrorBoundary"
 import { useVisibilityNotifier } from "../../../modules"
 import GridPaginator from "../../ui/GridPaginator"
-import Paginator from "../../ui/Paginator"
 import { useState } from "react"
 
 interface Props {
@@ -36,14 +35,15 @@ const BatteriesOverview = ({ mode = "full" }: Props) => {
         title={translate("boxes.batteries")}
         linkedView={AppViews.BOX_BATTERIES_OVERVIEW}
         getBoxSizeCallback={setBoxSize}
+        withPagination={true}
       >
-        <Paginator selectorLocation={"top-center"}>
+        <div className={"flex flex-row h-full"}>
           {overviewBatteries.map((b) => (
             <div key={b.id} className={"h-full flex items-center justify-center"}>
               <BatterySummary key={b.id} battery={b} boxSize={boxSize} />
             </div>
           ))}
-        </Paginator>
+        </div>
       </Box>
     )
   }
