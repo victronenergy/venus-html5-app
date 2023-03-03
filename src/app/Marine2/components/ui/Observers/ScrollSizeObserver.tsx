@@ -18,7 +18,7 @@ const ScrollSizeObserver = ({ children, onSizeChange, orientation }: Props) => {
 
   return (
     <div ref={parentRef} className="w-full h-full">
-      <div className="w-full min-w-fit h-full min-h-fit" ref={containerRef}>
+      <div className="min-w-full min-h-full h-fit w-fit" ref={containerRef}>
         {children}
       </div>
     </div>
