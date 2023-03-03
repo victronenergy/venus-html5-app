@@ -14,6 +14,7 @@ const Box = ({
   linkedView,
   getBoxSizeCallback,
   withPagination = false,
+  paginationOrientation = "horizontal",
 }: BoxProps) => {
   const appViewsStore = useAppViewsStore()
   const handleClick = () => {
@@ -50,11 +51,14 @@ const Box = ({
           {icon && <span className={"mr-1"}>{icon}</span>}
           <span className={"text-base truncate"}>{title}</span>
         </div>
-        {withPagination && !!pageSelectorProps?.maxPages && pageSelectorProps?.maxPages > 1 && (
-          <div className="shrink-0 min-w-0 w-fit">
-            <PageSelector {...pageSelectorProps} selectorLocation="top-right" />
-          </div>
-        )}
+        {withPagination &&
+          paginationOrientation === "horizontal" &&
+          !!pageSelectorProps?.maxPages &&
+          pageSelectorProps?.maxPages > 1 && (
+            <div className="shrink-0 min-w-0 w-fit">
+              <PageSelector {...pageSelectorProps} selectorLocation="top-right" />
+            </div>
+          )}
         {linkedView && (
           <div className="ml-3" onClick={handleClick}>
             <ArrowRightIcon
@@ -67,7 +71,14 @@ const Box = ({
         )}
       </div>
       <div className={"w-full min-h-0 h-full pt-2"}>
-        {withPagination && <Paginator pageSelectorPropsSetter={setPageSelectorProps}>{children}</Paginator>}
+        {withPagination && paginationOrientation === "horizontal" && (
+          <Paginator pageSelectorPropsSetter={setPageSelectorProps}>{children}</Paginator>
+        )}
+        {withPagination && paginationOrientation === "vertical" && (
+          <Paginator orientation={"vertical"} selectorLocation={"right-full"}>
+            {children}
+          </Paginator>
+        )}
         {!withPagination && children}
       </div>
     </div>
@@ -82,6 +93,7 @@ export interface BoxProps {
   className?: string
   headerActions?: JSX.Element
   withPagination?: boolean
+  paginationOrientation?: "horizontal" | "vertical"
   getBoxSizeCallback?: (size: { width: number; height: number }) => void
 }
 
