@@ -172,7 +172,10 @@ const Paginator = ({
         <ScrollSizeObserver orientation={orientation} onSizeChange={paginate}>
           {childrenArray.map((child, i) => (
             <div
-              className="min-h-full min-w-full h-fit w-fit"
+              className={classnames("min-h-fit min-w-fit", {
+                "h-full": orientation === "horizontal",
+                "w-full": orientation === "vertical",
+              })}
               key={i}
               ref={(el) => {
                 if (el !== null) childrenRef.current[i] = el as HTMLDivElement
@@ -206,10 +209,7 @@ const Paginator = ({
             <SizeChangeObserver
               orientation={orientation}
               onSizeChange={reset}
-              className={classnames("", {
-                "w-fit h-full": orientation === "horizontal",
-                "h-fit w-full": orientation === "vertical",
-              })}
+              className={"w-full h-full min-h-fit min-w-fit"}
             >
               {childrenArray.slice(
                 pages[currentPage][0].childIndex,

@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react"
 import { useComponentSize } from "../../../utils/hooks"
 import { observer } from "mobx-react"
+import classnames from "classnames"
 
 const ScrollSizeObserver = ({ children, onSizeChange, orientation }: Props) => {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -18,7 +19,13 @@ const ScrollSizeObserver = ({ children, onSizeChange, orientation }: Props) => {
 
   return (
     <div ref={parentRef} className="w-full h-full">
-      <div className="min-w-full min-h-full h-fit w-fit" ref={containerRef}>
+      <div
+        className={classnames("min-h-fit min-w-fit", {
+          "h-full": orientation === "horizontal",
+          "w-full": orientation === "vertical",
+        })}
+        ref={containerRef}
+      >
         {children}
       </div>
     </div>
