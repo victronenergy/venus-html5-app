@@ -50,12 +50,14 @@ const Tanks = ({ mode, className }: Props) => {
         linkedView={AppViews.BOX_TANKS}
         className={className}
         getBoxSizeCallback={setBoxSize}
+        withPagination={true}
+        paginationOrientation={"vertical"}
       >
-        <div>
+        <>
           {tanks?.map((tank) => {
             return tank ? <Tank mode={"compact"} key={tank} tankInstanceId={tank} parentSize={boxSize} /> : null
           })}
-        </div>
+        </>
       </Box>
     )
   }
