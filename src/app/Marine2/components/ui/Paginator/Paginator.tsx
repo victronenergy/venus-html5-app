@@ -4,6 +4,7 @@ import PageSelector, { PageSelectorProps, SelectorLocation } from "../PageSelect
 import { observer } from "mobx-react"
 import SizeChangeObserver from "../Observers/SizeChangeObserver"
 import ScrollSizeObserver from "../Observers/ScrollSizeObserver"
+import { useComponentSize } from "../../../utils/hooks"
 
 const Paginator = ({
   children,
@@ -18,7 +19,7 @@ const Paginator = ({
   const childrenRef = useRef<Array<HTMLDivElement>>([])
   const wrapperRef = useRef<HTMLDivElement>(null)
   const pageRef = useRef<HTMLDivElement>(null)
-
+  const componentSize = useComponentSize(wrapperRef)
   type PageElement = {
     childIndex: number
     scrollTo?: number
@@ -121,9 +122,12 @@ const Paginator = ({
         top: orientation === "vertical" ? currentPage * pageRef.current.offsetHeight : 0,
         behavior: "smooth",
       })
-      return
     }
+  }, [componentSize, currentPage, orientation, pageNumber])
+
+  useEffect(() => {
     if (
+      !pageNumber &&
       pages.length > 0 &&
       pageRef.current !== null &&
       pages[currentPage].length === 1 &&
