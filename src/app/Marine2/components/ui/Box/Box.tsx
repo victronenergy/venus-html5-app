@@ -40,10 +40,10 @@ const Box = ({
         className
       )}
     >
-      <div className={"w-full min-w-0 min-h-[2.75rem] flex flex-row justify-between"}>
+      <div className={"w-full min-w-0 min-h-[2.75rem] flex flex-row justify-between items-center"}>
         <div
           className={
-            "flex flex-row items-center justify-start text-victron-gray dark:text-victron-gray-dark cursor-pointer min-w-0"
+            "w-full shrink-1 flex flex-row items-center justify-start text-victron-gray dark:text-victron-gray-dark cursor-pointer min-w-0"
           }
           onClick={handleClick}
         >
@@ -51,10 +51,12 @@ const Box = ({
           <span className={"text-base truncate"}>{title}</span>
         </div>
         {withPagination && !!pageSelectorProps?.maxPages && pageSelectorProps?.maxPages > 1 && (
-          <PageSelector {...pageSelectorProps} selectorLocation="top-right" />
+          <div className="shrink-0 min-w-0 w-fit">
+            <PageSelector {...pageSelectorProps} selectorLocation="top-right" />
+          </div>
         )}
         {linkedView && (
-          <div onClick={handleClick}>
+          <div className="ml-3" onClick={handleClick}>
             <ArrowRightIcon
               /* todo: fix types for svg */
               /* @ts-ignore */
