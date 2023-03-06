@@ -27,7 +27,7 @@ Chapters in this readme:
 
 ### 1.1 Documentation per Box
 
-`Boxes` are the various designed visualisation: there is a Battery box, a Generator box, a Shorepower box, and so forth.
+`Boxes` are the various designed visualisation: there are a Battery box, a Generator box, a Tanks box, and so forth.
 
 How certain devices are visualised/rendered on HTML5, ie. in to what box(es), and what topics are used for what parameter, and more is documented in three places:
 
@@ -51,6 +51,8 @@ If it's the first time you run the app:
 - make sure to have `node` & `npm` installed on your machine
 - run `npm install` in the root folder
 
+### 2.2 Setting white label
+
 This repository contains several white-label apps. To work with a specific app, set the correct `APP` environment variable in the `.env.local` file. For example, to build the `Marine2` app, use:
 
 ```
@@ -59,7 +61,7 @@ REACT_APP_WHITELABEL=Marine2
 
 You can find the list of available apps in the `.env.local.example` file.
 
-### 2.2 Development
+### 2.3 Run app locally
 
 To run the app locally for development, run:
 
@@ -75,36 +77,40 @@ You can change the `host` and `port` (although the default 9001 is usually corre
 
 This way you can run the local app against venus device data if the venus device is on the same network as your computer.
 
-### 2.3 Running the app with no Venus device available
+### 2.4 Using Demo mode on Venus device
+
+Every Venus device also has a Demo mode, which allows you to get useful data if you only have the Venus device available, without requiring various Victron devices to be connected to the Venus device. To enable it, navigate to the `Venus Remote Console` -> `Settings` -> `General`.
+
+### 2.5 Running the app with no Venus device available
 
 Use [venus-docker](https://github.com/victronenergy/venus-docker) in demo mode.
 
 You can run multiple `venus-docker` simulations by executing: `echo {a..z} | xargs -n1 ./run.sh -s`. Each container running a simulation will expose MQTT on
 an increasing port number starting from `9001`.
 
-Also keep in mind the Venus device also has a Demo mode, which allows you to get useful data if you only have the Venus device available, without requiring various Victron devices to be connected to the Venus device. To enable it, navigate to the Venus Remote Console -> Settings -> General.
-
-## 2.5 Metrics available
+### 2.6 Metrics available
 
 - Identify the D-bus channel that you want to read [from here](https://github.com/victronenergy/venus/wiki/dbus)
-- Create a component using MqttSubscriptions or MqttTopicWildcard and pass the topic as the wrapper topi. See examples in other components
+- Create a component using MqttSubscriptions or MqttTopicWildcard and pass the topic as the wrapper topic. See examples in other components
 
-### 2.6 Deploying to a device during development
+### 2.7 Deploying to a device during development
 
-#### 2.6.1 Get the device ip
+#### 2.7.1 Get the device ip
 
 In order to deploy you need to know the target device's IP. It can be connected to by ethernet, LAN or the device's own WLAN.
-Instructions on how to find the IPs can be found [here](https://www.victronenergy.com/live/venus-gx:start#accessing_the_device)
+Instructions on how to find the IPs can be found [here](https://www.victronenergy.com/media/pg/Venus_GX/en/accessing-the-gx-device.html)
 for the Venus GX device.
 
-#### 2.6.2 Run deploy script
+The default device's IP address is `172.24.24.1`
+
+#### 2.7.2 Run deploy script
 
 In the project main folder run `./bin/deploy.sh <ip>` where ip is the target device's IP. The script also accepts an additional
-`--user|-u` param that defines the user for the deployment connection. This defaults to `root`.
+`--user|-u` param that defines the user for the deployment connection. This defaults to `root`. You will also need a password to connect to the device. To set the password, navigate to the `Venus Remote Console` -> `Settings` -> `General`.
 
-The deploy script also bundles the app. Nore that the script assumes that it's run from the root folder of the application.
+The deploy script also bundles the app. Note that the script assumes that it's run from the root folder of the application.
 
-#### 2.6.3 Deploying using a USB stick
+#### 2.7.3 Deploying using a USB stick
 
 Since Venus OS 2.80, placing the build of the app in `/data/www/app` allows for serving a different version of the app than the one bundled with Venus OS at `/var/www/venus/app`. When the `/data/www/app` is present, it'll be server at `venus.local/app` and the original application at `venus.local/default/app`.
 
@@ -112,19 +118,15 @@ By creating an archive named `venus-data.zip` that contains the build files from
 
 The content of the `/data` partition is persistent across firmware updates.
 
-#### 2.6.3 Navigate to the app address again on the target device
+To create the archive, run `./bin/pack.sh` from the root folder of the application. This will create a `venus-data.zip` file. Place this file on a USB stick and insert it into the GX device, then reboot the device.
 
-Once deployed reload the page by navigating to the Venus host IP on the target device.
-If you have enabled dev features and have previously deployed a new version of the UI to the device you can
-press the `reload page` on the top left corner of the page.
+### 2.8 Translations
 
-### 2.7 Translations
-
-#### 2.7.1 Syncronizing the translations files with the POEditor Project
+#### 2.8.1 Syncronizing the translations files with the POEditor Project
 
 [POEditor](https://poeditor.com/) is used as localization management platform for this project. In order to sync the translations using the scripts from the `poeditor` folder, an API key has to be placed in the `.env.local` according to the `.env.local.example` file.
 
-#### 2.7.2 Pushing the local translation files to POEditor
+#### 2.8.2 Pushing the local translation files to POEditor
 
 ```
 npm run poeditor:push
@@ -144,7 +146,7 @@ npm run poeditor:push -f
 Running the comamnd with the `-f` flag will delete the terms from POEditor that are not present in the local file.
 Please use with caution. If wrong data is sent, existing terms and their translations might be irreversibly lost.
 
-#### 2.7.3 Pulling the POEditor translations locally
+#### 2.8.3 Pulling the POEditor translations locally
 
 ```
 npm run poeditor:pull
@@ -205,7 +207,7 @@ A sample recipe for the HTML5 app is [here](https://github.com/victronenergy/met
 
 ## 5. Device error logging
 
-When the app is hosted from a VenusGX, there is no convenient way to see the errors in the js console. To make troubleshooting easier the app sends (at least attempts) to send the error messages through websocket to the device. The log can be found at `/var/log/venus-html5-app/current`.
+When the app is hosted from a VenusGX, there is no convenient way to see the errors in the js console. To make troubleshooting easier the app sends (at least attempts to send) the error messages through websocket to the device. The log can be found at `/var/log/venus-html5-app/current`.
 
 ## 6. Device debugging
 
