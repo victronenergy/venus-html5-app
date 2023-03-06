@@ -24,19 +24,19 @@ const Box = ({ children, icon, title, className, linkedView, getBoxSizeCallback 
     <div
       ref={boxRef}
       className={classNames(
-        "w-full h-full min-h-0 p-4 flex flex-col bg-victron-lightGray dark:bg-victron-darkGray rounded-md",
+        "w-full h-full min-h-0 px-4 py-2.5 flex flex-col bg-victron-lightGray dark:bg-victron-darkGray rounded-md",
         className
       )}
     >
       <div className={"flex flex-row justify-between"}>
         <div
           className={
-            "flex flex-row items-center justify-start text-victron-gray dark:text-victron-gray-dark cursor-pointer"
+            "flex items-center justify-start text-victron-gray dark:text-victron-gray-dark cursor-pointer min-w-0"
           }
           onClick={handleClick}
         >
           {icon && <span className={"mr-1"}>{icon}</span>}
-          <span className={"text-base"}>{title}</span>
+          <span className={"text-base truncate"}>{title}</span>
         </div>
         {linkedView && (
           <div onClick={handleClick}>

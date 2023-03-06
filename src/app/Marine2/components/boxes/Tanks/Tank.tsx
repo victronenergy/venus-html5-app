@@ -8,9 +8,9 @@ import FuelIcon from "../../../images/icons/fuel.svg"
 import WaterIcon from "../../../images/icons/fresh-water.svg"
 import BlackWaterIcon from "../../../images/icons/black-water.svg"
 import GrayWaterIcon from "../../../images/icons/waste-water.svg"
-import { applyStyles, StylesType } from "app/Marine2/utils/media"
+import { applyStyles, BreakpointStylesType, StylesType } from "app/Marine2/utils/media"
 
-const styles: StylesType = {
+const styles: BreakpointStylesType = {
   "sm-s": {
     tankName: "text-sm",
     level: "text-base",

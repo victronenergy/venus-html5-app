@@ -80,7 +80,9 @@ module.exports = {
           gray: {
             DEFAULT: "#969591",
             dark: "#969591",
+            200: "#272622",
             400: "#64635F",
+            500: "#969591",
           },
           blue: {
             DEFAULT: "#387DC5",
@@ -142,6 +144,10 @@ module.exports = {
       strokeWidth: {
         16: "16px",
       },
+      minWidth: {
+        '5': '1.25rem',
+        '7': '1.75rem',
+      }
     },
   },
   // Garmin and Furuno devices don't support the RGB colors with opacity,
