@@ -17,6 +17,7 @@ import BoxView from "./components/views/BoxView"
 import RootView from "./components/views/RootView"
 import RemoteConsoleView from "./components/views/RemoteConsoleView"
 import Connecting from "./components/ui/Connecting"
+import DiagnosticsView from "./components/views/DiagnosticsView"
 
 // type MainProps = {
 //   isConnected?: boolean
@@ -65,9 +66,10 @@ export const Marine2 = observer((props: AppProps) => {
 
     // Other views
     switch (currentView) {
-      // todo: add other views
       case AppViews.REMOTE_CONSOLE:
         return <RemoteConsoleView host={host} />
+      case AppViews.DIAGNOSTICS:
+        return <DiagnosticsView />
       default:
         return <RootView />
     }
