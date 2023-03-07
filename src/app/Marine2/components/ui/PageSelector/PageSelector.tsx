@@ -126,7 +126,10 @@ const PageSelector = ({
           </div>
         )}
       </div>
-      <div onClick={onRightSelectorClick} className={"w-11 h-11 shrink-0 text-victron-gray dark:text-victron-gray-dark"}>
+      <div
+        onClick={onRightSelectorClick}
+        className={"w-11 h-11 shrink-0 text-victron-gray dark:text-victron-gray-dark"}
+      >
         {(isHorizontal &&
           ((currentPage < maxPages - 1 && (
             // todo: fix types for svg
