@@ -6,11 +6,17 @@ import { BUILD_TIMESTAMP } from "../../../utils/constants"
 import packageInfo from "../../../../../../package.json"
 import React, { useState } from "react"
 import LogoIcon from "../../../images/logo.svg"
+import { AppViews, useAppViewsStore } from "../../../modules/AppViews"
 
 const VersionInfo = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const { portalId = "-", siteId = "-" } = useVrmStore()
   const { humanReadableFirmwareVersion } = useAppStore()
+  const appViewsStore = useAppViewsStore()
+
+  const openDiagnostics = () => {
+    appViewsStore.setView(AppViews.DIAGNOSTICS)
+  }
 
   return (
     <div className="cursor-pointer pl-4">
@@ -59,6 +65,11 @@ const VersionInfo = () => {
                       <div>{translate("versionInfo.vrmPortID")}</div>
                       <div>{siteId}</div>
                     </div>
+                  </div>
+                  <div className={"pt-2"}>
+                    <span className={"underline"} onClick={openDiagnostics}>
+                      {translate("diagnostics.diagnostics")}
+                    </span>
                   </div>
                 </div>
               </div>

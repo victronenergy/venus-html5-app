@@ -1,13 +1,9 @@
 import React, { BaseSyntheticEvent, useCallback, useEffect, useMemo, useRef } from "react"
 import classnames from "classnames"
-import LeftSelectorIcon from "../../../images/icons/selectors/selector-left.svg"
-import RightSelectorIcon from "../../../images/icons/selectors/selector-right.svg"
-import LeftSelectorBlueIcon from "../../../images/icons/selectors/selector-left-blue.svg"
-import RightSelectorBlueIcon from "../../../images/icons/selectors/selector-right-blue.svg"
-import DownSelectorIcon from "../../../images/icons/selectors/selector-down.svg"
-import UpSelectorIcon from "../../../images/icons/selectors/selector-up.svg"
-import DownSelectorBlueIcon from "../../../images/icons/selectors/selector-down-blue.svg"
-import UpSelectorBlueIcon from "../../../images/icons/selectors/selector-up-blue.svg"
+import SelectorLeftIcon from "../../../images/icons/selectors/selector-left.svg"
+import SelectorRightIcon from "../../../images/icons/selectors/selector-right.svg"
+import SelectorDownIcon from "../../../images/icons/selectors/selector-down.svg"
+import SelectorUpIcon from "../../../images/icons/selectors/selector-up.svg"
 import DotIcon from "../../../images/icons/selectors/dot.svg"
 import DotSelectedIcon from "../../../images/icons/selectors/dot-selected.svg"
 import DotSelectedVerticalIcon from "../../../images/icons/selectors/dot-selected-vert.svg"
@@ -29,10 +25,19 @@ const PageSelector = ({
 
   const dot = (i: number) => {
     if (i === currentPage) {
-      if (isHorizontal) return <DotSelectedIcon></DotSelectedIcon>
-      return <DotSelectedVerticalIcon></DotSelectedVerticalIcon>
+      return isHorizontal ? (
+        // todo: fix types for svg
+        // @ts-ignore
+        <DotSelectedIcon className={"text-victron-darkGray dark:text-white"} />
+      ) : (
+        // todo: fix types for svg
+        // @ts-ignore
+        <DotSelectedVerticalIcon className={"text-victron-darkGray dark:text-white"} />
+      )
     } else {
-      return <DotIcon></DotIcon>
+      // todo: fix types for svg
+      // @ts-ignore
+      return <DotIcon className={"text-victron-gray dark:text-victron-gray-400"} />
     }
   }
 
@@ -76,8 +81,25 @@ const PageSelector = ({
       })}
     >
       <div onClick={onLeftSelectorClick} className={"w-11 h-11 shrink-0"}>
-        {(isHorizontal && ((currentPage > 0 && <LeftSelectorBlueIcon />) || <LeftSelectorIcon />)) ||
-          (currentPage > 0 && <UpSelectorBlueIcon />) || <UpSelectorIcon />}
+        {(isHorizontal &&
+          ((currentPage > 0 && (
+            // todo: fix types for svg
+            // @ts-ignore
+            <SelectorLeftIcon className={"text-victron-blue dark:text-victron-blue-dark"} />
+          )) || (
+            // todo: fix types for svg
+            // @ts-ignore
+            <SelectorLeftIcon className={"text-victron-gray dark:text-victron-gray-dark"} />
+          ))) ||
+          (currentPage > 0 && (
+            // todo: fix types for svg
+            // @ts-ignore
+            <SelectorUpIcon className={"text-victron-blue dark:text-victron-blue-dark"} />
+          )) || (
+            // todo: fix types for svg
+            // @ts-ignore
+            <SelectorUpIcon className={"text-victron-gray dark:text-victron-gray-dark"} />
+          )}
       </div>
       <div
         ref={dotsVertRef}
@@ -104,9 +126,26 @@ const PageSelector = ({
           </div>
         )}
       </div>
-      <div onClick={onRightSelectorClick} className={"w-11 h-11 shrink-0"}>
-        {(isHorizontal && ((currentPage < maxPages - 1 && <RightSelectorBlueIcon />) || <RightSelectorIcon />)) ||
-          (currentPage < maxPages - 1 && <DownSelectorBlueIcon />) || <DownSelectorIcon />}
+      <div onClick={onRightSelectorClick} className={"w-11 h-11 shrink-0 text-victron-gray dark:text-victron-gray-dark"}>
+        {(isHorizontal &&
+          ((currentPage < maxPages - 1 && (
+            // todo: fix types for svg
+            // @ts-ignore
+            <SelectorRightIcon className={"text-victron-blue dark:text-victron-blue-dark"} />
+          )) || (
+            // todo: fix types for svg
+            // @ts-ignore
+            <SelectorRightIcon className={"text-victron-gray dark:text-victron-gray-dark"} />
+          ))) ||
+          (currentPage < maxPages - 1 && (
+            // todo: fix types for svg
+            // @ts-ignore
+            <SelectorDownIcon className={"text-victron-blue dark:text-victron-blue-dark"} />
+          )) || (
+            // todo: fix types for svg
+            // @ts-ignore
+            <SelectorDownIcon className={"text-victron-gray dark:text-victron-gray-dark"} />
+          )}
       </div>
     </div>
   )

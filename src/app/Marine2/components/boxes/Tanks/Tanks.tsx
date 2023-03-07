@@ -10,6 +10,7 @@ import { withErrorBoundary } from "react-error-boundary"
 import { appErrorBoundaryProps } from "../../ui/Error/appErrorBoundary"
 import { useVisibilityNotifier } from "../../../modules"
 import { BoxTypes } from "../../../utils/constants"
+import Paginator from "../../ui/Paginator"
 
 interface Props {
   mode?: string
@@ -74,10 +75,15 @@ const Tanks = ({ mode, className }: Props) => {
           />
         }
         className={className}
+        getBoxSizeCallback={setBoxSize}
       >
         <div ref={gridRef}>
           {tanks?.map((tank, index) => {
-            return tank ? <Tank key={index} tankInstanceId={tank} mode="full" orientation={orientation} /> : <></>
+            return tank ? (
+              <Tank key={index} tankInstanceId={tank} mode="full" orientation={orientation} parentSize={boxSize} />
+            ) : (
+              <></>
+            )
           })}
         </div>
       </Box>
@@ -94,12 +100,15 @@ const Tanks = ({ mode, className }: Props) => {
           className={"w-6 text-black dark:text-white"}
         />
       }
+      getBoxSizeCallback={setBoxSize}
     >
-      <div className="grid grid-cols-4 h-full">
-        {tanks?.map((tank, index) => {
-          return tank ? <Tank key={index} tankInstanceId={tank} mode="full" orientation={orientation} /> : <></>
-        })}
-      </div>
+      <Paginator selectorLocation="bottom-right" orientation="horizontal">
+        <div className="flex justify-between h-full">
+          {tanks.map((tank, index) => (
+            <Tank key={index} tankInstanceId={tank!} mode="full" orientation={orientation} parentSize={boxSize} />
+          ))}
+        </div>
+      </Paginator>
     </Box>
   )
 }
