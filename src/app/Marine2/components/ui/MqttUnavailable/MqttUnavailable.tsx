@@ -11,7 +11,7 @@ const MqttUnavailable = () => {
   }
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center bg-victron-lightGray dark:bg-victron-darkGray border-4 border-victron-blue rounded-md text-sm text-victron-blue text-black dark:text-white">
+    <div className="w-full h-full flex flex-col items-center justify-center bg-victron-lightGray dark:bg-victron-darkGray border-4 border-victron-blue rounded-md text-sm text-black dark:text-victron-blue">
       <div className="block max-w-xl p-4">
         <Button onClick={openRemoteConsole} className="w-full mb-4" size="md">
           {translate("header.remoteConsole")}
