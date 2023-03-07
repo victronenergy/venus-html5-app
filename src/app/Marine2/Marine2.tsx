@@ -11,13 +11,13 @@ import RemoteConsoleView from "./components/views/RemoteConsoleView"
 import Connecting from "./components/ui/Connecting"
 import DiagnosticsView from "./components/views/DiagnosticsView"
 import MqttUnavailable from "./components/ui/MqttUnavailable"
+import ErrorFallback from "./components/ui/Error"
 
 export const Marine2 = observer((props: AppProps) => {
   const { host } = props
   // subscribe to language
   useLanguage(mfdLanguageOptions)
   const mqtt = useMqtt()
-  console.log("-> mqtt", mqtt)
   const isConnected = mqtt.isConnected
   const portalId = mqtt.portalId
   const { error, status } = mqtt
@@ -47,10 +47,7 @@ export const Marine2 = observer((props: AppProps) => {
   }
 
   if (error && isError(error) && status !== STATUS.CONNECTING) {
-    return (
-      <div>Error</div>
-      // {/*<Error error={error} />*/}
-    )
+    return <ErrorFallback error={error as Error} resetErrorBoundary={() => {}} />
   }
 
   if (error) {
