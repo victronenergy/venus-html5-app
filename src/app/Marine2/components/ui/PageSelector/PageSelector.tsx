@@ -66,7 +66,7 @@ const PageSelector = ({
   return (
     <div
       className={classnames("flex items-center select-none", {
-        "h-11 w-full min-w-0 flex-row": isHorizontal,
+        "h-11 w-full min-w-0": isHorizontal,
         "w-11 h-full min-h-0 flex-col": !isHorizontal,
         "justify-between": selectorLocation.endsWith("full"),
         "justify-end": selectorLocation.endsWith("right") || selectorLocation.endsWith("bottom"),
@@ -89,7 +89,7 @@ const PageSelector = ({
         })}
       >
         {(isHorizontal && (
-          <div ref={dotsHorRef} className={"flex overflow-hidden w-max flex-row justify-left space-x-2"}>
+          <div ref={dotsHorRef} className={"flex overflow-hidden w-max justify-left space-x-2"}>
             {[...Array(maxPages)].map((e, i) => (
               <span key={i}>{dot(i)}</span>
             ))}

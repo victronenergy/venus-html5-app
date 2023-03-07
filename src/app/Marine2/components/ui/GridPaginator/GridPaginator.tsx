@@ -31,7 +31,6 @@ const GridPaginator = ({
       <Paginator orientation={orientation} selectorLocation={selectorLocation} pageNumber={pages}>
         <div
           className={classnames(`flex`, {
-            "flex-row": orientation === "horizontal",
             "flex-col": orientation === "vertical",
           })}
           style={{

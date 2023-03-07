@@ -158,8 +158,7 @@ const Paginator = ({
     <div
       ref={wrapperRef}
       className={classnames("w-full h-full", {
-        "flex flex-row justify-between":
-          pages.length > 1 && !pageSelectorPropsSetter && selectorLocation.startsWith("right"),
+        "flex justify-between": pages.length > 1 && !pageSelectorPropsSetter && selectorLocation.startsWith("right"),
         "flex flex-col justify-between":
           pages.length > 1 && !pageSelectorPropsSetter && selectorLocation.startsWith("bottom"),
         "flex flex-row-reverse justify-between":
@@ -190,7 +189,6 @@ const Paginator = ({
         <div
           ref={pageRef}
           className={classnames("overflow-hidden flex", {
-            "flex-row": orientation === "horizontal",
             "flex-col": orientation === "vertical",
             "w-full h-full": !!pageSelectorPropsSetter,
             "h-[calc(100%-3.5rem)] w-full":
@@ -238,7 +236,6 @@ const Paginator = ({
         <div
           ref={pageRef}
           className={classnames("overflow-hidden flex", {
-            "flex-row": orientation === "horizontal",
             "flex-col": orientation === "vertical",
             "w-full h-full": !!pageSelectorPropsSetter,
             "h-[calc(100%-3.5rem)] w-full":
