@@ -30,9 +30,12 @@ const Settings = () => {
   }
 
   return (
-    <div className="w-10 dark:text-white cursor-pointer">
+    <div
+      className="fixed right-1 bottom-4 dark:text-white cursor-pointer w-16"
+      onClick={() => setIsModalOpen(!isModalOpen)}
+    >
       <div className="flex justify-center items-center w-full">
-        <div onClick={() => setIsModalOpen(!isModalOpen)} className="pl-4 pt-1 w-14 h-10">
+        <div className="pl-8 pt-4 w-16 h-12">
           {/* todo: fix types for svg */}
           {/* @ts-ignore */}
           <PreferencesIcon className="w-1" alt={"Settings"} />
