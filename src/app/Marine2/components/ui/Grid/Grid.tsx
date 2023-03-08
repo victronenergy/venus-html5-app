@@ -2,7 +2,14 @@ import React, { useEffect, useMemo, useRef, useState } from "react"
 import classnames from "classnames"
 import { useComponentSize } from "../../../utils/hooks"
 
-const Grid = ({ children, className, childClassName, flow = "row", forceOneDimensionRatio = 3 }: GridProps) => {
+const Grid = ({
+  children,
+  className,
+  childClassName,
+  flow = "row",
+  forceOneDimensionRatio = 3,
+  forceFirstOrLastChild = "first",
+}: GridProps) => {
   const childrenCount = Array.isArray(children) ? children.length : 1
 
   const gridRef = useRef<HTMLDivElement>(null)
@@ -33,7 +40,8 @@ const Grid = ({ children, className, childClassName, flow = "row", forceOneDimen
     if (forceOneDimension) {
       return `${100 / childrenCount}%`
     }
-    if (childrenCount > elementsInRow && childrenCount % elementsInRow && i === childrenCount - 1) {
+    const forceIndex = forceFirstOrLastChild === "first" ? 0 : childrenCount - 1
+    if (childrenCount > elementsInRow && childrenCount % elementsInRow && i === forceIndex) {
       return `100%`
     }
     return `${100 / elementsInRow}%`
@@ -66,9 +74,9 @@ const Grid = ({ children, className, childClassName, flow = "row", forceOneDimen
             <div
               className={classnames(childClassName)}
               /* 
-                                            We have to use native styles here, because Tailwind can't do JIT css styles compilation for dynamic values:
-                                            https://stackoverflow.com/questions/69687530/dynamically-build-classnames-in-tailwindcss
-                                          */
+                We have to use native styles here, because Tailwind can't do JIT css styles compilation for dynamic values:
+                https://stackoverflow.com/questions/69687530/dynamically-build-classnames-in-tailwindcss
+              */
               style={{
                 width: gridFlow === "col" ? getChildWidth() : getChildFlexBasis(i),
                 maxWidth: gridFlow === "col" ? getChildWidth() : getChildFlexBasis(i),
@@ -95,8 +103,10 @@ export interface GridProps {
   className?: string
   childClassName?: string
   flow?: "row" | "col"
-  /** Force the grid to use only 1 row or column if the ratio of the grid is higher than this value */
+  /** Force the grid to use only 1 row or column if the width/height ratio of the grid is higher than this value */
   forceOneDimensionRatio?: number
+  /** In the case of even number of children, force the first or last child to take the whole row/column */
+  forceFirstOrLastChild?: "first" | "last"
 }
 
 export default Grid
