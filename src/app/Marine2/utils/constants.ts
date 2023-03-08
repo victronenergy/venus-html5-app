@@ -2,9 +2,10 @@ import preval from "preval.macro"
 
 export const BUILD_TIMESTAMP = preval`module.exports = new Date().toLocaleDateString();`
 
+// The order of these is important, as it determines the order of the boxes on the Root view page
 export enum BoxTypes {
-  BATTERIES = "Batteries",
   ENERGY = "Energy",
+  BATTERIES = "Batteries",
   TANKS = "Tanks",
 }
 
