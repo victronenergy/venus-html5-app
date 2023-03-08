@@ -60,7 +60,7 @@ const Box = ({
             </div>
           )}
         {linkedView && (
-          <div className="ml-3" onClick={handleClick}>
+          <div className="-mr-3 p-3" onClick={handleClick}>
             <ArrowRightIcon
               /* todo: fix types for svg */
               /* @ts-ignore */
