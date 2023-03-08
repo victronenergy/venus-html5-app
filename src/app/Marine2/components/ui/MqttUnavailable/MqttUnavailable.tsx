@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { translate } from "react-i18nify"
 import MqttSettingsGuide from "../../../images/mqtt-settings-v2.42.png"
 import Button from "../Button"
 import { AppViews, useAppViewsStore } from "../../../modules/AppViews"
 import { useMqtt } from "@elninotech/mfd-modules"
 import Connecting from "../Connecting"
+import { observer } from "mobx-react"
 
 const MqttUnavailable = () => {
   const appViewsStore = useAppViewsStore()
@@ -23,17 +24,21 @@ const MqttUnavailable = () => {
 
   useEffect(() => {
     if (!error) {
-      clearTimeout(connectTimeout)
+      clearTimeout((connectTimeout.current as NodeJS.Timeout) || undefined)
+      setIsConnecting(false)
       appViewsStore.setView(AppViews.ROOT)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [error, isConnected])
 
-  let connectTimeout: NodeJS.Timeout
+  // const connectTimeout = useRef()
+  let connectTimeout: React.MutableRefObject<NodeJS.Timeout | null> = useRef(null)
   useEffect(() => {
-    connectTimeout = setTimeout(() => {
-      clearTimeout(connectTimeout)
+    connectTimeout.current = setTimeout(() => {
+      clearTimeout((connectTimeout.current as NodeJS.Timeout) || undefined)
       setIsConnecting(false)
     }, 6 * 1000)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   if (isConnecting) {
@@ -65,4 +70,4 @@ const MqttUnavailable = () => {
   )
 }
 
-export default MqttUnavailable
+export default observer(MqttUnavailable)
