@@ -1,17 +1,43 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { translate } from "react-i18nify"
 import MqttSettingsGuide from "../../../images/mqtt-settings-v2.42.png"
 import Button from "../Button"
 import { AppViews, useAppViewsStore } from "../../../modules/AppViews"
+import { useMqtt } from "@elninotech/mfd-modules"
+import Connecting from "../Connecting"
 
 const MqttUnavailable = () => {
   const appViewsStore = useAppViewsStore()
+  const mqtt = useMqtt()
+  const { isConnected, error } = mqtt
+
+  const [isConnecting, setIsConnecting] = useState(true)
+
   const openRemoteConsole = () => {
     appViewsStore.setView(AppViews.REMOTE_CONSOLE)
   }
 
   const restart = () => {
     window.location.reload()
+  }
+
+  useEffect(() => {
+    if (!error) {
+      clearTimeout(connectTimeout)
+      appViewsStore.setView(AppViews.ROOT)
+    }
+  }, [error, isConnected])
+
+  let connectTimeout: NodeJS.Timeout
+  useEffect(() => {
+    connectTimeout = setTimeout(() => {
+      clearTimeout(connectTimeout)
+      setIsConnecting(false)
+    }, 6 * 1000)
+  }, [])
+
+  if (isConnecting) {
+    return <Connecting />
   }
 
   return (
