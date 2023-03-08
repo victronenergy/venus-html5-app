@@ -17,9 +17,9 @@ const Header = ({ title }: Props) => {
 
   return (
     <div className={"flex flex-row justify-between w-full items-center pb-1"}>
-      <div className={"grow text-center text-sm"}>{title}</div>
+      <div className={"grow text-center text-base md-m:text-md xl-m:text-lg"}>{title}</div>
       {isShowBack && (
-        <div onClick={handleBackClick} className={"grow-0 cursor-pointer"}>
+        <div onClick={handleBackClick} className={"grow-0 cursor-pointer p-3"}>
           {/* todo: fix types for svg */}
           {/* @ts-ignore */}
           <BackIcon className={"w-6 text-blue-600 dark:text-blue-400"} alt={"Back"} />
