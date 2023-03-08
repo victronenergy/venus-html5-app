@@ -32,11 +32,11 @@ const Settings = () => {
   return (
     <div className="w-10 dark:text-white cursor-pointer">
       <div className="flex justify-center items-center w-full">
-        <button onClick={() => setIsModalOpen(!isModalOpen)} className="pl-5 w-10">
+        <div onClick={() => setIsModalOpen(!isModalOpen)} className="pl-4 pt-1 w-14 h-10">
           {/* todo: fix types for svg */}
           {/* @ts-ignore */}
           <PreferencesIcon className="w-1" alt={"Settings"} />
-        </button>
+        </div>
         <Modal.Frame
           open={isModalOpen}
           onClose={() => {
