@@ -106,7 +106,7 @@ The default device's IP address is `172.24.24.1`
 #### 2.7.2 Run deploy script
 
 In the project main folder run `./bin/deploy.sh <ip>` where ip is the target device's IP. The script also accepts an additional
-`--user|-u` param that defines the user for the deployment connection. This defaults to `root`. You will also need a password to connect to the device. To set the password, navigate to the `Venus Remote Console` -> `Settings` -> `General`.
+`--user|-u` param that defines the user for the deployment connection. This defaults to `root`. You will also need a password to connect to the device. To set the password, navigate to the `Venus Remote Console` -> `Settings` -> `General -> Set root password`.
 
 The deploy script also bundles the app. Note that the script assumes that it's run from the root folder of the application.
 
