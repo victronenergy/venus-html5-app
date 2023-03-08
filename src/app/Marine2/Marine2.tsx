@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { useLanguage, useMqtt, STATUS } from "@elninotech/mfd-modules"
+import { useLanguage, useMqtt, STATUS, useApp } from "@elninotech/mfd-modules"
 import { AppProps } from "./App"
 import { mfdLanguageOptions } from "app/locales/constants"
 import { observer } from "mobx-react"
@@ -14,9 +14,13 @@ import MqttUnavailable from "./components/ui/MqttUnavailable"
 import ErrorFallback from "./components/ui/Error"
 
 export const Marine2 = observer((props: AppProps) => {
-  const { host } = props
+  // init App
+  useApp()
+
   // subscribe to language
   useLanguage(mfdLanguageOptions)
+
+  const { host } = props
   const mqtt = useMqtt()
   const isConnected = mqtt.isConnected
   const portalId = mqtt.portalId
