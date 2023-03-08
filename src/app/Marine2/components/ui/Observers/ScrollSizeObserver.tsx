@@ -20,9 +20,9 @@ const ScrollSizeObserver = ({ children, onSizeChange, orientation }: Props) => {
   return (
     <div ref={parentRef} className="w-full h-full">
       <div
-        className={classnames("min-h-fit min-w-fit", {
-          "h-full": orientation === "horizontal",
-          "w-full": orientation === "vertical",
+        className={classnames("", {
+          "h-full min-w-fit": orientation === "horizontal",
+          "w-full min-h-fit": orientation === "vertical",
         })}
         ref={containerRef}
       >
