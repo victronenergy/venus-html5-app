@@ -46,7 +46,7 @@ const ValueBox = ({ title, icon, value, unit, bottomValues, children }: Props) =
     <Box title={title} icon={icon} getBoxSizeCallback={setBoxSize}>
       <div className="w-full h-full flex flex-col justify-between">
         <div>
-          <div className={classNames("text-victron-gray dark:text-white", activeStyles?.value)}>
+          <div className={classNames("text-victron-darkGray dark:text-white", activeStyles?.value)}>
             {formatValue(value)}
             <span className={"pl-0.5 text-victron-gray dark:text-victron-gray-500"}>{unit}</span>
           </div>
