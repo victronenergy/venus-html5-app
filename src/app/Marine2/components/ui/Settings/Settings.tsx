@@ -31,7 +31,7 @@ const Settings = () => {
 
   return (
     <div
-      className="fixed right-1 bottom-4 dark:text-white cursor-pointer w-16"
+      className="fixed right-1 bottom-4 dark:text-white cursor-pointer w-16 outline-none"
       onClick={() => setIsModalOpen(!isModalOpen)}
     >
       <div className="flex justify-center items-center w-full">

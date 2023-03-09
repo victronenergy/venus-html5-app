@@ -21,7 +21,7 @@ const Header = ({ title }: Props) => {
       {isShowBack && (
         <div
           onClick={handleBackClick}
-          className={"absolute right-1 top-1.5 cursor-pointer py-3 pl-14 w-24 min-w-24 z-1"}
+          className={"absolute right-1 top-1.5 cursor-pointer py-3 pl-14 w-24 min-w-24 z-1 outline-none"}
         >
           {/* todo: fix types for svg */}
           {/* @ts-ignore */}

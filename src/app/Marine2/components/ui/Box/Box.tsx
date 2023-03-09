@@ -44,7 +44,7 @@ const Box = ({
       <div className={"w-full min-w-0 min-h-[2.75rem] flex justify-between items-center"}>
         <div
           className={
-            "w-full shrink-1 flex items-center justify-start text-victron-gray dark:text-victron-gray-dark cursor-pointer min-w-0"
+            "w-full shrink-1 flex items-center justify-start text-victron-gray dark:text-victron-gray-dark cursor-pointer min-w-0 outline-none"
           }
           onClick={handleClick}
         >
@@ -64,7 +64,7 @@ const Box = ({
             <ArrowRightIcon
               /* todo: fix types for svg */
               /* @ts-ignore */
-              className={"w-6 text-victron-blue dark:text-victron-blue-dark cursor-pointer"}
+              className={"w-6 text-victron-blue dark:text-victron-blue-dark cursor-pointer outline-none"}
               alt={"Expand"}
             />
           </div>
