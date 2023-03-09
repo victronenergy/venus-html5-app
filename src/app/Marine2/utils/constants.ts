@@ -1,6 +1,6 @@
 import preval from "preval.macro"
 
-export const BUILD_TIMESTAMP = preval`module.exports = new Date().toLocaleDateString();`
+export const BUILD_TIMESTAMP = preval`module.exports = new Date().toLocaleDateString() + "." + new Date().getUTCHours() + new Date().getUTCMinutes();`
 
 // The order of these is important, as it determines the order of the boxes on the Root view page
 export enum BoxTypes {
