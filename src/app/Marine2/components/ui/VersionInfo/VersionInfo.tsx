@@ -19,13 +19,15 @@ const VersionInfo = () => {
     appViewsStore.setView(AppViews.DIAGNOSTICS)
   }
 
+  const toggleVersionInfo = () => {
+    setIsModalOpen(!isModalOpen)
+  }
+
   return (
-    <div className="cursor-pointer pl-4">
-      <button onClick={() => setIsModalOpen(!isModalOpen)}>
-        {/* todo: fix types for svg */}
-        {/* @ts-ignore */}
-        <LogoIcon className={"w-32 text-black dark:text-white"} alt={"Victron Energy"} />
-      </button>
+    <div className="cursor-pointer py-3 px-5 outline-none" onClick={toggleVersionInfo}>
+      {/* todo: fix types for svg */}
+      {/* @ts-ignore */}
+      <LogoIcon className={"w-32 text-black dark:text-white"} alt={"Victron Energy"} />
       <div className="flex justify-center items-center w-full">
         <Modal.Frame
           open={isModalOpen}

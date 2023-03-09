@@ -4,7 +4,7 @@ import VersionInfo from "../VersionInfo"
 
 const Footer = () => {
   return (
-    <div className="flex w-full flex-row justify-between pt-6 pb-4">
+    <div className="flex w-full flex-row justify-between pt-2 pb-4">
       <VersionInfo />
       <Settings />
     </div>
