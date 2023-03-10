@@ -54,11 +54,11 @@ const Tanks = ({ mode, className }: Props) => {
         withPagination={true}
         paginationOrientation={"vertical"}
       >
-        <div className={"w-full"}>
-          {tanks?.map((tank) => {
-            return tank ? <Tank mode={"compact"} key={tank} tankInstanceId={tank} parentSize={boxSize} /> : null
-          })}
-        </div>
+        {tanks
+          ?.filter((tank) => !!tank)
+          .map((tank) => (
+            <Tank mode={"compact"} key={tank} tankInstanceId={Number(tank)} parentSize={boxSize} />
+          ))}
       </Box>
     )
   }

@@ -37,7 +37,7 @@ const BatteriesOverview = ({ mode = "full" }: Props) => {
         getBoxSizeCallback={setBoxSize}
         withPagination={true}
       >
-        <div className={"flex h-full justify-center"}>
+        <div className={"flex w-fit min-w-full h-full justify-center"}>
           {overviewBatteries.map((b) => (
             <div key={b.id} className={"h-full flex items-center justify-center"}>
               <BatterySummary key={b.id} battery={b} boxSize={boxSize} />
