@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, useCallback } from "react"
+import React, { useRef, useEffect, useState, useCallback, useMemo } from "react"
 import classnames from "classnames"
 import { PageSelectorProps, SelectorLocation } from "../PageSelector"
 import { observer } from "mobx-react"
@@ -13,7 +13,9 @@ const Paginator = ({
   pageNumber,
   pageSelectorPropsSetter,
 }: Props) => {
-  const childrenArray = Array.isArray(children) ? children : [children]
+  const childrenArray = useMemo(() => {
+    return Array.isArray(children) ? children : [children]
+  }, [children])
 
   const childrenRef = useRef<Array<HTMLDivElement>>([])
   const wrapperRef = useRef<HTMLDivElement>(null)
@@ -38,6 +40,7 @@ const Paginator = ({
       const parentSize =
         (orientation === "horizontal" ? wrapperRef.current.offsetWidth : wrapperRef.current.offsetHeight) -
         (selectorIsTakingUpSpace ? 56 : 0)
+
       if (sizeArray.reduce((sizeSum, size) => sizeSum + size, 0) <= parentSize) {
         return
       }
@@ -58,15 +61,17 @@ const Paginator = ({
 
         // if there is one dom element that is too long and would be scrollable, split it into separate pages
         if (currentPageSize === 0 && refSize > parentSize) {
-          // split into pages and save where to scroll on changing page
-          let i = 0
-          while ((i + 1) * parentSize < refSize) {
-            newPagesArray.push([childIndex])
-            i++
+          if (orientation === "horizontal") {
+            // split into pages and save where to scroll on changing page
+            let i = 0
+            while (i * parentSize < refSize) {
+              newPagesArray.push([childIndex])
+              i++
+            }
+          } else {
+            currentPageElements.push(childIndex)
+            currentPageSize += refSize
           }
-
-          // avoid having the last part of the element be very small, instead, make it the size of parent element
-          newPagesArray.push([childIndex])
         } else if (currentPageSize + refSize <= parentSize) {
           // if even after adding this element the page is not overflowing, add it to current page
           currentPageElements.push(childIndex)
