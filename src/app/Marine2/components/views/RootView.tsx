@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import MainLayout from "../ui/MainLayout"
 import Tanks from "../boxes/Tanks/Tanks"
 import BatteriesOverview from "../boxes/BatteriesOverview"
@@ -7,6 +7,7 @@ import GridPaginator from "../ui/GridPaginator"
 import { useVisibleWidgetsStore } from "../../modules"
 import { BoxTypes } from "../../utils/constants"
 import { observer } from "mobx-react"
+import { PageSelectorProps } from "../ui/PageSelector"
 
 const RootView = () => {
   const visibleWidgetsStore = useVisibleWidgetsStore()
@@ -45,17 +46,19 @@ const RootView = () => {
     }
   }
 
+  const [pageSelectorProps, setPageSelectorProps] = useState<PageSelectorProps>()
+
   return (
     <>
       {/* We need to have hidden boxes mounted to listen to mqtt data and manage boxes visibility */}
       <div className="hidden">{initialBoxes.map((box) => box)}</div>
-      <MainLayout>
+      <MainLayout pageSelectorProps={pageSelectorProps}>
         <GridPaginator
           childrenPerPage={4}
           flow={"col"}
           orientation={"horizontal"}
-          selectorLocation={"bottom-full"}
           childClassName={"p-2"}
+          pageSelectorPropsSetter={setPageSelectorProps}
         >
           {boxes.map((box) => box)}
         </GridPaginator>

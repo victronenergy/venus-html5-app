@@ -12,12 +12,14 @@ import { appErrorBoundaryProps } from "../../ui/Error/appErrorBoundary"
 import { useVisibilityNotifier } from "../../../modules"
 import GridPaginator from "../../ui/GridPaginator"
 import { useState } from "react"
+import { PageSelectorProps } from "../../ui/PageSelector"
 
 interface Props {
   mode?: "compact" | "full"
+  pageSelectorPropsSetter?: (arg0: PageSelectorProps) => void
 }
 
-const BatteriesOverview = ({ mode = "full" }: Props) => {
+const BatteriesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) => {
   const { batteries } = useBattery()
   const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
 
@@ -49,7 +51,13 @@ const BatteriesOverview = ({ mode = "full" }: Props) => {
   }
 
   return (
-    <GridPaginator childClassName={"p-2"} childrenPerPage={4} orientation={"horizontal"} flow={"col"}>
+    <GridPaginator
+      childClassName={"p-2"}
+      childrenPerPage={4}
+      orientation={"horizontal"}
+      flow={"col"}
+      pageSelectorPropsSetter={pageSelectorPropsSetter}
+    >
       {sortedBatteries.map((b) => (
         <Battery key={b.id} battery={b} />
       ))}

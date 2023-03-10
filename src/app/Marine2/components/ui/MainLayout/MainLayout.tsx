@@ -3,8 +3,9 @@ import Footer from "../Footer"
 import Header from "../Header"
 import { observer } from "mobx-react"
 import { useAppViewsStore } from "../../../modules/AppViews"
+import { PageSelectorProps } from "../PageSelector"
 
-const MainLayout = ({ children, title }: Props) => {
+const MainLayout = ({ children, title, pageSelectorProps }: Props) => {
   const appViewsStore = useAppViewsStore()
 
   const getTitle = useMemo(() => {
@@ -18,7 +19,7 @@ const MainLayout = ({ children, title }: Props) => {
       </div>
       <div className={"flex flex-col grow w-full h-full min-h-0"}>{children}</div>
       <div className={"flex flex-row w-full h-full grow-0 basis-0 min-h-fit"}>
-        <Footer />
+        <Footer pageSelectorProps={pageSelectorProps} />
       </div>
     </div>
   )
@@ -27,6 +28,7 @@ const MainLayout = ({ children, title }: Props) => {
 interface Props {
   children?: JSX.Element
   title?: string
+  pageSelectorProps?: PageSelectorProps
 }
 
 export default observer(MainLayout)

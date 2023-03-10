@@ -27,8 +27,9 @@ import { AppViews } from "../../../modules/AppViews"
 import { useVisibilityNotifier } from "../../../modules"
 import { BoxTypes } from "../../../utils/constants"
 import GridPaginator from "../../ui/GridPaginator"
+import { PageSelectorProps } from "../../ui/PageSelector"
 
-const EnergyOverview = ({ mode = "compact" }: Props) => {
+const EnergyOverview = ({ mode = "compact", pageSelectorPropsSetter }: Props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const vebus = useVebus() // We need this hook to enable some MQTT subscriptions
   const { inputId: shoreInputId } = useShorePowerInput()
@@ -73,7 +74,12 @@ const EnergyOverview = ({ mode = "compact" }: Props) => {
   }
 
   return (
-    <GridPaginator childClassName={"p-2"} childrenPerPage={4} orientation={"horizontal"}>
+    <GridPaginator
+      childClassName={"p-2"}
+      childrenPerPage={4}
+      orientation={"horizontal"}
+      pageSelectorPropsSetter={pageSelectorPropsSetter}
+    >
       {boxes}
     </GridPaginator>
   )
@@ -140,6 +146,7 @@ const getAvailableEnergyBoxes = function (
 
 interface Props {
   mode?: "compact" | "full"
+  pageSelectorPropsSetter?: (arg0: PageSelectorProps) => void
 }
 
 export default observer(EnergyOverview)
