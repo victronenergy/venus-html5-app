@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react"
+import React, { useEffect } from "react"
 import classNames from "classnames"
 import ArrowRightIcon from "../../../images/icons/arrow-right.svg"
 import { AppViews, useAppViewsStore } from "../../../modules/AppViews"
 import { useComponentSize } from "app/Marine2/utils/hooks"
-import PageSelector, { PageSelectorProps } from "../PageSelector"
 import Paginator from "../Paginator"
 
 const Box = ({
@@ -31,8 +30,6 @@ const Box = ({
     }
   }, [componentSize, getBoxSizeCallback])
 
-  const [pageSelectorProps, setPageSelectorProps] = useState<PageSelectorProps>()
-
   return (
     <div
       ref={boxRef}
@@ -51,14 +48,6 @@ const Box = ({
           {icon && <span className={"mr-1"}>{icon}</span>}
           <span className={"text-base truncate"}>{title}</span>
         </div>
-        {withPagination &&
-          paginationOrientation === "horizontal" &&
-          !!pageSelectorProps?.maxPages &&
-          pageSelectorProps?.maxPages > 1 && (
-            <div className="shrink-0 min-w-0 w-fit">
-              <PageSelector {...pageSelectorProps} selectorLocation="top-right" />
-            </div>
-          )}
         {linkedView && (
           <div className="ml-3" onClick={handleClick}>
             <ArrowRightIcon
@@ -71,11 +60,8 @@ const Box = ({
         )}
       </div>
       <div className={"w-full min-h-0 h-full pt-2"}>
-        {withPagination && paginationOrientation === "horizontal" && (
-          <Paginator pageSelectorPropsSetter={setPageSelectorProps}>{children}</Paginator>
-        )}
-        {withPagination && paginationOrientation === "vertical" && (
-          <Paginator orientation={"vertical"} selectorLocation={"right-full"}>
+        {withPagination && (
+          <Paginator orientation={paginationOrientation} selectorLocation={"bottom-full"}>
             {children}
           </Paginator>
         )}
@@ -86,7 +72,7 @@ const Box = ({
 }
 
 export interface BoxProps {
-  children: JSX.Element | string
+  children: JSX.Element[] | JSX.Element | string
   icon?: JSX.Element
   title: string
   linkedView?: AppViews
