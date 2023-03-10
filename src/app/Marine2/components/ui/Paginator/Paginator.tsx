@@ -1,9 +1,9 @@
 import React, { useRef, useEffect, useState, useCallback } from "react"
 import classnames from "classnames"
-import PageSelector, { PageSelectorProps, SelectorLocation } from "../PageSelector"
+import { PageSelectorProps, SelectorLocation } from "../PageSelector"
 import { observer } from "mobx-react"
-import SizeChangeObserver from "../Observers/SizeChangeObserver"
 import ScrollSizeObserver from "../Observers/ScrollSizeObserver"
+import PageFlipper from "../PageFlipper"
 import { useComponentSize } from "../../../utils/hooks"
 
 const Paginator = ({
@@ -14,23 +14,13 @@ const Paginator = ({
   pageSelectorPropsSetter,
 }: Props) => {
   const childrenArray = Array.isArray(children) ? children : [children]
-  const [childrenSizeArray, setChildrenSizeArray] = useState<Array<number>>([])
 
   const childrenRef = useRef<Array<HTMLDivElement>>([])
   const wrapperRef = useRef<HTMLDivElement>(null)
-  const pageRef = useRef<HTMLDivElement>(null)
   const componentSize = useComponentSize(wrapperRef)
-  type PageElement = {
-    childIndex: number
-    scrollTo?: number
-  }
-  const [pages, setPages] = useState<Array<Array<PageElement>>>([])
-  const [currentPage, setCurrentPage] = useState(0)
+  const [pageNum, setPageNum] = useState(0)
 
-  const reset = () => {
-    setPages([])
-  }
-
+  const [pagesElement, setPagesElement] = useState<JSX.Element>()
   const splitIntoPages = useCallback(
     (sizeArray: number[]) => {
       // if wrapperRef isn't set yet
@@ -48,16 +38,13 @@ const Paginator = ({
       const parentSize =
         (orientation === "horizontal" ? wrapperRef.current.offsetWidth : wrapperRef.current.offsetHeight) -
         (selectorIsTakingUpSpace ? 56 : 0)
-
-      // if content isn't scrollable return
       if (sizeArray.reduce((sizeSum, size) => sizeSum + size, 0) <= parentSize) {
-        if (pages.length > 1) setPages([])
         return
       }
 
-      const newPagesArray: Array<Array<PageElement>> = []
+      const newPagesArray: number[][] = []
       let currentPageSize: number = 0
-      let currentPageElements: Array<PageElement> = []
+      let currentPageElements: number[] = []
 
       childrenRef.current.forEach((ref, childIndex) => {
         const refSize = !!pageNumber ? parentSize * pageNumber : sizeArray[childIndex]
@@ -74,15 +61,15 @@ const Paginator = ({
           // split into pages and save where to scroll on changing page
           let i = 0
           while ((i + 1) * parentSize < refSize) {
-            newPagesArray.push([{ childIndex: childIndex, scrollTo: i * parentSize }])
+            newPagesArray.push([childIndex])
             i++
           }
 
           // avoid having the last part of the element be very small, instead, make it the size of parent element
-          newPagesArray.push([{ childIndex: childIndex, scrollTo: refSize - parentSize }])
+          newPagesArray.push([childIndex])
         } else if (currentPageSize + refSize <= parentSize) {
           // if even after adding this element the page is not overflowing, add it to current page
-          currentPageElements.push({ childIndex: childIndex })
+          currentPageElements.push(childIndex)
           currentPageSize += refSize
         }
       })
@@ -90,13 +77,35 @@ const Paginator = ({
       if (currentPageElements.length > 0) {
         newPagesArray.push(currentPageElements)
       }
-
-      // If the screen was resized it might happen that there's now less pages when user was on the last page
-      if (currentPage > newPagesArray.length - 1) setCurrentPage(newPagesArray.length - 1)
-
-      setPages(newPagesArray)
+      if (orientation === "vertical") {
+        const pagesEl = (
+          <div
+            style={{
+              width: `${newPagesArray.length}00%`,
+            }}
+            className={"h-full flex"}
+          >
+            {newPagesArray.map((pageChildren, i) => (
+              <div
+                className={"h-full"}
+                style={{
+                  width: `calc(100% / ${newPagesArray.length})`,
+                }}
+                key={`pageEl${i}`}
+              >
+                {pageChildren.map((elIndex) => childrenArray[elIndex])}
+              </div>
+            ))}
+          </div>
+        )
+        setPagesElement(pagesEl)
+      } else {
+        const pagesEl = <div className={"h-full w-fit w-min-full"}>{childrenArray}</div>
+        setPagesElement(pagesEl)
+      }
+      setPageNum(newPagesArray.length)
     },
-    [currentPage, orientation, pageNumber, pageSelectorPropsSetter, pages.length, selectorLocation]
+    [childrenArray, orientation, pageNumber, pageSelectorPropsSetter, selectorLocation]
   )
 
   const paginate = useCallback(() => {
@@ -106,68 +115,19 @@ const Paginator = ({
       const refSize = orientation === "horizontal" ? ref.scrollWidth : ref.scrollHeight
       newChildrenSizeArray.push(refSize)
     })
-    setChildrenSizeArray(newChildrenSizeArray)
 
     splitIntoPages(newChildrenSizeArray)
   }, [orientation, splitIntoPages])
-
   useEffect(() => {
-    if (!!pageNumber && pages.length !== pageNumber) paginate()
-  }, [pageNumber, pages.length, paginate])
-
+    if (orientation === "horizontal") setPagesElement(undefined)
+  }, [componentSize.width, orientation])
   useEffect(() => {
-    if (!!pageNumber && !!pageRef.current) {
-      pageRef.current.scrollTo({
-        left: orientation === "horizontal" ? currentPage * pageRef.current.offsetWidth : 0,
-        top: orientation === "vertical" ? currentPage * pageRef.current.offsetHeight : 0,
-        behavior: "smooth",
-      })
-    }
-  }, [componentSize, currentPage, orientation, pageNumber])
-
-  useEffect(() => {
-    if (
-      !pageNumber &&
-      pages.length > 0 &&
-      pageRef.current !== null &&
-      pages[currentPage].length === 1 &&
-      pages[currentPage][0].scrollTo !== undefined
-    ) {
-      // if there is only one element, and it has a scrollTo attribute, add that element and scroll it
-      const scrollTo = pages[currentPage][0].scrollTo
-      pageRef.current.scrollTo({
-        left: orientation === "horizontal" ? scrollTo : 0,
-        top: orientation === "vertical" ? scrollTo : 0,
-        behavior: "smooth",
-      })
-    }
-  }, [pages, currentPage, orientation, pageNumber])
-
-  useEffect(() => {
-    if (pageSelectorPropsSetter) {
-      pageSelectorPropsSetter({
-        onClickLeft: () => setCurrentPage(currentPage - 1),
-        onClickRight: () => setCurrentPage(currentPage + 1),
-        currentPage: currentPage,
-        maxPages: pages.length,
-      })
-    }
-  }, [currentPage, pageSelectorPropsSetter, pages.length])
+    if (orientation === "vertical") setPagesElement(undefined)
+  }, [componentSize.height, orientation])
 
   return (
-    <div
-      ref={wrapperRef}
-      className={classnames("w-full h-full", {
-        "flex justify-between": pages.length > 1 && !pageSelectorPropsSetter && selectorLocation.startsWith("right"),
-        "flex flex-col justify-between":
-          pages.length > 1 && !pageSelectorPropsSetter && selectorLocation.startsWith("bottom"),
-        "flex flex-row-reverse justify-between":
-          pages.length > 1 && !pageSelectorPropsSetter && selectorLocation.startsWith("left"),
-        "flex flex-col-reverse justify-between":
-          pages.length > 1 && !pageSelectorPropsSetter && selectorLocation.startsWith("top"),
-      })}
-    >
-      {!pageNumber && (pages.length === 0 || pages.length === 1) && (
+    <div ref={wrapperRef} className="w-full h-full">
+      {!pagesElement && (
         <ScrollSizeObserver orientation={orientation} onSizeChange={paginate}>
           {childrenArray.map((child, i) => (
             <div
@@ -185,90 +145,7 @@ const Paginator = ({
           ))}
         </ScrollSizeObserver>
       )}
-      {!pageNumber && pages && pages.length > 1 && (
-        <div
-          ref={pageRef}
-          className={classnames("overflow-hidden flex", {
-            "flex-col": orientation === "vertical",
-            "w-full h-full": !!pageSelectorPropsSetter,
-            "h-[calc(100%-3.5rem)] w-full":
-              !pageSelectorPropsSetter && (selectorLocation.startsWith("bottom") || selectorLocation.startsWith("top")),
-            "w-[calc(100%-3.5rem)] h-full":
-              !pageSelectorPropsSetter && (selectorLocation.startsWith("right") || selectorLocation.startsWith("left")),
-          })}
-        >
-          <SizeChangeObserver
-            orientation={orientation}
-            onSizeChange={() => {
-              splitIntoPages(childrenSizeArray)
-            }}
-            className={"w-full h-full"}
-          >
-            <SizeChangeObserver
-              orientation={orientation}
-              onSizeChange={reset}
-              className={classnames("w-full h-full", {
-                "min-h-fit": orientation === "vertical",
-                "min-w-fit": orientation === "horizontal",
-              })}
-            >
-              {childrenArray.slice(
-                pages[currentPage][0].childIndex,
-                pages[currentPage][pages[currentPage].length - 1].childIndex + 1
-              )}
-            </SizeChangeObserver>
-          </SizeChangeObserver>
-        </div>
-      )}
-      {!!pageNumber && (pages.length === 0 || pages.length === 1) && (
-        <div className="w-full h-full min-h-0 min-w-0">
-          {childrenArray.map((child, i) => (
-            <div
-              className="w-full h-full"
-              key={i}
-              ref={(el) => {
-                if (el !== null) childrenRef.current[i] = el as HTMLDivElement
-              }}
-            >
-              {child}
-            </div>
-          ))}
-        </div>
-      )}
-      {!!pageNumber && pages && pages.length > 1 && (
-        <div
-          ref={pageRef}
-          className={classnames("overflow-hidden flex", {
-            "flex-col": orientation === "vertical",
-            "w-full h-full": !!pageSelectorPropsSetter,
-            "h-[calc(100%-3.5rem)] w-full":
-              !pageSelectorPropsSetter && (selectorLocation.startsWith("bottom") || selectorLocation.startsWith("top")),
-            "w-[calc(100%-3.5rem)] h-full":
-              !pageSelectorPropsSetter && (selectorLocation.startsWith("right") || selectorLocation.startsWith("left")),
-          })}
-        >
-          {childrenArray
-            .slice(pages[currentPage][0].childIndex, pages[currentPage][pages[currentPage].length - 1].childIndex + 1)
-            .map((child, i) => (
-              <div className={"w-full h-full min-h-0"} key={i}>
-                {child}
-              </div>
-            ))}
-        </div>
-      )}
-      {pages.length > 1 && !pageSelectorPropsSetter && (
-        <PageSelector
-          onClickLeft={() => {
-            setCurrentPage(currentPage - 1)
-          }}
-          onClickRight={() => {
-            setCurrentPage(currentPage + 1)
-          }}
-          currentPage={currentPage}
-          maxPages={pages.length}
-          selectorLocation={selectorLocation}
-        ></PageSelector>
-      )}
+      {!!pagesElement && pageNum && <PageFlipper pages={pageNum}>{pagesElement}</PageFlipper>}
     </div>
   )
 }
