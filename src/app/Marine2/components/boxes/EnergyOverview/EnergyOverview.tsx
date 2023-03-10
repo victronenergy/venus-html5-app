@@ -73,12 +73,7 @@ const EnergyOverview = ({ mode = "compact" }: Props) => {
   }
 
   return (
-    <GridPaginator
-      childClassName={"p-2"}
-      childrenPerPage={4}
-      orientation={"horizontal"}
-      selectorLocation={"bottom-full"}
-    >
+    <GridPaginator childClassName={"p-2"} childrenPerPage={4} orientation={"horizontal"}>
       {boxes}
     </GridPaginator>
   )

@@ -49,13 +49,7 @@ const BatteriesOverview = ({ mode = "full" }: Props) => {
   }
 
   return (
-    <GridPaginator
-      childClassName={"p-2"}
-      childrenPerPage={4}
-      orientation={"horizontal"}
-      selectorLocation={"bottom-full"}
-      flow={"col"}
-    >
+    <GridPaginator childClassName={"p-2"} childrenPerPage={4} orientation={"horizontal"} flow={"col"}>
       {sortedBatteries.map((b) => (
         <Battery key={b.id} battery={b} />
       ))}
