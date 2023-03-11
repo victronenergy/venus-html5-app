@@ -13,7 +13,6 @@ const SizeChangeObserver = ({ children, onSizeChange, orientation, className = "
       (orientation === "vertical" && componentSize.height !== initialSize.height) ||
       (orientation === "horizontal" && componentSize.width !== initialSize.width)
     ) {
-      console.log(orientation)
       setInitialSize(componentSize)
       onSizeChange()
     }

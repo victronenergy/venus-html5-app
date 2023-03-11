@@ -3,11 +3,11 @@ import classnames from "classnames"
 import React, { useState, useRef, useEffect } from "react"
 import { useComponentSize } from "../../../utils/hooks"
 
-const PageFlipper = ({ children, pageSelectorPropsSetter, pages }: Props) => {
+const PageFlipper = ({ children, pageSelectorPropsSetter, pages, currentPageSetter, startingPage }: Props) => {
   const wrapperRef = useRef<HTMLDivElement>(null)
   const pageRef = useRef<HTMLDivElement>(null)
   const componentSize = useComponentSize(wrapperRef)
-  const [currentPage, setCurrentPage] = useState(0)
+  const [currentPage, setCurrentPage] = useState(startingPage ?? 0)
 
   useEffect(() => {
     if (pageSelectorPropsSetter) {
@@ -19,6 +19,7 @@ const PageFlipper = ({ children, pageSelectorPropsSetter, pages }: Props) => {
       })
     }
   }, [currentPage, pageSelectorPropsSetter, pages])
+
   useEffect(() => {
     if (!!pageRef.current) {
       pageRef.current.scrollTo({
@@ -27,6 +28,11 @@ const PageFlipper = ({ children, pageSelectorPropsSetter, pages }: Props) => {
       })
     }
   }, [componentSize, currentPage])
+
+  useEffect(() => {
+    if (!currentPageSetter) return
+    currentPageSetter(currentPage)
+  }, [currentPage, currentPageSetter])
 
   return (
     <div
@@ -64,6 +70,8 @@ interface Props {
   children: JSX.Element
   pages: number
   pageSelectorPropsSetter?: (arg0: PageSelectorProps) => void
+  currentPageSetter?: (arg0: number) => void
+  startingPage?: number
 }
 
 export default PageFlipper

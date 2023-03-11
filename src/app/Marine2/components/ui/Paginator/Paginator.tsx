@@ -21,9 +21,21 @@ const Paginator = ({
   const childrenRef = useRef<Array<HTMLDivElement>>([])
   const wrapperRef = useRef<HTMLDivElement>(null)
   const componentSize = useComponentSize(wrapperRef)
+
   const [pageNum, setPageNum] = useState(0)
+  const [currentPage, setCurrentPage] = useState(0)
 
   const [pagesElement, setPagesElement] = useState<JSX.Element>()
+
+  const setStartingPage = useCallback(
+    (pages: number) => {
+      if (!!currentPage && pages !== pageNum && currentPage >= pages) {
+        setCurrentPage(pages - 1)
+      }
+    },
+    [currentPage, pageNum]
+  )
+
   const splitIntoPages = useCallback(
     (sizeArray: number[]) => {
       // if wrapperRef isn't set yet
@@ -46,6 +58,7 @@ const Paginator = ({
         sizeArray.reduce((sizeSum, size) => sizeSum + size, 0) <=
         (orientation === "horizontal" ? wrapperRef.current.offsetWidth : wrapperRef.current.offsetHeight)
       ) {
+        setCurrentPage(0)
         return
       }
 
@@ -124,9 +137,10 @@ const Paginator = ({
         )
         setPagesElement(pagesEl)
       }
+      setStartingPage(newPagesArray.length)
       setPageNum(newPagesArray.length)
     },
-    [childrenArray, orientation, pageNumber, pageSelectorPropsSetter, selectorLocation]
+    [childrenArray, orientation, pageNumber, pageSelectorPropsSetter, selectorLocation, setStartingPage]
   )
 
   const paginate = useCallback(() => {
@@ -139,6 +153,7 @@ const Paginator = ({
 
     splitIntoPages(newChildrenSizeArray)
   }, [orientation, splitIntoPages])
+
   useEffect(() => {
     if (orientation === "horizontal") setPagesElement(undefined)
   }, [componentSize.width, orientation])
@@ -166,7 +181,11 @@ const Paginator = ({
           ))}
         </ScrollSizeObserver>
       )}
-      {!!pagesElement && pageNum && <PageFlipper pages={pageNum}>{pagesElement}</PageFlipper>}
+      {!!pagesElement && pageNum && (
+        <PageFlipper pages={pageNum} currentPageSetter={setCurrentPage} startingPage={currentPage}>
+          {pagesElement}
+        </PageFlipper>
+      )}
     </div>
   )
 }
