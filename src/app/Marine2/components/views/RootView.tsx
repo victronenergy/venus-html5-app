@@ -19,7 +19,7 @@ const RootView = () => {
     const visibleBoxes: JSX.Element[] = []
     const hiddenBoxes: JSX.Element[] = []
     for (const type of Object.values(BoxTypes)) {
-      const elem = getBoxes(type)
+      const elem = getBoxByType(type)
       if (!elem) continue
 
       if (visibleWidgetsStore.visibleElements.has(type)) {
@@ -33,7 +33,7 @@ const RootView = () => {
     setInitialBoxes(hiddenBoxes)
   }, [visibleWidgetsStore.visibleElements, visibleWidgetsStore.visibleElements.size])
 
-  const getBoxes = (type: BoxTypes) => {
+  const getBoxByType = (type: BoxTypes) => {
     switch (type) {
       case BoxTypes.ENERGY:
         return <EnergyOverview mode="compact" key={"energy-overview"} />

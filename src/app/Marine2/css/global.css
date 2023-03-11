@@ -45,3 +45,7 @@ p {
     url("fonts/MuseoSans/MuseoSans-700.otf"),
     url("fonts/MuseoSans/MuseoSans-700Italic.otf");
 }
+
+*:focus {
+    outline: none;
+}
