@@ -4,11 +4,12 @@ import VersionInfo from "../VersionInfo"
 import PageSelector, { PageSelectorProps } from "../PageSelector"
 
 const Footer = ({ pageSelectorProps }: Props) => {
-  console.log(pageSelectorProps)
   return (
     <div className="flex w-full h-20 items-center justify-between pt-5 pb-4">
       <VersionInfo />
-      {!!pageSelectorProps && <PageSelector {...pageSelectorProps} selectorLocation="bottom-right" />}
+      {!!pageSelectorProps && !!pageSelectorProps.maxPages && pageSelectorProps.maxPages > 1 && (
+        <PageSelector {...pageSelectorProps} selectorLocation="bottom-right" />
+      )}
       <Settings />
     </div>
   )
