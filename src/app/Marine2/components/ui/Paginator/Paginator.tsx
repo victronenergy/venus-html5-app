@@ -5,6 +5,7 @@ import { observer } from "mobx-react"
 import ScrollSizeObserver from "../Observers/ScrollSizeObserver"
 import PageFlipper from "../PageFlipper"
 import { useComponentSize } from "../../../utils/hooks"
+import { SizeChangeObserver } from "../Observers"
 
 const Paginator = ({
   children,
@@ -41,7 +42,10 @@ const Paginator = ({
         (orientation === "horizontal" ? wrapperRef.current.offsetWidth : wrapperRef.current.offsetHeight) -
         (selectorIsTakingUpSpace ? 56 : 0)
 
-      if (sizeArray.reduce((sizeSum, size) => sizeSum + size, 0) <= parentSize) {
+      if (
+        sizeArray.reduce((sizeSum, size) => sizeSum + size, 0) <=
+        (orientation === "horizontal" ? wrapperRef.current.offsetWidth : wrapperRef.current.offsetHeight)
+      ) {
         return
       }
 
@@ -91,21 +95,33 @@ const Paginator = ({
             className={"h-full flex"}
           >
             {newPagesArray.map((pageChildren, i) => (
-              <div
-                className={"h-full"}
+              <SizeChangeObserver
+                orientation={"vertical"}
+                className={"h-fit min-h-full"}
                 style={{
                   width: `calc(100% / ${newPagesArray.length})`,
                 }}
                 key={`pageEl${i}`}
+                onSizeChange={() => {
+                  setPagesElement(undefined)
+                }}
               >
                 {pageChildren.map((elIndex) => childrenArray[elIndex])}
-              </div>
+              </SizeChangeObserver>
             ))}
           </div>
         )
         setPagesElement(pagesEl)
       } else {
-        const pagesEl = <div className={"h-full w-fit w-min-full"}>{childrenArray}</div>
+        const pagesEl = (
+          <SizeChangeObserver
+            orientation={"horizontal"}
+            className={"h-full w-fit w-min-full"}
+            onSizeChange={() => setPagesElement(undefined)}
+          >
+            {childrenArray}
+          </SizeChangeObserver>
+        )
         setPagesElement(pagesEl)
       }
       setPageNum(newPagesArray.length)
