@@ -39,7 +39,6 @@ const GridPaginator = ({
           }}
         >
           {range(pages).map((page) => {
-            console.log(childrenArray.slice(page * childrenPerPage, (page + 1) * childrenPerPage))
             return (
               <Grid
                 key={page}
