@@ -24,7 +24,10 @@ const VersionInfo = () => {
   }
 
   return (
-    <div className="cursor-pointer py-3 px-5 outline-none" onClick={toggleVersionInfo}>
+    <div
+      className="w-40 min-w-0 shrink overflow-hidden cursor-pointer py-3 px-5 outline-none"
+      onClick={toggleVersionInfo}
+    >
       {/* todo: fix types for svg */}
       {/* @ts-ignore */}
       <LogoIcon className={"w-32 text-black dark:text-white"} alt={"Victron Energy"} />

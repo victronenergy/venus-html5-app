@@ -47,8 +47,8 @@ const PageSelector = ({
     if (scrollRef === null) return
     scrollRef.scroll({
       behavior: "smooth",
-      top: isHorizontal ? 0 : currentPage * (scrollRef.scrollHeight / maxPages) - scrollRef.offsetHeight / 2 + 4,
-      left: isHorizontal ? currentPage * (scrollRef.scrollWidth / maxPages) - scrollRef.offsetWidth / 2 + 4 : 0,
+      top: isHorizontal ? 0 : currentPage * (scrollRef.scrollHeight / maxPages) - scrollRef.offsetHeight / 2 + 10,
+      left: isHorizontal ? currentPage * (scrollRef.scrollWidth / maxPages) - scrollRef.offsetWidth / 2 + 10 : 0,
     })
   }, [currentPage, maxPages, isHorizontal])
 
@@ -71,8 +71,8 @@ const PageSelector = ({
   return (
     <div
       className={classnames("flex items-center select-none", {
-        "h-11 w-full min-w-0": isHorizontal,
-        "w-11 h-full min-h-0 flex-col": !isHorizontal,
+        "h-11 w-full min-w-[8.75rem]": isHorizontal,
+        "w-11 h-full min-h-[8.75rem] flex-col": !isHorizontal,
         "justify-between": selectorLocation.endsWith("full"),
         "justify-end": selectorLocation.endsWith("right") || selectorLocation.endsWith("bottom"),
         "justify-start": selectorLocation.endsWith("left") || selectorLocation.endsWith("top"),
