@@ -2,6 +2,7 @@ import React, { ReactNode, useState } from "react"
 import { Modal } from "../Modal"
 import Button from "../Button"
 import classnames from "classnames"
+import { translate } from "react-i18nify"
 
 interface Props {
   children: ReactNode
@@ -38,11 +39,11 @@ const Frame = ({ children, title, className, onSet }: Props) => {
             {children}
             <Footer className={"justify-around"}>
               <Button variant={"transparent"} onClick={onCloseClick}>
-                Close
+                {translate("common.close")}
               </Button>
               <div className={"w-[2px] min-w-[2px] border-l-victron-gray-200 border-l-2 grow-0"}></div>
               <Button variant={"transparent"} onClick={onSetClick}>
-                Set
+                {translate("common.set")}
               </Button>
             </Footer>
           </>
