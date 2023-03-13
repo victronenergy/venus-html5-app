@@ -26,8 +26,12 @@ const Frame: React.FC<Props> = ({ children, open = true, onClose, className }) =
   )
 }
 
-const Head: React.FC<{ children: React.ReactNode }> = ({ children }) => <div className="block p-4">{children}</div>
+const Head: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className }) => (
+  <div className={classnames("block p-4", className)}>{children}</div>
+)
 
-const Body: React.FC<{ children: React.ReactNode }> = ({ children }) => <div>{children}</div>
+const Body: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className }) => (
+  <div className={classnames(className)}>{children}</div>
+)
 
 export const Modal = { Frame, Head, Body }
