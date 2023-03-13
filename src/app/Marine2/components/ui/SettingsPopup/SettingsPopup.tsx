@@ -31,7 +31,7 @@ const Frame = ({ children, title, className, onSet }: Props) => {
         onClose={() => {
           setIsModalOpen(false)
         }}
-        className="w-full max-w-sm border-victron-gray-200 border-2"
+        className="w-full max-w-xl border-victron-gray-200 border-2 rounded-lg"
       >
         <Modal.Body>
           <>
@@ -40,6 +40,7 @@ const Frame = ({ children, title, className, onSet }: Props) => {
               <Button variant={"transparent"} onClick={onCloseClick}>
                 Close
               </Button>
+              <div className={"w-[2px] min-w-[2px] border-l-victron-gray-200 border-l-2 grow-0"}></div>
               <Button variant={"transparent"} onClick={onSetClick}>
                 Set
               </Button>
