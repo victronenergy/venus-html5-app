@@ -7,9 +7,19 @@ interface Props {
   children: ReactNode
   title?: string
   className?: string
+  onSet?: () => void
 }
-const Frame = ({ children, title, className }: Props) => {
+const Frame = ({ children, title, className, onSet }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const onCloseClick = () => {
+    setIsModalOpen(false)
+  }
+
+  const onSetClick = () => {
+    onSet && onSet()
+    setIsModalOpen(false)
+  }
 
   return (
     <>
@@ -23,7 +33,19 @@ const Frame = ({ children, title, className }: Props) => {
         }}
         className="w-full max-w-sm border-victron-gray-200 border-2"
       >
-        <Modal.Body>{children}</Modal.Body>
+        <Modal.Body>
+          <>
+            {children}
+            <Footer className={"justify-around"}>
+              <Button variant={"transparent"} onClick={onCloseClick}>
+                Close
+              </Button>
+              <Button variant={"transparent"} onClick={onSetClick}>
+                Set
+              </Button>
+            </Footer>
+          </>
+        </Modal.Body>
       </Modal.Frame>
     </>
   )
@@ -39,7 +61,7 @@ const Body: React.FC<{ children: React.ReactNode; className?: string }> = ({ chi
 )
 
 const Footer: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className }) => (
-  <div className={classnames("w-full flex flex-row justify-between", className)}>{children}</div>
+  <div className={classnames("w-full flex border-t-2 border-t-victron-gray-200 pt-4", className)}>{children}</div>
 )
 
 const SettingsPopup = { Frame, Header, Body, Footer }
