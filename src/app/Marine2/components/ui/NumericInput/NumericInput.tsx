@@ -56,13 +56,13 @@ const NumericInput = ({ initialValue = 0, unit, onChange, className, min, max, s
   const [value, setValue] = useState(initialValue)
 
   const increase = () => {
-    const newValue = max ? Math.max(value + step, max) : value + step
+    const newValue = max !== undefined ? Math.min(value + step, max) : value + step
     setValue(newValue)
     onChange && onChange(newValue)
   }
 
   const decrease = () => {
-    const newValue = min ? Math.min(value - step, min) : value - step
+    const newValue = min !== undefined ? Math.max(value - step, min) : value - step
     setValue(newValue)
     onChange && onChange(newValue)
   }
