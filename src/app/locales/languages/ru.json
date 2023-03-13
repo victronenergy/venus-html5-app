@@ -25,6 +25,7 @@
         "idle": "без нагрузки",
         "inverterOnly": "Только инвертер",
         "inverting": "Инвертирование",
+        "loading": "Загрузка",
         "lowPower": "Низкая мощность",
         "mode": "Режим",
         "notAvailable": "Недоступно",
@@ -43,7 +44,8 @@
     },
     "diagnostics": {
         "connection": {},
-        "device": {}
+        "device": {},
+        "diagnostics": "Диагностика"
     },
     "error": {
         "marine": {
@@ -67,7 +69,9 @@
     "noWidgets": {
         "title": "Сбросить пароль"
     },
-    "pages": {},
+    "pages": {
+        "diagnostics": "Диагностика"
+    },
     "remoteLogin": {
         "email": "Эл. почта",
         "logIn": "Вход",
