@@ -68,6 +68,9 @@ const NumericInput = ({ initialValue = 0, unit, onChange, className, min, max, s
   }
 
   const setExactValue = (val: number) => {
+    if ((max !== undefined && val > max) || (min !== undefined && val < min)) {
+      return
+    }
     setValue(val)
     onChange && onChange(val)
   }
