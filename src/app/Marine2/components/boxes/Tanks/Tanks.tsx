@@ -73,7 +73,6 @@ const Tanks = ({ mode, className }: Props) => {
       names.forEach((name) => {
         if (name.clientWidth > max) {
           max = name.clientWidth
-          console.log("max", max)
         }
       })
       if (max > 0) {
