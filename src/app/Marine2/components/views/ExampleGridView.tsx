@@ -1,7 +1,11 @@
 import React from "react"
 import MainLayout from "../ui/MainLayout"
 import Grid from "../ui/Grid"
-import Container from "../ui/Container"
+import classNames from "classnames"
+
+const Container = ({ children, className }: { children: JSX.Element | string; className?: string }) => {
+  return <div className={classNames("w-full h-full min-h-0", className)}>{children}</div>
+}
 
 const ExampleGridView = () => {
   return (
