@@ -43,23 +43,50 @@ const Tanks = ({ mode, className }: Props) => {
 
   useEffect(() => {
     if (!gridRef.current) return
-    const observer = new ResizeObserver(() => {
-      getColumnsWidth()
-    })
-    observer.observe(gridRef.current)
-    return () => {
-      observer.disconnect()
+    if (window.ResizeObserver) {
+      const observer = new ResizeObserver(getColumnsWidth)
+
+      observer.observe(gridRef.current)
+      return () => {
+        observer.disconnect()
+      }
+    } else {
+      const onDOMContentLoaded = () => {
+        if (document.readyState === "interactive" || document.readyState === "complete") {
+          getColumnsWidth()
+          window.addEventListener("resize", getColumnsWidth)
+          document.removeEventListener("DOMContentLoaded", onDOMContentLoaded)
+          return () => {
+            window.removeEventListener("resize", getColumnsWidth)
+          }
+        }
+      }
+      document.addEventListener("DOMContentLoaded", onDOMContentLoaded)
     }
   }, [gridRef])
 
   useEffect(() => {
     if (!tankRef.current) return
-    const observer = new ResizeObserver(() => {
-      getColumnsWidth()
-    })
-    observer.observe(tankRef.current)
-    return () => {
-      observer.disconnect()
+
+    if (window.ResizeObserver) {
+      const observer = new ResizeObserver(getColumnsWidth)
+
+      observer.observe(tankRef.current)
+      return () => {
+        observer.disconnect()
+      }
+    } else {
+      const onDOMContentLoaded = () => {
+        if (document.readyState === "interactive" || document.readyState === "complete") {
+          getColumnsWidth()
+          window.addEventListener("resize", getColumnsWidth)
+          document.removeEventListener("DOMContentLoaded", onDOMContentLoaded)
+          return () => {
+            window.removeEventListener("resize", getColumnsWidth)
+          }
+        }
+      }
+      document.addEventListener("DOMContentLoaded", onDOMContentLoaded)
     }
   }, [tankRef])
 
