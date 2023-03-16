@@ -44,7 +44,7 @@ const PageSelector = ({
   useEffect(() => {
     // If the dots don't all fit and overflow, make sure the selected page dot is visible
     const scrollRef = isHorizontal ? dotsHorRef.current : dotsVertRef.current
-    if (scrollRef === null) return
+    if (scrollRef === null || typeof scrollRef.scroll !== "function") return
     scrollRef.scroll({
       behavior: "smooth",
       top: isHorizontal ? 0 : currentPage * (scrollRef.scrollHeight / maxPages) - scrollRef.offsetHeight / 2 + 10,
