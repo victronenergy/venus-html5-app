@@ -9,7 +9,7 @@ import RadioButton from "../RadioButton"
 import { AppViews, useAppViewsStore } from "../../../modules/AppViews"
 import Button from "../Button"
 
-const Settings = () => {
+const SettingsMenu = () => {
   const { locked, toggleLocked } = useAppStore()
   const { themeStore } = useTheme()
   const appViewsStore = useAppViewsStore()
@@ -95,4 +95,4 @@ const Settings = () => {
   )
 }
 
-export default observer(Settings)
+export default observer(SettingsMenu)

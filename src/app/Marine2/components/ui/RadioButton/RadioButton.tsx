@@ -13,18 +13,21 @@ const RadioButton: React.FC<Props> = ({ selected, onChange, disabled }) => {
     <div>
       <div
         onClick={() => !disabled && onChange()}
-        className={classNames("w-4 h-4 border-[1px] bg-inherit rounded-full", {
-          "border-victron-gray": !selected,
-          "border-victron-blue": selected,
-          "md-l:w-6 md-l:h-6 md-l:border-2": true, // large
-          "sm-s:w-4 sm-s:h-4 :border-[1px]": true, // small
-        })}
+        className={classNames(
+          "w-[16px] h-[16px] border-[1px] bg-inherit rounded-full flex items-center justify-center",
+          {
+            "border-victron-gray": !selected,
+            "border-victron-blue": selected,
+            "md-m:w-[24px] md-m:h-[24px] md-m:border-[2px]": true, // large
+            "sm-s:w-[16px] sm-s:h-[16px] sm-s:border-[1px]": true, // small
+          }
+        )}
       >
         {selected && (
           <div
-            className={classNames("w-2 h-2 mt-[3px] ml-[3px] rounded-full bg-victron-blue", {
-              "md-l:w-4 md-l:h-4 md-l:mt-[2px] md-l:ml-[2px]": true, // large
-              "sm-s:w-2 sm-s:h-2 sm-s:mt-[3px] sm-s:ml-[3px]": true, // small
+            className={classNames("w-[8px] h-[8px] rounded-full bg-victron-blue", {
+              "md-m:w-[16px] md-m:h-[16px]": true, // large
+              "sm-s:w-[8px] sm-s:h-[8px]": true, // small
             })}
           ></div>
         )}

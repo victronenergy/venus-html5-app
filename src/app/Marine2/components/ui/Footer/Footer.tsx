@@ -1,5 +1,5 @@
 import React from "react"
-import Settings from "../Settings"
+import SettingsMenu from "../SettingsMenu"
 import VersionInfo from "../VersionInfo"
 import PageSelector, { PageSelectorProps } from "../PageSelector"
 
@@ -12,7 +12,7 @@ const Footer = ({ pageSelectorProps }: Props) => {
           <PageSelector {...pageSelectorProps} selectorLocation="bottom-right" />
         </div>
       )}
-      <Settings />
+      <SettingsMenu />
     </div>
   )
 }

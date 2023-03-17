@@ -7,7 +7,7 @@ const ProgressBar = ({ percentage, type, orientation = "horizontal" }: Props) =>
 
   if (orientation === "horizontal") {
     return (
-      <div className="w-full flex p-5">
+      <div className="w-full flex">
         <div className={classnames(`w-1/4 h-2 rounded-l-2xl mr-2 ${bgColor}`)}>
           <div
             className={classnames(`h-full rounded-l-2xl ${color}`)}

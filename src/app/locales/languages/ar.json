@@ -6,7 +6,30 @@
         },
         "title": "وضع التيار المتردد"
     },
-    "boxes": {},
+    "boxes": {
+        "EnergyOverview": "نظرة عامة على الطاقة",
+        "acLoads": "أحمال التيار المتردد",
+        "alternator": "مولّد تيار",
+        "batteries": "بطاريات",
+        "battery": "بطارية",
+        "batteryWithName": "بطارية: %{name}",
+        "chargerWithName": "شاحن: %{productNameShort}",
+        "dcLoads": "أحمال التيار المستمر",
+        "energy": "طاقة",
+        "generator": "مولد كهرباء",
+        "generatorInput": "مدخلات المولد",
+        "gridInput": "مدخلات الشبكة",
+        "invalidConfig": "تكوين غير صحيح",
+        "inverterCharger": "المحوّل/الشاحن: %{productNameShort}",
+        "inverterWithName": "المحوّل: %{productNameShort}",
+        "pvCharger": "شاحن PV",
+        "shorePower": "طاقة شاطئية",
+        "solar": "شمسي",
+        "status": "حالة",
+        "tanks": "خزانات",
+        "unknown": "غير معروف",
+        "windGenerator": "مولد الرياح"
+    },
     "cardFooter": {
         "Charge": "شحن",
         "Critical": "حساس",
@@ -17,13 +40,17 @@
     "common": {
         "absorptionCharging": "شحن الامتصاص",
         "assisting": "مساندة",
+        "auto": "آلي",
         "autoStartStop": "بدء/ توقف آلي",
         "bulkCharging": "الشحن المبدئي",
         "charge": "تحميل",
+        "charged": "مشحون",
         "chargerOnly": "الشاحن فقط",
         "charging": "جاري الشحن",
         "current": "التيار",
+        "dark": "غامق",
         "days": "أيام",
+        "days_short": "يوم",
         "discharge": "تفريغ",
         "discharging": "جاري تفريغ الشحن",
         "eco": "بيئة",
@@ -33,13 +60,18 @@
         "fault": "خلل",
         "floatCharging": "الشحن العائم",
         "hours": "ساعات",
+        "hours_short": "س",
         "idle": "ساكن",
         "inputLimit": "حد المدخلات",
         "inverterOnly": "محول التردد فقط",
         "inverting": "عكس",
+        "light": "فاتح",
         "limit": "حد",
+        "loading": "تحميل",
+        "loads": "أحمال",
         "lowPower": "طاقة منخفضة",
         "minutes": "دقائق",
+        "minutes_short": "د",
         "mode": "وضع",
         "noShorePower": "لا توجد طاقة شاطئية",
         "notAvailable": "غير متوفر",
@@ -62,8 +94,20 @@
         "voltage": "الجهد الكهربائي"
     },
     "diagnostics": {
-        "connection": {},
-        "device": {}
+        "connection": {
+            "connection": "اتصال",
+            "error": "خطأ",
+            "host": "مضيف",
+            "portalId": "معرّف البوابة",
+            "status": "حالة"
+        },
+        "device": {
+            "device": "جهاز",
+            "userAgent": "وكيل المستخدم",
+            "viewportHeight": "ارتفاع منفذ العرض",
+            "viewportWidth": "عرض منفذ العرض"
+        },
+        "diagnostics": "تشخيص"
     },
     "error": {
         "errorWithMessage": "خطأ: %{message}",
@@ -74,6 +118,8 @@
             "estimate": "البيانات المقدرة: %{size} بايت",
             "hint": "حاول إعادة تحميل الصفحة أو الاتصال بفيكترون إينرجي باستخدام المعلومات التالية:",
             "ignore": "تجاهل الخطأ",
+            "resetError": "خطأ في إعادة التعيين",
+            "restartApp": "أعِد تشغيل التطبيق",
             "sendReport": "إرسال تقرير خطأ",
             "title": "حدث خطأ في أثناء عرض التطبيق."
         },
@@ -83,7 +129,10 @@
         "mqttUnavailable4": "حاول استخدام زر \"وحدة التحكم عن بعد\" أعلى هذه الشاشة لتغيير إعداداتك عن بعد.",
         "mqttUnavailable5": "يمكنك كذلك محاول الاتصال بجهازك عن بعد من خلال تحديد \"عن بعد\" من القائمة أعلاه.",
         "queryParams": "معاملات الاستعلام: %{queryParams}",
-        "remoteConsole": {},
+        "remoteConsole": {
+            "connectionFailed": "تعذر الاتصال بجهاز GX",
+            "screenTooSmall": "افتح في شاشة أكبر لعرض وحدة التحكم عن بُعد"
+        },
         "userAgent": "وكيل المستخدم: %{userAgent}",
         "windowSize": "إطار: %{width} x %{height}"
     },
@@ -117,7 +166,11 @@
         "subtitle": "تأكد من توصيل أجهزتك بشكل مناسب",
         "title": "لوحة القياس الخاصة بك فارغة"
     },
-    "pages": {},
+    "pages": {
+        "diagnostics": "تشخيص",
+        "remoteConsole": "وحدة التحكم عن بُعد",
+        "systemOverview": "نظرة عامة على النظام"
+    },
     "remoteLogin": {
         "2fa": "رمز التوثيق ذي معاملين",
         "email": "بريد إلكتروني",
