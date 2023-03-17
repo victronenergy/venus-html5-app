@@ -13,11 +13,11 @@ import { BoxTypes } from "../../../utils/constants"
 import Paginator from "../../ui/Paginator"
 
 interface Props {
-  mode?: string
+  mode?: "full" | "compact"
   className?: string
 }
 
-const Tanks = ({ mode, className }: Props) => {
+const Tanks = ({ mode = "full", className }: Props) => {
   const { tanks } = useTanks()
   const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
 
