@@ -38,9 +38,6 @@ const Tanks = ({ mode = "full", className }: Props) => {
     }
   }, [windowSize, componentSize])
 
-  // todo: add component visibility report
-  // if (!tanks || !tanks.length) return null
-
   if (mode === "compact") {
     return (
       <Box
@@ -63,6 +60,7 @@ const Tanks = ({ mode = "full", className }: Props) => {
     )
   }
 
+  // FIXME: this prop conflicts with mode === "full"
   if (orientation === "vertical") {
     return (
       <Box
@@ -90,6 +88,7 @@ const Tanks = ({ mode = "full", className }: Props) => {
     )
   }
 
+  // FIXME: this is unreachable code in case of orientation === "vertical"
   return (
     <Box
       title={"Tanks"}
