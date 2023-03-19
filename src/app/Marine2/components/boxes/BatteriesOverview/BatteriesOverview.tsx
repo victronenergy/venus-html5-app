@@ -55,8 +55,8 @@ const BatteriesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) =>
       childClassName={"p-2"}
       childrenPerPage={4}
       orientation={"horizontal"}
-      flow={"col"}
       pageSelectorPropsSetter={pageSelectorPropsSetter}
+      flow={window.innerWidth > window.innerHeight ? "row" : "col"}
     >
       {sortedBatteries.map((b) => (
         <Battery key={b.id} battery={b} />
