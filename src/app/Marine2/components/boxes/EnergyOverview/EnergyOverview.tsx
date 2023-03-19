@@ -69,8 +69,10 @@ const EnergyOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) => {
         icon={<EnergyIcon className={"w-6 text-victron-gray dark:text-victron-gray-dark"} />}
         linkedView={AppViews.BOX_ENERGY_OVERVIEW}
         getBoxSizeCallback={setCompactBoxSize}
+        withPagination={true}
+        paginationOrientation={"vertical"}
       >
-        <div className="flex flex-col mt-2">{boxes}</div>
+        {boxes}
       </Box>
     )
   }
