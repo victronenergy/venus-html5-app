@@ -28,8 +28,10 @@ import { useVisibilityNotifier } from "../../../modules"
 import { BoxTypes } from "../../../utils/constants"
 import GridPaginator from "../../ui/GridPaginator"
 import { PageSelectorProps } from "../../ui/PageSelector"
+import { withErrorBoundary } from "react-error-boundary"
+import { appErrorBoundaryProps } from "../../ui/Error/appErrorBoundary"
 
-const EnergyOverview = ({ mode = "compact", pageSelectorPropsSetter }: Props) => {
+const EnergyOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const vebus = useVebus() // We need this hook to enable some MQTT subscriptions
   const { inputId: shoreInputId } = useShorePowerInput()
@@ -149,4 +151,4 @@ interface Props {
   pageSelectorPropsSetter?: (arg0: PageSelectorProps) => void
 }
 
-export default observer(EnergyOverview)
+export default withErrorBoundary(observer(EnergyOverview), appErrorBoundaryProps)

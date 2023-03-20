@@ -14,11 +14,11 @@ import Paginator from "../../ui/Paginator"
 import ResizeObserver from "resize-observer-polyfill"
 
 interface Props {
-  mode?: string
+  mode?: "full" | "compact"
   className?: string
 }
 
-const Tanks = ({ mode, className }: Props) => {
+const Tanks = ({ mode = "full", className }: Props) => {
   const { tanks } = useTanks()
   const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
   const [nameWidth, setNameWidth] = useState(0)
@@ -91,9 +91,6 @@ const Tanks = ({ mode, className }: Props) => {
     }, 0)
   }
 
-  // todo: add component visibility report
-  // if (!tanks || !tanks.length) return null
-
   if (mode === "compact") {
     return (
       <Box
@@ -125,6 +122,7 @@ const Tanks = ({ mode, className }: Props) => {
     )
   }
 
+  // FIXME: this prop conflicts with mode === "full"
   if (orientation === "vertical") {
     return (
       <Box
@@ -160,6 +158,7 @@ const Tanks = ({ mode, className }: Props) => {
     )
   }
 
+  // FIXME: this is unreachable code in case of orientation === "vertical"
   return (
     <Box
       title={"Tanks"}
