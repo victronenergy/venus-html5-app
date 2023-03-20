@@ -5,6 +5,7 @@ import { translate } from "react-i18nify"
 export enum AppViews {
   ROOT = "root",
   REMOTE_CONSOLE = "remote-console",
+  DIAGNOSTICS = "diagnostics",
   BOX_BATTERIES_OVERVIEW = "box/batteries-overview",
   BOX_TANKS = "box/tanks",
   BOX_ENERGY_OVERVIEW = "box/energy-overview",
@@ -14,6 +15,7 @@ export enum AppViews {
 export const AppViewTitles = new Map<AppViews, string>([
   [AppViews.ROOT, translate("pages.systemOverview")],
   [AppViews.REMOTE_CONSOLE, translate("pages.remoteConsole")],
+  [AppViews.DIAGNOSTICS, translate("pages.diagnostics")],
   [AppViews.BOX_BATTERIES_OVERVIEW, translate("boxes.batteries")],
   [AppViews.BOX_TANKS, translate("boxes.tanks")],
   [AppViews.BOX_ENERGY_OVERVIEW, translate("boxes.EnergyOverview")],

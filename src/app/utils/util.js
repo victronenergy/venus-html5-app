@@ -85,9 +85,5 @@ export const systemStateFormatter = (value) => {
 export const byteSize = (str) => new Blob([str]).size
 
 export const isError = (error) => {
-  if (error && error.stack && error.message) {
-    return true
-  }
-
-  return false
+  return !!(error && error.stack && error.message)
 }

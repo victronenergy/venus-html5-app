@@ -61,7 +61,7 @@ export const formatPower = (power: number) => {
   return power.toFixed(1)
 }
 
-export const formatValue = (value: number) => {
+export const formatValue = (value?: number) => {
   if (value === undefined) {
     return "--"
   }

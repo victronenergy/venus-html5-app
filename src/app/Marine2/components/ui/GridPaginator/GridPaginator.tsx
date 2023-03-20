@@ -1,9 +1,9 @@
 import React from "react"
-import { SelectorLocation } from "../PageSelector"
 import Grid, { GridProps } from "../Grid"
-import Paginator from "../Paginator"
 import range from "lodash-es/range"
 import classnames from "classnames"
+import PageFlipper from "../PageFlipper"
+import { PageSelectorProps } from "../PageSelector"
 
 const GridPaginator = ({
   children,
@@ -14,24 +14,23 @@ const GridPaginator = ({
   onClick,
   childrenPerPage,
   orientation = "horizontal",
-  selectorLocation = "bottom-full",
+  pageSelectorPropsSetter,
 }: Props) => {
   const childrenArray = Array.isArray(children) ? children : [children]
   const pages = Math.ceil(childrenArray.length / childrenPerPage)
 
   if (pages === 1) {
     return (
-      <Grid childClassName={"p-1"} flow={"col"}>
+      <Grid childClassName={childClassName} flow={flow} className={className}>
         {childrenArray}
       </Grid>
     )
   }
   return (
     <div className={"h-full w-full min-h-0 min-w-0"}>
-      <Paginator orientation={orientation} selectorLocation={selectorLocation} pageNumber={pages}>
+      <PageFlipper pages={pages} pageSelectorPropsSetter={pageSelectorPropsSetter}>
         <div
           className={classnames(`flex`, {
-            "flex-row": orientation === "horizontal",
             "flex-col": orientation === "vertical",
           })}
           style={{
@@ -54,7 +53,7 @@ const GridPaginator = ({
             )
           })}
         </div>
-      </Paginator>
+      </PageFlipper>
     </div>
   )
 }
@@ -62,7 +61,7 @@ const GridPaginator = ({
 interface Props extends GridProps {
   childrenPerPage: number
   orientation?: "vertical" | "horizontal"
-  selectorLocation?: SelectorLocation
+  pageSelectorPropsSetter?: (arg0: PageSelectorProps) => void
 }
 
 export default GridPaginator

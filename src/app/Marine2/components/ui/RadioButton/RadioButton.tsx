@@ -5,31 +5,29 @@ interface Props {
   selected?: boolean
   disabled?: boolean
   color?: string
-  size?: "lg"
   onChange: () => void
 }
 
-const RadioButton: React.FC<Props> = ({ selected, onChange, disabled, size }) => {
+const RadioButton: React.FC<Props> = ({ selected, onChange, disabled }) => {
   return (
     <div>
       <div
         onClick={() => !disabled && onChange()}
-        className={classNames(" bg-inherit rounded-full", {
-          "border-victron-gray": !selected,
-          "border-victron-blue": selected,
-          "w-4 h-4 border-[1px]": !size, //default
-          "md-l:w-6 md-l:h-6 md-l:border-2": !size, // large
-          "sm-s:w-4 sm-s:h-4 :border-[1px]": !size, // small
-          "w-8 h-8 border-[2px]": size === "lg",
-        })}
+        className={classNames(
+          "w-[16px] h-[16px] border-[1px] bg-inherit rounded-full flex items-center justify-center",
+          {
+            "border-victron-gray": !selected,
+            "border-victron-blue": selected,
+            "md-m:w-[24px] md-m:h-[24px] md-m:border-[2px]": true, // large
+            "sm-s:w-[16px] sm-s:h-[16px] sm-s:border-[1px]": true, // small
+          }
+        )}
       >
         {selected && (
           <div
-            className={classNames(" rounded-full bg-victron-blue", {
-              "w-2 h-2 mt-[3px] ml-[3px]": !size, //default
-              "md-l:w-4 md-l:h-4 md-l:mt-[2px] md-l:ml-[2px]": !size, // large
-              "sm-s:w-2 sm-s:h-2 sm-s:mt-[3px] sm-s:ml-[3px]": !size, // small
-              "w-[22px] h-[22px] mt-[3px] ml-[3px]": size === "lg",
+            className={classNames("w-[8px] h-[8px] rounded-full bg-victron-blue", {
+              "md-m:w-[16px] md-m:h-[16px]": true, // large
+              "sm-s:w-[8px] sm-s:h-[8px]": true, // small
             })}
           ></div>
         )}

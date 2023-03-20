@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import TanksIcon from "../../../images/icons/tanks.svg"
 import { useTanks } from "@elninotech/mfd-modules"
 import { observer } from "mobx-react"
@@ -10,18 +10,24 @@ import { withErrorBoundary } from "react-error-boundary"
 import { appErrorBoundaryProps } from "../../ui/Error/appErrorBoundary"
 import { useVisibilityNotifier } from "../../../modules"
 import { BoxTypes } from "../../../utils/constants"
+import Paginator from "../../ui/Paginator"
+import ResizeObserver from "resize-observer-polyfill"
 
 interface Props {
-  mode?: string
+  mode?: "full" | "compact"
   className?: string
 }
 
-const Tanks = ({ mode, className }: Props) => {
+const Tanks = ({ mode = "full", className }: Props) => {
   const { tanks } = useTanks()
+  const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
+  const [nameWidth, setNameWidth] = useState(0)
+  const [levelWidth, setLevelWidth] = useState(0)
 
   useVisibilityNotifier({ widgetName: BoxTypes.TANKS, visible: !!(tanks && tanks.length) })
 
   const gridRef = useRef<HTMLDivElement>(null)
+  const tankRef = useRef<HTMLDivElement>(null)
   const [orientation, setOrientation] = useState<"horizontal" | "vertical">("vertical")
 
   const componentSize = useComponentSize(gridRef)
@@ -36,8 +42,54 @@ const Tanks = ({ mode, className }: Props) => {
     }
   }, [windowSize, componentSize])
 
-  // todo: add component visibility report
-  // if (!tanks || !tanks.length) return null
+  useEffect(() => {
+    if (!gridRef.current) return
+
+    const observer = new ResizeObserver(getColumnsWidth)
+    observer.observe(gridRef.current)
+    return () => {
+      observer.disconnect()
+    }
+  }, [gridRef])
+
+  useEffect(() => {
+    if (!tankRef.current) return
+
+    const observer = new ResizeObserver(getColumnsWidth)
+    observer.observe(tankRef.current)
+    return () => {
+      observer.disconnect()
+    }
+  }, [tankRef])
+
+  // set the maximum width of the name and level of all the tanks
+  const getColumnsWidth = () => {
+    // wait for styles to be applied
+    setTimeout(() => {
+      const names = document.querySelectorAll(".tank-name")
+      const levels = document.querySelectorAll(".tank-level")
+      let max = 0
+      names.forEach((name) => {
+        if (name.clientWidth > max) {
+          max = name.clientWidth
+        }
+      })
+      if (max > 0) {
+        setNameWidth(max)
+      }
+
+      max = 0
+      levels.forEach((level) => {
+        if (level.clientWidth > max) {
+          max = level.clientWidth
+        }
+      })
+
+      if (max > 0) {
+        setLevelWidth(max)
+      }
+    }, 0)
+  }
 
   if (mode === "compact") {
     return (
@@ -48,16 +100,29 @@ const Tanks = ({ mode, className }: Props) => {
         icon={<TanksIcon className={"w-6 text-black dark:text-white"} />}
         linkedView={AppViews.BOX_TANKS}
         className={className}
+        getBoxSizeCallback={setBoxSize}
+        withPagination={true}
+        paginationOrientation={"vertical"}
       >
-        <div>
-          {tanks?.map((tank) => {
-            return tank ? <Tank mode={"compact"} key={tank} tankInstanceId={tank} /> : null
-          })}
-        </div>
+        {tanks
+          ?.filter((tank) => !!tank)
+          .map((tank) => (
+            <div ref={tankRef} key={tank}>
+              <Tank
+                mode={"compact"}
+                key={tank}
+                tankInstanceId={Number(tank)}
+                parentSize={boxSize}
+                nameWidth={nameWidth}
+                levelWidth={levelWidth}
+              />
+            </div>
+          ))}
       </Box>
     )
   }
 
+  // FIXME: this prop conflicts with mode === "full"
   if (orientation === "vertical") {
     return (
       <Box
@@ -70,16 +135,30 @@ const Tanks = ({ mode, className }: Props) => {
           />
         }
         className={className}
+        getBoxSizeCallback={setBoxSize}
       >
         <div ref={gridRef}>
           {tanks?.map((tank, index) => {
-            return tank ? <Tank key={index} tankInstanceId={tank} mode="full" orientation={orientation} /> : <></>
+            return tank ? (
+              <Tank
+                key={index}
+                tankInstanceId={tank}
+                mode="full"
+                orientation={orientation}
+                parentSize={boxSize}
+                nameWidth={nameWidth}
+                levelWidth={levelWidth}
+              />
+            ) : (
+              <></>
+            )
           })}
         </div>
       </Box>
     )
   }
 
+  // FIXME: this is unreachable code in case of orientation === "vertical"
   return (
     <Box
       title={"Tanks"}
@@ -90,12 +169,23 @@ const Tanks = ({ mode, className }: Props) => {
           className={"w-6 text-black dark:text-white"}
         />
       }
+      getBoxSizeCallback={setBoxSize}
     >
-      <div className="grid grid-cols-4 h-full">
-        {tanks?.map((tank, index) => {
-          return tank ? <Tank key={index} tankInstanceId={tank} mode="full" orientation={orientation} /> : <></>
-        })}
-      </div>
+      <Paginator selectorLocation="bottom-right" orientation="horizontal">
+        <div className="flex justify-between h-full" ref={gridRef}>
+          {tanks.map((tank, index) => (
+            <Tank
+              key={index}
+              tankInstanceId={tank!}
+              mode="full"
+              orientation={orientation}
+              parentSize={boxSize}
+              nameWidth={nameWidth}
+              levelWidth={levelWidth}
+            />
+          ))}
+        </div>
+      </Paginator>
     </Box>
   )
 }

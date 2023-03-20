@@ -2,43 +2,31 @@ import { observer } from "mobx-react-lite"
 import { Battery as BatteryType, useBattery } from "@elninotech/mfd-modules"
 import Box from "../../ui/Box"
 import { BATTERY, BoxTypes } from "../../../utils/constants"
-import Grid from "../../ui/Grid"
 import Battery from "../Battery/Battery"
 import BatteriesIcon from "../../../images/icons/batteries.svg"
 import BatterySummary from "../../ui/BatterySummary"
-import AuxiliaryBatteries from "../Batteries/AuxiliaryBatteries"
 import { withErrorBoundary } from "react-error-boundary"
 import { AppViews } from "../../../modules/AppViews"
 import { translate } from "react-i18nify"
 import { appErrorBoundaryProps } from "../../ui/Error/appErrorBoundary"
 import { useVisibilityNotifier } from "../../../modules"
+import GridPaginator from "../../ui/GridPaginator"
+import { useState } from "react"
+import { PageSelectorProps } from "../../ui/PageSelector"
 
 interface Props {
   mode?: "compact" | "full"
+  pageSelectorPropsSetter?: (arg0: PageSelectorProps) => void
 }
 
-const BatteriesOverview = ({ mode = "full" }: Props) => {
+const BatteriesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) => {
   const { batteries } = useBattery()
+  const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
 
   useVisibilityNotifier({ widgetName: BoxTypes.BATTERIES, visible: !!(batteries && batteries.length) })
 
   const sortedBatteries = sortBatteries(batteries ?? [])
-  const overviewBatteries = getOverviewBatteries(sortedBatteries, 2)
-  const auxiliaryBatteries = sortedBatteries.filter((b) => !overviewBatteries.includes(b))
-
-  const getDetailBatteries = function () {
-    let boxes = []
-
-    overviewBatteries.forEach((b) => {
-      boxes.push(<Battery key={b.id} battery={b} mode="full" />)
-    })
-
-    if (auxiliaryBatteries.length > 0) {
-      boxes.push(<AuxiliaryBatteries key={"auxiliary"} batteries={auxiliaryBatteries} />)
-    }
-
-    return boxes
-  }
+  const overviewBatteries = getOverviewBatteries(sortedBatteries)
 
   if (mode === "compact") {
     return (
@@ -48,17 +36,33 @@ const BatteriesOverview = ({ mode = "full" }: Props) => {
         icon={<BatteriesIcon className={"w-6 text-victron-gray dark:text-victron-gray-dark"} />}
         title={translate("boxes.batteries")}
         linkedView={AppViews.BOX_BATTERIES_OVERVIEW}
+        getBoxSizeCallback={setBoxSize}
+        withPagination={true}
       >
-        <div className={"flex justify-center items-center h-full -mx-4"}>
+        <div className={"flex w-fit min-w-full h-full justify-center"}>
           {overviewBatteries.map((b) => (
-            <BatterySummary key={b.id} battery={b} className={overviewBatteries.length > 1 ? "w-6/12" : ""} />
+            <div key={b.id} className={"h-full flex items-center justify-center"}>
+              <BatterySummary key={b.id} battery={b} boxSize={boxSize} />
+            </div>
           ))}
         </div>
       </Box>
     )
   }
 
-  return <Grid childClassName={"p-1"}>{getDetailBatteries()}</Grid>
+  return (
+    <GridPaginator
+      childClassName={"p-2"}
+      childrenPerPage={4}
+      orientation={"horizontal"}
+      flow={"col"}
+      pageSelectorPropsSetter={pageSelectorPropsSetter}
+    >
+      {sortedBatteries.map((b) => (
+        <Battery key={b.id} battery={b} />
+      ))}
+    </GridPaginator>
+  )
 }
 
 /*
@@ -88,12 +92,12 @@ const sortBatteries = function (batteries: BatteryType[]) {
   We show only batteries with state data on the overview, but if we don't
   have any we will show any batteries.
  */
-const getOverviewBatteries = function (batteries: BatteryType[], max: number) {
+const getOverviewBatteries = function (batteries: BatteryType[]) {
   const withStateCount = batteries.filter((b) => b.state || b.state === 0).length
   if (withStateCount === 0) {
-    return batteries.slice(0, max)
+    return batteries
   }
-  return batteries.slice(0, Math.min(withStateCount, max))
+  return batteries.slice(0, withStateCount)
 }
 
 export default withErrorBoundary(observer(BatteriesOverview), appErrorBoundaryProps)

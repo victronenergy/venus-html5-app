@@ -1,18 +1,20 @@
 import React, { BaseSyntheticEvent, useCallback, useEffect, useMemo, useRef } from "react"
 import classnames from "classnames"
-import LeftSelectorIcon from "../../../images/icons/selectors/selector-left.svg"
-import RightSelectorIcon from "../../../images/icons/selectors/selector-right.svg"
-import LeftSelectorBlueIcon from "../../../images/icons/selectors/selector-left-blue.svg"
-import RightSelectorBlueIcon from "../../../images/icons/selectors/selector-right-blue.svg"
-import DownSelectorIcon from "../../../images/icons/selectors/selector-down.svg"
-import UpSelectorIcon from "../../../images/icons/selectors/selector-up.svg"
-import DownSelectorBlueIcon from "../../../images/icons/selectors/selector-down-blue.svg"
-import UpSelectorBlueIcon from "../../../images/icons/selectors/selector-up-blue.svg"
+import SelectorLeftIcon from "../../../images/icons/selectors/selector-left.svg"
+import SelectorRightIcon from "../../../images/icons/selectors/selector-right.svg"
+import SelectorDownIcon from "../../../images/icons/selectors/selector-down.svg"
+import SelectorUpIcon from "../../../images/icons/selectors/selector-up.svg"
 import DotIcon from "../../../images/icons/selectors/dot.svg"
 import DotSelectedIcon from "../../../images/icons/selectors/dot-selected.svg"
 import DotSelectedVerticalIcon from "../../../images/icons/selectors/dot-selected-vert.svg"
 
-const PageSelector = ({ currentPage, maxPages, onClickLeft, onClickRight, selectorLocation }: Props) => {
+const PageSelector = ({
+  currentPage = 0,
+  maxPages = 1,
+  onClickLeft = () => {},
+  onClickRight = () => {},
+  selectorLocation = "bottom-full",
+}: PageSelectorProps) => {
   const dotsVertRef = useRef<HTMLDivElement>(null)
   const dotsHorRef = useRef<HTMLDivElement>(null)
 
@@ -23,21 +25,30 @@ const PageSelector = ({ currentPage, maxPages, onClickLeft, onClickRight, select
 
   const dot = (i: number) => {
     if (i === currentPage) {
-      if (isHorizontal) return <DotSelectedIcon></DotSelectedIcon>
-      return <DotSelectedVerticalIcon></DotSelectedVerticalIcon>
+      return isHorizontal ? (
+        // todo: fix types for svg
+        // @ts-ignore
+        <DotSelectedIcon className={"text-victron-darkGray dark:text-white"} />
+      ) : (
+        // todo: fix types for svg
+        // @ts-ignore
+        <DotSelectedVerticalIcon className={"text-victron-darkGray dark:text-white"} />
+      )
     } else {
-      return <DotIcon></DotIcon>
+      // todo: fix types for svg
+      // @ts-ignore
+      return <DotIcon className={"text-victron-gray dark:text-victron-gray-400"} />
     }
   }
 
   useEffect(() => {
     // If the dots don't all fit and overflow, make sure the selected page dot is visible
     const scrollRef = isHorizontal ? dotsHorRef.current : dotsVertRef.current
-    if (scrollRef === null) return
+    if (scrollRef === null || typeof scrollRef.scroll !== "function") return
     scrollRef.scroll({
       behavior: "smooth",
-      top: isHorizontal ? 0 : currentPage * (scrollRef.scrollHeight / maxPages) - scrollRef.offsetHeight / 2 + 4,
-      left: isHorizontal ? currentPage * (scrollRef.scrollWidth / maxPages) - scrollRef.offsetWidth / 2 + 4 : 0,
+      top: isHorizontal ? 0 : currentPage * (scrollRef.scrollHeight / maxPages) - scrollRef.offsetHeight / 2 + 10,
+      left: isHorizontal ? currentPage * (scrollRef.scrollWidth / maxPages) - scrollRef.offsetWidth / 2 + 10 : 0,
     })
   }, [currentPage, maxPages, isHorizontal])
 
@@ -60,8 +71,8 @@ const PageSelector = ({ currentPage, maxPages, onClickLeft, onClickRight, select
   return (
     <div
       className={classnames("flex items-center select-none", {
-        "h-11 w-full flex-row": isHorizontal,
-        "w-11 h-full flex-col": !isHorizontal,
+        "h-11 w-full min-w-[8.75rem]": isHorizontal,
+        "w-11 h-full min-h-[8.75rem] flex-col": !isHorizontal,
         "justify-between": selectorLocation.endsWith("full"),
         "justify-end": selectorLocation.endsWith("right") || selectorLocation.endsWith("bottom"),
         "justify-start": selectorLocation.endsWith("left") || selectorLocation.endsWith("top"),
@@ -69,21 +80,38 @@ const PageSelector = ({ currentPage, maxPages, onClickLeft, onClickRight, select
         "space-y-4 ": !selectorLocation.endsWith("full") && !isHorizontal,
       })}
     >
-      <div onClick={onLeftSelectorClick} className={"w-11 h-11"}>
-        {(isHorizontal && ((currentPage > 0 && <LeftSelectorBlueIcon />) || <LeftSelectorIcon />)) ||
-          (currentPage > 0 && <UpSelectorBlueIcon />) || <UpSelectorIcon />}
+      <div onClick={onLeftSelectorClick} className={"w-11 h-11 shrink-0"}>
+        {(isHorizontal &&
+          ((currentPage > 0 && (
+            // todo: fix types for svg
+            // @ts-ignore
+            <SelectorLeftIcon className={"text-victron-blue dark:text-victron-blue-dark"} />
+          )) || (
+            // todo: fix types for svg
+            // @ts-ignore
+            <SelectorLeftIcon className={"text-victron-gray dark:text-victron-gray-dark"} />
+          ))) ||
+          (currentPage > 0 && (
+            // todo: fix types for svg
+            // @ts-ignore
+            <SelectorUpIcon className={"text-victron-blue dark:text-victron-blue-dark"} />
+          )) || (
+            // todo: fix types for svg
+            // @ts-ignore
+            <SelectorUpIcon className={"text-victron-gray dark:text-victron-gray-dark"} />
+          )}
       </div>
       <div
         ref={dotsVertRef}
         className={classnames("flex justify-center overflow-hidden", {
           "w-[calc(100%-7.25rem)]": isHorizontal && selectorLocation.endsWith("full"),
           "h-[calc(100%-7.25rem)] items-center": !isHorizontal && selectorLocation.endsWith("full"),
-          "h-max items-center": !isHorizontal && !selectorLocation.endsWith("full"),
-          "w-max items-center": isHorizontal && !selectorLocation.endsWith("full"),
+          "h-fit max-h-[calc(100%-7.25rem)] min-h-0 items-center": !isHorizontal && !selectorLocation.endsWith("full"),
+          "w-fit max-w-[calc(100%-7.25rem)] min-w-0 items-center": isHorizontal && !selectorLocation.endsWith("full"),
         })}
       >
         {(isHorizontal && (
-          <div ref={dotsHorRef} className={"flex overflow-hidden w-max flex-row justify-left space-x-2"}>
+          <div ref={dotsHorRef} className={"flex overflow-hidden w-max justify-left space-x-2"}>
             {[...Array(maxPages)].map((e, i) => (
               <span key={i}>{dot(i)}</span>
             ))}
@@ -98,20 +126,40 @@ const PageSelector = ({ currentPage, maxPages, onClickLeft, onClickRight, select
           </div>
         )}
       </div>
-      <div onClick={onRightSelectorClick} className={"w-42 text-victron-gray dark:text-victron-gray-dark"}>
-        {(isHorizontal && ((currentPage < maxPages - 1 && <RightSelectorBlueIcon />) || <RightSelectorIcon />)) ||
-          (currentPage < maxPages - 1 && <DownSelectorBlueIcon />) || <DownSelectorIcon />}
+      <div
+        onClick={onRightSelectorClick}
+        className={"w-11 h-11 shrink-0 text-victron-gray dark:text-victron-gray-dark"}
+      >
+        {(isHorizontal &&
+          ((currentPage < maxPages - 1 && (
+            // todo: fix types for svg
+            // @ts-ignore
+            <SelectorRightIcon className={"text-victron-blue dark:text-victron-blue-dark"} />
+          )) || (
+            // todo: fix types for svg
+            // @ts-ignore
+            <SelectorRightIcon className={"text-victron-gray dark:text-victron-gray-dark"} />
+          ))) ||
+          (currentPage < maxPages - 1 && (
+            // todo: fix types for svg
+            // @ts-ignore
+            <SelectorDownIcon className={"text-victron-blue dark:text-victron-blue-dark"} />
+          )) || (
+            // todo: fix types for svg
+            // @ts-ignore
+            <SelectorDownIcon className={"text-victron-gray dark:text-victron-gray-dark"} />
+          )}
       </div>
     </div>
   )
 }
 
-interface Props {
-  currentPage: number
-  maxPages: number
-  onClickLeft: () => void
-  onClickRight: () => void
-  selectorLocation: SelectorLocation
+export interface PageSelectorProps {
+  currentPage?: number
+  maxPages?: number
+  onClickLeft?: () => void
+  onClickRight?: () => void
+  selectorLocation?: SelectorLocation
 }
 
 export type SelectorLocation =

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import MainLayout from "../ui/MainLayout"
 import Tanks from "../boxes/Tanks/Tanks"
 import BatteriesOverview from "../boxes/BatteriesOverview"
@@ -7,6 +7,7 @@ import GridPaginator from "../ui/GridPaginator"
 import { useVisibleWidgetsStore } from "../../modules"
 import { BoxTypes } from "../../utils/constants"
 import { observer } from "mobx-react"
+import { PageSelectorProps } from "../ui/PageSelector"
 import DevicesOverview from "../boxes/DevicesOverview"
 
 const RootView = () => {
@@ -19,7 +20,7 @@ const RootView = () => {
     const visibleBoxes: JSX.Element[] = []
     const hiddenBoxes: JSX.Element[] = []
     for (const type of Object.values(BoxTypes)) {
-      const elem = getBoxes(type)
+      const elem = getBoxByType(type)
       if (!elem) continue
 
       if (visibleWidgetsStore.visibleElements.has(type)) {
@@ -33,7 +34,7 @@ const RootView = () => {
     setInitialBoxes(hiddenBoxes)
   }, [visibleWidgetsStore.visibleElements, visibleWidgetsStore.visibleElements.size])
 
-  const getBoxes = (type: BoxTypes) => {
+  const getBoxByType = (type: BoxTypes) => {
     switch (type) {
       case BoxTypes.ENERGY:
         return <EnergyOverview mode="compact" key={"energy-overview"} />
@@ -48,17 +49,19 @@ const RootView = () => {
     }
   }
 
+  const [pageSelectorProps, setPageSelectorProps] = useState<PageSelectorProps>()
+
   return (
     <>
       {/* We need to have hidden boxes mounted to listen to mqtt data and manage boxes visibility */}
       <div className="hidden">{initialBoxes.map((box) => box)}</div>
-      <MainLayout>
+      <MainLayout pageSelectorProps={pageSelectorProps}>
         <GridPaginator
           childrenPerPage={4}
-          childClassName={"p-1"}
           flow={"col"}
           orientation={"horizontal"}
-          selectorLocation={"bottom-full"}
+          childClassName={"p-2"}
+          pageSelectorPropsSetter={setPageSelectorProps}
         >
           {boxes.map((box) => box)}
         </GridPaginator>

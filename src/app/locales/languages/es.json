@@ -6,7 +6,30 @@
         },
         "title": "Modo CA"
     },
-    "boxes": {},
+    "boxes": {
+        "EnergyOverview": "Resumen de energía",
+        "acLoads": "Cargas CA",
+        "alternator": "Alternador",
+        "batteries": "Baterías",
+        "battery": "Batería",
+        "batteryWithName": "Batería: %{name}",
+        "chargerWithName": "Cargador: %{productNameShort}",
+        "dcLoads": "Cargas CC",
+        "energy": "Energía",
+        "generator": "Generador",
+        "generatorInput": "Entrada del generador",
+        "gridInput": "Entrada de la red",
+        "invalidConfig": "Configuración no válida",
+        "inverterCharger": "Inversor / cargador: %{productNameShort}",
+        "inverterWithName": "Inversor: %{productNameShort}",
+        "pvCharger": "Cargador FV",
+        "shorePower": "Alimentación de la red",
+        "solar": "Solar",
+        "status": "Estado",
+        "tanks": "Depósitos",
+        "unknown": "Desconocido",
+        "windGenerator": "Aerogenerador"
+    },
     "cardFooter": {
         "Charge": "Carga",
         "Critical": "Crítica",
@@ -17,13 +40,17 @@
     "common": {
         "absorptionCharging": "En carga de absorción",
         "assisting": "Asistiendo",
+        "auto": "Automático",
         "autoStartStop": "Arranque/parada automático",
         "bulkCharging": "En carga inicial",
         "charge": "Carga",
+        "charged": "Cargado",
         "chargerOnly": "Solo cargador",
         "charging": "Cargando",
         "current": "Corriente",
+        "dark": "Oscuro",
         "days": "días",
+        "days_short": "d",
         "discharge": "Descarga",
         "discharging": "Descargando",
         "eco": "Eco",
@@ -33,13 +60,18 @@
         "fault": "Fallo",
         "floatCharging": "En carga de flotación",
         "hours": "horas",
+        "hours_short": "h",
         "idle": "En reposo",
         "inputLimit": "Límite de entrada",
         "inverterOnly": "Solo inversor",
         "inverting": "Invirtiendo",
+        "light": "Claro",
         "limit": "Límite",
+        "loading": "Cargando",
+        "loads": "Cargas",
         "lowPower": "Baja potencia",
         "minutes": "minutos",
+        "minutes_short": "m",
         "mode": "Modo",
         "noShorePower": "Sin alimentación de la red",
         "notAvailable": "No disponible",
@@ -62,8 +94,20 @@
         "voltage": "Tensión"
     },
     "diagnostics": {
-        "connection": {},
-        "device": {}
+        "connection": {
+            "connection": "Conexión",
+            "error": "Error",
+            "host": "Host",
+            "portalId": "ID portal",
+            "status": "Estado"
+        },
+        "device": {
+            "device": "Dispositivo",
+            "userAgent": "Agente del usuario",
+            "viewportHeight": "Altura del viewport",
+            "viewportWidth": "Anchura del viewport"
+        },
+        "diagnostics": "Diagnósticos"
     },
     "error": {
         "errorWithMessage": "Error: %{message}",
@@ -74,6 +118,8 @@
             "estimate": "Datos estimados: %{size} bytes.",
             "hint": "Intente volver a cargar la página o póngase en contacto con Victron Energy con la siguiente información:",
             "ignore": "Ignorar el error",
+            "resetError": "Resolver error",
+            "restartApp": "Reiniciar aplicación",
             "sendReport": "Enviar informe del error",
             "title": "Se ha producido un error al cargar la aplicación."
         },
@@ -83,7 +129,10 @@
         "mqttUnavailable4": "Intente usar el botón de Consola remota de la parte superior de esta pantalla para cambiar sus ajustes a distancia.",
         "mqttUnavailable5": "También puede intentar conectar su dispositivo a distancia seleccionando Remoto en el menú anterior.",
         "queryParams": "Parámetros de consulta: %{queryParams}",
-        "remoteConsole": {},
+        "remoteConsole": {
+            "connectionFailed": "No se puede conectar al dispositivo GX",
+            "screenTooSmall": "Abrir en una pantalla más grande para ver la consola remota"
+        },
         "userAgent": "Agente del usuario: %{userAgent}",
         "windowSize": "Ventana: %{width} x %{height}"
     },
@@ -117,7 +166,11 @@
         "subtitle": "Asegúrese de que sus dispositivos estén bien conectados",
         "title": "Su panel de control está vacío."
     },
-    "pages": {},
+    "pages": {
+        "diagnostics": "Diagnósticos",
+        "remoteConsole": "Consola remota",
+        "systemOverview": "Resumen del sistema"
+    },
     "remoteLogin": {
         "2fa": "Token de autenticación de dos factores",
         "email": "Email",

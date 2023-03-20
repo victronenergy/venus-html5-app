@@ -8,10 +8,95 @@ import FuelIcon from "../../../images/icons/fuel.svg"
 import WaterIcon from "../../../images/icons/fresh-water.svg"
 import BlackWaterIcon from "../../../images/icons/black-water.svg"
 import GrayWaterIcon from "../../../images/icons/waste-water.svg"
+import { applyStyles, BreakpointStylesType, StylesType } from "app/Marine2/utils/media"
 
-const Tank = ({ tankInstanceId, mode, orientation = "vertical" }: Props) => {
+// styles for compact mode
+const compactStyles: BreakpointStylesType = {
+  "sm-s": {
+    tankName: "text-sm ",
+    level: "text-base",
+    progressBar: "block",
+  },
+  "sm-m": {
+    tankName: "text-sm ",
+    progressBar: "block",
+  },
+  "md-s": {
+    tankName: "text-base mr-4",
+    level: "text-lg",
+    progressBar: "block",
+  },
+  "lg-s": {
+    tankName: "text-base mr-4",
+    level: "text-lg",
+    progressBar: "block",
+  },
+  default: {
+    tankName: "text-sm ",
+    level: "text-base",
+    progressBar: "hidden",
+  },
+}
+
+// styles for horizontal orientation
+const horizontalStyles: BreakpointStylesType = {
+  default: {
+    tankName: "text-base",
+    level: "text-md",
+    capacity: "text-xs",
+  },
+  "sm-s": {
+    tankName: "text-md",
+    level: "text-lg",
+    capacity: "text-sm",
+  },
+  "md-s": {
+    tankName: "text-md",
+    level: "text-xl",
+    capacity: "text-sm",
+  },
+}
+
+// styles for vertical orientation
+const verticalStyles: BreakpointStylesType = {
+  default: {
+    tankName: "text-base mr-5",
+    level: "text-lg",
+    capacity: "text-xs",
+    progressBar: "hidden",
+  },
+  "sm-s": {
+    tankName: "text-base mr-5",
+    level: "text-lg",
+    capacity: "text-xs",
+    progressBar: "hidden",
+  },
+  "md-s": {
+    tankName: "text-lg mr-5",
+    level: "text-xl",
+    capacity: "text-xs",
+    progressBar: "block",
+  },
+  "lg-s": {
+    tankName: "text-lg mr-5",
+    level: "text-xl",
+    capacity: "text-xs",
+    progressBar: "block",
+  },
+}
+
+const Tank = ({ tankInstanceId, mode, nameWidth, levelWidth, orientation = "vertical", parentSize }: Props) => {
   let { capacity, fluidType, level, remaining, unit } = useTank(tankInstanceId)
   const fluidTypeNum = +fluidType
+
+  let horizontalActiveStyles,
+    verticalActiveStyles,
+    compactActiveStyles: StylesType = {}
+  if (parentSize) {
+    compactActiveStyles = applyStyles(parentSize, compactStyles)
+    verticalActiveStyles = applyStyles(parentSize, verticalStyles)
+    horizontalActiveStyles = applyStyles(parentSize, horizontalStyles)
+  }
 
   const fluidTypeTitle = useMemo(() => {
     const fluids = [
@@ -45,22 +130,29 @@ const Tank = ({ tankInstanceId, mode, orientation = "vertical" }: Props) => {
 
   if (mode === "compact") {
     return (
-      <div>
-        <div className="grid grid-cols-8 gap-2">
-          <div className="col-span-6 flex items-center sm:col-span-4 lg:col-span-3">
+      <div className="flex flex-row justify-between items-center">
+        <div className="tank-name">
+          <div
+            style={nameWidth !== 0 ? { width: nameWidth + "px" } : {}}
+            className={"flex items-center whitespace-nowrap py-2"}
+          >
             <div>{fluidIcon(fluidTypeNum, mode)}</div>
-            <div className="flex flex-col p-1 sm:p-2 w-full">
-              <div className="text-sm md-m:text-base lg-l:text-lg truncate text-ellipsis overflow-hidden">
-                {fluidTypeTitle}
-              </div>
-            </div>
+            <div className={classnames("", compactActiveStyles?.tankName)}>{fluidTypeTitle}</div>
           </div>
-          <div className="flex items-center justify-center invisible sm:visible sm:col-span-3 lg:col-span-4">
-            <ProgressBar percentage={levelFormatter(level)} type={fluidTypeNum} />
-          </div>
-          <div className="col-span-1 flex items-center justify-center">
+        </div>
+        <div
+          className={classnames(
+            "flex items-center justify-center basis-0 flex-grow mx-4",
+            compactActiveStyles?.progressWidth,
+            compactActiveStyles?.progressBar
+          )}
+        >
+          <ProgressBar percentage={levelFormatter(level)} type={fluidTypeNum} />
+        </div>
+        <div className="tank-level">
+          <div style={levelWidth ? { width: levelWidth + "px" } : {}} className="flex items-center justify-center pl-5">
             <div
-              className={classnames("text-base md-m:text-lg lg-l:text-xl flex flex-row pr-2", {
+              className={classnames("flex flex-row ", compactActiveStyles?.level, compactActiveStyles?.levelWidth, {
                 "text-victron-red": level > 75,
               })}
             >
@@ -83,26 +175,84 @@ const Tank = ({ tankInstanceId, mode, orientation = "vertical" }: Props) => {
   if (orientation === "vertical") {
     return (
       <div>
-        <div className="grid grid-cols-8 gap-2">
-          <div className="col-span-3 flex items-center md:col-span-2">
-            <div>{fluidIcon(fluidTypeNum, mode)}</div>
-            <div className="flex flex-col p-2 w-full">
-              <div className="text-base md-m:text-lg lg-l:text-xl truncate text-ellipsis overflow-hidden">
-                {fluidTypeTitle}
-              </div>
-              <div className="text-victron-gray">
-                {formatCapacity(remaining) + "/" + formatCapacity(capacity) + " l"}
+        <div className="flex flex-row justify-between items-center">
+          <div className="tank-name">
+            <div style={nameWidth !== 0 ? { width: nameWidth + "px" } : {}} className={classnames("flex items-center")}>
+              <div>{fluidIcon(fluidTypeNum, mode)}</div>
+              <div className="flex flex-col p-2 w-full whitespace-nowrap">
+                <div className={classnames("", verticalActiveStyles?.tankName)}>{fluidTypeTitle}</div>
+                <div className={classnames("text-victron-gray", verticalActiveStyles?.capacity)}>
+                  {formatCapacity(remaining) + "/" + formatCapacity(capacity) + "l"}
+                </div>
               </div>
             </div>
           </div>
-          <div className="flex items-center justify-center col-span-4 md:col-span-5">
+          <div
+            className={classnames(
+              "flex items-center justify-center basis-0 flex-grow",
+              verticalActiveStyles?.progressBar
+            )}
+          >
             <ProgressBar percentage={levelFormatter(level)} type={fluidTypeNum} />
           </div>
-          <div className="col-span-1 flex items-center justify-center">
+          <div className="tank-level">
             <div
-              className={classnames("text-base md-m:text-lg lg-l:text-xl flex flex-row", {
-                "text-victron-red": level > 75,
-              })}
+              style={levelWidth ? { width: levelWidth + "px" } : {}}
+              className="flex items-center justify-center pl-5"
+            >
+              <div
+                className={classnames(
+                  "flex flex-row",
+                  {
+                    "text-victron-red": level > 75,
+                  },
+                  verticalActiveStyles?.level
+                )}
+              >
+                <div>{levelFormatter(level)}</div>
+                <div
+                  className={classnames({
+                    "text-victron-red/70": level > 75,
+                    "text-victron-gray/70": level <= 75,
+                  })}
+                >
+                  {" %"}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="px-3">
+      <div className="h-full w-full flex flex-row">
+        <div className="min-w-[10%] h-auto">
+          <ProgressBar percentage={levelFormatter(level)} type={fluidTypeNum} orientation="vertical" />
+        </div>
+        <div className="flex flex-col justify-between min-w-[90%]">
+          <div className="pt-2 px-2">
+            <div>{fluidIcon(fluidTypeNum, mode)}</div>
+            <div className="w-full tank-name">
+              <div
+                style={nameWidth ? { width: nameWidth + "px" } : {}}
+                className={classnames("whitespace-nowrap", horizontalActiveStyles?.tankName)}
+              >
+                {fluidTypeTitle}
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-col px-2">
+            <div
+              className={classnames(
+                "flex flex-row",
+                {
+                  "text-victron-red": level > 75,
+                },
+                horizontalActiveStyles?.level
+              )}
             >
               <div>{levelFormatter(level)}</div>
               <div
@@ -114,43 +264,10 @@ const Tank = ({ tankInstanceId, mode, orientation = "vertical" }: Props) => {
                 {" %"}
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
-  return (
-    <div className="h-full w-full grid grid-cols-8">
-      <div className="w-full col-span-1">
-        <ProgressBar percentage={levelFormatter(level)} type={fluidTypeNum} orientation="vertical" />
-      </div>
-      <div className="col-span-7 flex flex-col justify-between">
-        <div className="pt-2">
-          <div>{fluidIcon(fluidTypeNum, mode)}</div>
-          <div className="w-full">
-            <div className="text-base md-m:text-lg lg-l:text-xl truncate text-ellipsis overflow-hidden">
-              {fluidTypeTitle}
+            <div className={classnames("text-victron-gray", horizontalActiveStyles?.capacity)}>
+              {formatCapacity(remaining) + "/" + formatCapacity(capacity) + "l"}
             </div>
           </div>
-        </div>
-        <div className="flex flex-col">
-          <div
-            className={classnames("text-base md-m:text-lg lg-l:text-xl flex flex-row", {
-              "text-victron-red": level > 75,
-            })}
-          >
-            <div>{levelFormatter(level)}</div>
-            <div
-              className={classnames({
-                "text-victron-red/70": level > 75,
-                "text-victron-gray/70": level <= 75,
-              })}
-            >
-              {" %"}
-            </div>
-          </div>
-          <div className="text-victron-gray">{formatCapacity(remaining) + "/" + formatCapacity(capacity) + " l"}</div>
         </div>
       </div>
     </div>
@@ -199,8 +316,11 @@ const fluidIcon = (type: number, mode: string = "compact") => {
 
 interface Props {
   tankInstanceId: number
+  nameWidth?: number
+  levelWidth?: number
   mode?: "compact" | "full"
   orientation?: "vertical" | "horizontal"
+  parentSize?: { width: number; height: number }
 }
 
 export default observer(Tank)
