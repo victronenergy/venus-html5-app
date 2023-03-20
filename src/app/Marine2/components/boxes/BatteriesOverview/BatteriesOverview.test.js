@@ -8,11 +8,11 @@ describe("BatteriesOverview element", () => {
     const wrapper = mount(<BatteriesOverview mode={"compact"} />)
 
     it("should show content", () => {
-      expect(wrapper.find("BatteriesOverview").exists()).toBe(true)
+      expect(wrapper.find(BatteriesOverview).exists()).toBe(true)
     })
 
     it("should show expand link", () => {
-      const boxes = wrapper.find("BatteriesOverview").children().find("Box")
+      const boxes = wrapper.find(BatteriesOverview).children().find("Box")
 
       let contentBox
       boxes.forEach((box) => {
@@ -34,7 +34,7 @@ describe("BatteriesOverview element", () => {
     })
 
     it("should show content", () => {
-      expect(wrapper.find("BatteriesOverview").exists()).toBe(true)
+      expect(wrapper.find(BatteriesOverview).exists()).toBe(true)
     })
   })
 
@@ -42,8 +42,9 @@ describe("BatteriesOverview element", () => {
     const wrapper = mount(<BatteriesOverview />)
 
     it("should use error boundary", () => {
-      expect(wrapper.find("ErrorBoundary").exists()).toBe(true)
-      expect(wrapper.find("ErrorBoundary").children().find("BatteriesOverview").exists()).toBe(true)
+      const errorBoundary = wrapper.find("ErrorBoundary")
+      expect(errorBoundary.exists()).toBe(true)
+      expect(errorBoundary.find("Memo(BatteriesOverview)").exists()).toBe(true)
     })
   })
 
