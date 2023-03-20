@@ -20,7 +20,7 @@ const BoxView = ({ boxId }: BoxViewProps) => {
       case AppViews.BOX_ENERGY_OVERVIEW:
         return <EnergyOverview pageSelectorPropsSetter={setPageSelectorProps} />
       case AppViews.BOX_DEVICES_OVERVIEW:
-        return <DevicesOverview pageSelectorPropsSetter={setPageSelectorProps} mode={"full"} />
+        return <DevicesOverview pageSelectorPropsSetter={setPageSelectorProps} />
       default:
         // todo: replace with component
         return <div>Not found</div>

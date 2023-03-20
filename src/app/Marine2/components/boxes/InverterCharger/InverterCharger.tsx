@@ -137,7 +137,6 @@ const InverterCharger = ({ componentMode = "compact" }: Props) => {
               <RadioButton
                 onChange={() => setModeForSubmission(SYSTEM_MODE.ON)}
                 selected={modeForSubmission === SYSTEM_MODE.ON}
-                size={"lg"}
               />
             </label>
             <label
@@ -148,7 +147,6 @@ const InverterCharger = ({ componentMode = "compact" }: Props) => {
               <RadioButton
                 onChange={() => setModeForSubmission(SYSTEM_MODE.OFF)}
                 selected={modeForSubmission === SYSTEM_MODE.OFF}
-                size={"lg"}
               />
             </label>
             <label
@@ -159,7 +157,6 @@ const InverterCharger = ({ componentMode = "compact" }: Props) => {
               <RadioButton
                 onChange={() => setModeForSubmission(SYSTEM_MODE.CHARGER_ONLY)}
                 selected={modeForSubmission === SYSTEM_MODE.CHARGER_ONLY}
-                size={"lg"}
               />
             </label>
             <label
@@ -170,7 +167,6 @@ const InverterCharger = ({ componentMode = "compact" }: Props) => {
               <RadioButton
                 onChange={() => setModeForSubmission(SYSTEM_MODE.INVERTER_ONLY)}
                 selected={modeForSubmission === SYSTEM_MODE.INVERTER_ONLY}
-                size={"lg"}
               />
             </label>
           </DeviceSettingModal>

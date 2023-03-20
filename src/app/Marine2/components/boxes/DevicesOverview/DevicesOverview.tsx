@@ -16,13 +16,15 @@ import Inverter from "../Inverter"
 import GeneratorFp from "../GeneratorFp"
 import GeneratorRelays from "../GeneratorRelays"
 import InverterCharger from "../InverterCharger"
-import Grid from "../../ui/Grid"
 import { useVisibilityNotifier } from "../../../modules"
 import { BoxTypes } from "../../../utils/constants"
 import { withErrorBoundary } from "react-error-boundary"
 import { appErrorBoundaryProps } from "../../ui/Error/appErrorBoundary"
+import { PageSelectorProps } from "../../ui/PageSelector"
+import GridPaginator from "../../ui/GridPaginator"
+import React from "react"
 
-const DevicesOverview = ({ mode = "full" }: Props) => {
+const DevicesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) => {
   const { inverters } = useInverters()
   const { instanceId, vebusInverters } = useVebus()
   const { chargers } = useChargers()
@@ -89,11 +91,21 @@ const DevicesOverview = ({ mode = "full" }: Props) => {
     )
   }
 
-  return <Grid childClassName={"p-1"}>{getDetailDevices()}</Grid>
+  return (
+    <GridPaginator
+      childClassName={"p-2"}
+      childrenPerPage={4}
+      orientation={"horizontal"}
+      pageSelectorPropsSetter={pageSelectorPropsSetter}
+    >
+      {getDetailDevices()}
+    </GridPaginator>
+  )
 }
 
 interface Props {
   mode?: "compact" | "full"
+  pageSelectorPropsSetter?: (arg0: PageSelectorProps) => void
 }
 
 export default withErrorBoundary(observer(DevicesOverview), appErrorBoundaryProps)
