@@ -8,11 +8,11 @@ describe("EnergyOverview element", () => {
     const wrapper = mount(<EnergyOverview mode={"compact"} />)
 
     it("should show content", () => {
-      expect(wrapper.find("EnergyOverview").exists()).toBe(true)
+      expect(wrapper.find(EnergyOverview).exists()).toBe(true)
     })
 
     it("should show expand link", () => {
-      const boxes = wrapper.find("EnergyOverview").children().find("Box")
+      const boxes = wrapper.find(EnergyOverview).children().find("Box")
 
       let contentBox
       boxes.forEach((box) => {
@@ -34,7 +34,7 @@ describe("EnergyOverview element", () => {
     })
 
     it("should show content", () => {
-      expect(wrapper.find("EnergyOverview").exists()).toBe(true)
+      expect(wrapper.find(EnergyOverview).exists()).toBe(true)
     })
   })
 
@@ -43,7 +43,7 @@ describe("EnergyOverview element", () => {
 
     it("should use error boundary", () => {
       expect(wrapper.find("ErrorBoundary").exists()).toBe(true)
-      expect(wrapper.find("ErrorBoundary").children().find("EnergyOverview").exists()).toBe(true)
+      expect(wrapper.find("ErrorBoundary").children().find("Memo(EnergyOverview)").exists()).toBe(true)
     })
   })
 
