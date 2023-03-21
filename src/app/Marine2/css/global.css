@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+    html {
+        font-family: MuseoSans, "Noto Sans SC", sans-serif;
+    }
+}
+
 html,
 body {
     width: 100%;
@@ -45,6 +51,14 @@ p {
     url("../../../css/fonts/MuseoSans/MuseoSans-700.otf"),
     url("../../../css/fonts/MuseoSans/MuseoSans-700Italic.otf");
 }
+
+@font-face {
+    font-family: "Noto Sans SC";
+    src: url("../../../css/fonts/NotoSansSC/NotoSansSC-Regular.otf");
+}
+
+* {
+    font-family: MuseoSans, "Noto Sans SC", sans-serif;
 }
 
 *:focus {
