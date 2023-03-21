@@ -8,11 +8,11 @@ describe("Tanks element", () => {
     const wrapper = mount(<Tanks mode={"compact"} />)
 
     it("should show content", () => {
-      expect(wrapper.find("Tanks").exists()).toBe(true)
+      expect(wrapper.find(Tanks).exists()).toBe(true)
     })
 
     it("should show expand link", () => {
-      const boxes = wrapper.find("Tanks").children().find("Box")
+      const boxes = wrapper.find(Tanks).children().find("Box")
 
       let contentBox
       boxes.forEach((box) => {
@@ -35,7 +35,7 @@ describe("Tanks element", () => {
     })
 
     it("should show content", () => {
-      expect(wrapper.find("Tanks").exists()).toBe(true)
+      expect(wrapper.find(Tanks).exists()).toBe(true)
     })
   })
 
@@ -44,7 +44,7 @@ describe("Tanks element", () => {
 
     it("should use error boundary", () => {
       expect(wrapper.find("ErrorBoundary").exists()).toBe(true)
-      expect(wrapper.find("ErrorBoundary").children().find("Tanks").exists()).toBe(true)
+      expect(wrapper.find("ErrorBoundary").children().find("Memo(Tanks)").exists()).toBe(true)
     })
   })
 
