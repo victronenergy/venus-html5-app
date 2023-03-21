@@ -64,7 +64,7 @@ const InputLimitSelector = ({ inputId }: Props) => {
   return (
     <>
       <Button className="w-full mr-4" size="md" onClick={() => setIsLimitModalOpen(!isLimitModalOpen)}>
-        {!!currentLimit ? Number(currentLimit) : 0}
+        {!!currentLimit ? Number(currentLimit) + "A" : 0 + "A"}
       </Button>
       <DeviceSettingModal open={isLimitModalOpen} onClose={closeLimitModal} onSet={submitLimit} width={"lg"}>
         <label className="flex w-full justify-center text-lg mb-3">{translate("devices.Input current limit")}</label>
