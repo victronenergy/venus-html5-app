@@ -52,6 +52,7 @@ const RootView = () => {
     <>
       {/* We need to have hidden boxes mounted to listen to mqtt data and manage boxes visibility */}
       <div className="hidden">{initialBoxes.map((box) => box)}</div>
+      {/* TODO: remake this to use store states instead of pageSelectorProps down the tree */}
       <MainLayout pageSelectorProps={pageSelectorProps}>
         <GridPaginator
           perPage={4}

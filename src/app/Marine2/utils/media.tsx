@@ -15,7 +15,7 @@ type BreakpointsType = {
   [key: string]: ComponentSizeType
 }
 
-const boxBreakpoints: BreakpointsType = {
+export const boxBreakpoints: BreakpointsType = {
   "sm-s": { width: 200, height: 300 },
   "sm-m": { width: 200, height: 450 },
   "sm-l": { width: 200, height: 600 },
