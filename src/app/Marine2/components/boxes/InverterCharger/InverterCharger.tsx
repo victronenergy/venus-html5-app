@@ -5,15 +5,15 @@ import { translate } from "react-i18nify"
 import { SYSTEM_MODE } from "../../../utils/constants"
 import { formatStateForTranslation } from "../../../utils/format"
 import DeviceCompact from "../DeviceCompact"
-import Box from "../../ui/Box"
-import classnames from "classnames"
-import { useComponentSize, useWindowSize } from "../../../utils/hooks"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import Button from "../../ui/Button"
 import RadioButton from "../../ui/RadioButton"
 import DeviceSettingModal from "../../ui/DeviceSettingModal"
 import InputLimitValue from "../../ui/InputLimitValue"
 import InputLimitSelector from "../../ui/InputLimitSelector"
+import ValueBox from "../../ui/ValueBox"
+import { withErrorBoundary } from "react-error-boundary"
+import { appErrorBoundaryProps } from "../../ui/Error/appErrorBoundary"
 
 const InverterCharger = ({ componentMode = "compact" }: Props) => {
   const inverterChargerModeFormatter = (value: number) => {
@@ -30,20 +30,6 @@ const InverterCharger = ({ componentMode = "compact" }: Props) => {
         return ""
     }
   }
-
-  const parentRef = useRef<HTMLDivElement>(null)
-  const componentSize = useComponentSize(parentRef)
-  const windowSize = useWindowSize()
-  const [isFullHeight, setFullHeight] = useState<boolean>(false)
-
-  useEffect(() => {
-    if (!windowSize || !componentSize) return
-    if (windowSize.height !== undefined && componentSize.height < windowSize.height / 2) {
-      setFullHeight(false)
-    } else {
-      setFullHeight(true)
-    }
-  }, [windowSize, componentSize])
 
   const { inputId } = useShorePowerInput()
 
@@ -92,7 +78,7 @@ const InverterCharger = ({ componentMode = "compact" }: Props) => {
   }
 
   return (
-    <Box
+    <ValueBox
       title={productName}
       icon={
         <InverterChargerIcon
@@ -101,36 +87,31 @@ const InverterCharger = ({ componentMode = "compact" }: Props) => {
           className={"w-7"}
         ></InverterChargerIcon>
       }
+      inputLimitValue={!!inputId ? <InputLimitValue inputId={inputId} /> : undefined}
+      value={0}
+      unit={"A"}
+      buttons={
+        !!inputId
+          ? [
+              <InputLimitSelector inputId={inputId} />,
+              <Button className="w-full" size="md" onClick={() => setIsModeModalOpen(!isModeModalOpen)}>
+                {inverterChargerModeFormatter(parseInt(mode))}
+              </Button>,
+            ]
+          : [
+              <Button className="w-full" size="md" onClick={() => setIsModeModalOpen(!isModeModalOpen)}>
+                {inverterChargerModeFormatter(parseInt(mode))}
+              </Button>,
+            ]
+      }
+      bottomValues={[]}
     >
-      <div className={"w-full h-full flex flex-col justify-between"} ref={parentRef}>
-        <div className={""}>
-          <div
-            className={classnames("flex flex-row pr-2", {
-              "text-4xl": isFullHeight,
-              "text-xl sm:text-2xl md:text-3xl lg:text-3xl": !isFullHeight,
-            })}
-          >
-            <div>{!!inputId ? <InputLimitValue inputId={inputId} /> : 0}</div>
-            <div className={"text-victron-gray/70 pl-1"}>A</div>
-          </div>
-          <div
-            className={classnames("text-victron-gray/70", {
-              "text-2xl": isFullHeight,
-              "text-base sm:text-lg md:text-xl lg:text-xl": !isFullHeight,
-            })}
-          >
-            {subTitle}
-          </div>
-        </div>
-        <div className={"flex flex-row"}>
-          {!!inputId && <InputLimitSelector inputId={inputId} />}
-          <Button className="w-full" size="md" onClick={() => setIsModeModalOpen(!isModeModalOpen)}>
-            {inverterChargerModeFormatter(parseInt(mode))}
-          </Button>
-          <DeviceSettingModal open={isModeModalOpen} onClose={closeModeModal} onSet={submitMode}>
-            <label className="flex w-full justify-center text-lg mb-3">{translate("common.mode")}</label>
+      <div className={"flex flex-row"}>
+        <DeviceSettingModal open={isModeModalOpen} onClose={closeModeModal} onSet={submitMode} width={"lg"}>
+          <label className="flex justify-center text-lg mb-3">{translate("common.mode")}</label>
+          <div className={" m-auto w-[20rem] md:w-[30rem] lg:w-[30rem] flex flex-col items-center"}>
             <label
-              className="flex justify-between items-center pt-2 pb-4 sm-m:pb-6 sm-l:pb-8"
+              className="w-full flex justify-between items-center pt-4 pb-4 border-b border-victron-darkGray-2"
               onClick={() => setModeForSubmission(SYSTEM_MODE.ON)}
             >
               <span>{translate("common.on")}</span>
@@ -141,7 +122,7 @@ const InverterCharger = ({ componentMode = "compact" }: Props) => {
               />
             </label>
             <label
-              className="flex justify-between items-center pt-2 pb-4 sm-m:pb-6 sm-l:pb-8"
+              className="w-full flex justify-between items-center pt-4 pb-4 border-b border-victron-darkGray-2"
               onClick={() => setModeForSubmission(SYSTEM_MODE.OFF)}
             >
               <span>{translate("common.off")}</span>
@@ -152,7 +133,7 @@ const InverterCharger = ({ componentMode = "compact" }: Props) => {
               />
             </label>
             <label
-              className="flex justify-between items-center pt-2 pb-4 sm-m:pb-6 sm-l:pb-8"
+              className="w-full flex justify-between items-center pt-4 pb-4 border-b border-victron-darkGray-2"
               onClick={() => setModeForSubmission(SYSTEM_MODE.CHARGER_ONLY)}
             >
               <span>{translate("common.chargerOnly")}</span>
@@ -163,7 +144,7 @@ const InverterCharger = ({ componentMode = "compact" }: Props) => {
               />
             </label>
             <label
-              className="flex justify-between items-center pt-2 pb-4 sm-m:pb-6 sm-l:pb-8"
+              className="w-full flex justify-between items-center pt-4 pb-4 border-b border-victron-darkGray-2"
               onClick={() => setModeForSubmission(SYSTEM_MODE.INVERTER_ONLY)}
             >
               <span>{translate("common.inverterOnly")}</span>
@@ -173,10 +154,10 @@ const InverterCharger = ({ componentMode = "compact" }: Props) => {
                 responsive={false}
               />
             </label>
-          </DeviceSettingModal>
-        </div>
+          </div>
+        </DeviceSettingModal>
       </div>
-    </Box>
+    </ValueBox>
   )
 }
 
@@ -184,4 +165,4 @@ interface Props {
   componentMode?: "compact" | "full"
 }
 
-export default observer(InverterCharger)
+export default withErrorBoundary(observer(InverterCharger), appErrorBoundaryProps)
