@@ -3,14 +3,7 @@ import DevicesIcon from "../../../images/icons/devices.svg"
 import { AppViews } from "../../../modules/AppViews"
 import { observer } from "mobx-react"
 import { translate } from "react-i18nify"
-import {
-  ChargerInstanceId,
-  useChargers,
-  useGeneratorFp,
-  useGeneratorRelay,
-  useInverters,
-  useVebus,
-} from "@elninotech/mfd-modules"
+import { useChargers, useGeneratorFp, useGeneratorRelay, useInverters, useVebus } from "@elninotech/mfd-modules"
 import Charger from "../Charger"
 import Inverter from "../Inverter"
 import GeneratorFp from "../GeneratorFp"
@@ -46,7 +39,7 @@ const DevicesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) => {
       })
     }
 
-    if (!!vebusInverters) {
+    if (!!vebusInverters.length) {
       vebusInverters.forEach((id) => {
         boxes.push(<Inverter key={id} componentMode={"full"} instanceId={id} isVebusInverter={true} />)
       })
@@ -63,6 +56,37 @@ const DevicesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) => {
     return boxes
   }
 
+  const getCompactDevices = function () {
+    let devices = []
+
+    if (!!chargers) {
+      chargers.forEach((charger) => {
+        devices.push(<Charger key={charger} instanceId={charger} />)
+      })
+    }
+
+    if (!!inverters) {
+      inverters.forEach((id) => {
+        devices.push(<Inverter key={id} instanceId={id} isVebusInverter={false} />)
+      })
+    }
+
+    if (!!vebusInverters.length) {
+      vebusInverters.forEach((id) => {
+        devices.push(<Inverter key={id} instanceId={id} isVebusInverter={true} />)
+      })
+    }
+
+    if (!!instanceId) {
+      devices.push(<InverterCharger />)
+    }
+
+    if (!!generatorFp.phases) devices.push(<GeneratorFp generatorFp={generatorFp} />)
+    if (!!generatorRelay.settings) devices.push(<GeneratorRelays generatorRelay={generatorRelay} />)
+
+    return devices
+  }
+
   useVisibilityNotifier({ widgetName: BoxTypes.DEVICES, visible: !!getDetailDevices().length })
 
   if (mode === "compact") {
@@ -77,16 +101,10 @@ const DevicesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) => {
           />
         }
         linkedView={AppViews.BOX_DEVICES_OVERVIEW}
+        withPagination={true}
+        paginationOrientation={"vertical"}
       >
-        <>
-          {chargers && chargers.map((charger: ChargerInstanceId) => <Charger key={charger} instanceId={charger} />)}
-          {inverters && inverters.map((id) => <Inverter key={id} instanceId={id} isVebusInverter={false} />)}
-          {!!vebusInverters.length &&
-            vebusInverters.map((id) => <Inverter key={id} instanceId={id} isVebusInverter={true} />)}
-          {!!instanceId && <InverterCharger />}
-          {!!generatorFp.phases && <GeneratorFp generatorFp={generatorFp} />}
-          {!!generatorRelay.settings && <GeneratorRelays generatorRelay={generatorRelay} />}
-        </>
+        {getCompactDevices()}
       </Box>
     )
   }
