@@ -3,6 +3,10 @@ import { makeAutoObservable } from "mobx"
 import { useMemo } from "react"
 
 export type notifyParams = {
+  // This is a weird warning from prettier, but it's not a problem, the prettier asks to add brackets for (typeof WIDGET_TYPES),
+  // but it's not needed, even more, it's not possible to add brackets for (typeof WIDGET_TYPES) because prettier
+  // will remove them automatically
+  // eslint-disable-next-line prettier/prettier
   widgetName: typeof WIDGET_TYPES[keyof typeof WIDGET_TYPES]
   visible: boolean
 }
