@@ -12,7 +12,7 @@ const GridPaginator = ({
   flow,
   forceOneDimensionRatio,
   onClick,
-  childrenPerPage,
+  perPage,
   orientation = "horizontal",
   pageSelectorPropsSetter,
 }: Props) => {
@@ -59,7 +59,7 @@ const GridPaginator = ({
 }
 
 interface Props extends GridProps {
-  childrenPerPage: number
+  perPage: number
   orientation?: "vertical" | "horizontal"
   pageSelectorPropsSetter?: (arg0: PageSelectorProps) => void
 }

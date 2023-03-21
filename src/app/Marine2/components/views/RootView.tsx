@@ -54,7 +54,7 @@ const RootView = () => {
       <div className="hidden">{initialBoxes.map((box) => box)}</div>
       <MainLayout pageSelectorProps={pageSelectorProps}>
         <GridPaginator
-          childrenPerPage={4}
+          perPage={4}
           flow={"col"}
           orientation={"horizontal"}
           childClassName={"p-2"}
