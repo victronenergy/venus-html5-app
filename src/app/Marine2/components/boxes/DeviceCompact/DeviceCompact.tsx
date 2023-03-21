@@ -13,7 +13,7 @@ const DeviceCompact = ({ icon, title, subTitle, value, unit }: Props) => {
           </div>
           <div
             className={
-              "dark:text-victron-gray-dark text-xs md:text-sm lg:text-sm leading-none md:leading-none lg:leading-none truncate"
+              "dark:text-victron-gray-dark text-xs md:text-sm lg:text-sm leading-[1.1rem] md:leading-none lg:leading-none truncate"
             }
           >
             {!!subTitle && subTitle}
