@@ -20,7 +20,6 @@ const VersionInfo = () => {
   }
 
   const toggleVersionInfo = () => {
-    console.log()
     setIsModalOpen(!isModalOpen)
   }
 
