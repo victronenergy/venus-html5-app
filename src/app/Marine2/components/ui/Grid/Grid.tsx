@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react"
 import classnames from "classnames"
-import { useComponentSize } from "../../../utils/hooks"
+import useSize from "@react-hook/size"
 
 const Grid = ({
   children,
@@ -13,7 +13,7 @@ const Grid = ({
   const childrenCount = Array.isArray(children) ? children.length : 1
 
   const gridRef = useRef<HTMLDivElement>(null)
-  const gridSize = useComponentSize(gridRef)
+  const [width, height] = useSize(gridRef)
 
   const [gridFlow, setGridFlow] = useState<"row" | "col">(flow)
   const [forceOneDimension, setForceOneDimension] = useState(false)
@@ -48,6 +48,7 @@ const Grid = ({
   }
 
   useEffect(() => {
+    const gridSize = { width, height }
     if (!gridSize.width || !gridSize.height || forceOneDimensionRatio <= 0) {
       return
     }
@@ -57,7 +58,7 @@ const Grid = ({
 
     setForceOneDimension(isOneDimension)
     setGridFlow(isOneDimension ? (ratio > 1 ? "row" : "col") : flow)
-  }, [gridSize, forceOneDimensionRatio, flow])
+  }, [width, height, forceOneDimensionRatio, flow])
 
   return (
     <div ref={gridRef} className={classnames("w-full h-full min-w-0 min-h-0", className)}>
@@ -67,7 +68,7 @@ const Grid = ({
           "flex-row": gridFlow === "row",
           "flex-wrap": !forceOneDimension,
         })}
-        style={{ width: gridSize.width || undefined, height: gridSize.height || undefined }}
+        style={{ width: width || undefined, height: height || undefined }}
       >
         {Array.isArray(children) ? (
           children.map((child, i) => (

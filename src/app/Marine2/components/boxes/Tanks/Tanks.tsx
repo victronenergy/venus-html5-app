@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import TanksIcon from "../../../images/icons/tanks.svg"
 import { useTanks } from "@elninotech/mfd-modules"
 import { observer } from "mobx-react"
-import { useComponentSize, useWindowSize } from "../../../utils/hooks"
+import { useWindowSize } from "../../../utils/hooks"
 import Box from "../../ui/Box"
 import Tank from "./Tank"
 import { AppViews } from "../../../modules/AppViews"
@@ -12,6 +12,7 @@ import { useVisibilityNotifier } from "../../../modules"
 import { BoxTypes } from "../../../utils/constants"
 import Paginator from "../../ui/Paginator"
 import ResizeObserver from "resize-observer-polyfill"
+import useSize from "@react-hook/size"
 
 interface Props {
   mode?: "full" | "compact"
@@ -30,17 +31,18 @@ const Tanks = ({ mode = "full", className }: Props) => {
   const tankRef = useRef<HTMLDivElement>(null)
   const [orientation, setOrientation] = useState<"horizontal" | "vertical">("vertical")
 
-  const componentSize = useComponentSize(gridRef)
+  const [width, height] = useSize(gridRef)
   const windowSize = useWindowSize()
 
   useEffect(() => {
+    const componentSize = { width, height }
     if (!windowSize || !componentSize) return
     if (windowSize.height !== undefined && 2 * componentSize.height > windowSize.height) {
       setOrientation("horizontal")
     } else {
       setOrientation("vertical")
     }
-  }, [windowSize, componentSize])
+  }, [windowSize, width, height])
 
   useEffect(() => {
     if (!gridRef.current) return

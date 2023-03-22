@@ -4,8 +4,8 @@ import range from "lodash-es/range"
 import classnames from "classnames"
 import PageFlipper from "../PageFlipper"
 import { PageSelectorProps } from "../PageSelector"
-import { useComponentSize } from "../../../utils/hooks"
 import { boxBreakpoints } from "../../../utils/media"
+import useSize from "@react-hook/size"
 
 const GridPaginator = ({
   children,
@@ -21,24 +21,24 @@ const GridPaginator = ({
   const [childrenPerPage, setChildrenPerPage] = useState(perPage)
 
   const gridPaginatorRef = useRef<HTMLDivElement>(null)
-  const gridPaginatorSize = useComponentSize(gridPaginatorRef)
+  const [width, height] = useSize(gridPaginatorRef)
 
   const childrenArray = Array.isArray(children) ? children : [children]
   const pages = Math.ceil(childrenArray.length / childrenPerPage)
 
   // automatically change perPage if grid size is too small
   useEffect(() => {
-    if (!gridPaginatorSize.width || !gridPaginatorSize.height) {
+    if (!width || !height) {
       return
     }
 
     let forcePerPage = perPage
 
-    if (gridPaginatorSize.width < boxBreakpoints["lg-s"].width) {
+    if (width < boxBreakpoints["lg-s"].width) {
       forcePerPage = 2
     }
 
-    if (gridPaginatorSize.width < boxBreakpoints["md-s"].width) {
+    if (width < boxBreakpoints["md-s"].width) {
       forcePerPage = 1
     }
 
@@ -55,7 +55,7 @@ const GridPaginator = ({
           maxPages: 0,
         })
     }
-  }, [gridPaginatorSize, childrenPerPage, perPage, childrenArray.length, pageSelectorPropsSetter])
+  }, [width, height, childrenPerPage, perPage, childrenArray.length, pageSelectorPropsSetter])
 
   if (pages === 1) {
     return (
