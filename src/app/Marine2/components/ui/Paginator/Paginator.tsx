@@ -4,8 +4,8 @@ import { PageSelectorProps, SelectorLocation } from "../PageSelector"
 import { observer } from "mobx-react"
 import ScrollSizeObserver from "../Observers/ScrollSizeObserver"
 import PageFlipper from "../PageFlipper"
-import { useComponentSize } from "../../../utils/hooks"
 import { SizeChangeObserver } from "../Observers"
+import useSize from "@react-hook/size"
 
 const Paginator = ({
   children,
@@ -20,7 +20,7 @@ const Paginator = ({
 
   const childrenRef = useRef<Array<HTMLDivElement>>([])
   const wrapperRef = useRef<HTMLDivElement>(null)
-  const componentSize = useComponentSize(wrapperRef)
+  const [width, height] = useSize(wrapperRef)
 
   const [pageNum, setPageNum] = useState(0)
   const [currentPage, setCurrentPage] = useState(0)
@@ -156,10 +156,10 @@ const Paginator = ({
 
   useEffect(() => {
     if (orientation === "horizontal") setPagesElement(undefined)
-  }, [componentSize.width, orientation])
+  }, [width, orientation])
   useEffect(() => {
     if (orientation === "vertical") setPagesElement(undefined)
-  }, [componentSize.height, orientation])
+  }, [height, orientation])
 
   return (
     <div ref={wrapperRef} className="w-full h-full">

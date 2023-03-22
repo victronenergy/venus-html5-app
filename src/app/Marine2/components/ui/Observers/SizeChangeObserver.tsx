@@ -1,22 +1,22 @@
 import { CSSProperties, useEffect, useRef, useState } from "react"
-import { useComponentSize } from "../../../utils/hooks"
 import { observer } from "mobx-react"
+import useSize from "@react-hook/size"
 
 const SizeChangeObserver = ({ children, onSizeChange, orientation, className = "", style }: Props) => {
   const containerRef = useRef<HTMLDivElement>(null)
-  const componentSize = useComponentSize(containerRef)
+  const [width, height] = useSize(containerRef)
   const [initialSize, setInitialSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
   useEffect(() => {
     if (initialSize.width === 0 && initialSize.height === 0) {
-      setInitialSize(componentSize)
+      setInitialSize({ width, height })
     } else if (
-      (orientation === "vertical" && componentSize.height !== initialSize.height) ||
-      (orientation === "horizontal" && componentSize.width !== initialSize.width)
+      (orientation === "vertical" && height !== initialSize.height) ||
+      (orientation === "horizontal" && width !== initialSize.width)
     ) {
-      setInitialSize(componentSize)
+      setInitialSize({ width, height })
       onSizeChange()
     }
-  }, [onSizeChange, initialSize, orientation, componentSize, className])
+  }, [onSizeChange, initialSize, orientation, width, height, className])
 
   return (
     <div className={className} ref={containerRef} style={style}>

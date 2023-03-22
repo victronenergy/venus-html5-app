@@ -1,4 +1,5 @@
-import { RefObject, useCallback, useEffect, useState } from "react"
+import { RefObject, useEffect, useState } from "react"
+import useSize from "@react-hook/size"
 
 export const useWindowSize = () => {
   const [windowSize, setWindowSize] = useState<{ width?: number; height?: number }>({
@@ -34,40 +35,7 @@ export const useWindowSize = () => {
 }
 
 export const useComponentSize = (ref: RefObject<HTMLElement>) => {
-  const [size, setSize] = useState({ width: 0, height: 0 })
+  const [width, height] = useSize(ref)
 
-  const handleResize = useCallback(() => {
-    if (!ref?.current) {
-      return
-    }
-
-    setSize({
-      width: ref.current.offsetWidth,
-      height: ref.current.offsetHeight,
-    })
-  }, [ref])
-
-  useEffect(() => {
-    if (!ref?.current) {
-      return
-    }
-
-    handleResize()
-
-    // check if resizeObserver is supported
-    if (window.ResizeObserver) {
-      const resizeObserver = new ResizeObserver(handleResize)
-      resizeObserver.observe(ref.current)
-      return () => {
-        resizeObserver.disconnect()
-      }
-    }
-
-    window.addEventListener("resize", handleResize)
-    return () => {
-      window.removeEventListener("resize", handleResize)
-    }
-  }, [ref, handleResize])
-
-  return size
+  return { width, height }
 }
