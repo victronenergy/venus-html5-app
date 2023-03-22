@@ -2,6 +2,7 @@ import classNames from "classnames"
 import { applyStyles, BreakpointStylesType } from "../../../utils/media"
 import { formatValue } from "../../../utils/formatters"
 import React from "react"
+import FadedText from "../FadedText"
 
 const styles: BreakpointStylesType = {
   default: {
@@ -32,11 +33,12 @@ const ValueOverview = ({ title, subtitle, Icon, value, unit, boxSize }: Props) =
         {/* @ts-ignore */}
         {<Icon className={activeStyles.icon} />}
         <div className={"px-2 min-w-0 flex flex-col"}>
-          <p className={classNames("my-0 truncate", activeStyles.title)}>{title}</p>
+          <FadedText className={classNames("pr-8", activeStyles.title)} text={title} />
           {subtitle && (
-            <span className={classNames("text-victron-gray dark:text-victron-gray-500", activeStyles.subtitle)}>
-              {subtitle}
-            </span>
+            <FadedText
+              className={classNames("text-victron-gray dark:text-victron-gray-500", activeStyles.subtitle)}
+              text={subtitle}
+            />
           )}
         </div>
       </div>

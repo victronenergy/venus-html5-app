@@ -4,6 +4,7 @@ import ArrowRightIcon from "../../../images/icons/arrow-right.svg"
 import { AppViews, useAppViewsStore } from "../../../modules/AppViews"
 import { useComponentSize } from "app/Marine2/utils/hooks"
 import Paginator from "../Paginator"
+import FadedText from "../FadedText"
 
 const Box = ({
   children,
@@ -46,7 +47,7 @@ const Box = ({
           onClick={handleClick}
         >
           {icon && <span className={"mr-1"}>{icon}</span>}
-          <span className={"text-base truncate"}>{title}</span>
+          <FadedText text={title} className={"text-base"} />
         </div>
         {linkedView && (
           <div className="-mr-3 p-3" onClick={handleClick}>
