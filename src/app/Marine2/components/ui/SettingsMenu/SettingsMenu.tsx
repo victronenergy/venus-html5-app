@@ -45,7 +45,7 @@ const SettingsMenu = () => {
           onClose={() => {
             setIsModalOpen(false)
           }}
-          className="w-full max-w-sm mb-20 mr-6 bottom-0 right-0"
+          className="w-3/4 max-w-md mb-20 mr-6 bottom-0 right-0"
         >
           <Modal.Body>
             <div className="flex flex-col">
@@ -86,7 +86,7 @@ const SettingsMenu = () => {
               </div>
             </div>
           </Modal.Body>
-          <Button onClick={openRemoteConsole} className="w-full" size="md">
+          <Button onClick={openRemoteConsole} className="w-full truncate" size="md">
             {translate("header.remoteConsole")}
           </Button>
         </Modal.Frame>

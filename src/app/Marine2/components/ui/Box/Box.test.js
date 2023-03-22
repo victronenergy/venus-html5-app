@@ -2,6 +2,7 @@ import { mount } from "enzyme"
 import React from "react"
 import Box from "./Box"
 import { AppViews } from "../../../modules/AppViews"
+import Paginator from "../Paginator"
 
 describe("Box element", () => {
   const title = "Test title"
@@ -46,7 +47,7 @@ describe("Box element", () => {
     )
 
     it("should not contain paginator", () => {
-      expect(wrapper.find("Paginator").exists()).toBe(false)
+      expect(wrapper.find(Paginator).exists()).toBe(false)
     })
   })
 
@@ -58,15 +59,15 @@ describe("Box element", () => {
     )
 
     it("should contain paginator", () => {
-      expect(wrapper.find("Paginator").exists()).toBe(true)
+      expect(wrapper.find(Paginator).exists()).toBe(true)
     })
 
     it("should contain content inside paginator", () => {
-      expect(wrapper.find("Paginator").text()).toContain(content)
+      expect(wrapper.find(Paginator).text()).toContain(content)
     })
 
     it("should passthrough paginator orientation", () => {
-      expect(wrapper.find("Paginator").props()).toHaveProperty("orientation", "vertical")
+      expect(wrapper.find(Paginator).props()).toHaveProperty("orientation", "vertical")
     })
   })
 })

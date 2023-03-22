@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+    html {
+        font-family: MuseoSans, "Noto Sans SC", sans-serif;
+    }
+}
+
 html,
 body {
     width: 100%;
@@ -38,12 +44,21 @@ p {
 
 @font-face {
     font-family: MuseoSans;
-    src: url("fonts/MuseoSans/MuseoSans-300.otf"),
-    url("fonts/MuseoSans/MuseoSans-300Italic.otf"),
-    url("fonts/MuseoSans/MuseoSans-500.otf"),
-    url("fonts/MuseoSans/MuseoSans-500Italic.otf"),
-    url("fonts/MuseoSans/MuseoSans-700.otf"),
-    url("fonts/MuseoSans/MuseoSans-700Italic.otf");
+    src: url("../../../css/fonts/MuseoSans/MuseoSans-300.otf"),
+    url("../../../css/fonts/MuseoSans/MuseoSans-300Italic.otf"),
+    url("../../../css/fonts/MuseoSans/MuseoSans-500.otf"),
+    url("../../../css/fonts/MuseoSans/MuseoSans-500Italic.otf"),
+    url("../../../css/fonts/MuseoSans/MuseoSans-700.otf"),
+    url("../../../css/fonts/MuseoSans/MuseoSans-700Italic.otf");
+}
+
+@font-face {
+    font-family: "Noto Sans SC";
+    src: url("../../../css/fonts/NotoSansSC/NotoSansSC-Regular.otf");
+}
+
+* {
+    font-family: MuseoSans, "Noto Sans SC", sans-serif;
 }
 
 *:focus {

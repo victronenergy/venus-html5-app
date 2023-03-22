@@ -35,7 +35,7 @@ const activeSourceIcon = {
 
 const getSourceSubtitle = (active: boolean, phases: number) => {
   if (active) {
-    return phases > 1 ? translate("common.phases", { phases }) : ""
+    return phases > 1 ? translate("common.nrOfPhases", { phases }) : ""
   } else {
     return translate("common.unplugged")
   }
