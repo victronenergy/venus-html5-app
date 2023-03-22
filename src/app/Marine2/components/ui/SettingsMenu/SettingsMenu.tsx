@@ -8,6 +8,7 @@ import ToggleSwitch from "../ToggleSwitch"
 import RadioButton from "../RadioButton"
 import { AppViews, useAppViewsStore } from "../../../modules/AppViews"
 import Button from "../Button"
+import FadedText from "../FadedText"
 
 const SettingsMenu = () => {
   const { locked, toggleLocked } = useAppStore()
@@ -86,8 +87,8 @@ const SettingsMenu = () => {
               </div>
             </div>
           </Modal.Body>
-          <Button onClick={openRemoteConsole} className="w-full truncate" size="md">
-            {translate("header.remoteConsole")}
+          <Button onClick={openRemoteConsole} className="w-full" size="md">
+            <FadedText text={translate("header.remoteConsole")} />
           </Button>
         </Modal.Frame>
       </div>
