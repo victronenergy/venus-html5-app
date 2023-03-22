@@ -154,6 +154,7 @@ const PageSelector = ({
   )
 }
 
+// TODO: remake this to use store states instead of props down the tree
 export interface PageSelectorProps {
   currentPage?: number
   maxPages?: number

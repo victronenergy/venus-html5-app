@@ -122,74 +122,73 @@ const Tanks = ({ mode = "full", className }: Props) => {
           ))}
       </Box>
     )
-  }
-
-  // FIXME: this prop conflicts with mode === "full"
-  if (orientation === "vertical") {
-    return (
-      <Box
-        title={"Tanks"}
-        icon={
-          <TanksIcon
-            /* todo: fix types for svg */
-            /* @ts-ignore */
-            className={"w-6 text-black dark:text-white"}
-          />
-        }
-        className={className}
-        getBoxSizeCallback={setBoxSize}
-      >
-        <div ref={gridRef}>
-          {tanks?.map((tank, index) => {
-            return tank ? (
-              <Tank
-                key={index}
-                tankInstanceId={tank}
-                mode="full"
-                orientation={orientation}
-                parentSize={boxSize}
-                nameWidth={nameWidth}
-                levelWidth={levelWidth}
-              />
-            ) : (
-              <></>
-            )
-          })}
-        </div>
-      </Box>
-    )
-  }
-
-  // FIXME: this is unreachable code in case of orientation === "vertical"
-  return (
-    <Box
-      title={"Tanks"}
-      icon={
-        <TanksIcon
-          /* todo: fix types for svg */
-          /* @ts-ignore */
-          className={"w-6 text-black dark:text-white"}
-        />
-      }
-      getBoxSizeCallback={setBoxSize}
-    >
-      <Paginator selectorLocation="bottom-right" orientation="horizontal">
-        <div className="flex justify-between h-full" ref={gridRef}>
-          {tanks.map((tank, index) => (
-            <Tank
-              key={index}
-              tankInstanceId={tank!}
-              mode="full"
-              orientation={orientation}
-              parentSize={boxSize}
-              nameWidth={nameWidth}
-              levelWidth={levelWidth}
+  } else {
+    if (orientation === "vertical") {
+      return (
+        <Box
+          title={"Tanks"}
+          icon={
+            <TanksIcon
+              /* todo: fix types for svg */
+              /* @ts-ignore */
+              className={"w-6 text-black dark:text-white"}
             />
-          ))}
-        </div>
-      </Paginator>
-    </Box>
-  )
+          }
+          className={className}
+          getBoxSizeCallback={setBoxSize}
+        >
+          <div ref={gridRef}>
+            {tanks?.map((tank, index) => {
+              return tank ? (
+                <Tank
+                  key={index}
+                  tankInstanceId={tank}
+                  mode="full"
+                  orientation={orientation}
+                  parentSize={boxSize}
+                  nameWidth={nameWidth}
+                  levelWidth={levelWidth}
+                />
+              ) : (
+                <></>
+              )
+            })}
+          </div>
+        </Box>
+      )
+    } else {
+      // orientation === "horizontal"
+      return (
+        <Box
+          title={"Tanks"}
+          icon={
+            <TanksIcon
+              /* todo: fix types for svg */
+              /* @ts-ignore */
+              className={"w-6 text-black dark:text-white"}
+            />
+          }
+          getBoxSizeCallback={setBoxSize}
+        >
+          <Paginator selectorLocation="bottom-full" orientation="horizontal">
+            <div className="flex justify-between h-full" ref={gridRef}>
+              {tanks.map((tank, index) => (
+                <Tank
+                  key={tank}
+                  tankInstanceId={tank!}
+                  mode="full"
+                  orientation={orientation}
+                  parentSize={boxSize}
+                  nameWidth={nameWidth}
+                  levelWidth={levelWidth}
+                />
+              ))}
+            </div>
+          </Paginator>
+        </Box>
+      )
+    }
+  }
 }
 
 export default withErrorBoundary(observer(Tanks), appErrorBoundaryProps)

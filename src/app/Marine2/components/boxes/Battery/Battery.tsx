@@ -14,7 +14,7 @@ import ValueBox from "../../ui/ValueBox"
 
 const styles: BreakpointStylesType = {
   default: {
-    value: "text-2xl",
+    value: "text-xl",
     valueSubtitle: "text-base",
     valueBar: "text-sm",
     valueBars: "text-sm",
