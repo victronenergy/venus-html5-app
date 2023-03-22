@@ -80,7 +80,7 @@ const EnergyOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) => {
   return (
     <GridPaginator
       childClassName={"p-2"}
-      childrenPerPage={4}
+      perPage={4}
       orientation={"horizontal"}
       pageSelectorPropsSetter={pageSelectorPropsSetter}
     >
