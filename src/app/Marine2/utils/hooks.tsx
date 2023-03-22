@@ -1,5 +1,4 @@
-import { RefObject, useEffect, useState } from "react"
-import useSize from "@react-hook/size"
+import { useEffect, useState } from "react"
 
 export const useWindowSize = () => {
   const [windowSize, setWindowSize] = useState<{ width?: number; height?: number }>({
@@ -32,10 +31,4 @@ export const useWindowSize = () => {
   }, [])
 
   return windowSize
-}
-
-export const useComponentSize = (ref: RefObject<HTMLElement>) => {
-  const [width, height] = useSize(ref)
-
-  return { width, height }
 }
