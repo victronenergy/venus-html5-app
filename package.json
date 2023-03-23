@@ -60,7 +60,6 @@
     "postcss-flexbugs-fixes": "^4.2.1",
     "postcss-normalize": "^8.0.1",
     "postcss-preset-env": "^7.8.3",
-    "postcss-safe-parser": "^5.0.2",
     "preval.macro": "^5.0.0",
     "process": "^0.11.10",
     "prompts": "2.4.0",
