@@ -15,26 +15,21 @@ const compactStyles: BreakpointStylesType = {
   default: {
     tankName: "text-sm ",
     level: "text-base",
-    progressBar: "hidden",
   },
   "sm-s": {
     tankName: "text-sm ",
     level: "text-base",
-    progressBar: "hidden",
   },
   "sm-m": {
     tankName: "text-sm ",
-    progressBar: "block",
   },
   "md-s": {
     tankName: "text-base mr-4",
     level: "text-lg",
-    progressBar: "block",
   },
   "lg-s": {
     tankName: "text-base mr-4",
     level: "text-lg",
-    progressBar: "block",
   },
 }
 
@@ -63,29 +58,25 @@ const verticalStyles: BreakpointStylesType = {
     tankName: "text-base mr-5",
     level: "text-lg",
     capacity: "text-xs",
-    progressBar: "hidden",
   },
   "sm-s": {
     tankName: "text-base mr-5",
     level: "text-lg",
     capacity: "text-xs",
-    progressBar: "hidden",
   },
   "md-s": {
     tankName: "text-lg mr-5",
     level: "text-xl",
     capacity: "text-xs",
-    progressBar: "block",
   },
   "lg-s": {
     tankName: "text-lg mr-5",
     level: "text-xl",
     capacity: "text-xs",
-    progressBar: "block",
   },
 }
 
-const Tank = ({ tankInstanceId, mode, nameWidth, levelWidth, orientation = "vertical", parentSize }: Props) => {
+const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", parentSize }: Props) => {
   let { capacity, fluidType, level, remaining, unit } = useTank(tankInstanceId)
   const fluidTypeNum = +fluidType
 
@@ -130,29 +121,41 @@ const Tank = ({ tankInstanceId, mode, nameWidth, levelWidth, orientation = "vert
 
   if (mode === "compact") {
     return (
-      <div className="flex flex-row justify-end items-center">
-        <div className={"flex items-center py-2 truncate basis-0 flex-grow"}>
-          <div>{fluidIcon(fluidTypeNum, mode)}</div>
+      <div className="flex flex-row items-center">
+        <div className={classnames("flex items-center py-2 truncate")}>
+          <div className="mr-2">{fluidIcon(fluidTypeNum, mode)}</div>
           <div className={classnames("truncate", compactActiveStyles?.tankName)}>{fluidTypeTitle} </div>
         </div>
-        <div className={classnames("flex items-center justify-center ml-4 w-1/2", compactActiveStyles?.progressBar)}>
-          <ProgressBar percentage={levelFormatter(level)} type={fluidTypeNum} />
-        </div>
-        <div className="tank-level">
-          <div style={levelWidth ? { width: levelWidth + "px" } : {}} className="flex items-center justify-center pl-5">
-            <div
-              className={classnames("flex flex-row ", compactActiveStyles?.level, compactActiveStyles?.levelWidth, {
-                "text-victron-red": level > 75,
-              })}
-            >
-              <div>{levelFormatter(level)}</div>
+        <div className="flex flex-row items-center basis-0 flex-grow justify-end">
+          <div
+            className={classnames("ml-4")}
+            style={
+              parentSize?.width
+                ? {
+                    display: parentSize.width < 400 ? "none" : "block",
+                    width: parentSize.width > 540 ? parentSize.width * 0.5 : parentSize.width * 0.4,
+                  }
+                : {}
+            }
+          >
+            <ProgressBar percentage={levelFormatter(level)} type={fluidTypeNum} />
+          </div>
+          <div className="tank-level">
+            <div style={levelWidth ? { width: levelWidth + "px" } : {}} className="pl-2 md:pl-5 text-right">
               <div
-                className={classnames({
-                  "text-victron-red/70": level > 75,
-                  "text-victron-gray/70": level <= 75,
+                className={classnames("flex flex-row", compactActiveStyles?.level, compactActiveStyles?.levelWidth, {
+                  "text-victron-red": level > 75,
                 })}
               >
-                {" %"}
+                <div>{levelFormatter(level)}</div>
+                <div
+                  className={classnames({
+                    "text-victron-red/70": level > 75,
+                    "text-victron-gray/70": level <= 75,
+                  })}
+                >
+                  %
+                </div>
               </div>
             </div>
           </div>
@@ -163,51 +166,53 @@ const Tank = ({ tankInstanceId, mode, nameWidth, levelWidth, orientation = "vert
     if (orientation === "vertical") {
       return (
         <div>
-          <div className="flex flex-row justify-between items-center">
-            <div className="tank-name">
-              <div
-                style={nameWidth !== 0 ? { width: nameWidth + "px" } : {}}
-                className={classnames("flex items-center")}
-              >
-                <div>{fluidIcon(fluidTypeNum, mode)}</div>
-                <div className="flex flex-col p-2 w-full whitespace-nowrap">
-                  <div className={classnames("", verticalActiveStyles?.tankName)}>{fluidTypeTitle}</div>
-                  <div className={classnames("text-victron-gray", verticalActiveStyles?.capacity)}>
-                    {formatCapacity(remaining) + "/" + formatCapacity(capacity) + "L"}
-                  </div>
+          <div className="flex flex-row items-center">
+            <div className={classnames("flex items-center truncate")}>
+              <div className="mr-2 lg:mr-3">{fluidIcon(fluidTypeNum, mode)}</div>
+              <div className="flex flex-col p-2 w-full truncate">
+                <div className={classnames("truncate", verticalActiveStyles?.tankName)}>{fluidTypeTitle}</div>
+                <div className={classnames("text-victron-gray", verticalActiveStyles?.capacity)}>
+                  {formatCapacity(remaining) + "/" + formatCapacity(capacity) + "L"}
                 </div>
               </div>
             </div>
-            <div
-              className={classnames(
-                "flex items-center justify-center basis-0 flex-grow",
-                verticalActiveStyles?.progressBar
-              )}
-            >
-              <ProgressBar percentage={levelFormatter(level)} type={fluidTypeNum} size={"large"} />
-            </div>
-            <div className="tank-level">
+            <div className="flex flex-row items-center basis-0 flex-grow justify-end">
               <div
-                style={levelWidth ? { width: levelWidth + "px" } : {}}
-                className="flex items-center justify-center pl-5"
+                className={classnames("flex items-center justify-center")}
+                style={
+                  parentSize?.width
+                    ? {
+                        width: parentSize.width > 1000 ? parentSize.width * 0.7 : parentSize.width * 0.5,
+                        display: parentSize.width < 400 ? "none" : "block",
+                      }
+                    : {}
+                }
               >
+                <ProgressBar percentage={levelFormatter(level)} type={fluidTypeNum} size={"large"} />
+              </div>
+              <div className="tank-level">
                 <div
-                  className={classnames(
-                    "flex flex-row",
-                    {
-                      "text-victron-red": level > 75,
-                    },
-                    verticalActiveStyles?.level
-                  )}
+                  style={levelWidth ? { width: levelWidth + "px" } : {}}
+                  className="flex items-center justify-center pl-2 md:pl-5"
                 >
-                  <div>{levelFormatter(level)}</div>
                   <div
-                    className={classnames({
-                      "text-victron-red/70": level > 75,
-                      "text-victron-gray/70": level <= 75,
-                    })}
+                    className={classnames(
+                      "flex flex-row",
+                      {
+                        "text-victron-red": level > 75,
+                      },
+                      verticalActiveStyles?.level
+                    )}
                   >
-                    {" %"}
+                    <div>{levelFormatter(level)}</div>
+                    <div
+                      className={classnames({
+                        "text-victron-red/70": level > 75,
+                        "text-victron-gray/70": level <= 75,
+                      })}
+                    >
+                      {" %"}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -216,6 +221,7 @@ const Tank = ({ tankInstanceId, mode, nameWidth, levelWidth, orientation = "vert
         </div>
       )
     } else {
+      // orientation === "horizontal"
       return (
         <div className="px-3">
           <div className="h-full w-full flex flex-row">
@@ -224,12 +230,9 @@ const Tank = ({ tankInstanceId, mode, nameWidth, levelWidth, orientation = "vert
             </div>
             <div className="flex flex-col justify-between min-w-[90%]">
               <div className="pt-2 px-2">
-                <div>{fluidIcon(fluidTypeNum, mode)}</div>
+                <div className="mb-2">{fluidIcon(fluidTypeNum, mode)}</div>
                 <div className="w-full tank-name">
-                  <div
-                    style={nameWidth ? { width: nameWidth + "px" } : {}}
-                    className={classnames("whitespace-nowrap", horizontalActiveStyles?.tankName)}
-                  >
+                  <div className={classnames("whitespace-nowrap", horizontalActiveStyles?.tankName)}>
                     {fluidTypeTitle}
                   </div>
                 </div>
@@ -255,7 +258,7 @@ const Tank = ({ tankInstanceId, mode, nameWidth, levelWidth, orientation = "vert
                   </div>
                 </div>
                 <div className={classnames("text-victron-gray", horizontalActiveStyles?.capacity)}>
-                  {formatCapacity(remaining) + "/" + formatCapacity(capacity) + "l"}
+                  {formatCapacity(remaining) + "/" + formatCapacity(capacity) + "L"}
                 </div>
               </div>
             </div>
@@ -308,7 +311,6 @@ const fluidIcon = (type: number, mode: string = "compact") => {
 
 interface Props {
   tankInstanceId: number
-  nameWidth?: number
   levelWidth?: number
   mode?: "compact" | "full"
   orientation?: "vertical" | "horizontal"
