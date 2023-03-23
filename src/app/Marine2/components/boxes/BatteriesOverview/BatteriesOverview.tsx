@@ -5,10 +5,8 @@ import { BATTERY, BoxTypes } from "../../../utils/constants"
 import Battery from "../Battery/Battery"
 import BatteriesIcon from "../../../images/icons/batteries.svg"
 import BatterySummary from "../../ui/BatterySummary"
-import { withErrorBoundary } from "react-error-boundary"
 import { AppViews } from "../../../modules/AppViews"
 import { translate } from "react-i18nify"
-import { appErrorBoundaryProps } from "../../ui/Error/appErrorBoundary"
 import { useVisibilityNotifier } from "../../../modules"
 import GridPaginator from "../../ui/GridPaginator"
 import { useState } from "react"
@@ -100,4 +98,4 @@ const getOverviewBatteries = function (batteries: BatteryType[]) {
   return batteries.slice(0, withStateCount)
 }
 
-export default withErrorBoundary(observer(BatteriesOverview), appErrorBoundaryProps)
+export default observer(BatteriesOverview)

@@ -28,8 +28,6 @@ import { useVisibilityNotifier } from "../../../modules"
 import { BoxTypes } from "../../../utils/constants"
 import GridPaginator from "../../ui/GridPaginator"
 import { PageSelectorProps } from "../../ui/PageSelector"
-import { withErrorBoundary } from "react-error-boundary"
-import { appErrorBoundaryProps } from "../../ui/Error/appErrorBoundary"
 
 const EnergyOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -153,4 +151,4 @@ interface Props {
   pageSelectorPropsSetter?: (arg0: PageSelectorProps) => void
 }
 
-export default withErrorBoundary(observer(EnergyOverview), appErrorBoundaryProps)
+export default observer(EnergyOverview)
