@@ -673,7 +673,6 @@ module.exports = function (webpackEnv) {
             },
           },
         }),
-      new MiniCssExtractPlugin(),
       new webpack.ProvidePlugin({
         Buffer: ["buffer", "Buffer"],
       }),
