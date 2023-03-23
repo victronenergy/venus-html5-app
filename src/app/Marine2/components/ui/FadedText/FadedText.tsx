@@ -6,9 +6,8 @@ const FadedText = ({ text, className }: Props) => {
     <span
       className={classNames("whitespace-nowrap w-full overflow-hidden", className)}
       style={{
-        /* @ts-ignore */
-        "mask-image": "linear-gradient(to right, rgba(0,0,0,1) 90%, rgba(0,0,0,0))",
-        "-webkit-mask-image": "linear-gradient(to right, rgba(0,0,0,1) 90%, rgba(0,0,0,0))",
+        maskImage: "linear-gradient(to right, rgba(0,0,0,1) 90%, rgba(0,0,0,0))",
+        WebkitMaskImage: "linear-gradient(to right, rgba(0,0,0,1) 90%, rgba(0,0,0,0))",
       }}
     >
       {text}
