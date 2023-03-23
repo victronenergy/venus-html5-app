@@ -173,7 +173,7 @@ const Tank = ({ tankInstanceId, mode, nameWidth, levelWidth, orientation = "vert
                 <div className="flex flex-col p-2 w-full whitespace-nowrap">
                   <div className={classnames("", verticalActiveStyles?.tankName)}>{fluidTypeTitle}</div>
                   <div className={classnames("text-victron-gray", verticalActiveStyles?.capacity)}>
-                    {formatCapacity(remaining) + "/" + formatCapacity(capacity) + "l"}
+                    {formatCapacity(remaining) + "/" + formatCapacity(capacity) + "L"}
                   </div>
                 </div>
               </div>
