@@ -22,7 +22,6 @@ interface Props {
 const Tanks = ({ mode = "full", className }: Props) => {
   const { tanks } = useTanks()
   const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
-  const [nameWidth, setNameWidth] = useState(0)
   const [levelWidth, setLevelWidth] = useState(0)
 
   useVisibilityNotifier({ widgetName: BoxTypes.TANKS, visible: !!(tanks && tanks.length) })
@@ -35,14 +34,14 @@ const Tanks = ({ mode = "full", className }: Props) => {
   const windowSize = useWindowSize()
 
   useEffect(() => {
-    const componentSize = { width, height }
-    if (!windowSize || !componentSize) return
-    if (windowSize.height !== undefined && 2 * componentSize.height > windowSize.height) {
+    if (!windowSize.width || !windowSize.height) return
+
+    if (windowSize.width > 2 * windowSize.height) {
       setOrientation("horizontal")
     } else {
       setOrientation("vertical")
     }
-  }, [windowSize, width, height])
+  }, [windowSize])
 
   useEffect(() => {
     if (!gridRef.current) return
@@ -68,19 +67,8 @@ const Tanks = ({ mode = "full", className }: Props) => {
   const getColumnsWidth = () => {
     // wait for styles to be applied
     setTimeout(() => {
-      const names = document.querySelectorAll(".tank-name")
       const levels = document.querySelectorAll(".tank-level")
       let max = 0
-      names.forEach((name) => {
-        if (name.clientWidth > max) {
-          max = name.clientWidth
-        }
-      })
-      if (max > 0) {
-        setNameWidth(max)
-      }
-
-      max = 0
       levels.forEach((level) => {
         if (level.clientWidth > max) {
           max = level.clientWidth
@@ -115,7 +103,6 @@ const Tanks = ({ mode = "full", className }: Props) => {
                 key={tank}
                 tankInstanceId={Number(tank)}
                 parentSize={boxSize}
-                nameWidth={nameWidth}
                 levelWidth={levelWidth}
               />
             </div>
@@ -145,8 +132,7 @@ const Tanks = ({ mode = "full", className }: Props) => {
                   tankInstanceId={tank}
                   mode="full"
                   orientation={orientation}
-                  parentSize={boxSize}
-                  nameWidth={nameWidth}
+                  parentSize={{ width, height }}
                   levelWidth={levelWidth}
                 />
               ) : (
@@ -172,14 +158,13 @@ const Tanks = ({ mode = "full", className }: Props) => {
         >
           <Paginator selectorLocation="bottom-full" orientation="horizontal">
             <div className="flex justify-between h-full" ref={gridRef}>
-              {tanks.map((tank, index) => (
+              {tanks.map((tank) => (
                 <Tank
                   key={tank}
                   tankInstanceId={tank!}
                   mode="full"
                   orientation={orientation}
-                  parentSize={boxSize}
-                  nameWidth={nameWidth}
+                  parentSize={{ width, height }}
                   levelWidth={levelWidth}
                 />
               ))}
