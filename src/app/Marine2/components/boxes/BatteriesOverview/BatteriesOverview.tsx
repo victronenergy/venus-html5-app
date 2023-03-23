@@ -35,15 +35,16 @@ const BatteriesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) =>
         title={translate("boxes.batteries")}
         linkedView={AppViews.BOX_BATTERIES_OVERVIEW}
         getBoxSizeCallback={setBoxSize}
-        withPagination={true}
       >
-        <div className={"flex w-fit min-w-full h-full justify-center"}>
+        {/* TODO: set max items per page based on the available space */}
+        <GridPaginator perPage={2}>
           {overviewBatteries.map((b) => (
             <div key={b.id} className={"h-full flex items-center justify-center"}>
-              <BatterySummary key={b.id} battery={b} boxSize={boxSize} />
+              {/* TODO: Take into account pagination being active for box size instead of this 'trick' */}
+              <BatterySummary key={b.id} battery={b} boxSize={{ width: boxSize.width, height: boxSize.height - 50 }} />
             </div>
           ))}
-        </div>
+        </GridPaginator>
       </Box>
     )
   }
