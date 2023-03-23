@@ -176,7 +176,7 @@ module.exports = function (webpackEnv) {
       chunkFilename: isEnvProduction
         ? "static/js/[name].[contenthash:8].chunk.js"
         : isEnvDevelopment && "static/js/[name].chunk.js",
-      assetModuleFilename: 'static/media/[name].[hash][ext]',
+      assetModuleFilename: "static/media/[name].[hash][ext]",
       // webpack uses `publicPath` to determine where the app is being served from.
       // It requires a trailing slash, or the file assets will get an incorrect path.
       // We inferred the "public path" (such as / or /my-project) from homepage.
@@ -355,7 +355,7 @@ module.exports = function (webpackEnv) {
             },
             {
               test: /\.(woff|woff2|eot|ttf|otf)$/i,
-              type: 'asset/resource',
+              type: "asset/resource",
             },
             // "url" loader works like "file" loader except that it embeds assets
             // smaller than specified limit in bytes as data URLs to avoid requests.
