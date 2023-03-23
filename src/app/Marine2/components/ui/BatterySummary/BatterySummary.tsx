@@ -5,6 +5,7 @@ import { Battery } from "@elninotech/mfd-modules"
 import classNames from "classnames"
 import { translate } from "react-i18nify"
 import { applyStyles, BreakpointStylesType } from "../../../utils/media"
+import FadedText from "../FadedText"
 
 const styles: BreakpointStylesType = {
   default: {
@@ -47,9 +48,7 @@ const BatterySummary = ({ battery, boxSize }: Props) => {
           )}
         </ProgressCircle>
       </div>
-      <span className={classNames("mt-3.5 truncate w-full text-center max-w-full", activeStyles.name)}>
-        {battery.name}
-      </span>
+      <FadedText text={battery.name} className={classNames("mt-3.5 text-center", activeStyles.name)} />
       {
         <span className={classNames("text-victron-gray dark:text-victron-gray-dark", activeStyles.state)}>
           {battery.state === BATTERY.DISCHARGING && battery.timetogo

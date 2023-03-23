@@ -1,5 +1,5 @@
 import { observer } from "mobx-react"
-import { useAppStore, useVrmStore } from "@elninotech/mfd-modules"
+import { useAppStore, useMqtt } from "@elninotech/mfd-modules"
 import { Translate, translate } from "react-i18nify"
 import { Modal } from "../Modal"
 import { BUILD_TIMESTAMP } from "../../../utils/constants"
@@ -11,9 +11,9 @@ import Button from "../Button"
 
 const VersionInfo = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const { portalId = "-", siteId = "-" } = useVrmStore()
   const { humanReadableFirmwareVersion } = useAppStore()
   const appViewsStore = useAppViewsStore()
+  const { portalId } = useMqtt()
 
   const openDiagnostics = () => {
     appViewsStore.setView(AppViews.DIAGNOSTICS)
@@ -66,10 +66,6 @@ const VersionInfo = () => {
                     <div className="flex flex-row justify-between">
                       <div>{translate("versionInfo.identifier")}</div>
                       <div>{portalId}</div>
-                    </div>
-                    <div className="flex flex-row justify-between">
-                      <div>{translate("versionInfo.vrmPortID")}</div>
-                      <div>{siteId}</div>
                     </div>
                   </div>
                   <div className={"pt-2"}>

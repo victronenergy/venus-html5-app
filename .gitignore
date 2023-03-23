@@ -3,7 +3,6 @@
 # dependencies
 /**/node_modules
 /.pnp
-.pnp.js
 
 # testing
 /coverage
@@ -32,3 +31,6 @@ cypress/videos
 
 .idea
 .husky
+
+# deploy scripts
+networks.csv

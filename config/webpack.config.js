@@ -2,7 +2,6 @@ const fs = require("fs")
 const path = require("path")
 const webpack = require("webpack")
 const resolve = require("resolve")
-const PnpWebpackPlugin = require("pnp-webpack-plugin")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin")
 const InlineChunkHtmlPlugin = require("react-dev-utils/InlineChunkHtmlPlugin")
@@ -177,6 +176,7 @@ module.exports = function (webpackEnv) {
       chunkFilename: isEnvProduction
         ? "static/js/[name].[contenthash:8].chunk.js"
         : isEnvDevelopment && "static/js/[name].chunk.js",
+      assetModuleFilename: "static/media/[name].[hash][ext]",
       // webpack uses `publicPath` to determine where the app is being served from.
       // It requires a trailing slash, or the file assets will get an incorrect path.
       // We inferred the "public path" (such as / or /my-project) from homepage.
@@ -239,11 +239,11 @@ module.exports = function (webpackEnv) {
         new CssMinimizerPlugin({
           minimizerOptions: {
             // Other options are available https://webpack.js.org/plugins/css-minimizer-webpack-plugin/#minify
-            minify: CssMinimizerPlugin.cleanCssMinify,
             preset: [
               "default",
               {
                 discardComments: { removeAll: true },
+                minifyFontValues: { removeQuotes: false },
               },
             ],
           },
@@ -293,7 +293,6 @@ module.exports = function (webpackEnv) {
       plugins: [
         // Adds support for installing with Plug'n'Play, leading to faster installs and adding
         // guards against forgotten dependencies and such.
-        PnpWebpackPlugin,
         // Prevents users from importing files from outside of src/ (or node_modules/).
         // This often causes confusion because we only process files within src/ with babel.
         // To fix this, we prevent you from importing files out of src/ -- if you'd like to,
@@ -314,13 +313,6 @@ module.exports = function (webpackEnv) {
         stream: require.resolve("stream-browserify"),
         buffer: require.resolve("buffer"),
       },
-    },
-    resolveLoader: {
-      plugins: [
-        // Also related to Plug'n'Play, but this time it tells webpack to load its loaders
-        // from the current package.
-        PnpWebpackPlugin.moduleLoader(module),
-      ],
     },
     module: {
       strictExportPresence: true,
@@ -360,6 +352,10 @@ module.exports = function (webpackEnv) {
                 mimetype: "image/avif",
                 name: "static/media/[name].[hash:8].[ext]",
               },
+            },
+            {
+              test: /\.(woff|woff2|eot|ttf|otf)$/i,
+              type: "asset/resource",
             },
             // "url" loader works like "file" loader except that it embeds assets
             // smaller than specified limit in bytes as data URLs to avoid requests.
@@ -677,7 +673,6 @@ module.exports = function (webpackEnv) {
             },
           },
         }),
-      new MiniCssExtractPlugin(),
       new webpack.ProvidePlugin({
         Buffer: ["buffer", "Buffer"],
       }),

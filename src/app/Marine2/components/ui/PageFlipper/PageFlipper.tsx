@@ -1,12 +1,12 @@
 import PageSelector, { PageSelectorProps } from "../PageSelector"
 import classnames from "classnames"
 import React, { useState, useRef, useEffect } from "react"
-import { useComponentSize } from "../../../utils/hooks"
+import useSize from "@react-hook/size"
 
 const PageFlipper = ({ children, pageSelectorPropsSetter, pages, currentPageSetter, startingPage }: Props) => {
   const wrapperRef = useRef<HTMLDivElement>(null)
   const pageRef = useRef<HTMLDivElement>(null)
-  const componentSize = useComponentSize(wrapperRef)
+  const [width, height] = useSize(wrapperRef)
   const [currentPage, setCurrentPage] = useState(startingPage ?? 0)
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const PageFlipper = ({ children, pageSelectorPropsSetter, pages, currentPageSett
       left: currentPage * pageRef.current.offsetWidth,
       behavior: "smooth",
     })
-  }, [componentSize, currentPage])
+  }, [width, height, currentPage])
 
   useEffect(() => {
     if (!currentPageSetter) return

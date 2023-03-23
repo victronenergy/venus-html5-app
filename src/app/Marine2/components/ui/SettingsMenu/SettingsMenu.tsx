@@ -86,7 +86,7 @@ const SettingsMenu = () => {
               </div>
             </div>
           </Modal.Body>
-          <Button onClick={openRemoteConsole} className="w-full truncate" size="md">
+          <Button onClick={openRemoteConsole} className="w-full" size="md">
             {translate("header.remoteConsole")}
           </Button>
         </Modal.Frame>

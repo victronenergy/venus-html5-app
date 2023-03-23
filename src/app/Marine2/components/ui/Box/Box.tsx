@@ -2,8 +2,9 @@ import React, { useEffect } from "react"
 import classNames from "classnames"
 import ArrowRightIcon from "../../../images/icons/arrow-right.svg"
 import { AppViews, useAppViewsStore } from "../../../modules/AppViews"
-import { useComponentSize } from "app/Marine2/utils/hooks"
 import Paginator from "../Paginator"
+import useSize from "@react-hook/size"
+import FadedText from "../FadedText"
 
 const Box = ({
   children,
@@ -22,13 +23,13 @@ const Box = ({
     }
   }
   const boxRef = React.useRef<HTMLDivElement>(null)
-  const componentSize = useComponentSize(boxRef)
+  const [width, height] = useSize(boxRef)
 
   useEffect(() => {
     if (getBoxSizeCallback) {
-      getBoxSizeCallback(componentSize)
+      getBoxSizeCallback({ width, height })
     }
-  }, [componentSize, getBoxSizeCallback])
+  }, [getBoxSizeCallback, height, width])
 
   return (
     <div
@@ -46,7 +47,7 @@ const Box = ({
           onClick={handleClick}
         >
           {icon && <span className={"mr-1"}>{icon}</span>}
-          <span className={"text-base truncate"}>{title}</span>
+          <FadedText text={title} className={"text-base"} />
         </div>
         {linkedView && (
           <div className="-mr-3 p-3" onClick={handleClick}>

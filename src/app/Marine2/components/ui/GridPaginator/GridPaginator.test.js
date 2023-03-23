@@ -6,7 +6,7 @@ import GridPaginator from "./GridPaginator"
 describe("GridPaginator element", () => {
   describe("renders content", () => {
     const wrapper = mount(
-      <GridPaginator childrenPerPage={4}>
+      <GridPaginator perPage={4}>
         <Box title={"Box1"}>Box1</Box>
         <Box title={"Box2"}>Box2</Box>
         <Box title={"Box3"}>Box3</Box>
@@ -22,7 +22,7 @@ describe("GridPaginator element", () => {
   describe("without paginator", () => {
     it("should not show paginator if children count is less than defined", () => {
       const wrapper = mount(
-        <GridPaginator childrenPerPage={4}>
+        <GridPaginator perPage={4}>
           <Box title={"Box1"}>Box1</Box>
           <Box title={"Box2"}>Box2</Box>
         </GridPaginator>
@@ -33,7 +33,7 @@ describe("GridPaginator element", () => {
 
     it("should not show paginator if children count is equal to defined", () => {
       const wrapper = mount(
-        <GridPaginator childrenPerPage={4}>
+        <GridPaginator perPage={4}>
           <Box title={"Box1"}>Box1</Box>
           <Box title={"Box2"}>Box2</Box>
           <Box title={"Box3"}>Box3</Box>
@@ -47,7 +47,7 @@ describe("GridPaginator element", () => {
 
   describe("with paginator", () => {
     const wrapper = mount(
-      <GridPaginator childrenPerPage={2}>
+      <GridPaginator perPage={2}>
         <Box title={"Box1"}>Box1</Box>
         <Box title={"Box2"}>Box2</Box>
         <Box title={"Box3"}>Box3</Box>
