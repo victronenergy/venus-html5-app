@@ -19,6 +19,7 @@ while [[ $# -gt 0 ]]; do
         -b|--build)
             BUILD=true
             shift # past argument
+        ;;
         *)  # unknown option
             POSITIONAL+=("$1") # save it in an array for later
             shift # past argument
