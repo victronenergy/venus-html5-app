@@ -1,0 +1,255 @@
+{
+    "acMode": {
+        "modal": {
+            "name": "Vybrat režim",
+            "updateLimit": "Vybrat vstupní limit napájení ze sítě"
+        },
+        "title": "Režim AC"
+    },
+    "boxes": {
+        "EnergyOverview": "Přehled údajů o energii",
+        "acLoads": "AC zátěže",
+        "alternator": "Alternátor",
+        "batteries": "Baterie",
+        "battery": "Baterie",
+        "batteryWithName": "Baterie: %{name}",
+        "chargerWithName": "Nabíječka: %{productNameShort}",
+        "dcLoads": "DC zátěže",
+        "energy": "Energie",
+        "generator": "Generátor",
+        "generatorInput": "Vstup generátoru",
+        "gridInput": "Vstup sítě",
+        "invalidConfig": "Nesprávná konfigurace",
+        "inverterCharger": "Měnič / nabíječka: %{productNameShort}",
+        "inverterWithName": "Střídač: %{productNameShort}",
+        "pvCharger": "Fotovoltaická nabíječka",
+        "shorePower": "Napájení ze sítě",
+        "solar": "Solární energie",
+        "status": "Stav",
+        "tanks": "Nádrže",
+        "unknown": "Neznámý",
+        "windGenerator": "Větrný generátor"
+    },
+    "cardFooter": {
+        "Charge": "Nabíjet",
+        "Critical": "Kritický",
+        "Optimal": "Optimální",
+        "Status": "Stav",
+        "Warning": "Upozornění"
+    },
+    "common": {
+        "absorptionCharging": "Absorpční nabíjení",
+        "assisting": "Asistence",
+        "auto": "Auto",
+        "autoStartStop": "Auto spuštění/zastavení",
+        "bulkCharging": "Rychlé nabíjení",
+        "charge": "Nabíjení",
+        "charged": "Nabito",
+        "chargerOnly": "Pouze nabíječka",
+        "charging": "Nabíjení",
+        "close": "Zavřít",
+        "current": "Proud",
+        "dark": "Tmavý",
+        "days": "dnů",
+        "days_short": "d",
+        "discharge": "Vybíjení",
+        "discharging": "Vybíjení",
+        "eco": "Eco",
+        "emptyBar": " - ",
+        "equalisationCharging": "Vyrovnávací nabíjení",
+        "error": "Chyba",
+        "fault": "Závada",
+        "floatCharging": "Udržovací nabíjení",
+        "hours": "hodin",
+        "hours_short": "h",
+        "idle": "Nečinný",
+        "inputLimit": "Vstupní limit",
+        "inverterOnly": "Pouze měnič",
+        "inverting": "Invertování",
+        "light": "Světlý",
+        "limit": "Limit",
+        "loading": "Načítání",
+        "loads": "Zátěže",
+        "lowPower": "Nízký výkon",
+        "minutes": "minut",
+        "minutes_short": "m",
+        "mode": "Režim",
+        "noShorePower": "Žádné napájení ze sítě",
+        "notAvailable": "Není k dispozici",
+        "nrOfPhases": "%{phases} fáze",
+        "null": " ",
+        "off": "Vypnuto",
+        "on": "Zapnuto",
+        "passthru": "Průchozí",
+        "powerSupplyMode": "Režim dodání energie",
+        "remainingTime": "Zbývající čas",
+        "running": "Probíhá",
+        "set": "Nastavit",
+        "standby": "Pohotovostní režim",
+        "starting": "Spuštění",
+        "stopped": "Zastavený",
+        "stopping": "Zastavení",
+        "storageMode": "Režim skladování",
+        "sustain": "Udržování",
+        "unplugged": "Odpojeno",
+        "veBusFault": "Chybový stav sběrnice VE.Bus",
+        "voltage": "Napětí"
+    },
+    "diagnostics": {
+        "connection": {
+            "connection": "Připojení",
+            "error": "Chyba",
+            "host": "Hostitel",
+            "portalId": "ID portálu",
+            "status": "Stav"
+        },
+        "device": {
+            "device": "Zařízení",
+            "userAgent": "Agent uživatele",
+            "viewportHeight": "Výška panelu zobrazení",
+            "viewportWidth": "Šířka panelu zobrazení"
+        },
+        "diagnostics": "Diagnostika"
+    },
+    "error": {
+        "errorWithMessage": "Chyba: %{message}",
+        "genericMessage": "Při vykreslování aplikace došlo k chybě. Zkuste znovu načíst stránku nebo kontaktovat společnost Victron Energy s následujícími informacemi:",
+        "marine": {
+            "cta": "Pošlete toto chybové hlášení přímo týmu podpory Victron Energy:",
+            "dataCharges": "Účtují se standardní poplatky za data.",
+            "estimate": "Odhadovaná data: %{size} bajtů.",
+            "hint": "Zkuste znovu načíst stránku nebo kontaktovat společnost Victron Energy s následujícími informacemi:",
+            "ignore": "Ignorovat chybu",
+            "resetError": "Vynulovat chybu",
+            "restartApp": "Restartovat aplikaci",
+            "sendReport": "Odeslat chybové hlášení",
+            "title": "Při vykreslování aplikace došlo k chybě."
+        },
+        "mqttUnavailable1": "Nelze se připojit k serveru MQTT.",
+        "mqttUnavailable2": "Zkontrolujte, zda je ve vašem nastavení povoleno MQTT:",
+        "mqttUnavailable3": "Konzola dálkového ovládání > Nastavení > Služby > MQTT na LAN (Plaintext)",
+        "mqttUnavailable4": "Zkuste pomocí tlačítka Konzola dálkového ovládání v horní části této obrazovky změnit nastavení dálkově.",
+        "mqttUnavailable5": "Můžete také zkusit dálkové připojení k zařízení výběrem možnosti Dálkové z nabídky výše",
+        "queryParams": "Parametry dotazu: %{queryParams}",
+        "remoteConsole": {
+            "connectionFailed": "Nelze se připojit k zařízení GX.",
+            "screenTooSmall": "Zobrazit konzolu dálkového ovládání ve větším okně"
+        },
+        "userAgent": "Agent uživatele: %{userAgent}",
+        "windowSize": "Okno: %{width} x %{height}"
+    },
+    "generator": {
+        "fisherPandaAutoStartMessage": "Funkce automatického startu Fisher Panda je aktuálně deaktivována. Aktivujte ji na panelu generátoru, abyste mohli ovládat generátor z tohoto panelu.",
+        "temperature": {
+            "coolant": "Chladicí kapalina",
+            "exhaust": "Výfuk",
+            "winding": "Elektrické vinutí"
+        }
+    },
+    "header": {
+        "close": "Zavřít",
+        "connecting": "Připojování",
+        "local": "Místní",
+        "loggedIn": "Jste přihlášen jako",
+        "notLoggedIn": "Nejste přihlášen",
+        "remote": "Dálkový",
+        "remoteConsole": "Konzola dálkového ovládání",
+        "remoteMessage": "Zobrazit konzolu dálkového ovládání ve větším okně",
+        "versionInfo": "Informace o verzi"
+    },
+    "installations": {
+        "title": "Vybrat si instalaci"
+    },
+    "locker": {
+        "lockMessage": "Zamknout a neměnit",
+        "unlockMessage": "Odemknout a provést změny"
+    },
+    "noWidgets": {
+        "subtitle": "Ujistěte se, že vaše zařízení jsou správně připojena",
+        "title": "Váš řídicí panel je prázdný"
+    },
+    "pages": {
+        "diagnostics": "Diagnostika",
+        "remoteConsole": "Vzdálené ovládání",
+        "systemOverview": "Přehled systému"
+    },
+    "remoteLogin": {
+        "2fa": "Token dvoufaktorové autentizace",
+        "email": "E-mail",
+        "forgotPassword": "Zapomněli jste heslo?",
+        "goBack": "Přejít zpět",
+        "logIn": "Přihlaste se",
+        "logOut": "Odhlásit se",
+        "loginFailed": "Přihlášení se nepodařilo",
+        "mobileVerification": "Token autentizační aplikace",
+        "noInstallations": "U tohoto účtu nejsou žádné instalace.",
+        "password": "Heslo",
+        "registerMessage1": "Nemáte účet? ",
+        "registerMessage2": "Zaregistrujte svůj RV.",
+        "smsVerification": "Ověřovací token v SMS zprávě",
+        "wrong2fa": "Špatný dvoufaktorový ověřovací kód"
+    },
+    "statusWidget": {
+        "Absorption charging": "Absorpční nabíjení",
+        "Assisting": "Asistence",
+        "Bulk charging": "Rychlé nabíjení",
+        "Discharging": "Vybíjení",
+        "Equalisation charging": "Vyrovnávací nabíjení",
+        "Float charging": "Udržovací nabíjení",
+        "Inverting": "Invertování",
+        "Low power": "Nízký výkon",
+        "Off": "Vypnuto",
+        "Passthru": "Průchozí",
+        "Storage mode": "Režim skladování",
+        "Sustain": "Udržování",
+        "VE.Bus Fault condition": "Chybový stav sběrnice VE.Bus",
+        "parts": {
+            "Battery": "Baterie",
+            "Black water": "Splašky",
+            "DC Loads": "DC zátěže",
+            "Fresh water": "Čistá voda",
+            "Fuel": "Palivo",
+            "Live well": "Nádrž na vodu",
+            "Oil": "Olej",
+            "PV Charger": "FV regulátor",
+            "Shore Power": "Napájení ze sítě",
+            "Tank sensor": "Čidlo nádrže",
+            "Waste water": "Odpadní voda"
+        }
+    },
+    "tankWidget": {
+        "Black water": "Splašky",
+        "Fresh water": "Čistá voda",
+        "Fuel": "Palivo",
+        "Live well": "Nádrž na vodu",
+        "Oil": "Olej",
+        "Tank sensor": "Čidlo nádrže",
+        "Waste water": "Odpadní voda"
+    },
+    "versionInfo": {
+        "buildDate": "Datum sestavení",
+        "identifier": "Identifikátor",
+        "venusOs": "Venus OS",
+        "version": "Verze %{version}",
+        "vrmPortID": "ID portálu VRM"
+    },
+    "widgets": {
+        "acLoads": "AC zátěže",
+        "batteries": "Baterie",
+        "battery": "Baterie",
+        "batteryWithName": "Baterie: %{name}",
+        "chargerWithName": "Nabíječka: %{productNameShort}",
+        "dcLoads": "DC zátěže",
+        "generator": "Generátor",
+        "generatorInput": "Vstup generátoru",
+        "gridInput": "Vstup sítě",
+        "invalidConfig": "Nesprávná konfigurace",
+        "inverterCharger": "Měnič / nabíječka: %{productNameShort}",
+        "inverterWithName": "Střídač: %{productNameShort}",
+        "pvCharger": "FV nabíječka",
+        "shorePower": "Napájení ze sítě",
+        "solar": "Solární energie",
+        "status": "Stav",
+        "unknown": "Neznámý"
+    }
+}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>%REACT_APP_WHITELABEL%</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport"
+    content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+
+  <!-- PWA resources-->
+  <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/%REACT_APP_WHITELABEL%/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/%REACT_APP_WHITELABEL%/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/%REACT_APP_WHITELABEL%/favicon-16x16.png">
+  <link rel="manifest" href="%PUBLIC_URL%/%REACT_APP_WHITELABEL%/manifest.json">
+  <link rel="mask-icon" href="%PUBLIC_URL%/%REACT_APP_WHITELABEL%/safari-pinned-tab.svg" color="#1f2535">
+  <meta name="msapplication-TileColor" content="#1f2535">
+  <meta name="theme-color" content="#1f2535">
+</head>
+
+<body>
+  <div id="root" class="w-full h-full"></div>
+  <div id="debugReload" style="position: fixed; top: 10px; left: 20px; display: none;">
+    <input type="button" value="Reload page" onclick="location.reload(true)" />
+    <input type="button" value="Browser info"
+      onclick="window.location.href = 'browser-info.html' + window.location.search" />
+  </div>
+  <div id="debugLog"
+  style="color: white; background-color: rgba(18, 26, 40, 1); max-height: 200px; overflow: auto; position: fixed; bottom: 0">
+</div>
+<script>
+  function getParameterByName(name, url) {
+    if (!url) url = window.location.href
+    name = name.replace(/[\[\]]/g, "\\$&")
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+      results = regex.exec(url)
+    if (!results) return null
+    if (!results[2]) return ""
+    return decodeURIComponent(results[2].replace(/\+/g, " "))
+  }
+
+
+  if (window.location.protocol === "http:") {
+    var host = getParameterByName("host") || window.location.hostname || "localhost"
+    var socket = new WebSocket("ws://" + host + ":7890")
+    window.onerror = function (msg, url, lineNo, columnNo, err) {
+      var data = {
+        time: new Date(),
+        error: msg
+      }
+
+      if (err) {
+        data.stack = err.stack
+      }
+
+      socket.send(JSON.stringify(data))
+      return true
+    }
+  }
+
+  function debugLogFn(msg) {
+    document.getElementById("debugLog").innerHTML += msg + "<br/>"
+    return false
+  }
+
+  function debug(name, url) {
+    console.log = debugLogFn
+    console.error = debugLogFn
+    document.getElementById("debugLog").style.display = "block"
+  }
+
+  window.onload = function () {
+    if (getParameterByName("debug")) {
+      debug()
+      document.getElementById("debugReload").style.display = "block"
+    }
+  }
+</script>
+</body>
+
+</html>

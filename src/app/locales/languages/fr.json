@@ -1,0 +1,253 @@
+{
+    "acMode": {
+        "modal": {
+            "name": "Sélectionner Mode",
+            "updateLimit": "Sélectionner la limite d'entrée quai"
+        },
+        "title": "Mode AC"
+    },
+    "boxes": {
+        "EnergyOverview": "Vue générale énergie",
+        "acLoads": "Charges AC",
+        "alternator": "Alternateur",
+        "batteries": "Batteries",
+        "battery": "Batterie",
+        "batteryWithName": "Batterie : %{name}",
+        "chargerWithName": "Chargeur : %{productNameShort}",
+        "dcLoads": "Charges DC",
+        "energy": "Énergie",
+        "generator": "Générateur",
+        "generatorInput": "Entrée générateur",
+        "gridInput": "Entrée réseau",
+        "invalidConfig": "Configuration invalide",
+        "inverterCharger": "Onduleur / Chargeur : %{productNameShort}",
+        "inverterWithName": "Convertisseur : %{productNameShort}",
+        "pvCharger": "Chargeur PV",
+        "shorePower": "Alimentation du quai",
+        "solar": "Solaire",
+        "status": "État",
+        "tanks": "Réservoirs",
+        "unknown": "Inconnu",
+        "windGenerator": "Eolienne"
+    },
+    "cardFooter": {
+        "Charge": "Charge",
+        "Critical": "Critique",
+        "Optimal": "Optimal",
+        "Status": "État",
+        "Warning": "Avertissement"
+    },
+    "common": {
+        "absorptionCharging": "Charge Absorption",
+        "assisting": "Assistance",
+        "auto": "Auto",
+        "autoStartStop": "Start/Stop Automatique",
+        "bulkCharging": "Charge Bulk",
+        "charge": "Charge",
+        "charged": "Chargé",
+        "chargerOnly": "Chargeur uniquement",
+        "charging": "Charge en cours",
+        "current": "Courant",
+        "dark": "Sombre",
+        "days": "jours",
+        "days_short": "j",
+        "discharge": "Décharge",
+        "discharging": "Décharge en cours",
+        "eco": "Éco",
+        "emptyBar": " - ",
+        "equalisationCharging": "Charge Egalisation",
+        "error": "Erreur",
+        "fault": "Défaillance",
+        "floatCharging": "Charge Float",
+        "hours": "heures",
+        "hours_short": "h",
+        "idle": "Inactif",
+        "inputLimit": "Limite d'entrée",
+        "inverterOnly": "Onduleur uniquement",
+        "inverting": "Conversion",
+        "light": "Clair",
+        "limit": "Limite",
+        "loading": "Chargement",
+        "loads": "Charges",
+        "lowPower": "Puiss. basse",
+        "minutes": "minutes",
+        "minutes_short": "m",
+        "mode": "Mode",
+        "noShorePower": "Pas de puissance de quai",
+        "notAvailable": "Non Disponible",
+        "nrOfPhases": "%{phases} phases",
+        "null": " ",
+        "off": "Off",
+        "on": "On",
+        "passthru": "Passant",
+        "powerSupplyMode": "Mode Power Supply",
+        "remainingTime": "Temps restant",
+        "running": "En marche",
+        "standby": "Standby",
+        "starting": "Démarrage",
+        "stopped": "Arrêté",
+        "stopping": "Arrêt en cours",
+        "storageMode": "Mode stockage",
+        "sustain": "Maintenir",
+        "unplugged": "Débranché",
+        "veBusFault": "Condition de défaut VE.Bus",
+        "voltage": "Tension"
+    },
+    "diagnostics": {
+        "connection": {
+            "connection": "Connexion",
+            "error": "Erreur",
+            "host": "Hôte",
+            "portalId": "IP Portail",
+            "status": "État"
+        },
+        "device": {
+            "device": "Appareil",
+            "userAgent": "Agent utilisateur",
+            "viewportHeight": "Hauteur de la fenêtre",
+            "viewportWidth": "Largeur de la fenêtre"
+        },
+        "diagnostics": "Diagnostics"
+    },
+    "error": {
+        "errorWithMessage": "Erreur: %{message}",
+        "genericMessage": "Une erreur s'est produite lors du rendu de l'application. Essayez de réactualiser la page ou de contacter Victron Energy avec les informations suivantes :",
+        "marine": {
+            "cta": "Envoyez ce rapport d'erreur directement à l'équipe d'assistance de Victron Energy :",
+            "dataCharges": "Des frais de données standard s'appliquent.",
+            "estimate": "Données estimées : %{size} octets",
+            "hint": "Essayez de recharger la page ou de contacter Victron Energy avec les informations suivantes :",
+            "ignore": "Ignorer erreur",
+            "resetError": "Reset erreur",
+            "restartApp": "Rédémarrer l'app",
+            "sendReport": "Envoyer rapport d'erreur",
+            "title": "Une erreur s'est produite lors du rendu de l'application."
+        },
+        "mqttUnavailable1": "Ne peut pas se connecter sur le serveur MQTT.",
+        "mqttUnavailable2": "Vérifier que MQTT est activé dans vos paramètres :",
+        "mqttUnavailable3": "Console à distance > Paramètres > Services > MQTT sur LAN (Texte simple)",
+        "mqttUnavailable4": "Essayez d'utiliser le bouton Console à Distance en haut de cet écran pour changer vos réglages à distance.",
+        "mqttUnavailable5": "Vous pouvez aussi essayer de vous connecter à votre appareil à distance en sélectionnant A distance dans le menu ci-dessus.",
+        "queryParams": "Query params: %{queryParams}",
+        "remoteConsole": {
+            "connectionFailed": "Pas possible de se connecter à l'appareil GX",
+            "screenTooSmall": "Ouvrir dans un écran plus large pour visualiser la console à distance"
+        },
+        "userAgent": "User agent: %{userAgent}",
+        "windowSize": "Fenêtre: %{width} x %{height}"
+    },
+    "generator": {
+        "fisherPandaAutoStartMessage": "La fonctionnalité Fisher Panda AutoStart est actuellement désactivée, activez-la sur la console du groupe électrogène afin de contrôler le groupe électrogène à partir de cette console.",
+        "temperature": {
+            "coolant": "L. Refroid.",
+            "exhaust": "Echappement",
+            "winding": "Enroulement"
+        }
+    },
+    "header": {
+        "close": "Fermer",
+        "connecting": "Connexion en cours",
+        "local": "Local",
+        "loggedIn": "Connecté en tant que",
+        "notLoggedIn": "Déconnecté",
+        "remote": "À distance",
+        "remoteConsole": "Console à distance",
+        "remoteMessage": "Ouvrir dans un écran plus large pour visualiser la console à distance",
+        "versionInfo": "Information sur la version"
+    },
+    "installations": {
+        "title": "Choisissez un installation"
+    },
+    "locker": {
+        "lockMessage": "Verrouiller pour éviter les changements",
+        "unlockMessage": "Déverrouiller pour faire des changements"
+    },
+    "noWidgets": {
+        "subtitle": "Assurez vous que vos appareils sont bien connectés pour afficher les widgets",
+        "title": "Votre tableau de bord est vide"
+    },
+    "pages": {
+        "diagnostics": "Diagnostics",
+        "remoteConsole": "Console à distance",
+        "systemOverview": "Vue générale du système"
+    },
+    "remoteLogin": {
+        "2fa": "Code de vérification en 2 étapes",
+        "email": "Email",
+        "forgotPassword": "Mot de passe oublié ?",
+        "goBack": "Go Back",
+        "logIn": "Connexion",
+        "logOut": "Déconnexion",
+        "loginFailed": "Echec de connexion",
+        "mobileVerification": "Code d'application d'authentification",
+        "noInstallations": "Ce compte n'a pas d'installations.",
+        "password": "Mot de passe",
+        "registerMessage1": "Pas encore de compte ? ",
+        "registerMessage2": "Enregistrez votre véhicule.",
+        "smsVerification": "Code de vérification SMS",
+        "wrong2fa": "Mauvais code de vérification en 2 étapes"
+    },
+    "statusWidget": {
+        "Absorption charging": "Charge d'absorption",
+        "Assisting": "Assistance",
+        "Bulk charging": "Charge Bulk",
+        "Discharging": "Décharge",
+        "Equalisation charging": "Charge d'égalisation",
+        "Float charging": "Charge Float",
+        "Inverting": "Conversion",
+        "Low power": "Puiss. faible",
+        "Off": "Off",
+        "Passthru": "Passant",
+        "Storage mode": "Mode stockage",
+        "Sustain": "Maintenir",
+        "VE.Bus Fault condition": "Condition de défaut VE.Bus",
+        "parts": {
+            "Battery": "Batterie",
+            "Black water": "Eaux Noires",
+            "DC Loads": "Charges DC",
+            "Fresh water": "Eau douce",
+            "Fuel": "Carburant",
+            "Live well": "Vivier",
+            "Oil": "Huile",
+            "PV Charger": "Chargeur PV",
+            "Shore Power": "Puissance de quai",
+            "Tank sensor": "Sonde du réservoir",
+            "Waste water": "Eaux usées"
+        }
+    },
+    "tankWidget": {
+        "Black water": "Eaux Noires",
+        "Fresh water": "Eau douce",
+        "Fuel": "Carburant",
+        "Live well": "Vivier",
+        "Oil": "Huile",
+        "Tank sensor": "Sonde du réservoir",
+        "Waste water": "Eaux usées"
+    },
+    "versionInfo": {
+        "buildDate": "Date de fabrication",
+        "identifier": "Identificateur",
+        "venusOs": "Venus OS",
+        "version": "Version %{version}",
+        "vrmPortID": "ID site VRM"
+    },
+    "widgets": {
+        "acLoads": "Charges AC",
+        "batteries": "Batteries",
+        "battery": "Batterie",
+        "batteryWithName": "Batterie: : %{name}",
+        "chargerWithName": "Chargeur: %{productNameShort}",
+        "dcLoads": "Charges DC",
+        "generator": "Générateur",
+        "generatorInput": "Entrée générateur",
+        "gridInput": "Entrée réseau",
+        "invalidConfig": "Configuration invalide",
+        "inverterCharger": "Onduleur / Chargeur",
+        "inverterWithName": "Convertisseur: %{productNameShort}",
+        "pvCharger": "Chargeur PV",
+        "shorePower": "Alimentation du quai",
+        "solar": "Solaire",
+        "status": "État",
+        "unknown": "Inconnu"
+    }
+}

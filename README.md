@@ -1,12 +1,11 @@
-![screenshot](/screenshot.png?raw=true)
+![screenshot](/legacy/victron-webapp-screenshot.png?raw=true)
 
 # Venus OS hosted web app
-*Version 3*
 
 The "app" is a single page application that communicates to the rest of Venus OS via MQTT over websockets.
-It uses React for the UI layer and also includes a wrapper service for the MQTT interface.
+It uses React with ES6 for the UI layer and also includes a wrapper service for the MQTT interface.
 
-Its primary purpose is to be a simple-to-use and nice looking UI for a Victron system on
+Its primary purpose is to be a simple to use and nice looking UI for a Victron system on
 marine Multi Functional Displays, such as the ones from Garmin, Simrad and others. This
 removes the need for a Victron panel at the helm: less clutter on the dashboard.
 
@@ -28,7 +27,7 @@ Chapters in this readme:
 
 ### 1.1 Documentation per Box
 
-`Boxes` are the various designed visualisation: there is a Battery box, a Generator box, a Shorepower box, and so forth.
+`Boxes` are the various designed visualisation: there are a Battery box, a Generator box, a Tanks box, and so forth.
 
 How certain devices are visualised/rendered on HTML5, ie. in to what box(es), and what topics are used for what parameter, and more is documented in three places:
 
@@ -52,7 +51,17 @@ If it's the first time you run the app:
 - make sure to have `node` & `npm` installed on your machine
 - run `npm install` in the root folder
 
-### 2.2 Development
+### 2.2 Setting white label
+
+This repository contains several white-label apps. To work with a specific app, set the correct `APP` environment variable in the `.env.local` file. For example, to build the `Marine2` app, use:
+
+```
+REACT_APP_WHITELABEL=Marine2
+```
+
+You can find the list of available apps in the `.env.local.example` file.
+
+### 2.3 Run app locally
 
 To run the app locally for development, run:
 
@@ -64,54 +73,42 @@ This will start the webpack dev server, which will recompile the app on code cha
 
 You can change the `host` and `port` (although the default 9001 is usually correct) query parameters to point to your Venus device:
 
-`http://localhost:8000/?host=<VENUS_DEVICE_IP>&port=9001`
+`http://localhost:8000?host=<VENUS_DEVICE_IP>&port=9001`
 
 This way you can run the local app against venus device data if the venus device is on the same network as your computer.
 
-### 2.3 Routing
-Every route is prefixed with the current locale, i.e. `http://localhost:8000/en/box/EnergyOverview`. This is done automatically based on the language setting of the GX device, and stays in place when using the custom `<Link>` component.
+### 2.4 Using Demo mode on Venus device
 
-### 2.4 Running the app with no Venus device available
+Every Venus device also has a Demo mode, which allows you to get useful data if you only have the Venus device available, without requiring various Victron devices to be connected to the Venus device. To enable it, navigate to the `Venus Remote Console` -> `Settings` -> `General`.
 
-The MQTT mock is no longer maintained. Use [venus-docker](https://github.com/victronenergy/venus-docker) instead or a Venus GX in demo mode (below).
+### 2.5 Running the app with no Venus device available
+
+Use [venus-docker](https://github.com/victronenergy/venus-docker) in demo mode.
 
 You can run multiple `venus-docker` simulations by executing: `echo {a..z} | xargs -n1 ./run.sh -s`. Each container running a simulation will expose MQTT on
 an increasing port number starting from `9001`.
 
-~~If there is no real device to be used for MQTT data, you can run the app with a fake MQTT broker:~~
-
-~~`npm run dev:mocked` This shallowly fakes the MQTT implementation in the Venus device.~~
-
-Also keep in mind the Venus device also has a Demo mode, which allows you to get useful data if you only have the Venus device available, without requiring various Victron devices to be connected to the Venus device. To enable it, navigate to the Venus Remote Console -> Settings -> General.
-
-### 2.5 Device radiator
-
-Since the app will be run on a plethora of different resolutions and split screens there is a "radiator" available which has iframes for all the
-basic combinations of display "splits". The base 1/1 ui is 1280 x 720, which can be changed in the header. In the radiator there are the basic ui
-and multiple split screen variations available relative to the "base" size.
-
-To run this ui it is recommended to use mocked data. Run the mocked mqtt as described above and navigate to the radiator ui with `http://localhost/radiator.html`.
-Since it is still served through the webpack dev server, the app will hot reload any time there are code changes.
-
 ### 2.6 Metrics available
 
 - Identify the D-bus channel that you want to read [from here](https://github.com/victronenergy/venus/wiki/dbus)
-- Create a component using MqttSubscriptions or MqttTopicWildcard and pass the topic as the wrapper topi. See examples in other components
+- Create a component using MqttSubscriptions or MqttTopicWildcard and pass the topic as the wrapper topic. See examples in other components
 
 ### 2.7 Deploying to a device during development
 
 #### 2.7.1 Get the device ip
 
 In order to deploy you need to know the target device's IP. It can be connected to by ethernet, LAN or the device's own WLAN.
-Instructions on how to find the IPs can be found [here](https://www.victronenergy.com/live/venus-gx:start#accessing_the_device)
+Instructions on how to find the IPs can be found [here](https://www.victronenergy.com/media/pg/Venus_GX/en/accessing-the-gx-device.html)
 for the Venus GX device.
+
+The default device's IP address is `172.24.24.1`
 
 #### 2.7.2 Run deploy script
 
 In the project main folder run `./bin/deploy.sh <ip>` where ip is the target device's IP. The script also accepts an additional
-`--user|-u` param that defines the user for the deployment connection. This defaults to `root`.
+`--user|-u` param that defines the user for the deployment connection. This defaults to `root`. You will also need a password to connect to the device. To set the password, navigate to the `Venus Remote Console` -> `Settings` -> `General -> Set root password`.
 
-The deploy script also bundles the app. Nore that the script assumes that it's run from the root folder of the application.
+The deploy script also bundles the app. Note that the script assumes that it's run from the root folder of the application.
 
 #### 2.7.3 Deploying using a USB stick
 
@@ -121,11 +118,7 @@ By creating an archive named `venus-data.zip` that contains the build files from
 
 The content of the `/data` partition is persistent across firmware updates.
 
-#### 2.7.4 Navigate to the app address again on the target device
-
-Once deployed reload the page by navigating to the Venus host IP on the target device.
-If you have enabled dev features and have previously deployed a new version of the UI to the device you can
-press the `reload page` on the top left corner of the page.
+To create the archive, run `./bin/pack.sh` from the root folder of the application. This will create a `venus-data.zip` file. Place this file on a USB stick and insert it into the GX device, then reboot the device.
 
 ### 2.8 Translations
 
@@ -153,7 +146,7 @@ npm run poeditor:push -f
 Running the comamnd with the `-f` flag will delete the terms from POEditor that are not present in the local file.
 Please use with caution. If wrong data is sent, existing terms and their translations might be irreversibly lost.
 
-#### 2.7.3 Pulling the POEditor translations locally
+#### 2.8.3 Pulling the POEditor translations locally
 
 ```
 npm run poeditor:pull
@@ -214,7 +207,7 @@ A sample recipe for the HTML5 app is [here](https://github.com/victronenergy/met
 
 ## 5. Device error logging
 
-When the app is hosted from a VenusGX, there is no convenient way to see the errors in the js console. To make troubleshooting easier the app sends (at least attempts) to send the error messages through websocket to the device. The log can be found at `/var/log/venus-html5-app/current`.
+When the app is hosted from a VenusGX, there is no convenient way to see the errors in the js console. To make troubleshooting easier the app sends (at least attempts to send) the error messages through websocket to the device. The log can be found at `/var/log/venus-html5-app/current`.
 
 ## 6. Device debugging
 
@@ -225,29 +218,3 @@ By adding `debug=true` to the query params you can enable some convenience featu
 - A debug log element, which redirects all console messages to a visible element in the ui
 
 To enable this on a device set the debugReload and debugLog elements to visible in index.html and deploy to the device.
-
-
-## 7. Theming
-
-The app supports theming. We try to use the [default](https://tailwindcss.com/docs/theme) Tailwind theme settings as much as possible. The theme overrides is defined in the `tailwing.config.js` file.
-
-### 7.1. Colors
-
-Theme support dark and light mode. To add support of the dark mode to a Component, add the `dark:{param}` classes to the `html` elements. Every color, except white and black, has its corresponding value for the dark theme mode. For example
-
-```html
-<div className="bg-victron-white text-victron-black dark:bg-victron-black dark:text-victron-white">
-    <div>Normal text</div>
-    <div className="text-victron-green dark:text-victron-green-dark">Green color for light and dark theme</div>
-</div>
-```
-
-The dark mode is enabled by default on the Venus GX devices.
-
-### 7.2. Icons
-
-Icons are defined in the `public/icons` folder. Icons don't have predefined sizes and colors. To set the size and color of the icon, use the appropriate Tailwind classes. For example
-
-```html
-<ExpandIcon className='w-6 text-victron-blue dark:text-victron-blue-dark cursor-pointer' />
-```

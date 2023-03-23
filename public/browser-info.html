@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<style>
+  .title {
+    font-weight: bold;
+    font-size: 25px;
+  }
+
+  .info {
+    font-weight: normal
+  }
+
+  .title,
+  .info {
+    color: black;
+  }
+
+  body {
+    max-width: 600px;
+    background-color: white;
+  }
+
+  .back {
+    margin-top: 5px;
+    padding: 5px 10px;
+    font-size: 25px;
+  }
+</style>
+
+<body>
+  <div class="title">User agent: <span class="info" id="user-agent"></span></div>
+  <div class="title">Window:
+    <span class="info" id="width"></span> x <span class="info" id="height"></span>
+  </div>
+  <div class="title">Device pixel ratio:
+    <span class="info" id="devicePixelRatio"></span>
+  </div>
+
+  <div class="title">sessionStorage:
+    <span class="info" id="sessionStorageSupport"></span>
+  </div>
+
+  <div class="title">localStorage:
+    <span class="info" id="localStorageSupport"></span>
+  </div>
+
+  <div class="title">window.localStorage:
+    <span class="info" id="windowLocalStorageSupport"></span>
+  </div>
+
+  <div class="title">Cookies:
+    <span class="info" id="cookies"></span>
+  </div>
+
+  <div class="title">Query params: <span class="info" id="params"></span></div>
+  <button class="back" onclick="goBack();">Go back</button>
+  <button class="back" onclick="saveInParams();">Save in URL</button>
+  <button class="back" onclick="saveInCookie();">Save in Cookie</button>
+</body>
+
+<script>
+  function goBack() {
+    window.history.back();
+  }
+
+  function saveInParams() {
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.set('feature', 'true');
+    window.location.search = urlParams;
+    document.getElementById('params').innerHTML = window.location.search;
+  }
+
+  function saveInCookie() {
+    document.cookie = "feature=true";
+    document.getElementById('cookies').innerHTML = document.cookie;
+  }
+
+  (function () {
+    document.getElementById('user-agent').innerHTML = navigator.userAgent;
+    document.getElementById('width').innerHTML = window.innerWidth;
+    document.getElementById('height').innerHTML = window.innerHeight;
+    document.getElementById('devicePixelRatio').innerHTML = window.devicePixelRatio;
+    document.getElementById('params').innerHTML = window.location.search.slice(1).replace(/=/g, ': ').replace(/&/g, ', ')
+
+    window.addEventListener('resize', function () {
+      document.getElementById('width').innerHTML = window.innerWidth;
+      document.getElementById('height').innerHTML = window.innerHeight;
+    })
+
+    document.getElementById('cookies').innerHTML = document.cookie;
+
+    if (typeof sessionStorage !== 'undefined') {
+      try {
+        sessionStorage.setItem('feature_test', 'yes');
+        if (sessionStorage.getItem('feature_test') === 'yes') {
+          sessionStorage.removeItem('feature_test');
+          document.getElementById('sessionStorageSupport').innerHTML = "Enabled";
+        } else {
+          document.getElementById('sessionStorageSupport').innerHTML = "Disabled";
+        }
+      } catch (e) {
+        document.getElementById('sessionStorageSupport').innerHTML = "Disabled with exception:" + e;
+      }
+    } else {
+      document.getElementById('sessionStorageSupport').innerHTML = "Not available";
+    }
+
+    if (typeof localStorage !== 'undefined') {
+      try {
+        localStorage.setItem('feature_test', 'yes');
+        if (localStorage.getItem('feature_test') === 'yes') {
+          localStorage.removeItem('feature_test');
+          document.getElementById('localStorageSupport').innerHTML = "Enabled";
+        } else {
+          document.getElementById('localStorageSupport').innerHTML = "Disabled";
+        }
+      } catch (e) {
+        document.getElementById('localStorageSupport').innerHTML = "Disabled with exception:" + e;
+      }
+    } else {
+      document.getElementById('localStorageSupport').innerHTML = "Not available";
+    }
+
+    if (typeof window.localStorage !== 'undefined') {
+      try {
+        window.localStorage.setItem('feature_test', 'yes');
+        if (localStorage.getItem('feature_test') === 'yes') {
+          window.localStorage.removeItem('feature_test');
+          document.getElementById('windowLocalStorageSupport').innerHTML = "Enabled";
+        } else {
+          document.getElementById('windowLocalStorageSupport').innerHTML = "Disabled";
+        }
+      } catch (e) {
+        document.getElementById('windowLocalStorageSupport').innerHTML = "Disabled with exception:" + e;
+      }
+    } else {
+      document.getElementById('windowLocalStorageSupport').innerHTML = "Not available";
+    }
+
+  })()
+</script>
+
+</html>

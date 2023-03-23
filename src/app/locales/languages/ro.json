@@ -1,0 +1,255 @@
+{
+    "acMode": {
+        "modal": {
+            "name": "Selectați mod",
+            "updateLimit": "Selectați limita de intrare din rețea"
+        },
+        "title": "Mod AC"
+    },
+    "boxes": {
+        "EnergyOverview": "Rezumat energie",
+        "acLoads": "Consumatori AC",
+        "alternator": "Alternator",
+        "batteries": "Baterii",
+        "battery": "Baterie",
+        "batteryWithName": "Baterie: %{name}",
+        "chargerWithName": "Încărcător: %{productNameShort}",
+        "dcLoads": "Consumatori DC",
+        "energy": "Energie",
+        "generator": "Generator",
+        "generatorInput": "Intrare generator",
+        "gridInput": "Intrare rețea",
+        "invalidConfig": "Configurație nevalidă",
+        "inverterCharger": "Invertor/Încărcător: %{productNameShort}",
+        "inverterWithName": "Invertor: %{productNameShort}",
+        "pvCharger": "Încărcător PV",
+        "shorePower": "Alimentare din rețea",
+        "solar": "Solar",
+        "status": "Stare",
+        "tanks": "Rezervoare",
+        "unknown": "Necunoscut",
+        "windGenerator": "Generator eolian"
+    },
+    "cardFooter": {
+        "Charge": "Încărcare",
+        "Critical": "Sever",
+        "Optimal": "Optim",
+        "Status": "Stare",
+        "Warning": "Avertisment"
+    },
+    "common": {
+        "absorptionCharging": "Încărcare „Absorption”",
+        "assisting": "Asistență",
+        "auto": "Auto",
+        "autoStartStop": "Pornite/oprire automată",
+        "bulkCharging": "Încărcare „Bulk”",
+        "charge": "Încărcare",
+        "charged": "Schimbat",
+        "chargerOnly": "Doar încărcător",
+        "charging": "Încărcare",
+        "close": "Închidere",
+        "current": "Intensitate",
+        "dark": "Întunecat",
+        "days": "zile",
+        "days_short": "z",
+        "discharge": "Descărcare",
+        "discharging": "Descărcare",
+        "eco": "Eco",
+        "emptyBar": " - ",
+        "equalisationCharging": "Încărcare de egalizare",
+        "error": "Eroare",
+        "fault": "Defecțiune",
+        "floatCharging": "Încărcare „Float”",
+        "hours": "ore",
+        "hours_short": "o",
+        "idle": "Inactiv",
+        "inputLimit": "Limită de intrare",
+        "inverterOnly": "Doar invertor",
+        "inverting": "Inversare",
+        "light": "Luminos",
+        "limit": "Limită",
+        "loading": "Încărcare",
+        "loads": "Încărcătură",
+        "lowPower": "Putere scăzută",
+        "minutes": "minute",
+        "minutes_short": "m",
+        "mode": "Mod",
+        "noShorePower": "Fără alimentare din rețea",
+        "notAvailable": "Indisponibil",
+        "nrOfPhases": "%{phases} faze",
+        "null": " ",
+        "off": "Oprit",
+        "on": "Pornit",
+        "passthru": "Direct",
+        "powerSupplyMode": "Mod de alimentare",
+        "remainingTime": "Timp rămas",
+        "running": "În funcțiune",
+        "set": "Setare",
+        "standby": "Pauză",
+        "starting": "Inițiere",
+        "stopped": "Oprit",
+        "stopping": "Proces de oprire",
+        "storageMode": "Mod de depozitare",
+        "sustain": "Menținere",
+        "unplugged": "Deconectat",
+        "veBusFault": "Eroare convertor VE.Bus",
+        "voltage": "Tensiune"
+    },
+    "diagnostics": {
+        "connection": {
+            "connection": "Conexiuni",
+            "error": "Eroare",
+            "host": "Gazdă",
+            "portalId": "ID portal",
+            "status": "Stare"
+        },
+        "device": {
+            "device": "Dispozitiv",
+            "userAgent": "Agent utilizator",
+            "viewportHeight": "Înălțime fereastră vizualiare",
+            "viewportWidth": "Lățime fereastră vizualiare"
+        },
+        "diagnostics": "Diagnostic"
+    },
+    "error": {
+        "errorWithMessage": "Eroare: %{message}",
+        "genericMessage": "A apărut o eroare la afișarea aplicației. Încercați să reîncărcați pagina sau să contactați Victron Energy cu următoarele informații:",
+        "marine": {
+            "cta": "Trimiteți acest raport de eroare direct echipei de asistență Victron Energy:",
+            "dataCharges": "Se aplică taxe standard de date.",
+            "estimate": "Data estimată: %{size} biți.",
+            "hint": "Încercați să reîncărcați pagina sau să contactați Victron Energy cu următoarele informații:",
+            "ignore": "Ignorați eroarea",
+            "resetError": "Resetare eroare",
+            "restartApp": "Repornire aplicație",
+            "sendReport": "Trimiteți raport eroare",
+            "title": "A apărut o eroare la afişarea aplicației."
+        },
+        "mqttUnavailable1": "Nu s-a putut efectua conexiunea la serverul MQTT.",
+        "mqttUnavailable2": "Vă rugăm să verificați dacă MQTT este activat în setările dumneavoastră:",
+        "mqttUnavailable3": "Consolă la distanţă > Setări > Servicii > MQTT pe LAN (text simplu)",
+        "mqttUnavailable4": "Încercați să utilizați butonul Consolă la distanţă situat pe partea de sus a acestui ecran pentru a vă schimba setările de la distanţă.",
+        "mqttUnavailable5": "De asemenea, puteți încerca să vă conectați la dispozitivul dumneavoastră de la distanţă selectând Remote (de la distanţă) din meniul de mai sus.",
+        "queryParams": "Parametrii solicitării: %{queryParams}",
+        "remoteConsole": {
+            "connectionFailed": "Nu se poate conecta la dispozitivul GX",
+            "screenTooSmall": "Deschideți pe un ecran mai mare pentru a vizualiza consola la distanţă"
+        },
+        "userAgent": "Agent utilizator: %{userAgent}",
+        "windowSize": "Fereastră: %{width} x %{height}"
+    },
+    "generator": {
+        "fisherPandaAutoStartMessage": "Funcția Fisher Panda AutoStart este momentan dezactivată, activați-o din panoul generatorului pentru a putea porni generatorul din acest panou.",
+        "temperature": {
+            "coolant": "Agent de răcire",
+            "exhaust": "Evacuare",
+            "winding": "Bobinaj"
+        }
+    },
+    "header": {
+        "close": "Închide",
+        "connecting": "Conectare",
+        "local": "Local",
+        "loggedIn": "Conectat ca",
+        "notLoggedIn": "Neconectat",
+        "remote": "La distanță",
+        "remoteConsole": "Consolă la distanţă",
+        "remoteMessage": "Deschideți pe un ecran mai mare pentru a vizualiza consola la distanţă",
+        "versionInfo": "Informații despre versiune"
+    },
+    "installations": {
+        "title": "Alegeți o versiune de instalare"
+    },
+    "locker": {
+        "lockMessage": "Blocați pentru a preveni modificări",
+        "unlockMessage": "Deblocați pentru a efectua modificări"
+    },
+    "noWidgets": {
+        "subtitle": "Asigurați-vă că dispozitivele sunt conectate în mod corect",
+        "title": "Consola este goală"
+    },
+    "pages": {
+        "diagnostics": "Diagnostic",
+        "remoteConsole": "Consola la distanta",
+        "systemOverview": "Prezentare generală sistem"
+    },
+    "remoteLogin": {
+        "2fa": "Token de autentificare cu doi factori",
+        "email": "Email",
+        "forgotPassword": "Ați uitat parola?",
+        "goBack": "Înapoi",
+        "logIn": "Autentificare",
+        "logOut": "Deconectare",
+        "loginFailed": "Autentificare eșuată",
+        "mobileVerification": "Token pentru aplicația de autentificare",
+        "noInstallations": "Acest cont nu are instalări.",
+        "password": "Parola",
+        "registerMessage1": "Nu aveți încă un cont? ",
+        "registerMessage2": "Înregistrați-vă RV.",
+        "smsVerification": "Token de verificare prin SMS",
+        "wrong2fa": "Cod de verificare cu doi factori greșit"
+    },
+    "statusWidget": {
+        "Absorption charging": "Încărcare „Absorption”",
+        "Assisting": "Asistență",
+        "Bulk charging": "Încărcare „Bulk”",
+        "Discharging": "Descărcare",
+        "Equalisation charging": "Încărcare de egalizare",
+        "Float charging": "Încărcare „Float”",
+        "Inverting": "Inversare",
+        "Low power": "Putere scăzută",
+        "Off": "Oprit",
+        "Passthru": "Direct",
+        "Storage mode": "Mod de depozitare",
+        "Sustain": "Menținere",
+        "VE.Bus Fault condition": "Eroare convertor VE.Bus",
+        "parts": {
+            "Battery": "Baterie",
+            "Black water": "Apă contaminată",
+            "DC Loads": "Consumatori DC",
+            "Fresh water": "Apa dulce",
+            "Fuel": "Combustibil",
+            "Live well": "Bazin apă",
+            "Oil": "Ulei",
+            "PV Charger": "Încărcător PV",
+            "Shore Power": "Alimentare din rețea",
+            "Tank sensor": "Senzor rezervor",
+            "Waste water": "Apa reziduală"
+        }
+    },
+    "tankWidget": {
+        "Black water": "Apă contaminată",
+        "Fresh water": "Apa dulce",
+        "Fuel": "Combustibil",
+        "Live well": "Bazin apă",
+        "Oil": "Ulei",
+        "Tank sensor": "Senzor rezervor",
+        "Waste water": "Apa reziduala"
+    },
+    "versionInfo": {
+        "buildDate": "Dată construcție",
+        "identifier": "Identificator",
+        "venusOs": "Venus OS",
+        "version": "Versiune %{version}",
+        "vrmPortID": "ID site VRM"
+    },
+    "widgets": {
+        "acLoads": "Consumatori AC",
+        "batteries": "Baterii",
+        "battery": "Baterie",
+        "batteryWithName": "Baterie: %{name}",
+        "chargerWithName": "Încărcător: %{productNameShort}",
+        "dcLoads": "Consumatori DC",
+        "generator": "Generator",
+        "generatorInput": "Intrare generator",
+        "gridInput": "Intrare rețea",
+        "invalidConfig": "Configurație nevalidă",
+        "inverterCharger": "Invertor/Încărcător: %{productNameShort}",
+        "inverterWithName": "Invertor: %{productNameShort}",
+        "pvCharger": "Încărcător PV",
+        "shorePower": "Alimentare din rețea",
+        "solar": "Solar",
+        "status": "Stare",
+        "unknown": "Necunoscut"
+    }
+}

@@ -1,0 +1,255 @@
+{
+    "acMode": {
+        "modal": {
+            "name": "选择模式",
+            "updateLimit": "选择岸电限制"
+        },
+        "title": "交流模式"
+    },
+    "boxes": {
+        "EnergyOverview": "能源概览",
+        "acLoads": "交流负载",
+        "alternator": "交流发电机",
+        "batteries": "电池",
+        "battery": "电池",
+        "batteryWithName": "电池：%{name}",
+        "chargerWithName": "充电器：%{productNameShort}",
+        "dcLoads": "直流负载",
+        "energy": "能源",
+        "generator": "发电机",
+        "generatorInput": "发电机输入",
+        "gridInput": "电网输入",
+        "invalidConfig": "无效配置",
+        "inverterCharger": "逆变器/充电器：%{productNameShort}",
+        "inverterWithName": "逆变器：%{productNameShort}",
+        "pvCharger": "光伏充电器",
+        "shorePower": "岸电",
+        "solar": "太阳能",
+        "status": "状态",
+        "tanks": "液位",
+        "unknown": "未知",
+        "windGenerator": "风力发电机"
+    },
+    "cardFooter": {
+        "Charge": "充电",
+        "Critical": "关键",
+        "Optimal": "最优",
+        "Status": "状态",
+        "Warning": "警告"
+    },
+    "common": {
+        "absorptionCharging": "均充",
+        "assisting": "辅助供电",
+        "auto": "自动",
+        "autoStartStop": "自动启动和停止",
+        "bulkCharging": "快充",
+        "charge": "充电",
+        "charged": "已充电",
+        "chargerOnly": "只充电",
+        "charging": "充电",
+        "close": "关闭",
+        "current": "电流",
+        "dark": "黑暗的",
+        "days": "天",
+        "days_short": "天",
+        "discharge": "放电",
+        "discharging": "放电",
+        "eco": "节能",
+        "emptyBar": " - ",
+        "equalisationCharging": "均衡充电",
+        "error": "错误",
+        "fault": "错误",
+        "floatCharging": "浮充",
+        "hours": "小时",
+        "hours_short": "小时",
+        "idle": "空闲",
+        "inputLimit": "输入限制",
+        "inverterOnly": "仅逆变",
+        "inverting": "逆变",
+        "light": "光",
+        "limit": "限制",
+        "loading": "加载中",
+        "loads": "负载",
+        "lowPower": "低功率",
+        "minutes": "分",
+        "minutes_short": "分",
+        "mode": "模式",
+        "noShorePower": "无岸电",
+        "notAvailable": "不可用",
+        "nrOfPhases": "%{phases}相数",
+        "null": "无效的",
+        "off": "关",
+        "on": "开",
+        "passthru": "旁路",
+        "powerSupplyMode": "电源模式",
+        "remainingTime": "剩余时间",
+        "running": "正在运行",
+        "set": "设置",
+        "standby": "待机",
+        "starting": "开始...",
+        "stopped": "已停止",
+        "stopping": "停止",
+        "storageMode": "存储模式",
+        "sustain": "维持",
+        "unplugged": "未插电",
+        "veBusFault": "VE Bus故障",
+        "voltage": "电压"
+    },
+    "diagnostics": {
+        "connection": {
+            "connection": "连接",
+            "error": "错误",
+            "host": "主机",
+            "portalId": "门户ID",
+            "status": "状态"
+        },
+        "device": {
+            "device": "设备",
+            "userAgent": "用户代理",
+            "viewportHeight": "视口高度",
+            "viewportWidth": "视口宽度"
+        },
+        "diagnostics": "诊断"
+    },
+    "error": {
+        "errorWithMessage": "错误: %{message}",
+        "genericMessage": "呈现应用程序时出错。 尝试重新加载页面或联系 Victron Energy 并提供以下信息：",
+        "marine": {
+            "cta": "将此错误报告直接发送给 Victron Energy 支持团队：",
+            "dataCharges": "标准数据费用适用。",
+            "estimate": "估计数据：%{size} 字节。",
+            "hint": "尝试重新加载页面或联系 Victron Energy 并提供以下信息：",
+            "ignore": "忽略错误",
+            "resetError": "重置错误",
+            "restartApp": "重启应用",
+            "sendReport": "发送错误报告",
+            "title": "呈现应用程序时发生错误。"
+        },
+        "mqttUnavailable1": "无法连接到 MQTT 服务器。",
+        "mqttUnavailable2": "请检查您的设置中是否启用了 MQTT：",
+        "mqttUnavailable3": "远程终端 > 设置 > 服务 > MQTT on LAN (Plaintext)\n",
+        "mqttUnavailable4": "尝试使用此屏幕顶部的远程控制台按钮远程更改设置。",
+        "mqttUnavailable5": "您也可以通过从上面的菜单中选择远程来尝试远程连接到您的设备。",
+        "queryParams": "查询参数: %{queryParams}",
+        "remoteConsole": {
+            "connectionFailed": "无法连接到 GX 设备",
+            "screenTooSmall": "在大屏幕中打开以查看远程控制台"
+        },
+        "userAgent": "用户代理: %{userAgent}",
+        "windowSize": "窗口: %{width} x %{height}"
+    },
+    "generator": {
+        "fisherPandaAutoStartMessage": "Fisher Panda AutoStart 功能当前处于禁用状态，请在发电机组面板上启用它以从该面板控制发电机组。",
+        "temperature": {
+            "coolant": "冷却剂",
+            "exhaust": "废气",
+            "winding": "缠绕"
+        }
+    },
+    "header": {
+        "close": "关闭",
+        "connecting": "正在连接",
+        "local": "本地",
+        "loggedIn": "已登录",
+        "notLoggedIn": "未登录",
+        "remote": "远程",
+        "remoteConsole": "远程控制台",
+        "remoteMessage": "大屏幕查看远程终端",
+        "versionInfo": "版本信息"
+    },
+    "installations": {
+        "title": "选择安装"
+    },
+    "locker": {
+        "lockMessage": "锁定修改",
+        "unlockMessage": "解锁修改"
+    },
+    "noWidgets": {
+        "subtitle": "确保您的设备已正确连接",
+        "title": "仪表盘空白"
+    },
+    "pages": {
+        "diagnostics": "诊断",
+        "remoteConsole": "远程控制台",
+        "systemOverview": "系统总览"
+    },
+    "remoteLogin": {
+        "2fa": "两步验证令牌",
+        "email": "邮箱",
+        "forgotPassword": "忘记密码",
+        "goBack": "返回",
+        "logIn": "登录",
+        "logOut": "登出",
+        "loginFailed": "登录失败",
+        "mobileVerification": "身份验证器应用令牌",
+        "noInstallations": "该账户没有安装",
+        "password": "密码",
+        "registerMessage1": "还没有账号？ ",
+        "registerMessage2": "注册您的RV",
+        "smsVerification": "短信确认令牌",
+        "wrong2fa": "错误的两步验证码"
+    },
+    "statusWidget": {
+        "Absorption charging": "均充",
+        "Assisting": "辅助供电",
+        "Bulk charging": "快充",
+        "Discharging": "放电",
+        "Equalisation charging": "均衡充电",
+        "Float charging": "浮充",
+        "Inverting": "逆变",
+        "Low power": "低功率",
+        "Off": "关",
+        "Passthru": "旁路",
+        "Storage mode": "存储模式",
+        "Sustain": "维持",
+        "VE.Bus Fault condition": "VE.BUS故障条件",
+        "parts": {
+            "Battery": "电池",
+            "Black water": "黑水",
+            "DC Loads": "直流负载",
+            "Fresh water": "淡水",
+            "Fuel": "燃料",
+            "Live well": "活鱼池",
+            "Oil": "石油",
+            "PV Charger": "太阳能充电器",
+            "Shore Power": "太阳能",
+            "Tank sensor": "水箱传感器",
+            "Waste water": "废水"
+        }
+    },
+    "tankWidget": {
+        "Black water": "黑水",
+        "Fresh water": "淡水",
+        "Fuel": "燃料",
+        "Live well": "活鱼池",
+        "Oil": "石油",
+        "Tank sensor": "水箱传感器",
+        "Waste water": "废水"
+    },
+    "versionInfo": {
+        "buildDate": "版本日期",
+        "identifier": "标示",
+        "venusOs": "VenusOS",
+        "version": "版本 %{version}",
+        "vrmPortID": "VRM门户ID"
+    },
+    "widgets": {
+        "acLoads": "交流负载",
+        "batteries": "电池",
+        "battery": "电池",
+        "batteryWithName": "电池: %{name}",
+        "chargerWithName": "充电器名称: %{productNameShort}",
+        "dcLoads": "直流负载",
+        "generator": "发电机",
+        "generatorInput": "发电机输入",
+        "gridInput": "电网输入",
+        "invalidConfig": "无效的配置",
+        "inverterCharger": "逆变充电器：%{productNameShort}",
+        "inverterWithName": "逆变器名称: %{productNameShort}",
+        "pvCharger": "太阳能充电器",
+        "shorePower": "岸电",
+        "solar": "太阳能",
+        "status": "状态",
+        "unknown": "未知"
+    }
+}
