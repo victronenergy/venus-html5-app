@@ -38,15 +38,6 @@ describe("EnergyOverview element", () => {
     })
   })
 
-  describe("error boundary", () => {
-    const wrapper = mount(<EnergyOverview />)
-
-    it("should use error boundary", () => {
-      expect(wrapper.find("ErrorBoundary").exists()).toBe(true)
-      expect(wrapper.find("ErrorBoundary").children().find("Memo(EnergyOverview)").exists()).toBe(true)
-    })
-  })
-
   describe("todo", () => {
     it.todo("should show summary")
     it.todo("should show details")

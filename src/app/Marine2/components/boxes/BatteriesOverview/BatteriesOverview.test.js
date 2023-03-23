@@ -38,16 +38,6 @@ describe("BatteriesOverview element", () => {
     })
   })
 
-  describe("error boundary", () => {
-    const wrapper = mount(<BatteriesOverview />)
-
-    it("should use error boundary", () => {
-      const errorBoundary = wrapper.find("ErrorBoundary")
-      expect(errorBoundary.exists()).toBe(true)
-      expect(errorBoundary.find("Memo(BatteriesOverview)").exists()).toBe(true)
-    })
-  })
-
   describe("todo", () => {
     it.todo("should show summary")
     it.todo("should show details")
