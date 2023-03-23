@@ -105,12 +105,16 @@ The default device's IP address is `172.24.24.1`
 
 #### 2.7.2 Run deploy script
 
-In the project main folder run `./bin/deploy.sh <ip>` where ip is the target device's IP. The script also accepts an additional
+In the project main folder run `./bin/deploy.sh --build <ip>` where ip is the target device's IP. The script also accepts an additional
 `--user|-u` param that defines the user for the deployment connection. This defaults to `root`. You will also need a password to connect to the device. To set the password, navigate to the `Venus Remote Console` -> `Settings` -> `General -> Set root password`.
 
-The deploy script also bundles the app. Note that the script assumes that it's run from the root folder of the application.
+The deploy script also bundles the app if `--build` or `-b` . Note that the script assumes that it's run from the root folder of the application.
 
-#### 2.7.3 Deploying using a USB stick
+#### 2.7.3 Deploying on multiple devices
+
+To deploy the app on multiple devices, use `./bin/deploy-multiple.sh` script. This script uses a list of WiFi access points defined in `network.csv` file.
+
+#### 2.7.4 Deploying using a USB stick
 
 Since Venus OS 2.80, placing the build of the app in `/data/www/app` allows for serving a different version of the app than the one bundled with Venus OS at `/var/www/venus/app`. When the `/data/www/app` is present, it'll be server at `venus.local/app` and the original application at `venus.local/default/app`.
 
