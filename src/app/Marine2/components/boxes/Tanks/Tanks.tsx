@@ -6,8 +6,6 @@ import { useWindowSize } from "../../../utils/hooks"
 import Box from "../../ui/Box"
 import Tank from "./Tank"
 import { AppViews } from "../../../modules/AppViews"
-import { withErrorBoundary } from "react-error-boundary"
-import { appErrorBoundaryProps } from "../../ui/Error/appErrorBoundary"
 import { useVisibilityNotifier } from "../../../modules"
 import { BoxTypes } from "../../../utils/constants"
 import Paginator from "../../ui/Paginator"
@@ -176,4 +174,4 @@ const Tanks = ({ mode = "full", className }: Props) => {
   }
 }
 
-export default withErrorBoundary(observer(Tanks), appErrorBoundaryProps)
+export default observer(Tanks)
