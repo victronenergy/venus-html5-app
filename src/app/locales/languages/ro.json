@@ -6,7 +6,30 @@
         },
         "title": "Mod AC"
     },
-    "boxes": {},
+    "boxes": {
+        "EnergyOverview": "Rezumat energie",
+        "acLoads": "Consumatori AC",
+        "alternator": "Alternator",
+        "batteries": "Baterii",
+        "battery": "Baterie",
+        "batteryWithName": "Baterie: %{name}",
+        "chargerWithName": "Încărcător: %{productNameShort}",
+        "dcLoads": "Consumatori DC",
+        "energy": "Energie",
+        "generator": "Generator",
+        "generatorInput": "Intrare generator",
+        "gridInput": "Intrare rețea",
+        "invalidConfig": "Configurație nevalidă",
+        "inverterCharger": "Invertor/Încărcător: %{productNameShort}",
+        "inverterWithName": "Invertor: %{productNameShort}",
+        "pvCharger": "Încărcător PV",
+        "shorePower": "Alimentare din rețea",
+        "solar": "Solar",
+        "status": "Stare",
+        "tanks": "Rezervoare",
+        "unknown": "Necunoscut",
+        "windGenerator": "Generator eolian"
+    },
     "cardFooter": {
         "Charge": "Încărcare",
         "Critical": "Sever",
@@ -17,13 +40,18 @@
     "common": {
         "absorptionCharging": "Încărcare „Absorption”",
         "assisting": "Asistență",
+        "auto": "Auto",
         "autoStartStop": "Pornite/oprire automată",
         "bulkCharging": "Încărcare „Bulk”",
         "charge": "Încărcare",
+        "charged": "Schimbat",
         "chargerOnly": "Doar încărcător",
         "charging": "Încărcare",
+        "close": "Închidere",
         "current": "Intensitate",
+        "dark": "Întunecat",
         "days": "zile",
+        "days_short": "z",
         "discharge": "Descărcare",
         "discharging": "Descărcare",
         "eco": "Eco",
@@ -33,13 +61,18 @@
         "fault": "Defecțiune",
         "floatCharging": "Încărcare „Float”",
         "hours": "ore",
+        "hours_short": "o",
         "idle": "Inactiv",
         "inputLimit": "Limită de intrare",
         "inverterOnly": "Doar invertor",
         "inverting": "Inversare",
+        "light": "Luminos",
         "limit": "Limită",
+        "loading": "Încărcare",
+        "loads": "Încărcătură",
         "lowPower": "Putere scăzută",
         "minutes": "minute",
+        "minutes_short": "m",
         "mode": "Mod",
         "noShorePower": "Fără alimentare din rețea",
         "notAvailable": "Indisponibil",
@@ -51,6 +84,7 @@
         "powerSupplyMode": "Mod de alimentare",
         "remainingTime": "Timp rămas",
         "running": "În funcțiune",
+        "set": "Setare",
         "standby": "Pauză",
         "starting": "Inițiere",
         "stopped": "Oprit",
@@ -62,8 +96,20 @@
         "voltage": "Tensiune"
     },
     "diagnostics": {
-        "connection": {},
-        "device": {}
+        "connection": {
+            "connection": "Conexiuni",
+            "error": "Eroare",
+            "host": "Gazdă",
+            "portalId": "ID portal",
+            "status": "Stare"
+        },
+        "device": {
+            "device": "Dispozitiv",
+            "userAgent": "Agent utilizator",
+            "viewportHeight": "Înălțime fereastră vizualiare",
+            "viewportWidth": "Lățime fereastră vizualiare"
+        },
+        "diagnostics": "Diagnostic"
     },
     "error": {
         "errorWithMessage": "Eroare: %{message}",
@@ -74,6 +120,8 @@
             "estimate": "Data estimată: %{size} biți.",
             "hint": "Încercați să reîncărcați pagina sau să contactați Victron Energy cu următoarele informații:",
             "ignore": "Ignorați eroarea",
+            "resetError": "Resetare eroare",
+            "restartApp": "Repornire aplicație",
             "sendReport": "Trimiteți raport eroare",
             "title": "A apărut o eroare la afişarea aplicației."
         },
@@ -83,7 +131,10 @@
         "mqttUnavailable4": "Încercați să utilizați butonul Consolă la distanţă situat pe partea de sus a acestui ecran pentru a vă schimba setările de la distanţă.",
         "mqttUnavailable5": "De asemenea, puteți încerca să vă conectați la dispozitivul dumneavoastră de la distanţă selectând Remote (de la distanţă) din meniul de mai sus.",
         "queryParams": "Parametrii solicitării: %{queryParams}",
-        "remoteConsole": {},
+        "remoteConsole": {
+            "connectionFailed": "Nu se poate conecta la dispozitivul GX",
+            "screenTooSmall": "Deschideți pe un ecran mai mare pentru a vizualiza consola la distanţă"
+        },
         "userAgent": "Agent utilizator: %{userAgent}",
         "windowSize": "Fereastră: %{width} x %{height}"
     },
@@ -117,7 +168,11 @@
         "subtitle": "Asigurați-vă că dispozitivele sunt conectate în mod corect",
         "title": "Consola este goală"
     },
-    "pages": {},
+    "pages": {
+        "diagnostics": "Diagnostic",
+        "remoteConsole": "Consola la distanta",
+        "systemOverview": "Prezentare generală sistem"
+    },
     "remoteLogin": {
         "2fa": "Token de autentificare cu doi factori",
         "email": "Email",

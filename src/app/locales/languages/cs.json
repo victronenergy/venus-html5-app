@@ -6,7 +6,30 @@
         },
         "title": "Režim AC"
     },
-    "boxes": {},
+    "boxes": {
+        "EnergyOverview": "Přehled údajů o energii",
+        "acLoads": "AC zátěže",
+        "alternator": "Alternátor",
+        "batteries": "Baterie",
+        "battery": "Baterie",
+        "batteryWithName": "Baterie: %{name}",
+        "chargerWithName": "Nabíječka: %{productNameShort}",
+        "dcLoads": "DC zátěže",
+        "energy": "Energie",
+        "generator": "Generátor",
+        "generatorInput": "Vstup generátoru",
+        "gridInput": "Vstup sítě",
+        "invalidConfig": "Nesprávná konfigurace",
+        "inverterCharger": "Měnič / nabíječka: %{productNameShort}",
+        "inverterWithName": "Střídač: %{productNameShort}",
+        "pvCharger": "Fotovoltaická nabíječka",
+        "shorePower": "Napájení ze sítě",
+        "solar": "Solární energie",
+        "status": "Stav",
+        "tanks": "Nádrže",
+        "unknown": "Neznámý",
+        "windGenerator": "Větrný generátor"
+    },
     "cardFooter": {
         "Charge": "Nabíjet",
         "Critical": "Kritický",
@@ -17,13 +40,18 @@
     "common": {
         "absorptionCharging": "Absorpční nabíjení",
         "assisting": "Asistence",
+        "auto": "Auto",
         "autoStartStop": "Auto spuštění/zastavení",
         "bulkCharging": "Rychlé nabíjení",
         "charge": "Nabíjení",
+        "charged": "Nabito",
         "chargerOnly": "Pouze nabíječka",
         "charging": "Nabíjení",
+        "close": "Zavřít",
         "current": "Proud",
+        "dark": "Tmavý",
         "days": "dnů",
+        "days_short": "d",
         "discharge": "Vybíjení",
         "discharging": "Vybíjení",
         "eco": "Eco",
@@ -33,13 +61,18 @@
         "fault": "Závada",
         "floatCharging": "Udržovací nabíjení",
         "hours": "hodin",
+        "hours_short": "h",
         "idle": "Nečinný",
         "inputLimit": "Vstupní limit",
         "inverterOnly": "Pouze měnič",
         "inverting": "Invertování",
+        "light": "Světlý",
         "limit": "Limit",
+        "loading": "Načítání",
+        "loads": "Zátěže",
         "lowPower": "Nízký výkon",
         "minutes": "minut",
+        "minutes_short": "m",
         "mode": "Režim",
         "noShorePower": "Žádné napájení ze sítě",
         "notAvailable": "Není k dispozici",
@@ -51,6 +84,7 @@
         "powerSupplyMode": "Režim dodání energie",
         "remainingTime": "Zbývající čas",
         "running": "Probíhá",
+        "set": "Nastavit",
         "standby": "Pohotovostní režim",
         "starting": "Spuštění",
         "stopped": "Zastavený",
@@ -62,8 +96,20 @@
         "voltage": "Napětí"
     },
     "diagnostics": {
-        "connection": {},
-        "device": {}
+        "connection": {
+            "connection": "Připojení",
+            "error": "Chyba",
+            "host": "Hostitel",
+            "portalId": "ID portálu",
+            "status": "Stav"
+        },
+        "device": {
+            "device": "Zařízení",
+            "userAgent": "Agent uživatele",
+            "viewportHeight": "Výška panelu zobrazení",
+            "viewportWidth": "Šířka panelu zobrazení"
+        },
+        "diagnostics": "Diagnostika"
     },
     "error": {
         "errorWithMessage": "Chyba: %{message}",
@@ -74,6 +120,8 @@
             "estimate": "Odhadovaná data: %{size} bajtů.",
             "hint": "Zkuste znovu načíst stránku nebo kontaktovat společnost Victron Energy s následujícími informacemi:",
             "ignore": "Ignorovat chybu",
+            "resetError": "Vynulovat chybu",
+            "restartApp": "Restartovat aplikaci",
             "sendReport": "Odeslat chybové hlášení",
             "title": "Při vykreslování aplikace došlo k chybě."
         },
@@ -83,7 +131,10 @@
         "mqttUnavailable4": "Zkuste pomocí tlačítka Konzola dálkového ovládání v horní části této obrazovky změnit nastavení dálkově.",
         "mqttUnavailable5": "Můžete také zkusit dálkové připojení k zařízení výběrem možnosti Dálkové z nabídky výše",
         "queryParams": "Parametry dotazu: %{queryParams}",
-        "remoteConsole": {},
+        "remoteConsole": {
+            "connectionFailed": "Nelze se připojit k zařízení GX.",
+            "screenTooSmall": "Zobrazit konzolu dálkového ovládání ve větším okně"
+        },
         "userAgent": "Agent uživatele: %{userAgent}",
         "windowSize": "Okno: %{width} x %{height}"
     },
@@ -117,7 +168,11 @@
         "subtitle": "Ujistěte se, že vaše zařízení jsou správně připojena",
         "title": "Váš řídicí panel je prázdný"
     },
-    "pages": {},
+    "pages": {
+        "diagnostics": "Diagnostika",
+        "remoteConsole": "Vzdálené ovládání",
+        "systemOverview": "Přehled systému"
+    },
     "remoteLogin": {
         "2fa": "Token dvoufaktorové autentizace",
         "email": "E-mail",

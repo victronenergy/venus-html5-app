@@ -47,9 +47,11 @@
         "charged": "Geladen",
         "chargerOnly": "Alleen Lader",
         "charging": "Laden",
+        "close": "Sluiten",
         "current": "Stroom",
         "dark": "Donker",
         "days": "dagen",
+        "days_short": "d",
         "discharge": "Ontladen",
         "discharging": "Ontladen",
         "eco": "Eco",
@@ -59,15 +61,18 @@
         "fault": "Fout",
         "floatCharging": "Druppel laden",
         "hours": "uur",
+        "hours_short": "u",
         "idle": "Inactief",
         "inputLimit": "Maximum",
         "inverterOnly": "Alleen Omvormer",
         "inverting": "Omvormen",
         "light": "Licht",
         "limit": "Beperken",
+        "loading": "Laden...",
         "loads": "Belastingen",
         "lowPower": "Laag vermogen",
         "minutes": "minuten",
+        "minutes_short": "m",
         "mode": "Modus",
         "noShorePower": "Geen Walstroom",
         "notAvailable": "Niet beschikbaar",
@@ -79,6 +84,7 @@
         "powerSupplyMode": "Voeding Modus",
         "remainingTime": "Resterende tijd",
         "running": "Loopt",
+        "set": "Ingesteld",
         "standby": "Stand-by",
         "starting": "Opstarten",
         "stopped": "Gestopt",
@@ -90,8 +96,20 @@
         "voltage": "Spanning"
     },
     "diagnostics": {
-        "connection": {},
-        "device": {}
+        "connection": {
+            "connection": "Verbinding",
+            "error": "Fout",
+            "host": "Host",
+            "portalId": "Portal ID",
+            "status": "Status"
+        },
+        "device": {
+            "device": "Apparaat",
+            "userAgent": "Gebruiker",
+            "viewportHeight": "Beeld hoogte",
+            "viewportWidth": "Beeld breedte"
+        },
+        "diagnostics": "Diagnose"
     },
     "error": {
         "errorWithMessage": "Fout : %{message}",
@@ -102,6 +120,8 @@
             "estimate": "Geschatte hoeveelheid data: %{size} Bytes.",
             "hint": "Probeer de pagina opnieuw te laden of neem contact op met Victron Energy met de volgende informatie:\n",
             "ignore": "Negeer fout",
+            "resetError": "Herstel fout",
+            "restartApp": "Herstart app",
             "sendReport": "Stuur fout rapport",
             "title": "Weergave fout."
         },
@@ -149,6 +169,7 @@
         "title": "Het dashboard is leeg"
     },
     "pages": {
+        "diagnostics": "Diagnose",
         "remoteConsole": "Remote Console",
         "systemOverview": "Systeem Overzicht"
     },

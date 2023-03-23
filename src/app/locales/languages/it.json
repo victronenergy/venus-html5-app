@@ -6,7 +6,30 @@
         },
         "title": "Modalità CA"
     },
-    "boxes": {},
+    "boxes": {
+        "EnergyOverview": "Panoramica Energia",
+        "acLoads": "Carichi CA",
+        "alternator": "Alternatore",
+        "batteries": "Batterie",
+        "battery": "Batteria",
+        "batteryWithName": "Batteria: %{name}",
+        "chargerWithName": "Caricabatterie: %{productNameShort}",
+        "dcLoads": "Carichi CC",
+        "energy": "Energia",
+        "generator": "Generatore",
+        "generatorInput": "Entrata Generatore",
+        "gridInput": "Entrata Rete",
+        "invalidConfig": "Configurazione non valida",
+        "inverterCharger": "Inverter / Caricabatterie: %{productNameShort}",
+        "inverterWithName": "Inverter: %{productNameShort}",
+        "pvCharger": "Caricabatterie FV",
+        "shorePower": "Alimentazione da Banchina",
+        "solar": "Solare",
+        "status": "Stato",
+        "tanks": "Serbatoi",
+        "unknown": "Sconosciuto",
+        "windGenerator": "Generatore Eolico"
+    },
     "cardFooter": {
         "Charge": "Carica",
         "Critical": "Critico",
@@ -17,13 +40,18 @@
     "common": {
         "absorptionCharging": "Carica Absorption",
         "assisting": "Assistenza in corso",
+        "auto": "Automatico",
         "autoStartStop": "Avvio/arresto automatico",
         "bulkCharging": "Carica Bulk",
         "charge": "Carica",
+        "charged": "Caricato",
         "chargerOnly": "Solo caricabatterie",
         "charging": "Carica",
+        "close": "Chiudi",
         "current": "Corrente",
+        "dark": "Scuro",
         "days": "giorni",
+        "days_short": "d",
         "discharge": "Scarica",
         "discharging": "Scarica",
         "eco": "Eco",
@@ -33,13 +61,18 @@
         "fault": "Errore",
         "floatCharging": "Carica Float",
         "hours": "ore",
+        "hours_short": "h",
         "idle": "Folle",
         "inputLimit": "Limite ingresso",
         "inverterOnly": "Solo inverter",
         "inverting": "Inversione in corso",
+        "light": "Chiaro",
         "limit": "Limite",
+        "loading": "Caricamento in corso",
+        "loads": "Carichi",
         "lowPower": "Bassa potenza",
         "minutes": "minuti",
+        "minutes_short": "m",
         "mode": "Modalità",
         "noShorePower": "Potenza Banchina Assente",
         "notAvailable": "Non Disponibile",
@@ -51,6 +84,7 @@
         "powerSupplyMode": "Modalità alimentazione",
         "remainingTime": "Tempo rimanente",
         "running": "In funzionamento",
+        "set": "Imposta",
         "standby": "Standby",
         "starting": "Avvio in corso",
         "stopped": "Fermo",
@@ -62,8 +96,20 @@
         "voltage": "Tensione"
     },
     "diagnostics": {
-        "connection": {},
-        "device": {}
+        "connection": {
+            "connection": "Connessione",
+            "error": "Errore",
+            "host": "Host",
+            "portalId": "ID Portale",
+            "status": "Stato"
+        },
+        "device": {
+            "device": "Dispositivo",
+            "userAgent": "Agente utente",
+            "viewportHeight": "Altezza finestra visualizzazione",
+            "viewportWidth": "Larghezza finestra visualizzazione"
+        },
+        "diagnostics": "Diagnostica"
     },
     "error": {
         "errorWithMessage": "Errore: %{message}",
@@ -74,6 +120,8 @@
             "estimate": "Dati stimati: %{size} Bytes.",
             "hint": "Provare a ricaricare la pagina o rivolgersi a Victron Energy fornendo le seguenti informazioni:",
             "ignore": "Ignora errore",
+            "resetError": "Errore di ripristino",
+            "restartApp": "Riavviare applicazione",
             "sendReport": "Invia segnalazione errore",
             "title": "Si è verificato un errore durante il render dell’applicazione."
         },
@@ -83,7 +131,10 @@
         "mqttUnavailable4": "Provare a utilizzare il pulsante della Consolle Remota sito nella parte alta di questa schermata per cambiare le impostazioni da remoto.",
         "mqttUnavailable5": "Si può provare anche a collegarsi al proprio dispositivo da remoto, selezionando Remoto nel menù qui sopra.",
         "queryParams": "Parametri richiesta: %{queryParams}",
-        "remoteConsole": {},
+        "remoteConsole": {
+            "connectionFailed": "Impossibile connettersi al dispositivo GX",
+            "screenTooSmall": "Aprire su uno schermo più grande per vedere la consolle remota"
+        },
         "userAgent": "Agente utente: %{userAgent}",
         "windowSize": "Finestra: %{width} x %{height}"
     },
@@ -117,7 +168,11 @@
         "subtitle": "Assicurarsi che i dispositivi siano correttamente collegati",
         "title": "La vostra Dashboard è vuota"
     },
-    "pages": {},
+    "pages": {
+        "diagnostics": "Diagnostica",
+        "remoteConsole": "Consolle Remota",
+        "systemOverview": "Panoramica Sistema"
+    },
     "remoteLogin": {
         "2fa": "Token di autenticazione a due fattori",
         "email": "E-mail",
