@@ -239,11 +239,11 @@ module.exports = function (webpackEnv) {
         new CssMinimizerPlugin({
           minimizerOptions: {
             // Other options are available https://webpack.js.org/plugins/css-minimizer-webpack-plugin/#minify
-            minify: CssMinimizerPlugin.cleanCssMinify,
             preset: [
               "default",
               {
                 discardComments: { removeAll: true },
+                minifyFontValues: { removeQuotes: false },
               },
             ],
           },
