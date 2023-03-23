@@ -10,6 +10,22 @@
 
 file="network.csv"
 
+BUILD=false
+while [[ $# -gt 0 ]]; do
+    key="$1"
+    case $key in
+        -b|--build)
+            BUILD=true
+            shift # past argument
+        ;;
+    esac
+done
+
+if $BUILD; then
+  echo "Building app.."
+  npm run build
+fi
+
 while IFS=',' read -r WIFI_SSID WIFI_PASSWD HOST; 
 do
   if [[ $HOST -ne "" ]]; then
