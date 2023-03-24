@@ -50,13 +50,13 @@ const PageFlipper = ({ children, pageSelectorPropsSetter, pages, currentPageSett
       <div
         ref={pageRef}
         className={classnames("overflow-hidden w-full", {
-          "h-[calc(100%-3.5rem)]": !pageSelectorPropsSetter,
+          "h-[calc(100%-3.5rem)]": !pageSelectorPropsSetter && pages > 1,
           "h-full": !!pageSelectorPropsSetter,
         })}
       >
         {children}
       </div>
-      {!pageSelectorPropsSetter && (
+      {!pageSelectorPropsSetter && pages > 1 && (
         <PageSelector
           onClickLeft={() => {
             setCurrentPage(currentPage - 1)
