@@ -46,7 +46,7 @@ const getConnectionDiagnostics = (mqtt: MqttStore) => {
     },
     {
       property: translate("diagnostics.connection.error"),
-      value: mqtt.error ? `${mqtt.error}` : translate("diagnostics.connection.noError"),
+      value: mqtt.error ? `${mqtt.error}` : translate("diagnostics.connection.none"),
     },
     {
       property: translate("diagnostics.connection.host"),
