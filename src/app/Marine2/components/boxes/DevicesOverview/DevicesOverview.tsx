@@ -7,13 +7,13 @@ import { useChargers, useGeneratorFp, useGeneratorRelay, useInverters, useVebus 
 import Charger from "../Charger"
 import Inverter from "../Inverter"
 import GeneratorFp from "../GeneratorFp"
-import GeneratorRelays from "../GeneratorRelays"
 import InverterCharger from "../InverterCharger"
 import { useVisibilityNotifier } from "../../../modules"
-import { BoxTypes } from "../../../utils/constants"
+import { AC_SOURCE, BoxTypes, RELAY_FUNCTION } from "../../../utils/constants"
 import { PageSelectorProps } from "../../ui/PageSelector"
 import GridPaginator from "../../ui/GridPaginator"
 import React from "react"
+import GeneratorRelay from "../GeneratorRelays/GeneratorRelay"
 
 const DevicesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) => {
   const { inverters } = useInverters()
@@ -48,8 +48,26 @@ const DevicesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) => {
     }
 
     if (!!generatorFp.phases) boxes.push(<GeneratorFp key={"generatorFp"} generatorFp={generatorFp} mode={"full"} />)
-    if (!!generatorRelay.settings)
-      boxes.push(<GeneratorRelays key={"generatorRelay"} generatorRelay={generatorRelay} mode={"full"} />)
+    if (!!generatorRelay.settings) {
+      if (generatorRelay.settings.includes(AC_SOURCE.GENERATOR)) {
+        generatorRelay.settings.forEach((source: number, i: number) => {
+          if (source === AC_SOURCE.GENERATOR)
+            boxes.push(
+              <GeneratorRelay
+                key={"generator_relay" + i}
+                {...generatorRelay}
+                active={generatorRelay.activeInput === i}
+                mode={"full"}
+              />
+            )
+        })
+      } else if (
+        generatorRelay.relayFunction === RELAY_FUNCTION.GENERATOR_START_STOP &&
+        generatorRelay.statusCode !== undefined
+      ) {
+        boxes.push(<GeneratorRelay {...generatorRelay} mode={"full"} />)
+      }
+    }
 
     return boxes
   }
@@ -80,8 +98,26 @@ const DevicesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) => {
     }
 
     if (!!generatorFp.phases) devices.push(<GeneratorFp generatorFp={generatorFp} />)
-    if (!!generatorRelay.settings) devices.push(<GeneratorRelays generatorRelay={generatorRelay} />)
-
+    if (!!generatorRelay.settings) {
+      if (generatorRelay.settings.includes(AC_SOURCE.GENERATOR)) {
+        generatorRelay.settings.forEach((source: number, i: number) => {
+          if (source === AC_SOURCE.GENERATOR)
+            devices.push(
+              <GeneratorRelay
+                key={"generator_relay" + i}
+                {...generatorRelay}
+                active={generatorRelay.activeInput === i}
+                mode={"compact"}
+              />
+            )
+        })
+      } else if (
+        generatorRelay.relayFunction === RELAY_FUNCTION.GENERATOR_START_STOP &&
+        generatorRelay.statusCode !== undefined
+      ) {
+        devices.push(<GeneratorRelay {...generatorRelay} mode={"compact"} />)
+      }
+    }
     return devices
   }
 
