@@ -98,11 +98,11 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
       translate("tankWidget.Oil"),
       translate("tankWidget.Black water"),
       translate("tankWidget.Gasoline"),
-      translate("Diesel"),
-      translate("Liquid Petroleum Gas (LPG)"),
-      translate("Liquid Natural Gas (LNG)"),
-      translate("Hydraulic oil"),
-      translate("Raw water"),
+      translate("tankWidget.Diesel"),
+      translate("tankWidget.LPG"),
+      translate("tankWidget.LNG"),
+      translate("tankWidget.Hydraulic oil"),
+      translate("tankWidget.Raw water"),
     ]
 
     return fluids[fluidTypeNum]
