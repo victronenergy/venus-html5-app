@@ -9,8 +9,11 @@ import { AppViews } from "../../../modules/AppViews"
 import { translate } from "react-i18nify"
 import { useVisibilityNotifier } from "../../../modules"
 import GridPaginator from "../../ui/GridPaginator"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { PageSelectorProps } from "../../ui/PageSelector"
+import { boxBreakpoints } from "../../../utils/media"
+import PageFlipper from "../../ui/PageFlipper"
+import range from "lodash-es/range"
 
 interface Props {
   mode?: "compact" | "full"
@@ -26,6 +29,26 @@ const BatteriesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) =>
   const sortedBatteries = sortBatteries(batteries ?? [])
   const overviewBatteries = getOverviewBatteries(sortedBatteries)
 
+  const [pages, setPages] = useState(1)
+  const [perPage, setPerPage] = useState(2)
+
+  useEffect(() => {
+    if (!overviewBatteries || !overviewBatteries.length) return
+
+    let batterySummaryWidth = 142 // minimum BatterySummary component width
+    // BatterySummary component width is bigger based on these breakpoints (subtract 56 leaving space for page selector)
+    if (boxSize.height - 56 > boxBreakpoints["sm-m"].height) {
+      batterySummaryWidth = 302
+    } else if (boxSize.height - 56 > boxBreakpoints["sm-s"].height) {
+      batterySummaryWidth = 230
+    }
+
+    const batteriesPerPage = Math.floor((boxSize.width - 32) / batterySummaryWidth) ?? 1 // -32 due to box padding
+
+    setPerPage(batteriesPerPage)
+    setPages(Math.ceil(overviewBatteries.length / batteriesPerPage))
+  }, [boxSize, overviewBatteries])
+
   if (mode === "compact") {
     return (
       <Box
@@ -37,14 +60,28 @@ const BatteriesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) =>
         getBoxSizeCallback={setBoxSize}
       >
         {/* TODO: set max items per page based on the available space */}
-        <GridPaginator perPage={2}>
-          {overviewBatteries.map((b) => (
-            <div key={b.id} className={"h-full flex items-center justify-center"}>
-              {/* TODO: Take into account pagination being active for box size instead of this 'trick' */}
-              <BatterySummary key={b.id} battery={b} boxSize={{ width: boxSize.width, height: boxSize.height - 50 }} />
-            </div>
-          ))}
-        </GridPaginator>
+        <PageFlipper pages={pages}>
+          <div
+            className={"h-full flex"}
+            style={{
+              width: `${pages}00%`,
+            }}
+          >
+            {range(pages).map((page) => (
+              <div key={page + "batteryPage"} className={"flex w-full h-full items-center justify-center"}>
+                {overviewBatteries.slice(page * perPage, (page + 1) * perPage).map((b) => (
+                  <div key={b.id} className={"h-full flex items-center justify-center"}>
+                    <BatterySummary
+                      key={b.id}
+                      battery={b}
+                      boxSize={{ width: boxSize.width, height: boxSize.height - 50 }}
+                    />
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        </PageFlipper>
       </Box>
     )
   }
