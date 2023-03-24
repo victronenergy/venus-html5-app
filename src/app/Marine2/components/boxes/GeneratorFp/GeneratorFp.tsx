@@ -6,11 +6,11 @@ import { translate } from "react-i18nify"
 import { formatPower } from "../../../utils/format"
 import DeviceCompact from "../DeviceCompact"
 import Box from "../../ui/Box"
-import Button from "../../ui/Button"
 import classnames from "classnames"
 import { useState } from "react"
 import ValueBar from "../../ui/ValueBar"
 import { applyStyles, BreakpointStylesType } from "../../../utils/media"
+import AutoStartStopSetter from "../../ui/AutoStartStopSetter"
 
 const styles: BreakpointStylesType = {
   default: {
@@ -67,7 +67,7 @@ const GeneratorFp = ({ mode = "compact", generatorFp }: Props) => {
     }
   }
 
-  const { productName, phases, statusCode, gensetAutoStart } = generatorFp //TODO: once design is ready use autoStart, updateAutoMode, updateManualMode
+  const { productName, phases, statusCode, gensetAutoStart, autoStart, updateAutoMode, updateManualMode } = generatorFp
   const gensetValues = useGensetValues()
   const { voltage, current, power, coolant, winding, exhaust } = gensetValues
   // When a topic is invalid, it returns undefined -> no value means topic is not supported
@@ -166,9 +166,13 @@ const GeneratorFp = ({ mode = "compact", generatorFp }: Props) => {
           <div className={classnames("shrink overflow-hidden", activeStyles?.valueBars)}>
             {!!gensetValues && phasesOverview.map((v, i) => <ValueBar key={i} prefix={"L" + (i + 1)} values={v} />)}
           </div>
-          <Button size="md" className="flex-none mt-3" disabled={isAutoStartDisabled}>
-            {translate("common.autoStartStop")}
-          </Button>
+          <AutoStartStopSetter
+            autoStart={autoStart}
+            isAutoStartDisabled={isAutoStartDisabled}
+            updateAutoMode={updateAutoMode}
+            updateManualMode={updateManualMode}
+            statusCode={statusCode}
+          />
         </div>
       </div>
     </Box>

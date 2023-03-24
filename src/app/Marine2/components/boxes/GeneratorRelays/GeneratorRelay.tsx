@@ -4,8 +4,9 @@ import { translate } from "react-i18nify"
 import { formatPower } from "../../../utils/format"
 import DeviceCompact from "../DeviceCompact"
 import { useActiveInValues } from "@elninotech/mfd-modules"
-import Button from "../../ui/Button"
 import ValueBox from "../../ui/ValueBox"
+import AutoStartStopSetter from "../../ui/AutoStartStopSetter/AutoStartStopSetter"
+import { RELAY_FUNCTION } from "../../../utils/constants"
 
 const GeneratorRelay = ({
   statusCode,
@@ -83,21 +84,19 @@ const GeneratorRelay = ({
       }
       title={title}
       buttons={
-        <Button size="md" className="flex-none mt-3 w-full" disabled={!autoStart}>
-          {translate("common.autoStartStop")}
-        </Button>
+        relayFunction === RELAY_FUNCTION.GENERATOR_START_STOP && statusCode !== undefined ? (
+          <AutoStartStopSetter
+            autoStart={autoStart}
+            isAutoStartDisabled={false}
+            updateAutoMode={updateAutoMode}
+            updateManualMode={updateManualMode}
+            manualStart={manualStart}
+          />
+        ) : undefined
       }
       unit={"A"}
       value={current[0]} //TODO: get update to design for what should be shown when there are multiple phases
       bottomValues={phasesOverview}
-      infoText={
-        !autoStart
-          ? {
-              title: "Button disabled",
-              body: "Enable button functionality through genset panel",
-            }
-          : undefined
-      }
     >
       {subTitle}
     </ValueBox>

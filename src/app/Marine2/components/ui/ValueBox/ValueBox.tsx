@@ -62,7 +62,7 @@ const ValueBox = ({ title, icon, value, unit, bottomValues, children, buttons, i
               <ValueBar key={i} prefix={isMultiPhase ? "L" + (i + 1) : undefined} values={v} />
             ))}
           </div>
-          {!!buttons && <div className="flex">{buttons}</div>}
+          {!!buttons && <div className="flex w-full">{buttons}</div>}
         </div>
       </div>
     </Box>
