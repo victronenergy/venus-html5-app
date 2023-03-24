@@ -101,7 +101,7 @@
             "connection": "Connection",
             "error": "Error",
             "host": "Host",
-            "noError": "none",
+            "none": "none",
             "portalId": "Portal ID",
             "status": "Status"
         },
@@ -226,10 +226,16 @@
     },
     "tankWidget": {
         "Black water": "Black water",
+        "Diesel": "Diesel",
         "Fresh water": "Fresh water",
         "Fuel": "Fuel",
+        "Gasoline": "Gasoline",
+        "Hydraulic oil": "Hydraulic oil",
+        "LNG": "Liquid Natural Gas (LNG)",
+        "LPG": "Liquid Petroleum Gas (LPG)",
         "Live well": "Live well",
         "Oil": "Oil",
+        "Raw water": "Raw water",
         "Tank sensor": "Tank sensor",
         "Waste water": "Waste water"
     },

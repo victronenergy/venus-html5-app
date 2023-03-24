@@ -100,6 +100,7 @@
             "connection": "连接",
             "error": "错误",
             "host": "主机",
+            "none": "无",
             "portalId": "门户ID",
             "status": "状态"
         },
@@ -219,10 +220,15 @@
     },
     "tankWidget": {
         "Black water": "黑水",
+        "Diesel": "柴油",
         "Fresh water": "淡水",
         "Fuel": "燃料",
+        "Hydraulic oil": "液压油",
+        "LNG": "LNG",
+        "LPG": "LPG",
         "Live well": "活鱼池",
         "Oil": "石油",
+        "Raw water": "生水",
         "Tank sensor": "水箱传感器",
         "Waste water": "废水"
     },

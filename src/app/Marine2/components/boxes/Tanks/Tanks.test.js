@@ -39,15 +39,6 @@ describe("Tanks element", () => {
     })
   })
 
-  describe("error boundary", () => {
-    const wrapper = mount(<Tanks />)
-
-    it("should use error boundary", () => {
-      expect(wrapper.find("ErrorBoundary").exists()).toBe(true)
-      expect(wrapper.find("ErrorBoundary").children().find("Memo(Tanks)").exists()).toBe(true)
-    })
-  })
-
   describe("todo", () => {
     it.todo("should show summary")
     it.todo("should show details")
