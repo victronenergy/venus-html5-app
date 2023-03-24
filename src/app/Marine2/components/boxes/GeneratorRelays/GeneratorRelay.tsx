@@ -90,6 +90,14 @@ const GeneratorRelay = ({
       unit={"A"}
       value={phases === 1 ? current[0] : undefined} //TODO: get update to design for what should be shown otherwise
       bottomValues={phasesOverview}
+      infoText={
+        !autoStart
+          ? {
+              title: "Button disabled",
+              body: "Enable button functionality through genset panel",
+            }
+          : undefined
+      }
     >
       {subTitle}
     </ValueBox>

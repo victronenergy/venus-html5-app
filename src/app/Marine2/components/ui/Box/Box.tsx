@@ -1,10 +1,13 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import classNames from "classnames"
 import ArrowRightIcon from "../../../images/icons/arrow-right.svg"
+import InfoIcon from "../../../images/icons/info.svg"
 import { AppViews, useAppViewsStore } from "../../../modules/AppViews"
 import Paginator from "../Paginator"
 import useSize from "@react-hook/size"
 import FadedText from "../FadedText"
+import classnames from "classnames"
+import { Modal } from "../Modal"
 
 const Box = ({
   children,
@@ -14,6 +17,7 @@ const Box = ({
   linkedView,
   getBoxSizeCallback,
   withPagination = false,
+  infoText,
   paginationOrientation = "horizontal",
 }: BoxProps) => {
   const appViewsStore = useAppViewsStore()
@@ -21,6 +25,13 @@ const Box = ({
     if (linkedView) {
       appViewsStore.setView(linkedView)
     }
+  }
+  const [infoOpen, setInfoOpen] = useState(false)
+  const openInfo = () => {
+    setInfoOpen(true)
+  }
+  const closeInfo = () => {
+    setInfoOpen(false)
   }
   const boxRef = React.useRef<HTMLDivElement>(null)
   const [width, height] = useSize(boxRef)
@@ -59,6 +70,16 @@ const Box = ({
             />
           </div>
         )}
+        {!linkedView && !!infoText && (
+          <div className="-mr-3 p-3" onClick={openInfo}>
+            <InfoIcon
+              /* todo: fix types for svg */
+              /* @ts-ignore */
+              className={"w-7 text-victron-blue dark:text-victron-blue-dark cursor-pointer outline-none"}
+              alt={"Info"}
+            />
+          </div>
+        )}
       </div>
       <div className={"w-full min-h-0 h-full pt-2"}>
         {withPagination && (
@@ -68,6 +89,34 @@ const Box = ({
         )}
         {!withPagination && children}
       </div>
+      {!linkedView && !!infoText && (
+        <Modal.Frame
+          open={infoOpen}
+          onClose={closeInfo}
+          className={classnames(" border-victron-darkGray-2 border rounded-md w-[30rem]")}
+        >
+          <Modal.Body>
+            <div className="flex flex-col">
+              <div className="dark:text-white text-base">
+                <InfoIcon
+                  /* todo: fix types for svg */
+                  /* @ts-ignore */
+                  className={
+                    "ml-auto mr-auto mt-7 mb-7 w-10 text-victron-blue dark:text-victron-blue-dark cursor-pointer outline-none"
+                  }
+                  alt={"Info"}
+                />
+                <div className={"text-center mb-2 text-xl"}>{infoText.title}</div>
+                <div className={"text-center text-sm pr-2 pl-2 mb-20"}>{infoText.body}</div>
+                <div className={classnames("-ml-4 h-0 mt-3 border-b border-victron-darkGray-2 w-[30rem]")} />
+                <button onClick={closeInfo} className={"w-full -mb-2 h-11 mt-2"}>
+                  Ok
+                </button>
+              </div>
+            </div>
+          </Modal.Body>
+        </Modal.Frame>
+      )}
     </div>
   )
 }
@@ -75,6 +124,7 @@ const Box = ({
 export interface BoxProps {
   children: JSX.Element[] | JSX.Element | string
   icon?: JSX.Element
+  infoText?: { title: string; body: string }
   title: string
   linkedView?: AppViews
   className?: string

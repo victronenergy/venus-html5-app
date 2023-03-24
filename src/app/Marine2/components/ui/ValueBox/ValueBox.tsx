@@ -32,7 +32,7 @@ const styles: BreakpointStylesType = {
   },
 }
 
-const ValueBox = ({ title, icon, value, unit, bottomValues, children, buttons, inputLimitValue }: Props) => {
+const ValueBox = ({ title, icon, value, unit, bottomValues, children, buttons, infoText }: Props) => {
   const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
   const activeStyles = applyStyles(boxSize, styles)
   const isMultiPhase = bottomValues.length > 1
@@ -43,7 +43,7 @@ const ValueBox = ({ title, icon, value, unit, bottomValues, children, buttons, i
   }
 
   return (
-    <Box title={title} icon={icon} getBoxSizeCallback={setBoxSize}>
+    <Box title={title} icon={icon} getBoxSizeCallback={setBoxSize} infoText={infoText}>
       <div className="w-full h-full flex flex-col justify-between">
         <div className={"w-full h-full shrink overflow-hidden"}>
           <div className={classNames("text-victron-darkGray dark:text-white", activeStyles?.value)}>
@@ -76,6 +76,7 @@ interface Props {
   bottomValues: ValueWithUnit[][]
   children?: JSX.Element | JSX.Element[] | string
   buttons?: JSX.Element | JSX.Element[]
+  infoText?: { title: string; body: string }
 }
 
 interface ValueWithUnit {

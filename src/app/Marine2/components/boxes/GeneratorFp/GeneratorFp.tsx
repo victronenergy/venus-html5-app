@@ -121,6 +121,14 @@ const GeneratorFp = ({ mode = "compact", generatorFp }: Props) => {
       }
       title={title}
       getBoxSizeCallback={setBoxSize}
+      infoText={
+        isAutoStartDisabled
+          ? {
+              title: "Button disabled",
+              body: "Enable button functionality through genset panel",
+            }
+          : undefined
+      }
     >
       <div className="w-full h-full flex flex-col justify-between">
         <div className={classnames("flex w-full", activeStyles?.flow)}>
