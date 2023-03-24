@@ -147,7 +147,16 @@ const Paginator = ({
     const newChildrenSizeArray: number[] = []
 
     childrenRef.current.forEach((ref) => {
-      const refSize = orientation === "horizontal" ? ref.scrollWidth : ref.scrollHeight
+      const refWithoutWrapper = ref.firstElementChild
+      const marginSize = refWithoutWrapper
+        ? orientation === "horizontal"
+          ? parseInt(window.getComputedStyle(refWithoutWrapper).marginLeft) +
+            parseInt(window.getComputedStyle(refWithoutWrapper).marginRight)
+          : parseInt(window.getComputedStyle(refWithoutWrapper).marginTop) +
+            parseInt(window.getComputedStyle(refWithoutWrapper).marginBottom)
+        : 0
+      const refSize = (orientation === "horizontal" ? ref.scrollWidth : ref.scrollHeight) + marginSize
+
       newChildrenSizeArray.push(refSize)
     })
 
