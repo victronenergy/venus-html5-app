@@ -100,7 +100,7 @@
             "connection": "连接",
             "error": "错误",
             "host": "主机",
-            "noError": "无",
+            "none": "无",
             "portalId": "门户ID",
             "status": "状态"
         },

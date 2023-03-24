@@ -100,7 +100,7 @@
             "connection": "Connection",
             "error": "Error",
             "host": "Host",
-            "noError": "none",
+            "none": "none",
             "portalId": "Portal ID",
             "status": "Status"
         },
