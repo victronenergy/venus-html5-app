@@ -81,6 +81,7 @@ const EnergyOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) => {
       perPage={4}
       orientation={"horizontal"}
       pageSelectorPropsSetter={pageSelectorPropsSetter}
+      flow={window.innerWidth > window.innerHeight ? "row" : "col"}
     >
       {boxes}
     </GridPaginator>
