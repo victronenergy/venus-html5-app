@@ -40,6 +40,10 @@ const PageFlipper = ({ children, pageSelectorPropsSetter, pages, currentPageSett
     currentPageSetter(currentPage)
   }, [currentPage, currentPageSetter])
 
+  useEffect(() => {
+    if (pages && currentPage && currentPage > pages - 1) setCurrentPage(pages - 1)
+  }, [currentPage, pages])
+
   return (
     <div
       ref={wrapperRef}
