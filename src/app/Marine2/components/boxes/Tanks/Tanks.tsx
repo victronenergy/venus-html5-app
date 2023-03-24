@@ -8,7 +8,6 @@ import Tank from "./Tank"
 import { AppViews } from "../../../modules/AppViews"
 import { useVisibilityNotifier } from "../../../modules"
 import { BoxTypes } from "../../../utils/constants"
-import Paginator from "../../ui/Paginator"
 import ResizeObserver from "resize-observer-polyfill"
 import useSize from "@react-hook/size"
 
@@ -110,19 +109,22 @@ const Tanks = ({ mode = "full", className }: Props) => {
   } else {
     if (orientation === "vertical") {
       return (
-        <Box
-          title={"Tanks"}
-          icon={
-            <TanksIcon
-              /* todo: fix types for svg */
-              /* @ts-ignore */
-              className={"w-6 text-black dark:text-white"}
-            />
-          }
-          className={className}
-          getBoxSizeCallback={setBoxSize}
-        >
-          <div ref={gridRef}>
+        <div className="w-full h-full p-2">
+          <Box
+            title={"Tanks"}
+            icon={
+              <TanksIcon
+                /* todo: fix types for svg */
+                /* @ts-ignore */
+                className={"w-6 text-black dark:text-white"}
+              />
+            }
+            className={className}
+            getBoxSizeCallback={setBoxSize}
+            withPagination={true}
+            paginationOrientation={"vertical"}
+            setRef={gridRef}
+          >
             {tanks?.map((tank, index) => {
               return tank ? (
                 <Tank
@@ -137,24 +139,26 @@ const Tanks = ({ mode = "full", className }: Props) => {
                 <></>
               )
             })}
-          </div>
-        </Box>
+          </Box>
+        </div>
       )
     } else {
       // orientation === "horizontal"
       return (
-        <Box
-          title={"Tanks"}
-          icon={
-            <TanksIcon
-              /* todo: fix types for svg */
-              /* @ts-ignore */
-              className={"w-6 text-black dark:text-white"}
-            />
-          }
-          getBoxSizeCallback={setBoxSize}
-        >
-          <Paginator selectorLocation="bottom-full" orientation="horizontal">
+        <div className="w-full h-full p-2">
+          <Box
+            title={"Tanks"}
+            icon={
+              <TanksIcon
+                /* todo: fix types for svg */
+                /* @ts-ignore */
+                className={"w-6 text-black dark:text-white"}
+              />
+            }
+            getBoxSizeCallback={setBoxSize}
+            withPagination={true}
+            paginationOrientation={"horizontal"}
+          >
             <div className="flex justify-between h-full" ref={gridRef}>
               {tanks.map((tank) => (
                 <Tank
@@ -167,8 +171,8 @@ const Tanks = ({ mode = "full", className }: Props) => {
                 />
               ))}
             </div>
-          </Paginator>
-        </Box>
+          </Box>
+        </div>
       )
     }
   }
