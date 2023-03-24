@@ -51,7 +51,7 @@ const PageFlipper = ({ children, pageSelectorPropsSetter, pages, currentPageSett
         ref={pageRef}
         className={classnames("overflow-hidden w-full", {
           "h-[calc(100%-3.5rem)]": !pageSelectorPropsSetter && pages > 1,
-          "h-full": !!pageSelectorPropsSetter,
+          "h-full": !!pageSelectorPropsSetter || pages === 1,
         })}
       >
         {children}
