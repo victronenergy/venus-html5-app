@@ -88,7 +88,7 @@ const GridPaginator = ({
           {range(pages).map((page) => {
             return (
               <Grid
-                key={page}
+                key={page + "gridPage"}
                 className={className}
                 childClassName={childClassName}
                 flow={fixedFlow ?? flow}

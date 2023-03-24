@@ -15,14 +15,14 @@ const styles: BreakpointStylesType = {
     name: "text-base",
     state: "text-xs",
   },
-  "md-s": {
+  "sm-s": {
     circle: "w-[198px]",
     circleWrapper: "px-3 h-[144px]",
     voltage: "block",
     name: "text-base",
     state: "text-sm",
   },
-  "lg-m": {
+  "sm-m": {
     circle: "w-[270px]",
     circleWrapper: "px-4 h-[238px]",
     voltage: "text-lg",

@@ -17,6 +17,7 @@ const Box = ({
   linkedView,
   getBoxSizeCallback,
   withPagination = false,
+  setRef,
   infoText,
   paginationOrientation = "horizontal",
 }: BoxProps) => {
@@ -81,7 +82,7 @@ const Box = ({
           </div>
         )}
       </div>
-      <div className={"w-full min-h-0 h-full pt-2"}>
+      <div ref={setRef} className={"w-full min-h-0 h-full pt-2"}>
         {withPagination && (
           <Paginator orientation={paginationOrientation} selectorLocation={"bottom-full"}>
             {children}
@@ -132,6 +133,7 @@ export interface BoxProps {
   withPagination?: boolean
   paginationOrientation?: "horizontal" | "vertical"
   getBoxSizeCallback?: (size: { width: number; height: number }) => void
+  setRef?: React.RefObject<HTMLDivElement>
 }
 
 export default Box
