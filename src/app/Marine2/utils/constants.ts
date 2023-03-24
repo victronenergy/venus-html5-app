@@ -79,3 +79,10 @@ export const GENSET_STATE = {
 export const RELAY_FUNCTION = {
   GENERATOR_START_STOP: 1,
 }
+
+export const GENERATOR_START_STOP = {
+  STOP: 0,
+  START: 1,
+  AUTO_ON: 1,
+  AUTO_OFF: 0,
+}
