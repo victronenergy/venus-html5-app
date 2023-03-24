@@ -21,8 +21,11 @@ const PageFlipper = ({ children, pageSelectorPropsSetter, pages, currentPageSett
   }, [currentPage, pageSelectorPropsSetter, pages])
 
   useEffect(() => {
-    if (!pageRef.current || typeof pageRef.current.scrollTo !== "function") {
+    if (!pageRef.current) {
       return
+    }
+    if (typeof pageRef.current.scrollTo !== "function") {
+      pageRef.current.scrollLeft = currentPage * pageRef.current.offsetWidth
     }
 
     pageRef.current.scrollTo({
