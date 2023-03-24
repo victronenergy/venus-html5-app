@@ -22,16 +22,16 @@ const styles: BreakpointStylesType = {
   },
   "sm-s": {
     flow: "flex-col",
-    value: "text-base w-full",
+    value: "text-2xl w-full",
     valueSubtitle: "w-fit mt-3 text-xs",
-    subValue: "text-sm",
+    subValue: "text-base",
     valueBars: "text-sm",
   },
   "sm-m": {
     flow: "flex-col",
-    value: "text-lg w-full",
+    value: "text-2xl w-full",
     valueSubtitle: "w-fit text-xs mt-5",
-    subValue: "text-sm",
+    subValue: "text-base",
     valueBars: "text-base",
   },
   "md-s": {
@@ -141,21 +141,21 @@ const GeneratorFp = ({ mode = "compact", generatorFp }: Props) => {
           >
             <div className="flex flex-none flex-col mr-3 w-1/3 truncate">
               <span>Coolant</span>
-              <div className={classnames("text-white", activeStyles?.subValue)}>
+              <div className={classnames("text-victron-darkGray dark:text-white", activeStyles?.subValue)}>
                 {coolant}
                 <span>°</span>
               </div>
             </div>
             <div className="flex flex-none flex-col mr-3 w-1/3 truncate">
               <span>Winding</span>
-              <div className={classnames("text-white", activeStyles?.subValue)}>
+              <div className={classnames("text-victron-darkGray dark:text-white", activeStyles?.subValue)}>
                 {winding}
                 <span>°</span>
               </div>
             </div>
             <div className="flex flex-none flex-col w-1/3 truncate">
               <span>Exhaust</span>
-              <div className={classnames("text-white", activeStyles?.subValue)}>
+              <div className={classnames("text-victron-darkGray dark:text-white", activeStyles?.subValue)}>
                 {exhaust}
                 <span>°</span>
               </div>
