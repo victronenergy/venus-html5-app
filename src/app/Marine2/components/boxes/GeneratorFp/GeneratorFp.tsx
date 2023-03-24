@@ -11,8 +11,6 @@ import classnames from "classnames"
 import { useState } from "react"
 import ValueBar from "../../ui/ValueBar"
 import { applyStyles, BreakpointStylesType } from "../../../utils/media"
-import { withErrorBoundary } from "react-error-boundary"
-import { appErrorBoundaryProps } from "../../ui/Error/appErrorBoundary"
 
 const styles: BreakpointStylesType = {
   default: {
@@ -174,4 +172,4 @@ interface Props {
   generatorFp: GeneratorFpProvider
 }
 
-export default withErrorBoundary(observer(GeneratorFp), appErrorBoundaryProps)
+export default observer(GeneratorFp)

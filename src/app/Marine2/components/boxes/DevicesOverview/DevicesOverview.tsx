@@ -11,8 +11,6 @@ import GeneratorRelays from "../GeneratorRelays"
 import InverterCharger from "../InverterCharger"
 import { useVisibilityNotifier } from "../../../modules"
 import { BoxTypes } from "../../../utils/constants"
-import { withErrorBoundary } from "react-error-boundary"
-import { appErrorBoundaryProps } from "../../ui/Error/appErrorBoundary"
 import { PageSelectorProps } from "../../ui/PageSelector"
 import GridPaginator from "../../ui/GridPaginator"
 import React from "react"
@@ -126,4 +124,4 @@ interface Props {
   pageSelectorPropsSetter?: (arg0: PageSelectorProps) => void
 }
 
-export default withErrorBoundary(observer(DevicesOverview), appErrorBoundaryProps)
+export default observer(DevicesOverview)

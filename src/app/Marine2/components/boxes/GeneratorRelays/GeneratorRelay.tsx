@@ -6,8 +6,6 @@ import DeviceCompact from "../DeviceCompact"
 import { useActiveInValues } from "@elninotech/mfd-modules"
 import Button from "../../ui/Button"
 import ValueBox from "../../ui/ValueBox"
-import { withErrorBoundary } from "react-error-boundary"
-import { appErrorBoundaryProps } from "../../ui/Error/appErrorBoundary"
 
 const GeneratorRelay = ({
   statusCode,
@@ -110,4 +108,4 @@ interface Props {
   mode?: "compact" | "full"
 }
 
-export default withErrorBoundary(observer(GeneratorRelay), appErrorBoundaryProps)
+export default observer(GeneratorRelay)

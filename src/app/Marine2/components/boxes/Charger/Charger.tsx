@@ -15,8 +15,6 @@ import { useEffect, useState } from "react"
 import classNames from "classnames"
 import RadioButton from "../../ui/RadioButton"
 import DeviceSettingModal from "../../ui/DeviceSettingModal/DeviceSettingModal"
-import { withErrorBoundary } from "react-error-boundary"
-import { appErrorBoundaryProps } from "../../ui/Error/appErrorBoundary"
 
 const styles: BreakpointStylesType = {
   default: {
@@ -226,4 +224,4 @@ interface Props {
   componentMode?: "compact" | "full"
 }
 
-export default withErrorBoundary(observer(Charger), appErrorBoundaryProps)
+export default observer(Charger)

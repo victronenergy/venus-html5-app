@@ -15,8 +15,6 @@ import RadioButton from "../../ui/RadioButton"
 import Box from "../../ui/Box"
 import { applyStyles, BreakpointStylesType } from "../../../utils/media"
 import { useEffect, useState } from "react"
-import { withErrorBoundary } from "react-error-boundary"
-import { appErrorBoundaryProps } from "../../ui/Error/appErrorBoundary"
 
 const styles: BreakpointStylesType = {
   default: {
@@ -180,4 +178,4 @@ interface Props {
   componentMode?: "compact" | "full"
 }
 
-export default withErrorBoundary(observer(Inverter), appErrorBoundaryProps)
+export default observer(Inverter)

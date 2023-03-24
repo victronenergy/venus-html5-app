@@ -12,8 +12,6 @@ import DeviceSettingModal from "../../ui/DeviceSettingModal"
 import InputLimitValue from "../../ui/InputLimitValue"
 import InputLimitSelector from "../../ui/InputLimitSelector"
 import ValueBox from "../../ui/ValueBox"
-import { withErrorBoundary } from "react-error-boundary"
-import { appErrorBoundaryProps } from "../../ui/Error/appErrorBoundary"
 
 const InverterCharger = ({ componentMode = "compact" }: Props) => {
   const inverterChargerModeFormatter = (value: number) => {
@@ -38,9 +36,7 @@ const InverterCharger = ({ componentMode = "compact" }: Props) => {
 
   const productNameShort = productName && productName.split(" ")[0]
 
-  const inverterChargerState =
-    !!state || parseInt(state) === 0 ? translate(formatStateForTranslation(Number(state))) : ""
-  const subTitle = (!adjustable ? inverterChargerModeFormatter(parseInt(mode)) + " - " : "") + inverterChargerState
+  const subTitle = !!state || parseInt(state) === 0 ? translate(formatStateForTranslation(Number(state))) : ""
 
   const [isModeModalOpen, setIsModeModalOpen] = useState(false)
   const [modeForSubmission, setModeForSubmission] = useState(Number(mode))
@@ -57,6 +53,21 @@ const InverterCharger = ({ componentMode = "compact" }: Props) => {
   const submitMode = () => {
     updateMode(modeForSubmission)
     closeModeModal()
+  }
+
+  const getButtons = () => {
+    const buttons = []
+    if (!!inputId) {
+      buttons.push(<InputLimitSelector inputId={inputId} />)
+    }
+    if (adjustable) {
+      buttons.push(
+        <Button className="w-full" size="md" onClick={() => setIsModeModalOpen(!isModeModalOpen)}>
+          {inverterChargerModeFormatter(parseInt(mode))}
+        </Button>
+      )
+    }
+    return buttons
   }
 
   if (componentMode === "compact") {
@@ -87,26 +98,11 @@ const InverterCharger = ({ componentMode = "compact" }: Props) => {
           className={"w-7"}
         ></InverterChargerIcon>
       }
-      inputLimitValue={!!inputId ? <InputLimitValue inputId={inputId} /> : undefined}
-      value={0}
-      unit={"A"}
-      buttons={
-        !!inputId
-          ? [
-              <InputLimitSelector inputId={inputId} />,
-              <Button className="w-full" size="md" onClick={() => setIsModeModalOpen(!isModeModalOpen)}>
-                {inverterChargerModeFormatter(parseInt(mode))}
-              </Button>,
-            ]
-          : [
-              <Button className="w-full" size="md" onClick={() => setIsModeModalOpen(!isModeModalOpen)}>
-                {inverterChargerModeFormatter(parseInt(mode))}
-              </Button>,
-            ]
-      }
+      value={subTitle}
+      buttons={getButtons()}
       bottomValues={[]}
     >
-      <div className={"flex flex-row"}>
+      {(adjustable && (
         <DeviceSettingModal open={isModeModalOpen} onClose={closeModeModal} onSet={submitMode} width={"lg"}>
           <label className="flex justify-center text-lg mb-3">{translate("common.mode")}</label>
           <div className={" m-auto w-[20rem] md:w-[30rem] lg:w-[30rem] flex flex-col items-center"}>
@@ -156,7 +152,8 @@ const InverterCharger = ({ componentMode = "compact" }: Props) => {
             </label>
           </div>
         </DeviceSettingModal>
-      </div>
+      )) ||
+        undefined}
     </ValueBox>
   )
 }
@@ -165,4 +162,4 @@ interface Props {
   componentMode?: "compact" | "full"
 }
 
-export default withErrorBoundary(observer(InverterCharger), appErrorBoundaryProps)
+export default observer(InverterCharger)
