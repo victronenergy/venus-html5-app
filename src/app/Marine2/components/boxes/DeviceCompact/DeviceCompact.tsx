@@ -6,14 +6,14 @@ const DeviceCompact = ({ icon, title, subTitle, value, unit }: Props) => {
         <div className={"shrink min-w-0 flex flex-col mr-2"}>
           <div
             className={
-              "text-xs sm:text-sm md:text-base lg:text-base leading-none sm:leading-none md:leading-none lg:leading-none pb-1 truncate"
+              "text-xs sm:text-sm md:text-base lg:text-base leading-[1.1rem] sm:leading-[1.1rem] md:leading-[1.1rem] lg:leading-[1.2rem] truncate"
             }
           >
             {title}
           </div>
           <div
             className={
-              "dark:text-victron-gray-dark text-xs md:text-sm lg:text-sm leading-[1.1rem] md:leading-none lg:leading-none truncate"
+              "dark:text-victron-gray-dark text-xs md:text-sm lg:text-sm leading-[1.1rem] sm:leading-[1.1rem] md:leading-[1.1rem] lg:leading-[1.2rem] truncate"
             }
           >
             {!!subTitle && subTitle}
