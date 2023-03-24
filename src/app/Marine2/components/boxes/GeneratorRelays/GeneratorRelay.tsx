@@ -88,7 +88,7 @@ const GeneratorRelay = ({
         </Button>
       }
       unit={"A"}
-      value={phases === 1 ? current[0] : undefined} //TODO: get update to design for what should be shown otherwise
+      value={current[0]} //TODO: get update to design for what should be shown when there are multiple phases
       bottomValues={phasesOverview}
       infoText={
         !autoStart
