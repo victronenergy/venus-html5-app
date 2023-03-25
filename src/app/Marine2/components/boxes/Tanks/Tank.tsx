@@ -168,7 +168,7 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
   } else {
     if (orientation === "vertical") {
       return (
-        <div>
+        <div ref={wrapperRef}>
           <div className="flex flex-row items-center">
             <div className={classnames("flex items-center truncate")}>
               <div className="mr-2 lg:mr-3">{fluidIcon(fluidTypeNum, mode)}</div>
