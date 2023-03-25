@@ -164,11 +164,8 @@ const Paginator = ({
   }, [orientation, splitIntoPages])
 
   useEffect(() => {
-    if (orientation === "horizontal") setPagesElement(undefined)
-  }, [width, orientation])
-  useEffect(() => {
-    if (orientation === "vertical") setPagesElement(undefined)
-  }, [height, orientation])
+    setPagesElement(undefined)
+  }, [height, width, orientation])
 
   return (
     <div ref={wrapperRef} className="w-full h-full">
