@@ -35,12 +35,14 @@ const BatteriesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) =>
   useEffect(() => {
     if (!overviewBatteries || !overviewBatteries.length) return
 
-    let batterySummaryWidth = 142 // minimum BatterySummary component width
+    let batterySummaryWidth = 92 // minimum BatterySummary component width
     // BatterySummary component width is bigger based on these breakpoints (subtract 56 leaving space for page selector)
     if (boxSize.height - 56 > boxBreakpoints["sm-m"].height) {
       batterySummaryWidth = 302
     } else if (boxSize.height - 56 > boxBreakpoints["sm-s"].height) {
       batterySummaryWidth = 230
+    } else if (boxSize.height - 56 > boxBreakpoints["xs-xs"].height) {
+      batterySummaryWidth = 142
     }
 
     const batteriesPerPage = Math.floor((boxSize.width - 32) / batterySummaryWidth) ?? 1 // -32 due to box padding

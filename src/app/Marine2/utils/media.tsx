@@ -16,6 +16,7 @@ type BreakpointsType = {
 }
 
 export const boxBreakpoints: BreakpointsType = {
+  "xs-xs": { width: 150, height: 150 },
   "sm-s": { width: 200, height: 300 },
   "sm-m": { width: 200, height: 450 },
   "sm-l": { width: 200, height: 600 },

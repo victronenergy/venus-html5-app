@@ -131,6 +131,7 @@ module.exports = {
       },
       fontSize: {
         // Font sizes corresponding with design, px values for easy reference. Line height is always 120%.
+        "2xs": ["0.75rem", { lineHeight: "0.9rem" }],
         xs: ["1rem", { lineHeight: "1.2rem" }], // 16px
         sm: ["1.125rem", { lineHeight: "1.35rem" }], // 18px
         base: ["1.375rem", { lineHeight: "1.65rem" }], // 22px
