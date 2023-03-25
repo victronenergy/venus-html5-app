@@ -136,7 +136,12 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
               width
                 ? {
                     display: width < 368 ? "none" : "block",
-                    width: width > 572 ? (width + 32) * 0.5 : (width + 32) * 0.4,
+                    width: width > 572 ? (width + 32) * 0.45 : (width + 32) * 0.4,
+                  }
+                : parentSize?.width
+                ? {
+                    display: parentSize.width < 400 ? "none" : "block",
+                    width: parentSize.width > 540 ? parentSize.width * 0.45 : parentSize.width * 0.4,
                   }
                 : {}
             }
@@ -187,6 +192,11 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
                     ? {
                         width: width > 1000 ? width * 0.7 : width * 0.5,
                         display: width < 368 ? "none" : "block",
+                      }
+                    : parentSize?.width
+                    ? {
+                        width: parentSize.width > 1000 ? parentSize.width * 0.7 : parentSize.width * 0.5,
+                        display: parentSize.width < 400 ? "none" : "block",
                       }
                     : {}
                 }
