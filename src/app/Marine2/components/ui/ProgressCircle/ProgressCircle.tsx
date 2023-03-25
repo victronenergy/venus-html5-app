@@ -4,6 +4,9 @@ import { applyStyles, BreakpointStylesType } from "../../../utils/media"
 
 const styles: BreakpointStylesType = {
   default: {
+    percentage: "text-sm",
+  },
+  "xs-xs": {
     percentage: "text-base",
   },
   "md-s": {

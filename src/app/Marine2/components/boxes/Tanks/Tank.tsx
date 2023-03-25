@@ -1,4 +1,4 @@
-import { useMemo } from "react"
+import { useMemo, useRef } from "react"
 import { useTank } from "@elninotech/mfd-modules"
 import { observer } from "mobx-react-lite"
 import ProgressBar from "../../ui/ProgressBar"
@@ -9,6 +9,7 @@ import WaterIcon from "../../../images/icons/fresh-water.svg"
 import BlackWaterIcon from "../../../images/icons/black-water.svg"
 import GrayWaterIcon from "../../../images/icons/waste-water.svg"
 import { applyStyles, BreakpointStylesType, StylesType } from "app/Marine2/utils/media"
+import useSize from "@react-hook/size"
 
 // styles for compact mode
 const compactStyles: BreakpointStylesType = {
@@ -79,6 +80,8 @@ const verticalStyles: BreakpointStylesType = {
 const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", parentSize }: Props) => {
   let { capacity, fluidType, level, remaining, unit } = useTank(tankInstanceId)
   const fluidTypeNum = +fluidType
+  const wrapperRef = useRef<HTMLDivElement>(null)
+  const [width] = useSize(wrapperRef)
 
   let horizontalActiveStyles,
     verticalActiveStyles,
@@ -121,7 +124,7 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
 
   if (mode === "compact") {
     return (
-      <div className="flex flex-row items-center">
+      <div ref={wrapperRef} className="flex flex-row items-center">
         <div className={classnames("flex items-center py-2 truncate")}>
           <div className="mr-2">{fluidIcon(fluidTypeNum, mode)}</div>
           <div className={classnames("truncate", compactActiveStyles?.tankName)}>{fluidTypeTitle} </div>
@@ -130,10 +133,15 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
           <div
             className={classnames("ml-4")}
             style={
-              parentSize?.width
+              width
+                ? {
+                    display: width < 368 ? "none" : "block",
+                    width: width > 572 ? (width + 32) * 0.45 : (width + 32) * 0.4,
+                  }
+                : parentSize?.width
                 ? {
                     display: parentSize.width < 400 ? "none" : "block",
-                    width: parentSize.width > 540 ? parentSize.width * 0.5 : parentSize.width * 0.4,
+                    width: parentSize.width > 540 ? parentSize.width * 0.45 : parentSize.width * 0.4,
                   }
                 : {}
             }
@@ -165,7 +173,7 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
   } else {
     if (orientation === "vertical") {
       return (
-        <div>
+        <div ref={wrapperRef}>
           <div className="flex flex-row items-center">
             <div className={classnames("flex items-center truncate")}>
               <div className="mr-2 lg:mr-3">{fluidIcon(fluidTypeNum, mode)}</div>
@@ -180,7 +188,12 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
               <div
                 className={classnames("flex items-center justify-center")}
                 style={
-                  parentSize?.width
+                  width
+                    ? {
+                        width: width > 1000 ? width * 0.7 : width * 0.5,
+                        display: width < 368 ? "none" : "block",
+                      }
+                    : parentSize?.width
                     ? {
                         width: parentSize.width > 1000 ? parentSize.width * 0.7 : parentSize.width * 0.5,
                         display: parentSize.width < 400 ? "none" : "block",

@@ -9,6 +9,13 @@ import FadedText from "../FadedText"
 
 const styles: BreakpointStylesType = {
   default: {
+    circle: "w-[60px]",
+    circleWrapper: "px-1.5 h-[50px]",
+    voltage: "hidden",
+    name: "hidden",
+    state: "text-2xs",
+  },
+  "xs-xs": {
     circle: "w-[110px]",
     circleWrapper: "px-2.5 h-[90px]",
     voltage: "text-base hidden",
