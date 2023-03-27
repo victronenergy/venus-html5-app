@@ -10,7 +10,13 @@ export const mfdLanguageOptions = {
   defaultLanguage: DEFAULT_LANGUAGE,
   onLangChange: (lang: string) => {
     // override the language with the value of the lang URL parameter, if present and enabled
-    const languageOverride = (window.location.search.match(/[?&]lang=([a-zA-Z-_]{2,5})/) || [])[1]
-    setLocale((process.env.REACT_APP_ENABLE_LANG_OVERRIDE === "true" && languageOverride) || lang)
+    // NB: do not rely on `lang=` param here because some MFD devices like Simrad add optional qs
+    // params with additional data, including default system `&lang=en` which overrides the language we get
+    // from mqtt in the case if app was build with REACT_APP_ENABLE_LANG_OVERRIDE flag set to true
+    // (which is usually true for debugging and demo versions)
+    const overrideLang = (window.location.search.match(/[?&]overrideLang=([a-zA-Z-_]{2,5})/) || [])[1]
+    setLocale(
+      process.env.REACT_APP_ENABLE_LANG_OVERRIDE === "true" && LANGUAGES.includes(overrideLang) ? overrideLang : lang
+    )
   },
 }

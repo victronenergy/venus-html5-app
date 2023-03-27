@@ -2,7 +2,7 @@ import { useAppStore, useMqtt, useTheme, useVebus, useVrmStore } from "@elninote
 import { observer } from "mobx-react"
 import React, { useEffect } from "react"
 import { withErrorBoundary } from "react-error-boundary"
-import { getLocale } from "react-i18nify"
+import { getLocale, setLocale } from "react-i18nify"
 import { useVisibleWidgetsStore } from "./modules"
 import { Marine2 } from "./Marine2"
 import Connecting from "./components/ui/Connecting"
@@ -42,7 +42,6 @@ const App = (props: AppProps) => {
     props.host,
     props.port,
     appStore.remote,
-    appStore.language,
     vrmStore.username,
     vrmStore.token,
     vrmStore.webhost,
@@ -50,6 +49,12 @@ const App = (props: AppProps) => {
     vrmStore.siteId,
     locale,
   ])
+
+  useEffect(() => {
+    if (appStore.language) {
+      setLocale(appStore.language)
+    }
+  }, [appStore.language])
 
   useEffect(() => {
     visibleWidgetsStore.clearVisibleElements()
