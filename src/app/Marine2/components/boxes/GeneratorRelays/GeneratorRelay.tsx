@@ -94,8 +94,8 @@ const GeneratorRelay = ({
           />
         ) : undefined
       }
-      unit={"A"}
-      value={current[0]} //TODO: get update to design for what should be shown when there are multiple phases
+      unit={phases > 1 ? "W" : "A"}
+      value={phases > 1 ? powerSum : current[0]}
       bottomValues={phasesOverview}
     >
       {subTitle}
