@@ -94,7 +94,7 @@ const Box = ({
         <Modal.Frame
           open={infoOpen}
           onClose={closeInfo}
-          className={classnames(" border-victron-darkGray-2 border rounded-md w-[30rem]")}
+          className={classnames(" border-victron-darkGray-200 border rounded-md w-[30rem]")}
         >
           <Modal.Body>
             <div className="flex flex-col">
@@ -109,7 +109,7 @@ const Box = ({
                 />
                 <div className={"text-center mb-2 text-xl"}>{infoText.title}</div>
                 <div className={"text-center text-sm pr-2 pl-2 mb-20"}>{infoText.body}</div>
-                <div className={classnames("-ml-4 h-0 mt-3 border-b border-victron-darkGray-2 w-[30rem]")} />
+                <div className={classnames("-ml-4 h-0 mt-3 border-b border-victron-darkGray-200 w-[30rem]")} />
                 <button onClick={closeInfo} className={"w-full -mb-2 h-11 mt-2"}>
                   Ok
                 </button>

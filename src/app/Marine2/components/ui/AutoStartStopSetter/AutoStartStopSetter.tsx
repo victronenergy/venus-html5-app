@@ -81,7 +81,7 @@ const AutoStartStopSetter = ({
           <label className="flex justify-center text-lg mb-3">{translate("common.mode")}</label>
           <div className={" m-auto w-[20rem] md:w-[30rem] lg:w-[30rem] flex flex-col items-center"}>
             <label
-              className="w-full flex justify-between items-center pt-4 pb-4 border-b border-victron-darkGray-2"
+              className="w-full flex justify-between items-center pt-4 pb-4 border-b border-victron-darkGray-200"
               onClick={() => setModeForSubmission(0)}
             >
               <span>{translate("common.on")}</span>
@@ -92,7 +92,7 @@ const AutoStartStopSetter = ({
               />
             </label>
             <label
-              className="w-full flex justify-between items-center pt-4 pb-4 border-b border-victron-darkGray-2"
+              className="w-full flex justify-between items-center pt-4 pb-4 border-b border-victron-darkGray-200"
               onClick={() => setModeForSubmission(1)}
             >
               <span>{translate("common.off")}</span>
@@ -103,7 +103,7 @@ const AutoStartStopSetter = ({
               />
             </label>
             <label
-              className="w-full flex justify-between items-center pt-4 pb-4 border-b border-victron-darkGray-2"
+              className="w-full flex justify-between items-center pt-4 pb-4 border-b border-victron-darkGray-200"
               onClick={() => setModeForSubmission(2)}
             >
               <span>{translate("common.autoStartStop")}</span>

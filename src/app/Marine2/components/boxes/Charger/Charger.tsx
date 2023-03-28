@@ -164,7 +164,7 @@ const Charger = ({ instanceId, componentMode = "compact" }: Props) => {
             <label className="flex justify-center text-lg mb-3">{translate("common.mode")}</label>
             <div className={" m-auto w-[20rem] md:w-[30rem] lg:w-[30rem] flex flex-col items-center"}>
               <label
-                className="w-full flex justify-between items-center pt-4 pb-4 border-b border-victron-darkGray-2"
+                className="w-full flex justify-between items-center pt-4 pb-4 border-b border-victron-darkGray-200"
                 onClick={() => setModeForSubmission(CHARGER_MODE.ON)}
               >
                 <span>{translate("common.on")}</span>
@@ -175,7 +175,7 @@ const Charger = ({ instanceId, componentMode = "compact" }: Props) => {
                 />
               </label>
               <label
-                className="w-full flex justify-between items-center pt-4 pb-4 border-b border-victron-darkGray-2"
+                className="w-full flex justify-between items-center pt-4 pb-4 border-b border-victron-darkGray-200"
                 onClick={() => setModeForSubmission(CHARGER_MODE.OFF)}
               >
                 <span>{translate("common.off")}</span>
