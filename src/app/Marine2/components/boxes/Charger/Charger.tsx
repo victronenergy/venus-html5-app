@@ -190,9 +190,7 @@ const Charger = ({ instanceId, componentMode = "compact" }: Props) => {
         )}
         {chargerSupportsInputLimit && (
           <DeviceSettingModal open={isLimitModalOpen} onClose={closeLimitModal} onSet={submitLimit} width={"lg"}>
-            <label className="flex w-full justify-center text-lg mb-3">
-              {translate("devices.Input current limit")}
-            </label>
+            <label className="flex w-full justify-center text-lg mb-3">{translate("common.inputCurrentLimit")}</label>
             <div className="flex flex-row justify-center mt-10 mb-10">
               <button
                 className="w-28 md:w-36 lg:w-36 h-20 bg-victron-blue/70 border-0 rounded-md text-xl mr-14"
