@@ -13,7 +13,7 @@ import { AC_SOURCE, BoxTypes, RELAY_FUNCTION } from "../../../utils/constants"
 import { PageSelectorProps } from "../../ui/PageSelector"
 import GridPaginator from "../../ui/GridPaginator"
 import React from "react"
-import GeneratorRelay from "../GeneratorRelays/GeneratorRelay"
+import GeneratorRelay from "../GeneratorRelay/GeneratorRelay"
 
 const DevicesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) => {
   const { inverters } = useInverters()
