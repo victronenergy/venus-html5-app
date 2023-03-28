@@ -32,32 +32,37 @@ const styles: BreakpointStylesType = {
   },
 }
 
-const ValueBox = ({ title, icon, value, unit, bottomValues, children }: Props) => {
+const ValueBox = ({ title, icon, value, unit, bottomValues, children, buttons, infoText }: Props) => {
   const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
   const activeStyles = applyStyles(boxSize, styles)
   const isMultiPhase = bottomValues.length > 1
 
-  if (unit === "W" && value && value > 1000) {
+  if (unit === "W" && value && typeof value === "number" && value > 1000) {
     unit = "kW"
     value = value ? value / 1000 : value
   }
 
   return (
-    <Box title={title} icon={icon} getBoxSizeCallback={setBoxSize}>
+    <Box title={title} icon={icon} getBoxSizeCallback={setBoxSize} infoText={infoText}>
       <div className="w-full h-full flex flex-col justify-between">
-        <div>
+        <div className={"w-full h-full shrink overflow-hidden"}>
           <div className={classNames("text-victron-darkGray dark:text-white", activeStyles?.value)}>
-            {formatValue(value)}
-            <span className={"pl-0.5 text-victron-gray dark:text-victron-gray-500"}>{unit}</span>
+            {(typeof value === "number" && formatValue(value)) || value}
+            {typeof value === "number" && (
+              <span className={"pl-0.5 text-victron-gray dark:text-victron-gray-500"}>{unit}</span>
+            )}
           </div>
           <div className={classNames("text-victron-gray dark:text-victron-gray-500", activeStyles.valueSubtitle)}>
             {children}
           </div>
         </div>
-        <div className={classNames("-mb-1", activeStyles.valueBars)}>
-          {bottomValues.map((v, i) => (
-            <ValueBar key={i} prefix={isMultiPhase ? "L" + (i + 1) : undefined} values={v} />
-          ))}
+        <div className={"w-full h-full min-h-0 flex flex-col shrink justify-end"}>
+          <div className={classNames("shrink overflow-hidden", activeStyles.valueBars)}>
+            {bottomValues.map((v, i) => (
+              <ValueBar key={i} prefix={isMultiPhase ? "L" + (i + 1) : undefined} values={v} />
+            ))}
+          </div>
+          {!!buttons && <div className="flex w-full">{buttons}</div>}
         </div>
       </div>
     </Box>
@@ -67,10 +72,12 @@ const ValueBox = ({ title, icon, value, unit, bottomValues, children }: Props) =
 interface Props {
   icon?: JSX.Element
   title: string
-  value?: number
-  unit: string
+  value?: number | string
+  unit?: string
   bottomValues: ValueWithUnit[][]
-  children?: JSX.Element | JSX.Element[]
+  children?: JSX.Element | JSX.Element[] | string
+  buttons?: JSX.Element | JSX.Element[]
+  infoText?: { title: string; body: string }
 }
 
 interface ValueWithUnit {
