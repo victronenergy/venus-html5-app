@@ -220,10 +220,16 @@
     },
     "tankWidget": {
         "Black water": "Schwarzwasser",
+        "Diesel": "Diesel",
         "Fresh water": "Frischwasser",
         "Fuel": "Treibstoff",
+        "Gasoline": "Benzin",
+        "Hydraulic oil": "Hydrauliköl",
+        "LNG": "Liquid Natural Gas (LNG)",
+        "LPG": "Liquid Petroleum Gas (LPG)",
         "Live well": "Fischkasten",
         "Oil": "Öl",
+        "Raw water": "Rohwasser",
         "Tank sensor": "Tanksensor",
         "Waste water": "Abwasser"
     },

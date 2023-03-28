@@ -15,7 +15,6 @@
         "batteryWithName": "Battery: %{name}",
         "chargerWithName": "Charger: %{productNameShort}",
         "dcLoads": "DC Loads",
-        "devices": "Devices",
         "energy": "Energy",
         "generator": "Generator",
         "generatorInput": "Generator Input",
@@ -202,13 +201,8 @@
         "Low power": "Low power",
         "Off": "Off",
         "Passthru": "Passthru",
-        "Repeated absorption": "Repeated absorption",
-        "Auto equalize/Recondition": "Auto equalize/Recondition",
-        "Storage mode": "Storage",
-        "Wake-up": "Wake-up",
-        "External control": "External control",
+        "Storage mode": "Storage mode",
         "Sustain": "Sustain",
-        "BatterySafe": "BatterySafe",
         "VE.Bus Fault condition": "VE.Bus Fault condition",
         "parts": {
             "Battery": "Battery",
@@ -264,8 +258,5 @@
         "solar": "Solar",
         "status": "Status",
         "unknown": "Unknown"
-    },
-    "devices": {
-        "Input current limit": "Input current limit"
     }
 }

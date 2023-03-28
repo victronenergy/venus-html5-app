@@ -9,7 +9,7 @@ const DeviceSettingModal = ({ open, onClose, children, onSet, width = "md" }: Pr
     <Modal.Frame
       open={open}
       onClose={onClose}
-      className={classnames(" border-victron-darkGray-2 border rounded-md", {
+      className={classnames(" border-victron-darkGray-200 border rounded-md", {
         "w-96": width === "md",
         "w-[30rem] md:w-[40rem] lg:w-[40rem]": width === "lg",
       })}
@@ -19,7 +19,7 @@ const DeviceSettingModal = ({ open, onClose, children, onSet, width = "md" }: Pr
           <div className="dark:text-white text-base">
             {children}
             <div
-              className={classnames("-ml-4 h-0 mt-3 border-b border-victron-darkGray-2", {
+              className={classnames("-ml-4 h-0 mt-3 border-b border-victron-darkGray-200", {
                 "w-96": width === "md",
                 "w-[30rem] md:w-[40rem] lg:w-[40rem]": width === "lg",
               })}
@@ -28,7 +28,7 @@ const DeviceSettingModal = ({ open, onClose, children, onSet, width = "md" }: Pr
               <button onClick={onClose} className={"w-full -ml-4 -mb-2"}>
                 {translate("common.close")}
               </button>
-              <div className={"w-0 h-10 mt-2 border-r border-victron-darkGray-2"} />
+              <div className={"w-0 h-10 mt-2 border-r border-victron-darkGray-200"} />
               <button onClick={onSet} className={"w-full -mr-4 -mb-2"}>
                 {translate("common.set")}
               </button>

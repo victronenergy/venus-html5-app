@@ -15,6 +15,7 @@ const RadioButton: React.FC<Props> = ({ selected, onChange, disabled, responsive
       <div
         onClick={() => !disabled && onChange()}
         className={classNames(
+          // we especially use `px` here to avoid UI issues on some MFD screens
           "w-[24px] h-[24px] border-[2px] bg-inherit rounded-full flex items-center justify-center",
           {
             "border-victron-gray": !selected,
