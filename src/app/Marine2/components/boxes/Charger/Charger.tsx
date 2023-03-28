@@ -73,7 +73,6 @@ const Charger = ({ instanceId, componentMode = "compact" }: Props) => {
 
   useEffect(() => {
     setModeForSubmission(Number(mode))
-    console.log(mode)
   }, [mode])
 
   const closeModeModal = () => {
