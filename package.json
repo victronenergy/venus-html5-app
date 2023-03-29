@@ -1,6 +1,6 @@
 {
   "name": "victron-venus-metrics",
-  "version": "3.0.7-beta",
+  "version": "3.1.0-beta",
   "description": "Metric framework for Victron VenusOS",
   "license": "ISC",
   "author": "",
