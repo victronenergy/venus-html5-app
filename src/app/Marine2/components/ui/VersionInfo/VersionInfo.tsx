@@ -41,11 +41,11 @@ const VersionInfo = () => {
           onClose={() => {
             setIsModalOpen(false)
           }}
-          className="w-full max-w-sm mb-20 ml-6 bottom-0 left-0"
+          className="w-full max-w-sm mb-16 ml-6 bottom-0 -left-4"
         >
           <Modal.Body>
             <div className="flex flex-col">
-              <div className="text-sm dark:text-white md:mb-4 md-m:text-base lg-s:text-sm lg-l:text-base">
+              <div className="text-sm dark:text-white md:mb-4 md-m:text-base mr-6 lg-s:text-sm lg-l:text-base">
                 <div className="flex flex-col">
                   <div>
                     {/* todo: fix types for svg */}
