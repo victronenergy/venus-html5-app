@@ -6,6 +6,7 @@ import { BUILD_TIMESTAMP } from "../../../utils/constants"
 import packageInfo from "../../../../../../package.json"
 import React, { useState } from "react"
 import LogoIcon from "../../../images/logo.svg"
+import LogoOnlyIcon from "../../../images/logo-only.svg"
 import { AppViews, useAppViewsStore } from "../../../modules/AppViews"
 import Button from "../Button"
 
@@ -30,7 +31,10 @@ const VersionInfo = () => {
     >
       {/* todo: fix types for svg */}
       {/* @ts-ignore */}
-      <LogoIcon className={"w-32 text-black dark:text-white"} alt={"Victron Energy"} />
+      <LogoIcon className={"w-32 text-black dark:text-white hidden sm:block"} alt={"Victron Energy"} />
+      {/* todo: fix types for svg */}
+      {/* @ts-ignore */}
+      <LogoOnlyIcon className={"w-10 text-black dark:text-white sm:hidden block"} alt={"Victron Energy"} />
       <div className="flex justify-center items-center w-full">
         <Modal.Frame
           open={isModalOpen}
