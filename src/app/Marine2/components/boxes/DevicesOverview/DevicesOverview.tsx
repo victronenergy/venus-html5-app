@@ -94,7 +94,7 @@ const DevicesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) => {
     }
 
     if (!!instanceId) {
-      devices.push(<InverterCharger />)
+      devices.push(<InverterCharger key={instanceId} />)
     }
 
     if (!!generatorFp.phases) devices.push(<GeneratorFp generatorFp={generatorFp} />)
