@@ -26,6 +26,7 @@ const GridPaginator = ({
   const childrenArray = Array.isArray(children) ? children : [children]
   const pages = Math.ceil(childrenArray.length / childrenPerPage)
   const [fixedFlow, setFixedFlow] = useState<"row" | "col">()
+
   // automatically change perPage if grid size is too small
   useEffect(() => {
     if (!width || !height) {
@@ -33,6 +34,10 @@ const GridPaginator = ({
     }
 
     let forcePerPage = perPage
+
+    if (width / perPage < boxBreakpoints["md-s"].width) {
+      forcePerPage = 3
+    }
 
     if (width < boxBreakpoints["lg-s"].width) {
       forcePerPage = 2
@@ -44,7 +49,7 @@ const GridPaginator = ({
       setFixedFlow("row")
     }
 
-    if (width < boxBreakpoints["md-s"].width) {
+    if (width < boxBreakpoints["md-s"].width || width / perPage < boxBreakpoints["sm-s"].width) {
       forcePerPage = 1
     }
 
