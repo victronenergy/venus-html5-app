@@ -45,7 +45,7 @@ const BatteriesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) =>
       batterySummaryWidth = 142
     }
 
-    const batteriesPerPage = Math.floor((boxSize.width - 32) / batterySummaryWidth) ?? 1 // -32 due to box padding
+    const batteriesPerPage = Math.max(Math.floor((boxSize.width - 32) / batterySummaryWidth), 1) // -32 due to box padding
 
     setPerPage(batteriesPerPage)
     setPages(Math.ceil(overviewBatteries.length / batteriesPerPage))
