@@ -1,28 +1,56 @@
-import React from "react"
+import React, { useMemo } from "react"
 import { translate } from "react-i18nify"
 import { FallbackProps } from "react-error-boundary"
 import { byteSize, isError } from "../../../../utils/util"
 import * as Sentry from "@sentry/react"
 import WarningIcon from "../../../images/icons/warning.svg"
 import Button from "../Button"
+import { useErrorHandlerStore } from "../../../../components/ErrorHandlerModule/ErrorHandler.store"
+import { Breadcrumb } from "@sentry/react"
 
 interface Props extends FallbackProps {
   showReset?: boolean
 }
 
 const ErrorFallback = ({ error, resetErrorBoundary, showReset = false }: Props) => {
-  const size = isError(error) ? byteSize(error.stack + error.message) : byteSize(JSON.stringify(error))
+  const errorHandlerStore = useErrorHandlerStore()
+  const event = errorHandlerStore.error || error
+
+  // we need to calculate the size of the error object only once, because after sending it to Sentry
+  // it will be cleared from the store and we will get a zero size
+  const size = useMemo(() => {
+    return byteSize(JSON.stringify(event))
+  }, [])
+
   const queryParams = window.location.search.slice(1).replace(/=/g, "=").replace(/&/g, ", ")
 
-  const sendError = () => {
-    if (isError(error)) {
-      Sentry.captureException(error)
-    } else {
-      Sentry.captureException({ info: JSON.stringify(error) })
+  const [isErrorSent, setIsErrorSent] = React.useState(false)
+
+  const sendError = async () => {
+    // we need this custom text to pass by the Sentry `beforeSend` hook
+    const captureContext = {
+      tags: {
+        sendError: true,
+      },
     }
-    Sentry.flush(2000).then(() => {
-      // reload window after all errors have been sent
-      window.location.reload()
+
+    if (isError(event)) {
+      Sentry.captureException(event, captureContext)
+    } else {
+      Sentry.captureException({ info: JSON.stringify(error) }, captureContext)
+    }
+
+    const previousUiBreadcrumbs = event.breadcrumbs
+      ? event.breadcrumbs.filter((b: Breadcrumb) => b.category?.includes("ui"))
+      : []
+
+    previousUiBreadcrumbs.forEach((breadCrumb: Breadcrumb) =>
+      Sentry.addBreadcrumb({ ...breadCrumb, data: { trueTimestamp: breadCrumb.timestamp } })
+    )
+
+    Sentry.flush().then(() => {
+      errorHandlerStore.setError(null)
+      setIsErrorSent(true)
     })
   }
   const restart = () => {
@@ -58,9 +86,15 @@ const ErrorFallback = ({ error, resetErrorBoundary, showReset = false }: Props) 
         </div>
 
         <div className="flex flex-row mt-3">
-          <Button className="mr-4 w-full" size="md" onClick={sendError}>
-            {translate("error.marine.sendReport")}
-          </Button>
+          {isErrorSent ? (
+            <Button className="mr-4 w-full" size="md" disabled>
+              {translate("error.marine.reportSent")}
+            </Button>
+          ) : (
+            <Button className="mr-4 w-full" size="md" onClick={sendError}>
+              {translate("error.marine.sendReport")}
+            </Button>
+          )}
           {showReset && (
             <Button className="mx-2 w-full" size="md" onClick={reset}>
               {translate("error.marine.resetError")}
