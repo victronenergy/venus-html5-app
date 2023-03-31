@@ -33,24 +33,30 @@ const GridPaginator = ({
       return
     }
 
+    setFixedFlow("col")
     let forcePerPage = perPage
 
-    if (width / perPage < boxBreakpoints["md-s"].width) {
+    if (width / perPage < boxBreakpoints["md-l"].width && height < boxBreakpoints["md-l"].height) {
       forcePerPage = 3
     }
 
-    if (width < boxBreakpoints["lg-s"].width) {
+    if ((width < 800 && height < boxBreakpoints["lg-l"].height) || width < boxBreakpoints["lg-l"].width) {
       forcePerPage = 2
-      if (height < boxBreakpoints["lg-l"].height) {
-        forcePerPage = 1
-      }
-    } else if (width < 800 && height < boxBreakpoints["lg-l"].height) {
-      forcePerPage = 2
-      setFixedFlow("row")
     }
 
-    if (width < boxBreakpoints["md-s"].width || width / perPage < boxBreakpoints["sm-s"].width) {
+    if (width < boxBreakpoints["md-l"].width) {
+      forcePerPage = 2
+      if (height < boxBreakpoints["lg-m"].height) {
+        forcePerPage = 1
+      }
+    }
+
+    if (width < boxBreakpoints["lg-l"].width && height < boxBreakpoints["lg-m"].height) {
       forcePerPage = 1
+    }
+
+    if (width < 800 && width > boxBreakpoints["md-l"].width && height < boxBreakpoints["lg-m"].height) {
+      setFixedFlow("row")
     }
 
     if (forcePerPage !== childrenPerPage) {

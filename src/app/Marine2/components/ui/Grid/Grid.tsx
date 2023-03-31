@@ -7,7 +7,7 @@ const Grid = ({
   className,
   childClassName,
   flow = "row",
-  forceOneDimensionRatio = 3,
+  forceOneDimensionRatio = 2.5,
   forceFirstOrLastChild = "first",
 }: GridProps) => {
   const childrenCount = Array.isArray(children) ? children.length : 1
