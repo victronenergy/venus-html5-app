@@ -123,6 +123,7 @@
             "estimate": "Estimated data: %{size} Bytes.",
             "hint": "Try reloading the page or contacting Victron Energy with the following information:",
             "ignore": "Ignore error",
+            "reportSent": "Report has been sent",
             "resetError": "Reset error",
             "restartApp": "Restart app",
             "sendReport": "Send error report",
