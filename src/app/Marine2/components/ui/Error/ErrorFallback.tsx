@@ -16,10 +16,11 @@ const ErrorFallback = ({ error, resetErrorBoundary, showReset = false }: Props) 
   const errorHandlerStore = useErrorHandlerStore()
   const event = errorHandlerStore.error || error
 
-  // we need to calculate the size of the error object only once, because after sending it to Sentry
-  // it will be cleared from the store and we will get a zero size
   const size = useMemo(() => {
     return byteSize(JSON.stringify(event))
+    // we need to calculate the size of the error object only once, because after sending it to Sentry
+    // it will be cleared from the store and we will get a zero size
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const queryParams = window.location.search.slice(1).replace(/=/g, "=").replace(/&/g, ", ")
