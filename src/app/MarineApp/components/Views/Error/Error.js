@@ -14,10 +14,18 @@ const Error = ({ error, ignoreButton = false, handleIgnore = () => {} }) => {
     previousUiBreadcrumbs.forEach((breadCrumb) =>
       Sentry.addBreadcrumb({ ...breadCrumb, data: { trueTimestamp: breadCrumb.timestamp } })
     )
+
+    // we need this custom text to pass by the Sentry `beforeSend` hook
+    const captureContext = {
+      tags: {
+        sendError: true,
+      },
+    }
+
     if (isError(error)) {
-      Sentry.captureException(error, "captured")
+      Sentry.captureException(error, captureContext)
     } else {
-      Sentry.captureException({ info: JSON.stringify(error) }, "captured")
+      Sentry.captureException({ info: JSON.stringify(error) }, captureContext)
     }
     // reload window after all errors have been sent
     Sentry.flush().then(() => {

@@ -5,11 +5,13 @@ import { getParameterByName } from "./app/utils/util"
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration"
 import * as Sentry from "@sentry/react"
 import { Integrations } from "@sentry/tracing"
+import { initializeErrorHandlerStore } from "app/components/ErrorHandlerModule/ErrorHandler.store"
+import Loading from "./app/MarineApp/components/Loading"
+import packageInfo from "../package.json"
 
 // load languages
 import "./app/locales"
-import { initializeErrorHandlerStore } from "app/components/ErrorHandlerModule/ErrorHandler.store"
-import Loading from "./app/MarineApp/components/Loading"
+import { ScopeContext } from "@sentry/types/types/scope"
 
 // Get app according to whitelabel
 const KvnrvApp = React.lazy(() => import("./app/KVNRV/App"))
@@ -49,16 +51,29 @@ Sentry.init({
   dsn: "https://1582bd830f4349f1889999f8b3466a2e@o81300.ingest.sentry.io/6331073",
   integrations: [new Integrations.BrowserTracing()],
   sampleRate: 1,
+  environment: process.env.NODE_ENV,
+  release: `${packageInfo.version} ${process.env.REACT_APP_WHITELABEL}`,
   debug: process.env.NODE_ENV === "development",
   // Since this app can be used on remote devices such as a boat, we want to
   // capture errors and then allow the user to decide if they want to send them,
   // because they may have only limited or satellite internet access
   beforeSend(event, hint) {
-    const sendError = hint && (hint.captureContext as string) === "captured"
+    const captureContext = hint?.captureContext as Partial<ScopeContext>
+    const sendError = captureContext?.tags?.sendError
+
+    // we don't send errors immediately and first show the error message to the user,
+    // so that they can decide if they want to send the error to Sentry
     if (!sendError) {
       errorHandlerStore.setError(event)
       return null
     }
+
+    // replace the error message with the original error message stored before,
+    // because the second time the error is sent, the Sentry adds unclear stack trace and message
+    if (errorHandlerStore.error) {
+      event = errorHandlerStore.error
+    }
+
     return event
   },
 })
