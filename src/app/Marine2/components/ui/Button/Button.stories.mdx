@@ -1,0 +1,60 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs';
+import Button from './Button';
+
+<Meta
+  title="Marine2/Button"
+  component={Button}
+  argTypes={{
+    variant: {
+      options: ['primary', 'transparent'],
+      control: { type: 'radio' }
+    },
+    size: {
+      options: ['lg', 'md'],
+      control: { type: 'radio' }
+    },
+  }}
+/>
+
+export const Template = (args) => <Button {...args}>Click me</Button>
+
+# Button
+
+Basic clickable button
+
+## Default (primary) style
+
+<Canvas>
+  <Story
+    name="Primary"
+    args={{
+      variant: 'primary',
+    }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Transparent variant
+
+<Canvas>
+  <Story
+    name="Transparent"
+    args={{
+      variant: 'transparent',
+    }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Disabled 
+
+<Canvas>
+  <Story
+    name="Disabled"
+    args={{
+      disabled: true,
+    }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
