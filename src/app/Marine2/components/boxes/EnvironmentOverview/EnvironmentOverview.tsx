@@ -7,6 +7,7 @@ import { AppViews } from "../../../modules/AppViews"
 import Box from "../../ui/Box"
 import TemperatureData from "./TemperatureData"
 import HumidityData from "./HumidityData"
+import PressureData from "./PressureData"
 import ValueOverview from "../../ui/ValueOverview"
 import ThermometerIcon from "../../../images/icons/thermometer.svg"
 import GridPaginator from "../../ui/GridPaginator"
@@ -30,7 +31,16 @@ const EnvironmentOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) 
     <HumidityData key={`humidity-${temperatureId}`} dataId={temperatureId} mode={mode} boxSize={boxSize} />
   ))
 
-  const components = temperatureComponents.concat(humidityComponents)
+  const pressureComponents = temperatures.map((temperatureId: TemperatureInstanceId, i: number) => (
+    <PressureData key={`pressure-${temperatureId}`} dataId={temperatureId} mode={mode} boxSize={boxSize} />
+  ))
+
+  const components = [
+    ...temperatureComponents,
+    ...humidityComponents,
+    ...pressureComponents,
+  ]
+
 
   if (mode === "compact") {
     return (
