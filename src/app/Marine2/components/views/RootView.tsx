@@ -9,6 +9,7 @@ import { BoxTypes } from "../../utils/constants"
 import { observer } from "mobx-react"
 import { PageSelectorProps } from "../ui/PageSelector"
 import DevicesOverview from "../boxes/DevicesOverview"
+import EnvironmentOverview from "../boxes/EnvironmentOverview/EnvironmentOverview"
 
 const RootView = () => {
   const visibleWidgetsStore = useVisibleWidgetsStore()
@@ -44,6 +45,8 @@ const RootView = () => {
         return <BatteriesOverview mode="compact" key={"batteries-overview"} />
       case BoxTypes.DEVICES:
         return <DevicesOverview mode="compact" key={"devices-overview"} />
+      case BoxTypes.ENVIRONMENT:
+        return <EnvironmentOverview mode="compact" key={"environment-overview"} />
       default:
         return null
     }

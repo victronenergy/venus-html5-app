@@ -56,6 +56,7 @@ const ValueBox = ({ title, icon, value, unit, bottomValues, children, buttons, i
             {children}
           </div>
         </div>
+        {bottomValues.length > 0 && (
         <div className={"w-full h-full min-h-0 flex flex-col shrink justify-end"}>
           <div className={classNames("shrink overflow-hidden", activeStyles.valueBars)}>
             {bottomValues.map((v, i) => (
@@ -64,6 +65,7 @@ const ValueBox = ({ title, icon, value, unit, bottomValues, children, buttons, i
           </div>
           {!!buttons && <div className="flex w-full">{buttons}</div>}
         </div>
+        )}
       </div>
     </Box>
   )
