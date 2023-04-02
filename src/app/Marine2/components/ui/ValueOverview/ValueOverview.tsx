@@ -10,18 +10,20 @@ const styles: BreakpointStylesType = {
     title: "text-sm",
     subtitle: "text-xs",
     icon: "min-w-5 w-5",
+    smallIcon: "min-w-3 w-3",
   },
   "md-s": {
     value: "text-lg",
     title: "text-base",
     subtitle: "text-sm",
     icon: "min-w-7 w-7",
+    smallIcon: "min-w-5 w-5",
   },
 }
 
-const ValueOverview = ({ title, subtitle, Icon, value, unit, boxSize }: Props) => {
+const ValueOverview = ({ title, subtitle, Icon, value, unit, boxSize, valueType }: Props) => {
   const activeStyles = applyStyles(boxSize, styles)
-
+  const iconStyles = valueType === "environment" ? activeStyles.smallIcon : activeStyles.icon
   if (unit === "W" && value && value > 1000) {
     unit = "kW"
     value = value ? value / 1000 : value
@@ -31,7 +33,7 @@ const ValueOverview = ({ title, subtitle, Icon, value, unit, boxSize }: Props) =
     <div className={classNames("flex justify-between items-center h-11")}>
       <div className="flex items-center min-w-0">
         {/* @ts-ignore */}
-        {<Icon className={activeStyles.icon} />}
+        {<Icon className={iconStyles} />}
         <div className={"px-2 min-w-0 flex flex-col"}>
           <FadedText className={classNames("pr-8", activeStyles.title)} text={title} />
           {subtitle && (
@@ -51,7 +53,8 @@ const ValueOverview = ({ title, subtitle, Icon, value, unit, boxSize }: Props) =
 }
 
 interface Props {
-  Icon: React.ComponentType
+  Icon: React.ComponentType<{ className: string }>
+  valueType?: string
   title: string
   subtitle?: string
   value?: number
