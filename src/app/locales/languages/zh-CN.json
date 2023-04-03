@@ -123,6 +123,7 @@
             "estimate": "估计数据：%{size} 字节。",
             "hint": "尝试重新加载页面或联系 Victron Energy 并提供以下信息：",
             "ignore": "忽略错误",
+            "reportSent": "报告已发送",
             "resetError": "重置错误",
             "restartApp": "重启应用",
             "sendReport": "发送错误报告",
