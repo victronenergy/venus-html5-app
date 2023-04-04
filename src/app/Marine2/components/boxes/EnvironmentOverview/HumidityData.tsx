@@ -1,6 +1,5 @@
 import { observer } from "mobx-react-lite"
 import { useHumidity } from "@elninotech/mfd-modules"
-import { useEffect } from "react"
 import ValueOverview from "../../ui/ValueOverview"
 import HumidityIcon from "../../../images/icons/humidity.svg"
 import ValueBox from "../../ui/ValueBox"
