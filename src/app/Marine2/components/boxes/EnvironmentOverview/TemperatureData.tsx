@@ -5,7 +5,6 @@ import ThermometerIcon from "../../../images/icons/thermometer.svg"
 import ValueBox from "../../ui/ValueBox"
 import { translate } from "react-i18nify"
 
-
 interface Props {
   dataId: number
   mode?: "compact" | "full"
