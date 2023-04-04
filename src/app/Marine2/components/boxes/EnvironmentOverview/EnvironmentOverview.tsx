@@ -9,7 +9,7 @@ import TemperatureData from "./TemperatureData"
 import HumidityData from "./HumidityData"
 import PressureData from "./PressureData"
 import ValueOverview from "../../ui/ValueOverview"
-import ThermometerIcon from "../../../images/icons/thermometer.svg"
+import EnvironmentIcon from "../../../images/icons/environment.svg"
 import GridPaginator from "../../ui/GridPaginator"
 import { PageSelectorProps } from "../../ui/PageSelector"
 
@@ -47,8 +47,9 @@ const EnvironmentOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) 
       <Box
         title={"Environment"}
         /* todo: fix types for svg */
-        /* @ts-ignore */
         linkedView={AppViews.BOX_ENVIRONMENT_OVERVIEW}
+        /* @ts-ignore */
+        icon={<EnvironmentIcon className={"w-4"} />}
         withPagination={true}
         paginationOrientation={"vertical"}
         getBoxSizeCallback={setBoxSize}
