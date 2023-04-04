@@ -2,7 +2,7 @@ import { observer } from "mobx-react-lite"
 import { usePressure } from "@elninotech/mfd-modules"
 import { useEffect } from "react"
 import ValueOverview from "../../ui/ValueOverview"
-import ThermometerIcon from "../../../images/icons/thermometer.svg"
+import PressureIcon from "../../../images/icons/pressure.svg"
 import ValueBox from "../../ui/ValueBox"
 import { translate } from "react-i18nify"
 
@@ -23,7 +23,7 @@ const PressureData = ({ dataId, mode, boxSize }: Props) => {
     return (
       <ValueOverview
         /* @ts-ignore */
-        Icon={ThermometerIcon}
+        Icon={PressureIcon}
         title={customName}
         value={pressure}
         boxSize={boxSize}
@@ -38,7 +38,7 @@ const PressureData = ({ dataId, mode, boxSize }: Props) => {
       title={translate("boxes.pressure") + " " + customName}
       /* todo: fix types for svg */
       /* @ts-ignore */
-      icon={<ThermometerIcon className={"w-5"} />}
+      icon={<PressureIcon className={"w-5"} />}
       value={pressure}
       bottomValues={[]}
       unit={"hPa"}
