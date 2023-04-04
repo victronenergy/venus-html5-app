@@ -34,12 +34,7 @@ const EnvironmentOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) 
     <PressureData key={`pressure-${temperatureId}`} dataId={temperatureId} mode={mode} boxSize={boxSize} />
   ))
 
-  const components = [
-    ...temperatureComponents,
-    ...humidityComponents,
-    ...pressureComponents,
-  ]
-
+  const components = [...temperatureComponents, ...humidityComponents, ...pressureComponents]
 
   if (mode === "compact") {
     return (
