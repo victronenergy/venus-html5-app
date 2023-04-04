@@ -1,6 +1,5 @@
 import { observer } from "mobx-react-lite"
 import { useTemperature } from "@elninotech/mfd-modules"
-import { useEffect } from "react"
 import ValueOverview from "../../ui/ValueOverview"
 import ThermometerIcon from "../../../images/icons/thermometer.svg"
 import ValueBox from "../../ui/ValueBox"
