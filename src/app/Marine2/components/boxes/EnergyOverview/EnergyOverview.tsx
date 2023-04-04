@@ -64,7 +64,7 @@ const EnergyOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) => {
         title={translate("boxes.energy")}
         /* todo: fix types for svg */
         /* @ts-ignore */
-        icon={<EnergyIcon className={"w-6 text-victron-gray dark:text-victron-gray-dark"} />}
+        icon={<EnergyIcon className={"w-5 text-victron-gray dark:text-victron-gray-dark"} />}
         linkedView={AppViews.BOX_ENERGY_OVERVIEW}
         getBoxSizeCallback={setCompactBoxSize}
         withPagination={true}
