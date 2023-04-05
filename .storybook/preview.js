@@ -1,3 +1,4 @@
+import { withThemeByClassName } from "@storybook/addon-styling"
 import "../src/app/Marine2/css/global.css"
 
 export const parameters = {
@@ -9,3 +10,13 @@ export const parameters = {
     },
   },
 }
+
+export const decorators = [
+  withThemeByClassName({
+    themes: {
+      light: "light",
+      dark: "dark",
+    },
+    defaultTheme: "light",
+  }),
+]

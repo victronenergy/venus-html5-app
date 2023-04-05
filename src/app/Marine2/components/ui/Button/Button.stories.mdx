@@ -1,4 +1,5 @@
 import { Meta, Story, Canvas } from '@storybook/addon-docs';
+import { ThemeWrapper } from '/.storybook/theme';
 import Button from './Button';
 
 <Meta
@@ -16,7 +17,7 @@ import Button from './Button';
   }}
 />
 
-export const Template = (args) => <Button {...args}>Click me</Button>
+export const Template = (args) => <ThemeWrapper><Button {...args}>Click me</Button></ThemeWrapper>
 
 # Button
 
