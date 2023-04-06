@@ -1,5 +1,4 @@
 import { Meta, Story, Canvas } from '@storybook/addon-docs';
-import { ThemeWrapper } from '/.storybook/theme';
 import Button from './Button';
 
 <Meta
@@ -14,10 +13,20 @@ import Button from './Button';
       options: ['lg', 'md'],
       control: { type: 'radio' }
     },
+    disabled: {
+      control: { type: 'boolean' }
+    },
+    onClick: {
+      action: 'clicked'
+    },
+    className: {
+      control: { type: 'text' }
+    }
   }}
+  parameters={ {controls: { hideNoControlsWarning: true }} }
 />
 
-export const Template = (args) => <ThemeWrapper><Button {...args}>Click me</Button></ThemeWrapper>
+export const Template = (args) => <Button {...args}>Click me</Button>
 
 # Button
 
