@@ -7,24 +7,36 @@ import { formatValue } from "../../../utils/formatters"
 
 const styles: BreakpointStylesType = {
   default: {
-    value: "text-2xl",
+    value: "text-xl",
     valueSubtitle: "text-base",
     valueBar: "text-sm",
     valueBars: "text-sm",
   },
   "sm-s": {
-    value: "text-3xl",
+    value: "text-2xl",
     valueSubtitle: "text-lg",
     valueBar: "text-sm",
     valueBars: "text-sm",
   },
   "md-s": {
-    value: "text-3xl",
+    value: "text-2xl",
     valueSubtitle: "text-lg",
     valueBar: "text-lg",
     valueBars: "text-lg",
   },
   "md-m": {
+    value: "text-3xl",
+    valueSubtitle: "text-xl",
+    valueBar: "text-xl",
+    valueBars: "text-lg",
+  },
+  "md-l": {
+    value: "text-4xl",
+    valueSubtitle: "text-xl",
+    valueBar: "text-xl",
+    valueBars: "text-lg",
+  },
+  "lg-m": {
     value: "text-4xl",
     valueSubtitle: "text-xl",
     valueBar: "text-xl",
