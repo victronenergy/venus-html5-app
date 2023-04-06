@@ -7,15 +7,15 @@ import FadedText from "../FadedText"
 const styles: BreakpointStylesType = {
   default: {
     value: "text-base",
-    title: "text-sm",
-    subtitle: "text-xs",
+    title: "text-sm leading-[1.1]",
+    subtitle: "text-xs leading-none pb-1",
     icon: "min-w-5 w-5",
     smallIcon: "min-w-3 w-3",
   },
   "md-s": {
     value: "text-lg",
-    title: "text-base",
-    subtitle: "text-sm",
+    title: "text-base leading-[1.1]",
+    subtitle: "text-sm leading-none pb-1",
     icon: "min-w-7 w-7",
     smallIcon: "min-w-5 w-5",
   },
@@ -30,7 +30,12 @@ const ValueOverview = ({ title, subtitle, Icon, value, unit, boxSize, valueType,
   }
 
   return (
-    <div className={classNames("flex justify-between items-center h-11")}>
+    <div
+      className={classNames("flex justify-between items-center", {
+        "h-12": subtitle,
+        "h-11": !subtitle,
+      })}
+    >
       <div className="flex items-center min-w-0">
         {/* @ts-ignore */}
         {<Icon className={iconStyles} />}
