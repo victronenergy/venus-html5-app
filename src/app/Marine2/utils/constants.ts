@@ -8,6 +8,7 @@ export enum BoxTypes {
   BATTERIES = "Batteries",
   TANKS = "Tanks",
   DEVICES = "Devices",
+  ENVIRONMENT = "Environment",
 }
 
 export const BATTERY = {

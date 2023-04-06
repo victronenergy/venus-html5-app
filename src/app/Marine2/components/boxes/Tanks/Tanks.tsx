@@ -18,10 +18,12 @@ interface Props {
 
 const Tanks = ({ mode = "full", className }: Props) => {
   const { tanks } = useTanks()
+  const filteredTanks = (tanks || []).filter((tank) => !!tank)
+
   const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
   const [levelWidth, setLevelWidth] = useState(0)
 
-  useVisibilityNotifier({ widgetName: BoxTypes.TANKS, visible: !!(tanks && tanks.length) })
+  useVisibilityNotifier({ widgetName: BoxTypes.TANKS, visible: !!filteredTanks.length })
 
   const gridRef = useRef<HTMLDivElement>(null)
   const tankRef = useRef<HTMLDivElement>(null)
@@ -91,19 +93,17 @@ const Tanks = ({ mode = "full", className }: Props) => {
         withPagination={true}
         paginationOrientation={"vertical"}
       >
-        {tanks
-          ?.filter((tank) => !!tank)
-          .map((tank) => (
-            <div ref={tankRef} key={tank}>
-              <Tank
-                mode={"compact"}
-                key={tank}
-                tankInstanceId={Number(tank)}
-                parentSize={boxSize}
-                levelWidth={levelWidth}
-              />
-            </div>
-          ))}
+        {filteredTanks.map((tank) => (
+          <div ref={tankRef} key={tank}>
+            <Tank
+              mode={"compact"}
+              key={tank}
+              tankInstanceId={Number(tank)}
+              parentSize={boxSize}
+              levelWidth={levelWidth}
+            />
+          </div>
+        ))}
       </Box>
     )
   } else {
@@ -125,7 +125,7 @@ const Tanks = ({ mode = "full", className }: Props) => {
             paginationOrientation={"vertical"}
             setRef={gridRef}
           >
-            {tanks?.map((tank, index) => {
+            {filteredTanks?.map((tank, index) => {
               return tank ? (
                 <Tank
                   key={index}
@@ -160,7 +160,7 @@ const Tanks = ({ mode = "full", className }: Props) => {
             paginationOrientation={"horizontal"}
           >
             <div className="flex justify-between h-full" ref={gridRef}>
-              {tanks.map((tank) => (
+              {filteredTanks.map((tank) => (
                 <Tank
                   key={tank}
                   tankInstanceId={tank!}
