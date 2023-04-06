@@ -4,7 +4,6 @@ import InverterChargerIcon from "../../../images/icons/inverter-charger.svg"
 import { translate } from "react-i18nify"
 import { SYSTEM_MODE } from "../../../utils/constants"
 import { formatStateForTranslation } from "../../../utils/format"
-import DeviceCompact from "../DeviceCompact"
 import { useEffect, useState } from "react"
 import Button from "../../ui/Button"
 import RadioButton from "../../ui/RadioButton"
@@ -12,8 +11,9 @@ import DeviceSettingModal from "../../ui/DeviceSettingModal"
 import InputLimitValue from "../../ui/InputLimitValue"
 import InputLimitSelector from "../../ui/InputLimitSelector"
 import ValueBox from "../../ui/ValueBox"
+import ValueOverview from "../../ui/ValueOverview"
 
-const InverterCharger = ({ componentMode = "compact" }: Props) => {
+const InverterCharger = ({ componentMode = "compact", compactBoxSize }: Props) => {
   const inverterChargerModeFormatter = (value: number) => {
     switch (value) {
       case SYSTEM_MODE.CHARGER_ONLY:
@@ -70,20 +70,18 @@ const InverterCharger = ({ componentMode = "compact" }: Props) => {
     return buttons
   }
 
-  if (componentMode === "compact") {
+  if (componentMode === "compact" && compactBoxSize) {
     return (
-      <DeviceCompact
-        icon={
-          <InverterChargerIcon
-            /* todo: fix types for svg */
-            /* @ts-ignore */
-            className={"w-7"}
-          ></InverterChargerIcon>
-        }
+      <ValueOverview
+        /* todo: fix types for svg */
+        /* @ts-ignore */
+        Icon={InverterChargerIcon}
         title={customName || productNameShort}
-        subTitle={subTitle}
-        value={!!inputId ? <InputLimitValue inputId={inputId} /> : 0}
+        subtitle={subTitle}
+        inputLimitValue={!!inputId ? <InputLimitValue inputId={inputId} /> : undefined}
+        value={!inputId ? 0 : undefined}
         unit={"A"}
+        boxSize={compactBoxSize}
       />
     )
   }
@@ -160,6 +158,7 @@ const InverterCharger = ({ componentMode = "compact" }: Props) => {
 
 interface Props {
   componentMode?: "compact" | "full"
+  compactBoxSize?: { width: number; height: number }
 }
 
 export default observer(InverterCharger)

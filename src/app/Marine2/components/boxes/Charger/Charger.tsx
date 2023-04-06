@@ -4,7 +4,6 @@ import InverterChargerIcon from "../../../images/icons/inverter-charger.svg"
 import { translate } from "react-i18nify"
 import { CHARGER_MODE } from "../../../utils/constants"
 import { formatStateForTranslation } from "../../../utils/format"
-import DeviceCompact from "../DeviceCompact"
 import Button from "../../ui/Button"
 import GeneratorIcon from "../../../images/icons/generator.svg"
 import classnames from "classnames"
@@ -15,6 +14,7 @@ import { useEffect, useState } from "react"
 import classNames from "classnames"
 import RadioButton from "../../ui/RadioButton"
 import DeviceSettingModal from "../../ui/DeviceSettingModal/DeviceSettingModal"
+import ValueOverview from "../../ui/ValueOverview"
 
 const styles: BreakpointStylesType = {
   default: {
@@ -34,7 +34,7 @@ const styles: BreakpointStylesType = {
     valueBars: "text-lg",
   },
 }
-const Charger = ({ instanceId, componentMode = "compact" }: Props) => {
+const Charger = ({ instanceId, componentMode = "compact", compactBoxSize }: Props) => {
   const chargerModeFormatter = (value: number) => {
     switch (value) {
       case CHARGER_MODE.OFF:
@@ -60,8 +60,8 @@ const Charger = ({ instanceId, componentMode = "compact" }: Props) => {
   const chargerSupportsMode = mode !== undefined
   const chargerSupportsInputLimit = currentLimit !== undefined
   const chargerMode = chargerModeFormatter(Number(mode))
-  const currentValue = !!current && (!!current[0] || current[0] === 0) && current[0].toFixed(1.0)
-  const chargerState = (!!state || state === 0) && translate(formatStateForTranslation(Number(state)))
+  const currentValue = !!current && (!!current[0] || current[0] === 0) ? current[0] : undefined
+  const chargerState = !!state || state === 0 ? translate(formatStateForTranslation(Number(state))) : undefined
 
   const productNameShort = productName && productName.split(" ")[0]
 
@@ -110,20 +110,17 @@ const Charger = ({ instanceId, componentMode = "compact" }: Props) => {
     closeLimitModal()
   }
 
-  if (componentMode === "compact") {
+  if (componentMode === "compact" && compactBoxSize) {
     return (
-      <DeviceCompact
-        icon={
-          <InverterChargerIcon
-            /* todo: fix types for svg */
-            /* @ts-ignore */
-            className={"w-7"}
-          ></InverterChargerIcon>
-        }
+      <ValueOverview
+        /* todo: fix types for svg */
+        /* @ts-ignore */
+        Icon={InverterChargerIcon}
         title={productNameShort}
-        subTitle={chargerState}
+        subtitle={chargerState ?? undefined}
         value={currentValue}
         unit={"A"}
+        boxSize={compactBoxSize}
       />
     )
   }
@@ -219,6 +216,7 @@ const Charger = ({ instanceId, componentMode = "compact" }: Props) => {
 interface Props {
   instanceId: ChargerInstanceId
   componentMode?: "compact" | "full"
+  compactBoxSize?: { width: number; height: number }
 }
 
 export default observer(Charger)

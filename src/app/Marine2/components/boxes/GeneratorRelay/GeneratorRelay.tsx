@@ -1,12 +1,11 @@
 import { observer } from "mobx-react-lite"
 import GeneratorIcon from "../../../images/icons/generator.svg"
 import { translate } from "react-i18nify"
-import { formatPower } from "../../../utils/format"
-import DeviceCompact from "../DeviceCompact"
 import { useActiveInValues } from "@elninotech/mfd-modules"
 import ValueBox from "../../ui/ValueBox"
 import AutoStartStopSetter from "../../ui/AutoStartStopSetter/AutoStartStopSetter"
 import { RELAY_FUNCTION } from "../../../utils/constants"
+import ValueOverview from "../../ui/ValueOverview"
 
 const GeneratorRelay = ({
   statusCode,
@@ -18,6 +17,7 @@ const GeneratorRelay = ({
   updateManualMode,
   updateAutoMode,
   mode = "compact",
+  compactBoxSize,
 }: Props) => {
   const getGeneratorState = (statusCode: number, active: boolean, phases: number) => {
     if (active) {
@@ -43,7 +43,6 @@ const GeneratorRelay = ({
         return b ? sum + b : sum
       }, 0)
     : 0
-  const powerFormatted = formatPower(powerSum)
   const unit = powerSum > 1000 ? "kW" : "W"
 
   const phasesOverview = []
@@ -55,20 +54,17 @@ const GeneratorRelay = ({
     ])
   }
 
-  if (mode === "compact") {
+  if (mode === "compact" && compactBoxSize) {
     return (
-      <DeviceCompact
-        icon={
-          <GeneratorIcon
-            /* todo: fix types for svg */
-            /* @ts-ignore */
-            className={"w-7"}
-          ></GeneratorIcon>
-        }
+      <ValueOverview
+        /* todo: fix types for svg */
+        /* @ts-ignore */
+        Icon={GeneratorIcon}
         title={title}
-        subTitle={subTitle}
-        value={powerFormatted}
+        subtitle={subTitle}
+        value={powerSum}
         unit={unit}
+        boxSize={compactBoxSize}
       />
     )
   }
@@ -113,6 +109,7 @@ interface Props {
   updateAutoMode: Function
   active?: boolean
   mode?: "compact" | "full"
+  compactBoxSize?: { width: number; height: number }
 }
 
 export default observer(GeneratorRelay)

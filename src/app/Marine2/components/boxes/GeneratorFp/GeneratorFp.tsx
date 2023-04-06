@@ -3,14 +3,13 @@ import { observer } from "mobx-react-lite"
 import GeneratorIcon from "../../../images/icons/generator.svg"
 import { GENSET_STATE } from "../../../utils/constants"
 import { translate } from "react-i18nify"
-import { formatPower } from "../../../utils/format"
-import DeviceCompact from "../DeviceCompact"
 import Box from "../../ui/Box"
 import classnames from "classnames"
 import { useState } from "react"
 import ValueBar from "../../ui/ValueBar"
 import { applyStyles, BreakpointStylesType } from "../../../utils/media"
 import AutoStartStopSetter from "../../ui/AutoStartStopSetter"
+import ValueOverview from "../../ui/ValueOverview"
 
 const styles: BreakpointStylesType = {
   default: {
@@ -50,7 +49,7 @@ const styles: BreakpointStylesType = {
   },
 }
 
-const GeneratorFp = ({ mode = "compact", generatorFp }: Props) => {
+const GeneratorFp = ({ mode = "compact", generatorFp, compactBoxSize }: Props) => {
   const gensetStateFormatter = (value: number) => {
     if (value === GENSET_STATE.STANDBY) {
       return translate("common.standby")
@@ -72,12 +71,11 @@ const GeneratorFp = ({ mode = "compact", generatorFp }: Props) => {
   const { voltage, current, power, coolant, winding, exhaust } = gensetValues
   // When a topic is invalid, it returns undefined -> no value means topic is not supported
   const title = productName || "Genset"
-  const subTitle = (!!statusCode || statusCode === 0) && gensetStateFormatter(Number(statusCode))
+  const subTitle = !!statusCode || statusCode === 0 ? gensetStateFormatter(Number(statusCode)) : undefined
   const isAutoStartDisabled = gensetAutoStart === 0
   const powerSum = power.reduce((sum: number, b) => {
     return b ? sum + b : sum
   }, 0)
-  const powerFormatted = formatPower(powerSum)
   const unit = powerSum > 1000 ? "kW" : "W"
 
   const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
@@ -92,20 +90,17 @@ const GeneratorFp = ({ mode = "compact", generatorFp }: Props) => {
     ])
   }
 
-  if (mode === "compact") {
+  if (mode === "compact" && compactBoxSize) {
     return (
-      <DeviceCompact
-        icon={
-          <GeneratorIcon
-            /* todo: fix types for svg */
-            /* @ts-ignore */
-            className={"w-7"}
-          ></GeneratorIcon>
-        }
+      <ValueOverview
+        /* todo: fix types for svg */
+        /* @ts-ignore */
+        Icon={GeneratorIcon}
         title={title}
-        subTitle={subTitle}
-        value={powerFormatted}
+        subtitle={subTitle}
+        value={powerSum}
         unit={unit}
+        boxSize={compactBoxSize}
       />
     )
   }
@@ -182,6 +177,7 @@ const GeneratorFp = ({ mode = "compact", generatorFp }: Props) => {
 interface Props {
   mode?: "compact" | "full"
   generatorFp: GeneratorFpProvider
+  compactBoxSize?: { width: number; height: number }
 }
 
 export default observer(GeneratorFp)

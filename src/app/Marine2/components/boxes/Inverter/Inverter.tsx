@@ -4,7 +4,6 @@ import InverterChargerIcon from "../../../images/icons/inverter-charger.svg"
 import { translate } from "react-i18nify"
 import { INVERTER_MODE } from "../../../utils/constants"
 import { formatStateForTranslation } from "../../../utils/format"
-import DeviceCompact from "../DeviceCompact"
 import GeneratorIcon from "../../../images/icons/generator.svg"
 import classNames from "classnames"
 import classnames from "classnames"
@@ -15,6 +14,7 @@ import RadioButton from "../../ui/RadioButton"
 import Box from "../../ui/Box"
 import { applyStyles, BreakpointStylesType } from "../../../utils/media"
 import { useEffect, useState } from "react"
+import ValueOverview from "../../ui/ValueOverview"
 
 const styles: BreakpointStylesType = {
   default: {
@@ -34,7 +34,7 @@ const styles: BreakpointStylesType = {
     valueBars: "text-lg",
   },
 }
-const Inverter = ({ instanceId, isVebusInverter, componentMode = "compact" }: Props) => {
+const Inverter = ({ instanceId, isVebusInverter, componentMode = "compact", compactBoxSize }: Props) => {
   const inverterModeFormatter = (value: number) => {
     switch (value) {
       case INVERTER_MODE.OFF:
@@ -56,8 +56,8 @@ const Inverter = ({ instanceId, isVebusInverter, componentMode = "compact" }: Pr
   const onMode = isVebusInverter ? INVERTER_MODE.VEBUS_ON : INVERTER_MODE.ON
 
   const productNameShort = productName && productName.split(" ")[0]
-  const currentValue = (!!current || current === 0) && current.toFixed(1.0)
-  const inverterState = (!!state || state === 0) && translate(formatStateForTranslation(Number(state)))
+  const currentValue = !!current || current === 0 ? current : undefined
+  const inverterState = !!state || state === 0 ? translate(formatStateForTranslation(Number(state))) : undefined
   const inverterMode = inverterModeFormatter(Number(mode))
 
   const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
@@ -80,20 +80,17 @@ const Inverter = ({ instanceId, isVebusInverter, componentMode = "compact" }: Pr
     updateMode(modeForSubmission)
     closeModeModal()
   }
-  if (componentMode === "compact") {
+  if (componentMode === "compact" && compactBoxSize) {
     return (
-      <DeviceCompact
-        icon={
-          <InverterChargerIcon
-            /* todo: fix types for svg */
-            /* @ts-ignore */
-            className={"w-7"}
-          ></InverterChargerIcon>
-        }
+      <ValueOverview
+        /* todo: fix types for svg */
+        /* @ts-ignore */
+        Icon={InverterChargerIcon}
         title={productNameShort}
-        subTitle={inverterState}
+        subtitle={inverterState}
         value={currentValue}
         unit={"A"}
+        boxSize={compactBoxSize}
       />
     )
   }
@@ -176,6 +173,7 @@ interface Props {
   instanceId: InverterInstanceId
   isVebusInverter: boolean
   componentMode?: "compact" | "full"
+  compactBoxSize?: { width: number; height: number }
 }
 
 export default observer(Inverter)
