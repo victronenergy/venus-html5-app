@@ -9,12 +9,11 @@ import { AppViews } from "../../../modules/AppViews"
 import { translate } from "react-i18nify"
 import { useVisibilityNotifier } from "../../../modules"
 import GridPaginator from "../../ui/GridPaginator"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import { PageSelectorProps } from "../../ui/PageSelector"
 import { boxBreakpoints } from "../../../utils/media"
 import PageFlipper from "../../ui/PageFlipper"
 import range from "lodash-es/range"
-import ResizeObserver from "resize-observer-polyfill"
 
 interface Props {
   mode?: "compact" | "full"
@@ -33,37 +32,16 @@ const BatteriesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) =>
   const [pages, setPages] = useState(1)
   const [perPage, setPerPage] = useState(2)
 
-  const circleRef = useRef<HTMLDivElement>(null)
-  const circleBoxRef = useRef<HTMLDivElement>(null)
-  const [circleScale, setCircleScale] = useState(1)
-
-  useEffect(() => {
-    if (!circleRef.current) return
-    if (!circleBoxRef.current) return
-    const observer = new ResizeObserver(() => {
-      setCircleScale(
-        Math.min(
-          circleBoxRef.current!.clientHeight / circleRef.current!.scrollHeight,
-          circleBoxRef.current!.clientWidth / circleRef.current!.scrollWidth
-        )
-      )
-    })
-    observer.observe(circleRef.current)
-    return () => {
-      observer.disconnect()
-    }
-  }, [circleBoxRef, circleRef, circleScale])
-
   useEffect(() => {
     if (!overviewBatteries || !overviewBatteries.length) return
 
     let batterySummaryWidth = 92 // minimum BatterySummary component width
     // BatterySummary component width is bigger based on these breakpoints (subtract 56 leaving space for page selector)
-    if (boxSize.height - 56 > boxBreakpoints["sm-m"].height) {
+    if (boxSize.height - 50 > boxBreakpoints["sm-m"].height) {
       batterySummaryWidth = 302
-    } else if (boxSize.height - 56 > boxBreakpoints["sm-s"].height) {
+    } else if (boxSize.height - 50 > boxBreakpoints["sm-s"].height) {
       batterySummaryWidth = 230
-    } else if (boxSize.height - 56 > boxBreakpoints["xs-xs"].height) {
+    } else if (boxSize.height - 50 > boxBreakpoints["xs-xs"].height) {
       batterySummaryWidth = 142
     }
 
@@ -83,7 +61,6 @@ const BatteriesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) =>
         linkedView={AppViews.BOX_BATTERIES_OVERVIEW}
         getBoxSizeCallback={setBoxSize}
       >
-        {/* TODO: set max items per page based on the available space */}
         <PageFlipper pages={pages}>
           <div
             className={"h-full flex"}
@@ -92,20 +69,16 @@ const BatteriesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) =>
             }}
           >
             {range(pages).map((page) => (
-              <div
-                key={page + "batteryPage"}
-                className={"flex w-full h-full items-center justify-center"}
-                style={{
-                  transform: `scale(${circleScale})`,
-                }}
-              >
+              <div key={page + "batteryPage"} className={"flex w-full h-full items-center justify-center"}>
                 {overviewBatteries.slice(page * perPage, (page + 1) * perPage).map((b) => (
-                  <div key={b.id} className={"h-full flex items-center justify-center"} ref={circleBoxRef}>
+                  <div key={b.id} className={"h-full flex items-center justify-center"}>
                     <BatterySummary
                       key={b.id}
                       battery={b}
-                      boxSize={{ width: boxSize.width, height: boxSize.height - 50 }}
-                      circleRef={circleRef}
+                      boxSize={{
+                        width: boxSize.width,
+                        height: pages <= 1 ? boxSize.height - 50 : boxSize.height - 100,
+                      }}
                     />
                   </div>
                 ))}

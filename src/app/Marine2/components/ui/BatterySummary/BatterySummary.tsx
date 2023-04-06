@@ -38,11 +38,11 @@ const styles: BreakpointStylesType = {
   },
 }
 
-const BatterySummary = ({ battery, boxSize, circleRef }: Props) => {
+const BatterySummary = ({ battery, boxSize }: Props) => {
   const activeStyles = applyStyles(boxSize, styles)
 
   return (
-    <div className={classNames("flex flex-col justify-center items-center mx-4", activeStyles.circle)} ref={circleRef}>
+    <div className={classNames("flex flex-col justify-center items-center mx-4", activeStyles.circle)}>
       <div className={classNames("w-full", activeStyles.circleWrapper)}>
         <ProgressCircle percentage={battery.soc ?? null} boxSize={boxSize}>
           {battery.voltage || battery.voltage === 0 ? (
@@ -70,7 +70,6 @@ const BatterySummary = ({ battery, boxSize, circleRef }: Props) => {
 interface Props {
   battery: Battery
   boxSize: { width: number; height: number }
-  circleRef?: React.RefObject<HTMLDivElement>
 }
 
 export default BatterySummary
