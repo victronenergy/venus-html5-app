@@ -1,0 +1,64 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs';
+import RadioButton from './RadioButton';
+
+<Meta
+  title="Marine2/RadioButton"
+  component={RadioButton}
+  argTypes={{
+    selected: {
+      control: { type: 'boolean' }
+    },
+    disabled: {
+      control: { type: 'boolean' }
+    },
+    responsive: {
+      control: { type: 'boolean' }
+    },
+    onChanged: {
+      action: 'clicked'
+    },
+    color: {
+      control: { type: 'text' }
+    }
+  }}
+  parameters={ {controls: { hideNoControlsWarning: true }} }
+/>
+
+export const Template = (args) => <label className="w-full flex justify-start items-center pt-4 pb-4"><RadioButton {...args} /><span className="ml-2">Choose me</span></label>
+
+# Radio Button
+
+## Default (not selected)
+
+<Canvas>
+  <Story
+    name="Not selected">
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Selected
+
+<Canvas>
+  <Story
+    name="Selected"
+    args={{
+      selected: true,
+    }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Disabled
+
+<Canvas>
+  <Story
+    name="Disabled"
+    args={{
+      disabled: true,
+    }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+
