@@ -38,7 +38,7 @@ const ValueOverview = ({ title, subtitle, Icon, value, unit, boxSize, valueType,
           <FadedText className={classNames("pr-8", activeStyles.title)} text={title} />
           {subtitle && (
             <FadedText
-              className={classNames("text-victron-gray dark:text-victron-gray-500", activeStyles.subtitle)}
+              className={classNames("text-victron-gray pr-2 dark:text-victron-gray-500", activeStyles.subtitle)}
               text={subtitle}
             />
           )}
