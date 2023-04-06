@@ -45,7 +45,7 @@ const ValueBox = ({ title, icon, value, unit, bottomValues, children, buttons, i
   return (
     <Box title={title} icon={icon} getBoxSizeCallback={setBoxSize} infoText={infoText}>
       <div className="w-full h-full flex flex-col justify-between">
-        <div className={"w-full h-full shrink overflow-hidden"}>
+        <div className={"w-full h-full overflow-hidden"}>
           <div className={classNames("text-victron-darkGray dark:text-white", activeStyles?.value)}>
             {(typeof value === "number" && formatValue(value)) || value}
             {typeof value === "number" && (
@@ -57,8 +57,8 @@ const ValueBox = ({ title, icon, value, unit, bottomValues, children, buttons, i
           </div>
         </div>
         {bottomValues.length > 0 && (
-          <div className={"w-full h-full min-h-0 flex flex-col shrink justify-end"}>
-            <div className={classNames("shrink overflow-hidden", activeStyles.valueBars)}>
+          <div className={"w-full h-full flex flex-col justify-end"}>
+            <div className={classNames("overflow-hidden", activeStyles.valueBars)}>
               {bottomValues.map((v, i) => (
                 <ValueBar key={i} prefix={isMultiPhase ? "L" + (i + 1) : undefined} values={v} />
               ))}
