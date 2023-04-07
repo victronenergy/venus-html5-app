@@ -10,8 +10,8 @@ import BlackWaterIcon from "../../../images/icons/black-water.svg"
 import GrayWaterIcon from "../../../images/icons/waste-water.svg"
 import { applyStyles, BreakpointStylesType, StylesType } from "app/Marine2/utils/media"
 import useSize from "@react-hook/size"
-import ValueOverview from "../../ui/ValueOverview/ValueOverview"
-import ValueBox from "../../ui/ValueBox/ValueBox"
+import ValueOverview from "../../ui/ValueOverview"
+import ValueBox from "../../ui/ValueBox"
 
 // styles for compact mode
 const compactStyles: BreakpointStylesType = {
@@ -113,32 +113,21 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
     return fluids[fluidTypeNum]
   }, [fluidTypeNum])
 
-  // check if tank values are not undefined
-  if (
-    capacity === undefined ||
-    fluidType === undefined ||
-    level === undefined ||
-    remaining === undefined ||
-    unit === undefined
-  ) {
-    return null
-  }
 
   // tanks that are missing level readings and only have capacity
-  if (!capacity && level === undefined) {
+  if (!!capacity && !level) {
     if (mode === "compact") {
-
       return (
         <ValueOverview
-        /* todo: fix types for svg */
-        /* @ts-ignore */
-        Icon={fluidIcon(fluidTypeNum, mode)}
-        title={fluidTypeTitle}
-        value={capacity}
-        unit={"m3"}
-        boxSize={parentSize!}
+          /* todo: fix types for svg */
+          /* @ts-ignore */
+          Icon={fluidIcon(fluidTypeNum, mode, false)}
+          title={fluidTypeTitle}
+          value={capacity}
+          unit={"m3"}
+          boxSize={parentSize!}
         />
-        )
+      )
     }
 
     return (
@@ -152,6 +141,17 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
         bottomValues={[]}
       />
     )
+  }
+
+  // check if tank values are not undefined
+  if (
+    capacity === undefined ||
+    fluidType === undefined ||
+    level === undefined ||
+    remaining === undefined ||
+    unit === undefined
+  ) {
+    return null
   }
 
   if (mode === "compact") {
@@ -323,7 +323,7 @@ const levelFormatter = (level: number) => {
   return Math.round(level)
 }
 
-const fluidIcon = (type: number, mode: string = "compact") => {
+const fluidIcon = (type: number, mode: string = "compact", isComponent: boolean = true) => {
   switch (type) {
     case 0:
     case 3:
@@ -336,19 +336,19 @@ const fluidIcon = (type: number, mode: string = "compact") => {
     case 11:
       /* todo: fix types for svg */
       /* @ts-ignore */
-      return <FuelIcon className={mode === "compact" ? "w-7" : "w-9"} />
+      return isComponent ? <FuelIcon className={mode === "compact" ? "w-7" : "w-9"} /> : FuelIcon
     case 1:
       /* todo: fix types for svg */
       /* @ts-ignore */
-      return <WaterIcon className={mode === "compact" ? "w-7" : "w-9"} />
+      return isComponent ? <WaterIcon className={mode === "compact" ? "w-7" : "w-9"} /> : WaterIcon
     case 2:
       /* todo: fix types for svg */
       /* @ts-ignore */
-      return <GrayWaterIcon className={mode === "compact" ? "w-7" : "w-9"} />
+      return isComponent ? <GrayWaterIcon className={mode === "compact" ? "w-7" : "w-9"} /> : GrayWaterIcon
     case 5:
       /* todo: fix types for svg */
       /* @ts-ignore */
-      return <BlackWaterIcon className={mode === "compact" ? "w-7" : "w-9"} />
+      return isComponent ? <BlackWaterIcon className={mode === "compact" ? "w-7" : "w-9"} /> : BlackWaterIcon
     default:
       return null
   }
