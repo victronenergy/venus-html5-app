@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite"
 import { useTemperatures, TemperatureInstanceId } from "@elninotech/mfd-modules"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useVisibilityNotifier } from "../../../modules"
 import { BoxTypes } from "../../../utils/constants"
 import { AppViews } from "../../../modules/AppViews"
@@ -18,10 +18,16 @@ interface Props {
   pageSelectorPropsSetter?: (arg0: PageSelectorProps) => void
 }
 
+function isBoxVisible(components: JSX.Element[]): boolean {
+  return components.some((component) => {
+    return component.props._store && component.props._store.validated
+  })
+}
+
+
 const EnvironmentOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) => {
   const { temperatures } = useTemperatures()
   const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
-  useVisibilityNotifier({ widgetName: BoxTypes.ENVIRONMENT, visible: !!(temperatures && temperatures.length) })
 
   const temperatureComponents = temperatures.map((temperatureId: TemperatureInstanceId, i: number) => (
     <TemperatureData key={`temperature-${temperatureId}`} dataId={temperatureId} mode={mode} boxSize={boxSize} />
@@ -36,6 +42,8 @@ const EnvironmentOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) 
   ))
 
   const components = [...temperatureComponents, ...humidityComponents, ...pressureComponents]
+
+  useVisibilityNotifier({ widgetName: BoxTypes.ENVIRONMENT, visible: isBoxVisible(components) })
 
   if (mode === "compact") {
     return (
