@@ -11,6 +11,7 @@ import PressureData from "./PressureData"
 import EnvironmentIcon from "../../../images/icons/environment.svg"
 import GridPaginator from "../../ui/GridPaginator"
 import { PageSelectorProps } from "../../ui/PageSelector"
+import { translate } from "react-i18nify"
 
 interface Props {
   mode?: "compact" | "full"
@@ -39,7 +40,7 @@ const EnvironmentOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) 
   if (mode === "compact") {
     return (
       <Box
-        title={"Environment"}
+        title={translate("boxes.environment")}
         /* todo: fix types for svg */
         linkedView={AppViews.BOX_ENVIRONMENT_OVERVIEW}
         /* @ts-ignore */
