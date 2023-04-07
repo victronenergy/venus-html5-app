@@ -113,7 +113,6 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
     return fluids[fluidTypeNum]
   }, [fluidTypeNum])
 
-
   // tanks that are missing level readings and only have capacity
   if (!!capacity && !level) {
     if (mode === "compact") {
