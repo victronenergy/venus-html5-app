@@ -115,7 +115,6 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
 
   // tanks that are missing level readings and only have capacity
   if (!!capacity && !level) {
-    if (mode === "compact") {
       return (
         <ValueOverview
           /* todo: fix types for svg */
@@ -127,19 +126,6 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
           boxSize={parentSize!}
         />
       )
-    }
-
-    return (
-      <ValueBox
-        title={fluidTypeTitle}
-        /* todo: fix types for svg */
-        /* @ts-ignore */
-        icon={fluidIcon(fluidTypeNum, mode)}
-        value={capacity}
-        unit={"m3"}
-        bottomValues={[]}
-      />
-    )
   }
 
   // check if tank values are not undefined
