@@ -118,14 +118,15 @@
         "errorWithMessage": "Fout : %{message}",
         "genericMessage": "Fout tijdens het laden van de applicatie. Probeer de pagina opnieuw te laden of neem contact op met Victron Energy met de volgende informatie:",
         "marine": {
-            "cta": "Stuur dit fout rapport direct aan het support team van Victron Energy:",
+            "cta": "Stuur dit fout verslag direct aan het support team van Victron Energy:",
             "dataCharges": "Standaard data tarieven zijn van toepassing.",
             "estimate": "Geschatte hoeveelheid data: %{size} Bytes.",
             "hint": "Probeer de pagina opnieuw te laden of neem contact op met Victron Energy met de volgende informatie:\n",
             "ignore": "Negeer fout",
+            "reportSent": "Verslag is verzonden",
             "resetError": "Herstel fout",
             "restartApp": "Herstart app",
-            "sendReport": "Stuur fout rapport",
+            "sendReport": "Stuur fout verslag",
             "title": "Weergave fout."
         },
         "mqttUnavailable1": "Kan niet met de MQTT server verbinden.",

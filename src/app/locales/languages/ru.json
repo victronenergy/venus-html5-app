@@ -1,94 +1,221 @@
 {
     "acMode": {
         "modal": {
-            "name": "Имя"
+            "name": "Имя",
+            "updateLimit": "updateLimit"
         },
         "title": "Сбросить пароль"
     },
-    "boxes": {},
+    "boxes": {
+        "EnergyOverview": "ЭнергетикаОбзор",
+        "acLoads": "AC нагрузки",
+        "alternator": "Генератор",
+        "batteries": "Батареи",
+        "battery": "Батарея",
+        "batteryWithName": "batteryWithName",
+        "chargerWithName": "chargerWithName",
+        "dcLoads": "dcLoads",
+        "devices": "Устройства",
+        "energy": "Энергия",
+        "generator": "Генератор",
+        "generatorInput": "generatorInput",
+        "gridInput": "gridInput",
+        "invalidConfig": "invalidConfig",
+        "inverterCharger": "inverterCharger",
+        "inverterWithName": "inverterWithName",
+        "pvCharger": "PV зарядное устройство",
+        "shorePower": "Мощность солнечной системы",
+        "solar": "Солнечная энергия",
+        "status": "Состояние",
+        "tanks": "Резервуары",
+        "unknown": "Неизвестно",
+        "windGenerator": "windGenerator"
+    },
     "cardFooter": {
         "Charge": "Нагрузка",
+        "Critical": "Критический",
+        "Optimal": "Оптимальный",
         "Status": "Состояние",
         "Warning": "Предупреждение"
     },
     "common": {
+        "absorptionCharging": "абсорбцияЗарядка",
         "assisting": "Помощь",
+        "auto": "Авто",
         "autoStartStop": "Автоматический старт/стоп",
+        "bulkCharging": "bulkCharging",
         "charge": "Нагрузка",
+        "charged": "Заряжено",
         "chargerOnly": "Только зарядное устройство",
         "charging": "заряжается",
+        "close": "Закрыть",
         "current": "Ток",
+        "dark": "темный",
+        "days": "дней",
+        "days_short": "короткие дни",
+        "discharge": "Разряд",
         "discharging": "разряжается",
         "eco": "Эко",
+        "emptyBar": "emptyBar",
+        "equalisationCharging": "уравниваниеВыплата",
         "error": "Ошибка",
         "fault": "Неисправность",
+        "floatCharging": "floatCharging",
+        "hours": "часы",
+        "hours_short": "часы_короткие",
         "idle": "без нагрузки",
+        "inputCurrentLimit": "Ограничение входящего тока",
+        "inputLimit": "inputLimit",
         "inverterOnly": "Только инвертер",
         "inverting": "Инвертирование",
+        "light": "свет",
+        "limit": "ограничение",
         "loading": "Загрузка",
+        "loads": "нагрузки",
         "lowPower": "Низкая мощность",
+        "minutes": "минут",
+        "minutes_short": "минуты_короткие",
         "mode": "Режим",
+        "noShorePower": "noShorePower",
         "notAvailable": "Недоступно",
+        "nrOfPhases": "nrOfPhases",
+        "null": "Пожалуйста, обратитесь к нашим",
         "off": "Выкл",
         "on": "Вкл",
         "passthru": "Проход",
         "powerSupplyMode": "Режим поддержки мощности",
+        "remainingTime": "Оставшееся время",
         "running": "Работает",
+        "set": "сентябрь",
         "standby": "Ожидание",
         "starting": "Статус: запуск опроса устройств...",
         "stopped": "Остановлено",
         "stopping": "Остановка",
+        "storageMode": "Режим хранения",
         "sustain": "Удержание",
         "unplugged": "Отключено",
+        "veBusFault": "veBusFault",
         "voltage": "Напряжение"
     },
     "diagnostics": {
-        "connection": {},
-        "device": {},
+        "connection": {
+            "connection": "<mrk mtype=\"seg\" mid=\"678\">Подключение</mrk>",
+            "error": "Ошибка",
+            "host": "Хозяин",
+            "none": "Нет",
+            "portalId": "portalId",
+            "status": "Состояние"
+        },
+        "device": {
+            "device": "Устройство",
+            "userAgent": "userAgent",
+            "viewportHeight": "viewportHeight",
+            "viewportWidth": "viewportWidth"
+        },
         "diagnostics": "Диагностика"
     },
     "error": {
+        "errorWithMessage": "errorWithMessage",
+        "genericMessage": "genericMessage",
         "marine": {
-            "resetError": "Reset Error"
+            "cta": "cta",
+            "dataCharges": "dataCharges",
+            "estimate": "оценка",
+            "hint": "Индия",
+            "ignore": "игнорировать",
+            "reportSent": "reportSent",
+            "resetError": "Reset Error",
+            "restartApp": "restartApp",
+            "sendReport": "sendReport",
+            "title": "Сбросить пароль"
         },
-        "remoteConsole": {}
+        "mqttUnavailable1": "mqttUnavailable1",
+        "mqttUnavailable2": "mqttUnavailable2",
+        "mqttUnavailable3": "mqttUnavailable3",
+        "mqttUnavailable4": "mqttUnavailable4",
+        "mqttUnavailable5": "mqttUnavailable5",
+        "queryParams": "queryParams",
+        "remoteConsole": {
+            "connectionFailed": "connectionFailed",
+            "screenTooSmall": "screenTooSmall"
+        },
+        "userAgent": "userAgent",
+        "windowSize": "windowSize"
     },
     "generator": {
-        "temperature": {}
+        "fisherPandaAutoStartMessage": "fisherPandaAutoStartMessage",
+        "temperature": {
+            "coolant": "охлаждающая жидкость",
+            "exhaust": "выхлоп",
+            "winding": "намотка"
+        }
     },
     "header": {
         "close": "Закрыть",
         "connecting": "Подключение",
+        "local": "Локальные",
+        "loggedIn": "loggedIn",
+        "notLoggedIn": "notLoggedIn",
         "remote": "Удаленный",
-        "remoteConsole": "Дистанционная консоль"
+        "remoteConsole": "Дистанционная консоль",
+        "remoteMessage": "remoteMessage",
+        "versionInfo": "versionInfo"
     },
     "installations": {
         "title": "Сбросить пароль"
     },
-    "locker": {},
+    "locker": {
+        "lockMessage": "lockMessage",
+        "unlockMessage": "unlockMessage"
+    },
     "noWidgets": {
+        "subtitle": "субтитр",
         "title": "Сбросить пароль"
     },
     "pages": {
-        "diagnostics": "Диагностика"
+        "diagnostics": "Диагностика",
+        "remoteConsole": "Дистанционная консоль",
+        "systemOverview": "Обзор системы"
     },
     "remoteLogin": {
+        "2fa": "2fa",
         "email": "Эл. почта",
+        "forgotPassword": "forgotPassword",
+        "goBack": "goBack",
         "logIn": "Вход",
+        "logOut": "Выйти",
         "loginFailed": "<mrk mtype=\"seg\" mid=\"640\">Ошибка входа</mrk>",
-        "password": "Пароль"
+        "mobileVerification": "Приложение для проверки подлинности токена",
+        "noInstallations": "noInstallations",
+        "password": "Пароль",
+        "registerMessage1": "registerMessage1",
+        "registerMessage2": "registerMessage2",
+        "smsVerification": "Токен подтверждения SMS",
+        "wrong2fa": "wrong2fa"
     },
     "statusWidget": {
+        "Absorption charging": "Абсорбционная зарядка",
         "Assisting": "Помощь",
+        "Auto equalize/Recondition": "Автоуравнивание/Ремонт",
+        "Battery Safe": "Battery Safe",
+        "Bulk charging": "Насыпная зарядка",
         "Discharging": "разряжается",
+        "Equalisation charging": "Уравнительная тарификация",
+        "External control": "Внешнее управление",
+        "Float charging": "Зарядка поплавка",
         "Inverting": "Инвертирование",
         "Low power": "Низкая мощность",
         "Off": "Выкл",
         "Passthru": "Проход",
+        "Repeated absorption": "Повторная абсорбция",
+        "Storage mode": "Режим хранения",
         "Sustain": "Удержание",
+        "VE.Bus Fault condition": "VE.Bus Состояние неисправности",
+        "Wake-up": "Пробуждение",
         "parts": {
             "Battery": "Батарея",
             "Black water": "Темная вода",
+            "DC Loads": "Нагрузки постоянного тока",
             "Fresh water": "Свежая вода",
             "Fuel": "Топливо",
             "Live well": "Рабочая скважина",
@@ -101,23 +228,39 @@
     },
     "tankWidget": {
         "Black water": "Темная вода",
+        "Diesel": "Дизельное топливо",
         "Fresh water": "Свежая вода",
         "Fuel": "Топливо",
+        "Gasoline": "Бензин",
+        "Hydraulic oil": "Гидравлическое масло",
+        "LNG": "Сжиженный природный газ",
+        "LPG": "Сжиженный углеводородный газ",
         "Live well": "Рабочая скважина",
         "Oil": "Нефть",
+        "Raw water": "Сырая вода",
         "Tank sensor": "Датчик насоса",
         "Waste water": "Грязная вода"
     },
     "versionInfo": {
         "buildDate": "<mrk mtype=\"seg\" mid=\"52\">Дата билда</mrk>",
         "identifier": "<mrk mtype=\"seg\" mid=\"50\">Идентификатор</mrk>",
-        "version": "<mrk mtype=\"seg\" mid=\"73\">Версия</mrk>"
+        "venusOs": "venusOs",
+        "version": "<mrk mtype=\"seg\" mid=\"73\">Версия</mrk>",
+        "vrmPortID": "vrmPortID"
     },
     "widgets": {
         "acLoads": "AC нагрузки",
         "batteries": "Батареи",
         "battery": "Батарея",
+        "batteryWithName": "batteryWithName",
+        "chargerWithName": "chargerWithName",
+        "dcLoads": "dcLoads",
         "generator": "Генератор",
+        "generatorInput": "generatorInput",
+        "gridInput": "gridInput",
+        "invalidConfig": "invalidConfig",
+        "inverterCharger": "inverterCharger",
+        "inverterWithName": "inverterWithName",
         "pvCharger": "PV зарядное устройство",
         "shorePower": "Мощность солнечной системы",
         "solar": "Солнечная установка",
