@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite"
 import { useTemperatures, TemperatureInstanceId } from "@elninotech/mfd-modules"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { useVisibilityNotifier } from "../../../modules"
 import { BoxTypes } from "../../../utils/constants"
 import { AppViews } from "../../../modules/AppViews"
@@ -23,7 +23,6 @@ function isBoxVisible(components: JSX.Element[]): boolean {
     return component.props._store && component.props._store.validated
   })
 }
-
 
 const EnvironmentOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) => {
   const { temperatures } = useTemperatures()
