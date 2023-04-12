@@ -38,8 +38,8 @@ const compactStyles: BreakpointStylesType = {
 // styles for horizontal orientation
 const horizontalStyles: BreakpointStylesType = {
   default: {
-    tankName: "text-base",
-    level: "text-md",
+    tankName: "text-sm",
+    level: "text-base",
     capacity: "text-xs",
   },
   "sm-s": {
@@ -113,7 +113,7 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
   }, [fluidTypeNum])
 
   // tanks that are missing level readings and only have capacity
-  if (!!capacity && !level) {
+  if (!!capacity && !level && mode === "compact") {
     return (
       <ValueOverview
         /* todo: fix types for svg */
@@ -259,7 +259,7 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
             </div>
             <div className="flex flex-col justify-between min-w-[90%]">
               <div className="pt-2 px-2">
-                <div className="mb-2">{fluidIcon(fluidTypeNum, mode)}</div>
+                <div className="mb-2">{fluidIcon(fluidTypeNum, "compact")}</div>
                 <div className="w-full tank-name">
                   <div className={classnames("whitespace-nowrap", horizontalActiveStyles?.tankName)}>
                     {fluidTypeTitle}
