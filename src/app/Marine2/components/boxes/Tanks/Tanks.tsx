@@ -6,6 +6,7 @@ import { useWindowSize } from "../../../utils/hooks"
 import Box from "../../ui/Box"
 import Tank from "./Tank"
 import { AppViews } from "../../../modules/AppViews"
+import { translate } from "react-i18nify"
 import { useVisibilityNotifier } from "../../../modules"
 import { BoxTypes } from "../../../utils/constants"
 import ResizeObserver from "resize-observer-polyfill"
@@ -83,7 +84,7 @@ const Tanks = ({ mode = "full", className }: Props) => {
   if (mode === "compact") {
     return (
       <Box
-        title={"Tanks"}
+        title={translate("boxes.tanks")}
         /* todo: fix types for svg */
         /* @ts-ignore */
         icon={<TanksIcon className={"w-6 text-black dark:text-white"} />}
@@ -111,7 +112,7 @@ const Tanks = ({ mode = "full", className }: Props) => {
       return (
         <div className="w-full h-full p-2">
           <Box
-            title={"Tanks"}
+            title={translate("boxes.tanks")}
             icon={
               <TanksIcon
                 /* todo: fix types for svg */
