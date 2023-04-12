@@ -18,12 +18,6 @@ interface Props {
   pageSelectorPropsSetter?: (arg0: PageSelectorProps) => void
 }
 
-function isBoxVisible(components: JSX.Element[]): boolean {
-  return components.some((component) => {
-    return component.props._store && component.props._store.validated
-  })
-}
-
 const EnvironmentOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) => {
   const { temperatures } = useTemperatures()
   const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
@@ -42,7 +36,7 @@ const EnvironmentOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) 
 
   const components = [...temperatureComponents, ...humidityComponents, ...pressureComponents]
 
-  useVisibilityNotifier({ widgetName: BoxTypes.ENVIRONMENT, visible: isBoxVisible(components) })
+  useVisibilityNotifier({ widgetName: BoxTypes.ENVIRONMENT, visible: components.length > 0 })
 
   if (mode === "compact") {
     return (
