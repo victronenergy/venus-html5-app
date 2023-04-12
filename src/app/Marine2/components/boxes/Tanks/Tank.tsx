@@ -11,7 +11,6 @@ import GrayWaterIcon from "../../../images/icons/waste-water.svg"
 import { applyStyles, BreakpointStylesType, StylesType } from "app/Marine2/utils/media"
 import useSize from "@react-hook/size"
 import ValueOverview from "../../ui/ValueOverview"
-import ValueBox from "../../ui/ValueBox"
 
 // styles for compact mode
 const compactStyles: BreakpointStylesType = {
@@ -115,17 +114,17 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
 
   // tanks that are missing level readings and only have capacity
   if (!!capacity && !level) {
-      return (
-        <ValueOverview
-          /* todo: fix types for svg */
-          /* @ts-ignore */
-          Icon={fluidIcon(fluidTypeNum, mode, false)}
-          title={fluidTypeTitle}
-          value={capacity}
-          unit={"m3"}
-          boxSize={parentSize!}
-        />
-      )
+    return (
+      <ValueOverview
+        /* todo: fix types for svg */
+        /* @ts-ignore */
+        Icon={fluidIcon(fluidTypeNum, mode, false)}
+        title={fluidTypeTitle}
+        value={capacity}
+        unit={"m3"}
+        boxSize={parentSize!}
+      />
+    )
   }
 
   // check if tank values are not undefined
