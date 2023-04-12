@@ -2,18 +2,19 @@ import { observer } from "mobx-react-lite"
 import { Battery as BatteryType, useBattery } from "@elninotech/mfd-modules"
 import Box from "../../ui/Box"
 import { BATTERY, BoxTypes } from "../../../utils/constants"
-import Battery from "../Battery/Battery"
+import Battery from "../Battery"
 import BatteriesIcon from "../../../images/icons/batteries.svg"
 import BatterySummary from "../../ui/BatterySummary"
 import { AppViews } from "../../../modules/AppViews"
 import { translate } from "react-i18nify"
 import { useVisibilityNotifier } from "../../../modules"
 import GridPaginator from "../../ui/GridPaginator"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import { PageSelectorProps } from "../../ui/PageSelector"
 import { boxBreakpoints } from "../../../utils/media"
 import PageFlipper from "../../ui/PageFlipper"
 import range from "lodash-es/range"
+import ResizeObserver from "resize-observer-polyfill"
 
 interface Props {
   mode?: "compact" | "full"
@@ -31,6 +32,31 @@ const BatteriesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) =>
 
   const [pages, setPages] = useState(1)
   const [perPage, setPerPage] = useState(2)
+
+  const circleRef = useRef<HTMLDivElement>(null)
+  const circleBoxRef = useRef<HTMLDivElement>(null)
+  const [circleScale, setCircleScale] = useState(1)
+
+  useEffect(() => {
+    if (!circleRef.current) return
+    if (!circleBoxRef.current) return
+
+    const observer = new ResizeObserver(() => {
+      if (!circleRef.current) return
+      if (!circleBoxRef.current) return
+      setCircleScale(
+        // remove 32px for Box horizontal padding (mx-4 * 2)
+        0.95*Math.min(
+          circleBoxRef.current.clientHeight / circleRef.current.offsetHeight,
+          (circleBoxRef.current.clientWidth / pages - 32) / (circleRef.current.offsetWidth * perPage - 8)
+        )
+      )
+    })
+    observer.observe(circleBoxRef.current)
+    return () => {
+      observer.disconnect()
+    }
+  }, [circleBoxRef, circleRef, pages, perPage])
 
   useEffect(() => {
     if (!overviewBatteries || !overviewBatteries.length) return
@@ -67,11 +93,18 @@ const BatteriesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) =>
             style={{
               width: `${pages}00%`,
             }}
+            ref={circleBoxRef}
           >
             {range(pages).map((page) => (
               <div key={page + "batteryPage"} className={"flex w-full h-full items-center justify-center"}>
                 {overviewBatteries.slice(page * perPage, (page + 1) * perPage).map((b) => (
-                  <div key={b.id} className={"h-full flex items-center justify-center"}>
+                  <div
+                    key={b.id}
+                    className={"h-full flex items-center justify-center"}
+                    style={{
+                      transform: `scale(${circleScale})`,
+                    }}
+                  >
                     <BatterySummary
                       key={b.id}
                       battery={b}
@@ -79,6 +112,7 @@ const BatteriesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) =>
                         width: boxSize.width,
                         height: pages <= 1 ? boxSize.height - 50 : boxSize.height - 100,
                       }}
+                      circleRef={circleRef}
                     />
                   </div>
                 ))}
