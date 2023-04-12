@@ -46,10 +46,11 @@ const BatteriesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) =>
       if (!circleBoxRef.current) return
       setCircleScale(
         // remove 32px for Box horizontal padding (mx-4 * 2)
-        0.95*Math.min(
-          circleBoxRef.current.clientHeight / circleRef.current.offsetHeight,
-          (circleBoxRef.current.clientWidth / pages - 32) / (circleRef.current.offsetWidth * perPage - 8)
-        )
+        0.95 *
+          Math.min(
+            circleBoxRef.current.clientHeight / circleRef.current.offsetHeight,
+            (circleBoxRef.current.clientWidth / pages - 32) / (circleRef.current.offsetWidth * perPage - 8)
+          )
       )
     })
     observer.observe(circleBoxRef.current)
