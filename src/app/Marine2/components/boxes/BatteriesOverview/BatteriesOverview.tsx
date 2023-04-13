@@ -44,7 +44,7 @@ const BatteriesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) =>
     const observer = new ResizeObserver(() => {
       if (!circleRef.current) return
       if (!circleBoxRef.current) return
-      if (boxSize.width > boxBreakpoints["sm-s"].height || boxSize.height - 50 > boxBreakpoints["sm-s"].height) {
+      if (boxSize.width < boxBreakpoints["sm-m"].width || boxSize.height - 50 < boxBreakpoints["sm-m"].height) {
         setCircleScale(
           // remove 32px for Box horizontal padding (mx-4 * 2)
           0.9 *
