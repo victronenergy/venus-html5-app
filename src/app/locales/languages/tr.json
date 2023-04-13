@@ -24,7 +24,7 @@
         "humidity": "Nem",
         "invalidConfig": "Geçersiz Yapılandırma",
         "inverterCharger": "Inverter / Charger: %{productNameShort}",
-        "inverterWithName": "Inverter: %{productNameShort}\n",
+        "inverterWithName": "Inverter: %{productNameShort}",
         "pressure": "Basınç",
         "pvCharger": "PV Şarj cihaz",
         "shorePower": "Sahil Gücü",
@@ -249,7 +249,7 @@
         "buildDate": "Kuruluş zamanı",
         "identifier": "Tanımla",
         "venusOs": "Venus OS",
-        "version": "Versiyon",
+        "version": "Versiyon %{version}",
         "vrmPortID": "VRM Site ID"
     },
     "widgets": {

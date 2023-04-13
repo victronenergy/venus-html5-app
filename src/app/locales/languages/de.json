@@ -249,7 +249,7 @@
         "buildDate": "Build Datum",
         "identifier": "Kennung",
         "venusOs": "Venus OS",
-        "version": "Version",
+        "version": "Version %{version}",
         "vrmPortID": "VRM Site-ID"
     },
     "widgets": {

@@ -263,7 +263,7 @@
         "generatorInput": "Entrée générateur",
         "gridInput": "Entrée réseau",
         "invalidConfig": "Configuration invalide",
-        "inverterCharger": "Onduleur / Chargeur",
+        "inverterCharger": "Onduleur / Chargeur: %{productNameShort}",
         "inverterWithName": "Convertisseur: %{productNameShort}",
         "pvCharger": "Chargeur PV",
         "shorePower": "Alimentation du quai",

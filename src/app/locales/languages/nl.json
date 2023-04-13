@@ -257,7 +257,7 @@
         "batteries": "Accu's",
         "battery": "Accu",
         "batteryWithName": "Accu : %{name}",
-        "chargerWithName": "Lader naam",
+        "chargerWithName": "Lader naam: %{productNameShort}",
         "dcLoads": "DC Belastingen",
         "generator": "Aggregaat",
         "generatorInput": "Aggregaat",

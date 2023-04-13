@@ -245,7 +245,7 @@
         "buildDate": "<mrk mtype=\"seg\" mid=\"52\">Дата билда</mrk>",
         "identifier": "<mrk mtype=\"seg\" mid=\"50\">Идентификатор</mrk>",
         "venusOs": "venusOs",
-        "version": "<mrk mtype=\"seg\" mid=\"73\">Версия</mrk>",
+        "version": "<mrk mtype=\"seg\" mid=\"73\">Версия %{version}</mrk>",
         "vrmPortID": "vrmPortID"
     },
     "widgets": {
