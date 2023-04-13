@@ -46,10 +46,10 @@ const BatteriesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) =>
       if (!circleBoxRef.current) return
       setCircleScale(
         // remove 32px for Box horizontal padding (mx-4 * 2)
-        0.95 *
+        0.9 *
           Math.min(
-            circleBoxRef.current.clientHeight / circleRef.current.offsetHeight,
-            (circleBoxRef.current.clientWidth / pages - 32) / (circleRef.current.offsetWidth * perPage - 8)
+            (circleBoxRef.current.clientHeight - 16) / circleRef.current.offsetHeight,
+            (circleBoxRef.current.clientWidth / pages - 32) / (circleRef.current.offsetWidth * perPage + 8)
           )
       )
     })
@@ -97,7 +97,7 @@ const BatteriesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) =>
             ref={circleBoxRef}
           >
             {range(pages).map((page) => (
-              <div key={page + "batteryPage"} className={"flex w-full h-full items-center justify-center gap-1"}>
+              <div key={page + "batteryPage"} className={"flex w-full h-full items-center justify-center gap-2"}>
                 {overviewBatteries.slice(page * perPage, (page + 1) * perPage).map((b) => (
                   <div
                     key={b.id}
