@@ -44,14 +44,16 @@ const BatteriesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) =>
     const observer = new ResizeObserver(() => {
       if (!circleRef.current) return
       if (!circleBoxRef.current) return
-      setCircleScale(
-        // remove 32px for Box horizontal padding (mx-4 * 2)
-        0.9 *
-          Math.min(
-            (circleBoxRef.current.clientHeight - 16) / circleRef.current.offsetHeight,
-            (circleBoxRef.current.clientWidth / pages - 32) / (circleRef.current.offsetWidth * perPage + 8)
-          )
-      )
+      if (boxSize.width < boxBreakpoints["lg-m"].width && boxSize.height < boxBreakpoints["lg-m"].height) {
+        setCircleScale(
+          // remove 32px for Box horizontal padding (mx-4 * 2)
+          0.9 *
+            Math.min(
+              (circleBoxRef.current.clientHeight - 16) / circleRef.current.offsetHeight,
+              (circleBoxRef.current.clientWidth / pages - 32) / (circleRef.current.offsetWidth * perPage + 8)
+            )
+        )
+      }
     })
     observer.observe(circleBoxRef.current)
     return () => {
