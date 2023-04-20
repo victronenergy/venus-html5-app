@@ -3,6 +3,7 @@ on: [push]
 
 jobs:
   build:
+    if: ${{ !endsWith(github.ref, '/marine2') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
