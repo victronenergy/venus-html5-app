@@ -17,11 +17,18 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
       - name: Install the dependencies
         run: npm ci
-      - name: Build the test bundle
+      - name: Build the bundle for master
         run: npm run build
         env:
           PUBLIC_URL: /
           REACT_APP_ENABLE_LANG_OVERRIDE: false
+      - name: Build the bundle for Marine2 branch
+        if: endsWith(github.ref, '/marine2')
+        run: npm run build
+        env:
+          PUBLIC_URL: /
+          REACT_APP_ENABLE_LANG_OVERRIDE: false
+          REACT_APP_WHITELABEL: 'Marine2'
       - name: Serve the application
         run: npm run serve &
       - name: Run the Venus simulation
