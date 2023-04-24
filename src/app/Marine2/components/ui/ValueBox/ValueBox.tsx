@@ -44,7 +44,7 @@ const styles: BreakpointStylesType = {
   },
 }
 
-const ValueBox = ({ title, icon, value, unit, bottomValues, children, buttons, infoText }: Props) => {
+const ValueBox = ({ title, icon, value, unit, decimalPlaces, bottomValues, children, buttons, infoText }: Props) => {
   const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
   const activeStyles = applyStyles(boxSize, styles)
   const isMultiPhase = bottomValues.length > 1
@@ -59,7 +59,7 @@ const ValueBox = ({ title, icon, value, unit, bottomValues, children, buttons, i
       <div className="w-full h-full flex flex-col justify-between">
         <div className={"w-full h-full overflow-hidden"}>
           <div className={classNames("text-victron-darkGray dark:text-white", activeStyles?.value)}>
-            {(typeof value === "number" && formatValue(value, unit)) || value}
+            {(typeof value === "number" && (decimalPlaces ? formatValue(value, decimalPlaces) : formatValue(value))) || value}
             {typeof value === "number" && (
               <span className={"pl-0.5 text-victron-gray dark:text-victron-gray-500"}>{unit}</span>
             )}
@@ -72,7 +72,7 @@ const ValueBox = ({ title, icon, value, unit, bottomValues, children, buttons, i
           <div className={"w-full h-full flex flex-col justify-end"}>
             <div className={classNames("overflow-hidden", activeStyles.valueBars)}>
               {bottomValues.map((v, i) => (
-                <ValueBar key={i} prefix={isMultiPhase ? "L" + (i + 1) : undefined} values={v} />
+                <ValueBar key={i} prefix={isMultiPhase ? "L" + (i + 1) : undefined} values={v} decimalPlaces={decimalPlaces}/>
               ))}
             </div>
             {!!buttons && <div className="flex w-full">{buttons}</div>}
@@ -88,6 +88,7 @@ interface Props {
   title: string
   value?: number | string
   unit?: string
+  decimalPlaces?: number
   bottomValues: ValueWithUnit[][]
   children?: JSX.Element | JSX.Element[] | string
   buttons?: JSX.Element | JSX.Element[]
@@ -97,6 +98,7 @@ interface Props {
 interface ValueWithUnit {
   value?: number
   unit: string
+  decimalPlaces?: number
 }
 
 export default ValueBox
