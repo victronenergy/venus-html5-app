@@ -19,7 +19,7 @@ const EnergyAC = ({ mode = "compact", acLoads, compactBoxSize }: Props) => {
         title={translate("boxes.acLoads")}
         value={(phases ?? 1) === 1 ? current[0] : totalPower}
         unit={(phases ?? 1) === 1 ? "A" : "W"}
-        hideDecimal={(phases ?? 1) === 1 ? false : true}z
+        hideDecimal={(phases ?? 1) === 1 ? false : true}
         boxSize={compactBoxSize}
       />
     )

@@ -17,7 +17,7 @@ const ValueBar = ({ values, prefix }: Props) => {
         {values.map((v, idx) => (
           <div key={idx}>
             {v.value && useKw && v.unit === "W"
-              ? formatValue(v.value / 1000, v.hideDecimal ? 0 : 1)
+              ? formatValue(v.value / 1000)
               : formatValue(v.value, v.hideDecimal ? 0 : 1)}
             <span className={"ml-px text-victron-gray dark:text-victron-gray-400"}>{v.unit}</span>
           </div>
