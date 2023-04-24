@@ -61,9 +61,13 @@ export const formatPower = (power: number) => {
   return power.toFixed(1)
 }
 
-export const formatValue = (value?: number) => {
+export const formatValue = (value?: number, unit?: string) => {
   if (value === undefined) {
     return "--"
+  }
+
+  if (unit === "V" || unit === "W" || unit === "kW") {
+    return value.toFixed(0)
   }
 
   return value.toFixed(1)

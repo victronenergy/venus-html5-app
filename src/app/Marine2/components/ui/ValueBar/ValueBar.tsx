@@ -16,7 +16,7 @@ const ValueBar = ({ values, prefix }: Props) => {
       <div className={"flex justify-between grow"}>
         {values.map((v, idx) => (
           <div key={idx}>
-            {v.value && useKw && v.unit === "W" ? formatValue(v.value / 1000) : formatValue(v.value)}
+            {v.value && useKw && v.unit === "W" ? formatValue(v.value / 1000, v.unit) : formatValue(v.value, v.unit)}
             <span className={"ml-px text-victron-gray dark:text-victron-gray-400"}>{v.unit}</span>
           </div>
         ))}

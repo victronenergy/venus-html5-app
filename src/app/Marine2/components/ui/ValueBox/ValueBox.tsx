@@ -59,7 +59,7 @@ const ValueBox = ({ title, icon, value, unit, bottomValues, children, buttons, i
       <div className="w-full h-full flex flex-col justify-between">
         <div className={"w-full h-full overflow-hidden"}>
           <div className={classNames("text-victron-darkGray dark:text-white", activeStyles?.value)}>
-            {(typeof value === "number" && formatValue(value)) || value}
+            {(typeof value === "number" && formatValue(value, unit)) || value}
             {typeof value === "number" && (
               <span className={"pl-0.5 text-victron-gray dark:text-victron-gray-500"}>{unit}</span>
             )}

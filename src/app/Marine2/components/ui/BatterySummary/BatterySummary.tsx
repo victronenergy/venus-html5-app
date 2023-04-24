@@ -47,7 +47,7 @@ const BatterySummary = ({ battery, boxSize, circleRef }: Props) => {
         <ProgressCircle percentage={battery.soc ?? null} boxSize={boxSize}>
           {battery.voltage || battery.voltage === 0 ? (
             <div className={classNames("text-victron-gray dark:text-victron-gray-dark", activeStyles.voltage)}>
-              {formatValue(battery.voltage)}
+              {formatValue(battery.voltage, "V")}
               <span className={"text-victron-gray-4 dark:text-victron-gray-4-dark"}>V</span>
             </div>
           ) : (
