@@ -1,6 +1,6 @@
 import { formatValue } from "../../../utils/formatters"
 
-const ValueBar = ({ values, prefix, decimalPlaces }: Props) => {
+const ValueBar = ({ values, prefix }: Props) => {
   let useKw = false
   if (values.some((v) => v.unit === "W" && v.value && v.value > 1000)) {
     useKw = true
@@ -17,8 +17,8 @@ const ValueBar = ({ values, prefix, decimalPlaces }: Props) => {
         {values.map((v, idx) => (
           <div key={idx}>
             {v.value && useKw && v.unit === "W"
-              ? formatValue(v.value / 1000, v.decimalPlaces ? v.decimalPlaces : 1)
-              : formatValue(v.value, v.decimalPlaces ? v.decimalPlaces : decimalPlaces)}
+              ? formatValue(v.value / 1000, v.hideDecimal ? 0 : 1)
+              : formatValue(v.value, v.hideDecimal ? 0 : 1)}
             <span className={"ml-px text-victron-gray dark:text-victron-gray-400"}>{v.unit}</span>
           </div>
         ))}
@@ -28,9 +28,8 @@ const ValueBar = ({ values, prefix, decimalPlaces }: Props) => {
 }
 
 interface Props {
-  values: { value?: number; unit: string, decimalPlaces?: number }[]
+  values: { value?: number; unit: string, hideDecimal?: boolean }[]
   prefix?: string
-  decimalPlaces?: number
 }
 
 export default ValueBar
