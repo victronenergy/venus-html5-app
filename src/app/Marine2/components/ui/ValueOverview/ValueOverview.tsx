@@ -50,7 +50,7 @@ const ValueOverview = ({ title, subtitle, Icon, value, unit, boxSize, valueType,
         </div>
       </div>
       <span className={classNames(activeStyles.value)}>
-        {inputLimitValue ?? formatValue(value)}
+        {inputLimitValue ?? formatValue(value, unit)}
         <span className="text-victron-gray dark:text-victron-gray-500">{unit}</span>
       </span>
     </div>
