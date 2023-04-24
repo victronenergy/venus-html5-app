@@ -28,7 +28,7 @@ const ValueBar = ({ values, prefix }: Props) => {
 }
 
 interface Props {
-  values: { value?: number; unit: string, hideDecimal?: boolean }[]
+  values: { value?: number; unit: string; hideDecimal?: boolean }[]
   prefix?: string
 }
 
