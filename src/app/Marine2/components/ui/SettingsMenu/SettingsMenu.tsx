@@ -1,9 +1,10 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { observer } from "mobx-react"
 import { useAppStore, useTheme } from "@elninotech/mfd-modules"
 import { translate } from "react-i18nify"
 import { Modal } from "../Modal"
 import PreferencesIcon from "../../../images/icons/preferences.svg"
+import CloseIcon from "../../../images/icons/close.svg"
 import ToggleSwitch from "../ToggleSwitch"
 import RadioButton from "../RadioButton"
 import { AppViews, useAppViewsStore } from "../../../modules/AppViews"
@@ -45,7 +46,7 @@ const SettingsMenu = () => {
           onClose={() => {
             setIsModalOpen(false)
           }}
-          className="w-3/4 max-w-md mb-20 mr-6 bottom-0 right-0"
+          className="w-3/4 max-w-md mr-6 bottom-0 right-0"
         >
           <Modal.Body>
             <div className="flex flex-col">
@@ -54,6 +55,9 @@ const SettingsMenu = () => {
                   <span className="mr-1 text-sm sm-m:mr-2 sm-l:text-base">{translate("locker.lockMessage")}</span>
                   <ToggleSwitch onChange={toggleLocked} selected={locked} />
                 </label>
+                <div className="mr-2 mb-2 sm-l:mb-4 text-victron-gray text-xs sm-l:text-sm">
+                  {translate("locker.lockDesctiption")}
+                </div>
                 <div className="border border-victron-gray-300"></div>
                 <label className="text-xs text-victron-gray sm-l:text-sm">{translate("common.mode")}</label>
                 <label
@@ -78,10 +82,13 @@ const SettingsMenu = () => {
                     disabled={locked}
                   />
                 </label>
-                <label className="flex justify-between items-center pb-4 sm-m:pb-6 sm-l:pb-8">
+                <label className="flex justify-between items-center pb-2 sm-m:pb-3 sm-l:pb-4">
                   <span className="mr-1 text-sm sm-m:mr-2 sm-l:text-base">{translate("common.auto")}</span>
                   <ToggleSwitch onChange={setAutoMode} disabled={locked} />
                 </label>
+                <div className="mr-2 mb-2 sm-l:mb-4 text-victron-gray text-xs sm-l:text-sm">
+                  {translate("common.autoDescription")}
+                </div>
                 <div className="border border-victron-gray-300"></div>
               </div>
             </div>
@@ -89,6 +96,8 @@ const SettingsMenu = () => {
           <Button onClick={openRemoteConsole} className="w-full" size="md">
             {translate("header.remoteConsole")}
           </Button>
+          {/* @ts-ignore */}
+          <CloseIcon className="w-8 ml-auto m-1" onClick={() => setIsModalOpen(false)}/>
         </Modal.Frame>
       </div>
     </div>
