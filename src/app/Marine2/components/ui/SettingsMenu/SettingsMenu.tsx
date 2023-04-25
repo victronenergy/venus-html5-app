@@ -97,7 +97,7 @@ const SettingsMenu = () => {
             {translate("header.remoteConsole")}
           </Button>
           {/* @ts-ignore */}
-          <CloseIcon className="w-8 ml-auto m-1" onClick={() => setIsModalOpen(false)}/>
+          <CloseIcon className="w-8 ml-auto m-1" onClick={() => setIsModalOpen(false)} />
         </Modal.Frame>
       </div>
     </div>
