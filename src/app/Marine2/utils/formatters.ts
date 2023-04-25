@@ -61,10 +61,10 @@ export const formatPower = (power: number) => {
   return power.toFixed(1)
 }
 
-export const formatValue = (value?: number) => {
+export const formatValue = (value?: number, decimalPlaces: number = 1) => {
   if (value === undefined) {
     return "--"
   }
 
-  return value.toFixed(1)
+  return value.toFixed(decimalPlaces)
 }

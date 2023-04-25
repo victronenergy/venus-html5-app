@@ -162,6 +162,7 @@ const GeneratorFp = ({ mode = "compact", generatorFp, compactBoxSize }: Props) =
             {!!gensetValues && phasesOverview.map((v, i) => <ValueBar key={i} prefix={"L" + (i + 1)} values={v} />)}
           </div>
           <AutoStartStopSetter
+            title={title}
             autoStart={autoStart}
             isAutoStartDisabled={isAutoStartDisabled}
             updateAutoMode={updateAutoMode}

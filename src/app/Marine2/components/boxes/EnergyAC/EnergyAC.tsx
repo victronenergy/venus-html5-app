@@ -19,6 +19,7 @@ const EnergyAC = ({ mode = "compact", acLoads, compactBoxSize }: Props) => {
         title={translate("boxes.acLoads")}
         value={(phases ?? 1) === 1 ? current[0] : totalPower}
         unit={(phases ?? 1) === 1 ? "A" : "W"}
+        hideDecimal={(phases ?? 1) === 1 ? false : true}
         boxSize={compactBoxSize}
       />
     )
@@ -27,9 +28,9 @@ const EnergyAC = ({ mode = "compact", acLoads, compactBoxSize }: Props) => {
   const phasesOverview = []
   for (let phase = 0; phase < phases; phase++) {
     phasesOverview.push([
-      { value: voltage[phase], unit: "V" },
+      { value: voltage[phase], unit: "V", hideDecimal: true },
       { value: current[phase], unit: "A" },
-      { value: power[phase], unit: "W" },
+      { value: power[phase], unit: "W", hideDecimal: true },
     ])
   }
 
@@ -42,6 +43,7 @@ const EnergyAC = ({ mode = "compact", acLoads, compactBoxSize }: Props) => {
       value={(phases ?? 1) === 1 ? current[0] : totalPower}
       unit={(phases ?? 1) === 1 ? "A" : "W"}
       bottomValues={phasesOverview}
+      hideDecimal={(phases ?? 1) === 1 ? false : true}
     />
   )
 }

@@ -15,9 +15,9 @@ const EnergyShore = ({ mode = "compact", inputId, compactBoxSize }: Props) => {
   const phasesOverview = []
   for (let phase = 0; phase < phases; phase++) {
     phasesOverview.push([
-      { value: !unplugged ? voltage[phase] : undefined, unit: "V" },
+      { value: !unplugged ? voltage[phase] : undefined, unit: "V", hideDecimal: true },
       { value: !unplugged ? current[phase] : undefined, unit: "A" },
-      { value: !unplugged ? power[phase] : undefined, unit: "W" },
+      { value: !unplugged ? power[phase] : undefined, unit: "W", hideDecimal: true },
     ])
   }
 
@@ -31,6 +31,7 @@ const EnergyShore = ({ mode = "compact", inputId, compactBoxSize }: Props) => {
         subtitle={unplugged ? translate("common.unplugged") : undefined}
         value={(phases ?? 1) === 1 ? current[0] : totalPower}
         unit={(phases ?? 1) === 1 ? "A" : "W"}
+        hideDecimal={(phases ?? 1) === 1 ? false : true}
         boxSize={compactBoxSize}
       />
     )
@@ -45,6 +46,7 @@ const EnergyShore = ({ mode = "compact", inputId, compactBoxSize }: Props) => {
       value={!unplugged ? ((phases ?? 1) === 1 ? current[0] : totalPower) : undefined}
       unit={(phases ?? 1) === 1 ? "A" : "W"}
       bottomValues={phasesOverview}
+      hideDecimal={(phases ?? 1) === 1 ? false : true}
     >
       <div>{unplugged && translate("common.unplugged")}</div>
     </ValueBox>

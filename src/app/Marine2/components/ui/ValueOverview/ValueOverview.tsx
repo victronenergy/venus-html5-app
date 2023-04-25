@@ -21,7 +21,17 @@ const styles: BreakpointStylesType = {
   },
 }
 
-const ValueOverview = ({ title, subtitle, Icon, value, unit, boxSize, valueType, inputLimitValue }: Props) => {
+const ValueOverview = ({
+  title,
+  subtitle,
+  Icon,
+  value,
+  unit,
+  hideDecimal,
+  boxSize,
+  valueType,
+  inputLimitValue,
+}: Props) => {
   const activeStyles = applyStyles(boxSize, styles)
   const iconStyles = valueType === "environment" ? activeStyles.smallIcon : activeStyles.icon
   if (unit === "W" && value && value > 1000) {
@@ -50,7 +60,7 @@ const ValueOverview = ({ title, subtitle, Icon, value, unit, boxSize, valueType,
         </div>
       </div>
       <span className={classNames(activeStyles.value)}>
-        {inputLimitValue ?? formatValue(value)}
+        {inputLimitValue ?? formatValue(value, hideDecimal && unit !== "kW" ? 0 : 1)}
         <span className="text-victron-gray dark:text-victron-gray-500">{unit}</span>
       </span>
     </div>
@@ -65,6 +75,7 @@ interface Props {
   value?: number
   inputLimitValue?: JSX.Element
   unit: string
+  hideDecimal?: boolean
   boxSize: { width: number; height: number }
 }
 
