@@ -9,6 +9,7 @@ import { GENERATOR_START_STOP } from "../../../utils/constants"
 const AutoStartStopSetter = ({
   statusCode,
   manualStart,
+  title,
   autoStart,
   updateManualMode,
   updateAutoMode,
@@ -78,7 +79,7 @@ const AutoStartStopSetter = ({
       </Button>
       {!isAutoStartDisabled && (
         <DeviceSettingModal open={isModeModalOpen} onClose={closeModeModal} onSet={submitMode} width={"lg"}>
-          <label className="flex justify-center text-lg mb-3">{translate("common.mode")}</label>
+          <label className="flex justify-center text-lg mb-3">{title + " " + translate("common.mode")}</label>
           <div className={" m-auto w-[20rem] md:w-[30rem] lg:w-[30rem] flex flex-col items-center"}>
             <label
               className="w-full flex justify-between items-center pt-4 pb-4 border-b border-victron-darkGray-200"
@@ -123,6 +124,7 @@ const AutoStartStopSetter = ({
 interface Props {
   statusCode?: number
   manualStart?: number
+  title: string
   autoStart: number
   updateManualMode: Function
   updateAutoMode: Function
