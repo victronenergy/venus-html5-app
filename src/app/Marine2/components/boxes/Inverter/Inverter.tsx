@@ -55,7 +55,7 @@ const Inverter = ({ instanceId, isVebusInverter, componentMode = "compact", comp
   // Vebus inverters use mode 3 instead of 2 for ON.
   const onMode = isVebusInverter ? INVERTER_MODE.VEBUS_ON : INVERTER_MODE.ON
 
-  const productNameShort = customName || productName && productName.split(" ")[0]
+  const productNameShort = customName || (productName && productName.split(" ")[0])
   const currentValue = !!current || current === 0 ? current : undefined
   const inverterState = !!state || state === 0 ? translate(formatStateForTranslation(Number(state))) : undefined
   const inverterMode = inverterModeFormatter(Number(mode))

@@ -34,7 +34,7 @@ const InverterCharger = ({ componentMode = "compact", compactBoxSize }: Props) =
   const { state, mode, customName, productName, modeIsAdjustable, updateMode } = useInverterCharger()
   const adjustable = modeIsAdjustable === 1
 
-  const productNameShort = customName || productName && productName.split(" ")[0]
+  const productNameShort = customName || (productName && productName.split(" ")[0])
 
   const subTitle = !!state || parseInt(state) === 0 ? translate(formatStateForTranslation(Number(state))) : ""
 

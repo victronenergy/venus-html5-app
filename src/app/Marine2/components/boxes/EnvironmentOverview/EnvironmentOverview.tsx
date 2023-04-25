@@ -35,7 +35,7 @@ const EnvironmentOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) 
   ))
 
   const components = [...temperatureComponents, ...humidityComponents, ...pressureComponents]
-  
+
   components.filter((component) => isValidElement(component))
 
   useVisibilityNotifier({ widgetName: BoxTypes.ENVIRONMENT, visible: components.length > 0 })
