@@ -82,6 +82,7 @@ const GeneratorRelay = ({
       buttons={
         relayFunction === RELAY_FUNCTION.GENERATOR_START_STOP && statusCode !== undefined ? (
           <AutoStartStopSetter
+            title={title}
             autoStart={autoStart}
             isAutoStartDisabled={false}
             updateAutoMode={updateAutoMode}

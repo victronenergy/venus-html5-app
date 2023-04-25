@@ -6,7 +6,7 @@ import { translate } from "react-i18nify"
 import classnames from "classnames"
 import { observer } from "mobx-react"
 
-const InputLimitSelector = ({ inputId }: Props) => {
+const InputLimitSelector = ({ inputId, title }: Props) => {
   const USAmperage = [10, 15, 20, 30, 50, 100]
   const EUAmperage = [3, 6, 10, 13, 16, 25, 32, 63]
 
@@ -67,7 +67,7 @@ const InputLimitSelector = ({ inputId }: Props) => {
         {!!currentLimit ? Number(currentLimit) + "A" : 0 + "A"}
       </Button>
       <DeviceSettingModal open={isLimitModalOpen} onClose={closeLimitModal} onSet={submitLimit} width={"lg"}>
-        <label className="flex w-full justify-center text-lg mb-3">{translate("common.inputCurrentLimit")}</label>
+        <label className="flex w-full justify-center text-lg mb-3">{title + ' ' + translate("common.inputCurrentLimit")}</label>
         <div className="flex flex-row justify-center mt-10">
           <button
             className="w-28 md:w-36 lg:w-36 h-20 bg-victron-blue/70 border-0 rounded-md text-xl mr-14"
@@ -113,6 +113,7 @@ const InputLimitSelector = ({ inputId }: Props) => {
 
 interface Props {
   inputId: number
+  title: string
 }
 
 export default observer(InputLimitSelector)
