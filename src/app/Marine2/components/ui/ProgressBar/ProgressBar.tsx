@@ -32,7 +32,7 @@ const ProgressBar = ({ percentage, type, orientation = "horizontal", size = "sma
           className={classnames(`w-1/4 rounded-r-2xl ${bgColor}`, size === "small" ? "h-2" : "h-2 md:h-4 md:mr-0.5")}
         >
           <div
-            className={classnames(`h-full ${color}`)}
+            className={classnames(`h-full rounded-r-2xl ${color}`)}
             style={{ width: percentage <= 75 ? "0%" : `${(percentage - 75) * 4}%` }}
           />
         </div>
