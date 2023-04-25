@@ -49,6 +49,7 @@ const Charger = ({ instanceId, componentMode = "compact", compactBoxSize }: Prop
   let {
     nrOfOutputs = 3,
     productName,
+    customName,
     current,
     state,
     mode,
@@ -63,7 +64,7 @@ const Charger = ({ instanceId, componentMode = "compact", compactBoxSize }: Prop
   const currentValue = !!current && (!!current[0] || current[0] === 0) ? current[0] : undefined
   const chargerState = !!state || state === 0 ? translate(formatStateForTranslation(Number(state))) : undefined
 
-  const productNameShort = productName && productName.split(" ")[0]
+  const productNameShort = customName || productName && productName.split(" ")[0]
 
   const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
   const activeStyles = applyStyles(boxSize, styles)

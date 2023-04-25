@@ -34,7 +34,7 @@ const InverterCharger = ({ componentMode = "compact", compactBoxSize }: Props) =
   const { state, mode, customName, productName, modeIsAdjustable, updateMode } = useInverterCharger()
   const adjustable = modeIsAdjustable === 1
 
-  const productNameShort = productName && productName.split(" ")[0]
+  const productNameShort = customName || productName && productName.split(" ")[0]
 
   const subTitle = !!state || parseInt(state) === 0 ? translate(formatStateForTranslation(Number(state))) : ""
 
@@ -76,7 +76,7 @@ const InverterCharger = ({ componentMode = "compact", compactBoxSize }: Props) =
         /* todo: fix types for svg */
         /* @ts-ignore */
         Icon={InverterChargerIcon}
-        title={customName || productNameShort}
+        title={productNameShort}
         subtitle={subTitle}
         inputLimitValue={!!inputId ? <InputLimitValue inputId={inputId} /> : undefined}
         value={!inputId ? 0 : undefined}
@@ -88,7 +88,7 @@ const InverterCharger = ({ componentMode = "compact", compactBoxSize }: Props) =
 
   return (
     <ValueBox
-      title={productName}
+      title={productNameShort}
       icon={
         <InverterChargerIcon
           /* todo: fix types for svg */
