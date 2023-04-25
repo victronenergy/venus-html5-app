@@ -46,6 +46,7 @@
         "absorptionCharging": "Absorption charging",
         "assisting": "Assisting",
         "auto": "Auto",
+        "autoDescription": "Automatically adapt color mode based on environment.",
         "autoStartStop": "Auto start/stop",
         "bulkCharging": "Bulk charging",
         "charge": "Charge",
@@ -170,7 +171,8 @@
     },
     "locker": {
         "lockMessage": "Lock to prevent changes",
-        "unlockMessage": "Unlock to make changes"
+        "unlockMessage": "Unlock to make changes",
+        "lockDesctiption": "To prevent accidental changes in Device settings - enabling this function will lock the possibility to interact with controls"
     },
     "noWidgets": {
         "subtitle": "Make sure your devices are properly connected",
