@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite"
 import { useTemperatures, TemperatureInstanceId } from "@elninotech/mfd-modules"
-import { useState } from "react"
+import { useEffect, useState, isValidElement } from "react"
 import { useVisibilityNotifier } from "../../../modules"
 import { BoxTypes } from "../../../utils/constants"
 import { AppViews } from "../../../modules/AppViews"
@@ -22,19 +22,21 @@ const EnvironmentOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) 
   const { temperatures } = useTemperatures()
   const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
 
-  const temperatureComponents = temperatures.map((temperatureId: TemperatureInstanceId, i: number) => (
+  const temperatureComponents = temperatures.map((temperatureId: TemperatureInstanceId) => (
     <TemperatureData key={`temperature-${temperatureId}`} dataId={temperatureId} mode={mode} boxSize={boxSize} />
   ))
 
-  const humidityComponents = temperatures.map((temperatureId: TemperatureInstanceId, i: number) => (
+  const humidityComponents = temperatures.map((temperatureId: TemperatureInstanceId) => (
     <HumidityData key={`humidity-${temperatureId}`} dataId={temperatureId} mode={mode} boxSize={boxSize} />
   ))
 
-  const pressureComponents = temperatures.map((temperatureId: TemperatureInstanceId, i: number) => (
+  const pressureComponents = temperatures.map((temperatureId: TemperatureInstanceId) => (
     <PressureData key={`pressure-${temperatureId}`} dataId={temperatureId} mode={mode} boxSize={boxSize} />
   ))
 
   const components = [...temperatureComponents, ...humidityComponents, ...pressureComponents]
+  
+  components.filter((component) => isValidElement(component))
 
   useVisibilityNotifier({ widgetName: BoxTypes.ENVIRONMENT, visible: components.length > 0 })
 
