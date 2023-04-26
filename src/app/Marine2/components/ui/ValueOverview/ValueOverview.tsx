@@ -77,6 +77,7 @@ interface Props {
   unit: string
   hideDecimal?: boolean
   boxSize: { width: number; height: number }
+  ref?: React.Ref<HTMLDivElement>
 }
 
 export default ValueOverview

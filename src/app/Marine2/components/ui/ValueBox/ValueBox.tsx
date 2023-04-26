@@ -93,6 +93,7 @@ interface Props {
   children?: JSX.Element | JSX.Element[] | string
   buttons?: JSX.Element | JSX.Element[]
   infoText?: { title: string; body: string }
+  ref?: React.Ref<HTMLDivElement>
 }
 
 interface ValueWithUnit {
