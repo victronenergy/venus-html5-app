@@ -4,7 +4,7 @@ import ValueOverview from "../../ui/ValueOverview"
 import HumidityIcon from "../../../images/icons/humidity.svg"
 import ValueBox from "../../ui/ValueBox"
 import { translate } from "react-i18nify"
-import { useContext, useEffect, useCallback } from "react"
+import { useContext, useEffect } from "react"
 import { VisibleComponentsContext } from "./EnvironmentOverview"
 
 interface Props {
@@ -17,20 +17,13 @@ const HumidityData = ({ dataId, mode, boxSize }: Props) => {
   const { humidity, customName } = useHumidity(dataId)
   const { passVisibility } = useContext(VisibleComponentsContext)
 
-  const handlePassVisibility = useCallback(
-    (dataId, isVisible) => {
-      passVisibility(dataId, isVisible)
-    },
-    [passVisibility]
-  )
-
   useEffect(() => {
     if (humidity !== undefined && customName !== undefined) {
-      handlePassVisibility(dataId, true)
+      passVisibility(dataId, true)
     } else {
-      handlePassVisibility(dataId, false)
+      passVisibility(dataId, false)
     }
-  }, [humidity, customName, handlePassVisibility, dataId])
+  }, [humidity, customName])
 
   if (mode === "compact") {
     return (
@@ -56,6 +49,7 @@ const HumidityData = ({ dataId, mode, boxSize }: Props) => {
       bottomValues={[]}
       unit={"%"}
     >
+      <div className="text-base">{humidity! > 80 ? translate("common.high") : ""}</div>
       <div className="text-base">{humidity! > 80 ? translate("common.high") : ""}</div>
     </ValueBox>
   )
