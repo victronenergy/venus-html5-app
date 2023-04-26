@@ -4,6 +4,8 @@ import ValueOverview from "../../ui/ValueOverview"
 import ThermometerIcon from "../../../images/icons/thermometer.svg"
 import ValueBox from "../../ui/ValueBox"
 import { translate } from "react-i18nify"
+import { useContext, useEffect } from "react"
+import { VisibleComponentsContext } from "./EnvironmentOverview"
 
 interface Props {
   dataId: number
@@ -13,10 +15,16 @@ interface Props {
 
 const TemperatureData = ({ dataId, mode, boxSize }: Props) => {
   const { temperature, customName } = useTemperature(dataId)
+  const { passVisibility } = useContext(VisibleComponentsContext)
 
-  if (temperature === undefined || customName === undefined) {
-    return null
-  }
+  useEffect(() => {
+    if (temperature !== undefined && customName !== undefined) {
+      console.log("passVisibility")
+      passVisibility(dataId, true)
+    } else {
+      passVisibility(dataId, false)
+    }
+  }, [temperature, customName])
 
   if (mode === "compact") {
     return (
