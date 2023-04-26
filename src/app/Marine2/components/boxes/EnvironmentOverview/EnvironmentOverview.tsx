@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite"
 import { useTemperatures, TemperatureInstanceId } from "@elninotech/mfd-modules"
-import { useState, createContext } from "react"
+import { useState, useContext, createContext } from "react"
 import { useVisibilityNotifier } from "../../../modules"
 import { BoxTypes } from "../../../utils/constants"
 import { AppViews } from "../../../modules/AppViews"
@@ -20,8 +20,12 @@ interface Props {
 
 export const VisibleComponentsContext = createContext({ passVisibility: (id: number, visible: boolean) => {} })
 
+export const VisibleComponentsContext = createContext({ passVisibility: (id: number, visible: boolean) => {} })
+
 const EnvironmentOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) => {
+  const visibleComponents = useContext(VisibleComponentsContext)
   const { temperatures } = useTemperatures()
+  const [visibleElements, setVisibleElements] = useState({})
   const [visibleElements, setVisibleElements] = useState({})
   const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
 
@@ -30,19 +34,21 @@ const EnvironmentOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) 
   }
 
   let temperatureComponents = (temperatures || []).map((temperatureId: TemperatureInstanceId) => (
-    <TemperatureData key={"temperature" + temperatureId} dataId={temperatureId} mode={mode} boxSize={boxSize} />
+    <TemperatureData key={temperatureId} dataId={temperatureId} mode={mode} boxSize={boxSize} />
   ))
 
   let humidityComponents = (temperatures || []).map((temperatureId: TemperatureInstanceId) => (
-    <HumidityData key={"humidity" + temperatureId} dataId={temperatureId} mode={mode} boxSize={boxSize} />
+    <HumidityData key={temperatureId} dataId={temperatureId} mode={mode} boxSize={boxSize} />
   ))
 
   let pressureComponents = (temperatures || []).map((temperatureId: TemperatureInstanceId) => (
-    <PressureData key={"pressure" + temperatureId} dataId={temperatureId} mode={mode} boxSize={boxSize} />
+    <PressureData key={temperatureId} dataId={temperatureId} mode={mode} boxSize={boxSize} />
   ))
 
   const components = [...temperatureComponents, ...humidityComponents, ...pressureComponents] as JSX.Element[]
+  const components = [...temperatureComponents, ...humidityComponents, ...pressureComponents] as JSX.Element[]
 
+  useVisibilityNotifier({ widgetName: BoxTypes.ENVIRONMENT, visible: Object.values(visibleElements).includes(true) })
   useVisibilityNotifier({ widgetName: BoxTypes.ENVIRONMENT, visible: Object.values(visibleElements).includes(true) })
 
   if (mode === "compact") {
@@ -61,10 +67,35 @@ const EnvironmentOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) 
           {components}
         </Box>
       </VisibleComponentsContext.Provider>
+      <VisibleComponentsContext.Provider value={{ passVisibility }}>
+        <Box
+          title={translate("boxes.environment")}
+          /* todo: fix types for svg */
+          linkedView={AppViews.BOX_ENVIRONMENT_OVERVIEW}
+          /* @ts-ignore */
+          icon={<EnvironmentIcon className={"w-4"} />}
+          withPagination={true}
+          paginationOrientation={"vertical"}
+          getBoxSizeCallback={setBoxSize}
+        >
+          {components}
+        </Box>
+      </VisibleComponentsContext.Provider>
     )
   }
 
   return (
+    <VisibleComponentsContext.Provider value={{ passVisibility }}>
+      <GridPaginator
+        childClassName={"p-2"}
+        perPage={4}
+        orientation={"horizontal"}
+        pageSelectorPropsSetter={pageSelectorPropsSetter}
+        flow={window.innerWidth > window.innerHeight ? "row" : "col"}
+      >
+        {components}
+      </GridPaginator>
+    </VisibleComponentsContext.Provider>
     <VisibleComponentsContext.Provider value={{ passVisibility }}>
       <GridPaginator
         childClassName={"p-2"}
