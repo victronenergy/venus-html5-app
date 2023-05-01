@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite"
 import { useTemperatures, TemperatureInstanceId } from "@elninotech/mfd-modules"
-import { useEffect, useState, isValidElement } from "react"
+import { useState, isValidElement } from "react"
 import { useVisibilityNotifier } from "../../../modules"
 import { BoxTypes } from "../../../utils/constants"
 import { AppViews } from "../../../modules/AppViews"
