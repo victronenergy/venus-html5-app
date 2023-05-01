@@ -172,8 +172,8 @@ const AuxillaryTank = ({
 }
 
 // Convert capacity from m3 to L and round to nearest integer and return as number
-const formatCapacity = (capacity: number) : number => {
-  return Math.round(capacity * 1000) 
+const formatCapacity = (capacity: number): number => {
+  return Math.round(capacity * 1000)
 }
 
 const levelFormatter = (level: number) => {
