@@ -1,14 +1,12 @@
-import { useMemo, useRef } from "react"
+import { useRef } from "react"
 import { observer } from "mobx-react-lite"
 import ProgressBar from "../../ui/ProgressBar"
 import classnames from "classnames"
-import { translate } from "react-i18nify"
 import FuelIcon from "../../../images/icons/fuel.svg"
 import WaterIcon from "../../../images/icons/fresh-water.svg"
 import BlackWaterIcon from "../../../images/icons/black-water.svg"
 import GrayWaterIcon from "../../../images/icons/waste-water.svg"
 import { applyStyles, BreakpointStylesType, StylesType } from "app/Marine2/utils/media"
-import useSize from "@react-hook/size"
 import ValueOverview from "../../ui/ValueOverview/ValueOverview"
 
 // styles for compact mode
@@ -87,13 +85,10 @@ const AuxillaryTank = ({
   parentSize,
 }: Props) => {
   const wrapperRef = useRef<HTMLDivElement>(null)
-  const [width] = useSize(wrapperRef)
-
+  
   let horizontalActiveStyles,
-    verticalActiveStyles,
-    compactActiveStyles: StylesType = {}
+    verticalActiveStyles: StylesType = {}
   if (parentSize) {
-    compactActiveStyles = applyStyles(parentSize, compactStyles)
     verticalActiveStyles = applyStyles(parentSize, verticalStyles)
     horizontalActiveStyles = applyStyles(parentSize, horizontalStyles)
   }
