@@ -36,17 +36,25 @@ const SettingsMenu = () => {
       onClick={() => setIsModalOpen(!isModalOpen)}
     >
       <div className="flex justify-center items-center w-full">
-        <div className="pl-8 pt-4 w-16 h-12">
-          {/* todo: fix types for svg */}
-          {/* @ts-ignore */}
-          <PreferencesIcon className="w-1" alt={"Settings"} />
-        </div>
+        {!isModalOpen ? (
+          <div className="pl-8 pt-4 w-16 h-12">
+            {/* todo: fix types for svg */}
+            {/* @ts-ignore */}
+            <PreferencesIcon className="w-1" alt={"Settings"} />
+          </div>
+        ) : (
+          <>
+            {/* @ts-ignore */}
+            <CloseIcon className="w-8 ml-auto mr-2 opacity-1 z-20" onClick={() => setIsModalOpen(false)} />
+          </>
+        )}
+
         <Modal.Frame
           open={isModalOpen}
           onClose={() => {
             setIsModalOpen(false)
           }}
-          className="w-3/4 max-w-md mr-6 bottom-0 right-0"
+          className="w-3/4 max-w-md mr-6 mb-16 bottom-0 right-0"
         >
           <Modal.Body>
             <div className="flex flex-col">
@@ -96,8 +104,6 @@ const SettingsMenu = () => {
           <Button onClick={openRemoteConsole} className="w-full" size="md">
             {translate("header.remoteConsole")}
           </Button>
-          {/* @ts-ignore */}
-          <CloseIcon className="w-8 ml-auto m-1" onClick={() => setIsModalOpen(false)} />
         </Modal.Frame>
       </div>
     </div>
