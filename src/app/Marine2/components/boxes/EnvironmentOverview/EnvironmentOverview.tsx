@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite"
 import { useTemperatures, TemperatureInstanceId } from "@elninotech/mfd-modules"
-import { useState, useContext, createContext } from "react"
+import { useState, createContext } from "react"
 import { useVisibilityNotifier } from "../../../modules"
 import { BoxTypes } from "../../../utils/constants"
 import { AppViews } from "../../../modules/AppViews"
@@ -23,7 +23,6 @@ export const VisibleComponentsContext = createContext({ passVisibility: (id: num
 export const VisibleComponentsContext = createContext({ passVisibility: (id: number, visible: boolean) => {} })
 
 const EnvironmentOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) => {
-  const visibleComponents = useContext(VisibleComponentsContext)
   const { temperatures } = useTemperatures()
   const [visibleElements, setVisibleElements] = useState({})
   const [visibleElements, setVisibleElements] = useState({})
