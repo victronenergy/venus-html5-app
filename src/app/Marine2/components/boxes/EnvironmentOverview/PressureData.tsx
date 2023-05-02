@@ -4,7 +4,7 @@ import ValueOverview from "../../ui/ValueOverview"
 import PressureIcon from "../../../images/icons/pressure.svg"
 import ValueBox from "../../ui/ValueBox"
 import { translate } from "react-i18nify"
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useCallback } from "react"
 import { VisibleComponentsContext } from "./EnvironmentOverview"
 
 interface Props {
@@ -18,13 +18,20 @@ const PressureData = ({ dataId, mode, boxSize }: Props) => {
 
   const { passVisibility } = useContext(VisibleComponentsContext)
 
+  const handlePassVisibility = useCallback(
+    (dataId, isVisible) => {
+      passVisibility(dataId, isVisible)
+    },
+    [passVisibility]
+  )
+
   useEffect(() => {
     if (pressure !== undefined && customName !== undefined) {
-      passVisibility(dataId, true)
+      handlePassVisibility(dataId, true)
     } else {
-      passVisibility(dataId, false)
+      handlePassVisibility(dataId, false)
     }
-  }, [pressure, customName])
+  }, [pressure, customName, handlePassVisibility, dataId])
 
   if (mode === "compact") {
     return (
