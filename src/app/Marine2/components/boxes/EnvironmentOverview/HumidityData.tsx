@@ -23,7 +23,7 @@ const HumidityData = ({ dataId, mode, boxSize }: Props) => {
     } else {
       passVisibility(dataId, false)
     }
-  }, [humidity, customName, dataId, passVisibility])
+  }, [humidity, customName])
 
   if (mode === "compact") {
     return (
