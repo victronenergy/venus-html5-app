@@ -33,15 +33,15 @@ const EnvironmentOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) 
   }
 
   let temperatureComponents = (temperatures || []).map((temperatureId: TemperatureInstanceId) => (
-    <TemperatureData key={temperatureId} dataId={temperatureId} mode={mode} boxSize={boxSize} />
+    <TemperatureData key={"temperature" + temperatureId} dataId={temperatureId} mode={mode} boxSize={boxSize} />
   ))
 
   let humidityComponents = (temperatures || []).map((temperatureId: TemperatureInstanceId) => (
-    <HumidityData key={temperatureId} dataId={temperatureId} mode={mode} boxSize={boxSize} />
+    <HumidityData key={"humidity" + temperatureId} dataId={temperatureId} mode={mode} boxSize={boxSize} />
   ))
 
   let pressureComponents = (temperatures || []).map((temperatureId: TemperatureInstanceId) => (
-    <PressureData key={temperatureId} dataId={temperatureId} mode={mode} boxSize={boxSize} />
+    <PressureData key={"pressure" + temperatureId} dataId={temperatureId} mode={mode} boxSize={boxSize} />
   ))
 
   const components = [...temperatureComponents, ...humidityComponents, ...pressureComponents] as JSX.Element[]
