@@ -10,6 +10,7 @@ import BlackWaterIcon from "../../../images/icons/black-water.svg"
 import GrayWaterIcon from "../../../images/icons/waste-water.svg"
 import { applyStyles, BreakpointStylesType, StylesType } from "app/Marine2/utils/media"
 import useSize from "@react-hook/size"
+// @ts-ignore
 import AuxillaryTank from "./AuxillaryTank"
 
 // styles for compact mode
@@ -79,7 +80,7 @@ const verticalStyles: BreakpointStylesType = {
 }
 
 const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", parentSize }: Props) => {
-  let { capacity, fluidType, level, remaining, unit } = useTank(tankInstanceId)
+  let { capacity, fluidType, level, remaining, unit, customName } = useTank(tankInstanceId)
   const fluidTypeNum = +fluidType
   const wrapperRef = useRef<HTMLDivElement>(null)
   const [width] = useSize(wrapperRef)
@@ -93,7 +94,7 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
     horizontalActiveStyles = applyStyles(parentSize, horizontalStyles)
   }
 
-  const fluidTypeTitle = useMemo(() => {
+  const tankTitle = useMemo(() => {
     const fluids = [
       translate("tankWidget.Fuel"),
       translate("tankWidget.Fresh water"),
@@ -109,14 +110,14 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
       translate("tankWidget.Raw water"),
     ]
 
-    return fluids[fluidTypeNum]
+    return customName || fluids[fluidTypeNum]
   }, [fluidTypeNum])
 
   // tanks that are missing level readings and only have capacity
   if (!!capacity && !level) {
     return (
       <AuxillaryTank
-        title={fluidTypeTitle}
+        title={tankTitle}
         mode={mode}
         capacity={capacity}
         fluidTypeNum={fluidTypeNum}
@@ -142,7 +143,7 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
       <div ref={wrapperRef} className="flex flex-row items-center">
         <div className={classnames("flex items-center py-2 truncate")}>
           <div className="mr-2">{fluidIcon(fluidTypeNum, mode)}</div>
-          <div className={classnames("truncate", compactActiveStyles?.tankName)}>{fluidTypeTitle} </div>
+          <div className={classnames("truncate", compactActiveStyles?.tankName)}>{tankTitle} </div>
         </div>
         <div className="flex flex-row items-center basis-0 flex-grow justify-end">
           <div
@@ -193,7 +194,7 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
             <div className={classnames("flex items-center truncate")}>
               <div className="mr-2 lg:mr-3">{fluidIcon(fluidTypeNum, mode)}</div>
               <div className="flex flex-col p-2 w-full truncate">
-                <div className={classnames("truncate", verticalActiveStyles?.tankName)}>{fluidTypeTitle}</div>
+                <div className={classnames("truncate", verticalActiveStyles?.tankName)}>{tankTitle}</div>
                 <div className={classnames("text-victron-gray", verticalActiveStyles?.capacity)}>
                   {formatCapacity(remaining) + "/" + formatCapacity(capacity) + "L"}
                 </div>
@@ -261,7 +262,7 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
                 <div className="mb-2">{fluidIcon(fluidTypeNum, "compact")}</div>
                 <div className="w-full tank-name">
                   <div className={classnames("whitespace-nowrap", horizontalActiveStyles?.tankName)}>
-                    {fluidTypeTitle}
+                    {tankTitle}
                   </div>
                 </div>
               </div>

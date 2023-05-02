@@ -85,7 +85,7 @@ const AuxillaryTank = ({
   parentSize,
 }: Props) => {
   const wrapperRef = useRef<HTMLDivElement>(null)
-  
+
   let horizontalActiveStyles,
     verticalActiveStyles: StylesType = {}
   if (parentSize) {
@@ -152,10 +152,7 @@ const AuxillaryTank = ({
               </div>
               <div className="flex flex-col px-2">
                 <div className={classnames("flex flex-row", horizontalActiveStyles?.level)}>
-                  <div>{capacity}</div>
-                </div>
-                <div className={classnames("text-victron-gray", horizontalActiveStyles?.capacity)}>
-                  {formatCapacity(capacity) + "L"}
+                  <div>{formatCapacity(capacity) + "L"}</div>
                 </div>
               </div>
             </div>
