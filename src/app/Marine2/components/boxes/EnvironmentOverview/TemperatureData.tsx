@@ -24,7 +24,7 @@ const TemperatureData = ({ dataId, mode, boxSize }: Props) => {
     } else {
       passVisibility(dataId, false)
     }
-  }, [temperature, customName, dataId, passVisibility])
+  }, [temperature, customName])
 
   if (mode === "compact") {
     return (
