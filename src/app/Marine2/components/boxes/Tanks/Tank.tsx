@@ -111,7 +111,7 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
     ]
 
     return customName || fluids[fluidTypeNum]
-  }, [fluidTypeNum])
+  }, [fluidTypeNum, customName])
 
   // tanks that are missing level readings and only have capacity
   if (!!capacity && !level) {
@@ -261,9 +261,7 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
               <div className="pt-2 px-2">
                 <div className="mb-2">{fluidIcon(fluidTypeNum, "compact")}</div>
                 <div className="w-full tank-name">
-                  <div className={classnames("whitespace-nowrap", horizontalActiveStyles?.tankName)}>
-                    {tankTitle}
-                  </div>
+                  <div className={classnames("whitespace-nowrap", horizontalActiveStyles?.tankName)}>{tankTitle}</div>
                 </div>
               </div>
               <div className="flex flex-col px-2">
