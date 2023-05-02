@@ -24,7 +24,7 @@ const PressureData = ({ dataId, mode, boxSize }: Props) => {
     } else {
       passVisibility(dataId, false)
     }
-  }, [pressure, customName, dataId, passVisibility])
+  }, [pressure, customName])
 
   if (mode === "compact") {
     return (
@@ -45,7 +45,7 @@ const PressureData = ({ dataId, mode, boxSize }: Props) => {
       title={translate("boxes.pressure") + " " + customName}
       /* todo: fix types for svg */
       /* @ts-ignore */
-      icon={<PressureIcon className={"w-5"} />}
+      icon={<PressureIcon className={"w-6"} />}
       value={pressure}
       bottomValues={[]}
       unit={"hPa"}
