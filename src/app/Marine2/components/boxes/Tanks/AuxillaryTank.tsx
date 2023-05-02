@@ -9,28 +9,6 @@ import GrayWaterIcon from "../../../images/icons/waste-water.svg"
 import { applyStyles, BreakpointStylesType, StylesType } from "app/Marine2/utils/media"
 import ValueOverview from "../../ui/ValueOverview/ValueOverview"
 
-// styles for compact mode
-const compactStyles: BreakpointStylesType = {
-  default: {
-    tankName: "text-sm ",
-    level: "text-base",
-  },
-  "sm-s": {
-    tankName: "text-sm ",
-    level: "text-base",
-  },
-  "sm-m": {
-    tankName: "text-sm ",
-  },
-  "md-s": {
-    tankName: "text-base mr-4",
-    level: "text-lg",
-  },
-  "lg-s": {
-    tankName: "text-base mr-4",
-    level: "text-lg",
-  },
-}
 
 // styles for horizontal orientation
 const horizontalStyles: BreakpointStylesType = {
