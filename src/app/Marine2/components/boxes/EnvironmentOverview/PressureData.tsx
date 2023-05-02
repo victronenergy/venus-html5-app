@@ -24,7 +24,7 @@ const PressureData = ({ dataId, mode, boxSize }: Props) => {
     } else {
       passVisibility(dataId, false)
     }
-  }, [pressure, customName])
+  }, [pressure, customName, dataId, passVisibility])
 
   if (mode === "compact") {
     return (
