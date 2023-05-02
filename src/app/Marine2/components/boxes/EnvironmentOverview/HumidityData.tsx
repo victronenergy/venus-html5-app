@@ -4,7 +4,7 @@ import ValueOverview from "../../ui/ValueOverview"
 import HumidityIcon from "../../../images/icons/humidity.svg"
 import ValueBox from "../../ui/ValueBox"
 import { translate } from "react-i18nify"
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useCallback } from "react"
 import { VisibleComponentsContext } from "./EnvironmentOverview"
 
 interface Props {
@@ -17,13 +17,20 @@ const HumidityData = ({ dataId, mode, boxSize }: Props) => {
   const { humidity, customName } = useHumidity(dataId)
   const { passVisibility } = useContext(VisibleComponentsContext)
 
+  const handlePassVisibility = useCallback(
+    (dataId, isVisible) => {
+      passVisibility(dataId, isVisible)
+    },
+    [passVisibility]
+  )
+
   useEffect(() => {
     if (humidity !== undefined && customName !== undefined) {
-      passVisibility(dataId, true)
+      handlePassVisibility(dataId, true)
     } else {
-      passVisibility(dataId, false)
+      handlePassVisibility(dataId, false)
     }
-  }, [humidity, customName])
+  }, [humidity, customName, handlePassVisibility, dataId])
 
   if (mode === "compact") {
     return (
