@@ -9,7 +9,6 @@ import GrayWaterIcon from "../../../images/icons/waste-water.svg"
 import { applyStyles, BreakpointStylesType, StylesType } from "app/Marine2/utils/media"
 import ValueOverview from "../../ui/ValueOverview/ValueOverview"
 
-
 // styles for horizontal orientation
 const horizontalStyles: BreakpointStylesType = {
   default: {
