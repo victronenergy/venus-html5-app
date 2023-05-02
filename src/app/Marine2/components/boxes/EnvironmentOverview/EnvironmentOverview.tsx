@@ -20,11 +20,8 @@ interface Props {
 
 export const VisibleComponentsContext = createContext({ passVisibility: (id: number, visible: boolean) => {} })
 
-export const VisibleComponentsContext = createContext({ passVisibility: (id: number, visible: boolean) => {} })
-
 const EnvironmentOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) => {
   const { temperatures } = useTemperatures()
-  const [visibleElements, setVisibleElements] = useState({})
   const [visibleElements, setVisibleElements] = useState({})
   const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
 
@@ -45,9 +42,7 @@ const EnvironmentOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) 
   ))
 
   const components = [...temperatureComponents, ...humidityComponents, ...pressureComponents] as JSX.Element[]
-  const components = [...temperatureComponents, ...humidityComponents, ...pressureComponents] as JSX.Element[]
 
-  useVisibilityNotifier({ widgetName: BoxTypes.ENVIRONMENT, visible: Object.values(visibleElements).includes(true) })
   useVisibilityNotifier({ widgetName: BoxTypes.ENVIRONMENT, visible: Object.values(visibleElements).includes(true) })
 
   if (mode === "compact") {
@@ -66,35 +61,10 @@ const EnvironmentOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) 
           {components}
         </Box>
       </VisibleComponentsContext.Provider>
-      <VisibleComponentsContext.Provider value={{ passVisibility }}>
-        <Box
-          title={translate("boxes.environment")}
-          /* todo: fix types for svg */
-          linkedView={AppViews.BOX_ENVIRONMENT_OVERVIEW}
-          /* @ts-ignore */
-          icon={<EnvironmentIcon className={"w-4"} />}
-          withPagination={true}
-          paginationOrientation={"vertical"}
-          getBoxSizeCallback={setBoxSize}
-        >
-          {components}
-        </Box>
-      </VisibleComponentsContext.Provider>
     )
   }
 
   return (
-    <VisibleComponentsContext.Provider value={{ passVisibility }}>
-      <GridPaginator
-        childClassName={"p-2"}
-        perPage={4}
-        orientation={"horizontal"}
-        pageSelectorPropsSetter={pageSelectorPropsSetter}
-        flow={window.innerWidth > window.innerHeight ? "row" : "col"}
-      >
-        {components}
-      </GridPaginator>
-    </VisibleComponentsContext.Provider>
     <VisibleComponentsContext.Provider value={{ passVisibility }}>
       <GridPaginator
         childClassName={"p-2"}
