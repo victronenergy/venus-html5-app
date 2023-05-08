@@ -117,9 +117,6 @@ const AuxillaryTank = ({
       return (
         <div className="px-3">
           <div className="h-full w-full flex flex-row">
-            <div className="min-w-[10%] h-auto">
-              <ProgressBar percentage={levelFormatter(0)} type={fluidTypeNum} orientation="vertical" />
-            </div>
             <div className="flex flex-col justify-between min-w-[90%]">
               <div className="pt-2 px-2">
                 <div className="mb-2">{fluidIcon(fluidTypeNum, "compact")}</div>

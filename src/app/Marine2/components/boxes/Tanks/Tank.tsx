@@ -114,7 +114,7 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
   }, [fluidTypeNum, customName])
 
   // tanks that are missing level readings and only have capacity
-  if (!!capacity && !level) {
+  if (!!capacity && level === undefined) {
     return (
       <AuxillaryTank
         title={tankTitle}
