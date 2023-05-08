@@ -36,7 +36,7 @@ const styles: BreakpointStylesType = {
   "lg-l": {
     value: "text-2xl",
     valueBars: "text-xxl",
-  }
+  },
 }
 const Inverter = ({ instanceId, isVebusInverter, componentMode = "compact", compactBoxSize }: Props) => {
   const inverterModeFormatter = (value: number) => {
