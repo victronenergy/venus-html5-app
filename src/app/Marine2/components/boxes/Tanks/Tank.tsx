@@ -318,19 +318,19 @@ const fluidIcon = (type: number, mode: string = "compact", isComponent: boolean 
     case 11:
       /* todo: fix types for svg */
       /* @ts-ignore */
-      return isComponent ? <FuelIcon className={mode === "compact" ? "w-7" : "w-9"} /> : FuelIcon
+      return isComponent ? <FuelIcon className={mode === "compact" ? "w-5 md:w-7" : "w-9"} /> : FuelIcon
     case 1:
       /* todo: fix types for svg */
       /* @ts-ignore */
-      return isComponent ? <WaterIcon className={mode === "compact" ? "w-7" : "w-9"} /> : WaterIcon
+      return isComponent ? <WaterIcon className={mode === "compact" ? "w-5 md:w-7" : "w-9"} /> : WaterIcon
     case 2:
       /* todo: fix types for svg */
       /* @ts-ignore */
-      return isComponent ? <GrayWaterIcon className={mode === "compact" ? "w-7" : "w-9"} /> : GrayWaterIcon
+      return isComponent ? <GrayWaterIcon className={mode === "compact" ? "w-5 md:w-7" : "w-9"} /> : GrayWaterIcon
     case 5:
       /* todo: fix types for svg */
       /* @ts-ignore */
-      return isComponent ? <BlackWaterIcon className={mode === "compact" ? "w-7" : "w-9"} /> : BlackWaterIcon
+      return isComponent ? <BlackWaterIcon className={mode === "compact" ? "w-5 md:w-7" : "w-9"} /> : BlackWaterIcon
     default:
       return null
   }
