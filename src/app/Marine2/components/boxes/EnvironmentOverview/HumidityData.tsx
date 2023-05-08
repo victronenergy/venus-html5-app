@@ -18,8 +18,8 @@ const HumidityData = ({ dataId, mode, boxSize }: Props) => {
   const { passVisibility } = useContext(VisibleComponentsContext)
 
   const handlePassVisibility = useCallback(
-    (dataId, isVisible) => {
-      passVisibility(dataId, isVisible)
+    (id: number, isVisible: boolean) => {
+      passVisibility(id, isVisible)
     },
     [passVisibility]
   )
@@ -30,7 +30,7 @@ const HumidityData = ({ dataId, mode, boxSize }: Props) => {
     } else {
       handlePassVisibility(dataId, false)
     }
-  }, [humidity, customName, dataId])
+  }, [humidity, customName, dataId, handlePassVisibility])
 
   if (mode === "compact") {
     return (

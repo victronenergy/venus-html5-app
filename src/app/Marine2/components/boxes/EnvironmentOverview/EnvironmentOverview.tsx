@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite"
 import { useTemperatures, TemperatureInstanceId } from "@elninotech/mfd-modules"
-import { useState, createContext } from "react"
+import { useState, createContext, useCallback } from "react"
 import { useVisibilityNotifier } from "../../../modules"
 import { BoxTypes } from "../../../utils/constants"
 import { AppViews } from "../../../modules/AppViews"
@@ -25,9 +25,9 @@ const EnvironmentOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) 
   const [visibleElements, setVisibleElements] = useState({})
   const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
 
-  const passVisibility = (id: number, visible: boolean) => {
+  const passVisibility = useCallback((id: number, visible: boolean) => {
     setVisibleElements((prev) => ({ ...prev, [id]: visible }))
-  }
+  }, [])
 
   let temperatureComponents = (temperatures || []).map((temperatureId: TemperatureInstanceId) => (
     <TemperatureData key={"temperature" + temperatureId} dataId={temperatureId} mode={mode} boxSize={boxSize} />
