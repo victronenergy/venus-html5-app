@@ -1,6 +1,5 @@
 import { useRef } from "react"
 import { observer } from "mobx-react-lite"
-import ProgressBar from "../../ui/ProgressBar"
 import classnames from "classnames"
 import FuelIcon from "../../../images/icons/fuel.svg"
 import WaterIcon from "../../../images/icons/fresh-water.svg"
@@ -140,10 +139,6 @@ const AuxillaryTank = ({
 // Convert capacity from m3 to L and round to nearest integer and return as number
 const formatCapacity = (capacity: number): number => {
   return Math.round(capacity * 1000)
-}
-
-const levelFormatter = (level: number) => {
-  return Math.round(level)
 }
 
 const fluidIcon = (type: number, mode: string = "compact", isComponent: boolean = true) => {
