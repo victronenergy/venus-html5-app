@@ -18,21 +18,25 @@ import ValueOverview from "../../ui/ValueOverview"
 
 const styles: BreakpointStylesType = {
   default: {
-    value: "text-xl",
-    valueBars: "text-sm",
+    value: "text-lg",
+    valueBars: "text-base",
   },
   "sm-s": {
-    value: "text-2xl",
-    valueBars: "text-sm",
+    value: "text-lg",
+    valueBars: "text-base",
   },
   "md-s": {
-    value: "text-2xl",
-    valueBars: "text-lg",
+    value: "text-xxl",
+    valueBars: "text-xl",
   },
   "md-m": {
-    value: "text-2xl",
-    valueBars: "text-lg",
+    value: "text-lg",
+    valueBars: "text-base",
   },
+  "lg-l": {
+    value: "text-2xl",
+    valueBars: "text-xxl",
+  }
 }
 const Inverter = ({ instanceId, isVebusInverter, componentMode = "compact", compactBoxSize }: Props) => {
   const inverterModeFormatter = (value: number) => {
