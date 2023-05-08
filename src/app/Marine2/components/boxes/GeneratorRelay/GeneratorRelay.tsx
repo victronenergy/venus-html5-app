@@ -4,7 +4,6 @@ import { translate } from "react-i18nify"
 import { useActiveInValues } from "@elninotech/mfd-modules"
 import ValueBox from "../../ui/ValueBox"
 import AutoStartStopSetter from "../../ui/AutoStartStopSetter/AutoStartStopSetter"
-import { RELAY_FUNCTION } from "../../../utils/constants"
 import ValueOverview from "../../ui/ValueOverview"
 
 const GeneratorRelay = ({
@@ -13,7 +12,6 @@ const GeneratorRelay = ({
   phases = 1,
   manualStart,
   autoStart,
-  relayFunction,
   updateManualMode,
   updateAutoMode,
   mode = "compact",
@@ -80,7 +78,7 @@ const GeneratorRelay = ({
       }
       title={title}
       buttons={
-        relayFunction === RELAY_FUNCTION.GENERATOR_START_STOP && statusCode !== undefined ? (
+        statusCode !== undefined ? (
           <AutoStartStopSetter
             title={title}
             autoStart={autoStart}
