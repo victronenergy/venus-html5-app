@@ -75,9 +75,9 @@ const ValueBox = ({ title, icon, value, unit, hideDecimal, bottomValues, childre
                 <ValueBar key={i} prefix={isMultiPhase ? "L" + (i + 1) : undefined} values={v} />
               ))}
             </div>
-            {!!buttons && <div className="flex w-full">{buttons}</div>}
           </div>
         )}
+        {!!buttons && <div className="flex w-full">{buttons}</div>}
       </div>
     </Box>
   )
