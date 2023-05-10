@@ -137,7 +137,9 @@ const getAvailableDeviceBoxes = function (
   }
 
   if (!!generatorFp.phases)
-    devices.push(<GeneratorFp key={"generatorFp"} generatorFp={generatorFp} mode={mode} compactBoxSize={compactBoxSize} />)
+    devices.push(
+      <GeneratorFp key={"generatorFp"} generatorFp={generatorFp} mode={mode} compactBoxSize={compactBoxSize} />
+    )
   if (!!generatorRelay.settings) {
     if (generatorRelay.settings.includes(AC_SOURCE.GENERATOR)) {
       generatorRelay.settings.forEach((source: number, i: number) => {
@@ -156,7 +158,9 @@ const getAvailableDeviceBoxes = function (
       generatorRelay.relayFunction === RELAY_FUNCTION.GENERATOR_START_STOP &&
       generatorRelay.statusCode !== undefined
     ) {
-      devices.push(<GeneratorRelay key={"generator_relay"} {...generatorRelay} mode={mode} compactBoxSize={compactBoxSize} />)
+      devices.push(
+        <GeneratorRelay key={"generator_relay"} {...generatorRelay} mode={mode} compactBoxSize={compactBoxSize} />
+      )
     }
   }
   return devices
