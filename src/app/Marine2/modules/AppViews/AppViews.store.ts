@@ -13,15 +13,15 @@ export enum AppViews {
   BOX_ENVIRONMENT_OVERVIEW = "box/environment-overview",
 }
 
-export const AppViewTitles = new Map<AppViews, string>([
-  [AppViews.ROOT, translate("pages.systemOverview")],
-  [AppViews.REMOTE_CONSOLE, translate("pages.remoteConsole")],
-  [AppViews.DIAGNOSTICS, translate("pages.diagnostics")],
-  [AppViews.BOX_BATTERIES_OVERVIEW, translate("boxes.batteries")],
-  [AppViews.BOX_TANKS, translate("boxes.tanks")],
-  [AppViews.BOX_ENERGY_OVERVIEW, translate("boxes.EnergyOverview")],
-  [AppViews.BOX_DEVICES_OVERVIEW, translate("boxes.devices")],
-  [AppViews.BOX_ENVIRONMENT_OVERVIEW, translate("boxes.environment")],
+export const AppViewTitleKeys = new Map<AppViews, string>([
+  [AppViews.ROOT, "pages.systemOverview"],
+  [AppViews.REMOTE_CONSOLE, "pages.remoteConsole"],
+  [AppViews.DIAGNOSTICS, "pages.diagnostics"],
+  [AppViews.BOX_BATTERIES_OVERVIEW, "boxes.batteries"],
+  [AppViews.BOX_TANKS, "boxes.tanks"],
+  [AppViews.BOX_ENERGY_OVERVIEW, "boxes.EnergyOverview"],
+  [AppViews.BOX_DEVICES_OVERVIEW, "boxes.devices"],
+  [AppViews.BOX_ENVIRONMENT_OVERVIEW, "boxes.environment"],
 ])
 
 export class AppViewsStore {
@@ -36,7 +36,8 @@ export class AppViewsStore {
   }
 
   getViewTitle(view?: AppViews) {
-    return AppViewTitles.get(view || this.currentView) ?? ""
+    const titleKey = AppViewTitleKeys.get(view || this.currentView)
+    return titleKey ? translate(titleKey) : ""
   }
 }
 
