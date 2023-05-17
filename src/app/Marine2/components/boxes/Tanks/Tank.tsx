@@ -165,7 +165,7 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
             <ProgressBar percentage={levelFormatter(level)} type={fluidTypeNum} />
           </div>
           <div className="tank-level">
-            <div style={levelWidth ? { width: levelWidth + "px" } : {}} className="pl-2 md:pl-5">
+            <div style={levelWidth ? { width: roundLevelWidth(levelWidth) + "px" } : {}} className="pl-2 md:pl-5">
               <div
                 className={classnames("flex flex-row", compactActiveStyles?.level, {
                   "text-victron-red": level > 75,
@@ -221,7 +221,7 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
               </div>
               <div className="tank-level">
                 <div
-                  style={levelWidth ? { width: levelWidth + "px" } : {}}
+                  style={levelWidth ? { width: roundLevelWidth(levelWidth) + "px" } : {}}
                   className="flex items-center justify-center pl-2 md:pl-5"
                 >
                   <div
@@ -303,6 +303,10 @@ const formatCapacity = (capacity: number) => {
 
 const levelFormatter = (level: number) => {
   return Math.round(level)
+}
+
+const roundLevelWidth = (width: number) => {
+  return Math.ceil(width)
 }
 
 const fluidIcon = (type: number, mode: string = "compact", isComponent: boolean = true) => {
