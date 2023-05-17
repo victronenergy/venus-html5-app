@@ -12,7 +12,7 @@ const Frame: React.FC<Props> = ({ children, open = true, onClose, className }) =
   return (
     <div
       className={classnames(
-        "fixed inset-0 z-10 p-8 text-neutral-600 bg-neutral-100/70 dark:text-white dark:bg-victron-darkGray/70 items-center justify-center",
+        "fixed inset-0 z-10 p-8 text-neutral-600 modal dark:text-white items-center justify-center",
         `${open ? "flex" : "hidden"}` // control visibility via `open` attribute (or render conditionally)
       )}
       onClick={onClose}
