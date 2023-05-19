@@ -74,12 +74,12 @@ const AuxillaryTank = ({
   if (mode === "compact") {
     return (
       <ValueOverview
+        // @ts-ignore
+        Icon={fluidIcon(fluidTypeNum, mode, false)}
         title={title}
         value={formatCapacity(capacity)}
         unit="L"
         boxSize={parentSize!}
-        // @ts-ignore
-        Icon={fluidIcon(fluidTypeNum, mode, false)}
       />
     )
   } else {
@@ -168,7 +168,9 @@ const fluidIcon = (type: number, mode: string = "compact", isComponent: boolean 
       /* @ts-ignore */
       return isComponent ? <BlackWaterIcon className={mode === "compact" ? "w-7" : "w-9"} /> : BlackWaterIcon
     default:
-      return null
+      /* todo: fix types for svg */
+      /* @ts-ignore */
+      return isComponent ? <WaterIcon className={mode === "compact" ? "w-7" : "w-9"} /> : WaterIcon
   }
 }
 

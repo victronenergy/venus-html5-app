@@ -252,7 +252,7 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
     } else {
       // orientation === "horizontal"
       return (
-        <div className="px-3">
+        <div className="px-4">
           <div className="h-full w-full flex flex-row">
             <div className="min-w-[10%] h-auto">
               <ProgressBar percentage={levelFormatter(level)} type={fluidTypeNum} orientation="vertical" />
