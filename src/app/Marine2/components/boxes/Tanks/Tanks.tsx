@@ -160,7 +160,7 @@ const Tanks = ({ mode = "full", className }: Props) => {
             withPagination={true}
             paginationOrientation={"horizontal"}
           >
-            <div className="flex justify-between h-full" ref={gridRef}>
+            <div className="flex h-full" ref={gridRef}>
               {filteredTanks.map((tank) => (
                 <Tank
                   key={tank}
