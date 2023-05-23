@@ -28,7 +28,7 @@ const EnergySolar = ({ mode = "compact", pvCharger, compactBoxSize }: Props) => 
       /* todo: fix types for svg */
       /* @ts-ignore */
       icon={<SolarIcon className={"w-6"} />}
-      bottomValues={[[{ value: power, unit: "W" }]]}
+      bottomValues={[[{ value: power, unit: "W", hideDecimal: true }]]}
       value={current}
       unit={"A"}
     />

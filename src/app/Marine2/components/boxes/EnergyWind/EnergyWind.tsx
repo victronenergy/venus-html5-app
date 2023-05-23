@@ -33,7 +33,7 @@ const EnergyWind = ({ mode = "compact", windGenerator, showInstance, compactBoxS
       icon={<WindIcon className={"w-6"} />}
       value={current}
       unit={"A"}
-      bottomValues={[[{ value: power, unit: "W" }]]}
+      bottomValues={[[{ value: power, unit: "W", hideDecimal: true }]]}
     />
   )
 }
