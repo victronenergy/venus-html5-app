@@ -25,7 +25,7 @@ const TemperatureData = ({ dataId, mode, boxSize }: Props) => {
   )
 
   useEffect(() => {
-    if (temperature !== undefined && customName !== undefined) {
+    if (temperature !== undefined) {
       handlePassVisibility(dataId, true)
     } else {
       handlePassVisibility(dataId, false)

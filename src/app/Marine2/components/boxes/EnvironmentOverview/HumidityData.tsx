@@ -25,7 +25,7 @@ const HumidityData = ({ dataId, mode, boxSize }: Props) => {
   )
 
   useEffect(() => {
-    if (humidity !== undefined && customName !== undefined) {
+    if (humidity !== undefined) {
       handlePassVisibility(dataId, true)
     } else {
       handlePassVisibility(dataId, false)

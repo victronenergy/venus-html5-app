@@ -26,7 +26,7 @@ const PressureData = ({ dataId, mode, boxSize }: Props) => {
   )
 
   useEffect(() => {
-    if (pressure !== undefined && customName !== undefined) {
+    if (pressure !== undefined) {
       handlePassVisibility(dataId, true)
     } else {
       handlePassVisibility(dataId, false)
