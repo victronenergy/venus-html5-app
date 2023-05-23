@@ -50,8 +50,6 @@ const EnvironmentOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) 
       <VisibleComponentsContext.Provider value={{ passVisibility }}>
         <Box
           title={translate("boxes.environment")}
-          /* todo: fix types for svg */
-          linkedView={AppViews.BOX_ENVIRONMENT_OVERVIEW}
           /* @ts-ignore */
           icon={<EnvironmentIcon className={"w-4"} />}
           withPagination={true}
