@@ -37,7 +37,7 @@ const TemperatureData = ({ dataId, mode, boxSize }: Props) => {
       <ValueOverview
         /* @ts-ignore */
         Icon={ThermometerIcon}
-        title={customName}
+        title={translate("boxes.temperature")}
         value={temperature}
         boxSize={boxSize}
         unit={"°C"}
