@@ -93,7 +93,7 @@ const GeneratorFp = ({ mode = "compact", generatorFp, compactBoxSize }: Props) =
     phasesOverview.push([
       { value: voltage[phase], unit: "V" },
       { value: current[phase], unit: "A" },
-      { value: power[phase], unit: "W" },
+      { value: power[phase], unit: "W", hideDecimal: true },
     ])
   }
 
