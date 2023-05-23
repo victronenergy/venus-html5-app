@@ -90,7 +90,13 @@ const GeneratorRelay = ({
         ) : undefined
       }
       unit={phases > 1 ? "W" : "A"}
-      value={phases > 1 ? powerSum : current[0]}
+      value={
+        getGeneratorState(statusCode, active ?? false, phases) !== translate("common.stopped")
+          ? phases > 1
+            ? powerSum
+            : current[0]
+          : undefined
+      }
       bottomValues={active || statusCode === 1 ? phasesOverview : []}
     >
       {subTitle}
