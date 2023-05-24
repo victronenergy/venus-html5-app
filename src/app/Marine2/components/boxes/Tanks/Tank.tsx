@@ -165,7 +165,7 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
             <ProgressBar percentage={levelFormatter(level)} type={fluidTypeNum} />
           </div>
           <div className="tank-level">
-            <div style={levelWidth ? { width: roundLevelWidth(levelWidth) + "px" } : {}} className="pl-2 md:pl-5">
+            <div style={levelWidth ? { width: roundLevelWidth(levelWidth + 4) + "px" } : {}} className="pl-2 md:pl-5">
               <div
                 className={classnames("flex flex-row", compactActiveStyles?.level, {
                   "text-victron-red": level > 75,
