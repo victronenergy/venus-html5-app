@@ -23,8 +23,8 @@ const Button = ({ children, onClick, className, disabled, size = "lg", variant =
             disabled && variant === "primary",
           "bg-transparent text-black dark:text-white cursor-pointer": !disabled && variant === "transparent",
           "bg-transparent text-victron-gray dark:text-victron-gray-dark": disabled && variant === "transparent",
-          "text-base min-h-[1.65rem]": size === "lg",
-          "text-sm min-h-[1.35rem]": size === "md",
+          "text-base min-h-[2.675rem]": size === "lg",
+          "text-sm min-h-[2.375rem]": size === "md",
         },
         className
       )}
