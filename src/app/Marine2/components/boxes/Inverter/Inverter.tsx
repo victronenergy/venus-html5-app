@@ -126,7 +126,7 @@ const Inverter = ({ instanceId, isVebusInverter, componentMode = "compact", comp
           </div>
 
           <Button
-            disabled={!locked}
+            disabled={locked}
             className="w-full mt-3"
             size="md"
             onClick={() => setIsModeModalOpen(!isModeModalOpen)}

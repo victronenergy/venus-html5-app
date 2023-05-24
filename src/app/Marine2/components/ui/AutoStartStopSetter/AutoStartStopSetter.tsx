@@ -74,7 +74,7 @@ const AutoStartStopSetter = ({
       <Button
         size="md"
         className="flex-none mt-3 w-full"
-        disabled={isAutoStartDisabled || !locked}
+        disabled={isAutoStartDisabled || locked}
         onClick={() => setIsModeModalOpen(true)}
       >
         {autoStartFormatter(getStartStopMode())}

@@ -63,7 +63,7 @@ const InverterCharger = ({ componentMode = "compact", compactBoxSize }: Props) =
     }
     if (adjustable) {
       buttons.push(
-        <Button disabled={!locked} className="w-full" size="md" onClick={() => setIsModeModalOpen(!isModeModalOpen)}>
+        <Button disabled={locked} className="w-full" size="md" onClick={() => setIsModeModalOpen(!isModeModalOpen)}>
           {inverterChargerModeFormatter(parseInt(mode))}
         </Button>
       )
