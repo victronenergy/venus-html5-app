@@ -69,7 +69,7 @@ const ValueBox = ({ title, icon, value, unit, hideDecimal, bottomValues, childre
           </div>
         </div>
         {bottomValues.length > 0 && (
-          <div className={"w-full h-full flex flex-col justify-end"}>
+          <div className={"w-full h-full flex flex-col-reverse"}>
             <div className={classNames("overflow-hidden", activeStyles.valueBars)}>
               {bottomValues.map((v, i) => (
                 <ValueBar key={i} prefix={isMultiPhase ? "L" + (i + 1) : undefined} values={v} />
