@@ -32,6 +32,10 @@ const HumidityData = ({ dataId, mode, boxSize }: Props) => {
     }
   }, [humidity, customName, dataId, handlePassVisibility])
 
+  if (humidity === undefined) {
+    return null
+  }
+
   if (mode === "compact") {
     return (
       <ValueOverview
