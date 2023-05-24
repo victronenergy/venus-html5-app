@@ -18,7 +18,7 @@ const Frame: React.FC<Props> = ({ children, open = true, onClose, className }) =
       onClick={onClose}
     >
       <div className={classnames("absolute", className)} onClick={(e) => e.stopPropagation()}>
-        <div className="overflow-hidden p-4 bg-white dark:bg-victron-darkGray rounded-md shadow-[0_8px_24px_-15px_rgba(0,0,0,0.75)]">
+        <div className="overflow-hidden p-4 bg-victron-gray-900 dark:bg-victron-darkGray rounded-md shadow-[0_8px_24px_-15px_rgba(0,0,0,0.75)]">
           {children}
         </div>
       </div>
