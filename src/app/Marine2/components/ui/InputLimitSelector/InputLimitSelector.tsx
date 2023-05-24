@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useInputLimit, useInputLimitSelector } from "@elninotech/mfd-modules"
+import { useAppStore, useInputLimit, useInputLimitSelector } from "@elninotech/mfd-modules"
 import Button from "../Button"
 import DeviceSettingModal from "../DeviceSettingModal"
 import { translate } from "react-i18nify"
@@ -7,6 +7,7 @@ import classnames from "classnames"
 import { observer } from "mobx-react"
 
 const InputLimitSelector = ({ inputId, title }: Props) => {
+  const { locked } = useAppStore() // lock from theme settings
   const USAmperage = [10, 15, 20, 30, 50, 100]
   const EUAmperage = [3, 6, 10, 13, 16, 25, 32, 63]
 
@@ -63,7 +64,7 @@ const InputLimitSelector = ({ inputId, title }: Props) => {
   if (!currentLimitIsAdjustable) return null
   return (
     <>
-      <Button className="w-full mr-4" size="md" onClick={() => setIsLimitModalOpen(!isLimitModalOpen)}>
+      <Button disabled={locked} className="w-full mr-4" size="md" onClick={() => setIsLimitModalOpen(!isLimitModalOpen)}>
         {!!currentLimit ? Number(currentLimit) + "A" : 0 + "A"}
       </Button>
       <DeviceSettingModal open={isLimitModalOpen} onClose={closeLimitModal} onSet={submitLimit} width={"lg"}>
