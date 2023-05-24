@@ -69,12 +69,12 @@ const verticalStyles: BreakpointStylesType = {
   },
   "md-s": {
     tankName: "text-lg mr-5",
-    level: "text-lg min-w-[3.5rem]",
+    level: "text-xl min-w-[3.5rem]",
     capacity: "text-xs",
   },
   "lg-s": {
     tankName: "text-lg mr-5",
-    level: "text-lg min-w-[3.5rem]",
+    level: "text-xl min-w-[3.5rem]",
     capacity: "text-xs",
   },
 }
