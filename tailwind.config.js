@@ -85,6 +85,7 @@ module.exports = {
             300: "#504F4B",
             400: "#64635F",
             500: "#969591",
+            600: "#DCDBD7",
           },
           blue: {
             DEFAULT: "#387DC5",
@@ -140,7 +141,7 @@ module.exports = {
         md: ["1.625rem", { lineHeight: "1.95rem" }], // 26px
         lg: ["1.75rem", { lineHeight: "2.1rem" }], // 28px
         xl: ["2.125rem", { lineHeight: "2.55rem" }], // 34px
-        "xxl": ["2.75rem", { lineHeight: "3.3rem" }], // 44px 
+        xxl: ["2.75rem", { lineHeight: "3.3rem" }], // 44px
         "2xl": ["3.5rem", { lineHeight: "4.2rem" }], // 56px
         "3xl": ["4.25rem", { lineHeight: "5.1rem" }], // 68px
         "4xl": ["5.375rem", { lineHeight: "6.45rem" }], // 86px

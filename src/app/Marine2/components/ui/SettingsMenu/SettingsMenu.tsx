@@ -45,7 +45,7 @@ const SettingsMenu = () => {
         ) : (
           <>
             {/* @ts-ignore */}
-            <CloseIcon className="w-8 ml-auto mr-2 opacity-1 z-20" onClick={() => setIsModalOpen(false)} />
+            <CloseIcon className="w-8 ml-auto mr-2 opacity-1 z-20 text-white dark:text-victron-blue" onClick={() => setIsModalOpen(false)} />
           </>
         )}
 
@@ -60,19 +60,25 @@ const SettingsMenu = () => {
             <div className="flex flex-col">
               <div className="text-sm mb-2 dark:text-white md:mb-4 md-m:text-base">
                 <label className="flex justify-between items-center pb-4">
-                  <span className="mr-1 text-sm sm-m:mr-2 sm-l:text-base">{translate("locker.lockMessage")}</span>
+                  <span className="mr-1 text-sm sm-m:mr-2 sm-l:text-base text-black dark:text-white">
+                    {translate("locker.lockMessage")}
+                  </span>
                   <ToggleSwitch onChange={toggleLocked} selected={locked} />
                 </label>
-                <div className="mr-2 mb-2 sm-l:mb-4 text-victron-gray text-xs sm-l:text-sm">
+                <div className="mr-2 mb-2 sm-l:mb-4 text-victron-gray-400 text-xs sm-l:text-sm dark:text-victron-gray-500">
                   {translate("locker.lockDesctiption")}
                 </div>
-                <div className="border border-victron-gray-300"></div>
-                <label className="text-xs text-victron-gray sm-l:text-sm">{translate("common.mode")}</label>
+                <div className="border border-victron-gray-600 dark:border-victron-gray-300"></div>
+                <label className="text-xs text-victron-gray-400 sm-l:text-sm dark:text-victron-gray-500">
+                  {translate("common.mode")}
+                </label>
                 <label
                   className="flex justify-between items-center pt-2 pb-4 sm-m:pb-6 sm-l:pb-8"
                   onClick={() => themeStore.setDarkMode(false)}
                 >
-                  <span className="mr-1 text-sm sm-m:mr-2 sm-l:text-base">{translate("common.light")}</span>
+                  <span className="mr-1 text-sm sm-m:mr-2 sm-l:text-base text-black dark:text-white">
+                    {translate("common.light")}
+                  </span>
                   <RadioButton
                     onChange={() => themeStore.setDarkMode(false)}
                     selected={!themeStore.darkMode}
@@ -83,7 +89,9 @@ const SettingsMenu = () => {
                   className="flex justify-between items-center pb-4 sm-m:pb-6 sm-l:pb-8"
                   onClick={() => themeStore.setDarkMode(true)}
                 >
-                  <span className="mr-1 text-sm sm-m:mr-2 sm-l:text-base">{translate("common.dark")}</span>
+                  <span className="mr-1 text-sm sm-m:mr-2 sm-l:text-base text-black dark:text-white">
+                    {translate("common.dark")}
+                  </span>
                   <RadioButton
                     onChange={() => themeStore.setDarkMode(true)}
                     selected={themeStore.darkMode}
@@ -91,13 +99,14 @@ const SettingsMenu = () => {
                   />
                 </label>
                 <label className="flex justify-between items-center pb-2 sm-m:pb-3 sm-l:pb-4">
-                  <span className="mr-1 text-sm sm-m:mr-2 sm-l:text-base">{translate("common.auto")}</span>
+                  <span className="mr-1 text-sm sm-m:mr-2 sm-l:text-base text-black dark:text-white">
+                    {translate("common.auto")}
+                  </span>
                   <ToggleSwitch onChange={setAutoMode} disabled={locked} />
                 </label>
-                <div className="mr-2 mb-2 sm-l:mb-4 text-victron-gray text-xs sm-l:text-sm">
+                <div className="mr-2 mb-2 sm-l:mb-4 text-victron-gray-400 text-xs sm-l:text-sm dark:text-victron-gray-500">
                   {translate("common.autoDescription")}
                 </div>
-                <div className="border border-victron-gray-300"></div>
               </div>
             </div>
           </Modal.Body>
