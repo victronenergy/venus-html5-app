@@ -64,7 +64,12 @@ const InputLimitSelector = ({ inputId, title }: Props) => {
   if (!currentLimitIsAdjustable) return null
   return (
     <>
-      <Button disabled={locked} className="w-full mr-4" size="md" onClick={() => setIsLimitModalOpen(!isLimitModalOpen)}>
+      <Button
+        disabled={locked}
+        className="w-full mr-4"
+        size="md"
+        onClick={() => setIsLimitModalOpen(!isLimitModalOpen)}
+      >
         {!!currentLimit ? Number(currentLimit) + "A" : 0 + "A"}
       </Button>
       <DeviceSettingModal open={isLimitModalOpen} onClose={closeLimitModal} onSet={submitLimit} width={"lg"}>
