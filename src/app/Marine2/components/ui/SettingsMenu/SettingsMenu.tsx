@@ -44,8 +44,11 @@ const SettingsMenu = () => {
           </div>
         ) : (
           <>
-            {/* @ts-ignore */}
-            <CloseIcon className="w-8 ml-auto mr-2 opacity-1 z-20 text-white dark:text-victron-blue" onClick={() => setIsModalOpen(false)} />
+            <CloseIcon
+              // @ts-ignore
+              className="w-8 ml-auto mr-2 opacity-1 z-20 text-white dark:text-victron-blue"
+              onClick={() => setIsModalOpen(false)}
+            />
           </>
         )}
 
@@ -79,10 +82,7 @@ const SettingsMenu = () => {
                   <span className="mr-1 text-sm sm-m:mr-2 sm-l:text-base text-black dark:text-white">
                     {translate("common.light")}
                   </span>
-                  <RadioButton
-                    onChange={() => themeStore.setDarkMode(false)}
-                    selected={!themeStore.darkMode}
-                  />
+                  <RadioButton onChange={() => themeStore.setDarkMode(false)} selected={!themeStore.darkMode} />
                 </label>
                 <label
                   className="flex justify-between items-center pb-4 sm-m:pb-6 sm-l:pb-8"
@@ -91,10 +91,7 @@ const SettingsMenu = () => {
                   <span className="mr-1 text-sm sm-m:mr-2 sm-l:text-base text-black dark:text-white">
                     {translate("common.dark")}
                   </span>
-                  <RadioButton
-                    onChange={() => themeStore.setDarkMode(true)}
-                    selected={themeStore.darkMode}
-                  />
+                  <RadioButton onChange={() => themeStore.setDarkMode(true)} selected={themeStore.darkMode} />
                 </label>
                 <label className="flex justify-between items-center pb-2 sm-m:pb-3 sm-l:pb-4">
                   <span className="mr-1 text-sm sm-m:mr-2 sm-l:text-base text-black dark:text-white">
