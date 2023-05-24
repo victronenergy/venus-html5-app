@@ -57,7 +57,7 @@ const ValueBox = ({ title, icon, value, unit, hideDecimal, bottomValues, childre
   return (
     <Box title={title} icon={icon} getBoxSizeCallback={setBoxSize} infoText={infoText}>
       <div className="w-full h-full flex flex-col justify-between">
-        <div className={"w-full h-full overflow-hidden"}>
+        <div className={"w-full overflow-hidden"}>
           <div className={classNames("text-victron-darkGray dark:text-white", activeStyles?.value)}>
             {(typeof value === "number" && formatValue(value, hideDecimal && unit !== "kW" ? 0 : 1)) || value}
             {typeof value === "number" && (
@@ -68,16 +68,16 @@ const ValueBox = ({ title, icon, value, unit, hideDecimal, bottomValues, childre
             {children}
           </div>
         </div>
-        {bottomValues.length > 0 && (
-          <div className={"w-full h-full flex flex-col-reverse"}>
+        <div className={"w-full flex flex-col"}>
+          {bottomValues.length > 0 && (
             <div className={classNames("overflow-hidden", activeStyles.valueBars)}>
               {bottomValues.map((v, i) => (
                 <ValueBar key={i} prefix={isMultiPhase ? "L" + (i + 1) : undefined} values={v} />
               ))}
             </div>
-          </div>
-        )}
-        {!!buttons && <div className="flex w-full">{buttons}</div>}
+          )}
+          {!!buttons && <div className="flex w-full">{buttons}</div>}
+        </div>
       </div>
     </Box>
   )
