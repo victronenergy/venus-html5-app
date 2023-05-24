@@ -1,4 +1,4 @@
-import { useInverterCharger, useShorePowerInput } from "@elninotech/mfd-modules"
+import { useAppStore, useInverterCharger, useShorePowerInput } from "@elninotech/mfd-modules"
 import { observer } from "mobx-react-lite"
 import InverterChargerIcon from "../../../images/icons/inverter-charger.svg"
 import { translate } from "react-i18nify"
@@ -14,6 +14,7 @@ import ValueBox from "../../ui/ValueBox"
 import ValueOverview from "../../ui/ValueOverview"
 
 const InverterCharger = ({ componentMode = "compact", compactBoxSize }: Props) => {
+  const { locked } = useAppStore() // lock from theme settings
   const inverterChargerModeFormatter = (value: number) => {
     switch (value) {
       case SYSTEM_MODE.CHARGER_ONLY:
@@ -62,7 +63,7 @@ const InverterCharger = ({ componentMode = "compact", compactBoxSize }: Props) =
     }
     if (adjustable) {
       buttons.push(
-        <Button className="w-full" size="md" onClick={() => setIsModeModalOpen(!isModeModalOpen)}>
+        <Button disabled={!locked} className="w-full" size="md" onClick={() => setIsModeModalOpen(!isModeModalOpen)}>
           {inverterChargerModeFormatter(parseInt(mode))}
         </Button>
       )

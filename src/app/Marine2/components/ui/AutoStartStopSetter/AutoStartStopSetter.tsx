@@ -5,6 +5,7 @@ import RadioButton from "../RadioButton"
 import Button from "../Button"
 import { useCallback, useEffect, useState } from "react"
 import { GENERATOR_START_STOP } from "../../../utils/constants"
+import { useAppStore } from "@elninotech/mfd-modules"
 
 const AutoStartStopSetter = ({
   statusCode,
@@ -15,6 +16,7 @@ const AutoStartStopSetter = ({
   updateAutoMode,
   isAutoStartDisabled,
 }: Props) => {
+  const { locked } = useAppStore() // lock from theme settings
   const running =
     manualStart === undefined ? (statusCode === undefined ? 0 : statusCode >= 1 && statusCode <= 8) : manualStart === 1
   const getStartStopMode = useCallback(() => {
@@ -72,7 +74,7 @@ const AutoStartStopSetter = ({
       <Button
         size="md"
         className="flex-none mt-3 w-full"
-        disabled={isAutoStartDisabled}
+        disabled={isAutoStartDisabled || !locked}
         onClick={() => setIsModeModalOpen(true)}
       >
         {autoStartFormatter(getStartStopMode())}
