@@ -1,4 +1,4 @@
-import { InverterInstanceId, useInverter } from "@elninotech/mfd-modules"
+import { InverterInstanceId, useAppStore, useInverter } from "@elninotech/mfd-modules"
 import { observer } from "mobx-react-lite"
 import InverterChargerIcon from "../../../images/icons/inverter-charger.svg"
 import { translate } from "react-i18nify"
@@ -39,6 +39,7 @@ const styles: BreakpointStylesType = {
   },
 }
 const Inverter = ({ instanceId, isVebusInverter, componentMode = "compact", compactBoxSize }: Props) => {
+  const { locked } = useAppStore() // lock from theme settings
   const inverterModeFormatter = (value: number) => {
     switch (value) {
       case INVERTER_MODE.OFF:
@@ -124,7 +125,7 @@ const Inverter = ({ instanceId, isVebusInverter, componentMode = "compact", comp
             />
           </div>
 
-          <Button className="w-full mt-3" size="md" onClick={() => setIsModeModalOpen(!isModeModalOpen)}>
+          <Button disabled={!locked} className="w-full mt-3" size="md" onClick={() => setIsModeModalOpen(!isModeModalOpen)}>
             {inverterMode}
           </Button>
         </div>
