@@ -17,22 +17,22 @@ import AuxillaryTank from "./AuxillaryTank"
 const compactStyles: BreakpointStylesType = {
   default: {
     tankName: "text-sm ",
-    level: "text-base",
+    level: "text-base min-w-[38px]",
   },
   "sm-s": {
     tankName: "text-sm ",
-    level: "text-base",
+    level: "text-base min-w-[38px]",
   },
   "sm-m": {
-    tankName: "text-sm ",
+    tankName: "text-sm min-w-[2rem]",
   },
   "md-s": {
     tankName: "text-base mr-4",
-    level: "text-lg",
+    level: "text-lg min-w-[3rem]",
   },
   "lg-s": {
     tankName: "text-base mr-4",
-    level: "text-lg",
+    level: "text-lg min-w-[3rem]",
   },
 }
 
@@ -59,22 +59,22 @@ const horizontalStyles: BreakpointStylesType = {
 const verticalStyles: BreakpointStylesType = {
   default: {
     tankName: "text-base mr-5",
-    level: "text-lg",
+    level: "text-lg min-w-[3rem]",
     capacity: "text-xs",
   },
   "sm-s": {
     tankName: "text-base mr-5",
-    level: "text-lg",
+    level: "text-lg min-w-[3rem]",
     capacity: "text-xs",
   },
   "md-s": {
     tankName: "text-lg mr-5",
-    level: "text-xl",
+    level: "text-lg min-w-[3.5rem]",
     capacity: "text-xs",
   },
   "lg-s": {
     tankName: "text-lg mr-5",
-    level: "text-xl",
+    level: "text-lg min-w-[3.5rem]",
     capacity: "text-xs",
   },
 }
@@ -250,7 +250,7 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
         </div>
       )
     } else {
-      // orientation === "horizontal"
+      // orientation === "horizontal" (orientation of the screen view)
       return (
         <div className="px-4">
           <div className="h-full w-full flex flex-row">
