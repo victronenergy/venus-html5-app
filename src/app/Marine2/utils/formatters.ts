@@ -50,7 +50,7 @@ export const colorForPercentageFormatter = function (percentage: number) {
 
 export const formatPower = (power: number): string => {
   // check if power is not a number
-  if (typeof power !== 'number' || isNaN(power)) {
+  if (typeof power !== "number" || isNaN(power)) {
     return "--"
   }
 
@@ -62,13 +62,13 @@ export const formatPower = (power: number): string => {
 }
 
 export const formatValue = (value?: number, decimalPlaces: number = 1): string => {
-  if (typeof value !== 'number' || isNaN(value)) {
-    return "--";
+  if (typeof value !== "number" || isNaN(value)) {
+    return "--"
   }
 
   if (!Number.isInteger(decimalPlaces) || decimalPlaces < 0) {
-    throw new Error("decimalPlaces must be a non-negative integer");
+    throw new Error("decimalPlaces must be a non-negative integer")
   }
 
-  return value.toFixed(decimalPlaces);
+  return value.toFixed(decimalPlaces)
 }
