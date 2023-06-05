@@ -48,9 +48,9 @@ export const colorForPercentageFormatter = function (percentage: number) {
   return "victron-green"
 }
 
-export const formatPower = (power: number) => {
-  // check if power is undefined
-  if (power === undefined) {
+export const formatPower = (power: number): string => {
+  // check if power is not a number
+  if (typeof power !== 'number' || isNaN(power)) {
     return "--"
   }
 
@@ -61,10 +61,14 @@ export const formatPower = (power: number) => {
   return power.toFixed(1)
 }
 
-export const formatValue = (value?: number, decimalPlaces: number = 1) => {
-  if (value === undefined) {
-    return "--"
+export const formatValue = (value?: number, decimalPlaces: number = 1): string => {
+  if (typeof value !== 'number' || isNaN(value)) {
+    return "--";
   }
 
-  return value.toFixed(decimalPlaces)
+  if (!Number.isInteger(decimalPlaces) || decimalPlaces < 0) {
+    throw new Error("decimalPlaces must be a non-negative integer");
+  }
+
+  return value.toFixed(decimalPlaces);
 }
