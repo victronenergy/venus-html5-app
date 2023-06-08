@@ -9,15 +9,15 @@ const styles: BreakpointStylesType = {
     value: "text-base",
     title: "text-sm leading-[1.1]",
     subtitle: "text-xs leading-none pb-1",
-    icon: "min-w-5 w-5",
-    smallIcon: "min-w-3 w-3",
+    icon: "min-w-5 w-5 text-victron-gray-200 dark:text-white",
+    smallIcon: "min-w-3 w-3 text-victron-gray-200 dark:text-white",
   },
   "md-s": {
     value: "text-lg",
     title: "text-base leading-[1.1]",
     subtitle: "text-sm leading-none pb-1",
-    icon: "min-w-7 w-7",
-    smallIcon: "min-w-5 w-5",
+    icon: "min-w-7 w-7 text-victron-gray-200 dark:text-white",
+    smallIcon: "min-w-5 w-5 text-victron-gray-200 dark:text-white",
   },
 }
 
@@ -50,7 +50,10 @@ const ValueOverview = ({
         {/* @ts-ignore */}
         {<Icon className={iconStyles} />}
         <div className={"px-2 min-w-0 flex flex-col"}>
-          <FadedText className={classNames("pr-8", activeStyles.title)} text={title} />
+          <FadedText
+            className={classNames("pr-8 text-victron-gray-200 dark:text-white", activeStyles.title)}
+            text={title}
+          />
           {subtitle && (
             <FadedText
               className={classNames("text-victron-gray pr-2 dark:text-victron-gray-500", activeStyles.subtitle)}
@@ -61,7 +64,7 @@ const ValueOverview = ({
       </div>
       <span className={classNames(activeStyles.value)}>
         {inputLimitValue ?? formatValue(value, hideDecimal && unit !== "kW" ? 0 : 1)}
-        <span className="text-victron-gray dark:text-victron-gray-500">{unit}</span>
+        <span className="text-victron-gray-300 dark:text-victron-gray-500">{unit}</span>
       </span>
     </div>
   )

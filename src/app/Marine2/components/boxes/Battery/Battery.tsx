@@ -81,12 +81,12 @@ const Battery = ({ battery }: Props) => {
             {battery.soc ? Math.round(battery.soc) : battery.soc ?? "--"}
             <span className={"pl-0.5 opacity-70"}>%</span>
           </div>
-          <div className={classNames("text-victron-gray dark:text-victron-gray-500", activeStyles.valueSubtitle)}>
+          <div className={classNames("text-victron-gray-300 dark:text-victron-gray-500", activeStyles.valueSubtitle)}>
             <p>{batteryStateNameFormatter(translate, battery.state)}</p>
             {battery.temperature && (
               <p>
                 {Math.round(battery.temperature)}
-                <span className={"text-victron-gray-400"}>°C</span>
+                <span className={"text-victron-gray-300 dark:text-victron-gray-400"}>°C</span>
               </p>
             )}
           </div>

@@ -39,7 +39,7 @@ const NumericInputRange = ({
   return (
     <div
       className={classnames(
-        "flex justify-between items-center w-full rounded-md text-md border-victron-blue border-2 bg-victron-blue/30 dark:bg-victron-blue-dark/30 text-black dark:text-white",
+        "flex justify-between items-center w-full rounded-md text-md border-victron-blue border-2 bg-victron-blue/30 dark:bg-victron-blue-dark/30 text-victron-gray-200 dark:text-white",
         className
       )}
     >

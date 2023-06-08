@@ -31,7 +31,7 @@ const VersionInfo = () => {
     >
       {/* todo: fix types for svg */}
       {/* @ts-ignore */}
-      <LogoIcon className={"w-32 text-black dark:text-white hidden sm:block"} alt={"Victron Energy"} />
+      <LogoIcon className={"w-32 text-victron-blue dark:text-white hidden sm:block"} alt={"Victron Energy"} />
       {/* todo: fix types for svg */}
       {/* @ts-ignore */}
       <LogoOnlyIcon className={"w-10 text-black dark:text-white sm:hidden block"} alt={"Victron Energy"} />
