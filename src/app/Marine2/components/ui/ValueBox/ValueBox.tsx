@@ -58,10 +58,10 @@ const ValueBox = ({ title, icon, value, unit, hideDecimal, bottomValues, childre
     <Box title={title} icon={icon} getBoxSizeCallback={setBoxSize} infoText={infoText}>
       <div className="w-full h-full flex flex-col justify-between">
         <div className={"w-full overflow-hidden"}>
-          <div className={classNames("text-victron-darkGray dark:text-white", activeStyles?.value)}>
+          <div className={classNames("text-black dark:text-white", activeStyles?.value)}>
             {(typeof value === "number" && formatValue(value, hideDecimal && unit !== "kW" ? 0 : 1)) || value}
             {typeof value === "number" && (
-              <span className={"pl-0.5 text-victron-gray dark:text-victron-gray-500"}>{unit}</span>
+              <span className={"pl-0.5 text-victron-gray-400 dark:text-victron-gray-500"}>{unit}</span>
             )}
           </div>
           <div className={classNames("text-victron-gray dark:text-victron-gray-500", activeStyles.valueSubtitle)}>
