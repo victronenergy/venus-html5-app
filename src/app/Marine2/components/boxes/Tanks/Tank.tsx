@@ -10,8 +10,6 @@ import BlackWaterIcon from "../../../images/icons/black-water.svg"
 import GrayWaterIcon from "../../../images/icons/waste-water.svg"
 import { applyStyles, BreakpointStylesType, StylesType } from "app/Marine2/utils/media"
 import useSize from "@react-hook/size"
-// @ts-ignore
-import AuxillaryTank from "./AuxillaryTank"
 
 // styles for compact mode
 const compactStyles: BreakpointStylesType = {
@@ -114,18 +112,7 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
   }, [fluidTypeNum, customName])
 
   // tanks that are missing level readings and only have capacity
-  if (!!capacity && level === undefined) {
-    return (
-      <AuxillaryTank
-        title={tankTitle}
-        mode={mode}
-        capacity={capacity}
-        fluidTypeNum={fluidTypeNum}
-        orientation={orientation}
-        parentSize={parentSize}
-      />
-    )
-  }
+  const isAuxillaryTank = !!capacity && level === undefined
 
   // check if tank values are not undefined
   if (
@@ -162,7 +149,7 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
                 : {}
             }
           >
-            <ProgressBar percentage={levelFormatter(level)} type={fluidTypeNum} />
+            <ProgressBar percentage={isAuxillaryTank ? 0 : levelFormatter(level)} type={fluidTypeNum} />
           </div>
           <div className="tank-level">
             <div style={levelWidth ? { width: roundLevelWidth(levelWidth + 4) + "px" } : {}} className="pl-2 md:pl-5">
@@ -171,7 +158,7 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
                   "text-victron-red": level > 75,
                 })}
               >
-                <div>{levelFormatter(level)}</div>
+                <div>{isAuxillaryTank ? "--" : levelFormatter(level)}</div>
                 <div
                   className={classnames({
                     "text-victron-red/70": level > 75,
@@ -196,7 +183,7 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
               <div className="flex flex-col p-2 w-full truncate">
                 <div className={classnames("truncate", verticalActiveStyles?.tankName)}>{tankTitle}</div>
                 <div className={classnames("text-victron-gray", verticalActiveStyles?.capacity)}>
-                  {formatCapacity(remaining) + "/" + formatCapacity(capacity) + "L"}
+                  {isAuxillaryTank ? "--" : formatCapacity(remaining) + "/" + formatCapacity(capacity) + "L"}
                 </div>
               </div>
             </div>
@@ -217,7 +204,11 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
                     : {}
                 }
               >
-                <ProgressBar percentage={levelFormatter(level)} type={fluidTypeNum} size={"large"} />
+                <ProgressBar
+                  percentage={isAuxillaryTank ? 0 : levelFormatter(level)}
+                  type={fluidTypeNum}
+                  size={"large"}
+                />
               </div>
               <div className="tank-level">
                 <div
@@ -233,7 +224,7 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
                       verticalActiveStyles?.level
                     )}
                   >
-                    <div>{levelFormatter(level)}</div>
+                    <div>{isAuxillaryTank ? "--" : levelFormatter(level)}</div>
                     <div
                       className={classnames({
                         "text-victron-red/70": level > 75,
@@ -255,7 +246,11 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
         <div className="px-4">
           <div className="h-full w-full flex flex-row">
             <div className="min-w-[10%] h-auto">
-              <ProgressBar percentage={levelFormatter(level)} type={fluidTypeNum} orientation="vertical" />
+              <ProgressBar
+                percentage={isAuxillaryTank ? 0 : levelFormatter(level)}
+                type={fluidTypeNum}
+                orientation="vertical"
+              />
             </div>
             <div className="flex flex-col justify-between min-w-[90%]">
               <div className="pt-2 px-2">
@@ -274,7 +269,7 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
                     horizontalActiveStyles?.level
                   )}
                 >
-                  <div>{levelFormatter(level)}</div>
+                  <div>{isAuxillaryTank ? "--" : levelFormatter(level)}</div>
                   <div
                     className={classnames({
                       "text-victron-red/70": level > 75,
@@ -285,7 +280,7 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
                   </div>
                 </div>
                 <div className={classnames("text-victron-gray", horizontalActiveStyles?.capacity)}>
-                  {formatCapacity(remaining) + "/" + formatCapacity(capacity) + "L"}
+                  {isAuxillaryTank ? "--" : formatCapacity(remaining) + "/" + formatCapacity(capacity) + "L"}
                 </div>
               </div>
             </div>
