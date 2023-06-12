@@ -27,9 +27,9 @@ Chapters in this readme:
 
 ### 1.1 Documentation per Box
 
-`Boxes` are the various designed visualisation: there is a Battery box, a Generator box, a Shorepower box, and so forth.
+`Boxes` are various designed visualisations: there is a Battery box, a Generator box, a Shorepower box, and so forth.
 
-How certain devices are visualised/rendered on HTML5, ie. in to what box(es), and what topics are used for what parameter, and more is documented in three places:
+Documentation on how certain devices are visualised/rendered on HTML5, e.g. in to which box(es) devices should go, which topics are used for which parameter, and more, can be found here:
 
 - [TOPICS.md](https://github.com/victronenergy/venus-html5-app/blob/master/TOPICS.md)
 - [wiki/Translating system components into the HTML5 app](https://github.com/victronenergy/venus-html5-app/wiki/Translating-system-components-into-the-HTML5-app)
@@ -107,7 +107,7 @@ for the Venus GX device.
 In the project main folder run `./bin/deploy.sh <ip>` where ip is the target device's IP. The script also accepts an additional
 `--user|-u` param that defines the user for the deployment connection. This defaults to `root`.
 
-The deploy script also bundles the app. Nore that the script assumes that it's run from the root folder of the application.
+The deploy script also bundles the app. Note that the script assumes that it's run from the root folder of the application.
 
 #### 2.6.3 Deploying using a USB stick
 
@@ -125,7 +125,7 @@ press the `reload page` on the top left corner of the page.
 
 ### 2.7 Translations
 
-#### 2.7.1 Syncronizing the translations files with the POEditor Project
+#### 2.7.1 Synchronizing the translations files with the POEditor Project
 
 [POEditor](https://poeditor.com/) is used as localization management platform for this project. In order to sync the translations using the scripts from the `poeditor` folder, an API key has to be placed in the `.env.local` according to the `.env.local.example` file.
 
@@ -138,7 +138,7 @@ npm run poeditor:push
 Running the command will trigger the following actions:
 
 1. Add the terms of the main language file (default: en)
-1. Add new languges to the POEditor project if they are available locally but missing in POEditor
+1. Add new languages to the POEditor project if they are available locally but missing in POEditor
 1. Add the local translations for all the languages
 1. Mark translations as fuzzy if there are changes in the translation of the main language
 
@@ -146,7 +146,7 @@ Running the command will trigger the following actions:
 npm run poeditor:push -f
 ```
 
-Running the comamnd with the `-f` flag will delete the terms from POEditor that are not present in the local file.
+Running the command with the `-f` flag will delete the terms from POEditor that are not present in the local file.
 Please use with caution. If wrong data is sent, existing terms and their translations might be irreversibly lost.
 
 #### 2.7.3 Pulling the POEditor translations locally
@@ -204,7 +204,7 @@ html5-app - 0.2 \
   * Reworked the UI
 ```
 
-If you need any changes to the how the app is included inside Venus, please specify in the TODO file as well what changes need to be made to the recipe.
+If you need any changes to how the app is included inside Venus, please specify in the TODO file as well what changes need to be made to the recipe.
 All Venus recipes are found [here](https://github.com/victronenergy/meta-victronenergy/tree/master/meta-ve-software/recipes-ve).
 A sample recipe for the HTML5 app is [here](https://github.com/victronenergy/meta-victronenergy/tree/master/meta-ve-software/recipes-ve)
 
