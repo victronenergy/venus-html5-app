@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef } from "react"
+import { useMemo, useRef } from "react"
 import { useTank } from "@elninotech/mfd-modules"
 import { observer } from "mobx-react-lite"
 import ProgressBar from "../../ui/ProgressBar"
