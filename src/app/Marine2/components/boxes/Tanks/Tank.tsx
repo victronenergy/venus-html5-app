@@ -178,7 +178,7 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
                 <div className={classnames("truncate", verticalActiveStyles?.tankName)}>{tankTitle}</div>
                 <div className={classnames("text-victron-gray", verticalActiveStyles?.capacity)}>
                   {isAuxillaryTank
-                    ? "--" + "/" + formatCapacity(capacity) + "ℓ"
+                    ? "--/" + formatCapacity(capacity) + "ℓ"
                     : formatCapacity(remaining) + "/" + formatCapacity(capacity) + "ℓ"}
                 </div>
               </div>
@@ -277,7 +277,7 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
                 </div>
                 <div className={classnames("text-victron-gray", horizontalActiveStyles?.capacity)}>
                   {isAuxillaryTank
-                    ? "--" + "/" + formatCapacity(capacity) + "ℓ"
+                    ? "--/" + formatCapacity(capacity) + "ℓ"
                     : formatCapacity(remaining) + "/" + formatCapacity(capacity) + "ℓ"}
                 </div>
               </div>
