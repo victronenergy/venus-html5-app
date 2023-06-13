@@ -1,4 +1,4 @@
-import { useMemo, useRef } from "react"
+import { useEffect, useMemo, useRef } from "react"
 import { useTank } from "@elninotech/mfd-modules"
 import { observer } from "mobx-react-lite"
 import ProgressBar from "../../ui/ProgressBar"
@@ -78,7 +78,7 @@ const verticalStyles: BreakpointStylesType = {
 }
 
 const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", parentSize }: Props) => {
-  let { capacity, fluidType, level, remaining, unit, customName } = useTank(tankInstanceId)
+  let { capacity, fluidType, level, remaining, customName } = useTank(tankInstanceId)
   const fluidTypeNum = +fluidType
   const wrapperRef = useRef<HTMLDivElement>(null)
   const [width] = useSize(wrapperRef)
@@ -178,8 +178,8 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
                 <div className={classnames("truncate", verticalActiveStyles?.tankName)}>{tankTitle}</div>
                 <div className={classnames("text-victron-gray", verticalActiveStyles?.capacity)}>
                   {isAuxillaryTank
-                    ? "--" + "/" + formatCapacity(capacity) + "L"
-                    : formatCapacity(remaining) + "/" + formatCapacity(capacity) + "L"}
+                    ? "--" + "/" + formatCapacity(capacity) + "ℓ"
+                    : formatCapacity(remaining) + "/" + formatCapacity(capacity) + "ℓ"}
                 </div>
               </div>
             </div>
@@ -277,8 +277,8 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
                 </div>
                 <div className={classnames("text-victron-gray", horizontalActiveStyles?.capacity)}>
                   {isAuxillaryTank
-                    ? "--" + "/" + formatCapacity(capacity) + "L"
-                    : formatCapacity(remaining) + "/" + formatCapacity(capacity) + "L"}
+                    ? "--" + "/" + formatCapacity(capacity) + "ℓ"
+                    : formatCapacity(remaining) + "/" + formatCapacity(capacity) + "ℓ"}
                 </div>
               </div>
             </div>
