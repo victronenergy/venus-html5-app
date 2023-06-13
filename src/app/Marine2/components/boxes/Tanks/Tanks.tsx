@@ -162,7 +162,7 @@ const Tanks = ({ mode = "full", className }: Props) => {
           >
             <div className="flex h-full" ref={gridRef}>
               {filteredTanks.map((tank) => (
-              <Tank
+                <Tank
                   key={tank}
                   tankInstanceId={tank!}
                   mode="full"
