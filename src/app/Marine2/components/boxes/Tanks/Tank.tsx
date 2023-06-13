@@ -1,4 +1,4 @@
-import { useMemo, useRef, useEffect } from "react"
+import { useMemo, useRef } from "react"
 import { useTank } from "@elninotech/mfd-modules"
 import { observer } from "mobx-react-lite"
 import ProgressBar from "../../ui/ProgressBar"
@@ -113,10 +113,6 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
 
   // tanks that are missing level readings and only have capacity
   let isAuxillaryTank = !!capacity && level === undefined
-
-  useEffect(() => {
-    console.log(isAuxillaryTank, "isAuxillaryTank", customName, capacity, level, remaining, unit)
-  }, [isAuxillaryTank])
 
   // check if tank values are not undefined
   if (capacity === undefined && remaining === undefined) {
