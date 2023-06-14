@@ -1,52 +1,13 @@
 import Box from "../Box"
 import classNames from "classnames"
 import { useState } from "react"
-import { applyStyles, BreakpointStylesType } from "../../../utils/media"
+import { applyStyles, defaultBoxStyles } from "../../../utils/media"
 import ValueBar from "../ValueBar"
 import { formatValue } from "../../../utils/formatters"
 
-const styles: BreakpointStylesType = {
-  default: {
-    value: "text-xl",
-    valueSubtitle: "text-base",
-    valueBar: "text-sm",
-    valueBars: "text-sm",
-  },
-  "sm-s": {
-    value: "text-2xl",
-    valueSubtitle: "text-lg",
-    valueBar: "text-sm",
-    valueBars: "text-sm",
-  },
-  "md-s": {
-    value: "text-2xl",
-    valueSubtitle: "text-lg",
-    valueBar: "text-lg",
-    valueBars: "text-lg",
-  },
-  "md-m": {
-    value: "text-3xl",
-    valueSubtitle: "text-xl",
-    valueBar: "text-xl",
-    valueBars: "text-lg",
-  },
-  "md-l": {
-    value: "text-4xl",
-    valueSubtitle: "text-xl",
-    valueBar: "text-xl",
-    valueBars: "text-lg",
-  },
-  "lg-m": {
-    value: "text-4xl",
-    valueSubtitle: "text-xl",
-    valueBar: "text-xl",
-    valueBars: "text-lg",
-  },
-}
-
 const ValueBox = ({ title, icon, value, unit, hideDecimal, bottomValues, children, buttons, infoText }: Props) => {
   const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
-  const activeStyles = applyStyles(boxSize, styles)
+  const activeStyles = applyStyles(boxSize, defaultBoxStyles)
   const isMultiPhase = bottomValues.length > 1
 
   if (unit === "W" && value && typeof value === "number" && value > 1000) {
@@ -58,7 +19,7 @@ const ValueBox = ({ title, icon, value, unit, hideDecimal, bottomValues, childre
     <Box title={title} icon={icon} getBoxSizeCallback={setBoxSize} infoText={infoText}>
       <div className="w-full h-full flex flex-col justify-between">
         <div className={"w-full overflow-hidden"}>
-          <div className={classNames("text-black dark:text-white", activeStyles?.value)}>
+          <div className={classNames("text-black dark:text-white", activeStyles?.mainValue)}>
             {(typeof value === "number" && formatValue(value, hideDecimal && unit !== "kW" ? 0 : 1)) || value}
             {typeof value === "number" && (
               <span className={"pl-0.5 text-victron-gray-400 dark:text-victron-gray-500"}>{unit}</span>
@@ -70,7 +31,7 @@ const ValueBox = ({ title, icon, value, unit, hideDecimal, bottomValues, childre
         </div>
         <div className={"w-full flex flex-col"}>
           {bottomValues.length > 0 && (
-            <div className={classNames("overflow-hidden", activeStyles.valueBars)}>
+            <div className={classNames("overflow-hidden", activeStyles.secondaryValue)}>
               {bottomValues.map((v, i) => (
                 <ValueBar key={i} prefix={isMultiPhase ? "L" + (i + 1) : undefined} values={v} />
               ))}
