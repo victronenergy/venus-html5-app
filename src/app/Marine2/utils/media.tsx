@@ -71,7 +71,7 @@ export const applyStyles = (size: ComponentSizeType, stylesObject: BreakpointSty
         styles = { ...styles, ...stylesObject[breakpoint] }
       }
     })
-    
+
     if (Object.keys(styles).length === 0) {
       styles = stylesObject["default"]
     }
@@ -83,11 +83,10 @@ export const applyStyles = (size: ComponentSizeType, stylesObject: BreakpointSty
         styles = { ...styles, ...stylesObject[breakpoint] }
       }
     })
-    
+
     if (Object.keys(styles).length === 0) {
       styles = stylesObject["default"]
-  }
-
+    }
   }
   return styles
 }
