@@ -9,35 +9,13 @@ import GeneratorIcon from "../../../images/icons/generator.svg"
 import classnames from "classnames"
 import ValueBar from "../../ui/ValueBar"
 import Box from "../../ui/Box"
-import { applyStyles, BreakpointStylesType } from "../../../utils/media"
+import { applyStyles, defaultBoxStyles } from "../../../utils/media"
 import { useEffect, useState } from "react"
 import classNames from "classnames"
 import RadioButton from "../../ui/RadioButton"
 import DeviceSettingModal from "../../ui/DeviceSettingModal/DeviceSettingModal"
 import ValueOverview from "../../ui/ValueOverview"
 
-const styles: BreakpointStylesType = {
-  default: {
-    value: "text-lg",
-    valueBars: "text-base",
-  },
-  "sm-s": {
-    value: "text-lg",
-    valueBars: "text-base",
-  },
-  "md-s": {
-    value: "text-xxl",
-    valueBars: "text-xl",
-  },
-  "md-m": {
-    value: "text-lg",
-    valueBars: "text-base",
-  },
-  "lg-l": {
-    value: "text-2xl",
-    valueBars: "text-xxl",
-  },
-}
 const Charger = ({ instanceId, componentMode = "compact", compactBoxSize }: Props) => {
   const chargerModeFormatter = (value: number) => {
     switch (value) {
@@ -71,7 +49,7 @@ const Charger = ({ instanceId, componentMode = "compact", compactBoxSize }: Prop
   const productNameShort = customName || (productName && productName.split(" ")[0])
 
   const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
-  const activeStyles = applyStyles(boxSize, styles)
+  const activeStyles = applyStyles(boxSize, defaultBoxStyles)
 
   const [isModeModalOpen, setIsModeModalOpen] = useState(false)
   const [modeForSubmission, setModeForSubmission] = useState(Number(mode))
@@ -143,9 +121,11 @@ const Charger = ({ instanceId, componentMode = "compact", compactBoxSize }: Prop
       getBoxSizeCallback={setBoxSize}
     >
       <div className="w-full h-full flex flex-col justify-between">
-        <div className={classNames("text-victron-darkGray dark:text-white", activeStyles?.value)}>{chargerState}</div>
+        <div className={classNames("text-victron-darkGray dark:text-white", activeStyles?.mainValue)}>
+          {chargerState}
+        </div>
         <div className="w-full h-full min-h-0 shrink flex flex-col justify-end mt-2">
-          <div className={classnames("", activeStyles?.valueBars)}>
+          <div className={classnames("", activeStyles?.secondaryValue)}>
             <ValueBar values={current.slice(0, nrOfOutputs).map((v) => ({ value: v, unit: "A" }))} />
           </div>
           <div className="flex mt-3">

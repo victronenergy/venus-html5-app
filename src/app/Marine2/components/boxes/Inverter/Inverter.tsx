@@ -12,32 +12,10 @@ import Button from "../../ui/Button"
 import DeviceSettingModal from "../../ui/DeviceSettingModal/DeviceSettingModal"
 import RadioButton from "../../ui/RadioButton"
 import Box from "../../ui/Box"
-import { applyStyles, BreakpointStylesType } from "../../../utils/media"
+import { applyStyles, defaultBoxStyles } from "../../../utils/media"
 import { useEffect, useState } from "react"
 import ValueOverview from "../../ui/ValueOverview"
 
-const styles: BreakpointStylesType = {
-  default: {
-    value: "text-lg",
-    valueBars: "text-base",
-  },
-  "sm-s": {
-    value: "text-lg",
-    valueBars: "text-base",
-  },
-  "md-s": {
-    value: "text-xxl",
-    valueBars: "text-xl",
-  },
-  "md-m": {
-    value: "text-lg",
-    valueBars: "text-base",
-  },
-  "lg-l": {
-    value: "text-2xl",
-    valueBars: "text-xxl",
-  },
-}
 const Inverter = ({ instanceId, isVebusInverter, componentMode = "compact", compactBoxSize }: Props) => {
   const { locked } = useAppStore() // lock from theme settings
   const inverterModeFormatter = (value: number) => {
@@ -66,7 +44,7 @@ const Inverter = ({ instanceId, isVebusInverter, componentMode = "compact", comp
   const inverterMode = inverterModeFormatter(Number(mode))
 
   const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
-  const activeStyles = applyStyles(boxSize, styles)
+  const activeStyles = applyStyles(boxSize, defaultBoxStyles)
 
   const [isModeModalOpen, setIsModeModalOpen] = useState(false)
   const [modeForSubmission, setModeForSubmission] = useState(Number(mode))
@@ -113,9 +91,11 @@ const Inverter = ({ instanceId, isVebusInverter, componentMode = "compact", comp
       getBoxSizeCallback={setBoxSize}
     >
       <div className="w-full h-full flex flex-col justify-between">
-        <div className={classNames("text-victron-darkGray dark:text-white", activeStyles?.value)}>{inverterState}</div>
+        <div className={classNames("text-victron-darkGray dark:text-white", activeStyles?.mainValue)}>
+          {inverterState}
+        </div>
         <div className="w-full h-full min-h-0 shrink flex flex-col justify-end mt-2">
-          <div className={classnames("", activeStyles?.valueBars)}>
+          <div className={classnames("", activeStyles?.secondaryValue)}>
             <ValueBar
               values={[
                 { value: voltage, unit: "V" },
