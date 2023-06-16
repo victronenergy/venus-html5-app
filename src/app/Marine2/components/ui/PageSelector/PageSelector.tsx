@@ -128,7 +128,7 @@ const PageSelector = ({
       </div>
       <div
         onClick={onRightSelectorClick}
-        className={"w-11 h-11 shrink-0 text-victron-gray dark:text-victron-gray-dark"}
+        className={"w-[44px] h-[44px] shrink-0 text-victron-gray dark:text-victron-gray-dark"}
       >
         {(isHorizontal &&
           ((currentPage < maxPages - 1 && (

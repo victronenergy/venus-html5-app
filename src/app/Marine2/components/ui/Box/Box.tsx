@@ -62,11 +62,11 @@ const Box = ({
           <FadedText text={title} className={"text-base"} />
         </div>
         {linkedView && (
-          <div className="-mr-3 p-3" onClick={handleClick}>
+          <div className="-mr-3 p-[12px] cursor-pointer" onClick={handleClick}>
             <ArrowRightIcon
               /* todo: fix types for svg */
               /* @ts-ignore */
-              className={"w-6 text-victron-blue dark:text-victron-blue-dark cursor-pointer outline-none"}
+              className={"w-[24px] text-victron-blue dark:text-victron-blue-dark cursor-pointer outline-none"}
               alt={"Expand"}
             />
           </div>
