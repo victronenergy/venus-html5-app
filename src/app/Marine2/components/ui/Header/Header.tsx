@@ -21,11 +21,11 @@ const Header = ({ title }: Props) => {
       {isShowBack && (
         <div
           onClick={handleBackClick}
-          className={"absolute right-1 top-1.5 cursor-pointer py-3 pl-14 w-24 min-w-24 z-1 outline-none"}
+          className={"absolute right-1 top-1.5 cursor-pointer py-[12px] pl-[56px] w-24 min-w-[96px] z-1 outline-none"}
         >
           {/* todo: fix types for svg */}
           {/* @ts-ignore */}
-          <BackIcon className={"w-6 text-blue-600 dark:text-blue-400"} alt={"Back"} />
+          <BackIcon className={"w-[24px] text-blue-600 dark:text-blue-400"} alt={"Back"} />
         </div>
       )}
     </div>

@@ -32,21 +32,21 @@ const SettingsMenu = () => {
 
   return (
     <div
-      className="fixed right-1 bottom-4 dark:text-white cursor-pointer w-16 outline-none"
+      className="fixed right-1 bottom-4 dark:text-white cursor-pointer w-[64px] outline-none"
       onClick={() => setIsModalOpen(!isModalOpen)}
     >
       <div className="flex justify-center items-center w-full">
         {!isModalOpen ? (
-          <div className="pl-8 pt-4 w-16 h-12">
+          <div className="pl-[32px] pt-[16px] w-[64px] h-[48px]">
             {/* todo: fix types for svg */}
             {/* @ts-ignore */}
-            <PreferencesIcon className="w-1" alt={"Settings"} />
+            <PreferencesIcon className="w-[4px]" alt={"Settings"} />
           </div>
         ) : (
           <>
             <CloseIcon
               // @ts-ignore
-              className="w-8 ml-auto mr-2 opacity-1 z-20 text-white dark:text-victron-blue"
+              className="w-[32px] ml-auto mr-2 opacity-1 z-20 text-white dark:text-victron-blue"
               onClick={() => setIsModalOpen(false)}
             />
           </>
