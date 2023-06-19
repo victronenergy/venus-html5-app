@@ -101,17 +101,17 @@ const getAvailableEnergyBoxes = function (
   const boxes = []
 
   if (shoreInputId) {
-    boxes.push(<EnergyShore mode={mode} inputId={shoreInputId} compactBoxSize={compactBoxSize} />)
+    boxes.push(<EnergyShore key={`energy-shore`} mode={mode} inputId={shoreInputId} compactBoxSize={compactBoxSize} />)
   }
 
   if ((pvCharger.current || pvCharger.current === 0) && (pvCharger.power || pvCharger.power === 0)) {
-    boxes.push(<EnergySolar mode={mode} pvCharger={pvCharger} compactBoxSize={compactBoxSize} />)
+    boxes.push(<EnergySolar key={`energy-solar`} mode={mode} pvCharger={pvCharger} compactBoxSize={compactBoxSize} />)
   }
 
-  if (acLoads.phases) boxes.push(<EnergyAC mode={mode} acLoads={acLoads} compactBoxSize={compactBoxSize} />)
+  if (acLoads.phases) boxes.push(<EnergyAC key={`energy-ac`} mode={mode} acLoads={acLoads} compactBoxSize={compactBoxSize} />)
 
   if ((dcLoads.current || dcLoads.current === 0) && (dcLoads.voltage || dcLoads.voltage === 0) && dcLoads.power) {
-    boxes.push(<EnergyDC mode={mode} dcLoads={dcLoads} compactBoxSize={compactBoxSize} />)
+    boxes.push(<EnergyDC key={`energy-dc`} mode={mode} dcLoads={dcLoads} compactBoxSize={compactBoxSize} />)
   }
 
   const alternatorsPresent = alternators.filter((v) => v || v === 0)
