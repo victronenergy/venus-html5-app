@@ -108,7 +108,8 @@ const getAvailableEnergyBoxes = function (
     boxes.push(<EnergySolar key={`energy-solar`} mode={mode} pvCharger={pvCharger} compactBoxSize={compactBoxSize} />)
   }
 
-  if (acLoads.phases) boxes.push(<EnergyAC key={`energy-ac`} mode={mode} acLoads={acLoads} compactBoxSize={compactBoxSize} />)
+  if (acLoads.phases)
+    boxes.push(<EnergyAC key={`energy-ac`} mode={mode} acLoads={acLoads} compactBoxSize={compactBoxSize} />)
 
   if ((dcLoads.current || dcLoads.current === 0) && (dcLoads.voltage || dcLoads.voltage === 0) && dcLoads.power) {
     boxes.push(<EnergyDC key={`energy-dc`} mode={mode} dcLoads={dcLoads} compactBoxSize={compactBoxSize} />)
