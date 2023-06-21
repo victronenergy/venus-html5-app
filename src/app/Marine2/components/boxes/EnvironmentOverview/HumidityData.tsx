@@ -41,7 +41,7 @@ const HumidityData = ({ dataId, mode, boxSize }: Props) => {
       <ValueOverview
         /* @ts-ignore */
         Icon={HumidityIcon}
-        title={translate("boxes.humidity")}
+        title={customName || translate("boxes.humidity")}
         value={humidity}
         boxSize={boxSize}
         unit={"%"}

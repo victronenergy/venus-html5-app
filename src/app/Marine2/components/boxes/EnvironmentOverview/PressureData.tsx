@@ -42,7 +42,7 @@ const PressureData = ({ dataId, mode, boxSize }: Props) => {
       <ValueOverview
         /* @ts-ignore */
         Icon={PressureIcon}
-        title={translate("boxes.pressure")}
+        title={customName || translate("boxes.pressure")}
         value={pressure}
         boxSize={boxSize}
         unit={"hPa"}
