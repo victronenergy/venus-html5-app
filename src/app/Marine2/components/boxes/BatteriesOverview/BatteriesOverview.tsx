@@ -106,9 +106,6 @@ const BatteriesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) =>
                   <div
                     key={b.id}
                     className={"h-full flex items-center justify-center"}
-                    style={{
-                      transform: `scale(${circleScale})`,
-                    }}
                   >
                     <BatterySummary
                       key={b.id}

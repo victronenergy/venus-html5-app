@@ -9,27 +9,27 @@ import FadedText from "../FadedText"
 
 const styles: BreakpointStylesType = {
   default: {
-    circle: "w-[60px]",
-    circleWrapper: "px-1.5 h-[50px]",
-    voltage: "hidden",
-    name: "hidden",
-    state: "text-2xs",
-  },
-  "xs-xs": {
-    circle: "w-[110px]",
-    circleWrapper: "px-2.5 h-[90px]",
-    voltage: "text-base hidden",
-    name: "text-base",
+    circle: "w-[142px]",
+    circleWrapper: "px-5 h-[142px]",
+    voltage: "text-sm",
+    name: "text-sm",
     state: "text-xs",
   },
-  "sm-s": {
+  small: {
+    circle: "w-[142px]",
+    circleWrapper: "px-5 h-[142px]",
+    voltage: "text-sm",
+    name: "text-sm",
+    state: "text-xs",
+  },
+  medium: {
     circle: "w-[198px]",
     circleWrapper: "px-3 h-[144px]",
     voltage: "block",
     name: "text-base",
     state: "text-sm",
   },
-  "sm-m": {
+  large: {
     circle: "w-[270px]",
     circleWrapper: "px-4 h-[238px]",
     voltage: "text-lg",
@@ -44,25 +44,27 @@ const BatterySummary = ({ battery, boxSize, circleRef }: Props) => {
   return (
     <div className={classNames("flex flex-col justify-center items-center mx-8", activeStyles.circle)} ref={circleRef}>
       <div className={classNames("w-full", activeStyles.circleWrapper)}>
+        <FadedText text={battery.name} className={classNames("", activeStyles.name)} />
         <ProgressCircle percentage={battery.soc ?? null} boxSize={boxSize}>
-          {battery.voltage || battery.voltage === 0 ? (
-            <div className={classNames("text-victron-gray dark:text-victron-gray-dark", activeStyles.voltage)}>
-              {formatValue(battery.voltage)}
-              <span className={"text-victron-gray-4 dark:text-victron-gray-4-dark"}>V</span>
-            </div>
-          ) : (
-            <></>
-          )}
+          <div>
+            {battery.voltage || battery.voltage === 0 ? (
+              <div className={classNames("text-victron-gray dark:text-victron-gray-dark", activeStyles.voltage)}>
+                {formatValue(battery.voltage)}
+                {formatValue(battery.current)}
+              </div>
+            ) : (
+              <></>
+            )}
+            <span className={"text-victron-gray-4 dark:text-victron-gray-4-dark"}>V</span>
+            <span className={classNames("text-victron-gray dark:text-victron-gray-dark", activeStyles.state)}>
+              {battery.state === BATTERY.DISCHARGING && battery.timetogo
+                ? timeAsStringFormatter(translate, battery.timetogo)
+                : batteryStateNameFormatter(translate, battery.state, battery.soc ?? null)}
+            </span>
+          </div>
         </ProgressCircle>
       </div>
-      <FadedText text={battery.name} className={classNames("mt-3.5 text-center", activeStyles.name)} />
-      {
-        <span className={classNames("text-victron-gray dark:text-victron-gray-dark", activeStyles.state)}>
-          {battery.state === BATTERY.DISCHARGING && battery.timetogo
-            ? timeAsStringFormatter(translate, battery.timetogo)
-            : batteryStateNameFormatter(translate, battery.state, battery.soc ?? null)}
-        </span>
-      }
+      {}
     </div>
   )
 }
