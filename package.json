@@ -1,13 +1,13 @@
 {
   "name": "victron-venus-metrics",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "description": "Metric framework for Victron VenusOS",
   "license": "ISC",
   "author": "",
   "dependencies": {
     "@babel/core": "^7.20.5",
     "@babel/runtime": "^7.20.6",
-    "@elninotech/mfd-modules": "^3.3.0",
+    "@elninotech/mfd-modules": "^3.3.1",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.10",
     "@react-hook/size": "^2.1",
     "@sentry/react": "^6.15.0",
