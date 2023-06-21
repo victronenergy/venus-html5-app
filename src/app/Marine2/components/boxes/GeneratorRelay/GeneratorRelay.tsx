@@ -92,8 +92,7 @@ const GeneratorRelay = ({
       unit={phases > 1 ? "W" : "A"}
       value={subTitle}
       bottomValues={active || statusCode === 1 ? phasesOverview : []}
-    >
-    </ValueBox>
+    ></ValueBox>
   )
 }
 
