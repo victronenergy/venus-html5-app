@@ -99,9 +99,6 @@ const SettingsMenu = () => {
                   </span>
                   <ToggleSwitch onChange={setAutoMode} />
                 </label>
-                <div className="mr-2 mb-2 sm-l:mb-4 text-victron-gray-400 text-xs sm-l:text-sm dark:text-victron-gray-500">
-                  {translate("common.autoDescription")}
-                </div>
               </div>
             </div>
           </Modal.Body>
