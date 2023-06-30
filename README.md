@@ -180,15 +180,15 @@ To run the ui tests in CI-style use `npm run test:e2e`
 
 ## 4. Making a release
 
-Whenever a new tag is created, GitHub Actions will build the app, archive the built files and upload them as `venus-html5-app.tar.gz` to the Github Release associated with the tag.
+Whenever a new tag is created, GitHub Actions will build the app, archive the built files and upload them as `venus-html5-app.tar.gz` to the Github Release associated with the tag. In the release notes, add a descriptive explanation of the changes and improvements made in this version.
 The app can then be downloaded from `https://github.com/victronenergy/venus-html5-app/releases/download/<TAG_NAME>/venus-html5-app.tar.gz`.
 The build script expects the tags to follow semantic versioning (e.g. `1.2.3`, `1.2`, etc.) and will not trigger for tags that don't follow this convention (e.g. `v1.0`, `test`).
 
-To include the HTML5 app in the next Venus OS version:
+To make sure the new build of the HTML5 app will be included in the next Venus OS version:
 
 1. Increment the version number in `package.json`. Create and push a commit.
 2. Create & push a tag for the version (do not use `v` in the version name, just the number)
-3. Update the [todo](https://github.com/victronenergy/venus-private/wiki/todo) page for the build
+3. Update the [todo](https://github.com/victronenergy/venus-private/wiki/todo) page with the build
 
 You should add a note under `Done - waiting for recipe / venus maintainer`, containing the tag name and the changes included:
 
