@@ -78,7 +78,7 @@ const verticalStyles: BreakpointStylesType = {
 }
 
 const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", parentSize }: Props) => {
-  let { capacity, fluidType, level, remaining, customName } = useTank(tankInstanceId)
+  let { capacity, fluidType, level, remaining, customName, unit } = useTank(tankInstanceId)
   const fluidTypeNum = +fluidType
   const wrapperRef = useRef<HTMLDivElement>(null)
   const [width] = useSize(wrapperRef)
@@ -291,7 +291,6 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
 
 // Convert remaining and total capacity to liters from m3
 const formatCapacity = (capacity: number) => {
-  console.log(capacity, "capacity")
   return Math.round(capacity * 1000)
 }
 
