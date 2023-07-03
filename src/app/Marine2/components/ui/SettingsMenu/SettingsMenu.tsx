@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { observer } from "mobx-react"
 import { useAppStore, useTheme } from "@elninotech/mfd-modules"
 import { translate } from "react-i18nify"
@@ -9,12 +9,22 @@ import ToggleSwitch from "../ToggleSwitch"
 import RadioButton from "../RadioButton"
 import { AppViews, useAppViewsStore } from "../../../modules/AppViews"
 import Button from "../Button"
+import classNames from "classnames"
 
 const SettingsMenu = () => {
   const { locked, toggleLocked } = useAppStore()
   const { themeStore } = useTheme()
   const appViewsStore = useAppViewsStore()
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isHorizontal, setIsHorizontal] = useState(false)
+
+  useEffect(() => {
+    if (window.innerWidth > 2 * window.innerHeight) {
+      setIsHorizontal(true)
+    } else {
+      setIsHorizontal(false)
+    }
+  })
 
   const setAutoMode = () => {
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)")
@@ -57,7 +67,7 @@ const SettingsMenu = () => {
           onClose={() => {
             setIsModalOpen(false)
           }}
-          className="w-3/4 max-w-md mr-6 mb-16 bottom-0 right-0"
+          className={classNames("w-3/4 max-w-md mr-6 bottom-0 right-0", isHorizontal ? "mr-16" : "mb-10")}
         >
           <Modal.Body>
             <div className="flex flex-col">
