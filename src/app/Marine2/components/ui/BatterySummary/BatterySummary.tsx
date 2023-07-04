@@ -45,10 +45,16 @@ const BatterySummary = ({ battery, boxSize, circleRef }: Props) => {
     <div className={classNames("flex flex-col justify-center items-center mx-8", activeStyles.circle)} ref={circleRef}>
       <div className={classNames("w-full", activeStyles.circleWrapper)}>
         <ProgressCircle percentage={battery.soc ?? null} boxSize={boxSize}>
-          {battery.voltage || battery.voltage === 0 ? (
-            <div className={classNames("text-victron-gray dark:text-victron-gray-dark", activeStyles.voltage)}>
-              {formatValue(battery.voltage)}
-              <span className={"text-victron-gray-4 dark:text-victron-gray-4-dark"}>V</span>
+          {battery.voltage || (battery.voltage === 0 && (battery.current || battery.current === 0)) ? (
+            <div className="flex gap-1 md:gap-2">
+              <div className={classNames("text-victron-gray dark:text-victron-gray-dark", activeStyles.voltage)}>
+                {formatValue(battery.voltage)}
+                <span className={"text-victron-gray-400 dark:text-victron-gray-400-dark"}>V</span>
+              </div>
+              <div className={classNames("text-victron-gray dark:text-victron-gray-dark", activeStyles.voltage)}>
+                {formatValue(battery.current)}
+                <span className={"text-victron-gray-400 dark:text-victron-gray-400-dark"}>A</span>
+              </div>
             </div>
           ) : (
             <></>
