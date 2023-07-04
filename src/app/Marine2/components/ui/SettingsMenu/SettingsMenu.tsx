@@ -19,12 +19,23 @@ const SettingsMenu = () => {
   const [isHorizontal, setIsHorizontal] = useState(false)
 
   useEffect(() => {
-    if (window.innerWidth > 2 * window.innerHeight) {
-      setIsHorizontal(true)
-    } else {
-      setIsHorizontal(false)
+    const handleResize = () => {
+      if (window.innerWidth > 3 * window.innerHeight) {
+        setIsHorizontal(true)
+      } else {
+        setIsHorizontal(false)
+      }
     }
-  }, [setIsHorizontal])
+
+    handleResize()
+
+    window.addEventListener("resize", handleResize)
+
+    // Clean up after unmount
+    return () => {
+      window.removeEventListener("resize", handleResize)
+    }
+  }, [])
 
   const setAutoMode = () => {
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)")
@@ -67,7 +78,7 @@ const SettingsMenu = () => {
           onClose={() => {
             setIsModalOpen(false)
           }}
-          className={classNames("w-3/4 max-w-md mr-6 bottom-0 right-0", isHorizontal ? "mr-16" : "mb-10")}
+          className={classNames("w-3/4 max-w-md bottom-0 right-0", isHorizontal ? "mr-14 mb-2" : "mb-14 mr-2")}
         >
           <Modal.Body>
             <div className="flex flex-col">
