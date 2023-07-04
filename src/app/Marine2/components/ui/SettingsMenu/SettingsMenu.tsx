@@ -24,7 +24,7 @@ const SettingsMenu = () => {
     } else {
       setIsHorizontal(false)
     }
-  })
+  }, [setIsHorizontal])
 
   const setAutoMode = () => {
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)")

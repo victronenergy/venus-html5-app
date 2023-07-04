@@ -78,7 +78,7 @@ const verticalStyles: BreakpointStylesType = {
 }
 
 const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", parentSize }: Props) => {
-  let { capacity, fluidType, level, remaining, customName, unit } = useTank(tankInstanceId)
+  let { capacity, fluidType, level, remaining, customName } = useTank(tankInstanceId)
   const fluidTypeNum = +fluidType
   const wrapperRef = useRef<HTMLDivElement>(null)
   const [width] = useSize(wrapperRef)
