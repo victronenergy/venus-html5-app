@@ -12,19 +12,17 @@ const RemoteConsole = ({ host, width, height }: Props) => {
   const [iframeWidth, iframeHeight] = useSize(iframeRef)
 
   const [iframeLoaded, setIframeLoaded] = useState(false)
-  const loading = mqtt.status !== STATUS.CONNECTED || !iframeLoaded
-  const error = mqtt.error && [STATUS.OFFLINE, STATUS.DISCONNECTED].some((v) => v === mqtt.status)
-
+  const loading = !iframeLoaded
   const protocol = (typeof window !== "undefined" && window.location.protocol) || "http:"
   const url = protocol + "//" + host
 
   return (
     <>
-      {mqtt.status === STATUS.CONNECTED && (
+      {(
         <iframe
           ref={iframeRef}
           className={classnames("max-w-screen-md flex-grow h-96 py-3.5 block hide-remote-console:hidden", {
-            hidden: loading || error,
+            hidden: loading,
             "scale-110": iframeWidth * 1.1 < width && iframeHeight * 1.1 < height,
             "scale-125": iframeWidth * 1.25 < width && iframeHeight * 1.25 < height,
             "scale-150": iframeWidth * 1.5 < width && iframeHeight * 1.5 < height,
@@ -35,14 +33,9 @@ const RemoteConsole = ({ host, width, height }: Props) => {
         />
       )}
 
-      {loading && !error && (
+      {loading && (
         <div className={"text-center text-base p-4 block hide-remote-console:hidden"}>
           <Translate value={"common.loading"} />…
-        </div>
-      )}
-      {error && (
-        <div className={"text-center text-base p-4 block hide-remote-console:hidden"}>
-          <Translate value={"error.remoteConsole.connectionFailed"} />
         </div>
       )}
 

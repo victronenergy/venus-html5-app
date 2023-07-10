@@ -55,7 +55,7 @@ export const Marine2 = observer((props: AppProps) => {
   }
 
   if (error) {
-    return <MqttUnavailable />
+    return <MqttUnavailable host={host} />
   }
 
   if (!isConnected || !portalId) {
