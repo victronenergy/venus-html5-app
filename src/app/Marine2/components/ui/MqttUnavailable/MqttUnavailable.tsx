@@ -6,8 +6,9 @@ import { AppViews, useAppViewsStore } from "../../../modules/AppViews"
 import { useMqtt } from "@elninotech/mfd-modules"
 import Connecting from "../Connecting"
 import { observer } from "mobx-react"
+import RemoteConsoleView from "./../../views/RemoteConsoleView"
 
-const MqttUnavailable = () => {
+const MqttUnavailable = ({ host }: Props) => {
   const appViewsStore = useAppViewsStore()
   const mqtt = useMqtt()
   const { isConnected, error } = mqtt
@@ -45,6 +46,10 @@ const MqttUnavailable = () => {
     return <Connecting />
   }
 
+  if (appViewsStore.currentView === AppViews.REMOTE_CONSOLE) {
+    return <RemoteConsoleView host={host} />
+  }
+
   return (
     <div className="w-full h-full flex flex-col items-center justify-center bg-victron-lightGray dark:bg-victron-darkGray border-4 border-victron-blue rounded-md text-sm text-black dark:text-victron-blue">
       <div className="block max-w-xl p-4">
@@ -68,6 +73,10 @@ const MqttUnavailable = () => {
       </div>
     </div>
   )
+}
+
+interface Props {
+  host: string
 }
 
 export default observer(MqttUnavailable)
