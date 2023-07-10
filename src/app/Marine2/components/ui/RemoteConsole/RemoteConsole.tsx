@@ -1,13 +1,11 @@
-import React, { useRef, useState } from "react"
+import { useRef, useState } from "react"
 import { observer } from "mobx-react-lite"
 import classnames from "classnames"
-import { STATUS, useMqtt } from "@elninotech/mfd-modules"
+import { useMqtt } from "@elninotech/mfd-modules"
 import { translate, Translate } from "react-i18nify"
 import useSize from "@react-hook/size"
 
 const RemoteConsole = ({ host, width, height }: Props) => {
-  const mqtt = useMqtt()
-
   const iframeRef = useRef<HTMLIFrameElement>(null)
   const [iframeWidth, iframeHeight] = useSize(iframeRef)
 
@@ -18,7 +16,7 @@ const RemoteConsole = ({ host, width, height }: Props) => {
 
   return (
     <>
-      {(
+      {
         <iframe
           ref={iframeRef}
           className={classnames("max-w-screen-md flex-grow h-96 py-3.5 block hide-remote-console:hidden", {
@@ -31,7 +29,7 @@ const RemoteConsole = ({ host, width, height }: Props) => {
           title={translate("pages.remoteConsole")}
           onLoad={() => setIframeLoaded(true)}
         />
-      )}
+      }
 
       {loading && (
         <div className={"text-center text-base p-4 block hide-remote-console:hidden"}>
