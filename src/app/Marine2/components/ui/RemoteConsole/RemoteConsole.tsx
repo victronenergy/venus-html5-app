@@ -1,7 +1,6 @@
 import { useRef, useState } from "react"
 import { observer } from "mobx-react-lite"
 import classnames from "classnames"
-import { useMqtt } from "@elninotech/mfd-modules"
 import { translate, Translate } from "react-i18nify"
 import useSize from "@react-hook/size"
 
