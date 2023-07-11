@@ -78,7 +78,7 @@ const verticalStyles: BreakpointStylesType = {
 }
 
 const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", parentSize }: Props) => {
-  let { capacity, fluidType, level, remaining, customName } = useTank(tankInstanceId)
+  let { capacity, fluidType, level, remaining, customName, unit } = useTank(tankInstanceId)
   const fluidTypeNum = +fluidType
   const wrapperRef = useRef<HTMLDivElement>(null)
   const [width] = useSize(wrapperRef)
@@ -178,8 +178,8 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
                 <div className={classnames("truncate", verticalActiveStyles?.tankName)}>{tankTitle}</div>
                 <div className={classnames("text-victron-gray", verticalActiveStyles?.capacity)}>
                   {isAuxillaryTank
-                    ? "--/" + formatCapacity(capacity) + "ℓ"
-                    : formatCapacity(remaining) + "/" + formatCapacity(capacity) + "ℓ"}
+                    ? "--/" + formatCapacity(capacity, +unit) + tankUnit(+unit)
+                    : formatCapacity(remaining, +unit) + "/" + formatCapacity(capacity, +unit) + tankUnit(+unit)}
                 </div>
               </div>
             </div>
@@ -277,8 +277,8 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
                 </div>
                 <div className={classnames("text-victron-gray", horizontalActiveStyles?.capacity)}>
                   {isAuxillaryTank
-                    ? "--/" + formatCapacity(capacity) + "ℓ"
-                    : formatCapacity(remaining) + "/" + formatCapacity(capacity) + "ℓ"}
+                    ? "--/" + formatCapacity(capacity, +unit) + tankUnit(+unit)
+                    : formatCapacity(remaining, +unit) + "/" + formatCapacity(capacity, +unit) + tankUnit(+unit)}
                 </div>
               </div>
             </div>
@@ -289,9 +289,37 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
   }
 }
 
-// Convert remaining and total capacity to liters from m3
-const formatCapacity = (capacity: number) => {
-  return Math.round(capacity * 1000)
+// Convert remaining and total capacity to unit from m3
+const formatCapacity = (capacity: number, unit: number) => {
+  console.log("unit suka", unit, capacity)
+  // m3
+  if (unit === 0) {
+    return capacity.toFixed(2)
+  }
+  // liters
+  else if (unit === 1) {
+    return Math.round(capacity * 1000)
+  }
+  // imperial gallons
+  else if (unit === 2) {
+    return Math.round(capacity * 219.969)
+  }
+  // US gallons
+  else if (unit === 3) {
+    return Math.round(capacity * 264.172)
+  }
+
+  return Math.round(capacity)
+}
+
+const tankUnit = (unit: number) => {
+  if (unit === 0) {
+    return "m³"
+  } else if (unit === 1) {
+    return "ℓ"
+  } else if (unit === 2 || unit === 3) {
+    return "gal"
+  }
 }
 
 const levelFormatter = (level: number) => {
