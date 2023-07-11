@@ -4,16 +4,16 @@ import { applyStyles, BreakpointStylesType } from "../../../utils/media"
 
 const styles: BreakpointStylesType = {
   default: {
-    percentage: "text-sm",
-  },
-  "xs-xs": {
-    percentage: "text-base",
-  },
-  "md-s": {
     percentage: "text-lg",
   },
+  "xs-xs": {
+    percentage: "text-xl",
+  },
+  "md-s": {
+    percentage: "text-xxl",
+  },
   "lg-m": {
-    percentage: "text-2xl",
+    percentage: "text-xxl",
   },
 }
 
