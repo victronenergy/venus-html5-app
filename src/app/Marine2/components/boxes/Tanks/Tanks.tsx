@@ -19,7 +19,7 @@ interface Props {
 
 const Tanks = ({ mode = "full", className }: Props) => {
   const { tanks } = useTanks()
-  const filteredTanks = (tanks || []).filter((tank) => !!tank)
+  const filteredTanks = (tanks || []).filter((tank) => !!tank || tank === 0)
 
   const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
   const [levelWidth, setLevelWidth] = useState(0)
