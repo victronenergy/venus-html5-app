@@ -1,4 +1,4 @@
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { observer } from "mobx-react-lite"
 import classnames from "classnames"
 import { translate, Translate } from "react-i18nify"
@@ -12,6 +12,10 @@ const RemoteConsole = ({ host, width, height }: Props) => {
   const loading = !iframeLoaded
   const protocol = (typeof window !== "undefined" && window.location.protocol) || "http:"
   const url = protocol + "//" + host
+
+  useEffect(() => {
+    iframeRef.current?.focus()
+  }, [iframeLoaded])
 
   return (
     <>
