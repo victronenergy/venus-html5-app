@@ -1,11 +1,11 @@
 import { Workbox } from "workbox-window"
 
 export default function registerServiceWorker() {
-  // if ("production" !== process.env.NODE_ENV) {
-  //   return
-  // }
+  if ("production" !== process.env.NODE_ENV) {
+    return
+  }
+
   // Check if the serviceWorker Object exists in the navigator object ( means if browser supports SW )
-  console.log("try to register service worker")
   if ("serviceWorker" in navigator) {
     const wb = new Workbox(`${process.env.PUBLIC_URL}/service-worker.js`)
 
@@ -20,7 +20,6 @@ export default function registerServiceWorker() {
       }
     })
 
-    console.log("register service worker")
     wb.register()
   }
 }
