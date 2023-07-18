@@ -2,7 +2,7 @@ import "react-app-polyfill/stable"
 import React from "react"
 import ReactDOM from "react-dom"
 import { getParameterByName } from "./app/utils/util"
-import registerServiceWorker from './serviceWorkerRegistration'
+import registerServiceWorker from "./serviceWorkerRegistration"
 import * as Sentry from "@sentry/react"
 import { Integrations } from "@sentry/tracing"
 import { initializeErrorHandlerStore } from "app/components/ErrorHandlerModule/ErrorHandler.store"
