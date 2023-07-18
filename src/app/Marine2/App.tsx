@@ -25,18 +25,26 @@ const App = (props: AppProps) => {
   useVebus()
 
   useEffect(() => {
-    if (!appStore.remote) {
-      mqtt.boot(props.host, props.port)
-    } else if (
-      appStore.remote &&
-      vrmStore?.username &&
-      vrmStore?.token &&
-      vrmStore?.webhost &&
-      vrmStore?.portalId &&
-      vrmStore?.siteId
-    ) {
-      mqtt.boot(vrmStore.webhost, null, true, vrmStore.username, vrmStore.token, vrmStore.portalId, "live")
-    }
+    // if (!appStore.remote) {
+    //   mqtt.boot(props.host, props.port)
+    // } else if (
+    //   appStore.remote &&
+    //   vrmStore?.username &&
+    //   vrmStore?.token &&
+    //   vrmStore?.webhost &&
+    //   vrmStore?.portalId &&
+    //   vrmStore?.siteId
+    // ) {
+    mqtt.boot(
+      "webmqtt13.victronenergy.com",
+      null,
+      true,
+      "info@elnino.tech",
+      "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjQ3M2RiZTFjMmQyZTY4NmViNzExZmY4MTQ0ZGYyNTM0In0.eyJ1aWQiOiIxMzI5ODUiLCJ0b2tlbl90eXBlIjoicmVtZW1iZXJfbWUiLCJpc3MiOiJ2cm1hcGkudmljdHJvbmVuZXJneS5jb20iLCJhdWQiOiJodHRwczovL3ZybWFwaS52aWN0cm9uZW5lcmd5LmNvbS8iLCJpYXQiOjE2ODkyNDM1MTksImV4cCI6MTcwNDc5NTUxOSwianRpIjoiNDczZGJlMWMyZDJlNjg2ZWI3MTFmZjgxNDRkZjI1MzQifQ.sCVSyfV0Rzhi8Vcuu_xj_mHYp9FNZ9xnoGINqxXgFjS9O4vMgftwropnzdHc20pKQqSKeMeaY3gvPfnEiWdv50Y22pq56OEW2UNigvyb9tSqr6dC_Y_2tltUdtaXeVaaRux_TIA-AwezZG2_kEChLYEz1cGQcbLjDDS3kvRKWeKdW3IwYfz983FujCVIURR1t3CjpPD4tInPn6wa2zR8E5SK61NasR-V8C3xIjFXiRkvJLL_1szmvYXbt5Hfm2-ZlRhfTHrX_99Vnhz4w71FokdvaRLERMn3sBoIxhJJ9L8UWi-eFqvMgsZUhvn94oUldQZGaDrUoLGMi74ns5ko2A",
+      "985dad817608",
+      "live"
+    )
+    // }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     props.host,
