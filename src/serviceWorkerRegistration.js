@@ -19,7 +19,7 @@ export default function registerServiceWorker() {
         window.location.reload()
       }
     })
-    
+
     console.log("register service worker")
     wb.register()
   }
