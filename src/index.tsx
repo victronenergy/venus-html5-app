@@ -2,7 +2,7 @@ import "react-app-polyfill/stable"
 import React from "react"
 import ReactDOM from "react-dom"
 import { getParameterByName } from "./app/utils/util"
-import * as serviceWorkerRegistration from "./serviceWorkerRegistration"
+import registerServiceWorker from './serviceWorkerRegistration'
 import * as Sentry from "@sentry/react"
 import { Integrations } from "@sentry/tracing"
 import { initializeErrorHandlerStore } from "app/components/ErrorHandlerModule/ErrorHandler.store"
@@ -80,21 +80,7 @@ Sentry.init({
 
 ReactDOM.render(<React.StrictMode>{getApp()}</React.StrictMode>, document.getElementById("root"))
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://cra.link/PWA
-serviceWorkerRegistration.register({
-  onUpdate: async (registration) => {
-    if (registration && registration.waiting) {
-      await registration.unregister()
-      // Makes Workbox call skipWaiting()
-      registration.waiting.postMessage({ type: "SKIP_WAITING" })
-      // Once the service worker is unregistered, we can reload the page to let
-      // the browser download a fresh copy of our app (invalidating the cache)
-      window.location.reload()
-    }
-  },
-})
+registerServiceWorker()
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
