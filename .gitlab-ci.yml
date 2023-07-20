@@ -1,0 +1,15 @@
+# Run automatic security tests in Gitlab mirror
+
+include:
+  - project: 'elnino/security'
+    ref: main
+    file: sast.yml
+  - project: 'elnino/security'
+    ref: main
+    file: trivy-image.yml
+
+stages:
+  - test
+  - deploy
+
+
