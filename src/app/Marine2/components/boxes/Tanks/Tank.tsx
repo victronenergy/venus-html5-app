@@ -82,7 +82,7 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
   const fluidTypeNum = +fluidType
   const wrapperRef = useRef<HTMLDivElement>(null)
   const [width] = useSize(wrapperRef)
-  
+
   let horizontalActiveStyles,
     verticalActiveStyles,
     compactActiveStyles: StylesType = {}
