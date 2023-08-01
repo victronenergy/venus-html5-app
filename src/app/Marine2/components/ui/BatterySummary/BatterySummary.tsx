@@ -63,7 +63,7 @@ const BatterySummary = ({ battery, boxSize, circleRef }: Props) => {
                 </div>
               </div>
               <div className={classNames("text-victron-gray dark:text-victron-gray-dark", activeStyles.batteryState)}>
-                {batteryStateNameFormatter(translate, battery.state, battery.soc ?? null)}
+                {batteryStateNameFormatter(translate, battery.state, battery.soc ?? null, battery.timetogo ?? null)}
               </div>
             </div>
           ) : (

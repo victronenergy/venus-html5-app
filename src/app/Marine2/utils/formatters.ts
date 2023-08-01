@@ -4,7 +4,8 @@ import { Replacements, TranslateOptions } from "react-i18nify"
 export const batteryStateNameFormatter = function (
   t: (key: string, replacements?: Replacements, options?: TranslateOptions) => string,
   state: number,
-  percentage?: number
+  percentage?: number,
+  timetogo?: number
 ): string | null {
   if (percentage === 100) return t("common.charged")
   switch (state) {
@@ -13,7 +14,7 @@ export const batteryStateNameFormatter = function (
     case BATTERY.IDLE:
       return t("common.idle")
     case BATTERY.DISCHARGING:
-      return t("common.discharging")
+      return timetogo ? timetogo + " " + t("common.timetogo") : t("common.discharging")
   }
   return null
 }
