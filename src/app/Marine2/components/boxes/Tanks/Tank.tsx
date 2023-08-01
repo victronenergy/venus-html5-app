@@ -1,4 +1,4 @@
-import { useMemo, useRef } from "react"
+import { useEffect, useMemo, useRef } from "react"
 import { useTank } from "@elninotech/mfd-modules"
 import { observer } from "mobx-react-lite"
 import ProgressBar from "../../ui/ProgressBar"
@@ -78,11 +78,11 @@ const verticalStyles: BreakpointStylesType = {
 }
 
 const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", parentSize }: Props) => {
-  let { capacity, fluidType, level, remaining, customName } = useTank(tankInstanceId)
+  let { capacity, fluidType, level, remaining, customName, unit } = useTank(tankInstanceId)
   const fluidTypeNum = +fluidType
   const wrapperRef = useRef<HTMLDivElement>(null)
   const [width] = useSize(wrapperRef)
-
+  
   let horizontalActiveStyles,
     verticalActiveStyles,
     compactActiveStyles: StylesType = {}
@@ -114,6 +114,9 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
   // tanks that are missing level readings and only have capacity
   let isAuxillaryTank = !!capacity && level === undefined
 
+  useEffect(() => {
+    console.log("suka", customName, unit)
+  }, [customName, unit])
   // check if tank values are not undefined
   if (capacity === undefined && remaining === undefined) {
     return null
@@ -178,8 +181,8 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
                 <div className={classnames("truncate", verticalActiveStyles?.tankName)}>{tankTitle}</div>
                 <div className={classnames("text-victron-gray", verticalActiveStyles?.capacity)}>
                   {isAuxillaryTank
-                    ? "--/" + formatCapacity(capacity) + "ℓ"
-                    : formatCapacity(remaining) + "/" + formatCapacity(capacity) + "ℓ"}
+                    ? "--/" + formatCapacity(capacity, +unit) + unitFormatter(+unit)
+                    : formatCapacity(remaining, +unit) + "/" + formatCapacity(capacity, +unit) + unitFormatter(+unit)}
                 </div>
               </div>
             </div>
@@ -277,8 +280,8 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
                 </div>
                 <div className={classnames("text-victron-gray", horizontalActiveStyles?.capacity)}>
                   {isAuxillaryTank
-                    ? "--/" + formatCapacity(capacity) + "ℓ"
-                    : formatCapacity(remaining) + "/" + formatCapacity(capacity) + "ℓ"}
+                    ? "--/" + formatCapacity(capacity, +unit) + unitFormatter(+unit)
+                    : formatCapacity(remaining, +unit) + "/" + formatCapacity(capacity, +unit) + unitFormatter(+unit)}
                 </div>
               </div>
             </div>
@@ -289,9 +292,35 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
   }
 }
 
-// Convert remaining and total capacity to liters from m3
-const formatCapacity = (capacity: number) => {
-  return Math.round(capacity * 1000)
+// Convert remaining and total capacity to required unit from m3
+const formatCapacity = (capacity: number, unit: number) => {
+  switch (unit) {
+    case 0:
+      return Number(capacity.toFixed(2))
+    case 1:
+      return Math.round(capacity * 1000)
+    case 2:
+      return Math.round(capacity * 219.969)
+    case 3:
+      return Math.round(capacity * 264.172)
+    default:
+      return Math.round(capacity)
+  }
+}
+
+const unitFormatter = (unit: number) => {
+  switch (unit) {
+    case 0:
+      return "m³"
+    case 1:
+      return "ℓ"
+    case 2:
+      return "gal"
+    case 3:
+      return "gal"
+    default:
+      return "m³"
+  }
 }
 
 const levelFormatter = (level: number) => {
