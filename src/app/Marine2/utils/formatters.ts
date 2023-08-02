@@ -14,7 +14,7 @@ export const batteryStateNameFormatter = function (
     case BATTERY.IDLE:
       return t("common.idle")
     case BATTERY.DISCHARGING:
-      return timetogo ? timetogo + " " + t("common.timetogo") : t("common.discharging")
+      return timetogo ? timeAsStringFormatter(t, timetogo) + " " + t("common.timetogo") : t("common.discharging")
   }
   return null
 }
