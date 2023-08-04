@@ -7,15 +7,15 @@ import FadedText from "../FadedText"
 const styles: BreakpointStylesType = {
   default: {
     value: "text-base",
-    title: "text-sm leading-[1.1]",
-    subtitle: "text-xs leading-none pb-1",
+    title: "text-sm",
+    subtitle: "text-xs pb-1",
     icon: "min-w-5 w-5 text-victron-gray-200 dark:text-white",
     smallIcon: "min-w-3 w-3 text-victron-gray-200 dark:text-white",
   },
   "md-s": {
     value: "text-lg",
-    title: "text-base leading-[1.1]",
-    subtitle: "text-sm leading-none pb-1",
+    title: "text-base",
+    subtitle: "text-sm pb-1",
     icon: "min-w-7 w-7 text-victron-gray-200 dark:text-white",
     smallIcon: "min-w-5 w-5 text-victron-gray-200 dark:text-white",
   },
