@@ -23,13 +23,10 @@ export const timeAsStringFormatter = function (
   t: (key: string, replacements?: Replacements, options?: TranslateOptions) => string,
   timeInSeconds: number
 ): string {
-  const days = Math.floor(timeInSeconds / (24 * 60 * 60))
   const hours = Math.floor(timeInSeconds / (60 * 60))
   const minutes = Math.floor((timeInSeconds / 60) % 60)
   return (
-    (days ? days + t("common.days_short") + " " : "") +
-    (hours || days ? hours + t("common.hours_short") + " " : "") +
-    (minutes || hours || days ? minutes + t("common.minutes_short") : "")
+    (hours ? hours + t("common.hours_short") + " " : "") + (minutes || hours ? minutes + t("common.minutes_short") : "")
   )
 }
 
