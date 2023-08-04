@@ -135,17 +135,17 @@ module.exports = {
       },
       fontSize: {
         // Font sizes corresponding with design, px values for easy reference. Line height is always 120%.
-        "2xs": ["0.75rem", { lineHeight: "0.9rem" }],
-        xs: ["1rem", { lineHeight: "1.2rem" }], // 16px
-        sm: ["1.125rem", { lineHeight: "1.35rem" }], // 18px
-        base: ["1.375rem", { lineHeight: "1.65rem" }], // 22px
-        md: ["1.625rem", { lineHeight: "1.95rem" }], // 26px
-        lg: ["1.75rem", { lineHeight: "2.1rem" }], // 28px
-        xl: ["2.125rem", { lineHeight: "2.55rem" }], // 34px
-        xxl: ["2.75rem", { lineHeight: "3.3rem" }], // 44px
-        "2xl": ["3.5rem", { lineHeight: "4.2rem" }], // 56px
-        "3xl": ["4.25rem", { lineHeight: "5.1rem" }], // 68px
-        "4xl": ["5.375rem", { lineHeight: "6.45rem" }], // 86px
+        "2xs": ["0.75rem", { lineHeight: "120%" }],
+        xs: ["1rem", { lineHeight: "120%" }], // 16px
+        sm: ["1.125rem", { lineHeight: "120%" }], // 18px
+        base: ["1.375rem", { lineHeight: "120%" }], // 22px
+        md: ["1.625rem", { lineHeight: "120%" }], // 26px
+        lg: ["1.75rem", { lineHeight: "120%" }], // 28px
+        xl: ["2.125rem", { lineHeight: "120%" }], // 34px
+        xxl: ["2.75rem", { lineHeight: "120%" }], // 44px
+        "2xl": ["3.5rem", { lineHeight: "120%" }], // 56px
+        "3xl": ["4.25rem", { lineHeight: "120%" }], // 68px
+        "4xl": ["5.375rem", { lineHeight: "120%" }], // 86px
       },
       strokeWidth: {
         16: "16px",
