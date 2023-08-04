@@ -5,7 +5,7 @@ import { applyStyles, defaultBoxStyles } from "../../../utils/media"
 import ValueBar from "../ValueBar"
 import { formatValue } from "../../../utils/formatters"
 
-const ValueBox = ({ title, icon, value, unit, hideDecimal, bottomValues, children, buttons, infoText }: Props) => {
+const ValueBox = ({ title, icon, value, unit, hideDecimal, bottomValues, children, buttons, infoText, valueSubtitle }: Props) => {
   const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
   const activeStyles = applyStyles(boxSize, defaultBoxStyles)
   const isMultiPhase = bottomValues.length > 1
@@ -21,10 +21,14 @@ const ValueBox = ({ title, icon, value, unit, hideDecimal, bottomValues, childre
         <div className={"w-full overflow-hidden"}>
           <div className={classNames("text-black dark:text-white", activeStyles?.mainValue)}>
             {(typeof value === "number" && formatValue(value, hideDecimal && unit !== "kW" ? 0 : 1)) || value}
-            {typeof value === "number" && (
-              <span className={"pl-0.5 text-victron-gray-400 dark:text-victron-gray-500"}>{unit}</span>
-            )}
+            {((typeof value === "number" || value === "--") && <span className={"pl-0.5 text-victron-gray-400 dark:text-victron-gray-500"}>{unit}</span>) || ""}
           </div>
+          {valueSubtitle && (
+          <div className={classNames("text-victron-gray-300 dark:text-victron-gray-500", activeStyles.valueSubtitle)}>
+            {valueSubtitle}
+          </div>
+          )}
+
           <div className={classNames("text-victron-gray dark:text-victron-gray-500", activeStyles.valueSubtitle)}>
             {children}
           </div>
@@ -54,6 +58,7 @@ interface Props {
   children?: JSX.Element | JSX.Element[] | string
   buttons?: JSX.Element | JSX.Element[]
   infoText?: { title: string; body: string }
+  valueSubtitle?: string
 }
 
 interface ValueWithUnit {
