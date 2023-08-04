@@ -64,7 +64,7 @@ const RootView = () => {
           perPage={4}
           flow={"col"}
           orientation={"horizontal"}
-          childClassName={"p-2"}
+          childClassName={"p-1"}
           pageSelectorPropsSetter={setPageSelectorProps}
         >
           {boxes.map((box) => box)}

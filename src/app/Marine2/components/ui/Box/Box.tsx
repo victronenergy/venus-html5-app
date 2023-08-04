@@ -82,7 +82,7 @@ const Box = ({
           </div>
         )}
       </div>
-      <div ref={setRef} className={"w-full min-h-0 h-full pt-2"}>
+      <div ref={setRef} className={"w-full min-h-0 h-full"}>
         {withPagination && (
           <Paginator orientation={paginationOrientation} selectorLocation={"bottom-full"}>
             {children}
