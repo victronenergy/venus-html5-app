@@ -114,9 +114,6 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
   // tanks that are missing level readings and only have capacity
   let isAuxillaryTank = !!capacity && level === undefined
 
-  useEffect(() => {
-    console.log("suka", customName, unit)
-  }, [customName, unit])
   // check if tank values are not undefined
   if (capacity === undefined && remaining === undefined) {
     return null
