@@ -46,7 +46,6 @@
         "absorptionCharging": "Absorption charging",
         "assisting": "Assisting",
         "auto": "Auto",
-        "autoDescription": "Automatically adapt color mode based on environment.",
         "autoStartStop": "Auto start/stop",
         "bulkCharging": "Bulk charging",
         "charge": "Charge",
@@ -98,6 +97,7 @@
         "stopping": "Stopping",
         "storageMode": "Storage mode",
         "sustain": "Sustain",
+        "timetogo": "to go",
         "unplugged": "Unplugged",
         "veBusFault": "VE.Bus Fault condition",
         "voltage": "Voltage"
@@ -171,8 +171,7 @@
     },
     "locker": {
         "lockMessage": "Lock to prevent changes",
-        "unlockMessage": "Unlock to make changes",
-        "lockDesctiption": "To prevent accidental changes in Device settings - enabling this function will lock the possibility to interact with controls"
+        "unlockMessage": "Unlock to make changes"
     },
     "noWidgets": {
         "subtitle": "Make sure your devices are properly connected",
