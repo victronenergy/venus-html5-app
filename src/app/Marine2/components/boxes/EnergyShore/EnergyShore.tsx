@@ -43,13 +43,12 @@ const EnergyShore = ({ mode = "compact", inputId, compactBoxSize }: Props) => {
       /* todo: fix types for svg */
       /* @ts-ignore */
       icon={<ShorePowerIcon className={"w-6"} />}
-      value={!unplugged ? ((phases ?? 1) === 1 ? current[0] : totalPower) : undefined}
+      value={!unplugged ? ((phases ?? 1) === 1 ? current[0] : totalPower) : "--"}
       unit={(phases ?? 1) === 1 ? "A" : "W"}
       bottomValues={phasesOverview}
       hideDecimal={(phases ?? 1) === 1 ? false : true}
-    >
-      <div>{unplugged && translate("common.unplugged")}</div>
-    </ValueBox>
+      valueSubtitle={unplugged ? translate("common.unplugged") : undefined}
+    ></ValueBox>
   )
 }
 
