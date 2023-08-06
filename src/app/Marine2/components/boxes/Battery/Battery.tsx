@@ -16,23 +16,23 @@ const styles: BreakpointStylesType = {
   default: {
     value: "text-xl",
     valueSubtitle: "text-base",
-    valueBar: "text-sm",
-    valueBars: "text-sm",
+    valueBar: "text-md",
+    valueBars: "text-md",
   },
   "sm-s": {
-    value: "text-3xl",
+    value: "text-2xl",
     valueSubtitle: "text-lg",
-    valueBar: "text-sm",
-    valueBars: "text-sm",
+    valueBar: "text-lg",
+    valueBars: "text-lg",
   },
   "md-s": {
-    value: "text-3xl",
+    value: "text-2xl",
     valueSubtitle: "text-lg",
     valueBar: "text-lg",
     valueBars: "text-lg",
   },
   "md-m": {
-    value: "text-4xl",
+    value: "text-3xl",
     valueSubtitle: "text-xl",
     valueBar: "text-xl",
     valueBars: "text-lg",
@@ -47,7 +47,7 @@ const Battery = ({ battery }: Props) => {
     return (
       <ValueBox
         /* @ts-ignore */
-        icon={<BatteryIcon className={"w-6"} />}
+        icon={<BatteryIcon className={"w-[18px] sm-s:w-[24px] sm-m:w-[32px]"} />}
         title={battery.name}
         unit={"V"}
         value={battery.voltage}
@@ -100,7 +100,7 @@ const Battery = ({ battery }: Props) => {
 }
 
 const batteryStateIconFormatter = function (state: number): JSX.Element {
-  const className = "w-6"
+  const className = "w-[18px] sm-s:w-[24px] sm-m:w-[32px]"
   switch (state) {
     case BATTERY.CHARGING:
       /* todo: fix types for svg */
