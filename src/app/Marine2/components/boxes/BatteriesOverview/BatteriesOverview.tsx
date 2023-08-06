@@ -14,7 +14,8 @@ import { PageSelectorProps } from "../../ui/PageSelector"
 import { boxBreakpoints } from "../../../utils/media"
 import PageFlipper from "../../ui/PageFlipper"
 import range from "lodash-es/range"
-import ResizeObserver from "resize-observer-polyfill"
+import { applyStyles, defaultBoxStyles } from "../../../utils/media"
+import classNames from "classnames"
 
 interface Props {
   mode?: "compact" | "full"
@@ -33,40 +34,14 @@ const BatteriesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) =>
   const [pages, setPages] = useState(1)
   const [perPage, setPerPage] = useState(2)
 
-  const circleRef = useRef<HTMLDivElement>(null)
   const circleBoxRef = useRef<HTMLDivElement>(null)
-  const [circleScale, setCircleScale] = useState(1)
 
-  useEffect(() => {
-    if (!circleRef.current) return
-    if (!circleBoxRef.current) return
-
-    const observer = new ResizeObserver(() => {
-      if (!circleRef.current) return
-      if (!circleBoxRef.current) return
-      if (boxSize.width < boxBreakpoints["sm-m"].width || boxSize.height - 50 < boxBreakpoints["sm-m"].height) {
-        setCircleScale(
-          // remove 32px for Box horizontal padding (mx-4 * 2)
-          0.9 *
-            Math.min(
-              (circleBoxRef.current.clientHeight - 16) / circleRef.current.offsetHeight,
-              (circleBoxRef.current.clientWidth / pages - 32) / (circleRef.current.offsetWidth * perPage + 8)
-            )
-        )
-      } else {
-        setCircleScale(1)
-      }
-    })
-    observer.observe(circleBoxRef.current)
-    return () => {
-      observer.disconnect()
-    }
-  }, [circleBoxRef, circleRef, pages, perPage, boxSize.width, boxSize.height])
+  const activeStyles = applyStyles(boxSize, defaultBoxStyles)
 
   useEffect(() => {
     if (!overviewBatteries || !overviewBatteries.length) return
 
-    let batterySummaryWidth = 92 // minimum BatterySummary component width
+    let batterySummaryWidth = 142 // minimum BatterySummary component width
     // BatterySummary component width is bigger based on these breakpoints (subtract 56 leaving space for page selector)
     if (boxSize.height - 50 > boxBreakpoints["sm-m"].height) {
       batterySummaryWidth = 302
@@ -87,14 +62,14 @@ const BatteriesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) =>
       <Box
         /* todo: fix types for svg */
         /* @ts-ignore */
-        icon={<BatteriesIcon className={"w-6 text-victron-gray dark:text-victron-gray-dark"} />}
+        icon={<BatteriesIcon className={classNames("text-victron-gray dark:text-victron-gray-dark", activeStyles?.icon)} />}
         title={translate("boxes.batteries")}
         linkedView={AppViews.BOX_BATTERIES_OVERVIEW}
         getBoxSizeCallback={setBoxSize}
       >
         <PageFlipper pages={pages}>
           <div
-            className={"h-full flex"}
+            className={"w-full h-full flex flex-row items-center justify-center"}
             style={{
               width: `${pages}00%`,
             }}
@@ -103,14 +78,14 @@ const BatteriesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) =>
             {range(pages).map((page) => (
               <div
                 key={page + "batteryPage"}
-                className={"flex w-full h-full items-center justify-center gap-1 md:gap-2"}
+                className={"flex flex-row w-full h-full items-center justify-center gap-8 lg:gap-8"}
               >
                 {overviewBatteries.slice(page * perPage, (page + 1) * perPage).map((b) => (
                   <div
                     key={b.id}
                     className={"h-full flex items-center justify-center"}
                     style={{
-                      transform: `scale(${circleScale})`,
+                      width: pages <= 1 ? `calc(${100 / batteries.length}% - 32px)` : boxSize.width / perPage - 32,
                     }}
                   >
                     <BatterySummary
@@ -120,7 +95,6 @@ const BatteriesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) =>
                         width: boxSize.width,
                         height: pages <= 1 ? boxSize.height - 50 : boxSize.height - 100,
                       }}
-                      circleRef={circleRef}
                     />
                   </div>
                 ))}
