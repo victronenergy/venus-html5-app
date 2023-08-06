@@ -11,6 +11,8 @@ import { useVisibilityNotifier } from "../../../modules"
 import { BoxTypes } from "../../../utils/constants"
 import ResizeObserver from "resize-observer-polyfill"
 import useSize from "@react-hook/size"
+import { applyStyles, defaultBoxStyles } from "../../../utils/media"
+import classNames from "classnames"
 
 interface Props {
   mode?: "full" | "compact"
@@ -33,10 +35,11 @@ const Tanks = ({ mode = "full", className }: Props) => {
   const [width, height] = useSize(gridRef)
   const windowSize = useWindowSize()
 
+  const activeStyles = applyStyles(boxSize, defaultBoxStyles)
   useEffect(() => {
     if (!windowSize.width || !windowSize.height) return
 
-    if (windowSize.width > 2 * windowSize.height) {
+    if (windowSize.width > 3 * windowSize.height) {
       setOrientation("horizontal")
     } else {
       setOrientation("vertical")
@@ -87,7 +90,7 @@ const Tanks = ({ mode = "full", className }: Props) => {
         title={translate("boxes.tanks")}
         /* todo: fix types for svg */
         /* @ts-ignore */
-        icon={<TanksIcon className={"w-6 text-black dark:text-white"} />}
+        icon={<TanksIcon className={classNames("text-black dark:text-white", activeStyles?.icon)} />}
         linkedView={AppViews.BOX_TANKS}
         className={className}
         getBoxSizeCallback={setBoxSize}

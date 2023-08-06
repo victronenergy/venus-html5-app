@@ -73,7 +73,7 @@ const GeneratorRelay = ({
         <GeneratorIcon
           /* todo: fix types for svg */
           /* @ts-ignore */
-          className={"w-7"}
+          className={"w-[18px] sm-s:w-[24px] sm-m:w-[32px]"}
         ></GeneratorIcon>
       }
       title={title}

@@ -18,23 +18,22 @@ const Footer = ({ pageSelectorProps }: Props) => {
   }, [appViewsStore.currentView])
 
   return (
-    <div className="flex w-[calc(100%-4rem)] h-16 items-center justify-between pt-2 pb-3">
-      <VersionInfo />
-      {!!pageSelectorProps && !!pageSelectorProps.maxPages && pageSelectorProps.maxPages > 1 && (
-        <div className={"fixed left-1/2 translate-x-[-50%] min-w-[8.75rem]"}>
-          <PageSelector {...pageSelectorProps} selectorLocation="bottom-center" />
-        </div>
-      )}
-      {isShowBack && (
-        <div
-          onClick={handleBackClick}
-          className={"fixed right-14 bottom-3.5 cursor-pointer py-[12px] pl-[56px] w-24 min-w-[96px] z-1 outline-none"}
-        >
-          {/* todo: fix types for svg */}
-          {/* @ts-ignore */}
-          <BackIcon className={"w-[24px] text-blue-600 dark:text-blue-400"} alt={"Back"} />
-        </div>
-      )}
+    <div className="flex flex-row w-full h-16 items-center justify-between pt-2 pb-3">
+      <div className="flex flex-1 flex-row items-center justify-between">
+        <VersionInfo />
+        {!!pageSelectorProps && !!pageSelectorProps.maxPages && pageSelectorProps.maxPages > 1 && (
+          <div className={"fixed left-1/2 translate-x-[-50%] min-w-[8.75rem]"}>
+            <PageSelector {...pageSelectorProps} selectorLocation="bottom-center" />
+          </div>
+        )}
+        {isShowBack && (
+          <div onClick={handleBackClick} className={"w-fit h-fit cursor-pointer"}>
+            {/* todo: fix types for svg */}
+            {/* @ts-ignore */}
+            <BackIcon onClick={handleBackClick} className={"text-blue-600 dark:text-blue-400"} alt={"Back"} />
+          </div>
+        )}
+      </div>
       <SettingsMenu />
     </div>
   )

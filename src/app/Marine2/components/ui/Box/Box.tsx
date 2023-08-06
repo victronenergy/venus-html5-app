@@ -47,7 +47,7 @@ const Box = ({
     <div
       ref={boxRef}
       className={classNames(
-        "w-full h-full min-h-0 px-4 py-2.5 flex flex-col bg-victron-lightGray dark:bg-victron-darkGray rounded-md",
+        "w-full h-full min-h-0 px-4 py-1 sm-m:py-2 flex flex-col bg-victron-lightGray dark:bg-victron-darkGray rounded-md",
         className
       )}
     >
@@ -66,7 +66,7 @@ const Box = ({
             <ArrowRightIcon
               /* todo: fix types for svg */
               /* @ts-ignore */
-              className={"w-[24px] text-victron-blue dark:text-victron-blue-dark cursor-pointer outline-none"}
+              className={"w-[24px] sm-s:w-[32px] text-victron-blue dark:text-victron-blue-dark cursor-pointer outline-none"}
               alt={"Expand"}
             />
           </div>

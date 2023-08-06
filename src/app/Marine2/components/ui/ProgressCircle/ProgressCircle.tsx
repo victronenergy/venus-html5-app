@@ -13,11 +13,11 @@ const styles: BreakpointStylesType = {
     percentage: "text-xxl",
   },
   "lg-m": {
-    percentage: "text-xxl",
+    percentage: "text-2xl",
   },
 }
 
-const ProgressCircle = ({ percentage, children, boxSize }: Props) => {
+const ProgressCircle = ({ percentage, children, boxSize, batteryTitle }: Props) => {
   const activeStyles = applyStyles(boxSize, styles)
   const hasPercentage = percentage !== null
   const roundedPercentage = Math.round(percentage)
@@ -71,6 +71,7 @@ interface Props {
   percentage: number
   children?: JSX.Element
   boxSize: { width: number; height: number }
+  batteryTitle?: string
 }
 
 export default ProgressCircle

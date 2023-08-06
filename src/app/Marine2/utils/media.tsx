@@ -16,9 +16,9 @@ type BreakpointsType = {
 }
 
 export const defaultBoxBreakpoints: BreakpointsType = {
-  small: { width: 250, height: 300 },
-  medium: { width: 500, height: 300 },
-  large: { width: 800, height: 440 },
+  small: { width: 200, height: 200 },
+  medium: { width: 200, height: 280 },
+  large: { width: 300, height: 350 },
 }
 
 export const defaultBoxStyles: BreakpointStylesType = {
@@ -27,38 +27,42 @@ export const defaultBoxStyles: BreakpointStylesType = {
     valueSubtitle: "text-sm",
     secondaryValue: "text-base",
     buttons: "text-base",
+    icon: "w-[18px]",
   },
   medium: {
     mainValue: "text-2xl",
     valueSubtitle: "text-base",
     secondaryValue: "text-xl",
     buttons: "text-base",
+    icon: "w-[24px]",
   },
   large: {
     mainValue: "text-3xl",
     valueSubtitle: "text-base",
     secondaryValue: "text-xxl",
     buttons: "text-base",
+    icon: "w-[32px]",
   },
   default: {
     mainValue: "text-xl",
     valueSubtitle: "text-sm",
     secondaryValue: "text-base",
     buttons: "text-base",
+    icon: "w-[18px]",
   },
 }
 
 export const boxBreakpoints: BreakpointsType = {
   "xs-xs": { width: 200, height: 200 },
-  "sm-s": { width: 200, height: 300 },
-  "sm-m": { width: 200, height: 450 },
-  "sm-l": { width: 200, height: 600 },
-  "md-s": { width: 400, height: 300 },
-  "md-m": { width: 400, height: 450 },
-  "md-l": { width: 400, height: 600 },
-  "lg-s": { width: 600, height: 300 },
-  "lg-m": { width: 600, height: 450 },
-  "lg-l": { width: 600, height: 600 },
+  "sm-s": { width: 200, height: 200 },
+  "sm-m": { width: 200, height: 300 },
+  "sm-l": { width: 200, height: 400 },
+  "md-s": { width: 400, height: 200 },
+  "md-m": { width: 400, height: 300 },
+  "md-l": { width: 400, height: 400 },
+  "lg-s": { width: 500, height: 200 },
+  "lg-m": { width: 500, height: 300 },
+  "lg-l": { width: 500, height: 400 },
 }
 
 export const applyStyles = (size: ComponentSizeType, stylesObject: BreakpointStylesType = defaultBoxStyles) => {
