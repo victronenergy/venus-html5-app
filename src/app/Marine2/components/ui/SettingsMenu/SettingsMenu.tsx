@@ -52,10 +52,7 @@ const SettingsMenu = () => {
   }
 
   return (
-    <div
-      className="dark:text-white cursor-pointer w-[64px] outline-none"
-      onClick={() => setIsModalOpen(!isModalOpen)}
-    >
+    <div className="dark:text-white cursor-pointer w-[64px] outline-none" onClick={() => setIsModalOpen(!isModalOpen)}>
       <div className="flex justify-center items-center w-full">
         {!isModalOpen ? (
           <div className="h-full">

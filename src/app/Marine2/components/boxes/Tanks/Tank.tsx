@@ -16,27 +16,27 @@ const compactStyles: BreakpointStylesType = {
   default: {
     tankName: "text-sm ",
     level: "text-base min-w-[38px]",
-    icon: "w-[18px]"
+    icon: "w-[18px]",
   },
   "sm-s": {
     tankName: "text-sm ",
     level: "text-base min-w-[38px]",
-    icon: "w-[24px]"
+    icon: "w-[24px]",
   },
   "sm-m": {
     tankName: "text-base min-w-[2rem]",
     level: "text-base min-w-[38px]",
-    icon: "w-[32px]"
+    icon: "w-[32px]",
   },
   "md-s": {
     tankName: "text-base mr-4",
     level: "text-lg min-w-[3rem]",
-    icon: "w-[32px]"
+    icon: "w-[32px]",
   },
   "md-l": {
     tankName: "text-lg mr-4",
     level: "text-lg min-w-[3rem]",
-    icon: "w-[32px]"
+    icon: "w-[32px]",
   },
 }
 

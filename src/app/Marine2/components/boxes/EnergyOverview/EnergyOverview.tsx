@@ -69,7 +69,7 @@ const EnergyOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) => {
         /* todo: fix types for svg */
         icon={
           <EnergyIcon
-          /* @ts-ignore */
+            /* @ts-ignore */
             className={classNames("text-victron-gray dark:text-victron-gray-dark", activeStyles?.icon)}
           />
         }

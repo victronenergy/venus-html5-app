@@ -35,9 +35,7 @@ const BatterySummary = ({ battery, boxSize }: Props) => {
   const activeStyles = applyStyles(boxSize, styles)
 
   return (
-    <div
-      className={classNames("flex flex-col justify-center items-center w-full h-full")}
-    >
+    <div className={classNames("flex flex-col justify-center items-center w-full h-full")}>
       <div className={classNames("w-full h-full")}>
         <ProgressCircle percentage={battery.soc ?? null} boxSize={boxSize}>
           {battery.voltage || (battery.voltage === 0 && (battery.current || battery.current === 0)) ? (
@@ -61,9 +59,7 @@ const BatterySummary = ({ battery, boxSize }: Props) => {
           )}
         </ProgressCircle>
       </div>
-      <div className={classNames("truncate mt-3.5 w-[inherit] text-center", activeStyles.name)}>
-        {battery.name}
-      </div>
+      <div className={classNames("truncate mt-3.5 w-[inherit] text-center", activeStyles.name)}>{battery.name}</div>
     </div>
   )
 }

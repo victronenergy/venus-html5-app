@@ -61,8 +61,10 @@ const BatteriesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) =>
     return (
       <Box
         /* todo: fix types for svg */
-        /* @ts-ignore */
-        icon={<BatteriesIcon className={classNames("text-victron-gray dark:text-victron-gray-dark", activeStyles?.icon)} />}
+        icon={
+          /* @ts-ignore */
+          <BatteriesIcon className={classNames("text-victron-gray dark:text-victron-gray-dark", activeStyles?.icon)} />
+        }
         title={translate("boxes.batteries")}
         linkedView={AppViews.BOX_BATTERIES_OVERVIEW}
         getBoxSizeCallback={setBoxSize}
