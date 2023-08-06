@@ -47,7 +47,7 @@ const Box = ({
     <div
       ref={boxRef}
       className={classNames(
-        "w-full h-full min-h-0 px-4 py-1 sm-m:py-2 flex flex-col bg-victron-lightGray dark:bg-victron-darkGray rounded-md",
+        "w-full h-full min-h-0 px-4 pt-1 pb-2 sm-m:pt-2 sm-m:pb-3 flex flex-col bg-victron-lightGray dark:bg-victron-darkGray rounded-md",
         className
       )}
     >
