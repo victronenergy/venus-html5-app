@@ -20,7 +20,7 @@ const SettingsMenu = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth > 3 * window.innerHeight) {
+      if (window.innerWidth > 3 * window.innerHeight || window.innerHeight < 400) {
         setIsHorizontal(true)
       } else {
         setIsHorizontal(false)
@@ -53,15 +53,15 @@ const SettingsMenu = () => {
 
   return (
     <div
-      className="fixed right-1 bottom-4 dark:text-white cursor-pointer w-[64px] outline-none"
+      className="dark:text-white cursor-pointer w-[64px] outline-none"
       onClick={() => setIsModalOpen(!isModalOpen)}
     >
       <div className="flex justify-center items-center w-full">
         {!isModalOpen ? (
-          <div className="pl-[32px] pt-[16px] w-[64px] h-[48px]">
+          <div className="h-full">
             {/* todo: fix types for svg */}
             {/* @ts-ignore */}
-            <PreferencesIcon className="w-[4px]" alt={"Settings"} />
+            <PreferencesIcon alt={"Settings"} />
           </div>
         ) : (
           <>
