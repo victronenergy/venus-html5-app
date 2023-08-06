@@ -66,7 +66,9 @@ const Box = ({
             <ArrowRightIcon
               /* todo: fix types for svg */
               /* @ts-ignore */
-              className={"w-[24px] sm-s:w-[32px] text-victron-blue dark:text-victron-blue-dark cursor-pointer outline-none"}
+              className={
+                "w-[24px] sm-s:w-[32px] text-victron-blue dark:text-victron-blue-dark cursor-pointer outline-none"
+              }
               alt={"Expand"}
             />
           </div>
