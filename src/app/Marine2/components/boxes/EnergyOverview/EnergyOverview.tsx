@@ -28,6 +28,8 @@ import { useVisibilityNotifier } from "../../../modules"
 import { BoxTypes } from "../../../utils/constants"
 import GridPaginator from "../../ui/GridPaginator"
 import { PageSelectorProps } from "../../ui/PageSelector"
+import { applyStyles, defaultBoxStyles } from "../../../utils/media"
+import classNames from "classnames"
 
 const EnergyOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -51,6 +53,8 @@ const EnergyOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) => {
     compactBoxSize
   )
 
+  const activeStyles = applyStyles(compactBoxSize, defaultBoxStyles)
+
   // TODO: it seems that visibility logic can be improved since the energy component always has an overview box
   useVisibilityNotifier({ widgetName: BoxTypes.ENERGY, visible: boxes.length > 0 })
 
@@ -63,8 +67,12 @@ const EnergyOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) => {
       <Box
         title={translate("boxes.energy")}
         /* todo: fix types for svg */
-        /* @ts-ignore */
-        icon={<EnergyIcon className={"w-5 text-victron-gray dark:text-victron-gray-dark"} />}
+        icon={
+          <EnergyIcon
+          /* @ts-ignore */
+            className={classNames("text-victron-gray dark:text-victron-gray-dark", activeStyles?.icon)}
+          />
+        }
         linkedView={AppViews.BOX_ENERGY_OVERVIEW}
         getBoxSizeCallback={setCompactBoxSize}
         withPagination={true}

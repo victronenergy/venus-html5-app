@@ -30,7 +30,7 @@ const EnergyDC = ({ mode = "compact", dcLoads, compactBoxSize }: Props) => {
       title={translate("boxes.dcLoads")}
       /* todo: fix types for svg */
       /* @ts-ignore */
-      icon={<DCIcon className={"w-6"} />}
+      icon={<DCIcon className={"w-[18px] sm-s:w-[24px] sm-m:w-[32px]"} />}
       value={current}
       unit={"A"}
       bottomValues={[[{ value: power, unit: "W", hideDecimal: true }]]}

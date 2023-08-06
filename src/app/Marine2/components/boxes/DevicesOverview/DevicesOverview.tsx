@@ -26,6 +26,8 @@ import { PageSelectorProps } from "../../ui/PageSelector"
 import GridPaginator from "../../ui/GridPaginator"
 import React from "react"
 import GeneratorRelay from "../GeneratorRelay/GeneratorRelay"
+import { applyStyles, defaultBoxStyles } from "../../../utils/media"
+import classNames from "classnames"
 
 const DevicesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) => {
   const { inverters } = useInverters()
@@ -52,6 +54,7 @@ const DevicesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) => {
     return null
   }
 
+  const activeStyles = applyStyles(compactBoxSize, defaultBoxStyles)
   if (mode === "compact") {
     return (
       <Box
@@ -60,7 +63,7 @@ const DevicesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) => {
           <DevicesIcon
             /* todo: fix types for svg */
             /* @ts-ignore */
-            className={"w-6 text-victron-gray dark:text-victron-gray-dark"}
+            className={classNames("text-victron-gray dark:text-victron-gray-dark", activeStyles?.icon)}
           />
         }
         linkedView={AppViews.BOX_DEVICES_OVERVIEW}

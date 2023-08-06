@@ -30,7 +30,7 @@ const EnergyWind = ({ mode = "compact", windGenerator, showInstance, compactBoxS
       title={translate("boxes.windGenerator") + instance}
       /* todo: fix types for svg */
       /* @ts-ignore */
-      icon={<WindIcon className={"w-6"} />}
+      icon={<WindIcon className={"w-[18px] sm-s:w-[24px] sm-m:w-[32px]"} />}
       value={current}
       unit={"A"}
       bottomValues={[[{ value: power, unit: "W", hideDecimal: true }]]}

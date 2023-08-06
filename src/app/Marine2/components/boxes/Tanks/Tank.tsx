@@ -16,21 +16,27 @@ const compactStyles: BreakpointStylesType = {
   default: {
     tankName: "text-sm ",
     level: "text-base min-w-[38px]",
+    icon: "w-[18px]"
   },
   "sm-s": {
     tankName: "text-sm ",
     level: "text-base min-w-[38px]",
+    icon: "w-[24px]"
   },
   "sm-m": {
-    tankName: "text-sm min-w-[2rem]",
+    tankName: "text-base min-w-[2rem]",
+    level: "text-base min-w-[38px]",
+    icon: "w-[32px]"
   },
   "md-s": {
     tankName: "text-base mr-4",
     level: "text-lg min-w-[3rem]",
+    icon: "w-[32px]"
   },
-  "lg-s": {
-    tankName: "text-base mr-4",
+  "md-l": {
+    tankName: "text-lg mr-4",
     level: "text-lg min-w-[3rem]",
+    icon: "w-[32px]"
   },
 }
 
@@ -67,12 +73,12 @@ const verticalStyles: BreakpointStylesType = {
   },
   "md-s": {
     tankName: "text-lg mr-5",
-    level: "text-xl min-w-[3.5rem]",
+    level: "text-xl min-w-[3.8rem]",
     capacity: "text-xs",
   },
   "lg-s": {
     tankName: "text-lg mr-5",
-    level: "text-xl min-w-[3.5rem]",
+    level: "text-xl min-w-[3.8rem]",
     capacity: "text-xs",
   },
 }
@@ -118,7 +124,7 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
     return (
       <div ref={wrapperRef} className="flex flex-row items-center">
         <div className={classnames("flex items-center py-2 truncate")}>
-          <div className="mr-2">{fluidIcon(fluidTypeNum, mode)}</div>
+          <div className="mr-2">{fluidIcon(fluidTypeNum, mode, compactActiveStyles?.icon)}</div>
           <div className={classnames("truncate", compactActiveStyles?.tankName)}>{tankTitle} </div>
         </div>
         <div className="flex flex-row items-center basis-0 flex-grow justify-end">
@@ -143,7 +149,7 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
           <div className="tank-level">
             <div style={levelWidth ? { width: roundLevelWidth(levelWidth + 4) + "px" } : {}} className="pl-2 md:pl-5">
               <div
-                className={classnames("flex flex-row", compactActiveStyles?.level, {
+                className={classnames("flex flex-row justify-end", compactActiveStyles?.level, {
                   "text-victron-red": level > 75,
                 })}
               >
@@ -168,7 +174,7 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
         <div ref={wrapperRef}>
           <div className="flex flex-row items-center">
             <div className={classnames("flex items-center truncate")}>
-              <div className="mr-2 lg:mr-3">{fluidIcon(fluidTypeNum, mode)}</div>
+              <div className="mr-2 lg:mr-3">{fluidIcon(fluidTypeNum, mode, "w-[24px] md:w-[32px]")}</div>
               <div className="flex flex-col p-2 w-full truncate">
                 <div className={classnames("truncate", verticalActiveStyles?.tankName)}>{tankTitle}</div>
                 <div className={classnames("text-victron-gray", verticalActiveStyles?.capacity)}>
@@ -245,7 +251,7 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
             </div>
             <div className="flex flex-col justify-between min-w-[90%]">
               <div className="pt-2 px-2">
-                <div className="mb-2">{fluidIcon(fluidTypeNum, "compact")}</div>
+                <div className="mb-2">{fluidIcon(fluidTypeNum, "compact", "w-5")}</div>
                 <div className="w-full tank-name">
                   <div className={classnames("whitespace-nowrap", horizontalActiveStyles?.tankName)}>{tankTitle}</div>
                 </div>
@@ -325,7 +331,7 @@ const roundLevelWidth = (width: number) => {
   return Math.ceil(width)
 }
 
-const fluidIcon = (type: number, mode: string = "compact", isComponent: boolean = true) => {
+const fluidIcon = (type: number, mode: string = "compact", className: string, isComponent: boolean = true) => {
   switch (type) {
     case 0:
     case 3:
@@ -337,20 +343,36 @@ const fluidIcon = (type: number, mode: string = "compact", isComponent: boolean 
     case 10:
     case 11:
       /* todo: fix types for svg */
-      /* @ts-ignore */
-      return isComponent ? <FuelIcon className={mode === "compact" ? "w-5 md:w-7" : "w-9"} /> : FuelIcon
+      return isComponent ? (
+        /* @ts-ignore */
+        <FuelIcon className={className} />
+      ) : (
+        FuelIcon
+      )
     case 1:
       /* todo: fix types for svg */
-      /* @ts-ignore */
-      return isComponent ? <WaterIcon className={mode === "compact" ? "w-5 md:w-7" : "w-9"} /> : WaterIcon
+      return isComponent ? (
+        /* @ts-ignore */
+        <WaterIcon className={className} />
+      ) : (
+        WaterIcon
+      )
     case 2:
       /* todo: fix types for svg */
-      /* @ts-ignore */
-      return isComponent ? <GrayWaterIcon className={mode === "compact" ? "w-5 md:w-7" : "w-9"} /> : GrayWaterIcon
+      return isComponent ? (
+        /* @ts-ignore */
+        <GrayWaterIcon className={className} />
+      ) : (
+        GrayWaterIcon
+      )
     case 5:
       /* todo: fix types for svg */
-      /* @ts-ignore */
-      return isComponent ? <BlackWaterIcon className={mode === "compact" ? "w-5 md:w-7" : "w-9"} /> : BlackWaterIcon
+      return isComponent ? (
+        /* @ts-ignore */
+        <BlackWaterIcon className={className} />
+      ) : (
+        BlackWaterIcon
+      )
     default:
       return null
   }

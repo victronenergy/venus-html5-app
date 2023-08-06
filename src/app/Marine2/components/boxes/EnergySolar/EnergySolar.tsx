@@ -27,7 +27,7 @@ const EnergySolar = ({ mode = "compact", pvCharger, compactBoxSize }: Props) => 
       title={translate("boxes.solar")}
       /* todo: fix types for svg */
       /* @ts-ignore */
-      icon={<SolarIcon className={"w-6"} />}
+      icon={<SolarIcon className={"w-[18px] sm-s:w-[24px] sm-m:w-[32px]"} />}
       bottomValues={[[{ value: power, unit: "W", hideDecimal: true }]]}
       value={current}
       unit={"A"}

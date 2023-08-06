@@ -39,7 +39,7 @@ const EnergyAC = ({ mode = "compact", acLoads, compactBoxSize }: Props) => {
       title={translate("boxes.acLoads")}
       /* todo: fix types for svg */
       /* @ts-ignore */
-      icon={<ACIcon className={"w-6"} />}
+      icon={<ACIcon className={"w-[18px] sm-s:w-[24px] sm-m:w-[32px]"} />}
       value={(phases ?? 1) === 1 ? current[0] : totalPower}
       unit={(phases ?? 1) === 1 ? "A" : "W"}
       bottomValues={phasesOverview}

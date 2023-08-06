@@ -94,7 +94,7 @@ const InverterCharger = ({ componentMode = "compact", compactBoxSize }: Props) =
         <InverterChargerIcon
           /* todo: fix types for svg */
           /* @ts-ignore */
-          className={"w-7"}
+          className={"w-[18px] sm-s:w-[24px] sm-m:w-[32px]"}
         ></InverterChargerIcon>
       }
       value={subTitle}
