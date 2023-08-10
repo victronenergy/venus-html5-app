@@ -126,18 +126,16 @@ const Tanks = ({ mode = "full", className }: Props) => {
             paginationOrientation={"vertical"}
             setRef={gridRef}
           >
-            {filteredTanks?.map((tank, index) => {
-              return tank ? (
+            {filteredTanks.map((tank, index) => {
+              return (
                 <Tank
                   key={index}
-                  tankInstanceId={tank}
+                  tankInstanceId={Number(tank)}
                   mode="full"
                   orientation={orientation}
                   parentSize={{ width, height }}
                   levelWidth={levelWidth}
                 />
-              ) : (
-                <></>
               )
             })}
           </Box>
