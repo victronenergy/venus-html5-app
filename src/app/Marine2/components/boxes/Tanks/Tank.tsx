@@ -114,11 +114,6 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
   // tanks that are missing level readings and only have capacity
   let isAuxillaryTank = !!capacity && level === undefined
 
-  // check if tank values are not undefined
-  if (capacity === undefined && remaining === undefined) {
-    return null
-  }
-
   if (mode === "compact") {
     return (
       <div ref={wrapperRef} className="flex flex-row items-center">
@@ -291,6 +286,8 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
 
 // Convert remaining and total capacity to required unit from m3
 const formatCapacity = (capacity: number, unit: number) => {
+  if (capacity === undefined) return "--"
+
   switch (unit) {
     case 0:
       return Number(capacity.toFixed(2))
