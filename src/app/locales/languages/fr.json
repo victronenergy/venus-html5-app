@@ -97,6 +97,7 @@
         "stopping": "Arrêt en cours",
         "storageMode": "Mode stockage",
         "sustain": "Maintenir",
+        "timetogo": "restant",
         "unplugged": "Débranché",
         "veBusFault": "Condition de défaut VE.Bus",
         "voltage": "Tension"
