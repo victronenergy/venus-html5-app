@@ -40,8 +40,13 @@ const BatterySummary = ({ battery, boxSize }: Props) => {
         <ProgressCircle percentage={battery.soc ?? null} boxSize={boxSize}>
           {battery.voltage || (battery.voltage === 0 && (battery.current || battery.current === 0)) ? (
             <div className="flex flex-col items-center">
-              <div className="flex gap-1 md:gap-2">
-                <div className={classNames("text-victron-gray dark:text-victron-gray-dark", activeStyles.voltage)}>
+              <div className="flex">
+                <div
+                  className={classNames(
+                    "text-victron-gray dark:text-victron-gray-dark mr-1 md:mr-2",
+                    activeStyles.voltage
+                  )}
+                >
                   {formatValue(battery.voltage)}
                   <span className={"text-victron-gray-400 dark:text-victron-gray-400-dark"}>V</span>
                 </div>
