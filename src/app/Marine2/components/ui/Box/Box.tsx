@@ -58,7 +58,7 @@ const Box = ({
           }
           onClick={handleClick}
         >
-          {icon && <span className={"mr-1"}>{icon}</span>}
+          {icon && <span className={"mr-1 md:mr-2"}>{icon}</span>}
           <FadedText text={title} className={"text-base"} />
         </div>
         {linkedView && (
