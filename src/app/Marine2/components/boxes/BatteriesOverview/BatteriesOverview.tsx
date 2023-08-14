@@ -82,7 +82,7 @@ const BatteriesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) =>
                 {overviewBatteries.slice(page * perPage, (page + 1) * perPage).map((b) => (
                   <div
                     key={b.id}
-                    className={"h-full flex items-center justify-center"}
+                    className={"h-full flex ml-4 mr-4 first:ml-0 last:mr-0"}
                     style={{
                       width: pages <= 1 ? `calc(${100 / batteries.length}% - 32px)` : boxSize.width / perPage - 32,
                     }}
