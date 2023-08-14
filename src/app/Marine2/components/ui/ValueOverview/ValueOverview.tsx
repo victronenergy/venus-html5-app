@@ -63,8 +63,8 @@ const ValueOverview = ({
   return (
     <div
       className={classNames("flex justify-between items-center", {
-        "h-12": subtitle,
-        "h-11": !subtitle,
+        "h-14": subtitle,
+        "h-12": !subtitle,
       })}
     >
       <div className="flex items-center min-w-0">
