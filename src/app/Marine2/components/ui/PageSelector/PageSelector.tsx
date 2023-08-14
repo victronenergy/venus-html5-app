@@ -71,7 +71,7 @@ const PageSelector = ({
   return (
     <div
       className={classnames("flex items-center select-none", {
-        "h-[44px] w-full min-w-[8.75rem]": isHorizontal,
+        "h-[44px] w-full min-w-[140px]": isHorizontal,
         "w-11 h-full min-h-[140px] flex-col": !isHorizontal,
         "justify-between": selectorLocation.endsWith("full"),
         "justify-end": selectorLocation.endsWith("right") || selectorLocation.endsWith("bottom"),

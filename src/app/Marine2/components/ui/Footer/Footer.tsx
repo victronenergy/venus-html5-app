@@ -22,7 +22,7 @@ const Footer = ({ pageSelectorProps }: Props) => {
       <div className="flex flex-1 flex-row items-center justify-between">
         <VersionInfo />
         {!!pageSelectorProps && !!pageSelectorProps.maxPages && pageSelectorProps.maxPages > 1 && (
-          <div className={"fixed left-1/2 translate-x-[-50%] min-w-[8.75rem]"}>
+          <div className={"fixed left-1/2 translate-x-[-50%] min-w-[140px]"}>
             <PageSelector {...pageSelectorProps} selectorLocation="bottom-center" />
           </div>
         )}
