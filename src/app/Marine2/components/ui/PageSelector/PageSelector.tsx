@@ -71,8 +71,8 @@ const PageSelector = ({
   return (
     <div
       className={classnames("flex items-center select-none", {
-        "h-11 w-full min-w-[8.75rem]": isHorizontal,
-        "w-11 h-full min-h-[8.75rem] flex-col": !isHorizontal,
+        "h-[44px] w-full min-w-[140px]": isHorizontal,
+        "w-11 h-full min-h-[140px] flex-col": !isHorizontal,
         "justify-between": selectorLocation.endsWith("full"),
         "justify-end": selectorLocation.endsWith("right") || selectorLocation.endsWith("bottom"),
         "justify-start": selectorLocation.endsWith("left") || selectorLocation.endsWith("top"),
@@ -80,7 +80,7 @@ const PageSelector = ({
         "space-y-4 ": !selectorLocation.endsWith("full") && !isHorizontal,
       })}
     >
-      <div onClick={onLeftSelectorClick} className={"w-11 h-11 shrink-0"}>
+      <div onClick={onLeftSelectorClick} className={"w-11 h-[44px] shrink-0"}>
         {(isHorizontal &&
           ((currentPage > 0 && (
             // todo: fix types for svg
@@ -104,10 +104,10 @@ const PageSelector = ({
       <div
         ref={dotsVertRef}
         className={classnames("flex justify-center overflow-hidden", {
-          "w-[calc(100%-7.25rem)]": isHorizontal && selectorLocation.endsWith("full"),
-          "h-[calc(100%-7.25rem)] items-center": !isHorizontal && selectorLocation.endsWith("full"),
-          "h-fit max-h-[calc(100%-7.25rem)] min-h-0 items-center": !isHorizontal && !selectorLocation.endsWith("full"),
-          "w-fit max-w-[calc(100%-7.25rem)] min-w-0 items-center": isHorizontal && !selectorLocation.endsWith("full"),
+          "w-[calc(100%-116px)]": isHorizontal && selectorLocation.endsWith("full"),
+          "h-[calc(100%-116px)] items-center": !isHorizontal && selectorLocation.endsWith("full"),
+          "h-fit max-h-[calc(100%-116px)] min-h-0 items-center": !isHorizontal && !selectorLocation.endsWith("full"),
+          "w-fit max-w-[calc(100%-116px)] min-w-0 items-center": isHorizontal && !selectorLocation.endsWith("full"),
         })}
       >
         {(isHorizontal && (

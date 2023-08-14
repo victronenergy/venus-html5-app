@@ -78,14 +78,11 @@ const BatteriesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) =>
             ref={circleBoxRef}
           >
             {range(pages).map((page) => (
-              <div
-                key={page + "batteryPage"}
-                className={"flex flex-row w-full h-full items-center justify-center gap-8 lg:gap-8"}
-              >
+              <div key={page + "batteryPage"} className={"flex flex-row w-full h-full items-center justify-center"}>
                 {overviewBatteries.slice(page * perPage, (page + 1) * perPage).map((b) => (
                   <div
                     key={b.id}
-                    className={"h-full flex items-center justify-center"}
+                    className={"h-full flex ml-4 mr-4 first:ml-0 last:mr-0"}
                     style={{
                       width: pages <= 1 ? `calc(${100 / batteries.length}% - 32px)` : boxSize.width / perPage - 32,
                     }}

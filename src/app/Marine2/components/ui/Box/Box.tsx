@@ -51,14 +51,14 @@ const Box = ({
         className
       )}
     >
-      <div className={"w-full min-w-0 min-h-[2.75rem] flex justify-between items-center"}>
+      <div className={"w-full min-w-0 min-h-[44px] flex justify-between items-center"}>
         <div
           className={
             "w-full shrink-1 flex items-center justify-start text-victron-gray-300 dark:text-victron-gray-dark cursor-pointer min-w-0 outline-none"
           }
           onClick={handleClick}
         >
-          {icon && <span className={"mr-1"}>{icon}</span>}
+          {icon && <span className={"mr-1 md:mr-2"}>{icon}</span>}
           <FadedText text={title} className={"text-base"} />
         </div>
         {linkedView && (
@@ -112,7 +112,7 @@ const Box = ({
                 <div className={"text-center mb-2 text-xl"}>{infoText.title}</div>
                 <div className={"text-center text-sm pr-2 pl-2 mb-20"}>{infoText.body}</div>
                 <div className={classnames("-ml-4 h-0 mt-3 border-b border-victron-darkGray-200 w-[30rem]")} />
-                <button onClick={closeInfo} className={"w-full -mb-2 h-11 mt-2"}>
+                <button onClick={closeInfo} className={"w-full -mb-2 h-[44px] mt-2"}>
                   Ok
                 </button>
               </div>

@@ -1,21 +1,18 @@
-#!/bin/bash
-
-# Have a csv file with the different devices ready to go.
-# Format should be 
-# 'network_1_ssid, network_1_passwd, network_1_host'
-# SSID and Password are for connecting to the network
-# Host is for the connection to the local device
-# If empty host defaults to value below
-# Note that this is meant for internal use and based on MacOS
-
-file="network.csv"
+#!/bin/zsh
 
 BUILD=false
+REBOOT=false
 while [[ $# -gt 0 ]]; do
     key="$1"
     case $key in
         -b|--build)
             BUILD=true
+            shift # past argument
+        ;;
+    esac
+    case $key in
+        -r|--reboot)
+            REBOOT=true
             shift # past argument
         ;;
     esac
@@ -26,13 +23,28 @@ if $BUILD; then
   npm run build
 fi
 
-while IFS=',' read -r WIFI_SSID WIFI_PASSWD HOST; 
-do
-  if [[ $HOST -ne "" ]]; then
-    HOST="172.24.24.1"
-  fi
-  networksetup -setairportnetwork en0 $WIFI_SSID $WIFI_PASSWD
-  ./deploy.sh $HOST $USER
-  sleep 5
-done < "$file"
+# Source: https://gitlab.elnino.tech/elnino/snooze/victron-mfd/-/wikis/Home
+# Simrad MFD: 172.25.9.234
+# Raymarine MFD: 172.25.9.64
+# Furuno MFD: 172.25.9.35
+# Garmin MFD: 172.25.9.217
+# Garmin 2 MFD: 172.25.9.122
 
+# Associative array
+declare -A MFDs
+MFDs[Simrad]="172.25.9.234"
+MFDs[Raymarine]="172.25.9.64"
+MFDs[Furuno]="172.25.9.35"
+MFDs[Garmin]="172.25.9.217"
+MFDs[Garmin2]="172.25.9.122"
+
+# Call deploy.sh for each MFD in a loop
+for MFD in "${MFDs[@]}"; do
+  echo "Deploying to $MFD..."
+  bin/deploy.sh ${MFD} 
+  # Reboot device if requested
+  if $REBOOT; then
+    echo "Rebooting $MFD..."
+    ssh root@${MFD} "reboot"
+  fi
+done
