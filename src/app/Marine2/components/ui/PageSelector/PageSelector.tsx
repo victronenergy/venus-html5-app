@@ -104,10 +104,10 @@ const PageSelector = ({
       <div
         ref={dotsVertRef}
         className={classnames("flex justify-center overflow-hidden", {
-          "w-[calc(100%-7.25rem)]": isHorizontal && selectorLocation.endsWith("full"),
+          "w-[calc(100%-116px)]": isHorizontal && selectorLocation.endsWith("full"),
           "h-[calc(100%-116px)] items-center": !isHorizontal && selectorLocation.endsWith("full"),
           "h-fit max-h-[calc(100%-116px)] min-h-0 items-center": !isHorizontal && !selectorLocation.endsWith("full"),
-          "w-fit max-w-[calc(100%-7.25rem)] min-w-0 items-center": isHorizontal && !selectorLocation.endsWith("full"),
+          "w-fit max-w-[calc(100%-116px)] min-w-0 items-center": isHorizontal && !selectorLocation.endsWith("full"),
         })}
       >
         {(isHorizontal && (
