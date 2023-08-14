@@ -8,7 +8,7 @@ import { applyStyles, BreakpointStylesType } from "../../../utils/media"
 const styles: BreakpointStylesType = {
   default: {
     voltage: "hidden",
-    name: "hidden",
+    name: "text-base",
     state: "text-2xs",
   },
   "xs-xs": {
@@ -26,7 +26,7 @@ const styles: BreakpointStylesType = {
   "sm-m": {
     voltage: "text-lg",
     batteryState: "text-base",
-    name: "text-xl",
+    name: "text-lg",
     state: "text-base",
   },
 }
@@ -36,35 +36,39 @@ const BatterySummary = ({ battery, boxSize }: Props) => {
 
   return (
     <div className={classNames("flex flex-col justify-center items-center w-full h-full")}>
-      <div className={classNames("w-full h-full")}>
-        <ProgressCircle percentage={battery.soc ?? null} boxSize={boxSize}>
-          {battery.voltage || (battery.voltage === 0 && (battery.current || battery.current === 0)) ? (
-            <div className="flex flex-col items-center">
-              <div className="flex">
-                <div
-                  className={classNames(
-                    "text-victron-gray dark:text-victron-gray-dark mr-1 md:mr-2",
-                    activeStyles.voltage
-                  )}
-                >
-                  {formatValue(battery.voltage)}
-                  <span className={"text-victron-gray-400 dark:text-victron-gray-400-dark"}>V</span>
-                </div>
-                <div className={classNames("text-victron-gray dark:text-victron-gray-dark", activeStyles.voltage)}>
-                  {formatValue(battery.current)}
-                  <span className={"text-victron-gray-400 dark:text-victron-gray-400-dark"}>A</span>
-                </div>
+      <ProgressCircle
+        percentage={battery.soc ?? null}
+        boxSize={{
+          width: boxSize.width - 32,
+          height: boxSize.height - 32,
+        }}
+      >
+        {battery.voltage || (battery.voltage === 0 && (battery.current || battery.current === 0)) ? (
+          <div className="flex flex-col items-center">
+            <div className="flex">
+              <div
+                className={classNames(
+                  "text-victron-gray dark:text-victron-gray-dark mr-1 md:mr-2",
+                  activeStyles.voltage
+                )}
+              >
+                {formatValue(battery.voltage)}
+                <span className={"text-victron-gray-400 dark:text-victron-gray-400-dark"}>V</span>
               </div>
-              <div className={classNames("text-victron-gray dark:text-victron-gray-dark", activeStyles.batteryState)}>
-                {batteryStateNameFormatter(translate, battery.state, battery.soc ?? null, battery.timetogo ?? null)}
+              <div className={classNames("text-victron-gray dark:text-victron-gray-dark", activeStyles.voltage)}>
+                {formatValue(battery.current)}
+                <span className={"text-victron-gray-400 dark:text-victron-gray-400-dark"}>A</span>
               </div>
             </div>
-          ) : (
-            <></>
-          )}
-        </ProgressCircle>
-      </div>
-      <div className={classNames("truncate mt-3.5 w-[inherit] text-center", activeStyles.name)}>{battery.name}</div>
+            <div className={classNames("text-victron-gray dark:text-victron-gray-dark", activeStyles.batteryState)}>
+              {batteryStateNameFormatter(translate, battery.state, battery.soc ?? null, battery.timetogo ?? null)}
+            </div>
+          </div>
+        ) : (
+          <></>
+        )}
+      </ProgressCircle>
+      <div className={classNames("truncate mt-2 w-[inherit] text-center", activeStyles.name)}>{battery.name}</div>
     </div>
   )
 }
