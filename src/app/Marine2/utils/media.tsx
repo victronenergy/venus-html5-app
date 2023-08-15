@@ -16,9 +16,9 @@ type BreakpointsType = {
 }
 
 export const defaultBoxBreakpoints: BreakpointsType = {
-  small: { width: 200, height: 200 },
-  medium: { width: 200, height: 280 },
-  large: { width: 300, height: 350 },
+  small: { width: 250, height: 300 },
+  medium: { width: 500, height: 300 },
+  large: { width: 800, height: 440 },
 }
 
 export const defaultBoxStyles: BreakpointStylesType = {
