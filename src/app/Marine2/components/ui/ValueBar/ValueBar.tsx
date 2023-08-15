@@ -12,7 +12,7 @@ const ValueBar = ({ values, prefix }: Props) => {
         "border-victron-gray border-t-2 text-victron-darkGray dark:text-victron-gray-500 dark:border-victron-gray-200 px-2 -mx-2 flex"
       }
     >
-      {prefix && <div className={"w-10"}>{prefix}</div>}
+      {prefix && <div className={"pr-[12px]"}>{prefix}</div>}
       <div className={"flex justify-between grow"}>
         {values.map((v, idx) => (
           <div key={idx} className="text-black dark:text-victron-gray-500">
