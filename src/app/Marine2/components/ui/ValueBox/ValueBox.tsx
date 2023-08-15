@@ -29,7 +29,7 @@ const ValueBox = ({
   return (
     <Box title={title} icon={icon} getBoxSizeCallback={setBoxSize} infoText={infoText}>
       <div className="w-full h-full flex flex-col justify-between">
-        <div className={"w-full overflow-hidden"}>
+        <div className={"w-full"}>
           <div className={classNames("text-black dark:text-white", activeStyles?.mainValue)}>
             {(typeof value === "number" && formatValue(value, hideDecimal && unit !== "kW" ? 0 : 1)) || value}
             {((typeof value === "number" || value === "--") && (
