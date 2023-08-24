@@ -89,7 +89,7 @@ N/{portalId}/settings/0/Settings/SystemSetup/AcInput2
 ##### Which input is currently active
 
 Figure out which of the AC-inputs is what; so for example ACinput0 == Generator and
-ACinput1 == Shore. (based on the the settings above) and then look at this path:
+ACinput1 == Shore. (based on the settings above) and then look at this path:
 
 ```
 N/{portalId}/vebus/{vebusInstanceId}/Ac/ActiveIn/ActiveInput
@@ -197,7 +197,7 @@ Notes:
 ##### Make commonly used shore input limits available as a button
 
 The list of amperages commonly used depends on wether the system is US based or EU based. To
-etermine that, get the product id from:
+determine that, get the product id from:
 
 ```
 N/{portalId}/vebus/{vebusInstanceId}/ProductId
@@ -259,7 +259,7 @@ N/{portalId]/vebus/{vebusInstanceId}/Ac/Out/L3/P
 
 ```
 Voltage: N/{portalId}/system/0/Dc/Battery/Voltage
-Current: power divded by voltage
+Current: power divided by voltage
 Power: N/{portalId}/system/0/Dc/System/Power
 ```
 
@@ -297,7 +297,7 @@ W/${portalId}/charger/${deviceInstanceId}/Mode`
 
 #### Inverter information
 
-Dbus spec for invertes [here](https://github.com/victronenergy/venus/wiki/dbus)
+Dbus spec for inverters [here](https://github.com/victronenergy/venus/wiki/dbus)
 
 For every inverter in the system show an element in the ui. Inverters can be found on D-Bus under two paths:
 
