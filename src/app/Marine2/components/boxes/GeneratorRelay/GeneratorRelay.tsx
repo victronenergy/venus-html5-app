@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite"
 import GeneratorIcon from "../../../images/icons/generator.svg"
 import { translate } from "react-i18nify"
-import { useActiveInValues } from "@elninotech/mfd-modules"
+import { useActiveInValues } from "@victronenergy/mfd-modules"
 import ValueBox from "../../ui/ValueBox"
 import AutoStartStopSetter from "../../ui/AutoStartStopSetter/AutoStartStopSetter"
 import ValueOverview from "../../ui/ValueOverview"

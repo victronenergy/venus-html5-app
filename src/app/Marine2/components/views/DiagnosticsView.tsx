@@ -1,7 +1,7 @@
 import React from "react"
 import MainLayout from "../ui/MainLayout"
 import DiagnosticsTable from "../ui/DiagnosticsTable"
-import { MqttStore, useMqtt } from "@elninotech/mfd-modules"
+import { MqttStore, useMqtt } from "@victronenergy/mfd-modules"
 import { translate } from "react-i18nify"
 import { observer } from "mobx-react"
 import { useWindowSize } from "../../utils/hooks"

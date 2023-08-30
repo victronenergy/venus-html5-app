@@ -1,5 +1,5 @@
 import DcIcon from "../../images/icons/dc.svg"
-import { DcLoadsState, useDcLoads } from "@elninotech/mfd-modules"
+import { DcLoadsState, useDcLoads } from "@victronenergy/mfd-modules"
 import HeaderView from "../HeaderView"
 import ColumnContainer from "../ColumnContainer"
 import MetricValues from "../MetricValues"

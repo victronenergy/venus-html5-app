@@ -1,5 +1,5 @@
 import { useMemo, useRef } from "react"
-import { useTank } from "@elninotech/mfd-modules"
+import { useTank } from "@victronenergy/mfd-modules"
 import { observer } from "mobx-react-lite"
 import ProgressBar from "../../ui/ProgressBar"
 import classnames from "classnames"

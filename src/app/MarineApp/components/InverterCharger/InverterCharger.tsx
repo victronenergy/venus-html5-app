@@ -1,5 +1,5 @@
 import classnames from "classnames"
-import { useShorePowerInput, useInverterCharger } from "@elninotech/mfd-modules"
+import { useShorePowerInput, useInverterCharger } from "@victronenergy/mfd-modules"
 
 import HeaderView from "../HeaderView"
 import InputLimit from "./InputLimit"

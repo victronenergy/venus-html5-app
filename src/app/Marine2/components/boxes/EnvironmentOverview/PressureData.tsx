@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite"
-import { usePressure } from "@elninotech/mfd-modules"
+import { usePressure } from "@victronenergy/mfd-modules"
 import ValueOverview from "../../ui/ValueOverview"
 import PressureIcon from "../../../images/icons/pressure.svg"
 import ValueBox from "../../ui/ValueBox"

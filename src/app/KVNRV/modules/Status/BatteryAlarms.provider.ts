@@ -6,7 +6,7 @@ import {
   useMqtt,
   useTopicsState,
   useTopicSubscriptions,
-} from "@elninotech/mfd-modules"
+} from "@victronenergy/mfd-modules"
 import { useMemo } from "react"
 
 export interface BatteryAlarmsState {

@@ -13,7 +13,7 @@ const config = {
     "^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js",
   },
   transformIgnorePatterns: [
-    "node_modules/(?!@elninotech/mfd-modules|lodash-es)",
+    "node_modules/(?!@victronenergy/mfd-modules|lodash-es)",
   ],
   modulePaths: ["./src"],
   moduleNameMapper: {

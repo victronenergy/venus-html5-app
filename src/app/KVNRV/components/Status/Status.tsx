@@ -4,7 +4,7 @@ import { Card } from "../../../components/Card"
 import IconWarning from "../../../images/IconWarning.svg"
 import "./Status.scss"
 import { STATUS_LEVELS } from "../../utils/constants"
-import { useSystemState } from "@elninotech/mfd-modules"
+import { useSystemState } from "@victronenergy/mfd-modules"
 import {
   BatteryAlarmsState,
   StatusUpdate,

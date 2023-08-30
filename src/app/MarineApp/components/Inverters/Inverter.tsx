@@ -1,4 +1,4 @@
-import { InverterState, useInverter, InverterInstanceId } from "@elninotech/mfd-modules"
+import { InverterState, useInverter, InverterInstanceId } from "@victronenergy/mfd-modules"
 
 import { INVERTER_MODE } from "../../../utils/constants"
 

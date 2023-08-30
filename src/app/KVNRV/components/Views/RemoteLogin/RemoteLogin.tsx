@@ -1,5 +1,5 @@
 import { FormEventHandler, useCallback, useEffect, useState } from "react"
-import { useAppStore, useTheme, useVrmStore } from "@elninotech/mfd-modules"
+import { useAppStore, useTheme, useVrmStore } from "@victronenergy/mfd-modules"
 import { Installations, NoInstallations } from "../../Installations"
 import { VRM_URL } from "../../../utils/constants"
 

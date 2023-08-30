@@ -1,4 +1,4 @@
-import { InverterInstanceId, useAppStore, useInverter } from "@elninotech/mfd-modules"
+import { InverterInstanceId, useAppStore, useInverter } from "@victronenergy/mfd-modules"
 import { observer } from "mobx-react-lite"
 import InverterChargerIcon from "../../../images/icons/inverter-charger.svg"
 import { translate } from "react-i18nify"

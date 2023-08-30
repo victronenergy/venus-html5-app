@@ -1,4 +1,4 @@
-import { GeneratorFpProvider, useGensetValues } from "@elninotech/mfd-modules"
+import { GeneratorFpProvider, useGensetValues } from "@victronenergy/mfd-modules"
 import { observer } from "mobx-react-lite"
 import GeneratorIcon from "../../../images/icons/generator.svg"
 import { GENSET_STATE } from "../../../utils/constants"

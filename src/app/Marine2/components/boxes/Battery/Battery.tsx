@@ -1,5 +1,5 @@
 import Box from "../../ui/Box"
-import { Battery as BatteryType } from "@elninotech/mfd-modules"
+import { Battery as BatteryType } from "@victronenergy/mfd-modules"
 import { batteryStateNameFormatter, colorForPercentageFormatter } from "../../../utils/formatters"
 import { BATTERY } from "../../../utils/constants"
 import BatteryChargingIcon from "../../../images/icons/battery-charging.svg"

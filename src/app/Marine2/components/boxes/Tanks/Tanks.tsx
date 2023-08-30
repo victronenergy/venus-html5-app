@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import TanksIcon from "../../../images/icons/tanks.svg"
-import { useTanks } from "@elninotech/mfd-modules"
+import { useTanks } from "@victronenergy/mfd-modules"
 import { observer } from "mobx-react"
 import { useWindowSize } from "../../../utils/hooks"
 import Box from "../../ui/Box"

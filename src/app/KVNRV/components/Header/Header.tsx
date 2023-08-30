@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react"
-import { useApp, useTheme, useVrmStore } from "@elninotech/mfd-modules"
+import { useApp, useTheme, useVrmStore } from "@victronenergy/mfd-modules"
 import { VIEWS } from "../../utils/constants"
 
 import "./Header.scss"

@@ -6,7 +6,7 @@ import MetricValues from "../MetricValues"
 import NumericValue from "../../../components/NumericValue"
 
 import SolarIcon from "../../images/icons/icon_solar.svg"
-import { usePvCharger } from "@elninotech/mfd-modules"
+import { usePvCharger } from "@victronenergy/mfd-modules"
 import { observer } from "mobx-react"
 import { useVisibilityNotifier } from "app/MarineApp/modules"
 import { WIDGET_TYPES } from "app/MarineApp/utils/constants"

@@ -1,5 +1,5 @@
 import React from "react"
-import { useActiveInValues, useActiveSource } from "@elninotech/mfd-modules"
+import { useActiveInValues, useActiveSource } from "@victronenergy/mfd-modules"
 import { observer } from "mobx-react-lite"
 import ShorePowerIcon from "../../../images/icons/shore-power.svg"
 import { translate } from "react-i18nify"

@@ -1,6 +1,6 @@
 import React from "react"
 
-import { useActiveSource } from "@elninotech/mfd-modules"
+import { useActiveSource } from "@victronenergy/mfd-modules"
 
 import ActiveInValues from "./ActiveInValues"
 import HeaderView from "../HeaderView/HeaderView"

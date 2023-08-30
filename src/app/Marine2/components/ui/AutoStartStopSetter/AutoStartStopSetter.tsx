@@ -5,7 +5,7 @@ import RadioButton from "../RadioButton"
 import Button from "../Button"
 import { useCallback, useEffect, useState } from "react"
 import { GENERATOR_START_STOP } from "../../../utils/constants"
-import { useAppStore } from "@elninotech/mfd-modules"
+import { useAppStore } from "@victronenergy/mfd-modules"
 
 const AutoStartStopSetter = ({
   statusCode,

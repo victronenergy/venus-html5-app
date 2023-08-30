@@ -1,6 +1,6 @@
 import React from "react"
 
-import { useGensetValues } from "@elninotech/mfd-modules"
+import { useGensetValues } from "@victronenergy/mfd-modules"
 
 import { ListRow } from "../ListView"
 import NumericValue from "../../../components/NumericValue"

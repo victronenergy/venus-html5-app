@@ -15,7 +15,7 @@ import {
   useInverters,
   useVebus,
   VebusInverters,
-} from "@elninotech/mfd-modules"
+} from "@victronenergy/mfd-modules"
 import Charger from "../Charger"
 import Inverter from "../Inverter"
 import GeneratorFp from "../GeneratorFp"

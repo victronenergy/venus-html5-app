@@ -1,4 +1,4 @@
-import { useInputLimit } from "@elninotech/mfd-modules"
+import { useInputLimit } from "@victronenergy/mfd-modules"
 import { observer } from "mobx-react"
 
 const InputLimitValue = ({ inputId }: Props) => {

@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 
-import { Battery, useBattery } from "@elninotech/mfd-modules"
+import { Battery, useBattery } from "@victronenergy/mfd-modules"
 import { BATTERY_STATE } from "../../../utils/constants"
 
 import ColumnContainer from "../ColumnContainer"

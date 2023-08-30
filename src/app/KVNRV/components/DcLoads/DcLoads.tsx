@@ -1,5 +1,5 @@
 import { Card, SIZE_NARROW, SIZE_SHORT } from "../../../components/Card"
-import { useDcLoads } from "@elninotech/mfd-modules"
+import { useDcLoads } from "@victronenergy/mfd-modules"
 import { useSendUpdate } from "../../modules"
 import { CRITICAL_MULTIPLIER, DC_CONF } from "../../utils/constants"
 

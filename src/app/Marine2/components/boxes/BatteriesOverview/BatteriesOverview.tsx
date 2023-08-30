@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite"
-import { Battery as BatteryType, useBattery } from "@elninotech/mfd-modules"
+import { Battery as BatteryType, useBattery } from "@victronenergy/mfd-modules"
 import Box from "../../ui/Box"
 import { BATTERY, BoxTypes } from "../../../utils/constants"
 import Battery from "../Battery"

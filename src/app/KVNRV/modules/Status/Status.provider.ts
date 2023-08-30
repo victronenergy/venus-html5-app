@@ -2,7 +2,7 @@ import { MessagesObj, STATUS_LEVELS, STATUS_LEVELS_MSG, WidgetConfiguration } fr
 import { useEffect, useState } from "react"
 import { Footer } from "../../../components/Card/Card"
 import { sum } from "../../utils/helpers"
-import { useApp } from "@elninotech/mfd-modules"
+import { useApp } from "@victronenergy/mfd-modules"
 import { useStatusStore } from "./Status.store"
 
 export const useStatus = () => {

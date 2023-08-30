@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite"
-import { useTemperatures, TemperatureInstanceId } from "@elninotech/mfd-modules"
+import { useTemperatures, TemperatureInstanceId } from "@victronenergy/mfd-modules"
 import { useState, createContext, useCallback } from "react"
 import { useVisibilityNotifier } from "../../../modules"
 import { BoxTypes } from "../../../utils/constants"

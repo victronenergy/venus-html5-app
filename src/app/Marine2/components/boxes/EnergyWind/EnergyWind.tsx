@@ -1,6 +1,6 @@
 import React from "react"
 import WindIcon from "../../../images/icons/wind.svg"
-import { useWindGenerator } from "@elninotech/mfd-modules"
+import { useWindGenerator } from "@victronenergy/mfd-modules"
 import { observer } from "mobx-react-lite"
 import { translate } from "react-i18nify"
 import ValueBox from "../../ui/ValueBox"

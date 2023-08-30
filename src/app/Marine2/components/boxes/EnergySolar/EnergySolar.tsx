@@ -1,4 +1,4 @@
-import { PvChargerState } from "@elninotech/mfd-modules"
+import { PvChargerState } from "@victronenergy/mfd-modules"
 import SolarIcon from "../../../images/icons/solar.svg"
 import { translate } from "react-i18nify"
 import ValueBox from "../../ui/ValueBox"

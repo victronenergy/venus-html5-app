@@ -6,7 +6,7 @@ import NumericValue, { formatNumber } from "../../../components/NumericValue"
 import ProgressIndicator from "../ProgressIndicator"
 
 import "./SmallTank.scss"
-import { useTank } from "@elninotech/mfd-modules"
+import { useTank } from "@victronenergy/mfd-modules"
 import { TankProps } from "./index"
 import { useSendUpdate } from "../../modules"
 import {

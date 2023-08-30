@@ -1,4 +1,4 @@
-import { useAppStore, useVrmStore } from "@elninotech/mfd-modules"
+import { useAppStore, useVrmStore } from "@victronenergy/mfd-modules"
 import "./Installations.scss"
 import { VIEWS } from "../../utils/constants"
 import { Translate } from "react-i18nify"

@@ -1,7 +1,7 @@
 import { setTranslations, setLocale, setHandleMissingTranslation, translate } from "react-i18nify"
 import { __LOCAL_STORAGE_LANG_KEY__, LANGUAGES, DEFAULT_LANGUAGE } from "./constants"
 import { get } from "lodash-es"
-import { Storage } from "@elninotech/mfd-modules"
+import { Storage } from "@victronenergy/mfd-modules"
 
 type TranslationRecord = {
   [key: string]: Record<string, any>

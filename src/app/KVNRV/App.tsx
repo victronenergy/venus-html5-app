@@ -1,4 +1,4 @@
-import { useAppStore, useMqtt, useVebus, useVrmStore } from "@elninotech/mfd-modules"
+import { useAppStore, useMqtt, useVebus, useVrmStore } from "@victronenergy/mfd-modules"
 import { observer } from "mobx-react"
 import React, { useEffect } from "react"
 import "../../css/index.scss"

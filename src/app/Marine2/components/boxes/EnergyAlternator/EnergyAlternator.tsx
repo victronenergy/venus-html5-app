@@ -1,6 +1,6 @@
 import React from "react"
 import AlternatorIcon from "../../../images/icons/alternator.svg"
-import { useAlternator } from "@elninotech/mfd-modules"
+import { useAlternator } from "@victronenergy/mfd-modules"
 import { translate } from "react-i18nify"
 import ValueBox from "../../ui/ValueBox"
 import ValueOverview from "../../ui/ValueOverview"

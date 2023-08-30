@@ -2,7 +2,7 @@ import { Card, SIZE_NARROW, SIZE_SHORT } from "../../../components/Card"
 
 import "./ShorePower.scss"
 import NumericValue from "../../../components/NumericValue"
-import { useActiveInValues } from "@elninotech/mfd-modules"
+import { useActiveInValues } from "@victronenergy/mfd-modules"
 import { useSendUpdate } from "../../modules"
 import { SHORE_POWER_CONF } from "../../utils/constants"
 import { normalizePower } from "../../utils/helpers"

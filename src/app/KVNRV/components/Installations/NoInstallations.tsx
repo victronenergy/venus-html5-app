@@ -1,4 +1,4 @@
-import { useVrmStore } from "@elninotech/mfd-modules"
+import { useVrmStore } from "@victronenergy/mfd-modules"
 import { Translate } from "react-i18nify"
 
 export const NoInstallations = () => {

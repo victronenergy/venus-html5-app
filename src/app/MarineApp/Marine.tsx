@@ -6,7 +6,7 @@ import { InverterChargerInputLimitSelector } from "./components/InverterCharger"
 
 import { Connecting, Error, Metrics, MqttUnavailable, RemoteConsole } from "./components/Views"
 
-import { useLanguage, useMqtt, STATUS } from "@elninotech/mfd-modules"
+import { useLanguage, useMqtt, STATUS } from "@victronenergy/mfd-modules"
 import { VIEWS } from "../utils/constants"
 import { AppProps } from "./App"
 

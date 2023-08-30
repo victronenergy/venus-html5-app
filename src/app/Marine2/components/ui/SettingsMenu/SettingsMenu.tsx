@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { observer } from "mobx-react"
-import { useAppStore, useTheme } from "@elninotech/mfd-modules"
+import { useAppStore, useTheme } from "@victronenergy/mfd-modules"
 import { translate } from "react-i18nify"
 import { Modal } from "../Modal"
 import PreferencesIcon from "../../../images/icons/preferences.svg"

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useAppStore, useInputLimit, useInputLimitSelector } from "@elninotech/mfd-modules"
+import { useAppStore, useInputLimit, useInputLimitSelector } from "@victronenergy/mfd-modules"
 import Button from "../Button"
 import DeviceSettingModal from "../DeviceSettingModal"
 import { translate } from "react-i18nify"

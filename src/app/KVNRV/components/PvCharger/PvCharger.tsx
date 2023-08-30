@@ -1,7 +1,7 @@
 import React from "react"
 
 import { PV_CONF } from "../../utils/constants"
-import { usePvCharger } from "@elninotech/mfd-modules"
+import { usePvCharger } from "@victronenergy/mfd-modules"
 import { useSendUpdate } from "../../modules"
 import { Card, SIZE_NARROW, SIZE_SHORT } from "../../../components/Card"
 import NumericValue from "../../../components/NumericValue"

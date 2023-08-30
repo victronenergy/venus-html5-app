@@ -1,4 +1,4 @@
-import { useAcLoads } from "@elninotech/mfd-modules"
+import { useAcLoads } from "@victronenergy/mfd-modules"
 
 import HeaderView from "../HeaderView"
 import ColumnContainer from "../ColumnContainer"

@@ -4,7 +4,7 @@ import IconWarning from "../../images/IconWarning.svg"
 import "./Card.scss"
 import CloseIcon from "../../images/IconClose.svg"
 import CloseIconDark from "../../images/IconClose-Dark.svg"
-import { useTheme } from "@elninotech/mfd-modules"
+import { useTheme } from "@victronenergy/mfd-modules"
 import { Translate } from "react-i18nify"
 import { STATUS_LEVELS } from "app/KVNRV/utils/constants"
 

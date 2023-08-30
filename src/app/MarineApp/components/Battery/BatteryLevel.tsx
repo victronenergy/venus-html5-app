@@ -1,5 +1,5 @@
 import { BATTERY_STATE } from "../../../utils/constants"
-import { Battery, useLanguage } from "@elninotech/mfd-modules"
+import { Battery, useLanguage } from "@victronenergy/mfd-modules"
 import { formatNumber } from "../../../components/NumericValue"
 import { translate, Translate } from "react-i18nify"
 import { mfdLanguageOptions } from "app/locales/constants"

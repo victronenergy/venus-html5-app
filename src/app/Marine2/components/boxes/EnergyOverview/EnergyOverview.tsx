@@ -17,7 +17,7 @@ import {
   useVebus,
   useWindGenerators,
   WindGeneratorId,
-} from "@elninotech/mfd-modules"
+} from "@victronenergy/mfd-modules"
 import EnergyShore from "../EnergyShore"
 import { observer } from "mobx-react-lite"
 import EnergyWind from "../EnergyWind"

@@ -1,4 +1,4 @@
-import { useTheme } from "@elninotech/mfd-modules"
+import { useTheme } from "@victronenergy/mfd-modules"
 import { useEffect, useRef, useState } from "react"
 
 const initColors = {

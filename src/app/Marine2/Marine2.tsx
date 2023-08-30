@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { useLanguage, useMqtt, STATUS, useApp } from "@elninotech/mfd-modules"
+import { useLanguage, useMqtt, STATUS, useApp } from "@victronenergy/mfd-modules"
 import { AppProps } from "./App"
 import { mfdLanguageOptions } from "app/locales/constants"
 import { observer } from "mobx-react"

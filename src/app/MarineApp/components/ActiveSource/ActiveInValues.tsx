@@ -1,6 +1,6 @@
 import React from "react"
 
-import { useActiveInValues } from "@elninotech/mfd-modules"
+import { useActiveInValues } from "@victronenergy/mfd-modules"
 
 import { ListRow } from "../ListView"
 import NumericValue from "../../../components/NumericValue"

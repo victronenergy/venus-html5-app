@@ -1,5 +1,5 @@
 import React from "react"
-import { AcLoadsState } from "@elninotech/mfd-modules"
+import { AcLoadsState } from "@victronenergy/mfd-modules"
 import ACIcon from "../../../images/icons/ac.svg"
 import { translate } from "react-i18nify"
 import ValueBox from "../../ui/ValueBox"

@@ -7,7 +7,7 @@ import { SIZE_EXTRA_WIDE } from "app/components/Card"
 
 import packageInfo from "../../../../../package.json"
 import { BUILD_TIMESTAMP } from "app/utils/constants"
-import { useVrmStore, useAppStore } from "@elninotech/mfd-modules"
+import { useVrmStore, useAppStore } from "@victronenergy/mfd-modules"
 import { observer } from "mobx-react"
 
 export const ModalVersionInfo = observer(

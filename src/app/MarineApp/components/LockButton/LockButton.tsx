@@ -7,7 +7,7 @@ import LockIcon from "../../../../images/icons/lock.svg"
 
 import "./LockButton.scss"
 import { Translate } from "react-i18nify"
-import { useApp } from "@elninotech/mfd-modules"
+import { useApp } from "@victronenergy/mfd-modules"
 import { observer } from "mobx-react"
 import { useVisibleWidgetsStore } from "app/MarineApp/modules"
 

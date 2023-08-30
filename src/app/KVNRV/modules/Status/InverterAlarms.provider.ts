@@ -1,4 +1,4 @@
-import { PortalId, Topics, useMqtt, useTopicsState, useTopicSubscriptions } from "@elninotech/mfd-modules"
+import { PortalId, Topics, useMqtt, useTopicsState, useTopicSubscriptions } from "@victronenergy/mfd-modules"
 import { useMemo } from "react"
 
 export interface InverterAlarmsState {
