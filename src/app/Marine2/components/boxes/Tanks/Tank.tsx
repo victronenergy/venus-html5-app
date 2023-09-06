@@ -1,4 +1,4 @@
-import { useMemo, useRef } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import { useTank } from "@victronenergy/mfd-modules"
 import { observer } from "mobx-react-lite"
 import ProgressBar from "../../ui/ProgressBar"
@@ -88,6 +88,7 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
   const fluidTypeNum = +fluidType
   const wrapperRef = useRef<HTMLDivElement>(null)
   const [width] = useSize(wrapperRef)
+  const [isComponentVisible, setIsComponentVisible] = useState(false)
 
   let horizontalActiveStyles,
     verticalActiveStyles,
@@ -116,6 +117,16 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
 
     return customName || fluids[fluidTypeNum]
   }, [fluidTypeNum, customName])
+
+  useEffect(() => {
+    if (level !== undefined || (capacity !== undefined && level === undefined)) {
+      setIsComponentVisible(true)
+    } else {
+      setIsComponentVisible(false)
+    }
+  }, [level, capacity])
+
+  if (!isComponentVisible) return <></>
 
   // tanks that are missing level readings and only have capacity
   let isAuxillaryTank = !!capacity && level === undefined
