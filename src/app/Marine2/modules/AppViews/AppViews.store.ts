@@ -19,7 +19,7 @@ export const AppViewTitleKeys = new Map<AppViews, string>([
   [AppViews.DIAGNOSTICS, "pages.diagnostics"],
   [AppViews.BOX_BATTERIES_OVERVIEW, "boxes.batteries"],
   [AppViews.BOX_TANKS, "boxes.tanks"],
-  [AppViews.BOX_ENERGY_OVERVIEW, "boxes.EnergyOverview"],
+  [AppViews.BOX_ENERGY_OVERVIEW, "boxes.energy"],
   [AppViews.BOX_DEVICES_OVERVIEW, "boxes.devices"],
   [AppViews.BOX_ENVIRONMENT_OVERVIEW, "boxes.environment"],
 ])
