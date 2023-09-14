@@ -1,9 +1,10 @@
 import { useInputLimit } from "@victronenergy/mfd-modules"
 import { observer } from "mobx-react"
+import { formatValue } from "../../../utils/formatters"
 
 const InputLimitValue = ({ inputId }: Props) => {
   const { currentLimit } = useInputLimit(inputId)
-  return <>{!!currentLimit ? Number(currentLimit) : 0}</>
+  return <>{!!currentLimit ? formatValue(Number(currentLimit)) : 0.0}</>
 }
 
 interface Props {

@@ -15,6 +15,7 @@ import classNames from "classnames"
 import RadioButton from "../../ui/RadioButton"
 import DeviceSettingModal from "../../ui/DeviceSettingModal/DeviceSettingModal"
 import ValueOverview from "../../ui/ValueOverview"
+import { formatValue } from "../../../utils/formatters"
 
 const Charger = ({ instanceId, componentMode = "compact", compactBoxSize }: Props) => {
   const chargerModeFormatter = (value: number) => {
@@ -131,7 +132,7 @@ const Charger = ({ instanceId, componentMode = "compact", compactBoxSize }: Prop
           <div className="flex mt-3">
             {chargerSupportsInputLimit && (
               <Button className="w-full mr-4" size="md" onClick={() => setIsLimitModalOpen(!isLimitModalOpen)}>
-                {!!currentLimit ? Number(currentLimit) + "A" : 0 + "A"}
+                {!!currentLimit ? formatValue(Number(currentLimit)) + "A" : 0 + "A"}
               </Button>
             )}
             {chargerSupportsMode && (
@@ -179,17 +180,17 @@ const Charger = ({ instanceId, componentMode = "compact", compactBoxSize }: Prop
             </label>
             <div className="flex flex-row justify-center mt-10 mb-10">
               <button
-                className="w-28 md:w-36 lg:w-36 h-20 bg-victron-blue/70 border-0 rounded-md text-xl mr-14"
+                className="w-28 md:w-36 lg:w-36 h-20 bg-victron-blue/70 border-0 rounded-md text-xl"
                 onClick={decreaseLimit}
               >
                 -
               </button>
-              <div className="w-24 md:w-32 lg:w-32 flex flex-row pr-2 items-center text-2xl md:text-3xl lg:text-3xl">
-                <div>{limitForSubmission ?? 0}</div>
-                <div className={"text-victron-gray/70 pl-1"}>A</div>
+              <div className="flex items-center w-32 md:w-44 justify-center mx-6 md:mx-14 lg:w-32 text-2xl md:text-3xl lg:text-3xl">
+                <span>{formatValue(limitForSubmission ?? 0)}</span>
+                <span className="text-victron-gray/70 pl-1">A</span>
               </div>
               <button
-                className="w-28 md:w-36 lg:w-36 h-20 bg-victron-blue/70 border-0 rounded-md text-xl ml-14"
+                className="w-28 md:w-36 lg:w-36 h-20 bg-victron-blue/70 border-0 rounded-md text-xl"
                 onClick={increaseLimit}
               >
                 +
