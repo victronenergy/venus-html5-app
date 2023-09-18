@@ -42,7 +42,6 @@ const ValueBox = ({
               {valueSubtitle}
             </div>
           )}
-
           <div className={classNames("text-victron-gray dark:text-victron-gray-500", activeStyles.valueSubtitle)}>
             {children}
           </div>
