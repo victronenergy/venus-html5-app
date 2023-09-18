@@ -6,7 +6,7 @@
 # that still create hashes with legacy cryptographic algorithms like MD4.
 
 # Get only major number of Node.js version
-VERSION=`node -v | while IFS=. read a b; do echo "$a"; done | grep -o -E "\d*"`
+VERSION=`node -v | sed -nr 's/^v([0-9]+)\..*/\1/p'`
 
 # Apply --openssl-legacy-provider option only for node v17 and higher
 if [ $VERSION -gt "16" ]
