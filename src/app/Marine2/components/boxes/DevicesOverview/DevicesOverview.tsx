@@ -1,3 +1,5 @@
+import React, { useState } from "react"
+import classNames from "classnames"
 import Box from "../../ui/Box"
 import DevicesIcon from "../../../images/icons/devices.svg"
 import { AppViews } from "../../../modules/AppViews"
@@ -24,10 +26,8 @@ import { useVisibilityNotifier } from "../../../modules"
 import { AC_SOURCE, BoxTypes, RELAY_FUNCTION } from "../../../utils/constants"
 import { PageSelectorProps } from "../../ui/PageSelector"
 import GridPaginator from "../../ui/GridPaginator"
-import React from "react"
 import GeneratorRelay from "../GeneratorRelay/GeneratorRelay"
 import { applyStyles, defaultBoxStyles } from "../../../utils/media"
-import classNames from "classnames"
 import { ComponentMode } from "@m2Types/generic/component-mode"
 
 const DevicesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: Props) => {
@@ -36,7 +36,7 @@ const DevicesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: Pr
   const { chargers } = useChargers()
   const generatorFp = useGeneratorFp()
   const generatorRelay = useGeneratorRelay()
-  const [compactBoxSize, setCompactBoxSize] = React.useState<{ width: number; height: number }>({ width: 0, height: 0 })
+  const [compactBoxSize, setCompactBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
 
   const boxes = getAvailableDeviceBoxes(
     chargers,

@@ -37,6 +37,8 @@ const GeneratorFp = ({ componentMode = "compact", generatorFp, compactBoxSize }:
   const title = productName || "Genset"
   const subTitle = !!statusCode || statusCode === 0 ? gensetStateFormatter(Number(statusCode)) : undefined
   const isAutoStartDisabled = gensetAutoStart === 0
+
+  // TODO refactor to totalPowerOf function for generic usage (single-source-of-truth).
   const powerSum = power.reduce((sum: number, b) => {
     return b ? sum + b : sum
   }, 0)
