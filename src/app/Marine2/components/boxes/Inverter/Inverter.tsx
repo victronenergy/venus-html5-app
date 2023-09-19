@@ -15,6 +15,7 @@ import Box from "../../ui/Box"
 import { applyStyles, defaultBoxStyles } from "../../../utils/media"
 import { useEffect, useState } from "react"
 import ValueOverview from "../../ui/ValueOverview"
+import { ComponentMode } from "@m2Types/generic/component-mode"
 
 const Inverter = ({ instanceId, isVebusInverter, componentMode = "compact", compactBoxSize }: Props) => {
   const { locked } = useAppStore() // lock from theme settings
@@ -164,7 +165,7 @@ const Inverter = ({ instanceId, isVebusInverter, componentMode = "compact", comp
 interface Props {
   instanceId: InverterInstanceId
   isVebusInverter: boolean
-  componentMode?: "compact" | "full"
+  componentMode?: ComponentMode
   compactBoxSize?: { width: number; height: number }
 }
 

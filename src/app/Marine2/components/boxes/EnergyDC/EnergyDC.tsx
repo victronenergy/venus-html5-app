@@ -3,15 +3,16 @@ import DCIcon from "../../../images/icons/dc.svg"
 import { translate } from "react-i18nify"
 import ValueBox from "../../ui/ValueBox"
 import ValueOverview from "../../ui/ValueOverview"
+import { ComponentMode } from "@m2Types/generic/component-mode"
 
-const EnergyDC = ({ mode = "compact", dcLoads, compactBoxSize }: Props) => {
+const EnergyDC = ({ componentMode = "compact", dcLoads, compactBoxSize }: Props) => {
   const { power, voltage, current } = dcLoads
 
   if (isNaN(power) || isNaN(voltage)) {
     return <></>
   }
 
-  if (mode === "compact" && compactBoxSize) {
+  if (componentMode === "compact" && compactBoxSize) {
     return (
       <ValueOverview
         /* todo: fix types for svg */
@@ -19,7 +20,7 @@ const EnergyDC = ({ mode = "compact", dcLoads, compactBoxSize }: Props) => {
         Icon={DCIcon}
         title={translate("boxes.dcLoads")}
         value={current}
-        unit={"A"}
+        unit="A"
         boxSize={compactBoxSize}
       />
     )
@@ -40,7 +41,7 @@ const EnergyDC = ({ mode = "compact", dcLoads, compactBoxSize }: Props) => {
 
 interface Props {
   dcLoads: DcLoadsState
-  mode?: "compact" | "full"
+  componentMode?: ComponentMode
   compactBoxSize?: { width: number; height: number }
 }
 

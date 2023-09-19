@@ -12,6 +12,7 @@ import InputLimitValue from "../../ui/InputLimitValue"
 import InputLimitSelector from "../../ui/InputLimitSelector"
 import ValueBox from "../../ui/ValueBox"
 import ValueOverview from "../../ui/ValueOverview"
+import { ComponentMode } from "@m2Types/generic/component-mode"
 
 const InverterCharger = ({ componentMode = "compact", compactBoxSize }: Props) => {
   const { locked } = useAppStore() // lock from theme settings
@@ -160,7 +161,7 @@ const InverterCharger = ({ componentMode = "compact", compactBoxSize }: Props) =
 }
 
 interface Props {
-  componentMode?: "compact" | "full"
+  componentMode?: ComponentMode
   compactBoxSize?: { width: number; height: number }
 }
 

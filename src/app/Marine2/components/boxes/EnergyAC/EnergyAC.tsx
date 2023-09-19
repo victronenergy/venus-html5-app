@@ -7,11 +7,12 @@ import ValueOverview from "../../ui/ValueOverview"
 import { phaseUnitFor } from "../../../utils/formatters/phase-unit-for"
 import { phaseValueFor } from "../../../utils/formatters/phase-value-for"
 import { ValueWithUnit } from "@m2Types/generic/value-with-units"
+import { ComponentMode } from "@m2Types/generic/component-mode"
 
-const EnergyAC = ({ mode = "compact", acLoads, compactBoxSize }: Props) => {
+const EnergyAC = ({ componentMode = "compact", acLoads, compactBoxSize }: Props) => {
   const { current, power, phases, voltage } = acLoads
 
-  if (mode === "compact" && compactBoxSize) {
+  if (componentMode === "compact" && compactBoxSize) {
     return (
       <ValueOverview
         /* todo: fix types for svg */
@@ -49,7 +50,7 @@ const EnergyAC = ({ mode = "compact", acLoads, compactBoxSize }: Props) => {
 
 interface Props {
   acLoads: AcLoadsState
-  mode?: "compact" | "full"
+  componentMode?: ComponentMode
   compactBoxSize?: { width: number; height: number }
 }
 

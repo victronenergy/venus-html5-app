@@ -30,8 +30,9 @@ import GridPaginator from "../../ui/GridPaginator"
 import { PageSelectorProps } from "../../ui/PageSelector"
 import { applyStyles, defaultBoxStyles } from "../../../utils/media"
 import classNames from "classnames"
+import { ComponentMode } from "@m2Types/generic/component-mode"
 
-const EnergyOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) => {
+const EnergyOverview = ({ componentMode = "full", pageSelectorPropsSetter }: Props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const vebus = useVebus() // We need this hook to enable some MQTT subscriptions
   const { inputId: shoreInputId } = useShorePowerInput()
@@ -43,14 +44,14 @@ const EnergyOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) => {
   const [compactBoxSize, setCompactBoxSize] = React.useState<{ width: number; height: number }>({ width: 0, height: 0 })
 
   const boxes = getAvailableEnergyBoxes(
-    mode,
     shoreInputId,
     acLoads,
     pvCharger,
     dcLoads,
     alternators,
     windGenerators,
-    compactBoxSize
+    compactBoxSize,
+    componentMode
   )
 
   const activeStyles = applyStyles(compactBoxSize, defaultBoxStyles)
@@ -62,7 +63,7 @@ const EnergyOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) => {
     return null
   }
 
-  if (mode === "compact") {
+  if (componentMode === "compact") {
     return (
       <Box
         title={translate("boxes.energy")}
@@ -97,30 +98,48 @@ const EnergyOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) => {
 }
 
 const getAvailableEnergyBoxes = function (
-  mode: "compact" | "full" | undefined,
   shoreInputId: number | null | undefined,
   acLoads: AcLoadsState,
   pvCharger: PvChargerState,
   dcLoads: DcLoadsState,
   alternators: AlternatorId[],
   windGenerators: WindGeneratorId[],
-  compactBoxSize: { width: number; height: number }
+  compactBoxSize: { width: number; height: number },
+  componentMode?: ComponentMode
 ) {
   const boxes = []
 
   if (shoreInputId) {
-    boxes.push(<EnergyShore key={`energy-shore`} mode={mode} inputId={shoreInputId} compactBoxSize={compactBoxSize} />)
+    boxes.push(
+      <EnergyShore
+        key={`energy-shore`}
+        componentMode={componentMode}
+        inputId={shoreInputId}
+        compactBoxSize={compactBoxSize}
+      />
+    )
   }
 
   if ((pvCharger.current || pvCharger.current === 0) && (pvCharger.power || pvCharger.power === 0)) {
-    boxes.push(<EnergySolar key={`energy-solar`} mode={mode} pvCharger={pvCharger} compactBoxSize={compactBoxSize} />)
+    boxes.push(
+      <EnergySolar
+        key={`energy-solar`}
+        componentMode={componentMode}
+        pvCharger={pvCharger}
+        compactBoxSize={compactBoxSize}
+      />
+    )
   }
 
   if (acLoads.phases)
-    boxes.push(<EnergyAC key={`energy-ac`} mode={mode} acLoads={acLoads} compactBoxSize={compactBoxSize} />)
+    boxes.push(
+      <EnergyAC key={`energy-ac`} componentMode={componentMode} acLoads={acLoads} compactBoxSize={compactBoxSize} />
+    )
 
   if ((dcLoads.current || dcLoads.current === 0) && (dcLoads.voltage || dcLoads.voltage === 0) && dcLoads.power) {
-    boxes.push(<EnergyDC key={`energy-dc`} mode={mode} dcLoads={dcLoads} compactBoxSize={compactBoxSize} />)
+    boxes.push(
+      <EnergyDC key={`energy-dc`} componentMode={componentMode} dcLoads={dcLoads} compactBoxSize={compactBoxSize} />
+    )
   }
 
   const alternatorsPresent = alternators.filter((v) => v || v === 0)
@@ -129,7 +148,7 @@ const getAvailableEnergyBoxes = function (
       ...alternatorsPresent.map((alternator) => (
         <EnergyAlternator
           key={`alternator_${alternator}`}
-          mode={mode}
+          componentMode={componentMode}
           alternator={alternator ?? 0}
           showInstance={alternators.length > 1}
           compactBoxSize={compactBoxSize}
@@ -144,7 +163,7 @@ const getAvailableEnergyBoxes = function (
       ...windGeneratorsPresent.map((windGenerator) => (
         <EnergyWind
           key={`wind_${windGenerator}`}
-          mode={mode}
+          componentMode={componentMode}
           windGenerator={windGenerator ?? 0}
           showInstance={alternators.length > 1}
           compactBoxSize={compactBoxSize}
@@ -157,7 +176,7 @@ const getAvailableEnergyBoxes = function (
 }
 
 interface Props {
-  mode?: "compact" | "full"
+  componentMode?: ComponentMode
   pageSelectorPropsSetter?: (arg0: PageSelectorProps) => void
 }
 

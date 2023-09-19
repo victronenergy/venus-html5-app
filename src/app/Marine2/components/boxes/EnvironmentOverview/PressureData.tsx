@@ -6,14 +6,15 @@ import ValueBox from "../../ui/ValueBox"
 import { translate } from "react-i18nify"
 import { useContext, useEffect, useCallback } from "react"
 import { VisibleComponentsContext } from "./EnvironmentOverview"
+import { ComponentMode } from "@m2Types/generic/component-mode"
 
 interface Props {
   dataId: number
-  mode?: "compact" | "full"
+  componentMode?: ComponentMode
   boxSize: { width: number; height: number }
 }
 
-const PressureData = ({ dataId, mode, boxSize }: Props) => {
+const PressureData = ({ dataId, componentMode, boxSize }: Props) => {
   const { pressure, customName } = usePressure(dataId)
 
   const { passVisibility } = useContext(VisibleComponentsContext)
@@ -37,7 +38,7 @@ const PressureData = ({ dataId, mode, boxSize }: Props) => {
     return null
   }
 
-  if (mode === "compact") {
+  if (componentMode === "compact") {
     return (
       <ValueOverview
         /* @ts-ignore */

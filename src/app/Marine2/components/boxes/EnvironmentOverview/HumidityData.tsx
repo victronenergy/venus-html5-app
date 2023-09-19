@@ -6,14 +6,15 @@ import ValueBox from "../../ui/ValueBox"
 import { translate } from "react-i18nify"
 import { useContext, useEffect, useCallback } from "react"
 import { VisibleComponentsContext } from "./EnvironmentOverview"
+import { ComponentMode } from "@m2Types/generic/component-mode"
 
 interface Props {
   dataId: number
-  mode?: "compact" | "full"
+  componentMode?: ComponentMode
   boxSize: { width: number; height: number }
 }
 
-const HumidityData = ({ dataId, mode, boxSize }: Props) => {
+const HumidityData = ({ dataId, componentMode, boxSize }: Props) => {
   const { humidity, customName } = useHumidity(dataId)
   const { passVisibility } = useContext(VisibleComponentsContext)
 
@@ -36,7 +37,7 @@ const HumidityData = ({ dataId, mode, boxSize }: Props) => {
     return null
   }
 
-  if (mode === "compact") {
+  if (componentMode === "compact") {
     return (
       <ValueOverview
         /* @ts-ignore */

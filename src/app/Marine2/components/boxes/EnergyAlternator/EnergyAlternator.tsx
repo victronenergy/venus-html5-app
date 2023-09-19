@@ -4,13 +4,14 @@ import { useAlternator } from "@victronenergy/mfd-modules"
 import { translate } from "react-i18nify"
 import ValueBox from "../../ui/ValueBox"
 import ValueOverview from "../../ui/ValueOverview"
+import { ComponentMode } from "@m2Types/generic/component-mode"
 
-const EnergyAlternator = ({ mode = "compact", alternator, showInstance, compactBoxSize }: Props) => {
+const EnergyAlternator = ({ componentMode = "compact", alternator, showInstance, compactBoxSize }: Props) => {
   const { current, voltage } = useAlternator(alternator)
   const instance = showInstance ? ` [${alternator}]` : ""
   const power = current * voltage
 
-  if (mode === "compact" && compactBoxSize) {
+  if (componentMode === "compact" && compactBoxSize) {
     return (
       <ValueOverview
         /* todo: fix types for svg */
@@ -40,7 +41,7 @@ const EnergyAlternator = ({ mode = "compact", alternator, showInstance, compactB
 interface Props {
   alternator: number
   showInstance: boolean
-  mode?: "compact" | "full"
+  componentMode?: ComponentMode
   compactBoxSize?: { width: number; height: number }
 }
 

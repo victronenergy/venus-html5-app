@@ -5,7 +5,7 @@ import { AppViews } from "../../../modules/AppViews"
 
 describe("BatteriesOverview element", () => {
   describe("compact mode", () => {
-    const wrapper = mount(<BatteriesOverview mode={"compact"} />)
+    const wrapper = mount(<BatteriesOverview componentMode="compact" />)
 
     it("should show content", () => {
       expect(wrapper.find(BatteriesOverview).exists()).toBe(true)

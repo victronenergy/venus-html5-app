@@ -8,8 +8,9 @@ import ValueOverview from "../../ui/ValueOverview"
 import { phaseUnitFor } from "../../../utils/formatters/phase-unit-for"
 import { phaseValueFor } from "../../../utils/formatters/phase-value-for"
 import { ValueWithUnit } from "@m2Types/generic/value-with-units"
+import { ComponentMode } from "@m2Types/generic/component-mode"
 
-const EnergyShore = ({ mode = "compact", inputId, compactBoxSize }: Props) => {
+const EnergyShore = ({ componentMode = "compact", inputId, compactBoxSize }: Props) => {
   const { current, power, voltage } = useActiveInValues()
   const { activeInput, phases } = useActiveSource()
   const unplugged = activeInput + 1 !== inputId // Active in = 0 -> AC1 is active
@@ -23,7 +24,7 @@ const EnergyShore = ({ mode = "compact", inputId, compactBoxSize }: Props) => {
     ])
   }
 
-  if (mode === "compact" && compactBoxSize) {
+  if (componentMode === "compact" && compactBoxSize) {
     return (
       <ValueOverview
         /* todo: fix types for svg */
@@ -54,7 +55,7 @@ const EnergyShore = ({ mode = "compact", inputId, compactBoxSize }: Props) => {
 
 interface Props {
   inputId: number
-  mode?: "compact" | "full"
+  componentMode?: ComponentMode
   compactBoxSize?: { width: number; height: number }
 }
 

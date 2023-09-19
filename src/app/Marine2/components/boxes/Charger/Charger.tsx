@@ -16,6 +16,7 @@ import RadioButton from "../../ui/RadioButton"
 import DeviceSettingModal from "../../ui/DeviceSettingModal/DeviceSettingModal"
 import ValueOverview from "../../ui/ValueOverview"
 import { formatValue } from "../../../utils/formatters"
+import { ComponentMode } from "@m2Types/generic/component-mode"
 
 const Charger = ({ instanceId, componentMode = "compact", compactBoxSize }: Props) => {
   const chargerModeFormatter = (value: number) => {
@@ -205,7 +206,7 @@ const Charger = ({ instanceId, componentMode = "compact", compactBoxSize }: Prop
 
 interface Props {
   instanceId: ChargerInstanceId
-  componentMode?: "compact" | "full"
+  componentMode?: ComponentMode
   compactBoxSize?: { width: number; height: number }
 }
 

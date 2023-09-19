@@ -13,13 +13,14 @@ import ResizeObserver from "resize-observer-polyfill"
 import useSize from "@react-hook/size"
 import { applyStyles, defaultBoxStyles } from "../../../utils/media"
 import classNames from "classnames"
+import { ComponentMode } from "@m2Types/generic/component-mode"
 
 interface Props {
-  mode?: "full" | "compact"
+  componentMode?: ComponentMode
   className?: string
 }
 
-const Tanks = ({ mode = "full", className }: Props) => {
+const Tanks = ({ componentMode = "full", className }: Props) => {
   const { tanks } = useTanks()
   const filteredTanks = (tanks || []).filter((tank) => !!tank || tank === 0)
 
@@ -84,7 +85,7 @@ const Tanks = ({ mode = "full", className }: Props) => {
     }, 0)
   }
 
-  if (mode === "compact") {
+  if (componentMode === "compact") {
     return (
       <Box
         title={translate("boxes.tanks")}
@@ -100,7 +101,7 @@ const Tanks = ({ mode = "full", className }: Props) => {
         {filteredTanks.map((tank) => (
           <div ref={tankRef} key={tank}>
             <Tank
-              mode={"compact"}
+              componentMode="compact"
               key={tank}
               tankInstanceId={Number(tank)}
               parentSize={boxSize}
@@ -134,7 +135,7 @@ const Tanks = ({ mode = "full", className }: Props) => {
                 <Tank
                   key={index}
                   tankInstanceId={Number(tank)}
-                  mode="full"
+                  componentMode="full"
                   orientation={orientation}
                   parentSize={{ width, height }}
                   levelWidth={levelWidth}
@@ -166,7 +167,7 @@ const Tanks = ({ mode = "full", className }: Props) => {
                 <Tank
                   key={tank}
                   tankInstanceId={tank!}
-                  mode="full"
+                  componentMode="full"
                   orientation={orientation}
                   parentSize={{ width, height }}
                   levelWidth={levelWidth}

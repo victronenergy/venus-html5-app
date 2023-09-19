@@ -28,8 +28,9 @@ import React from "react"
 import GeneratorRelay from "../GeneratorRelay/GeneratorRelay"
 import { applyStyles, defaultBoxStyles } from "../../../utils/media"
 import classNames from "classnames"
+import { ComponentMode } from "@m2Types/generic/component-mode"
 
-const DevicesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) => {
+const DevicesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: Props) => {
   const { inverters } = useInverters()
   const { instanceId, vebusInverters } = useVebus()
   const { chargers } = useChargers()
@@ -38,14 +39,14 @@ const DevicesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) => {
   const [compactBoxSize, setCompactBoxSize] = React.useState<{ width: number; height: number }>({ width: 0, height: 0 })
 
   const boxes = getAvailableDeviceBoxes(
-    mode,
     chargers,
     inverters,
     vebusInverters,
     instanceId,
     generatorFp,
     generatorRelay,
-    compactBoxSize
+    compactBoxSize,
+    componentMode
   )
 
   useVisibilityNotifier({ widgetName: BoxTypes.DEVICES, visible: !!boxes.length })
@@ -55,7 +56,7 @@ const DevicesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) => {
   }
 
   const activeStyles = applyStyles(compactBoxSize, defaultBoxStyles)
-  if (mode === "compact") {
+  if (componentMode === "compact") {
     return (
       <Box
         title={translate("boxes.devices")}
@@ -90,20 +91,22 @@ const DevicesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) => {
 }
 
 const getAvailableDeviceBoxes = function (
-  mode: "compact" | "full" | undefined,
   chargers: ChargerInstanceId[],
   inverters: InverterInstanceId[],
   vebusInverters: VebusInverters,
   instanceId: InstanceId,
   generatorFp: GeneratorFpProvider,
   generatorRelay: GeneratorRelayProvider,
-  compactBoxSize: { width: number; height: number }
+  compactBoxSize: { width: number; height: number },
+  componentMode?: ComponentMode
 ) {
   let devices = []
 
   if (!!chargers) {
     chargers.forEach((charger) => {
-      devices.push(<Charger key={charger} instanceId={charger} componentMode={mode} compactBoxSize={compactBoxSize} />)
+      devices.push(
+        <Charger key={charger} instanceId={charger} componentMode={componentMode} compactBoxSize={compactBoxSize} />
+      )
     })
   }
 
@@ -114,7 +117,7 @@ const getAvailableDeviceBoxes = function (
           key={id}
           instanceId={id}
           isVebusInverter={false}
-          componentMode={mode}
+          componentMode={componentMode}
           compactBoxSize={compactBoxSize}
         />
       )
@@ -128,7 +131,7 @@ const getAvailableDeviceBoxes = function (
           key={id}
           instanceId={id}
           isVebusInverter={true}
-          componentMode={mode}
+          componentMode={componentMode}
           compactBoxSize={compactBoxSize}
         />
       )
@@ -136,12 +139,17 @@ const getAvailableDeviceBoxes = function (
   }
 
   if (!!instanceId) {
-    devices.push(<InverterCharger key={instanceId} componentMode={mode} compactBoxSize={compactBoxSize} />)
+    devices.push(<InverterCharger key={instanceId} componentMode={componentMode} compactBoxSize={compactBoxSize} />)
   }
 
   if (!!generatorFp.phases)
     devices.push(
-      <GeneratorFp key={"generatorFp"} generatorFp={generatorFp} mode={mode} compactBoxSize={compactBoxSize} />
+      <GeneratorFp
+        key={"generatorFp"}
+        generatorFp={generatorFp}
+        componentMode={componentMode}
+        compactBoxSize={compactBoxSize}
+      />
     )
   if (!!generatorRelay.settings) {
     if (generatorRelay.settings.includes(AC_SOURCE.GENERATOR)) {
@@ -152,7 +160,7 @@ const getAvailableDeviceBoxes = function (
               key={"generator_relay" + i}
               {...generatorRelay}
               active={generatorRelay.activeInput === i}
-              mode={mode}
+              componentMode={componentMode}
               compactBoxSize={compactBoxSize}
             />
           )
@@ -162,7 +170,12 @@ const getAvailableDeviceBoxes = function (
       generatorRelay.statusCode !== undefined
     ) {
       devices.push(
-        <GeneratorRelay key={"generator_relay"} {...generatorRelay} mode={mode} compactBoxSize={compactBoxSize} />
+        <GeneratorRelay
+          key={"generator_relay"}
+          {...generatorRelay}
+          componentMode={componentMode}
+          compactBoxSize={compactBoxSize}
+        />
       )
     }
   }
@@ -170,7 +183,7 @@ const getAvailableDeviceBoxes = function (
 }
 
 interface Props {
-  mode?: "compact" | "full"
+  componentMode?: ComponentMode
   pageSelectorPropsSetter?: (arg0: PageSelectorProps) => void
 }
 

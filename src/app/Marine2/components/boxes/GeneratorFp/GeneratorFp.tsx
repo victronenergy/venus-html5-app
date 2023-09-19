@@ -11,9 +11,9 @@ import { applyStyles } from "../../../utils/media"
 import AutoStartStopSetter from "../../ui/AutoStartStopSetter"
 import ValueOverview from "../../ui/ValueOverview"
 import { ValueWithUnit } from "@m2Types/generic/value-with-units"
-import { Mode } from "@m2Types/generic/mode"
+import { ComponentMode } from "@m2Types/generic/component-mode"
 
-const GeneratorFp = ({ mode = "compact", generatorFp, compactBoxSize }: Props) => {
+const GeneratorFp = ({ componentMode = "compact", generatorFp, compactBoxSize }: Props) => {
   const gensetStateFormatter = (value: number) => {
     if (value === GENSET_STATE.STANDBY) {
       return translate("common.standby")
@@ -53,7 +53,7 @@ const GeneratorFp = ({ mode = "compact", generatorFp, compactBoxSize }: Props) =
     ])
   }
 
-  if (mode === "compact" && compactBoxSize) {
+  if (componentMode === "compact" && compactBoxSize) {
     return (
       <ValueOverview
         /* todo: fix types for svg */
@@ -139,7 +139,7 @@ const GeneratorFp = ({ mode = "compact", generatorFp, compactBoxSize }: Props) =
 }
 
 interface Props {
-  mode?: Mode
+  componentMode?: ComponentMode
   generatorFp: GeneratorFpProvider
   compactBoxSize?: { width: number; height: number }
 }

@@ -10,6 +10,7 @@ import BlackWaterIcon from "../../../images/icons/black-water.svg"
 import GrayWaterIcon from "../../../images/icons/waste-water.svg"
 import { applyStyles, BreakpointStylesType, StylesType } from "app/Marine2/utils/media"
 import useSize from "@react-hook/size"
+import { ComponentMode } from "@m2Types/generic/component-mode"
 
 // styles for compact mode
 const compactStyles: BreakpointStylesType = {
@@ -83,7 +84,7 @@ const verticalStyles: BreakpointStylesType = {
   },
 }
 
-const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", parentSize }: Props) => {
+const Tank = ({ tankInstanceId, componentMode, levelWidth, orientation = "vertical", parentSize }: Props) => {
   let { capacity, fluidType, level, remaining, customName, unit } = useTank(tankInstanceId)
   const fluidTypeNum = +fluidType
   const wrapperRef = useRef<HTMLDivElement>(null)
@@ -131,11 +132,11 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
   // tanks that are missing level readings and only have capacity
   let isAuxillaryTank = !!capacity && level === undefined
 
-  if (mode === "compact") {
+  if (componentMode === "compact") {
     return (
       <div ref={wrapperRef} className="flex flex-row items-center">
         <div className={classnames("flex items-center py-2 truncate")}>
-          <div className="mr-2">{fluidIcon(fluidTypeNum, mode, compactActiveStyles?.icon)}</div>
+          <div className="mr-2">{fluidIcon(fluidTypeNum, componentMode, compactActiveStyles?.icon)}</div>
           <div className={classnames("truncate", compactActiveStyles?.tankName)}>{tankTitle} </div>
         </div>
         <div className="flex flex-row items-center basis-0 flex-grow justify-end">
@@ -185,7 +186,7 @@ const Tank = ({ tankInstanceId, mode, levelWidth, orientation = "vertical", pare
         <div ref={wrapperRef}>
           <div className="flex flex-row items-center">
             <div className={classnames("flex items-center truncate")}>
-              <div className="mr-2 lg:mr-3">{fluidIcon(fluidTypeNum, mode, "w-[24px] md:w-[32px]")}</div>
+              <div className="mr-2 lg:mr-3">{fluidIcon(fluidTypeNum, componentMode, "w-[24px] md:w-[32px]")}</div>
               <div className="flex flex-col p-2 w-full truncate">
                 <div className={classnames("truncate", verticalActiveStyles?.tankName)}>{tankTitle}</div>
                 <div className={classnames("text-victron-gray", verticalActiveStyles?.capacity)}>
@@ -342,7 +343,7 @@ const roundLevelWidth = (width: number) => {
   return Math.ceil(width)
 }
 
-const fluidIcon = (type: number, mode: string = "compact", className: string, isComponent: boolean = true) => {
+const fluidIcon = (type: number, componentMode: ComponentMode = "compact", className: string, isComponent: boolean = true) => {
   switch (type) {
     case 0:
     case 3:
@@ -392,7 +393,7 @@ const fluidIcon = (type: number, mode: string = "compact", className: string, is
 interface Props {
   tankInstanceId: number
   levelWidth?: number
-  mode?: "compact" | "full"
+  componentMode?: ComponentMode
   orientation?: "vertical" | "horizontal"
   parentSize?: { width: number; height: number }
 }

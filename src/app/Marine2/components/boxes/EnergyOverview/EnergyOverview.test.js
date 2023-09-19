@@ -5,7 +5,7 @@ import { AppViews } from "../../../modules/AppViews"
 
 describe("EnergyOverview element", () => {
   describe("compact mode", () => {
-    const wrapper = mount(<EnergyOverview mode={"compact"} />)
+    const wrapper = mount(<EnergyOverview componentMode="compact" />)
 
     it("should show content", () => {
       expect(wrapper.find(EnergyOverview).exists()).toBe(true)

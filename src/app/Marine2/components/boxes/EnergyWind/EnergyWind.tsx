@@ -5,11 +5,12 @@ import { observer } from "mobx-react-lite"
 import { translate } from "react-i18nify"
 import ValueBox from "../../ui/ValueBox"
 import ValueOverview from "../../ui/ValueOverview"
+import { ComponentMode } from "@m2Types/generic/component-mode"
 
-const EnergyWind = ({ mode = "compact", windGenerator, showInstance, compactBoxSize }: Props) => {
+const EnergyWind = ({ componentMode = "compact", windGenerator, showInstance, compactBoxSize }: Props) => {
   const { current, voltage } = useWindGenerator(windGenerator)
 
-  if (mode === "compact" && compactBoxSize) {
+  if (componentMode === "compact" && compactBoxSize) {
     return (
       <ValueOverview
         /* todo: fix types for svg */
@@ -42,7 +43,7 @@ const EnergyWind = ({ mode = "compact", windGenerator, showInstance, compactBoxS
 interface Props {
   windGenerator: number
   showInstance: boolean
-  mode?: "compact" | "full"
+  componentMode?: ComponentMode
   compactBoxSize?: { width: number; height: number }
 }
 

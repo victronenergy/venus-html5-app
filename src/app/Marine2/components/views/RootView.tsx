@@ -38,15 +38,15 @@ const RootView = () => {
   const getBoxByType = (type: BoxTypes) => {
     switch (type) {
       case BoxTypes.ENERGY:
-        return <EnergyOverview mode="compact" key={"energy-overview"} />
+        return <EnergyOverview componentMode="compact" key={"energy-overview"} />
       case BoxTypes.TANKS:
-        return <Tanks mode="compact" key={"tanks"} />
+        return <Tanks componentMode="compact" key={"tanks"} />
       case BoxTypes.BATTERIES:
-        return <BatteriesOverview mode="compact" key={"batteries-overview"} />
+        return <BatteriesOverview componentMode="compact" key={"batteries-overview"} />
       case BoxTypes.DEVICES:
-        return <DevicesOverview mode="compact" key={"devices-overview"} />
+        return <DevicesOverview componentMode="compact" key={"devices-overview"} />
       case BoxTypes.ENVIRONMENT:
-        return <EnvironmentOverview mode="compact" key={"environment-overview"} />
+        return <EnvironmentOverview componentMode="compact" key={"environment-overview"} />
       default:
         return null
     }

@@ -1,4 +1,7 @@
+import classNames from "classnames"
+import { translate } from "react-i18nify"
 import { observer } from "mobx-react-lite"
+import range from "lodash-es/range"
 import { Battery as BatteryType, useBattery } from "@victronenergy/mfd-modules"
 import Box from "../../ui/Box"
 import { BATTERY, BoxTypes } from "../../../utils/constants"
@@ -6,23 +9,21 @@ import Battery from "../Battery"
 import BatteriesIcon from "../../../images/icons/batteries.svg"
 import BatterySummary from "../../ui/BatterySummary"
 import { AppViews } from "../../../modules/AppViews"
-import { translate } from "react-i18nify"
 import { useVisibilityNotifier } from "../../../modules"
 import GridPaginator from "../../ui/GridPaginator"
 import { useEffect, useState, useRef } from "react"
 import { PageSelectorProps } from "../../ui/PageSelector"
 import { boxBreakpoints } from "../../../utils/media"
 import PageFlipper from "../../ui/PageFlipper"
-import range from "lodash-es/range"
 import { applyStyles, defaultBoxStyles } from "../../../utils/media"
-import classNames from "classnames"
+import { ComponentMode } from "@m2Types/generic/component-mode"
 
 interface Props {
-  mode?: "compact" | "full"
+  componentMode?: ComponentMode
   pageSelectorPropsSetter?: (arg0: PageSelectorProps) => void
 }
 
-const BatteriesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) => {
+const BatteriesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: Props) => {
   const { batteries } = useBattery()
   const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
 
@@ -57,7 +58,7 @@ const BatteriesOverview = ({ mode = "full", pageSelectorPropsSetter }: Props) =>
     setPages(Math.ceil(overviewBatteries.length / batteriesPerPage))
   }, [boxSize, overviewBatteries])
 
-  if (mode === "compact") {
+  if (componentMode === "compact") {
     return (
       <Box
         /* todo: fix types for svg */

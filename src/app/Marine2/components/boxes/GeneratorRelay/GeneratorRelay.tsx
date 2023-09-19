@@ -9,6 +9,7 @@ import { totalPowerFor } from "../../../utils/helpers/total-power-for"
 import { phaseUnitFor } from "../../../utils/formatters/phase-unit-for"
 import { isMultiPhaseFor } from "../../../utils/helpers/is-multi-phase-for"
 import { ValueWithUnit } from "@m2Types/generic/value-with-units"
+import { ComponentMode } from "@m2Types/generic/component-mode"
 
 const GeneratorRelay = ({
   statusCode,
@@ -18,7 +19,7 @@ const GeneratorRelay = ({
   autoStart,
   updateManualMode,
   updateAutoMode,
-  mode = "compact",
+  componentMode = "compact",
   compactBoxSize,
 }: Props) => {
   const getGeneratorState = (statusCode: number, active: boolean, phases: number) => {
@@ -50,7 +51,7 @@ const GeneratorRelay = ({
     ])
   }
 
-  if (mode === "compact" && compactBoxSize) {
+  if (componentMode === "compact" && compactBoxSize) {
     return (
       <ValueOverview
         /* todo: fix types for svg */
@@ -103,7 +104,7 @@ interface Props {
   updateManualMode: Function
   updateAutoMode: Function
   active?: boolean
-  mode?: "compact" | "full"
+  componentMode?: ComponentMode
   compactBoxSize?: { width: number; height: number }
 }
 

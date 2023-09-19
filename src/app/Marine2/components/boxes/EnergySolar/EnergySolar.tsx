@@ -1,14 +1,15 @@
+import React from "react"
 import { PvChargerState } from "@victronenergy/mfd-modules"
 import SolarIcon from "../../../images/icons/solar.svg"
 import { translate } from "react-i18nify"
 import ValueBox from "../../ui/ValueBox"
 import ValueOverview from "../../ui/ValueOverview"
-import React from "react"
+import { ComponentMode } from "@m2Types/generic/component-mode"
 
-const EnergySolar = ({ mode = "compact", pvCharger, compactBoxSize }: Props) => {
+const EnergySolar = ({ componentMode = "compact", pvCharger, compactBoxSize }: Props) => {
   const { current, power } = pvCharger
 
-  if (mode === "compact" && compactBoxSize) {
+  if (componentMode === "compact" && compactBoxSize) {
     return (
       <ValueOverview
         /* todo: fix types for svg */
@@ -16,7 +17,7 @@ const EnergySolar = ({ mode = "compact", pvCharger, compactBoxSize }: Props) => 
         Icon={SolarIcon}
         title={translate("boxes.solar")}
         value={current}
-        unit={"A"}
+        unit="A"
         boxSize={compactBoxSize}
       />
     )
@@ -37,7 +38,7 @@ const EnergySolar = ({ mode = "compact", pvCharger, compactBoxSize }: Props) => 
 
 interface Props {
   pvCharger: PvChargerState
-  mode?: "compact" | "full"
+  componentMode?: ComponentMode
   compactBoxSize?: { width: number; height: number }
 }
 

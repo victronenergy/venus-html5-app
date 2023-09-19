@@ -5,7 +5,7 @@ import { AppViews } from "../../../modules/AppViews"
 
 describe("Tanks element", () => {
   describe("compact mode", () => {
-    const wrapper = mount(<Tanks mode={"compact"} />)
+    const wrapper = mount(<Tanks componentMode="compact" />)
 
     it("should show content", () => {
       expect(wrapper.find(Tanks).exists()).toBe(true)
