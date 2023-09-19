@@ -56,10 +56,10 @@ const PressureData = ({ dataId, mode, boxSize }: Props) => {
       title={translate("boxes.pressure") + " " + customName}
       /* todo: fix types for svg */
       /* @ts-ignore */
-      icon={<PressureIcon className={"w-6"} />}
+      icon={<PressureIcon className="w-6" />}
       value={pressure}
       bottomValues={[]}
-      unit={"hPa"}
+      unit="hPa"
     />
   )
 }

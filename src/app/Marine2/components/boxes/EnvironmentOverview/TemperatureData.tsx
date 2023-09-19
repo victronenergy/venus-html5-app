@@ -55,10 +55,10 @@ const TemperatureData = ({ dataId, mode, boxSize }: Props) => {
       title={translate("boxes.temperature") + " " + customName}
       /* todo: fix types for svg */
       /* @ts-ignore */
-      icon={<ThermometerIcon className={"w-5"} />}
+      icon={<ThermometerIcon className="w-5" />}
       value={temperature}
       bottomValues={[]}
-      unit={"°C"}
+      unit="°C"
     />
   )
 }

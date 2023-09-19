@@ -46,10 +46,15 @@ const Battery = ({ battery }: Props) => {
   if (isSimpleBattery) {
     return (
       <ValueBox
-        /* @ts-ignore */
-        icon={<BatteryIcon className={"w-[18px] sm-s:w-[24px] sm-m:w-[32px]"} />}
+        icon={
+          <BatteryIcon
+            /* todo: fix types for svg */
+            /* @ts-ignore */
+            className="w-[18px] sm-s:w-[24px] sm-m:w-[32px]"
+          />
+        }
         title={battery.name}
-        unit={"V"}
+        unit="V"
         value={battery.voltage}
         bottomValues={[]}
       ></ValueBox>
@@ -79,14 +84,14 @@ const Battery = ({ battery }: Props) => {
         <div>
           <div className={classNames(colorClasses, activeStyles?.value)}>
             {battery.soc ? Math.round(battery.soc) : battery.soc ?? "--"}
-            <span className={"pl-0.5 opacity-70"}>%</span>
+            <span className="pl-0.5 opacity-70">%</span>
           </div>
           <div className={classNames("text-victron-gray-300 dark:text-victron-gray-500", activeStyles.valueSubtitle)}>
             <p>{batteryStateNameFormatter(translate, battery.state, battery.soc ?? null, battery.timetogo ?? null)}</p>
             {battery.temperature && (
               <p>
                 {Math.round(battery.temperature)}
-                <span className={"text-victron-gray-300 dark:text-victron-gray-400"}>°C</span>
+                <span className="text-victron-gray-300 dark:text-victron-gray-400">°C</span>
               </p>
             )}
           </div>
@@ -103,18 +108,31 @@ const batteryStateIconFormatter = function (state: number): JSX.Element {
   const className = "w-[18px] sm-s:w-[24px] sm-m:w-[32px]"
   switch (state) {
     case BATTERY.CHARGING:
-      /* todo: fix types for svg */
-      /* @ts-ignore */
-      return <BatteryChargingIcon className={className} />
+      return (
+        <BatteryChargingIcon
+          /* todo: fix types for svg */
+          /* @ts-ignore */
+          className={className}
+        />
+      )
     case BATTERY.DISCHARGING:
+      return (
+        <BatteryDischargingIcon
+          /* todo: fix types for svg */
+          /* @ts-ignore */
+          className={className}
+        />
+      )
+  }
+  return (
+    <BatteryIcon
       /* todo: fix types for svg */
       /* @ts-ignore */
-      return <BatteryDischargingIcon className={className} />
-  }
-  /* todo: fix types for svg */
-  /* @ts-ignore */
-  return <BatteryIcon className={className} />
+      className={className}
+    />
+  )
 }
+
 interface Props {
   battery: BatteryType
 }

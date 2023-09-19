@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { ReactElement, ReactNode, ReactSVGElement, SVGProps, useEffect, useState } from "react"
 import classNames from "classnames"
 import ArrowRightIcon from "../../../images/icons/arrow-right.svg"
 import InfoIcon from "../../../images/icons/info.svg"
@@ -58,7 +58,7 @@ const Box = ({
           }
           onClick={handleClick}
         >
-          {icon && <span className={"mr-1 md:mr-2"}>{icon}</span>}
+          {icon && <span className="mr-1 md:mr-2">{icon}</span>}
           <FadedText text={title} className={"text-base"} />
         </div>
         {linkedView && (
@@ -66,10 +66,8 @@ const Box = ({
             <ArrowRightIcon
               /* todo: fix types for svg */
               /* @ts-ignore */
-              className={
-                "w-[24px] sm-s:w-[32px] text-victron-blue dark:text-victron-blue-dark cursor-pointer outline-none"
-              }
-              alt={"Expand"}
+              className="w-[24px] sm-s:w-[32px] text-victron-blue dark:text-victron-blue-dark cursor-pointer outline-none"
+              alt="Expand"
             />
           </div>
         )}
@@ -78,8 +76,8 @@ const Box = ({
             <InfoIcon
               /* todo: fix types for svg */
               /* @ts-ignore */
-              className={"w-7 text-victron-blue dark:text-victron-blue-dark cursor-pointer outline-none"}
-              alt={"Info"}
+              className="w-7 text-victron-blue dark:text-victron-blue-dark cursor-pointer outline-none"
+              alt="Info"
             />
           </div>
         )}
@@ -126,7 +124,7 @@ const Box = ({
 
 export interface BoxProps {
   children: JSX.Element[] | JSX.Element | string
-  icon?: JSX.Element
+  icon?: ReactNode
   infoText?: { title: string; body: string }
   title: string
   linkedView?: AppViews

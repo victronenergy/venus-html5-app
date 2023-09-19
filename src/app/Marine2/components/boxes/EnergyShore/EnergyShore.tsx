@@ -5,12 +5,14 @@ import ShorePowerIcon from "../../../images/icons/shore-power.svg"
 import { translate } from "react-i18nify"
 import ValueBox from "../../ui/ValueBox"
 import ValueOverview from "../../ui/ValueOverview"
+import { isMultiPhaseFor } from "../../../utils/helpers/is-multi-phase-for"
+import { phaseUnitFor } from "../../../utils/formatters/phase-unit-for"
+import { phaseValueFor } from "../../../utils/formatters/phase-value-for"
 
 const EnergyShore = ({ mode = "compact", inputId, compactBoxSize }: Props) => {
   const { current, power, voltage } = useActiveInValues()
   const { activeInput, phases } = useActiveSource()
   const unplugged = activeInput + 1 !== inputId // Active in = 0 -> AC1 is active
-  const totalPower = power.reduce((total, power) => (power ? total + power : total))
 
   const phasesOverview = []
   for (let phase = 0; phase < phases; phase++) {
@@ -29,9 +31,8 @@ const EnergyShore = ({ mode = "compact", inputId, compactBoxSize }: Props) => {
         Icon={ShorePowerIcon}
         title={translate("boxes.shorePower")}
         subtitle={unplugged ? translate("common.unplugged") : undefined}
-        value={(phases ?? 1) === 1 ? current[0] : totalPower}
-        unit={(phases ?? 1) === 1 ? "A" : "W"}
-        hideDecimal={(phases ?? 1) === 1 ? false : true}
+        value={phaseValueFor(phases, current, power)}
+        unit={phaseUnitFor(phases)}
         boxSize={compactBoxSize}
       />
     )
@@ -42,13 +43,13 @@ const EnergyShore = ({ mode = "compact", inputId, compactBoxSize }: Props) => {
       title={translate("boxes.shorePower")}
       /* todo: fix types for svg */
       /* @ts-ignore */
-      icon={<ShorePowerIcon className={"w-[18px] sm-s:w-[24px] sm-m:w-[32px]"} />}
-      value={!unplugged ? ((phases ?? 1) === 1 ? current[0] : totalPower) : "--"}
-      unit={(phases ?? 1) === 1 ? "A" : "W"}
+      icon={<ShorePowerIcon className="w-[18px] sm-s:w-[24px] sm-m:w-[32px]" />}
+      value={!unplugged ? phaseValueFor(phases, current, power) : undefined}
+      unit={phaseUnitFor(phases)}
       bottomValues={phasesOverview}
-      hideDecimal={(phases ?? 1) === 1 ? false : true}
+      hideDecimal={isMultiPhaseFor(phases)}
       valueSubtitle={unplugged ? translate("common.unplugged") : undefined}
-    ></ValueBox>
+    />
   )
 }
 

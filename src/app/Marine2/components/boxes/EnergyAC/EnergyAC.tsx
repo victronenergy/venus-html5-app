@@ -4,11 +4,12 @@ import ACIcon from "../../../images/icons/ac.svg"
 import { translate } from "react-i18nify"
 import ValueBox from "../../ui/ValueBox"
 import ValueOverview from "../../ui/ValueOverview"
+import { isMultiPhaseFor } from "../../../utils/helpers/is-multi-phase-for"
+import { phaseUnitFor } from "../../../utils/formatters/phase-unit-for"
+import { phaseValueFor } from "../../../utils/formatters/phase-value-for"
 
 const EnergyAC = ({ mode = "compact", acLoads, compactBoxSize }: Props) => {
   const { current, power, phases, voltage } = acLoads
-
-  const totalPower = power.reduce((total, power) => (power ? total + power : total))
 
   if (mode === "compact" && compactBoxSize) {
     return (
@@ -17,9 +18,8 @@ const EnergyAC = ({ mode = "compact", acLoads, compactBoxSize }: Props) => {
         /* @ts-ignore */
         Icon={ACIcon}
         title={translate("boxes.acLoads")}
-        value={(phases ?? 1) === 1 ? current[0] : totalPower}
-        unit={(phases ?? 1) === 1 ? "A" : "W"}
-        hideDecimal={(phases ?? 1) === 1 ? false : true}
+        value={phaseValueFor(phases, current, power)}
+        unit={phaseUnitFor(phases)}
         boxSize={compactBoxSize}
       />
     )
@@ -39,11 +39,11 @@ const EnergyAC = ({ mode = "compact", acLoads, compactBoxSize }: Props) => {
       title={translate("boxes.acLoads")}
       /* todo: fix types for svg */
       /* @ts-ignore */
-      icon={<ACIcon className={"w-[18px] sm-s:w-[24px] sm-m:w-[32px]"} />}
-      value={(phases ?? 1) === 1 ? current[0] : totalPower}
-      unit={(phases ?? 1) === 1 ? "A" : "W"}
+      icon={<ACIcon className="w-[18px] sm-s:w-[24px] sm-m:w-[32px]" />}
+      value={phaseValueFor(phases, current, power)}
+      unit={phaseUnitFor(phases)}
       bottomValues={phasesOverview}
-      hideDecimal={(phases ?? 1) === 1 ? false : true}
+      hideDecimal={isMultiPhaseFor(phases)}
     />
   )
 }

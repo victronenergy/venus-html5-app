@@ -8,8 +8,6 @@ import ValueOverview from "../../ui/ValueOverview"
 
 const EnergyWind = ({ mode = "compact", windGenerator, showInstance, compactBoxSize }: Props) => {
   const { current, voltage } = useWindGenerator(windGenerator)
-  const instance = showInstance ? ` [${windGenerator}]` : ""
-  const power = current * voltage
 
   if (mode === "compact" && compactBoxSize) {
     return (
@@ -25,14 +23,17 @@ const EnergyWind = ({ mode = "compact", windGenerator, showInstance, compactBoxS
     )
   }
 
+  const power = current * voltage
+  const instance = showInstance ? ` [${windGenerator}]` : ""
+
   return (
     <ValueBox
       title={translate("boxes.windGenerator") + instance}
       /* todo: fix types for svg */
       /* @ts-ignore */
-      icon={<WindIcon className={"w-[18px] sm-s:w-[24px] sm-m:w-[32px]"} />}
+      icon={<WindIcon className="w-[18px] sm-s:w-[24px] sm-m:w-[32px]" />}
       value={current}
-      unit={"A"}
+      unit="A"
       bottomValues={[[{ value: power, unit: "W", hideDecimal: true }]]}
     />
   )

@@ -38,7 +38,6 @@ const GeneratorFp = ({ mode = "compact", generatorFp, compactBoxSize }: Props) =
   const powerSum = power.reduce((sum: number, b) => {
     return b ? sum + b : sum
   }, 0)
-  const unit = powerSum > 1000 ? "kW" : "W"
 
   const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
   const activeStyles = applyStyles(boxSize)
@@ -61,7 +60,7 @@ const GeneratorFp = ({ mode = "compact", generatorFp, compactBoxSize }: Props) =
         title={title}
         subtitle={subTitle}
         value={powerSum}
-        unit={unit}
+        unit="W"
         boxSize={compactBoxSize}
       />
     )

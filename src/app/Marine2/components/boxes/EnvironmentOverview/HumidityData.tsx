@@ -55,10 +55,10 @@ const HumidityData = ({ dataId, mode, boxSize }: Props) => {
       title={translate("boxes.humidity") + " " + customName}
       /* todo: fix types for svg */
       /* @ts-ignore */
-      icon={<HumidityIcon className={"w-5"} />}
+      icon={<HumidityIcon className="w-5" />}
       value={humidity}
       bottomValues={[]}
-      unit={"%"}
+      unit="%"
     >
       <div className="text-base">{humidity! > 80 ? translate("common.high") : ""}</div>
       <div className="text-base">{humidity! > 80 ? translate("common.high") : ""}</div>

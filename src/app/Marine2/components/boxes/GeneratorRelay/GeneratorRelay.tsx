@@ -5,6 +5,9 @@ import { useActiveInValues } from "@victronenergy/mfd-modules"
 import ValueBox from "../../ui/ValueBox"
 import AutoStartStopSetter from "../../ui/AutoStartStopSetter/AutoStartStopSetter"
 import ValueOverview from "../../ui/ValueOverview"
+import { totalPowerFor } from "../../../utils/helpers/total-power-for"
+import { phaseUnitFor } from "../../../utils/formatters/phase-unit-for"
+import { isMultiPhaseFor } from "../../../utils/helpers/is-multi-phase-for"
 
 const GeneratorRelay = ({
   statusCode,
@@ -19,7 +22,7 @@ const GeneratorRelay = ({
 }: Props) => {
   const getGeneratorState = (statusCode: number, active: boolean, phases: number) => {
     if (active) {
-      return phases > 1 ? translate("common.nrOfPhases", { phases }) : translate("common.running")
+      return isMultiPhaseFor(phases) ? translate("common.nrOfPhases", { phases }) : translate("common.running")
     }
 
     switch (statusCode) {
@@ -36,12 +39,6 @@ const GeneratorRelay = ({
   const subTitle = getGeneratorState(statusCode, active ?? false, phases)
 
   const { current, voltage, power } = useActiveInValues()
-  const powerSum = active
-    ? power.reduce((sum: number, b) => {
-        return b ? sum + b : sum
-      }, 0)
-    : 0
-  const unit = powerSum > 1000 ? "kW" : "W"
 
   const phasesOverview = []
   for (let phase = 0; phase < phases; phase++) {
@@ -60,8 +57,8 @@ const GeneratorRelay = ({
         Icon={GeneratorIcon}
         title={title}
         subtitle={subTitle}
-        value={powerSum}
-        unit={unit}
+        value={active ? totalPowerFor(power) : 0}
+        unit="W"
         boxSize={compactBoxSize}
       />
     )
@@ -73,10 +70,11 @@ const GeneratorRelay = ({
         <GeneratorIcon
           /* todo: fix types for svg */
           /* @ts-ignore */
-          className={"w-[18px] sm-s:w-[24px] sm-m:w-[32px]"}
+          className="w-[18px] sm-s:w-[24px] sm-m:w-[32px]"
         ></GeneratorIcon>
       }
       title={title}
+      subtitle={subTitle}
       buttons={
         statusCode !== undefined ? (
           <AutoStartStopSetter
@@ -89,10 +87,9 @@ const GeneratorRelay = ({
           />
         ) : undefined
       }
-      unit={phases > 1 ? "W" : "A"}
-      value={subTitle}
+      unit={phaseUnitFor(phases)}
       bottomValues={active || statusCode === 1 ? phasesOverview : []}
-    ></ValueBox>
+    />
   )
 }
 

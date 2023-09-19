@@ -81,7 +81,7 @@ const InverterCharger = ({ componentMode = "compact", compactBoxSize }: Props) =
         subtitle={subTitle}
         inputLimitValue={!!inputId ? <InputLimitValue inputId={inputId} /> : undefined}
         value={!inputId ? 0 : undefined}
-        unit={"A"}
+        unit="A"
         boxSize={compactBoxSize}
       />
     )
@@ -90,14 +90,14 @@ const InverterCharger = ({ componentMode = "compact", compactBoxSize }: Props) =
   return (
     <ValueBox
       title={productNameShort}
+      subtitle={subTitle}
       icon={
         <InverterChargerIcon
           /* todo: fix types for svg */
           /* @ts-ignore */
-          className={"w-[18px] sm-s:w-[24px] sm-m:w-[32px]"}
+          className="w-[18px] sm-s:w-[24px] sm-m:w-[32px]"
         ></InverterChargerIcon>
       }
-      value={subTitle}
       buttons={getButtons()}
       bottomValues={[]}
     >
