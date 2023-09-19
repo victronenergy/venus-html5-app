@@ -11,6 +11,7 @@ import { applyStyles, BreakpointStylesType, StylesType } from "app/Marine2/utils
 import { useState } from "react"
 import ValueBar from "../../ui/ValueBar"
 import ValueBox from "../../ui/ValueBox"
+import { ValueWithUnit } from "@m2Types/generic/value-with-units"
 
 const styles: BreakpointStylesType = {
   default: {
@@ -72,7 +73,7 @@ const Battery = ({ battery }: Props) => {
   })
 
   const activeStyles: StylesType = applyStyles(boxSize, styles)
-  const bottomValues = [
+  const bottomValues: ValueWithUnit[] = [
     { value: battery.voltage, unit: "V" },
     { value: battery.current, unit: "A" },
     { value: battery.power, unit: "W" },

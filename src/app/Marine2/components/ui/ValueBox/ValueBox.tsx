@@ -17,7 +17,6 @@ interface Props {
   subtitle?: string
   value?: number
   unit?: unit
-  hideDecimal?: boolean
   bottomValues: ValueWithUnit[][]
   children?: JSX.Element | JSX.Element[] | string
   buttons?: JSX.Element | JSX.Element[]
@@ -31,7 +30,6 @@ const ValueBox: FC<Props> = ({
   icon,
   value,
   unit,
-  hideDecimal,
   bottomValues,
   children,
   buttons,

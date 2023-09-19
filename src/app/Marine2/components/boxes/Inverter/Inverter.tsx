@@ -98,7 +98,7 @@ const Inverter = ({ instanceId, isVebusInverter, componentMode = "compact", comp
           <div className={classnames("", activeStyles?.secondaryValue)}>
             <ValueBar
               values={[
-                { value: voltage, unit: "V" },
+                { value: voltage, unit: "V", hideDecimal: true },
                 { value: current, unit: "A" },
                 { value: power, unit: "W" },
               ]}

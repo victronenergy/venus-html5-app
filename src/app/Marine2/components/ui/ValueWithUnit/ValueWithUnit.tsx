@@ -9,10 +9,11 @@ interface Props {
   value?: number
   unit?: unit
   className?: string
+  hideDecimal?: boolean
   inputLimitValue?: JSX.Element
 }
 
-export const ValueWithUnit: FC<Props> = ({ value = 0, unit, className, inputLimitValue }) => {
+export const ValueWithUnit: FC<Props> = ({ value = 0, unit, className, hideDecimal, inputLimitValue }) => {
   if (unit === "W" || unit === "kW") {
     return (
       <span className={className}>
@@ -24,7 +25,7 @@ export const ValueWithUnit: FC<Props> = ({ value = 0, unit, className, inputLimi
 
   return (
     <span className={className}>
-      {inputLimitValue ?? formatValue(value)}
+      {inputLimitValue ?? formatValue(value, hideDecimal ? 0 : 1)}
       <Unit unit={unit} />
     </span>
   )

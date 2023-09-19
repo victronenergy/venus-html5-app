@@ -1,6 +1,6 @@
+import { FC } from "react"
 import { ValueWithUnit } from "@m2Types/generic/value-with-units"
 import ValueBar from "../../ValueBar"
-import { FC } from "react"
 
 interface Props {
   values: ValueWithUnit[][]
@@ -26,7 +26,7 @@ export const BottomValues: FC<Props> = ({ values, className }) => {
     <div className={className}>
       {values.map((v, i) => {
         const prefix = `L${i + 1}`
-        return <ValueBar key={i} prefix={prefix} values={v} /> //  "L" + (i + 1)
+        return <ValueBar key={i} prefix={prefix} values={v} />
       })}
     </div>
   )

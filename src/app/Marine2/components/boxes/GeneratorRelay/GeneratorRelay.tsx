@@ -8,6 +8,7 @@ import ValueOverview from "../../ui/ValueOverview"
 import { totalPowerFor } from "../../../utils/helpers/total-power-for"
 import { phaseUnitFor } from "../../../utils/formatters/phase-unit-for"
 import { isMultiPhaseFor } from "../../../utils/helpers/is-multi-phase-for"
+import { ValueWithUnit } from "@m2Types/generic/value-with-units"
 
 const GeneratorRelay = ({
   statusCode,
@@ -40,7 +41,7 @@ const GeneratorRelay = ({
 
   const { current, voltage, power } = useActiveInValues()
 
-  const phasesOverview = []
+  const phasesOverview: ValueWithUnit[][] = []
   for (let phase = 0; phase < phases; phase++) {
     phasesOverview.push([
       { value: voltage[phase], unit: "V", hideDecimal: true },
@@ -71,7 +72,7 @@ const GeneratorRelay = ({
           /* todo: fix types for svg */
           /* @ts-ignore */
           className="w-[18px] sm-s:w-[24px] sm-m:w-[32px]"
-        ></GeneratorIcon>
+        />
       }
       title={title}
       subtitle={subTitle}

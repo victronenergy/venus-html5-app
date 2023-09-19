@@ -5,16 +5,16 @@ import ShorePowerIcon from "../../../images/icons/shore-power.svg"
 import { translate } from "react-i18nify"
 import ValueBox from "../../ui/ValueBox"
 import ValueOverview from "../../ui/ValueOverview"
-import { isMultiPhaseFor } from "../../../utils/helpers/is-multi-phase-for"
 import { phaseUnitFor } from "../../../utils/formatters/phase-unit-for"
 import { phaseValueFor } from "../../../utils/formatters/phase-value-for"
+import { ValueWithUnit } from "@m2Types/generic/value-with-units"
 
 const EnergyShore = ({ mode = "compact", inputId, compactBoxSize }: Props) => {
   const { current, power, voltage } = useActiveInValues()
   const { activeInput, phases } = useActiveSource()
   const unplugged = activeInput + 1 !== inputId // Active in = 0 -> AC1 is active
 
-  const phasesOverview = []
+  const phasesOverview: ValueWithUnit[][] = []
   for (let phase = 0; phase < phases; phase++) {
     phasesOverview.push([
       { value: !unplugged ? voltage[phase] : undefined, unit: "V", hideDecimal: true },
@@ -47,7 +47,6 @@ const EnergyShore = ({ mode = "compact", inputId, compactBoxSize }: Props) => {
       value={!unplugged ? phaseValueFor(phases, current, power) : undefined}
       unit={phaseUnitFor(phases)}
       bottomValues={phasesOverview}
-      hideDecimal={isMultiPhaseFor(phases)}
       valueSubtitle={unplugged ? translate("common.unplugged") : undefined}
     />
   )

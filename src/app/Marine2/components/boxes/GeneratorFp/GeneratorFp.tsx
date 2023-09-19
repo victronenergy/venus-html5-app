@@ -10,6 +10,8 @@ import ValueBar from "../../ui/ValueBar"
 import { applyStyles } from "../../../utils/media"
 import AutoStartStopSetter from "../../ui/AutoStartStopSetter"
 import ValueOverview from "../../ui/ValueOverview"
+import { ValueWithUnit } from "@m2Types/generic/value-with-units"
+import { Mode } from "@m2Types/generic/mode"
 
 const GeneratorFp = ({ mode = "compact", generatorFp, compactBoxSize }: Props) => {
   const gensetStateFormatter = (value: number) => {
@@ -42,7 +44,7 @@ const GeneratorFp = ({ mode = "compact", generatorFp, compactBoxSize }: Props) =
   const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
   const activeStyles = applyStyles(boxSize)
 
-  const phasesOverview = []
+  const phasesOverview: ValueWithUnit[][] = []
   for (let phase = 0; phase < phases; phase++) {
     phasesOverview.push([
       { value: voltage[phase], unit: "V", hideDecimal: true },
@@ -137,7 +139,7 @@ const GeneratorFp = ({ mode = "compact", generatorFp, compactBoxSize }: Props) =
 }
 
 interface Props {
-  mode?: "compact" | "full"
+  mode?: Mode
   generatorFp: GeneratorFpProvider
   compactBoxSize?: { width: number; height: number }
 }

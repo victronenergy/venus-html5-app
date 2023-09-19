@@ -1,9 +1,10 @@
 import { ReactNode, useState } from "react"
 import classnames from "classnames"
+import { unit } from "@m2Types/generic/unit"
 
 interface Props {
   initialValue: number
-  unit?: string
+  unit?: unit
   className?: string
   onChange?: (value: number) => void
   max?: number

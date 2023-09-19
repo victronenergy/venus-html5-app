@@ -1,5 +1,7 @@
+import { unit } from "./unit"
+
 export interface ValueWithUnit {
   value?: number
-  unit: string
+  unit?: unit
   hideDecimal?: boolean
 }

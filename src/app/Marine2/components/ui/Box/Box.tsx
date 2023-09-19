@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode, ReactSVGElement, SVGProps, useEffect, useState } from "react"
+import React, { ReactNode, useEffect, useState } from "react"
 import classNames from "classnames"
 import ArrowRightIcon from "../../../images/icons/arrow-right.svg"
 import InfoIcon from "../../../images/icons/info.svg"

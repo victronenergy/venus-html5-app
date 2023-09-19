@@ -4,9 +4,9 @@ import ACIcon from "../../../images/icons/ac.svg"
 import { translate } from "react-i18nify"
 import ValueBox from "../../ui/ValueBox"
 import ValueOverview from "../../ui/ValueOverview"
-import { isMultiPhaseFor } from "../../../utils/helpers/is-multi-phase-for"
 import { phaseUnitFor } from "../../../utils/formatters/phase-unit-for"
 import { phaseValueFor } from "../../../utils/formatters/phase-value-for"
+import { ValueWithUnit } from "@m2Types/generic/value-with-units"
 
 const EnergyAC = ({ mode = "compact", acLoads, compactBoxSize }: Props) => {
   const { current, power, phases, voltage } = acLoads
@@ -25,7 +25,7 @@ const EnergyAC = ({ mode = "compact", acLoads, compactBoxSize }: Props) => {
     )
   }
 
-  const phasesOverview = []
+  const phasesOverview: ValueWithUnit[][] = []
   for (let phase = 0; phase < phases; phase++) {
     phasesOverview.push([
       { value: voltage[phase], unit: "V", hideDecimal: true },
@@ -43,7 +43,6 @@ const EnergyAC = ({ mode = "compact", acLoads, compactBoxSize }: Props) => {
       value={phaseValueFor(phases, current, power)}
       unit={phaseUnitFor(phases)}
       bottomValues={phasesOverview}
-      hideDecimal={isMultiPhaseFor(phases)}
     />
   )
 }
