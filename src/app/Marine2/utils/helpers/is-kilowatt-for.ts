@@ -3,5 +3,6 @@ export const isKilowattFor = (value?: number): boolean => {
     return false
   }
 
-  return value >= 1000
+  // Check for absolute values, for batteries the value is a negative number.
+  return Math.abs(value) >= 1000
 }
