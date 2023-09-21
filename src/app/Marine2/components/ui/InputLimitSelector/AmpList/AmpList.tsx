@@ -29,28 +29,23 @@ export const AmpList: FC<Props> = ({ productId, clickHandler, limitForSubmission
     }
   }
 
-  const amperageList = getSuggestedAmperageValuesList(productId)
-    .filter((value) => value <= (currentLimitMax ?? 100))
+  const amperageList = getSuggestedAmperageValuesList(productId).filter((value) => value <= (currentLimitMax ?? 100))
 
-  const getClassNames = (value: number) => classnames("h-12 flex justify-center items-center -mt-0.5", {
+  const getClassNames = (value: number) =>
+    classnames("h-12 flex justify-center items-center -mt-0.5", {
       "text-base": amperageList.length === 8,
       "text-lg": amperageList.length === 7,
       "bg-victron-blue": value === limitForSubmission,
     })
 
   const style = {
-    width: `${33 / amperageList.length}rem`
+    width: `${33 / amperageList.length}rem`,
   }
 
   return (
     <div className="flex justify-between h-12 mt-10 mb-12 bg-victron-blue/30 border-2 border-victron-blue rounded-md overflow-hidden">
       {amperageList.map((value) => (
-        <button
-          key={value}
-          style={style}
-          className={getClassNames(value)}
-          onClick={() => clickHandler(value)}
-        >
+        <button key={value} style={style} className={getClassNames(value)} onClick={() => clickHandler(value)}>
           {value}
         </button>
       ))}
