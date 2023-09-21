@@ -343,7 +343,12 @@ const roundLevelWidth = (width: number) => {
   return Math.ceil(width)
 }
 
-const fluidIcon = (type: number, componentMode: ComponentMode = "compact", className: string, isComponent: boolean = true) => {
+const fluidIcon = (
+  type: number,
+  componentMode: ComponentMode = "compact",
+  className: string,
+  isComponent: boolean = true
+) => {
   switch (type) {
     case 0:
     case 3:

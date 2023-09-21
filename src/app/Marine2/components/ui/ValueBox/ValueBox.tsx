@@ -1,6 +1,6 @@
 import Box from "../Box"
 import classNames from "classnames"
-import { ComponentProps, FC, ReactElement, ReactNode, ReactSVGElement, SVGProps, useState } from "react"
+import { FC, ReactElement, useState } from "react"
 import { applyStyles, defaultBoxStyles } from "../../../utils/media"
 import { ValueWithUnit } from "@m2Types/generic/value-with-units"
 import { BottomValues } from "./BottomValues/BottomValues"

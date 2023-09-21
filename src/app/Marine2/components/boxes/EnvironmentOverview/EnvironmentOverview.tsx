@@ -18,7 +18,9 @@ interface Props {
   pageSelectorPropsSetter?: (arg0: PageSelectorProps) => void
 }
 
-export const VisibleComponentsContext = createContext({ passVisibility: (id: number, visible: boolean) => {} })
+export const VisibleComponentsContext = createContext({
+  passVisibility: (id: number, visible: boolean) => {},
+})
 
 const EnvironmentOverview = ({ componentMode = "full", pageSelectorPropsSetter }: Props) => {
   const { temperatures } = useTemperatures()
@@ -30,15 +32,30 @@ const EnvironmentOverview = ({ componentMode = "full", pageSelectorPropsSetter }
   }, [])
 
   let temperatureComponents = (temperatures || []).map((temperatureId: TemperatureInstanceId) => (
-    <TemperatureData key={"temperature" + temperatureId} dataId={temperatureId} componentMode={componentMode} boxSize={boxSize} />
+    <TemperatureData
+      key={"temperature" + temperatureId}
+      dataId={temperatureId}
+      componentMode={componentMode}
+      boxSize={boxSize}
+    />
   ))
 
   let humidityComponents = (temperatures || []).map((temperatureId: TemperatureInstanceId) => (
-    <HumidityData key={"humidity" + temperatureId} dataId={temperatureId} componentMode={componentMode} boxSize={boxSize} />
+    <HumidityData
+      key={"humidity" + temperatureId}
+      dataId={temperatureId}
+      componentMode={componentMode}
+      boxSize={boxSize}
+    />
   ))
 
   let pressureComponents = (temperatures || []).map((temperatureId: TemperatureInstanceId) => (
-    <PressureData key={"pressure" + temperatureId} dataId={temperatureId} componentMode={componentMode} boxSize={boxSize} />
+    <PressureData
+      key={"pressure" + temperatureId}
+      dataId={temperatureId}
+      componentMode={componentMode}
+      boxSize={boxSize}
+    />
   ))
 
   const components = [...temperatureComponents, ...humidityComponents, ...pressureComponents] as JSX.Element[]
