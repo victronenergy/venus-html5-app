@@ -30,11 +30,6 @@ export const timeAsStringFormatter = function (
   )
 }
 
-export const dcVoltageFormatter = function (voltage?: number): string {
-  if (!voltage && voltage !== 0) return "--"
-  return Math.floor(voltage).toString().padStart(2, "0") + "." + Math.round((voltage % 1) * 10)
-}
-
 export const colorForPercentageFormatter = function (percentage: number) {
   if (percentage <= 12) {
     return "victron-red"
@@ -44,19 +39,6 @@ export const colorForPercentageFormatter = function (percentage: number) {
     return "victron-blue"
   }
   return "victron-green"
-}
-
-export const formatPower = (power: number): string => {
-  // check if power is not a number
-  if (typeof power !== "number" || isNaN(power)) {
-    return "--"
-  }
-
-  if (power >= 1000) {
-    return (power / 1000).toFixed(1)
-  }
-
-  return power.toFixed(1)
 }
 
 export const formatValue = (value?: number, decimalPlaces: number = 1): string => {
