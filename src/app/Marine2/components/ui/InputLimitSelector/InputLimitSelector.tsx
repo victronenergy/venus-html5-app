@@ -1,43 +1,22 @@
-import { useEffect, useState } from "react"
-import { useAppStore, useInputLimit, useInputLimitSelector } from "@victronenergy/mfd-modules"
-import Button from "../Button"
-import DeviceSettingModal from "../DeviceSettingModal"
+import { FC, useEffect, useState } from "react"
 import { translate } from "react-i18nify"
-import classnames from "classnames"
 import { observer } from "mobx-react"
+import { useAppStore, useInputLimit, useInputLimitSelector } from "@victronenergy/mfd-modules"
+import DeviceSettingModal from "../DeviceSettingModal"
 import { formatValue } from "../../../utils/formatters"
+import { AmpList } from "./AmpList/AmpList"
+import Button from "../Button"
 
-const InputLimitSelector = ({ inputId, title }: Props) => {
+interface Props {
+  inputId: number
+  title: string
+}
+
+const InputLimitSelector: FC<Props> = ({ inputId, title }) => {
   const { locked } = useAppStore() // lock from theme settings
-  const USAmperage = [10, 15, 20, 30, 50, 100]
-  const EUAmperage = [3, 6, 10, 13, 16, 25, 32, 63]
-
-  /**
-   * - Mask the Product id with `0xFF00`
-   * - If the result is `0x1900` or `0x2600` it is an EU model (230VAC)
-   * - If the result is `0x2000` or `0x2700` it is a US model (120VAC)
-   */
-
-  const getSuggestedAmperageValuesList = (productId: number) => {
-    const result = productId & 0xff00
-    if (result === 0x1900 || result === 0x2600) {
-      return EUAmperage
-    } else if (result === 0x2000 || result === 0x2700) {
-      return USAmperage
-    } else {
-      console.log(`Could not determine amperage US/EU for product id ${productId}`)
-      return USAmperage
-    }
-  }
-
   const { currentLimitIsAdjustable } = useInputLimit(inputId)
   const { currentLimit, currentLimitMax, productId, updateLimit } = useInputLimitSelector(inputId)
-  const amperageList = getSuggestedAmperageValuesList(productId).filter((value) => {
-    return value <= (currentLimitMax ?? 100)
-  })
-
   const [limitForSubmission, setLimitForSubmission] = useState(Number(currentLimit))
-
   const [isLimitModalOpen, setIsLimitModalOpen] = useState(false)
 
   useEffect(() => {
@@ -74,55 +53,41 @@ const InputLimitSelector = ({ inputId, title }: Props) => {
         {!!currentLimit ? formatValue(Number(currentLimit)) + "A" : 0 + "A"}
       </Button>
       <DeviceSettingModal open={isLimitModalOpen} onClose={closeLimitModal} onSet={submitLimit} width={"lg"}>
-        <label className="flex w-full justify-center text-lg mb-3">
-          {title + " " + translate("common.inputCurrentLimit")}
-        </label>
-        <div className="flex flex-row justify-center mt-10">
-          <button
-            className="w-28 md:w-36 lg:w-36 h-20 bg-victron-blue/70 border-0 rounded-md text-xl"
-            onClick={decreaseLimit}
-          >
-            -
-          </button>
-          <div className="flex items-center w-32 md:w-44 justify-center mx-6 md:mx-14 lg:w-32 text-2xl md:text-3xl lg:text-3xl">
-            <span>{formatValue(limitForSubmission ?? 0)}</span>
-            <span className="text-victron-gray/70 pl-1">A</span>
-          </div>
-          <button
-            className="w-28 md:w-36 lg:w-36 h-20 bg-victron-blue/70 border-0 rounded-md text-xl"
-            onClick={increaseLimit}
-          >
-            +
-          </button>
-        </div>
-        <div className="flex w-full justify-center mt-10 mb-12">
-          <div className="w-[27rem] md:w-[33rem] lg:w-[33rem] h-12 bg-victron-blue/30 border-2 border-victron-blue rounded-md flex flex-row justify-between">
-            {amperageList.map((value) => (
+        <div className="flex justify-center">
+          <div className="w-[27rem] md:w-[33rem] lg:w-[33rem]">
+            <label className="flex w-full justify-center text-lg mb-3">
+              {title + " " + translate("common.inputCurrentLimit")}
+            </label>
+            <div className="flex justify-between mt-10">
               <button
-                key={value}
-                style={{ width: `${33 / amperageList.length}rem` }}
-                className={classnames("h-12 flex justify-center items-center -mt-0.5", {
-                  " text-base": amperageList.length === 8,
-                  " text-lg": amperageList.length === 7,
-                  " bg-victron-blue rounded-md": value === limitForSubmission,
-                })}
-                onClick={() => {
-                  setLimitForSubmission(value)
-                }}
+                className="w-28 md:w-36 lg:w-36 h-20 bg-victron-blue/70 border-0 rounded-md text-xl"
+                onClick={decreaseLimit}
               >
-                {value}
+                -
               </button>
-            ))}
+              <div className="flex text-2xl md:text-3xl lg:text-3xl">
+                <span>{formatValue(limitForSubmission ?? 0)}</span>
+                <span className="text-victron-gray/70 pl-1">A</span>
+              </div>
+              <button
+                className="w-28 md:w-36 lg:w-36 h-20 bg-victron-blue/70 border-0 rounded-md text-xl"
+                onClick={increaseLimit}
+              >
+                +
+              </button>
+            </div>
+
+            <AmpList
+              productId={productId}
+              clickHandler={setLimitForSubmission}
+              limitForSubmission={limitForSubmission}
+              currentLimitMax={currentLimitMax}
+            />
           </div>
         </div>
       </DeviceSettingModal>
     </>
   )
-}
-
-interface Props {
-  inputId: number
-  title: string
 }
 
 export default observer(InputLimitSelector)
