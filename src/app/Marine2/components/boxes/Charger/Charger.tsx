@@ -17,6 +17,7 @@ import DeviceSettingModal from "../../ui/DeviceSettingModal/DeviceSettingModal"
 import ValueOverview from "../../ui/ValueOverview"
 import { formatValue } from "../../../utils/formatters"
 import { ComponentMode } from "@m2Types/generic/component-mode"
+import { LimitAdjuster } from "../../ui/LimitAdjuster/LimitAdjuster"
 
 const Charger = ({ instanceId, componentMode = "compact", compactBoxSize }: Props) => {
   const chargerModeFormatter = (value: number) => {
@@ -50,7 +51,10 @@ const Charger = ({ instanceId, componentMode = "compact", compactBoxSize }: Prop
 
   const productNameShort = customName || (productName && productName.split(" ")[0])
 
-  const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
+  const [boxSize, setBoxSize] = useState<{
+    width: number
+    height: number
+  }>({ width: 0, height: 0 })
   const activeStyles = applyStyles(boxSize, defaultBoxStyles)
 
   const [isModeModalOpen, setIsModeModalOpen] = useState(false)
@@ -144,10 +148,15 @@ const Charger = ({ instanceId, componentMode = "compact", compactBoxSize }: Prop
           </div>
         </div>
         {chargerSupportsMode && (
-          <DeviceSettingModal open={isModeModalOpen} onClose={closeModeModal} onSet={submitMode} width={"lg"}>
-            <label className="flex justify-center text-lg mb-3">
-              {productNameShort + " " + translate("common.mode")}
-            </label>
+          <DeviceSettingModal
+            title={productNameShort}
+            subtitle={translate("common.mode")}
+            open={isModeModalOpen}
+            onClose={closeModeModal}
+            onSet={submitMode}>
+
+
+            // todo REFACTOR TO LIST COMPONENT + LIST ITEM COMPONENT.
             <div className={" m-auto w-[20rem] md:w-[30rem] lg:w-[30rem] flex flex-col items-center"}>
               <label
                 className="w-full flex justify-between items-center pt-4 pb-4 border-b border-victron-darkGray-200"
@@ -175,28 +184,14 @@ const Charger = ({ instanceId, componentMode = "compact", compactBoxSize }: Prop
           </DeviceSettingModal>
         )}
         {chargerSupportsInputLimit && (
-          <DeviceSettingModal open={isLimitModalOpen} onClose={closeLimitModal} onSet={submitLimit} width={"lg"}>
-            <label className="flex w-full justify-center text-lg mb-3">
-              {productNameShort + " " + translate("common.inputCurrentLimit")}
-            </label>
-            <div className="flex flex-row justify-center mt-10 mb-10">
-              <button
-                className="w-28 md:w-36 lg:w-36 h-20 bg-victron-blue/70 border-0 rounded-md text-xl"
-                onClick={decreaseLimit}
-              >
-                -
-              </button>
-              <div className="flex items-center w-32 md:w-44 justify-center mx-6 md:mx-14 lg:w-32 text-2xl md:text-3xl lg:text-3xl">
-                <span>{formatValue(limitForSubmission ?? 0)}</span>
-                <span className="text-victron-gray/70 pl-1">A</span>
-              </div>
-              <button
-                className="w-28 md:w-36 lg:w-36 h-20 bg-victron-blue/70 border-0 rounded-md text-xl"
-                onClick={increaseLimit}
-              >
-                +
-              </button>
-            </div>
+          <DeviceSettingModal
+            title={productNameShort}
+            subtitle={translate("common.inputCurrentLimit")}
+            open={isLimitModalOpen}
+            onClose={closeLimitModal}
+            onSet={submitLimit}
+          >
+            <LimitAdjuster decreaseLimit={decreaseLimit} increaseLimit={increaseLimit} value={limitForSubmission} />
           </DeviceSettingModal>
         )}
       </div>
@@ -207,7 +202,10 @@ const Charger = ({ instanceId, componentMode = "compact", compactBoxSize }: Prop
 interface Props {
   instanceId: ChargerInstanceId
   componentMode?: ComponentMode
-  compactBoxSize?: { width: number; height: number }
+  compactBoxSize?: {
+    width: number
+    height: number
+  }
 }
 
 export default observer(Charger)

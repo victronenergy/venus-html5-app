@@ -43,7 +43,7 @@ export const AmpList: FC<Props> = ({ productId, clickHandler, limitForSubmission
   }
 
   return (
-    <div className="flex justify-between h-12 mt-10 mb-12 bg-victron-blue/30 border-2 border-victron-blue rounded-md overflow-hidden">
+    <div className="flex justify-between h-12 mt-8 bg-victron-blue/30 border-2 border-victron-blue rounded-md overflow-hidden">
       {amperageList.map((value) => (
         <button key={value} style={style} className={getClassNames(value)} onClick={() => clickHandler(value)}>
           {value}

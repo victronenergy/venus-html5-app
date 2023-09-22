@@ -103,7 +103,7 @@ const InverterCharger = ({ componentMode = "compact", compactBoxSize }: Props) =
       bottomValues={[]}
     >
       {(adjustable && (
-        <DeviceSettingModal open={isModeModalOpen} onClose={closeModeModal} onSet={submitMode} width={"lg"}>
+        <DeviceSettingModal open={isModeModalOpen} onClose={closeModeModal} onSet={submitMode}>
           <label className="flex justify-center text-lg mb-3">
             {productNameShort + " " + translate("common.mode")}
           </label>

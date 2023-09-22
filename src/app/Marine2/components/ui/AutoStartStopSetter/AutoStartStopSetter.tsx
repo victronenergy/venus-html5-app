@@ -80,7 +80,7 @@ const AutoStartStopSetter = ({
         {autoStartFormatter(getStartStopMode())}
       </Button>
       {!isAutoStartDisabled && (
-        <DeviceSettingModal open={isModeModalOpen} onClose={closeModeModal} onSet={submitMode} width={"lg"}>
+        <DeviceSettingModal open={isModeModalOpen} onClose={closeModeModal} onSet={submitMode}>
           <label className="flex justify-center text-lg mb-3">{title + " " + translate("common.mode")}</label>
           <div className={" m-auto w-[20rem] md:w-[30rem] lg:w-[30rem] flex flex-col items-center"}>
             <label

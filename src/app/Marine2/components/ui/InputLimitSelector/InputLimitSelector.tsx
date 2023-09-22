@@ -6,6 +6,7 @@ import DeviceSettingModal from "../DeviceSettingModal"
 import { formatValue } from "../../../utils/formatters"
 import { AmpList } from "./AmpList/AmpList"
 import Button from "../Button"
+import { LimitAdjuster } from "../LimitAdjuster/LimitAdjuster"
 
 interface Props {
   inputId: number
@@ -19,16 +20,26 @@ const InputLimitSelector: FC<Props> = ({ inputId, title }) => {
   const [limitForSubmission, setLimitForSubmission] = useState(Number(currentLimit))
   const [isLimitModalOpen, setIsLimitModalOpen] = useState(false)
 
+  const step = 0.5
+
   useEffect(() => {
     setLimitForSubmission(Number(currentLimit))
   }, [currentLimit])
 
   const increaseLimit = () => {
-    if (limitForSubmission < (currentLimitMax ?? 100)) setLimitForSubmission(limitForSubmission + 1)
+    if (limitForSubmission < (currentLimitMax ?? 100)) {
+      const newValue = currentLimit % step !== 0 ? currentLimit + (step - (currentLimit % step)) : currentLimit + step
+      console.log(newValue)
+      setLimitForSubmission(newValue)
+    }
   }
 
   const decreaseLimit = () => {
-    if (limitForSubmission > 0) setLimitForSubmission(limitForSubmission - 1)
+    if (limitForSubmission > 0) {
+      const newValue = currentLimit % step !== 0 ? currentLimit - (currentLimit % step) : currentLimit - step
+
+      setLimitForSubmission(newValue)
+    }
   }
 
   const closeLimitModal = () => {
@@ -42,6 +53,7 @@ const InputLimitSelector: FC<Props> = ({ inputId, title }) => {
   }
 
   if (!currentLimitIsAdjustable) return null
+
   return (
     <>
       <Button
@@ -52,39 +64,21 @@ const InputLimitSelector: FC<Props> = ({ inputId, title }) => {
       >
         {!!currentLimit ? formatValue(Number(currentLimit)) + "A" : 0 + "A"}
       </Button>
-      <DeviceSettingModal open={isLimitModalOpen} onClose={closeLimitModal} onSet={submitLimit} width={"lg"}>
-        <div className="flex justify-center">
-          <div className="w-[27rem] md:w-[33rem] lg:w-[33rem]">
-            <label className="flex w-full justify-center text-lg mb-3">
-              {title + " " + translate("common.inputCurrentLimit")}
-            </label>
-            <div className="flex justify-between mt-10">
-              <button
-                className="w-28 md:w-36 lg:w-36 h-20 bg-victron-blue/70 border-0 rounded-md text-xl"
-                onClick={decreaseLimit}
-              >
-                -
-              </button>
-              <div className="flex text-2xl md:text-3xl lg:text-3xl">
-                <span>{formatValue(limitForSubmission ?? 0)}</span>
-                <span className="text-victron-gray/70 pl-1">A</span>
-              </div>
-              <button
-                className="w-28 md:w-36 lg:w-36 h-20 bg-victron-blue/70 border-0 rounded-md text-xl"
-                onClick={increaseLimit}
-              >
-                +
-              </button>
-            </div>
+      <DeviceSettingModal
+        title={title}
+        subtitle={translate("common.inputCurrentLimit")}
+        open={isLimitModalOpen}
+        onClose={closeLimitModal}
+        onSet={submitLimit}
+      >
+        <LimitAdjuster decreaseLimit={decreaseLimit} increaseLimit={increaseLimit} value={limitForSubmission} />
 
-            <AmpList
-              productId={productId}
-              clickHandler={setLimitForSubmission}
-              limitForSubmission={limitForSubmission}
-              currentLimitMax={currentLimitMax}
-            />
-          </div>
-        </div>
+        <AmpList
+          productId={productId}
+          clickHandler={setLimitForSubmission}
+          limitForSubmission={limitForSubmission}
+          currentLimitMax={currentLimitMax}
+        />
       </DeviceSettingModal>
     </>
   )

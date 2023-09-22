@@ -115,7 +115,7 @@ const Inverter = ({ instanceId, isVebusInverter, componentMode = "compact", comp
             {inverterMode}
           </Button>
         </div>
-        <DeviceSettingModal open={isModeModalOpen} onClose={closeModeModal} onSet={submitMode} width={"lg"}>
+        <DeviceSettingModal open={isModeModalOpen} onClose={closeModeModal} onSet={submitMode}>
           <label className="flex justify-center text-lg mb-3">
             {productNameShort + " " + translate("common.mode")}
           </label>
