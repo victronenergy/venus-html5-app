@@ -3,68 +3,66 @@
 @tailwind utilities;
 
 @layer base {
-    html {
-        font-family: MuseoSans, "Noto Sans SC", sans-serif;
-    }
+  html {
+    font-family: MuseoSans, "Noto Sans SC", sans-serif;
+  }
 }
 
 html,
 body {
-    width: 100%;
-    height: 100%;
-    padding: 0;
-    margin: 0;
-    text-rendering: geometricPrecision;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  text-rendering: geometricPrecision;
 }
 
 p {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .min-safe-h-screen {
-    min-height: 100vh;
+  min-height: 100vh;
 }
 
 @supports (-webkit-touch-callout: none) {
-    .min-safe-h-screen {
-        min-height: -webkit-fill-available;
-    }
+  .min-safe-h-screen {
+    min-height: -webkit-fill-available;
+  }
 }
 
 .safe-h-screen {
-    height: 100vh;
+  height: 100vh;
 }
 
 @supports (-webkit-touch-callout: none) {
-    .safe-h-screen {
-        height: -webkit-fill-available;
-    }
+  .safe-h-screen {
+    height: -webkit-fill-available;
+  }
 }
 
 @font-face {
-    font-family: MuseoSans;
-    src: url("../../../css/fonts/MuseoSans/MuseoSans-300.otf"),
-    url("../../../css/fonts/MuseoSans/MuseoSans-300Italic.otf"),
-    url("../../../css/fonts/MuseoSans/MuseoSans-500.otf"),
-    url("../../../css/fonts/MuseoSans/MuseoSans-500Italic.otf"),
-    url("../../../css/fonts/MuseoSans/MuseoSans-700.otf"),
+  font-family: MuseoSans;
+  src: url("../../../css/fonts/MuseoSans/MuseoSans-300.otf"),
+    url("../../../css/fonts/MuseoSans/MuseoSans-300Italic.otf"), url("../../../css/fonts/MuseoSans/MuseoSans-500.otf"),
+    url("../../../css/fonts/MuseoSans/MuseoSans-500Italic.otf"), url("../../../css/fonts/MuseoSans/MuseoSans-700.otf"),
     url("../../../css/fonts/MuseoSans/MuseoSans-700Italic.otf");
 }
 
 @font-face {
-    font-family: "Noto Sans SC";
-    src: url("../../../css/fonts/NotoSansSC/NotoSansSC-Regular.otf");
+  font-family: "Noto Sans SC";
+  src: url("../../../css/fonts/NotoSansSC/NotoSansSC-Regular.otf");
 }
 
 * {
-    font-family: MuseoSans, "Noto Sans SC", sans-serif;
+  font-family: MuseoSans, "Noto Sans SC", sans-serif;
 }
 
 *:focus {
-    outline: none;
+  outline: none;
 }
 
 .modal {
-    background-color: rgba(0 0 0 / 0.7);
+  background-color: rgba(0 0 0 / 0.7);
 }

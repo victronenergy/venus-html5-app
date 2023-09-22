@@ -1,29 +1,29 @@
-import { Meta, Story, Canvas } from '@storybook/addon-docs';
-import Button from './Button';
+import { Meta, Story, Canvas } from "@storybook/addon-docs"
+import Button from "./Button"
 
 <Meta
   title="Marine2/Button"
   component={Button}
   argTypes={{
     variant: {
-      options: ['primary', 'transparent'],
-      control: { type: 'radio' }
+      options: ["primary", "transparent"],
+      control: { type: "radio" },
     },
     size: {
-      options: ['lg', 'md'],
-      control: { type: 'radio' }
+      options: ["lg", "md"],
+      control: { type: "radio" },
     },
     disabled: {
-      control: { type: 'boolean' }
+      control: { type: "boolean" },
     },
     onClick: {
-      action: 'clicked'
+      action: "clicked",
     },
     className: {
-      control: { type: 'text' }
-    }
+      control: { type: "text" },
+    },
   }}
-  parameters={ {controls: { hideNoControlsWarning: true }} }
+  parameters={{ controls: { hideNoControlsWarning: true } }}
 />
 
 export const Template = (args) => <Button {...args}>Click me</Button>
@@ -38,8 +38,9 @@ Basic clickable button
   <Story
     name="Primary"
     args={{
-      variant: 'primary',
-    }}>
+      variant: "primary",
+    }}
+  >
     {Template.bind({})}
   </Story>
 </Canvas>
@@ -50,8 +51,9 @@ Basic clickable button
   <Story
     name="Transparent"
     args={{
-      variant: 'transparent',
-    }}>
+      variant: "transparent",
+    }}
+  >
     {Template.bind({})}
   </Story>
 </Canvas>
@@ -62,21 +64,22 @@ Basic clickable button
   <Story
     name="MiddleSize"
     args={{
-      size: 'md',
-    }}>
+      size: "md",
+    }}
+  >
     {Template.bind({})}
   </Story>
 </Canvas>
 
-## Disabled 
+## Disabled
 
 <Canvas>
   <Story
     name="Disabled"
     args={{
       disabled: true,
-    }}>
+    }}
+  >
     {Template.bind({})}
   </Story>
 </Canvas>
-
