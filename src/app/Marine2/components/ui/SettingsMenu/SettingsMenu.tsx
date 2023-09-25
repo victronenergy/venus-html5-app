@@ -86,7 +86,7 @@ const SettingsMenu = () => {
                 <ToggleSwitch onChange={toggleLocked} selected={locked} />
               </label>
               <div className="mr-2 mb-2 sm-l:mb-4 text-victron-gray-400 text-xs sm-l:text-sm dark:text-victron-gray-500">
-                {translate("locker.lockDesctiption")}
+                {translate("locker.lockDescription")}
               </div>
               <div className="border border-victron-gray-600 dark:border-victron-gray-300"></div>
               <label className="text-xs text-victron-gray-400 sm-l:text-sm dark:text-victron-gray-500">
@@ -110,7 +110,7 @@ const SettingsMenu = () => {
                 </span>
                 <RadioButton onChange={() => themeStore.setDarkMode(true)} selected={themeStore.darkMode} />
               </label>
-              <label className="flex justify-between items-center pb-2 sm-m:pb-3 sm-l:pb-4">
+              <label className="flex justify-between items-center pb-4 sm-m:pb-6 sm-l:pb-8">
                 <span className="mr-1 text-sm sm-m:mr-2 sm-l:text-base text-black dark:text-white">
                   {translate("common.auto")}
                 </span>
