@@ -45,4 +45,8 @@ const Body: FC<BodyProps> = ({ children, className, variant = "default" }) => {
   return <div className={classes}>{children}</div>
 }
 
-export const Modal = { Frame, Head, Body }
+const Footer: FC = ({ children }) => (
+  <div className="flex justify-between border-t border-victron-darkGray-200 text-base">{children}</div>
+)
+
+export const Modal = { Frame, Head, Body, Footer }

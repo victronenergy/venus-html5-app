@@ -30,15 +30,15 @@ const DeviceSettingModal: FC<Props> = (props) => {
         </div>
         {children}
       </Modal.Body>
-      <div className="flex flex-row justify-between border-t border-victron-darkGray-200 text-base">
-        <button onClick={onClose} className="w-full -ml-4 -mb-2">
+      <Modal.Footer>
+        <button onClick={onClose} className="w-full">
           {translate("common.close")}
         </button>
-        <div className="w-0 h-10 mt-2 border-r border-victron-darkGray-200" />
-        <button onClick={onSet} className="w-full -mr-4 -mb-2">
+        <div className="w-0 h-10 my-2 border-r border-victron-darkGray-200" />
+        <button onClick={onSet} className="w-full">
           {translate("common.set")}
         </button>
-      </div>
+      </Modal.Footer>
     </Modal.Frame>
   )
 }

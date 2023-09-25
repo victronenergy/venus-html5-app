@@ -82,7 +82,7 @@ const GeneratorFp = ({ componentMode = "compact", generatorFp, compactBoxSize }:
       title={title}
       getBoxSizeCallback={setBoxSize}
       infoText={
-        isAutoStartDisabled
+        !isAutoStartDisabled
           ? {
               title: "Button disabled",
               body: "Enable button functionality through genset panel",

@@ -6,7 +6,6 @@ import { AppViews, useAppViewsStore } from "../../../modules/AppViews"
 import Paginator from "../Paginator"
 import useSize from "@react-hook/size"
 import FadedText from "../FadedText"
-import classnames from "classnames"
 import { Modal } from "../Modal"
 
 const Box = ({
@@ -91,31 +90,22 @@ const Box = ({
         {!withPagination && children}
       </div>
       {!linkedView && !!infoText && (
-        <Modal.Frame
-          open={infoOpen}
-          onClose={closeInfo}
-          className={classnames(" border-victron-darkGray-200 border rounded-md w-[30rem]")}
-        >
+        <Modal.Frame open={infoOpen} onClose={closeInfo}>
           <Modal.Body>
-            <div className="flex flex-col">
-              <div className="dark:text-white text-base">
-                <InfoIcon
-                  /* todo: fix types for svg */
-                  /* @ts-ignore */
-                  className={
-                    "ml-auto mr-auto mt-7 mb-7 w-10 text-victron-blue dark:text-victron-blue-dark cursor-pointer outline-none"
-                  }
-                  alt={"Info"}
-                />
-                <div className={"text-center mb-2 text-xl"}>{infoText.title}</div>
-                <div className={"text-center text-sm pr-2 pl-2 mb-20"}>{infoText.body}</div>
-                <div className={classnames("-ml-4 h-0 mt-3 border-b border-victron-darkGray-200 w-[30rem]")} />
-                <button onClick={closeInfo} className={"w-full -mb-2 h-[44px] mt-2"}>
-                  Ok
-                </button>
-              </div>
-            </div>
+            <InfoIcon
+              /* todo: fix types for svg */
+              /* @ts-ignore */
+              className="ml-auto mr-auto mt-7 mb-7 w-10 text-victron-blue dark:text-victron-blue-dark cursor-pointer outline-none"
+              alt="Info"
+            />
+            <div className="text-center mb-2 text-xl">{infoText.title}</div>
+            <div className="text-center text-sm px-2 pb-14">{infoText.body}</div>
           </Modal.Body>
+          <Modal.Footer>
+            <button onClick={closeInfo} className="w-full h-[60px]">
+              Ok
+            </button>
+          </Modal.Footer>
         </Modal.Frame>
       )}
     </div>
