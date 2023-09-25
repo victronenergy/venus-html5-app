@@ -7,6 +7,12 @@ import { formatValue } from "../../../utils/formatters"
 import { AmpList } from "./AmpList/AmpList"
 import Button from "../Button"
 import { LimitAdjuster } from "../LimitAdjuster/LimitAdjuster"
+import { CURRENT_LIMIT_STEP } from "../../../utils/constants/generic"
+import {
+  currentStepDecrementFor,
+  currentStepIncrementFor,
+  isCurrentStepDividable,
+} from "../../../utils/helpers/current-limit-adjuster"
 
 interface Props {
   inputId: number
@@ -20,25 +26,23 @@ const InputLimitSelector: FC<Props> = ({ inputId, title }) => {
   const [limitForSubmission, setLimitForSubmission] = useState(Number(currentLimit))
   const [isLimitModalOpen, setIsLimitModalOpen] = useState(false)
 
-  const step = 0.5
-
   useEffect(() => {
     setLimitForSubmission(Number(currentLimit))
   }, [currentLimit])
 
   const increaseLimit = () => {
     if (limitForSubmission < (currentLimitMax ?? 100)) {
-      const newValue = currentLimit % step !== 0 ? currentLimit + (step - (currentLimit % step)) : currentLimit + step
-      console.log(newValue)
-      setLimitForSubmission(newValue)
+      isCurrentStepDividable(limitForSubmission)
+        ? setLimitForSubmission(limitForSubmission + CURRENT_LIMIT_STEP)
+        : setLimitForSubmission(currentStepIncrementFor(limitForSubmission))
     }
   }
 
   const decreaseLimit = () => {
     if (limitForSubmission > 0) {
-      const newValue = currentLimit % step !== 0 ? currentLimit - (currentLimit % step) : currentLimit - step
-
-      setLimitForSubmission(newValue)
+      isCurrentStepDividable(limitForSubmission)
+        ? setLimitForSubmission(limitForSubmission - CURRENT_LIMIT_STEP)
+        : setLimitForSubmission(currentStepDecrementFor(limitForSubmission))
     }
   }
 

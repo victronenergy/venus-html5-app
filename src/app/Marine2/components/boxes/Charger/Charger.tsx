@@ -18,6 +18,12 @@ import ValueOverview from "../../ui/ValueOverview"
 import { formatValue } from "../../../utils/formatters"
 import { ComponentMode } from "@m2Types/generic/component-mode"
 import { LimitAdjuster } from "../../ui/LimitAdjuster/LimitAdjuster"
+import {
+  currentStepDecrementFor,
+  currentStepIncrementFor,
+  isCurrentStepDividable,
+} from "../../../utils/helpers/current-limit-adjuster"
+import { CURRENT_LIMIT_STEP } from "../../../utils/constants/generic"
 
 const Charger = ({ instanceId, componentMode = "compact", compactBoxSize }: Props) => {
   const chargerModeFormatter = (value: number) => {
@@ -73,8 +79,8 @@ const Charger = ({ instanceId, componentMode = "compact", compactBoxSize }: Prop
     updateMode(modeForSubmission)
     closeModeModal()
   }
-  const [limitForSubmission, setLimitForSubmission] = useState(Number(currentLimit))
 
+  const [limitForSubmission, setLimitForSubmission] = useState(Number(currentLimit))
   const [isLimitModalOpen, setIsLimitModalOpen] = useState(false)
 
   useEffect(() => {
@@ -82,11 +88,19 @@ const Charger = ({ instanceId, componentMode = "compact", compactBoxSize }: Prop
   }, [currentLimit])
 
   const increaseLimit = () => {
-    if (limitForSubmission < 100) setLimitForSubmission(limitForSubmission + 1)
+    if (limitForSubmission < 100) {
+      isCurrentStepDividable(limitForSubmission)
+        ? setLimitForSubmission(limitForSubmission + CURRENT_LIMIT_STEP)
+        : setLimitForSubmission(currentStepIncrementFor(limitForSubmission))
+    }
   }
 
   const decreaseLimit = () => {
-    if (limitForSubmission > 0) setLimitForSubmission(limitForSubmission - 1)
+    if (limitForSubmission > 0) {
+      isCurrentStepDividable(limitForSubmission)
+        ? setLimitForSubmission(limitForSubmission - CURRENT_LIMIT_STEP)
+        : setLimitForSubmission(currentStepDecrementFor(limitForSubmission))
+    }
   }
 
   const closeLimitModal = () => {
