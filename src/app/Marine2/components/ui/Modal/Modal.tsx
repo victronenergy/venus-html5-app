@@ -39,8 +39,8 @@ type ModalVariant = "default" | "popUp"
 const Body: FC<BodyProps> = ({ children, className, variant = "default" }) => {
   const classes = classnames("dark:text-white", {
     className: className,
-    ["px-4 md:px-10 lg:px-16 pt-6 pb-6 md:pb-10"]: variant === "default",
-    ["p-4"]: variant === "popUp",
+    "px-4 md:px-10 lg:px-16 pt-6 pb-6 md:pb-10": variant === "default",
+    "p-4": variant === "popUp",
   })
   return <div className={classes}>{children}</div>
 }

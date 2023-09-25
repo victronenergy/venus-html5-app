@@ -2,7 +2,6 @@ import { Modal } from "../Modal"
 import { translate } from "react-i18nify"
 import type { FC, ReactNode } from "react"
 import { observer } from "mobx-react"
-import classnames from "classnames"
 
 interface Props {
   title?: string
