@@ -103,13 +103,16 @@ const InverterCharger = ({ componentMode = "compact", compactBoxSize }: Props) =
       bottomValues={[]}
     >
       {(adjustable && (
-        <DeviceSettingModal open={isModeModalOpen} onClose={closeModeModal} onSet={submitMode}>
-          <label className="flex justify-center text-lg mb-3">
-            {productNameShort + " " + translate("common.mode")}
-          </label>
-          <div className={" m-auto w-[20rem] md:w-[30rem] lg:w-[30rem] flex flex-col items-center"}>
+        <DeviceSettingModal
+          title={productNameShort}
+          subtitle={translate("common.mode")}
+          open={isModeModalOpen}
+          onClose={closeModeModal}
+          onSet={submitMode}
+        >
+          <div className="divide-y divide-victron-darkGray-200 text-base">
             <label
-              className="w-full flex justify-between items-center pt-4 pb-4 border-b border-victron-darkGray-200"
+              className="w-full flex justify-between items-center pb-4"
               onClick={() => setModeForSubmission(SYSTEM_MODE.ON)}
             >
               <span>{translate("common.on")}</span>
@@ -120,7 +123,7 @@ const InverterCharger = ({ componentMode = "compact", compactBoxSize }: Props) =
               />
             </label>
             <label
-              className="w-full flex justify-between items-center pt-4 pb-4 border-b border-victron-darkGray-200"
+              className="w-full flex justify-between items-center py-4"
               onClick={() => setModeForSubmission(SYSTEM_MODE.OFF)}
             >
               <span>{translate("common.off")}</span>
@@ -131,7 +134,7 @@ const InverterCharger = ({ componentMode = "compact", compactBoxSize }: Props) =
               />
             </label>
             <label
-              className="w-full flex justify-between items-center pt-4 pb-4 border-b border-victron-darkGray-200"
+              className="w-full flex justify-between items-center py-4"
               onClick={() => setModeForSubmission(SYSTEM_MODE.CHARGER_ONLY)}
             >
               <span>{translate("common.chargerOnly")}</span>
@@ -142,7 +145,7 @@ const InverterCharger = ({ componentMode = "compact", compactBoxSize }: Props) =
               />
             </label>
             <label
-              className="w-full flex justify-between items-center pt-4 pb-4 border-b border-victron-darkGray-200"
+              className="w-full flex justify-between items-center pt-4"
               onClick={() => setModeForSubmission(SYSTEM_MODE.INVERTER_ONLY)}
             >
               <span>{translate("common.inverterOnly")}</span>

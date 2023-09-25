@@ -16,7 +16,7 @@ const Frame: FC<Props> = ({ children, open = true, onClose, className }) => {
   return (
     <div className={classes} onClick={onClose}>
       <div className={classnames("absolute", className)} onClick={(e) => e.stopPropagation()}>
-        <div className="overflow-hidden pb-2 bg-victron-gray-900 dark:bg-victron-darkGray rounded-md shadow-[0_8px_24px_-15px_rgba(0,0,0,0.75)]">
+        <div className="overflow-hidden bg-victron-gray-900 dark:bg-victron-darkGray rounded-md shadow-[0_8px_24px_-15px_rgba(0,0,0,0.75)]">
           {children}
         </div>
       </div>
@@ -28,18 +28,21 @@ const Head: FC<{ children: ReactNode; className?: string }> = ({ children, class
   <div className={classnames("block p-4", className)}>{children}</div>
 )
 
-const Body: FC<{ children: ReactNode; className?: string }> = ({ children, className }) => {
-  const classes = classnames("  dark:text-white", {
+interface BodyProps {
+  children: ReactNode
+  className?: string
+  variant?: ModalVariant
+}
+
+type ModalVariant = "default" | "popUp"
+
+const Body: FC<BodyProps> = ({ children, className, variant = "default" }) => {
+  const classes = classnames("dark:text-white", {
     className: className,
+    ["px-4 md:px-10 lg:px-16 pt-6 pb-6 md:pb-10"]: variant === "default",
+    ["p-4"]: variant === "popUp",
   })
   return <div className={classes}>{children}</div>
 }
 
-const Content: FC<{ children: ReactNode; className?: string }> = ({ children, className }) => {
-  const classes = classnames("px-4 md:px-10 lg:px-16 pt-6 pb-12", {
-    className: className,
-  })
-  return <div className={classes}>{children}</div>
-}
-
-export const Modal = { Frame, Head, Body, Content }
+export const Modal = { Frame, Head, Body }

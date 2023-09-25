@@ -72,7 +72,6 @@ const InputLimitSelector: FC<Props> = ({ inputId, title }) => {
         onSet={submitLimit}
       >
         <LimitAdjuster decreaseLimit={decreaseLimit} increaseLimit={increaseLimit} value={limitForSubmission} />
-
         <AmpList
           productId={productId}
           clickHandler={setLimitForSubmission}

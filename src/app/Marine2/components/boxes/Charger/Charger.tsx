@@ -153,13 +153,12 @@ const Charger = ({ instanceId, componentMode = "compact", compactBoxSize }: Prop
             subtitle={translate("common.mode")}
             open={isModeModalOpen}
             onClose={closeModeModal}
-            onSet={submitMode}>
-
-
-            // todo REFACTOR TO LIST COMPONENT + LIST ITEM COMPONENT.
-            <div className={" m-auto w-[20rem] md:w-[30rem] lg:w-[30rem] flex flex-col items-center"}>
+            onSet={submitMode}
+          >
+            {/* TODO Refactor to list-item or label component, too much duplicate code. */}
+            <div className="divide-y divide-victron-darkGray-200 text-base">
               <label
-                className="w-full flex justify-between items-center pt-4 pb-4 border-b border-victron-darkGray-200"
+                className="w-full flex justify-between items-center pb-4"
                 onClick={() => setModeForSubmission(CHARGER_MODE.ON)}
               >
                 <span>{translate("common.on")}</span>
@@ -170,7 +169,7 @@ const Charger = ({ instanceId, componentMode = "compact", compactBoxSize }: Prop
                 />
               </label>
               <label
-                className="w-full flex justify-between items-center pt-4 pb-4 border-b border-victron-darkGray-200"
+                className="w-full flex justify-between items-center pt-4"
                 onClick={() => setModeForSubmission(CHARGER_MODE.OFF)}
               >
                 <span>{translate("common.off")}</span>

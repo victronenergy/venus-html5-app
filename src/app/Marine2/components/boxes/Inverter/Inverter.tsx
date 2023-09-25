@@ -105,7 +105,6 @@ const Inverter = ({ instanceId, isVebusInverter, componentMode = "compact", comp
               ]}
             />
           </div>
-
           <Button
             disabled={locked}
             className="w-full mt-3"
@@ -115,13 +114,17 @@ const Inverter = ({ instanceId, isVebusInverter, componentMode = "compact", comp
             {inverterMode}
           </Button>
         </div>
-        <DeviceSettingModal open={isModeModalOpen} onClose={closeModeModal} onSet={submitMode}>
-          <label className="flex justify-center text-lg mb-3">
-            {productNameShort + " " + translate("common.mode")}
-          </label>
-          <div className={" m-auto w-[20rem] md:w-[30rem] lg:w-[30rem] flex flex-col items-center"}>
+        <DeviceSettingModal
+          title={productNameShort}
+          subtitle={translate("common.mode")}
+          open={isModeModalOpen}
+          onClose={closeModeModal}
+          onSet={submitMode}
+        >
+          {/* TODO Refactor to list item component, too much duplicate code. */}
+          <div className="divide-y divide-victron-darkGray-200 text-base">
             <label
-              className="w-full flex justify-between items-center pt-4 pb-4 border-b border-victron-darkGray-200"
+              className="w-full flex justify-between items-center pb-4"
               onClick={() => setModeForSubmission(onMode)}
             >
               <span>{translate("common.on")}</span>
@@ -132,7 +135,7 @@ const Inverter = ({ instanceId, isVebusInverter, componentMode = "compact", comp
               />
             </label>
             <label
-              className="w-full flex justify-between items-center pt-4 pb-4 border-b border-victron-darkGray-200"
+              className="w-full flex justify-between items-center py-4 last:pb-0"
               onClick={() => setModeForSubmission(INVERTER_MODE.OFF)}
             >
               <span>{translate("common.off")}</span>
@@ -144,7 +147,7 @@ const Inverter = ({ instanceId, isVebusInverter, componentMode = "compact", comp
             </label>
             {!isVebusInverter && (
               <label
-                className="w-full flex justify-between items-center pt-4 pb-4 border-b border-victron-darkGray-200"
+                className="w-full flex justify-between items-center pt-4"
                 onClick={() => setModeForSubmission(INVERTER_MODE.ECO)}
               >
                 <span>{translate("common.eco")}</span>
