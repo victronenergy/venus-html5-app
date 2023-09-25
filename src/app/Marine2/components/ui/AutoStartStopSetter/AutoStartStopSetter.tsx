@@ -88,10 +88,7 @@ const AutoStartStopSetter = ({
           onSet={submitMode}
         >
           <div className="divide-y divide-victron-darkGray-200 text-base">
-            <label
-              className="w-full flex justify-between items-center pb-4"
-              onClick={() => setModeForSubmission(0)}
-            >
+            <label className="w-full flex justify-between items-center pb-4" onClick={() => setModeForSubmission(0)}>
               <span>{translate("common.on")}</span>
               <RadioButton
                 onChange={() => setModeForSubmission(0)}
@@ -99,10 +96,7 @@ const AutoStartStopSetter = ({
                 responsive={false}
               />
             </label>
-            <label
-              className="w-full flex justify-between items-center py-4"
-              onClick={() => setModeForSubmission(1)}
-            >
+            <label className="w-full flex justify-between items-center py-4" onClick={() => setModeForSubmission(1)}>
               <span>{translate("common.off")}</span>
               <RadioButton
                 onChange={() => setModeForSubmission(1)}
@@ -110,10 +104,7 @@ const AutoStartStopSetter = ({
                 responsive={false}
               />
             </label>
-            <label
-              className="w-full flex justify-between items-center pt-4"
-              onClick={() => setModeForSubmission(2)}
-            >
+            <label className="w-full flex justify-between items-center pt-4" onClick={() => setModeForSubmission(2)}>
               <span>{translate("common.autoStartStop")}</span>
               <RadioButton
                 onChange={() => setModeForSubmission(2)}
