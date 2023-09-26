@@ -19,7 +19,6 @@ const EnergyAC = ({ componentMode = "compact", compactBoxSize }: Props) => {
   const { current, power, phases, voltage } = acLoads
 
   const phasesOverview: ValueWithUnit[][] = []
-
   for (let phase = 0; phase < phases; phase++) {
     phasesOverview.push([
       { value: voltage[phase], unit: "V", hideDecimal: true },
