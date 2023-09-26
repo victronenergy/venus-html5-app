@@ -15,9 +15,13 @@ import EnergyDC from "../../components/boxes/EnergyDC"
 import EnergyAlternator from "../../components/boxes/EnergyAlternator"
 import { ISize } from "@m2Types/generic/size"
 
+// TODO Refactor
+//  Get data in box components themselves.
+//  Return null if conditions are not met.
+//  Noticed some data inconsistencies (undefined values) when using this array.push method/prop data.
 export const useAvailableEnergyBoxes = (compactBoxSize: ISize, componentMode?: ComponentMode) => {
   const { inputId: shoreInputId } = useShorePowerInput()
-  const acLoads = useAcLoads()
+  const { phases } = useAcLoads()
   const dcLoads = useDcLoads()
   const pvCharger = usePvCharger()
   const { alternators } = useAlternators()
@@ -47,11 +51,11 @@ export const useAvailableEnergyBoxes = (compactBoxSize: ISize, componentMode?: C
     )
   }
 
-  if (acLoads.phases) {
-    console.log("0, Bij boxes creator", acLoads)
-    boxes.push(<EnergyAC key="energy-ac" acLoads={acLoads} componentMode={componentMode} compactBoxSize={compactBoxSize} />)
+  if (phases) {
+    boxes.push(<EnergyAC key="energy-ac" componentMode={componentMode} compactBoxSize={compactBoxSize} />)
   }
 
+  // TODO double check if data is up to date.
   if ((dcLoads.current || dcLoads.current === 0) && (dcLoads.voltage || dcLoads.voltage === 0) && dcLoads.power) {
     boxes.push(
       <EnergyDC key="energy-dc" componentMode={componentMode} dcLoads={dcLoads} compactBoxSize={compactBoxSize} />

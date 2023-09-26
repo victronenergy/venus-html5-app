@@ -10,7 +10,6 @@ import { ComponentMode } from "@m2Types/generic/component-mode"
 import { ISize } from "@m2Types/generic/size"
 
 interface Props {
-  acLoads: AcLoadsState
   componentMode?: ComponentMode
   compactBoxSize?: ISize
 }
