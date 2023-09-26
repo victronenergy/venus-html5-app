@@ -42,6 +42,7 @@ const GeneratorRelay = ({
 
   const { current, voltage, power } = useActiveInValues()
 
+  // TODO refactor to new memoized usePhasesData hook.
   const phasesOverview: ValueWithUnit[][] = []
   for (let phase = 0; phase < phases; phase++) {
     phasesOverview.push([

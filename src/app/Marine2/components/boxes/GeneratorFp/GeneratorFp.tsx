@@ -46,6 +46,7 @@ const GeneratorFp = ({ componentMode = "compact", generatorFp, compactBoxSize }:
   const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
   const activeStyles = applyStyles(boxSize)
 
+  // TODO refactor to new memoized usePhasesData hook.
   const phasesOverview: ValueWithUnit[][] = []
   for (let phase = 0; phase < phases; phase++) {
     phasesOverview.push([

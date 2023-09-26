@@ -15,6 +15,7 @@ const EnergyShore = ({ componentMode = "compact", inputId, compactBoxSize }: Pro
   const { activeInput, phases } = useActiveSource()
   const unplugged = activeInput + 1 !== inputId // Active in = 0 -> AC1 is active
 
+  // TODO refactor to new memoized usePhasesData hook.
   const phasesOverview: ValueWithUnit[][] = []
   for (let phase = 0; phase < phases; phase++) {
     phasesOverview.push([
