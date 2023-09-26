@@ -52,7 +52,6 @@ const Inverter = ({ instanceId, isVebusInverter, componentMode = "compact", comp
 
   useEffect(() => {
     setModeForSubmission(Number(mode))
-    console.log(mode)
   }, [mode])
 
   const closeModeModal = () => {
