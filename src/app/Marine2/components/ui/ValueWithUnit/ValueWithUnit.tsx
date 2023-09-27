@@ -4,6 +4,7 @@ import { powerUnitFor } from "../../../utils/formatters/power-unit-for"
 import { formatValue } from "../../../utils/formatters"
 import { unit } from "@m2Types/generic/unit"
 import { Unit } from "./Unit/Unit"
+import { TForcePowerUnit } from "@m2Types/generic/force-power-unit"
 
 interface Props {
   value?: number
@@ -11,14 +12,15 @@ interface Props {
   className?: string
   hideDecimal?: boolean
   inputLimitValue?: JSX.Element
+  forcePowerUnit?: TForcePowerUnit
 }
 
-export const ValueWithUnit: FC<Props> = ({ value = 0, unit, className, hideDecimal, inputLimitValue }) => {
+export const ValueWithUnit: FC<Props> = ({ value = 0, unit, className, hideDecimal, inputLimitValue, forcePowerUnit }) => {
   if (unit === "W" || unit === "kW") {
     return (
       <span className={className}>
-        {powerValueFor(value)}
-        <Unit unit={powerUnitFor(value)} />
+        {powerValueFor(value, forcePowerUnit)}
+        <Unit unit={powerUnitFor(value, forcePowerUnit)} />
       </span>
     )
   }

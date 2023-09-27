@@ -6,13 +6,10 @@ import { ValueWithUnit } from "@m2Types/generic/value-with-units"
 import { BottomValues } from "./BottomValues/BottomValues"
 import { Heading } from "./Heading/Heading"
 import { unit } from "@m2Types/generic/unit"
-
-interface Test {
-  className?: string
-}
+import { ISize } from "@m2Types/generic/size"
 
 interface Props {
-  icon?: ReactElement<Test>
+  icon?: ReactElement<string>
   title: string
   subtitle?: string
   value?: number
@@ -36,9 +33,8 @@ const ValueBox: FC<Props> = ({
   infoText,
   valueSubtitle,
 }) => {
-  const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
+  const [boxSize, setBoxSize] = useState<ISize>({ width: 0, height: 0 })
   const activeStyles = applyStyles(boxSize, defaultBoxStyles)
-
   return (
     <Box title={title} icon={icon} getBoxSizeCallback={setBoxSize} infoText={infoText}>
       <div className="w-full h-full flex flex-col justify-between">

@@ -4,7 +4,7 @@ import DiagnosticsTable from "../ui/DiagnosticsTable"
 import { MqttStore, useMqtt } from "@victronenergy/mfd-modules"
 import { translate } from "react-i18nify"
 import { observer } from "mobx-react"
-import { useWindowSize } from "../../utils/hooks"
+import { useWindowSize } from "../../utils/hooks/use-window-size"
 import Paginator from "../ui/Paginator"
 
 const DiagnosticsView = () => {
