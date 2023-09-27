@@ -16,7 +16,6 @@ interface Props {
 
 const EnergyAC = ({ componentMode = "compact", compactBoxSize }: Props) => {
   const { current, power, phases, voltage } = useAcLoads()
-
   const phasesData = usePhasesData(phases, voltage, current, power)
 
   if (componentMode === "compact" && compactBoxSize) {

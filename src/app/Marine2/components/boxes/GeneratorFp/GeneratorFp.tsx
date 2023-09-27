@@ -12,6 +12,9 @@ import AutoStartStopSetter from "../../ui/AutoStartStopSetter"
 import ValueOverview from "../../ui/ValueOverview"
 import { ValueWithUnit } from "@m2Types/generic/value-with-units"
 import { ComponentMode } from "@m2Types/generic/component-mode"
+import { ISize } from "@m2Types/generic/size"
+import { usePhasesData } from "../../../utils/hooks/use-phases-data"
+import { BottomValues } from "../../ui/ValueBox/BottomValues/BottomValues"
 
 const GeneratorFp = ({ componentMode = "compact", generatorFp, compactBoxSize }: Props) => {
   const gensetStateFormatter = (value: number) => {
@@ -43,18 +46,11 @@ const GeneratorFp = ({ componentMode = "compact", generatorFp, compactBoxSize }:
     return b ? sum + b : sum
   }, 0)
 
-  const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
+  // TODO fix types.
+  // @ts-ignore
+  const phasesData = usePhasesData(phases, voltage, current, power)
+  const [boxSize, setBoxSize] = useState<ISize>({ width: 0, height: 0 })
   const activeStyles = applyStyles(boxSize)
-
-  // TODO refactor to new memoized usePhasesData hook.
-  const phasesOverview: ValueWithUnit[][] = []
-  for (let phase = 0; phase < phases; phase++) {
-    phasesOverview.push([
-      { value: voltage[phase], unit: "V", hideDecimal: true },
-      { value: current[phase], unit: "A" },
-      { value: power[phase], unit: "W", hideDecimal: true },
-    ])
-  }
 
   if (componentMode === "compact" && compactBoxSize) {
     return (
@@ -125,7 +121,8 @@ const GeneratorFp = ({ componentMode = "compact", generatorFp, compactBoxSize }:
         </div>
         <div className="w-full h-full min-h-0 shrink flex flex-col justify-end mt-2">
           <div className={classnames("shrink overflow-hidden", activeStyles?.secondaryValue)}>
-            {!!gensetValues && phasesOverview.map((v, i) => <ValueBar key={i} prefix={"L" + (i + 1)} values={v} />)}
+            {/*          {!!gensetValues && phasesOverview.map((v, i) => <ValueBar key={i} prefix={"L" + (i + 1)} values={v} />)}*/}
+            {!!gensetValues && <BottomValues values={phasesData} />}
           </div>
           <AutoStartStopSetter
             title={title}

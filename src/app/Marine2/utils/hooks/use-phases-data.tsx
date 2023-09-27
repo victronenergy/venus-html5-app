@@ -5,14 +5,15 @@ export const usePhasesData = (
   phases: number,
   voltage: number[],
   current: number[],
-  power: number[]
+  power: number[],
+  unplugged?: boolean
 ): ValueWithUnit[][] =>
   useMemo(
     () =>
       [...Array(phases)].map((phase, index) => [
-        { value: voltage[index], unit: "V", hideDecimal: true },
-        { value: current[index], unit: "A" },
-        { value: power[index], unit: "W", hideDecimal: true },
+        { value: !unplugged ? voltage[index] : undefined, unit: "V", hideDecimal: true },
+        { value: !unplugged ? current[index] : undefined, unit: "A" },
+        { value: !unplugged ? power[index] : undefined, unit: "W", hideDecimal: true },
       ]),
     [phases, voltage, current, power]
   )

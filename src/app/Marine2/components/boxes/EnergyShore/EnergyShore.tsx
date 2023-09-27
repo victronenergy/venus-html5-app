@@ -9,21 +9,13 @@ import { phaseUnitFor } from "../../../utils/formatters/phase-unit-for"
 import { phaseValueFor } from "../../../utils/formatters/phase-value-for"
 import { ValueWithUnit } from "@m2Types/generic/value-with-units"
 import { ComponentMode } from "@m2Types/generic/component-mode"
+import { usePhasesData } from "../../../utils/hooks/use-phases-data"
 
 const EnergyShore = ({ componentMode = "compact", inputId, compactBoxSize }: Props) => {
   const { current, power, voltage } = useActiveInValues()
   const { activeInput, phases } = useActiveSource()
   const unplugged = activeInput + 1 !== inputId // Active in = 0 -> AC1 is active
-
-  // TODO refactor to new memoized usePhasesData hook.
-  const phasesOverview: ValueWithUnit[][] = []
-  for (let phase = 0; phase < phases; phase++) {
-    phasesOverview.push([
-      { value: !unplugged ? voltage[phase] : undefined, unit: "V", hideDecimal: true },
-      { value: !unplugged ? current[phase] : undefined, unit: "A" },
-      { value: !unplugged ? power[phase] : undefined, unit: "W", hideDecimal: true },
-    ])
-  }
+  const phasesData = usePhasesData(phases, voltage, current, power, unplugged)
 
   if (componentMode === "compact" && compactBoxSize) {
     return (
@@ -48,7 +40,7 @@ const EnergyShore = ({ componentMode = "compact", inputId, compactBoxSize }: Pro
       icon={<ShorePowerIcon className="w-[18px] sm-s:w-[24px] sm-m:w-[32px]" />}
       value={!unplugged ? phaseValueFor(phases, current, power) : undefined}
       unit={phaseUnitFor(phases)}
-      bottomValues={phasesOverview}
+      bottomValues={phasesData}
       valueSubtitle={unplugged ? translate("common.unplugged") : undefined}
     />
   )
