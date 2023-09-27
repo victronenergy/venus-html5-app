@@ -1,17 +1,18 @@
 import Box from "../../ui/Box"
 import { Battery as BatteryType } from "@victronenergy/mfd-modules"
-import { batteryStateNameFormatter, colorForPercentageFormatter } from "../../../utils/formatters"
+import { batteryStateNameFor } from "../../../utils/formatters/battery/battery-state-name-for"
+import { colorForPercentageFormatter } from "../../../utils/formatters"
 import { BATTERY } from "../../../utils/constants"
 import BatteryChargingIcon from "../../../images/icons/battery-charging.svg"
 import BatteryIcon from "../../../images/icons/battery.svg"
 import BatteryDischargingIcon from "../../../images/icons/battery-discharging.svg"
-import { translate } from "react-i18nify"
 import classNames from "classnames"
 import { applyStyles, BreakpointStylesType, StylesType } from "app/Marine2/utils/media"
 import { useState } from "react"
 import ValueBar from "../../ui/ValueBar"
 import ValueBox from "../../ui/ValueBox"
 import { ValueWithUnit } from "@m2Types/generic/value-with-units"
+import { ISize } from "@m2Types/generic/size"
 
 const styles: BreakpointStylesType = {
   default: {
@@ -42,7 +43,7 @@ const styles: BreakpointStylesType = {
 
 const Battery = ({ battery }: Props) => {
   const isSimpleBattery = !(battery.state || battery.state === 0)
-  const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
+  const [boxSize, setBoxSize] = useState<ISize>({ width: 0, height: 0 })
 
   if (isSimpleBattery) {
     return (
@@ -88,7 +89,7 @@ const Battery = ({ battery }: Props) => {
             <span className="pl-0.5 opacity-70">%</span>
           </div>
           <div className={classNames("text-victron-gray-300 dark:text-victron-gray-500", activeStyles.valueSubtitle)}>
-            <p>{batteryStateNameFormatter(translate, battery.state, battery.soc ?? null, battery.timetogo ?? null)}</p>
+            <p>{batteryStateNameFor(battery.state, battery.timetogo ?? null)}</p>
             {battery.temperature && (
               <p>
                 {Math.round(battery.temperature)}

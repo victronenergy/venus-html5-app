@@ -1,8 +1,8 @@
 import ProgressCircle from "../../../components/ui/ProgressCircle"
-import { batteryStateNameFormatter, formatValue } from "../../../utils/formatters"
+import { batteryStateNameFor } from "../../../utils/formatters/battery/battery-state-name-for"
+import { formatValue } from "../../../utils/formatters"
 import { Battery } from "@victronenergy/mfd-modules"
 import classNames from "classnames"
-import { translate } from "react-i18nify"
 import { applyStyles, BreakpointStylesType } from "../../../utils/media"
 
 const styles: BreakpointStylesType = {
@@ -61,7 +61,7 @@ const BatterySummary = ({ battery, boxSize }: Props) => {
               </div>
             </div>
             <div className={classNames("text-victron-gray dark:text-victron-gray-dark", activeStyles.batteryState)}>
-              {batteryStateNameFormatter(translate, battery.state, battery.soc ?? null, battery.timetogo ?? null)}
+              {batteryStateNameFor(battery.state, battery.timetogo ?? null)}
             </div>
           </div>
         ) : (
