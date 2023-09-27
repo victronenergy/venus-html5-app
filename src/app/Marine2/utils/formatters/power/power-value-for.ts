@@ -1,5 +1,5 @@
-import { formatValue } from "../formatters"
-import { isKilowattFor } from "../helpers/is-kilowatt-for"
+import { formatValue } from "../../formatters"
+import { isKilowattFor } from "../../helpers/is-kilowatt-for"
 import { TForcePowerUnit } from "@m2Types/generic/force-power-unit"
 
 export const powerValueFor = (value?: number, forcePowerUnit?: TForcePowerUnit): string => {

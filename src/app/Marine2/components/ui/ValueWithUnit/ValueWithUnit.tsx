@@ -1,6 +1,6 @@
 import React, { FC } from "react"
-import { powerValueFor } from "../../../utils/formatters/power-value-for"
-import { powerUnitFor } from "../../../utils/formatters/power-unit-for"
+import { powerValueFor } from "../../../utils/formatters/power/power-value-for"
+import { powerUnitFor } from "../../../utils/formatters/power/power-unit-for"
 import { formatValue } from "../../../utils/formatters"
 import { unit } from "@m2Types/generic/unit"
 import { Unit } from "./Unit/Unit"
