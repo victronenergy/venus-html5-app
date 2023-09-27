@@ -8,5 +8,5 @@ interface Props {
 export const Unit: FC<Props> = ({ unit }) => {
   if (!unit) return null
 
-  return <span className="text-victron-gray-300 dark:text-victron-gray-500">{unit}</span>
+  return <span className="text-victron-gray-300 dark:text-victron-gray-500 ml-0.5">{unit}</span>
 }
