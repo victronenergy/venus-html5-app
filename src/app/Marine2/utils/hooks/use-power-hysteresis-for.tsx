@@ -8,7 +8,7 @@ export const usePowerHysteresisFor = (values: ValueWithUnit[][]): TForcePowerUni
 
   useMemo(() => {
     setValue(powerHysteresisFor(values, value))
-  }, [values])
+  }, [values, value])
 
   return value
 }

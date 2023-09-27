@@ -15,5 +15,5 @@ export const usePhasesData = (
         { value: !unplugged ? current[index] : undefined, unit: "A" },
         { value: !unplugged ? power[index] : undefined, unit: "W", hideDecimal: true },
       ]),
-    [phases, voltage, current, power]
+    [phases, voltage, current, power, unplugged]
   )
