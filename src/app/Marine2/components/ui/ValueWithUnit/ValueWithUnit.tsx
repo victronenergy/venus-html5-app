@@ -15,7 +15,14 @@ interface Props {
   forcePowerUnit?: TForcePowerUnit
 }
 
-export const ValueWithUnit: FC<Props> = ({ value = 0, unit, className, hideDecimal, inputLimitValue, forcePowerUnit }) => {
+export const ValueWithUnit: FC<Props> = ({
+  value = 0,
+  unit,
+  className,
+  hideDecimal,
+  inputLimitValue,
+  forcePowerUnit,
+}) => {
   if (unit === "W" || unit === "kW") {
     return (
       <span className={className}>
