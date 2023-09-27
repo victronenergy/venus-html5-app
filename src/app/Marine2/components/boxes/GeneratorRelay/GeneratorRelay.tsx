@@ -7,9 +7,9 @@ import AutoStartStopSetter from "../../ui/AutoStartStopSetter/AutoStartStopSette
 import ValueOverview from "../../ui/ValueOverview"
 import { totalPowerFor } from "../../../utils/helpers/total-power-for"
 import { phaseUnitFor } from "../../../utils/formatters/phase-unit-for"
-import { isMultiPhaseFor } from "../../../utils/helpers/is-multi-phase-for"
-import { ValueWithUnit } from "@m2Types/generic/value-with-units"
+import { isSinglePhaseFor } from "../../../utils/helpers/is-single-phase-for"
 import { ComponentMode } from "@m2Types/generic/component-mode"
+import { usePhasesData } from "../../../utils/hooks/use-phases-data"
 
 const GeneratorRelay = ({
   statusCode,
@@ -24,7 +24,7 @@ const GeneratorRelay = ({
 }: Props) => {
   const getGeneratorState = (statusCode: number, active: boolean, phases: number) => {
     if (active) {
-      return isMultiPhaseFor(phases) ? translate("common.nrOfPhases", { phases }) : translate("common.running")
+      return isSinglePhaseFor(phases) ? translate("common.running") : translate("common.nrOfPhases", { phases })
     }
 
     switch (statusCode) {
@@ -43,14 +43,7 @@ const GeneratorRelay = ({
   const { current, voltage, power } = useActiveInValues()
 
   // TODO refactor to new memoized usePhasesData hook.
-  const phasesOverview: ValueWithUnit[][] = []
-  for (let phase = 0; phase < phases; phase++) {
-    phasesOverview.push([
-      { value: voltage[phase], unit: "V", hideDecimal: true },
-      { value: current[phase], unit: "A" },
-      { value: power[phase], unit: "W", hideDecimal: true },
-    ])
-  }
+  const phasesData = usePhasesData(phases, voltage, current, power)
 
   if (componentMode === "compact" && compactBoxSize) {
     return (
@@ -91,7 +84,7 @@ const GeneratorRelay = ({
         ) : undefined
       }
       unit={phaseUnitFor(phases)}
-      bottomValues={active || statusCode === 1 ? phasesOverview : []}
+      bottomValues={active || statusCode === 1 ? phasesData : []}
     />
   )
 }

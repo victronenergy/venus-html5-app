@@ -121,7 +121,6 @@ const GeneratorFp = ({ componentMode = "compact", generatorFp, compactBoxSize }:
         </div>
         <div className="w-full h-full min-h-0 shrink flex flex-col justify-end mt-2">
           <div className={classnames("shrink overflow-hidden", activeStyles?.secondaryValue)}>
-            {/*          {!!gensetValues && phasesOverview.map((v, i) => <ValueBar key={i} prefix={"L" + (i + 1)} values={v} />)}*/}
             {!!gensetValues && <BottomValues values={phasesData} />}
           </div>
           <AutoStartStopSetter
