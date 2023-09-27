@@ -1,4 +1,4 @@
-import { AcLoadsState, useAcLoads } from "@victronenergy/mfd-modules"
+import { useAcLoads } from "@victronenergy/mfd-modules"
 import ACIcon from "../../../images/icons/ac.svg"
 import { translate } from "react-i18nify"
 import ValueBox from "../../ui/ValueBox"

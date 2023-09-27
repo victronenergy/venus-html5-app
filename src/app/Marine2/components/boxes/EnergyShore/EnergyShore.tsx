@@ -7,7 +7,6 @@ import ValueBox from "../../ui/ValueBox"
 import ValueOverview from "../../ui/ValueOverview"
 import { phaseUnitFor } from "../../../utils/formatters/phase-unit-for"
 import { phaseValueFor } from "../../../utils/formatters/phase-value-for"
-import { ValueWithUnit } from "@m2Types/generic/value-with-units"
 import { ComponentMode } from "@m2Types/generic/component-mode"
 import { usePhasesData } from "../../../utils/hooks/use-phases-data"
 
