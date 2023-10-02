@@ -24,6 +24,7 @@ import {
   isCurrentStepDividable,
 } from "../../../utils/helpers/current-limit-adjuster"
 import { CURRENT_LIMIT_STEP } from "../../../utils/constants/generic"
+import { ISize } from "@m2Types/generic/size"
 
 const Charger = ({ instanceId, componentMode = "compact", compactBoxSize }: Props) => {
   const chargerModeFormatter = (value: number) => {
@@ -57,10 +58,7 @@ const Charger = ({ instanceId, componentMode = "compact", compactBoxSize }: Prop
 
   const productNameShort = customName || (productName && productName.split(" ")[0])
 
-  const [boxSize, setBoxSize] = useState<{
-    width: number
-    height: number
-  }>({ width: 0, height: 0 })
+  const [boxSize, setBoxSize] = useState<ISize>({ width: 0, height: 0 })
   const activeStyles = applyStyles(boxSize, defaultBoxStyles)
 
   const [isModeModalOpen, setIsModeModalOpen] = useState(false)
@@ -120,9 +118,9 @@ const Charger = ({ instanceId, componentMode = "compact", compactBoxSize }: Prop
         /* @ts-ignore */
         Icon={InverterChargerIcon}
         title={productNameShort}
-        subtitle={chargerState ?? undefined}
+        subtitle={chargerState}
         value={currentValue}
-        unit={"A"}
+        unit="A"
         boxSize={compactBoxSize}
       />
     )
@@ -134,7 +132,7 @@ const Charger = ({ instanceId, componentMode = "compact", compactBoxSize }: Prop
         <GeneratorIcon
           /* todo: fix types for svg */
           /* @ts-ignore */
-          className={"w-7"}
+          className="w-7"
         ></GeneratorIcon>
       }
       title={productNameShort}
