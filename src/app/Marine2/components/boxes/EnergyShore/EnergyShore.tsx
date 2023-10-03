@@ -16,7 +16,7 @@ const EnergyShore = ({ componentMode = "compact", inputId, compactBoxSize }: Pro
   const { activeInput, phases } = useActiveSource()
   const unplugged = activeInput + 1 !== inputId // Active in = 0 -> AC1 is active
   const phasesData = usePhasesData(phases, voltage, current, power, unplugged)
-  const status = unplugged ? "unplugged" : "active";
+  const status = unplugged ? "unplugged" : "active"
 
   if (componentMode === "compact" && compactBoxSize) {
     return (
