@@ -5,6 +5,7 @@ import FadedText from "../FadedText"
 import { ValueWithUnit } from "../ValueWithUnit/ValueWithUnit"
 import { unit } from "@m2Types/generic/unit"
 import { valueType } from "@m2Types/generic/value-type"
+import { TStatus } from "@m2Types/generic/status"
 
 interface Props {
   Icon: React.ComponentType<{ className: string }>
@@ -15,6 +16,7 @@ interface Props {
   inputLimitValue?: JSX.Element
   unit?: unit
   boxSize: { width: number; height: number }
+  status?: TStatus
 }
 
 const styles: BreakpointStylesType = {
@@ -55,7 +57,7 @@ const styles: BreakpointStylesType = {
   },
 }
 
-const ValueOverview = ({ title, subtitle, Icon, value, unit, boxSize, valueType, inputLimitValue }: Props) => {
+const ValueOverview = ({ title, subtitle, Icon, value, unit, boxSize, valueType, inputLimitValue, status }: Props) => {
   const activeStyles = applyStyles(boxSize, styles)
   const iconStyles = valueType === "environment" ? activeStyles.smallIcon : activeStyles.icon
   const classes = classNames("flex justify-between items-center", {
@@ -86,6 +88,7 @@ const ValueOverview = ({ title, subtitle, Icon, value, unit, boxSize, valueType,
         unit={unit}
         inputLimitValue={inputLimitValue}
         className={classNames(activeStyles.value)}
+        status={status}
       />
     </div>
   )

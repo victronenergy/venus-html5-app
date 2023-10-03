@@ -5,17 +5,37 @@ import { formatValue } from "../../../utils/formatters"
 import { unit } from "@m2Types/generic/unit"
 import { Unit } from "./Unit/Unit"
 import { TForcePowerUnit } from "@m2Types/generic/force-power-unit"
+import { TStatus } from "@m2Types/generic/status"
 
 interface Props {
   value?: number
   unit?: unit
   className?: string
+  status?: TStatus
   hideDecimal?: boolean
   inputLimitValue?: JSX.Element
   forcePowerUnit?: TForcePowerUnit
 }
 
-export const ValueWithUnit: FC<Props> = ({ value, unit, className, hideDecimal, inputLimitValue, forcePowerUnit }) => {
+export const ValueWithUnit: FC<Props> = ({
+  value,
+  unit,
+  className,
+  status = "active",
+  hideDecimal,
+  inputLimitValue,
+  forcePowerUnit,
+}) => {
+  if (status !== "active") {
+    const getInactiveUnit = () => (unit === "W" || unit === "kW" ? "W" : unit)
+    return (
+      <span className={className}>
+        --
+        <Unit unit={getInactiveUnit()} />
+      </span>
+    )
+  }
+
   if (unit === "W" || unit === "kW") {
     return (
       <span className={className}>

@@ -9,12 +9,14 @@ import { phaseUnitFor } from "../../../utils/formatters/phase/phase-unit-for"
 import { phaseValueFor } from "../../../utils/formatters/phase/phase-value-for"
 import { ComponentMode } from "@m2Types/generic/component-mode"
 import { usePhasesData } from "../../../utils/hooks/use-phases-data"
+import { ISize } from "@m2Types/generic/size"
 
 const EnergyShore = ({ componentMode = "compact", inputId, compactBoxSize }: Props) => {
   const { current, power, voltage } = useActiveInValues()
   const { activeInput, phases } = useActiveSource()
   const unplugged = activeInput + 1 !== inputId // Active in = 0 -> AC1 is active
   const phasesData = usePhasesData(phases, voltage, current, power, unplugged)
+  const status = unplugged ? "unplugged" : "active";
 
   if (componentMode === "compact" && compactBoxSize) {
     return (
@@ -27,20 +29,21 @@ const EnergyShore = ({ componentMode = "compact", inputId, compactBoxSize }: Pro
         value={phaseValueFor(phases, current, power)}
         unit={phaseUnitFor(phases)}
         boxSize={compactBoxSize}
+        status={status}
       />
     )
   }
 
   return (
     <ValueBox
-      title={translate("boxes.shorePower")}
       /* todo: fix types for svg */
       /* @ts-ignore */
       icon={<ShorePowerIcon className="w-[18px] sm-s:w-[24px] sm-m:w-[32px]" />}
-      value={!unplugged ? phaseValueFor(phases, current, power) : undefined}
+      title={translate("boxes.shorePower")}
+      value={phaseValueFor(phases, current, power)}
       unit={phaseUnitFor(phases)}
       bottomValues={phasesData}
-      valueSubtitle={unplugged ? translate("common.unplugged") : undefined}
+      status={status}
     />
   )
 }
@@ -48,7 +51,7 @@ const EnergyShore = ({ componentMode = "compact", inputId, compactBoxSize }: Pro
 interface Props {
   inputId: number
   componentMode?: ComponentMode
-  compactBoxSize?: { width: number; height: number }
+  compactBoxSize?: ISize
 }
 
 export default observer(EnergyShore)

@@ -7,6 +7,8 @@ import { BottomValues } from "./BottomValues/BottomValues"
 import { Heading } from "./Heading/Heading"
 import { unit } from "@m2Types/generic/unit"
 import { ISize } from "@m2Types/generic/size"
+import { TStatus } from "@m2Types/generic/status"
+import { translate } from "react-i18nify"
 
 interface Props {
   icon?: ReactElement<string>
@@ -19,6 +21,7 @@ interface Props {
   buttons?: JSX.Element | JSX.Element[]
   infoText?: { title: string; body: string }
   valueSubtitle?: string
+  status?: TStatus
 }
 
 const ValueBox: FC<Props> = ({
@@ -31,7 +34,7 @@ const ValueBox: FC<Props> = ({
   children,
   buttons,
   infoText,
-  valueSubtitle,
+  status,
 }) => {
   const [boxSize, setBoxSize] = useState<ISize>({ width: 0, height: 0 })
   const activeStyles = applyStyles(boxSize, defaultBoxStyles)
@@ -44,10 +47,11 @@ const ValueBox: FC<Props> = ({
             unit={unit}
             subtitle={subtitle}
             className={classNames("text-black dark:text-white", activeStyles?.mainValue)}
+            status={status}
           />
-          {valueSubtitle && (
+          {status === "unplugged" && (
             <div className={classNames("text-victron-gray-300 dark:text-victron-gray-500", activeStyles.valueSubtitle)}>
-              {valueSubtitle}
+              {translate("common.unplugged")}
             </div>
           )}
           <div className={classNames("text-victron-gray dark:text-victron-gray-500", activeStyles.valueSubtitle)}>
@@ -55,7 +59,11 @@ const ValueBox: FC<Props> = ({
           </div>
         </div>
         <div className="w-full flex flex-col">
-          <BottomValues values={bottomValues} className={classNames("overflow-hidden", activeStyles.secondaryValue)} />
+          <BottomValues
+            values={bottomValues}
+            className={classNames("overflow-hidden", activeStyles.secondaryValue)}
+            status={status}
+          />
           {!!buttons && <div className="flex w-full">{buttons}</div>}
         </div>
       </div>

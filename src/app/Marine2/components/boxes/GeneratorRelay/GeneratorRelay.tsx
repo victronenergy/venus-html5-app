@@ -5,11 +5,11 @@ import { useActiveInValues } from "@victronenergy/mfd-modules"
 import ValueBox from "../../ui/ValueBox"
 import AutoStartStopSetter from "../../ui/AutoStartStopSetter/AutoStartStopSetter"
 import ValueOverview from "../../ui/ValueOverview"
-import { totalPowerFor } from "../../../utils/helpers/total-power-for"
 import { phaseUnitFor } from "../../../utils/formatters/phase/phase-unit-for"
 import { isSinglePhaseFor } from "../../../utils/helpers/is-single-phase-for"
 import { ComponentMode } from "@m2Types/generic/component-mode"
 import { usePhasesData } from "../../../utils/hooks/use-phases-data"
+import { phaseValueFor } from "../../../utils/formatters/phase/phase-value-for"
 
 const GeneratorRelay = ({
   statusCode,
@@ -41,9 +41,8 @@ const GeneratorRelay = ({
   const subTitle = getGeneratorState(statusCode, active ?? false, phases)
 
   const { current, voltage, power } = useActiveInValues()
-
-  // TODO refactor to new memoized usePhasesData hook.
   const phasesData = usePhasesData(phases, voltage, current, power)
+  const status = active ? "active" : "inactive"
 
   if (componentMode === "compact" && compactBoxSize) {
     return (
@@ -53,15 +52,20 @@ const GeneratorRelay = ({
         Icon={GeneratorIcon}
         title={title}
         subtitle={subTitle}
-        value={active ? totalPowerFor(power) : 0}
-        unit="W"
+        value={phaseValueFor(phases, current, power)}
+        unit={phaseUnitFor(phases)}
         boxSize={compactBoxSize}
+        status={status}
       />
     )
   }
 
   return (
     <ValueBox
+      title={title}
+      subtitle={subTitle}
+      bottomValues={active || statusCode === 1 ? phasesData : []}
+      status={status}
       icon={
         <GeneratorIcon
           /* todo: fix types for svg */
@@ -69,8 +73,6 @@ const GeneratorRelay = ({
           className="w-[18px] sm-s:w-[24px] sm-m:w-[32px]"
         />
       }
-      title={title}
-      subtitle={subTitle}
       buttons={
         statusCode !== undefined ? (
           <AutoStartStopSetter
@@ -83,8 +85,6 @@ const GeneratorRelay = ({
           />
         ) : undefined
       }
-      unit={phaseUnitFor(phases)}
-      bottomValues={active || statusCode === 1 ? phasesData : []}
     />
   )
 }

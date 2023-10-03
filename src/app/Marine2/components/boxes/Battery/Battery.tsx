@@ -49,17 +49,15 @@ const Battery = ({ battery }: Props) => {
     return (
       <ValueBox
         icon={
-          <BatteryIcon
-            /* todo: fix types for svg */
-            /* @ts-ignore */
-            className="w-[18px] sm-s:w-[24px] sm-m:w-[32px]"
-          />
+          /* todo: fix types for svg */
+          /* @ts-ignore */
+          <BatteryIcon className="w-[18px] sm-s:w-[24px] sm-m:w-[32px]" />
         }
         title={battery.name}
         unit="V"
         value={battery.voltage}
         bottomValues={[]}
-      ></ValueBox>
+      />
     )
   }
 

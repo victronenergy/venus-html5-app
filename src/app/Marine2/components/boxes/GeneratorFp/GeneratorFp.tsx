@@ -1,18 +1,17 @@
-import { GeneratorFpProvider, useGensetValues } from "@victronenergy/mfd-modules"
 import { observer } from "mobx-react-lite"
-import GeneratorIcon from "../../../images/icons/generator.svg"
-import { GENSET_STATE } from "../../../utils/constants"
 import { translate } from "react-i18nify"
-import Box from "../../ui/Box"
-import classnames from "classnames"
-import { useState } from "react"
-import { applyStyles } from "../../../utils/media"
+import { GeneratorFpProvider, useGensetValues } from "@victronenergy/mfd-modules"
+import { ComponentMode } from "@m2Types/generic/component-mode"
+import GeneratorIcon from "../../../images/icons/generator.svg"
 import AutoStartStopSetter from "../../ui/AutoStartStopSetter"
 import ValueOverview from "../../ui/ValueOverview"
-import { ComponentMode } from "@m2Types/generic/component-mode"
-import { ISize } from "@m2Types/generic/size"
+import ValueBox from "../../ui/ValueBox"
+import { GENSET_STATE } from "../../../utils/constants"
 import { usePhasesData } from "../../../utils/hooks/use-phases-data"
-import { BottomValues } from "../../ui/ValueBox/BottomValues/BottomValues"
+import { phaseValueFor } from "../../../utils/formatters/phase/phase-value-for"
+import { phaseUnitFor } from "../../../utils/formatters/phase/phase-unit-for"
+import { AdditionalInformation } from "./AdditionalInformation/AdditionalInformation"
+import { ISize } from "@m2Types/generic/size"
 
 const GeneratorFp = ({ componentMode = "compact", generatorFp, compactBoxSize }: Props) => {
   const gensetStateFormatter = (value: number) => {
@@ -39,16 +38,8 @@ const GeneratorFp = ({ componentMode = "compact", generatorFp, compactBoxSize }:
   const subTitle = !!statusCode || statusCode === 0 ? gensetStateFormatter(Number(statusCode)) : undefined
   const isAutoStartDisabled = gensetAutoStart === 0
 
-  // TODO refactor to totalPowerOf function for generic usage (single-source-of-truth).
-  const powerSum = power.reduce((sum: number, b) => {
-    return b ? sum + b : sum
-  }, 0)
-
-  // TODO fix types.
-  // @ts-ignore
-  const phasesData = usePhasesData(phases, voltage, current, power)
-  const [boxSize, setBoxSize] = useState<ISize>({ width: 0, height: 0 })
-  const activeStyles = applyStyles(boxSize)
+  const phasesData = usePhasesData(phases, voltage as number[], current as number[], power as number[])
+  const status = statusCode === 8 || statusCode === 9 ? "active" : "inactive"
 
   if (componentMode === "compact" && compactBoxSize) {
     return (
@@ -58,87 +49,60 @@ const GeneratorFp = ({ componentMode = "compact", generatorFp, compactBoxSize }:
         Icon={GeneratorIcon}
         title={title}
         subtitle={subTitle}
-        value={powerSum}
-        unit="W"
+        value={phaseValueFor(phases, current as number[], power as number[])}
+        unit={phaseUnitFor(phases)}
         boxSize={compactBoxSize}
+        status={status}
       />
     )
   }
 
-  return (
-    <Box
-      icon={
-        <GeneratorIcon
-          /* todo: fix types for svg */
-          /* @ts-ignore */
-          className={"w-7"}
-        ></GeneratorIcon>
+  // TODO translate?
+  const infoText = isAutoStartDisabled
+    ? {
+        title: "Button disabled",
+        body: "Enable button functionality through genset panel",
       }
+    : undefined
+
+  return (
+    <ValueBox
       title={title}
-      getBoxSizeCallback={setBoxSize}
-      infoText={
-        isAutoStartDisabled
-          ? {
-              title: "Button disabled",
-              body: "Enable button functionality through genset panel",
-            }
-          : undefined
+      subtitle={subTitle}
+      bottomValues={!!gensetValues && phasesData}
+      status={status}
+      infoText={infoText}
+      icon={
+        /* todo: fix types for svg */
+        /* @ts-ignore */
+        <GeneratorIcon className="w-7" />
+      }
+      buttons={
+        <AutoStartStopSetter
+          title={title}
+          autoStart={autoStart}
+          isAutoStartDisabled={isAutoStartDisabled}
+          updateAutoMode={updateAutoMode}
+          updateManualMode={updateManualMode}
+          statusCode={statusCode}
+        />
       }
     >
-      <div className="w-full h-full flex flex-col justify-between">
-        <div className={classnames("flex w-full flex-col", activeStyles?.flow)}>
-          <div className={classnames("mt-1 flex flex-row pr-2", activeStyles?.mainValue)}>{subTitle}</div>
-          <div
-            className={classnames(
-              "flex flex-row mr-4 justify-start text-victron-gray min-w-0",
-              activeStyles?.valueSubtitle
-            )}
-          >
-            <div className="flex flex-none flex-col mr-3 w-1/3 truncate">
-              <span>Coolant</span>
-              <div className={classnames("text-victron-darkGray dark:text-white", activeStyles?.secondaryValue)}>
-                {coolant}
-                <span>°</span>
-              </div>
-            </div>
-            <div className="flex flex-none flex-col mr-3 w-1/3 truncate">
-              <span>Winding</span>
-              <div className={classnames("text-victron-darkGray dark:text-white", activeStyles?.secondaryValue)}>
-                {winding}
-                <span>°</span>
-              </div>
-            </div>
-            <div className="flex flex-none flex-col w-1/3 truncate">
-              <span>Exhaust</span>
-              <div className={classnames("text-victron-darkGray dark:text-white", activeStyles?.secondaryValue)}>
-                {exhaust}
-                <span>°</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="w-full h-full min-h-0 shrink flex flex-col justify-end mt-2">
-          <div className={classnames("shrink overflow-hidden", activeStyles?.secondaryValue)}>
-            {!!gensetValues && <BottomValues values={phasesData} />}
-          </div>
-          <AutoStartStopSetter
-            title={title}
-            autoStart={autoStart}
-            isAutoStartDisabled={isAutoStartDisabled}
-            updateAutoMode={updateAutoMode}
-            updateManualMode={updateManualMode}
-            statusCode={statusCode}
-          />
-        </div>
-      </div>
-    </Box>
+      <AdditionalInformation
+        values={[
+          { key: "coolant", value: coolant },
+          { key: "winding", value: winding },
+          { key: "exhaust", value: exhaust },
+        ]}
+      />
+    </ValueBox>
   )
 }
 
 interface Props {
   componentMode?: ComponentMode
   generatorFp: GeneratorFpProvider
-  compactBoxSize?: { width: number; height: number }
+  compactBoxSize?: ISize
 }
 
 export default observer(GeneratorFp)
