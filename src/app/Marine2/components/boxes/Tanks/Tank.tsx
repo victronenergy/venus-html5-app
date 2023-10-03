@@ -120,11 +120,7 @@ const Tank = ({ tankInstanceId, componentMode, levelWidth, orientation = "vertic
   }, [fluidTypeNum, customName])
 
   useEffect(() => {
-    if (level !== undefined || (capacity !== undefined && level === undefined)) {
-      setIsComponentVisible(true)
-    } else {
-      setIsComponentVisible(false)
-    }
+    setIsComponentVisible(level !== undefined || capacity !== undefined)
   }, [level, capacity])
 
   if (!isComponentVisible) return <></>
