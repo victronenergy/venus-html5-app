@@ -4,7 +4,7 @@ import { useTanks } from "@victronenergy/mfd-modules"
 import { observer } from "mobx-react"
 import { useWindowSize } from "../../../utils/hooks/use-window-size"
 import Box from "../../ui/Box"
-import Tank from "./Tank"
+import Tank from "./Tank/Tank"
 import { AppViews } from "../../../modules/AppViews"
 import { translate } from "react-i18nify"
 import { useVisibilityNotifier } from "../../../modules"
@@ -35,8 +35,8 @@ const Tanks = ({ componentMode = "full", className }: Props) => {
 
   const [width, height] = useSize(gridRef)
   const windowSize = useWindowSize()
-
   const activeStyles = applyStyles(boxSize, defaultBoxStyles)
+
   useEffect(() => {
     if (!windowSize.width || !windowSize.height) return
 
