@@ -14,6 +14,7 @@ import useSize from "@react-hook/size"
 import { applyStyles, defaultBoxStyles } from "../../../utils/media"
 import classNames from "classnames"
 import { ComponentMode } from "@m2Types/generic/component-mode"
+import { ScreenOrientation } from "@m2Types/generic/screen-orientation"
 
 interface Props {
   componentMode?: ComponentMode
@@ -31,7 +32,7 @@ const Tanks = ({ componentMode = "full", className }: Props) => {
 
   const gridRef = useRef<HTMLDivElement>(null)
   const tankRef = useRef<HTMLDivElement>(null)
-  const [orientation, setOrientation] = useState<"horizontal" | "vertical">("vertical")
+  const [orientation, setOrientation] = useState<ScreenOrientation>("vertical")
 
   const [width, height] = useSize(gridRef)
   const windowSize = useWindowSize()

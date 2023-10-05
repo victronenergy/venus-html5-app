@@ -6,6 +6,7 @@ import PageFlipper from "../PageFlipper"
 import { PageSelectorProps } from "../PageSelector"
 import { boxBreakpoints } from "../../../utils/media"
 import useSize from "@react-hook/size"
+import { ScreenOrientation } from "@m2Types/generic/screen-orientation"
 
 const GridPaginator = ({
   children,
@@ -118,7 +119,7 @@ const GridPaginator = ({
 
 interface Props extends GridProps {
   perPage: number
-  orientation?: "vertical" | "horizontal"
+  orientation?: ScreenOrientation
   pageSelectorPropsSetter?: (arg0: PageSelectorProps) => void
 }
 

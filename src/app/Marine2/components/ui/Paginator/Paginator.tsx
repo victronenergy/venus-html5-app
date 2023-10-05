@@ -6,6 +6,7 @@ import ScrollSizeObserver from "../Observers/ScrollSizeObserver"
 import PageFlipper from "../PageFlipper"
 import { SizeChangeObserver } from "../Observers"
 import useSize from "@react-hook/size"
+import { ScreenOrientation } from "@m2Types/generic/screen-orientation"
 
 const Paginator = ({
   children,
@@ -198,7 +199,7 @@ const Paginator = ({
 
 interface Props {
   children: JSX.Element[] | JSX.Element | string
-  orientation?: "vertical" | "horizontal"
+  orientation?: ScreenOrientation
   pageNumber?: number
   selectorLocation?: SelectorLocation
   pageSelectorPropsSetter?: (arg0: PageSelectorProps) => void

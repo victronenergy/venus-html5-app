@@ -1,6 +1,7 @@
 import { CSSProperties, useEffect, useRef, useState } from "react"
 import { observer } from "mobx-react"
 import useSize from "@react-hook/size"
+import { ScreenOrientation } from "@m2Types/generic/screen-orientation"
 
 const SizeChangeObserver = ({ children, onSizeChange, orientation, className = "", style }: Props) => {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -28,7 +29,7 @@ const SizeChangeObserver = ({ children, onSizeChange, orientation, className = "
 interface Props {
   children: (string | JSX.Element)[] | JSX.Element | string
   onSizeChange: () => void
-  orientation: "vertical" | "horizontal"
+  orientation: ScreenOrientation
   className?: string
   style?: CSSProperties
 }
