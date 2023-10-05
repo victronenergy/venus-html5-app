@@ -2,6 +2,13 @@ import { useEffect, useRef } from "react"
 import { observer } from "mobx-react"
 import classnames from "classnames"
 import useSize from "@react-hook/size"
+import { ScreenOrientation } from "@m2Types/generic/screen-orientation"
+
+interface Props {
+  children: JSX.Element[] | JSX.Element | string
+  onSizeChange: () => void
+  orientation: ScreenOrientation
+}
 
 const ScrollSizeObserver = ({ children, onSizeChange, orientation }: Props) => {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -30,12 +37,6 @@ const ScrollSizeObserver = ({ children, onSizeChange, orientation }: Props) => {
       </div>
     </div>
   )
-}
-
-interface Props {
-  children: JSX.Element[] | JSX.Element | string
-  onSizeChange: () => void
-  orientation: "vertical" | "horizontal"
 }
 
 export default observer(ScrollSizeObserver)
