@@ -11,7 +11,7 @@ import { applyStyles, BreakpointStylesType, StylesType } from "app/Marine2/utils
 import { useState } from "react"
 import ValueBar from "../../ui/ValueBar"
 import ValueBox from "../../ui/ValueBox"
-import { ValueWithUnit } from "@m2Types/generic/value-with-units"
+import { ValueWithUnit } from "@m2Types/data/value-with-units"
 import { ISize } from "@m2Types/generic/size"
 
 const styles: BreakpointStylesType = {

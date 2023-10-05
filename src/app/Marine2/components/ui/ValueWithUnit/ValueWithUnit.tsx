@@ -2,10 +2,10 @@ import React, { FC } from "react"
 import { powerValueFor } from "../../../utils/formatters/power/power-value-for"
 import { powerUnitFor } from "../../../utils/formatters/power/power-unit-for"
 import { formatValue } from "../../../utils/formatters"
-import { unit } from "@m2Types/generic/unit"
+import { unit } from "@m2Types/data/unit"
 import { Unit } from "./Unit/Unit"
-import { TForcePowerUnit } from "@m2Types/generic/force-power-unit"
-import { TStatus } from "@m2Types/generic/status"
+import { TForcePowerUnit } from "@m2Types/data/force-power-unit"
+import { TStatus } from "@m2Types/data/status"
 
 interface Props {
   value?: number

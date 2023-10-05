@@ -7,6 +7,7 @@ import Paginator from "../Paginator"
 import useSize from "@react-hook/size"
 import FadedText from "../FadedText"
 import { Modal } from "../Modal"
+import { ScreenOrientation } from "@m2Types/generic/screen-orientation"
 
 const Box = ({
   children,
@@ -121,7 +122,7 @@ export interface BoxProps {
   className?: string
   headerActions?: JSX.Element
   withPagination?: boolean
-  paginationOrientation?: "horizontal" | "vertical"
+  paginationOrientation?: ScreenOrientation
   getBoxSizeCallback?: (size: { width: number; height: number }) => void
   setRef?: React.RefObject<HTMLDivElement>
 }

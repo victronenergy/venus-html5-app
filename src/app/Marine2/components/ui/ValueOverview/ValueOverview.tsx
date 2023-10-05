@@ -3,9 +3,9 @@ import classNames from "classnames"
 import { applyStyles, BreakpointStylesType } from "../../../utils/media"
 import FadedText from "../FadedText"
 import { ValueWithUnit } from "../ValueWithUnit/ValueWithUnit"
-import { unit } from "@m2Types/generic/unit"
-import { valueType } from "@m2Types/generic/value-type"
-import { TStatus } from "@m2Types/generic/status"
+import { unit } from "@m2Types/data/unit"
+import { valueType } from "@m2Types/data/value-type"
+import { TStatus } from "@m2Types/data/status"
 
 interface Props {
   Icon: React.ComponentType<{ className: string }>

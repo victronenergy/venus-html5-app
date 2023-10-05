@@ -1,7 +1,7 @@
 import React, { FC } from "react"
-import { unit } from "@m2Types/generic/unit"
+import { unit } from "@m2Types/data/unit"
 import { ValueWithUnit } from "../../ValueWithUnit/ValueWithUnit"
-import { TStatus } from "@m2Types/generic/status"
+import { TStatus } from "@m2Types/data/status"
 
 interface Props {
   value?: number

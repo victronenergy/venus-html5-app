@@ -1,7 +1,7 @@
 import { ValueWithUnit } from "../ValueWithUnit/ValueWithUnit"
-import { ValueWithUnit as IValueWithUnit } from "@m2Types/generic/value-with-units"
-import { TForcePowerUnit } from "@m2Types/generic/force-power-unit"
-import { TStatus } from "@m2Types/generic/status"
+import { ValueWithUnit as IValueWithUnit } from "@m2Types/data/value-with-units"
+import { TForcePowerUnit } from "@m2Types/data/force-power-unit"
+import { TStatus } from "@m2Types/data/status"
 
 interface Props {
   values: IValueWithUnit[]

@@ -1,6 +1,6 @@
 import { ReactNode, useState } from "react"
 import classnames from "classnames"
-import { unit } from "@m2Types/generic/unit"
+import { unit } from "@m2Types/data/unit"
 
 interface Props {
   initialValue: number

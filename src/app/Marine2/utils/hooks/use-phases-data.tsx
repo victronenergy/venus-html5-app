@@ -1,5 +1,5 @@
 import { useMemo } from "react"
-import { ValueWithUnit } from "@m2Types/generic/value-with-units"
+import { ValueWithUnit } from "@m2Types/data/value-with-units"
 
 export const usePhasesData = (
   phases: number,

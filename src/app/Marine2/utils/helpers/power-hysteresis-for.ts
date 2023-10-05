@@ -1,7 +1,7 @@
 import { isKilowattFor } from "./is-kilowatt-for"
 import { isPowerUnderThreshold } from "./is-power-under-threshold"
-import { ValueWithUnit } from "@m2Types/generic/value-with-units"
-import { TForcePowerUnit } from "@m2Types/generic/force-power-unit"
+import { ValueWithUnit } from "@m2Types/data/value-with-units"
+import { TForcePowerUnit } from "@m2Types/data/force-power-unit"
 
 /*
   The goal of this function is to force the same power formatting/units for all phases, there is a minimal threshold to prevent flickering.

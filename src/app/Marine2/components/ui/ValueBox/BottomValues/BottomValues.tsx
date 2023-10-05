@@ -1,8 +1,8 @@
 import type { FC } from "react"
-import { ValueWithUnit } from "@m2Types/generic/value-with-units"
+import { ValueWithUnit } from "@m2Types/data/value-with-units"
 import ValueBar from "../../ValueBar"
 import { usePowerHysteresisFor } from "../../../../utils/hooks/use-power-hysteresis-for"
-import { TStatus } from "@m2Types/generic/status"
+import { TStatus } from "@m2Types/data/status"
 
 interface Props {
   values: ValueWithUnit[][]
