@@ -9,19 +9,17 @@ import useSize from "@react-hook/size"
 import { ComponentMode } from "@m2Types/generic/component-mode"
 import { compactStyles, horizontalStyles, verticalStyles } from "./Styles"
 import { FLUID_TRANSLATIONS } from "../../../../utils/constants/fluids"
-import { formatCapacityFor } from "../../../../utils/formatters/tanks/format-capacity-for"
-import { tankUnitFor } from "../../../../utils/formatters/tanks/tank-unit-for"
 import { formatLevelFor } from "../../../../utils/formatters/tanks/format-level-for"
-import { roundLevelWidthFor } from "../../../../utils/formatters/tanks/round-level-width-for"
 import { FluidIcon } from "./FluidIcon/FluidIcon"
 import { ValueWithPercentage } from "./ValueWithPercentage/ValueWithPercentage"
 import { Capacity } from "./Capacity/Capacity"
+import { ScreenOrientation } from "@m2Types/generic/screen-orientation"
 
 interface Props {
   tankInstanceId: number
   levelWidth?: number
   componentMode?: ComponentMode
-  orientation?: "vertical" | "horizontal"
+  orientation?: ScreenOrientation
   parentSize?: ISize
 }
 
@@ -53,8 +51,6 @@ const Tank = ({ tankInstanceId, componentMode, levelWidth, orientation = "vertic
   // Tanks that are missing level readings and only have capacity
   const isAuxillaryTank = !!capacity && level === undefined
 
-  console.log(componentMode, orientation)
-
   if (componentMode === "compact") {
     return (
       <div ref={wrapperRef} className="flex items-center">
@@ -62,11 +58,7 @@ const Tank = ({ tankInstanceId, componentMode, levelWidth, orientation = "vertic
           <FluidIcon fluid={fluidTypeNum} className={`mr-2 ${compactActiveStyles?.icon}`} />
           <div className={classnames("truncate", compactActiveStyles?.tankName)}>{tankTitle} </div>
         </div>
-
-        <ProgressBar percentage={isAuxillaryTank ? 0 : formatLevelFor(level)} type={fluidTypeNum} />
-        <ValueWithPercentage level={level} className={compactActiveStyles?.level} isAuxillaryTank={isAuxillaryTank} />
-
-{/*        <div className="flex flex-row items-center basis-0 flex-grow justify-end">
+        <div className="flex flex-row items-center basis-0 flex-grow justify-end">
           <div
             className={classnames("ml-4")}
             style={
@@ -83,12 +75,15 @@ const Tank = ({ tankInstanceId, componentMode, levelWidth, orientation = "vertic
                 : {}
             }
           >
-
+            <ProgressBar percentage={isAuxillaryTank ? 0 : formatLevelFor(level)} type={fluidTypeNum} />
           </div>
-          <ProgressBar percentage={isAuxillaryTank ? 0 : formatLevelFor(level)} type={fluidTypeNum} />
-          <ValueWithPercentage level={level} className={compactActiveStyles?.level} isAuxillaryTank={isAuxillaryTank} />
-
-        </div>*/}
+          <ValueWithPercentage
+            fluid={fluidTypeNum}
+            level={level}
+            className={compactActiveStyles?.level}
+            isAuxillaryTank={isAuxillaryTank}
+          />
+        </div>
       </div>
     )
   }
@@ -111,33 +106,30 @@ const Tank = ({ tankInstanceId, componentMode, levelWidth, orientation = "vertic
           </div>
         </div>
 
-{/*          <div
-            className={classnames("flex items-center justify-center")}
-            style={
-              width
-                ? {
-                    width: width > 1000 ? width * 0.7 : width * 0.5,
-                    display: width < 368 ? "none" : "block",
-                  }
-                : parentSize?.width
-                ? {
-                    width: parentSize.width > 1000 ? parentSize.width * 0.7 : parentSize.width * 0.5,
-                    display: parentSize.width < 400 ? "none" : "block",
-                  }
-                : {}
-            }
-          >
-          <ProgressBar percentage={isAuxillaryTank ? 0 : formatLevelFor(level)} type={fluidTypeNum} size={"large"} />
-          </div>*/}
-
-        <ProgressBar percentage={isAuxillaryTank ? 0 : formatLevelFor(level)} type={fluidTypeNum} size={"large"} />
-
-          <ValueWithPercentage
-            level={level}
-            className={verticalActiveStyles?.level}
-            isAuxillaryTank={isAuxillaryTank}
-          />
-
+        <div
+          className={classnames("flex items-center justify-center")}
+          style={
+            width
+              ? {
+                  width: width > 1000 ? width * 0.7 : width * 0.5,
+                  display: width < 368 ? "none" : "block",
+                }
+              : parentSize?.width
+              ? {
+                  width: parentSize.width > 1000 ? parentSize.width * 0.7 : parentSize.width * 0.5,
+                  display: parentSize.width < 400 ? "none" : "block",
+                }
+              : {}
+          }
+        >
+          <ProgressBar percentage={isAuxillaryTank ? 0 : formatLevelFor(level)} type={fluidTypeNum} size="large" />
+        </div>
+        <ValueWithPercentage
+          fluid={fluidTypeNum}
+          level={level}
+          className={verticalActiveStyles?.level}
+          isAuxillaryTank={isAuxillaryTank}
+        />
       </div>
     )
   }
@@ -163,6 +155,7 @@ const Tank = ({ tankInstanceId, componentMode, levelWidth, orientation = "vertic
           </div>
           <div className="flex flex-col px-2">
             <ValueWithPercentage
+              fluid={fluidTypeNum}
               level={level}
               className={horizontalActiveStyles?.level}
               isAuxillaryTank={isAuxillaryTank}
