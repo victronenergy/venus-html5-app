@@ -45,8 +45,8 @@ const HumidityData = ({ dataId, componentMode, boxSize }: Props) => {
         title={customName || translate("boxes.humidity")}
         value={humidity}
         boxSize={boxSize}
-        unit={"%"}
-        valueType={"environment"}
+        unit="%"
+        valueType="environment"
       />
     )
   }

@@ -19,7 +19,7 @@ const EnergyAlternator = ({ componentMode = "compact", alternator, showInstance,
         Icon={AlternatorIcon}
         title={translate("boxes.alternator")}
         value={current}
-        unit={"A"}
+        unit="A"
         boxSize={compactBoxSize}
       />
     )

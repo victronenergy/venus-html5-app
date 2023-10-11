@@ -18,7 +18,7 @@ const EnergyWind = ({ componentMode = "compact", windGenerator, showInstance, co
         Icon={WindIcon}
         title={translate("boxes.windGenerator")}
         value={current}
-        unit={"A"}
+        unit="A"
         boxSize={compactBoxSize}
       />
     )
