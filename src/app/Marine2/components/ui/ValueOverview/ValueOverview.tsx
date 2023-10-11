@@ -1,65 +1,36 @@
-import React from "react"
+import { ComponentType } from "react"
 import classNames from "classnames"
-import { applyStyles, BreakpointStylesType } from "../../../utils/media"
+import { applyStyles } from "../../../utils/media"
 import FadedText from "../FadedText"
 import { ValueWithUnit } from "../ValueWithUnit/ValueWithUnit"
 import { unit } from "@m2Types/data/unit"
 import { valueType } from "@m2Types/data/value-type"
 import { TStatus } from "@m2Types/data/status"
+import { Styles } from "./Styles"
+import { ISize } from "@m2Types/generic/size"
+import { observer } from "mobx-react"
 
 interface Props {
-  Icon: React.ComponentType<{ className: string }>
+  Icon: ComponentType<{ className: string }>
   valueType?: valueType
   title: string
   subtitle?: string
   value?: number
-  inputLimitValue?: JSX.Element
   unit?: unit
-  boxSize: { width: number; height: number }
+  boxSize: ISize
   status?: TStatus
 }
 
-const styles: BreakpointStylesType = {
-  default: {
-    value: "text-base",
-    title: "text-sm",
-    subtitle: "text-xs pb-1",
-    icon: "w-[18px] text-victron-gray-200 dark:text-white",
-    smallIcon: "min-w-3 w-3 text-victron-gray-200 dark:text-white",
-  },
-  "sm-s": {
-    value: "text-lg",
-    title: "text-sm",
-    subtitle: "text-sm pb-1",
-    icon: "w-[24px] text-victron-gray-200 dark:text-white",
-    smallIcon: "min-w-5 w-5 text-victron-gray-200 dark:text-white",
-  },
-  "sm-m": {
-    value: "text-lg",
-    title: "text-base",
-    subtitle: "text-sm pb-1",
-    icon: "w-[32px] text-victron-gray-200 dark:text-white",
-    smallIcon: "min-w-5 w-5 text-victron-gray-200 dark:text-white",
-  },
-  "md-s": {
-    value: "text-lg",
-    title: "text-base",
-    subtitle: "text-sm pb-1",
-    icon: "w-[32px] text-victron-gray-200 dark:text-white",
-    smallIcon: "min-w-5 w-5 text-victron-gray-200 dark:text-white",
-  },
-  "md-l": {
-    value: "text-lg",
-    title: "text-lg",
-    subtitle: "text-sm pb-1",
-    icon: "w-[32px] text-victron-gray-200 dark:text-white",
-    smallIcon: "min-w-5 w-5 text-victron-gray-200 dark:text-white",
-  },
-}
+const ValueOverview = ({ title, subtitle, Icon, value, unit, boxSize, valueType, status }: Props) => {
+  const {
+    smallIcon,
+    icon,
+    title: titleStyle,
+    subtitle: subtitleStyle,
+    value: valueStyle,
+  } = applyStyles(boxSize, Styles)
 
-const ValueOverview = ({ title, subtitle, Icon, value, unit, boxSize, valueType, inputLimitValue, status }: Props) => {
-  const activeStyles = applyStyles(boxSize, styles)
-  const iconStyles = valueType === "environment" ? activeStyles.smallIcon : activeStyles.icon
+  const iconStyles = valueType === "environment" ? smallIcon : icon
   const classes = classNames("flex justify-between items-center", {
     "h-14": subtitle,
     "h-12": !subtitle,
@@ -70,28 +41,19 @@ const ValueOverview = ({ title, subtitle, Icon, value, unit, boxSize, valueType,
       <div className="flex items-center min-w-0">
         {/* @ts-ignore */}
         <Icon className={iconStyles} />
-        <div className={"px-2 min-w-0 flex flex-col"}>
-          <FadedText
-            className={classNames("pr-8 text-victron-gray-200 dark:text-white", activeStyles.title)}
-            text={title}
-          />
+        <div className="px-2 min-w-0 flex flex-col">
+          <FadedText className={classNames("pr-8 text-victron-gray-200 dark:text-white", titleStyle)} text={title} />
           {subtitle && (
             <FadedText
-              className={classNames("text-victron-gray pr-2 dark:text-victron-gray-500", activeStyles.subtitle)}
+              className={classNames("text-victron-gray pr-2 dark:text-victron-gray-500", subtitleStyle)}
               text={subtitle}
             />
           )}
         </div>
       </div>
-      <ValueWithUnit
-        value={value}
-        unit={unit}
-        inputLimitValue={inputLimitValue}
-        className={classNames(activeStyles.value)}
-        status={status}
-      />
+      <ValueWithUnit value={value} unit={unit} className={classNames(valueStyle)} status={status} />
     </div>
   )
 }
 
-export default ValueOverview
+export default observer(ValueOverview)

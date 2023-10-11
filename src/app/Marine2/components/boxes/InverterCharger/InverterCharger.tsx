@@ -2,70 +2,43 @@ import { useAppStore, useInverterCharger, useShorePowerInput } from "@victronene
 import { observer } from "mobx-react-lite"
 import InverterChargerIcon from "../../../images/icons/inverter-charger.svg"
 import { translate } from "react-i18nify"
-import { SYSTEM_MODE } from "../../../utils/constants"
 import { formatStateForTranslation } from "../../../utils/format"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import Button from "../../ui/Button"
-import RadioButton from "../../ui/RadioButton"
-import DeviceSettingModal from "../../ui/DeviceSettingModal"
-import InputLimitValue from "../../ui/InputLimitValue"
 import InputLimitSelector from "../../ui/InputLimitSelector"
 import ValueBox from "../../ui/ValueBox"
 import ValueOverview from "../../ui/ValueOverview"
 import { ComponentMode } from "@m2Types/generic/component-mode"
+import { ISize } from "@m2Types/generic/size"
+import { Modal } from "./Modal/Modal"
+import { formatModeFor } from "../../../utils/helpers/inverter-charger/format-mode-for"
+
+interface Props {
+  componentMode?: ComponentMode
+  compactBoxSize?: ISize
+}
 
 const InverterCharger = ({ componentMode = "compact", compactBoxSize }: Props) => {
   const { locked } = useAppStore() // lock from theme settings
-  const inverterChargerModeFormatter = (value: number) => {
-    switch (value) {
-      case SYSTEM_MODE.CHARGER_ONLY:
-        return translate("common.chargerOnly")
-      case SYSTEM_MODE.INVERTER_ONLY:
-        return translate("common.inverterOnly")
-      case SYSTEM_MODE.ON:
-        return translate("common.on")
-      case SYSTEM_MODE.OFF:
-        return translate("common.off")
-      default:
-        return ""
-    }
-  }
-
   const { inputId } = useShorePowerInput()
 
   const { state, mode, customName, productName, modeIsAdjustable, updateMode } = useInverterCharger()
-  const adjustable = modeIsAdjustable === 1
+  const [openModal, setOpenModal] = useState(false)
 
   const productNameShort = customName || (productName && productName.split(" ")[0])
-
   const subTitle = !!state || parseInt(state) === 0 ? translate(formatStateForTranslation(Number(state))) : ""
-
-  const [isModeModalOpen, setIsModeModalOpen] = useState(false)
-  const [modeForSubmission, setModeForSubmission] = useState(Number(mode))
-
-  useEffect(() => {
-    setModeForSubmission(Number(mode))
-  }, [mode])
-
-  const closeModeModal = () => {
-    setIsModeModalOpen(false)
-    setModeForSubmission(Number(mode))
-  }
-
-  const submitMode = () => {
-    updateMode(modeForSubmission)
-    closeModeModal()
-  }
 
   const getButtons = () => {
     const buttons = []
+
     if (!!inputId) {
       buttons.push(<InputLimitSelector inputId={inputId} title={productNameShort} />)
     }
-    if (adjustable) {
+
+    if (modeIsAdjustable === 1) {
       buttons.push(
-        <Button disabled={locked} className="w-full" size="md" onClick={() => setIsModeModalOpen(!isModeModalOpen)}>
-          {inverterChargerModeFormatter(parseInt(mode))}
+        <Button disabled={locked} className="w-full" size="md" onClick={() => setOpenModal(!openModal)}>
+          {formatModeFor(parseInt(mode))}
         </Button>
       )
     }
@@ -80,9 +53,6 @@ const InverterCharger = ({ componentMode = "compact", compactBoxSize }: Props) =
         Icon={InverterChargerIcon}
         title={productNameShort}
         subtitle={subTitle}
-        inputLimitValue={!!inputId ? <InputLimitValue inputId={inputId} /> : undefined}
-        value={!inputId ? 0 : undefined}
-        unit="A"
         boxSize={compactBoxSize}
       />
     )
@@ -93,79 +63,16 @@ const InverterCharger = ({ componentMode = "compact", compactBoxSize }: Props) =
       title={productNameShort}
       subtitle={subTitle}
       icon={
-        <InverterChargerIcon
-          /* todo: fix types for svg */
-          /* @ts-ignore */
-          className="w-[18px] sm-s:w-[24px] sm-m:w-[32px]"
-        ></InverterChargerIcon>
+        /* todo: fix types for svg */
+        /* @ts-ignore */
+        <InverterChargerIcon className="w-[18px] sm-s:w-[24px] sm-m:w-[32px]" />
       }
       buttons={getButtons()}
       bottomValues={[]}
     >
-      {(adjustable && (
-        <DeviceSettingModal
-          title={productNameShort}
-          subtitle={translate("common.mode")}
-          open={isModeModalOpen}
-          onClose={closeModeModal}
-          onSet={submitMode}
-        >
-          <div className="divide-y divide-victron-darkGray-200 text-base">
-            <label
-              className="w-full flex justify-between items-center pb-4"
-              onClick={() => setModeForSubmission(SYSTEM_MODE.ON)}
-            >
-              <span>{translate("common.on")}</span>
-              <RadioButton
-                onChange={() => setModeForSubmission(SYSTEM_MODE.ON)}
-                selected={modeForSubmission === SYSTEM_MODE.ON}
-                responsive={false}
-              />
-            </label>
-            <label
-              className="w-full flex justify-between items-center py-4"
-              onClick={() => setModeForSubmission(SYSTEM_MODE.OFF)}
-            >
-              <span>{translate("common.off")}</span>
-              <RadioButton
-                onChange={() => setModeForSubmission(SYSTEM_MODE.OFF)}
-                selected={modeForSubmission === SYSTEM_MODE.OFF}
-                responsive={false}
-              />
-            </label>
-            <label
-              className="w-full flex justify-between items-center py-4"
-              onClick={() => setModeForSubmission(SYSTEM_MODE.CHARGER_ONLY)}
-            >
-              <span>{translate("common.chargerOnly")}</span>
-              <RadioButton
-                onChange={() => setModeForSubmission(SYSTEM_MODE.CHARGER_ONLY)}
-                selected={modeForSubmission === SYSTEM_MODE.CHARGER_ONLY}
-                responsive={false}
-              />
-            </label>
-            <label
-              className="w-full flex justify-between items-center pt-4"
-              onClick={() => setModeForSubmission(SYSTEM_MODE.INVERTER_ONLY)}
-            >
-              <span>{translate("common.inverterOnly")}</span>
-              <RadioButton
-                onChange={() => setModeForSubmission(SYSTEM_MODE.INVERTER_ONLY)}
-                selected={modeForSubmission === SYSTEM_MODE.INVERTER_ONLY}
-                responsive={false}
-              />
-            </label>
-          </div>
-        </DeviceSettingModal>
-      )) ||
-        undefined}
+      <Modal title={productNameShort} open={openModal} onClose={setOpenModal} />
     </ValueBox>
   )
-}
-
-interface Props {
-  componentMode?: ComponentMode
-  compactBoxSize?: { width: number; height: number }
 }
 
 export default observer(InverterCharger)

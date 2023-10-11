@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import { FC } from "react"
 import { powerValueFor } from "../../../utils/formatters/power/power-value-for"
 import { powerUnitFor } from "../../../utils/formatters/power/power-unit-for"
 import { formatValue } from "../../../utils/formatters"
@@ -13,7 +13,6 @@ interface Props {
   className?: string
   status?: TStatus
   hideDecimal?: boolean
-  inputLimitValue?: JSX.Element
   forcePowerUnit?: TForcePowerUnit
 }
 
@@ -23,7 +22,6 @@ export const ValueWithUnit: FC<Props> = ({
   className,
   status = "active",
   hideDecimal,
-  inputLimitValue,
   forcePowerUnit,
 }) => {
   if (status !== "active") {
@@ -45,9 +43,13 @@ export const ValueWithUnit: FC<Props> = ({
     )
   }
 
+  if (!value && !unit) {
+    return null
+  }
+
   return (
     <span className={className}>
-      {inputLimitValue ?? formatValue(value, hideDecimal ? 0 : 1)}
+      {formatValue(value, hideDecimal ? 0 : 1)}
       <Unit unit={unit} />
     </span>
   )
