@@ -22,7 +22,7 @@ const InverterCharger = ({ componentMode = "compact", compactBoxSize }: Props) =
   const { locked } = useAppStore() // lock from theme settings
   const { inputId } = useShorePowerInput()
 
-  const { state, mode, customName, productName, modeIsAdjustable, updateMode } = useInverterCharger()
+  const { state, mode, customName, productName, modeIsAdjustable } = useInverterCharger()
   const [openModal, setOpenModal] = useState(false)
 
   const productNameShort = customName || (productName && productName.split(" ")[0])
@@ -44,6 +44,8 @@ const InverterCharger = ({ componentMode = "compact", compactBoxSize }: Props) =
     }
     return buttons
   }
+
+  console.log(state, mode)
 
   if (componentMode === "compact" && compactBoxSize) {
     return (

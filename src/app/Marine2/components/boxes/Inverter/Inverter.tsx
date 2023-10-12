@@ -41,7 +41,7 @@ const Inverter = ({ instanceId, isVebusInverter, componentMode = "compact", comp
 
   const productNameShort = customName || (productName && productName.split(" ")[0])
   const currentValue = !!current || current === 0 ? current : undefined
-  const inverterState = !!state || state === 0 ? translate(formatStateForTranslation(Number(state))) : undefined
+  const subTitle = !!state || state === 0 ? translate(formatStateForTranslation(Number(state))) : undefined
   const inverterMode = inverterModeFormatter(Number(mode))
 
   const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
@@ -70,7 +70,7 @@ const Inverter = ({ instanceId, isVebusInverter, componentMode = "compact", comp
         /* @ts-ignore */
         Icon={InverterChargerIcon}
         title={productNameShort}
-        subtitle={inverterState}
+        subtitle={subTitle}
         value={currentValue}
         unit={"A"}
         boxSize={compactBoxSize}
@@ -92,7 +92,7 @@ const Inverter = ({ instanceId, isVebusInverter, componentMode = "compact", comp
     >
       <div className="w-full h-full flex flex-col justify-between">
         <div className={classNames("text-victron-darkGray dark:text-white", activeStyles?.mainValue)}>
-          {inverterState}
+          {subTitle}
         </div>
         <div className="w-full h-full min-h-0 shrink flex flex-col justify-end mt-2">
           <div className={classnames("", activeStyles?.secondaryValue)}>

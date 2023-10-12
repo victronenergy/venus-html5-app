@@ -54,7 +54,7 @@ const Charger = ({ instanceId, componentMode = "compact", compactBoxSize }: Prop
   const chargerSupportsInputLimit = currentLimit !== undefined
   const chargerMode = chargerModeFormatter(Number(mode))
   const currentValue = !!current && (!!current[0] || current[0] === 0) ? current[0] : undefined
-  const chargerState = !!state || state === 0 ? translate(formatStateForTranslation(Number(state))) : undefined
+  const subTitle = !!state || state === 0 ? translate(formatStateForTranslation(Number(state))) : undefined
 
   const productNameShort = customName || (productName && productName.split(" ")[0])
 
@@ -118,7 +118,7 @@ const Charger = ({ instanceId, componentMode = "compact", compactBoxSize }: Prop
         /* @ts-ignore */
         Icon={InverterChargerIcon}
         title={productNameShort}
-        subtitle={chargerState}
+        subtitle={subTitle}
         value={currentValue}
         unit="A"
         boxSize={compactBoxSize}
@@ -140,7 +140,7 @@ const Charger = ({ instanceId, componentMode = "compact", compactBoxSize }: Prop
     >
       <div className="w-full h-full flex flex-col justify-between">
         <div className={classNames("text-victron-darkGray dark:text-white", activeStyles?.mainValue)}>
-          {chargerState}
+          {subTitle}
         </div>
         <div className="w-full h-full min-h-0 shrink flex flex-col justify-end mt-2">
           <div className={classnames("", activeStyles?.secondaryValue)}>
