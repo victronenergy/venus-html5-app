@@ -28,6 +28,10 @@ const InverterCharger = ({ componentMode = "compact", compactBoxSize }: Props) =
   const productNameShort = customName || (productName && productName.split(" ")[0])
   const subTitle = !!state || parseInt(state) === 0 ? translate(formatStateForTranslation(Number(state))) : ""
 
+    const title = shortTitleFor(customName, productName, "Charger Fallback Name")
+  const translatedState = translatedStateFor(state)
+
+
   const getButtons = () => {
     const buttons = []
 
