@@ -1,7 +1,7 @@
 import type { FC } from "react"
 import classnames from "classnames"
-import { formatCapacityFor } from "../../../../../utils/formatters/tanks/format-capacity-for"
-import { tankUnitFor } from "../../../../../utils/helpers/tanks/tank-unit-for"
+import { formatCapacityFor } from "../../../../../utils/formatters/devices/tanks/format-capacity-for"
+import { tankUnitFor } from "../../../../../utils/helpers/devices/tanks/tank-unit-for"
 
 interface Props {
   remaining: number

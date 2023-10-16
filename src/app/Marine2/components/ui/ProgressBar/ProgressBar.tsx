@@ -1,5 +1,5 @@
 import classnames from "classnames"
-import { tankColorFor } from "../../../utils/helpers/tanks/tank-color-for"
+import { tankColorFor } from "../../../utils/helpers/devices/tanks/tank-color-for"
 import { ScreenOrientation } from "@m2Types/generic/screen-orientation"
 
 interface Props {

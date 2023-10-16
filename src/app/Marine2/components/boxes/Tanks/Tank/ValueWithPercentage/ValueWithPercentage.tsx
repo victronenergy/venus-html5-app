@@ -1,8 +1,8 @@
 import type { FC } from "react"
 import classnames from "classnames"
-import { formatLevelFor } from "../../../../../utils/formatters/tanks/format-level-for"
 import { ScreenOrientation } from "@m2Types/generic/screen-orientation"
-import { isReversedLevelFor } from "../../../../../utils/helpers/tanks/is-reversed-level-for"
+import { formatLevelFor } from "../../../../../utils/formatters/devices/tanks/format-level-for"
+import { isReversedLevelFor } from "../../../../../utils/helpers/devices/tanks/is-reversed-level-for"
 
 interface Props {
   fluid: number

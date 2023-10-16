@@ -1,5 +1,5 @@
 import ProgressCircle from "../../../components/ui/ProgressCircle"
-import { batteryStateNameFor } from "../../../utils/formatters/battery/battery-state-name-for"
+import { batteryStateNameFor } from "../../../utils/formatters/devices/battery/battery-state-name-for"
 import { formatValue } from "../../../utils/formatters"
 import { Battery } from "@victronenergy/mfd-modules"
 import classNames from "classnames"
