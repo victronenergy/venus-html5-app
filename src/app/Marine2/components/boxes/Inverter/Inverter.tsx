@@ -1,50 +1,47 @@
-import { InverterInstanceId, useAppStore, useInverter } from "@victronenergy/mfd-modules"
+import { useEffect, useState } from "react"
 import { observer } from "mobx-react-lite"
-import InverterChargerIcon from "../../../images/icons/inverter-charger.svg"
 import { translate } from "react-i18nify"
-import { INVERTER_MODE } from "../../../utils/constants"
-import { formatStateForTranslation } from "../../../utils/format"
+import { ComponentMode } from "@m2Types/generic/component-mode"
+import { ISize } from "@m2Types/generic/size"
+import { InverterInstanceId, useAppStore, useInverter } from "@victronenergy/mfd-modules"
+import InverterChargerIcon from "../../../images/icons/inverter-charger.svg"
 import GeneratorIcon from "../../../images/icons/generator.svg"
+import { INVERTER_MODE } from "../../../utils/constants"
 import classNames from "classnames"
-import classnames from "classnames"
 import ValueBar from "../../ui/ValueBar"
 import Button from "../../ui/Button"
 import DeviceSettingModal from "../../ui/DeviceSettingModal/DeviceSettingModal"
 import RadioButton from "../../ui/RadioButton"
 import Box from "../../ui/Box"
 import { applyStyles, defaultBoxStyles } from "../../../utils/media"
-import { useEffect, useState } from "react"
 import ValueOverview from "../../ui/ValueOverview"
-import { ComponentMode } from "@m2Types/generic/component-mode"
+import { formatModeFor } from "../../../utils/formatters/devices/inverter/format-mode-for"
+import { translatedStateFor } from "../../../utils/helpers/devices/translated-state-for"
+import { titleFor } from "../../../utils/helpers/devices/title-for"
+
+interface Props {
+  instanceId: InverterInstanceId
+  isVebusInverter: boolean
+  componentMode?: ComponentMode
+  compactBoxSize?: ISize
+}
 
 const Inverter = ({ instanceId, isVebusInverter, componentMode = "compact", compactBoxSize }: Props) => {
   const { locked } = useAppStore() // lock from theme settings
-  const inverterModeFormatter = (value: number) => {
-    switch (value) {
-      case INVERTER_MODE.OFF:
-        return translate("common.off")
-      case INVERTER_MODE.VEBUS_ON:
-      case INVERTER_MODE.ON:
-        return translate("common.on")
-      case INVERTER_MODE.ECO:
-        return translate("common.eco")
-      default:
-        return translate("common.emptyBar")
-    }
-  }
 
   const source = isVebusInverter ? "vebus" : "inverter"
-  let { state, mode, voltage, current, power, productName, customName, updateMode } = useInverter(instanceId, source)
+  const { state, mode, voltage, current, power, productName, customName, updateMode } = useInverter(instanceId, source)
 
   // Vebus inverters use mode 3 instead of 2 for ON.
   const onMode = isVebusInverter ? INVERTER_MODE.VEBUS_ON : INVERTER_MODE.ON
 
-  const productNameShort = customName || (productName && productName.split(" ")[0])
-  const currentValue = !!current || current === 0 ? current : undefined
-  const subTitle = !!state || state === 0 ? translate(formatStateForTranslation(Number(state))) : undefined
-  const inverterMode = inverterModeFormatter(Number(mode))
+  const title = titleFor(customName, productName)
+  const subTitle = translatedStateFor(state)
+  const inverterMode = formatModeFor(mode)
 
-  const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
+  const currentValue = !!current || current === 0 ? current : undefined
+
+  const [boxSize, setBoxSize] = useState<ISize>({ width: 0, height: 0 })
   const activeStyles = applyStyles(boxSize, defaultBoxStyles)
 
   const [isModeModalOpen, setIsModeModalOpen] = useState(false)
@@ -63,16 +60,17 @@ const Inverter = ({ instanceId, isVebusInverter, componentMode = "compact", comp
     updateMode(modeForSubmission)
     closeModeModal()
   }
+
   if (componentMode === "compact" && compactBoxSize) {
     return (
       <ValueOverview
         /* todo: fix types for svg */
         /* @ts-ignore */
         Icon={InverterChargerIcon}
-        title={productNameShort}
+        title={title}
         subtitle={subTitle}
         value={currentValue}
-        unit={"A"}
+        unit="A"
         boxSize={compactBoxSize}
       />
     )
@@ -81,21 +79,17 @@ const Inverter = ({ instanceId, isVebusInverter, componentMode = "compact", comp
   return (
     <Box
       icon={
-        <GeneratorIcon
-          /* todo: fix types for svg */
-          /* @ts-ignore */
-          className={"w-7"}
-        ></GeneratorIcon>
+        /* todo: fix types for svg */
+        /* @ts-ignore */
+        <GeneratorIcon className="w-7" />
       }
-      title={productNameShort}
+      title={title}
       getBoxSizeCallback={setBoxSize}
     >
       <div className="w-full h-full flex flex-col justify-between">
-        <div className={classNames("text-victron-darkGray dark:text-white", activeStyles?.mainValue)}>
-          {subTitle}
-        </div>
+        <div className={classNames("text-victron-darkGray dark:text-white", activeStyles?.mainValue)}>{subTitle}</div>
         <div className="w-full h-full min-h-0 shrink flex flex-col justify-end mt-2">
-          <div className={classnames("", activeStyles?.secondaryValue)}>
+          <div className={classNames("", activeStyles?.secondaryValue)}>
             <ValueBar
               values={[
                 { value: voltage, unit: "V", hideDecimal: true },
@@ -113,8 +107,9 @@ const Inverter = ({ instanceId, isVebusInverter, componentMode = "compact", comp
             {inverterMode}
           </Button>
         </div>
+        {/* TODO Refactor to seperate modal file. */}
         <DeviceSettingModal
-          title={productNameShort}
+          title={title}
           subtitle={translate("common.mode")}
           open={isModeModalOpen}
           onClose={closeModeModal}
@@ -162,13 +157,6 @@ const Inverter = ({ instanceId, isVebusInverter, componentMode = "compact", comp
       </div>
     </Box>
   )
-}
-
-interface Props {
-  instanceId: InverterInstanceId
-  isVebusInverter: boolean
-  componentMode?: ComponentMode
-  compactBoxSize?: { width: number; height: number }
 }
 
 export default observer(Inverter)

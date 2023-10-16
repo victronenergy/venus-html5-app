@@ -16,7 +16,7 @@ import {
   useGeneratorRelay,
   useInverters,
   useVebus,
-  VebusInverters,
+  VebusInverters
 } from "@victronenergy/mfd-modules"
 import Charger from "../Charger"
 import Inverter from "../Inverter"
@@ -32,7 +32,7 @@ import { ComponentMode } from "@m2Types/generic/component-mode"
 
 const DevicesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: Props) => {
   const { inverters } = useInverters()
-  const { instanceId, vebusInverters } = useVebus()
+  const { instanceId: vebusInstanceId, vebusInverters } = useVebus()
   const { chargers } = useChargers()
   const generatorFp = useGeneratorFp()
   const generatorRelay = useGeneratorRelay()
@@ -42,7 +42,7 @@ const DevicesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: Pr
     chargers,
     inverters,
     vebusInverters,
-    instanceId,
+    vebusInstanceId,
     generatorFp,
     generatorRelay,
     compactBoxSize,
@@ -90,11 +90,11 @@ const DevicesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: Pr
   )
 }
 
-const getAvailableDeviceBoxes = function (
+const getAvailableDeviceBoxes = function(
   chargers: ChargerInstanceId[],
   inverters: InverterInstanceId[],
   vebusInverters: VebusInverters,
-  instanceId: InstanceId,
+  vebusInstanceId: InstanceId,
   generatorFp: GeneratorFpProvider,
   generatorRelay: GeneratorRelayProvider,
   compactBoxSize: { width: number; height: number },
@@ -138,8 +138,10 @@ const getAvailableDeviceBoxes = function (
     })
   }
 
-  if (!!instanceId) {
-    devices.push(<InverterCharger key={instanceId} componentMode={componentMode} compactBoxSize={compactBoxSize} />)
+  if (!!vebusInstanceId && !vebusInverters.includes(vebusInstanceId)) {
+    devices.push(
+      <InverterCharger key={vebusInstanceId} componentMode={componentMode} compactBoxSize={compactBoxSize} />
+    )
   }
 
   if (!!generatorFp.phases)
