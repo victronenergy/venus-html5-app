@@ -2,7 +2,7 @@ import React from "react"
 import classNames from "classnames"
 
 const FadedText = ({ text, className }: Props) => {
-  return <span className={classNames("whitespace-nowrap w-full overflow-hidden", className)}>{text}</span>
+  return <span className={classNames("truncate whitespace-nowrap w-full overflow-hidden", className)}>{text}</span>
 }
 
 interface Props {
