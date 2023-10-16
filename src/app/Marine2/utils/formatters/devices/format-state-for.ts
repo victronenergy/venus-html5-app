@@ -1,6 +1,6 @@
-import { VEBUS_SYSTEM_STATE } from "./constants"
+import { VEBUS_SYSTEM_STATE } from "../../constants"
 
-export const formatStateForTranslation = (state: number) => {
+export const formatStateFor = (state: number) => {
   switch (state) {
     case VEBUS_SYSTEM_STATE.OFF:
       return "common.off"
