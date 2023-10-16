@@ -1,45 +1,19 @@
+import { useState } from "react"
+import classNames from "classnames"
 import Box from "../../ui/Box"
 import { Battery as BatteryType } from "@victronenergy/mfd-modules"
-import { batteryStateNameFor } from "../../../utils/formatters/battery/battery-state-name-for"
+import { batteryStateNameFor } from "../../../utils/formatters/devices/battery/battery-state-name-for"
 import { colorForPercentageFormatter } from "../../../utils/formatters"
 import { BATTERY } from "../../../utils/constants"
 import BatteryChargingIcon from "../../../images/icons/battery-charging.svg"
 import BatteryIcon from "../../../images/icons/battery.svg"
 import BatteryDischargingIcon from "../../../images/icons/battery-discharging.svg"
-import classNames from "classnames"
-import { applyStyles, BreakpointStylesType, StylesType } from "app/Marine2/utils/media"
-import { useState } from "react"
+import { applyStyles, StylesType } from "app/Marine2/utils/media"
 import ValueBar from "../../ui/ValueBar"
 import ValueBox from "../../ui/ValueBox"
 import { ValueWithUnit } from "@m2Types/data/value-with-units"
 import { ISize } from "@m2Types/generic/size"
-
-const styles: BreakpointStylesType = {
-  default: {
-    value: "text-xl",
-    valueSubtitle: "text-base",
-    valueBar: "text-md",
-    valueBars: "text-md",
-  },
-  "sm-s": {
-    value: "text-2xl",
-    valueSubtitle: "text-lg",
-    valueBar: "text-lg",
-    valueBars: "text-lg",
-  },
-  "md-s": {
-    value: "text-2xl",
-    valueSubtitle: "text-lg",
-    valueBar: "text-lg",
-    valueBars: "text-lg",
-  },
-  "md-m": {
-    value: "text-3xl",
-    valueSubtitle: "text-xl",
-    valueBar: "text-xl",
-    valueBars: "text-lg",
-  },
-}
+import { Styles } from "./Styles"
 
 const Battery = ({ battery }: Props) => {
   const isSimpleBattery = !(battery.state || battery.state === 0)
@@ -71,7 +45,7 @@ const Battery = ({ battery }: Props) => {
     "text-victron-gray dark:text-white": color === "victron-gray",
   })
 
-  const activeStyles: StylesType = applyStyles(boxSize, styles)
+  const activeStyles: StylesType = applyStyles(boxSize, Styles)
   const bottomValues: ValueWithUnit[] = [
     { value: battery.voltage, unit: "V" },
     { value: battery.current, unit: "A" },
