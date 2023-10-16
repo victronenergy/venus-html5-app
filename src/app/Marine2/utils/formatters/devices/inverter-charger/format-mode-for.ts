@@ -1,8 +1,8 @@
 import { translate } from "react-i18nify"
-import { SYSTEM_MODE } from "../../constants"
+import { SYSTEM_MODE } from "../../../constants"
 
 export const formatModeFor = (value: number) => {
-  switch (value) {
+  switch (Number(value)) {
     case SYSTEM_MODE.CHARGER_ONLY:
       return translate("common.chargerOnly")
     case SYSTEM_MODE.INVERTER_ONLY:
