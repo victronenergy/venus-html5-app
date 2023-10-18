@@ -1,10 +1,10 @@
-import React, { useState } from "react"
+import { useState } from "react"
+import { observer } from "mobx-react"
+import { translate } from "react-i18nify"
 import classNames from "classnames"
 import Box from "../../ui/Box"
 import DevicesIcon from "../../../images/icons/devices.svg"
 import { AppViews } from "../../../modules/AppViews"
-import { observer } from "mobx-react"
-import { translate } from "react-i18nify"
 import {
   ChargerInstanceId,
   GeneratorFpProvider,
@@ -16,7 +16,7 @@ import {
   useGeneratorRelay,
   useInverters,
   useVebus,
-  VebusInverters
+  VebusInverters,
 } from "@victronenergy/mfd-modules"
 import Charger from "../Charger"
 import Inverter from "../Inverter"
@@ -29,6 +29,7 @@ import GridPaginator from "../../ui/GridPaginator"
 import GeneratorRelay from "../GeneratorRelay/GeneratorRelay"
 import { applyStyles, defaultBoxStyles } from "../../../utils/media"
 import { ComponentMode } from "@m2Types/generic/component-mode"
+import { ISize } from "@m2Types/generic/size"
 
 const DevicesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: Props) => {
   const { inverters } = useInverters()
@@ -36,7 +37,7 @@ const DevicesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: Pr
   const { chargers } = useChargers()
   const generatorFp = useGeneratorFp()
   const generatorRelay = useGeneratorRelay()
-  const [compactBoxSize, setCompactBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
+  const [compactBoxSize, setCompactBoxSize] = useState<ISize>({ width: 0, height: 0 })
 
   const boxes = getAvailableDeviceBoxes(
     chargers,
@@ -56,6 +57,7 @@ const DevicesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: Pr
   }
 
   const activeStyles = applyStyles(compactBoxSize, defaultBoxStyles)
+
   if (componentMode === "compact") {
     return (
       <Box
@@ -90,7 +92,7 @@ const DevicesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: Pr
   )
 }
 
-const getAvailableDeviceBoxes = function(
+const getAvailableDeviceBoxes = function (
   chargers: ChargerInstanceId[],
   inverters: InverterInstanceId[],
   vebusInverters: VebusInverters,
@@ -144,7 +146,7 @@ const getAvailableDeviceBoxes = function(
     )
   }
 
-  if (!!generatorFp.phases)
+  if (!!generatorFp.phases) {
     devices.push(
       <GeneratorFp
         key={"generatorFp"}
@@ -153,6 +155,8 @@ const getAvailableDeviceBoxes = function(
         compactBoxSize={compactBoxSize}
       />
     )
+  }
+
   if (!!generatorRelay.settings) {
     if (generatorRelay.settings.includes(AC_SOURCE.GENERATOR)) {
       generatorRelay.settings.forEach((source: number, i: number) => {
@@ -173,7 +177,7 @@ const getAvailableDeviceBoxes = function(
     ) {
       devices.push(
         <GeneratorRelay
-          key={"generator_relay"}
+          key="generator_relay"
           {...generatorRelay}
           componentMode={componentMode}
           compactBoxSize={compactBoxSize}
@@ -181,6 +185,7 @@ const getAvailableDeviceBoxes = function(
       )
     }
   }
+
   return devices
 }
 
