@@ -27,9 +27,11 @@ export const formatValue = (value?: number, decimalPlaces: number = 1): string =
     return "--"
   }
 
-  if (!Number.isInteger(decimalPlaces) || decimalPlaces < 0) {
-    throw new Error("decimalPlaces must be a non-negative integer")
+  const rounded = value.toFixed(decimalPlaces)
+
+  if (rounded === "-0.0") {
+    return "0.0"
   }
 
-  return value.toFixed(decimalPlaces)
+  return rounded
 }
