@@ -41,11 +41,7 @@ export const Modal: FC<Props> = observer(({ instanceId, isVebusInverter, title, 
       onClose={closeModeModal}
       onSet={submitMode}
     >
-      <Options
-        mode={modeForSubmission}
-        onChange={setModeForSubmission}
-        isVebus={isVebusInverter}
-      />
+      <Options mode={modeForSubmission} onChange={setModeForSubmission} isVebus={isVebusInverter} />
     </DeviceSettingModal>
   )
 })
