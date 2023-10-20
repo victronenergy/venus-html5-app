@@ -66,6 +66,7 @@ module.exports = {
         "xl-xl": {
           raw: "(min-width: 1800px) and (min-height: 1000px)",
         },
+        'h-short': { 'raw': '(min-height: 368px)' },
       },
       colors: {
         victron: {
