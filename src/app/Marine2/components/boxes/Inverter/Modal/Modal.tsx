@@ -1,25 +1,27 @@
 import { FC, useEffect, useState } from "react"
-import { translate } from "react-i18nify"
-import DeviceSettingModal from "../../../ui/DeviceSettingModal/DeviceSettingModal"
-import { useInverterCharger } from "@victronenergy/mfd-modules"
-import { Options } from "./Options/Options"
 import { observer } from "mobx-react"
+import { translate } from "react-i18nify"
+import { InverterInstanceId, useInverter } from "@victronenergy/mfd-modules"
+import DeviceSettingModal from "../../../ui/DeviceSettingModal/DeviceSettingModal"
+import { Options } from "./Options/Options"
 
 interface Props {
+  instanceId: InverterInstanceId
+  isVebusInverter: boolean
   title?: string
   open: boolean
   onClose: (arg: boolean) => void
 }
 
-export const Modal: FC<Props> = observer(({ title, open, onClose }) => {
-  const { mode, modeIsAdjustable, updateMode } = useInverterCharger()
+export const Modal: FC<Props> = observer(({ instanceId, isVebusInverter, title, open, onClose }) => {
+  const source = isVebusInverter ? "vebus" : "inverter"
+
+  const { mode, updateMode } = useInverter(instanceId, source)
   const [modeForSubmission, setModeForSubmission] = useState(Number(mode))
 
   useEffect(() => {
     setModeForSubmission(Number(mode))
   }, [mode])
-
-  if (modeIsAdjustable !== 1) return null
 
   const closeModeModal = () => {
     onClose(!open)
@@ -39,7 +41,11 @@ export const Modal: FC<Props> = observer(({ title, open, onClose }) => {
       onClose={closeModeModal}
       onSet={submitMode}
     >
-      <Options mode={modeForSubmission} onChange={setModeForSubmission} />
+      <Options
+        mode={modeForSubmission}
+        onChange={setModeForSubmission}
+        isVebus={isVebusInverter}
+      />
     </DeviceSettingModal>
   )
 })
