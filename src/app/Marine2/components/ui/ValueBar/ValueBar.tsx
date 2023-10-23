@@ -21,7 +21,7 @@ const ValueBar = ({ values, prefix, forcePowerUnit, status }: Props) => (
           unit={v.unit}
           hideDecimal={v.hideDecimal}
           forcePowerUnit={forcePowerUnit}
-          className="md:min-w-[125px] text-black dark:text-victron-gray-600 tabular-nums"
+          className="md:min-w-[110px] bg-red-900 text-black dark:text-victron-gray-600 tabular-nums"
           status={status}
         />
       ))}
