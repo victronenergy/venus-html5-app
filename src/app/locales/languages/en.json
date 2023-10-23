@@ -170,6 +170,7 @@
         "title": "Choose an installation"
     },
     "locker": {
+        "lockDescription": "To prevent accidental changes in Device settings - enabling this function will lock the possibility to interact with controls",
         "lockMessage": "Lock to prevent changes",
         "unlockMessage": "Unlock to make changes"
     },
