@@ -12,7 +12,7 @@ interface Props {
 
 const ValueBar = ({ values, prefix, forcePowerUnit, status }: Props) => (
   <div className="flex border-t-2 border-victron-gray dark:border-victron-gray-200 px-2">
-    {prefix && <div className="w-[35px] bg-red-700 mr-4 text-victron-darkGray dark:text-victron-gray-500">{prefix}</div>}
+    {prefix && <div className="mr-3 md:mr-6 text-victron-darkGray dark:text-victron-gray-500 tabular-nums">{prefix}</div>}
     <div className="flex justify-between grow">
       {values.map((v, id) => (
         <ValueWithUnit
@@ -21,7 +21,7 @@ const ValueBar = ({ values, prefix, forcePowerUnit, status }: Props) => (
           unit={v.unit}
           hideDecimal={v.hideDecimal}
           forcePowerUnit={forcePowerUnit}
-          className="min-w-[130px] bg-red-700 text-black dark:text-victron-gray-600 text-right"
+          className="md:min-w-[125px] text-black dark:text-victron-gray-600 tabular-nums"
           status={status}
         />
       ))}
