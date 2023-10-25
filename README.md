@@ -206,8 +206,9 @@ The build script expects the tags to follow semantic versioning (e.g. `1.2.3`, `
 To include the HTML5 app in the next Venus OS version:
 
 1. Increment the version number in `package.json`. Create and push a commit.
-2. Create & push a tag for the version (do not use `v` in the version name, just the number)
-3. Update the [todo](https://github.com/victronenergy/venus-private/wiki/todo) page for the build
+2. Create & push a tag for the version (do not use `v` in the version name, just the number).
+3. Edit the generated release, add the changelog, change title (see previous releases) and set checkbox "Set as pre-release" to true.
+4. Update the [todo](https://github.com/victronenergy/venus-private/wiki/todo) page for the build.
 
 You should add a note under `Done - waiting for recipe / venus maintainer`, containing the tag name and the changes included:
 
