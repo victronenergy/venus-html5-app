@@ -15,7 +15,7 @@ const ValueBar = ({ values, prefix, forcePowerUnit, status }: Props) => (
     {prefix && (
       <div className="mr-3 md:mr-6 text-victron-darkGray dark:text-victron-gray-500 tabular-nums">{prefix}</div>
     )}
-    <div className="flex justify-between grow">
+    <div className="flex justify-between grow w-full">
       {values.map((v, id) => (
         <ValueWithUnit
           key={id}
@@ -23,7 +23,7 @@ const ValueBar = ({ values, prefix, forcePowerUnit, status }: Props) => (
           unit={v.unit}
           hideDecimal={v.hideDecimal}
           forcePowerUnit={forcePowerUnit}
-          className="md:min-w-[110px] text-black dark:text-victron-gray-600 tabular-nums"
+          className="text-black dark:text-victron-gray-600 tabular-nums"
           status={status}
         />
       ))}

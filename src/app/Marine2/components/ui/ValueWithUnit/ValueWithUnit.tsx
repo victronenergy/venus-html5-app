@@ -27,7 +27,7 @@ export const ValueWithUnit: FC<Props> = ({
   if (status !== "active") {
     const getInactiveUnit = () => (unit === "W" || unit === "kW" ? "W" : unit)
     return (
-      <span className={className}>
+      <span className={`min-w-fit ${className}`}>
         --
         <Unit unit={getInactiveUnit()} />
       </span>
@@ -36,7 +36,7 @@ export const ValueWithUnit: FC<Props> = ({
 
   if (unit === "W" || unit === "kW") {
     return (
-      <span className={className}>
+      <span className={`min-w-fit ${className}`}>
         {powerValueFor(value, forcePowerUnit)}
         <Unit unit={powerUnitFor(value, forcePowerUnit)} />
       </span>
@@ -48,7 +48,7 @@ export const ValueWithUnit: FC<Props> = ({
   }
 
   return (
-    <span className={className}>
+    <span className={`min-w-fit ${className}`}>
       {formatValue(value, hideDecimal ? 0 : 1)}
       <Unit unit={unit} />
     </span>
