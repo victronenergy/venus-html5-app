@@ -170,6 +170,7 @@
         "title": "Wählen Sie eine Installation"
     },
     "locker": {
+        "lockDescription": "Um versehentliche Änderungen an den Geräteeinstellungen zu verhindern, wird durch die Aktivierung dieser Funktion die Möglichkeit zur Interaktion mit Steuerelementen gesperrt",
         "lockMessage": "Sperren, um Änderungen zu verhindern",
         "unlockMessage": "Entsperren, um Änderungen zuzulassen"
     },

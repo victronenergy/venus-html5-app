@@ -170,6 +170,7 @@
         "title": "Choisissez un installation"
     },
     "locker": {
+        "lockDescription": "Pour éviter toute modification accidentelle des paramètres de l'appareil - l'activation de cette fonction verrouillera la possibilité d'interagir avec les commandes",
         "lockMessage": "Verrouiller pour éviter les changements",
         "unlockMessage": "Déverrouiller pour faire des changements"
     },

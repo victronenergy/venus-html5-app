@@ -170,6 +170,7 @@
         "title": "选择安装"
     },
     "locker": {
+        "lockDescription": "为了防止意外更改设备设置 - 启用此功能将锁定与控件交互的可能性\n",
         "lockMessage": "锁定修改",
         "unlockMessage": "解锁修改"
     },

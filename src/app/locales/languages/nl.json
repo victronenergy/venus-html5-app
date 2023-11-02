@@ -170,6 +170,7 @@
         "title": "Kies een installatie"
     },
     "locker": {
+        "lockDescription": "Om te voorkomen dat de instellingen van het apparaat per ongeluk worden gewijzigd - door deze functie in te schakelen wordt de mogelijkheid tot interactie met de besturingselementen geblokkeerd.",
         "lockMessage": "Alleen Lezen",
         "unlockMessage": "Wijzigen"
     },
