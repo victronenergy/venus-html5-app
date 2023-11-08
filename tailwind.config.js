@@ -167,5 +167,5 @@ module.exports = {
     placeholderOpacity: false,
     ringOpacity: false,
   },
-  plugins: [require("@tailwindcss/aspect-ratio"), require("@tailwindcss/line-clamp")],
+  plugins: [require("@tailwindcss/aspect-ratio")],
 }
