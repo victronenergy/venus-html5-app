@@ -7,7 +7,6 @@ const Container = ({ children, className }: { children: JSX.Element | string; cl
   return <div className={classNames("w-full h-full min-h-0", className)}>{children}</div>
 }
 
-// TODO: move this to storybook when it's ready
 const ExampleGridView = () => {
   return (
     <MainLayout>

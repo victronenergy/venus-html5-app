@@ -156,24 +156,6 @@ Please use with caution. If wrong data is sent, existing terms and their transla
 npm run poeditor:pull
 ```
 
-### 2.9 UI Documentation
-
-We use [Storybook](https://storybook.js.org/) to document the UI components.
-
-#### 2.9.1 Viewing Storybook documentation
-
-The UI documentation is available via Storybook. To run it locally:
-
-```
-npm run storybook
-```
-
-Then open the documentation page in the browser at `http://localhost:6006`.
-
-#### 2.9.2 Adding new stories
-
-To add a new story, create a new file within the component's folder. The file name should be the name of the component that you want to document. For example, if you want to document the `Button` component, create a file named `Button.stories.mdx`. Use MDX syntax to document the component and Storybook will automatically generate the documentation page.
-
 ## 3. Testing
 
 ### 3.1 Venus OS Release test plan

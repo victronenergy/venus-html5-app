@@ -103,16 +103,6 @@
     "workbox-webpack-plugin": "^6.5.4"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^6.5.16",
-    "@storybook/addon-docs": "^6.5.16",
-    "@storybook/addon-essentials": "^6.5.16",
-    "@storybook/addon-interactions": "^6.5.16",
-    "@storybook/addon-links": "^6.5.16",
-    "@storybook/addon-styling": "^0.3.2",
-    "@storybook/builder-webpack5": "^6.5.16",
-    "@storybook/manager-webpack5": "^6.5.16",
-    "@storybook/react": "^6.5.16",
-    "@storybook/testing-library": "^0.0.13",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@testing-library/cypress": "^7.0.7",
     "@testing-library/dom": "^8.20.0",
@@ -167,9 +157,7 @@
     "cy:open": "./node_modules/.bin/cypress open",
     "cy:run": "NODE_ENV=test cypress run",
     "poeditor:push": "node src/app/locales/poeditor/push.js",
-    "poeditor:pull": "node src/app/locales/poeditor/pull.js",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "poeditor:pull": "node src/app/locales/poeditor/pull.js"
   },
   "browserslist": {
     "production": [
