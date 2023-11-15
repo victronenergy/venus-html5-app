@@ -312,6 +312,7 @@ module.exports = function (webpackEnv) {
         child_process: false,
         stream: require.resolve("stream-browserify"),
         buffer: require.resolve("buffer"),
+        url: require.resolve("url/")
       },
     },
     module: {
