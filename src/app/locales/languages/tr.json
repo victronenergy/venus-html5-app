@@ -170,6 +170,7 @@
         "title": "Başlık"
     },
     "locker": {
+        "lockDescription": "Cihaz ayarlarında yanlışlıkla değişiklik yapılmasını önlemek için - bu işlevin etkinleştirilmesi, kontrollerle etkileşim olasılığını kilitleyecektir",
         "lockMessage": "lockMessage",
         "unlockMessage": "unlockMessage"
     },
