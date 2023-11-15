@@ -120,7 +120,7 @@
     "autoprefixer": "^10.4.13",
     "css-loader": "^6.7.3",
     "css-minimizer-webpack-plugin": "^4.2.2",
-    "cypress": "^6.8.0",
+    "cypress": "^13.5.1",
     "enzyme": "^3.11.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",
@@ -135,7 +135,8 @@
     "react-test-renderer": "^17.0.2",
     "resize-observer-polyfill": "^1.5.1",
     "style-loader": "^3.3.1",
-    "tailwindcss": "^3.3.5"
+    "tailwindcss": "^3.3.5",
+    "url": "^0.11.3"
   },
   "scripts": {
     "clean": "rm -rf build",
