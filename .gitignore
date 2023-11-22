@@ -28,6 +28,7 @@ yarn-error.log*
 cypress/screenshots
 cypress/results
 cypress/videos
+cypress/report
 
 .idea
 .husky
