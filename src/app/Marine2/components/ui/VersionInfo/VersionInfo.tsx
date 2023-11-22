@@ -26,12 +26,12 @@ const VersionInfo = () => {
 
   return (
     <div
-      className="w-40 min-w-0 shrink overflow-hidden cursor-pointer py-3 px-5 outline-none"
+      className="w-40 min-w-0 shrink overflow-hidden cursor-pointer py-3 px-5 outline-none cy-logo"
       onClick={toggleVersionInfo}
     >
       {/* todo: fix types for svg */}
       {/* @ts-ignore */}
-      <LogoIcon className="w-32 text-victron-blue dark:text-white hidden sm:block cy-logo" alt="Victron Energy" />
+      <LogoIcon className="w-32 text-victron-blue dark:text-white hidden sm:block" alt="Victron Energy" />
       {/* todo: fix types for svg */}
       {/* @ts-ignore */}
       <LogoOnlyIcon className="w-10 text-black dark:text-white sm:hidden block" alt="Victron Energy" />
