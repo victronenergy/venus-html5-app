@@ -4,9 +4,7 @@ import SelectorLeftIcon from "../../../images/icons/selectors/selector-left.svg"
 import SelectorRightIcon from "../../../images/icons/selectors/selector-right.svg"
 import SelectorDownIcon from "../../../images/icons/selectors/selector-down.svg"
 import SelectorUpIcon from "../../../images/icons/selectors/selector-up.svg"
-import DotIcon from "../../../images/icons/selectors/dot.svg"
-import DotSelectedIcon from "../../../images/icons/selectors/dot-selected.svg"
-import DotSelectedVerticalIcon from "../../../images/icons/selectors/dot-selected-vert.svg"
+import { Dot } from "./Dot/Dot"
 
 const PageSelector = ({
   currentPage = 0,
@@ -22,24 +20,6 @@ const PageSelector = ({
     () => selectorLocation.startsWith("bottom") || selectorLocation.startsWith("top"),
     [selectorLocation]
   )
-
-  const dot = (i: number) => {
-    if (i === currentPage) {
-      return isHorizontal ? (
-        // todo: fix types for svg
-        // @ts-ignore
-        <DotSelectedIcon className={"text-victron-darkGray dark:text-white"} />
-      ) : (
-        // todo: fix types for svg
-        // @ts-ignore
-        <DotSelectedVerticalIcon className={"text-victron-darkGray dark:text-white"} />
-      )
-    } else {
-      // todo: fix types for svg
-      // @ts-ignore
-      return <DotIcon className={"text-victron-gray dark:text-victron-gray-400"} />
-    }
-  }
 
   useEffect(() => {
     // If the dots don't all fit and overflow, make sure the selected page dot is visible
@@ -113,14 +93,18 @@ const PageSelector = ({
         {(isHorizontal && (
           <div ref={dotsHorRef} className={"flex overflow-hidden w-max justify-left space-x-2"}>
             {[...Array(maxPages)].map((e, i) => (
-              <span key={i}>{dot(i)}</span>
+              <span key={i}>
+                <Dot isCurrentPage={i === currentPage} isHorizontal={isHorizontal} />
+              </span>
             ))}
           </div>
         )) || (
           <div className={"m-auto"}>
             <div className={"flex overflow-hidden h-max flex-col items-start space-y-2"}>
               {[...Array(maxPages)].map((e, i) => (
-                <span key={i}>{dot(i)}</span>
+                <span key={i}>
+                  <Dot isCurrentPage={i === currentPage} isHorizontal={isHorizontal} />
+                </span>
               ))}
             </div>
           </div>
