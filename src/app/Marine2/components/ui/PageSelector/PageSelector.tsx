@@ -1,10 +1,7 @@
 import React, { BaseSyntheticEvent, useCallback, useEffect, useMemo, useRef } from "react"
 import classnames from "classnames"
-import SelectorLeftIcon from "../../../images/icons/selectors/selector-left.svg"
-import SelectorRightIcon from "../../../images/icons/selectors/selector-right.svg"
-import SelectorDownIcon from "../../../images/icons/selectors/selector-down.svg"
-import SelectorUpIcon from "../../../images/icons/selectors/selector-up.svg"
-import { Dot } from "./Dot/Dot"
+import { DotIcon } from "./DotIcon/DotIcon"
+import { SelectorIcon } from "./SelectorIcon/SelectIcon"
 
 const PageSelector = ({
   currentPage = 0,
@@ -60,26 +57,8 @@ const PageSelector = ({
         "space-y-4 ": !selectorLocation.endsWith("full") && !isHorizontal,
       })}
     >
-      <div onClick={onLeftSelectorClick} className={"w-11 h-[44px] shrink-0"}>
-        {(isHorizontal &&
-          ((currentPage > 0 && (
-            // todo: fix types for svg
-            // @ts-ignore
-            <SelectorLeftIcon className={"text-victron-blue dark:text-victron-blue-dark"} />
-          )) || (
-            // todo: fix types for svg
-            // @ts-ignore
-            <SelectorLeftIcon className={"text-victron-gray dark:text-victron-gray-dark"} />
-          ))) ||
-          (currentPage > 0 && (
-            // todo: fix types for svg
-            // @ts-ignore
-            <SelectorUpIcon className={"text-victron-blue dark:text-victron-blue-dark"} />
-          )) || (
-            // todo: fix types for svg
-            // @ts-ignore
-            <SelectorUpIcon className={"text-victron-gray dark:text-victron-gray-dark"} />
-          )}
+      <div onClick={onLeftSelectorClick} className="w-11 h-[44px] shrink-0">
+        <SelectorIcon direction="previous" disabled={currentPage === 0} isHorizontal={isHorizontal} />
       </div>
       <div
         ref={dotsVertRef}
@@ -93,18 +72,14 @@ const PageSelector = ({
         {(isHorizontal && (
           <div ref={dotsHorRef} className={"flex overflow-hidden w-max justify-left space-x-2"}>
             {[...Array(maxPages)].map((e, i) => (
-              <span key={i}>
-                <Dot isCurrentPage={i === currentPage} isHorizontal={isHorizontal} />
-              </span>
+              <DotIcon key={i} isCurrentPage={i === currentPage} isHorizontal={isHorizontal} />
             ))}
           </div>
         )) || (
           <div className={"m-auto"}>
             <div className={"flex overflow-hidden h-max flex-col items-start space-y-2"}>
               {[...Array(maxPages)].map((e, i) => (
-                <span key={i}>
-                  <Dot isCurrentPage={i === currentPage} isHorizontal={isHorizontal} />
-                </span>
+                <DotIcon key={i} isCurrentPage={i === currentPage} isHorizontal={isHorizontal} />
               ))}
             </div>
           </div>
@@ -112,27 +87,9 @@ const PageSelector = ({
       </div>
       <div
         onClick={onRightSelectorClick}
-        className={"w-[44px] h-[44px] shrink-0 text-victron-gray dark:text-victron-gray-dark"}
+        className="w-[44px] h-[44px] shrink-0 text-victron-gray dark:text-victron-gray-dark"
       >
-        {(isHorizontal &&
-          ((currentPage < maxPages - 1 && (
-            // todo: fix types for svg
-            // @ts-ignore
-            <SelectorRightIcon className={"text-victron-blue dark:text-victron-blue-dark"} />
-          )) || (
-            // todo: fix types for svg
-            // @ts-ignore
-            <SelectorRightIcon className={"text-victron-gray dark:text-victron-gray-dark"} />
-          ))) ||
-          (currentPage < maxPages - 1 && (
-            // todo: fix types for svg
-            // @ts-ignore
-            <SelectorDownIcon className={"text-victron-blue dark:text-victron-blue-dark"} />
-          )) || (
-            // todo: fix types for svg
-            // @ts-ignore
-            <SelectorDownIcon className={"text-victron-gray dark:text-victron-gray-dark"} />
-          )}
+        <SelectorIcon direction="next" disabled={currentPage === maxPages - 1} isHorizontal={isHorizontal} />
       </div>
     </div>
   )
