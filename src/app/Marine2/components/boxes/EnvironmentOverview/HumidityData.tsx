@@ -40,7 +40,6 @@ const HumidityData = ({ dataId, componentMode, boxSize }: Props) => {
   if (componentMode === "compact") {
     return (
       <ValueOverview
-        /* @ts-ignore */
         Icon={HumidityIcon}
         title={customName || translate("boxes.humidity")}
         value={humidity}
@@ -54,8 +53,6 @@ const HumidityData = ({ dataId, componentMode, boxSize }: Props) => {
   return (
     <ValueBox
       title={translate("boxes.humidity") + " " + customName}
-      /* todo: fix types for svg */
-      /* @ts-ignore */
       icon={<HumidityIcon className="w-5" />}
       value={humidity}
       bottomValues={[]}

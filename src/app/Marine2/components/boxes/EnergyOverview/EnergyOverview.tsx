@@ -1,4 +1,4 @@
-import { useState, FC } from "react"
+import { FC, useState } from "react"
 import classNames from "classnames"
 import { observer } from "mobx-react-lite"
 import { translate } from "react-i18nify"
@@ -39,11 +39,7 @@ const EnergyOverview: FC<Props> = ({ componentMode = "full", pageSelectorPropsSe
       <Box
         title={translate("boxes.energy")}
         icon={
-          <EnergyIcon
-            /* todo: fix types for svg */
-            /* @ts-ignore */
-            className={classNames("text-victron-gray dark:text-victron-gray-dark", activeStyles?.icon)}
-          />
+          <EnergyIcon className={classNames("text-victron-gray dark:text-victron-gray-dark", activeStyles?.icon)} />
         }
         linkedView={AppViews.BOX_ENERGY_OVERVIEW}
         getBoxSizeCallback={setCompactBoxSize}

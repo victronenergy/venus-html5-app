@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
 import { observer } from "mobx-react"
 import { useAppStore, useTheme } from "@victronenergy/mfd-modules"
 import { translate } from "react-i18nify"
@@ -56,14 +56,11 @@ const SettingsMenu = () => {
       <div className="flex justify-center items-center w-full">
         {!isModalOpen ? (
           <div className="h-full">
-            {/* todo: fix types for svg */}
-            {/* @ts-ignore */}
             <PreferencesIcon alt={"Settings"} />
           </div>
         ) : (
           <>
             <CloseIcon
-              // @ts-ignore
               className="w-[32px] ml-auto mr-2 opacity-1 z-20 text-white dark:text-victron-blue"
               onClick={() => setIsModalOpen(false)}
             />

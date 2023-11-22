@@ -13,8 +13,6 @@ const EnergyWind = ({ componentMode = "compact", windGenerator, showInstance, co
   if (componentMode === "compact" && compactBoxSize) {
     return (
       <ValueOverview
-        /* todo: fix types for svg */
-        /* @ts-ignore */
         Icon={WindIcon}
         title={translate("boxes.windGenerator")}
         value={current}
@@ -30,8 +28,6 @@ const EnergyWind = ({ componentMode = "compact", windGenerator, showInstance, co
   return (
     <ValueBox
       title={translate("boxes.windGenerator") + instance}
-      /* todo: fix types for svg */
-      /* @ts-ignore */
       icon={<WindIcon className="w-[18px] sm-s:w-[24px] sm-m:w-[32px]" />}
       value={current}
       unit="A"

@@ -64,8 +64,6 @@ const Box = ({
         {linkedView && (
           <div className="-mr-3 p-[12px] cursor-pointer" onClick={handleClick}>
             <ArrowRightIcon
-              /* todo: fix types for svg */
-              /* @ts-ignore */
               className="w-[24px] sm-s:w-[32px] text-victron-blue dark:text-victron-blue-dark cursor-pointer outline-none"
               alt="Expand"
             />
@@ -74,8 +72,6 @@ const Box = ({
         {!linkedView && !!infoText && (
           <div className="-mr-3 p-3" onClick={openInfo}>
             <InfoIcon
-              /* todo: fix types for svg */
-              /* @ts-ignore */
               className="w-7 text-victron-blue dark:text-victron-blue-dark cursor-pointer outline-none"
               alt="Info"
             />
@@ -94,8 +90,6 @@ const Box = ({
         <Modal.Frame open={infoOpen} onClose={closeInfo}>
           <Modal.Body>
             <InfoIcon
-              /* todo: fix types for svg */
-              /* @ts-ignore */
               className="ml-auto mr-auto mt-7 mb-7 w-10 text-victron-blue dark:text-victron-blue-dark cursor-pointer outline-none"
               alt="Info"
             />

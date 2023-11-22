@@ -10,15 +10,11 @@ interface Props {
 }
 
 export const FluidIcon: FC<Props> = ({ fluid, className }) => {
-  /* @ts-ignore */
   if (fluid === 1) return <WaterIcon className={className} />
 
-  /* @ts-ignore */
   if (fluid === 2) return <GrayWaterIcon className={className} />
 
-  /* @ts-ignore */
   if (fluid === 5) return <BlackWaterIcon className={className} />
 
-  /* @ts-ignore */
   return <FuelIcon className={className} />
 }

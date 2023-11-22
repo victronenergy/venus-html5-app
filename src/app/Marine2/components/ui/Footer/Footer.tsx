@@ -28,8 +28,6 @@ const Footer = ({ pageSelectorProps }: Props) => {
         )}
         {isShowBack && (
           <div onClick={handleBackClick} className={"w-fit h-fit cursor-pointer"}>
-            {/* todo: fix types for svg */}
-            {/* @ts-ignore */}
             <BackIcon onClick={handleBackClick} className={"text-blue-600 dark:text-blue-400"} alt={"Back"} />
           </div>
         )}

@@ -14,8 +14,6 @@ const EnergyAlternator = ({ componentMode = "compact", alternator, showInstance,
   if (componentMode === "compact" && compactBoxSize) {
     return (
       <ValueOverview
-        /* todo: fix types for svg */
-        /* @ts-ignore */
         Icon={AlternatorIcon}
         title={translate("boxes.alternator")}
         value={current}
@@ -28,8 +26,6 @@ const EnergyAlternator = ({ componentMode = "compact", alternator, showInstance,
   return (
     <ValueBox
       title={translate("boxes.alternator") + instance}
-      /* todo: fix types for svg */
-      /* @ts-ignore */
       icon={<AlternatorIcon className="w-[18px] sm-s:w-[24px] sm-m:w-[32px]" />}
       value={current}
       unit="A"

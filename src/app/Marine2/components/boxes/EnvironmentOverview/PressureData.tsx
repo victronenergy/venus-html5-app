@@ -41,7 +41,6 @@ const PressureData = ({ dataId, componentMode, boxSize }: Props) => {
   if (componentMode === "compact") {
     return (
       <ValueOverview
-        /* @ts-ignore */
         Icon={PressureIcon}
         title={customName || translate("boxes.pressure")}
         value={pressure}
@@ -55,8 +54,6 @@ const PressureData = ({ dataId, componentMode, boxSize }: Props) => {
   return (
     <ValueBox
       title={translate("boxes.pressure") + " " + customName}
-      /* todo: fix types for svg */
-      /* @ts-ignore */
       icon={<PressureIcon className="w-6" />}
       value={pressure}
       bottomValues={[]}

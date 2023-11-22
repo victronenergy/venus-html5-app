@@ -29,11 +29,7 @@ const VersionInfo = () => {
       className="w-40 min-w-0 shrink overflow-hidden cursor-pointer py-3 px-5 outline-none cy-logo"
       onClick={toggleVersionInfo}
     >
-      {/* todo: fix types for svg */}
-      {/* @ts-ignore */}
       <LogoIcon className="w-32 text-victron-blue dark:text-white hidden sm:block" alt="Victron Energy" />
-      {/* todo: fix types for svg */}
-      {/* @ts-ignore */}
       <LogoOnlyIcon className="w-10 text-black dark:text-white sm:hidden block" alt="Victron Energy" />
       <Modal.Frame
         open={isModalOpen}
@@ -42,8 +38,6 @@ const VersionInfo = () => {
       >
         <Modal.Body variant="popUp">
           <div className="text-sm dark:text-white md-m:text-base lg-s:text-sm lg-l:text-base">
-            {/* todo: fix types for svg */}
-            {/* @ts-ignore */}
             <LogoIcon className="w-24 text-black dark:text-white" alt="Victron Energy" />
             <div className="mt-1 py-2">
               <Translate

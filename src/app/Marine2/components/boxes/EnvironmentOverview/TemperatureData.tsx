@@ -4,7 +4,7 @@ import ValueOverview from "../../ui/ValueOverview"
 import ThermometerIcon from "../../../images/icons/thermometer.svg"
 import ValueBox from "../../ui/ValueBox"
 import { translate } from "react-i18nify"
-import { useContext, useEffect, useCallback } from "react"
+import { useCallback, useContext, useEffect } from "react"
 import { VisibleComponentsContext } from "./EnvironmentOverview"
 import { ComponentMode } from "@m2Types/generic/component-mode"
 
@@ -40,13 +40,12 @@ const TemperatureData = ({ dataId, componentMode, boxSize }: Props) => {
   if (componentMode === "compact") {
     return (
       <ValueOverview
-        /* @ts-ignore */
         Icon={ThermometerIcon}
         title={customName || translate("boxes.temperature")}
         value={temperature}
         boxSize={boxSize}
-        unit={"°C"}
-        valueType={"environment"}
+        unit="°C"
+        valueType="environment"
       />
     )
   }
@@ -54,8 +53,6 @@ const TemperatureData = ({ dataId, componentMode, boxSize }: Props) => {
   return (
     <ValueBox
       title={translate("boxes.temperature") + " " + customName}
-      /* todo: fix types for svg */
-      /* @ts-ignore */
       icon={<ThermometerIcon className="w-5" />}
       value={temperature}
       bottomValues={[]}

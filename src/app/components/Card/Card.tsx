@@ -58,6 +58,8 @@ export const Card: FunctionComponent<CardProps> = ({
               <button className={"card__header__icon " + icon} onClick={(e) => onIconClick && onIconClick(e)}>
                 {icon === ICON_CLOSE && (
                   <img
+                    /* todo: fix types for svg */
+                    /* @ts-ignore */
                     src={darkMode ? CloseIconDark : CloseIcon}
                     alt={"Close Icon"}
                     className={"card__header__icon__img"}
@@ -75,7 +77,7 @@ export const Card: FunctionComponent<CardProps> = ({
         <div className={"card__footer items-center " + footer.status}>
           {showAlarmIconInFooter && (
             <div className={`row items-center card-status-update__icon card-status-update__icon-${footer.status}`}>
-              <img src={IconWarning} alt={"Status update icon"} />
+              <img src={IconWarning} alt="Status update icon" />
             </div>
           )}
           <span>

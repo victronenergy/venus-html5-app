@@ -12,8 +12,6 @@ const EnergySolar = ({ componentMode = "compact", pvCharger, compactBoxSize }: P
   if (componentMode === "compact" && compactBoxSize) {
     return (
       <ValueOverview
-        /* todo: fix types for svg */
-        /* @ts-ignore */
         Icon={SolarIcon}
         title={translate("boxes.solar")}
         value={current}
@@ -26,8 +24,6 @@ const EnergySolar = ({ componentMode = "compact", pvCharger, compactBoxSize }: P
   return (
     <ValueBox
       title={translate("boxes.solar")}
-      /* todo: fix types for svg */
-      /* @ts-ignore */
       icon={<SolarIcon className="w-[18px] sm-s:w-[24px] sm-m:w-[32px]" />}
       bottomValues={[[{ value: power, unit: "W", hideDecimal: true }]]}
       value={current}

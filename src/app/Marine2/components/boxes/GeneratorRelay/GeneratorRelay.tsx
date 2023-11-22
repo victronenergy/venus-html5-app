@@ -46,8 +46,6 @@ const GeneratorRelay = ({
   if (componentMode === "compact" && compactBoxSize) {
     return (
       <ValueOverview
-        /* todo: fix types for svg */
-        /* @ts-ignore */
         Icon={GeneratorIcon}
         title={title}
         subtitle={subTitle}
@@ -65,11 +63,7 @@ const GeneratorRelay = ({
       subtitle={subTitle}
       bottomValues={active || statusCode === 1 ? phasesData : []}
       status={status}
-      icon={
-        /* todo: fix types for svg */
-        /* @ts-ignore */
-        <GeneratorIcon className="w-[18px] sm-s:w-[24px] sm-m:w-[32px]" />
-      }
+      icon={<GeneratorIcon className="w-[18px] sm-s:w-[24px] sm-m:w-[32px]" />}
       buttons={
         statusCode !== undefined ? (
           <AutoStartStopSetter

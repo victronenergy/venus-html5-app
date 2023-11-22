@@ -22,11 +22,7 @@ const Battery = ({ battery }: Props) => {
   if (isSimpleBattery) {
     return (
       <ValueBox
-        icon={
-          /* todo: fix types for svg */
-          /* @ts-ignore */
-          <BatteryIcon className="w-[18px] sm-s:w-[24px] sm-m:w-[32px]" />
-        }
+        icon={<BatteryIcon className="w-[18px] sm-s:w-[24px] sm-m:w-[32px]" />}
         title={battery.name}
         unit="V"
         value={battery.voltage}
@@ -82,29 +78,11 @@ const batteryStateIconFormatter = function (state: number): JSX.Element {
   const className = "w-[18px] sm-s:w-[24px] sm-m:w-[32px]"
   switch (state) {
     case BATTERY.CHARGING:
-      return (
-        <BatteryChargingIcon
-          /* todo: fix types for svg */
-          /* @ts-ignore */
-          className={className}
-        />
-      )
+      return <BatteryChargingIcon className={className} />
     case BATTERY.DISCHARGING:
-      return (
-        <BatteryDischargingIcon
-          /* todo: fix types for svg */
-          /* @ts-ignore */
-          className={className}
-        />
-      )
+      return <BatteryDischargingIcon className={className} />
   }
-  return (
-    <BatteryIcon
-      /* todo: fix types for svg */
-      /* @ts-ignore */
-      className={className}
-    />
-  )
+  return <BatteryIcon className={className} />
 }
 
 interface Props {

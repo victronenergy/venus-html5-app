@@ -39,7 +39,6 @@ const ValueOverview = ({ title, subtitle, Icon, value, unit, boxSize, valueType,
   return (
     <div className={classes}>
       <div className="flex items-center min-w-0">
-        {/* @ts-ignore */}
         <Icon className={iconStyles} />
         <div className="px-2 min-w-0 flex flex-col">
           <FadedText className={classNames("pr-8 text-victron-gray-200 dark:text-white", titleStyle)} text={title} />

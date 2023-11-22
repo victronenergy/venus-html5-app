@@ -15,8 +15,6 @@ const EnergyDC = ({ componentMode = "compact", dcLoads, compactBoxSize }: Props)
   if (componentMode === "compact" && compactBoxSize) {
     return (
       <ValueOverview
-        /* todo: fix types for svg */
-        /* @ts-ignore */
         Icon={DCIcon}
         title={translate("boxes.dcLoads")}
         value={current}
@@ -29,8 +27,6 @@ const EnergyDC = ({ componentMode = "compact", dcLoads, compactBoxSize }: Props)
   return (
     <ValueBox
       title={translate("boxes.dcLoads")}
-      /* todo: fix types for svg */
-      /* @ts-ignore */
       icon={<DCIcon className="w-[18px] sm-s:w-[24px] sm-m:w-[32px]" />}
       value={current}
       unit="A"

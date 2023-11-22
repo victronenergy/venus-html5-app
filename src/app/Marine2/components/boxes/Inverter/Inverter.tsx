@@ -43,8 +43,6 @@ const Inverter = ({ instanceId, isVebusInverter, componentMode = "compact", comp
   if (componentMode === "compact" && compactBoxSize) {
     return (
       <ValueOverview
-        /* todo: fix types for svg */
-        /* @ts-ignore */
         Icon={InverterChargerIcon}
         title={title}
         subtitle={subTitle}
@@ -56,15 +54,7 @@ const Inverter = ({ instanceId, isVebusInverter, componentMode = "compact", comp
   }
 
   return (
-    <Box
-      icon={
-        /* todo: fix types for svg */
-        /* @ts-ignore */
-        <GeneratorIcon className="w-7" />
-      }
-      title={title}
-      getBoxSizeCallback={setBoxSize}
-    >
+    <Box icon={<GeneratorIcon className="w-7" />} title={title} getBoxSizeCallback={setBoxSize}>
       <div className="w-full h-full flex flex-col justify-between">
         <div className={classNames("text-victron-darkGray dark:text-white", activeStyles?.mainValue)}>{subTitle}</div>
         <div className="w-full h-full min-h-0 shrink flex flex-col justify-end mt-2">

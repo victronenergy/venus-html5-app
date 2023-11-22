@@ -44,8 +44,6 @@ const GeneratorFp = ({ componentMode = "compact", generatorFp, compactBoxSize }:
   if (componentMode === "compact" && compactBoxSize) {
     return (
       <ValueOverview
-        /* todo: fix types for svg */
-        /* @ts-ignore */
         Icon={GeneratorIcon}
         title={title}
         subtitle={subTitle}
@@ -72,11 +70,7 @@ const GeneratorFp = ({ componentMode = "compact", generatorFp, compactBoxSize }:
       bottomValues={!!gensetValues && phasesData}
       status={status}
       infoText={infoText}
-      icon={
-        /* todo: fix types for svg */
-        /* @ts-ignore */
-        <GeneratorIcon className="w-7" />
-      }
+      icon={<GeneratorIcon className="w-7" />}
       buttons={
         <AutoStartStopSetter
           title={title}

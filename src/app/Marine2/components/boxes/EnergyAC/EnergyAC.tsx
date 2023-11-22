@@ -21,8 +21,6 @@ const EnergyAC = ({ componentMode = "compact", compactBoxSize }: Props) => {
   if (componentMode === "compact" && compactBoxSize) {
     return (
       <ValueOverview
-        /* todo: fix types for svg */
-        /* @ts-ignore */
         Icon={ACIcon}
         title={translate("boxes.acLoads")}
         value={phaseValueFor(phases, current, power)}
@@ -35,8 +33,6 @@ const EnergyAC = ({ componentMode = "compact", compactBoxSize }: Props) => {
   return (
     <ValueBox
       title={translate("boxes.acLoads")}
-      /* todo: fix types for svg */
-      /* @ts-ignore */
       icon={<ACIcon className="w-[18px] sm-s:w-[24px] sm-m:w-[32px]" />}
       value={phaseValueFor(phases, current, power)}
       unit={phaseUnitFor(phases)}

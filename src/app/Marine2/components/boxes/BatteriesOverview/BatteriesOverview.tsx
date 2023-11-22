@@ -61,9 +61,7 @@ const BatteriesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: 
   if (componentMode === "compact") {
     return (
       <Box
-        /* todo: fix types for svg */
         icon={
-          /* @ts-ignore */
           <BatteriesIcon className={classNames("text-victron-gray dark:text-victron-gray-dark", activeStyles?.icon)} />
         }
         title={translate("boxes.batteries")}

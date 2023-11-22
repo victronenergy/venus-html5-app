@@ -47,27 +47,14 @@ const InverterCharger = ({ componentMode = "compact", compactBoxSize }: Props) =
   }
 
   if (componentMode === "compact" && compactBoxSize) {
-    return (
-      <ValueOverview
-        /* todo: fix types for svg */
-        /* @ts-ignore */
-        Icon={InverterChargerIcon}
-        title={title}
-        subtitle={subTitle}
-        boxSize={compactBoxSize}
-      />
-    )
+    return <ValueOverview Icon={InverterChargerIcon} title={title} subtitle={subTitle} boxSize={compactBoxSize} />
   }
 
   return (
     <ValueBox
       title={title}
       subtitle={subTitle}
-      icon={
-        /* todo: fix types for svg */
-        /* @ts-ignore */
-        <InverterChargerIcon className="w-[18px] sm-s:w-[24px] sm-m:w-[32px]" />
-      }
+      icon={<InverterChargerIcon className="w-[18px] sm-s:w-[24px] sm-m:w-[32px]" />}
       buttons={getButtons()}
       bottomValues={[]}
     >

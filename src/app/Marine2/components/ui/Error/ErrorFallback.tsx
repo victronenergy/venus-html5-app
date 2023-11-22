@@ -3,10 +3,10 @@ import { translate } from "react-i18nify"
 import { FallbackProps } from "react-error-boundary"
 import { byteSize, isError } from "../../../../utils/util"
 import * as Sentry from "@sentry/react"
+import { Breadcrumb } from "@sentry/react"
 import WarningIcon from "../../../images/icons/warning.svg"
 import Button from "../Button"
 import { useErrorHandlerStore } from "../../../../components/ErrorHandlerModule/ErrorHandler.store"
-import { Breadcrumb } from "@sentry/react"
 
 interface Props extends FallbackProps {
   showReset?: boolean
@@ -66,8 +66,6 @@ const ErrorFallback = ({ error, resetErrorBoundary, showReset = false }: Props) 
     <div className="w-full h-full flex flex-col items-center justify-center border-4 border-victron-red rounded-md px-4 py-6 text-black dark:text-white bg-white dark:bg-black">
       <div className="flex flex-col justify-between h-full text-sm">
         <div className="mb-1 self-center grow">
-          {/* todo: fix types for svg */}
-          {/* @ts-ignore */}
           <WarningIcon className="w-12 text-victron-red" alt={"warning"} />
         </div>
         <div className="flex flex-col align-top mb-2">

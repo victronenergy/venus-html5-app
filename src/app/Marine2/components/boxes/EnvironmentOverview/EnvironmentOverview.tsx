@@ -67,7 +67,6 @@ const EnvironmentOverview = ({ componentMode = "full", pageSelectorPropsSetter }
       <VisibleComponentsContext.Provider value={{ passVisibility }}>
         <Box
           title={translate("boxes.environment")}
-          /* @ts-ignore */
           icon={<EnvironmentIcon className={"w-4"} />}
           withPagination={true}
           paginationOrientation={"vertical"}

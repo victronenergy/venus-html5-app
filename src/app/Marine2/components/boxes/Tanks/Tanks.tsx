@@ -90,8 +90,6 @@ const Tanks = ({ componentMode = "full", className }: Props) => {
     return (
       <Box
         title={translate("boxes.tanks")}
-        /* todo: fix types for svg */
-        /* @ts-ignore */
         icon={<TanksIcon className={classNames("text-black dark:text-white", activeStyles?.icon)} />}
         linkedView={AppViews.BOX_TANKS}
         className={className}
@@ -118,13 +116,7 @@ const Tanks = ({ componentMode = "full", className }: Props) => {
         <div className="w-full h-full p-2">
           <Box
             title={translate("boxes.tanks")}
-            icon={
-              <TanksIcon
-                /* todo: fix types for svg */
-                /* @ts-ignore */
-                className={"w-6 text-black dark:text-white"}
-              />
-            }
+            icon={<TanksIcon className={"w-6 text-black dark:text-white"} />}
             className={className}
             getBoxSizeCallback={setBoxSize}
             withPagination={true}
@@ -152,13 +144,7 @@ const Tanks = ({ componentMode = "full", className }: Props) => {
         <div className="w-full h-full p-2">
           <Box
             title={"Tanks"}
-            icon={
-              <TanksIcon
-                /* todo: fix types for svg */
-                /* @ts-ignore */
-                className={"w-6 text-black dark:text-white"}
-              />
-            }
+            icon={<TanksIcon className={"w-6 text-black dark:text-white"} />}
             getBoxSizeCallback={setBoxSize}
             withPagination={true}
             paginationOrientation={"horizontal"}

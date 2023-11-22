@@ -21,8 +21,6 @@ const EnergyShore = ({ componentMode = "compact", inputId, compactBoxSize }: Pro
   if (componentMode === "compact" && compactBoxSize) {
     return (
       <ValueOverview
-        /* todo: fix types for svg */
-        /* @ts-ignore */
         Icon={ShorePowerIcon}
         title={translate("boxes.shorePower")}
         subtitle={unplugged ? translate("common.unplugged") : undefined}
@@ -36,8 +34,6 @@ const EnergyShore = ({ componentMode = "compact", inputId, compactBoxSize }: Pro
 
   return (
     <ValueBox
-      /* todo: fix types for svg */
-      /* @ts-ignore */
       icon={<ShorePowerIcon className="w-[18px] sm-s:w-[24px] sm-m:w-[32px]" />}
       title={translate("boxes.shorePower")}
       value={phaseValueFor(phases, current, power)}
