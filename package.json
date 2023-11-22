@@ -150,13 +150,13 @@
     "test:ci": "npm test -- --watchAll=false && npm run cy:run",
     "generate-e2e-report": "npm run copy-e2e-assets && npm run merge-e2e-results && npm run create-e2e-html-report",
     "copy-e2e-assets": "rm -rf ./cypress/report && mkdir ./cypress/report && cp -r ./cypress/screenshots ./cypress/videos ./cypress/report/",
-    "merge-e2e-results": "./node_modules/.bin/mochawesome-merge ./cypress/results/*.json > ./cypress/results/results.json",
+    "merge-e2e-results": "./node_modules/.bin/mochawesome-merge ./cypress/results/*.json -o ./cypress/results/results.json",
     "create-e2e-html-report": "./node_modules/.bin/marge ./cypress/results/results.json -f index.html -o ./cypress/report --cdn",
     "cy:version": "./node_modules/.bin/cypress version",
     "cy:verify": "./node_modules/.bin/cypress verify",
     "cy:open": "./node_modules/.bin/cypress open",
     "cy:run": "NODE_ENV=test cypress run",
-    "poeditor:push": "node src/app/locales/poeditor/push.js",
+
     "poeditor:pull": "node src/app/locales/poeditor/pull.js"
   },
   "browserslist": {
