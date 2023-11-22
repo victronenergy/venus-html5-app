@@ -1,17 +1,18 @@
 import React from "react"
 
 interface Props {
+  id: string
   selected?: boolean
   disabled?: boolean
   color?: string
   onChange: () => void
 }
 
-const ToggleSwitch: React.FC<Props> = ({ onChange, selected, disabled }) => {
+const ToggleSwitch: React.FC<Props> = ({ id, onChange, selected, disabled }) => {
   return (
     <span className="relative">
       <input
-        id="Toggle2"
+        id={id}
         type="checkbox"
         className="hidden peer"
         onChange={onChange}

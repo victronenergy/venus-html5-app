@@ -80,7 +80,7 @@ const SettingsMenu = () => {
                 <span className="mr-1 text-sm sm-m:mr-2 sm-l:text-base text-black dark:text-white">
                   {translate("locker.lockMessage")}
                 </span>
-                <ToggleSwitch onChange={toggleLocked} selected={locked} />
+                <ToggleSwitch id="Toggle1" onChange={toggleLocked} selected={locked} />
               </label>
               <div className="mr-2 mb-2 sm-l:mb-4 text-victron-gray-400 text-xs sm-l:text-sm dark:text-victron-gray-500">
                 {translate("locker.lockDescription")}
@@ -111,7 +111,7 @@ const SettingsMenu = () => {
                 <span className="mr-1 text-sm sm-m:mr-2 sm-l:text-base text-black dark:text-white">
                   {translate("common.auto")}
                 </span>
-                <ToggleSwitch onChange={setAutoMode} />
+                <ToggleSwitch id="Toggle2" onChange={setAutoMode} />
               </label>
               <Button onClick={openRemoteConsole} className="w-full" size="md">
                 {translate("header.remoteConsole")}
