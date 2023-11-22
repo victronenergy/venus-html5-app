@@ -123,5 +123,4 @@ const SettingsMenu = () => {
     </div>
   )
 }
-
 export default observer(SettingsMenu)
