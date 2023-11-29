@@ -105,6 +105,7 @@
   },
   "devDependencies": {
     "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/line-clamp": "^0.4.2",
     "@testing-library/cypress": "^7.0.7",
     "@testing-library/dom": "^8.20.0",
     "@types/chart.js": "^2.9.32",
@@ -135,7 +136,7 @@
     "react-test-renderer": "^17.0.2",
     "resize-observer-polyfill": "^1.5.1",
     "style-loader": "^3.3.1",
-    "tailwindcss": "^3.3.5",
+    "tailwindcss": "3.2.4",
     "url": "^0.11.3"
   },
   "scripts": {
