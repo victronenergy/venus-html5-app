@@ -170,6 +170,7 @@
         "title": "Scegliere un impianto"
     },
     "locker": {
+        "lockDescription": "Per evitare modifiche accidentali alle impostazioni del dispositivo, attivando questa funzione si blocca la possibilità di interagire con i comandi",
         "lockMessage": "Bloccare per evitare cambi",
         "unlockMessage": "Sbloccare per eseguire cambi"
     },

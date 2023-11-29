@@ -170,6 +170,7 @@
         "title": "Elegir una instalación"
     },
     "locker": {
+        "lockDescription": "Para evitar cambios accidentales en los ajustes del dispositivo - al habilitar esta función se bloqueará la posibilidad de accionar los controles",
         "lockMessage": "Bloquear para impedir cambios",
         "unlockMessage": "Desbloquear para hacer cambios"
     },

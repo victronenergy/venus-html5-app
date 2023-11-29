@@ -170,6 +170,7 @@
         "title": "Vybrat si instalaci"
     },
     "locker": {
+        "lockDescription": "Náhodným změnám v nastavení zařízení zabráníte zapnutím této funkce, která zablokuje možnost interakce s ovládacími prvky.",
         "lockMessage": "Zamknout a neměnit",
         "unlockMessage": "Odemknout a provést změny"
     },

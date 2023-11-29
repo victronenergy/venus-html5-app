@@ -170,6 +170,7 @@
         "title": "Välj en installation"
     },
     "locker": {
+        "lockDescription": "För att förhindra oavsiktliga ändringar i Enhetsinställningar - aktivera den här funktionen för att låsa möjligheten att interagera med kontroller",
         "lockMessage": "Lås för att förhindra ändringar",
         "unlockMessage": "Lås upp för att göra ändringar"
     },

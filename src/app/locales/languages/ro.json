@@ -170,6 +170,7 @@
         "title": "Alegeți o versiune de instalare"
     },
     "locker": {
+        "lockDescription": "Pentru a preveni modificările accidentale în setările dispozitivului – activarea acestei funcții va bloca posibila interacțiune cu comenzile",
         "lockMessage": "Blocați pentru a preveni modificări",
         "unlockMessage": "Deblocați pentru a efectua modificări"
     },
