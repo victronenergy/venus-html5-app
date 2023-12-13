@@ -46,8 +46,11 @@
         "absorptionCharging": "Absorption charging",
         "assisting": "Assisting",
         "auto": "Auto",
+        "autoStart": "Autostart",
         "autoStartStop": "Auto start/stop",
         "bulkCharging": "Bulk charging",
+        "enable": "Enable",
+        "disable": "Disable",
         "charge": "Charge",
         "charged": "Charged",
         "chargerOnly": "Charger Only",
@@ -272,5 +275,15 @@
         "solar": "Solar",
         "status": "Status",
         "unknown": "Unknown"
+    },
+    "messages": {
+        "enableAutostart": {
+            "title": "Enable Autostart?",
+            "text": "The generator will start and stop based on the configured autostart conditions."
+        },
+        "disableAutostart": {
+            "title": "Disable Autostart?",
+            "text": "Autostart will be disabled and the generator won't automatically start based on the configured conditions."
+        }
     }
 }

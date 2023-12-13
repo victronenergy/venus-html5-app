@@ -64,7 +64,7 @@ const ValueBox: FC<Props> = ({
             className={classNames("overflow-hidden", activeStyles.secondaryValue)}
             status={status}
           />
-          {!!buttons && <div className="flex w-full">{buttons}</div>}
+          {!!buttons && <div className="flex items-center gap-2 md:gap-4">{buttons}</div>}
         </div>
       </div>
     </Box>

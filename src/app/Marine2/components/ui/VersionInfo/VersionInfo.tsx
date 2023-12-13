@@ -7,7 +7,7 @@ import React, { useState } from "react"
 import LogoIcon from "../../../images/logo.svg"
 import LogoOnlyIcon from "../../../images/logo-only.svg"
 import { AppViews, useAppViewsStore } from "../../../modules/AppViews"
-import Button from "../Button"
+import Button from "../../_elements/Button"
 import { BUILD_TIMESTAMP } from "../../../utils/constants/generic"
 
 const VersionInfo = () => {

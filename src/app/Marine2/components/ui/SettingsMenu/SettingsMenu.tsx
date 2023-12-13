@@ -8,7 +8,7 @@ import CloseIcon from "../../../images/icons/close.svg"
 import ToggleSwitch from "../ToggleSwitch"
 import RadioButton from "../RadioButton"
 import { AppViews, useAppViewsStore } from "../../../modules/AppViews"
-import Button from "../Button"
+import Button from "../../_elements/Button"
 import classNames from "classnames"
 
 const SettingsMenu = () => {

@@ -5,7 +5,7 @@ import { useAppStore, useInputLimit, useInputLimitSelector } from "@victronenerg
 import DeviceSettingModal from "../DeviceSettingModal"
 
 import { AmpList } from "./AmpList/AmpList"
-import Button from "../Button"
+import Button from "../../_elements/Button"
 import { LimitAdjuster } from "../LimitAdjuster/LimitAdjuster"
 import { CURRENT_LIMIT_STEP } from "../../../utils/constants/generic"
 import {
@@ -63,7 +63,7 @@ const InputLimitSelector: FC<Props> = ({ inputId, title }) => {
     <>
       <Button
         disabled={locked}
-        className="w-full mr-4"
+        className="w-full"
         size="md"
         onClick={() => setIsLimitModalOpen(!isLimitModalOpen)}
       >

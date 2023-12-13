@@ -2,10 +2,13 @@ import { observer } from "mobx-react"
 import DeviceSettingModal from "../DeviceSettingModal/DeviceSettingModal"
 import { translate } from "react-i18nify"
 import RadioButton from "../RadioButton"
-import Button from "../Button"
+import Button from "../../_elements/Button"
 import { useCallback, useEffect, useState } from "react"
 import { useAppStore } from "@victronenergy/mfd-modules"
 import { GENERATOR_START_STOP } from "../../../utils/constants/devices/generators"
+import { formatStartStopFor, StartStopValue } from "../../../utils/formatters/general/start-stop/format-start-stop-for"
+import { isGeneratorRunningFor } from "../../../utils/helpers/devices/generators/is-running-for"
+import { useStartStopMode } from "../../../utils/hooks/use-start-stop-mode"
 
 const AutoStartStopSetter = ({
   statusCode,
@@ -16,39 +19,21 @@ const AutoStartStopSetter = ({
   updateAutoMode,
   isAutoStartDisabled,
 }: Props) => {
-  const { locked } = useAppStore() // lock from theme settings
-  const running =
-    manualStart === undefined ? (statusCode === undefined ? 0 : statusCode >= 1 && statusCode <= 8) : manualStart === 1
-  const getStartStopMode = useCallback(() => {
-    if (running && !autoStart) {
-      return 0
-    } else if (!running && !autoStart) {
-      return 1
-    } else {
-      return 2
-    }
-  }, [autoStart, running])
-  const [isModeModalOpen, setIsModeModalOpen] = useState(false)
-  const [modeForSubmission, setModeForSubmission] = useState(getStartStopMode())
+  const { locked } = useAppStore()
 
-  const autoStartFormatter = (value: number) => {
-    switch (value) {
-      case 0:
-        return translate("common.on")
-      case 1:
-        return translate("common.off")
-      case 2:
-        return translate("common.autoStartStop")
-    }
-  }
+  const running = isGeneratorRunningFor(statusCode, manualStart)
+  const startStopMode = useStartStopMode(running, autoStart)
+
+  const [isModeModalOpen, setIsModeModalOpen] = useState(false)
+  const [modeForSubmission, setModeForSubmission] = useState(startStopMode)
 
   useEffect(() => {
-    setModeForSubmission(getStartStopMode())
-  }, [getStartStopMode])
+    setModeForSubmission(startStopMode)
+  }, [startStopMode])
 
   const closeModeModal = () => {
     setIsModeModalOpen(false)
-    setModeForSubmission(getStartStopMode())
+    setModeForSubmission(startStopMode)
   }
 
   const submitMode = () => {
@@ -66,9 +51,11 @@ const AutoStartStopSetter = ({
     }
     closeModeModal()
   }
+
   useEffect(() => {
     if (isAutoStartDisabled) setIsModeModalOpen(false)
   }, [isAutoStartDisabled])
+
   return (
     <>
       <Button
@@ -77,8 +64,9 @@ const AutoStartStopSetter = ({
         disabled={isAutoStartDisabled || locked}
         onClick={() => setIsModeModalOpen(true)}
       >
-        {autoStartFormatter(getStartStopMode())}
+        {formatStartStopFor(startStopMode)}
       </Button>
+
       {!isAutoStartDisabled && (
         <DeviceSettingModal
           title={title}
