@@ -5,7 +5,7 @@ import { byteSize, isError } from "../../../../utils/util"
 import * as Sentry from "@sentry/react"
 import { Breadcrumb } from "@sentry/react"
 import WarningIcon from "../../../images/icons/warning.svg"
-import Button from "../Button"
+import Button from "../../_elements/Button"
 import { useErrorHandlerStore } from "../../../../components/ErrorHandlerModule/ErrorHandler.store"
 
 interface Props extends FallbackProps {
