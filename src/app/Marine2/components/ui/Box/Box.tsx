@@ -1,13 +1,27 @@
 import React, { ReactNode, useEffect, useState } from "react"
 import classNames from "classnames"
 import ArrowRightIcon from "../../../images/icons/arrow-right.svg"
-import InfoIcon from "../../../images/icons/info.svg"
+
 import { AppViews, useAppViewsStore } from "../../../modules/AppViews"
 import Paginator from "../Paginator"
 import useSize from "@react-hook/size"
 import FadedText from "../FadedText"
 import { Modal } from "../Modal"
 import { ScreenOrientation } from "@m2Types/generic/screen-orientation"
+
+export interface BoxProps {
+  children: JSX.Element[] | JSX.Element | string
+  icon?: ReactNode
+  infoText?: { title: string; body: string }
+  title: string
+  linkedView?: AppViews
+  className?: string
+  headerActions?: JSX.Element
+  withPagination?: boolean
+  paginationOrientation?: ScreenOrientation
+  getBoxSizeCallback?: (size: { width: number; height: number }) => void
+  setRef?: React.RefObject<HTMLDivElement>
+}
 
 const Box = ({
   children,
@@ -69,14 +83,6 @@ const Box = ({
             />
           </div>
         )}
-        {!linkedView && !!infoText && (
-          <div className="-mr-3 p-3" onClick={openInfo}>
-            <InfoIcon
-              className="w-7 text-victron-blue dark:text-victron-blue-dark cursor-pointer outline-none"
-              alt="Info"
-            />
-          </div>
-        )}
       </div>
       <div ref={setRef} className={"w-full min-h-0 h-full"}>
         {withPagination && (
@@ -86,39 +92,8 @@ const Box = ({
         )}
         {!withPagination && children}
       </div>
-      {!linkedView && !!infoText && (
-        <Modal.Frame open={infoOpen} onClose={closeInfo}>
-          <Modal.Body>
-            <InfoIcon
-              className="ml-auto mr-auto mt-7 mb-7 w-10 text-victron-blue dark:text-victron-blue-dark cursor-pointer outline-none"
-              alt="Info"
-            />
-            <div className="text-center mb-2 text-xl">{infoText.title}</div>
-            <div className="text-center text-sm px-2 pb-14">{infoText.body}</div>
-          </Modal.Body>
-          <Modal.Footer>
-            <button onClick={closeInfo} className="w-full h-[60px]">
-              Ok
-            </button>
-          </Modal.Footer>
-        </Modal.Frame>
-      )}
     </div>
   )
-}
-
-export interface BoxProps {
-  children: JSX.Element[] | JSX.Element | string
-  icon?: ReactNode
-  infoText?: { title: string; body: string }
-  title: string
-  linkedView?: AppViews
-  className?: string
-  headerActions?: JSX.Element
-  withPagination?: boolean
-  paginationOrientation?: ScreenOrientation
-  getBoxSizeCallback?: (size: { width: number; height: number }) => void
-  setRef?: React.RefObject<HTMLDivElement>
 }
 
 export default Box

@@ -29,9 +29,9 @@ const EnergyWind = ({ componentMode = "compact", windGenerator, showInstance, co
     <ValueBox
       title={translate("boxes.windGenerator") + instance}
       icon={<WindIcon className="w-[18px] sm-s:w-[24px] sm-m:w-[32px]" />}
+      bottomValues={[[{ value: power, unit: "W", hideDecimal: true }]]}
       value={current}
       unit="A"
-      bottomValues={[[{ value: power, unit: "W", hideDecimal: true }]]}
     />
   )
 }

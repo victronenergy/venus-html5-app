@@ -37,11 +37,13 @@ const ValueBox: FC<Props> = ({
   status,
 }) => {
   const [boxSize, setBoxSize] = useState<ISize>({ width: 0, height: 0 })
+
   const activeStyles = applyStyles(boxSize, defaultBoxStyles)
+
   return (
     <Box title={title} icon={icon} getBoxSizeCallback={setBoxSize} infoText={infoText}>
       <div className="w-full h-full flex flex-col justify-between">
-        <div className="w-full">
+        <div>
           <Heading
             value={value}
             unit={unit}
@@ -49,16 +51,18 @@ const ValueBox: FC<Props> = ({
             className={classNames("text-black dark:text-white", activeStyles?.mainValue)}
             status={status}
           />
+
           {status === "unplugged" && (
             <div className={classNames("text-victron-gray-300 dark:text-victron-gray-500", activeStyles.valueSubtitle)}>
               {translate("common.unplugged")}
             </div>
           )}
+
           <div className={classNames("text-victron-gray dark:text-victron-gray-500", activeStyles.valueSubtitle)}>
             {children}
           </div>
         </div>
-        <div className="w-full flex flex-col">
+        <div>
           <BottomValues
             values={bottomValues}
             className={classNames("overflow-hidden", activeStyles.secondaryValue)}
