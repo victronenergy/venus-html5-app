@@ -11,8 +11,9 @@ import GeneratorIcon from "../../../images/icons/generator.svg"
 import { usePhasesData } from "../../../utils/hooks/use-phases-data"
 import { phaseValueFor } from "../../../utils/formatters/phase/phase-value-for"
 import { generatorStateFor } from "../../../utils/formatters/devices/generator-relay/generator-state-for"
-import { Buttons } from "../../_composed/StartStop/Buttons/Buttons"
 import { responsiveBoxIcon } from "../../../utils/helpers/classes/responsive-box-icon"
+import { Buttons } from "../../_composed/auto-start-stop/Buttons/Buttons"
+
 
 interface Props {
   statusCode: number
@@ -38,7 +39,6 @@ const GeneratorRelay = ({
   componentMode = "compact",
   compactBoxSize,
 }: Props) => {
-
   const title = translate("widgets.generator")
   const subTitle = generatorStateFor(statusCode, active, phases)
 
@@ -65,8 +65,8 @@ const GeneratorRelay = ({
       <ValueBox
         title={title}
         subtitle={subTitle}
-        bottomValues={active || statusCode === 1 ? phasesData : []}
         status={status}
+        bottomValues={active || statusCode === 1 ? phasesData : []}
         icon={<GeneratorIcon className={responsiveBoxIcon} />}
       />
     )
@@ -77,34 +77,43 @@ const GeneratorRelay = ({
     <ValueBox
       title={title}
       subtitle={subTitle}
-      bottomValues={active || statusCode === 1 ? phasesData : []}
       status={status}
+      bottomValues={active || statusCode === 1 ? phasesData : []}
       icon={<GeneratorIcon className="w-[18px] sm-s:w-[24px] sm-m:w-[32px]" />}
-      buttons={<Buttons/>}
+      buttons={
+        <Buttons
+          title={title}
+          autoStart={autoStart}
+          isAutoStartDisabled={false}
+          updateAutoMode={updateAutoMode}
+          updateManualMode={updateManualMode}
+          manualStart={manualStart}
+        />
+      }
     />
   )
 
-/*  const buttons = (
-    <AutoStartStopSetter
-      title={title}
-      autoStart={autoStart}
-      isAutoStartDisabled={false}
-      updateAutoMode={updateAutoMode}
-      updateManualMode={updateManualMode}
-      manualStart={manualStart}
-    />
-  )
+  /*  const buttons = (
+      <AutoStartStopSetter
+        title={title}
+        autoStart={autoStart}
+        isAutoStartDisabled={false}
+        updateAutoMode={updateAutoMode}
+        updateManualMode={updateManualMode}
+        manualStart={manualStart}
+      />
+    )
 
-  return (
-    <ValueBox
-      title={title}
-      subtitle={subTitle}
-      bottomValues={active || statusCode === 1 ? phasesData : []}
-      status={status}
-      icon={<GeneratorIcon className="w-[18px] sm-s:w-[24px] sm-m:w-[32px]" />}
-      buttons={buttons}
-    />
-  )*/
+    return (
+      <ValueBox
+        title={title}
+        subtitle={subTitle}
+        bottomValues={active || statusCode === 1 ? phasesData : []}
+        status={status}
+        icon={<GeneratorIcon className="w-[18px] sm-s:w-[24px] sm-m:w-[32px]" />}
+        buttons={buttons}
+      />
+    )*/
 }
 
 export default observer(GeneratorRelay)

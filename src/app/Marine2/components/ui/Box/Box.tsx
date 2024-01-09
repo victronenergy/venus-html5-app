@@ -1,7 +1,7 @@
-import { ReactNode, RefObject, useEffect, useRef, useState } from "react"
+import React, { ReactNode, RefObject, useEffect, useState } from "react"
 import classNames from "classnames"
 import ArrowRightIcon from "../../../images/icons/arrow-right.svg"
-import InfoIcon from "../../../images/icons/info.svg"
+
 import { AppViews, useAppViewsStore } from "../../../modules/AppViews"
 import Paginator from "../Paginator"
 import useSize from "@react-hook/size"

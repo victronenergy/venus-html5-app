@@ -3,9 +3,17 @@ import { translate } from "react-i18nify"
 import Button from "../../../_elements/Button"
 import { ToggleSwitchButton } from "../../../_elements/ToggleSwitchButton/ToggleSwitchButton"
 import { formatStartStopFor } from "../../../../utils/formatters/general/start-stop/format-start-stop-for"
-import { AutoStartStopModal } from "../Modals/AutoStartStopModal"
+import { AutoStartStopModal } from "../../modals/auto-start-stop"
 
-interface Props {}
+interface Props {
+  title: string
+  statusCode?: number
+  manualStart?: number
+  autoStart: number
+  updateManualMode: Function
+  updateAutoMode: Function
+  isAutoStartDisabled: boolean
+}
 
 export const Buttons: FC<Props> = ({}) => {
   const [showModal, setShowModal] = useState(false) // naar global state? modal systeem.

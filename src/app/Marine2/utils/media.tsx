@@ -66,7 +66,9 @@ export const boxBreakpoints: BreakpointsType = {
 }
 
 export const applyStyles = (size: ComponentSizeType, stylesObject: BreakpointStylesType = defaultBoxStyles) => {
+
   let styles: StylesType = {}
+
   if (stylesObject === defaultBoxStyles) {
     Object.keys(defaultBoxBreakpoints).forEach((breakpoint) => {
       const breakpointWidth = defaultBoxBreakpoints[breakpoint].width
