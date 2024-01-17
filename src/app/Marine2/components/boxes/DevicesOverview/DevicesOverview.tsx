@@ -95,7 +95,7 @@ const getAvailableDeviceBoxes = function (
   vebusInstanceId: InstanceId,
   generatorFp: GeneratorFpProvider,
   generatorRelay: GeneratorRelayProvider,
-  compactBoxSize: { width: number; height: number },
+  compactBoxSize: ISize,
   componentMode?: ComponentMode
 ) {
   let devices = []

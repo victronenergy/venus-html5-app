@@ -30,7 +30,7 @@ import { formatModeFor } from "../../../utils/formatters/devices/charger/format-
 interface Props {
   instanceId: ChargerInstanceId
   componentMode?: ComponentMode
-  compactBoxSize?: ISize
+  compactBoxSize: ISize
 }
 
 const Charger = ({ instanceId, componentMode = "compact", compactBoxSize }: Props) => {

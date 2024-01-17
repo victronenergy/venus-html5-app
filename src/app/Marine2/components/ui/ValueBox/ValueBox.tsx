@@ -1,6 +1,6 @@
 import Box from "../Box"
 import classNames from "classnames"
-import { FC, ReactElement, useState } from "react"
+import { FC, ReactElement, ReactNode, useState } from "react"
 import { applyStyles, defaultBoxStyles } from "../../../utils/media"
 import { ValueWithUnit } from "@m2Types/data/value-with-units"
 import { BottomValues } from "./BottomValues/BottomValues"
@@ -17,8 +17,8 @@ interface Props {
   value?: number
   unit?: unit
   bottomValues: ValueWithUnit[][]
-  children?: JSX.Element | JSX.Element[] | string
-  buttons?: JSX.Element | JSX.Element[]
+  children?: ReactNode
+  buttons?: ReactNode | ReactNode[]
   infoText?: { title: string; body: string }
   valueSubtitle?: string
   status?: TStatus

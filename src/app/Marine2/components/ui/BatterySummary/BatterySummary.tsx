@@ -4,6 +4,7 @@ import { formatValue } from "../../../utils/formatters"
 import { Battery } from "@victronenergy/mfd-modules"
 import classNames from "classnames"
 import { applyStyles, BreakpointStylesType } from "../../../utils/media"
+import { ISize } from "@m2Types/generic/size"
 
 const styles: BreakpointStylesType = {
   default: {
@@ -29,6 +30,11 @@ const styles: BreakpointStylesType = {
     name: "text-lg",
     state: "text-base",
   },
+}
+
+interface Props {
+  battery: Battery
+  boxSize: ISize
 }
 
 const BatterySummary = ({ battery, boxSize }: Props) => {
@@ -71,11 +77,6 @@ const BatterySummary = ({ battery, boxSize }: Props) => {
       <div className={classNames("truncate mt-2 w-[inherit] text-center", activeStyles.name)}>{battery.name}</div>
     </div>
   )
-}
-
-interface Props {
-  battery: Battery
-  boxSize: { width: number; height: number }
 }
 
 export default BatterySummary
