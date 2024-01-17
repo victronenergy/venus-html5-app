@@ -51,15 +51,13 @@ const Box = ({
         className
       )}
     >
-      <div className={"w-full min-w-0 min-h-[44px] flex justify-between items-center"}>
+      <div className="w-full min-w-0 min-h-[44px] flex justify-between items-center">
         <div
-          className={
-            "w-full shrink-1 flex items-center justify-start text-victron-gray-300 dark:text-victron-gray-dark cursor-pointer min-w-0 outline-none"
-          }
+          className="w-full shrink-1 flex items-center justify-start text-victron-gray-300 dark:text-victron-gray-dark cursor-pointer min-w-0 outline-none"
           onClick={handleClick}
         >
           {icon && <span className="mr-1 md:mr-2">{icon}</span>}
-          <FadedText text={title} className={"text-base"} />
+          <FadedText text={title} className="text-base" />
         </div>
         {linkedView && (
           <div className="-mr-3 p-[12px] cursor-pointer" onClick={handleClick}>
@@ -78,9 +76,9 @@ const Box = ({
           </div>
         )}
       </div>
-      <div ref={setRef} className={"w-full min-h-0 h-full"}>
+      <div ref={setRef} className="w-full min-h-0 h-full">
         {withPagination && (
-          <Paginator orientation={paginationOrientation} selectorLocation={"bottom-full"}>
+          <Paginator orientation={paginationOrientation} selectorLocation="bottom-full">
             {children}
           </Paginator>
         )}
