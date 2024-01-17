@@ -13,6 +13,12 @@ import { phaseUnitFor } from "../../../utils/formatters/phase/phase-unit-for"
 import { AdditionalInformation } from "./AdditionalInformation/AdditionalInformation"
 import { ISize } from "@m2Types/generic/size"
 
+interface Props {
+  componentMode?: ComponentMode
+  generatorFp: GeneratorFpProvider
+  compactBoxSize?: ISize
+}
+
 const GeneratorFp = ({ componentMode = "compact", generatorFp, compactBoxSize }: Props) => {
   const gensetStateFormatter = (value: number) => {
     if (value === GENSET_STATE.STANDBY) {
