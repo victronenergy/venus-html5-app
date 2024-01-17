@@ -13,9 +13,7 @@ interface Props {
 const ValueBar = ({ values, prefix, forcePowerUnit, status }: Props) => (
   <div className="flex border-t-2 border-victron-gray dark:border-victron-gray-200">
     {prefix && (
-      <div className="mr-3 md:mr-6 text-victron-darkGray dark:text-victron-gray-500 tabular-nums">
-        {prefix}
-      </div>
+      <div className="mr-3 md:mr-6 text-victron-darkGray dark:text-victron-gray-500 tabular-nums">{prefix}</div>
     )}
     <div className="flex justify-between grow w-full">
       {values.map((v, id) => (
