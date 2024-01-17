@@ -90,19 +90,13 @@ const GeneratorFp = ({ componentMode = "compact", generatorFp, compactBoxSize }:
     >
       <AdditionalInformation
         values={[
-          { key: "coolant", value: coolant },
-          { key: "winding", value: winding },
-          { key: "exhaust", value: exhaust },
+          { label: translate("generator.temperature.coolant"), value: `${coolant}°` },
+          { label: translate("generator.temperature.winding"), value: `${winding}°` },
+          { label: translate("generator.temperature.exhaust"), value: `${exhaust}°` },
         ]}
       />
     </ValueBox>
   )
-}
-
-interface Props {
-  componentMode?: ComponentMode
-  generatorFp: GeneratorFpProvider
-  compactBoxSize?: ISize
 }
 
 export default observer(GeneratorFp)

@@ -7,6 +7,7 @@ import { translate } from "react-i18nify"
 import { useContext, useEffect, useCallback } from "react"
 import { VisibleComponentsContext } from "./EnvironmentOverview"
 import { ComponentMode } from "@m2Types/generic/component-mode"
+import { AdditionalInformation } from "../GeneratorFp/AdditionalInformation/AdditionalInformation"
 
 interface Props {
   dataId: number
@@ -52,14 +53,13 @@ const HumidityData = ({ dataId, componentMode, boxSize }: Props) => {
 
   return (
     <ValueBox
-      title={translate("boxes.humidity") + " " + customName}
+      title={`${translate("boxes.humidity")} ${customName}`}
       icon={<HumidityIcon className="w-5" />}
       value={humidity}
       bottomValues={[]}
       unit="%"
     >
-      <div className="text-base">{humidity! > 80 ? translate("common.high") : ""}</div>
-      <div className="text-base">{humidity! > 80 ? translate("common.high") : ""}</div>
+      {humidity > 80 && <AdditionalInformation values={[{ label: translate("common.high") }]} />}
     </ValueBox>
   )
 }
