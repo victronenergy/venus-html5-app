@@ -12,6 +12,7 @@ import { Modal } from "./Modal/Modal"
 import { formatModeFor } from "../../../utils/formatters/devices/inverter-charger/format-mode-for"
 import { titleFor } from "../../../utils/helpers/devices/title-for"
 import { translatedStateFor } from "../../../utils/helpers/devices/translated-state-for"
+import { responsiveBoxIconClasses } from "../../../utils/constants/responsive-box-icon-classes"
 
 interface Props {
   componentMode?: ComponentMode
@@ -54,7 +55,7 @@ const InverterCharger = ({ componentMode = "compact", compactBoxSize }: Props) =
     <ValueBox
       title={title}
       subtitle={subTitle}
-      icon={<InverterChargerIcon className="w-[18px] sm-s:w-[24px] sm-m:w-[32px]" />}
+      icon={<InverterChargerIcon className={responsiveBoxIconClasses} />}
       buttons={getButtons()}
       bottomValues={[]}
     >

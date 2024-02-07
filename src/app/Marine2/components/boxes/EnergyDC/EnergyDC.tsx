@@ -4,6 +4,7 @@ import { translate } from "react-i18nify"
 import ValueBox from "../../ui/ValueBox"
 import ValueOverview from "../../ui/ValueOverview"
 import { ComponentMode } from "@m2Types/generic/component-mode"
+import { responsiveBoxIconClasses } from "../../../utils/constants/responsive-box-icon-classes"
 
 const EnergyDC = ({ componentMode = "compact", dcLoads, compactBoxSize }: Props) => {
   const { power, voltage, current } = dcLoads
@@ -27,7 +28,7 @@ const EnergyDC = ({ componentMode = "compact", dcLoads, compactBoxSize }: Props)
   return (
     <ValueBox
       title={translate("boxes.dcLoads")}
-      icon={<DCIcon className="w-[18px] sm-s:w-[24px] sm-m:w-[32px]" />}
+      icon={<DCIcon className={responsiveBoxIconClasses} />}
       value={current}
       unit="A"
       bottomValues={[[{ value: power, unit: "W", hideDecimal: true }]]}

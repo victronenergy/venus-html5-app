@@ -10,6 +10,7 @@ import { phaseValueFor } from "../../../utils/formatters/phase/phase-value-for"
 import { ComponentMode } from "@m2Types/generic/component-mode"
 import { usePhasesData } from "../../../utils/hooks/use-phases-data"
 import { ISize } from "@m2Types/generic/size"
+import { responsiveBoxIconClasses } from "../../../utils/constants/responsive-box-icon-classes"
 
 const EnergyShore = ({ componentMode = "compact", inputId, compactBoxSize }: Props) => {
   const { current, power, voltage } = useActiveInValues()
@@ -34,7 +35,7 @@ const EnergyShore = ({ componentMode = "compact", inputId, compactBoxSize }: Pro
 
   return (
     <ValueBox
-      icon={<ShorePowerIcon className="w-[18px] sm-s:w-[24px] sm-m:w-[32px]" />}
+      icon={<ShorePowerIcon className={responsiveBoxIconClasses} />}
       title={translate("boxes.shorePower")}
       value={phaseValueFor(phases, current, power)}
       unit={phaseUnitFor(phases)}

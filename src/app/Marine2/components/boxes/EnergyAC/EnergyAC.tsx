@@ -8,6 +8,7 @@ import { phaseValueFor } from "../../../utils/formatters/phase/phase-value-for"
 import { ComponentMode } from "@m2Types/generic/component-mode"
 import { ISize } from "@m2Types/generic/size"
 import { usePhasesData } from "../../../utils/hooks/use-phases-data"
+import { responsiveBoxIconClasses } from "../../../utils/constants/responsive-box-icon-classes"
 
 interface Props {
   componentMode?: ComponentMode
@@ -33,7 +34,7 @@ const EnergyAC = ({ componentMode = "compact", compactBoxSize }: Props) => {
   return (
     <ValueBox
       title={translate("boxes.acLoads")}
-      icon={<ACIcon className="w-[18px] sm-s:w-[24px] sm-m:w-[32px]" />}
+      icon={<ACIcon className={responsiveBoxIconClasses} />}
       value={phaseValueFor(phases, current, power)}
       unit={phaseUnitFor(phases)}
       bottomValues={phasesData}

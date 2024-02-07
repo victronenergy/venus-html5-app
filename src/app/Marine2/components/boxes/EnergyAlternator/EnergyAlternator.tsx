@@ -5,6 +5,7 @@ import { translate } from "react-i18nify"
 import ValueBox from "../../ui/ValueBox"
 import ValueOverview from "../../ui/ValueOverview"
 import { ComponentMode } from "@m2Types/generic/component-mode"
+import { responsiveBoxIconClasses } from "../../../utils/constants/responsive-box-icon-classes"
 
 const EnergyAlternator = ({ componentMode = "compact", alternator, showInstance, compactBoxSize }: Props) => {
   const { current, voltage } = useAlternator(alternator)
@@ -26,7 +27,7 @@ const EnergyAlternator = ({ componentMode = "compact", alternator, showInstance,
   return (
     <ValueBox
       title={translate("boxes.alternator") + instance}
-      icon={<AlternatorIcon className="w-[18px] sm-s:w-[24px] sm-m:w-[32px]" />}
+      icon={<AlternatorIcon className={responsiveBoxIconClasses} />}
       value={current}
       unit="A"
       bottomValues={[[{ value: power, unit: "W" }]]}

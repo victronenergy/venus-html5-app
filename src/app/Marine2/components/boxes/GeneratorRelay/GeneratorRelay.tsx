@@ -11,6 +11,7 @@ import GeneratorIcon from "../../../images/icons/generator.svg"
 import { usePhasesData } from "../../../utils/hooks/use-phases-data"
 import { phaseValueFor } from "../../../utils/formatters/phase/phase-value-for"
 import { generatorStateFor } from "../../../utils/formatters/devices/generator-relay/generator-state-for"
+import { responsiveBoxIconClasses } from "../../../utils/constants/responsive-box-icon-classes"
 
 interface Props {
   statusCode: number
@@ -63,7 +64,7 @@ const GeneratorRelay = ({
       subtitle={subTitle}
       bottomValues={active || statusCode === 1 ? phasesData : []}
       status={status}
-      icon={<GeneratorIcon className="w-[18px] sm-s:w-[24px] sm-m:w-[32px]" />}
+      icon={<GeneratorIcon className={responsiveBoxIconClasses} />}
       buttons={
         statusCode !== undefined ? (
           <AutoStartStopSetter

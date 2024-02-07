@@ -26,7 +26,7 @@ const Battery = ({ battery }: Props) => {
   if (isSimpleBattery) {
     return (
       <ValueBox
-        icon={<BatteryIcon className="w-[18px] sm-s:w-[24px] sm-m:w-[32px]" />}
+        icon={<BatteryIcon className={responsiveBoxIconClasses} />}
         title={battery.name}
         unit="V"
         value={battery.voltage}
