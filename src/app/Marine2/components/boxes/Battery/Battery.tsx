@@ -15,6 +15,10 @@ import { ValueWithUnit } from "@m2Types/data/value-with-units"
 import { ISize } from "@m2Types/generic/size"
 import { Styles } from "./Styles"
 
+interface Props {
+  battery: BatteryType
+}
+
 const Battery = ({ battery }: Props) => {
   const isSimpleBattery = !(battery.state || battery.state === 0)
   const [boxSize, setBoxSize] = useState<ISize>({ width: 0, height: 0 })
@@ -83,10 +87,6 @@ const batteryStateIconFormatter = function (state: number): JSX.Element {
       return <BatteryDischargingIcon className={className} />
   }
   return <BatteryIcon className={className} />
-}
-
-interface Props {
-  battery: BatteryType
 }
 
 export default Battery

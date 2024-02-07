@@ -77,7 +77,7 @@ const DevicesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: Pr
 
   return (
     <GridPaginator
-      childClassName={"p-1"}
+      childClassName="p-1"
       perPage={4}
       orientation={"horizontal"}
       pageSelectorPropsSetter={pageSelectorPropsSetter}
