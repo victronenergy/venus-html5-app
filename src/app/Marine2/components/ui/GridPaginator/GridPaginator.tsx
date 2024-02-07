@@ -56,7 +56,7 @@ const GridPaginator = ({
       forcePerPage = 1
     }
 
-    if (width < 800 && width > boxBreakpoints["md-l"].width && height < boxBreakpoints["lg-m"].height) {
+    if (width < 800 && width > boxBreakpoints["md-l"].width && height < boxBreakpoints["lg-l"].height) {
       setFixedFlow("row")
     }
 
