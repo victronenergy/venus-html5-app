@@ -57,7 +57,7 @@ const Box = ({
           onClick={handleClick}
         >
           {icon && <span className="mr-1 md:mr-2">{icon}</span>}
-          <FadedText text={title} className="text-base" />
+          <FadedText text={title} className={activeStyles?.valueSubtitle} />
         </div>
         {linkedView && (
           <div className="-mr-3 p-[12px] cursor-pointer" onClick={handleClick}>
