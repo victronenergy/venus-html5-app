@@ -2,7 +2,7 @@ import { translate } from "react-i18nify"
 import { BATTERY } from "../../../constants"
 import { timeAsStringFormatter } from "../../../formatters"
 
-export const batteryStateNameFor = (state: number, timetogo?: number): string | null => {
+export const batteryNameFor = (state: number, timetogo?: number): string | null => {
   switch (state) {
     case BATTERY.CHARGING:
       return translate("common.charging")

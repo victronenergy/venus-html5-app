@@ -1,5 +1,5 @@
 import ProgressCircle from "../../../components/ui/ProgressCircle"
-import { batteryStateNameFor } from "../../../utils/formatters/devices/battery/battery-state-name-for"
+import { batteryNameFor } from "../../../utils/formatters/devices/battery/battery-name-for"
 import { formatValue } from "../../../utils/formatters"
 import { Battery } from "@victronenergy/mfd-modules"
 import classNames from "classnames"
@@ -67,7 +67,7 @@ const BatterySummary = ({ battery, boxSize }: Props) => {
               </div>
             </div>
             <div className={classNames("text-victron-gray dark:text-victron-gray-dark", activeStyles.batteryState)}>
-              {batteryStateNameFor(battery.state, battery.timetogo ?? null)}
+              {batteryNameFor(battery.state, battery.timetogo ?? null)}
             </div>
           </div>
         ) : (

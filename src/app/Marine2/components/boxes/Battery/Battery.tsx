@@ -1,19 +1,19 @@
 import { useState } from "react"
 import classNames from "classnames"
-import Box from "../../ui/Box"
+import { Styles } from "./Styles"
+import { ISize } from "@m2Types/generic/size"
+import { ValueWithUnit } from "@m2Types/data/value-with-units"
 import { Battery as BatteryType } from "@victronenergy/mfd-modules"
-import { batteryStateNameFor } from "../../../utils/formatters/devices/battery/battery-state-name-for"
-import { colorForPercentageFormatter } from "../../../utils/formatters"
-import { BATTERY } from "../../../utils/constants"
-import BatteryChargingIcon from "../../../images/icons/battery-charging.svg"
-import BatteryIcon from "../../../images/icons/battery.svg"
-import BatteryDischargingIcon from "../../../images/icons/battery-discharging.svg"
 import { applyStyles, StylesType } from "app/Marine2/utils/media"
+import Box from "../../ui/Box"
 import ValueBar from "../../ui/ValueBar"
 import ValueBox from "../../ui/ValueBox"
-import { ValueWithUnit } from "@m2Types/data/value-with-units"
-import { ISize } from "@m2Types/generic/size"
-import { Styles } from "./Styles"
+import { batteryNameFor } from "../../../utils/formatters/devices/battery/battery-name-for"
+import { batteryIconFor } from "../../../utils/formatters/devices/battery/battery-icon-for"
+import { responsiveBoxIconClasses } from "../../../utils/constants/responsive-box-icon-classes"
+import { colorForPercentageFormatter } from "../../../utils/formatters"
+
+import BatteryIcon from "../../../images/icons/battery.svg"
 
 interface Props {
   battery: BatteryType
@@ -53,7 +53,7 @@ const Battery = ({ battery }: Props) => {
   ]
 
   return (
-    <Box title={battery.name} icon={batteryStateIconFormatter(battery.state)} getBoxSizeCallback={setBoxSize}>
+    <Box title={battery.name} icon={batteryIconFor(battery.state)} getBoxSizeCallback={setBoxSize}>
       <div className="w-full h-full flex flex-col justify-between">
         <div>
           <div className={classNames(colorClasses, activeStyles?.value)}>
@@ -61,7 +61,7 @@ const Battery = ({ battery }: Props) => {
             <span className="pl-0.5 opacity-70">%</span>
           </div>
           <div className={classNames("text-victron-gray-300 dark:text-victron-gray-500", activeStyles.valueSubtitle)}>
-            <p>{batteryStateNameFor(battery.state, battery.timetogo ?? null)}</p>
+            <p>{batteryNameFor(battery.state, battery.timetogo ?? null)}</p>
             {battery.temperature && (
               <p>
                 {Math.round(battery.temperature)}
@@ -76,17 +76,6 @@ const Battery = ({ battery }: Props) => {
       </div>
     </Box>
   )
-}
-
-const batteryStateIconFormatter = function (state: number): JSX.Element {
-  const className = "w-[18px] sm-s:w-[24px] sm-m:w-[32px]"
-  switch (state) {
-    case BATTERY.CHARGING:
-      return <BatteryChargingIcon className={className} />
-    case BATTERY.DISCHARGING:
-      return <BatteryDischargingIcon className={className} />
-  }
-  return <BatteryIcon className={className} />
 }
 
 export default Battery
