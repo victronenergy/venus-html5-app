@@ -1,4 +1,4 @@
-import { translate } from "react-i18nify"import { translate } from "react-i18nify"
+import { translate } from "react-i18nify"
 import { DcLoadsState } from "@victronenergy/mfd-modules"
 import DCIcon from "../../../images/icons/dc.svg"
 import ValueBox from "../../ui/ValueBox"
