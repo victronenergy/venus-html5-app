@@ -10,11 +10,11 @@ export const RELAY_FUNCTION = {
 }
 
 type T_GENSET_STATE = {
-  STANDBY: number,
-  STARTING: number[],
-  RUNNING: number,
-  STOPPING: number,
-  ERROR: number,
+  STANDBY: number
+  STARTING: number[]
+  RUNNING: number
+  STOPPING: number
+  ERROR: number
 }
 
 export const GENSET_STATE: T_GENSET_STATE = {
