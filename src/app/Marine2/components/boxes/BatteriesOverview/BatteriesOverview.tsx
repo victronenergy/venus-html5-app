@@ -18,6 +18,7 @@ import { applyStyles, defaultBoxStyles } from "../../../utils/media"
 import { ComponentMode } from "@m2Types/generic/component-mode"
 import { BOX_TYPES } from "../../../utils/constants/generic"
 import { BATTERY } from "../../../utils/constants/devices/batteries"
+import { ISize } from "@m2Types/generic/size"
 
 interface Props {
   componentMode?: ComponentMode
@@ -26,7 +27,7 @@ interface Props {
 
 const BatteriesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: Props) => {
   const { batteries } = useBattery()
-  const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
+  const [boxSize, setBoxSize] = useState<ISize>({ width: 0, height: 0 })
 
   useVisibilityNotifier({ widgetName: BOX_TYPES.BATTERIES, visible: !!(batteries && batteries.length) })
 

@@ -7,6 +7,14 @@ import ValueBox from "../../ui/ValueBox"
 import ValueOverview from "../../ui/ValueOverview"
 import { ComponentMode } from "@m2Types/generic/component-mode"
 import { responsiveBoxIcon } from "../../../utils/helpers/classes/responsive-box-icon"
+import { ISize } from "@m2Types/generic/size"
+
+interface Props {
+  windGenerator: number
+  showInstance: boolean
+  componentMode?: ComponentMode
+  compactBoxSize?: ISize
+}
 
 const EnergyWind = ({ componentMode = "compact", windGenerator, showInstance, compactBoxSize }: Props) => {
   const { current, voltage } = useWindGenerator(windGenerator)
@@ -35,13 +43,6 @@ const EnergyWind = ({ componentMode = "compact", windGenerator, showInstance, co
       bottomValues={[[{ value: power, unit: "W", hideDecimal: true }]]}
     />
   )
-}
-
-interface Props {
-  windGenerator: number
-  showInstance: boolean
-  componentMode?: ComponentMode
-  compactBoxSize?: { width: number; height: number }
 }
 
 export default observer(EnergyWind)

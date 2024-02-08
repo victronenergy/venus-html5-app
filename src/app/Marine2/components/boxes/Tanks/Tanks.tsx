@@ -8,13 +8,13 @@ import Tank from "./Tank/Tank"
 import { AppViews } from "../../../modules/AppViews"
 import { translate } from "react-i18nify"
 import { useVisibilityNotifier } from "../../../modules"
-import ResizeObserver from "resize-observer-polyfill"
 import useSize from "@react-hook/size"
 import { applyStyles, defaultBoxStyles } from "../../../utils/media"
 import classNames from "classnames"
 import { ComponentMode } from "@m2Types/generic/component-mode"
 import { ScreenOrientation } from "@m2Types/generic/screen-orientation"
 import { BOX_TYPES } from "../../../utils/constants/generic"
+import { ISize } from "@m2Types/generic/size"
 
 interface Props {
   componentMode?: ComponentMode
@@ -25,8 +25,7 @@ const Tanks = ({ componentMode = "full", className }: Props) => {
   const { tanks } = useTanks()
   const filteredTanks = (tanks || []).filter((tank) => !!tank || tank === 0)
 
-  const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
-  const [levelWidth, setLevelWidth] = useState(0)
+  const [boxSize, setBoxSize] = useState<ISize>({ width: 0, height: 0 })
 
   useVisibilityNotifier({ widgetName: BOX_TYPES.TANKS, visible: !!filteredTanks.length })
 
@@ -41,50 +40,13 @@ const Tanks = ({ componentMode = "full", className }: Props) => {
   useEffect(() => {
     if (!windowSize.width || !windowSize.height) return
 
-    if (windowSize.width > 3 * windowSize.height) {
-      setOrientation("horizontal")
-    } else {
-      setOrientation("vertical")
-    }
+    const orientation = windowSize.width > 3 * windowSize.height
+      ? "horizontal"
+      : "vertical"
+
+    setOrientation(orientation)
+
   }, [windowSize])
-
-  useEffect(() => {
-    if (!gridRef.current) return
-
-    const observer = new ResizeObserver(getColumnsWidth)
-    observer.observe(gridRef.current)
-    return () => {
-      observer.disconnect()
-    }
-  }, [gridRef])
-
-  useEffect(() => {
-    if (!tankRef.current) return
-
-    const observer = new ResizeObserver(getColumnsWidth)
-    observer.observe(tankRef.current)
-    return () => {
-      observer.disconnect()
-    }
-  }, [tankRef])
-
-  // set the maximum width of the name and level of all the tanks
-  const getColumnsWidth = () => {
-    // wait for styles to be applied
-    setTimeout(() => {
-      const levels = document.querySelectorAll(".tank-level")
-      let max = 0
-      levels.forEach((level) => {
-        if (level.clientWidth > max) {
-          max = level.clientWidth
-        }
-      })
-
-      if (max > 0) {
-        setLevelWidth(max)
-      }
-    }, 0)
-  }
 
   if (componentMode === "compact") {
     return (
@@ -104,7 +66,6 @@ const Tanks = ({ componentMode = "full", className }: Props) => {
               key={tank}
               tankInstanceId={Number(tank)}
               parentSize={boxSize}
-              levelWidth={levelWidth}
             />
           </div>
         ))}
@@ -131,7 +92,6 @@ const Tanks = ({ componentMode = "full", className }: Props) => {
                   componentMode="full"
                   orientation={orientation}
                   parentSize={{ width, height }}
-                  levelWidth={levelWidth}
                 />
               )
             })}
@@ -157,7 +117,6 @@ const Tanks = ({ componentMode = "full", className }: Props) => {
                   componentMode="full"
                   orientation={orientation}
                   parentSize={{ width, height }}
-                  levelWidth={levelWidth}
                 />
               ))}
             </div>

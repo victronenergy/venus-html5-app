@@ -12,6 +12,7 @@ import { PageSelectorProps } from "../../ui/PageSelector"
 import { translate } from "react-i18nify"
 import { ComponentMode } from "@m2Types/generic/component-mode"
 import { BOX_TYPES } from "../../../utils/constants/generic"
+import { ISize } from "@m2Types/generic/size"
 
 interface Props {
   componentMode?: ComponentMode
@@ -25,7 +26,7 @@ export const VisibleComponentsContext = createContext({
 const EnvironmentOverview = ({ componentMode = "full", pageSelectorPropsSetter }: Props) => {
   const { temperatures } = useTemperatures()
   const [visibleElements, setVisibleElements] = useState({})
-  const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
+  const [boxSize, setBoxSize] = useState<ISize>({ width: 0, height: 0 })
 
   const passVisibility = useCallback((id: number, visible: boolean) => {
     setVisibleElements((prev) => ({ ...prev, [id]: visible }))

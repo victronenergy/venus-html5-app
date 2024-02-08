@@ -1,15 +1,16 @@
+import { translate } from "react-i18nify"import { translate } from "react-i18nify"
 import { DcLoadsState } from "@victronenergy/mfd-modules"
 import DCIcon from "../../../images/icons/dc.svg"
-import { translate } from "react-i18nify"
 import ValueBox from "../../ui/ValueBox"
 import ValueOverview from "../../ui/ValueOverview"
 import { ComponentMode } from "@m2Types/generic/component-mode"
 import { responsiveBoxIcon } from "../../../utils/helpers/classes/responsive-box-icon"
+import { ISize } from "@m2Types/generic/size"
 
 interface Props {
   dcLoads: DcLoadsState
   componentMode?: ComponentMode
-  compactBoxSize?: { width: number; height: number }
+  compactBoxSize?: ISize
 }
 
 const EnergyDC = ({ componentMode = "compact", dcLoads, compactBoxSize }: Props) => {

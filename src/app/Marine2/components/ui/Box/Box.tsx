@@ -9,6 +9,7 @@ import FadedText from "../FadedText"
 import { Modal } from "../Modal"
 import { ScreenOrientation } from "@m2Types/generic/screen-orientation"
 import { applyStyles, defaultBoxStyles } from "../../../utils/media"
+import { ISize } from "@m2Types/generic/size"
 
 export interface BoxProps {
   children: JSX.Element[] | JSX.Element | string
@@ -20,7 +21,7 @@ export interface BoxProps {
   headerActions?: JSX.Element
   withPagination?: boolean
   paginationOrientation?: ScreenOrientation
-  getBoxSizeCallback?: (size: { width: number; height: number }) => void
+  getBoxSizeCallback?: (size: ISize) => void
   setRef?: RefObject<HTMLDivElement>
 }
 

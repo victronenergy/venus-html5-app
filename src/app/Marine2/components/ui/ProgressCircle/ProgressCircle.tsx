@@ -1,7 +1,7 @@
 import classNames from "classnames"
-
 import { applyStyles, BreakpointStylesType } from "../../../utils/media"
 import { colorFor } from "../../../utils/formatters/generic"
+import { ISize } from "@m2Types/generic/size"
 
 const styles: BreakpointStylesType = {
   default: {
@@ -16,6 +16,13 @@ const styles: BreakpointStylesType = {
   "lg-m": {
     percentage: "text-2xl",
   },
+}
+
+interface Props {
+  percentage: number
+  children?: JSX.Element
+  boxSize: ISize
+  batteryTitle?: string
 }
 
 const ProgressCircle = ({ percentage, children, boxSize, batteryTitle }: Props) => {
@@ -66,13 +73,6 @@ const ProgressCircle = ({ percentage, children, boxSize, batteryTitle }: Props) 
       </div>
     </div>
   )
-}
-
-interface Props {
-  percentage: number
-  children?: JSX.Element
-  boxSize: { width: number; height: number }
-  batteryTitle?: string
 }
 
 export default ProgressCircle

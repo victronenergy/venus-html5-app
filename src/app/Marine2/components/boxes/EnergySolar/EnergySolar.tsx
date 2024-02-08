@@ -6,6 +6,7 @@ import ValueBox from "../../ui/ValueBox"
 import ValueOverview from "../../ui/ValueOverview"
 import { ComponentMode } from "@m2Types/generic/component-mode"
 import { responsiveBoxIcon } from "../../../utils/helpers/classes/responsive-box-icon"
+import { ISize } from "@m2Types/generic/size"
 
 const EnergySolar = ({ componentMode = "compact", pvCharger, compactBoxSize }: Props) => {
   const { current, power } = pvCharger
@@ -36,7 +37,7 @@ const EnergySolar = ({ componentMode = "compact", pvCharger, compactBoxSize }: P
 interface Props {
   pvCharger: PvChargerState
   componentMode?: ComponentMode
-  compactBoxSize?: { width: number; height: number }
+  compactBoxSize?: ISize
 }
 
 export default EnergySolar

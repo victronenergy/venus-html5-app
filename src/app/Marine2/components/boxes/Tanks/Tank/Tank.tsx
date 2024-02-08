@@ -8,7 +8,6 @@ import { applyStyles, StylesType } from "../../../../utils/media"
 import useSize from "@react-hook/size"
 import { ComponentMode } from "@m2Types/generic/component-mode"
 import { compactStyles, horizontalStyles, verticalStyles } from "./Styles"
-
 import { formatLevelFor } from "../../../../utils/formatters/devices/tanks/format-level-for"
 import { FluidIcon } from "./FluidIcon/FluidIcon"
 import { ValueWithPercentage } from "./ValueWithPercentage/ValueWithPercentage"
@@ -18,13 +17,12 @@ import { FLUID_TRANSLATIONS } from "../../../../utils/constants/devices/tanks"
 
 interface Props {
   tankInstanceId: number
-  levelWidth?: number
   componentMode?: ComponentMode
   orientation?: ScreenOrientation
   parentSize?: ISize
 }
 
-const Tank = ({ tankInstanceId, componentMode, levelWidth, orientation = "vertical", parentSize }: Props) => {
+const Tank = ({ tankInstanceId, componentMode, orientation = "vertical", parentSize }: Props) => {
   let { capacity, fluidType, level, remaining, customName, unit } = useTank(tankInstanceId)
   const fluidTypeNum = +fluidType
   const wrapperRef = useRef<HTMLDivElement>(null)

@@ -8,11 +8,12 @@ import { useContext, useEffect, useCallback } from "react"
 import { VisibleComponentsContext } from "./EnvironmentOverview"
 import { ComponentMode } from "@m2Types/generic/component-mode"
 import { AdditionalInformation } from "../GeneratorFp/AdditionalInformation/AdditionalInformation"
+import { ISize } from "@m2Types/generic/size"
 
 interface Props {
   dataId: number
   componentMode?: ComponentMode
-  boxSize: { width: number; height: number }
+  boxSize: ISize
 }
 
 const HumidityData = ({ dataId, componentMode, boxSize }: Props) => {
