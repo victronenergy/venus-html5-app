@@ -13,7 +13,6 @@ interface Props {
 }
 
 const SizeChangeObserver = ({ children, onSizeChange, orientation, className = "", style }: Props) => {
-
   const containerRef = useRef<HTMLDivElement>(null)
 
   const [width, height] = useSize(containerRef)

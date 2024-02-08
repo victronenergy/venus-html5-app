@@ -40,12 +40,9 @@ const Tanks = ({ componentMode = "full", className }: Props) => {
   useEffect(() => {
     if (!windowSize.width || !windowSize.height) return
 
-    const orientation = windowSize.width > 3 * windowSize.height
-      ? "horizontal"
-      : "vertical"
+    const orientation = windowSize.width > 3 * windowSize.height ? "horizontal" : "vertical"
 
     setOrientation(orientation)
-
   }, [windowSize])
 
   if (componentMode === "compact") {
@@ -61,12 +58,7 @@ const Tanks = ({ componentMode = "full", className }: Props) => {
       >
         {filteredTanks.map((tank) => (
           <div ref={tankRef} key={tank}>
-            <Tank
-              componentMode="compact"
-              key={tank}
-              tankInstanceId={Number(tank)}
-              parentSize={boxSize}
-            />
+            <Tank componentMode="compact" key={tank} tankInstanceId={Number(tank)} parentSize={boxSize} />
           </div>
         ))}
       </Box>
