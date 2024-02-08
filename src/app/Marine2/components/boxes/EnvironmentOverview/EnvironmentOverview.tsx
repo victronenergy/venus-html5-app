@@ -2,7 +2,6 @@ import { observer } from "mobx-react-lite"
 import { useTemperatures, TemperatureInstanceId } from "@victronenergy/mfd-modules"
 import { useState, createContext, useCallback } from "react"
 import { useVisibilityNotifier } from "../../../modules"
-import { BoxTypes } from "../../../utils/constants"
 import Box from "../../ui/Box"
 import TemperatureData from "./TemperatureData"
 import HumidityData from "./HumidityData"
@@ -12,6 +11,7 @@ import GridPaginator from "../../ui/GridPaginator"
 import { PageSelectorProps } from "../../ui/PageSelector"
 import { translate } from "react-i18nify"
 import { ComponentMode } from "@m2Types/generic/component-mode"
+import { BOX_TYPES } from "../../../utils/constants/generic"
 
 interface Props {
   componentMode?: ComponentMode
@@ -60,7 +60,7 @@ const EnvironmentOverview = ({ componentMode = "full", pageSelectorPropsSetter }
 
   const components = [...temperatureComponents, ...humidityComponents, ...pressureComponents] as JSX.Element[]
 
-  useVisibilityNotifier({ widgetName: BoxTypes.ENVIRONMENT, visible: Object.values(visibleElements).includes(true) })
+  useVisibilityNotifier({ widgetName: BOX_TYPES.ENVIRONMENT, visible: Object.values(visibleElements).includes(true) })
 
   if (componentMode === "compact") {
     return (

@@ -10,9 +10,8 @@ import ValueBar from "../../ui/ValueBar"
 import ValueBox from "../../ui/ValueBox"
 import { batteryNameFor } from "../../../utils/formatters/devices/battery/battery-name-for"
 import { batteryIconFor } from "../../../utils/formatters/devices/battery/battery-icon-for"
-import { responsiveBoxIconClasses } from "../../../utils/constants/responsive-box-icon-classes"
-import { colorForPercentageFormatter } from "../../../utils/formatters"
-
+import { responsiveBoxIcon } from "../../../utils/helpers/classes/responsive-box-icon"
+import { colorFor } from "../../../utils/formatters/generic"
 import BatteryIcon from "../../../images/icons/battery.svg"
 
 interface Props {
@@ -26,7 +25,7 @@ const Battery = ({ battery }: Props) => {
   if (isSimpleBattery) {
     return (
       <ValueBox
-        icon={<BatteryIcon className={responsiveBoxIconClasses} />}
+        icon={<BatteryIcon className={responsiveBoxIcon} />}
         title={battery.name}
         unit="V"
         value={battery.voltage}
@@ -36,7 +35,7 @@ const Battery = ({ battery }: Props) => {
   }
 
   const hasPercentage = battery.soc !== undefined && battery.soc !== null
-  const color = hasPercentage ? colorForPercentageFormatter(Math.round(battery.soc)) : "victron-gray"
+  const color = hasPercentage ? colorFor(Math.round(battery.soc)) : "victron-gray"
   const colorClasses = classNames({
     "text-victron-red dark:text-victron-red-dark": color === "victron-red",
     "text-victron-yellow dark:text-victron-yellow-dark": color === "victron-yellow",

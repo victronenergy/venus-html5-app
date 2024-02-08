@@ -1,5 +1,5 @@
 import { translate } from "react-i18nify"
-import { INVERTER_MODE } from "../../../constants"
+import { INVERTER_MODE } from "../../../constants/devices/inverters"
 
 export const formatModeFor = (value: number) => {
   switch (Number(value)) {

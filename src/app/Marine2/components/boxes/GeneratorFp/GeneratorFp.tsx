@@ -6,12 +6,12 @@ import GeneratorIcon from "../../../images/icons/generator.svg"
 import AutoStartStopSetter from "../../ui/AutoStartStopSetter"
 import ValueOverview from "../../ui/ValueOverview"
 import ValueBox from "../../ui/ValueBox"
-import { GENSET_STATE } from "../../../utils/constants"
 import { usePhasesData } from "../../../utils/hooks/use-phases-data"
 import { phaseValueFor } from "../../../utils/formatters/phase/phase-value-for"
 import { phaseUnitFor } from "../../../utils/formatters/phase/phase-unit-for"
 import { AdditionalInformation } from "./AdditionalInformation/AdditionalInformation"
 import { ISize } from "@m2Types/generic/size"
+import { GENSET_STATE } from "../../../utils/constants/devices/generators"
 
 interface Props {
   componentMode?: ComponentMode

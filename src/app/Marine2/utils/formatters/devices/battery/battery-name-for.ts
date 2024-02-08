@@ -1,6 +1,6 @@
 import { translate } from "react-i18nify"
-import { BATTERY } from "../../../constants"
-import { timeAsStringFormatter } from "../../../formatters"
+import { BATTERY } from "../../../constants/devices/batteries"
+import { timeAsStringFormatter } from "../../generic"
 
 export const batteryNameFor = (state: number, timetogo?: number): string | null => {
   switch (state) {

@@ -23,13 +23,14 @@ import Inverter from "../Inverter"
 import GeneratorFp from "../GeneratorFp"
 import InverterCharger from "../InverterCharger"
 import { useVisibilityNotifier } from "../../../modules"
-import { AC_SOURCE, BoxTypes, RELAY_FUNCTION } from "../../../utils/constants"
 import { PageSelectorProps } from "../../ui/PageSelector"
 import GridPaginator from "../../ui/GridPaginator"
 import GeneratorRelay from "../GeneratorRelay/GeneratorRelay"
 import { applyStyles, defaultBoxStyles } from "../../../utils/media"
 import { ComponentMode } from "@m2Types/generic/component-mode"
 import { ISize } from "@m2Types/generic/size"
+import { AC_SOURCE, BOX_TYPES } from "../../../utils/constants/generic"
+import { RELAY_FUNCTION } from "../../../utils/constants/devices/generators"
 
 const DevicesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: Props) => {
   const { inverters } = useInverters()
@@ -50,7 +51,7 @@ const DevicesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: Pr
     componentMode
   )
 
-  useVisibilityNotifier({ widgetName: BoxTypes.DEVICES, visible: !!boxes.length })
+  useVisibilityNotifier({ widgetName: BOX_TYPES.DEVICES, visible: !!boxes.length })
 
   if (!boxes.length) {
     return null

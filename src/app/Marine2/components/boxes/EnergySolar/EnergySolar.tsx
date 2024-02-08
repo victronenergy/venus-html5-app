@@ -5,7 +5,7 @@ import { translate } from "react-i18nify"
 import ValueBox from "../../ui/ValueBox"
 import ValueOverview from "../../ui/ValueOverview"
 import { ComponentMode } from "@m2Types/generic/component-mode"
-import { responsiveBoxIconClasses } from "../../../utils/constants/responsive-box-icon-classes"
+import { responsiveBoxIcon } from "../../../utils/helpers/classes/responsive-box-icon"
 
 const EnergySolar = ({ componentMode = "compact", pvCharger, compactBoxSize }: Props) => {
   const { current, power } = pvCharger
@@ -25,7 +25,7 @@ const EnergySolar = ({ componentMode = "compact", pvCharger, compactBoxSize }: P
   return (
     <ValueBox
       title={translate("boxes.solar")}
-      icon={<SolarIcon className={responsiveBoxIconClasses} />}
+      icon={<SolarIcon className={responsiveBoxIcon} />}
       bottomValues={[[{ value: power, unit: "W", hideDecimal: true }]]}
       value={current}
       unit="A"

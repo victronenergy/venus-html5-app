@@ -1,7 +1,7 @@
 import { FC } from "react"
 import { powerValueFor } from "../../../utils/formatters/power/power-value-for"
 import { powerUnitFor } from "../../../utils/formatters/power/power-unit-for"
-import { formatValue } from "../../../utils/formatters"
+import { formatValue } from "../../../utils/formatters/generic"
 import { unit } from "@m2Types/data/unit"
 import { Unit } from "./Unit/Unit"
 import { TForcePowerUnit } from "@m2Types/data/force-power-unit"

@@ -4,7 +4,6 @@ import { observer } from "mobx-react-lite"
 import range from "lodash-es/range"
 import { Battery as BatteryType, useBattery } from "@victronenergy/mfd-modules"
 import Box from "../../ui/Box"
-import { BATTERY, BoxTypes } from "../../../utils/constants"
 import Battery from "../Battery"
 import BatteriesIcon from "../../../images/icons/batteries.svg"
 import BatterySummary from "../../ui/BatterySummary"
@@ -17,6 +16,8 @@ import { boxBreakpoints } from "../../../utils/media"
 import PageFlipper from "../../ui/PageFlipper"
 import { applyStyles, defaultBoxStyles } from "../../../utils/media"
 import { ComponentMode } from "@m2Types/generic/component-mode"
+import { BOX_TYPES } from "../../../utils/constants/generic"
+import { BATTERY } from "../../../utils/constants/devices/batteries"
 
 interface Props {
   componentMode?: ComponentMode
@@ -27,7 +28,7 @@ const BatteriesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: 
   const { batteries } = useBattery()
   const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
 
-  useVisibilityNotifier({ widgetName: BoxTypes.BATTERIES, visible: !!(batteries && batteries.length) })
+  useVisibilityNotifier({ widgetName: BOX_TYPES.BATTERIES, visible: !!(batteries && batteries.length) })
 
   const sortedBatteries = sortBatteries(batteries ?? [])
   const overviewBatteries = getOverviewBatteries(sortedBatteries)

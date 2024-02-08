@@ -1,5 +1,16 @@
 import { Replacements, TranslateOptions } from "react-i18nify"
 
+export const colorFor = function (percentage: number) {
+  if (percentage <= 12) {
+    return "victron-red"
+  } else if (percentage <= 40) {
+    return "victron-yellow"
+  } else if (percentage === 100) {
+    return "victron-blue"
+  }
+  return "victron-green"
+}
+
 export const timeAsStringFormatter = function (
   t: (key: string, replacements?: Replacements, options?: TranslateOptions) => string,
   timeInSeconds: number
@@ -9,17 +20,6 @@ export const timeAsStringFormatter = function (
   return (
     (hours ? hours + t("common.hours_short") + " " : "") + (minutes || hours ? minutes + t("common.minutes_short") : "")
   )
-}
-
-export const colorForPercentageFormatter = function (percentage: number) {
-  if (percentage <= 12) {
-    return "victron-red"
-  } else if (percentage <= 40) {
-    return "victron-yellow"
-  } else if (percentage === 100) {
-    return "victron-blue"
-  }
-  return "victron-green"
 }
 
 export const formatValue = (value?: number, decimalPlaces: number = 1): string => {

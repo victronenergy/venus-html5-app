@@ -1,6 +1,6 @@
 import { FC } from "react"
 import { translate } from "react-i18nify"
-import { inverterOptionsFor } from "../../../../../utils/helpers/devices/inverter-options-for"
+import { inverterOptionsFor } from "../../../../../utils/helpers/devices/inverters/inverter-options-for"
 import { OptionList } from "../../../../ui/OptionList/OptionList"
 import { RadioOption } from "../../../../ui/OptionList/RadioOption/RadioOption"
 

@@ -8,12 +8,13 @@ import { applyStyles, StylesType } from "../../../../utils/media"
 import useSize from "@react-hook/size"
 import { ComponentMode } from "@m2Types/generic/component-mode"
 import { compactStyles, horizontalStyles, verticalStyles } from "./Styles"
-import { FLUID_TRANSLATIONS } from "../../../../utils/constants/fluids"
+
 import { formatLevelFor } from "../../../../utils/formatters/devices/tanks/format-level-for"
 import { FluidIcon } from "./FluidIcon/FluidIcon"
 import { ValueWithPercentage } from "./ValueWithPercentage/ValueWithPercentage"
 import { Capacity } from "./Capacity/Capacity"
 import { ScreenOrientation } from "@m2Types/generic/screen-orientation"
+import { FLUID_TRANSLATIONS } from "../../../../utils/constants/devices/tanks"
 
 interface Props {
   tankInstanceId: number

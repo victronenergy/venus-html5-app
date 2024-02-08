@@ -6,7 +6,7 @@ import { translate } from "react-i18nify"
 import ValueBox from "../../ui/ValueBox"
 import ValueOverview from "../../ui/ValueOverview"
 import { ComponentMode } from "@m2Types/generic/component-mode"
-import { responsiveBoxIconClasses } from "../../../utils/constants/responsive-box-icon-classes"
+import { responsiveBoxIcon } from "../../../utils/helpers/classes/responsive-box-icon"
 
 const EnergyWind = ({ componentMode = "compact", windGenerator, showInstance, compactBoxSize }: Props) => {
   const { current, voltage } = useWindGenerator(windGenerator)
@@ -29,7 +29,7 @@ const EnergyWind = ({ componentMode = "compact", windGenerator, showInstance, co
   return (
     <ValueBox
       title={translate("boxes.windGenerator") + instance}
-      icon={<WindIcon className={responsiveBoxIconClasses} />}
+      icon={<WindIcon className={responsiveBoxIcon} />}
       value={current}
       unit="A"
       bottomValues={[[{ value: power, unit: "W", hideDecimal: true }]]}

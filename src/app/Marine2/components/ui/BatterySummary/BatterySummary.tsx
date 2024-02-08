@@ -1,6 +1,6 @@
 import ProgressCircle from "../../../components/ui/ProgressCircle"
 import { batteryNameFor } from "../../../utils/formatters/devices/battery/battery-name-for"
-import { formatValue } from "../../../utils/formatters"
+import { formatValue } from "../../../utils/formatters/generic"
 import { Battery } from "@victronenergy/mfd-modules"
 import classNames from "classnames"
 import { applyStyles, BreakpointStylesType } from "../../../utils/media"

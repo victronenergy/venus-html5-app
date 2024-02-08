@@ -1,5 +1,5 @@
 import { FC } from "react"
-import { formatValue } from "../../../utils/formatters"
+import { formatValue } from "../../../utils/formatters/generic"
 
 interface Props {
   decreaseLimit: () => void

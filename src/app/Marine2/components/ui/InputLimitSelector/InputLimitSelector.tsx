@@ -3,7 +3,7 @@ import { translate } from "react-i18nify"
 import { observer } from "mobx-react"
 import { useAppStore, useInputLimit, useInputLimitSelector } from "@victronenergy/mfd-modules"
 import DeviceSettingModal from "../DeviceSettingModal"
-import { formatValue } from "../../../utils/formatters"
+
 import { AmpList } from "./AmpList/AmpList"
 import Button from "../Button"
 import { LimitAdjuster } from "../LimitAdjuster/LimitAdjuster"
@@ -13,6 +13,7 @@ import {
   currentStepIncrementFor,
   isCurrentStepDividable,
 } from "../../../utils/helpers/current-limit-adjuster"
+import { formatValue } from "../../../utils/formatters/generic"
 
 interface Props {
   inputId: number

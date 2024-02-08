@@ -1,6 +1,7 @@
 import classNames from "classnames"
-import { colorForPercentageFormatter } from "../../../utils/formatters"
+
 import { applyStyles, BreakpointStylesType } from "../../../utils/media"
+import { colorFor } from "../../../utils/formatters/generic"
 
 const styles: BreakpointStylesType = {
   default: {
@@ -21,7 +22,7 @@ const ProgressCircle = ({ percentage, children, boxSize, batteryTitle }: Props) 
   const activeStyles = applyStyles(boxSize, styles)
   const hasPercentage = percentage !== null
   const roundedPercentage = Math.round(percentage)
-  const color = hasPercentage ? colorForPercentageFormatter(roundedPercentage) : "victron-gray-400"
+  const color = hasPercentage ? colorFor(roundedPercentage) : "victron-gray-400"
   const strokeClasses = classNames("fill-none stroke-16", {
     "stroke-victron-green dark:stroke-victron-green-dark": color === "victron-green",
     "stroke-victron-yellow dark:stroke-victron-yellow-dark": color === "victron-yellow",

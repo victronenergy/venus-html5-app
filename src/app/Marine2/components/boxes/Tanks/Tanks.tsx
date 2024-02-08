@@ -8,13 +8,13 @@ import Tank from "./Tank/Tank"
 import { AppViews } from "../../../modules/AppViews"
 import { translate } from "react-i18nify"
 import { useVisibilityNotifier } from "../../../modules"
-import { BoxTypes } from "../../../utils/constants"
 import ResizeObserver from "resize-observer-polyfill"
 import useSize from "@react-hook/size"
 import { applyStyles, defaultBoxStyles } from "../../../utils/media"
 import classNames from "classnames"
 import { ComponentMode } from "@m2Types/generic/component-mode"
 import { ScreenOrientation } from "@m2Types/generic/screen-orientation"
+import { BOX_TYPES } from "../../../utils/constants/generic"
 
 interface Props {
   componentMode?: ComponentMode
@@ -28,7 +28,7 @@ const Tanks = ({ componentMode = "full", className }: Props) => {
   const [boxSize, setBoxSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
   const [levelWidth, setLevelWidth] = useState(0)
 
-  useVisibilityNotifier({ widgetName: BoxTypes.TANKS, visible: !!filteredTanks.length })
+  useVisibilityNotifier({ widgetName: BOX_TYPES.TANKS, visible: !!filteredTanks.length })
 
   const gridRef = useRef<HTMLDivElement>(null)
   const tankRef = useRef<HTMLDivElement>(null)

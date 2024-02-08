@@ -7,13 +7,13 @@ import EnergyIcon from "../../../images/icons/energy.svg"
 import { useVebus } from "@victronenergy/mfd-modules"
 import { AppViews } from "../../../modules/AppViews"
 import { useVisibilityNotifier } from "../../../modules"
-import { BoxTypes } from "../../../utils/constants"
 import GridPaginator from "../../ui/GridPaginator"
 import { PageSelectorProps } from "../../ui/PageSelector"
 import { applyStyles, defaultBoxStyles } from "../../../utils/media"
 import { ComponentMode } from "@m2Types/generic/component-mode"
 import { useAvailableEnergyBoxes } from "../../../utils/hooks/use-available-energy-boxes"
 import { ISize } from "@m2Types/generic/size"
+import { BOX_TYPES } from "../../../utils/constants/generic"
 
 interface Props {
   componentMode?: ComponentMode
@@ -28,7 +28,7 @@ const EnergyOverview: FC<Props> = ({ componentMode = "full", pageSelectorPropsSe
   const activeStyles = applyStyles(compactBoxSize, defaultBoxStyles)
 
   // TODO: it seems that visibility logic can be improved since the energy component always has an overview box
-  useVisibilityNotifier({ widgetName: BoxTypes.ENERGY, visible: boxes.length > 0 })
+  useVisibilityNotifier({ widgetName: BOX_TYPES.ENERGY, visible: boxes.length > 0 })
 
   if (!boxes.length) {
     return null

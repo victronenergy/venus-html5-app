@@ -1,4 +1,4 @@
-import { VEBUS_SYSTEM_STATE } from "../../constants"
+import { VEBUS_SYSTEM_STATE } from "../../constants/generic"
 
 export const formatStateFor = (state: number) => {
   switch (state) {

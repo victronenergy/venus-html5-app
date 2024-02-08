@@ -4,8 +4,8 @@ import { translate } from "react-i18nify"
 import RadioButton from "../RadioButton"
 import Button from "../Button"
 import { useCallback, useEffect, useState } from "react"
-import { GENERATOR_START_STOP } from "../../../utils/constants"
 import { useAppStore } from "@victronenergy/mfd-modules"
+import { GENERATOR_START_STOP } from "../../../utils/constants/devices/generators"
 
 const AutoStartStopSetter = ({
   statusCode,

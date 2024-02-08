@@ -5,11 +5,11 @@ import BatteriesOverview from "../boxes/BatteriesOverview"
 import EnergyOverview from "../boxes/EnergyOverview"
 import GridPaginator from "../ui/GridPaginator"
 import { useVisibleWidgetsStore } from "../../modules"
-import { BoxTypes } from "../../utils/constants"
 import { observer } from "mobx-react"
 import { PageSelectorProps } from "../ui/PageSelector"
 import DevicesOverview from "../boxes/DevicesOverview"
 import EnvironmentOverview from "../boxes/EnvironmentOverview/EnvironmentOverview"
+import { BOX_TYPES } from "../../utils/constants/generic"
 
 const RootView = () => {
   const visibleWidgetsStore = useVisibleWidgetsStore()
@@ -20,7 +20,7 @@ const RootView = () => {
   useEffect(() => {
     const visibleBoxes: JSX.Element[] = []
     const hiddenBoxes: JSX.Element[] = []
-    for (const type of Object.values(BoxTypes)) {
+    for (const type of Object.values(BOX_TYPES)) {
       const elem = getBoxByType(type)
       if (!elem) continue
 
@@ -35,17 +35,17 @@ const RootView = () => {
     setInitialBoxes(hiddenBoxes)
   }, [visibleWidgetsStore.visibleElements, visibleWidgetsStore.visibleElements.size])
 
-  const getBoxByType = (type: BoxTypes) => {
+  const getBoxByType = (type: BOX_TYPES) => {
     switch (type) {
-      case BoxTypes.ENERGY:
+      case BOX_TYPES.ENERGY:
         return <EnergyOverview componentMode="compact" key="energy-overview" />
-      case BoxTypes.TANKS:
+      case BOX_TYPES.TANKS:
         return <Tanks componentMode="compact" key="tanks" />
-      case BoxTypes.BATTERIES:
+      case BOX_TYPES.BATTERIES:
         return <BatteriesOverview componentMode="compact" key="batteries-overview" />
-      case BoxTypes.DEVICES:
+      case BOX_TYPES.DEVICES:
         return <DevicesOverview componentMode="compact" key="devices-overview" />
-      case BoxTypes.ENVIRONMENT:
+      case BOX_TYPES.ENVIRONMENT:
         return <EnvironmentOverview componentMode="compact" key="environment-overview" />
       default:
         return null

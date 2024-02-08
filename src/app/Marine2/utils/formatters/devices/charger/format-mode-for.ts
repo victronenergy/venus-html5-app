@@ -1,5 +1,5 @@
 import { translate } from "react-i18nify"
-import { CHARGER_MODE } from "../../../constants"
+import { CHARGER_MODE } from "../../../constants/devices/chargers"
 
 export const formatModeFor = (value: number) => {
   switch (Number(value)) {

@@ -2,13 +2,13 @@ import { observer } from "mobx-react"
 import { useAppStore, useMqtt } from "@victronenergy/mfd-modules"
 import { Translate, translate } from "react-i18nify"
 import { Modal } from "../Modal"
-import { BUILD_TIMESTAMP } from "../../../utils/constants"
 import packageInfo from "../../../../../../package.json"
 import React, { useState } from "react"
 import LogoIcon from "../../../images/logo.svg"
 import LogoOnlyIcon from "../../../images/logo-only.svg"
 import { AppViews, useAppViewsStore } from "../../../modules/AppViews"
 import Button from "../Button"
+import { BUILD_TIMESTAMP } from "../../../utils/constants/generic"
 
 const VersionInfo = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)

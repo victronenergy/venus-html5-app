@@ -1,5 +1,5 @@
+import { SYSTEM_MODE } from "../../../constants/generic"
 import { translate } from "react-i18nify"
-import { SYSTEM_MODE } from "../../../constants"
 
 export const formatModeFor = (value: number) => {
   switch (Number(value)) {
