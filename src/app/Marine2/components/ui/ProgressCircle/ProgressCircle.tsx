@@ -1,32 +1,17 @@
 import classNames from "classnames"
-import { applyStyles, BreakpointStylesType } from "../../../utils/media"
+import { applyStyles } from "../../../utils/media"
 import { colorFor } from "../../../utils/formatters/generic"
 import { ISize } from "@m2Types/generic/size"
-
-const styles: BreakpointStylesType = {
-  default: {
-    percentage: "text-lg",
-  },
-  "xs-xs": {
-    percentage: "text-xl",
-  },
-  "md-s": {
-    percentage: "text-xxl",
-  },
-  "lg-m": {
-    percentage: "text-2xl",
-  },
-}
+import { Styles } from "./Styles"
 
 interface Props {
   percentage: number
   children?: JSX.Element
   boxSize: ISize
-  batteryTitle?: string
 }
 
-const ProgressCircle = ({ percentage, children, boxSize, batteryTitle }: Props) => {
-  const activeStyles = applyStyles(boxSize, styles)
+const ProgressCircle = ({ percentage, children, boxSize }: Props) => {
+  const activeStyles = applyStyles(boxSize, Styles)
   const hasPercentage = percentage !== null
   const roundedPercentage = Math.round(percentage)
   const color = hasPercentage ? colorFor(roundedPercentage) : "victron-gray-400"
@@ -46,27 +31,27 @@ const ProgressCircle = ({ percentage, children, boxSize, batteryTitle }: Props) 
     : circlePathLength
 
   return (
-    <div className={"relative flex justify-center items-center w-full h-full"}>
-      <svg className={"absolute w-full h-full -rotate-90"} viewBox={"0 0 238 238"}>
-        <circle r={circleRadius} cx={"50%"} cy={"50%"} className={classNames("opacity-30", strokeClasses)} />
+    <div className="relative flex justify-center items-center w-full h-full">
+      <svg className="absolute w-full h-full -rotate-90" viewBox="0 0 238 238">
+        <circle r={circleRadius} cx="50%" cy="50%" className={classNames("opacity-30", strokeClasses)} />
         {roundedPercentage !== 0 && (
           <circle
             r={circleRadius}
-            cx={"50%"}
-            cy={"50%"}
+            cx="50%"
+            cy="50%"
             strokeDasharray={`${circleStrokeLength} ${circlePathLength}`}
             strokeDashoffset={0}
-            strokeLinecap={"round"}
+            strokeLinecap="round"
             className={strokeClasses}
             style={{ transition: "stroke-dasharray .5s ease" }}
           />
         )}
       </svg>
-      <div className={"flex flex-col items-center"}>
+      <div className="flex flex-col items-center">
         {hasPercentage && (
           <div className={classNames(activeStyles.percentage)}>
             {roundedPercentage}
-            <span className={"text-victron-gray dark:text-victron-gray-dark"}>%</span>
+            <span className="text-victron-gray dark:text-victron-gray-dark">%</span>
           </div>
         )}
         {children}
