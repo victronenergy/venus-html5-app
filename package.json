@@ -106,7 +106,7 @@
   "devDependencies": {
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/line-clamp": "^0.4.2",
-    "@testing-library/cypress": "^7.0.7",
+    "@testing-library/cypress": "^10.0.1",
     "@testing-library/dom": "^8.20.0",
     "@types/chart.js": "^2.9.32",
     "@types/enzyme": "^3.10.8",
