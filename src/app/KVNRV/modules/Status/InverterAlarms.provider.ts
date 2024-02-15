@@ -1,4 +1,4 @@
-import { PortalId, Topics, useMqtt, useTopicsState, useTopicSubscriptions } from "@victronenergy/mfd-modules"
+import { PortalId, Topics, useMqtt, useTopicsState } from "@victronenergy/mfd-modules"
 import { useMemo } from "react"
 
 export interface InverterAlarmsState {
@@ -37,8 +37,6 @@ export function useInverterAlarms(): InverterAlarmsState {
 
   const { portalId } = useMqtt()
   const topics = useMemo(() => getTopics(portalId), [portalId])
-
-  useTopicSubscriptions(topics)
 
   return useTopicsState<InverterAlarmsState>(topics)
 }

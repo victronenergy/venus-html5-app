@@ -4,7 +4,6 @@ import {
   Topics,
   useMqtt,
   useTopicsState,
-  useTopicSubscriptions,
   useVebusStore,
 } from "@victronenergy/mfd-modules"
 import { useMemo } from "react"
@@ -53,8 +52,6 @@ export function useVebusAlarms(): VebusAlarmsState {
   const { portalId } = useMqtt()
   const { instanceId } = useVebusStore()
   const topics = useMemo(() => getTopics(portalId, instanceId), [portalId, instanceId])
-
-  useTopicSubscriptions(topics)
 
   return useTopicsState<VebusAlarmsState>(topics)
 }

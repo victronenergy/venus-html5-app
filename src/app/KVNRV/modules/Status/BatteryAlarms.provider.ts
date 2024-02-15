@@ -5,7 +5,6 @@ import {
   useBatteries,
   useMqtt,
   useTopicsState,
-  useTopicSubscriptions,
 } from "@victronenergy/mfd-modules"
 import { useMemo } from "react"
 
@@ -71,8 +70,6 @@ export function useBatteryAlarms(): BatteryAlarmsState {
 
   const { portalId } = useMqtt()
   const topics = useMemo(() => getTopics(portalId, batteries), [portalId, batteries])
-
-  useTopicSubscriptions(topics)
 
   return useTopicsState<BatteryAlarmsState>(topics)
 }
