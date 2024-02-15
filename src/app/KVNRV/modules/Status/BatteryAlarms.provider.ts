@@ -1,11 +1,4 @@
-import {
-  BatteryId,
-  PortalId,
-  Topics,
-  useBatteries,
-  useMqtt,
-  useTopicsState,
-} from "@victronenergy/mfd-modules"
+import { BatteryId, PortalId, Topics, useBatteries, useMqtt, useTopicsState } from "@victronenergy/mfd-modules"
 import { useMemo } from "react"
 
 export interface BatteryAlarmsState {
