@@ -60,6 +60,19 @@ const BatteriesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: 
     setPages(Math.ceil(overviewBatteries.length / batteriesPerPage))
   }, [boxSize, overviewBatteries])
 
+  // TODO: Temp fix for #358. The whole battery system needs to be refactored, too much logic in components.
+  const calculateRingWidth = () => {
+    if (pages <= 1) {
+      if (boxSize.width < 400) {
+        return `calc(${100 / batteries.length}% + 75px)`
+      }
+
+      return `calc(${100 / batteries.length}% - 32px)`
+    }
+
+    return boxSize.width / perPage - 32
+  }
+
   if (componentMode === "compact") {
     return (
       <Box
@@ -85,7 +98,7 @@ const BatteriesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: 
                     key={b.id}
                     className={"h-full flex ml-4 mr-4 first:ml-0 last:mr-0"}
                     style={{
-                      width: pages <= 1 ? `calc(${100 / batteries.length}% - 32px)` : boxSize.width / perPage - 32,
+                      width: calculateRingWidth(),
                     }}
                   >
                     <BatterySummary
