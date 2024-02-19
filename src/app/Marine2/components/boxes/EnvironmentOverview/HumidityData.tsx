@@ -22,7 +22,7 @@ const HumidityData = ({ dataId, componentMode, boxSize }: Props) => {
 
   const handlePassVisibility = useCallback(
     (id: number, isVisible: boolean) => {
-      passVisibility(id, isVisible)
+      passVisibility(id, "humidity", isVisible)
     },
     [passVisibility]
   )
