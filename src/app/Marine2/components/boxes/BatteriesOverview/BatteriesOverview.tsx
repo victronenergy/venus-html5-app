@@ -60,17 +60,24 @@ const BatteriesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: 
     setPages(Math.ceil(overviewBatteries.length / batteriesPerPage))
   }, [boxSize, overviewBatteries])
 
-  // TODO: Temp fix for #358. The whole battery system needs to be refactored, too much logic in components.
-  const calculateRingWidth = () => {
+  // TODO: Temp fix for #358. The whole battery system needs to be refactored, too much logic in this component.
+  const ringWidth = () => {
     if (pages <= 1) {
-      if (boxSize.width < 400) {
-        return `calc(${100 / batteries.length}% + 75px)`
-      }
-
-      return `calc(${100 / batteries.length}% - 32px)`
+      return calculateWidthFor(100 / batteries.length, true)
     }
 
-    return boxSize.width / perPage - 32
+    return calculateWidthFor(boxSize.width / perPage, false)
+  }
+
+  const calculateWidthFor = (value: number, useCssCalc: boolean) => {
+    const boxIsNarrow = boxSize.width < 400
+    const offset = boxIsNarrow ? 75 : 32
+
+    if (useCssCalc) {
+      return boxIsNarrow ? `calc(${value}% + ${offset}px)` : `calc(${value}% - ${offset}px)`
+    }
+
+    return boxIsNarrow ? value + offset : value - offset
   }
 
   if (componentMode === "compact") {
@@ -98,7 +105,7 @@ const BatteriesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: 
                     key={b.id}
                     className={"h-full flex ml-4 mr-4 first:ml-0 last:mr-0"}
                     style={{
-                      width: calculateRingWidth(),
+                      width: ringWidth(),
                     }}
                   >
                     <BatterySummary
