@@ -21,7 +21,7 @@ const TemperatureData = ({ dataId, componentMode, boxSize }: Props) => {
 
   const handlePassVisibility = useCallback(
     (id: number, isVisible: boolean) => {
-      passVisibility(id, isVisible)
+      passVisibility(id, "temperature", isVisible)
     },
     [passVisibility]
   )

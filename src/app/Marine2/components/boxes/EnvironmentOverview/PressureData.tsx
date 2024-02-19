@@ -17,12 +17,11 @@ interface Props {
 
 const PressureData = ({ dataId, componentMode, boxSize }: Props) => {
   const { pressure, customName } = usePressure(dataId)
-
   const { passVisibility } = useContext(VisibleComponentsContext)
 
   const handlePassVisibility = useCallback(
     (id: number, isVisible: boolean) => {
-      passVisibility(id, isVisible)
+      passVisibility(id, "pressure", isVisible)
     },
     [passVisibility]
   )

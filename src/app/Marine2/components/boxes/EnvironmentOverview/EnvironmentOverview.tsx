@@ -20,19 +20,27 @@ interface Props {
 }
 
 export const VisibleComponentsContext = createContext({
-  passVisibility: (id: number, visible: boolean) => {},
+  passVisibility: (id: number, type: SensorInformationType, visible: boolean) => {},
 })
 
+type SensorInformationType = "humidity" | "pressure" | "temperature"
+
 const EnvironmentOverview = ({ componentMode = "full", pageSelectorPropsSetter }: Props) => {
-  const { temperatures } = useTemperatures()
+  const { temperatures: sensors } = useTemperatures()
   const [visibleElements, setVisibleElements] = useState({})
   const [boxSize, setBoxSize] = useState<ISize>({ width: 0, height: 0 })
 
-  const passVisibility = useCallback((id: number, visible: boolean) => {
-    setVisibleElements((prev) => ({ ...prev, [id]: visible }))
+  const passVisibility = useCallback((id: number, type: SensorInformationType, visible: boolean) => {
+    setVisibleElements((prev: any) => ({
+      ...prev,
+      [id]: {
+        ...prev[id],
+        [type]: visible,
+      },
+    }))
   }, [])
 
-  let temperatureComponents = (temperatures || []).map((temperatureId: TemperatureInstanceId) => (
+  let temperatureComponents = (sensors || []).map((temperatureId: TemperatureInstanceId) => (
     <TemperatureData
       key={"temperature" + temperatureId}
       dataId={temperatureId}
@@ -41,7 +49,7 @@ const EnvironmentOverview = ({ componentMode = "full", pageSelectorPropsSetter }
     />
   ))
 
-  let humidityComponents = (temperatures || []).map((temperatureId: TemperatureInstanceId) => (
+  let humidityComponents = (sensors || []).map((temperatureId: TemperatureInstanceId) => (
     <HumidityData
       key={"humidity" + temperatureId}
       dataId={temperatureId}
@@ -50,7 +58,7 @@ const EnvironmentOverview = ({ componentMode = "full", pageSelectorPropsSetter }
     />
   ))
 
-  let pressureComponents = (temperatures || []).map((temperatureId: TemperatureInstanceId) => (
+  let pressureComponents = (sensors || []).map((temperatureId: TemperatureInstanceId) => (
     <PressureData
       key={"pressure" + temperatureId}
       dataId={temperatureId}
@@ -60,8 +68,11 @@ const EnvironmentOverview = ({ componentMode = "full", pageSelectorPropsSetter }
   ))
 
   const components = [...temperatureComponents, ...humidityComponents, ...pressureComponents] as JSX.Element[]
+  const sensorHasData: boolean = Object.values(visibleElements).some(
+    (sensor: any) => sensor.temperature || sensor.humidity || sensor.pressure
+  )
 
-  useVisibilityNotifier({ widgetName: BOX_TYPES.ENVIRONMENT, visible: Object.values(visibleElements).includes(true) })
+  useVisibilityNotifier({ widgetName: BOX_TYPES.ENVIRONMENT, visible: sensorHasData })
 
   if (componentMode === "compact") {
     return (
