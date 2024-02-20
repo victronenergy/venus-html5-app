@@ -3,7 +3,7 @@ import classNames from "classnames"
 import { Styles } from "./Styles"
 import { ISize } from "@m2Types/generic/size"
 import { ValueWithUnit } from "@m2Types/data/value-with-units"
-import { Battery as BatteryType } from "@victronenergy/mfd-modules"
+import { Battery as BatteryType, useAppStore } from "@victronenergy/mfd-modules"
 import { applyStyles, StylesType } from "app/Marine2/utils/media"
 import Box from "../../ui/Box"
 import ValueBar from "../../ui/ValueBar"
@@ -13,6 +13,7 @@ import { batteryIconFor } from "../../../utils/formatters/devices/battery/batter
 import { responsiveBoxIcon } from "../../../utils/helpers/classes/responsive-box-icon"
 import { colorFor } from "../../../utils/formatters/generic"
 import BatteryIcon from "../../../images/icons/battery.svg"
+import { temperatureValueFor } from "../../../utils/formatters/temperature/temperature-value-for"
 
 interface Props {
   battery: BatteryType
@@ -21,6 +22,7 @@ interface Props {
 const Battery = ({ battery }: Props) => {
   const isSimpleBattery = !(battery.state || battery.state === 0)
   const [boxSize, setBoxSize] = useState<ISize>({ width: 0, height: 0 })
+  const { temperatureUnitToHumanReadable, temperatureUnit } = useAppStore()
 
   if (isSimpleBattery) {
     return (
@@ -63,8 +65,10 @@ const Battery = ({ battery }: Props) => {
             <p>{batteryNameFor(battery.state, battery.timetogo ?? null)}</p>
             {battery.temperature && (
               <p>
-                {Math.round(battery.temperature)}
-                <span className="text-victron-gray-300 dark:text-victron-gray-400">°C</span>
+                {temperatureValueFor(battery.temperature, temperatureUnit)}
+                <span className="text-victron-gray-300 dark:text-victron-gray-400">
+                  {temperatureUnitToHumanReadable}
+                </span>
               </p>
             )}
           </div>

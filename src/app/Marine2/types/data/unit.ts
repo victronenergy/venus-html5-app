@@ -1,1 +1,1 @@
-export type unit = "W" | "kW" | "V" | "A" | "Hz" | "hPa" | "°C" | "%"
+export type unit = "W" | "kW" | "V" | "A" | "Hz" | "hPa" | "°C" | "°F" | "%"
