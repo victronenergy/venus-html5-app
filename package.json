@@ -17,7 +17,7 @@
     "@testing-library/user-event": "^14.4.3",
     "@typescript-eslint/eslint-plugin": "^5.48.2",
     "@typescript-eslint/parser": "^5.48.2",
-    "@victronenergy/mfd-modules": "^3.3.11",
+    "@victronenergy/mfd-modules": "^3.4.0",
     "axios": "^1.6.2",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.6.0",
@@ -157,7 +157,6 @@
     "cy:verify": "./node_modules/.bin/cypress verify",
     "cy:open": "./node_modules/.bin/cypress open",
     "cy:run": "NODE_ENV=test cypress run",
-
     "poeditor:pull": "node src/app/locales/poeditor/pull.js"
   },
   "browserslist": {

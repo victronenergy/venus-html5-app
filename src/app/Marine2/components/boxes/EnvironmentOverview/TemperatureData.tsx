@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite"
-import { useTemperature } from "@victronenergy/mfd-modules"
+import { useAppStore, useTemperature } from "@victronenergy/mfd-modules"
 import ValueOverview from "../../ui/ValueOverview"
 import ThermometerIcon from "../../../images/icons/thermometer.svg"
 import ValueBox from "../../ui/ValueBox"
@@ -8,6 +8,7 @@ import { useCallback, useContext, useEffect } from "react"
 import { VisibleComponentsContext } from "./EnvironmentOverview"
 import { ComponentMode } from "@m2Types/generic/component-mode"
 import { ISize } from "@m2Types/generic/size"
+import { temperatureValueFor } from "../../../utils/formatters/temperature/temperature-value-for"
 
 interface Props {
   dataId: number
@@ -18,6 +19,7 @@ interface Props {
 const TemperatureData = ({ dataId, componentMode, boxSize }: Props) => {
   const { temperature, customName } = useTemperature(dataId)
   const { passVisibility } = useContext(VisibleComponentsContext)
+  const { temperatureUnitToHumanReadable, temperatureUnit } = useAppStore()
 
   const handlePassVisibility = useCallback(
     (id: number, isVisible: boolean) => {
@@ -43,9 +45,9 @@ const TemperatureData = ({ dataId, componentMode, boxSize }: Props) => {
       <ValueOverview
         Icon={ThermometerIcon}
         title={customName || translate("boxes.temperature")}
-        value={temperature}
+        value={temperatureValueFor(temperature, temperatureUnit)}
         boxSize={boxSize}
-        unit="°C"
+        unit={temperatureUnitToHumanReadable}
         valueType="environment"
       />
     )
@@ -55,9 +57,9 @@ const TemperatureData = ({ dataId, componentMode, boxSize }: Props) => {
     <ValueBox
       title={translate("boxes.temperature") + " " + customName}
       icon={<ThermometerIcon className="w-5" />}
-      value={temperature}
+      value={temperatureValueFor(temperature, temperatureUnit)}
       bottomValues={[]}
-      unit="°C"
+      unit={temperatureUnitToHumanReadable}
     />
   )
 }
