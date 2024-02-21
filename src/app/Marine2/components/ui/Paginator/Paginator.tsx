@@ -110,8 +110,8 @@ const Paginator = ({
           >
             {newPagesArray.map((pageChildren, i) => (
               <SizeChangeObserver
-                orientation={"vertical"}
-                className={"h-fit min-h-full"}
+                orientation="vertical"
+                className="h-fit min-h-full"
                 style={{
                   width: `calc(100% / ${newPagesArray.length})`,
                 }}

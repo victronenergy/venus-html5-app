@@ -27,28 +27,28 @@ export const defaultBoxStyles: BreakpointStylesType = {
     valueSubtitle: "text-sm",
     secondaryValue: "text-base",
     buttons: "text-base",
-    icon: "w-[18px]",
+    icon: "shrink-0 w-[18px]",
   },
   medium: {
     mainValue: "text-2xl",
     valueSubtitle: "text-base",
     secondaryValue: "text-xl",
     buttons: "text-base",
-    icon: "w-[24px]",
+    icon: "shrink-0 w-[24px]",
   },
   large: {
     mainValue: "text-3xl",
     valueSubtitle: "text-base",
     secondaryValue: "text-xxl",
     buttons: "text-base",
-    icon: "w-[32px]",
+    icon: "shrink-0 w-[32px]",
   },
   default: {
     mainValue: "text-xl",
     valueSubtitle: "text-sm",
     secondaryValue: "text-base",
     buttons: "text-base",
-    icon: "w-[18px]",
+    icon: "shrink-0 w-[18px]",
   },
 }
 
