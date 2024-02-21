@@ -6,7 +6,6 @@ if [ -z "$1" ]; then
 fi
 
 BUILD=false
-MKPATH=false
 PORT=22
 POSITIONAL=()
 while [[ $# -gt 0 ]]; do
@@ -20,10 +19,6 @@ while [[ $# -gt 0 ]]; do
         ;;
         -b|--build)
             BUILD=true
-            shift # past argument
-        ;;
-        -m|--mkpath)
-            MKPATH=true
             shift # past argument
         ;;
         -p|--port)
@@ -49,9 +44,8 @@ fi
 
 echo "Uploading dist/* to ${USERNAME}@${HOST}:/data/www/app/"
 
-if $MKPATH; then
-  echo "mkdir -p /data/www/app/"
-  ssh -p "${PORT}" -oStrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "${USERNAME}"@"${HOST}" "mkdir -p /data/www/app/"
-fi
+echo "mkdir -p /data/www/app/"
+ssh -p "${PORT}" -oStrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "${USERNAME}"@"${HOST}" \
+	"[ -d /data/www/app/ ] || mkdir -p /data/www/app/"
 
 rsync --delete --info=progress2 -e "ssh -p ${PORT} -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" -r dist/* "${USERNAME}"@"${HOST}":/data/www/app/
