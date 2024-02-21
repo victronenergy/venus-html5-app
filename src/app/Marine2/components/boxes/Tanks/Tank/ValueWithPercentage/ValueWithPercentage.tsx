@@ -22,12 +22,12 @@ export const ValueWithPercentage: FC<Props> = ({
   const isCritical = isReversedLevelFor(fluid) ? level > 75 : level < 25
   const value = isAuxillaryTank ? "--" : formatLevelFor(level)
 
-  const classes = classnames("tank-level min-w-[70px]", className, {
+  const classes = classnames(className, {
     "text-victron-red": isCritical,
-    "ml-2 md:ml-5 text-end": orientation === "vertical",
+    "text-end": orientation === "vertical",
   })
 
-  const unitClasses = classnames("ml-0.5", {
+  const unitClasses = classnames({
     "text-victron-red/70": isCritical,
     "text-victron-gray/70": !isCritical || isAuxillaryTank,
   })

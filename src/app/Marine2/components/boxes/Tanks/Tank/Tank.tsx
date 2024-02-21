@@ -1,11 +1,11 @@
-import { useEffect, useMemo, useRef, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
+import classNames from "classnames"
 import { useTank } from "@victronenergy/mfd-modules"
 import { observer } from "mobx-react-lite"
 import ProgressBar from "../../../ui/ProgressBar"
 import classnames from "classnames"
 import { ISize } from "@m2Types/generic/size"
 import { applyStyles, StylesType } from "../../../../utils/media"
-import useSize from "@react-hook/size"
 import { ComponentMode } from "@m2Types/generic/component-mode"
 import { compactStyles, horizontalStyles, verticalStyles } from "./Styles"
 import { formatLevelFor } from "../../../../utils/formatters/devices/tanks/format-level-for"
@@ -25,8 +25,6 @@ interface Props {
 const Tank = ({ tankInstanceId, componentMode, orientation = "vertical", parentSize }: Props) => {
   let { capacity, fluidType, level, remaining, customName, unit } = useTank(tankInstanceId)
   const fluidTypeNum = +fluidType
-  const wrapperRef = useRef<HTMLDivElement>(null)
-  const [width] = useSize(wrapperRef)
   const [isComponentVisible, setIsComponentVisible] = useState(false)
 
   let horizontalActiveStyles,
@@ -49,33 +47,30 @@ const Tank = ({ tankInstanceId, componentMode, orientation = "vertical", parentS
 
   // Tanks that are missing level readings and only have capacity
   const isAuxillaryTank = !!capacity && level === undefined
+  const tempWidth = parentSize ? parentSize.width : {}
+
+  const iconContainerClasses = classNames("flex items-center gap-1 truncate", {
+    "w-[10rem]": tempWidth > 572 || tempWidth < 400,
+    "w-[5rem]": tempWidth <= 572 && tempWidth >= 400,
+  })
+
+  const progressBarContainerClasses = classNames({
+    "w-[calc(100%-14rem)]": tempWidth > 572,
+    "w-[calc(100%-9rem)]": tempWidth <= 572,
+    hidden: tempWidth < 400,
+  })
 
   if (componentMode === "compact") {
     return (
-      <div ref={wrapperRef} className="flex items-center">
-        <div className={classnames("flex items-center min-w-[30%] py-2 truncate")}>
-          <FluidIcon fluid={fluidTypeNum} className={`mr-2 ${compactActiveStyles?.icon}`} />
+      <div className="flex justify-between items-center gap-2">
+        <div className={iconContainerClasses}>
+          <FluidIcon fluid={fluidTypeNum} className={compactActiveStyles?.icon} />
           <div className={classnames("truncate", compactActiveStyles?.tankName)}>{tankTitle} </div>
         </div>
-        <div className="flex flex-row items-center basis-0 flex-grow justify-end">
-          <div
-            className={classnames("ml-4")}
-            style={
-              width
-                ? {
-                    display: width < 368 ? "none" : "block",
-                    width: width > 572 ? (width + 32) * 0.45 : (width + 32) * 0.4,
-                  }
-                : parentSize?.width
-                ? {
-                    display: parentSize.width < 400 ? "none" : "block",
-                    width: parentSize.width > 540 ? parentSize.width * 0.45 : parentSize.width * 0.4,
-                  }
-                : {}
-            }
-          >
-            <ProgressBar percentage={isAuxillaryTank ? 0 : formatLevelFor(level)} type={fluidTypeNum} />
-          </div>
+        <div className={progressBarContainerClasses}>
+          <ProgressBar percentage={isAuxillaryTank ? 0 : formatLevelFor(level)} type={fluidTypeNum} />
+        </div>
+        <div className="w-[4rem]">
           <ValueWithPercentage
             fluid={fluidTypeNum}
             level={level}
@@ -88,48 +83,83 @@ const Tank = ({ tankInstanceId, componentMode, orientation = "vertical", parentS
   }
 
   if (orientation === "vertical") {
+    const iconContainerClasses = classNames("flex items-center gap-2 truncate", {
+      "w-[16.5rem]": tempWidth > 572 || tempWidth < 400,
+      "w-[5rem]": tempWidth <= 572 && tempWidth >= 400,
+    })
+
+    const progressBarContainerClasses = classNames({
+      "w-[calc(100%-14rem)]": tempWidth > 572,
+      "w-[calc(100%-9rem)]": tempWidth <= 572,
+      hidden: tempWidth < 400,
+    })
+
     return (
-      <div ref={wrapperRef} className="flex items-center">
-        <div className={classnames("flex items-center min-w-[15%] truncate")}>
-          <div className="mr-2 lg:mr-3">
-            <FluidIcon fluid={fluidTypeNum} className="w-[24px] md:w-[32px]" />
+      <>
+
+        <div className="flex justify-between items-center gap-2">
+          <div className={iconContainerClasses}>
+            <FluidIcon fluid={fluidTypeNum} className={compactActiveStyles?.icon} />
+            <div className="flex flex-col truncate">
+              <div className={classnames("truncate", verticalActiveStyles?.tankName)}>{tankTitle}</div>
+              <Capacity
+                remaining={remaining}
+                unit={unit}
+                capacity={capacity}
+                className={verticalActiveStyles?.capacity}
+              />
+            </div>
           </div>
-          <div className="flex flex-col p-2 w-full truncate">
-            <div className={classnames("truncate", verticalActiveStyles?.tankName)}>{tankTitle}</div>
-            <Capacity
-              remaining={remaining}
-              unit={unit}
-              capacity={capacity}
-              className={verticalActiveStyles?.capacity}
+          <div className={progressBarContainerClasses}>
+            <ProgressBar percentage={isAuxillaryTank ? 0 : formatLevelFor(level)} type={fluidTypeNum} />
+          </div>
+          <div className="w-[4rem]">
+            <ValueWithPercentage
+              fluid={fluidTypeNum}
+              level={level}
+              className={compactActiveStyles?.level}
+              isAuxillaryTank={isAuxillaryTank}
             />
           </div>
         </div>
 
-        <div
-          className={classnames("flex items-center justify-center")}
-          style={
-            width
-              ? {
-                  width: width > 1000 ? width * 0.7 : width * 0.5,
-                  display: width < 368 ? "none" : "block",
-                }
-              : parentSize?.width
-              ? {
-                  width: parentSize.width > 1000 ? parentSize.width * 0.7 : parentSize.width * 0.5,
-                  display: parentSize.width < 400 ? "none" : "block",
-                }
-              : {}
-          }
-        >
-          <ProgressBar percentage={isAuxillaryTank ? 0 : formatLevelFor(level)} type={fluidTypeNum} size="large" />
-        </div>
-        <ValueWithPercentage
-          fluid={fluidTypeNum}
-          level={level}
-          className={verticalActiveStyles?.level}
-          isAuxillaryTank={isAuxillaryTank}
-        />
-      </div>
+      {/*  <div className="flex items-center">
+          <div className={classnames("flex items-center min-w-[15%] truncate")}>
+            <div className="mr-2 lg:mr-3">
+              <FluidIcon fluid={fluidTypeNum} className="w-[24px] md:w-[32px]" />
+            </div>
+            <div className="flex flex-col p-2 w-full truncate">
+              <div className={classnames("truncate", verticalActiveStyles?.tankName)}>{tankTitle}</div>
+              <Capacity
+                remaining={remaining}
+                unit={unit}
+                capacity={capacity}
+                className={verticalActiveStyles?.capacity}
+              />
+            </div>
+          </div>
+
+          <div
+            className={classnames("flex items-center justify-center")}
+            style={
+              parentSize?.width
+                ? {
+                    width: parentSize.width > 1000 ? parentSize.width * 0.7 : parentSize.width * 0.5,
+                    display: parentSize.width < 400 ? "none" : "block",
+                  }
+                : {}
+            }
+          >
+            <ProgressBar percentage={isAuxillaryTank ? 0 : formatLevelFor(level)} type={fluidTypeNum} size="large" />
+          </div>
+          <ValueWithPercentage
+            fluid={fluidTypeNum}
+            level={level}
+            className={verticalActiveStyles?.level}
+            isAuxillaryTank={isAuxillaryTank}
+          />
+        </div>*/}
+      </>
     )
   }
 
