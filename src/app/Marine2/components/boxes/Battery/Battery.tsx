@@ -14,15 +14,17 @@ import { responsiveBoxIcon } from "../../../utils/helpers/classes/responsive-box
 import { colorFor } from "../../../utils/formatters/generic"
 import BatteryIcon from "../../../images/icons/battery.svg"
 import { temperatureValueFor } from "../../../utils/formatters/temperature/temperature-value-for"
+import { TemperatureUnit } from "@victronenergy/mfd-modules/dist/src/Modules/App/App.store"
 
 interface Props {
   battery: BatteryType
+  unit: TemperatureUnit
 }
 
-const Battery = ({ battery }: Props) => {
+const Battery = ({ battery, unit }: Props) => {
   const isSimpleBattery = !(battery.state || battery.state === 0)
   const [boxSize, setBoxSize] = useState<ISize>({ width: 0, height: 0 })
-  const { temperatureUnitToHumanReadable, temperatureUnit } = useAppStore()
+  const { temperatureUnit } = useAppStore()
 
   if (isSimpleBattery) {
     return (
@@ -66,9 +68,7 @@ const Battery = ({ battery }: Props) => {
             {battery.temperature && (
               <p>
                 {temperatureValueFor(battery.temperature, temperatureUnit)}
-                <span className="text-victron-gray-300 dark:text-victron-gray-400">
-                  {temperatureUnitToHumanReadable}
-                </span>
+                <span className="text-victron-gray-300 dark:text-victron-gray-400">{unit}</span>
               </p>
             )}
           </div>

@@ -2,7 +2,7 @@ import classNames from "classnames"
 import { translate } from "react-i18nify"
 import { observer } from "mobx-react-lite"
 import range from "lodash-es/range"
-import { Battery as BatteryType, useBattery } from "@victronenergy/mfd-modules"
+import { Battery as BatteryType, useAppStore, useBattery } from "@victronenergy/mfd-modules"
 import Box from "../../ui/Box"
 import Battery from "../Battery"
 import BatteriesIcon from "../../../images/icons/batteries.svg"
@@ -28,6 +28,8 @@ interface Props {
 const BatteriesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: Props) => {
   const { batteries } = useBattery()
   const [boxSize, setBoxSize] = useState<ISize>({ width: 0, height: 0 })
+
+  const { temperatureUnitToHumanReadable } = useAppStore()
 
   useVisibilityNotifier({ widgetName: BOX_TYPES.BATTERIES, visible: !!(batteries && batteries.length) })
 
@@ -135,7 +137,7 @@ const BatteriesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: 
       flow={window.innerWidth > window.innerHeight ? "row" : "col"}
     >
       {sortedBatteries.map((b) => (
-        <Battery key={b.id} battery={b} />
+        <Battery key={b.id} battery={b} unit={temperatureUnitToHumanReadable} />
       ))}
     </GridPaginator>
   )
