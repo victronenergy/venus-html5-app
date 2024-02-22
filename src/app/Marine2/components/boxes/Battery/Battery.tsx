@@ -14,11 +14,10 @@ import { responsiveBoxIcon } from "../../../utils/helpers/classes/responsive-box
 import { colorFor } from "../../../utils/formatters/generic"
 import BatteryIcon from "../../../images/icons/battery.svg"
 import { temperatureValueFor } from "../../../utils/formatters/temperature/temperature-value-for"
-import { TemperatureUnit } from "@victronenergy/mfd-modules/dist/src/Modules/App/App.store"
 
 interface Props {
   battery: BatteryType
-  unit: TemperatureUnit
+  unit: "°C" | "°F"
 }
 
 const Battery = ({ battery, unit }: Props) => {
