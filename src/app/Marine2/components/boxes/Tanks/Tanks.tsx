@@ -30,7 +30,6 @@ const Tanks = ({ componentMode = "full", className }: Props) => {
   useVisibilityNotifier({ widgetName: BOX_TYPES.TANKS, visible: !!filteredTanks.length })
 
   const gridRef = useRef<HTMLDivElement>(null)
-  const tankRef = useRef<HTMLDivElement>(null)
   const [orientation, setOrientation] = useState<ScreenOrientation>("vertical")
 
   const [width, height] = useSize(gridRef)
@@ -54,69 +53,67 @@ const Tanks = ({ componentMode = "full", className }: Props) => {
         className={className}
         getBoxSizeCallback={setBoxSize}
         withPagination={true}
-        paginationOrientation={"vertical"}
+        paginationOrientation="vertical"
       >
         {filteredTanks.map((tank) => (
-          <div ref={tankRef} key={tank}>
-            <Tank componentMode="compact" key={tank} tankInstanceId={Number(tank)} parentSize={boxSize} />
-          </div>
+          <Tank key={tank} tankInstanceId={Number(tank)} componentMode="compact" parentSize={boxSize} />
         ))}
       </Box>
     )
-  } else {
-    if (orientation === "vertical") {
-      return (
-        <div className="w-full h-full p-2">
-          <Box
-            title={translate("boxes.tanks")}
-            icon={<TanksIcon className={"w-6 text-black dark:text-white"} />}
-            className={className}
-            getBoxSizeCallback={setBoxSize}
-            withPagination={true}
-            paginationOrientation={"vertical"}
-            setRef={gridRef}
-          >
-            {filteredTanks.map((tank, index) => {
-              return (
-                <Tank
-                  key={index}
-                  tankInstanceId={Number(tank)}
-                  componentMode="full"
-                  orientation={orientation}
-                  parentSize={{ width, height }}
-                />
-              )
-            })}
-          </Box>
-        </div>
-      )
-    } else {
-      // orientation === "horizontal"
-      return (
-        <div className="w-full h-full p-2">
-          <Box
-            title={"Tanks"}
-            icon={<TanksIcon className={"w-6 text-black dark:text-white"} />}
-            getBoxSizeCallback={setBoxSize}
-            withPagination={true}
-            paginationOrientation={"horizontal"}
-          >
-            <div className="flex h-full" ref={gridRef}>
-              {filteredTanks.map((tank) => (
-                <Tank
-                  key={tank}
-                  tankInstanceId={tank!}
-                  componentMode="full"
-                  orientation={orientation}
-                  parentSize={{ width, height }}
-                />
-              ))}
-            </div>
-          </Box>
-        </div>
-      )
-    }
   }
+
+  if (orientation === "vertical") {
+    return (
+      <div className="w-full h-full p-2">
+        <Box
+          title={translate("boxes.tanks")}
+          icon={<TanksIcon className="w-6 text-black dark:text-white" />}
+          className={className}
+          getBoxSizeCallback={setBoxSize}
+          withPagination={true}
+          paginationOrientation={"vertical"}
+          setRef={gridRef}
+        >
+          {filteredTanks.map((tank, index) => {
+            return (
+              <Tank
+                key={tank}
+                tankInstanceId={Number(tank)}
+                componentMode="full"
+                orientation={orientation}
+                parentSize={{ width, height }}
+              />
+            )
+          })}
+        </Box>
+      </div>
+    )
+  }
+
+  //orientation === "horizontal"
+  return (
+    <div className="w-full h-full p-2">
+      <Box
+        title={"Tanks"}
+        icon={<TanksIcon className={"w-6 text-black dark:text-white"} />}
+        getBoxSizeCallback={setBoxSize}
+        withPagination={true}
+        paginationOrientation={"horizontal"}
+      >
+        <div className="flex h-full" ref={gridRef}>
+          {filteredTanks.map((tank) => (
+            <Tank
+              key={tank}
+              tankInstanceId={Number(tank)}
+              componentMode="full"
+              orientation={orientation}
+              parentSize={{ width, height }}
+            />
+          ))}
+        </div>
+      </Box>
+    </div>
+  )
 }
 
 export default observer(Tanks)
