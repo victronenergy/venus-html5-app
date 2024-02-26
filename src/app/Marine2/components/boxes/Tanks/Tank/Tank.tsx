@@ -41,7 +41,7 @@ const Tank = ({ tankInstanceId, componentMode, orientation = "vertical", parentS
 
   if (componentMode === "compact") {
     return (
-      <div className="flex justify-between items-center gap-2 mb-4">
+      <div className="flex justify-between items-center gap-2 md:mb-8 mb-4">
         <div className={classnames("flex items-center gap-1 truncate", compactActiveStyles?.iconContainer)}>
           <FluidIcon fluid={fluidTypeNum} className={classnames("shrink-0", compactActiveStyles?.icon)} />
           <div className={classnames("truncate", compactActiveStyles?.tankName)}>{tankTitle} </div>
@@ -63,7 +63,7 @@ const Tank = ({ tankInstanceId, componentMode, orientation = "vertical", parentS
 
   if (orientation === "vertical") {
     return (
-      <div className="flex justify-between items-center gap-2 mb-4">
+      <div className="flex justify-between items-center gap-2 md:mb-6 mb-4">
         <div className="flex items-center gap-1 w-[17rem] sm:w-[10rem] md:w-[12rem] truncate">
           <FluidIcon fluid={fluidTypeNum} className="shrink-0 w-[32px]" />
           <div className="flex flex-col truncate">
