@@ -80,7 +80,7 @@ const Tank = ({ tankInstanceId, componentMode, orientation = "vertical", parentS
           </div>
         </div>
         <div className={verticalActiveStyles?.progressBar}>
-          <ProgressBar percentage={percentage} type={fluidTypeNum} />
+          <ProgressBar percentage={percentage} type={fluidTypeNum} size="large" />
         </div>
         <div className={verticalActiveStyles?.percentage}>
           <ValueWithPercentage
