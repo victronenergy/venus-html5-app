@@ -6,7 +6,7 @@ import classnames from "classnames"
 import { ISize } from "@m2Types/generic/size"
 import { applyStyles } from "../../../../utils/media"
 import { ComponentMode } from "@m2Types/generic/component-mode"
-import { compactStyles, horizontalStyles, verticalStyles } from "./Styles"
+import { compactStyles, horizontalStyles } from "./Styles"
 import { formatLevelFor } from "../../../../utils/formatters/devices/tanks/format-level-for"
 import { FluidIcon } from "./FluidIcon/FluidIcon"
 import { ValueWithPercentage } from "./ValueWithPercentage/ValueWithPercentage"
@@ -27,9 +27,6 @@ const Tank = ({ tankInstanceId, componentMode, orientation = "vertical", parentS
   const [isComponentVisible, setIsComponentVisible] = useState(false)
 
   const compactActiveStyles = applyStyles(parentSize, compactStyles)
-  const verticalActiveStyles = applyStyles(parentSize, verticalStyles)
-  const horizontalActiveStyles = applyStyles(parentSize, horizontalStyles)
-
   const tankTitle = useMemo(() => customName || FLUID_TRANSLATIONS[fluidTypeNum], [fluidTypeNum, customName])
 
   useEffect(() => {
@@ -46,7 +43,7 @@ const Tank = ({ tankInstanceId, componentMode, orientation = "vertical", parentS
     return (
       <div className="flex justify-between items-center gap-2 mb-4">
         <div className={classnames("flex items-center gap-1 truncate", compactActiveStyles?.iconContainer)}>
-          <FluidIcon fluid={fluidTypeNum} className={compactActiveStyles?.icon} />
+          <FluidIcon fluid={fluidTypeNum} className={classnames("shrink-0", compactActiveStyles?.icon)} />
           <div className={classnames("truncate", compactActiveStyles?.tankName)}>{tankTitle} </div>
         </div>
         <div className={compactActiveStyles?.progressBar}>
@@ -67,32 +64,29 @@ const Tank = ({ tankInstanceId, componentMode, orientation = "vertical", parentS
   if (orientation === "vertical") {
     return (
       <div className="flex justify-between items-center gap-2 mb-4">
-        <div className={classnames("flex items-center gap-1 truncate", verticalActiveStyles?.iconContainer)}>
-          <FluidIcon fluid={fluidTypeNum} className={compactActiveStyles?.icon} />
+        <div className="flex items-center gap-1 w-[17rem] sm:w-[10rem] md:w-[12rem] truncate">
+          <FluidIcon fluid={fluidTypeNum} className="shrink-0 w-[32px]" />
           <div className="flex flex-col truncate">
-            <div className={classnames("truncate", verticalActiveStyles?.tankName)}>{tankTitle}</div>
-            <Capacity
-              remaining={remaining}
-              unit={unit}
-              capacity={capacity}
-              className={verticalActiveStyles?.capacity}
-            />
+            <div className="truncate text-base">{tankTitle}</div>
+            <Capacity remaining={remaining} unit={unit} capacity={capacity} className="text-xs" />
           </div>
         </div>
-        <div className={verticalActiveStyles?.progressBar}>
+        <div className="xs:hidden md:w-[calc(100%-22rem)] lg:w-[calc(100%-17rem)]">
           <ProgressBar percentage={percentage} type={fluidTypeNum} size="large" />
         </div>
-        <div className={verticalActiveStyles?.percentage}>
+        <div className="w-[5rem]">
           <ValueWithPercentage
             fluid={fluidTypeNum}
             level={level}
-            className={verticalActiveStyles?.level}
+            className="text-lg md:text-xl min-w-[3.8rem]"
             isAuxillaryTank={isAuxiliaryTank}
           />
         </div>
       </div>
     )
   }
+
+  const horizontalActiveStyles = applyStyles(parentSize, horizontalStyles)
 
   return (
     <div className="px-4">
