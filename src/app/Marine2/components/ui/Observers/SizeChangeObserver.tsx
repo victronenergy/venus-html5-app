@@ -19,7 +19,7 @@ const SizeChangeObserver = ({ children, onSizeChange, orientation, className = "
   const [initialSize, setInitialSize] = useState<ISize>({ width: 0, height: 0 })
 
   useEffect(() => {
-    if (initialSize.width === 0 && initialSize.height === 0) {
+    if (initialSize.width === 0 && initialSize.height === 0 && width !== 0 && height !== 0) {
       setInitialSize({ width, height })
     } else if (
       (orientation === "vertical" && height !== initialSize.height) ||
