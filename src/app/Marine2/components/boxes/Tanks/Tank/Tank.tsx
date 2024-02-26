@@ -41,8 +41,8 @@ const Tank = ({ tankInstanceId, componentMode, orientation = "vertical", parentS
 
   if (componentMode === "compact") {
     return (
-      <div className="flex justify-between items-center gap-2 md:mb-8 mb-4">
-        <div className={classnames("flex items-center gap-1 truncate", compactActiveStyles?.iconContainer)}>
+      <div className="flex justify-between items-center h-12">
+        <div className={classnames("flex items-center truncate", compactActiveStyles?.iconContainer)}>
           <FluidIcon fluid={fluidTypeNum} className={classnames("shrink-0", compactActiveStyles?.icon)} />
           <div className={classnames("truncate", compactActiveStyles?.tankName)}>{tankTitle} </div>
         </div>
@@ -63,22 +63,22 @@ const Tank = ({ tankInstanceId, componentMode, orientation = "vertical", parentS
 
   if (orientation === "vertical") {
     return (
-      <div className="flex justify-between items-center gap-2 md:mb-6 mb-4">
-        <div className="flex items-center gap-1 w-[17rem] sm:w-[10rem] md:w-[12rem] truncate">
+      <div className="flex justify-between items-center h-16">
+        <div className="flex items-center w-[14rem] truncate">
           <FluidIcon fluid={fluidTypeNum} className="shrink-0 w-[32px]" />
-          <div className="flex flex-col truncate">
+          <div className="flex flex-col mx-2 truncate">
             <div className="truncate text-base">{tankTitle}</div>
             <Capacity remaining={remaining} unit={unit} capacity={capacity} className="text-xs" />
           </div>
         </div>
-        <div className="xs:hidden md:w-[calc(100%-22rem)] lg:w-[calc(100%-17rem)]">
+        <div className="xs:hidden sm:w-[calc(100%-19rem)]">
           <ProgressBar percentage={percentage} type={fluidTypeNum} size="large" />
         </div>
         <div className="w-[5rem]">
           <ValueWithPercentage
             fluid={fluidTypeNum}
             level={level}
-            className="text-lg md:text-xl min-w-[3.8rem]"
+            className="text-lg md:text-md xl:text-xl min-w-[3.8rem]"
             isAuxillaryTank={isAuxiliaryTank}
           />
         </div>
