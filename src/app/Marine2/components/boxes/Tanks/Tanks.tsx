@@ -91,7 +91,7 @@ const Tanks = ({ componentMode = "full", className }: Props) => {
   return (
     <div className="w-full h-full p-2">
       <Box
-        title={"Tanks"}
+        title={translate("boxes.tanks")}
         icon={<TanksIcon className={"w-6 text-black dark:text-white"} />}
         getBoxSizeCallback={setBoxSize}
         withPagination={true}
