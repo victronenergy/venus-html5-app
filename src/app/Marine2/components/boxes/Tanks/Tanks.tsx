@@ -73,17 +73,15 @@ const Tanks = ({ componentMode = "full", className }: Props) => {
           withPagination={true}
           paginationOrientation="vertical"
         >
-          {filteredTanks.map((tank, index) => {
-            return (
-              <Tank
-                key={tank}
-                tankInstanceId={Number(tank)}
-                componentMode="full"
-                orientation={orientation}
-                parentSize={{ width, height }}
-              />
-            )
-          })}
+          {filteredTanks.map((tank) => (
+            <Tank
+              key={tank}
+              tankInstanceId={Number(tank)}
+              componentMode="full"
+              orientation={orientation}
+              parentSize={{ width, height }}
+            />
+          ))}
         </Box>
       </div>
     )

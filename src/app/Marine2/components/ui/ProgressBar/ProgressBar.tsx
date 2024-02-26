@@ -10,7 +10,6 @@ interface Props {
 }
 
 const ProgressBar = ({ percentage, type, orientation = "horizontal", size = "small" }: Props) => {
-
   const color = tankColorFor(type)
   const bgColor = tankColorFor(type, true)
 
