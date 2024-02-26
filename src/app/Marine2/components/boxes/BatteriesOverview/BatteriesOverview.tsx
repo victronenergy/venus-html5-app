@@ -94,18 +94,18 @@ const BatteriesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: 
       >
         <PageFlipper pages={pages}>
           <div
-            className={"w-full h-full flex flex-row items-center justify-center"}
+            className="w-full h-full flex flex-row items-center justify-center"
             style={{
               width: `${pages}00%`,
             }}
             ref={circleBoxRef}
           >
             {range(pages).map((page) => (
-              <div key={page + "batteryPage"} className={"flex flex-row w-full h-full items-center justify-center"}>
+              <div key={page + "batteryPage"} className="flex flex-row w-full h-full items-center justify-center">
                 {overviewBatteries.slice(page * perPage, (page + 1) * perPage).map((b) => (
                   <div
                     key={b.id}
-                    className={"h-full flex ml-4 mr-4 first:ml-0 last:mr-0"}
+                    className="h-full flex ml-4 mr-4 first:ml-0 last:mr-0"
                     style={{
                       width: ringWidth(),
                     }}
@@ -130,9 +130,9 @@ const BatteriesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: 
 
   return (
     <GridPaginator
-      childClassName={"p-1"}
+      childClassName="p-1"
       perPage={4}
-      orientation={"horizontal"}
+      orientation="horizontal"
       pageSelectorPropsSetter={pageSelectorPropsSetter}
       flow={window.innerWidth > window.innerHeight ? "row" : "col"}
     >
