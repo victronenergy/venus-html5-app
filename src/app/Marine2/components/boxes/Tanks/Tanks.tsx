@@ -71,8 +71,7 @@ const Tanks = ({ componentMode = "full", className }: Props) => {
           className={className}
           getBoxSizeCallback={setBoxSize}
           withPagination={true}
-          paginationOrientation={"vertical"}
-          setRef={gridRef}
+          paginationOrientation="vertical"
         >
           {filteredTanks.map((tank, index) => {
             return (
@@ -98,7 +97,7 @@ const Tanks = ({ componentMode = "full", className }: Props) => {
         icon={<TanksIcon className={"w-6 text-black dark:text-white"} />}
         getBoxSizeCallback={setBoxSize}
         withPagination={true}
-        paginationOrientation={"horizontal"}
+        paginationOrientation="horizontal"
       >
         <div className="flex h-full" ref={gridRef}>
           {filteredTanks.map((tank) => (

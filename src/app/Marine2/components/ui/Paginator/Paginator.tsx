@@ -106,7 +106,7 @@ const Paginator = ({
             style={{
               width: `${newPagesArray.length}00%`,
             }}
-            className={"h-full flex"}
+            className="h-full flex"
           >
             {newPagesArray.map((pageChildren, i) => (
               <SizeChangeObserver
@@ -129,13 +129,14 @@ const Paginator = ({
       } else {
         const pagesEl = (
           <SizeChangeObserver
-            orientation={"horizontal"}
-            className={"h-full w-fit w-min-full"}
+            orientation="horizontal"
+            className="h-full w-fit w-min-full"
             onSizeChange={() => setPagesElement(undefined)}
           >
             {childrenArray}
           </SizeChangeObserver>
         )
+
         setPagesElement(pagesEl)
       }
       setStartingPage(newPagesArray.length)
