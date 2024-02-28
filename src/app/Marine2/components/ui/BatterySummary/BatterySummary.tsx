@@ -5,32 +5,7 @@ import { Battery } from "@victronenergy/mfd-modules"
 import classNames from "classnames"
 import { applyStyles, BreakpointStylesType } from "../../../utils/media"
 import { ISize } from "@m2Types/generic/size"
-
-const styles: BreakpointStylesType = {
-  default: {
-    voltage: "hidden",
-    name: "text-base",
-    state: "text-2xs",
-  },
-  "xs-xs": {
-    voltage: "text-sm",
-    batteryState: "text-xs",
-    name: "text-base",
-    state: "text-xs",
-  },
-  "sm-s": {
-    voltage: "text-base",
-    batteryState: "text-sm",
-    name: "text-base",
-    state: "text-sm",
-  },
-  "sm-m": {
-    voltage: "text-lg",
-    batteryState: "text-base",
-    name: "text-lg",
-    state: "text-base",
-  },
-}
+import { Styles } from "./Styles"
 
 interface Props {
   battery: Battery
