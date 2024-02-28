@@ -40,7 +40,6 @@ const BatteriesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: 
   const [perPage, setPerPage] = useState(2)
 
   const circleBoxRef = useRef<HTMLDivElement>(null)
-
   const activeStyles = applyStyles(boxSize, defaultBoxStyles)
 
   useEffect(() => {
@@ -62,27 +61,10 @@ const BatteriesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: 
     setPages(Math.ceil(overviewBatteries.length / batteriesPerPage))
   }, [boxSize, overviewBatteries])
 
-  // TODO: Temp fix for #358. The whole battery system needs to be refactored, too much logic in this component.
-  const ringWidth = () => {
-    if (pages <= 1) {
-      return calculateWidthFor(100 / batteries.length, true)
-    }
-
-    return calculateWidthFor(boxSize.width / perPage, false)
-  }
-
-  const calculateWidthFor = (value: number, useCssCalc: boolean) => {
-    const boxIsNarrow = boxSize.width < 400
-    const offset = boxIsNarrow ? 75 : 32
-
-    if (useCssCalc) {
-      return boxIsNarrow ? `calc(${value}% + ${offset}px)` : `calc(${value}% - ${offset}px)`
-    }
-
-    return boxIsNarrow ? value + offset : value - offset
-  }
-
   if (componentMode === "compact") {
+    const batteriesFor = (page: number) => overviewBatteries.slice(page * perPage, (page + 1) * perPage)
+    const height = pages <= 1 ? boxSize.height - 50 : boxSize.height - 100
+
     return (
       <Box
         icon={
@@ -94,31 +76,24 @@ const BatteriesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: 
       >
         <PageFlipper pages={pages}>
           <div
-            className="w-full h-full flex flex-row items-center justify-center"
+            ref={circleBoxRef}
+            className="w-full h-full flex items-center justify-center"
             style={{
               width: `${pages}00%`,
             }}
-            ref={circleBoxRef}
           >
             {range(pages).map((page) => (
-              <div key={page + "batteryPage"} className="flex flex-row w-full h-full items-center justify-center">
-                {overviewBatteries.slice(page * perPage, (page + 1) * perPage).map((b) => (
-                  <div
+              <div key={page} className="flex gap-4 w-full h-full items-center justify-around">
+                {batteriesFor(page).map((b) => (
+                  <BatterySummary
                     key={b.id}
-                    className="h-full flex ml-4 mr-4 first:ml-0 last:mr-0"
-                    style={{
-                      width: ringWidth(),
+                    battery={b}
+                    boxSize={{
+                      width: boxSize.width,
+                      height: height,
                     }}
-                  >
-                    <BatterySummary
-                      key={b.id}
-                      battery={b}
-                      boxSize={{
-                        width: boxSize.width,
-                        height: pages <= 1 ? boxSize.height - 50 : boxSize.height - 100,
-                      }}
-                    />
-                  </div>
+                    classes="h-full flex w-[15rem] md:w-[17rem] lg:w-[22rem] xl:w-[26rem]"
+                  />
                 ))}
               </div>
             ))}
