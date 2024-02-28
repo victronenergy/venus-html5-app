@@ -92,7 +92,6 @@ const BatteriesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: 
                       width: boxSize.width,
                       height: height,
                     }}
-                    classes="h-full flex w-[15rem] md:w-[17rem] lg:w-[22rem] xl:w-[26rem]"
                   />
                 ))}
               </div>
