@@ -3,20 +3,21 @@ import { batteryNameFor } from "../../../utils/formatters/devices/battery/batter
 import { formatValue } from "../../../utils/formatters/generic"
 import { Battery } from "@victronenergy/mfd-modules"
 import classNames from "classnames"
-import { applyStyles, BreakpointStylesType } from "../../../utils/media"
+import { applyStyles } from "../../../utils/media"
 import { ISize } from "@m2Types/generic/size"
 import { Styles } from "./Styles"
 
 interface Props {
   battery: Battery
   boxSize: ISize
+  classes: string
 }
 
-const BatterySummary = ({ battery, boxSize }: Props) => {
-  const activeStyles = applyStyles(boxSize, styles)
+const BatterySummary = ({ battery, boxSize, classes }: Props) => {
+  const activeStyles = applyStyles(boxSize, Styles)
 
   return (
-    <div className={classNames("flex flex-col justify-center items-center w-full h-full")}>
+    <div className={classNames("flex flex-col justify-center items-center w-full h-full gap-4", classes)}>
       <ProgressCircle
         percentage={battery.soc ?? null}
         boxSize={{
@@ -34,11 +35,11 @@ const BatterySummary = ({ battery, boxSize }: Props) => {
                 )}
               >
                 {formatValue(battery.voltage)}
-                <span className={"text-victron-gray-400 dark:text-victron-gray-400-dark"}>V</span>
+                <span className="text-victron-gray-400 dark:text-victron-gray-400-dark">V</span>
               </div>
               <div className={classNames("text-victron-gray dark:text-victron-gray-dark", activeStyles.voltage)}>
                 {formatValue(battery.current)}
-                <span className={"text-victron-gray-400 dark:text-victron-gray-400-dark"}>A</span>
+                <span className="text-victron-gray-400 dark:text-victron-gray-400-dark">A</span>
               </div>
             </div>
             <div className={classNames("text-victron-gray dark:text-victron-gray-dark", activeStyles.batteryState)}>
