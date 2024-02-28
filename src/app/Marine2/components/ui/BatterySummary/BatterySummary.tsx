@@ -10,14 +10,13 @@ import { Styles } from "./Styles"
 interface Props {
   battery: Battery
   boxSize: ISize
-  classes: string
 }
 
-const BatterySummary = ({ battery, boxSize, classes }: Props) => {
+const BatterySummary = ({ battery, boxSize }: Props) => {
   const activeStyles = applyStyles(boxSize, Styles)
 
   return (
-    <div className={classNames("flex flex-col justify-center items-center w-full h-full gap-4", classes)}>
+    <div className="flex flex-col justify-center items-center w-full h-full max-w-[20rem]">
       <ProgressCircle
         percentage={battery.soc ?? null}
         boxSize={{
@@ -50,7 +49,7 @@ const BatterySummary = ({ battery, boxSize, classes }: Props) => {
           <></>
         )}
       </ProgressCircle>
-      <div className={classNames("truncate mt-2 w-[inherit] text-center", activeStyles.name)}>{battery.name}</div>
+      <div className={classNames("truncate mt-2 text-center", activeStyles.name)}>{battery.name}</div>
     </div>
   )
 }
