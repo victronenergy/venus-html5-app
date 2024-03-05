@@ -5,7 +5,7 @@ export const Styles: BreakpointStylesType = {
     strokeWidth: "stroke-8",
   },
   "sm-m": {
-    strokeWidth: "stroke-12"
+    strokeWidth: "stroke-12",
   },
   "md-s": {
     strokeWidth: "stroke-12",
