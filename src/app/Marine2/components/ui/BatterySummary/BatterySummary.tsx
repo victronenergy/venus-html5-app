@@ -1,11 +1,9 @@
-import ProgressCircle from "../../../components/ui/ProgressCircle"
-import { batteryNameFor } from "../../../utils/formatters/devices/battery/battery-name-for"
-import { formatValue } from "../../../utils/formatters/generic"
+import { FC } from "react"
 import { Battery } from "@victronenergy/mfd-modules"
-import classNames from "classnames"
-import { applyStyles } from "../../../utils/media"
 import { ISize } from "@m2Types/generic/size"
-import { Styles } from "./Styles"
+import { BatteryValues } from "./BatteryValues/BatteryValues"
+import { BatteryName } from "./BatteryName/BatteryName"
+import { ProgressCircle } from "../ProgressCircle/ProgressCircle"
 
 interface Props {
   battery: Battery
@@ -23,7 +21,7 @@ export const BatterySummary: FC<Props> = ({ battery, boxSize }) => {
       <ProgressCircle percentage={battery.soc ?? null} boxSize={size}>
         <BatteryValues battery={battery} boxSize={size} />
       </ProgressCircle>
-      <div className={classNames("truncate mt-2 text-center", activeStyles.name)}>{battery.name}</div>
+      <BatteryName battery={battery} boxSize={size} />
     </div>
   )
 }

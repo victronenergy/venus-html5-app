@@ -8,7 +8,7 @@ import { applyStyles, StylesType } from "app/Marine2/utils/media"
 import Box from "../../ui/Box"
 import ValueBar from "../../ui/ValueBar"
 import ValueBox from "../../ui/ValueBox"
-import { batteryNameFor } from "../../../utils/formatters/devices/battery/battery-name-for"
+import { batteryStateFor } from "../../../utils/formatters/devices/battery/battery-state-for"
 import { batteryIconFor } from "../../../utils/formatters/devices/battery/battery-icon-for"
 import { responsiveBoxIcon } from "../../../utils/helpers/classes/responsive-box-icon"
 import { colorFor } from "../../../utils/formatters/generic"
@@ -63,7 +63,7 @@ const Battery = ({ battery, unit }: Props) => {
             <span className="pl-0.5 opacity-70">%</span>
           </div>
           <div className={classNames("text-victron-gray-300 dark:text-victron-gray-500", activeStyles.valueSubtitle)}>
-            <p>{batteryNameFor(battery.state, battery.timetogo ?? null)}</p>
+            <p>{batteryStateFor(battery.state, battery.timetogo ?? null)}</p>
             {battery.temperature && (
               <p>
                 {temperatureValueFor(battery.temperature, temperatureUnit)}
