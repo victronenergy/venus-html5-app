@@ -149,7 +149,11 @@ module.exports = {
         "4xl": ["5.375rem", { lineHeight: "120%" }], // 86px
       },
       strokeWidth: {
-        16: "16px",
+        '16': "16px",
+        '12': "12px",
+        '8': "8px",
+        '6': "6px",
+        '0': "0"
       },
       minWidth: {
         5: "1.25rem",
