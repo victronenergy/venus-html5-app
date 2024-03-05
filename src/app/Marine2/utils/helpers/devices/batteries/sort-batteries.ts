@@ -4,8 +4,8 @@ import { Battery as BatteryType } from "@victronenergy/mfd-modules"
 /*
  Sort batteries by state (charging > discharging > idle) and within that by id.
  */
-export const sortBatteries = (batteries: BatteryType[]) => batteries.slice()
-  .sort((a, b) => {
+export const sortBatteries = (batteries: BatteryType[]) =>
+  batteries.slice().sort((a, b) => {
     if (
       (a.state === BATTERY.CHARGING && b.state !== BATTERY.CHARGING) ||
       (a.state === BATTERY.DISCHARGING && b.state === BATTERY.IDLE) ||
