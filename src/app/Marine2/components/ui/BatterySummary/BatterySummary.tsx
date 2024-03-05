@@ -12,46 +12,18 @@ interface Props {
   boxSize: ISize
 }
 
-const BatterySummary = ({ battery, boxSize }: Props) => {
-  const activeStyles = applyStyles(boxSize, Styles)
+export const BatterySummary: FC<Props> = ({ battery, boxSize }) => {
+  const size = {
+    width: boxSize.width - 32,
+    height: boxSize.height - 32,
+  }
 
   return (
-    <div className="flex flex-col justify-center items-center w-full h-full max-w-[20rem]">
-      <ProgressCircle
-        percentage={battery.soc ?? null}
-        boxSize={{
-          width: boxSize.width - 32,
-          height: boxSize.height - 32,
-        }}
-      >
-        {battery.voltage || (battery.voltage === 0 && (battery.current || battery.current === 0)) ? (
-          <div className="flex flex-col items-center">
-            <div className="flex">
-              <div
-                className={classNames(
-                  "text-victron-gray dark:text-victron-gray-dark mr-1 md:mr-2",
-                  activeStyles.voltage
-                )}
-              >
-                {formatValue(battery.voltage)}
-                <span className="text-victron-gray-400 dark:text-victron-gray-400-dark">V</span>
-              </div>
-              <div className={classNames("text-victron-gray dark:text-victron-gray-dark", activeStyles.voltage)}>
-                {formatValue(battery.current)}
-                <span className="text-victron-gray-400 dark:text-victron-gray-400-dark">A</span>
-              </div>
-            </div>
-            <div className={classNames("text-victron-gray dark:text-victron-gray-dark", activeStyles.batteryState)}>
-              {batteryNameFor(battery.state, battery.timetogo ?? null)}
-            </div>
-          </div>
-        ) : (
-          <></>
-        )}
+    <div className="flex flex-col justify-center items-center w-full h-full">
+      <ProgressCircle percentage={battery.soc ?? null} boxSize={size}>
+        <BatteryValues battery={battery} boxSize={size} />
       </ProgressCircle>
       <div className={classNames("truncate mt-2 text-center", activeStyles.name)}>{battery.name}</div>
     </div>
   )
 }
-
-export default BatterySummary
