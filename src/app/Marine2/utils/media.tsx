@@ -53,7 +53,7 @@ export const defaultBoxStyles: BreakpointStylesType = {
 }
 
 export const boxBreakpoints: BreakpointsType = {
-  "xs-xs": { width: 200, height: 200 },
+  "xs-xs": { width: 150, height: 150 },
   "sm-s": { width: 200, height: 200 },
   "sm-m": { width: 200, height: 300 },
   "sm-l": { width: 200, height: 400 },
