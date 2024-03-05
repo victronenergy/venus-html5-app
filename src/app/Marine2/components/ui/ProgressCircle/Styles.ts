@@ -2,15 +2,15 @@ import { BreakpointStylesType } from "../../../utils/media"
 
 export const Styles: BreakpointStylesType = {
   default: {
-    percentage: "text-lg",
+    strokeWidth: "stroke-8",
   },
-  "xs-xs": {
-    percentage: "text-xl",
+  "sm-m": {
+    strokeWidth: "stroke-12"
   },
   "md-s": {
-    percentage: "text-xxl",
+    strokeWidth: "stroke-12",
   },
   "lg-m": {
-    percentage: "text-2xl",
+    strokeWidth: "stroke-16",
   },
 }
