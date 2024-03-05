@@ -17,8 +17,10 @@ import PageFlipper from "../../ui/PageFlipper"
 import { applyStyles, defaultBoxStyles } from "../../../utils/media"
 import { ComponentMode } from "@m2Types/generic/component-mode"
 import { BOX_TYPES } from "../../../utils/constants/generic"
-import { BATTERY } from "../../../utils/constants/devices/batteries"
+
 import { ISize } from "@m2Types/generic/size"
+import { sortBatteries } from "../../../utils/helpers/devices/batteries/sort-batteries"
+import { batteriesForOverview } from "../../../utils/helpers/devices/batteries/batteries-for-overview"
 
 interface Props {
   componentMode?: ComponentMode
@@ -115,41 +117,6 @@ const BatteriesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: 
       ))}
     </GridPaginator>
   )
-}
-
-/*
- Sort batteries by state (charging > discharging > idle) and within that by id.
- */
-const sortBatteries = function (batteries: BatteryType[]) {
-  return batteries.slice().sort((a, b) => {
-    if (
-      (a.state === BATTERY.CHARGING && b.state !== BATTERY.CHARGING) ||
-      (a.state === BATTERY.DISCHARGING && b.state === BATTERY.IDLE) ||
-      ((a.state || a.state === 0) && !b.state && b.state !== 0)
-    )
-      return -1
-
-    if (
-      (a.state !== BATTERY.CHARGING && b.state === BATTERY.CHARGING) ||
-      (a.state === BATTERY.IDLE && b.state === BATTERY.DISCHARGING) ||
-      (!a.state && a.state !== 0 && (b.state || b.state === 0))
-    )
-      return 1
-
-    return +a.id - +b.id
-  })
-}
-
-/*
-  We show only batteries with state data on the overview, but if we don't
-  have any we will show any batteries.
- */
-const getOverviewBatteries = function (batteries: BatteryType[]) {
-  const withStateCount = batteries.filter((b) => b.state || b.state === 0).length
-  if (withStateCount === 0) {
-    return batteries
-  }
-  return batteries.slice(0, withStateCount)
 }
 
 export default observer(BatteriesOverview)
