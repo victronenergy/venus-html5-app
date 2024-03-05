@@ -1,24 +1,23 @@
+import { useEffect, useState } from "react"
 import classNames from "classnames"
 import { translate } from "react-i18nify"
 import { observer } from "mobx-react-lite"
 import range from "lodash-es/range"
 import { Battery as BatteryType, useAppStore, useBattery } from "@victronenergy/mfd-modules"
+import { ComponentMode } from "@m2Types/generic/component-mode"
+import { ISize } from "@m2Types/generic/size"
 import Box from "../../ui/Box"
 import Battery from "../Battery"
 import BatteriesIcon from "../../../images/icons/batteries.svg"
-import BatterySummary from "../../ui/BatterySummary"
+import { BatterySummary } from "../../ui/BatterySummary/BatterySummary"
 import { AppViews } from "../../../modules/AppViews"
 import { useVisibilityNotifier } from "../../../modules"
 import GridPaginator from "../../ui/GridPaginator"
-import { useEffect, useState, useRef } from "react"
 import { PageSelectorProps } from "../../ui/PageSelector"
 import { boxBreakpoints } from "../../../utils/media"
 import PageFlipper from "../../ui/PageFlipper"
 import { applyStyles, defaultBoxStyles } from "../../../utils/media"
-import { ComponentMode } from "@m2Types/generic/component-mode"
 import { BOX_TYPES } from "../../../utils/constants/generic"
-
-import { ISize } from "@m2Types/generic/size"
 import { sortBatteries } from "../../../utils/helpers/devices/batteries/sort-batteries"
 import { batteriesForOverview } from "../../../utils/helpers/devices/batteries/batteries-for-overview"
 
@@ -36,12 +35,11 @@ const BatteriesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: 
   useVisibilityNotifier({ widgetName: BOX_TYPES.BATTERIES, visible: !!(batteries && batteries.length) })
 
   const sortedBatteries = sortBatteries(batteries ?? [])
-  const overviewBatteries = getOverviewBatteries(sortedBatteries)
+  const overviewBatteries = batteriesForOverview(sortedBatteries)
 
   const [pages, setPages] = useState(1)
   const [perPage, setPerPage] = useState(2)
 
-  const circleBoxRef = useRef<HTMLDivElement>(null)
   const activeStyles = applyStyles(boxSize, defaultBoxStyles)
 
   useEffect(() => {
@@ -65,7 +63,10 @@ const BatteriesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: 
 
   if (componentMode === "compact") {
     const batteriesFor = (page: number) => overviewBatteries.slice(page * perPage, (page + 1) * perPage)
-    const height = pages <= 1 ? boxSize.height - 50 : boxSize.height - 100
+    const size = {
+      width: boxSize.width,
+      height: pages <= 1 ? boxSize.height - 50 : boxSize.height - 100,
+    }
 
     return (
       <Box
@@ -77,24 +78,11 @@ const BatteriesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: 
         getBoxSizeCallback={setBoxSize}
       >
         <PageFlipper pages={pages}>
-          <div
-            ref={circleBoxRef}
-            className="w-full h-full flex items-center justify-center"
-            style={{
-              width: `${pages}00%`,
-            }}
-          >
+          <div className="w-full h-full flex items-center justify-center" style={{ width: `${pages}00%` }}>
             {range(pages).map((page) => (
               <div key={page} className="flex gap-4 w-full h-full items-center justify-around">
                 {batteriesFor(page).map((b) => (
-                  <BatterySummary
-                    key={b.id}
-                    battery={b}
-                    boxSize={{
-                      width: boxSize.width,
-                      height: height,
-                    }}
-                  />
+                  <BatterySummary key={b.id} battery={b} boxSize={size} />
                 ))}
               </div>
             ))}
