@@ -55,9 +55,17 @@ const Tanks = ({ componentMode = "full", className }: Props) => {
         withPagination={true}
         paginationOrientation="vertical"
       >
-        {filteredTanks.map((tank) => (
+        {/*    {filteredTanks.map((tank) => (
           <Tank key={tank} tankInstanceId={Number(tank)} componentMode="compact" parentSize={boxSize} />
-        ))}
+        ))}*/}
+
+        <table className="w-full text-left">
+          <tbody>
+            {filteredTanks.map((tank) => (
+              <Tank key={tank} tankInstanceId={Number(tank)} componentMode="compact" parentSize={boxSize} />
+            ))}
+          </tbody>
+        </table>
       </Box>
     )
   }
@@ -73,15 +81,19 @@ const Tanks = ({ componentMode = "full", className }: Props) => {
           withPagination={true}
           paginationOrientation="vertical"
         >
-          {filteredTanks.map((tank) => (
-            <Tank
-              key={tank}
-              tankInstanceId={Number(tank)}
-              componentMode="full"
-              orientation={orientation}
-              parentSize={{ width, height }}
-            />
-          ))}
+          <table className="w-full text-left">
+            <tbody>
+              {filteredTanks.map((tank) => (
+                <Tank
+                  key={tank}
+                  tankInstanceId={Number(tank)}
+                  componentMode="full"
+                  orientation={orientation}
+                  parentSize={{ width, height }}
+                />
+              ))}
+            </tbody>
+          </table>
         </Box>
       </div>
     )

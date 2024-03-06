@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, useCallback, useMemo } from "react"
+import React, { useRef, useEffect, useState, useCallback, useMemo, Children } from "react"
 import classnames from "classnames"
 import { PageSelectorProps, SelectorLocation } from "../PageSelector"
 import { observer } from "mobx-react"
@@ -16,6 +16,8 @@ const Paginator = ({
   pageSelectorPropsSetter,
 }: Props) => {
   const childrenArray = useMemo(() => {
+
+    // TODO Convert this component to also receive a table.
     return Array.isArray(children) ? children : [children]
   }, [children])
 

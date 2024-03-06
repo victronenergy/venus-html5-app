@@ -13,6 +13,7 @@ import { ValueWithPercentage } from "./ValueWithPercentage/ValueWithPercentage"
 import { Capacity } from "./Capacity/Capacity"
 import { ScreenOrientation } from "@m2Types/generic/screen-orientation"
 import { FLUID_TRANSLATIONS } from "../../../../utils/constants/devices/tanks"
+import classNames from "classnames"
 
 interface Props {
   tankInstanceId: number
@@ -41,50 +42,107 @@ const Tank = ({ tankInstanceId, componentMode, orientation = "vertical", parentS
 
   if (componentMode === "compact") {
     return (
-      <div className="flex justify-between items-center h-12">
-        <div className={classnames("flex items-center truncate", compactActiveStyles?.iconContainer)}>
-          <FluidIcon fluid={fluidTypeNum} className={classnames("shrink-0", compactActiveStyles?.icon)} />
-          <div className={classnames("truncate", compactActiveStyles?.tankName)}>{tankTitle} </div>
-        </div>
-        <div className={compactActiveStyles?.progressBar}>
-          <ProgressBar percentage={percentage} type={fluidTypeNum} />
-        </div>
-        <div className={compactActiveStyles?.percentage}>
-          <ValueWithPercentage
-            fluid={fluidTypeNum}
-            level={level}
-            className={compactActiveStyles?.level}
-            isAuxillaryTank={isAuxiliaryTank}
-          />
-        </div>
-      </div>
+      <tr>
+        <td className="bg-blue-900 py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0 w-[10px]">
+          <div className={classnames("flex items-center truncate", compactActiveStyles?.iconContainer)}>
+            <FluidIcon fluid={fluidTypeNum} className={classnames("shrink-0", compactActiveStyles?.icon)} />
+            <div className={classnames("truncate", compactActiveStyles?.tankName)}>{tankTitle} </div>
+          </div>
+        </td>
+        <td className="whitespace-nowrap px-3 py-4" colSpan={1}>
+          <div className={compactActiveStyles?.progressBar}>
+            <ProgressBar percentage={percentage} type={fluidTypeNum} />
+          </div>
+        </td>
+        <td className="bg-blue-700 px-3 py-4 w-[10px]">
+          <div className={compactActiveStyles?.percentage}>
+            <ValueWithPercentage
+              fluid={fluidTypeNum}
+              level={level}
+              className={compactActiveStyles?.level}
+              isAuxillaryTank={isAuxiliaryTank}
+            />
+          </div>
+        </td>
+      </tr>
     )
   }
 
-  if (orientation === "vertical") {
-    return (
-      <div className="flex justify-between items-center h-16">
-        <div className="flex items-center w-[14rem] truncate">
-          <FluidIcon fluid={fluidTypeNum} className="shrink-0 w-[32px]" />
-          <div className="flex flex-col mx-2 truncate">
-            <div className="truncate text-base">{tankTitle}</div>
-            <Capacity remaining={remaining} unit={unit} capacity={capacity} className="text-xs" />
+  /*  if (componentMode === "compact") {
+      return (
+        <div className="flex justify-between items-center h-12">
+          <div className={classnames("flex items-center truncate", compactActiveStyles?.iconContainer)}>
+            <FluidIcon fluid={fluidTypeNum} className={classnames("shrink-0", compactActiveStyles?.icon)} />
+            <div className={classnames("truncate", compactActiveStyles?.tankName)}>{tankTitle} </div>
+          </div>
+          <div className={compactActiveStyles?.progressBar}>
+            <ProgressBar percentage={percentage} type={fluidTypeNum} />
+          </div>
+          <div className={compactActiveStyles?.percentage}>
+            <ValueWithPercentage
+              fluid={fluidTypeNum}
+              level={level}
+              className={compactActiveStyles?.level}
+              isAuxillaryTank={isAuxiliaryTank}
+            />
           </div>
         </div>
-        <div className="xs:hidden sm:w-[calc(100%-19rem)]">
+      )
+    }*/
+
+  if (orientation === "vertical") {
+    return (
+      <tr className="h-16">
+        <td className={compactActiveStyles?.iconContainer}>
+          <div className="flex items-center truncate">
+            <FluidIcon fluid={fluidTypeNum} className="shrink-0 w-8" />
+            <div className="flex flex-col mx-2 truncate">
+              <div className="truncate text-base">{tankTitle}</div>
+              <Capacity remaining={remaining} unit={unit} capacity={capacity} className="text-xs" />
+            </div>
+          </div>
+        </td>
+        <td className="hidden sm:table-cell px-6 md:px-4 sm:px-2">
           <ProgressBar percentage={percentage} type={fluidTypeNum} size="large" />
-        </div>
-        <div className="w-[5rem]">
+        </td>
+        <td className={compactActiveStyles?.percentage}>
           <ValueWithPercentage
             fluid={fluidTypeNum}
             level={level}
             className="text-lg md:text-md xl:text-xl min-w-[3.8rem]"
             isAuxillaryTank={isAuxiliaryTank}
           />
-        </div>
-      </div>
+        </td>
+      </tr>
     )
   }
+
+  /*
+    if (orientation === "vertical2") {
+      return (
+        <div className="flex justify-between items-center h-16">
+          <div className="flex items-center w-[14rem] truncate">
+            <FluidIcon fluid={fluidTypeNum} className="shrink-0 w-[32px]" />
+            <div className="flex flex-col mx-2 truncate">
+              <div className="truncate text-base">{tankTitle}</div>
+              <Capacity remaining={remaining} unit={unit} capacity={capacity} className="text-xs" />
+            </div>
+          </div>
+          <div className="xs:hidden sm:w-[calc(100%-19rem)]">
+            <ProgressBar percentage={percentage} type={fluidTypeNum} size="large" />
+          </div>
+          <div className="w-[5rem]">
+            <ValueWithPercentage
+              fluid={fluidTypeNum}
+              level={level}
+              className="text-lg md:text-md xl:text-xl min-w-[3.8rem]"
+              isAuxillaryTank={isAuxiliaryTank}
+            />
+          </div>
+        </div>
+      )
+    }
+  */
 
   const horizontalActiveStyles = applyStyles(parentSize, horizontalStyles)
 
