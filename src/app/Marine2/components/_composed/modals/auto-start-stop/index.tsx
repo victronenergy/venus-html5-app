@@ -2,18 +2,24 @@ import React, { FC } from "react"
 import { Modal } from "../../../ui/Modal"
 import { translate } from "react-i18nify"
 import { Message } from "../../../_elements/Message/Message"
+import { useUiStore } from "../../../../modules/Ui"
+import { useAppStore } from "@victronenergy/mfd-modules"
 
-interface Props {
-  disabled: boolean
-  onClose: () => void
-  onClick: () => void
-}
-
-export const AutoStartStopModal: FC<Props> = ({ disabled, onClose, onClick }) => {
+export const AutoStartStopModal: FC = () => {
+  const { modals, closeModalFor } = useUiStore()
+  const { locked } = useAppStore()
+  console.log('>_', modals["startStopMode"])
+  if (!modals["startStopMode"]) return null
 
   const classes = "border-victron-darkGray-200 border rounded-md w-[95%] md:w-[40rem] scale-[0.7] h-short:scale-[1]"
 
-  if (disabled) {
+  const enableHandler = () => {
+    // Logic here
+    closeModalFor("startStopMode")
+  }
+
+  //if (disabled) {
+  if (locked) {
     return (
       <Modal.Frame open={true} onClose={() => console.log(false)} className={classes}>
         <Modal.Body>
@@ -25,16 +31,21 @@ export const AutoStartStopModal: FC<Props> = ({ disabled, onClose, onClick }) =>
           />
         </Modal.Body>
         <Modal.Footer>
-          <button onClick={onClose} className="w-full">
+          <button onClick={() => closeModalFor("startStopMode")} className="w-full">
             {translate("common.close")}
           </button>
           <div className="w-0 h-10 my-2 border-r border-victron-darkGray-200" />
-          <button onClick={onClick} className="w-full">
+          <button onClick={enableHandler} className="w-full">
             {translate("common.enable")}
           </button>
         </Modal.Footer>
       </Modal.Frame>
     )
+  }
+
+  const disableHandler = () => {
+    // Logic here
+    closeModalFor("startStopMode")
   }
 
   return (
@@ -48,11 +59,11 @@ export const AutoStartStopModal: FC<Props> = ({ disabled, onClose, onClick }) =>
         />
       </Modal.Body>
       <Modal.Footer>
-        <button onClick={onClose} className="w-full">
+        <button onClick={() => closeModalFor("startStopMode")} className="w-full">
           {translate("common.close")}
         </button>
         <div className="w-0 h-10 my-2 border-r border-victron-darkGray-200" />
-        <button onClick={onClick} className="w-full">
+        <button onClick={disableHandler} className="w-full">
           {translate("common.disable")}
         </button>
       </Modal.Footer>

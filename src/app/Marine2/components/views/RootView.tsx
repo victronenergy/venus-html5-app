@@ -10,6 +10,8 @@ import { PageSelectorProps } from "../ui/PageSelector"
 import DevicesOverview from "../boxes/DevicesOverview"
 import EnvironmentOverview from "../boxes/EnvironmentOverview/EnvironmentOverview"
 import { BOX_TYPES } from "../../utils/constants/generic"
+import { AutoStartStopModal } from "../_composed/modals/auto-start-stop"
+import { Modals } from "../_composed/modals/Modals"
 
 const RootView = () => {
   const visibleWidgetsStore = useVisibleWidgetsStore()

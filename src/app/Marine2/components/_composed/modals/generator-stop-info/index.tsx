@@ -1,41 +1,20 @@
 import React, { FC } from "react"
 import { Modal } from "app/Marine2/components/ui/Modal/Modal"
 import { Message } from "../../../_elements/Message/Message"
-import { AppViews } from "../../../../modules/AppViews"
+import { useUiStore } from "../../../../modules/Ui"
 
-interface Props {
-  linkedView?: AppViews
-  onClose: () => void
-  infoText?: InfoText
-}
+export const GeneratorStopInfo: FC = () => {
+  const { modals, closeModalFor } = useUiStore()
 
-export interface InfoText {
-  title: string
-  body: string
-}
+  if (!modals["startStopMode"]) return null
 
-export const GeneratorStopInfo: FC<Props> = ({ linkedView, onClose, infoText }) => {
-
-  if (linkedView || !infoText) {
-    return null
-  }
-  {
-    /*        {!linkedView && !!infoText && (
-            <div className="-mr-3 p-3" onClick={openInfo}>
-              <InfoIcon
-                className="w-7 text-victron-blue dark:text-victron-blue-dark cursor-pointer outline-none"
-                alt="Info"
-              />
-            </div>
-          )}*/
-  }
   return (
-    <Modal.Frame open={true} onClose={onClose}>
+    <Modal.Frame open={true} onClose={() => closeModalFor("generatorStopInfo")}>
       <Modal.Body>
-        <Message variant="info" label="Fischer Panda Genset" title={infoText.title} text={infoText.body} />
+        <Message variant="info" label="Fischer Panda Genset" title="You sure?" text="You are about to stop the generator. Are you sure?" />
       </Modal.Body>
       <Modal.Footer>
-        <button onClick={onClose} className="w-full h-[60px]">
+        <button onClick={() => closeModalFor("generatorStopInfo")} className="w-full h-[60px]">
           Ok
         </button>
       </Modal.Footer>

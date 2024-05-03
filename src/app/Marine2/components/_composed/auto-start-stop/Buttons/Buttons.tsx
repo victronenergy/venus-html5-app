@@ -4,6 +4,7 @@ import Button from "../../../_elements/Button"
 import { ToggleSwitchButton } from "../../../_elements/ToggleSwitchButton/ToggleSwitchButton"
 import { formatStartStopFor } from "../../../../utils/formatters/general/start-stop/format-start-stop-for"
 import { AutoStartStopModal } from "../../modals/auto-start-stop"
+import { useUiStore } from "../../../../modules/Ui"
 
 interface Props {
   title: string
@@ -16,12 +17,18 @@ interface Props {
 }
 
 export const Buttons: FC<Props> = ({}) => {
-  const [showModal, setShowModal] = useState(false) // naar global state? modal systeem.
+
+  const { openModalFor, toggleModalFor } = useUiStore()
   const [disabled, setDisabled] = useState(false) // dynamisch maken
 
+
   const clickHandler = () => {
-    setDisabled(!disabled)
-    setShowModal(!showModal)
+    console.log("HOHO")
+
+    openModalFor("startStopMode")
+
+    //setDisabled(!disabled)
+    //toggleModalFor("startStopMode")
   }
 
   return (
@@ -29,19 +36,9 @@ export const Buttons: FC<Props> = ({}) => {
       <Button size="lg" className="w-full" disabled={false} onClick={() => console.log(true)}>
         {formatStartStopFor(0)}
       </Button>
-      <ToggleSwitchButton
-        id="toggleAutoStart"
-        toggle={() => setShowModal(!showModal)}
-        size="lg"
-        className="w-full"
-        selected={!disabled}
-      >
+      <ToggleSwitchButton id="toggleAutoStart" toggle={() => setDisabled(!disabled)} size="lg" className="w-full" selected={!disabled}>
         {translate("common.autoStart")}
       </ToggleSwitchButton>
-
-      {showModal && (
-        <AutoStartStopModal disabled={disabled} onClose={() => setShowModal(!showModal)} onClick={clickHandler} />
-      )}
     </>
   )
 }

@@ -10,6 +10,16 @@ import { formatStartStopFor, StartStopValue } from "../../../utils/formatters/ge
 import { isGeneratorRunningFor } from "../../../utils/helpers/devices/generators/is-running-for"
 import { useStartStopMode } from "../../../utils/hooks/use-start-stop-mode"
 
+interface Props {
+  statusCode?: number
+  manualStart?: number
+  title: string
+  autoStart: number
+  updateManualMode: Function
+  updateAutoMode: Function
+  isAutoStartDisabled: boolean
+}
+
 const AutoStartStopSetter = ({
   statusCode,
   manualStart,
@@ -26,6 +36,8 @@ const AutoStartStopSetter = ({
 
   const [isModeModalOpen, setIsModeModalOpen] = useState(false)
   const [modeForSubmission, setModeForSubmission] = useState(startStopMode)
+
+
 
   useEffect(() => {
     setModeForSubmission(startStopMode)
@@ -105,16 +117,6 @@ const AutoStartStopSetter = ({
       )}
     </>
   )
-}
-
-interface Props {
-  statusCode?: number
-  manualStart?: number
-  title: string
-  autoStart: number
-  updateManualMode: Function
-  updateAutoMode: Function
-  isAutoStartDisabled: boolean
 }
 
 export default observer(AutoStartStopSetter)
