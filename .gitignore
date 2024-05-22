@@ -31,6 +31,7 @@ cypress/report
 
 .idea
 .husky
+.vscode
 
 # deploy scripts
 networks.csv
