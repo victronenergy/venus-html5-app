@@ -28,7 +28,7 @@ const App = (props: AppProps) => {
     if (!appStore.remote) {
       mqtt.boot(props.host, props.port)
     } else if (appStore.remote && vrmStore?.webhost && vrmStore?.portalId && vrmStore?.siteId) {
-      mqtt.boot(vrmStore.webhost, null, true, vrmStore.portalId)
+      mqtt.boot(vrmStore.webhost, null, "", true, vrmStore.portalId)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.host, props.port, appStore.remote, vrmStore.webhost, vrmStore.portalId, vrmStore.siteId, locale])
