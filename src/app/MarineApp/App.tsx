@@ -10,7 +10,7 @@ import { Marine } from "./Marine"
 
 export type AppProps = {
   host: string
-  port: number
+  port: number | null
 }
 
 const App = observer((props: AppProps) => {
