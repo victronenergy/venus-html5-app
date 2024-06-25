@@ -43,7 +43,7 @@ const getApp = () => {
 }
 
 const host = getParameterByName("host") || window.location.hostname || "localhost"
-const port = parseInt(getParameterByName("port") || window.location.port)
+const port = parseInt(getParameterByName("port") || window.location.port) || null
 
 const errorHandlerStore = initializeErrorHandlerStore()
 
