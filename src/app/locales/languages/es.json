@@ -1,10 +1,10 @@
 {
     "acMode": {
         "modal": {
-            "name": "Seleccionar modo",
+            "name": "Nombre",
             "updateLimit": "Seleccionar límite de entrada de la red"
         },
-        "title": "Modo CA"
+        "title": "Título"
     },
     "boxes": {
         "EnergyOverview": "Resumen de energía",
@@ -58,7 +58,7 @@
         "days": "días",
         "days_short": "d",
         "discharge": "Descarga",
-        "discharging": "Descargando",
+        "discharging": "descargando",
         "eco": "Eco",
         "emptyBar": " - ",
         "equalisationCharging": "En carga de ecualización",
@@ -67,7 +67,7 @@
         "floatCharging": "En carga de flotación",
         "hours": "horas",
         "hours_short": "h",
-        "idle": "En reposo",
+        "idle": "reposo",
         "inputCurrentLimit": "Límite de corriente de entrada",
         "inputLimit": "Límite de entrada",
         "inverterOnly": "Solo inversor",
@@ -87,16 +87,16 @@
         "off": "Apagado",
         "on": "Encendido",
         "passthru": "Paso libre",
-        "powerSupplyMode": "Modo fuente de alimentación",
+        "powerSupplyMode": "Modo de fuente de alimentación",
         "remainingTime": "Tiempo restante",
-        "running": "En funcionamiento",
+        "running": "En marcha",
         "set": "Establecer",
         "standby": "En espera",
         "starting": "Arrancando",
         "stopped": "Parado",
         "stopping": "Parando",
         "storageMode": "Modo de almacenamiento",
-        "sustain": "Sostenimiento",
+        "sustain": "Sostener",
         "timetogo": "queda",
         "unplugged": "Desconectado",
         "veBusFault": "Fallo del VE.Bus",
@@ -167,7 +167,7 @@
         "versionInfo": "Información de la versión"
     },
     "installations": {
-        "title": "Elegir una instalación"
+        "title": "Título"
     },
     "locker": {
         "lockDescription": "Para evitar cambios accidentales en los ajustes del dispositivo - al habilitar esta función se bloqueará la posibilidad de accionar los controles",
@@ -176,7 +176,7 @@
     },
     "noWidgets": {
         "subtitle": "Asegúrese de que sus dispositivos estén bien conectados",
-        "title": "Su panel de control está vacío."
+        "title": "Título"
     },
     "pages": {
         "diagnostics": "Diagnósticos",
@@ -186,7 +186,7 @@
     "remoteLogin": {
         "2fa": "Token de autenticación de dos factores",
         "email": "Email",
-        "forgotPassword": "¿Ha olvidado la contraseña?",
+        "forgotPassword": "¿Ha olvidado su contraseña?",
         "goBack": "Volver",
         "logIn": "Iniciar sesión",
         "logOut": "Cerrar sesión",
@@ -205,7 +205,7 @@
         "Auto equalize/Recondition": "Ecualización automática/Reacondicionamiento",
         "Battery Safe": "BatterySafe",
         "Bulk charging": "En carga inicial",
-        "Discharging": "Descargando",
+        "Discharging": "descargando",
         "Equalisation charging": "En carga de ecualización",
         "External control": "Control externo",
         "Float charging": "En carga de flotación",
@@ -215,7 +215,7 @@
         "Passthru": "Paso libre",
         "Repeated absorption": "Absorción repetida",
         "Storage mode": "Modo de almacenamiento",
-        "Sustain": "Sostenimiento",
+        "Sustain": "Sostener",
         "VE.Bus Fault condition": "Fallo del VE.Bus",
         "Wake-up": "Activación",
         "parts": {
@@ -227,9 +227,9 @@
             "Live well": "Vivero",
             "Oil": "Aceite",
             "PV Charger": "Cargador FV",
-            "Shore Power": "Alimentación de la red",
-            "Tank sensor": "Sensor del depósito",
-            "Waste water": "Aguas residuales"
+            "Shore Power": "Energía solar",
+            "Tank sensor": "Sensor nivel tanque",
+            "Waste water": "Aguas grises"
         }
     },
     "tankWidget": {
@@ -244,14 +244,14 @@
         "Live well": "Vivero",
         "Oil": "Aceite",
         "Raw water": "Agua sin tratar",
-        "Tank sensor": "Sensor del depósito",
-        "Waste water": "Aguas residuales"
+        "Tank sensor": "Sensor nivel tanque",
+        "Waste water": "Aguas grises"
     },
     "versionInfo": {
         "buildDate": "Fecha de creación",
-        "identifier": "Identificador",
+        "identifier": "Identificar",
         "venusOs": "Venus OS",
-        "version": "Versión %{version}",
+        "version": "Versión",
         "vrmPortID": "ID portal VRM"
     },
     "widgets": {
@@ -268,7 +268,7 @@
         "inverterCharger": "Inversor / cargador: %{productNameShort}",
         "inverterWithName": "Inversor: %{productNameShort}",
         "pvCharger": "Cargador FV",
-        "shorePower": "Alimentación de la red",
+        "shorePower": "Energía solar",
         "solar": "Solar",
         "status": "Estado",
         "unknown": "Desconocido"

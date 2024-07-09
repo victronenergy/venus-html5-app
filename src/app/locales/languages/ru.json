@@ -97,13 +97,14 @@
         "stopping": "Остановка",
         "storageMode": "Режим хранения",
         "sustain": "Удержание",
+        "timetogo": "идти",
         "unplugged": "Отключено",
         "veBusFault": "veBusFault",
         "voltage": "Напряжение"
     },
     "diagnostics": {
         "connection": {
-            "connection": "<mrk mtype=\"seg\" mid=\"678\">Подключение</mrk>",
+            "connection": "Подключение",
             "error": "Ошибка",
             "host": "Хозяин",
             "none": "Нет",
@@ -169,6 +170,7 @@
         "title": "Сбросить пароль"
     },
     "locker": {
+        "lockDescription": "Для предотвращения случайных изменений в настройках устройства - включение этой функции заблокирует возможность взаимодействия с элементами управления",
         "lockMessage": "lockMessage",
         "unlockMessage": "unlockMessage"
     },
@@ -188,7 +190,7 @@
         "goBack": "goBack",
         "logIn": "Вход",
         "logOut": "Выйти",
-        "loginFailed": "<mrk mtype=\"seg\" mid=\"640\">Ошибка входа</mrk>",
+        "loginFailed": "Ошибка входа",
         "mobileVerification": "Приложение для проверки подлинности токена",
         "noInstallations": "noInstallations",
         "password": "Пароль",
@@ -246,10 +248,10 @@
         "Waste water": "Грязная вода"
     },
     "versionInfo": {
-        "buildDate": "<mrk mtype=\"seg\" mid=\"52\">Дата билда</mrk>",
-        "identifier": "<mrk mtype=\"seg\" mid=\"50\">Идентификатор</mrk>",
+        "buildDate": "Дата билда",
+        "identifier": "Идентификатор",
         "venusOs": "venusOs",
-        "version": "<mrk mtype=\"seg\" mid=\"73\">Версия %{version}</mrk>",
+        "version": "Версия %{version}",
         "vrmPortID": "vrmPortID"
     },
     "widgets": {

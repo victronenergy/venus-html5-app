@@ -252,7 +252,7 @@
         "identifier": "Identificateur",
         "venusOs": "Venus OS",
         "version": "Version %{version}",
-        "vrmPortID": "ID site VRM"
+        "vrmPortID": "ID Portail VRM"
     },
     "widgets": {
         "acLoads": "Charges AC",
@@ -265,7 +265,7 @@
         "generatorInput": "Entrée générateur",
         "gridInput": "Entrée réseau",
         "invalidConfig": "Configuration invalide",
-        "inverterCharger": "Onduleur / Chargeur: %{productNameShort}",
+        "inverterCharger": "Onduleur / Chargeur",
         "inverterWithName": "Convertisseur: %{productNameShort}",
         "pvCharger": "Chargeur PV",
         "shorePower": "Alimentation du quai",

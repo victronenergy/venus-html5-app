@@ -1,10 +1,10 @@
 {
     "acMode": {
         "modal": {
-            "name": "Välj läge",
+            "name": "Namn",
             "updateLimit": "Välj ingångsbegränsning för landström"
         },
-        "title": "AC-läge"
+        "title": "Remote VEConfigure"
     },
     "boxes": {
         "EnergyOverview": "Energiöversikt",
@@ -36,7 +36,7 @@
         "windGenerator": "Vindgenerator"
     },
     "cardFooter": {
-        "Charge": "Laddning",
+        "Charge": "Belastning",
         "Critical": "Kritisk",
         "Optimal": "Optimal",
         "Status": "Status",
@@ -44,21 +44,21 @@
     },
     "common": {
         "absorptionCharging": "Absorptionsladdning",
-        "assisting": "Assisterar",
+        "assisting": "Hjälpström",
         "auto": "Automatisk",
         "autoStartStop": "Auto start/stopp",
         "bulkCharging": "Bulkladdning",
-        "charge": "Laddning",
+        "charge": "Belastning",
         "charged": "Laddad",
         "chargerOnly": "Endast laddare",
-        "charging": "Laddning",
+        "charging": "laddar",
         "close": "Stäng",
         "current": "Ström",
         "dark": "Mörk",
         "days": "dagar",
         "days_short": "d",
         "discharge": "Urladdning",
-        "discharging": "Urladdning",
+        "discharging": "laddar ur",
         "eco": "Eco",
         "emptyBar": " - ",
         "equalisationCharging": "Utjämningsladdning",
@@ -81,13 +81,13 @@
         "minutes_short": "m",
         "mode": "Läge",
         "noShorePower": "Ingen landström",
-        "notAvailable": "Ej tillgängligt",
+        "notAvailable": "Inte tillgänglig",
         "nrOfPhases": "%{phases} faser",
         "null": " ",
         "off": "Av",
         "on": "På",
         "passthru": "Förbikoppling",
-        "powerSupplyMode": "Nätströmsläge",
+        "powerSupplyMode": "Strömförsörjningsläge",
         "remainingTime": "Kvarvarande tid",
         "running": "I drift",
         "set": "Uppsättning",
@@ -156,8 +156,8 @@
         }
     },
     "header": {
-        "close": "Stäng",
-        "connecting": "Ansluter",
+        "close": "stäng",
+        "connecting": "Ansluter...",
         "local": "Lokal",
         "loggedIn": "Inloggad som",
         "notLoggedIn": "Inte inloggad",
@@ -167,7 +167,7 @@
         "versionInfo": "Versioninformation"
     },
     "installations": {
-        "title": "Välj en installation"
+        "title": "Remote VEConfigure"
     },
     "locker": {
         "lockDescription": "För att förhindra oavsiktliga ändringar i Enhetsinställningar - aktivera den här funktionen för att låsa möjligheten att interagera med kontroller",
@@ -176,7 +176,7 @@
     },
     "noWidgets": {
         "subtitle": "Säkerställ att dina enheter är korrekt anslutna",
-        "title": "Din panel är tom"
+        "title": "Remote VEConfigure"
     },
     "pages": {
         "diagnostics": "Diagnostik",
@@ -188,24 +188,24 @@
         "email": "E-post",
         "forgotPassword": "Glömt ditt lösenord?",
         "goBack": "Gå tillbaka",
-        "logIn": "Logga in",
-        "logOut": "Logga ut",
+        "logIn": "Inloggning",
+        "logOut": "Utloggning",
         "loginFailed": "Inloggningen misslyckades",
         "mobileVerification": "Kod till auktoriseringsapp",
         "noInstallations": "Detta konto har inga installationer.",
         "password": "Lösenord",
         "registerMessage1": "Har du inget konto än? ",
         "registerMessage2": "Registrera din husbil.",
-        "smsVerification": "SMS-verifieringskod",
+        "smsVerification": "SMS-bekräftelsekod",
         "wrong2fa": "Felaktig tvåfaktorsverifieringskod"
     },
     "statusWidget": {
         "Absorption charging": "Absorptionsladdning",
-        "Assisting": "Assisterar",
+        "Assisting": "Hjälpström",
         "Auto equalize/Recondition": "Autoutjämning/rekonditionering",
         "Battery Safe": "Battery Safe",
         "Bulk charging": "Bulkladdning",
-        "Discharging": "Urladdning",
+        "Discharging": "laddar ur",
         "Equalisation charging": "Utjämningsladdning",
         "External control": "Extern kontroll",
         "Float charging": "Floatladdning.",
@@ -220,20 +220,20 @@
         "Wake-up": "Vakna",
         "parts": {
             "Battery": "Batteri",
-            "Black water": "Avloppsvatten",
+            "Black water": "Svartvatten",
             "DC Loads": "DC-belastningar",
             "Fresh water": "Färskvatten",
             "Fuel": "Bränsle",
-            "Live well": "Livewell (vattentank)",
+            "Live well": "Vattentank",
             "Oil": "Olja",
             "PV Charger": "Solcellsladdare",
             "Shore Power": "Landström",
             "Tank sensor": "Tanksensor",
-            "Waste water": "Avfallsvatten"
+            "Waste water": "Spillvatten"
         }
     },
     "tankWidget": {
-        "Black water": "Avloppsvatten",
+        "Black water": "Svartvatten",
         "Diesel": "Diesel",
         "Fresh water": "Färskvatten",
         "Fuel": "Bränsle",
@@ -241,11 +241,11 @@
         "Hydraulic oil": "Hydraulolja",
         "LNG": "LNG",
         "LPG": "LPG",
-        "Live well": "Livewell (vattentank)",
+        "Live well": "Vattentank",
         "Oil": "Olja",
         "Raw water": "Råvatten",
         "Tank sensor": "Tanksensor",
-        "Waste water": "Avfallsvatten"
+        "Waste water": "Spillvatten"
     },
     "versionInfo": {
         "buildDate": "Upprättandedatum",
@@ -255,7 +255,7 @@
         "vrmPortID": "VRM plats-id"
     },
     "widgets": {
-        "acLoads": "AC-belastningar",
+        "acLoads": "AC belastningar",
         "batteries": "Batterier",
         "battery": "Batteri",
         "batteryWithName": "Batteri: %{name}",

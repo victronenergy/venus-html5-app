@@ -83,7 +83,7 @@
         "noShorePower": "无岸电",
         "notAvailable": "不可用",
         "nrOfPhases": "%{phases}相数",
-        "null": "无效的",
+        "null": " ",
         "off": "关",
         "on": "开",
         "passthru": "旁路",

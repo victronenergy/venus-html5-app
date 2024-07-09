@@ -251,7 +251,7 @@
         "buildDate": "Kuruluş zamanı",
         "identifier": "Tanımla",
         "venusOs": "Venus OS",
-        "version": "Versiyon %{version}",
+        "version": "Sürüm %{version}",
         "vrmPortID": "VRM Site ID"
     },
     "widgets": {
