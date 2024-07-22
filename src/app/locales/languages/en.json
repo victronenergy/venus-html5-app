@@ -115,7 +115,8 @@
             "device": "Device",
             "userAgent": "User agent",
             "viewportHeight": "Viewport height",
-            "viewportWidth": "Viewport width"
+            "viewportWidth": "Viewport width",
+            "isWebAssemblySupported": "WebAssembly supported"
         },
         "diagnostics": "Diagnostics"
     },

@@ -69,7 +69,19 @@ const getDeviceDiagnostics = (windowSize: { width?: number; height?: number }) =
       property: translate("diagnostics.device.viewportHeight"),
       value: (windowSize.height ?? window.innerHeight) + "px",
     },
+    {
+      property: translate("diagnostics.device.isWebAssemblySupported"),
+      value: `${checkIfWebAssemblyIsSupported()}`,
+    },
   ]
+}
+
+const checkIfWebAssemblyIsSupported = () => {
+  // Check for WebAssembly presence
+  if (typeof WebAssembly === "object" && typeof WebAssembly.instantiate === "function") {
+    return true
+  }
+  return false
 }
 
 export default observer(DiagnosticsView)
