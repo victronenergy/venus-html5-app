@@ -11,6 +11,7 @@ import { Marine } from "./Marine"
 export type AppProps = {
   host: string
   port: number | null
+  path: string
 }
 
 const App = observer((props: AppProps) => {
@@ -23,7 +24,7 @@ const App = observer((props: AppProps) => {
 
   useEffect(() => {
     if (!appStore.remote) {
-      mqtt.boot(props.host, props.port)
+      mqtt.boot(props.host, props.port, props.path)
     } else if (appStore.remote && vrmStore?.webhost && vrmStore?.portalId && vrmStore?.siteId) {
       mqtt.boot(vrmStore.webhost, null, "", true, vrmStore.portalId)
     }

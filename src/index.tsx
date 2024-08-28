@@ -24,19 +24,19 @@ const getApp = () => {
     case "KVNRV":
       return (
         <React.Suspense fallback={<Loading />}>
-          <KvnrvApp host={host} port={port} />
+          <KvnrvApp host={host} port={port} path={path} />
         </React.Suspense>
       )
     case "Marine":
       return (
         <React.Suspense fallback={<Loading />}>
-          <MarineApp host={host} port={port} />
+          <MarineApp host={host} port={port} path={path} />
         </React.Suspense>
       )
     default:
       return (
         <React.Suspense fallback={<Loading />}>
-          <Marine2App host={host} port={port} />
+          <Marine2App host={host} port={port} path={path} />
         </React.Suspense>
       )
   }
@@ -44,6 +44,7 @@ const getApp = () => {
 
 const host = getParameterByName("host") || window.location.hostname || "localhost"
 const port = parseInt(getParameterByName("port") || window.location.port) || null
+const path = getParameterByName("path") || "websocket-mqtt"
 
 const errorHandlerStore = initializeErrorHandlerStore()
 
