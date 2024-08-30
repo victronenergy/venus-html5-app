@@ -13,6 +13,7 @@ export type AppProps = {
   protocol: string
   host: string
   port: number | null
+  path: string
 }
 
 const App = (props: AppProps) => {
@@ -27,7 +28,7 @@ const App = (props: AppProps) => {
 
   useEffect(() => {
     if (!appStore.remote) {
-      mqtt.boot(props.protocol, props.host, props.port)
+      mqtt.boot(props.protocol, props.host, props.port, props.path)
     } else if (appStore.remote && vrmStore?.webhost && vrmStore?.portalId && vrmStore?.siteId) {
       mqtt.boot("https", vrmStore.webhost, null, "", true, vrmStore.portalId)
     }
