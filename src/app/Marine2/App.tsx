@@ -12,6 +12,7 @@ import "./css/global.css"
 export type AppProps = {
   host: string
   port: number | null
+  path: string
 }
 
 const App = (props: AppProps) => {
@@ -26,7 +27,7 @@ const App = (props: AppProps) => {
 
   useEffect(() => {
     if (!appStore.remote) {
-      mqtt.boot(props.host, props.port)
+      mqtt.boot(props.host, props.port, props.path)
     } else if (appStore.remote && vrmStore?.webhost && vrmStore?.portalId && vrmStore?.siteId) {
       mqtt.boot(vrmStore.webhost, null, "", true, vrmStore.portalId)
     }
