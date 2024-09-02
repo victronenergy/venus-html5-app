@@ -87,6 +87,7 @@
         "off": "Off",
         "on": "On",
         "passthru": "Passant",
+        "pending": "En attente",
         "powerSupplyMode": "Mode Power Supply",
         "remainingTime": "Temps restant",
         "running": "En marche",

@@ -87,6 +87,7 @@
         "off": "Apagado",
         "on": "Encendido",
         "passthru": "Paso libre",
+        "pending": "Pendiente...",
         "powerSupplyMode": "Modo de fuente de alimentación",
         "remainingTime": "Tiempo restante",
         "running": "En marcha",
