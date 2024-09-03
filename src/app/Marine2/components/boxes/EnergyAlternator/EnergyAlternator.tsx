@@ -15,7 +15,7 @@ interface Props {
 }
 
 const EnergyAlternator = ({ componentMode = "compact", alternator, showInstance, compactBoxSize }: Props) => {
-  const { current, voltage } = useAlternator(alternator)
+  const { current, voltage, customName } = useAlternator(alternator)
   const instance = showInstance ? ` [${alternator}]` : ""
   const power = current * voltage
 
@@ -23,7 +23,7 @@ const EnergyAlternator = ({ componentMode = "compact", alternator, showInstance,
     return (
       <ValueOverview
         Icon={AlternatorIcon}
-        title={translate("boxes.alternator")}
+        title={customName || translate("boxes.alternator")}
         value={current}
         unit="A"
         boxSize={compactBoxSize}
@@ -33,7 +33,7 @@ const EnergyAlternator = ({ componentMode = "compact", alternator, showInstance,
 
   return (
     <ValueBox
-      title={translate("boxes.alternator") + instance}
+      title={customName || translate("boxes.alternator") + instance}
       icon={<AlternatorIcon className={responsiveBoxIcon} />}
       value={current}
       unit="A"
