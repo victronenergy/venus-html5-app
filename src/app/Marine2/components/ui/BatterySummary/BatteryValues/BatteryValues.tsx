@@ -36,7 +36,7 @@ export const BatteryValues: FC<Props> = ({ battery, boxSize }) => {
         )}
       </div>
       <div className={classNames("text-victron-gray dark:text-victron-gray-dark", activeStyles.state)}>
-        {batteryStateFor(battery.state, battery.timetogo ?? null)}
+        {batteryStateFor(battery.state, battery.bmsstate, battery.timetogo ?? null)}
       </div>
     </div>
   )

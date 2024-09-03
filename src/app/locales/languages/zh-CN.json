@@ -87,6 +87,7 @@
         "off": "关",
         "on": "开",
         "passthru": "旁路",
+        "pending": "等待中",
         "powerSupplyMode": "电源模式",
         "remainingTime": "剩余时间",
         "running": "正在运行",
