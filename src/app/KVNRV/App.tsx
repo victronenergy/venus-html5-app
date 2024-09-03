@@ -9,6 +9,7 @@ import { useVisibleWidgetsStore } from "../MarineApp/modules"
 import { KVNRV } from "./KVNRV"
 
 export type AppProps = {
+  protocol: string
   host: string
   port: number | null
   path: string
@@ -24,12 +25,21 @@ const App = observer((props: AppProps) => {
 
   useEffect(() => {
     if (!appStore.remote) {
-      mqtt.boot(props.host, props.port, props.path)
+      mqtt.boot(props.protocol, props.host, props.port, props.path)
     } else if (appStore.remote && vrmStore?.webhost && vrmStore?.portalId && vrmStore?.siteId) {
-      mqtt.boot(vrmStore.webhost, null, "", true, vrmStore.portalId)
+      mqtt.boot("https", vrmStore.webhost, null, "", true, vrmStore.portalId)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.host, props.port, appStore.remote, vrmStore.webhost, vrmStore.portalId, vrmStore.siteId, locale])
+  }, [
+    props.protocol,
+    props.host,
+    props.port,
+    appStore.remote,
+    vrmStore.webhost,
+    vrmStore.portalId,
+    vrmStore.siteId,
+    locale,
+  ])
 
   useEffect(() => {
     visibleWidgetsStore.clearVisibleElements()
