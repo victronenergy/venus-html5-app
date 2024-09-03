@@ -7,3 +7,4 @@ export const BATTERY = {
 export const BMS = {
   PENDING: 18,
 }
+
