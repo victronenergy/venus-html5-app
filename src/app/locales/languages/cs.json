@@ -87,6 +87,7 @@
         "off": "Vypnuto",
         "on": "Zapnuto",
         "passthru": "Průchozí",
+        "pending": "Čekající",
         "powerSupplyMode": "Režim dodávky energie",
         "remainingTime": "Zbývající čas",
         "running": "Chod",

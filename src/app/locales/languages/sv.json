@@ -87,6 +87,7 @@
         "off": "Av",
         "on": "På",
         "passthru": "Förbikoppling",
+        "pending": "Avvaktar",
         "powerSupplyMode": "Strömförsörjningsläge",
         "remainingTime": "Kvarvarande tid",
         "running": "I drift",

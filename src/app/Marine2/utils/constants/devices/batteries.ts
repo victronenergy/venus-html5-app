@@ -3,3 +3,7 @@ export const BATTERY = {
   CHARGING: 1,
   DISCHARGING: 2,
 }
+
+export const BMS = {
+  PENDING: 18,
+}

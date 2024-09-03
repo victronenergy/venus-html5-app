@@ -87,6 +87,7 @@
         "off": "Kapalı",
         "on": "Açık",
         "passthru": "Düz geçme",
+        "pending": "Askıda olması...",
         "powerSupplyMode": "powerSupplyMode",
         "remainingTime": "kalan Saat",
         "running": "Çalışıyor",

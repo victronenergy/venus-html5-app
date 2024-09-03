@@ -87,6 +87,7 @@
         "off": "Выкл",
         "on": "Вкл",
         "passthru": "Проход",
+        "pending": "Ожидание...",
         "powerSupplyMode": "Режим поддержки мощности",
         "remainingTime": "Оставшееся время",
         "running": "Работает",
