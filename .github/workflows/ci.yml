@@ -35,25 +35,25 @@ jobs:
         run: npm run generate-e2e-report
         if: always()
       - name: Upload E2E Results
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: e2e-tests-results
           path: cypress/results/results.json
       - name: Upload E2E Report
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: e2e-tests-report
           path: cypress/report
       - name: Upload Cypress Screenshots
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: cypress-screenshots
           path: cypress/screenshots
       - name: Upload Cypress Videos
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: cypress-videos
