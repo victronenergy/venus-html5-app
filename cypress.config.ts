@@ -15,7 +15,7 @@ export default defineConfig({
     json: true,
   },
   e2e: {
-    baseUrl: "http://localhost:8000/",
+    baseUrl: "http://localhost:8000/?host=localhost&port=9001&path=%02%03",
     specPattern: "cypress/e2e/**/*.{js,jsx,ts,tsx}",
   },
 })
