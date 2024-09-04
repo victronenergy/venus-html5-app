@@ -71,11 +71,13 @@ And then open the app in the browser at `http://localhost:8000`.
 
 This will start the webpack dev server, which will recompile the app on code changes and hot reload the UI.
 
-You can change the `host`, `port`, and `path` (defaults to `websocket-mqtt`) query parameters to connect to a different Venus websocket MQTT host.
+Note that the app will attempt to by default connect to MQTT broker served via the same port as the app and path `websocket-mqtt`, and that will eventually fail.
+
+You will need to change the `host`, `port`, and `path` (defaults to `websocket-mqtt`) query parameters to connect to a different Venus websocket MQTT host.
 
 To connect to a Venus device with `VENUS_DEVICE_IP` running firmware >= 3.50 use the following URL:
 
-`http://localhost:8000?host=<VENUS_DEVICE_IP>`
+`http://localhost:8000?host=<VENUS_DEVICE_IP>&port=80`
 
 To connect to Venus device with `VENUS_DEVICE_IP` running firmware < 3.50, or to a `venus-docker` simulation, use the following URL:
 
@@ -181,7 +183,7 @@ Most components have Enzyme unit tests. Run all of these tests with `npm run tes
 Cypress is used to run integration tests on the compiled ui to make sure it opens and operated correctly in different
 display sizes. To run cypress you need to run the live server and an instance of venus docker in the Venus GX demo mode (z):
 
-(in html5 app repo): `npm run dev`
+(in html5 app repo): `npm run start`
 
 (in venus docker repo): `./run.sh -s z`
 
