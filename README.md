@@ -185,7 +185,7 @@ display sizes. To run cypress you need to run the live server and an instance of
 
 (in venus docker repo): `./run.sh -s z`
 
-Then you can run the cypress ui with `npm run cypress`.
+Then you can run the cypress UI interactively with `npm run cy:open`.
 
 To run the ui tests in CI-style use `npm run test:e2e`
 
