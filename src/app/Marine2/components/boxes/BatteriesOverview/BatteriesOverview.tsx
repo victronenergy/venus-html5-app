@@ -32,7 +32,9 @@ const BatteriesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: 
 
   const { temperatureUnitToHumanReadable } = useAppStore()
 
-  useVisibilityNotifier({ widgetName: BOX_TYPES.BATTERIES, visible: !!(batteries && batteries.length) })
+  const hasValidData = !!(batteries && batteries.length)
+
+  useVisibilityNotifier({ widgetName: BOX_TYPES.BATTERIES, isVisible: hasValidData })
 
   const sortedBatteries = sortBatteries(batteries ?? [])
   const overviewBatteries = batteriesForOverview(sortedBatteries)

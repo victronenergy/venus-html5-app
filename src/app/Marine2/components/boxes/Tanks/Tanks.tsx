@@ -27,7 +27,9 @@ const Tanks = ({ componentMode = "full", className }: Props) => {
 
   const [boxSize, setBoxSize] = useState<ISize>({ width: 0, height: 0 })
 
-  useVisibilityNotifier({ widgetName: BOX_TYPES.TANKS, visible: !!filteredTanks.length })
+  const hasValidData = !!filteredTanks.length
+
+  useVisibilityNotifier({ widgetName: BOX_TYPES.TANKS, isVisible: hasValidData })
 
   const gridRef = useRef<HTMLDivElement>(null)
   const [orientation, setOrientation] = useState<ScreenOrientation>("vertical")

@@ -27,8 +27,9 @@ const EnergyOverview: FC<Props> = ({ componentMode = "full", pageSelectorPropsSe
   const boxes = useAvailableEnergyBoxes(compactBoxSize, componentMode)
   const activeStyles = applyStyles(compactBoxSize, defaultBoxStyles)
 
-  // TODO: it seems that visibility logic can be improved since the energy component always has an overview box
-  useVisibilityNotifier({ widgetName: BOX_TYPES.ENERGY, visible: boxes.length > 0 })
+  const hasValidData = boxes.length > 0
+
+  useVisibilityNotifier({ widgetName: BOX_TYPES.ENERGY, isVisible: hasValidData })
 
   if (!boxes.length) {
     return null
