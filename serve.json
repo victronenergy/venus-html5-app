@@ -1,0 +1,8 @@
+{
+  "public": "./dist",
+  "rewrites": [
+    { "source": "app/:a", "destination": ":a" },
+    { "source": "app/:a/:b", "destination": ":a/:b" },
+    { "source": "app/:a/:b/:c", "destination": ":a/:b/:c" }
+  ]
+}

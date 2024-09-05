@@ -72,7 +72,9 @@ const EnvironmentOverview = ({ componentMode = "full", pageSelectorPropsSetter }
     (sensor: any) => sensor.temperature || sensor.humidity || sensor.pressure
   )
 
-  useVisibilityNotifier({ widgetName: BOX_TYPES.ENVIRONMENT, visible: sensorHasData })
+  const hasValidData = sensorHasData
+
+  useVisibilityNotifier({ widgetName: BOX_TYPES.ENVIRONMENT, isVisible: hasValidData })
 
   if (componentMode === "compact") {
     return (

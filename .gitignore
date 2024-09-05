@@ -26,6 +26,7 @@ yarn-debug.log*
 yarn-error.log*
 
 cypress/results
+cypress/screenshots
 cypress/videos
 cypress/report
 
