@@ -27,8 +27,7 @@ export class VisibleWidgets {
 
     // React compares complex types like Set or Array by reference
     // when computing dependency changes.
-    // Duplicate the Set when its elements changes
-    // to correctly report upwards that we should re-render.
+    // Duplicate the Set when its elements change to indicate we should re-render.
     if (isDirty) {
       this.visibleElements = new Set(this.visibleElements)
     }
