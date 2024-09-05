@@ -71,11 +71,21 @@ And then open the app in the browser at `http://localhost:8000`.
 
 This will start the webpack dev server, which will recompile the app on code changes and hot reload the UI.
 
-You can change the `host` and `port` (although the default 9001 is usually correct) query parameters to point to your Venus device:
+You can change the `host`, `port`, and `path` (defaults to `websocket-mqtt`) query parameters to connect to a different Venus websocket MQTT host.
 
-`http://localhost:8000?host=<VENUS_DEVICE_IP>&port=9001`
+To connect to a Venus device with `VENUS_DEVICE_IP` running firmware >= 3.50 use the following URL:
 
-This way you can run the local app against venus device data if the venus device is on the same network as your computer.
+`http://localhost:8000?host=<VENUS_DEVICE_IP>`
+
+To connect to Venus device with `VENUS_DEVICE_IP` running firmware < 3.50, or to a `venus-docker` simulation, use the following URL:
+
+`http://localhost:8000/app?host=VENUS_DEVICE_IP&port=9001&path=%02%03`
+
+Note: the `port` needs to be overriden to connect directly to `flashmq` provided websocket port.
+
+Note: the `path` URL parameter requires special sequence `%02%03` in order to properly override the default `websocket-mqtt` path and specify an empty string.
+
+This way you can run the local app against any Venus device that is reachable via your network.
 
 ### 2.4 Using Demo mode on Venus device
 
