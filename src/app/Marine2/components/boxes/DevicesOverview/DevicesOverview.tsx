@@ -32,6 +32,11 @@ import { ISize } from "@m2Types/generic/size"
 import { AC_SOURCE, BOX_TYPES } from "../../../utils/constants/generic"
 import { RELAY_FUNCTION } from "../../../utils/constants/devices/generators"
 
+interface Props {
+  componentMode?: ComponentMode
+  pageSelectorPropsSetter?: (arg0: PageSelectorProps) => void
+}
+
 const DevicesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: Props) => {
   const { inverters } = useInverters()
   const { instanceId: vebusInstanceId, vebusInverters } = useVebus()
@@ -51,7 +56,9 @@ const DevicesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: Pr
     componentMode
   )
 
-  useVisibilityNotifier({ widgetName: BOX_TYPES.DEVICES, visible: !!boxes.length })
+  const hasValidData = !!boxes.length
+
+  useVisibilityNotifier({ widgetName: BOX_TYPES.DEVICES, isVisible: hasValidData })
 
   if (!boxes.length) {
     return null
@@ -184,11 +191,6 @@ const getAvailableDeviceBoxes = function (
   }
 
   return devices
-}
-
-interface Props {
-  componentMode?: ComponentMode
-  pageSelectorPropsSetter?: (arg0: PageSelectorProps) => void
 }
 
 export default observer(DevicesOverview)
