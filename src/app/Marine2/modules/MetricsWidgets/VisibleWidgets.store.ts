@@ -16,15 +16,26 @@ export class VisibleWidgets {
   }
 
   notifyVisibility(element: notifyParams) {
-    if (element.visible) {
+    let isDirty = false
+    if (element.visible && !this.visibleElements.has(element.widgetName)) {
       this.visibleElements.add(element.widgetName)
-    } else {
+      isDirty = true
+    } else if (this.visibleElements.has(element.widgetName)) {
       this.visibleElements.delete(element.widgetName)
+      isDirty = true
+    }
+
+    // React compares complex types like Set or Array by reference
+    // when computing dependency changes.
+    // Duplicate the Set when its contents changes
+    // to correctly report upwards that we should re-render.
+    if (isDirty) {
+      this.visibleElements = new Set(this.visibleElements)
     }
   }
 
   get noVisibleElements() {
-    return !this.visibleElements.size
+    return this.visibleElements.size === 0
   }
 
   clearVisibleElements() {
