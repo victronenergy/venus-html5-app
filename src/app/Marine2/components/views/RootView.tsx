@@ -21,10 +21,12 @@ const RootView = () => {
     const visibleBoxes: JSX.Element[] = []
     const hiddenBoxes: JSX.Element[] = []
     for (const type of Object.values(BOX_TYPES)) {
+      const isVisible = visibleWidgetsStore.visibleElements.has(type)
+
       const elem = getBoxByType(type)
       if (!elem) continue
 
-      if (visibleWidgetsStore.visibleElements.has(type)) {
+      if (isVisible) {
         visibleBoxes.push(elem)
       } else {
         hiddenBoxes.push(elem)
