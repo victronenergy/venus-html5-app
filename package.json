@@ -31,7 +31,7 @@
     "classnames": "^2.5.1",
     "dotenv": "^8.2.0",
     "dotenv-expand": "^5.1.0",
-    "eslint": "^8.32.0",
+    "eslint": "^8.57.0",
     "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-flowtype": "^8.0.3",
     "eslint-plugin-import": "^2.27.5",
