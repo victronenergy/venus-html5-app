@@ -143,8 +143,9 @@
         "queryParams": "Query params: %{queryParams}",
         "remoteConsole": {
             "connectionFailed": "Unable to connect to the GX device",
-            "screenTooSmall": "Open in a larger screen to view remote console"
-        },
+            "screenTooSmall": "Open in a larger screen to view remote console",
+            "qrCodeMessage": "To access the GX Remote Console, make sure your phone is on the same WiFi network as the GX device and then scan this QR code."
+          },
         "userAgent": "User agent: %{userAgent}",
         "windowSize": "Window: %{width} x %{height}"
     },

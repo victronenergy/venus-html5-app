@@ -10,7 +10,6 @@ import RadioButton from "../RadioButton"
 import { AppViews, useAppViewsStore } from "../../../modules/AppViews"
 import Button from "../Button"
 import classNames from "classnames"
-import { QRCode } from "react-qrcode-logo"
 
 const SettingsMenu = () => {
   const { locked, toggleLocked } = useAppStore()
@@ -113,11 +112,6 @@ const SettingsMenu = () => {
                   {translate("common.auto")}
                 </span>
                 <ToggleSwitch id="Toggle2" onChange={setAutoMode} />
-              </label>
-              <label className="flex justify-between items-center pb-4 sm-m:pb-6 sm-l:pb-8">
-                <span className="mr-1 text-sm sm-m:mr-2 sm-l:text-base text-black dark:text-white">
-                  <QRCode value={window.location.origin} />
-                </span>
               </label>
               <Button onClick={openRemoteConsole} className="w-full" size="md">
                 {translate("header.remoteConsole")}
