@@ -31,10 +31,6 @@ const EnergyOverview: FC<Props> = ({ componentMode = "full", pageSelectorPropsSe
 
   useVisibilityNotifier({ widgetName: BOX_TYPES.ENERGY, isVisible: hasValidData })
 
-  if (!boxes.length) {
-    return null
-  }
-
   if (componentMode === "compact") {
     return (
       <Box
