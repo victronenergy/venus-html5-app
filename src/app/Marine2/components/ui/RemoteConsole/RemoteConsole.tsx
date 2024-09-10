@@ -22,7 +22,7 @@ const RemoteConsole = ({ host, width, height }: Props) => {
 
   console.log(`Venus Running GUI version: ${app.guiVersion}`)
 
-  const consoleUrl = `${window.location.protocol}://venus.local/`
+  const consoleUrl = `${window.location.protocol}//venus.local/`
 
   if (app.guiVersion !== 1) {
     return (
