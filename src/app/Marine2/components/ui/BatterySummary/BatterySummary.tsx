@@ -17,7 +17,7 @@ export const BatterySummary: FC<Props> = ({ battery, boxSize }) => {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center w-full h-full">
+    <div className="flex flex-col min-w-0 justify-center items-center w-full h-full">
       <ProgressCircle percentage={battery.soc ?? null} boxSize={size}>
         <BatteryValues battery={battery} boxSize={size} />
       </ProgressCircle>
