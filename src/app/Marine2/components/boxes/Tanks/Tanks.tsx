@@ -15,6 +15,8 @@ import { ComponentMode } from "@m2Types/generic/component-mode"
 import { ScreenOrientation } from "@m2Types/generic/screen-orientation"
 import { BOX_TYPES } from "../../../utils/constants/generic"
 import { ISize } from "@m2Types/generic/size"
+import { sortTanks } from "../../../utils/helpers/devices/tanks/sort-tanks"
+import { trace } from "mobx"
 
 interface Props {
   componentMode?: ComponentMode
@@ -23,11 +25,12 @@ interface Props {
 
 const Tanks = ({ componentMode = "full", className }: Props) => {
   const { tanks } = useTanks()
-  const filteredTanks = (tanks || []).filter((tank) => !!tank || tank === 0)
+
+  const sortedTanks = sortTanks(tanks || [])
 
   const [boxSize, setBoxSize] = useState<ISize>({ width: 0, height: 0 })
 
-  const hasValidData = !!filteredTanks.length
+  const hasValidData = !!tanks.length
 
   useVisibilityNotifier({ widgetName: BOX_TYPES.TANKS, isVisible: hasValidData })
 
@@ -57,8 +60,8 @@ const Tanks = ({ componentMode = "full", className }: Props) => {
         withPagination={true}
         paginationOrientation="vertical"
       >
-        {filteredTanks.map((tank) => (
-          <Tank key={tank} tankInstanceId={Number(tank)} componentMode="compact" parentSize={boxSize} />
+        {sortedTanks.map((tank) => (
+          <Tank key={tank.instance} tankInstanceId={tank.instance} componentMode="compact" parentSize={boxSize} />
         ))}
       </Box>
     )
@@ -75,10 +78,10 @@ const Tanks = ({ componentMode = "full", className }: Props) => {
           withPagination={true}
           paginationOrientation="vertical"
         >
-          {filteredTanks.map((tank) => (
+          {sortedTanks.map((tank) => (
             <Tank
-              key={tank}
-              tankInstanceId={Number(tank)}
+              key={tank.instance}
+              tankInstanceId={tank.instance}
               componentMode="full"
               orientation={orientation}
               parentSize={{ width, height }}
@@ -100,10 +103,10 @@ const Tanks = ({ componentMode = "full", className }: Props) => {
         paginationOrientation="horizontal"
       >
         <div className="flex h-full" ref={gridRef}>
-          {filteredTanks.map((tank) => (
+          {sortedTanks.map((tank) => (
             <Tank
-              key={tank}
-              tankInstanceId={Number(tank)}
+              key={tank.instance}
+              tankInstanceId={tank.instance}
               componentMode="full"
               orientation={orientation}
               parentSize={{ width, height }}
