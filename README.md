@@ -191,6 +191,14 @@ Then you can run the cypress UI interactively with `npm run cy:open`.
 
 To run the ui tests in CI-style use `npm run test:e2e`
 
+### 3.4 Simulating/Debugging MFD UI locally
+
+MFDs ship web browsers based on `AppleWebKit/537` or `AppleWebKit/601`.
+
+Partially Simulating the MFD web browser can be achieved by running any browser using the same engine.
+
+Google Chrome 49 runs `AppleWebKit/537`, so contains all the same CSS/JS limitations, and can be use to simulate/debug CSS issues faster.
+
 ## 4. Making a release
 
 Whenever a new tag is created, GitHub Actions will build the app, archive the built files and upload them as `venus-html5-app.tar.gz` to the Github Release associated with the tag.
