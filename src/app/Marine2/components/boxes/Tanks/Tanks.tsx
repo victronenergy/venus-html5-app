@@ -16,7 +16,6 @@ import { ScreenOrientation } from "@m2Types/generic/screen-orientation"
 import { BOX_TYPES } from "../../../utils/constants/generic"
 import { ISize } from "@m2Types/generic/size"
 import { sortTanks } from "../../../utils/helpers/devices/tanks/sort-tanks"
-import { trace } from "mobx"
 
 interface Props {
   componentMode?: ComponentMode
