@@ -71,9 +71,9 @@ And then open the app in the browser at `http://localhost:8000`.
 
 This will start the webpack dev server, which will recompile the app on code changes and hot reload the UI.
 
-Note that the app will attempt to by default connect to MQTT broker served via the same port as the app and path `websocket-mqtt`, and that will eventually fail.
+Note that the app will attempt to connect to MQTT broker served via the same port as the app and path `/websocket-mqtt`, and that will eventually fail.
 
-You will need to change the `host`, `port`, and `path` (defaults to `websocket-mqtt`) query parameters to connect to a different Venus websocket MQTT host.
+You will need to change the `host`, `port`, and `path` (defaults to `/websocket-mqtt`) query parameters to connect to a different Venus websocket MQTT host.
 
 To connect to a Venus device with `VENUS_DEVICE_IP` running firmware >= 3.50 use the following URL:
 
@@ -85,7 +85,7 @@ To connect to Venus device with `VENUS_DEVICE_IP` running firmware < 3.50, or to
 
 Note: the `port` needs to be overriden to connect directly to `flashmq` provided websocket port.
 
-Note: the `path` URL parameter requires special sequence `%02%03` in order to properly override the default `websocket-mqtt` path and specify an empty string.
+Note: the `path` URL parameter requires special sequence `%02%03` in order to properly override the default `/websocket-mqtt` path and specify an empty string.
 
 This way you can run the local app against any Venus device that is reachable via your network.
 
