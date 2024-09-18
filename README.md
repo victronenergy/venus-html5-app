@@ -232,7 +232,9 @@ A sample recipe for the HTML5 app is [here](https://github.com/victronenergy/met
 
 ## 5. Device error logging
 
-When the app is hosted from a VenusGX, there is no convenient way to see the errors in the js console. To make troubleshooting easier the app sends (at least attempts to send) the error messages through websocket to the device. The log can be found at `/var/log/venus-html5-app/current`.
+When the app is hosted from a Venus device, there is no convenient way to see the errors in the js console.
+To make troubleshooting easier the app can send the error messages through websocket port 7890 to the device.
+To enable this debugging mode, setup https://github.com/vi/websocat on your Venus device, uncomment the debug code in `index.html`, and deploy to the device.
 
 ## 6. Device debugging
 
@@ -242,4 +244,4 @@ By adding `debug=true` to the query params you can enable some convenience featu
 - "Browser info" button - links to page containing basic information about the browser in which the app is running
 - A debug log element, which redirects all console messages to a visible element in the ui
 
-To enable this on a device set the debugReload and debugLog elements to visible in index.html and deploy to the device.
+To enable this this debugging mode on a MFD device, uncommend the debug code in `index.html`, override the `debug=true` check, and deploy to the device.
