@@ -4,8 +4,6 @@ import ValueOverview from "../../ui/ValueOverview"
 import ThermometerIcon from "../../../images/icons/thermometer.svg"
 import ValueBox from "../../ui/ValueBox"
 import { translate } from "react-i18nify"
-import { useCallback, useContext, useEffect } from "react"
-import { VisibleComponentsContext } from "./EnvironmentOverview"
 import { ComponentMode } from "@m2Types/generic/component-mode"
 import { ISize } from "@m2Types/generic/size"
 import { temperatureValueFor } from "../../../utils/formatters/temperature/temperature-value-for"
@@ -18,23 +16,7 @@ interface Props {
 
 const TemperatureData = ({ dataId, componentMode, boxSize }: Props) => {
   const { temperature, customName } = useTemperature(dataId)
-  const { passVisibility } = useContext(VisibleComponentsContext)
   const { temperatureUnitToHumanReadable, temperatureUnit } = useAppStore()
-
-  const handlePassVisibility = useCallback(
-    (id: number, isVisible: boolean) => {
-      passVisibility(id, "temperature", isVisible)
-    },
-    [passVisibility]
-  )
-
-  useEffect(() => {
-    if (temperature !== undefined) {
-      handlePassVisibility(dataId, true)
-    } else {
-      handlePassVisibility(dataId, false)
-    }
-  }, [temperature, customName, dataId, handlePassVisibility])
 
   if (temperature === undefined) {
     return null
