@@ -1,10 +1,11 @@
 import "./Modal.scss"
-import { FunctionComponent } from "react"
+import { FunctionComponent, ReactNode } from "react"
 import { Card, SIZE_WIDE, ICON_CLOSE } from "../Card"
 
 type ModalProps = {
   title: string
   onClose: Function
+  children: ReactNode
   cardProps?: any
 }
 

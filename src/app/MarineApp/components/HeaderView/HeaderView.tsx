@@ -6,6 +6,7 @@ const MAX_TITLE_LENGTH = 40
 
 type HeaderViewProps = {
   child?: boolean
+  children?: React.ReactNode
   icon: string
   title?: string
   subTitle?: string

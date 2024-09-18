@@ -1,4 +1,4 @@
-import { FC } from "react"
+import { FC, ReactNode } from "react"
 import RadioButton from "../../RadioButton"
 
 interface Props {
@@ -6,6 +6,7 @@ interface Props {
   onChange: (arg: number) => void
   key: string
   value: number
+  children: ReactNode
 }
 
 export const RadioOption: FC<Props> = ({ mode, onChange, value, children }) => (

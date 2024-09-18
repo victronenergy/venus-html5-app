@@ -40,7 +40,11 @@ const Body: FC<BodyProps> = ({ children, className, variant = "default" }) => {
   return <div className={classes}>{children}</div>
 }
 
-const Footer: FC = ({ children }) => (
+interface FooterProps {
+  children: ReactNode
+}
+
+const Footer: FC<FooterProps> = ({ children }) => (
   <div className="flex justify-between border-t border-victron-darkGray-200 text-base">{children}</div>
 )
 
