@@ -25,7 +25,6 @@ const MqttUnavailable = ({ host }: Props) => {
 
   useEffect(() => {
     if (!error) {
-      clearTimeout((connectTimeout.current as NodeJS.Timeout) || undefined)
       setIsConnecting(false)
       appViewsStore.setView(AppViews.ROOT)
     }
@@ -40,6 +39,7 @@ const MqttUnavailable = ({ host }: Props) => {
       setIsConnecting(false)
     }, 6 * 1000)
     // eslint-disable-next-line react-hooks/exhaustive-deps
+    return () => clearTimeout((connectTimeout.current as NodeJS.Timeout) || undefined)
   }, [])
 
   if (isConnecting) {
