@@ -71,9 +71,9 @@ And then open the app in the browser at `http://localhost:8000`.
 
 This will start the webpack dev server, which will recompile the app on code changes and hot reload the UI.
 
-Note that the app will attempt to by default connect to MQTT broker served via the same port as the app and path `websocket-mqtt`, and that will eventually fail.
+Note that the app will attempt to connect to MQTT broker served via the same port as the app and path `/websocket-mqtt`, and that will eventually fail.
 
-You will need to change the `host`, `port`, and `path` (defaults to `websocket-mqtt`) query parameters to connect to a different Venus websocket MQTT host.
+You will need to change the `host`, `port`, and `path` (defaults to `/websocket-mqtt`) query parameters to connect to a different Venus websocket MQTT host.
 
 To connect to a Venus device with `VENUS_DEVICE_IP` running firmware >= 3.50 use the following URL:
 
@@ -85,7 +85,7 @@ To connect to Venus device with `VENUS_DEVICE_IP` running firmware < 3.50, or to
 
 Note: the `port` needs to be overriden to connect directly to `flashmq` provided websocket port.
 
-Note: the `path` URL parameter requires special sequence `%02%03` in order to properly override the default `websocket-mqtt` path and specify an empty string.
+Note: the `path` URL parameter requires special sequence `%02%03` in order to properly override the default `/websocket-mqtt` path and specify an empty string.
 
 This way you can run the local app against any Venus device that is reachable via your network.
 
@@ -191,6 +191,14 @@ Then you can run the cypress UI interactively with `npm run cy:open`.
 
 To run the ui tests in CI-style use `npm run test:e2e`
 
+### 3.4 Simulating/Debugging MFD UI locally
+
+MFDs ship web browsers based on `AppleWebKit/537` or `AppleWebKit/601`.
+
+Partially Simulating the MFD web browser can be achieved by running any browser using the same engine.
+
+Google Chrome 49 runs `AppleWebKit/537`, so contains all the same CSS/JS limitations, and can be use to simulate/debug CSS issues faster.
+
 ## 4. Making a release
 
 Whenever a new tag is created, GitHub Actions will build the app, archive the built files and upload them as `venus-html5-app.tar.gz` to the Github Release associated with the tag.
@@ -224,7 +232,9 @@ A sample recipe for the HTML5 app is [here](https://github.com/victronenergy/met
 
 ## 5. Device error logging
 
-When the app is hosted from a VenusGX, there is no convenient way to see the errors in the js console. To make troubleshooting easier the app sends (at least attempts to send) the error messages through websocket to the device. The log can be found at `/var/log/venus-html5-app/current`.
+When the app is hosted from a Venus device, there is no convenient way to see the errors in the js console.
+To make troubleshooting easier the app can send the error messages through websocket port 7890 to the device.
+To enable this debugging mode, setup https://github.com/vi/websocat on your Venus device, uncomment the debug code in `index.html`, and deploy to the device.
 
 ## 6. Device debugging
 
@@ -234,4 +244,4 @@ By adding `debug=true` to the query params you can enable some convenience featu
 - "Browser info" button - links to page containing basic information about the browser in which the app is running
 - A debug log element, which redirects all console messages to a visible element in the ui
 
-To enable this on a device set the debugReload and debugLog elements to visible in index.html and deploy to the device.
+To enable this this debugging mode on a MFD device, uncommend the debug code in `index.html`, override the `debug=true` check, and deploy to the device.

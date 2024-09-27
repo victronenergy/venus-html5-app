@@ -20,8 +20,8 @@ import {
 import { Translate } from "react-i18nify"
 import { observer } from "mobx-react"
 
-export const fluidTypeFormatter = (fluidType: string) => {
-  switch (Number(fluidType)) {
+export const fluidTypeFormatter = (fluidType: number) => {
+  switch (fluidType) {
     case FLUID_TYPES.FUEL:
       return "Fuel"
     case FLUID_TYPES.FRESH_WATER:
@@ -46,7 +46,7 @@ export const SmallTank = observer(({ tankId }: TankProps) => {
   const footer = useSendUpdate(
     !hasReverseConfig ? 1 - tank.level / 100 : tank.level / 100,
     hasReverseConfig ? TANKS_CONF.REVERSE_TANK : TANKS_CONF.STANDART_TANK,
-    tank.fluidType && fluidTypeFormatter(tank.fluidType)
+    fluidTypeFormatter(tank.fluidType)
   )
 
   const unit: VolumeUnit =
