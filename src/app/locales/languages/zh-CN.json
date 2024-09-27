@@ -143,6 +143,7 @@
         "queryParams": "查询参数: %{queryParams}",
         "remoteConsole": {
             "connectionFailed": "无法连接到 GX 设备",
+            "qrCodeMessage": "要访问 GX 远程控制台，请确保您的手机与 GX 设备位于同一 WiFi 网络上，然后扫描此二维码。",
             "screenTooSmall": "在大屏幕中打开以查看远程控制台"
         },
         "userAgent": "用户代理: %{userAgent}",

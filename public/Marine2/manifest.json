@@ -2,7 +2,7 @@
     "name": "Victron MFD",
     "short_name": "Victron MFD",
     "description": "Victron Marine MFD",
-    "start_url": ".",
+    "start_url": "/app",
     "icons": [
         {
             "src": "favicon.ico",

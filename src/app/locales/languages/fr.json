@@ -143,6 +143,7 @@
         "queryParams": "Query params: %{queryParams}",
         "remoteConsole": {
             "connectionFailed": "Pas possible de se connecter à l'appareil GX",
+            "qrCodeMessage": "Pour accéder à la console à distance GX, assurez-vous que votre téléphone est sur le même réseau Wi-Fi que l'appareil GX, puis scannez ce code QR.",
             "screenTooSmall": "Ouvrir dans un écran plus large pour visualiser la console à distance"
         },
         "userAgent": "User agent: %{userAgent}",
@@ -256,7 +257,7 @@
         "vrmPortID": "ID Portail VRM"
     },
     "widgets": {
-        "acLoads": "Charges AC",
+        "acLoads": "Charges CA",
         "batteries": "Batteries",
         "battery": "Batterie",
         "batteryWithName": "Batterie: : %{name}",

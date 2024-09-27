@@ -87,7 +87,7 @@
         "off": "Aus",
         "on": "Ein",
         "passthru": "Durchleitung",
-        "pending": "Noch ausstehend",
+        "pending": "Ausstehend",
         "powerSupplyMode": "Stromversorgungsmodus",
         "remainingTime": "Restzeit",
         "running": "In Betrieb",
@@ -143,6 +143,7 @@
         "queryParams": "Abfrageparameter: %{queryParams}",
         "remoteConsole": {
             "connectionFailed": "Verbindung zum GX-Gerät nicht möglich",
+            "qrCodeMessage": "Um auf die GX-Fernbedienungskonsole zuzugreifen, vergewissern Sie sich, dass sich Ihr Telefon im selben WiFi-Netzwerk befindet wie das GX-Gerät, und scannen Sie dann diesen QR-Code.",
             "screenTooSmall": "Auf einem größeren Bildschirm öffnen, um die Remote-Konsole anzuzeigen"
         },
         "userAgent": "User agent: %{userAgent}",
