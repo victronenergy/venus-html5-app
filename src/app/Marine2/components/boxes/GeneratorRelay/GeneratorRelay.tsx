@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite"
 import { translate } from "react-i18nify"
-import { useActiveInValues } from "@victronenergy/mfd-modules"
+import { useActiveInValues, useAppStore } from "@victronenergy/mfd-modules"
 import ValueBox from "../../ui/ValueBox"
 import ValueOverview from "../../ui/ValueOverview"
 import AutoStartStopSetter from "../../ui/AutoStartStopSetter/AutoStartStopSetter"
@@ -40,6 +40,7 @@ const GeneratorRelay = ({
   const title = translate("widgets.generator")
   const subTitle = generatorStateFor(statusCode, active, phases)
 
+  const { electricalPowerIndicator } = useAppStore()
   const { current, voltage, power } = useActiveInValues()
   const phasesData = usePhasesData(phases, voltage, current, power)
   const status = active ? "active" : "inactive"
@@ -50,8 +51,8 @@ const GeneratorRelay = ({
         Icon={GeneratorIcon}
         title={title}
         subtitle={subTitle}
-        value={phaseValueFor(phases, current, power)}
-        unit={phaseUnitFor(phases)}
+        value={phaseValueFor(phases, current, power, electricalPowerIndicator)}
+        unit={phaseUnitFor(phases, electricalPowerIndicator)}
         boxSize={compactBoxSize}
         status={status}
       />

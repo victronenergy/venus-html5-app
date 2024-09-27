@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite"
 import classnames from "classnames"
 import { translate, Translate } from "react-i18nify"
 import useSize from "@react-hook/size"
-import { useApp } from "@victronenergy/mfd-modules"
+import { useAppStore } from "@victronenergy/mfd-modules"
 import { QRCode } from "react-qrcode-logo"
 
 const RemoteConsole = ({ host, width, height }: Props) => {
@@ -14,7 +14,7 @@ const RemoteConsole = ({ host, width, height }: Props) => {
   const loading = !iframeLoaded
   const protocol = (typeof window !== "undefined" && window.location.protocol) || "http:"
   const url = protocol + "//" + host
-  const app = useApp()
+  const app = useAppStore()
 
   useEffect(() => {
     iframeRef.current?.focus()
