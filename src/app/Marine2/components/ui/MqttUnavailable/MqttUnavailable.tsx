@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react"
 import { translate } from "react-i18nify"
-import MqttSettingsGuide from "../../../images/mqtt-settings-v2.42.png"
+import MqttSettingsGuide from "../../../images/mqtt-settings-v3.50.png"
 import Button from "../Button"
 import { AppViews, useAppViewsStore } from "../../../modules/AppViews"
 import { useMqtt } from "@victronenergy/mfd-modules"
