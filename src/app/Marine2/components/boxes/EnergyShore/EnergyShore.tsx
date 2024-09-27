@@ -1,5 +1,5 @@
 import React from "react"
-import { useActiveInValues, useActiveSource } from "@victronenergy/mfd-modules"
+import { useActiveInValues, useActiveSource, useAppStore } from "@victronenergy/mfd-modules"
 import { observer } from "mobx-react-lite"
 import ShorePowerIcon from "../../../images/icons/shore-power.svg"
 import { translate } from "react-i18nify"
@@ -13,6 +13,7 @@ import { ISize } from "@m2Types/generic/size"
 import { responsiveBoxIcon } from "../../../utils/helpers/classes/responsive-box-icon"
 
 const EnergyShore = ({ componentMode = "compact", inputId, compactBoxSize }: Props) => {
+  const { electricalPowerIndicator } = useAppStore()
   const { current, power, voltage } = useActiveInValues()
   const { activeInput, phases } = useActiveSource()
   const unplugged = activeInput + 1 !== inputId // Active in = 0 -> AC1 is active
@@ -25,8 +26,8 @@ const EnergyShore = ({ componentMode = "compact", inputId, compactBoxSize }: Pro
         Icon={ShorePowerIcon}
         title={translate("boxes.shorePower")}
         subtitle={unplugged ? translate("common.unplugged") : undefined}
-        value={phaseValueFor(phases, current, power)}
-        unit={phaseUnitFor(phases)}
+        value={phaseValueFor(phases, current, power, electricalPowerIndicator)}
+        unit={phaseUnitFor(phases, electricalPowerIndicator)}
         boxSize={compactBoxSize}
         status={status}
       />
@@ -37,8 +38,8 @@ const EnergyShore = ({ componentMode = "compact", inputId, compactBoxSize }: Pro
     <ValueBox
       icon={<ShorePowerIcon className={responsiveBoxIcon} />}
       title={translate("boxes.shorePower")}
-      value={phaseValueFor(phases, current, power)}
-      unit={phaseUnitFor(phases)}
+      value={phaseValueFor(phases, current, power, electricalPowerIndicator)}
+      unit={phaseUnitFor(phases, electricalPowerIndicator)}
       bottomValues={phasesData}
       status={status}
     />

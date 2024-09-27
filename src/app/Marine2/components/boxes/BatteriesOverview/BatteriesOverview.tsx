@@ -27,6 +27,7 @@ interface Props {
 }
 
 const BatteriesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: Props) => {
+  const { electricalPowerIndicator } = useAppStore()
   const { batteries } = useBattery()
   const [boxSize, setBoxSize] = useState<ISize>({ width: 0, height: 0 })
 
@@ -84,7 +85,12 @@ const BatteriesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: 
             {range(pages).map((page) => (
               <div key={page} className="flex gap-4 w-full h-full items-center justify-around">
                 {batteriesFor(page).map((b) => (
-                  <BatterySummary key={b.id} battery={b} boxSize={size} />
+                  <BatterySummary
+                    key={b.id}
+                    battery={b}
+                    boxSize={size}
+                    electricalPowerIndicator={electricalPowerIndicator}
+                  />
                 ))}
               </div>
             ))}

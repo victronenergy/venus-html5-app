@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite"
 import { translate } from "react-i18nify"
-import { GeneratorFpProvider, useGensetValues } from "@victronenergy/mfd-modules"
+import { GeneratorFpProvider, useAppStore, useGensetValues } from "@victronenergy/mfd-modules"
 import { ComponentMode } from "@m2Types/generic/component-mode"
 import GeneratorIcon from "../../../images/icons/generator.svg"
 import AutoStartStopSetter from "../../ui/AutoStartStopSetter"
@@ -36,6 +36,7 @@ const GeneratorFp = ({ componentMode = "compact", generatorFp, compactBoxSize }:
     }
   }
 
+  const { electricalPowerIndicator } = useAppStore()
   const { productName, phases, statusCode, gensetAutoStart, autoStart, updateAutoMode, updateManualMode } = generatorFp
   const gensetValues = useGensetValues()
   const { voltage, current, power, coolant, winding, exhaust } = gensetValues
@@ -53,8 +54,8 @@ const GeneratorFp = ({ componentMode = "compact", generatorFp, compactBoxSize }:
         Icon={GeneratorIcon}
         title={title}
         subtitle={subTitle}
-        value={phaseValueFor(phases, current as number[], power as number[])}
-        unit={phaseUnitFor(phases)}
+        value={phaseValueFor(phases, current as number[], power as number[], electricalPowerIndicator)}
+        unit={phaseUnitFor(phases, electricalPowerIndicator)}
         boxSize={compactBoxSize}
         status={status}
       />
