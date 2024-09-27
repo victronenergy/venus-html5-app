@@ -8,6 +8,7 @@ type ListViewProps = {
   icon: string
   title: string | React.ReactNode
   subTitle: string | React.ReactNode
+  children: React.ReactNode
 }
 
 export const ListView: React.FunctionComponent<ListViewProps> = ({ child, icon, title, subTitle, children }) => (

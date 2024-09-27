@@ -1,6 +1,6 @@
 import "react-app-polyfill/stable"
 import React from "react"
-import ReactDOM from "react-dom"
+import { createRoot } from "react-dom/client"
 import { getParameterByName } from "./app/utils/util"
 import registerServiceWorker from "./serviceWorkerRegistration"
 import * as Sentry from "@sentry/react"
@@ -80,7 +80,10 @@ Sentry.init({
   },
 })
 
-ReactDOM.render(<React.StrictMode>{getApp()}</React.StrictMode>, document.getElementById("root"))
+const container = document.getElementById("root")
+const root = createRoot(container!)
+
+root.render(<React.StrictMode>{getApp()}</React.StrictMode>)
 
 registerServiceWorker()
 

@@ -21,6 +21,7 @@ type CardProps = {
   onIconClick?: Function
   footer?: Footer
   infoText?: string
+  children: ReactNode
   className?: string
 }
 

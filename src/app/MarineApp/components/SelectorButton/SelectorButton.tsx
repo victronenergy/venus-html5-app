@@ -12,6 +12,7 @@ type SelectorButtonProps = {
   onClick: Function
   className?: string
   alwaysUnlocked?: boolean
+  children: React.ReactNode
 }
 
 // Keep as class component to allow refs
