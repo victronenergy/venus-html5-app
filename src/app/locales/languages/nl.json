@@ -143,6 +143,7 @@
         "queryParams": "Zoek :  %{queryParams}",
         "remoteConsole": {
             "connectionFailed": "Verbinding met GX apparaat mislukt",
+            "qrCodeMessage": "Om toegang te krijgen tot de GX Remote Console, moet ervoor gezorgd worden dat de telefoon zich op hetzelfde WiFi-netwerk bevindt als het GX-apparaat en vervolgens moet deze QR-code gescanned worden.",
             "screenTooSmall": "Open in een groter scherm om het Remote Console te zien"
         },
         "userAgent": "Gebruiker : %{userAgent}",

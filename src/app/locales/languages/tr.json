@@ -143,6 +143,7 @@
         "queryParams": "Query params: %{queryParams}",
         "remoteConsole": {
             "connectionFailed": "GX cihazına bağlanılamıyor",
+            "qrCodeMessage": "GX Remote Console'a erişmek için telefonunuzun GX cihazıyla aynı WiFi ağında olduğundan emin olun ve ardından bu QR kodunu tarayın.",
             "screenTooSmall": "Uzak konsolu görüntülemek için daha büyük bir ekranda açın"
         },
         "userAgent": "User agent: %{userAgent}",

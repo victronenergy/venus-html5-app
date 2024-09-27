@@ -87,7 +87,7 @@
         "off": "Wył.",
         "on": "Wł.",
         "passthru": "Przepuszczanie",
-        "pending": "W oczekiwaniu...",
+        "pending": "W toku",
         "powerSupplyMode": "Tryb zasilania",
         "remainingTime": "Pozostały czas",
         "running": "Działa",
@@ -143,6 +143,7 @@
         "queryParams": "Parametry zapytania: %{queryParams}",
         "remoteConsole": {
             "connectionFailed": "Nie można połączyć się z urządzeniem GX",
+            "qrCodeMessage": "Aby uzyskać dostęp do konsoli GX Remote, upewnij się, że Twój telefon jest w tej samej sieci Wi-Fi, co urządzenie GX, a następnie zeskanuj ten kod QR.",
             "screenTooSmall": "Otwórz na większym ekranie, aby wyświetlić konsolę zdalną"
         },
         "userAgent": "Agent użytkownika: %{userAgent}",
