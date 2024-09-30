@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite"
 import { usePressure } from "@victronenergy/mfd-modules"
 import ValueOverview from "../../ui/ValueOverview"
-import PressureIcon from "../../../images/icons/pressure.svg"
+import { ReactComponent as PressureIcon } from "../../../images/icons/pressure.svg"
 import ValueBox from "../../ui/ValueBox"
 import { translate } from "react-i18nify"
 import { ComponentMode } from "@m2Types/generic/component-mode"

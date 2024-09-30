@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { observer } from "mobx-react-lite"
 import { useAppStore, useInverterCharger, useShorePowerInput } from "@victronenergy/mfd-modules"
-import InverterChargerIcon from "../../../images/icons/inverter-charger.svg"
+import { ReactComponent as InverterChargerIcon } from "../../../images/icons/inverter-charger.svg"
 import Button from "../../ui/Button"
 import InputLimitSelector from "../../ui/InputLimitSelector"
 import ValueBox from "../../ui/ValueBox"

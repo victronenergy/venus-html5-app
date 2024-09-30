@@ -3,8 +3,8 @@ import { observer } from "mobx-react"
 import { useAppStore, useTheme } from "@victronenergy/mfd-modules"
 import { translate } from "react-i18nify"
 import { Modal } from "../Modal"
-import PreferencesIcon from "../../../images/icons/preferences.svg"
-import CloseIcon from "../../../images/icons/close.svg"
+import { ReactComponent as PreferencesIcon } from "../../../images/icons/preferences.svg"
+import { ReactComponent as CloseIcon } from "../../../images/icons/close.svg"
 import ToggleSwitch from "../ToggleSwitch"
 import RadioButton from "../RadioButton"
 import { AppViews, useAppViewsStore } from "../../../modules/AppViews"
@@ -56,7 +56,7 @@ const SettingsMenu = () => {
       <div className="flex justify-center items-center w-full">
         {!isModalOpen ? (
           <div className="h-full">
-            <PreferencesIcon alt={"Settings"} />
+            <PreferencesIcon className="" alt={"Settings"} />
           </div>
         ) : (
           <>

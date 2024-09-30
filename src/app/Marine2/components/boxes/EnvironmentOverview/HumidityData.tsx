@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite"
 import { useHumidity } from "@victronenergy/mfd-modules"
 import ValueOverview from "../../ui/ValueOverview"
-import HumidityIcon from "../../../images/icons/humidity.svg"
+import { ReactComponent as HumidityIcon } from "../../../images/icons/humidity.svg"
 import ValueBox from "../../ui/ValueBox"
 import { translate } from "react-i18nify"
 import { ComponentMode } from "@m2Types/generic/component-mode"

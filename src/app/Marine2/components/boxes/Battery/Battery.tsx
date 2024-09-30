@@ -12,7 +12,7 @@ import { batteryStateFor } from "../../../utils/formatters/devices/battery/batte
 import { batteryIconFor } from "../../../utils/formatters/devices/battery/battery-icon-for"
 import { responsiveBoxIcon } from "../../../utils/helpers/classes/responsive-box-icon"
 import { colorFor } from "../../../utils/formatters/generic"
-import BatteryIcon from "../../../images/icons/battery.svg"
+import { ReactComponent as BatteryIcon } from "../../../images/icons/battery.svg"
 import { temperatureValueFor } from "../../../utils/formatters/temperature/temperature-value-for"
 
 interface Props {

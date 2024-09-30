@@ -3,7 +3,7 @@ import { observer } from "mobx-react"
 import { translate } from "react-i18nify"
 import classNames from "classnames"
 import Box from "../../ui/Box"
-import DevicesIcon from "../../../images/icons/devices.svg"
+import { ReactComponent as DevicesIcon } from "../../../images/icons/devices.svg"
 import { AppViews } from "../../../modules/AppViews"
 import {
   ChargerInstanceId,

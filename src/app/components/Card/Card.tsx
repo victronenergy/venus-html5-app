@@ -61,7 +61,7 @@ export const Card: FunctionComponent<CardProps> = ({
                   <img
                     /* todo: fix types for svg */
                     /* @ts-ignore */
-                    src={darkMode ? CloseIconDark : CloseIcon}
+                    src={darkMode ? CloseIconDark.src : CloseIcon.src}
                     alt={"Close Icon"}
                     className={"card__header__icon__img"}
                   />

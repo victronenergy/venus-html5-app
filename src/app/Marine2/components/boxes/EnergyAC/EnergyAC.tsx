@@ -1,5 +1,5 @@
 import { useAcLoads, useAppStore } from "@victronenergy/mfd-modules"
-import ACIcon from "../../../images/icons/ac.svg"
+import { ReactComponent as ACIcon } from "../../../images/icons/ac.svg"
 import { translate } from "react-i18nify"
 import ValueBox from "../../ui/ValueBox"
 import ValueOverview from "../../ui/ValueOverview"

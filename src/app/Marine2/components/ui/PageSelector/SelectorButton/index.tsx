@@ -1,9 +1,9 @@
 import { BaseSyntheticEvent, FC } from "react"
 import classNames from "classnames"
-import SelectorLeftIcon from "../../../../images/icons/selectors/selector-left.svg"
-import SelectorUpIcon from "../../../../images/icons/selectors/selector-up.svg"
-import SelectorRightIcon from "../../../../images/icons/selectors/selector-right.svg"
-import SelectorDownIcon from "../../../../images/icons/selectors/selector-down.svg"
+import { ReactComponent as SelectorLeftIcon } from "../../../../images/icons/selectors/selector-left.svg"
+import { ReactComponent as SelectorUpIcon } from "../../../../images/icons/selectors/selector-up.svg"
+import { ReactComponent as SelectorRightIcon } from "../../../../images/icons/selectors/selector-right.svg"
+import { ReactComponent as SelectorDownIcon } from "../../../../images/icons/selectors/selector-down.svg"
 
 interface Props {
   onClick: (e: BaseSyntheticEvent) => void

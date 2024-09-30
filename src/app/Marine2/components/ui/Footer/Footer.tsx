@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import SettingsMenu from "../SettingsMenu"
 import VersionInfo from "../VersionInfo"
 import PageSelector, { PageSelectorProps } from "../PageSelector"
-import BackIcon from "../../../images/icons/back.svg"
+import { ReactComponent as BackIcon } from "../../../images/icons/back.svg"
 import { AppViews, useAppViewsStore } from "../../../modules/AppViews"
 
 const Footer = ({ pageSelectorProps }: Props) => {

@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite"
 import { useAppStore, useTemperature } from "@victronenergy/mfd-modules"
 import ValueOverview from "../../ui/ValueOverview"
-import ThermometerIcon from "../../../images/icons/thermometer.svg"
+import { ReactComponent as ThermometerIcon } from "../../../images/icons/thermometer.svg"
 import ValueBox from "../../ui/ValueBox"
 import { translate } from "react-i18nify"
 import { ComponentMode } from "@m2Types/generic/component-mode"

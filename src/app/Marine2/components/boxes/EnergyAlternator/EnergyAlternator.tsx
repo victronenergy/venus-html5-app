@@ -1,4 +1,4 @@
-import AlternatorIcon from "../../../images/icons/alternator.svg"
+import { ReactComponent as AlternatorIcon } from "../../../images/icons/alternator.svg"
 import { useAlternator, useAppStore } from "@victronenergy/mfd-modules"
 import { translate } from "react-i18nify"
 import ValueBox from "../../ui/ValueBox"

@@ -1,6 +1,6 @@
 import React from "react"
 import { PvChargerState, useAppStore } from "@victronenergy/mfd-modules"
-import SolarIcon from "../../../images/icons/solar.svg"
+import { ReactComponent as SolarIcon } from "../../../images/icons/solar.svg"
 import { translate } from "react-i18nify"
 import ValueBox from "../../ui/ValueBox"
 import ValueOverview from "../../ui/ValueOverview"

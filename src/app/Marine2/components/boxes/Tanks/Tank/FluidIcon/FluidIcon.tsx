@@ -1,8 +1,8 @@
 import type { FC } from "react"
-import WaterIcon from "../../../../../images/icons/fresh-water.svg"
-import GrayWaterIcon from "../../../../../images/icons/waste-water.svg"
-import BlackWaterIcon from "../../../../../images/icons/black-water.svg"
-import FuelIcon from "../../../../../images/icons/fuel.svg"
+import { ReactComponent as WaterIcon } from "../../../../../images/icons/fresh-water.svg"
+import { ReactComponent as GrayWaterIcon } from "../../../../../images/icons/waste-water.svg"
+import { ReactComponent as BlackWaterIcon } from "../../../../../images/icons/black-water.svg"
+import { ReactComponent as FuelIcon } from "../../../../../images/icons/fuel.svg"
 
 interface Props {
   fluid: number

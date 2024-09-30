@@ -1,7 +1,7 @@
 import React from "react"
 import { useActiveInValues, useActiveSource, useAppStore } from "@victronenergy/mfd-modules"
 import { observer } from "mobx-react-lite"
-import ShorePowerIcon from "../../../images/icons/shore-power.svg"
+import { ReactComponent as ShorePowerIcon } from "../../../images/icons/shore-power.svg"
 import { translate } from "react-i18nify"
 import ValueBox from "../../ui/ValueBox"
 import ValueOverview from "../../ui/ValueOverview"
