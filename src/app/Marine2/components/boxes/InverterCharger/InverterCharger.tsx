@@ -34,12 +34,12 @@ const InverterCharger = ({ componentMode = "compact", compactBoxSize }: Props) =
     const buttons = []
 
     if (!!inputId) {
-      buttons.push(<InputLimitSelector inputId={inputId} title={title} />)
+      buttons.push(<InputLimitSelector key="limit" inputId={inputId} title={title} />)
     }
 
     if (modeIsAdjustable === 1) {
       buttons.push(
-        <Button disabled={locked} className="w-full" size="md" onClick={() => setOpenModal(!openModal)}>
+        <Button key="mode" disabled={locked} className="w-full" size="md" onClick={() => setOpenModal(!openModal)}>
           {inverterChargerMode}
         </Button>
       )
