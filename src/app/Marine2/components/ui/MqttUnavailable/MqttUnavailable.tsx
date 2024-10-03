@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react"
 import { translate } from "react-i18nify"
-import MqttSettingsGuide from "../../../images/mqtt-settings-v3.50.png"
 import Button from "../Button"
 import { AppViews, useAppViewsStore } from "../../../modules/AppViews"
 import { useMqtt } from "@victronenergy/mfd-modules"
@@ -62,13 +61,8 @@ const MqttUnavailable = ({ host }: Props) => {
           </Button>
         </div>
         <div>
-          <div className={"text-md mb-4"}>{translate("error.mqttUnavailable1")}</div>
-          <div className={"mt-2"}>{translate("error.mqttUnavailable2")}</div>
-          <div className={"mt-2 italic"}>{translate("error.mqttUnavailable3")}</div>
-          <div className={"mt-2"}>{translate("error.mqttUnavailable4")}</div>
-          <div className={"mt-4 text-center"}>
-            <img src={MqttSettingsGuide} alt={"MQTT Settings Guide"} className={"m-auto"} />
-          </div>
+          <div className={"text-md mb-4"}>{translate("error.wsMqttUnavailable1")}</div>
+          <div className={"mt-2"}>{translate("error.wsMqttUnavailable2")}</div>
         </div>
       </div>
     </div>

@@ -8,6 +8,7 @@ import { responsiveBoxIcon } from "../../../utils/helpers/classes/responsive-box
 import { ISize } from "@m2Types/generic/size"
 import { valueFor } from "app/Marine2/utils/formatters/phase/phase-value-for"
 import { unitFor } from "app/Marine2/utils/formatters/phase/phase-unit-for"
+import { observer } from "mobx-react"
 
 interface Props {
   dcLoads: DcLoadsState
@@ -52,4 +53,4 @@ const EnergyDC = ({ componentMode = "compact", dcLoads, compactBoxSize }: Props)
   )
 }
 
-export default EnergyDC
+export default observer(EnergyDC)

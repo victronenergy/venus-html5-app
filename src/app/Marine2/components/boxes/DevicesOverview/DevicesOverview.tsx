@@ -7,12 +7,13 @@ import { ReactComponent as DevicesIcon } from "../../../images/icons/devices.svg
 import { AppViews } from "../../../modules/AppViews"
 import {
   ChargerInstanceId,
-  GeneratorFpProvider,
+  ConnectedGensetType,
+  GeneratorConnectedGensetProvider,
   GeneratorRelayProvider,
   InstanceId,
   InverterInstanceId,
   useChargers,
-  useGeneratorFp,
+  useGeneratorConnectedGenset,
   useGeneratorRelay,
   useInverters,
   useVebus,
@@ -20,7 +21,7 @@ import {
 } from "@victronenergy/mfd-modules"
 import Charger from "../Charger"
 import Inverter from "../Inverter"
-import GeneratorFp from "../GeneratorFp"
+import GeneratorConnectedGenset from "../GeneratorConnectedGenset"
 import InverterCharger from "../InverterCharger"
 import { useVisibilityNotifier } from "../../../modules"
 import { PageSelectorProps } from "../../ui/PageSelector"
@@ -41,7 +42,7 @@ const DevicesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: Pr
   const { inverters } = useInverters()
   const { instanceId: vebusInstanceId, vebusInverters } = useVebus()
   const { chargers } = useChargers()
-  const generatorFp = useGeneratorFp()
+  const generatorConnectedGenset = useGeneratorConnectedGenset()
   const generatorRelay = useGeneratorRelay()
   const [compactBoxSize, setCompactBoxSize] = useState<ISize>({ width: 0, height: 0 })
 
@@ -50,7 +51,7 @@ const DevicesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: Pr
     inverters,
     vebusInverters,
     vebusInstanceId,
-    generatorFp,
+    generatorConnectedGenset,
     generatorRelay,
     compactBoxSize,
     componentMode
@@ -101,7 +102,7 @@ const getAvailableDeviceBoxes = function (
   inverters: InverterInstanceId[],
   vebusInverters: VebusInverters,
   vebusInstanceId: InstanceId,
-  generatorFp: GeneratorFpProvider,
+  generatorConnectedGenset: GeneratorConnectedGensetProvider,
   generatorRelay: GeneratorRelayProvider,
   compactBoxSize: ISize,
   componentMode?: ComponentMode
@@ -150,11 +151,24 @@ const getAvailableDeviceBoxes = function (
     )
   }
 
-  if (!!generatorFp.phases) {
+  if (generatorConnectedGenset.gensetState.gensetType === ConnectedGensetType.ACGENSET) {
+    if (!!generatorConnectedGenset.gensetState.phases) {
+      devices.push(
+        <GeneratorConnectedGenset
+          key={"genset"} // only one /generator/1 can be present
+          generatorConnectedGenset={generatorConnectedGenset}
+          componentMode={componentMode}
+          compactBoxSize={compactBoxSize}
+        />
+      )
+    }
+  }
+
+  if (generatorConnectedGenset.gensetType === ConnectedGensetType.DCGENSET) {
     devices.push(
-      <GeneratorFp
-        key={"generatorFp"}
-        generatorFp={generatorFp}
+      <GeneratorConnectedGenset
+        key={"dcgenset"} // only one /generator/1 can be present
+        generatorConnectedGenset={generatorConnectedGenset}
         componentMode={componentMode}
         compactBoxSize={compactBoxSize}
       />

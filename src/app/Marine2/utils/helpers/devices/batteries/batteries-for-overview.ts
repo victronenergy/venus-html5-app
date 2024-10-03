@@ -1,4 +1,4 @@
-import { Battery as BatteryType } from "@victronenergy/mfd-modules"
+import { BatteryState as BatteryType } from "@victronenergy/mfd-modules"
 
 /*
   We show only batteries with state data on the overview, but if we don't

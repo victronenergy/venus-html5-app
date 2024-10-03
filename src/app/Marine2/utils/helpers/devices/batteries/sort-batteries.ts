@@ -1,4 +1,4 @@
-import { Battery as BatteryType } from "@victronenergy/mfd-modules"
+import { BatteryState as BatteryType } from "@victronenergy/mfd-modules"
 
 /*
   Push batteries with active_battery_service to the front.

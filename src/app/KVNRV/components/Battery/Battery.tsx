@@ -1,7 +1,7 @@
 import { Card, SIZE_SHORT } from "../../../components/Card"
 
 import { BATTERY_STATE } from "../../../utils/constants"
-import { useBattery } from "@victronenergy/mfd-modules"
+import { useSystemBatteries } from "@victronenergy/mfd-modules"
 import { useSendUpdate } from "../../modules"
 import NumericValue, { formatNumber } from "../../../components/NumericValue"
 import { NotAvailable } from "../NotAvailable"
@@ -73,7 +73,7 @@ type BatteryProps = {
 }
 
 export const Batteries = observer(({ size }: BatteryProps) => {
-  const { batteries } = useBattery()
+  const { batteries } = useSystemBatteries()
 
   const battery = batteries
     ? batteries.length > 1

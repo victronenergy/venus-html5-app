@@ -1,6 +1,6 @@
 import { FC } from "react"
 import classNames from "classnames"
-import { Battery } from "@victronenergy/mfd-modules"
+import { BatteryState } from "@victronenergy/mfd-modules"
 import { ISize } from "@m2Types/generic/size"
 import { batteryStateFor } from "../../../../utils/formatters/devices/battery/battery-state-for"
 import { applyStyles } from "../../../../utils/media"
@@ -9,7 +9,7 @@ import { Styles } from "./Styles"
 import { ValueWithUnit } from "../../ValueWithUnit/ValueWithUnit"
 
 interface Props {
-  battery: Battery
+  battery: BatteryState
   boxSize: ISize
   electricalPowerIndicator: number
 }

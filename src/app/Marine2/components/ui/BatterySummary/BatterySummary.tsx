@@ -1,12 +1,12 @@
 import { FC } from "react"
-import { Battery } from "@victronenergy/mfd-modules"
+import { BatteryState } from "@victronenergy/mfd-modules"
 import { ISize } from "@m2Types/generic/size"
 import { BatteryValues } from "./BatteryValues/BatteryValues"
 import { BatteryName } from "./BatteryName/BatteryName"
 import { ProgressCircle } from "../ProgressCircle/ProgressCircle"
 
 interface Props {
-  battery: Battery
+  battery: BatteryState
   boxSize: ISize
   electricalPowerIndicator: number
 }

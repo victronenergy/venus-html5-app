@@ -3,7 +3,7 @@ import classNames from "classnames"
 import { Styles } from "./Styles"
 import { ISize } from "@m2Types/generic/size"
 import { ValueWithUnit } from "@m2Types/data/value-with-units"
-import { Battery as BatteryType, useAppStore } from "@victronenergy/mfd-modules"
+import { BatteryState as BatteryType, useAppStore } from "@victronenergy/mfd-modules"
 import { applyStyles, StylesType } from "app/Marine2/utils/media"
 import Box from "../../ui/Box"
 import ValueBar from "../../ui/ValueBar"
@@ -20,7 +20,7 @@ interface Props {
   unit: "°C" | "°F"
 }
 
-const Battery = ({ battery, unit }: Props) => {
+const BatteryState = ({ battery, unit }: Props) => {
   const isSimpleBattery = !(battery.state || battery.state === 0)
   const [boxSize, setBoxSize] = useState<ISize>({ width: 0, height: 0 })
   const { temperatureUnit } = useAppStore()
@@ -80,4 +80,4 @@ const Battery = ({ battery, unit }: Props) => {
   )
 }
 
-export default Battery
+export default BatteryState
