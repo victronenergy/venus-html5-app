@@ -5,7 +5,7 @@ import HumidityIcon from "../../../images/icons/humidity.svg"
 import ValueBox from "../../ui/ValueBox"
 import { translate } from "react-i18nify"
 import { ComponentMode } from "@m2Types/generic/component-mode"
-import { AdditionalInformation } from "../GeneratorFp/AdditionalInformation/AdditionalInformation"
+import { AdditionalInformation } from "../GeneratorConnectedGenset/AdditionalInformation/AdditionalInformation"
 import { ISize } from "@m2Types/generic/size"
 
 interface Props {

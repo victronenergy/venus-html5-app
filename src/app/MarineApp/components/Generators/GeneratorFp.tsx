@@ -1,6 +1,6 @@
 import React from "react"
 
-import { useGeneratorFp } from "@victronenergy/mfd-modules"
+import { ConnectedGensetType, useGeneratorConnectedGenset } from "@victronenergy/mfd-modules"
 
 import GensetValues from "./GensetValues"
 import HeaderView from "../HeaderView/HeaderView"
@@ -57,14 +57,14 @@ function getGensetState(statusCode: number) {
 }
 
 const GeneratorFp = observer(() => {
-  const { productId, productName, phases, statusCode, gensetAutoStart, autoStart, updateAutoMode, updateManualMode } =
-    useGeneratorFp()
-
+  const { autoStartEnabled: autoStart, updateAutoMode, updateManualMode, gensetState } = useGeneratorConnectedGenset()
+  const { productId, productName, statusCode, remoteStartModeEnabled } = gensetState
+  const phases = gensetState.gensetType === ConnectedGensetType.ACGENSET ? gensetState.phases : 0
   const icon = getIcon(productId)
   const title = productName || "Genset"
   const subTitle = getGensetState(statusCode)
   const translatedSubTitle = translate(`common.${subTitle}`)
-  const isAutoStartDisabled = gensetAutoStart === FISCHER_PANDA_GENSET_AUTOSTART.DISABLED
+  const isAutoStartDisabled = remoteStartModeEnabled === FISCHER_PANDA_GENSET_AUTOSTART.DISABLED
 
   useVisibilityNotifier({ widgetName: WIDGET_TYPES.GENERATOR_FP, visible: !!phases })
 

@@ -1,25 +1,25 @@
 import { observer } from "mobx-react-lite"
 import { translate } from "react-i18nify"
-import { GeneratorFpProvider, useAppStore, useGensetValues } from "@victronenergy/mfd-modules"
+import { ConnectedGensetType, GeneratorConnectedGensetProvider, useAppStore } from "@victronenergy/mfd-modules"
 import { ComponentMode } from "@m2Types/generic/component-mode"
 import GeneratorIcon from "../../../images/icons/generator.svg"
 import AutoStartStopSetter from "../../ui/AutoStartStopSetter"
 import ValueOverview from "../../ui/ValueOverview"
 import ValueBox from "../../ui/ValueBox"
 import { usePhasesData } from "../../../utils/hooks/use-phases-data"
-import { phaseValueFor } from "../../../utils/formatters/phase/phase-value-for"
-import { phaseUnitFor } from "../../../utils/formatters/phase/phase-unit-for"
+import { phaseValueFor, valueFor } from "../../../utils/formatters/phase/phase-value-for"
+import { phaseUnitFor, unitFor } from "../../../utils/formatters/phase/phase-unit-for"
 import { AdditionalInformation } from "./AdditionalInformation/AdditionalInformation"
 import { ISize } from "@m2Types/generic/size"
 import { GENSET_STATE } from "../../../utils/constants/devices/generators"
 
 interface Props {
   componentMode?: ComponentMode
-  generatorFp: GeneratorFpProvider
+  generatorConnectedGenset: GeneratorConnectedGensetProvider
   compactBoxSize?: ISize
 }
 
-const GeneratorFp = ({ componentMode = "compact", generatorFp, compactBoxSize }: Props) => {
+const GeneratorConnectedGenset = ({ componentMode = "compact", generatorConnectedGenset, compactBoxSize }: Props) => {
   const gensetStateFormatter = (value: number) => {
     if (value === GENSET_STATE.STANDBY) {
       return translate("common.standby")
@@ -37,15 +37,44 @@ const GeneratorFp = ({ componentMode = "compact", generatorFp, compactBoxSize }:
   }
 
   const { electricalPowerIndicator } = useAppStore()
-  const { productName, phases, statusCode, gensetAutoStart, autoStart, updateAutoMode, updateManualMode } = generatorFp
-  const gensetValues = useGensetValues()
-  const { voltage, current, power, coolant, winding, exhaust } = gensetValues
-  // When a topic is invalid, it returns undefined -> no value means topic is not supported
-  const title = productName || "Genset"
-  const subTitle = !!statusCode || statusCode === 0 ? gensetStateFormatter(Number(statusCode)) : undefined
-  const isAutoStartDisabled = gensetAutoStart === 0
+  const { autoStartEnabled, updateAutoMode, updateManualMode, gensetState } = generatorConnectedGenset
+  const { productName, customName, statusCode, remoteStartModeEnabled, coolant, winding, exhaust } = gensetState
+
+  let phases: number
+  let voltage: number[]
+  let current: number[]
+  let power: number[]
+  let value
+  let unit
+  if (gensetState.gensetType === ConnectedGensetType.ACGENSET) {
+    phases = gensetState.phases
+    voltage = gensetState.voltage as number[]
+    current = gensetState.current as number[]
+    power = gensetState.power as number[]
+    value = phaseValueFor(
+      gensetState.phases,
+      gensetState.current as number[],
+      gensetState.power as number[],
+      electricalPowerIndicator
+    )
+    unit = phaseUnitFor(gensetState.phases, electricalPowerIndicator)
+  } else {
+    // gensetState.gensetType === ConnectedGensetType.DCGENSET)
+    phases = 1
+    voltage = [gensetState.voltage]
+    current = [gensetState.current]
+    power = [gensetState.voltage * gensetState.current]
+    value = valueFor(current[0], power[0], electricalPowerIndicator)
+    unit = unitFor(electricalPowerIndicator)
+  }
 
   const phasesData = usePhasesData(phases, voltage as number[], current as number[], power as number[])
+
+  // TODO: translate
+  const title = customName || productName || "Genset"
+  const subTitle = !!statusCode || statusCode === 0 ? gensetStateFormatter(Number(statusCode)) : undefined
+  const isAutoStartDisabled = remoteStartModeEnabled === 0
+
   const status = statusCode === 8 || statusCode === 9 ? "active" : "inactive"
 
   if (componentMode === "compact" && compactBoxSize) {
@@ -54,8 +83,8 @@ const GeneratorFp = ({ componentMode = "compact", generatorFp, compactBoxSize }:
         Icon={GeneratorIcon}
         title={title}
         subtitle={subTitle}
-        value={phaseValueFor(phases, current as number[], power as number[], electricalPowerIndicator)}
-        unit={phaseUnitFor(phases, electricalPowerIndicator)}
+        value={value}
+        unit={unit}
         boxSize={compactBoxSize}
         status={status}
       />
@@ -70,18 +99,22 @@ const GeneratorFp = ({ componentMode = "compact", generatorFp, compactBoxSize }:
       }
     : undefined
 
+  if (gensetState.gensetType === ConnectedGensetType.ACGENSET) {
+  } else if (gensetState.gensetType === ConnectedGensetType.DCGENSET) {
+  }
+
   return (
     <ValueBox
       title={title}
       subtitle={subTitle}
-      bottomValues={!!gensetValues && phasesData}
+      bottomValues={phasesData}
       status={status}
       infoText={infoText}
       icon={<GeneratorIcon className="w-7" />}
       buttons={
         <AutoStartStopSetter
           title={title}
-          autoStart={autoStart}
+          autoStart={autoStartEnabled}
           isAutoStartDisabled={isAutoStartDisabled}
           updateAutoMode={updateAutoMode}
           updateManualMode={updateManualMode}
@@ -91,13 +124,13 @@ const GeneratorFp = ({ componentMode = "compact", generatorFp, compactBoxSize }:
     >
       <AdditionalInformation
         values={[
-          { label: translate("generator.temperature.coolant"), value: `${coolant}°` },
-          { label: translate("generator.temperature.winding"), value: `${winding}°` },
-          { label: translate("generator.temperature.exhaust"), value: `${exhaust}°` },
+          { label: translate("generator.temperature.coolant"), value: `${coolant || "--"}°` },
+          { label: translate("generator.temperature.winding"), value: `${winding || "--"}°` },
+          { label: translate("generator.temperature.exhaust"), value: `${exhaust || "--"}°` },
         ]}
       />
     </ValueBox>
   )
 }
 
-export default observer(GeneratorFp)
+export default observer(GeneratorConnectedGenset)
