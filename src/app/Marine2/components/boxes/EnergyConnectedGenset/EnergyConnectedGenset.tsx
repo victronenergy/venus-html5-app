@@ -1,4 +1,4 @@
-import GeneratorIcon from "../../../images/icons/generator.svg"
+import { ReactComponent as GeneratorIcon } from "../../../images/icons/generator.svg"
 import { ConnectedGensetType, useAppStore, useConnectedGenset } from "@victronenergy/mfd-modules"
 import { translate } from "react-i18nify"
 import ValueBox from "../../ui/ValueBox"
