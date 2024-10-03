@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 
-import { Battery, useBattery } from "@victronenergy/mfd-modules"
+import { BatteryState, useSystemBatteries } from "@victronenergy/mfd-modules"
 import { BATTERY_STATE } from "../../../utils/constants"
 
 import ColumnContainer from "../ColumnContainer"
@@ -73,7 +73,7 @@ const BatteryHeader = ({ amount, paginate, setPage, currentPage, pageSize }: Bat
   )
 }
 
-const BatteryRow = (battery: Battery) => {
+const BatteryRow = (battery: BatteryState) => {
   return (
     <MetricValues inflate>
       <div className="metrics__left">
@@ -86,14 +86,14 @@ const BatteryRow = (battery: Battery) => {
   )
 }
 
-const SingleBattery = (battery: Battery) => (
+const SingleBattery = (battery: BatteryState) => (
   <HeaderView icon={BatteryIcon} title={translate("widgets.batteryWithName", { name: battery.name })}>
     <BatteryRow {...battery} />
   </HeaderView>
 )
 
 type BatteryListProps = {
-  batteries: Array<Battery | any>
+  batteries: Array<BatteryState | any>
   currentPage: number
   pageSize: number
 }
@@ -115,7 +115,7 @@ class BatteryList extends Component<BatteryListProps> {
               {!battery.dummy && (
                 <div className="battery__data">
                   <div className="battery__title-row text--subtitle-upper">{battery.name}</div>
-                  <BatteryRow {...(battery as Battery)} />
+                  <BatteryRow {...(battery as BatteryState)} />
                 </div>
               )}
             </div>
@@ -127,7 +127,7 @@ class BatteryList extends Component<BatteryListProps> {
 }
 
 type BatteriesProps = {
-  batteries: Array<Battery>
+  batteries: Array<BatteryState>
 }
 type BatteriesState = {
   pageSize: number
@@ -194,7 +194,7 @@ export class Batteries extends Component<BatteriesProps, BatteriesState> {
 }
 
 export const BatteriesWithData = observer(() => {
-  const { batteries } = useBattery()
+  const { batteries } = useSystemBatteries()
 
   useVisibilityNotifier({ widgetName: WIDGET_TYPES.BATTERY, visible: !!(batteries && batteries.length) })
 

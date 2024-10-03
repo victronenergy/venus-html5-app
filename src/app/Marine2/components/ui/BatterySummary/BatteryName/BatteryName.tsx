@@ -1,12 +1,12 @@
 import classNames from "classnames"
 import { FC } from "react"
-import { Battery } from "@victronenergy/mfd-modules"
+import { BatteryState } from "@victronenergy/mfd-modules"
 import { ISize } from "@m2Types/generic/size"
 import { applyStyles } from "../../../../utils/media"
 import { Styles } from "./Styles"
 
 interface Props {
-  battery: Battery
+  battery: BatteryState
   boxSize: ISize
 }
 

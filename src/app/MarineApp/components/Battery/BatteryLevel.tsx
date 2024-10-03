@@ -1,5 +1,5 @@
 import { BATTERY_STATE } from "../../../utils/constants"
-import { Battery, useLanguage } from "@victronenergy/mfd-modules"
+import { BatteryState, useLanguage } from "@victronenergy/mfd-modules"
 import { formatNumber } from "../../../components/NumericValue"
 import { translate, Translate } from "react-i18nify"
 import { mfdLanguageOptions } from "app/locales/constants"
@@ -37,7 +37,7 @@ const batteryTimeToGoFormatter = (timeToGo: number) => {
 }
 
 type BatteryLevelProps = {
-  battery: Battery
+  battery: BatteryState
 }
 
 export const BatteryLevel = observer(({ battery }: BatteryLevelProps) => {

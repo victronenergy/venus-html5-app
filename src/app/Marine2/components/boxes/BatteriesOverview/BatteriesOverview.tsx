@@ -3,7 +3,7 @@ import classNames from "classnames"
 import { translate } from "react-i18nify"
 import { observer } from "mobx-react-lite"
 import range from "lodash-es/range"
-import { useAppStore, useBattery } from "@victronenergy/mfd-modules"
+import { useAppStore, useSystemBatteries } from "@victronenergy/mfd-modules"
 import { ComponentMode } from "@m2Types/generic/component-mode"
 import { ISize } from "@m2Types/generic/size"
 import Box from "../../ui/Box"
@@ -28,7 +28,7 @@ interface Props {
 
 const BatteriesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: Props) => {
   const { electricalPowerIndicator } = useAppStore()
-  const { batteries } = useBattery()
+  const { batteries } = useSystemBatteries()
   const [boxSize, setBoxSize] = useState<ISize>({ width: 0, height: 0 })
 
   const { temperatureUnitToHumanReadable } = useAppStore()
