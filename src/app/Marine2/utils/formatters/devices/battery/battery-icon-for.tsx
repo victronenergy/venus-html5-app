@@ -1,6 +1,6 @@
-import BatteryIcon from "../../../../images/icons/battery.svg"
-import BatteryChargingIcon from "../../../../images/icons/battery-charging.svg"
-import BatteryDischargingIcon from "../../../../images/icons/battery-discharging.svg"
+import { ReactComponent as BatteryIcon } from "../../../../images/icons/battery.svg"
+import { ReactComponent as BatteryChargingIcon } from "../../../../images/icons/battery-charging.svg"
+import { ReactComponent as BatteryDischargingIcon } from "../../../../images/icons/battery-discharging.svg"
 import { responsiveBoxIcon } from "../../../helpers/classes/responsive-box-icon"
 import { BATTERY } from "../../../constants/devices/batteries"
 

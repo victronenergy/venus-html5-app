@@ -1,5 +1,4 @@
-import React from "react"
-import WindIcon from "../../../images/icons/wind.svg"
+import { ReactComponent as WindIcon } from "../../../images/icons/wind.svg"
 import { useAppStore, useWindGenerator } from "@victronenergy/mfd-modules"
 import { observer } from "mobx-react-lite"
 import { translate } from "react-i18nify"

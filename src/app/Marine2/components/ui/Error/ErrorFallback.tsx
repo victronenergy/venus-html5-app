@@ -4,7 +4,7 @@ import { FallbackProps } from "react-error-boundary"
 import { byteSize, isError } from "../../../../utils/util"
 import * as Sentry from "@sentry/react"
 import { Breadcrumb } from "@sentry/react"
-import WarningIcon from "../../../images/icons/warning.svg"
+import { ReactComponent as WarningIcon } from "../../../images/icons/warning.svg"
 import Button from "../Button"
 import { useErrorHandlerStore } from "../../../../components/ErrorHandlerModule/ErrorHandler.store"
 
@@ -66,7 +66,7 @@ const ErrorFallback = ({ error, resetErrorBoundary, showReset = false }: Props) 
     <div className="w-full h-full flex flex-col items-center justify-center border-4 border-victron-red rounded-md px-4 py-6 text-black dark:text-white bg-white dark:bg-black">
       <div className="flex flex-col justify-between h-full text-sm">
         <div className="mb-1 self-center grow">
-          <WarningIcon className="w-12 text-victron-red" alt={"warning"} />
+          <WarningIcon className="w-12 text-victron-red" aria-valuetext={"warning"} />
         </div>
         <div className="flex flex-col align-top mb-2">
           <div>{translate("error.genericMessage")}</div>

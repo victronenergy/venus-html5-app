@@ -1,7 +1,7 @@
 import { FC } from "react"
-import PlainDotIcon from "../../../../images/icons/selectors/dot.svg"
-import DotSelectedIcon from "../../../../images/icons/selectors/dot-selected.svg"
-import DotSelectedVerticalIcon from "../../../../images/icons/selectors/dot-selected-vert.svg"
+import { ReactComponent as PlainDotIcon } from "../../../../images/icons/selectors/dot.svg"
+import { ReactComponent as DotSelectedIcon } from "../../../../images/icons/selectors/dot-selected.svg"
+import { ReactComponent as DotSelectedVerticalIcon } from "../../../../images/icons/selectors/dot-selected-vert.svg"
 
 interface DotProps {
   isCurrentPage: boolean

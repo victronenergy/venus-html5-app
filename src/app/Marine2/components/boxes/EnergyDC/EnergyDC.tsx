@@ -1,6 +1,6 @@
 import { translate } from "react-i18nify"
 import { DcLoadsState, useAppStore } from "@victronenergy/mfd-modules"
-import DCIcon from "../../../images/icons/dc.svg"
+import { ReactComponent as DCIcon } from "../../../images/icons/dc.svg"
 import ValueBox from "../../ui/ValueBox"
 import ValueOverview from "../../ui/ValueOverview"
 import { ComponentMode } from "@m2Types/generic/component-mode"

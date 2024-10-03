@@ -7,7 +7,7 @@ import AutoStartStopSetter from "../../ui/AutoStartStopSetter/AutoStartStopSette
 import { phaseUnitFor } from "../../../utils/formatters/phase/phase-unit-for"
 import { ComponentMode } from "@m2Types/generic/component-mode"
 import { ISize } from "@m2Types/generic/size"
-import GeneratorIcon from "../../../images/icons/generator.svg"
+import { ReactComponent as GeneratorIcon } from "../../../images/icons/generator.svg"
 import { usePhasesData } from "../../../utils/hooks/use-phases-data"
 import { phaseValueFor } from "../../../utils/formatters/phase/phase-value-for"
 import { generatorStateFor } from "../../../utils/formatters/devices/generator-relay/generator-state-for"
