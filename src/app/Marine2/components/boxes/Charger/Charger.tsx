@@ -132,7 +132,7 @@ const Charger = ({ instanceId, componentMode = "compact", compactBoxSize }: Prop
             <div className="flex mt-3">
               {chargerSupportsInputLimit && (
                 <Button className="w-full mr-4" size="md" onClick={() => setIsLimitModalOpen(!isLimitModalOpen)}>
-                  {!!currentLimit ? formatValue(Number(currentLimit)) + "A" : 0 + "A"}
+                  {currentLimit ? formatValue(Number(currentLimit)) + "A" : 0 + "A"}
                 </Button>
               )}
               {chargerSupportsMode && (

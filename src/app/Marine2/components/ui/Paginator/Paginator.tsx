@@ -68,7 +68,7 @@ const Paginator = ({
       let currentPageElements: number[] = []
 
       childrenRef.current.forEach((ref, childIndex) => {
-        const refSize = !!pageNumber ? parentSize * pageNumber : sizeArray[childIndex]
+        const refSize = pageNumber ? parentSize * pageNumber : sizeArray[childIndex]
 
         // if the current page would overflow after adding this element, push it to the array and start a new page
         if (currentPageSize + refSize > parentSize && currentPageElements.length > 0) {

@@ -1,5 +1,7 @@
 module.exports = {
-  extends: ["react-app", "react-app/jest", "plugin:prettier/recommended"],
+  extends: ["eslint:recommended", "react-app", "react-app/jest", "plugin:prettier/recommended"],
+  parser: "@typescript-eslint/parser",
+  root: true,
   rules: {
     "no-console": "off",
     "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
