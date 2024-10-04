@@ -150,6 +150,7 @@
         "windowSize": "windowSize"
     },
     "generator": {
+        "autoStartDisabledMessage": "На генераторной установке отключена функция дистанционного запуска. Теперь GX не сможет запустить или остановить генераторную установку. Включите ее на панели управления генераторной установки.",
         "fisherPandaAutoStartMessage": "fisherPandaAutoStartMessage",
         "temperature": {
             "coolant": "охлаждающая жидкость",

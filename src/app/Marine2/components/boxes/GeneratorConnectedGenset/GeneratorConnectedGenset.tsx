@@ -92,11 +92,10 @@ const GeneratorConnectedGenset = ({ componentMode = "compact", generatorConnecte
     )
   }
 
-  // TODO translate?
   const infoText = isAutoStartDisabled
     ? {
-        title: "Button disabled",
-        body: "Enable button functionality through genset panel",
+        title: "",
+        body: translate("generator.autoStartDisabledMessage"),
       }
     : undefined
 

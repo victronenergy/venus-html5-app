@@ -149,6 +149,7 @@
         "windowSize": "Ventana: %{width} x %{height}"
     },
     "generator": {
+        "autoStartDisabledMessage": "La función de arranque a distancia está deshabilitada en el generador. Ahora, el GX no podrá arrancar ni parar el generador. Active esta función en el panel de control del generador.",
         "fisherPandaAutoStartMessage": "La función AutoStart (arranque automático) Fisher Panda está deshabilitada en este momento, habilítela en el panel del generador para poder controlar el generador desde este panel.",
         "temperature": {
             "coolant": "Refrigerante",

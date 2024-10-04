@@ -149,6 +149,7 @@
         "windowSize": "Fönster: %{width} x %{height}"
     },
     "generator": {
+        "autoStartDisabledMessage": "Funktionen för fjärrstart av generatorn är inaktiverad. GX kommer inte kunna starta eller stoppa generatorn nu. Aktivera den på generatorns kontrollpanel.",
         "fisherPandaAutoStartMessage": "Fisher Pandas autostart-funktion är för närvarande inaktiverad, aktivera den på generatorpanelen för att styra generatorn från denna panel.",
         "temperature": {
             "coolant": "Kylmedel",

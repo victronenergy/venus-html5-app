@@ -150,6 +150,7 @@
         "windowSize": "Okno: %{width} x %{height}"
     },
     "generator": {
+        "autoStartDisabledMessage": "Funkcja zdalnego uruchamiania jest wyłączona w agregacie. GX nie będzie mógł teraz uruchomić ani zatrzymać agregatu. Włącz tę opcję na panelu sterowania agregatu.",
         "fisherPandaAutoStartMessage": "Funkcja Fisher Panda AutoStart jest obecnie wyłączona, należy ją włączyć na panelu agregatu, aby móc sterować agregatem z tego panelu.",
         "temperature": {
             "coolant": "Płyn chłodzący",

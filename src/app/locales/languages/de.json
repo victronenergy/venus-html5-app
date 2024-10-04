@@ -147,9 +147,12 @@
             "screenTooSmall": "Auf einem größeren Bildschirm öffnen, um die Remote-Konsole anzuzeigen"
         },
         "userAgent": "User agent: %{userAgent}",
-        "windowSize": "Fenster: %{width} x %{height}"
+        "windowSize": "Fenster: %{width} x %{height}",
+        "wsMqttUnavailable1": "Es konnte keine Verbindung mit dem GX-Gerät hergestellt werden.",
+        "wsMqttUnavailable2": "GX Fehler #60."
     },
     "generator": {
+        "autoStartDisabledMessage": "Die Fernstartfunktion ist am Aggregat deaktiviert. Der GX kann das Aggregat jetzt nicht starten oder stoppen. Aktivieren Sie die Funktion auf dem Bedienfeld des Aggregats.",
         "fisherPandaAutoStartMessage": "Die AutoStart-Funktion von Fisher Panda ist derzeit deaktiviert. Aktivieren Sie sie im Aggregate-Bedienfeld, um das Aggregat über dieses Bedienfeld zu steuern.",
         "temperature": {
             "coolant": "Kühlmittel",

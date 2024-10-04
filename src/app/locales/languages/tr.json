@@ -150,6 +150,7 @@
         "windowSize": "Window: %{width} x %{height}"
     },
     "generator": {
+        "autoStartDisabledMessage": "Jeneratörde uzaktan çalıştırma fonksiyonu devre dışıdır. GX artık jeneratör setini çalıştıramayacak veya durduramayacaktır. Jeneratör kontrol panelinden etkinleştirin.\n",
         "fisherPandaAutoStartMessage": "fisherPandaAutoStartMessage",
         "temperature": {
             "coolant": "soğutucu",

@@ -150,6 +150,7 @@
         "windowSize": "Розмір вікна"
     },
     "generator": {
+        "autoStartDisabledMessage": "Віддалений старт вимкнено на генератора. GX не зможу запустити або зупинити генератор. Увімкніть функцію на панелі генератора.",
         "fisherPandaAutoStartMessage": "Повідомлення про автоматичний запуск fisherPanda",
         "temperature": {
             "coolant": "охолоджувальна рідина",

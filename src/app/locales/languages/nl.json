@@ -147,9 +147,12 @@
             "screenTooSmall": "Open in een groter scherm om het Remote Console te zien"
         },
         "userAgent": "Gebruiker : %{userAgent}",
-        "windowSize": "Venster :  %{width} x %{height}"
+        "windowSize": "Venster :  %{width} x %{height}",
+        "wsMqttUnavailable1": "Kon niet verbinden met GX apparaat.",
+        "wsMqttUnavailable2": "GX Fout #60."
     },
     "generator": {
+        "autoStartDisabledMessage": "De afstandsstartfunctie is uitgeschakeld op het aggregaat. De GX kan het aggregaat nu niet starten of stoppen. Schakel deze functie in op het bedieningspaneel van het aggregaat.",
         "fisherPandaAutoStartMessage": "FisherPanda AutoStart is op dit moment uitgeschakeld, zet dat eerst aan op het paneel van het aggregaat om vanaf dit scherm te kunnen schakelen.",
         "temperature": {
             "coolant": "Koelvloeistof",
