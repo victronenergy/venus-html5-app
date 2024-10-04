@@ -149,6 +149,7 @@
         "windowSize": "Fereastră: %{width} x %{height}"
     },
     "generator": {
+        "autoStartDisabledMessage": "Funcționalitatea de pornire de la distanță este dezactivată pe generator. GX nu va putea porni sau opri generatorul acum. Activați-o pe panoul de control al generatorului.",
         "fisherPandaAutoStartMessage": "Funcția Fisher Panda AutoStart este momentan dezactivată, activați-o din panoul generatorului pentru a putea porni generatorul din acest panou.",
         "temperature": {
             "coolant": "Agent de răcire",

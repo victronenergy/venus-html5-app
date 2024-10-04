@@ -150,6 +150,7 @@
         "windowSize": "Fenêtre: %{width} x %{height}"
     },
     "generator": {
+        "autoStartDisabledMessage": "La fonctionnalité de démarrage à distance est désactivée sur le groupe électrogène. Le GX ne pourra pas démarrer ou arrêter le groupe électrogène pour le moment. Activez-le sur le panneau de commande du groupe électrogène.",
         "fisherPandaAutoStartMessage": "La fonctionnalité Fisher Panda AutoStart est actuellement désactivée, activez-la sur la console du groupe électrogène afin de contrôler le groupe électrogène à partir de cette console.",
         "temperature": {
             "coolant": "L. Refroid.",

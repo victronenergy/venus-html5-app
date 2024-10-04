@@ -150,6 +150,7 @@
         "windowSize": "窗口: %{width} x %{height}"
     },
     "generator": {
+        "autoStartDisabledMessage": "发电机组上的远程启动功能被禁用。GX 现在将无法启动或停止发电机组。在发电机组控制面板上启用它。",
         "fisherPandaAutoStartMessage": "Fisher Panda AutoStart 功能当前处于禁用状态，请在发电机组面板上启用它以从该面板控制发电机组。",
         "temperature": {
             "coolant": "冷却剂",

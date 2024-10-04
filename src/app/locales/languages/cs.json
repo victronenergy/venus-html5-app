@@ -149,6 +149,7 @@
         "windowSize": "Okno: %{width} x %{height}"
     },
     "generator": {
+        "autoStartDisabledMessage": "Funkce dálkového spouštění je u elektrocentrály vypnutá. Genset GX nyní nebude možné spustit ani zastavit. Povolte ji na ovládacím panelu elektrocentrály.",
         "fisherPandaAutoStartMessage": "Funkce automatického startu Fisher Panda je aktuálně deaktivována. Aktivujte ji na panelu generátoru, abyste mohli ovládat generátor z tohoto panelu.",
         "temperature": {
             "coolant": "Chladicí kapalina",

@@ -149,6 +149,7 @@
         "windowSize": "Finestra: %{width} x %{height}"
     },
     "generator": {
+        "autoStartDisabledMessage": "La funzionalità di avvio remoto è disattivata nel generatore. Il GX non sarà in grado di avviare o arrestare il generatore. Attivarla sul pannello di controllo del generatore.",
         "fisherPandaAutoStartMessage": "La funzione AutoStart di Fisher Panda è disattiva; attivarla sul pannello del generatore per controllare il generatore dal tale pannello.",
         "temperature": {
             "coolant": "Refrigerante",
