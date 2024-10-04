@@ -235,7 +235,6 @@ module.exports = function (webpackEnv) {
               ascii_only: true,
             },
           },
-          sourceMap: shouldUseSourceMap,
         }),
         new CssMinimizerPlugin({
           minimizerOptions: {
