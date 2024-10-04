@@ -63,7 +63,7 @@
     "resolve-url-loader": "^5.0.0",
     "rxjs": "^7.8.1",
     "sass": "^1.49.8",
-    "sass-loader": "^10.0.5",
+    "sass-loader": "^16.0.2",
     "semver": "^7.6.3",
     "serve": "^14.2.3",
     "stream-browserify": "^3.0.0",
