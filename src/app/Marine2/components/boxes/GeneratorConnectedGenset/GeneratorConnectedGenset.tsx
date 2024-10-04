@@ -94,7 +94,7 @@ const GeneratorConnectedGenset = ({ componentMode = "compact", generatorConnecte
 
   const infoText = isAutoStartDisabled
     ? {
-        title: translate("generator.autoStartDisabledTitle"),
+        title: "",
         body: translate("generator.autoStartDisabledMessage"),
       }
     : undefined

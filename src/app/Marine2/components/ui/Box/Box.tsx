@@ -98,7 +98,7 @@ const Box = ({
         {!withPagination && children}
       </div>
       {!linkedView && !!infoText && (
-        <Modal.Frame open={infoOpen} onClose={() => setInfoOpen(false)}>
+        <Modal.Frame className="max-w-[50%] w-full" open={infoOpen} onClose={() => setInfoOpen(false)}>
           <Modal.Body>
             <InfoIcon
               className="ml-auto mr-auto mt-7 mb-7 w-10 text-victron-blue dark:text-victron-blue-dark cursor-pointer outline-none"

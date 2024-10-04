@@ -153,7 +153,6 @@
     },
     "generator": {
         "autoStartDisabledMessage": "The remote start functionality is disabled on the genset. The GX will not be able to start or stop the genset now. Enable it on the genset control panel.",
-        "autoStartDisabledTitle": "Remote control disabled",
         "fisherPandaAutoStartMessage": "The Fisher Panda AutoStart functionality is currently disabled, enable it on the genset panel in order to control the genset from this panel.",
         "temperature": {
             "coolant": "Coolant",
