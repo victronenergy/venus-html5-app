@@ -151,6 +151,7 @@
         "temperature": {
             "coolant": "Coolant",
             "exhaust": "Exhaust",
+            "heatsink": "Heatsink",
             "winding": "Winding"
         }
     },

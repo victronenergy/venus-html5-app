@@ -9,7 +9,7 @@ import ValueBox from "../../ui/ValueBox"
 import { usePhasesData } from "../../../utils/hooks/use-phases-data"
 import { phaseValueFor, valueFor } from "../../../utils/formatters/phase/phase-value-for"
 import { phaseUnitFor, unitFor } from "../../../utils/formatters/phase/phase-unit-for"
-import { AdditionalInformation } from "./AdditionalInformation/AdditionalInformation"
+import { AdditionalInformation, IValue } from "./AdditionalInformation/AdditionalInformation"
 import { ISize } from "@m2Types/generic/size"
 import { GENSET_STATE } from "../../../utils/constants/devices/generators"
 
@@ -38,7 +38,8 @@ const GeneratorConnectedGenset = ({ componentMode = "compact", generatorConnecte
 
   const { electricalPowerIndicator } = useAppStore()
   const { autoStartEnabled, updateAutoMode, updateManualMode, gensetState } = generatorConnectedGenset
-  const { productName, customName, statusCode, remoteStartModeEnabled, coolant, winding, exhaust } = gensetState
+  const { productName, customName, statusCode, remoteStartModeEnabled, coolant, winding, exhaust, heatsink } =
+    gensetState
 
   let phases: number
   let voltage: number[]
@@ -123,11 +124,14 @@ const GeneratorConnectedGenset = ({ componentMode = "compact", generatorConnecte
       }
     >
       <AdditionalInformation
-        values={[
-          { label: translate("generator.temperature.coolant"), value: `${coolant || "--"}°` },
-          { label: translate("generator.temperature.winding"), value: `${winding || "--"}°` },
-          { label: translate("generator.temperature.exhaust"), value: `${exhaust || "--"}°` },
-        ]}
+        values={
+          [
+            coolant && { label: translate("generator.temperature.coolant"), value: `${coolant}°` },
+            winding && { label: translate("generator.temperature.winding"), value: `${winding}°` },
+            exhaust && { label: translate("generator.temperature.exhaust"), value: `${exhaust}°` },
+            heatsink && { label: translate("generator.temperature.heatsink"), value: `${heatsink}°` },
+          ].filter(Boolean) as IValue[]
+        }
       />
     </ValueBox>
   )
