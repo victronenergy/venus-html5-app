@@ -109,7 +109,7 @@ const getAvailableDeviceBoxes = function (
 ) {
   let devices = []
 
-  if (!!chargers) {
+  if (chargers) {
     chargers.forEach((charger) => {
       devices.push(
         <Charger key={charger} instanceId={charger} componentMode={componentMode} compactBoxSize={compactBoxSize} />
@@ -117,7 +117,7 @@ const getAvailableDeviceBoxes = function (
     })
   }
 
-  if (!!inverters) {
+  if (inverters) {
     inverters.forEach((id) => {
       devices.push(
         <Inverter
@@ -131,7 +131,7 @@ const getAvailableDeviceBoxes = function (
     })
   }
 
-  if (!!vebusInverters.length) {
+  if (vebusInverters.length) {
     vebusInverters.forEach((id) => {
       devices.push(
         <Inverter
@@ -152,7 +152,7 @@ const getAvailableDeviceBoxes = function (
   }
 
   if (generatorConnectedGenset.gensetState.gensetType === ConnectedGensetType.ACGENSET) {
-    if (!!generatorConnectedGenset.gensetState.phases) {
+    if (generatorConnectedGenset.gensetState.phases) {
       devices.push(
         <GeneratorConnectedGenset
           key={"genset"} // only one /generator/1 can be present
@@ -175,7 +175,7 @@ const getAvailableDeviceBoxes = function (
     )
   }
 
-  if (!!generatorRelay.settings) {
+  if (generatorRelay.settings) {
     // we have relay controlled generator present, show it
     if (
       generatorRelay.relayFunction === RELAY_FUNCTION.GENERATOR_START_STOP &&

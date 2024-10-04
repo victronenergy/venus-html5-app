@@ -67,7 +67,7 @@ const InputLimitSelector: FC<Props> = ({ inputId, title }) => {
         size="md"
         onClick={() => setIsLimitModalOpen(!isLimitModalOpen)}
       >
-        {!!currentLimit ? formatValue(Number(currentLimit)) + "A" : 0 + "A"}
+        {currentLimit ? formatValue(Number(currentLimit)) + "A" : 0 + "A"}
       </Button>
       <DeviceSettingModal
         title={title}

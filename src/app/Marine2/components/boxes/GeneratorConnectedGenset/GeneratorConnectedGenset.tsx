@@ -99,10 +99,6 @@ const GeneratorConnectedGenset = ({ componentMode = "compact", generatorConnecte
       }
     : undefined
 
-  if (gensetState.gensetType === ConnectedGensetType.ACGENSET) {
-  } else if (gensetState.gensetType === ConnectedGensetType.DCGENSET) {
-  }
-
   return (
     <ValueBox
       title={title}

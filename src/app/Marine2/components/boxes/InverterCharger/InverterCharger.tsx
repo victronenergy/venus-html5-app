@@ -33,7 +33,7 @@ const InverterCharger = ({ componentMode = "compact", compactBoxSize }: Props) =
   const getButtons = () => {
     const buttons = []
 
-    if (!!inputId) {
+    if (inputId) {
       buttons.push(<InputLimitSelector key="limit" inputId={inputId} title={title} />)
     }
 

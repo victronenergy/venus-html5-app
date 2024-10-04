@@ -76,7 +76,7 @@ const ErrorFallback = ({ error, resetErrorBoundary, showReset = false }: Props) 
           <p>{translate("error.errorWithMessage", { message: error.message || "Unknown" })}</p>
           <p>{translate("error.userAgent", { userAgent: navigator.userAgent })}</p>
           <p>{translate("error.windowSize", { width: window.innerWidth, height: window.innerHeight })}</p>
-          <p>{Boolean(queryParams) ? translate("error.queryParams", { queryParams }) : null}</p>
+          <p>{queryParams ? translate("error.queryParams", { queryParams }) : null}</p>
         </div>
 
         <div className="grow">
