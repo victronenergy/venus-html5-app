@@ -101,8 +101,8 @@ export const Batteries = observer(({ size }: BatteryProps) => {
         batteryLevelBars <= ALARM_LEVEL
           ? STATUS_LEVELS.ALARM
           : batteryLevelBars <= WARNING_LEVEL
-          ? STATUS_LEVELS.WARNING
-          : STATUS_LEVELS.SUCCESS
+            ? STATUS_LEVELS.WARNING
+            : STATUS_LEVELS.SUCCESS
 
       const footer: Footer = { status: status, message: STATUS_LEVELS_MSG[status], property: "Charge" }
       return (

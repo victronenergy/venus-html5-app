@@ -59,7 +59,7 @@ const BatteryState = ({ battery, unit }: Props) => {
       <div className="w-full h-full flex flex-col justify-between">
         <div>
           <div className={classNames(colorClasses, activeStyles?.value)}>
-            {battery.soc ? Math.round(battery.soc) : battery.soc ?? "--"}
+            {battery.soc ? Math.round(battery.soc) : (battery.soc ?? "--")}
             <span className="pl-0.5 opacity-70">%</span>
           </div>
           <div className={classNames("text-victron-gray-300 dark:text-victron-gray-500", activeStyles.valueSubtitle)}>
