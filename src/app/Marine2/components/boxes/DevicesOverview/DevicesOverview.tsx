@@ -176,20 +176,8 @@ const getAvailableDeviceBoxes = function (
   }
 
   if (!!generatorRelay.settings) {
-    if (generatorRelay.settings.includes(AC_SOURCE.GENERATOR)) {
-      generatorRelay.settings.forEach((source: number, i: number) => {
-        if (source === AC_SOURCE.GENERATOR)
-          devices.push(
-            <GeneratorRelay
-              key={"generator_relay" + i}
-              {...generatorRelay}
-              active={generatorRelay.activeInput === i}
-              componentMode={componentMode}
-              compactBoxSize={compactBoxSize}
-            />
-          )
-      })
-    } else if (
+    // we have relay controlled generator present, show it
+    if (
       generatorRelay.relayFunction === RELAY_FUNCTION.GENERATOR_START_STOP &&
       generatorRelay.statusCode !== undefined
     ) {
@@ -201,6 +189,25 @@ const getAvailableDeviceBoxes = function (
           compactBoxSize={compactBoxSize}
         />
       )
+    } else if (generatorRelay.settings.includes(AC_SOURCE.GENERATOR)) {
+      // we do not have relay controlled generator configured,
+      // but one or more of the AC inputs is set to GENERATOR
+      if (generatorConnectedGenset.gensetState.gensetType !== ConnectedGensetType.ACGENSET) {
+        // display generator controls for each GENERATOR AC input
+        // unless there is a connected genset
+        generatorRelay.settings.forEach((source: number, i: number) => {
+          if (source === AC_SOURCE.GENERATOR)
+            devices.push(
+              <GeneratorRelay
+                key={"generator_relay" + i}
+                {...generatorRelay}
+                active={generatorRelay.activeInput === i}
+                componentMode={componentMode}
+                compactBoxSize={compactBoxSize}
+              />
+            )
+        })
+      }
     }
   }
 
