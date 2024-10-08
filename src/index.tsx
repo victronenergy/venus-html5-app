@@ -1,4 +1,6 @@
 import "react-app-polyfill/stable"
+import "@ungap/global-this"
+import "abortcontroller-polyfill/dist/polyfill-patch-fetch"
 import React from "react"
 import { createRoot } from "react-dom/client"
 import { getParameterByName } from "./app/utils/util"
