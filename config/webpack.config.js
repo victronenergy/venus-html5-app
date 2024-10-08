@@ -429,6 +429,9 @@ module.exports = function (webpackEnv) {
                 // show incorrect code and set breakpoints on the wrong lines.
                 sourceMaps: shouldUseSourceMap,
                 inputSourceMap: shouldUseSourceMap,
+                plugins: [
+                  [require.resolve("./babel-plugin-transform-bigint.js")]
+                ],
               },
             },
             // "postcss" loader applies autoprefixer to our CSS.
