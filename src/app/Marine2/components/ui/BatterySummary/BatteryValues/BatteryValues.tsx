@@ -40,6 +40,11 @@ export const BatteryValues: FC<Props> = ({ battery, boxSize, electricalPowerIndi
             <ValueWithUnit value={battery.power} unit="W" />
           </div>
         )}
+        {showWatts && battery.power === undefined && (battery.voltage || battery.voltage === 0) && (
+          <div className={classNames("text-victron-gray dark:text-victron-gray-dark", activeStyles.values)}>
+            <ValueWithUnit value={battery.voltage} unit="V" />
+          </div>
+        )}
       </div>
       <div className={classNames("text-victron-gray dark:text-victron-gray-dark", activeStyles.state)}>
         {batteryStateFor(battery.state, battery.bmsstate, battery.timetogo ?? null)}
