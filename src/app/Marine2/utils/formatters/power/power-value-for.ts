@@ -3,7 +3,7 @@ import { TForcePowerUnit } from "@m2Types/data/force-power-unit"
 import { formatValue } from "../generic"
 
 export const powerValueFor = (value?: number, forcePowerUnit?: TForcePowerUnit): string => {
-  if (!value) {
+  if (value === undefined) {
     return formatValue()
   }
 
