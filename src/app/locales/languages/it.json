@@ -137,16 +137,19 @@
         },
         "mqttUnavailable1": "Non è stato possibile collegarsi al server MQTT.",
         "mqttUnavailable2": "Si prega di verificare che MQTT sia attivo nelle impostazioni:",
-        "mqttUnavailable3": "Consolle Remota > Impostazioni > Servizi > MQTT su LAN (Plaintext)",
+        "mqttUnavailable3": "Consolle Remota > Impostazioni > Servizi > Accesso MQTT",
         "mqttUnavailable4": "Provare a utilizzare il pulsante della Consolle Remota sito nella parte alta di questa schermata per cambiare le impostazioni da remoto.",
         "mqttUnavailable5": "Si può provare anche a collegarsi al proprio dispositivo da remoto, selezionando Remoto nel menù qui sopra.",
         "queryParams": "Parametri richiesta: %{queryParams}",
         "remoteConsole": {
             "connectionFailed": "Impossibile connettersi al dispositivo GX",
+            "qrCodeMessage": "Per accedere alla Console remota GX, assicurarsi che il telefono sia sulla stessa rete WiFi del dispositivo GX e quindi scansionare questo codice QR.",
             "screenTooSmall": "Aprire su uno schermo più grande per vedere la consolle remota"
         },
         "userAgent": "Agente utente: %{userAgent}",
-        "windowSize": "Finestra: %{width} x %{height}"
+        "windowSize": "Finestra: %{width} x %{height}",
+        "wsMqttUnavailable1": "Impossibile connettersi al dispositivo GX.",
+        "wsMqttUnavailable2": "Errore GX #60."
     },
     "generator": {
         "autoStartDisabledMessage": "La funzionalità di avvio remoto è disattivata nel generatore. Il GX non sarà in grado di avviare o arrestare il generatore. Attivarla sul pannello di controllo del generatore.",
@@ -154,6 +157,7 @@
         "temperature": {
             "coolant": "Refrigerante",
             "exhaust": "Scarico",
+            "heatsink": "Dissipatore",
             "winding": "Avvolgimento in corso"
         }
     },

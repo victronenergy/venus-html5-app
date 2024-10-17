@@ -54,7 +54,7 @@
         "charging": "充电",
         "close": "关闭",
         "current": "电流",
-        "dark": "黑暗的",
+        "dark": "深色",
         "days": "天",
         "days_short": "天",
         "discharge": "放电",
@@ -72,7 +72,7 @@
         "inputLimit": "输入限制",
         "inverterOnly": "仅逆变",
         "inverting": "逆变",
-        "light": "光",
+        "light": "浅色",
         "limit": "限制",
         "loading": "加载中",
         "loads": "负载",
@@ -115,8 +115,8 @@
         "device": {
             "device": "设备",
             "userAgent": "用户代理",
-            "viewportHeight": "视口高度",
-            "viewportWidth": "视口宽度"
+            "viewportHeight": "视窗高度",
+            "viewportWidth": "视窗宽度"
         },
         "diagnostics": "诊断"
     },
@@ -137,7 +137,7 @@
         },
         "mqttUnavailable1": "无法连接到 MQTT 服务器。",
         "mqttUnavailable2": "请检查您的设置中是否启用了 MQTT：",
-        "mqttUnavailable3": "远程终端 > 设置 > 服务 > MQTT on LAN (Plaintext)\n",
+        "mqttUnavailable3": "远程终端 > 设置 > 服务 > MQTT访问\n",
         "mqttUnavailable4": "尝试使用此屏幕顶部的远程控制台按钮远程更改设置。",
         "mqttUnavailable5": "您也可以通过从上面的菜单中选择远程来尝试远程连接到您的设备。",
         "queryParams": "查询参数: %{queryParams}",
@@ -147,7 +147,9 @@
             "screenTooSmall": "在大屏幕中打开以查看远程控制台"
         },
         "userAgent": "用户代理: %{userAgent}",
-        "windowSize": "窗口: %{width} x %{height}"
+        "windowSize": "窗口: %{width} x %{height}",
+        "wsMqttUnavailable1": "不能连接到GX设备。",
+        "wsMqttUnavailable2": "GX错误#60."
     },
     "generator": {
         "autoStartDisabledMessage": "发电机组上的远程启动功能被禁用。GX 现在将无法启动或停止发电机组。在发电机组控制面板上启用它。",
@@ -155,6 +157,7 @@
         "temperature": {
             "coolant": "冷却剂",
             "exhaust": "废气",
+            "heatsink": "散热器",
             "winding": "缠绕"
         }
     },

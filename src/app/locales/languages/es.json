@@ -137,16 +137,19 @@
         },
         "mqttUnavailable1": "No se ha podido conectar el servidor MQTT.",
         "mqttUnavailable2": "Compruebe que MQTT está habilitado en sus ajustes:",
-        "mqttUnavailable3": "Consola remota > Ajustes > Servicios > MQTT en LAN (Plaintext)",
+        "mqttUnavailable3": "Consola remota > Ajustes > Servicios > Acceso MQTT",
         "mqttUnavailable4": "Intente usar el botón de Consola remota de la parte superior de esta pantalla para cambiar sus ajustes a distancia.",
         "mqttUnavailable5": "También puede intentar conectar su dispositivo a distancia seleccionando Remoto en el menú anterior.",
         "queryParams": "Parámetros de consulta: %{queryParams}",
         "remoteConsole": {
             "connectionFailed": "No se puede conectar al dispositivo GX",
+            "qrCodeMessage": "Para acceder a la consola remota GX, asegúrese de que su teléfono está en la misma red WiFi que el dispositivo GX y, a continuación, escanee este código QR.",
             "screenTooSmall": "Abrir en una pantalla más grande para ver la consola remota"
         },
         "userAgent": "Agente del usuario: %{userAgent}",
-        "windowSize": "Ventana: %{width} x %{height}"
+        "windowSize": "Ventana: %{width} x %{height}",
+        "wsMqttUnavailable1": "No se ha podido conectar con el dispositivo GX.",
+        "wsMqttUnavailable2": "GX Error #60."
     },
     "generator": {
         "autoStartDisabledMessage": "La función de arranque a distancia está deshabilitada en el generador. Ahora, el GX no podrá arrancar ni parar el generador. Active esta función en el panel de control del generador.",
@@ -154,6 +157,7 @@
         "temperature": {
             "coolant": "Refrigerante",
             "exhaust": "Escape",
+            "heatsink": "Disipador térmico",
             "winding": "Devanado"
         }
     },
@@ -253,7 +257,7 @@
         "buildDate": "Fecha de creación",
         "identifier": "Identificar",
         "venusOs": "Venus OS",
-        "version": "Versión",
+        "version": "Versión  %{version}",
         "vrmPortID": "ID portal VRM"
     },
     "widgets": {

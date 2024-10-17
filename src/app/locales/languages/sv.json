@@ -143,10 +143,13 @@
         "queryParams": "Frågeparametrar: %{queryParams}",
         "remoteConsole": {
             "connectionFailed": "Kan inte ansluta till GX-enheten",
+            "qrCodeMessage": "För att komma åt GX Remote Console, se till att din telefon är på samma WiFi-nätverk som GX-enheten och skanna sedan den här QR-koden.",
             "screenTooSmall": "Öppna på en större skärm för att se fjärrkonsol"
         },
         "userAgent": "Användaragent: %{userAgent}",
-        "windowSize": "Fönster: %{width} x %{height}"
+        "windowSize": "Fönster: %{width} x %{height}",
+        "wsMqttUnavailable1": "Det gick inte att ansluta till GX-enheten.",
+        "wsMqttUnavailable2": "GX Error #60."
     },
     "generator": {
         "autoStartDisabledMessage": "Funktionen för fjärrstart av generatorn är inaktiverad. GX kommer inte kunna starta eller stoppa generatorn nu. Aktivera den på generatorns kontrollpanel.",
@@ -154,6 +157,7 @@
         "temperature": {
             "coolant": "Kylmedel",
             "exhaust": "Avgas",
+            "heatsink": "Kylfläns",
             "winding": "Lindning"
         }
     },

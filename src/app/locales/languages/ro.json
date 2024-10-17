@@ -143,10 +143,13 @@
         "queryParams": "Parametrii solicitării: %{queryParams}",
         "remoteConsole": {
             "connectionFailed": "Nu se poate conecta la dispozitivul GX",
+            "qrCodeMessage": "Pentru a accesa Consola la distanță GX, asigurați-vă că telefonul dvs. se află în aceeași rețea WiFi cu dispozitivul GX și apoi scanați acest cod QR.",
             "screenTooSmall": "Deschideți pe un ecran mai mare pentru a vizualiza consola la distanţă"
         },
         "userAgent": "Agent utilizator: %{userAgent}",
-        "windowSize": "Fereastră: %{width} x %{height}"
+        "windowSize": "Fereastră: %{width} x %{height}",
+        "wsMqttUnavailable1": "Nu s-a putut conecta la dispozitivul GX.",
+        "wsMqttUnavailable2": "Eroare GX #60."
     },
     "generator": {
         "autoStartDisabledMessage": "Funcționalitatea de pornire de la distanță este dezactivată pe generator. GX nu va putea porni sau opri generatorul acum. Activați-o pe panoul de control al generatorului.",
@@ -154,6 +157,7 @@
         "temperature": {
             "coolant": "Agent de răcire",
             "exhaust": "Evacuare",
+            "heatsink": "Heatsink",
             "winding": "Bobinaj"
         }
     },

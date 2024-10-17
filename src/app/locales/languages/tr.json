@@ -137,7 +137,7 @@
         },
         "mqttUnavailable1": "mqttUnavailable1",
         "mqttUnavailable2": "mqttUnavailable2",
-        "mqttUnavailable3": "mqttUnavailable3",
+        "mqttUnavailable3": "Uzak Konsol > Ayarlar > Hizmetler > MQTT Erişimi\n",
         "mqttUnavailable4": "mqttUnavailable4",
         "mqttUnavailable5": "mqttUnavailable5",
         "queryParams": "Query params: %{queryParams}",
@@ -147,7 +147,9 @@
             "screenTooSmall": "Uzak konsolu görüntülemek için daha büyük bir ekranda açın"
         },
         "userAgent": "User agent: %{userAgent}",
-        "windowSize": "Window: %{width} x %{height}"
+        "windowSize": "Window: %{width} x %{height}",
+        "wsMqttUnavailable1": "GX cihazına bağlanılamadı.\n",
+        "wsMqttUnavailable2": "GX Error #60.\n"
     },
     "generator": {
         "autoStartDisabledMessage": "Jeneratörde uzaktan çalıştırma fonksiyonu devre dışıdır. GX artık jeneratör setini çalıştıramayacak veya durduramayacaktır. Jeneratör kontrol panelinden etkinleştirin.\n",
@@ -155,6 +157,7 @@
         "temperature": {
             "coolant": "soğutucu",
             "exhaust": "tüketmek",
+            "heatsink": "Soğutucu",
             "winding": "Sarma"
         }
     },

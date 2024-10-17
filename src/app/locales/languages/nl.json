@@ -137,7 +137,7 @@
         },
         "mqttUnavailable1": "Kan niet met de MQTT server verbinden.",
         "mqttUnavailable2": "Controleer of MQTT is ingeschakeld in de instellingen:",
-        "mqttUnavailable3": "Remote Console > Instellingen > Services > MQTT on LAN (Plaintext)\n",
+        "mqttUnavailable3": "Remote Console > Instellingen > Diensten > MQTT via LAN (Plattetekst)\n",
         "mqttUnavailable4": "Probeer de Remote Control knop bovenaan het scherm om de instellingen remote te veranderen.",
         "mqttUnavailable5": "Verbind Remote met het apparaat door de knop Remote bovenaan het scherm te drukken.",
         "queryParams": "Zoek :  %{queryParams}",
@@ -152,11 +152,12 @@
         "wsMqttUnavailable2": "GX Fout #60."
     },
     "generator": {
-        "autoStartDisabledMessage": "De afstandsstartfunctie is uitgeschakeld op het aggregaat. De GX kan het aggregaat nu niet starten of stoppen. Schakel deze functie in op het bedieningspaneel van het aggregaat.",
+        "autoStartDisabledMessage": "De op afstand starten functie is uitgeschakeld op het aggregaat. De GX kan het aggregaat nu niet starten of stoppen. Schakel deze functie in op het bedieningspaneel van het aggregaat.",
         "fisherPandaAutoStartMessage": "FisherPanda AutoStart is op dit moment uitgeschakeld, zet dat eerst aan op het paneel van het aggregaat om vanaf dit scherm te kunnen schakelen.",
         "temperature": {
             "coolant": "Koelvloeistof",
             "exhaust": "Uitlaat",
+            "heatsink": "Koellichaam",
             "winding": "Wikkeling"
         }
     },

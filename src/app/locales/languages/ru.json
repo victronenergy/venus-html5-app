@@ -2,7 +2,7 @@
     "acMode": {
         "modal": {
             "name": "Имя",
-            "updateLimit": "updateLimit"
+            "updateLimit": "Выберите предел входного сигнала берега"
         },
         "title": "Сбросить пароль"
     },
@@ -12,19 +12,19 @@
         "alternator": "Генератор",
         "batteries": "Батареи",
         "battery": "Батарея",
-        "batteryWithName": "batteryWithName",
-        "chargerWithName": "chargerWithName",
-        "dcLoads": "dcLoads",
+        "batteryWithName": "Батарея: %{имя}",
+        "chargerWithName": "Зарядное устройство: %{productNameShort}",
+        "dcLoads": "Нагрузки постоянного тока",
         "devices": "Устройства",
         "energy": "Энергия",
         "environment": "Окружающая среда",
         "generator": "Генератор",
         "generatorInput": "generatorInput",
-        "gridInput": "gridInput",
+        "gridInput": "Входная сетка",
         "humidity": "Влажность",
-        "invalidConfig": "invalidConfig",
-        "inverterCharger": "inverterCharger",
-        "inverterWithName": "inverterWithName",
+        "invalidConfig": "Недопустимая конфигурация",
+        "inverterCharger": "Инвертор / зарядное устройство: %{productNameShort}",
+        "inverterWithName": "Инвертор: %{productNameShort}",
         "pressure": "Давление",
         "pvCharger": "PV зарядное устройство",
         "shorePower": "Мощность солнечной системы",
@@ -33,7 +33,7 @@
         "tanks": "Резервуары",
         "temperature": "Температура",
         "unknown": "Неизвестно",
-        "windGenerator": "windGenerator"
+        "windGenerator": "Ветряной генератор"
     },
     "cardFooter": {
         "Charge": "Нагрузка",
@@ -47,7 +47,7 @@
         "assisting": "Помощь",
         "auto": "Авто",
         "autoStartStop": "Автоматический старт/стоп",
-        "bulkCharging": "bulkCharging",
+        "bulkCharging": "Насыпная зарядка",
         "charge": "Нагрузка",
         "charged": "Заряжено",
         "chargerOnly": "Только зарядное устройство",
@@ -60,16 +60,16 @@
         "discharge": "Разряд",
         "discharging": "разряжается",
         "eco": "Эко",
-        "emptyBar": "emptyBar",
+        "emptyBar": " - ",
         "equalisationCharging": "уравниваниеВыплата",
         "error": "Ошибка",
         "fault": "Неисправность",
-        "floatCharging": "floatCharging",
+        "floatCharging": "Зарядка поплавка",
         "hours": "часы",
         "hours_short": "часы_короткие",
         "idle": "без нагрузки",
         "inputCurrentLimit": "Ограничение входящего тока",
-        "inputLimit": "inputLimit",
+        "inputLimit": "Входной предел",
         "inverterOnly": "Только инвертер",
         "inverting": "Инвертирование",
         "light": "свет",
@@ -80,9 +80,9 @@
         "minutes": "минут",
         "minutes_short": "минуты_короткие",
         "mode": "Режим",
-        "noShorePower": "noShorePower",
+        "noShorePower": "Нет берегового питания",
         "notAvailable": "Недоступно",
-        "nrOfPhases": "nrOfPhases",
+        "nrOfPhases": "%{фазы} фазы",
         "null": "Пожалуйста, обратитесь к нашим",
         "off": "Выкл",
         "on": "Вкл",
@@ -100,7 +100,7 @@
         "sustain": "Удержание",
         "timetogo": "идти",
         "unplugged": "Отключено",
-        "veBusFault": "veBusFault",
+        "veBusFault": "VE.Bus Состояние неисправности",
         "voltage": "Напряжение"
     },
     "diagnostics": {
@@ -109,45 +109,47 @@
             "error": "Ошибка",
             "host": "Хозяин",
             "none": "Нет",
-            "portalId": "portalId",
+            "portalId": "Идентификатор портала",
             "status": "Состояние"
         },
         "device": {
             "device": "Устройство",
-            "userAgent": "userAgent",
-            "viewportHeight": "viewportHeight",
-            "viewportWidth": "viewportWidth"
+            "userAgent": "Пользовательский агент",
+            "viewportHeight": "Высота окна просмотра",
+            "viewportWidth": "Ширина окна просмотра"
         },
         "diagnostics": "Диагностика"
     },
     "error": {
-        "errorWithMessage": "errorWithMessage",
-        "genericMessage": "genericMessage",
+        "errorWithMessage": "Ошибка: %{сообщение}",
+        "genericMessage": "Во время рендеринга приложения произошла ошибка. Попробуйте перезагрузить страницу или свяжитесь с Victron Energy, предоставив следующую информацию:",
         "marine": {
-            "cta": "cta",
-            "dataCharges": "dataCharges",
-            "estimate": "оценка",
+            "cta": "Отправьте этот отчет об ошибке непосредственно в службу поддержки Victron Energy:",
+            "dataCharges": "Взимается стандартная плата за передачу данных.",
+            "estimate": "Предполагаемые данные: %{size} Байт.",
             "hint": "Индия",
             "ignore": "игнорировать",
             "reportSent": "reportSent",
             "resetError": "Reset Error",
-            "restartApp": "restartApp",
-            "sendReport": "sendReport",
+            "restartApp": "Перезапустите приложение",
+            "sendReport": "Отправить отчет об ошибке",
             "title": "Сбросить пароль"
         },
-        "mqttUnavailable1": "mqttUnavailable1",
-        "mqttUnavailable2": "mqttUnavailable2",
-        "mqttUnavailable3": "mqttUnavailable3",
-        "mqttUnavailable4": "mqttUnavailable4",
-        "mqttUnavailable5": "mqttUnavailable5",
+        "mqttUnavailable1": "Не удалось подключиться к серверу MQTT.",
+        "mqttUnavailable2": "Убедитесь, что MQTT включен в ваших настройках:",
+        "mqttUnavailable3": "Удаленная консоль > Настройки > Службы > Доступ MQTT",
+        "mqttUnavailable4": "Попробуйте воспользоваться кнопкой Remote Console в верхней части этого экрана, чтобы изменить настройки удаленно.",
+        "mqttUnavailable5": "Вы также можете попробовать подключиться к устройству удаленно, выбрав пункт Remote в меню выше.",
         "queryParams": "queryParams",
         "remoteConsole": {
-            "connectionFailed": "connectionFailed",
-            "qrCodeMessage": "qrCodeMessage",
-            "screenTooSmall": "screenTooSmall"
+            "connectionFailed": "Невозможно подключиться к устройству GX",
+            "qrCodeMessage": "Чтобы получить доступ к удаленной консоли GX, убедитесь, что ваш телефон находится в той же сети WiFi, что и устройство GX, а затем отсканируйте этот QR-код.",
+            "screenTooSmall": "Открыть на большом экране для просмотра удаленной консоли"
         },
-        "userAgent": "userAgent",
-        "windowSize": "windowSize"
+        "userAgent": "Агент пользователя: %{userAgent}",
+        "windowSize": "Окно: %{ширина} x %{высота}",
+        "wsMqttUnavailable1": "Не удалось подключиться к устройству GX.",
+        "wsMqttUnavailable2": "Ошибка GX #60."
     },
     "generator": {
         "autoStartDisabledMessage": "На генераторной установке отключена функция дистанционного запуска. Теперь GX не сможет запустить или остановить генераторную установку. Включите ее на панели управления генераторной установки.",
@@ -155,6 +157,7 @@
         "temperature": {
             "coolant": "охлаждающая жидкость",
             "exhaust": "выхлоп",
+            "heatsink": "радиатор",
             "winding": "намотка"
         }
     },
@@ -162,20 +165,20 @@
         "close": "Закрыть",
         "connecting": "Подключение",
         "local": "Локальные",
-        "loggedIn": "loggedIn",
-        "notLoggedIn": "notLoggedIn",
+        "loggedIn": "Вошел в систему как",
+        "notLoggedIn": "Не вошел в систему",
         "remote": "Удаленный",
         "remoteConsole": "Дистанционная консоль",
-        "remoteMessage": "remoteMessage",
-        "versionInfo": "versionInfo"
+        "remoteMessage": "Открыть на большом экране для просмотра удаленной консоли",
+        "versionInfo": "Информация о версии"
     },
     "installations": {
         "title": "Сбросить пароль"
     },
     "locker": {
         "lockDescription": "Для предотвращения случайных изменений в настройках устройства - включение этой функции заблокирует возможность взаимодействия с элементами управления",
-        "lockMessage": "lockMessage",
-        "unlockMessage": "unlockMessage"
+        "lockMessage": "Блокировка для предотвращения изменений",
+        "unlockMessage": "Разблокировка для внесения изменений"
     },
     "noWidgets": {
         "subtitle": "субтитр",
@@ -187,20 +190,20 @@
         "systemOverview": "Обзор системы"
     },
     "remoteLogin": {
-        "2fa": "2fa",
+        "2fa": "Жетон двухфакторной аутентификации",
         "email": "Эл. почта",
-        "forgotPassword": "forgotPassword",
-        "goBack": "goBack",
+        "forgotPassword": "Забыли пароль?",
+        "goBack": "Вернуться",
         "logIn": "Вход",
         "logOut": "Выйти",
         "loginFailed": "Ошибка входа",
         "mobileVerification": "Приложение для проверки подлинности токена",
-        "noInstallations": "noInstallations",
+        "noInstallations": "У этого аккаунта нет установок.",
         "password": "Пароль",
-        "registerMessage1": "registerMessage1",
-        "registerMessage2": "registerMessage2",
+        "registerMessage1": "У вас еще нет аккаунта? ",
+        "registerMessage2": "Зарегистрируйте свой фургон.",
         "smsVerification": "Токен подтверждения SMS",
-        "wrong2fa": "wrong2fa"
+        "wrong2fa": "Неверный код двухфакторной верификации"
     },
     "statusWidget": {
         "Absorption charging": "Абсорбционная зарядка",
@@ -253,22 +256,22 @@
     "versionInfo": {
         "buildDate": "Дата билда",
         "identifier": "Идентификатор",
-        "venusOs": "venusOs",
+        "venusOs": "Venus OS",
         "version": "Версия %{version}",
-        "vrmPortID": "vrmPortID"
+        "vrmPortID": "Идентификатор объекта VRM"
     },
     "widgets": {
         "acLoads": "AC нагрузки",
         "batteries": "Батареи",
         "battery": "Батарея",
-        "batteryWithName": "batteryWithName",
+        "batteryWithName": "Батарея: %{имя}",
         "chargerWithName": "chargerWithName",
-        "dcLoads": "dcLoads",
+        "dcLoads": "Нагрузки постоянного тока",
         "generator": "Генератор",
-        "generatorInput": "generatorInput",
-        "gridInput": "gridInput",
-        "invalidConfig": "invalidConfig",
-        "inverterCharger": "inverterCharger",
+        "generatorInput": "Вход генератора",
+        "gridInput": "Входная сетка",
+        "invalidConfig": "Недопустимая конфигурация",
+        "inverterCharger": "Инвертор / зарядное устройство: %{productNameShort}",
         "inverterWithName": "inverterWithName",
         "pvCharger": "PV зарядное устройство",
         "shorePower": "Мощность солнечной системы",

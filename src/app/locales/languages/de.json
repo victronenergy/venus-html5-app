@@ -137,7 +137,7 @@
         },
         "mqttUnavailable1": "Es konnte keine Verbindung zum MQTT-Server hergestellt werden.",
         "mqttUnavailable2": "Bitte überprüfen Sie, ob MQTT in Ihren Einstellungen aktiviert ist:",
-        "mqttUnavailable3": "Remote Console > Einstellungen > Dienste > MQTT im LAN (Klartext)",
+        "mqttUnavailable3": "Remote Console > Einstellungen > Dienste > MQTT-Zugriff",
         "mqttUnavailable4": "Versuchen Sie es mit der Schaltfläche Remote Console oben auf diesem Bildschirm, um Ihre Einstellungen aus der Ferne zu ändern.",
         "mqttUnavailable5": "Sie können auch versuchen, eine Remote-Verbindung zu Ihrem Gerät herzustellen, indem Sie im Menü oben Remote auswählen.",
         "queryParams": "Abfrageparameter: %{queryParams}",
@@ -152,11 +152,12 @@
         "wsMqttUnavailable2": "GX Fehler #60."
     },
     "generator": {
-        "autoStartDisabledMessage": "Die Fernstartfunktion ist am Aggregat deaktiviert. Der GX kann das Aggregat jetzt nicht starten oder stoppen. Aktivieren Sie die Funktion auf dem Bedienfeld des Aggregats.",
+        "autoStartDisabledMessage": "Die Fernstartfunktion ist am Generator deaktiviert. Der GX kann den Generator jetzt weder starten noch stoppen. Aktivieren Sie die Funktion auf dem Bedienfeld des Generators.",
         "fisherPandaAutoStartMessage": "Die AutoStart-Funktion von Fisher Panda ist derzeit deaktiviert. Aktivieren Sie sie im Aggregate-Bedienfeld, um das Aggregat über dieses Bedienfeld zu steuern.",
         "temperature": {
             "coolant": "Kühlmittel",
             "exhaust": "Auspuff",
+            "heatsink": "Kühlkörper",
             "winding": "Wicklung"
         }
     },

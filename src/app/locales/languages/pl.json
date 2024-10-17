@@ -147,7 +147,9 @@
             "screenTooSmall": "Otwórz na większym ekranie, aby wyświetlić konsolę zdalną"
         },
         "userAgent": "Agent użytkownika: %{userAgent}",
-        "windowSize": "Okno: %{width} x %{height}"
+        "windowSize": "Okno: %{width} x %{height}",
+        "wsMqttUnavailable1": "wsMqttUnavailable1",
+        "wsMqttUnavailable2": "wsMqttUnavailable2"
     },
     "generator": {
         "autoStartDisabledMessage": "Funkcja zdalnego uruchamiania jest wyłączona w agregacie. GX nie będzie mógł teraz uruchomić ani zatrzymać agregatu. Włącz tę opcję na panelu sterowania agregatu.",
@@ -155,6 +157,7 @@
         "temperature": {
             "coolant": "Płyn chłodzący",
             "exhaust": "Wydech",
+            "heatsink": "radiator",
             "winding": "Uzwojenie"
         }
     },

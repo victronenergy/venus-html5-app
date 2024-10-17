@@ -143,10 +143,13 @@
         "queryParams": "معاملات الاستعلام: %{queryParams}",
         "remoteConsole": {
             "connectionFailed": "تعذر الاتصال بجهاز GX",
+            "qrCodeMessage": "للوصول إلى وحدة التحكم عن بعد GX، تأكد من أن هاتفك متصل بنفس شبكة WiFi مثل جهاز GX، ثم قم بمسح رمز الاستجابة السريعة هذا.",
             "screenTooSmall": "افتح في شاشة أكبر لعرض وحدة التحكم عن بُعد"
         },
         "userAgent": "وكيل المستخدم: %{userAgent}",
-        "windowSize": "إطار: %{width} x %{height}"
+        "windowSize": "إطار: %{width} x %{height}",
+        "wsMqttUnavailable1": "تعذر الاتصال بجهاز GX.",
+        "wsMqttUnavailable2": "خطأ GX رقم 60."
     },
     "generator": {
         "autoStartDisabledMessage": "تم تعطيل وظيفة التشغيل عن بعد في المولد. لن يتمكن GX من تشغيل أو إيقاف المولد الآن. اجعله متاحا على لوحة تحكم المولد.",
@@ -154,6 +157,7 @@
         "temperature": {
             "coolant": "سائل التبريد",
             "exhaust": "عادم",
+            "heatsink": "تقليل الحرارة",
             "winding": "حلزوني"
         }
     },

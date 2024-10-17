@@ -147,7 +147,9 @@
             "screenTooSmall": "Ouvrir dans un écran plus large pour visualiser la console à distance"
         },
         "userAgent": "User agent: %{userAgent}",
-        "windowSize": "Fenêtre: %{width} x %{height}"
+        "windowSize": "Fenêtre: %{width} x %{height}",
+        "wsMqttUnavailable1": "Impossible de se connecter au dispositif GX.",
+        "wsMqttUnavailable2": "Erreur GX #60."
     },
     "generator": {
         "autoStartDisabledMessage": "La fonctionnalité de démarrage à distance est désactivée sur le groupe électrogène. Le GX ne pourra pas démarrer ou arrêter le groupe électrogène pour le moment. Activez-le sur le panneau de commande du groupe électrogène.",
@@ -155,6 +157,7 @@
         "temperature": {
             "coolant": "L. Refroid.",
             "exhaust": "Echappement",
+            "heatsink": "dissipateur",
             "winding": "Enroulement"
         }
     },

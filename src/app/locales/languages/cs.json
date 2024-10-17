@@ -143,10 +143,13 @@
         "queryParams": "Parametry dotazu: %{queryParams}",
         "remoteConsole": {
             "connectionFailed": "Nelze se připojit k zařízení GX.",
+            "qrCodeMessage": "Chcete-li získat přístup ke vzdálené konzole GX, ujistěte se, že je váš telefon ve stejné síti WiFi jako zařízení GX, a poté naskenujte tento kód QR.",
             "screenTooSmall": "Zobrazit konzolu dálkového ovládání ve větším okně"
         },
         "userAgent": "Agent uživatele: %{userAgent}",
-        "windowSize": "Okno: %{width} x %{height}"
+        "windowSize": "Okno: %{width} x %{height}",
+        "wsMqttUnavailable1": "Nepodařilo se připojit k zařízení GX.",
+        "wsMqttUnavailable2": "Chyba GX č. 60."
     },
     "generator": {
         "autoStartDisabledMessage": "Funkce dálkového spouštění je u elektrocentrály vypnutá. Genset GX nyní nebude možné spustit ani zastavit. Povolte ji na ovládacím panelu elektrocentrály.",
@@ -154,6 +157,7 @@
         "temperature": {
             "coolant": "Chladicí kapalina",
             "exhaust": "Výfuk",
+            "heatsink": "chladič",
             "winding": "Elektrické vinutí"
         }
     },
