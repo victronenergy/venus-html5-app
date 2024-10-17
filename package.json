@@ -65,7 +65,7 @@
     "sass": "^1.49.8",
     "sass-loader": "^16.0.2",
     "semver": "^7.6.3",
-    "serve": "^14.2.3",
+    "serve": "^14.2.4",
     "stream-browserify": "^3.0.0",
     "terser-webpack-plugin": "^5.3.10",
     "ts-pnp": "^1.2.0",
