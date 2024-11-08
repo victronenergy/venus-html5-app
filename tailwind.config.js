@@ -66,7 +66,7 @@ module.exports = {
         "xl-xl": {
           raw: "(min-width: 1800px) and (min-height: 1000px)",
         },
-        'h-short': { 'raw': '(min-height: 368px)' },
+        "h-short": { raw: "(min-height: 368px)" },
       },
       colors: {
         victron: {
@@ -149,11 +149,11 @@ module.exports = {
         "4xl": ["5.375rem", { lineHeight: "120%" }], // 86px
       },
       strokeWidth: {
-        '16': "16px",
-        '12': "12px",
-        '8': "8px",
-        '6': "6px",
-        '0': "0"
+        16: "16px",
+        12: "12px",
+        8: "8px",
+        6: "6px",
+        0: "0",
       },
       minWidth: {
         5: "1.25rem",
