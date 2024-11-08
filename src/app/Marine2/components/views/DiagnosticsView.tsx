@@ -69,6 +69,10 @@ const getDeviceDiagnostics = (windowSize: { width?: number; height?: number }) =
       property: translate("diagnostics.device.viewportHeight"),
       value: (windowSize.height ?? window.innerHeight) + "px",
     },
+    {
+      property: translate("diagnostics.device.devicePixelRatio"),
+      value: (window.devicePixelRatio ?? 1) + "px/pt",
+    },
   ]
 }
 
