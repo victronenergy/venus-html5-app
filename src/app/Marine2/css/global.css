@@ -6,6 +6,22 @@
   html {
     font-family: MuseoSans, "Noto Sans SC", sans-serif;
   }
+
+  html {
+    font-size: 16px;
+  }
+
+  @media screen and (min-width: 1920px) and (max-width: 2559px) {
+    html {
+        font-size: 24px;
+    }
+  }
+
+  @media screen and (min-width: 2560px) {
+    html {
+        font-size: 32px;
+    }
+  }
 }
 
 html,
