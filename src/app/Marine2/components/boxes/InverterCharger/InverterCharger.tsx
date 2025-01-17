@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { observer } from "mobx-react-lite"
-import { useAppStore, useInverterCharger, useShorePowerInput } from "@victronenergy/mfd-modules"
+import { useActiveSource, useAppStore, useInverterCharger, useSystemState } from "@victronenergy/mfd-modules"
 import InverterChargerIcon from "../../../images/icons/inverter-charger.svg"
 import Button from "../../ui/Button"
 import InputLimitSelector from "../../ui/InputLimitSelector"
@@ -13,28 +13,57 @@ import { formatModeFor } from "../../../utils/formatters/devices/inverter-charge
 import { titleFor } from "../../../utils/helpers/devices/title-for"
 import { translatedStateFor } from "../../../utils/helpers/devices/translated-state-for"
 import { responsiveBoxIcon } from "../../../utils/helpers/classes/responsive-box-icon"
+import { translate } from "react-i18nify"
+import { formatInputTypeFor as formatACInputTypeFor } from "../../../utils/formatters/devices/inverter-charger/format-input-type-for"
 
 interface Props {
+  instanceId: number
+  isMainVEBusDevice: boolean
   componentMode?: ComponentMode
   compactBoxSize?: ISize
 }
 
-const InverterCharger = ({ componentMode = "compact", compactBoxSize }: Props) => {
-  const { locked } = useAppStore() // lock from theme settings
-  const { inputId } = useShorePowerInput()
+const translateInputDescription = (
+  isMainVEBusDevice: boolean,
+  numberOfAcInputs: number,
+  inputId: number,
+  settings: number[]
+) => {
+  if (isMainVEBusDevice) {
+    const inputType = formatACInputTypeFor(settings[inputId - 1])
+    return translate("common.inputCurrentLimitWithType", { inputType })
+  } else if (numberOfAcInputs > 1) {
+    return translate("common.inputCurrentLimitWithNumber", { inputId })
+  }
+  return translate("common.inputCurrentLimit")
+}
 
-  const { state, mode, customName, productName, modeIsAdjustable } = useInverterCharger()
+const InverterCharger = ({ instanceId, isMainVEBusDevice, componentMode = "compact", compactBoxSize }: Props) => {
+  const { locked } = useAppStore() // lock from theme settings
+
+  const { settings } = useActiveSource()
+  const { systemState } = useSystemState()
+  const { state, mode, numberOfAcInputs, customName, productName, modeIsAdjustable } = useInverterCharger(instanceId)
   const [openModal, setOpenModal] = useState(false)
 
   const title = titleFor(customName, productName)
-  const subTitle = translatedStateFor(state)
+  const subTitle = translatedStateFor(isMainVEBusDevice ? systemState : state)
   const inverterChargerMode = formatModeFor(parseInt(mode))
 
-  const getButtons = () => {
+  const getButtons = (numberOfAcInputs: number) => {
     const buttons = []
 
-    if (inputId) {
-      buttons.push(<InputLimitSelector key="limit" inputId={inputId} title={title} />)
+    for (let inputId = 1; inputId <= numberOfAcInputs; inputId++) {
+      const inputDescription = translateInputDescription(isMainVEBusDevice, numberOfAcInputs, inputId, settings)
+      buttons.push(
+        <InputLimitSelector
+          key={`limit${inputId}`}
+          instanceId={instanceId}
+          inputId={inputId}
+          title={title}
+          subtitle={inputDescription}
+        />
+      )
     }
 
     if (modeIsAdjustable === 1) {
@@ -56,10 +85,10 @@ const InverterCharger = ({ componentMode = "compact", compactBoxSize }: Props) =
       title={title}
       subtitle={subTitle}
       icon={<InverterChargerIcon className={responsiveBoxIcon} />}
-      buttons={getButtons()}
+      buttons={getButtons(numberOfAcInputs)}
       bottomValues={[]}
     >
-      <Modal title={title} open={openModal} onClose={setOpenModal} />
+      <Modal instanceId={instanceId} title={title} open={openModal} onClose={setOpenModal} />
     </ValueBox>
   )
 }
