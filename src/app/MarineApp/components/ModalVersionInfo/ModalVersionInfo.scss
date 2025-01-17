@@ -20,22 +20,24 @@
     @media #{$minimum} {
       margin-bottom: 2rem;
     }
-    width: 100%;
-    display: flex;
-    &-content {
-      justify-content: center;
+    & {
+      width: 100%;
       display: flex;
-      margin-left: 2rem;
-      flex-direction: column;
-      img {
-        width: 80%;
-        @media #{$minimum} {
-          width: 100%;
+      &-content {
+        justify-content: center;
+        display: flex;
+        margin-left: 2rem;
+        flex-direction: column;
+        img {
+          width: 80%;
+          @media #{$minimum} {
+            width: 100%;
+          }
         }
-      }
-      .version-item {
-        margin-top: 1rem;
-        font-size: 0.8rem;
+        .version-item {
+          margin-top: 1rem;
+          font-size: 0.8rem;
+        }
       }
     }
   }

@@ -164,7 +164,9 @@ button:disabled {
   @media #{$portrait}, #{$smaller} {
     width: 100%;
   }
-  width: 50%;
+  & {
+    width: 50%;
+  }
 }
 
 .boat-image {
