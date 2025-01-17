@@ -1,5 +1,5 @@
 import classnames from "classnames"
-import { useShorePowerInput, useInverterCharger } from "@victronenergy/mfd-modules"
+import { useShorePowerInput, useInverterCharger, useVebus } from "@victronenergy/mfd-modules"
 
 import HeaderView from "../HeaderView"
 import InputLimit from "./InputLimit"
@@ -25,7 +25,8 @@ type InverterChargerProps = {
 const InverterCharger = observer(({ connected, onChangeInputLimitClicked }: InverterChargerProps) => {
   const { inputId } = useShorePowerInput()
 
-  const { state, mode, customName, productName, modeIsAdjustable, updateMode } = useInverterCharger()
+  const { instanceId } = useVebus()
+  const { state, mode, customName, productName, modeIsAdjustable, updateMode } = useInverterCharger(instanceId)
   const adjustable = connected && modeIsAdjustable === 1
 
   const productNameShort = productName && productName.split(" ")[0]

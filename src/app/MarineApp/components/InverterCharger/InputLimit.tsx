@@ -1,5 +1,5 @@
 import React from "react"
-import { useInputLimit } from "@victronenergy/mfd-modules"
+import { useInputLimit, useVebus } from "@victronenergy/mfd-modules"
 
 import SelectorButton from "../SelectorButton"
 
@@ -13,7 +13,8 @@ type InputLimitProps = {
   shorePowerInput: number
 }
 export const InputLimit = observer(({ onChangeInputLimitClicked, shorePowerInput }: InputLimitProps) => {
-  const { currentLimit, currentLimitIsAdjustable } = useInputLimit(shorePowerInput)
+  const { instanceId } = useVebus()
+  const { currentLimit, currentLimitIsAdjustable } = useInputLimit(instanceId, shorePowerInput)
 
   let isAdjustable = currentLimitIsAdjustable || 0
 

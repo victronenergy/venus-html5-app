@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 
-import { useInputLimitSelector, useShorePowerInput } from "@victronenergy/mfd-modules"
+import { useInputLimitSelector, useShorePowerInput, useVebus } from "@victronenergy/mfd-modules"
 
 import SelectorButton from "../SelectorButton"
 
@@ -38,7 +38,8 @@ type InputLimitSelectorProps = {
 }
 
 const InputLimitSelector = observer(({ inputId, onLimitSelected }: InputLimitSelectorProps) => {
-  const { currentLimit, currentLimitMax, productId, updateLimit } = useInputLimitSelector(inputId)
+  const { instanceId } = useVebus()
+  const { currentLimit, currentLimitMax, productId, updateLimit } = useInputLimitSelector(instanceId, inputId)
 
   const selectedHandler = (value: number) => {
     updateLimit(value)
