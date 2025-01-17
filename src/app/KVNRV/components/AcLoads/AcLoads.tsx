@@ -61,7 +61,7 @@ const acLimit = (inverterMode: number, inPowerLimit: number, systemState: number
 }
 
 export const AcLoads = observer(() => {
-  const { state } = useSystemState()
+  const { systemState } = useSystemState()
   const { mode, limit } = useAcMode()
   const { current, voltage, power, frequency } = useAcLoads()
   const [config, setConfig] = useState<WidgetConfiguration>(AC_CONF)
@@ -70,8 +70,8 @@ export const AcLoads = observer(() => {
   const inMode = Number(mode)
 
   useEffect(() => {
-    setConfig(acLimit(inMode, isNaN(inLimit) ? AC_MODE.LIMITS_US[0] : inLimit, state, voltage ? voltage[0] : 1))
-  }, [inMode, inLimit, state, voltage])
+    setConfig(acLimit(inMode, isNaN(inLimit) ? AC_MODE.LIMITS_US[0] : inLimit, systemState, voltage ? voltage[0] : 1))
+  }, [inMode, inLimit, systemState, voltage])
 
   const normalizedPower = normalizePower(power && power[0] ? power[0] : 0, config.MAX)
   useSendUpdate(normalizedPower, config, "AC Loads")

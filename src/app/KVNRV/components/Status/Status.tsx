@@ -59,7 +59,7 @@ type StatusProps = {
 
 export const Status = observer(({ size }: StatusProps) => {
   const { statuses } = useStatus()
-  const { state } = useSystemState()
+  const { systemState } = useSystemState()
 
   const batteryAlarms = useBatteryAlarms()
   const vebusAlarms = useVebusAlarms()
@@ -69,7 +69,7 @@ export const Status = observer(({ size }: StatusProps) => {
   notifications = notifications.concat(alarmsToUpdate(batteryAlarms, "Battery"))
   notifications = notifications.concat(alarmsToUpdate(vebusAlarms))
   notifications = notifications.concat(statuses?.slice() ?? [])
-  const status = SYSTEM_STATE_MAP[state?.toString() as unknown as keyof typeof SYSTEM_STATE_MAP]
+  const status = SYSTEM_STATE_MAP[systemState?.toString() as unknown as keyof typeof SYSTEM_STATE_MAP]
 
   return (
     <div className="metrics__status">
