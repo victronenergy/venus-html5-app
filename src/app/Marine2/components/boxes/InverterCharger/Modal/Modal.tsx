@@ -6,13 +6,14 @@ import { Options } from "./Options/Options"
 import { observer } from "mobx-react"
 
 interface Props {
+  instanceId: number
   title?: string
   open: boolean
   onClose: (arg: boolean) => void
 }
 
-export const Modal: FC<Props> = observer(({ title, open, onClose }) => {
-  const { mode, modeIsAdjustable, updateMode } = useInverterCharger()
+export const Modal: FC<Props> = observer(({ instanceId, title, open, onClose }) => {
+  const { mode, modeIsAdjustable, updateMode } = useInverterCharger(instanceId)
   const [modeForSubmission, setModeForSubmission] = useState(Number(mode))
 
   useEffect(() => {
