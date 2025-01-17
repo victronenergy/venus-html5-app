@@ -17,7 +17,7 @@ import {
   useGeneratorRelay,
   useInverters,
   useVebus,
-  VebusInverters,
+  VebusDevices,
 } from "@victronenergy/mfd-modules"
 import Charger from "../Charger"
 import Inverter from "../Inverter"
@@ -40,7 +40,7 @@ interface Props {
 
 const DevicesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: Props) => {
   const { inverters } = useInverters()
-  const { instanceId: vebusInstanceId, vebusInverters } = useVebus()
+  const { instanceId, vebusInverters, vebusInverterChargers } = useVebus()
   const { chargers } = useChargers()
   const generatorConnectedGenset = useGeneratorConnectedGenset()
   const generatorRelay = useGeneratorRelay()
@@ -50,7 +50,8 @@ const DevicesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: Pr
     chargers,
     inverters,
     vebusInverters,
-    vebusInstanceId,
+    vebusInverterChargers,
+    instanceId,
     generatorConnectedGenset,
     generatorRelay,
     compactBoxSize,
@@ -100,7 +101,8 @@ const DevicesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: Pr
 const getAvailableDeviceBoxes = function (
   chargers: ChargerInstanceId[],
   inverters: InverterInstanceId[],
-  vebusInverters: VebusInverters,
+  vebusInverters: VebusDevices,
+  vebusInverterChargers: VebusDevices,
   vebusInstanceId: InstanceId,
   generatorConnectedGenset: GeneratorConnectedGensetProvider,
   generatorRelay: GeneratorRelayProvider,
@@ -145,10 +147,18 @@ const getAvailableDeviceBoxes = function (
     })
   }
 
-  if (!!vebusInstanceId && !vebusInverters.includes(vebusInstanceId)) {
-    devices.push(
-      <InverterCharger key={vebusInstanceId} componentMode={componentMode} compactBoxSize={compactBoxSize} />
-    )
+  if (vebusInverterChargers.length) {
+    vebusInverterChargers.forEach((id) => {
+      devices.push(
+        <InverterCharger
+          key={id}
+          instanceId={id}
+          isMainVEBusDevice={id === vebusInstanceId}
+          componentMode={componentMode}
+          compactBoxSize={compactBoxSize}
+        />
+      )
+    })
   }
 
   if (generatorConnectedGenset.gensetState.gensetType === ConnectedGensetType.ACGENSET) {
