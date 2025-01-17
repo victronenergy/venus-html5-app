@@ -1,5 +1,4 @@
 import { FC, useEffect, useState } from "react"
-import { translate } from "react-i18nify"
 import { observer } from "mobx-react"
 import { useAppStore, useInputLimit, useInputLimitSelector } from "@victronenergy/mfd-modules"
 import DeviceSettingModal from "../DeviceSettingModal"
@@ -16,14 +15,16 @@ import {
 import { formatValue } from "../../../utils/formatters/generic"
 
 interface Props {
+  instanceId: number
   inputId: number
   title: string
+  subtitle: string
 }
 
-const InputLimitSelector: FC<Props> = ({ inputId, title }) => {
+const InputLimitSelector: FC<Props> = ({ instanceId, inputId, title, subtitle }) => {
   const { locked } = useAppStore() // lock from theme settings
-  const { currentLimitIsAdjustable } = useInputLimit(inputId)
-  const { currentLimit, currentLimitMax, productId, updateLimit } = useInputLimitSelector(inputId)
+  const { currentLimitIsAdjustable } = useInputLimit(instanceId, inputId)
+  const { currentLimit, currentLimitMax, productId, updateLimit } = useInputLimitSelector(instanceId, inputId)
   const [limitForSubmission, setLimitForSubmission] = useState(Number(currentLimit))
   const [isLimitModalOpen, setIsLimitModalOpen] = useState(false)
 
@@ -71,7 +72,7 @@ const InputLimitSelector: FC<Props> = ({ inputId, title }) => {
       </Button>
       <DeviceSettingModal
         title={title}
-        subtitle={translate("common.inputCurrentLimit")}
+        subtitle={subtitle}
         open={isLimitModalOpen}
         onClose={closeLimitModal}
         onSet={submitLimit}
