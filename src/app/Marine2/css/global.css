@@ -7,17 +7,31 @@
     font-family: MuseoSans, "Noto Sans SC", sans-serif;
   }
 
+  /* Specify the base font size according to device horizontal resolution,
+     assuming it will be in one of 4:3 or 16:9 standard screen formats,
+     and adjust the font size appropriately */
+
+  /* All screen resolutions up to 1920 x 1080p (Full HD) */
   html {
     font-size: 16px;
   }
 
-  @media screen and (min-width: 1920px) and (max-width: 2559px) {
+  /* 1920 × 1080p (Full HD) up to 2560 × 1440p (2.5k / QHD) */
+  @media screen and (min-device-width: 1920px) and (max-device-width: 2559px) {
     html {
-        font-size: 24px;
+        font-size: 20px;
     }
   }
 
-  @media screen and (min-width: 2560px) {
+  /* 2560 × 1440p (2.5k / QHD) up to 3840 × 2160p (4k / UHD) */
+  @media screen and (min-device-width: 2560px) and (max-device-width: 3839px) {
+    html {
+        font-size: 26px;
+    }
+  }
+
+  /* 3840 × 2160p (4K UHD) */
+  @media screen and (min-device-width: 3840px) {
     html {
         font-size: 32px;
     }
