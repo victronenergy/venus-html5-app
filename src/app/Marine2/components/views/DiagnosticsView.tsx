@@ -6,10 +6,12 @@ import { translate } from "react-i18nify"
 import { observer } from "mobx-react"
 import { useWindowSize } from "../../utils/hooks/use-window-size"
 import Paginator from "../ui/Paginator"
+import { useBrowserFeatures } from "../../utils/hooks/use-browser-features"
 
 const DiagnosticsView = () => {
   const mqtt = useMqtt()
   const windowSize = useWindowSize()
+  const browserFeatures = useBrowserFeatures()
 
   const connectionDiagnostics = (
     <DiagnosticsTable
@@ -19,7 +21,10 @@ const DiagnosticsView = () => {
   )
 
   const deviceDiagnostics = (
-    <DiagnosticsTable title={translate("diagnostics.device.device")} diagnostics={getDeviceDiagnostics(windowSize)} />
+    <DiagnosticsTable
+      title={translate("diagnostics.device.device")}
+      diagnostics={getDeviceDiagnostics(windowSize, browserFeatures)}
+    />
   )
 
   return (
@@ -55,7 +60,10 @@ const getConnectionDiagnostics = (mqtt: MqttStore) => {
   ]
 }
 
-const getDeviceDiagnostics = (windowSize: { width?: number; height?: number }) => {
+const getDeviceDiagnostics = (
+  windowSize: { width?: number; height?: number },
+  browserFeatures: { isGuiV2Supported: boolean; missingFeatures: string[] }
+) => {
   return [
     {
       property: translate("diagnostics.device.userAgent"),
@@ -72,6 +80,10 @@ const getDeviceDiagnostics = (windowSize: { width?: number; height?: number }) =
     {
       property: translate("diagnostics.device.devicePixelRatio"),
       value: (window.devicePixelRatio ?? 1) + "px/pt",
+    },
+    {
+      property: translate("diagnostics.device.isGuiV2Supported"),
+      value: `${browserFeatures.isGuiV2Supported ? translate("common.yes") : translate("common.no")}${browserFeatures.isGuiV2Supported === false ? ", " + translate("diagnostics.device.missing") + " " + browserFeatures.missingFeatures.join(", ") : ""}`,
     },
   ]
 }

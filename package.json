@@ -71,6 +71,7 @@
     "ts-pnp": "^1.2.0",
     "typescript": "^5.7.3",
     "url-loader": "4.1.1",
+    "wasm-feature-detect": "^1.8.0",
     "web-vitals": "^0.2.4",
     "webpack": "^5.97.1",
     "webpack-cli": "^6.0.1",

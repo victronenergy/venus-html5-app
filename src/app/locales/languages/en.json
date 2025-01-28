@@ -106,7 +106,9 @@
         "timetogo": "to go",
         "unplugged": "Unplugged",
         "veBusFault": "VE.Bus Fault condition",
-        "voltage": "Voltage"
+        "voltage": "Voltage",
+        "yes": "Yes",
+        "no": "No"
     },
     "diagnostics": {
         "connection": {
@@ -122,7 +124,9 @@
             "userAgent": "User agent",
             "viewportHeight": "Viewport height",
             "viewportWidth": "Viewport width",
-            "devicePixelRatio": "Pixel Ratio"
+            "devicePixelRatio": "Pixel Ratio",
+            "isGuiV2Supported": "GUI v2 supported",
+            "missing": "missing"
         },
         "diagnostics": "Diagnostics"
     },
