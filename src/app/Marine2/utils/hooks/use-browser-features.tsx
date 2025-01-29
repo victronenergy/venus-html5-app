@@ -65,7 +65,12 @@ function checkWebGLSupport() {
 }
 
 export const useBrowserFeatures = () => {
-  const [browserFeatures, setBrowserFeatures] = useState<{ isGuiV2Supported: boolean; missingFeatures: string[] }>({
+  const [browserFeatures, setBrowserFeatures] = useState<{
+    isInitialized: boolean
+    isGuiV2Supported: boolean
+    missingFeatures: string[]
+  }>({
+    isInitialized: false,
     isGuiV2Supported: false,
     missingFeatures: [],
   })
@@ -83,7 +88,11 @@ export const useBrowserFeatures = () => {
       (results) => {
         unsupported = results.filter((r) => r.result === false).map((r) => r.name)
         unsupported = unsupported.concat(checkJSFeatures())
-        setBrowserFeatures({ isGuiV2Supported: unsupported.length === 0, missingFeatures: unsupported })
+        setBrowserFeatures({
+          isInitialized: true,
+          isGuiV2Supported: unsupported.length === 0,
+          missingFeatures: unsupported,
+        })
       }
     )
   }, [])
