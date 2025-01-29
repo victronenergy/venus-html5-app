@@ -39,11 +39,12 @@
   } */
 
   /* 3840 × 2160p (4K UHD) (minus ~10% vertically) (minus ~10% vertically) */
-  @media screen and (
-    (min-width: 3840px)
-  ), screen and (
-    (min-height: 1982px)
-  ) {
+  @media screen and (min-width: 3840px) {
+    html {
+        font-size: 32px;
+    }
+  }
+  @media screen and (min-height: 1982px) {
     html {
         font-size: 32px;
     }
