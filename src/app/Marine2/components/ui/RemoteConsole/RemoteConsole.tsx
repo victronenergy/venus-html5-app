@@ -55,9 +55,9 @@ const RemoteConsole = ({ host, width, height }: Props) => {
     iframeClassNames = classnames("max-w-screen-md flex-grow h-96 py-3.5 block hide-remote-console:hidden", {
       // iframeClassNames = classnames("aspect-[750/350] max-w-[750] max-h-[350] p-4 flex-grow block hide-remote-console:hidden", {
       hidden: loading,
-      "scale-110": 750 * 1.1 < width && 350 * 1.1 < height,
-      "scale-125": 750 * 1.25 < width && 350 * 1.25 < height,
-      "scale-150": 750 * 1.5 < width && 350 * 1.5 < height,
+      "scale-110": iframeWidth * 1.1 < width && iframeHeight * 1.1 < height,
+      "scale-125": iframeWidth * 1.25 < width && iframeHeight * 1.25 < height,
+      "scale-150": iframeWidth * 1.5 < width && iframeHeight * 1.5 < height,
     })
   }
 
