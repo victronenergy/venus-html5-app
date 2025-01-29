@@ -73,7 +73,7 @@ const RemoteConsole = ({ host, width, height }: Props) => {
         />
       }
 
-      {app.guiVersion === 1 && loading && (
+      {loading && (
         <div className={"text-center text-base p-4 block hide-remote-console:hidden"}>
           <Translate value={"common.loading"} />…
         </div>
