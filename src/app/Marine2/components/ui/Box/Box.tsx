@@ -64,7 +64,7 @@ const Box = ({
         className
       )}
     >
-      <div className="w-full min-w-0 min-h-[44px] flex justify-between items-center">
+      <div className="w-full min-w-0 min-h-[var(--ui-control-size)] flex justify-between items-center">
         <div
           className="w-full shrink-1 flex items-center justify-start text-victron-gray-300 dark:text-victron-gray-dark cursor-pointer min-w-0 outline-none"
           onClick={clickHandler}
@@ -73,9 +73,12 @@ const Box = ({
           <FadedText text={title} className={activeStyles?.valueSubtitle} />
         </div>
         {linkedView && (
-          <div className="-mr-3 p-[12px] cursor-pointer" onClick={clickHandler}>
+          <div
+            className="-mr-3 w-[var(--ui-control-size)] h-[var(--ui-control-size)] p-1 cursor-pointer"
+            onClick={clickHandler}
+          >
             <ArrowRightIcon
-              className="w-[24px] sm-s:w-[32px] text-victron-blue dark:text-victron-blue-dark cursor-pointer outline-none"
+              className="text-victron-blue dark:text-victron-blue-dark cursor-pointer outline-none"
               alt="Expand"
             />
           </div>

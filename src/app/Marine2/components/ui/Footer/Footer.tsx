@@ -18,7 +18,7 @@ const Footer = ({ pageSelectorProps }: Props) => {
   }, [appViewsStore.currentView])
 
   return (
-    <div className="flex flex-row w-full h-16 items-center justify-between pt-2 pb-3">
+    <div className="flex flex-row w-full h-[var(--ui-control-size)] m-1 items-center justify-between pt-2 pb-3">
       <div className="flex flex-1 flex-row items-center justify-between">
         <VersionInfo />
         {!!pageSelectorProps && !!pageSelectorProps.maxPages && pageSelectorProps.maxPages > 1 && (
@@ -27,7 +27,10 @@ const Footer = ({ pageSelectorProps }: Props) => {
           </div>
         )}
         {isShowBack && (
-          <div onClick={handleBackClick} className={"w-fit h-fit cursor-pointer"}>
+          <div
+            onClick={handleBackClick}
+            className={"w-[var(--ui-control-size)] h-[var(--ui-control-size)] p-1 cursor-pointer"}
+          >
             <BackIcon onClick={handleBackClick} className={"text-blue-600 dark:text-blue-400"} alt={"Back"} />
           </div>
         )}
