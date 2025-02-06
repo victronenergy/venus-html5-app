@@ -18,7 +18,7 @@ const Footer = ({ pageSelectorProps }: Props) => {
   }, [appViewsStore.currentView])
 
   return (
-    <div className="flex flex-row w-full h-16 items-center justify-between pt-2 pb-3">
+    <div className="flex flex-row w-full h-[var(--ui-control-size)] m-1 items-center justify-between pt-2 pb-3">
       <div className="flex flex-1 flex-row items-center justify-between">
         <VersionInfo />
         {!!pageSelectorProps && !!pageSelectorProps.maxPages && pageSelectorProps.maxPages > 1 && (
