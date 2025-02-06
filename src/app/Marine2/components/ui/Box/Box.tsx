@@ -64,7 +64,7 @@ const Box = ({
         className
       )}
     >
-      <div className="w-full min-w-0 min-h-[44px] flex justify-between items-center">
+      <div className="w-full min-w-0 min-h-[var(--ui-control-size)] flex justify-between items-center">
         <div
           className="w-full shrink-1 flex items-center justify-start text-victron-gray-300 dark:text-victron-gray-dark cursor-pointer min-w-0 outline-none"
           onClick={clickHandler}
