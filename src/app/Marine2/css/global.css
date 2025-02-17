@@ -7,46 +7,130 @@
     font-family: MuseoSans, "Noto Sans SC", sans-serif;
   }
 
-  /* Specify the base font size according to device horizontal resolution,
-     assuming it will be in one of 4:3 or 16:9 standard screen formats,
-     and adjust the font size appropriately */
-
-  /* All screen resolutions up to 1900 x 900 (slightly smaller 1/4 of 4k) */
+  /* All screen resolutions up to 1920 x 1080p (Full HD) */
+  :root {
+    /* UI scale factor */
+    --uix: 1.0;
+    --px1: var(--uix);
+    --px2: calc(var(--uix) * 2px);
+    --px8: calc(var(--uix) * 8px);
+    --px16: calc(var(--uix) * 16px);
+    --px20: calc(var(--uix) * 20px);
+    --px24: calc(var(--uix) * 24px);
+    --px32: calc(var(--uix) * 32px);
+    --px36: calc(var(--uix) * 36px);
+    --px44: calc(var(--uix) * 44px);
+  }
   html {
     font-size: 16px;
   }
 
   /* 1900 x 900 (slightly smaller 1/4 of 4k) up to 2560 × 1440p (2.5k / QHD) */
+  /* 1.25 x base size */
   @media screen and (min-width: 1900px) and (max-width: 2559px) {
+    :root {
+      --uix: 1.25;
+      --px1: var(--uix);
+      --px2: calc(var(--uix) * 2px);
+      --px8: calc(var(--uix) * 8px);
+      --px16: calc(var(--uix) * 16px);
+      --px20: calc(var(--uix) * 20px);
+      --px24: calc(var(--uix) * 24px);
+      --px32: calc(var(--uix) * 32px);
+      --px36: calc(var(--uix) * 36px);
+      --px44: calc(var(--uix) * 44px);
+      }
     html {
       font-size: 20px;
     }
   }
   @media screen and (min-height: 900px) and (max-height: 1439px) {
+    :root {
+      --uix: 1.25;
+      --px1: var(--uix);
+      --px2: calc(var(--uix) * 2px);
+      --px8: calc(var(--uix) * 8px);
+      --px16: calc(var(--uix) * 16px);
+      --px20: calc(var(--uix) * 20px);
+      --px24: calc(var(--uix) * 24px);
+      --px32: calc(var(--uix) * 32px);
+      --px36: calc(var(--uix) * 36px);
+      --px44: calc(var(--uix) * 44px);
+      }
     html {
         font-size: 20px;
     }
   }
 
   /* 2560 × 1440p (2.5k / QHD) up to 3840 × 2160p (4k / UHD) (minus ~10% vertically) */
+  /* 1.625 x base size */
   @media screen and (min-width: 2560px) and (max-width: 3839px) {
+    :root {
+      --uix: 1.625;
+      --px1: var(--uix);
+      --px2: calc(var(--uix) * 2px);
+      --px8: calc(var(--uix) * 8px);
+      --px16: calc(var(--uix) * 16px);
+      --px20: calc(var(--uix) * 20px);
+      --px24: calc(var(--uix) * 24px);
+      --px32: calc(var(--uix) * 32px);
+      --px36: calc(var(--uix) * 36px);
+      --px44: calc(var(--uix) * 44px);
+      }
     html {
         font-size: 26px;
     }
   }
   @media screen and (min-height: 1440px) and (max-height: 1981px) {
+    :root {
+      --uix: 1.625;
+      --px1: var(--uix);
+      --px2: calc(var(--uix) * 2px);
+      --px8: calc(var(--uix) * 8px);
+      --px16: calc(var(--uix) * 16px);
+      --px20: calc(var(--uix) * 20px);
+      --px24: calc(var(--uix) * 24px);
+      --px32: calc(var(--uix) * 32px);
+      --px36: calc(var(--uix) * 36px);
+      --px44: calc(var(--uix) * 44px);
+      }
     html {
         font-size: 26px;
     }
   }
 
   /* 3840 × 2160p (4K / UHD) (minus ~10% vertically) and up */
+  /* 2.0 x base size */
   @media screen and (min-width: 3840px) {
+    :root {
+      --uix: 2.0;
+      --px1: var(--uix);
+      --px2: calc(var(--uix) * 2px);
+      --px8: calc(var(--uix) * 8px);
+      --px16: calc(var(--uix) * 16px);
+      --px20: calc(var(--uix) * 20px);
+      --px24: calc(var(--uix) * 24px);
+      --px32: calc(var(--uix) * 32px);
+      --px36: calc(var(--uix) * 36px);
+      --px44: calc(var(--uix) * 44px);
+      }
     html {
         font-size: 32px;
     }
   }
   @media screen and (min-height: 1982px) {
+    :root {
+      --uix: 2.0;
+      --px1: var(--uix);
+      --px2: calc(var(--uix) * 2px);
+      --px8: calc(var(--uix) * 8px);
+      --px16: calc(var(--uix) * 16px);
+      --px20: calc(var(--uix) * 20px);
+      --px24: calc(var(--uix) * 24px);
+      --px32: calc(var(--uix) * 32px);
+      --px36: calc(var(--uix) * 36px);
+      --px44: calc(var(--uix) * 44px);
+      }
     html {
         font-size: 32px;
     }
