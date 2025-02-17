@@ -16,20 +16,20 @@ const RadioButton: React.FC<Props> = ({ selected, onChange, disabled, responsive
         onClick={() => !disabled && onChange()}
         className={classNames(
           // we especially use `px` here to avoid UI issues on some MFD screens
-          "w-[24px] h-[24px] border-[2px] bg-inherit rounded-full flex items-center justify-center",
+          "w-px-24 h-px-24 border-px-2 bg-inherit rounded-full flex items-center justify-center",
           {
             "border-victron-gray": !selected,
             "border-victron-blue": selected,
-            "md-m:w-[24px] md-m:h-[24px] md-m:border-[2px]": true, // large
-            "sm-s:w-[16px] sm-s:h-[16px] sm-s:border-[1px]": responsive, // small
+            "md-m:w-px-24 md-m:h-px-24 md-m:border-px-2": true, // large
+            "sm-s:w-px-16 sm-s:h-px-16 sm-s:border-px-1": responsive, // small
           }
         )}
       >
         {selected && (
           <div
-            className={classNames("w-[16px] h-[16px] rounded-full bg-victron-blue", {
-              "md-m:w-[16px] md-m:h-[16px]": true, // large
-              "sm-s:w-[8px] sm-s:h-[8px]": responsive, // small
+            className={classNames("w-px-16 h-px-16 rounded-full bg-victron-blue", {
+              "md-m:w-px-16 md-m:h-px-16": true, // large
+              "sm-s:w-px-8 sm-s:h-px-8": responsive, // small
             })}
           ></div>
         )}

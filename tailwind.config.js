@@ -126,6 +126,21 @@ module.exports = {
       fontFamily: {
         sans: ["MuseoSans", ...defaultTheme.fontFamily.sans],
       },
+      spacing: {
+        "px-1": "var(--px1)",
+        "px-2": "var(--px2)",
+        "px-8": "var(--px8)",
+        "px-16": "var(--px16)",
+        "px-20": "var(--px20)",
+        "px-24": "var(--px24)",
+        "px-32": "var(--px32)",
+        "px-36": "var(--px36)",
+        "px-44": "var(--px44)",
+      },
+      borderWidth: {
+        "px-1": "var(--px1)",
+        "px-2": "var(--px2)",
+      },
       borderRadius: {
         none: "0",
         sm: "0.25rem",
