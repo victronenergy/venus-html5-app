@@ -122,7 +122,7 @@ const SettingsMenu = () => {
                 <span className="mr-1 text-sm sm-m:mr-2 sm-l:text-base text-black dark:text-white">
                   {translate("common.night")}
                 </span>
-                <ToggleSwitch id="ToggleNightMde" onChange={setNightMode} />
+                <RadioButton onChange={() => themeStore.setNightMode(true)} selected={themeStore.nightMode} />
               </label>
               <label className="flex justify-between items-center pb-4 sm-m:pb-6 sm-l:pb-8">
                 <span className="mr-1 text-sm sm-m:mr-2 sm-l:text-base text-black dark:text-white">
