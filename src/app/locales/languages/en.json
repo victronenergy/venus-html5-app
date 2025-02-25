@@ -82,6 +82,7 @@
         "minutes": "minutes",
         "minutes_short": "m",
         "mode": "Mode",
+        "night": "Prefer Night Dark Mode",
         "noShorePower": "No Shore Power",
         "notAvailable": "Not Available",
         "grid": "Grid",

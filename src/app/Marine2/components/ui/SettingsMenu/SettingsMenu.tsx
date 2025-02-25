@@ -37,6 +37,17 @@ const SettingsMenu = () => {
     }
   }, [])
 
+  const setNightMode = () => {
+    // TODO: when light mode is on, turn on dark/red
+    // TODO: when dark mode is on, turn on/off dark/normal dark/red
+    // const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)")
+    // if (mediaQuery.matches && !themeStore.darkMode) {
+    //   themeStore.setDarkMode(true)
+    // } else if (!mediaQuery.matches && themeStore.darkMode) {
+    //   themeStore.setDarkMode(false)
+    // }
+  }
+
   const setAutoMode = () => {
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)")
 
@@ -109,9 +120,15 @@ const SettingsMenu = () => {
               </label>
               <label className="flex justify-between items-center pb-4 sm-m:pb-6 sm-l:pb-8">
                 <span className="mr-1 text-sm sm-m:mr-2 sm-l:text-base text-black dark:text-white">
+                  {translate("common.night")}
+                </span>
+                <ToggleSwitch id="ToggleNightMde" onChange={setNightMode} />
+              </label>
+              <label className="flex justify-between items-center pb-4 sm-m:pb-6 sm-l:pb-8">
+                <span className="mr-1 text-sm sm-m:mr-2 sm-l:text-base text-black dark:text-white">
                   {translate("common.auto")}
                 </span>
-                <ToggleSwitch id="Toggle2" onChange={setAutoMode} />
+                <ToggleSwitch id="ToggleAutoMode" onChange={setAutoMode} />
               </label>
               <Button onClick={openRemoteConsole} className="w-full" size="md">
                 {translate("header.remoteConsole")}
