@@ -13,7 +13,7 @@ interface Props {
 }
 
 export const SelectorButton: FC<Props> = ({ onClick, direction, disabled, isHorizontal }) => {
-  const buttonClasses = "w-[44px] h-[44px] shrink-0 cursor-pointer"
+  const buttonClasses = "w-px-44 h-px-44 shrink-0 cursor-pointer"
   const iconClasses = classNames({
     "text-victron-gray dark:text-victron-gray-dark": disabled,
     "text-victron-blue dark:text-victron-blue-dark": !disabled,
