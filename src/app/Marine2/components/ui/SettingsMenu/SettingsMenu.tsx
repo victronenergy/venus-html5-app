@@ -63,16 +63,16 @@ const SettingsMenu = () => {
   }
 
   return (
-    <div className="dark:text-white cursor-pointer w-[64px] outline-none" onClick={() => setIsModalOpen(!isModalOpen)}>
+    <div className="dark:text-white cursor-pointer outline-none" onClick={() => setIsModalOpen(!isModalOpen)}>
       <div className="flex justify-center items-center w-full">
         {!isModalOpen ? (
           <div className="h-full">
-            <PreferencesIcon alt={"Settings"} />
+            <PreferencesIcon className="w-px-44 h-px-44 justify-center p-3" alt={"Settings"} />
           </div>
         ) : (
           <>
             <CloseIcon
-              className="w-[32px] ml-auto mr-2 opacity-1 z-20 text-white dark:text-victron-blue"
+              className="w-px-44 h-px-44 justify-center p-3 opacity-1 z-20 text-white dark:text-victron-blue"
               onClick={() => setIsModalOpen(false)}
             />
           </>
