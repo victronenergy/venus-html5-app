@@ -87,7 +87,7 @@ const AutoStartStopSetter = ({
           onClose={closeModeModal}
           onSet={submitMode}
         >
-          <div className="divide-y divide-victron-darkGray-200 text-base">
+          <div className="divide-y divide-outline-primary text-base">
             <label className="w-full flex justify-between items-center pb-4" onClick={() => setModeForSubmission(0)}>
               <span>{translate("common.on")}</span>
               <RadioButton

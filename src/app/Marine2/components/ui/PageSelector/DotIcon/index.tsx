@@ -10,12 +10,12 @@ interface DotProps {
 
 export const DotIcon: FC<DotProps> = ({ isCurrentPage, isHorizontal }) => {
   if (isCurrentPage && isHorizontal) {
-    return <DotSelectedIcon className="w-px-16 h-px-8 text-victron-darkGray dark:text-white" />
+    return <DotSelectedIcon className="w-px-16 h-px-8 text-content-primary" />
   }
 
   if (isCurrentPage && !isHorizontal) {
-    return <DotSelectedVerticalIcon className="w-px-8 h-px-16 text-victron-darkGray dark:text-white" />
+    return <DotSelectedVerticalIcon className="w-px-8 h-px-16 text-content-primary" />
   }
 
-  return <PlainDotIcon className="w-px-8 h-px-8 text-victron-gray dark:text-victron-gray-400" />
+  return <PlainDotIcon className="w-px-8 h-px-8 text-content-tertiary" />
 }

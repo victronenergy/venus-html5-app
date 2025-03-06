@@ -72,9 +72,7 @@ const DevicesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: Pr
     return (
       <Box
         title={translate("boxes.devices")}
-        icon={
-          <DevicesIcon className={classNames("text-victron-gray dark:text-victron-gray-dark", activeStyles?.icon)} />
-        }
+        icon={<DevicesIcon className={classNames("text-content-victronGray", activeStyles?.icon)} />}
         linkedView={AppViews.BOX_DEVICES_OVERVIEW}
         getBoxSizeCallback={setCompactBoxSize}
         withPagination={true}

@@ -6,16 +6,16 @@ export const tankColorFor = (type: number, opacity = false) => {
     case 7:
     case 8:
     case 9:
-      return opacity ? "bg-victron-lime/30" : "bg-victron-lime/100"
+      return opacity ? "bg-surface-victronLime" : "bg-content-victronLime"
     case 1:
-      return opacity ? "bg-victron-cyan/30" : "bg-victron-cyan/100"
+      return opacity ? "bg-surface-victronCyan" : "bg-content-victronCyan"
     case 2:
     case 11:
-      return opacity ? "bg-victron-slate/30" : "bg-victron-slate/100"
+      return opacity ? "bg-surface-victronSlate" : "bg-content-victronSlate"
     case 3:
     case 10:
-      return opacity ? "bg-victron-green/30" : "bg-victron-green/100"
+      return opacity ? "bg-surface-victronGreen" : "bg-content-victronGreen"
     case 5:
-      return opacity ? "bg-victron-purple/30" : "bg-victron-purple/100"
+      return opacity ? "bg-surface-victronPurple" : "bg-content-victronPurple"
   }
 }

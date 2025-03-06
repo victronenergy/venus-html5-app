@@ -28,7 +28,7 @@ const Footer = ({ pageSelectorProps }: Props) => {
         )}
         {isShowBack && (
           <div onClick={handleBackClick} className={"w-px-44 h-px-44 p-1 cursor-pointer"}>
-            <BackIcon onClick={handleBackClick} className={"text-blue-600 dark:text-blue-400"} alt={"Back"} />
+            <BackIcon onClick={handleBackClick} className={"text-content-victronBlue"} alt={"Back"} />
           </div>
         )}
       </div>

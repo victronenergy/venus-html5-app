@@ -69,58 +69,36 @@ module.exports = {
         "h-short": { raw: "(min-height: 368px)" },
       },
       colors: {
-        victron: {
-          lightGray: {
-            DEFAULT: "#F5F5F5",
-            dark: "#F5F5F5",
-          },
-          darkGray: {
-            DEFAULT: "#141414",
-            dark: "#141414",
-            200: "#272622",
-          },
-          gray: {
-            DEFAULT: "#969591",
-            dark: "#969591",
-            200: "#272622",
-            300: "#504F4B",
-            400: "#64635F",
-            500: "#969591",
-            600: "#DCDBD7",
-            900: "#FAF9F5",
-          },
-          blue: {
-            DEFAULT: "#387DC5",
-            dark: "#387DC5",
-          },
-          red: {
-            DEFAULT: "#F35C58",
-            dark: "#F35C58",
-          },
-          cyan: {
-            DEFAULT: "#84CBF8",
-            dark: "#84CBF8",
-          },
-          purple: {
-            DEFAULT: "#6B4AB3",
-            dark: "#6B4AB3",
-          },
-          lime: {
-            DEFAULT: "#76832C",
-            dark: "#76832C",
-          },
-          green: {
-            DEFAULT: "#72B84C",
-            dark: "#72B84C",
-          },
-          slate: {
-            DEFAULT: "#7F7F9C",
-            dark: "#7F7F9C",
-          },
-          yellow: {
-            DEFAULT: "#F0962E",
-            dark: "#F0962E",
-          },
+        surface: {
+          primary: "var(--c-surface-primary)",
+          secondary: "var(--c-surface-secondary)",
+          victronGray: "var(--c-surface-victron-gray)",
+          victronBlue: "var(--c-surface-victron-blue)",
+          victronRed: "var(--c-surface-victron-red)",
+          victronYello: "var(--c-surface-victron-yellow)",
+          victronLime: "var(--c-surface-victron-lime)",
+          victronCyan: "var(--c-surface-victron-cyan)",
+          victronSlate: "var(--c-surface-victron-slate)",
+          victronGreen: "var(--c-surface-victron-green)",
+          victronPurple: "var(--c-surface-victron-purple)",
+        },
+        outline: {
+          primary: "var(--c-outline-primary)",
+          secondary: "var(--c-outline-secondary)",
+        },
+        content: {
+          primary: "var(--c-content-primary)",
+          secondary: "var(--c-content-secondary)",
+          tertiary: "var(--c-content-tertiary)",
+          victronGray: "var(--c-content-victron-gray)",
+          victronBlue: "var(--c-content-victron-blue)",
+          victronRed: "var(--c-content-victron-red)",
+          victronYellow: "var(--c-content-victron-yello)",
+          victronLime: "var(--c-content-victron-lime)",
+          victronCyan: "var(--c-content-victron-cyan)",
+          victronSlate: "var(--c-content-victron-slate)",
+          victronGreen: "var(--c-content-victron-green)",
+          victronPurple: "var(--c-content-victron-purple)",
         },
       },
       fontFamily: {

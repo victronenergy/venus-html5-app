@@ -18,7 +18,7 @@ export const BatteryPercentage: FC<Props> = ({ percentage, boxSize }) => {
   return (
     <div className={activeStyles.percentage}>
       {Math.round(percentage)}
-      <span className="text-victron-gray dark:text-victron-gray-dark">%</span>
+      <span className="text-content-secondary">%</span>
     </div>
   )
 }

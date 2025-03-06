@@ -40,11 +40,11 @@ const BatteryState = ({ battery, unit }: Props) => {
   const hasPercentage = battery.soc !== undefined && battery.soc !== null
   const color = hasPercentage ? colorFor(Math.round(battery.soc)) : "victron-gray"
   const colorClasses = classNames({
-    "text-victron-red dark:text-victron-red-dark": color === "victron-red",
-    "text-victron-yellow dark:text-victron-yellow-dark": color === "victron-yellow",
-    "text-victron-green dark:text-victron-green-dark": color === "victron-green",
-    "text-victron-blue dark:text-victron-blue-dark": color === "victron-blue",
-    "text-victron-gray dark:text-white": color === "victron-gray",
+    "text-content-victronRed": color === "victron-red",
+    "text-content-victronYellow": color === "victron-yellow",
+    "text-content-victronGreen": color === "victron-green",
+    "text-content-victronBlue": color === "victron-blue",
+    "text-content-victronGray": color === "victron-gray",
   })
 
   const activeStyles: StylesType = applyStyles(boxSize, Styles)
@@ -62,12 +62,12 @@ const BatteryState = ({ battery, unit }: Props) => {
             {battery.soc ? Math.round(battery.soc) : (battery.soc ?? "--")}
             <span className="pl-0.5 opacity-70">%</span>
           </div>
-          <div className={classNames("text-victron-gray-300 dark:text-victron-gray-500", activeStyles.valueSubtitle)}>
+          <div className={classNames("text-content-tertiary", activeStyles.valueSubtitle)}>
             <p>{batteryStateFor(battery.state, battery.bmsstate, battery.timetogo ?? null)}</p>
             {battery.temperature && (
               <p>
                 {temperatureValueFor(battery.temperature, temperatureUnit)}
-                <span className="text-victron-gray-300 dark:text-victron-gray-400">{unit}</span>
+                <span className="text-content-tertiary">{unit}</span>
               </p>
             )}
           </div>

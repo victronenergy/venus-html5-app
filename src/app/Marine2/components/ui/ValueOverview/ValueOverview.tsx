@@ -36,17 +36,16 @@ const ValueOverview = ({ title, subtitle, Icon, value, unit, boxSize, valueType,
     "h-12": !subtitle,
   })
 
+  console.log(`HERE:`)
+
   return (
     <div className={classes}>
-      <div className="flex items-center min-w-0">
-        <Icon className={iconStyles} />
+      <div className="flex items-center min-w-0 text-content-secondary">
+        <Icon className={classNames("text-content-tertiary", iconStyles)} />
         <div className="px-2 min-w-0 flex flex-col">
-          <FadedText className={classNames("pr-8 text-victron-gray-200 dark:text-white", titleStyle)} text={title} />
+          <FadedText className={classNames("pr-8 text-content-primary", titleStyle)} text={title} />
           {subtitle && (
-            <FadedText
-              className={classNames("text-victron-gray pr-2 dark:text-victron-gray-500", subtitleStyle)}
-              text={subtitle}
-            />
+            <FadedText className={classNames("pr-2 text-content-secondary", subtitleStyle)} text={subtitle} />
           )}
         </div>
       </div>

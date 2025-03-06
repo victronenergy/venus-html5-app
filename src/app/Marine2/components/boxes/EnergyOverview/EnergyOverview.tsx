@@ -73,9 +73,7 @@ const EnergyOverview: FC<Props> = ({ componentMode = "full", pageSelectorPropsSe
     return (
       <Box
         title={translate("boxes.energy")}
-        icon={
-          <EnergyIcon className={classNames("text-victron-gray dark:text-victron-gray-dark", activeStyles?.icon)} />
-        }
+        icon={<EnergyIcon className={classNames("text-content-victronGray", activeStyles?.icon)} />}
         linkedView={AppViews.BOX_ENERGY_OVERVIEW}
         getBoxSizeCallback={setCompactBoxSize}
         withPagination={true}

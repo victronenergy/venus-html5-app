@@ -37,8 +37,8 @@ const RemoteConsole = ({ host, width, height }: Props) => {
     return (
       <div className="flex flex-col items-center w-2/3 md:w-1/3 space-y-4">
         <QRCode value={consoleUrl} />
-        <label className="text-xs text-victron-gray-400 sm-l:text-sm dark:text-victron-gray-500">{consoleUrl}</label>
-        <label className="text-xs text-victron-gray-400 sm-l:text-sm dark:text-victron-gray-500 text-center">
+        <label className="text-xs text-content-secondary sm-l:text-sm">{consoleUrl}</label>
+        <label className="text-xs text-content-secondary sm-l:text-sm text-center">
           <Translate value={"error.remoteConsole.qrCodeMessage"} />
         </label>
       </div>
