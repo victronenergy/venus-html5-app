@@ -23,13 +23,13 @@ export const ValueWithPercentage: FC<Props> = ({
   const value = isAuxillaryTank ? "--" : formatLevelFor(level)
 
   const classes = classnames(className, {
-    "text-victron-red": isCritical,
+    "text-content-victronRed": isCritical,
     "text-end": orientation === "vertical",
   })
 
   const unitClasses = classnames({
-    "text-victron-red/70": isCritical,
-    "text-victron-gray/70": !isCritical || isAuxillaryTank,
+    "text-content-victronRed opacity-70": isCritical,
+    "text-content-secondary opacity-70": !isCritical || isAuxillaryTank,
   })
 
   return (

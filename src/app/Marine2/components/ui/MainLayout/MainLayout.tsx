@@ -13,7 +13,7 @@ const MainLayout = ({ children, title, pageSelectorProps }: Props) => {
   }, [title, appViewsStore])
 
   return (
-    <div className={"dark:bg-black dark:text-white text-black bg-white flex flex-col w-full h-full pt-2 px-2"}>
+    <div className={"text-content-primary bg-surface-primary flex flex-col w-full h-full pt-2 px-2"}>
       <div className={"flex flex-row w-full h-full grow-0 basis-0 min-h-fit"}>
         <Header title={getTitle} />
       </div>

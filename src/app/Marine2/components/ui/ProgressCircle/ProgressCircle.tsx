@@ -19,7 +19,7 @@ export const ProgressCircle: FC<Props> = ({ percentage, children, boxSize }) => 
   const { strokeWidth } = applyStyles(boxSize, Styles)
 
   if (percentage === null) {
-    const classes = classNames("fill-none stroke-victron-gray-400 dark:stroke-victron-gray-dark", strokeWidth)
+    const classes = classNames("fill-none stroke-content-victronGray", strokeWidth)
     const strokeDashArray = `${pathLength} ${pathLength}`
 
     return (
@@ -36,10 +36,10 @@ export const ProgressCircle: FC<Props> = ({ percentage, children, boxSize }) => 
   const roundedPercentage = Math.round(percentage)
   const color = colorFor(roundedPercentage)
   const classes = classNames("fill-none", strokeWidth, {
-    "stroke-victron-green dark:stroke-victron-green-dark": color === "victron-green",
-    "stroke-victron-yellow dark:stroke-victron-yellow-dark": color === "victron-yellow",
-    "stroke-victron-red dark:stroke-victron-red-dark": color === "victron-red",
-    "stroke-victron-blue dark:stroke-victron-blue-dark": color === "victron-blue",
+    "stroke-content-victronGreen": color === "victron-green",
+    "stroke-content-victronYellow": color === "victron-yellow",
+    "stroke-content-victronRed": color === "victron-red",
+    "stroke-content-victronBlue": color === "victron-blue",
   })
   const strokeDashArray = `${(Math.floor(roundedPercentage / 5) * 5 * pathLength) / 100} ${pathLength}`
 

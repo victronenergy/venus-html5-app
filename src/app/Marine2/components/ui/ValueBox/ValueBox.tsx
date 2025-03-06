@@ -46,17 +46,15 @@ const ValueBox: FC<Props> = ({
             value={value}
             unit={unit}
             subtitle={subtitle}
-            className={classNames("text-black dark:text-white", activeStyles?.mainValue)}
+            className={classNames("text-content-primary", activeStyles?.mainValue)}
             status={status}
           />
           {status === "unplugged" && (
-            <div className={classNames("text-victron-gray-300 dark:text-victron-gray-500", activeStyles.valueSubtitle)}>
+            <div className={classNames("text-content-secondary", activeStyles.valueSubtitle)}>
               {translate("common.unplugged")}
             </div>
           )}
-          <div className={classNames("text-victron-gray dark:text-victron-gray-500", activeStyles.valueSubtitle)}>
-            {children}
-          </div>
+          <div className={classNames("text-content-secondary", activeStyles.valueSubtitle)}>{children}</div>
         </div>
         <div className="w-full flex flex-col">
           <BottomValues

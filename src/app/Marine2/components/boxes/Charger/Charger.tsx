@@ -123,7 +123,7 @@ const Charger = ({ instanceId, componentMode = "compact", compactBoxSize }: Prop
   return (
     <Box icon={<GeneratorIcon className="w-7" />} title={title} getBoxSizeCallback={setBoxSize}>
       <div className="w-full h-full flex flex-col justify-between">
-        <div className={classNames("text-victron-darkGray dark:text-white", activeStyles?.mainValue)}>{subTitle}</div>
+        <div className={classNames("text-content-primary", activeStyles?.mainValue)}>{subTitle}</div>
         <div className="w-full h-full min-h-0 shrink flex flex-col justify-end mt-2">
           <div className={classNames("", activeStyles?.secondaryValue)}>
             <div className={classNames("", activeStyles?.secondaryValue)}>
@@ -152,7 +152,7 @@ const Charger = ({ instanceId, componentMode = "compact", compactBoxSize }: Prop
               onSet={submitMode}
             >
               {/* TODO Refactor to list-item or label component, too much duplicate code. */}
-              <div className="divide-y divide-victron-darkGray-200 text-base">
+              <div className="divide-y divide-outline-primary text-base">
                 <label
                   className="w-full flex justify-between items-center pb-4"
                   onClick={() => setModeForSubmission(CHARGER_MODE.ON)}

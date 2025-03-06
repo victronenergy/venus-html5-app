@@ -7,10 +7,7 @@ const DiagnosticsTable = ({ title, diagnostics }: Props) => {
       <table className={"table-fixed border-collapse w-full text-xs md-m:text-sm"}>
         <tbody>
           {diagnostics.map(({ property, value }) => (
-            <tr
-              key={property}
-              className={"border-b border-t border-victron-gray dark:border-victron-gray-dark align-top"}
-            >
+            <tr key={property} className={"border-b border-t border-surface-victronGray align-top"}>
               <td className={"w-1/3 py-2"}>{property}</td>
               <td className={"py-2"}>{value}</td>
             </tr>
