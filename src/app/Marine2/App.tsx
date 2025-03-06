@@ -57,11 +57,18 @@ const App = (props: AppProps) => {
 
   useEffect(() => {
     if (themeStore.darkMode) {
-      document.body.classList.add("dark")
+      if (themeStore.nightMode) {
+        document.body.classList.remove("dark")
+        document.body.classList.add("dark-red")
+      } else {
+        document.body.classList.remove("dark-red")
+        document.body.classList.add("dark")
+      }
     } else {
       document.body.classList.remove("dark")
+      document.body.classList.remove("dark-red")
     }
-  }, [themeStore.darkMode])
+  }, [themeStore.darkMode, themeStore.nightMode])
 
   return (
     <React.Suspense fallback={<Connecting />}>
