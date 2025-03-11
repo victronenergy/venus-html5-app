@@ -36,8 +36,6 @@ const ValueOverview = ({ title, subtitle, Icon, value, unit, boxSize, valueType,
     "h-12": !subtitle,
   })
 
-  console.log(`HERE:`)
-
   return (
     <div className={classes}>
       <div className="flex items-center min-w-0 text-content-secondary">
