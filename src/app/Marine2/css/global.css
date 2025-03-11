@@ -155,7 +155,7 @@
     --c-content-secondary: #504F4B;
     --c-content-tertiary: #969591;
 
-    --c-victron-gray-rgb: 150,, 149, 145;      /* RGB values for #969591 */
+    --c-victron-gray-rgb: 150, 149, 145;      /* RGB values for #969591 */
     --c-victron-blue-rgb: 56, 125, 197;       /* RGB values for #387DC5 */
     --c-victron-red-rgb: 243, 92, 88;         /* RGB values for #F35C58 */
     --c-victron-yellow-rgb: 240, 150, 46;     /* RGB values for #F0962E */
