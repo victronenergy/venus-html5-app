@@ -136,20 +136,17 @@
     }
   }
 
+  /*
+  Note that specifying the colors with #RRGGBB syntax breaks the tailwind opacity modifier.
+  Colors expected to be used with transparency need to be specified as rgb values,
+  without color space as descibed here: https://v3.tailwindcss.com/docs/customizing-colors#using-css-variables.
+  Note that using alpha channel in #RRGGBBAA notation does not work on Furuno and other legacy engines.
+  Using modern variant of `rgb(R G B / A)` does not work on Garmin and Furuno, we use legacy `rgba(R, G, B, A)`.
+  */
   /* Semantic colors used across the app in light mode */
   :root {
     --c-surface-primary: #FFFFFF;
     --c-surface-secondary: #F5F5F5;
-
-    --c-surface-victron-gray: #9695914b;    /* 0x4b ~ 30% opacity */
-    --c-surface-victron-blue: #387DC54b;    /* 0x4b ~ 30% opacity */
-    --c-surface-victron-red: #F35C584b;     /* 0x4b ~ 30% opacity */
-    --c-surface-victron-yellow: #F0962E4b;  /* 0x4b ~ 30% opacity */
-    --c-surface-victron-lime: #76832C4b;    /* 0x4b ~ 30% opacity */
-    --c-surface-victron-cyan: #84CBF84b;    /* 0x4b ~ 30% opacity */
-    --c-surface-victron-slate: #7F7F9C4b;   /* 0x4b ~ 30% opacity */
-    --c-surface-victron-green: #72B84C4b;   /* 0x4b ~ 30% opacity */
-    --c-surface-victron-purple: #6B4AB34b;  /* 0x4b ~ 30% opacity */
 
     --c-outline-primary: #DCDBD7;
     --c-outline-secondary: #F5F5F5;
@@ -158,15 +155,15 @@
     --c-content-secondary: #504F4B;
     --c-content-tertiary: #969591;
 
-    --c-content-victron-gray: #969591;
-    --c-content-victron-blue: #387DC5;
-    --c-content-victron-red: #F35C58;
-    --c-content-victron-yellow: #F0962E;
-    --c-content-victron-lime: #76832C;
-    --c-content-victron-cyan: #84CBF8;
-    --c-content-victron-slate: #7F7F9C;
-    --c-content-victron-green: #72B84C;
-    --c-content-victron-purple: #6B4AB3;
+    --c-victron-gray-rgb: 150,, 149, 145;      /* RGB values for #969591 */
+    --c-victron-blue-rgb: 56, 125, 197;       /* RGB values for #387DC5 */
+    --c-victron-red-rgb: 243, 92, 88;         /* RGB values for #F35C58 */
+    --c-victron-yellow-rgb: 240, 150, 46;     /* RGB values for #F0962E */
+    --c-victron-lime-rgb: 118, 131, 44;       /* RGB values for #76832C */
+    --c-victron-cyan-rgb: 132, 203, 248;      /* RGB values for #84CBF8 */
+    --c-victron-slate-rgb: 127, 127, 156;     /* RGB values for #7F7F9C */
+    --c-victron-green-rgb: 114, 184, 76;      /* RGB values for #72B84C */
+    --c-victron-purple-rgb: 107, 74, 179;     /* RGB values for #6B4AB3 */
   }
 }
 
@@ -175,48 +172,18 @@
   --c-surface-primary: #000000;
   --c-surface-secondary: #141414;
 
-  --c-surface-victron-gray: #9695914b;    /* 0x4b ~ 30% opacity */
-  --c-surface-victron-blue: #387DC54b;    /* 0x4b ~ 30% opacity */
-  --c-surface-victron-red: #F35C584b;     /* 0x4b ~ 30% opacity */
-  --c-surface-victron-yellow: #F0962E4b;  /* 0x4b ~ 30% opacity */
-  --c-surface-victron-lime: #76832C4b;    /* 0x4b ~ 30% opacity */
-  --c-surface-victron-cyan: #84CBF84b;    /* 0x4b ~ 30% opacity */
-  --c-surface-victron-slate: #7F7F9C4b;   /* 0x4b ~ 30% opacity */
-  --c-surface-victron-green: #72B84C4b;   /* 0x4b ~ 30% opacity */
-  --c-surface-victron-purple: #6B4AB34b;  /* 0x4b ~ 30% opacity */
-
   --c-outline-primary: #272622;
   --c-outline-secondary: #141414;
 
   --c-content-primary: #FFFFFF;
   --c-content-secondary: #969591;
   --c-content-tertiary: #64635F;
-
-  --c-content-victron-gray: #504F4B;
-  --c-content-victron-blue: #387DC5;
-  --c-content-victron-red: #F35C58;
-  --c-content-victron-yellow: #F0962E;
-  --c-content-victron-lime: #76832C;
-  --c-content-victron-cyan: #84CBF8;
-  --c-content-victron-slate: #7F7F9C;
-  --c-content-victron-green: #72B84C;
-  --c-content-victron-purple: #6B4AB3;
 }
 
 /* Semantic colors used across the app in dark red mode */
 .dark-red {
   --c-surface-primary: #000000;
   --c-surface-secondary: #140000;
-
-  --c-surface-victron-gray: #4D08074b;    /* 0x4b ~ 30% opacity */
-  --c-surface-victron-blue: #FF01004b;    /* 0x4b ~ 30% opacity */
-  --c-surface-victron-red: #FF01004b;     /* 0x4b ~ 30% opacity */
-  --c-surface-victron-yellow: #FF01004b;  /* 0x4b ~ 30% opacity */
-  --c-surface-victron-lime: #FF01004b;    /* 0x4b ~ 30% opacity */
-  --c-surface-victron-cyan: #FF01004b;    /* 0x4b ~ 30% opacity */
-  --c-surface-victron-slate: #FF01004b;   /* 0x4b ~ 30% opacity */
-  --c-surface-victron-green: #FF01004b;   /* 0x4b ~ 30% opacity */
-  --c-surface-victron-purple: #FF01004b;  /* 0x4b ~ 30% opacity */
 
   --c-outline-primary: #4D0807;
   --c-outline-secondary: #4D0807;
@@ -225,15 +192,15 @@
   --c-content-secondary: #B00908;
   --c-content-tertiary: #4D0807;
 
-  --c-content-victron-gray: #B00908;
-  --c-content-victron-blue: #FF0100;
-  --c-content-victron-red: #FF0100;
-  --c-content-victron-yellow: #FF0100;
-  --c-content-victron-lime: #FF0100;
-  --c-content-victron-cyan: #FF0100;
-  --c-content-victron-slate: #FF0100;
-  --c-content-victron-green: #FF0100;
-  --c-content-victron-purple: #FF0100;
+  --c-victron-gray-rgb: 176, 9, 8;         /* RGB values for #B00908 */
+  --c-victron-blue-rgb: 255, 1, 0;         /* RGB values for #FF0100 */
+  --c-victron-red-rgb: 255, 1, 0;          /* RGB values for #FF0100 */
+  --c-victron-yellow-rgb: 255, 1, 0;       /* RGB values for #FF0100 */
+  --c-victron-lime-rgb: 255, 1, 0;         /* RGB values for #FF0100 */
+  --c-victron-cyan-rgb: 255, 1, 0;         /* RGB values for #FF0100 */
+  --c-victron-slate-rgb: 255, 1, 0;        /* RGB values for #FF0100 */
+  --c-victron-green-rgb: 255, 1, 0;        /* RGB values for #FF0100 */
+  --c-victron-purple-rgb: 255, 1, 0;       /* RGB values for #FF0100 */
 }
 
 html,
