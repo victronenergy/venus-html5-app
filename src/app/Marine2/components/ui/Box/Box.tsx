@@ -60,13 +60,13 @@ const Box = ({
     <div
       ref={boxRef}
       className={classNames(
-        "w-full h-full min-h-0 px-4 pt-1 pb-2 sm-m:pt-2 sm-m:pb-3 flex flex-col bg-victron-lightGray dark:bg-victron-darkGray rounded-md",
+        "w-full h-full min-h-0 px-4 pt-1 pb-2 sm-m:pt-2 sm-m:pb-3 flex flex-col bg-surface-secondary border-outline-secondary border-px-1 rounded-md",
         className
       )}
     >
       <div className="w-full min-w-0 min-h-px-44 flex justify-between items-center">
         <div
-          className="w-full shrink-1 flex items-center justify-start text-victron-gray-300 dark:text-victron-gray-dark cursor-pointer min-w-0 outline-none"
+          className="w-full shrink-1 flex items-center justify-start text-content-victronGray cursor-pointer min-w-0 outline-none"
           onClick={clickHandler}
         >
           {icon && <span className="mr-1 md:mr-2">{icon}</span>}
@@ -74,18 +74,12 @@ const Box = ({
         </div>
         {linkedView && (
           <div className="-mr-3 w-px-44 h-px-44 p-1 cursor-pointer" onClick={clickHandler}>
-            <ArrowRightIcon
-              className="text-victron-blue dark:text-victron-blue-dark cursor-pointer outline-none"
-              alt="Expand"
-            />
+            <ArrowRightIcon className="text-content-victronBlue cursor-pointer outline-none" alt="Expand" />
           </div>
         )}
         {!linkedView && !!infoText && (
           <div className="-mr-3 p-3" onClick={() => setInfoOpen(true)}>
-            <InfoIcon
-              className="w-7 text-victron-blue dark:text-victron-blue-dark cursor-pointer outline-none"
-              alt="Info"
-            />
+            <InfoIcon className="w-7 text-content-victronBlue cursor-pointer outline-none" alt="Info" />
           </div>
         )}
       </div>
@@ -101,7 +95,7 @@ const Box = ({
         <Modal.Frame className="max-w-[50%] w-full" open={infoOpen} onClose={() => setInfoOpen(false)}>
           <Modal.Body>
             <InfoIcon
-              className="ml-auto mr-auto mt-7 mb-7 w-10 text-victron-blue dark:text-victron-blue-dark cursor-pointer outline-none"
+              className="ml-auto mr-auto mt-7 mb-7 w-10 text-content-victronBlue cursor-pointer outline-none"
               alt="Info"
             />
             <div className="text-center mb-2 text-xl">{infoText.title}</div>

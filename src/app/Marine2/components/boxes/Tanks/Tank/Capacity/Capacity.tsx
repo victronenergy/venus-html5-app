@@ -12,7 +12,7 @@ interface Props {
 }
 
 export const Capacity: FC<Props> = ({ remaining, unit, capacity, isAuxillaryTank, className }) => {
-  const classes = classnames("text-victron-gray", className)
+  const classes = classnames("text-content-tertiary", className)
 
   const tankUnit = tankUnitFor(+unit)
   const calculatedCapacity = formatCapacityFor(capacity, +unit) + tankUnit

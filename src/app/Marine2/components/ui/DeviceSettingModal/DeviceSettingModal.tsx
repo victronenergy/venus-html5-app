@@ -20,7 +20,7 @@ const DeviceSettingModal: FC<Props> = (props) => {
     <Modal.Frame
       open={open}
       onClose={onClose}
-      className="border-victron-darkGray-200 border rounded-md w-[95%] md:w-[40rem] scale-[0.7] h-short:scale-[1]"
+      className="border-outline-primary border rounded-md w-[95%] md:w-[40rem] scale-[0.7] h-short:scale-[1]"
     >
       <Modal.Body>
         <div className="mb-8">
@@ -33,7 +33,7 @@ const DeviceSettingModal: FC<Props> = (props) => {
         <button onClick={onClose} className="w-full">
           {translate("common.close")}
         </button>
-        <div className="w-0 h-10 my-2 border-r border-victron-darkGray-200" />
+        <div className="w-0 h-10 my-2 border-r border-outline-primary" />
         <button onClick={onSet} className="w-full">
           {translate("common.set")}
         </button>

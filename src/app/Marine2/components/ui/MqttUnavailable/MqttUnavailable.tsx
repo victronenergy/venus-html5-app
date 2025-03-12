@@ -50,7 +50,7 @@ const MqttUnavailable = ({ host }: Props) => {
   }
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center bg-victron-lightGray dark:bg-victron-darkGray border-4 border-victron-blue rounded-md text-sm text-black dark:text-victron-blue">
+    <div className="w-full h-full flex flex-col items-center justify-center bg-surface-primary border-4 border-content-victronBlue rounded-md text-sm text-content-primary">
       <div className="block max-w-xl p-4">
         <div className="flex flex-row">
           <Button onClick={openRemoteConsole} className="w-full mb-4 mr-2" size="md">

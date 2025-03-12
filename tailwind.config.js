@@ -69,58 +69,36 @@ module.exports = {
         "h-short": { raw: "(min-height: 368px)" },
       },
       colors: {
-        victron: {
-          lightGray: {
-            DEFAULT: "#F5F5F5",
-            dark: "#F5F5F5",
-          },
-          darkGray: {
-            DEFAULT: "#141414",
-            dark: "#141414",
-            200: "#272622",
-          },
-          gray: {
-            DEFAULT: "#969591",
-            dark: "#969591",
-            200: "#272622",
-            300: "#504F4B",
-            400: "#64635F",
-            500: "#969591",
-            600: "#DCDBD7",
-            900: "#FAF9F5",
-          },
-          blue: {
-            DEFAULT: "#387DC5",
-            dark: "#387DC5",
-          },
-          red: {
-            DEFAULT: "#F35C58",
-            dark: "#F35C58",
-          },
-          cyan: {
-            DEFAULT: "#84CBF8",
-            dark: "#84CBF8",
-          },
-          purple: {
-            DEFAULT: "#6B4AB3",
-            dark: "#6B4AB3",
-          },
-          lime: {
-            DEFAULT: "#76832C",
-            dark: "#76832C",
-          },
-          green: {
-            DEFAULT: "#72B84C",
-            dark: "#72B84C",
-          },
-          slate: {
-            DEFAULT: "#7F7F9C",
-            dark: "#7F7F9C",
-          },
-          yellow: {
-            DEFAULT: "#F0962E",
-            dark: "#F0962E",
-          },
+        surface: {
+          primary: "var(--c-surface-primary)",
+          secondary: "var(--c-surface-secondary)",
+          victronGray: "rgba(var(--c-victron-gray-rgb), 0.3)",
+          victronBlue: "rgba(var(--c-victron-blue-rgb), 0.3)",
+          victronRed: "rgba(var(--c-victron-red-rgb), 0.3)",
+          victronYello: "rgba(var(--c-victron-yellow-rgb), 0.3)",
+          victronLime: "rgba(var(--c-victron-lime-rgb), 0.3)",
+          victronCyan: "rgba(var(--c-victron-cyan-rgb), 0.3)",
+          victronSlate: "rgba(var(--c-victron-slate-rgb), 0.3)",
+          victronGreen: "rgba(var(--c-victron-green-rgb), 0.3)",
+          victronPurple: "rgba(var(--c-victron-purple-rgb), 0.3)",
+        },
+        outline: {
+          primary: "var(--c-outline-primary)",
+          secondary: "var(--c-outline-secondary)",
+        },
+        content: {
+          primary: "var(--c-content-primary)",
+          secondary: "var(--c-content-secondary)",
+          tertiary: "var(--c-content-tertiary)",
+          victronGray: "rgba(var(--c-victron-gray-rgb), 1.0)",
+          victronBlue: "rgba(var(--c-victron-blue-rgb), 1.0)",
+          victronRed: "rgba(var(--c-victron-red-rgb), 1.0)",
+          victronYellow: "rgba(var(--c-victron-yellow-rgb), 1.0)",
+          victronLime: "rgba(var(--c-victron-lime-rgb), 1.0)",
+          victronCyan: "rgba(var(--c-victron-cyan-rgb), 1.0)",
+          victronSlate: "rgba(var(--c-victron-slate-rgb), 1.0)",
+          victronGreen: "rgba(var(--c-victron-green-rgb), 1.0)",
+          victronPurple: "rgba(var(--c-victron-purple-rgb), 1.0)",
         },
       },
       fontFamily: {

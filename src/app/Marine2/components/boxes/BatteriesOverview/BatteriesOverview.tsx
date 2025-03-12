@@ -73,9 +73,7 @@ const BatteriesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: 
 
     return (
       <Box
-        icon={
-          <BatteriesIcon className={classNames("text-victron-gray dark:text-victron-gray-dark", activeStyles?.icon)} />
-        }
+        icon={<BatteriesIcon className={classNames("text-content-victronGray", activeStyles?.icon)} />}
         title={translate("boxes.batteries")}
         linkedView={AppViews.BOX_BATTERIES_OVERVIEW}
         getBoxSizeCallback={setBoxSize}
