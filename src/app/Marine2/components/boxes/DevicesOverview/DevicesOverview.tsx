@@ -193,6 +193,7 @@ const getAvailableDeviceBoxes = function (
         <GeneratorRelay
           key="generator_relay"
           {...generatorRelay}
+          active={generatorRelay.statusCode === 1}
           componentMode={componentMode}
           compactBoxSize={compactBoxSize}
         />

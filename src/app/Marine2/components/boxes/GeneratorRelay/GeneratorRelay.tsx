@@ -38,7 +38,7 @@ const GeneratorRelay = ({
   compactBoxSize,
 }: Props) => {
   const title = translate("widgets.generator")
-  const subTitle = generatorStateFor(statusCode, active, phases)
+  const subTitle = generatorStateFor(statusCode, active)
 
   const { electricalPowerIndicator } = useAppStore()
   const { current, voltage, power } = useActiveInValues()
