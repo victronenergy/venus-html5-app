@@ -1,4 +1,4 @@
-![screenshot](/legacy/victron-webapp-screenshot.png?raw=true)
+![screenshot](/victron-webapp-screenshot.png?raw=true)
 
 # Venus OS hosted web app
 
