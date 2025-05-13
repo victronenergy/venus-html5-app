@@ -44,7 +44,7 @@ const Footer = ({ pageSelectorProps }: Props) => {
       {isShowingSwitchingPaneButton && (
         <div onClick={openSwitchingPane} className={"w-px-44 h-px-44 p-1 cursor-pointer"}>
           <PreferencesIcon onClick={openSwitchingPane} className={"text-content-victronBlue"} alt={"Switching Pane"} />
-          </div>
+        </div>
       )}
       <SettingsMenu />
     </div>
