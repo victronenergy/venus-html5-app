@@ -198,7 +198,8 @@
     "pages": {
         "diagnostics": "Diagnostics",
         "remoteConsole": "Remote Console",
-        "systemOverview": "System Overview"
+        "systemOverview": "System Overview",
+        "switchingPane": "Switching Pane"
     },
     "remoteLogin": {
         "2fa": "Two-factor authentication token",
