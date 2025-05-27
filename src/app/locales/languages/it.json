@@ -65,10 +65,14 @@
         "error": "Errore",
         "fault": "Errore",
         "floatCharging": "Carica Float",
+        "generator": "Generatore",
+        "grid": "Rete",
         "hours": "ore",
         "hours_short": "h",
         "idle": "Folle",
         "inputCurrentLimit": "Limite corrente in ingresso",
+        "inputCurrentLimitWithNumber": "Limite di corrente in ingresso %{inputId}",
+        "inputCurrentLimitWithType": "Limite di corrente in ingresso %{inputType}",
         "inputLimit": "Limite ingresso",
         "inverterOnly": "Solo inverter",
         "inverting": "Inversione in corso",
@@ -80,6 +84,8 @@
         "minutes": "minuti",
         "minutes_short": "m",
         "mode": "Modalità",
+        "night": "Notte",
+        "no": "No",
         "noShorePower": "Potenza Banchina Assente",
         "notAvailable": "Non Disponibile",
         "nrOfPhases": "%{phases} fasi",
@@ -92,6 +98,7 @@
         "remainingTime": "Tempo rimanente",
         "running": "In funzionamento",
         "set": "Imposta",
+        "shorePower": "Alimentazione da terra",
         "standby": "Standby",
         "starting": "Avvio in corso",
         "stopped": "Fermo",
@@ -101,7 +108,8 @@
         "timetogo": "restante",
         "unplugged": "Scollegato",
         "veBusFault": "Condizione di errore VE.Bus",
-        "voltage": "Tensione"
+        "voltage": "Tensione",
+        "yes": "Sì"
     },
     "diagnostics": {
         "connection": {
@@ -114,6 +122,9 @@
         },
         "device": {
             "device": "Dispositivo",
+            "devicePixelRatio": "Pixel Ratio",
+            "isGuiV2Supported": "GUI v2 supportata",
+            "missing": "mancante",
             "userAgent": "Agente utente",
             "viewportHeight": "Altezza finestra visualizzazione",
             "viewportWidth": "Larghezza finestra visualizzazione"

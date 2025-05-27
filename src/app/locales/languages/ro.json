@@ -65,10 +65,14 @@
         "error": "Eroare",
         "fault": "Avarie",
         "floatCharging": "Încărcare „Float”",
+        "generator": "Generator",
+        "grid": "Rețea",
         "hours": "ore",
         "hours_short": "o",
         "idle": "inactiv",
         "inputCurrentLimit": "Limita intensitate curent",
+        "inputCurrentLimitWithNumber": "Limită curent intrare %{inputId}",
+        "inputCurrentLimitWithType": "Limită curent intrare %{inputType}",
         "inputLimit": "Limită de intrare",
         "inverterOnly": "Doar invertor",
         "inverting": "Dimensiune invertor",
@@ -80,6 +84,8 @@
         "minutes": "minute",
         "minutes_short": "m",
         "mode": "Mod",
+        "night": "Noapte",
+        "no": "Nu",
         "noShorePower": "Fără alimentare din rețea",
         "notAvailable": "Indisponibil",
         "nrOfPhases": "%{phases} faze",
@@ -92,6 +98,7 @@
         "remainingTime": "Timp rămas",
         "running": "Functioneaza",
         "set": "Setare",
+        "shorePower": "Alimentare de la țărm",
         "standby": "In asteptare",
         "starting": "Inițiere",
         "stopped": "Oprit",
@@ -101,7 +108,8 @@
         "timetogo": "rămas",
         "unplugged": "Deconectat",
         "veBusFault": "Eroare convertor VE.Bus",
-        "voltage": "Tensiune"
+        "voltage": "Tensiune",
+        "yes": "Da"
     },
     "diagnostics": {
         "connection": {
@@ -114,6 +122,9 @@
         },
         "device": {
             "device": "Dispozitiv",
+            "devicePixelRatio": "Raport pixeli",
+            "isGuiV2Supported": "GUI v2 suportat",
+            "missing": "lipsă",
             "userAgent": "Agent utilizator",
             "viewportHeight": "Înălțime fereastră vizualiare",
             "viewportWidth": "Lățime fereastră vizualiare"

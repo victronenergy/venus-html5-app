@@ -65,10 +65,14 @@
         "error": "Ошибка",
         "fault": "Неисправность",
         "floatCharging": "Зарядка поплавка",
+        "generator": "Генератор",
+        "grid": "Сеть",
         "hours": "часы",
         "hours_short": "часы_короткие",
         "idle": "без нагрузки",
         "inputCurrentLimit": "Ограничение входящего тока",
+        "inputCurrentLimitWithNumber": "Предел входного тока %{inputId}",
+        "inputCurrentLimitWithType": "Предел входного тока %{inputType}",
         "inputLimit": "Входной предел",
         "inverterOnly": "Только инвертер",
         "inverting": "Инвертирование",
@@ -80,6 +84,8 @@
         "minutes": "минут",
         "minutes_short": "минуты_короткие",
         "mode": "Режим",
+        "night": "Ночь",
+        "no": "Нет",
         "noShorePower": "Нет берегового питания",
         "notAvailable": "Недоступно",
         "nrOfPhases": "%{фазы} фазы",
@@ -92,6 +98,7 @@
         "remainingTime": "Оставшееся время",
         "running": "Работает",
         "set": "сентябрь",
+        "shorePower": "Береговое питание",
         "standby": "Ожидание",
         "starting": "Статус: запуск опроса устройств...",
         "stopped": "Остановлено",
@@ -101,7 +108,8 @@
         "timetogo": "идти",
         "unplugged": "Отключено",
         "veBusFault": "VE.Bus Состояние неисправности",
-        "voltage": "Напряжение"
+        "voltage": "Напряжение",
+        "yes": "Да"
     },
     "diagnostics": {
         "connection": {
@@ -114,6 +122,9 @@
         },
         "device": {
             "device": "Устройство",
+            "devicePixelRatio": "Соотношение пикселей",
+            "isGuiV2Supported": "Поддержка GUI v2",
+            "missing": "отсутствует",
             "userAgent": "Пользовательский агент",
             "viewportHeight": "Высота окна просмотра",
             "viewportWidth": "Ширина окна просмотра"

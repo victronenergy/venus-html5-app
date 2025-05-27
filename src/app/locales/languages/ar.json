@@ -65,10 +65,14 @@
         "error": "خطأ",
         "fault": "خلل",
         "floatCharging": "الشحن العائم",
+        "generator": "مولد",
+        "grid": "الشبكة",
         "hours": "ساعات",
         "hours_short": "س",
         "idle": "ساكن",
         "inputCurrentLimit": "حد تيار الدخل",
+        "inputCurrentLimitWithNumber": "حد التيار للإدخال %{inputId}",
+        "inputCurrentLimitWithType": "حد التيار للإدخال %{inputType}",
         "inputLimit": "حد المدخلات",
         "inverterOnly": "فقط المعاكس",
         "inverting": "عكس",
@@ -80,6 +84,8 @@
         "minutes": "دقائق",
         "minutes_short": "د",
         "mode": "وضعية",
+        "night": "ليل",
+        "no": "لا",
         "noShorePower": "لا توجد طاقة شاطئية",
         "notAvailable": "غير متوفر",
         "nrOfPhases": "%{phases} أطوار",
@@ -92,6 +98,7 @@
         "remainingTime": "الوقت المتبقي",
         "running": "مشغل",
         "set": "تعيين",
+        "shorePower": "طاقة الشاطئ",
         "standby": "انتظار",
         "starting": "بدء",
         "stopped": "موقف",
@@ -101,7 +108,8 @@
         "timetogo": "حان الوقت للذهاب",
         "unplugged": "مفصول",
         "veBusFault": "حالة تعطل VE.Bus",
-        "voltage": "الجهد الكهربائي"
+        "voltage": "الجهد الكهربائي",
+        "yes": "نعم"
     },
     "diagnostics": {
         "connection": {
@@ -114,6 +122,9 @@
         },
         "device": {
             "device": "جهاز",
+            "devicePixelRatio": "نسبة البكسل",
+            "isGuiV2Supported": "واجهة المستخدم الرسومية v2 مدعومة",
+            "missing": "مفقود",
             "userAgent": "وكيل المستخدم",
             "viewportHeight": "ارتفاع منفذ العرض",
             "viewportWidth": "عرض منفذ العرض"

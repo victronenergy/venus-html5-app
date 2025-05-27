@@ -65,10 +65,14 @@
         "error": "Hata",
         "fault": "Hata",
         "floatCharging": "Float Şarj",
+        "generator": "Jeneratör",
+        "grid": "Şebeke",
         "hours": "saatler",
         "hours_short": "s",
         "idle": "Atıl",
         "inputCurrentLimit": "Giriş Akımı Limiti",
+        "inputCurrentLimitWithNumber": "Giriş %{inputId} akım sınırı",
+        "inputCurrentLimitWithType": "%{inputType} Giriş akım sınırı",
         "inputLimit": "inputLimit",
         "inverterOnly": "inverterOnly",
         "inverting": "Çevriliyor",
@@ -79,7 +83,9 @@
         "lowPower": "lowPower",
         "minutes": "dakika",
         "minutes_short": "d",
-        "mode": "mod",
+        "mode": "Mod",
+        "night": "Gece",
+        "no": "Hayır",
         "noShorePower": "noShorePower",
         "notAvailable": "notAvailable",
         "nrOfPhases": "nrOfPhases",
@@ -92,6 +98,7 @@
         "remainingTime": "kalan Saat",
         "running": "Çalışıyor",
         "set": "Ayarla",
+        "shorePower": "Kıyı Elektriği",
         "standby": "Bekleme",
         "starting": "Durum: Bağlantı kuruldu, cihaz listesi alınıyor ...",
         "stopped": "Durduruldu",
@@ -101,7 +108,8 @@
         "timetogo": "kaldı",
         "unplugged": "Fiş takılı değil",
         "veBusFault": "veBusFault",
-        "voltage": "Gerilim"
+        "voltage": "Gerilim",
+        "yes": "Evet"
     },
     "diagnostics": {
         "connection": {
@@ -114,6 +122,9 @@
         },
         "device": {
             "device": "Cihaz",
+            "devicePixelRatio": "Piksel Oranı",
+            "isGuiV2Supported": "GUI v2 destekleniyor",
+            "missing": "eksik",
             "userAgent": "User agent",
             "viewportHeight": "Viewport height",
             "viewportWidth": "Viewport width"
@@ -261,7 +272,7 @@
         "vrmPortID": "VRM Site ID"
     },
     "widgets": {
-        "acLoads": "acLoads",
+        "acLoads": "AC Yükler",
         "batteries": "Aküler",
         "battery": "Akü",
         "batteryWithName": "Battery: %{name}",

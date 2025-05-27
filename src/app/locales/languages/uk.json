@@ -65,10 +65,14 @@
         "error": "Помилка",
         "fault": "Несправність",
         "floatCharging": "Плаваюче заряджання",
+        "generator": "Генератор",
+        "grid": "Мережа",
         "hours": "години",
         "hours_short": "год",
         "idle": "Релаксую",
         "inputCurrentLimit": "Обмеження вхідного струму",
+        "inputCurrentLimitWithNumber": "Обмеження вхідного струму %{inputId}",
+        "inputCurrentLimitWithType": "Обмеження вхідного струму %{inputType}",
         "inputLimit": "Вхідне обмеження",
         "inverterOnly": "Тільки інвертор",
         "inverting": "Інвертування",
@@ -80,6 +84,8 @@
         "minutes": "хвилини",
         "minutes_short": "хв",
         "mode": "Режим",
+        "night": "Ніч",
+        "no": "Ні",
         "noShorePower": "Відсутнє Портове живлення",
         "notAvailable": "Недоступний",
         "nrOfPhases": "%{phases} фаз",
@@ -92,6 +98,7 @@
         "remainingTime": "Час, що залишився",
         "running": "Працюю",
         "set": "Встановити",
+        "shorePower": "Берегове живлення",
         "standby": "Очікую",
         "starting": "Стартую",
         "stopped": "Зупинився",
@@ -101,7 +108,8 @@
         "timetogo": "час, що залишився",
         "unplugged": "Від’єднано",
         "veBusFault": "несправність veBus",
-        "voltage": "Напруга"
+        "voltage": "Напруга",
+        "yes": "Так"
     },
     "diagnostics": {
         "connection": {
@@ -114,6 +122,9 @@
         },
         "device": {
             "device": "Пристрій",
+            "devicePixelRatio": "Pixel Ratio",
+            "isGuiV2Supported": "Підтримується GUI v2",
+            "missing": "відсутній",
             "userAgent": "User agent",
             "viewportHeight": "Висота вікна перегляду",
             "viewportWidth": "Ширина вікна перегляду"
