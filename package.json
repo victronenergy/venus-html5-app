@@ -6,7 +6,7 @@
   "author": "",
   "dependencies": {
     "@babel/core": "^7.26.9",
-    "@babel/runtime": "^7.26.9",
+    "@babel/runtime": "^7.27.3",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.15",
     "@react-hook/size": "^2.1",
     "@sentry/react": "^6.15.0",
