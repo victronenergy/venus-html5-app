@@ -18,8 +18,9 @@ const translations: TranslationRecord = Object.fromEntries(
   LANGUAGES.map((language) => [language, require(`./languages/${fileNameOverrides[language] || language}.json`)])
 )
 
-// override the language with the value of the overrideLang URL parameter, if present
-const languageOverride = (window.location.search.match(/[?&]overrideLang=([a-zA-Z-_]{2,5})/) || [])[1]
+// override the language with the value of the lang URL parameter, if present
+// only enabled in debug builds when `REACT_APP_ENABLE_LANG_OVERRIDE=true`
+const languageOverride = (window.location.search.match(/[?&]lang=([a-zA-Z-_]{2,5})/) || [])[1]
 
 // disable incomplete translations, and let them be used in development
 // using the overrideLang URL parameter
