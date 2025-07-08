@@ -5,9 +5,12 @@ import { translate } from "react-i18nify"
 import GridPaginator from "../ui/GridPaginator"
 import { PageSelectorProps } from "../ui/PageSelector"
 import Box from "../ui/Box"
+import { useSwitchableOutputs } from "@victronenergy/mfd-modules"
 
 const SwitchingPane = () => {
   const [pageSelectorProps, setPageSelectorProps] = useState<PageSelectorProps>()
+  const switchableOutputs = useSwitchableOutputs()
+
   return (
     <MainLayout title={translate("pages.switchingPane")} pageSelectorProps={pageSelectorProps}>
       <div className={"h-full w-full overflow-hidden"}>
@@ -18,33 +21,17 @@ const SwitchingPane = () => {
           childClassName="p-1"
           pageSelectorPropsSetter={setPageSelectorProps}
         >
-          <Box title="Group 1">
-            <div />
-          </Box>
-          <Box title="Group 2">
-            <div />
-          </Box>
-          <Box title="Group 3">
-            <div />
-          </Box>
-          <Box title="Group 4">
-            <div />
-          </Box>
-          <Box title="Group 5">
-            <div />
-          </Box>
-          <Box title="Group 6">
-            <div />
-          </Box>
-          <Box title="Group 7">
-            <div />
-          </Box>
-          <Box title="Group 8">
-            <div />
-          </Box>
-          <Box title="Group 9">
-            <div />
-          </Box>
+          {Object.entries(switchableOutputs.groups)
+            .sort(([a], [b]) => a.localeCompare(b))
+            .map(([groupName, groupSwitchableOutputs]) => (
+              <Box key={groupName} title={groupName}>
+                {groupSwitchableOutputs.map((switchableOutput) => (
+                  <div key={switchableOutput.id}>
+                    {switchableOutput.customName || switchableOutput.name}, type: {switchableOutput.type}
+                  </div>
+                ))}
+              </Box>
+            ))}
         </GridPaginator>
       </div>
     </MainLayout>
