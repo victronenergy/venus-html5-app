@@ -4,6 +4,7 @@ import MainLayout from "../ui/MainLayout"
 import { translate } from "react-i18nify"
 import GridPaginator from "../ui/GridPaginator"
 import { PageSelectorProps } from "../ui/PageSelector"
+import SwitchableOutput from "../ui/SwitchableOutput"
 import Box from "../ui/Box"
 import { useSwitchableOutputs } from "@victronenergy/mfd-modules"
 
@@ -22,13 +23,18 @@ const SwitchingPane = () => {
           pageSelectorPropsSetter={setPageSelectorProps}
         >
           {Object.entries(switchableOutputs.groups)
+            // Sort groups by name
             .sort(([a], [b]) => a.localeCompare(b))
             .map(([groupName, groupSwitchableOutputs]) => (
               <Box key={groupName} title={groupName}>
                 {groupSwitchableOutputs.map((switchableOutput) => (
-                  <div key={switchableOutput.id}>
-                    {switchableOutput.customName || switchableOutput.name}, type: {switchableOutput.type}
-                  </div>
+                  <SwitchableOutput
+                    className="w-full"
+                    key={`${switchableOutput.deviceId}_${switchableOutput.outputId}`}
+                    type={switchableOutput.type}
+                    deviceId={switchableOutput.deviceId}
+                    outputId={switchableOutput.outputId}
+                  />
                 ))}
               </Box>
             ))}
