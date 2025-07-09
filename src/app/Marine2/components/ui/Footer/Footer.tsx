@@ -4,7 +4,7 @@ import VersionInfo from "../VersionInfo"
 import PageSelector, { PageSelectorProps } from "../PageSelector"
 import BackIcon from "../../../images/icons/back.svg"
 import { AppViews, useAppViewsStore } from "../../../modules/AppViews"
-import PreferencesIcon from "../../../images/icons/preferences.svg"
+import SwitchingPaneOffIcon from "../../../images/icons/smartswitch_off.svg"
 
 const Footer = ({ pageSelectorProps }: Props) => {
   const appViewsStore = useAppViewsStore()
@@ -43,7 +43,11 @@ const Footer = ({ pageSelectorProps }: Props) => {
       </div>
       {isShowingSwitchingPaneButton && (
         <div onClick={openSwitchingPane} className={"w-px-44 h-px-44 p-1 cursor-pointer"}>
-          <PreferencesIcon onClick={openSwitchingPane} className={"text-content-victronBlue"} alt={"Switching Pane"} />
+          <SwitchingPaneOffIcon
+            onClick={openSwitchingPane}
+            className={"text-content-victronBlue"}
+            alt={"Switching Pane"}
+          />
         </div>
       )}
       <SettingsMenu />
