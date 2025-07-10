@@ -43,9 +43,14 @@ const DimmableOutput = observer((props: DimmableOutputProps) => {
   return (
     <div className={classnames("mt-4", props.className)}>
       <div>{switchableOutput.customName || switchableOutput.name}</div>
-      <div className={classnames("relative inline-block mx-auto", props.className)}>
+      <div
+        className={classnames(
+          "relative inline-block mx-auto rounded-md border-2 border-content-victronBlue",
+          props.className
+        )}
+      >
         {/* Background */}
-        <div className="absolute inset-0 flex overflow-hidden rounded-md border-2 border-content-victronBlue">
+        <div className="absolute inset-0 rounded-sm flex overflow-hidden">
           {/* Color A section */}
           <div
             className={classnames("transition-all duration-300 ease-in-out", {
