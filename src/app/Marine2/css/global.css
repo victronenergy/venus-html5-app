@@ -154,6 +154,7 @@
     --c-content-primary: #000000;
     --c-content-secondary: #504F4B;
     --c-content-tertiary: #969591;
+    --c-content-on-primary: #000000;
 
     --c-victron-gray-rgb: 150, 149, 145;      /* RGB values for #969591 */
     --c-victron-blue-rgb: 56, 125, 197;       /* RGB values for #387DC5 */
@@ -178,6 +179,7 @@
   --c-content-primary: #FFFFFF;
   --c-content-secondary: #969591;
   --c-content-tertiary: #64635F;
+  --c-content-on-primary: #FFFFFF;
 }
 
 /* Semantic colors used across the app in dark red mode */
@@ -191,6 +193,7 @@
   --c-content-primary: #FF0100;
   --c-content-secondary: #B00908;
   --c-content-tertiary: #4D0807;
+  --c-content-on-primary: #4D0807;
 
   --c-victron-gray-rgb: 176, 9, 8;         /* RGB values for #B00908 */
   --c-victron-blue-rgb: 255, 1, 0;         /* RGB values for #FF0100 */

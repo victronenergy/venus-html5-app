@@ -32,12 +32,12 @@ const MomentaryOutput = observer((props: MomentaryOutputProps) => {
       <button
         className={classnames(
           "px-4 py-1.5 whitespace-nowrap",
-          "border-2 border-content-victronBlue text-content-primary cursor-pointer",
+          "border-2 border-content-victronBlue cursor-pointer",
           "text-sm min-h-[2.375rem]",
           "rounded-md",
           {
-            "bg-surface-victronBlue": variant === "off",
-            "bg-content-victronBlue": variant === "on",
+            "bg-surface-victronBlue text-content-primary": variant === "off",
+            "bg-content-victronBlue text-content-onPrimary": variant === "on",
           },
           props.className
         )}
