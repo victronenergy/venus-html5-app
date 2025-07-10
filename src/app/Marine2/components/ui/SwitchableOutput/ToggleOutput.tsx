@@ -28,7 +28,7 @@ const ToggleOutput = observer((props: ToggleOutputProps) => {
       <div className="flex">
         <button
           className={classnames(
-            "px-4 py-1.5 whitespace-nowrap",
+            "h-px-44 px-4 py-1.5 whitespace-nowrap",
             "border-2 border-content-victronBlue cursor-pointer",
             "text-sm min-h-[2.375rem]",
             "rounded-l-md",
@@ -44,7 +44,7 @@ const ToggleOutput = observer((props: ToggleOutputProps) => {
         </button>
         <button
           className={classnames(
-            "px-4 py-1.5 whitespace-nowrap",
+            "h-px-44 px-4 py-1.5 whitespace-nowrap",
             "border-2 border-content-victronBlue cursor-pointer",
             "text-sm min-h-[2.375rem]",
             "rounded-r-md",

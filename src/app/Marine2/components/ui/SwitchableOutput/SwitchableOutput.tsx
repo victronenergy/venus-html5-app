@@ -4,6 +4,7 @@ import { SwitchableOutputType, SWITCHABLE_OUTPUT_TYPE } from "@victronenergy/mfd
 import MomentaryOutput from "./MomentaryOutput"
 import { observer } from "mobx-react"
 import ToggleOutput from "./ToggleOutput"
+import DimmableOutput from "./DimmableOutput"
 
 interface SwitchableOutputProps {
   key: string
@@ -22,8 +23,10 @@ const SwitchableOutput = observer((props: SwitchableOutputProps) => {
       )
     case SWITCHABLE_OUTPUT_TYPE.TOGGLE:
       return <ToggleOutput key={key} deviceId={props.deviceId} outputId={props.outputId} className={props.className} />
-    // case SWITCHABLE_OUTPUT_TYPE.DIMMABLE:
-    //   return <DimmableOutput {...output} />
+    case SWITCHABLE_OUTPUT_TYPE.DIMMABLE:
+      return (
+        <DimmableOutput key={key} deviceId={props.deviceId} outputId={props.outputId} className={props.className} />
+      )
     // case SWITCHABLE_OUTPUT_TYPE.TEMPERATURE_SETPOINT:
     //   return <TemperatureSetpointOutput {...output} />
     // case SWITCHABLE_OUTPUT_TYPE.MULTI_STEP:
@@ -32,8 +35,6 @@ const SwitchableOutput = observer((props: SwitchableOutputProps) => {
     //   return <MultiOptionOutput {...output} />;
     // case SWITCHABLE_OUTPUT_TYPE.SLIDER:
     //   return <SliderOutput {...output} />;
-    // default:
-    //   return <div>Unknown output type</div>;
   }
 })
 

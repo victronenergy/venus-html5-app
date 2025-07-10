@@ -27,7 +27,7 @@ const MomentaryOutput = observer((props: MomentaryOutputProps) => {
       <div>{switchableOutput.customName || switchableOutput.name}</div>
       <button
         className={classnames(
-          "px-4 py-1.5 whitespace-nowrap",
+          "h-px-44 px-4 py-1.5 whitespace-nowrap",
           "border-2 border-content-victronBlue cursor-pointer",
           "text-sm min-h-[2.375rem]",
           "rounded-md",
