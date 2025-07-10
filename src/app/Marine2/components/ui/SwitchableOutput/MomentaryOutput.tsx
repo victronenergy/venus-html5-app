@@ -14,10 +14,6 @@ const MomentaryOutput = observer((props: MomentaryOutputProps) => {
   const switchableOutput = useSwitchableOutput(props.deviceId, props.outputId)
 
   const variant = switchableOutput.state === 1 ? "on" : "off"
-  const size = "md"
-  const pressed = switchableOutput.state
-
-  console.log(`DEBUG: MomentaryOutput: deviceId: ${props.deviceId}, outputId: ${props.outputId}, pressed: ${pressed}`)
 
   const handlePress = () => {
     switchableOutput.updateState(1)
@@ -37,7 +33,7 @@ const MomentaryOutput = observer((props: MomentaryOutputProps) => {
           "rounded-md",
           {
             "bg-surface-victronBlue text-content-primary": variant === "off",
-            "bg-content-victronBlue text-content-onPrimary": variant === "on",
+            "bg-content-victronBlue text-content-onVictronBlue": variant === "on",
           },
           props.className
         )}

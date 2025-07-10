@@ -90,7 +90,7 @@ module.exports = {
           primary: "var(--c-content-primary)",
           secondary: "var(--c-content-secondary)",
           tertiary: "var(--c-content-tertiary)",
-          onPrimary: "var(--c-content-on-primary)",
+          onVictronBlue: "var(--c-content-on-victron-blue)",
           victronGray: "rgba(var(--c-victron-gray-rgb), 1.0)",
           victronBlue: "rgba(var(--c-victron-blue-rgb), 1.0)",
           victronRed: "rgba(var(--c-victron-red-rgb), 1.0)",

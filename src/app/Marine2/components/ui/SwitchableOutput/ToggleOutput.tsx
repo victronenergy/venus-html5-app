@@ -14,10 +14,6 @@ const ToggleOutput = observer((props: ToggleOutputProps) => {
   const switchableOutput = useSwitchableOutput(props.deviceId, props.outputId)
 
   const variant = switchableOutput.state === 1 ? "on" : "off"
-  const size = "md"
-  const pressed = switchableOutput.state
-
-  console.log(`DEBUG: MomentaryOutput: deviceId: ${props.deviceId}, outputId: ${props.outputId}, pressed: ${pressed}`)
 
   const handleClickOn = () => {
     switchableOutput.updateState(1)
@@ -38,7 +34,7 @@ const ToggleOutput = observer((props: ToggleOutputProps) => {
             "rounded-l-md",
             {
               "bg-surface-victronBlue text-content-primary": variant === "on",
-              "bg-content-victronBlue text-content-onPrimary": variant === "off",
+              "bg-content-victronBlue text-content-onVictronBlue": variant === "off",
             },
             props.className
           )}
@@ -54,7 +50,7 @@ const ToggleOutput = observer((props: ToggleOutputProps) => {
             "rounded-r-md",
             {
               "bg-surface-victronBlue text-content-primary": variant === "off",
-              "bg-content-victronBlue text-content-onPrimary": variant === "on",
+              "bg-content-victronBlue text-content-onVictronBlue": variant === "on",
             },
             props.className
           )}
