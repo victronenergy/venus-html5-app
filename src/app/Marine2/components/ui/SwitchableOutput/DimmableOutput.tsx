@@ -50,7 +50,7 @@ const DimmableOutput = observer((props: DimmableOutputProps) => {
           <div
             className={classnames("transition-all duration-300 ease-in-out", {
               "bg-content-victronBlue": variant === "on",
-              "bg-content-victronBlue70": variant === "off",
+              "bg-content-victronBlue50": variant === "off",
             })}
             style={{ width: `${ratio}%` }}
           />

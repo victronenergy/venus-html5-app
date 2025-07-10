@@ -93,7 +93,7 @@ module.exports = {
           onVictronBlue: "var(--c-content-on-victron-blue)",
           victronGray: "rgba(var(--c-victron-gray-rgb), 1.0)",
           victronBlue: "rgba(var(--c-victron-blue-rgb), 1.0)",
-          victronBlue70: "rgba(var(--c-victron-blue-rgb), 0.7)",
+          victronBlue50: "rgba(var(--c-victron-blue-rgb), 0.5)",
           victronRed: "rgba(var(--c-victron-red-rgb), 1.0)",
           victronYellow: "rgba(var(--c-victron-yellow-rgb), 1.0)",
           victronLime: "rgba(var(--c-victron-lime-rgb), 1.0)",
