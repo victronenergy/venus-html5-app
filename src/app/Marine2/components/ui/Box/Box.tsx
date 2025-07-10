@@ -73,7 +73,7 @@ const Box = ({
           <FadedText text={title} className={activeStyles?.valueSubtitle} />
         </div>
         {linkedView && (
-          <div className="-mr-3 w-px-44 h-px-44 p-1 cursor-pointer" onClick={clickHandler}>
+          <div className="-mr-3 w-px-44 h-px-44 p-2 cursor-pointer" onClick={clickHandler}>
             <ArrowRightIcon className="text-content-victronBlue cursor-pointer outline-none" alt="Expand" />
           </div>
         )}
