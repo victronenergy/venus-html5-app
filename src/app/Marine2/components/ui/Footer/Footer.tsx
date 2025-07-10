@@ -36,13 +36,13 @@ const Footer = ({ pageSelectorProps }: Props) => {
           </div>
         )}
         {isShowingBackButton && (
-          <div onClick={handleBackClick} className={"w-px-44 h-px-44 p-1 cursor-pointer"}>
+          <div onClick={handleBackClick} className={"w-px-44 h-px-44 justify-center p-1 cursor-pointer"}>
             <BackIcon onClick={handleBackClick} className={"text-content-victronBlue"} alt={"Back"} />
           </div>
         )}
       </div>
       {isShowingSwitchingPaneButton && (
-        <div onClick={openSwitchingPane} className={"w-px-44 h-px-44 p-1 cursor-pointer"}>
+        <div onClick={openSwitchingPane} className={"w-px-44 h-px-44 justify-center p-2 cursor-pointer"}>
           <SwitchingPaneOffIcon
             onClick={openSwitchingPane}
             className={"text-content-victronBlue"}
