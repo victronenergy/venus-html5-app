@@ -26,7 +26,7 @@ const SwitchingPane = () => {
             // Sort groups by name
             .sort(([a], [b]) => a.localeCompare(b))
             .map(([groupName, groupSwitchableOutputs]) => (
-              <Box key={groupName} title={groupName}>
+              <Box key={groupName} title={groupName} withPagination={true} paginationOrientation={"vertical"}>
                 {groupSwitchableOutputs.map((switchableOutput) => (
                   <SwitchableOutput
                     className="w-full"
