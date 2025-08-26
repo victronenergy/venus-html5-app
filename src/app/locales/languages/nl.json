@@ -65,10 +65,14 @@
         "error": "Fout",
         "fault": "Fout",
         "floatCharging": "Druppel laden",
+        "generator": "Generator",
+        "grid": "Net",
         "hours": "uur",
         "hours_short": "u",
         "idle": "Inactief",
         "inputCurrentLimit": "Ingangsstroom limiet",
+        "inputCurrentLimitWithNumber": "Ingang %{inputId} stroomlimiet",
+        "inputCurrentLimitWithType": "%{inputType} Ingangsstroomlimiet",
         "inputLimit": "Maximum",
         "inverterOnly": "Alleen Omvormer",
         "inverting": "Omvormen",
@@ -80,6 +84,8 @@
         "minutes": "minuten",
         "minutes_short": "m",
         "mode": "Modus",
+        "night": "Nacht",
+        "no": "Nee",
         "noShorePower": "Geen Walstroom",
         "notAvailable": "Niet beschikbaar",
         "nrOfPhases": "%{phases} fasen",
@@ -92,6 +98,7 @@
         "remainingTime": "Resterende tijd",
         "running": "Loopt",
         "set": "Ingesteld",
+        "shorePower": "Walstroom",
         "standby": "Stand-by",
         "starting": "Opstarten",
         "stopped": "Gestopt",
@@ -101,7 +108,8 @@
         "timetogo": "resterende tijd",
         "unplugged": "Losgekoppeld",
         "veBusFault": "VE.Bus fout",
-        "voltage": "Spanning"
+        "voltage": "Spanning",
+        "yes": "Ja"
     },
     "diagnostics": {
         "connection": {
@@ -114,6 +122,9 @@
         },
         "device": {
             "device": "Apparaat",
+            "devicePixelRatio": "Pixelverhouding",
+            "isGuiV2Supported": "GUI v2 ondersteund",
+            "missing": "ontbreekt",
             "userAgent": "Gebruiker",
             "viewportHeight": "Beeld hoogte",
             "viewportWidth": "Beeld breedte"

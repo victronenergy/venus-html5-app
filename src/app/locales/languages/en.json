@@ -65,6 +65,8 @@
         "error": "Error",
         "fault": "Fault",
         "floatCharging": "Float charging",
+        "generator": "Generator",
+        "grid": "Grid",
         "hours": "hours",
         "hours_short": "h",
         "idle": "Idle",
@@ -83,11 +85,9 @@
         "minutes_short": "m",
         "mode": "Mode",
         "night": "Night",
+        "no": "No",
         "noShorePower": "No Shore Power",
         "notAvailable": "Not Available",
-        "grid": "Grid",
-        "generator": "Generator",
-        "shorePower": "Shore Power",
         "nrOfPhases": "%{phases} phases",
         "null": " ",
         "off": "Off",
@@ -98,6 +98,7 @@
         "remainingTime": "Remaining time",
         "running": "Running",
         "set": "Set",
+        "shorePower": "Shore Power",
         "standby": "Standby",
         "starting": "Starting",
         "stopped": "Stopped",
@@ -108,8 +109,7 @@
         "unplugged": "Unplugged",
         "veBusFault": "VE.Bus Fault condition",
         "voltage": "Voltage",
-        "yes": "Yes",
-        "no": "No"
+        "yes": "Yes"
     },
     "diagnostics": {
         "connection": {
@@ -122,12 +122,12 @@
         },
         "device": {
             "device": "Device",
-            "userAgent": "User agent",
-            "viewportHeight": "Viewport height",
-            "viewportWidth": "Viewport width",
             "devicePixelRatio": "Pixel Ratio",
             "isGuiV2Supported": "GUI v2 supported",
-            "missing": "missing"
+            "missing": "missing",
+            "userAgent": "User agent",
+            "viewportHeight": "Viewport height",
+            "viewportWidth": "Viewport width"
         },
         "diagnostics": "Diagnostics"
     },

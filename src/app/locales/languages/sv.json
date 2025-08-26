@@ -65,10 +65,14 @@
         "error": "Fel",
         "fault": "Fel",
         "floatCharging": "Floatladdning.",
+        "generator": "Generator",
+        "grid": "Elnät",
         "hours": "timmar",
         "hours_short": "t",
         "idle": "Tomgång",
         "inputCurrentLimit": "Gräns ingångsström",
+        "inputCurrentLimitWithNumber": "Strömgräns för ingång %{inputId}",
+        "inputCurrentLimitWithType": "Strömgräns för %{inputType}-ingång",
         "inputLimit": "Ingångsbegränsning",
         "inverterOnly": "Endast växelriktare",
         "inverting": "Växelriktning",
@@ -80,6 +84,8 @@
         "minutes": "minuter",
         "minutes_short": "m",
         "mode": "Läge",
+        "night": "Natt",
+        "no": "Nej",
         "noShorePower": "Ingen landström",
         "notAvailable": "Inte tillgänglig",
         "nrOfPhases": "%{phases} faser",
@@ -92,6 +98,7 @@
         "remainingTime": "Kvarvarande tid",
         "running": "I drift",
         "set": "Uppsättning",
+        "shorePower": "Landström",
         "standby": "Standby",
         "starting": "Startar",
         "stopped": "Stoppad",
@@ -101,7 +108,8 @@
         "timetogo": "kvar",
         "unplugged": "Urkopplad",
         "veBusFault": "VE-Bus feltillstånd",
-        "voltage": "Spänning"
+        "voltage": "Spänning",
+        "yes": "Ja"
     },
     "diagnostics": {
         "connection": {
@@ -114,6 +122,9 @@
         },
         "device": {
             "device": "Enhet",
+            "devicePixelRatio": "Pixelkvot",
+            "isGuiV2Supported": "GUI v2 stöds",
+            "missing": "saknas",
             "userAgent": "Användaragent",
             "viewportHeight": "Höjd visningsport",
             "viewportWidth": "Bredd visningsport"

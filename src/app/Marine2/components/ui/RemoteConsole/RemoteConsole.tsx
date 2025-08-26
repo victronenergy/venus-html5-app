@@ -14,7 +14,7 @@ const RemoteConsole = ({ host, width, height }: Props) => {
   const [iframeLoaded, setIframeLoaded] = useState(false)
   const loading = !iframeLoaded
   const protocol = (typeof window !== "undefined" && window.location.protocol) || "http:"
-  const url = protocol + "//" + host
+  const url = protocol + "//" + host + "/?fullscreen"
   const app = useAppStore()
   const browserFeatures = useBrowserFeatures()
 
@@ -31,7 +31,7 @@ const RemoteConsole = ({ host, width, height }: Props) => {
     `GUI v2 supported: ${browserFeatures.isGuiV2Supported}, missing: ${JSON.stringify(browserFeatures.missingFeatures)}`
   )
 
-  const consoleUrl = `${window.location.protocol}//venus.local/`
+  const consoleUrl = `${window.location.protocol}//venus.local/?fullscreen`
 
   if (app.guiVersion !== 1 && browserFeatures.isGuiV2Supported === false) {
     return (

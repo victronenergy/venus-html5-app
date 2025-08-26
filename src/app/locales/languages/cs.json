@@ -65,10 +65,14 @@
         "error": "Chyba",
         "fault": "Závada",
         "floatCharging": "Udržovací nabíjení",
+        "generator": "Generátor",
+        "grid": "Síť",
         "hours": "hodin",
         "hours_short": "h",
         "idle": "Nečinný",
         "inputCurrentLimit": "Limit vstupního proudu",
+        "inputCurrentLimitWithNumber": "Proudový limit vstupu %{inputId}",
+        "inputCurrentLimitWithType": "Proudový limit %{inputType} vstupu",
         "inputLimit": "Vstupní limit",
         "inverterOnly": "Pouze měnič",
         "inverting": "Měnič",
@@ -80,6 +84,8 @@
         "minutes": "minut",
         "minutes_short": "m",
         "mode": "Režim",
+        "night": "Noční",
+        "no": "Ne",
         "noShorePower": "Žádné napájení ze sítě",
         "notAvailable": "Nedostupný",
         "nrOfPhases": "%{phases} fáze",
@@ -92,6 +98,7 @@
         "remainingTime": "Zbývající čas",
         "running": "Chod",
         "set": "Nastavit",
+        "shorePower": "Napájení ze sítě",
         "standby": "Standby",
         "starting": "Spuštění",
         "stopped": "Zastavený",
@@ -101,7 +108,8 @@
         "timetogo": "zbývá",
         "unplugged": "Odpojeno",
         "veBusFault": "Chybový stav sběrnice VE.Bus",
-        "voltage": "Napětí"
+        "voltage": "Napětí",
+        "yes": "Ano"
     },
     "diagnostics": {
         "connection": {
@@ -114,6 +122,9 @@
         },
         "device": {
             "device": "Zařízení",
+            "devicePixelRatio": "Poměr pixelů",
+            "isGuiV2Supported": "Podpora GUI v2",
+            "missing": "chybí",
             "userAgent": "Agent uživatele",
             "viewportHeight": "Výška panelu zobrazení",
             "viewportWidth": "Šířka panelu zobrazení"

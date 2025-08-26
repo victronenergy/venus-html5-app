@@ -65,10 +65,14 @@
         "error": "错误",
         "fault": "错误",
         "floatCharging": "浮充",
+        "generator": "发电机",
+        "grid": "电网",
         "hours": "小时",
         "hours_short": "小时",
         "idle": "空闲",
         "inputCurrentLimit": "输入电流限制",
+        "inputCurrentLimitWithNumber": "输入 %{inputId} 电流限制",
+        "inputCurrentLimitWithType": "%{inputType} 输入电流限制",
         "inputLimit": "输入限制",
         "inverterOnly": "仅逆变",
         "inverting": "逆变",
@@ -80,6 +84,8 @@
         "minutes": "分",
         "minutes_short": "分",
         "mode": "模式",
+        "night": "夜晚",
+        "no": "否",
         "noShorePower": "无岸电",
         "notAvailable": "不可用",
         "nrOfPhases": "%{phases}相数",
@@ -92,6 +98,7 @@
         "remainingTime": "剩余时间",
         "running": "正在运行",
         "set": "设置",
+        "shorePower": "岸电",
         "standby": "待机",
         "starting": "开始...",
         "stopped": "已停止",
@@ -101,7 +108,8 @@
         "timetogo": "备用时间",
         "unplugged": "未插电",
         "veBusFault": "VE Bus故障",
-        "voltage": "电压"
+        "voltage": "电压",
+        "yes": "是"
     },
     "diagnostics": {
         "connection": {
@@ -114,6 +122,9 @@
         },
         "device": {
             "device": "设备",
+            "devicePixelRatio": "像素比",
+            "isGuiV2Supported": "支持GUI v2",
+            "missing": "缺失",
             "userAgent": "用户代理",
             "viewportHeight": "视窗高度",
             "viewportWidth": "视窗宽度"

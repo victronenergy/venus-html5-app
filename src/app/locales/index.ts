@@ -19,17 +19,14 @@ const translations: TranslationRecord = Object.fromEntries(
 )
 
 // override the language with the value of the lang URL parameter, if present
+// only enabled in debug builds when `REACT_APP_ENABLE_LANG_OVERRIDE=true`
 const languageOverride = (window.location.search.match(/[?&]lang=([a-zA-Z-_]{2,5})/) || [])[1]
 
-// set the partially translated languages to fall back to English
+// disable incomplete translations, and let them be used in development
+// using the overrideLang URL parameter
 if (!languageOverride) {
-  translations["ar"] = translations["en"]
-  translations["cs"] = translations["en"]
-  translations["es"] = translations["en"]
-  translations["ro"] = translations["en"]
-  translations["ru"] = translations["en"]
-  translations["sv"] = translations["en"]
-  translations["tr"] = translations["en"]
+  // replacing incomplete translations with english until we are sure they can go to production
+  // translations["xx"] = translations["en"]
 }
 
 setHandleMissingTranslation((key, replacements) => {

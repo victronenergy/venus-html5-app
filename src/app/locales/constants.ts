@@ -1,6 +1,23 @@
 import { setLocale } from "react-i18nify"
 
-export const LANGUAGES = ["en", "fr", "ar", "cs", "de", "es", "it", "nl", "ro", "ru", "sv", "tr", "zh", "uk"]
+export const LANGUAGES = [
+  "en",
+  "fr",
+  "ar",
+  "cs",
+  "de",
+  "es",
+  "it",
+  "nl",
+  "ro",
+  "ru",
+  "sv",
+  "tr",
+  "zh",
+  "uk",
+  "af",
+  "da",
+]
 export const __LOCAL_STORAGE_LANG_KEY__ = "__LOCAL_STORAGE_LANG_KEY__"
 export const DEFAULT_LANGUAGE = "en"
 
