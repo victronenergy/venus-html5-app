@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite"
 import classnames from "classnames"
 import { translate, Translate } from "react-i18nify"
 import useSize from "@react-hook/size"
-import { useAppStore } from "@victronenergy/mfd-modules"
+import { useAppStore, useTheme } from "@victronenergy/mfd-modules"
 import { QRCode } from "react-qrcode-logo"
 import { useBrowserFeatures } from "app/Marine2/utils/hooks/use-browser-features"
 
@@ -13,10 +13,9 @@ const RemoteConsole = ({ host, width, height }: Props) => {
 
   const [iframeLoaded, setIframeLoaded] = useState(false)
   const loading = !iframeLoaded
-  const protocol = (typeof window !== "undefined" && window.location.protocol) || "http:"
-  const url = protocol + "//" + host + "/?fullscreen"
   const app = useAppStore()
   const browserFeatures = useBrowserFeatures()
+  const { themeStore } = useTheme()
 
   useEffect(() => {
     iframeRef.current?.focus()
@@ -31,13 +30,16 @@ const RemoteConsole = ({ host, width, height }: Props) => {
     `GUI v2 supported: ${browserFeatures.isGuiV2Supported}, missing: ${JSON.stringify(browserFeatures.missingFeatures)}`
   )
 
-  const consoleUrl = `${window.location.protocol}//venus.local/?fullscreen`
+  const protocol = (typeof window !== "undefined" && window.location.protocol) || "http:"
+  const colorScheme = themeStore.autoMode ? "auto" : themeStore.darkMode ? "dark" : "light"
+  const iframeUrl = `${protocol}//${host}/?fullscreen&colorScheme=${colorScheme}`
+  const qrCodeUrl = `${window.location.protocol}//venus.local/`
 
   if (app.guiVersion !== 1 && browserFeatures.isGuiV2Supported === false) {
     return (
       <div className="flex flex-col items-center w-2/3 md:w-1/3 space-y-4">
-        <QRCode value={consoleUrl} />
-        <label className="text-xs text-content-secondary sm-l:text-sm">{consoleUrl}</label>
+        <QRCode value={qrCodeUrl} />
+        <label className="text-xs text-content-secondary sm-l:text-sm">{qrCodeUrl}</label>
         <label className="text-xs text-content-secondary sm-l:text-sm text-center">
           <Translate value={"error.remoteConsole.qrCodeMessage"} />
         </label>
@@ -67,7 +69,7 @@ const RemoteConsole = ({ host, width, height }: Props) => {
         <iframe
           ref={iframeRef}
           className={iframeClassNames}
-          src={url}
+          src={iframeUrl}
           title={translate("pages.remoteConsole")}
           onLoad={() => setIframeLoaded(true)}
         />
