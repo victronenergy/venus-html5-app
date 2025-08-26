@@ -37,16 +37,6 @@ const SettingsMenu = () => {
     }
   }, [])
 
-  const setAutoMode = () => {
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)")
-
-    if (mediaQuery.matches && !themeStore.darkMode) {
-      themeStore.setDarkMode(true)
-    } else if (!mediaQuery.matches && themeStore.darkMode) {
-      themeStore.setDarkMode(false)
-    }
-  }
-
   const openRemoteConsole = () => {
     appViewsStore.setView(AppViews.REMOTE_CONSOLE)
   }
@@ -94,7 +84,13 @@ const SettingsMenu = () => {
                 <span className="mr-1 text-sm sm-m:mr-2 sm-l:text-base text-content-primary">
                   {translate("common.light")}
                 </span>
-                <RadioButton onChange={() => themeStore.setDarkMode(false)} selected={!themeStore.darkMode} />
+                <RadioButton
+                  onChange={() => {
+                    themeStore.setDarkMode(false)
+                    themeStore.setAutoMode(false)
+                  }}
+                  selected={!themeStore.darkMode}
+                />
               </label>
               <label
                 className="flex justify-between items-center pb-4 sm-m:pb-6 sm-l:pb-8"
@@ -103,13 +99,23 @@ const SettingsMenu = () => {
                 <span className="mr-1 text-sm sm-m:mr-2 sm-l:text-base text-content-primary">
                   {translate("common.dark")}
                 </span>
-                <RadioButton onChange={() => themeStore.setDarkMode(true)} selected={themeStore.darkMode} />
+                <RadioButton
+                  onChange={() => {
+                    themeStore.setDarkMode(true)
+                    themeStore.setAutoMode(false)
+                  }}
+                  selected={themeStore.darkMode}
+                />
               </label>
               <label className="flex justify-between items-center pb-4 sm-m:pb-6 sm-l:pb-8">
                 <span className="mr-1 text-sm sm-m:mr-2 sm-l:text-base text-content-primary">
                   {translate("common.auto")}
                 </span>
-                <ToggleSwitch id="ToggleAutoMode" onChange={setAutoMode} />
+                <ToggleSwitch
+                  id="ToggleAutoMode"
+                  onChange={(e) => themeStore.setAutoMode(e.target.checked)}
+                  selected={themeStore.autoMode}
+                />
               </label>
               <label className="flex justify-between items-center pb-4 sm-m:pb-6 sm-l:pb-8">
                 <span className="mr-1 text-sm sm-m:mr-2 sm-l:text-base text-content-primary">
@@ -119,8 +125,9 @@ const SettingsMenu = () => {
                   id="ToggleNightMode"
                   onChange={() => {
                     themeStore.setNightMode(!themeStore.nightMode)
-                    if (themeStore.nightMode) {
+                    if (themeStore.nightMode && !themeStore.darkMode) {
                       themeStore.setDarkMode(true)
+                      themeStore.setAutoMode(false)
                     }
                   }}
                   selected={themeStore.nightMode}
