@@ -4,17 +4,31 @@ import VersionInfo from "../VersionInfo"
 import PageSelector, { PageSelectorProps } from "../PageSelector"
 import BackIcon from "../../../images/icons/back.svg"
 import { AppViews, useAppViewsStore } from "../../../modules/AppViews"
+import SwitchingPaneOffIcon from "../../../images/icons/smartswitch_off.svg"
+import SwitchingPaneOnIcon from "../../../images/icons/smartswitch_on.svg"
 
 const Footer = ({ pageSelectorProps }: Props) => {
   const appViewsStore = useAppViewsStore()
-  const [isShowBack, setShowBack] = useState(appViewsStore.currentView !== AppViews.ROOT)
+  const [isShowingBackButton, setIsShowingBackButton] = useState(appViewsStore.currentView !== AppViews.ROOT)
+  const [isShowingSwitchingPaneButton, setIsShowingSwitchingPaneButton] = useState(
+    appViewsStore.currentView === AppViews.ROOT
+  )
+  const [isShowingSwitchingPane, setIsShowingSwitchingPane] = useState(
+    appViewsStore.currentView === AppViews.SWITCHING_PANE
+  )
 
   const handleBackClick = () => {
     appViewsStore.setView(AppViews.ROOT)
   }
 
+  const openSwitchingPane = () => {
+    appViewsStore.setView(AppViews.SWITCHING_PANE)
+  }
+
   useEffect(() => {
-    setShowBack(appViewsStore.currentView !== AppViews.ROOT)
+    setIsShowingBackButton(appViewsStore.currentView !== AppViews.ROOT)
+    setIsShowingSwitchingPaneButton(appViewsStore.currentView === AppViews.ROOT)
+    setIsShowingSwitchingPane(appViewsStore.currentView === AppViews.SWITCHING_PANE)
   }, [appViewsStore.currentView])
 
   return (
@@ -26,9 +40,27 @@ const Footer = ({ pageSelectorProps }: Props) => {
             <PageSelector {...pageSelectorProps} selectorLocation="bottom-center" />
           </div>
         )}
-        {isShowBack && (
-          <div onClick={handleBackClick} className={"w-px-44 h-px-44 p-1 cursor-pointer"}>
-            <BackIcon onClick={handleBackClick} className={"text-content-victronBlue"} alt={"Back"} />
+        {isShowingBackButton && (
+          <>
+            {!isShowingSwitchingPane && (
+              <div onClick={handleBackClick} className={"w-px-44 h-px-44 justify-center p-1 cursor-pointer"}>
+                <BackIcon onClick={handleBackClick} className={"text-content-victronBlue"} alt={"Back"} />
+              </div>
+            )}
+            {isShowingSwitchingPane && (
+              <div onClick={handleBackClick} className={"w-px-44 h-px-44 justify-center p-2 cursor-pointer"}>
+                <SwitchingPaneOnIcon onClick={handleBackClick} className={"text-content-victronBlue"} alt={"Back"} />
+              </div>
+            )}
+          </>
+        )}
+        {isShowingSwitchingPaneButton && (
+          <div onClick={openSwitchingPane} className={"w-px-44 h-px-44 justify-center p-2 cursor-pointer"}>
+            <SwitchingPaneOffIcon
+              onClick={openSwitchingPane}
+              className={"text-content-victronBlue"}
+              alt={"Switching Pane"}
+            />
           </div>
         )}
       </div>
