@@ -46,8 +46,6 @@ export const Marine2 = observer((props: AppProps) => {
         return <RemoteConsoleView host={host} />
       case AppViews.DIAGNOSTICS:
         return <DiagnosticsView />
-      case AppViews.SWITCHING_PANE:
-        return <SwitchingPane />
       default:
         return <RootView />
     }
