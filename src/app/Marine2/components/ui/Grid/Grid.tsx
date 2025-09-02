@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react"
+import React, { useLayoutEffect, useMemo, useRef, useState } from "react"
 import classnames from "classnames"
 import useSize from "@react-hook/size"
 
@@ -47,7 +47,7 @@ const Grid = ({
     return `${100 / elementsInRow}%`
   }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const gridSize = { width, height }
     if (!gridSize.width || !gridSize.height || forceOneDimensionRatio <= 0) {
       return
