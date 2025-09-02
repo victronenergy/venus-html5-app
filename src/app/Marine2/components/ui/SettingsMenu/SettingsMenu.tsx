@@ -79,30 +79,36 @@ const SettingsMenu = () => {
               <label className="text-xs sm-l:text-sm text-content-secondary">{translate("common.mode")}</label>
               <label
                 className="flex justify-between items-center pt-2 pb-4 sm-m:pb-6 sm-l:pb-8"
-                onClick={() => themeStore.setDarkMode(false)}
+                onClick={() => {
+                  themeStore.setAutoMode(false)
+                  themeStore.setDarkMode(false)
+                }}
               >
                 <span className="mr-1 text-sm sm-m:mr-2 sm-l:text-base text-content-primary">
                   {translate("common.light")}
                 </span>
                 <RadioButton
                   onChange={() => {
-                    themeStore.setDarkMode(false)
                     themeStore.setAutoMode(false)
+                    themeStore.setDarkMode(false)
                   }}
                   selected={!themeStore.darkMode}
                 />
               </label>
               <label
                 className="flex justify-between items-center pb-4 sm-m:pb-6 sm-l:pb-8"
-                onClick={() => themeStore.setDarkMode(true)}
+                onClick={() => {
+                  themeStore.setAutoMode(false)
+                  themeStore.setDarkMode(true)
+                }}
               >
                 <span className="mr-1 text-sm sm-m:mr-2 sm-l:text-base text-content-primary">
                   {translate("common.dark")}
                 </span>
                 <RadioButton
                   onChange={() => {
-                    themeStore.setDarkMode(true)
                     themeStore.setAutoMode(false)
+                    themeStore.setDarkMode(true)
                   }}
                   selected={themeStore.darkMode}
                 />
@@ -126,8 +132,8 @@ const SettingsMenu = () => {
                   onChange={() => {
                     themeStore.setNightMode(!themeStore.nightMode)
                     if (themeStore.nightMode && !themeStore.darkMode) {
-                      themeStore.setDarkMode(true)
                       themeStore.setAutoMode(false)
+                      themeStore.setDarkMode(true)
                     }
                   }}
                   selected={themeStore.nightMode}
