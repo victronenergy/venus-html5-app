@@ -1,15 +1,27 @@
-import PageSelector, { PageSelectorProps } from "../PageSelector"
+import PageSelector, { PageSelectorProps, SelectorLocation } from "../PageSelector"
 import classnames from "classnames"
-import React, { useState, useRef, useEffect } from "react"
+import React, { useState, useRef, useLayoutEffect } from "react"
 import useSize from "@react-hook/size"
 
-const PageFlipper = ({ children, pageSelectorPropsSetter, pages, currentPageSetter, startingPage }: Props) => {
+/// Takes the horizontal space occupied by `children` and divides it by number of `pages`
+/// and clips to display only one page at a time, starting at `startingPage`.
+/// Uses either built in `PageSelector` to navigate between pages and pass the result back via `currentPageSetter`,
+/// or you can pass in your own page selector component via `pageSelectorPropsSetter`.
+const PageFlipper = ({
+  children,
+  pageSelectorPropsSetter,
+  pages,
+  currentPageSetter,
+  startingPage,
+  selectorLocation = "bottom-full",
+}: Props) => {
   const wrapperRef = useRef<HTMLDivElement>(null)
   const pageRef = useRef<HTMLDivElement>(null)
   const [width, height] = useSize(wrapperRef)
   const [currentPage, setCurrentPage] = useState(startingPage ?? 0)
+  const [cachedCurrentPage] = useState(startingPage ?? 0)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (pageSelectorPropsSetter) {
       pageSelectorPropsSetter({
         onClickLeft: () => setCurrentPage(currentPage - 1),
@@ -20,27 +32,39 @@ const PageFlipper = ({ children, pageSelectorPropsSetter, pages, currentPageSett
     }
   }, [currentPage, pageSelectorPropsSetter, pages])
 
-  useEffect(() => {
+  // Restore scroll position to cachedCurrentPage when viewport changes
+  useLayoutEffect(() => {
     if (!pageRef.current) {
       return
     }
+    const offset = cachedCurrentPage * pageRef.current.offsetWidth
+    pageRef.current.scrollLeft = offset
+  }, [width, height, cachedCurrentPage])
+
+  // Smooth scroll to new position when currentPage changes
+  useLayoutEffect(() => {
+    if (!pageRef.current) {
+      return
+    }
+    const offset = currentPage * pageRef.current.offsetWidth
+
     if (typeof pageRef.current.scrollTo !== "function") {
-      pageRef.current.scrollLeft = currentPage * pageRef.current.offsetWidth
+      pageRef.current.scrollLeft = offset
       return
     }
 
     pageRef.current.scrollTo({
-      left: currentPage * pageRef.current.offsetWidth,
+      left: offset,
       behavior: "smooth",
     })
-  }, [width, height, currentPage])
+  }, [currentPage])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!currentPageSetter) return
     currentPageSetter(currentPage)
   }, [currentPage, currentPageSetter])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (pages && currentPage && currentPage > pages - 1) setCurrentPage(pages - 1)
   }, [currentPage, pages])
 
@@ -51,17 +75,12 @@ const PageFlipper = ({ children, pageSelectorPropsSetter, pages, currentPageSett
         "flex flex-col justify-between": !pageSelectorPropsSetter,
       })}
     >
-      <div
-        ref={pageRef}
-        className={classnames("overflow-hidden w-full", {
-          "h-[calc(100%-56px)]": !pageSelectorPropsSetter && pages > 1,
-          "h-full": !!pageSelectorPropsSetter || pages === 1,
-        })}
-      >
+      <div ref={pageRef} className={classnames("overflow-hidden w-full h-full", {})}>
         {children}
       </div>
       {!pageSelectorPropsSetter && pages > 1 && (
         <PageSelector
+          selectorLocation={selectorLocation}
           onClickLeft={() => {
             setCurrentPage(currentPage - 1)
           }}
@@ -82,6 +101,7 @@ interface Props {
   pageSelectorPropsSetter?: (arg0: PageSelectorProps) => void
   currentPageSetter?: (arg0: number) => void
   startingPage?: number
+  selectorLocation?: SelectorLocation
 }
 
 export default PageFlipper
