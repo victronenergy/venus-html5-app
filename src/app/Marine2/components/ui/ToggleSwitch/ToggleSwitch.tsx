@@ -5,7 +5,7 @@ interface Props {
   selected?: boolean
   disabled?: boolean
   color?: string
-  onChange: () => void
+  onChange: React.ChangeEventHandler<HTMLInputElement>
 }
 
 const ToggleSwitch: React.FC<Props> = ({ id, onChange, selected, disabled }) => {
