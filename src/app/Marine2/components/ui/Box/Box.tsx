@@ -23,6 +23,8 @@ export interface BoxProps {
   paginationOrientation?: ScreenOrientation
   getBoxSizeCallback?: (size: ISize) => void
   setRef?: RefObject<HTMLDivElement>
+  roundLeftCorners?: boolean
+  roundRightCorners?: boolean
 }
 
 const Box = ({
@@ -36,6 +38,8 @@ const Box = ({
   setRef,
   infoText,
   paginationOrientation = "horizontal",
+  roundLeftCorners = true,
+  roundRightCorners = true,
 }: BoxProps) => {
   const appViewsStore = useAppViewsStore()
   const boxRef = useRef<HTMLDivElement>(null)
@@ -60,8 +64,12 @@ const Box = ({
     <div
       ref={boxRef}
       className={classNames(
+        className,
         "w-full h-full min-h-0 px-4 pt-1 pb-2 sm-m:pt-2 sm-m:pb-3 flex flex-col bg-surface-secondary border-outline-secondary border-px-1 rounded-md",
-        className
+        {
+          "rounded-l-none": roundLeftCorners === false,
+          "rounded-r-none": roundRightCorners === false,
+        }
       )}
     >
       <div className="w-full min-w-0 min-h-px-44 flex justify-between items-center">
