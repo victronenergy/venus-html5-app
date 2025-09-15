@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { useLayoutEffect, useRef, useState } from "react"
 import Grid, { GridProps } from "../Grid"
 import range from "lodash-es/range"
 import classnames from "classnames"
@@ -29,7 +29,7 @@ const GridPaginator = ({
   const [fixedFlow, setFixedFlow] = useState<"row" | "col">()
 
   // automatically change perPage if grid size is too small
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!width || !height) {
       return
     }
@@ -78,7 +78,12 @@ const GridPaginator = ({
   if (pages === 1) {
     return (
       <div className={"h-full w-full min-h-0 min-w-0"} ref={gridPaginatorRef}>
-        <Grid childClassName={childClassName} flow={flow} className={className}>
+        <Grid
+          childClassName={childClassName}
+          flow={flow}
+          className={className}
+          forceOneDimensionRatio={forceOneDimensionRatio}
+        >
           {childrenArray}
         </Grid>
       </div>
