@@ -54,7 +54,7 @@ const Grid = ({
     }
 
     const ratio = gridSize.width / gridSize.height
-    const isOneDimension = ratio > 1 ? ratio > forceOneDimensionRatio : 1 - 1 / forceOneDimensionRatio > ratio
+    const isOneDimension = ratio >= 1 ? ratio >= forceOneDimensionRatio : ratio <= 1 / forceOneDimensionRatio
 
     setForceOneDimension(isOneDimension)
     setGridFlow(isOneDimension ? (ratio > 1 ? "row" : "col") : flow)
