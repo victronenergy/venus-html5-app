@@ -17,7 +17,7 @@ const Frame: FC<Props> = ({ children, open = true, onClose, className }) => {
   return (
     <div className={classes} onClick={onClose}>
       <div className={classNames("absolute", className)} onClick={(e) => e.stopPropagation()}>
-        <div className="overflow-hidden bg-surface-secondary rounded-md shadow-[0_8px_24px_-15px_rgba(0,0,0,0.75)]">
+        <div className="h-full overflow-hidden bg-surface-secondary rounded-md shadow-[0_8px_24px_-15px_rgba(0,0,0,0.75)]">
           {children}
         </div>
       </div>
@@ -32,11 +32,14 @@ interface BodyProps {
 }
 
 const Body: FC<BodyProps> = ({ children, className, variant = "default" }) => {
-  const classes = classNames("text-content-primary", {
-    "px-4 md:px-10 lg:px-16 pt-6 pb-6 md:pb-10": variant === "default",
-    "p-4": variant === "popUp",
-    className: className,
-  })
+  const classes = classNames(
+    "text-content-primary",
+    {
+      "px-4 md:px-10 lg:px-16 pt-6 pb-6 md:pb-10": variant === "default",
+      "p-4": variant === "popUp",
+    },
+    className
+  )
   return <div className={classes}>{children}</div>
 }
 
