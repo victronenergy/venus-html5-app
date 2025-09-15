@@ -45,7 +45,7 @@ const DimmableOutput = observer((props: DimmableOutputProps) => {
       <div>{switchableOutput.customName || switchableOutput.name}</div>
       <div
         className={classnames(
-          "relative inline-block mx-auto rounded-md border-2 border-content-victronBlue",
+          "relative inline-block h-px-44 rounded-md border-2 border-content-victronBlue",
           props.className
         )}
       >
@@ -67,7 +67,7 @@ const DimmableOutput = observer((props: DimmableOutputProps) => {
         </div>
         <div className="relative z-10 flex">
           <button
-            className={classnames("w-px-44 h-px-44 justify-center p-3 cursor-pointer", {
+            className={classnames("w-px-44 h-px-44 -m-0.5 object-contain justify-center px-3 cursor-pointer", {
               "text-content-primary": ratio <= 2,
               "text-content-onVictronBlue": ratio > 2,
             })}
@@ -78,7 +78,7 @@ const DimmableOutput = observer((props: DimmableOutputProps) => {
           <button
             className={classnames(
               "flex-1",
-              "px-4 py-1.5 whitespace-nowrap",
+              "h-px-44 -m-0.5 px-4 whitespace-nowrap",
               "cursor-pointer",
               "text-sm min-h-[2.375rem]",
               {
@@ -91,7 +91,7 @@ const DimmableOutput = observer((props: DimmableOutputProps) => {
             {variant === "on" ? "On" : "Off"}
           </button>
           <button
-            className={classnames("w-px-44 h-px-44 justify-center p-3 cursor-pointer", {
+            className={classnames("w-px-44 h-px-44 -m-0.5 object-contain justify-center px-3 cursor-pointer", {
               "text-content-primary": ratio < 98,
               "text-content-onVictronBlue": ratio >= 98,
             })}
