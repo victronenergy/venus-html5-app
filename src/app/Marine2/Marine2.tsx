@@ -12,7 +12,6 @@ import Connecting from "./components/ui/Connecting"
 import DiagnosticsView from "./components/views/DiagnosticsView"
 import MqttUnavailable from "./components/ui/MqttUnavailable"
 import ErrorFallback from "./components/ui/Error"
-import SwitchingPane from "./components/views/SwitchingPane"
 
 export const Marine2 = observer((props: AppProps) => {
   // init App
