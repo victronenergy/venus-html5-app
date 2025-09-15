@@ -1,14 +1,50 @@
-import React, { useRef, useEffect, useCallback } from "react"
-import { SelectorLocation } from "../PageSelector"
+import React, { useRef, useEffect, useCallback, useLayoutEffect } from "react"
+import PageSelector, { SelectorLocation } from "../PageSelector"
 import { observer } from "mobx-react"
 import { ScreenOrientation } from "@m2Types/generic/screen-orientation"
 
+/// Every Page contains several children referenced by their index in original un-paged array
+export type Children<T extends JSX.Element = JSX.Element> = T[]
+export type Page<T extends JSX.Element = JSX.Element> = {
+  indexes: number[]
+  children: Children<T>
+}
+/// Result if list of Pages
+export type Pages<T extends JSX.Element = JSX.Element> = Page<T>[]
+
 /// Render children offscreen and split them into pages based on availableSpace
 /// Invoke onPagesCalculated callback when split is complete
-/// TODO: Take into account position and size of paging navigation
-const OffscreenPageSplitter = ({ children, orientation = "vertical", availableSpace, onPagesCalculated }: Props) => {
-  const measureRef = useRef<HTMLDivElement>(null)
+const OffscreenPageSplitter = <T extends JSX.Element = JSX.Element>({
+  children,
+  orientation = "vertical",
+  availableSpace,
+  selectorLocation = "bottom-center",
+  isSelectorAlwaysDisplayed = false,
+  identifier,
+  onPagesCalculated,
+}: Props<T>) => {
+  const measureChildrenRef = useRef<HTMLDivElement>(null)
+  const measurePageSelectorRef = useRef<HTMLDivElement>(null)
   const childRefs = useRef<(HTMLDivElement | null)[]>([])
+
+  // DEBUG: the following code dumps into console why this component re-rendered
+  // const prevProps = useRef({ children, orientation, availableSpace, onPagesCalculated })
+  // useEffect(() => {
+  //   const changed = {
+  //     children: prevProps.current.children !== children,
+  //     orientation: prevProps.current.orientation !== orientation,
+  //     availableSpace: prevProps.current.availableSpace !== availableSpace,
+  //     onPagesCalculated: prevProps.current.onPagesCalculated !== onPagesCalculated,
+  //   }
+
+  //   console.log("OffscreenPageSplitter useEffect triggered. Changes:", changed)
+
+  //   if (changed.children) {
+  //     console.log("Children changed from:", prevProps.current.children, "to:", children)
+  //   }
+
+  //   prevProps.current = { children, orientation, availableSpace, onPagesCalculated }
+  // })
 
   const measureChildren = useCallback(() => {
     const childSizes = childRefs.current.map((ref) => {
@@ -19,8 +55,6 @@ const OffscreenPageSplitter = ({ children, orientation = "vertical", availableSp
       return 0
     })
 
-    // console.log(`DEBUG: OffscreenPageSplitter childSizes: ${JSON.stringify(childSizes)}`)
-
     // Only proceed if we have valid measurements
     const hasValidMeasurements = childSizes.some((size) => size > 0)
     if (!hasValidMeasurements) {
@@ -29,24 +63,36 @@ const OffscreenPageSplitter = ({ children, orientation = "vertical", availableSp
       return
     }
 
+    // Measure page selector
+    let pageSelectorSize = 0
+    if (measurePageSelectorRef.current) {
+      const rect = measurePageSelectorRef.current.getBoundingClientRect()
+      if (
+        orientation === "vertical" &&
+        (selectorLocation?.startsWith("top") || selectorLocation?.startsWith("bottom"))
+      ) {
+        pageSelectorSize = rect.height
+      }
+      if (
+        orientation === "horizontal" &&
+        (selectorLocation?.startsWith("left") || selectorLocation?.startsWith("right"))
+      ) {
+        pageSelectorSize = rect.width
+      }
+      pageSelectorSize *= 1.5 // padding above pageSelector
+    }
+
     // Calculate pages based on sizes
     const pages = []
     let currentPage: number[] = []
     let currentSize = 0
 
     // First pass: determine whether we need pagination
-    let needsPagination = false
-    let tempSize = 0
-    for (const size of childSizes) {
-      if (tempSize + size > availableSpace && tempSize > 0) {
-        needsPagination = true
-        break
-      }
-      tempSize += size
-    }
+    const layoutSpace = isSelectorAlwaysDisplayed ? availableSpace - pageSelectorSize : availableSpace
+    const needsPagination = childSizes.reduce((sum, size) => sum + size, 0) > layoutSpace
 
-    // TODO: remove hardcoded 56 for PageSelector
-    const effectiveSpace = needsPagination ? availableSpace - 56 : availableSpace
+    // Subtract pageSelectorSize if it affects display
+    const effectiveSpace = needsPagination ? availableSpace - pageSelectorSize : availableSpace
 
     // Second pass: split into pages
     childSizes.forEach((size, index) => {
@@ -66,14 +112,24 @@ const OffscreenPageSplitter = ({ children, orientation = "vertical", availableSp
       pages.push(currentPage)
     }
 
-    const pageCount = Math.max(1, pages.length)
+    const result = pages.map((indexes) => {
+      return { indexes: indexes, children: indexes.map((i) => children[i]) }
+    })
 
     if (onPagesCalculated) {
-      onPagesCalculated(pageCount, pages, orientation)
+      onPagesCalculated(identifier, result, orientation, pageSelectorSize)
     }
-  }, [availableSpace, onPagesCalculated, orientation])
+  }, [
+    availableSpace,
+    children,
+    identifier,
+    isSelectorAlwaysDisplayed,
+    onPagesCalculated,
+    orientation,
+    selectorLocation,
+  ])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (children && children.length > 0 && availableSpace > 0) {
       measureChildren()
     }
@@ -84,40 +140,55 @@ const OffscreenPageSplitter = ({ children, orientation = "vertical", availableSp
   }
 
   return (
-    <div
-      ref={measureRef}
-      style={{
-        position: "absolute",
-        top: "0",
-        left: "0",
-        visibility: "hidden",
-        pointerEvents: "none",
-      }}
-    >
+    <>
       <div
+        ref={measureChildrenRef}
         style={{
-          display: "flex",
-          flexDirection: orientation === "vertical" ? "column" : "row",
-          flexWrap: "nowrap",
+          position: "absolute",
+          top: "0",
+          left: "0",
+          visibility: "hidden",
+          pointerEvents: "none",
         }}
       >
-        {React.Children.map(children, (child, index) => (
-          <div key={`measure-${index}`} ref={(el) => (childRefs.current[index] = el)}>
-            {child}
-          </div>
-        ))}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: orientation === "vertical" ? "column" : "row",
+            flexWrap: "nowrap",
+          }}
+        >
+          {React.Children.map(children, (child, index) => (
+            <div key={`measure-${index}`} ref={(el) => (childRefs.current[index] = el)}>
+              {child}
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+      <div
+        ref={measurePageSelectorRef}
+        style={{
+          position: "absolute",
+          top: "0",
+          left: "0",
+          visibility: "hidden",
+          pointerEvents: "none",
+        }}
+      >
+        <PageSelector maxPages={1} selectorLocation={selectorLocation} />
+      </div>
+    </>
   )
 }
 
-interface Props {
-  children: JSX.Element[]
+interface Props<T extends JSX.Element = JSX.Element> {
+  children: T[]
   orientation?: ScreenOrientation
   availableSpace: number
-  pageNumber?: number
   selectorLocation?: SelectorLocation
-  onPagesCalculated: (pageCount: number, pages: number[][], orientation: ScreenOrientation) => void
+  isSelectorAlwaysDisplayed?: boolean
+  identifier: any
+  onPagesCalculated: (identifier: any, pages: Pages<T>, orientation: ScreenOrientation, selectorSize: number) => void
 }
 
 export default observer(OffscreenPageSplitter)
