@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useCallback, useLayoutEffect } from "react"
+import React, { useRef, useCallback, useLayoutEffect } from "react"
 import PageSelector, { SelectorLocation } from "../PageSelector"
 import { observer } from "mobx-react"
 import { ScreenOrientation } from "@m2Types/generic/screen-orientation"
