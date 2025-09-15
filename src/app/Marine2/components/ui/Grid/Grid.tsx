@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react"
+import React, { useLayoutEffect, useMemo, useRef, useState } from "react"
 import classnames from "classnames"
 import useSize from "@react-hook/size"
 
@@ -47,14 +47,14 @@ const Grid = ({
     return `${100 / elementsInRow}%`
   }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const gridSize = { width, height }
     if (!gridSize.width || !gridSize.height || forceOneDimensionRatio <= 0) {
       return
     }
 
     const ratio = gridSize.width / gridSize.height
-    const isOneDimension = ratio > 1 ? ratio > forceOneDimensionRatio : 1 - 1 / forceOneDimensionRatio > ratio
+    const isOneDimension = ratio >= 1 ? ratio >= forceOneDimensionRatio : ratio <= 1 / forceOneDimensionRatio
 
     setForceOneDimension(isOneDimension)
     setGridFlow(isOneDimension ? (ratio > 1 ? "row" : "col") : flow)
