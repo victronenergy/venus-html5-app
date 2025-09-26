@@ -662,17 +662,8 @@ module.exports = function (webpackEnv) {
           context: paths.appSrc,
           cache: true,
           cacheLocation: path.resolve(paths.appNodeModules, ".cache/.eslintcache"),
-          // ESLint class options
           cwd: paths.appPath,
-          resolvePluginsRelativeTo: __dirname,
-          baseConfig: {
-            extends: [require.resolve("eslint-config-react-app/base")],
-            rules: {
-              ...(!hasJsxRuntime && {
-                "react/react-in-jsx-scope": "error",
-              }),
-            },
-          },
+          overrideConfigFile: path.resolve(__dirname, "../eslint.config.mjs"),
         }),
       new webpack.ProvidePlugin({
         Buffer: ["buffer", "Buffer"],
