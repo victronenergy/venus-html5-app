@@ -33,5 +33,5 @@ registerRoute(
   ({ request }) => request.destination === "script" || request.destination === "style",
   new StaleWhileRevalidate({
     cacheName: "static-resources",
-  })
+  }),
 )
