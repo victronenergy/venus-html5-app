@@ -8,13 +8,12 @@ const config = {
   testEnvironment: "jsdom",
   testRunner: "<rootDir>/node_modules/jest-circus/runner.js",
   transform: {
+    "^.+\\.svg$": "<rootDir>/config/jest/fileTransform.js",
     "^.+\\.(js|jsx|mjs|cjs|ts|tsx)$": "<rootDir>/config/jest/babelTransform.js",
     "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
     "^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js",
   },
-  transformIgnorePatterns: [
-    "node_modules/(?!@victronenergy/mfd-modules|lodash-es)",
-  ],
+  transformIgnorePatterns: ["node_modules/(?!@victronenergy/mfd-modules|lodash-es)"],
   modulePaths: ["./src"],
   moduleNameMapper: {
     "^react-native$": "react-native-web",
