@@ -46,7 +46,7 @@ export const SmallTank = observer(({ tankId }: TankProps) => {
   const footer = useSendUpdate(
     !hasReverseConfig ? 1 - tank.level / 100 : tank.level / 100,
     hasReverseConfig ? TANKS_CONF.REVERSE_TANK : TANKS_CONF.STANDART_TANK,
-    fluidTypeFormatter(tank.fluidType)
+    fluidTypeFormatter(tank.fluidType),
   )
 
   const unit: VolumeUnit =

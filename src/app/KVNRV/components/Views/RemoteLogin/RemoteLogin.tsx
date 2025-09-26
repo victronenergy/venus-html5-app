@@ -38,7 +38,7 @@ export const RemoteLogin = observer(() => {
     try {
       setLoading(true)
       await vrmStore.updateInstanceDetails()
-    } catch (_e) {
+    } catch {
       // was not possible to update instance details
     } finally {
       setLoading(false)
