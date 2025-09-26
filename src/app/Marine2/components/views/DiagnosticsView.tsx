@@ -39,6 +39,24 @@ const DiagnosticsView = () => {
   )
 }
 
+const getColorSchemePreferences = () => {
+  const prefersDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+  const prefersLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+  const prefersHighContrast = window.matchMedia("(prefers-contrast: high)").matches
+  const prefersLowContrast = window.matchMedia("(prefers-contrast: low)").matches
+
+  const preferences = [
+    prefersDarkMode ? translate("diagnostics.device.prefersDarkMode") : undefined,
+    prefersLightMode ? translate("diagnostics.device.prefersLightMode") : undefined,
+    prefersHighContrast ? translate("diagnostics.device.prefersHighContrast") : undefined,
+    prefersLowContrast ? translate("diagnostics.device.prefersLowContrast") : undefined,
+  ]
+    .filter((str) => str !== undefined)
+    .join(", ")
+
+  return preferences || translate("diagnostics.device.unspecified")
+}
+
 const getConnectionDiagnostics = (mqtt: MqttStore) => {
   return [
     {
@@ -80,6 +98,10 @@ const getDeviceDiagnostics = (
     {
       property: translate("diagnostics.device.devicePixelRatio"),
       value: (window.devicePixelRatio ?? 1) + "px/pt",
+    },
+    {
+      property: translate("diagnostics.device.colorScheme"),
+      value: getColorSchemePreferences(),
     },
     {
       property: translate("diagnostics.device.isGuiV2Supported"),
