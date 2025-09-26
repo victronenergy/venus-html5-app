@@ -39,7 +39,7 @@
     "jest-resolve": "^26.6.0",
     "jest-watch-typeahead": "^0.6.1",
     "lodash-es": "^4.17.21",
-    "mini-css-extract-plugin": "^2.9.2",
+    "mini-css-extract-plugin": "^2.9.4",
     "mobx": "^6.15.0",
     "mobx-react": "^9.2.0",
     "mobx-utils": "^6.1.1",
