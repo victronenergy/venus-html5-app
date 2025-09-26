@@ -674,10 +674,11 @@ module.exports = function (webpackEnv) {
       new webpack.optimize.LimitChunkCountPlugin({
         maxChunks: 1,
       }),
-      new CompressionPlugin({
-        threshold: 500000,
-        deleteOriginalAssets: true,
-      }),
+      isEnvProduction &&
+        new CompressionPlugin({
+          threshold: 500000,
+          deleteOriginalAssets: true,
+        }),
     ].filter(Boolean),
     // Turn off performance processing because we utilize
     // our own hints via the FileSizeReporter
