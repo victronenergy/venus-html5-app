@@ -20,7 +20,7 @@ const getClientEnvironment = require("./env")
 const ModuleNotFoundPlugin = require("react-dev-utils/ModuleNotFoundPlugin")
 const ForkTsCheckerWebpackPlugin = require("react-dev-utils/ForkTsCheckerWebpackPlugin")
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin")
-const CompressionPlugin = require("compression-webpack-plugin");
+const CompressionPlugin = require("compression-webpack-plugin")
 
 const appPackageJson = require(paths.appPackageJson)
 
@@ -685,7 +685,8 @@ module.exports = function (webpackEnv) {
       }),
       new CompressionPlugin({
         threshold: 500000,
-      })
+        deleteOriginalAssets: true,
+      }),
     ].filter(Boolean),
     // Turn off performance processing because we utilize
     // our own hints via the FileSizeReporter
