@@ -47,6 +47,7 @@ const getExportFileURL = async (language) => {
 
 const unflatten = (data) => {
   if (Object(data) !== data || Array.isArray(data)) return data
+  // eslint-disable-next-line no-useless-escape
   var regex = /\.?([^.\[\]]+)|\[(\d+)\]/g,
     resultholder = {}
   for (var p of Object.keys(data).sort()) {
@@ -84,7 +85,7 @@ const jsonSerializerReplacer = (_, value) => {
       const res = await api.get(url)
       fs.writeFileSync(
         `${LANGUAGES_PATH}/${language}.json`,
-        JSON.stringify(unflatten(res.data || {}), jsonSerializerReplacer, 4)
+        JSON.stringify(unflatten(res.data || {}), jsonSerializerReplacer, 4),
       )
     } catch (e) {
       console.error(`An error occured while saving the exported translations for ${language}. Error:`, e)
