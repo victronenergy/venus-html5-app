@@ -82,7 +82,11 @@ const Box = ({
         </div>
         {linkedView && (
           <div className="-mr-3 w-px-44 h-px-44 p-2 cursor-pointer" onClick={clickHandler}>
-            <ArrowRightIcon className="text-content-victronBlue cursor-pointer outline-none" alt="Expand" />
+            <ArrowRightIcon
+              className="text-content-victronBlue cursor-pointer outline-none"
+              alt="Expand"
+              data-testid="expand-icon"
+            />
           </div>
         )}
         {!linkedView && !!infoText && (

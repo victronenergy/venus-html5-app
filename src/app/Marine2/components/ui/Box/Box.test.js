@@ -33,7 +33,7 @@ describe("Box element", () => {
     )
 
     it("should show link to the linked view", () => {
-      const link = wrapper.find({ alt: "Expand" })
+      const link = wrapper.find({ "data-testid": "expand-icon" })
       expect(link.exists()).toBe(true)
       expect(link.parent().props()).toHaveProperty("onClick")
     })
