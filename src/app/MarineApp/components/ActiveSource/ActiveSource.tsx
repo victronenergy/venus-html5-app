@@ -87,7 +87,7 @@ const ActiveSourceList = observer(() => {
             <ColumnContainer key={i}>
               <ActiveSource source={source} phases={phases} active={activeInput === i} />
             </ColumnContainer>
-          )
+          ),
       )}
     </>
   )

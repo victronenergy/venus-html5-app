@@ -6,13 +6,16 @@ import SelectorButton from "../../SelectorButton"
 import { byteSize, isError } from "app/utils/util"
 import * as Sentry from "@sentry/react"
 
+// eslint-disable-next-line react/prop-types
 const Error = ({ error, ignoreButton = false, handleIgnore = () => {} }) => {
+  // eslint-disable-next-line react/prop-types
   const size = isError(error) ? byteSize(error.stack + error.message) : byteSize(JSON.stringify(error))
 
   const sendError = () => {
+    // eslint-disable-next-line react/prop-types
     const previousUiBreadcrumbs = error.breadcrumbs ? error.breadcrumbs.filter((b) => b.category.includes("ui")) : []
     previousUiBreadcrumbs.forEach((breadCrumb) =>
-      Sentry.addBreadcrumb({ ...breadCrumb, data: { trueTimestamp: breadCrumb.timestamp } })
+      Sentry.addBreadcrumb({ ...breadCrumb, data: { trueTimestamp: breadCrumb.timestamp } }),
     )
 
     // we need this custom text to pass by the Sentry `beforeSend` hook

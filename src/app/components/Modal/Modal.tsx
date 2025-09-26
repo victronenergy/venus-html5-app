@@ -1,5 +1,5 @@
 import "./Modal.scss"
-import { FunctionComponent, ReactNode } from "react"
+import React, { FunctionComponent, ReactNode } from "react"
 import { Card, SIZE_WIDE, ICON_CLOSE } from "../Card"
 
 type ModalProps = {

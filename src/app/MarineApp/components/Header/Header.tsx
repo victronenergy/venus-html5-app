@@ -110,7 +110,7 @@ const HeaderWithData = observer(
         pages={pages}
       />
     )
-  }
+  },
 )
 
 const HeaderWithoutMQTTData = ({ currentView, handleRemoteConsoleButtonClicked }: HeaderProps) => {
