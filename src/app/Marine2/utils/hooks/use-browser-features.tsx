@@ -3,10 +3,9 @@ import { bigInt } from "wasm-feature-detect"
 
 function checkJSFeature(featureName: string, testCode: string): boolean {
   try {
-    // eslint-disable-next-line no-eval
     eval(testCode)
     return true
-  } catch (e) {
+  } catch {
     return false
   }
 }
@@ -21,7 +20,7 @@ function checkJSFeatures() {
     "const": "const x = 1;",
     // eslint-disable-next-line prettier/prettier
     "class": "class Test {}",
-    // eslint-disable-next-line no-template-curly-in-string
+
     "template literals": "`test ${1}`",
     // eslint-disable-next-line prettier/prettier
     "destructuring": "const {a} = {a: 1}",
@@ -58,7 +57,7 @@ function checkWebGLSupport() {
     const gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl")
     const supported = !!gl
     result = supported
-  } catch (e) {
+  } catch {
     result = false
   }
   return Promise.resolve(result)
@@ -93,7 +92,7 @@ export const useBrowserFeatures = () => {
           isGuiV2Supported: unsupported.length === 0,
           missingFeatures: unsupported,
         })
-      }
+      },
     )
   }, [])
 

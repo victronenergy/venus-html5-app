@@ -14,12 +14,12 @@ import { BOX_TYPES } from "../../utils/constants/generic"
 const RootView = () => {
   const visibleWidgetsStore = useVisibleWidgetsStore()
 
-  const [boxes, setBoxes] = React.useState<JSX.Element[]>([])
-  const [initialBoxes, setInitialBoxes] = React.useState<JSX.Element[]>([])
+  const [boxes, setBoxes] = React.useState<React.JSX.Element[]>([])
+  const [initialBoxes, setInitialBoxes] = React.useState<React.JSX.Element[]>([])
 
   useEffect(() => {
-    const visibleBoxes: JSX.Element[] = []
-    const hiddenBoxes: JSX.Element[] = []
+    const visibleBoxes: React.JSX.Element[] = []
+    const hiddenBoxes: React.JSX.Element[] = []
     for (const type of Object.values(BOX_TYPES)) {
       const isVisible = visibleWidgetsStore.visibleElements.has(type)
 

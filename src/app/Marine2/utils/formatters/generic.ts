@@ -13,7 +13,7 @@ export const colorFor = function (percentage: number) {
 
 export const timeAsStringFormatter = function (
   t: (key: string, replacements?: Replacements, options?: TranslateOptions) => string,
-  timeInSeconds: number
+  timeInSeconds: number,
 ): string {
   const hours = Math.floor(timeInSeconds / (60 * 60))
   const minutes = Math.floor((timeInSeconds / 60) % 60)

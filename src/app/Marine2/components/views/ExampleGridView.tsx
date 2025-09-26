@@ -3,7 +3,7 @@ import MainLayout from "../ui/MainLayout"
 import Grid from "../ui/Grid"
 import classNames from "classnames"
 
-const Container = ({ children, className }: { children: JSX.Element | string; className?: string }) => {
+const Container = ({ children, className }: { children: React.JSX.Element | string; className?: string }) => {
   return <div className={classNames("w-full h-full min-h-0", className)}>{children}</div>
 }
 

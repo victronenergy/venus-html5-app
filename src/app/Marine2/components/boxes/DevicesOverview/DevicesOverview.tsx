@@ -55,7 +55,7 @@ const DevicesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: Pr
     generatorConnectedGenset,
     generatorRelay,
     compactBoxSize,
-    componentMode
+    componentMode,
   )
 
   const hasValidData = !!boxes.length
@@ -105,14 +105,14 @@ const getAvailableDeviceBoxes = function (
   generatorConnectedGenset: GeneratorConnectedGensetProvider,
   generatorRelay: GeneratorRelayProvider,
   compactBoxSize: ISize,
-  componentMode?: ComponentMode
+  componentMode?: ComponentMode,
 ) {
   let devices = []
 
   if (chargers) {
     chargers.forEach((charger) => {
       devices.push(
-        <Charger key={charger} instanceId={charger} componentMode={componentMode} compactBoxSize={compactBoxSize} />
+        <Charger key={charger} instanceId={charger} componentMode={componentMode} compactBoxSize={compactBoxSize} />,
       )
     })
   }
@@ -126,7 +126,7 @@ const getAvailableDeviceBoxes = function (
           isVebusInverter={false}
           componentMode={componentMode}
           compactBoxSize={compactBoxSize}
-        />
+        />,
       )
     })
   }
@@ -140,7 +140,7 @@ const getAvailableDeviceBoxes = function (
           isVebusInverter={true}
           componentMode={componentMode}
           compactBoxSize={compactBoxSize}
-        />
+        />,
       )
     })
   }
@@ -154,7 +154,7 @@ const getAvailableDeviceBoxes = function (
           isMainVEBusDevice={id === vebusInstanceId}
           componentMode={componentMode}
           compactBoxSize={compactBoxSize}
-        />
+        />,
       )
     })
   }
@@ -167,7 +167,7 @@ const getAvailableDeviceBoxes = function (
           generatorConnectedGenset={generatorConnectedGenset}
           componentMode={componentMode}
           compactBoxSize={compactBoxSize}
-        />
+        />,
       )
     }
   }
@@ -179,7 +179,7 @@ const getAvailableDeviceBoxes = function (
         generatorConnectedGenset={generatorConnectedGenset}
         componentMode={componentMode}
         compactBoxSize={compactBoxSize}
-      />
+      />,
     )
   }
 
@@ -196,7 +196,7 @@ const getAvailableDeviceBoxes = function (
           active={generatorRelay.statusCode === 1}
           componentMode={componentMode}
           compactBoxSize={compactBoxSize}
-        />
+        />,
       )
     } else if (generatorRelay.settings.includes(AC_SOURCE.GENERATOR)) {
       // we do not have relay controlled generator configured,
@@ -213,7 +213,7 @@ const getAvailableDeviceBoxes = function (
                 active={generatorRelay.activeInput === i}
                 componentMode={componentMode}
                 compactBoxSize={compactBoxSize}
-              />
+              />,
             )
         })
       }

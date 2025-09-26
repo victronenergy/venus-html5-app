@@ -56,7 +56,7 @@ const GeneratorConnectedGenset = ({ componentMode = "compact", generatorConnecte
       gensetState.phases,
       gensetState.current as number[],
       gensetState.power as number[],
-      electricalPowerIndicator
+      electricalPowerIndicator,
     )
     unit = phaseUnitFor(gensetState.phases, electricalPowerIndicator)
   } else {

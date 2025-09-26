@@ -80,7 +80,7 @@ const getConnectionDiagnostics = (mqtt: MqttStore) => {
 
 const getDeviceDiagnostics = (
   windowSize: { width?: number; height?: number },
-  browserFeatures: { isGuiV2Supported: boolean; missingFeatures: string[] }
+  browserFeatures: { isGuiV2Supported: boolean; missingFeatures: string[] },
 ) => {
   return [
     {

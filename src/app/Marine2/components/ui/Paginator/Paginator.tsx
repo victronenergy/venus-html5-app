@@ -26,7 +26,7 @@ const Paginator = ({
   const [pageNum, setPageNum] = useState(0)
   const [currentPage, setCurrentPage] = useState(0)
 
-  const [pagesElement, setPagesElement] = useState<JSX.Element>()
+  const [pagesElement, setPagesElement] = useState<React.JSX.Element>()
 
   const setStartingPage = useCallback(
     (pages: number) => {
@@ -34,7 +34,7 @@ const Paginator = ({
         setCurrentPage(pages - 1)
       }
     },
-    [currentPage, pageNum]
+    [currentPage, pageNum],
   )
 
   const splitIntoPages = useCallback(
@@ -142,7 +142,7 @@ const Paginator = ({
       setStartingPage(newPagesArray.length)
       setPageNum(newPagesArray.length)
     },
-    [childrenArray, orientation, pageNumber, pageSelectorPropsSetter, selectorLocation, setStartingPage]
+    [childrenArray, orientation, pageNumber, pageSelectorPropsSetter, selectorLocation, setStartingPage],
   )
 
   const paginate = useCallback(() => {
@@ -199,7 +199,7 @@ const Paginator = ({
 }
 
 interface Props {
-  children: JSX.Element[] | JSX.Element | string
+  children: React.JSX.Element[] | React.JSX.Element | string
   orientation?: ScreenOrientation
   pageNumber?: number
   selectorLocation?: SelectorLocation

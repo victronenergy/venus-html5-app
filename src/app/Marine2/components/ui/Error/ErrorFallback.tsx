@@ -46,7 +46,7 @@ const ErrorFallback = ({ error, resetErrorBoundary, showReset = false }: Props) 
       : []
 
     previousUiBreadcrumbs.forEach((breadCrumb: Breadcrumb) =>
-      Sentry.addBreadcrumb({ ...breadCrumb, data: { trueTimestamp: breadCrumb.timestamp } })
+      Sentry.addBreadcrumb({ ...breadCrumb, data: { trueTimestamp: breadCrumb.timestamp } }),
     )
 
     Sentry.flush().then(() => {

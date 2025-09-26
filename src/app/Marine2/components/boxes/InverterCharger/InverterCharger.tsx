@@ -27,7 +27,7 @@ const translateInputDescription = (
   isMainVEBusDevice: boolean,
   numberOfAcInputs: number,
   inputId: number,
-  settings: number[]
+  settings: number[],
 ) => {
   if (isMainVEBusDevice) {
     const inputType = formatACInputTypeFor(settings[inputId - 1])
@@ -62,7 +62,7 @@ const InverterCharger = ({ instanceId, isMainVEBusDevice, componentMode = "compa
           inputId={inputId}
           title={title}
           subtitle={inputDescription}
-        />
+        />,
       )
     }
 
@@ -70,7 +70,7 @@ const InverterCharger = ({ instanceId, isMainVEBusDevice, componentMode = "compa
       buttons.push(
         <Button key="mode" disabled={locked} className="w-full" size="md" onClick={() => setOpenModal(!openModal)}>
           {inverterChargerMode}
-        </Button>
+        </Button>,
       )
     }
     return buttons

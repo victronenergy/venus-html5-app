@@ -13,7 +13,7 @@ describe("Box element", () => {
     const wrapper = mount(
       <Box title={title}>
         <div>{content}</div>
-      </Box>
+      </Box>,
     )
 
     it("should show title", () => {
@@ -29,7 +29,7 @@ describe("Box element", () => {
     const wrapper = mount(
       <Box title={title} linkedView={linkedView}>
         <div>{content}</div>
-      </Box>
+      </Box>,
     )
 
     it("should show link to the linked view", () => {
@@ -43,7 +43,7 @@ describe("Box element", () => {
     const wrapper = mount(
       <Box title={title}>
         <div>{content}</div>
-      </Box>
+      </Box>,
     )
 
     it("should not contain paginator", () => {
@@ -55,7 +55,7 @@ describe("Box element", () => {
     const wrapper = mount(
       <Box title={title} withPagination={true} paginationOrientation={"vertical"}>
         <div>{content}</div>
-      </Box>
+      </Box>,
     )
 
     it("should contain paginator", () => {

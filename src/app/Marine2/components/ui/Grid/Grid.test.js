@@ -10,7 +10,7 @@ describe("Grid element", () => {
         <Box title={"Box1"}>Box1</Box>
         <Box title={"Box2"}>Box2</Box>
         <Box title={"Box3"}>Box3</Box>
-      </Grid>
+      </Grid>,
     )
 
     it("should show content", () => {
@@ -28,7 +28,7 @@ describe("Grid element", () => {
         <Box title={"Box1"}>Box1</Box>
         <Box title={"Box2"}>Box2</Box>
         <Box title={"Box3"}>Box3</Box>
-      </Grid>
+      </Grid>,
     )
 
     it("should show content", () => {
@@ -47,7 +47,7 @@ describe("Grid element", () => {
           <Box title={"Box1"}>Box1</Box>
           <Box title={"Box2"}>Box2</Box>
           <Box title={"Box3"}>Box3</Box>
-        </Grid>
+        </Grid>,
       )
 
       expect(wrapper.find("Box").first().parent().prop("style")).toHaveProperty("width", "100%")
@@ -60,7 +60,7 @@ describe("Grid element", () => {
           <Box title={"Box1"}>Box1</Box>
           <Box title={"Box2"}>Box2</Box>
           <Box title={"Box3"}>Box3</Box>
-        </Grid>
+        </Grid>,
       )
 
       expect(wrapper.find("Box").first().parent().prop("style")).toHaveProperty("height", "100%")
@@ -75,7 +75,7 @@ describe("Grid element", () => {
           <Box title={"Box1"}>Box1</Box>
           <Box title={"Box2"}>Box2</Box>
           <Box title={"Box3"}>Box3</Box>
-        </Grid>
+        </Grid>,
       )
 
       expect(wrapper.find("Box").last().parent().prop("style")).toHaveProperty("width", "100%")
@@ -88,7 +88,7 @@ describe("Grid element", () => {
           <Box title={"Box1"}>Box1</Box>
           <Box title={"Box2"}>Box2</Box>
           <Box title={"Box3"}>Box3</Box>
-        </Grid>
+        </Grid>,
       )
 
       expect(wrapper.find("Box").last().parent().prop("style")).toHaveProperty("height", "100%")

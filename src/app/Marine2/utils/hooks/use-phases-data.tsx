@@ -6,7 +6,7 @@ export const usePhasesData = (
   voltage: number[],
   current: number[],
   power: number[],
-  unplugged?: boolean
+  unplugged?: boolean,
 ): ValueWithUnit[][] =>
   useMemo(
     () =>
@@ -15,5 +15,5 @@ export const usePhasesData = (
         { value: !unplugged ? current[index] : undefined, unit: "A" },
         { value: !unplugged ? power[index] : undefined, unit: "W", hideDecimal: true },
       ]),
-    [phases, voltage, current, power, unplugged]
+    [phases, voltage, current, power, unplugged],
   )

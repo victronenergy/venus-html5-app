@@ -37,7 +37,6 @@ const MqttUnavailable = ({ host }: Props) => {
       clearTimeout((connectTimeout.current as NodeJS.Timeout) || undefined)
       setIsConnecting(false)
     }, 6 * 1000)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     return () => clearTimeout((connectTimeout.current as NodeJS.Timeout) || undefined)
   }, [])
 

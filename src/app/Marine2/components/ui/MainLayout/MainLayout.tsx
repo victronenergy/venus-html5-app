@@ -26,7 +26,7 @@ const MainLayout = ({ children, title, pageSelectorProps }: Props) => {
 }
 
 interface Props {
-  children?: JSX.Element
+  children?: React.JSX.Element
   title?: string
   pageSelectorProps?: PageSelectorProps
 }

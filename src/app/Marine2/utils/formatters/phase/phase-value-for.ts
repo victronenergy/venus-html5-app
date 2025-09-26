@@ -13,7 +13,7 @@ export const phaseValueFor = (
   phases: number,
   current: number[],
   power: number[],
-  preferredElectricalPowerIndicator: number
+  preferredElectricalPowerIndicator: number,
 ) => {
   if (isSinglePhaseFor(phases) && preferredElectricalPowerIndicator === 1) {
     return current[0]

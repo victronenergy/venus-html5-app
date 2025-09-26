@@ -1,4 +1,4 @@
-import { FC } from "react"
+import React, { FC } from "react"
 import { ISize } from "@m2Types/generic/size"
 import { colorFor } from "../../../utils/formatters/generic"
 import { applyStyles } from "../../../utils/media"
@@ -8,7 +8,7 @@ import classNames from "classnames"
 
 interface Props {
   percentage: number
-  children?: JSX.Element
+  children?: React.JSX.Element
   boxSize: ISize
 }
 
