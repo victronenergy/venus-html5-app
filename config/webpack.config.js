@@ -313,6 +313,7 @@ module.exports = function (webpackEnv) {
         stream: require.resolve("stream-browserify"),
         buffer: require.resolve("buffer"),
         url: require.resolve("url/"),
+        process: require.resolve("process/browser"),
       },
     },
     module: {
@@ -324,6 +325,7 @@ module.exports = function (webpackEnv) {
           // hasn't `requireEnsure` parameter in config, therefore we apply this rule only for Js
           test: /\.[cm]?js$/,
           parser: { requireEnsure: false },
+          resolve: { fullySpecified: false },
         },
         {
           // "oneOf" will traverse all following loaders until one will
