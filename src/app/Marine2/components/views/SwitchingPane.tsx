@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from "react"
+import React, { useCallback, useLayoutEffect, useState } from "react"
 import { observer } from "mobx-react"
 import SwitchableOutput from "../ui/SwitchableOutput"
 import { useSwitchableOutputs } from "@victronenergy/mfd-modules"
@@ -15,6 +15,14 @@ const SwitchingPane = () => {
 
   const [groupNames, setGroupNames] = useState<string[]>([])
   const [groupsOfSwitchableOutputs, setGroupsOfSwitchableOutputs] = useState<React.JSX.Element[][]>([])
+
+  const [currentPage, setCurrentPage] = useState(0)
+  const [pageCount, setPageCount] = useState(0)
+
+  const currentPageSetter = useCallback((a: number, b: number) => {
+    setPageCount(b)
+    setCurrentPage(a)
+  }, [])
 
   useLayoutEffect(() => {
     const x = Object.entries(switchableOutputs.groups)
@@ -68,23 +76,56 @@ const SwitchingPane = () => {
           className={classNames("w-5/6 max-w-5/6 h-5/6 max-h-5/6")}
         >
           <Modal.Body variant="popUp" className="h-full bg-surface-primary">
-            <GroupPaginator childrenGroups={groupsOfSwitchableOutputs} orientation="vertical">
-              {({ columnChildren, groupIndex, groupColumnIndex, groupColumnCount, isFirstColumnOnPage }) => (
-                <div
-                  className={classNames("pt-2 pb-2 h-full", {
-                    "pl-2": groupColumnIndex === 0,
-                    "pr-2": groupColumnIndex === groupColumnCount - 1,
-                  })}
-                >
-                  <Box
-                    title={groupColumnIndex === 0 || isFirstColumnOnPage ? groupNames[groupIndex] : "\u00A0"}
-                    roundLeftCorners={groupColumnIndex === 0}
-                    roundRightCorners={groupColumnIndex === groupColumnCount - 1}
+            <GroupPaginator
+              childrenGroups={groupsOfSwitchableOutputs}
+              orientation="vertical"
+              currentPageSetter={currentPageSetter}
+            >
+              {({
+                columnChildren,
+                groupIndex,
+                groupColumnIndex,
+                groupColumnCount,
+                isFirstColumnOnPage,
+                isFirstColumnOnLastPage,
+              }) => {
+                var displayPageTitle = false
+                // NOTE: display page title for first page in every group
+                if (groupColumnIndex === 0) {
+                  displayPageTitle = true
+                }
+                // NOTE: display page title for first column displayed onscreen
+                if (isFirstColumnOnPage) {
+                  displayPageTitle = true
+                }
+                // NOTE: display page title for first column displayed onscreen
+                // NOTE: when we are on the last page. (which can be non-first column
+                // NOTE: when on the before-last page). Example for three columns:
+                // groups: [a a a] [b b]
+                // page 0: [a _ _]
+                // page 1: [a] [b _]
+                // last column `a` in the first group is also first column on the last page
+                // and should not be displayed unless we are showing the last page
+                if (isFirstColumnOnLastPage && currentPage === pageCount - 1) {
+                  displayPageTitle = true
+                }
+                return (
+                  <div
+                    className={classNames("pt-2 pb-2 h-full", {
+                      "pl-2": groupColumnIndex === 0,
+                      "pr-2": groupColumnIndex === groupColumnCount - 1,
+                    })}
                   >
-                    {columnChildren}
-                  </Box>
-                </div>
-              )}
+                    <Box
+                      title={displayPageTitle ? groupNames[groupIndex] : "\u00A0"}
+                      roundLeftCorners={groupColumnIndex === 0}
+                      roundRightCorners={groupColumnIndex === groupColumnCount - 1}
+                    >
+                      {columnChildren}
+                    </Box>
+                  </div>
+                )
+              }}
             </GroupPaginator>
           </Modal.Body>
         </Modal.Frame>
