@@ -1,6 +1,6 @@
-import React, { useRef, useState, useCallback, useMemo, useLayoutEffect } from "react"
+import React, { useRef, useState, useCallback, useMemo, useLayoutEffect, useEffect } from "react"
 import classnames from "classnames"
-import { PageSelectorProps, SelectorLocation } from "../PageSelector"
+import { SelectorLocation } from "../PageSelector"
 import { observer } from "mobx-react"
 import PageFlipper from "../PageFlipper"
 import useSize from "@react-hook/size"
@@ -8,11 +8,13 @@ import { ScreenOrientation } from "@m2Types/generic/screen-orientation"
 import OffscreenPageSplitter, { Children, Pages } from "../OffscreenPageSplitter"
 
 /// Split `children` laid out in given `orientation` into pages and allow flipping through them
-/// using `PageSelector` positioned in `selectorLocation`
+/// using `PageSelector` positioned in `selectorLocation`.
+/// Notify parent about scrolling via `currentPageSetter`.
 const Paginator = <T extends React.JSX.Element>({
   children,
   orientation = "horizontal",
   selectorLocation = "bottom-full",
+  currentPageSetter = (_currentPage, _pageCount) => {},
 }: Props<T>) => {
   const childrenArray = useMemo(() => {
     return Array.isArray(children) ? children : [children]
@@ -101,6 +103,10 @@ const Paginator = <T extends React.JSX.Element>({
     }
   }, [height, orientation])
 
+  useEffect(() => {
+    currentPageSetter(currentPage, pageCount)
+  }, [currentPage, currentPageSetter, pageCount])
+
   return (
     <>
       <div>
@@ -135,7 +141,7 @@ interface Props<T extends React.JSX.Element = React.JSX.Element> {
   orientation?: ScreenOrientation
   pageNumber?: number
   selectorLocation?: SelectorLocation
-  pageSelectorPropsSetter?: (arg0: PageSelectorProps) => void
+  currentPageSetter?: (currentPage: number, pageCount: number) => void
 }
 
 export default observer(Paginator)
