@@ -99,7 +99,7 @@ const Grid = ({
 }
 
 export interface GridProps {
-  children: JSX.Element[] | JSX.Element
+  children: React.JSX.Element[] | React.JSX.Element
   onClick?: () => void
   className?: string
   childClassName?: string

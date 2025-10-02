@@ -42,7 +42,7 @@ const PageSelector = ({
 
   const isHorizontal = useMemo(
     () => selectorLocation.startsWith("bottom") || selectorLocation.startsWith("top"),
-    [selectorLocation]
+    [selectorLocation],
   )
 
   useEffect(() => {
@@ -61,7 +61,7 @@ const PageSelector = ({
       e.preventDefault()
       if (currentPage > 0) onClickLeft()
     },
-    [currentPage, onClickLeft]
+    [currentPage, onClickLeft],
   )
 
   const rightClickHandler = useCallback(
@@ -69,7 +69,7 @@ const PageSelector = ({
       e.preventDefault()
       if (currentPage < maxPages - 1) onClickRight()
     },
-    [currentPage, maxPages, onClickRight]
+    [currentPage, maxPages, onClickRight],
   )
 
   return (

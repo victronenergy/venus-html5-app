@@ -2,6 +2,7 @@ import { translate, Translate } from "react-i18nify"
 
 import "./RemoteConsole.scss"
 
+// eslint-disable-next-line react/prop-types
 const RemoteConsole = ({ onClickOutsideContainer, host }) => (
   <div className="remote-console__container" onClick={onClickOutsideContainer}>
     <iframe className="remote-console" src={"http://" + host} title={translate("header.remoteConsole")} />

@@ -22,7 +22,7 @@ const RadioButton: React.FC<Props> = ({ selected, onChange, disabled, responsive
             "border-content-victronBlue": selected,
             "md-m:w-px-24 md-m:h-px-24 md-m:border-px-2": true, // large
             "sm-s:w-px-16 sm-s:h-px-16 sm-s:border-px-1": responsive, // small
-          }
+          },
         )}
       >
         {selected && (

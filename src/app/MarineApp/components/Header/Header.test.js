@@ -13,11 +13,10 @@ describe("Header element", () => {
         setPage={() => {}}
         currentPage={1}
         pages={1}
-      />
+      />,
     )
 
     it("should show the Victron logo", () => {
-      // eslint-disable-next-line jest/valid-expect
       expect(wrapper.find("img").exists())
     })
 
@@ -35,7 +34,7 @@ describe("Header element", () => {
         setPage={() => {}}
         currentPage={1}
         pages={3}
-      />
+      />,
     )
 
     it("should show pagination", () => {

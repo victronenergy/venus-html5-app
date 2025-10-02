@@ -54,7 +54,7 @@ export const Inverter = observer(
     const source = isVebusInverter ? "vebus" : "inverter"
     let { state, mode, voltage, current, power, customName, productName, nAcInputs, updateMode } = useInverter(
       instanceId,
-      source
+      source,
     )
     nAcInputs = props.nAcInputs ?? nAcInputs
 
@@ -95,7 +95,7 @@ export const Inverter = observer(
         )}
       </>
     )
-  }
+  },
 )
 
 export default Inverter

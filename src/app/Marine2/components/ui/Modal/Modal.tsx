@@ -12,7 +12,7 @@ interface Props {
 const Frame: FC<Props> = ({ children, open = true, onClose, className }) => {
   const classes = classNames(
     "fixed inset-0 z-10 p-4 md:p-8 text-content-secondary modal items-center justify-center",
-    `${open ? "flex" : "hidden"}` // control visibility via `open` attribute (or render conditionally)
+    `${open ? "flex" : "hidden"}`, // control visibility via `open` attribute (or render conditionally)
   )
   return (
     <div className={classes} onClick={onClose}>
@@ -38,7 +38,7 @@ const Body: FC<BodyProps> = ({ children, className, variant = "default" }) => {
       "px-4 md:px-10 lg:px-16 pt-6 pb-6 md:pb-10": variant === "default",
       "p-4": variant === "popUp",
     },
-    className
+    className,
   )
   return <div className={classes}>{children}</div>
 }

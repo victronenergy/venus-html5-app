@@ -1,11 +1,11 @@
-import { CSSProperties, useLayoutEffect, useRef, useState } from "react"
+import React, { CSSProperties, useLayoutEffect, useRef, useState } from "react"
 import { observer } from "mobx-react"
 import useSize from "@react-hook/size"
 import { ScreenOrientation } from "@m2Types/generic/screen-orientation"
 import { ISize } from "@m2Types/generic/size"
 
 interface Props {
-  children: (string | JSX.Element)[] | JSX.Element | string
+  children: (string | React.JSX.Element)[] | React.JSX.Element | string
   onSizeChange: () => void
   orientation: ScreenOrientation
   className?: string

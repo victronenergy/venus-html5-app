@@ -11,7 +11,7 @@ describe("GridPaginator element", () => {
         <Box title={"Box2"}>Box2</Box>
         <Box title={"Box3"}>Box3</Box>
         <Box title={"Box4"}>Box4</Box>
-      </GridPaginator>
+      </GridPaginator>,
     )
 
     it("should show content", () => {
@@ -25,7 +25,7 @@ describe("GridPaginator element", () => {
         <GridPaginator perPage={4}>
           <Box title={"Box1"}>Box1</Box>
           <Box title={"Box2"}>Box2</Box>
-        </GridPaginator>
+        </GridPaginator>,
       )
 
       expect(wrapper.find("PageFlipper").exists()).toBe(false)
@@ -38,7 +38,7 @@ describe("GridPaginator element", () => {
           <Box title={"Box2"}>Box2</Box>
           <Box title={"Box3"}>Box3</Box>
           <Box title={"Box4"}>Box4</Box>
-        </GridPaginator>
+        </GridPaginator>,
       )
 
       expect(wrapper.find("PageFlipper").exists()).toBe(false)
@@ -52,7 +52,7 @@ describe("GridPaginator element", () => {
         <Box title={"Box2"}>Box2</Box>
         <Box title={"Box3"}>Box3</Box>
         <Box title={"Box4"}>Box4</Box>
-      </GridPaginator>
+      </GridPaginator>,
     )
 
     it("should show paginator if children count is more than defined", () => {

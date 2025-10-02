@@ -12,13 +12,11 @@ import { boxBreakpoints } from "../../../utils/media"
 /// and allow flipping through them using `PageSelector` positioned in `selectorLocation`.
 /// Pages always contain only `children` from one group, and new page is open for children
 /// from next group.
-const GroupPaginator = <T extends JSX.Element>({
+const GroupPaginator = <T extends React.JSX.Element>({
   children,
   childrenGroups,
   orientation = "horizontal",
   selectorLocation = "bottom-center",
-  pageNumber, // TODO: this should the initial page to display?
-  pageSelectorPropsSetter,
 }: Props<T>) => {
   // Layout children horizontally or vertically with min-[wh]-fit to measure thir size
   // to compute pages
@@ -47,7 +45,7 @@ const GroupPaginator = <T extends JSX.Element>({
   const [pageCount, setPageCount] = useState(0)
   const [currentPage, setCurrentPage] = useState(0)
 
-  const [pagesElement, setPagesElement] = useState<JSX.Element>()
+  const [pagesElement, setPagesElement] = useState<React.JSX.Element>()
 
   const setStartingPage = useCallback(
     (startingPage: number) => {
@@ -55,16 +53,16 @@ const GroupPaginator = <T extends JSX.Element>({
         setCurrentPage(startingPage - 1)
       }
     },
-    [currentPage, pageCount]
+    [currentPage, pageCount],
   )
 
   const onPagesForGroupCalculated = useCallback(
-    (index: number, pages: Pages<T>, orientation: ScreenOrientation, selectorSize: number) => {
+    (index: number, pages: Pages<T>, _orientation: ScreenOrientation, _selectorSize: number) => {
       setPagingResults((prev) => {
         return [...prev.slice(0, index), pages, ...prev.slice(index + 1)]
       })
     },
-    []
+    [],
   )
 
   useLayoutEffect(() => {
@@ -154,14 +152,15 @@ const GroupPaginator = <T extends JSX.Element>({
         {groupsOfChildrenToMeasure.map((group, index) => (
           <div key={`splitter_${index}`}>
             <OffscreenPageSplitter
-              children={groupsOfChildrenToMeasure[index]}
               orientation={orientation}
               availableSpace={availableSpace - 40} // TODO: subtract Box title height properly
               selectorLocation={selectorLocation}
               isSelectorAlwaysDisplayed={groupsOfChildrenToMeasure.length > 1}
               identifier={index}
               onPagesCalculated={onPagesForGroupCalculated}
-            />
+            >
+              {groupsOfChildrenToMeasure[index]}
+            </OffscreenPageSplitter>
           </div>
         ))}
       </div>
@@ -194,7 +193,7 @@ function isFirstColumnOnPage(columnIndex: number, totalColumns: number, columnsP
   return columnIndex === lastPageStart
 }
 
-interface PaginationState<T extends JSX.Element = JSX.Element> {
+interface PaginationState<T extends React.JSX.Element = React.JSX.Element> {
   columnIndex: number
   columnCount: number
   columnsPerPage: number
@@ -205,9 +204,11 @@ interface PaginationState<T extends JSX.Element = JSX.Element> {
   isFirstColumnOnPage: boolean
 }
 
-type PaginationRenderer<T extends JSX.Element = JSX.Element> = (state: PaginationState<T>) => JSX.Element
+type PaginationRenderer<T extends React.JSX.Element = React.JSX.Element> = (
+  state: PaginationState<T>,
+) => React.JSX.Element
 
-interface Props<T extends JSX.Element = JSX.Element> {
+interface Props<T extends React.JSX.Element = React.JSX.Element> {
   children: PaginationRenderer<T>
   childrenGroups: Children<T>[]
   orientation?: ScreenOrientation

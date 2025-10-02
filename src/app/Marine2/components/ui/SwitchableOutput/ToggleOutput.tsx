@@ -36,7 +36,7 @@ const ToggleOutput = observer((props: ToggleOutputProps) => {
               "bg-surface-victronBlue text-content-primary": variant === "on",
               "bg-content-victronBlue text-content-onVictronBlue": variant === "off",
             },
-            props.className
+            props.className,
           )}
           onClick={handleClickOff}
         >
@@ -52,7 +52,7 @@ const ToggleOutput = observer((props: ToggleOutputProps) => {
               "bg-surface-victronBlue text-content-primary": variant === "off",
               "bg-content-victronBlue text-content-onVictronBlue": variant === "on",
             },
-            props.className
+            props.className,
           )}
           onClick={handleClickOn}
         >

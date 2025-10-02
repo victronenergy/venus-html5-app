@@ -46,7 +46,7 @@ const DimmableOutput = observer((props: DimmableOutputProps) => {
       <div
         className={classnames(
           "relative inline-block h-px-44 rounded-md border-2 border-content-victronBlue",
-          props.className
+          props.className,
         )}
       >
         {/* Background */}
@@ -84,7 +84,7 @@ const DimmableOutput = observer((props: DimmableOutputProps) => {
               {
                 "text-content-primary": ratio < 50,
                 "text-content-onVictronBlue": ratio >= 50,
-              }
+              },
             )}
             onClick={handleClickOnOff}
           >

@@ -17,11 +17,11 @@ interface SwitchableOutputProps {
 const SwitchableOutput = observer((props: SwitchableOutputProps) => {
   const key = `${props.deviceId}_${props.outputId}`
   switch (props.type) {
-    case SWITCHABLE_OUTPUT_TYPE.MOMENTARY:
+    case SWITCHABLE_OUTPUT_TYPE.MOMENTARY_SWITCH:
       return (
         <MomentaryOutput key={key} deviceId={props.deviceId} outputId={props.outputId} className={props.className} />
       )
-    case SWITCHABLE_OUTPUT_TYPE.TOGGLE:
+    case SWITCHABLE_OUTPUT_TYPE.TOGGLE_SWITCH:
       return <ToggleOutput key={key} deviceId={props.deviceId} outputId={props.outputId} className={props.className} />
     case SWITCHABLE_OUTPUT_TYPE.DIMMABLE:
       return (

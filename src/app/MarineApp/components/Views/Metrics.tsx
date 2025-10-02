@@ -91,7 +91,6 @@ export const Metrics = observer(
       return () => {
         clearInterval(interval)
       }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     })
 
     const computeResponsiveness = () => {
@@ -133,7 +132,7 @@ export const Metrics = observer(
         </div>
       </>
     )
-  }
+  },
 )
 
 export default Metrics

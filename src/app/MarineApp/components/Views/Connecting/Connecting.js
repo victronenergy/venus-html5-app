@@ -5,6 +5,7 @@ import Fade from "../../../../components/Fade"
 
 import "./Connecting.scss"
 
+// eslint-disable-next-line react/prop-types
 const Connecting = ({ viewUnmounting }) => (
   <main>
     <Fade unmount={viewUnmounting}>

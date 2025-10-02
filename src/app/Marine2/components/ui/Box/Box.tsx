@@ -1,4 +1,4 @@
-import { ReactNode, RefObject, useEffect, useRef, useState } from "react"
+import React, { ReactNode, RefObject, useEffect, useRef, useState } from "react"
 import classNames from "classnames"
 import ArrowRightIcon from "../../../images/icons/arrow-right.svg"
 import InfoIcon from "../../../images/icons/info.svg"
@@ -12,13 +12,13 @@ import { applyStyles, defaultBoxStyles } from "../../../utils/media"
 import { ISize } from "@m2Types/generic/size"
 
 export interface BoxProps {
-  children: JSX.Element[] | JSX.Element | string
+  children: React.JSX.Element[] | React.JSX.Element | string
   icon?: ReactNode
   infoText?: { title: string; body: string }
   title: string
   linkedView?: AppViews
   className?: string
-  headerActions?: JSX.Element
+  headerActions?: React.JSX.Element
   withPagination?: boolean
   paginationOrientation?: ScreenOrientation
   getBoxSizeCallback?: (size: ISize) => void
@@ -69,7 +69,7 @@ const Box = ({
         {
           "rounded-l-none": roundLeftCorners === false,
           "rounded-r-none": roundRightCorners === false,
-        }
+        },
       )}
     >
       <div className="w-full min-w-0 min-h-px-44 flex justify-between items-center">
@@ -82,7 +82,11 @@ const Box = ({
         </div>
         {linkedView && (
           <div className="-mr-3 w-px-44 h-px-44 p-2 cursor-pointer" onClick={clickHandler}>
-            <ArrowRightIcon className="text-content-victronBlue cursor-pointer outline-none" alt="Expand" />
+            <ArrowRightIcon
+              className="text-content-victronBlue cursor-pointer outline-none"
+              alt="Expand"
+              data-testid="expand-icon"
+            />
           </div>
         )}
         {!linkedView && !!infoText && (

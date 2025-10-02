@@ -75,7 +75,7 @@ const InputLimitSelector = observer(({ inputId, onLimitSelected }: InputLimitSel
         {amperageList.map((currentValue, index) => {
           const ref = index === 0 ? firstSelectorButtonNode : null
           return (
-            <div ref={ref}>
+            <div key={currentValue} ref={ref}>
               <SelectorButton
                 key={currentValue}
                 className={"selector-button__amperage text--very-large"}

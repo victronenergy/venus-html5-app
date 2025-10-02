@@ -77,9 +77,10 @@ const Charger = observer(({ chargerId }: ChargerProps) => {
           <HeaderView
             icon={MultiplusIcon}
             title={customName || translate("widgets.chargerWithName", { productNameShort })}
-            children={ChargerSubtitle(current, state, nrOfOutputs)}
             child
-          />
+          >
+            {ChargerSubtitle(current, state, nrOfOutputs)}
+          </HeaderView>
         </div>
         {chargerSupportsMode && (
           <div className="charger__mode-selector">

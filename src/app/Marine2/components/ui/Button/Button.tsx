@@ -1,4 +1,4 @@
-import { ReactNode } from "react"
+import React, { ReactNode } from "react"
 import classnames from "classnames"
 
 interface Props {
@@ -25,7 +25,7 @@ const Button = ({ children, onClick, className, disabled, size = "lg", variant =
           "text-base min-h-[2.675rem]": size === "lg",
           "text-sm min-h-[2.375rem]": size === "md",
         },
-        className
+        className,
       )}
       onClick={disabled ? undefined : onClick}
       disabled={disabled}

@@ -89,7 +89,7 @@ const Tank = ({ tankInstanceId, componentMode, orientation = "vertical", parentS
   const horizontalActiveStyles = applyStyles(parentSize, horizontalStyles)
 
   return (
-    <div className="px-4">
+    <div className="p-4">
       <div className="h-full w-full flex flex-row">
         <div className="min-w-[10%] h-auto">
           <ProgressBar percentage={percentage} type={fluidTypeNum} orientation="vertical" />

@@ -1,6 +1,7 @@
 import { formatNumber } from "app/components/NumericValue"
 
 export const TextPlugin = () => ({
+  // eslint-disable-next-line no-undef
   beforeDraw: (chart: Chart) => {
     let width = chart.width,
       height = chart.height,

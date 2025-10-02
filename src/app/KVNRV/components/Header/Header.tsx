@@ -83,7 +83,7 @@ export const Header = observer(() => {
               <input
                 type="checkbox"
                 checked={darkMode ?? true}
-                onChange={(e) => themeStore.setDarkMode(!darkMode)}
+                onChange={(_e) => themeStore.setDarkMode(!darkMode)}
                 id="header__buttons__darkmode__input"
               />
               <span className="header__buttons__darkmode__slider">

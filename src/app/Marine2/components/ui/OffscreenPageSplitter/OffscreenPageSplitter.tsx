@@ -4,17 +4,17 @@ import { observer } from "mobx-react"
 import { ScreenOrientation } from "@m2Types/generic/screen-orientation"
 
 /// Every Page contains several children referenced by their index in original un-paged array
-export type Children<T extends JSX.Element = JSX.Element> = T[]
-export type Page<T extends JSX.Element = JSX.Element> = {
+export type Children<T extends React.JSX.Element = React.JSX.Element> = T[]
+export type Page<T extends React.JSX.Element = React.JSX.Element> = {
   indexes: number[]
   children: Children<T>
 }
 /// Result if list of Pages
-export type Pages<T extends JSX.Element = JSX.Element> = Page<T>[]
+export type Pages<T extends React.JSX.Element = React.JSX.Element> = Page<T>[]
 
 /// Render children offscreen and split them into pages based on availableSpace
 /// Invoke onPagesCalculated callback when split is complete
-const OffscreenPageSplitter = <T extends JSX.Element = JSX.Element>({
+const OffscreenPageSplitter = <T extends React.JSX.Element = React.JSX.Element>({
   children,
   orientation = "vertical",
   availableSpace,
@@ -181,7 +181,7 @@ const OffscreenPageSplitter = <T extends JSX.Element = JSX.Element>({
   )
 }
 
-interface Props<T extends JSX.Element = JSX.Element> {
+interface Props<T extends React.JSX.Element = React.JSX.Element> {
   children: T[]
   orientation?: ScreenOrientation
   availableSpace: number

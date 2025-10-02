@@ -1,4 +1,4 @@
-import { FC, useState } from "react"
+import React, { FC, useState } from "react"
 import classNames from "classnames"
 import { observer } from "mobx-react-lite"
 import { translate } from "react-i18nify"
@@ -60,7 +60,7 @@ const EnergyOverview: FC<Props> = ({ componentMode = "full", pageSelectorPropsSe
     windGenerators,
     dcGensets,
     compactBoxSize,
-    componentMode
+    componentMode,
   )
 
   const hasValidData = !!boxes.length
@@ -106,7 +106,7 @@ export const getAvailableEnergyBoxes = (
   windGenerators: WindGeneratorId[],
   dcGensets: ConnectedGensetId[],
   compactBoxSize: ISize,
-  componentMode?: ComponentMode
+  componentMode?: ComponentMode,
 ) => {
   const boxes = []
 
@@ -117,7 +117,7 @@ export const getAvailableEnergyBoxes = (
         inputId={shoreInputId}
         componentMode={componentMode}
         compactBoxSize={compactBoxSize}
-      />
+      />,
     )
   }
 
@@ -128,7 +128,7 @@ export const getAvailableEnergyBoxes = (
         pvCharger={pvCharger}
         componentMode={componentMode}
         compactBoxSize={compactBoxSize}
-      />
+      />,
     )
   }
 
@@ -139,7 +139,7 @@ export const getAvailableEnergyBoxes = (
   // TODO double check if data is up to date.
   if ((dcLoads.current || dcLoads.current === 0) && (dcLoads.voltage || dcLoads.voltage === 0) && dcLoads.power) {
     boxes.push(
-      <EnergyDC key="energy-dc" componentMode={componentMode} dcLoads={dcLoads} compactBoxSize={compactBoxSize} />
+      <EnergyDC key="energy-dc" componentMode={componentMode} dcLoads={dcLoads} compactBoxSize={compactBoxSize} />,
     )
   }
 
@@ -154,7 +154,7 @@ export const getAvailableEnergyBoxes = (
           showInstance={alternators.length > 1}
           compactBoxSize={compactBoxSize}
         />
-      ))
+      )),
     )
   }
 
@@ -169,7 +169,7 @@ export const getAvailableEnergyBoxes = (
           showInstance={alternators.length > 1}
           compactBoxSize={compactBoxSize}
         />
-      ))
+      )),
     )
   }
 
@@ -185,7 +185,7 @@ export const getAvailableEnergyBoxes = (
           showInstance={dcGensets.length > 1}
           compactBoxSize={compactBoxSize}
         />
-      ))
+      )),
     )
   }
 

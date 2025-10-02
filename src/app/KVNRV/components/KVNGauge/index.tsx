@@ -1,3 +1,4 @@
+import React from "react"
 import { sum } from "app/KVNRV/utils/helpers"
 import { useContainerColors } from "app/KVNRV/utils/hooks"
 import { Chart } from "chart.js"
@@ -211,5 +212,5 @@ export const KVNGauge = observer(
         </div>
       </div>
     )
-  }
+  },
 )

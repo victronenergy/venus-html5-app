@@ -11,7 +11,7 @@ describe("Paginator element", () => {
         <Box title={"Box2"}>Box2</Box>
         <Box title={"Box3"}>Box3</Box>
         <Box title={"Box4"}>Box4</Box>
-      </Paginator>
+      </Paginator>,
     )
 
     it("should show content", () => {

@@ -74,7 +74,7 @@ export const Status = observer(({ size }: StatusProps) => {
   return (
     <div className="metrics__status">
       <Card title={<Translate value="widgets.status" />} size={size}>
-        <div className={"title"}>Penny's House</div>
+        <div className={"title"}>Penny&apos;s House</div>
         <div className={"status"}>
           <Translate value={status ? "statusWidget." + status : "common.emptyBar"} />
         </div>

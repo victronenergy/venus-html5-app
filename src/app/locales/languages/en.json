@@ -121,6 +121,12 @@
             "status": "Status"
         },
         "device": {
+            "colorScheme": "Color Scheme",
+            "unspecified": "Unspecified",
+            "prefersDarkMode": "Dark Mode",
+            "prefersLightMode": "Light Mode",
+            "prefersHighContrast": "High Contrast",
+            "prefersLowContrast": "Low Contrast",
             "device": "Device",
             "devicePixelRatio": "Pixel Ratio",
             "isGuiV2Supported": "GUI v2 supported",

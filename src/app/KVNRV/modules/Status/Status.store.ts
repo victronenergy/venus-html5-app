@@ -33,7 +33,7 @@ export class StatusStore {
     if (this.isUpdatePresent(statusPart)) {
       this.status.splice(
         this.status.findIndex((s) => s.part === statusPart),
-        1
+        1,
       )
     }
   }

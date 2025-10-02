@@ -27,7 +27,7 @@ const RemoteConsole = ({ host, width, height }: Props) => {
 
   console.log(`Venus Running GUI version: ${app.guiVersion}`)
   console.log(
-    `GUI v2 supported: ${browserFeatures.isGuiV2Supported}, missing: ${JSON.stringify(browserFeatures.missingFeatures)}`
+    `GUI v2 supported: ${browserFeatures.isGuiV2Supported}, missing: ${JSON.stringify(browserFeatures.missingFeatures)}`,
   )
 
   const protocol = (typeof window !== "undefined" && window.location.protocol) || "http:"

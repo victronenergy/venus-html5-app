@@ -96,7 +96,7 @@ const PageFlipper = ({
 }
 
 interface Props {
-  children: JSX.Element
+  children: React.JSX.Element
   pages: number
   pageSelectorPropsSetter?: (arg0: PageSelectorProps) => void
   currentPageSetter?: (arg0: number) => void

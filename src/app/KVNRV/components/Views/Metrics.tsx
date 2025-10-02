@@ -23,6 +23,7 @@ export const Metrics = () => {
   let [currentPage, setCurrentPage] = useState(0)
   let [layout, setLayout] = useState(<></>)
   const metricsRef = useRef<HTMLDivElement>(null)
+  // eslint-disable-next-line no-undef
   let [hammer, setHammer] = useState<HammerManager>(null!)
 
   useEffect(() => {
@@ -56,6 +57,7 @@ export const Metrics = () => {
       hammer.on("swiperight", next)
       hammer.on("swipeleft", prev)
 
+      // eslint-disable-next-line no-undef
       hammer.on("hammer.input", (ev: HammerInput) => {
         if (metricsRef.current) {
           if (Math.abs(ev.deltaX) > Math.abs(ev.deltaY)) {
@@ -134,7 +136,7 @@ export const Metrics = () => {
               </div>
             </div>
           )}
-        </div>
+        </div>,
       )
     } else {
       setLayout(
@@ -181,7 +183,7 @@ export const Metrics = () => {
               </div>
             </div>
           )}
-        </div>
+        </div>,
       )
     }
 

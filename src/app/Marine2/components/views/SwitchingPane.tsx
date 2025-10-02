@@ -6,7 +6,7 @@ import SmartswitchOffIcon from "../../images/icons/smartswitch_off.svg"
 import SmartswitchOnIcon from "../../images/icons/smartswitch_on.svg"
 import { Modal } from "../ui/Modal"
 import classNames from "classnames"
-import GroupPaginator from "../ui/Paginator/GroupPaginator"
+import GroupPaginator from "../ui/GroupPaginator/GroupPaginator"
 import Box from "../ui/Box"
 
 const SwitchingPane = () => {
@@ -14,7 +14,7 @@ const SwitchingPane = () => {
   const switchableOutputs = useSwitchableOutputs()
 
   const [groupNames, setGroupNames] = useState<string[]>([])
-  const [groupsOfSwitchableOutputs, setGroupsOfSwitchableOutputs] = useState<JSX.Element[][]>([])
+  const [groupsOfSwitchableOutputs, setGroupsOfSwitchableOutputs] = useState<React.JSX.Element[][]>([])
 
   useLayoutEffect(() => {
     const x = Object.entries(switchableOutputs.groups)
@@ -69,16 +69,7 @@ const SwitchingPane = () => {
         >
           <Modal.Body variant="popUp" className="h-full bg-surface-primary">
             <GroupPaginator childrenGroups={groupsOfSwitchableOutputs} orientation="vertical">
-              {({
-                columnIndex,
-                columnCount,
-                columnsPerPage,
-                columnChildren,
-                groupIndex,
-                groupColumnIndex,
-                groupColumnCount,
-                isFirstColumnOnPage,
-              }) => (
+              {({ columnChildren, groupIndex, groupColumnIndex, groupColumnCount, isFirstColumnOnPage }) => (
                 <div
                   className={classNames("pt-2 pb-2 h-full", {
                     "pl-2": groupColumnIndex === 0,

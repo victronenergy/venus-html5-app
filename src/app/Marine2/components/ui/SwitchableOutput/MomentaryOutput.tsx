@@ -35,7 +35,7 @@ const MomentaryOutput = observer((props: MomentaryOutputProps) => {
             "bg-surface-victronBlue text-content-primary": variant === "off",
             "bg-content-victronBlue text-content-onVictronBlue": variant === "on",
           },
-          props.className
+          props.className,
         )}
         onMouseDown={handlePress}
         onMouseUp={handleRelease}

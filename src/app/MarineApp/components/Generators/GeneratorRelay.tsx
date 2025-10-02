@@ -120,7 +120,7 @@ export const GeneratorRelays = observer(() => {
                   <ColumnContainer key={"generator-relay-" + i}>
                     <GeneratorRelay {...values} active={values.activeInput === i} />
                   </ColumnContainer>
-                )
+                ),
             )
           : values.relayFunction === RELAY_FUNCTION.GENERATOR_START_STOP &&
             values.statusCode !== undefined && (

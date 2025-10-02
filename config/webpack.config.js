@@ -20,7 +20,7 @@ const getClientEnvironment = require("./env")
 const ModuleNotFoundPlugin = require("react-dev-utils/ModuleNotFoundPlugin")
 const ForkTsCheckerWebpackPlugin = require("react-dev-utils/ForkTsCheckerWebpackPlugin")
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin")
-const CompressionPlugin = require("compression-webpack-plugin");
+const CompressionPlugin = require("compression-webpack-plugin")
 
 const appPackageJson = require(paths.appPackageJson)
 
@@ -59,7 +59,7 @@ const hasJsxRuntime = (() => {
   try {
     require.resolve("react/jsx-runtime")
     return true
-  } catch (e) {
+  } catch {
     return false
   }
 })()
@@ -120,7 +120,7 @@ module.exports = function (webpackEnv) {
           options: {
             sourceMap: true,
           },
-        }
+        },
       )
     }
     return loaders
@@ -312,7 +312,8 @@ module.exports = function (webpackEnv) {
         child_process: false,
         stream: require.resolve("stream-browserify"),
         buffer: require.resolve("buffer"),
-        url: require.resolve("url/")
+        url: require.resolve("url/"),
+        process: require.resolve("process/browser"),
       },
     },
     module: {
@@ -324,6 +325,7 @@ module.exports = function (webpackEnv) {
           // hasn't `requireEnsure` parameter in config, therefore we apply this rule only for Js
           test: /\.[cm]?js$/,
           parser: { requireEnsure: false },
+          resolve: { fullySpecified: false },
         },
         {
           // "oneOf" will traverse all following loaders until one will
@@ -474,7 +476,7 @@ module.exports = function (webpackEnv) {
                   importLoaders: 3,
                   sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
                 },
-                "sass-loader"
+                "sass-loader",
               ),
               // Don't consider CSS imports dead code even if the
               // containing package claims to have no side effects.
@@ -494,7 +496,7 @@ module.exports = function (webpackEnv) {
                     getLocalIdent: getCSSModuleLocalIdent,
                   },
                 },
-                "sass-loader"
+                "sass-loader",
               ),
             },
             // "file" loader makes sure those assets get served by WebpackDevServer.
@@ -543,8 +545,8 @@ module.exports = function (webpackEnv) {
                   minifyURLs: true,
                 },
               }
-            : undefined
-        )
+            : undefined,
+        ),
       ),
       // Inlines the webpack runtime script. This script is too small to warrant
       // a network request.
@@ -662,17 +664,8 @@ module.exports = function (webpackEnv) {
           context: paths.appSrc,
           cache: true,
           cacheLocation: path.resolve(paths.appNodeModules, ".cache/.eslintcache"),
-          // ESLint class options
           cwd: paths.appPath,
-          resolvePluginsRelativeTo: __dirname,
-          baseConfig: {
-            extends: [require.resolve("eslint-config-react-app/base")],
-            rules: {
-              ...(!hasJsxRuntime && {
-                "react/react-in-jsx-scope": "error",
-              }),
-            },
-          },
+          overrideConfigFile: path.resolve(__dirname, "../eslint.config.mjs"),
         }),
       new webpack.ProvidePlugin({
         Buffer: ["buffer", "Buffer"],
@@ -683,9 +676,11 @@ module.exports = function (webpackEnv) {
       new webpack.optimize.LimitChunkCountPlugin({
         maxChunks: 1,
       }),
-      new CompressionPlugin({
-        threshold: 500000,
-      })
+      isEnvProduction &&
+        new CompressionPlugin({
+          threshold: 500000,
+          deleteOriginalAssets: true,
+        }),
     ].filter(Boolean),
     // Turn off performance processing because we utilize
     // our own hints via the FileSizeReporter

@@ -10,6 +10,7 @@ import { observer } from "mobx-react"
 import packageInfo from "../../../../../package.json"
 
 export const ModalVersionInfo = observer(
+  // eslint-disable-next-line react/display-name
   forwardRef((_, ref) => {
     const [isOpen, setOpen] = useState(false)
     const { portalId = "-", siteId = "-" } = useVrmStore()
@@ -69,5 +70,5 @@ export const ModalVersionInfo = observer(
         )}
       </>
     )
-  })
+  }),
 )

@@ -1,3 +1,4 @@
+import React from "react"
 import { observer } from "mobx-react-lite"
 import { useTemperatures, TemperatureState } from "@victronenergy/mfd-modules"
 import { useState } from "react"
@@ -31,7 +32,7 @@ const EnvironmentOverview = ({ componentMode = "full", pageSelectorPropsSetter }
         componentMode={componentMode}
         boxSize={boxSize}
       />
-    )
+    ),
   )
 
   let humidityComponents = (sensors.filter((sensor) => sensor.humidity !== undefined) || []).map(
@@ -42,7 +43,7 @@ const EnvironmentOverview = ({ componentMode = "full", pageSelectorPropsSetter }
         componentMode={componentMode}
         boxSize={boxSize}
       />
-    )
+    ),
   )
 
   let pressureComponents = (sensors.filter((sensor) => sensor.pressure !== undefined) || []).map(
@@ -53,10 +54,10 @@ const EnvironmentOverview = ({ componentMode = "full", pageSelectorPropsSetter }
         componentMode={componentMode}
         boxSize={boxSize}
       />
-    )
+    ),
   )
 
-  const components = [...temperatureComponents, ...humidityComponents, ...pressureComponents] as JSX.Element[]
+  const components = [...temperatureComponents, ...humidityComponents, ...pressureComponents] as React.JSX.Element[]
 
   const hasValidData = components.length > 0
 

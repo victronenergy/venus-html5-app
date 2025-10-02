@@ -34,13 +34,13 @@ const SelectorButton: React.FunctionComponent<SelectorButtonProps> = observer(
             "selector-button--narrow": narrow,
             "selector-button--disabled": disabled || (state?.locked && !alwaysUnlocked),
           },
-          className || ""
+          className || "",
         )}
       >
         {children}
       </div>
     )
-  }
+  },
 )
 
 export default SelectorButton

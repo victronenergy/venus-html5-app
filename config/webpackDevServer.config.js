@@ -16,15 +16,15 @@ module.exports = function (proxy, allowedHost) {
   return {
     devServer: {
       host,
-      allowedHosts : !proxy || process.env.DANGEROUSLY_DISABLE_HOST_CHECK === "true" ? "all" : allowedHost,
+      allowedHosts: !proxy || process.env.DANGEROUSLY_DISABLE_HOST_CHECK === "true" ? "all" : allowedHost,
       // `proxy` is run between `before` and `after` `webpack-dev-server` hooks
       proxy,
       client: {
         overlay: false,
         // Silence WebpackDevServer's own logs since they're generally not useful.
         // It will still show compile warnings and errors with this setting.
-        logging: 'none',
-        webSocketTransport: 'ws',
+        logging: "none",
+        webSocketTransport: "ws",
         webSocketURL: {
           // Enable custom sockjs pathname for websocket connection to hot reloading server.
           // Enable custom sockjs hostname, pathname and port for websocket connection
@@ -36,7 +36,7 @@ module.exports = function (proxy, allowedHost) {
       },
       // Use 'ws' instead of 'sockjs-node' on server since we're using native
       // websockets in `webpackHotDevClient`.
-      webSocketServer: 'ws',
+      webSocketServer: "ws",
       // Enable gzip compression of generated files.
       compress: true,
       https: getHttpsConfig(),
@@ -82,12 +82,12 @@ module.exports = function (proxy, allowedHost) {
           // src/node_modules is not ignored to support absolute imports
           // https://github.com/facebook/create-react-app/issues/1065
           ignored: ignoredFiles(paths.appSrc),
-        }
+        },
       },
 
       onBeforeSetupMiddleware(server) {
         if (!server) {
-          throw new Error('webpack-dev-server is not defined');
+          throw new Error("webpack-dev-server is not defined")
         }
 
         // Keep `evalSourceMapMiddleware` and `errorOverlayMiddleware`
@@ -114,6 +114,5 @@ module.exports = function (proxy, allowedHost) {
         server.app.use(noopServiceWorkerMiddleware(paths.publicUrlOrPath))
       },
     },
-    
   }
 }

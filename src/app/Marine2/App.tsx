@@ -1,6 +1,6 @@
 import { useAppStore, useMqtt, useTheme, useVebus, useVrmStore } from "@victronenergy/mfd-modules"
 import { observer } from "mobx-react"
-import React, { useEffect } from "react"
+import React, { useEffect, useLayoutEffect } from "react"
 import { withErrorBoundary } from "react-error-boundary"
 import { getLocale, setLocale } from "react-i18nify"
 import { useVisibleWidgetsStore } from "./modules"
@@ -33,29 +33,20 @@ const App = (props: AppProps) => {
       mqtt.boot("https", vrmStore.webhost, null, "", true, vrmStore.portalId)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    props.protocol,
-    props.host,
-    props.port,
-    appStore.remote,
-    vrmStore.webhost,
-    vrmStore.portalId,
-    vrmStore.siteId,
-    locale,
-  ])
+  }, [props.protocol, props.host, props.port, appStore.remote, vrmStore.webhost, vrmStore.portalId, vrmStore.siteId])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (appStore.language) {
       setLocale(appStore.language)
     }
   }, [appStore.language])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     visibleWidgetsStore.clearVisibleElements()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [locale])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (themeStore.darkMode) {
       if (themeStore.nightMode) {
         document.body.classList.remove("dark")

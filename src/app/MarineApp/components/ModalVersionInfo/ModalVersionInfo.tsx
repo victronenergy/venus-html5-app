@@ -11,6 +11,7 @@ import { useVrmStore, useAppStore } from "@victronenergy/mfd-modules"
 import { observer } from "mobx-react"
 
 export const ModalVersionInfo = observer(
+  // eslint-disable-next-line react/display-name
   forwardRef((_, ref) => {
     const [isOpen, setOpen] = useState(false)
     const { portalId = "-", siteId = "-" } = useVrmStore()
@@ -67,5 +68,5 @@ export const ModalVersionInfo = observer(
         )}
       </>
     )
-  })
+  }),
 )

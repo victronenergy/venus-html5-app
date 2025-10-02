@@ -3,6 +3,7 @@ import { Translate } from "react-i18nify"
 import Fade from "../../../components/Fade"
 import MqttSettingsGuide from "../../images/mqtt-settings-v2.42.png"
 
+// eslint-disable-next-line react/prop-types
 const MqttUnavailable = ({ viewUnmounting }) => (
   <main>
     <Fade unmount={viewUnmounting}>
