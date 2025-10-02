@@ -1,6 +1,6 @@
-import React, { useRef, useState, useCallback, useMemo, useLayoutEffect } from "react"
+import React, { useRef, useState, useCallback, useMemo, useLayoutEffect, useEffect } from "react"
 import classnames from "classnames"
-import { PageSelectorProps, SelectorLocation } from "../PageSelector"
+import { SelectorLocation } from "../PageSelector"
 import { observer } from "mobx-react"
 import PageFlipper from "../PageFlipper"
 import useSize from "@react-hook/size"
@@ -11,12 +11,13 @@ import { boxBreakpoints } from "../../../utils/media"
 /// Split `children` contained in `childrenGroups` laid out in given `orientation` into pages
 /// and allow flipping through them using `PageSelector` positioned in `selectorLocation`.
 /// Pages always contain only `children` from one group, and new page is open for children
-/// from next group.
+/// from next group. Notify parent about scrolling via `currentPageSetter`.
 const GroupPaginator = <T extends React.JSX.Element>({
   children,
   childrenGroups,
   orientation = "horizontal",
   selectorLocation = "bottom-center",
+  currentPageSetter = (_currentPage, _pageCount) => {},
 }: Props<T>) => {
   // Layout children horizontally or vertically with min-[wh]-fit to measure thir size
   // to compute pages
@@ -112,6 +113,7 @@ const GroupPaginator = <T extends React.JSX.Element>({
                     groupColumnIndex: groupColumnIndex,
                     groupColumnCount: groupColumnCount,
                     isFirstColumnOnPage: isFirstColumnOnPage(columnIndex, columnCount, columnsPerPage),
+                    isFirstColumnOnLastPage: isFirstColumnOnLastPage(columnIndex, columnCount, columnsPerPage),
                   })}
                 </div>
               )
@@ -145,6 +147,10 @@ const GroupPaginator = <T extends React.JSX.Element>({
       setAvailableSpace(height)
     }
   }, [height, orientation])
+
+  useEffect(() => {
+    currentPageSetter(currentPage, pageCount)
+  }, [currentPage, currentPageSetter, pageCount])
 
   return (
     <>
@@ -189,6 +195,10 @@ function isFirstColumnOnPage(columnIndex: number, totalColumns: number, columnsP
     return true
   }
 
+  return false
+}
+
+function isFirstColumnOnLastPage(columnIndex: number, totalColumns: number, columnsPerPage: number) {
   const lastPageStart = totalColumns - columnsPerPage
   return columnIndex === lastPageStart
 }
@@ -202,6 +212,7 @@ interface PaginationState<T extends React.JSX.Element = React.JSX.Element> {
   groupColumnIndex: number
   groupColumnCount: number
   isFirstColumnOnPage: boolean
+  isFirstColumnOnLastPage: boolean
 }
 
 type PaginationRenderer<T extends React.JSX.Element = React.JSX.Element> = (
@@ -214,7 +225,7 @@ interface Props<T extends React.JSX.Element = React.JSX.Element> {
   orientation?: ScreenOrientation
   pageNumber?: number
   selectorLocation?: SelectorLocation
-  pageSelectorPropsSetter?: (arg0: PageSelectorProps) => void
+  currentPageSetter?: (currentPage: number, pageCount: number) => void
 }
 
 export default observer(GroupPaginator)
