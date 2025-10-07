@@ -1,4 +1,4 @@
-import React, { useCallback, useLayoutEffect, useState } from "react"
+import React, { useCallback, useEffect, useLayoutEffect, useState } from "react"
 import { observer } from "mobx-react"
 import SwitchableOutput from "../ui/SwitchableOutput"
 import { useSwitchableOutputs } from "@victronenergy/mfd-modules"
@@ -48,6 +48,12 @@ const SwitchingPane = () => {
     // array of groups by index containing arrays of switchable outputs
     setGroupsOfSwitchableOutputs(x.map((g) => g.outputs))
   }, [switchableOutputs.groups])
+
+  useEffect(() => {
+    if (Object.keys(switchableOutputs.groups).length === 0) {
+      setIsModalOpen(false)
+    }
+  }, [groupsOfSwitchableOutputs, switchableOutputs.groups])
 
   if (Object.keys(switchableOutputs.groups).length === 0) {
     return <></>
