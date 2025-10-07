@@ -82,8 +82,10 @@ const GroupPaginator = <T extends React.JSX.Element>({
       return total + group.length
     }, 0)
 
-    const pageCount = Math.ceil(columnCount / columnsPerPage)
-    const fullWidthPct = (100.0 / columnsPerPage) * columnCount
+    const effectiveColumnsPerPage = columnCount >= columnsPerPage ? columnsPerPage : columnCount > 0 ? columnCount : 1
+
+    const pageCount = Math.ceil(columnCount / effectiveColumnsPerPage)
+    const fullWidthPct = (100.0 / effectiveColumnsPerPage) * columnCount
 
     if (orientation === "vertical") {
       var columnIndex = 0
@@ -101,19 +103,19 @@ const GroupPaginator = <T extends React.JSX.Element>({
                 <div
                   key={`columnEl${groupIndex}${groupColumnIndex}`}
                   style={{
-                    width: `calc(100% / ${columnsPerPage})`,
+                    width: `calc(100% / ${effectiveColumnsPerPage})`,
                   }}
                 >
                   {children({
                     columnIndex: columnIndex,
                     columnCount: columnCount,
-                    columnsPerPage: columnsPerPage,
+                    columnsPerPage: effectiveColumnsPerPage,
                     columnChildren: column.children,
                     groupIndex: groupIndex,
                     groupColumnIndex: groupColumnIndex,
                     groupColumnCount: groupColumnCount,
-                    isFirstColumnOnPage: isFirstColumnOnPage(columnIndex, columnCount, columnsPerPage),
-                    isFirstColumnOnLastPage: isFirstColumnOnLastPage(columnIndex, columnCount, columnsPerPage),
+                    isFirstColumnOnPage: isFirstColumnOnPage(columnIndex, columnCount, effectiveColumnsPerPage),
+                    isFirstColumnOnLastPage: isFirstColumnOnLastPage(columnIndex, columnCount, effectiveColumnsPerPage),
                   })}
                 </div>
               )
