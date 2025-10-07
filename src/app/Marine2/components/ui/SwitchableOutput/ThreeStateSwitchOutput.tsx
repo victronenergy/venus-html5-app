@@ -17,12 +17,16 @@ const ThreeStateSwitchOutput = observer((props: ThreeStateSwitchOutputProps) => 
   const auto = switchableOutput.auto === 1 ? "on" : "off"
 
   const handleClickOn = () => {
-    switchableOutput.updateAuto(0)
+    if (auto) {
+      return
+    }
     switchableOutput.updateState(1)
   }
 
   const handleClickOff = () => {
-    switchableOutput.updateAuto(0)
+    if (auto) {
+      return
+    }
     switchableOutput.updateState(0)
   }
 
