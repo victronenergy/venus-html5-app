@@ -19,9 +19,24 @@ const GroupPaginator = <T extends React.JSX.Element>({
   selectorLocation = "bottom-center",
   currentPageSetter = (_currentPage, _pageCount) => {},
 }: Props<T>) => {
+  const wrapperRef = useRef<HTMLDivElement>(null)
+  const [width, height] = useSize(wrapperRef)
+  const [availableSpace, setAvailableSpace] = useState(0)
+  const [columnsPerPage, setColumnsPerPage] = useState(1)
+
+  const [pagingResults, setPagingResults] = useState<Pages<T>[]>([])
+  const [pageCount, setPageCount] = useState(0)
+  const [currentPage, setCurrentPage] = useState(0)
+
+  const [pagesElement, setPagesElement] = useState<React.JSX.Element>()
+
   // Layout children horizontally or vertically with min-[wh]-fit to measure thir size
   // to compute pages
   const groupsOfChildrenToMeasure = useMemo(() => {
+    // Reset paging results
+    setPagingResults([])
+
+    // Prepare children to measure
     return childrenGroups.map((group) => {
       return group.map((child, i) => (
         <div
@@ -37,17 +52,6 @@ const GroupPaginator = <T extends React.JSX.Element>({
     })
   }, [childrenGroups, orientation])
 
-  const wrapperRef = useRef<HTMLDivElement>(null)
-  const [width, height] = useSize(wrapperRef)
-  const [availableSpace, setAvailableSpace] = useState(0)
-  const [columnsPerPage, setColumnsPerPage] = useState(1)
-
-  const [pagingResults, setPagingResults] = useState<Pages<T>[]>([])
-  const [pageCount, setPageCount] = useState(0)
-  const [currentPage, setCurrentPage] = useState(0)
-
-  const [pagesElement, setPagesElement] = useState<React.JSX.Element>()
-
   const setStartingPage = useCallback(
     (startingPage: number) => {
       if (!!currentPage && startingPage !== pageCount && currentPage >= startingPage) {
@@ -57,13 +61,31 @@ const GroupPaginator = <T extends React.JSX.Element>({
     [currentPage, pageCount],
   )
 
+  // Compare two pages referening to their children by their index
+  const arePagesEqual = useCallback((a: Pages<T>, b: Pages<T>) => {
+    if (a === b) return true
+    if (a.length !== b.length) return false
+    return a.every((pageA, i) => {
+      const pageB = b[i]
+      if (!pageB || pageA.indexes.length !== pageB.indexes.length) return false
+      return pageA.indexes.every((item, j) => item === pageB.indexes[j])
+    })
+  }, [])
+
+  // Collect paging results for all groups. Each group is referenced by index
+  // representing its position within sorted list of groups.
   const onPagesForGroupCalculated = useCallback(
     (index: number, pages: Pages<T>, _orientation: ScreenOrientation, _selectorSize: number) => {
       setPagingResults((prev) => {
+        if (prev.length > index) {
+          if (arePagesEqual(prev[index], pages)) {
+            return prev
+          }
+        }
         return [...prev.slice(0, index), pages, ...prev.slice(index + 1)]
       })
     },
-    [],
+    [arePagesEqual],
   )
 
   useLayoutEffect(() => {
@@ -86,6 +108,10 @@ const GroupPaginator = <T extends React.JSX.Element>({
 
     const pageCount = Math.ceil(columnCount / effectiveColumnsPerPage)
     const fullWidthPct = (100.0 / effectiveColumnsPerPage) * columnCount
+
+    if (columnCount === 0) {
+      return
+    }
 
     if (orientation === "vertical") {
       var columnIndex = 0
@@ -134,7 +160,7 @@ const GroupPaginator = <T extends React.JSX.Element>({
     }
     setPageCount(pageCount)
     setStartingPage(pageCount)
-  }, [children, childrenGroups, columnsPerPage, orientation, pagingResults, setStartingPage])
+  }, [children, columnsPerPage, orientation, pagingResults, setStartingPage])
 
   useLayoutEffect(() => {
     if (orientation === "horizontal") {
