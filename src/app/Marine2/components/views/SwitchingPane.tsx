@@ -60,10 +60,10 @@ const SwitchingPane = () => {
   }
 
   return (
-    <div className="text-content-victronBlue cursor-pointer outline-none" onClick={() => setIsModalOpen(!isModalOpen)}>
+    <div className="text-content-victronBlue cursor-pointer outline-none">
       <div className="flex justify-center items-center w-full">
         {!isModalOpen ? (
-          <div className="h-full">
+          <div className="h-full" onClick={() => setIsModalOpen(!isModalOpen)}>
             <SmartswitchOffIcon className="w-px-44 h-px-44 justify-center p-2" alt={"Swiching Pane"} />
           </div>
         ) : (
@@ -77,7 +77,7 @@ const SwitchingPane = () => {
         <Modal.Frame
           open={isModalOpen}
           onClose={() => {
-            setIsModalOpen(false)
+            // setIsModalOpen(false)
           }}
           className={classNames("w-5/6 max-w-5/6 h-5/6 max-h-5/6")}
         >
