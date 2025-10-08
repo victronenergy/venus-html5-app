@@ -22,6 +22,7 @@ const MomentaryOutput = observer((props: MomentaryOutputProps) => {
   const handleRelease = () => {
     switchableOutput.updateState(0)
   }
+
   return (
     <div className={classnames("mt-4", props.className)}>
       <div>{switchableOutput.customName || switchableOutput.name}</div>
