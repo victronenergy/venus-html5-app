@@ -90,6 +90,8 @@ module.exports = {
           primary: "var(--c-content-primary)",
           secondary: "var(--c-content-secondary)",
           tertiary: "var(--c-content-tertiary)",
+          white: "var(--c-content-white)",
+          lightGray: "var(--c-content-light-gray)",
           onVictronBlue: "var(--c-content-on-victron-blue)",
           victronGray: "rgba(var(--c-victron-gray-rgb), 1.0)",
           victronBlue: "rgba(var(--c-victron-blue-rgb), 1.0)",
@@ -109,6 +111,7 @@ module.exports = {
       spacing: {
         "px-1": "var(--px1)",
         "px-2": "var(--px2)",
+        "px-4": "var(--px4)",
         "px-8": "var(--px8)",
         "px-16": "var(--px16)",
         "px-20": "var(--px20)",
