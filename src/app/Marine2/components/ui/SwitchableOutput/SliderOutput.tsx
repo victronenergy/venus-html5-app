@@ -10,6 +10,8 @@ interface SliderOutputProps {
   className?: string
 }
 
+// TODO: handle special case of Unit to format properly /T /S /V
+
 const SliderOutput = observer((props: SliderOutputProps) => {
   const switchableOutput = useSwitchableOutput(props.deviceId, props.outputId)
 
