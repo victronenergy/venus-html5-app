@@ -17,6 +17,7 @@ const SliderOutput = observer((props: SliderOutputProps) => {
 
   const min = switchableOutput.dimmingMin || 0
   const max = switchableOutput.dimmingMax || 100
+  const step = switchableOutput.stepSize || 1
   const value = switchableOutput.dimming || 0
   const unit = switchableOutput.unit
   const ratio = Math.round((value / (max - min)) * 100)
@@ -27,8 +28,8 @@ const SliderOutput = observer((props: SliderOutputProps) => {
   const calculatePercentage = (clientX: number, element: HTMLDivElement): number => {
     const rect = element.getBoundingClientRect()
     const relativeX = clientX - rect.left
-    const percentageX = Math.round(Math.max(0, Math.min(100, (relativeX / rect.width) * 100)))
-    return percentageX
+    const percentageX = Math.max(0, Math.min(100, (relativeX / rect.width) * 100))
+    return Math.round(percentageX / step) * step
   }
 
   const updateDimmingValueImmediately = useCallback(
