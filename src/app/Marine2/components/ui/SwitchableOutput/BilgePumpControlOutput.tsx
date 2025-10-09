@@ -14,26 +14,31 @@ const BilgePumpControlOutput = observer((props: BilgePumpControlOutputProps) => 
   const switchableOutput = useSwitchableOutput(props.deviceId, props.outputId)
 
   const variant = switchableOutput.state === 1 ? "on" : "off"
-
-  // TODO: Where to get Bilge Pump Control Status string from?
-  // TODO: What is the behavior of tapping On, vs. tapping Auto
-  // TODO: What colors to use, what font size to use for Status
+  const statusLabel =
+    switchableOutput.status === 0 ? "Not Running" : switchableOutput.status === 0x9 ? "Running" : "Fault"
 
   const handleClickOn = () => {
-    switchableOutput.updateAuto(0)
     switchableOutput.updateState(1)
   }
 
   const handleClickAuto = () => {
-    switchableOutput.updateAuto(1)
     switchableOutput.updateState(0)
   }
+
   return (
     <div className={classnames("mt-4", props.className)}>
       <div className="flex">
         <div className="flex-1">{switchableOutput.customName || switchableOutput.name}</div>
         <div className="flex py-1">
-          <span className="px-2 text-2xs rounded-md bg-red-500">TODO: {switchableOutput.status}</span>
+          <span
+            className={classnames("px-2 text-2xs rounded-md", {
+              "bg-surface-victronGray": switchableOutput.status === 0x0,
+              "bg-surface-victronYello": switchableOutput.status === 0x9,
+              "bg-surface-victronRed": switchableOutput.status !== 0x9 && switchableOutput.status !== 0x0,
+            })}
+          >
+            {statusLabel}
+          </span>
         </div>
       </div>
       <div className="flex">
