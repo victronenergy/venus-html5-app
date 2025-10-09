@@ -202,8 +202,8 @@
   --c-content-primary: #FF0100;
   --c-content-secondary: #B00908;
   --c-content-tertiary: #4D0807;
-  --c-content-white: #FF0100;
-  --c-content-light-gray: #D80504;
+  --c-content-white: #4D0807;
+  --c-content-light-gray: #7F0908;
   --c-content-on-victron-blue: #4D0807;
 
   --c-victron-gray-rgb: 176, 9, 8;         /* RGB values for #B00908 */
