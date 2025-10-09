@@ -26,7 +26,7 @@ const DimmableOutput = observer((props: DimmableOutputProps) => {
   const calculatePercentage = (clientX: number, element: HTMLDivElement): number => {
     const rect = element.getBoundingClientRect()
     const relativeX = clientX - rect.left
-    const percentageX = Math.max(0, Math.min(100, (relativeX / rect.width) * 100))
+    const percentageX = Math.round(Math.max(0, Math.min(100, (relativeX / rect.width) * 100)))
     return percentageX
   }
 
@@ -46,7 +46,7 @@ const DimmableOutput = observer((props: DimmableOutputProps) => {
 
       updateTimeoutRef.current = setTimeout(() => {
         switchableOutput.updateDimming(percentage)
-      }, 25)
+      }, 10)
     },
     [switchableOutput],
   )
@@ -115,7 +115,6 @@ const DimmableOutput = observer((props: DimmableOutputProps) => {
             onMouseDown={handlePress}
             onMouseMove={handleMove}
             onMouseUp={handleRelease}
-            onMouseLeave={handleRelease}
             onTouchStart={handlePress}
             onTouchMove={handleMove}
             onTouchEnd={handleRelease}
@@ -125,7 +124,7 @@ const DimmableOutput = observer((props: DimmableOutputProps) => {
             <div className="flex h-full">
               {/* Percent area */}
               <div
-                className={classnames("h-full", {
+                className={classnames("h-full transition-all duration-100 ease-out", {
                   "bg-content-victronBlue": variant === "on",
                   "bg-content-victronBlue50": variant === "off",
                 })}
