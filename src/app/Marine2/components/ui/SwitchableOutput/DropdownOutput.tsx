@@ -13,26 +13,21 @@ interface DropdownOutputProps {
 const DropdownOutput = observer((props: DropdownOutputProps) => {
   const switchableOutput = useSwitchableOutput(props.deviceId, props.outputId)
 
-  const variant = "off"
+  const parsedLabels = switchableOutput.labels ? JSON.parse(switchableOutput.labels) : "[]"
+  const labels = Array.isArray(parsedLabels) ? parsedLabels : []
+  const selectedLabelIndex = switchableOutput.dimming || 0
+  const label = labels.length > selectedLabelIndex ? labels[selectedLabelIndex] : ""
 
   return (
     <div className={classnames("mt-4", props.className)}>
       <div>{switchableOutput.customName || switchableOutput.name}</div>
-      <button
-        className={classnames(
-          "h-px-44 px-4 py-1.5 whitespace-nowrap",
-          "border-2 border-content-victronBlue cursor-pointer",
-          "text-sm min-h-[2.375rem]",
-          "rounded-md",
-          {
-            "bg-surface-victronBlue text-content-primary": variant === "off",
-            // "bg-content-victronBlue text-content-onVictronBlue": variant === "on",
-          },
-          props.className,
-        )}
-      >
-        DropdownOutput
-      </button>
+      {/* Border */}
+      <div className="h-px-44 rounded-md bg-surface-victronBlue border-2 border-content-victronBlue">
+        {/* Container */}
+        <div className="h-full rounded-sm flex overflow-hidden items-center">
+          <div className="px-2 whitespace-nowrap cursor-pointer text-sm">{label}</div>
+        </div>
+      </div>
     </div>
   )
 })
