@@ -25,11 +25,18 @@ const SliderOutput = observer((props: SliderOutputProps) => {
   const [isDragging, setIsDragging] = useState(false)
   const updateTimeoutRef = useRef<NodeJS.Timeout>()
 
-  const calculatePercentage = (clientX: number, element: HTMLDivElement): number => {
+  const calculateNewValue = (
+    clientX: number,
+    element: HTMLDivElement,
+    min: number,
+    max: number,
+    step: number,
+  ): number => {
     const rect = element.getBoundingClientRect()
     const relativeX = clientX - rect.left
     const percentageX = Math.max(0, Math.min(100, (relativeX / rect.width) * 100))
-    return Math.round(percentageX / step) * step
+    const newValue = min + percentageX / (max - min)
+    return Math.round(newValue / step) * step
   }
 
   const updateDimmingValueImmediately = useCallback(
@@ -57,9 +64,9 @@ const SliderOutput = observer((props: SliderOutputProps) => {
     setIsDragging(true)
 
     const clientX = "touches" in e ? e.touches[0].clientX : e.clientX
-    const percentageX = calculatePercentage(clientX, e.currentTarget)
+    const newValue = calculateNewValue(clientX, e.currentTarget, min, max, step)
 
-    updateDimmingValueImmediately(percentageX)
+    updateDimmingValueImmediately(newValue)
   }
 
   const handleMove = (e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
@@ -67,9 +74,9 @@ const SliderOutput = observer((props: SliderOutputProps) => {
       return
     }
     const clientX = "touches" in e ? e.touches[0].clientX : e.clientX
-    const percentageX = calculatePercentage(clientX, e.currentTarget)
+    const newValue = calculateNewValue(clientX, e.currentTarget, min, max, step)
 
-    updateDimmingValueDebounced(percentageX)
+    updateDimmingValueDebounced(newValue)
   }
 
   const handleRelease = () => {
