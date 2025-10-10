@@ -1,7 +1,13 @@
 import React, { useCallback, useRef, useState } from "react"
-import { SwitchableOutputId, SwitchingDeviceInstanceId, useSwitchableOutput } from "@victronenergy/mfd-modules"
+import {
+  SwitchableOutputId,
+  SwitchingDeviceInstanceId,
+  useAppStore,
+  useSwitchableOutput,
+} from "@victronenergy/mfd-modules"
 import classnames from "classnames"
 import { observer } from "mobx-react"
+import { temperatureValueFor } from "app/Marine2/utils/formatters/temperature/temperature-value-for"
 
 interface TemperatureSetpointOutputProps {
   key: string
@@ -16,17 +22,33 @@ interface TemperatureSetpointOutputProps {
 const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProps) => {
   const switchableOutput = useSwitchableOutput(props.deviceId, props.outputId)
 
+  const { temperatureUnitToHumanReadable, temperatureUnit } = useAppStore()
+
   const min = switchableOutput.dimmingMin || 0
   const max = switchableOutput.dimmingMax || 100
   const step = switchableOutput.stepSize || 1
   const setpoint = switchableOutput.dimming || 0
   const measurement = switchableOutput.measurement || setpoint
-  const unit = switchableOutput.unit
+  const unit = "/T"
   const ratio = Math.round(((setpoint - min) / (max - min)) * 100)
   const tick = Math.round((setpoint - min) / step)
 
   const [isDragging, setIsDragging] = useState(false)
   const updateTimeoutRef = useRef<NodeJS.Timeout>()
+
+  const formattedValueAndUnit = useCallback(
+    (value: number, unit: string | "/S" | "/T" | "/V"): string => {
+      if (unit === "/S") {
+        return `TODO: ${value} in units of speed`
+      } else if (unit === "/V") {
+        return `TODO: ${value} in units of volume`
+      } else if (unit === "/T") {
+        return `${temperatureValueFor(value, temperatureUnit)}${temperatureUnitToHumanReadable}`
+      }
+      return `${value}${unit}`
+    },
+    [temperatureUnit, temperatureUnitToHumanReadable],
+  )
 
   const calculateNewValue = (
     clientX: number,
@@ -95,10 +117,7 @@ const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProp
     <div className={classnames("mt-4", props.className)}>
       <div className="flex">
         <div className="flex-1">{switchableOutput.customName || switchableOutput.name}</div>
-        <div className="flex py-1">
-          {measurement}&nbsp;
-          {unit}
-        </div>
+        <div className="flex py-1">{formattedValueAndUnit(measurement, unit)}</div>
       </div>
       {/* Border */}
       <div className="h-px-44 rounded-md bg-content-victronBlue50 border-2 border-content-victronBlue bg-gradient-to-r from-content-victronBlue to-content-victronRed">

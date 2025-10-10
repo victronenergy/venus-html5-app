@@ -1,7 +1,13 @@
 import React, { useCallback, useRef, useState } from "react"
-import { SwitchableOutputId, SwitchingDeviceInstanceId, useSwitchableOutput } from "@victronenergy/mfd-modules"
+import {
+  SwitchableOutputId,
+  SwitchingDeviceInstanceId,
+  useAppStore,
+  useSwitchableOutput,
+} from "@victronenergy/mfd-modules"
 import classnames from "classnames"
 import { observer } from "mobx-react"
+import { temperatureValueFor } from "app/Marine2/utils/formatters/temperature/temperature-value-for"
 
 interface SliderOutputProps {
   key: string
@@ -15,6 +21,8 @@ interface SliderOutputProps {
 const SliderOutput = observer((props: SliderOutputProps) => {
   const switchableOutput = useSwitchableOutput(props.deviceId, props.outputId)
 
+  const { temperatureUnitToHumanReadable, temperatureUnit } = useAppStore()
+
   const min = switchableOutput.dimmingMin || 0
   const max = switchableOutput.dimmingMax || 100
   const step = switchableOutput.stepSize || 1
@@ -24,6 +32,20 @@ const SliderOutput = observer((props: SliderOutputProps) => {
 
   const [isDragging, setIsDragging] = useState(false)
   const updateTimeoutRef = useRef<NodeJS.Timeout>()
+
+  const formattedValueAndUnit = useCallback(
+    (value: number, unit: string | "/S" | "/T" | "/V"): string => {
+      if (unit === "/S") {
+        return `TODO: ${value} in units of speed`
+      } else if (unit === "/V") {
+        return `TODO: ${value} in units of volume`
+      } else if (unit === "/T") {
+        return `${temperatureValueFor(value, temperatureUnit)} ${temperatureUnitToHumanReadable}`
+      }
+      return `${value}${unit}`
+    },
+    [temperatureUnit, temperatureUnitToHumanReadable],
+  )
 
   const calculateNewValue = (
     clientX: number,
@@ -92,10 +114,7 @@ const SliderOutput = observer((props: SliderOutputProps) => {
     <div className={classnames("mt-4", props.className)}>
       <div className="flex">
         <div className="flex-1">{switchableOutput.customName || switchableOutput.name}</div>
-        <div className="flex py-1">
-          {value}&nbsp;
-          {unit}
-        </div>
+        <div className="flex py-1">{formattedValueAndUnit(value, unit)}</div>
       </div>
       {/* Border */}
       <div className="h-px-44 rounded-md bg-surface-victronBlue border-2 border-content-victronBlue">

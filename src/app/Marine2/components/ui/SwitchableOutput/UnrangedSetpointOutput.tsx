@@ -1,7 +1,13 @@
-import React, { useMemo } from "react"
-import { SwitchableOutputId, SwitchingDeviceInstanceId, useSwitchableOutput } from "@victronenergy/mfd-modules"
+import React, { useCallback, useMemo } from "react"
+import {
+  SwitchableOutputId,
+  SwitchingDeviceInstanceId,
+  useAppStore,
+  useSwitchableOutput,
+} from "@victronenergy/mfd-modules"
 import classnames from "classnames"
 import { observer } from "mobx-react"
+import { temperatureValueFor } from "app/Marine2/utils/formatters/temperature/temperature-value-for"
 
 interface UnrangedSetpointOutputProps {
   key: string
@@ -16,11 +22,27 @@ interface UnrangedSetpointOutputProps {
 const UnrangedSetpointOutput = observer((props: UnrangedSetpointOutputProps) => {
   const switchableOutput = useSwitchableOutput(props.deviceId, props.outputId)
 
+  const { temperatureUnitToHumanReadable, temperatureUnit } = useAppStore()
+
   const min = switchableOutput.dimmingMin || 0
   const max = switchableOutput.dimmingMax || 100
   const step = switchableOutput.stepSize || 1
   const value = switchableOutput.dimming || 1
   const unit = switchableOutput.unit
+
+  const formattedValueAndUnit = useCallback(
+    (value: number, unit: string | "/S" | "/T" | "/V"): string => {
+      if (unit === "/S") {
+        return `TODO: ${value} in units of speed`
+      } else if (unit === "/V") {
+        return `TODO: ${value} in units of volume`
+      } else if (unit === "/T") {
+        return `${temperatureValueFor(value, temperatureUnit)} ${temperatureUnitToHumanReadable}`
+      }
+      return `${value}${unit}`
+    },
+    [temperatureUnit, temperatureUnitToHumanReadable],
+  )
 
   const minusEnabled = useMemo(() => {
     return value - step > min
@@ -67,8 +89,7 @@ const UnrangedSetpointOutput = observer((props: UnrangedSetpointOutputProps) => 
             </button>
           </div>
           <div className="flex-1 h-full flex items-center justify-center text-sm min-h-[2.375rem] whitespace-nowrap">
-            {value}&nbsp;
-            {unit}
+            {formattedValueAndUnit(value, unit)}
           </div>
           <div
             className={classnames("h-full flex items-center px-4", {
