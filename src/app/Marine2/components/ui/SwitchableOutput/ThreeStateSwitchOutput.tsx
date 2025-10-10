@@ -45,8 +45,7 @@ const ThreeStateSwitchOutput = observer((props: ThreeStateSwitchOutputProps) => 
             "text-sm min-h-[2.375rem]",
             "rounded-l-md",
             {
-              "bg-content-victronBlue text-content-onVictronBlue": auto === "off" && variant === "off",
-              "bg-content-victronBlue50 text-content-primary": auto === "on" && variant === "off",
+              "bg-content-victronBlue50 text-content-onVictronBlue": variant === "off",
               "bg-surface-victronBlue text-content-primary": variant === "on",
             },
             props.className,

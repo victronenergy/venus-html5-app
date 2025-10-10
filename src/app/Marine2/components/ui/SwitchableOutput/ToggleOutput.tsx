@@ -29,12 +29,12 @@ const ToggleOutput = observer((props: ToggleOutputProps) => {
         <button
           className={classnames(
             "h-px-44 px-4 py-1.5 whitespace-nowrap",
-            "border-2 border-content-victronBlue cursor-pointer",
+            "border-2 border-r-0 border-content-victronBlue cursor-pointer",
             "text-sm min-h-[2.375rem]",
             "rounded-l-md",
             {
               "bg-surface-victronBlue text-content-primary": variant === "on",
-              "bg-content-victronBlue text-content-onVictronBlue": variant === "off",
+              "bg-content-victronBlue50 text-content-onVictronBlue": variant === "off",
             },
             props.className,
           )}
@@ -45,7 +45,7 @@ const ToggleOutput = observer((props: ToggleOutputProps) => {
         <button
           className={classnames(
             "h-px-44 px-4 py-1.5 whitespace-nowrap",
-            "border-2 border-content-victronBlue cursor-pointer",
+            "border-2 border-l-0 border-content-victronBlue cursor-pointer",
             "text-sm min-h-[2.375rem]",
             "rounded-r-md",
             {
