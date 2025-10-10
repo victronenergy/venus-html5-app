@@ -35,7 +35,7 @@ const SliderOutput = observer((props: SliderOutputProps) => {
     const rect = element.getBoundingClientRect()
     const relativeX = clientX - rect.left
     const percentageX = Math.max(0, Math.min(100, (relativeX / rect.width) * 100))
-    const newValue = min + percentageX / (max - min)
+    const newValue = min + (percentageX / 100) * (max - min)
     return Math.round(newValue / step) * step
   }
 
