@@ -23,7 +23,7 @@ const DimmableOutput = observer((props: DimmableOutputProps) => {
   const [isDragging, setIsDragging] = useState(false)
   const updateTimeoutRef = useRef<NodeJS.Timeout>()
 
-  const calculatePercentage = (clientX: number, element: HTMLDivElement): number => {
+  const calculateNewValue = (clientX: number, element: HTMLDivElement): number => {
     const rect = element.getBoundingClientRect()
     const relativeX = clientX - rect.left
     const percentageX = Math.round(Math.max(0, Math.min(100, (relativeX / rect.width) * 100)))
@@ -55,7 +55,7 @@ const DimmableOutput = observer((props: DimmableOutputProps) => {
     setIsDragging(true)
 
     const clientX = "touches" in e ? e.touches[0].clientX : e.clientX
-    const percentageX = calculatePercentage(clientX, e.currentTarget)
+    const percentageX = calculateNewValue(clientX, e.currentTarget)
 
     updateDimmingValueImmediately(percentageX)
   }
@@ -65,9 +65,9 @@ const DimmableOutput = observer((props: DimmableOutputProps) => {
       return
     }
     const clientX = "touches" in e ? e.touches[0].clientX : e.clientX
-    const percentageX = calculatePercentage(clientX, e.currentTarget)
+    const newValue = calculateNewValue(clientX, e.currentTarget)
 
-    updateDimmingValueDebounced(percentageX)
+    updateDimmingValueDebounced(newValue)
   }
 
   const handleRelease = () => {
