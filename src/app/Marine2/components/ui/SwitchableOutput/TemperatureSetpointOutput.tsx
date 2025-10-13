@@ -17,9 +17,6 @@ interface TemperatureSetpointOutputProps {
   className?: string
 }
 
-// TODO: handle special case of Unit to format properly /T /S /V
-// TODO: and popover when dragging and show it briefly when tapping
-
 const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProps) => {
   const switchableOutput = useSwitchableOutput(props.deviceId, props.outputId)
 
