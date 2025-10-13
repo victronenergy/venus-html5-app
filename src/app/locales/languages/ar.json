@@ -121,10 +121,16 @@
             "status": "حالة"
         },
         "device": {
+            "colorScheme": "مخطط الألوان",
             "device": "جهاز",
             "devicePixelRatio": "نسبة البكسل",
             "isGuiV2Supported": "واجهة المستخدم الرسومية v2 مدعومة",
             "missing": "مفقود",
+            "prefersDarkMode": "الوضع الداكن",
+            "prefersHighContrast": "تباين عالٍ",
+            "prefersLightMode": "الوضع الفاتح",
+            "prefersLowContrast": "تباين منخفض",
+            "unspecified": "غير محدد",
             "userAgent": "وكيل المستخدم",
             "viewportHeight": "ارتفاع منفذ العرض",
             "viewportWidth": "عرض منفذ العرض"
@@ -249,6 +255,7 @@
             "Waste water": "ماء فاسد"
         }
     },
+    "switches": {},
     "tankWidget": {
         "Black water": "مياه سوداء",
         "Diesel": "الديزل",

@@ -122,15 +122,15 @@
         },
         "device": {
             "colorScheme": "Color Scheme",
-            "unspecified": "Unspecified",
-            "prefersDarkMode": "Dark Mode",
-            "prefersLightMode": "Light Mode",
-            "prefersHighContrast": "High Contrast",
-            "prefersLowContrast": "Low Contrast",
             "device": "Device",
             "devicePixelRatio": "Pixel Ratio",
             "isGuiV2Supported": "GUI v2 supported",
             "missing": "missing",
+            "prefersDarkMode": "Dark Mode",
+            "prefersHighContrast": "High Contrast",
+            "prefersLightMode": "Light Mode",
+            "prefersLowContrast": "Low Contrast",
+            "unspecified": "Unspecified",
             "userAgent": "User agent",
             "viewportHeight": "Viewport height",
             "viewportWidth": "Viewport width"
@@ -204,6 +204,7 @@
     "pages": {
         "diagnostics": "Diagnostics",
         "remoteConsole": "Remote Console",
+        "switchingPane": "Switching Pane",
         "systemOverview": "System Overview"
     },
     "remoteLogin": {
@@ -254,6 +255,17 @@
             "Tank sensor": "Tank sensor",
             "Waste water": "Waste water"
         }
+    },
+    "switches": {
+        "auto": "Auto",
+        "fault": "Fault",
+        "max": "Max",
+        "min": "Min",
+        "notRunning": "Not Running",
+        "off": "Off",
+        "on": "On",
+        "press": "Press",
+        "running": "Running"
     },
     "tankWidget": {
         "Black water": "Black water",

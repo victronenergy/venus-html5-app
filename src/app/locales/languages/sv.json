@@ -121,10 +121,16 @@
             "status": "Status"
         },
         "device": {
+            "colorScheme": "Färgschema",
             "device": "Enhet",
             "devicePixelRatio": "Pixelkvot",
             "isGuiV2Supported": "GUI v2 stöds",
             "missing": "saknas",
+            "prefersDarkMode": "Mörkt läge",
+            "prefersHighContrast": "Hög kontrast",
+            "prefersLightMode": "Ljust läge",
+            "prefersLowContrast": "Låg kontrast",
+            "unspecified": "Ospecificerad",
             "userAgent": "Användaragent",
             "viewportHeight": "Höjd visningsport",
             "viewportWidth": "Bredd visningsport"
@@ -249,6 +255,7 @@
             "Waste water": "Spillvatten"
         }
     },
+    "switches": {},
     "tankWidget": {
         "Black water": "Svartvatten",
         "Diesel": "Diesel",

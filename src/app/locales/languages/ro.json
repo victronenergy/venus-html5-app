@@ -121,10 +121,16 @@
             "status": "Stare"
         },
         "device": {
+            "colorScheme": "Schemă de culori",
             "device": "Dispozitiv",
             "devicePixelRatio": "Raport pixeli",
             "isGuiV2Supported": "GUI v2 suportat",
             "missing": "lipsă",
+            "prefersDarkMode": "Mod întunecat",
+            "prefersHighContrast": "Contrast ridicat",
+            "prefersLightMode": "Mod luminos",
+            "prefersLowContrast": "Contrast scăzut",
+            "unspecified": "Nespecificat",
             "userAgent": "Agent utilizator",
             "viewportHeight": "Înălțime fereastră vizualiare",
             "viewportWidth": "Lățime fereastră vizualiare"
@@ -249,6 +255,7 @@
             "Waste water": "Apa reziduala"
         }
     },
+    "switches": {},
     "tankWidget": {
         "Black water": "Apa redizuala",
         "Diesel": "Motorină",

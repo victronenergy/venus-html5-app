@@ -121,10 +121,16 @@
             "status": "Состояние"
         },
         "device": {
+            "colorScheme": "Цветовая схема",
             "device": "Устройство",
             "devicePixelRatio": "Соотношение пикселей",
             "isGuiV2Supported": "Поддержка GUI v2",
             "missing": "отсутствует",
+            "prefersDarkMode": "Тёмный режим",
+            "prefersHighContrast": "Высокая контрастность",
+            "prefersLightMode": "Светлый режим",
+            "prefersLowContrast": "Низкая контрастность",
+            "unspecified": "Не указано",
             "userAgent": "Пользовательский агент",
             "viewportHeight": "Высота окна просмотра",
             "viewportWidth": "Ширина окна просмотра"
@@ -249,6 +255,7 @@
             "Waste water": "Грязная вода"
         }
     },
+    "switches": {},
     "tankWidget": {
         "Black water": "Темная вода",
         "Diesel": "Дизельное топливо",

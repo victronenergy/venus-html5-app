@@ -121,10 +121,16 @@
             "status": "Estado"
         },
         "device": {
+            "colorScheme": "Esquema de colores",
             "device": "Dispositivo",
             "devicePixelRatio": "Relación de píxeles",
             "isGuiV2Supported": "GUI v2 soportada",
             "missing": "falta",
+            "prefersDarkMode": "Modo oscuro",
+            "prefersHighContrast": "Alto contraste",
+            "prefersLightMode": "Modo claro",
+            "prefersLowContrast": "Bajo contraste",
+            "unspecified": "Sin especificar",
             "userAgent": "Agente del usuario",
             "viewportHeight": "Altura del viewport",
             "viewportWidth": "Anchura del viewport"
@@ -249,6 +255,7 @@
             "Waste water": "Aguas grises"
         }
     },
+    "switches": {},
     "tankWidget": {
         "Black water": "Aguas negras",
         "Diesel": "Diésel",

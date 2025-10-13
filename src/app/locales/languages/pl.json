@@ -121,10 +121,16 @@
             "status": "Status"
         },
         "device": {
+            "colorScheme": "Schemat kolorów",
             "device": "Urządzenie",
             "devicePixelRatio": "Współczynnik pikseli",
             "isGuiV2Supported": "GUI v2 obsługiwane",
             "missing": "brak",
+            "prefersDarkMode": "Tryb ciemny",
+            "prefersHighContrast": "Wysoki kontrast",
+            "prefersLightMode": "Tryb jasny",
+            "prefersLowContrast": "Niski kontrast",
+            "unspecified": "Nieokreślony",
             "userAgent": "Agent użytkownika",
             "viewportHeight": "Wysokość podglądu",
             "viewportWidth": "Szerokość podglądu"
@@ -249,6 +255,7 @@
             "Waste water": "Ścieki"
         }
     },
+    "switches": {},
     "tankWidget": {
         "Black water": "Czarna woda",
         "Diesel": "Diesel",

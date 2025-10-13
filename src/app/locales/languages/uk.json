@@ -121,10 +121,16 @@
             "status": "Стан"
         },
         "device": {
+            "colorScheme": "Колірна схема",
             "device": "Пристрій",
             "devicePixelRatio": "Pixel Ratio",
             "isGuiV2Supported": "Підтримується GUI v2",
             "missing": "відсутній",
+            "prefersDarkMode": "Темний режим",
+            "prefersHighContrast": "Висока контрастність",
+            "prefersLightMode": "Світлий режим",
+            "prefersLowContrast": "Низька контрастність",
+            "unspecified": "Не вказано",
             "userAgent": "User agent",
             "viewportHeight": "Висота вікна перегляду",
             "viewportWidth": "Ширина вікна перегляду"
@@ -249,6 +255,7 @@
             "Waste water": "Стічні води"
         }
     },
+    "switches": {},
     "tankWidget": {
         "Black water": "Стічні води з каналізації",
         "Diesel": "Дизель",
