@@ -100,6 +100,20 @@ const GroupPaginator = <T extends React.JSX.Element>({
   }, [width, height])
 
   useLayoutEffect(() => {
+    if (orientation === "horizontal") {
+      setPagesElement(undefined)
+      setAvailableSpace(width)
+    }
+  }, [width, orientation])
+
+  useLayoutEffect(() => {
+    if (orientation === "vertical") {
+      setPagesElement(undefined)
+      setAvailableSpace(height)
+    }
+  }, [height, orientation])
+
+  useLayoutEffect(() => {
     const columnCount = pagingResults.reduce((total, group) => {
       return total + group.length
     }, 0)
@@ -160,21 +174,7 @@ const GroupPaginator = <T extends React.JSX.Element>({
     }
     setPageCount(pageCount)
     setStartingPage(pageCount)
-  }, [children, columnsPerPage, orientation, pagingResults, setStartingPage])
-
-  useLayoutEffect(() => {
-    if (orientation === "horizontal") {
-      setPagesElement(undefined)
-      setAvailableSpace(width)
-    }
-  }, [width, orientation])
-
-  useLayoutEffect(() => {
-    if (orientation === "vertical") {
-      setPagesElement(undefined)
-      setAvailableSpace(height)
-    }
-  }, [height, orientation])
+  }, [children, columnsPerPage, orientation, pagingResults, setStartingPage, availableSpace])
 
   useEffect(() => {
     currentPageSetter(currentPage, pageCount)
