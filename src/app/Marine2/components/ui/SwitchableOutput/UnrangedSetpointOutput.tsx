@@ -80,9 +80,10 @@ const UnrangedSetpointOutput = observer((props: UnrangedSetpointOutputProps) => 
             "bg-surface-victronGray border-content-victronGray": !minusEnabled,
             "bg-surface-victronBlue border-content-victronBlue ": minusEnabled,
           })}
+          onClick={handleClickMinus}
         >
           <button
-            className="h-px-44 px-4 py-1.5 cursor-pointer text-sm min-h-[2.375rem] text-content-primary"
+            className="h-px-44 px-4 py-1.5 cursor-pointer text-sm min-h-[2.375rem] text-content-primary select-none"
             onClick={handleClickMinus}
           >
             -
@@ -98,9 +99,10 @@ const UnrangedSetpointOutput = observer((props: UnrangedSetpointOutputProps) => 
             "bg-surface-victronGray border-content-victronGray": !plusEnabled,
             "bg-surface-victronBlue border-content-victronBlue": plusEnabled,
           })}
+          onClick={handleClickPlus}
         >
           <button
-            className="h-px-44 px-4 py-1.5 cursor-pointer text-sm min-h-[2.375rem] text-content-primary"
+            className="h-px-44 px-4 py-1.5 cursor-pointer text-sm min-h-[2.375rem] text-content-primary select-none"
             onClick={handleClickPlus}
           >
             +
