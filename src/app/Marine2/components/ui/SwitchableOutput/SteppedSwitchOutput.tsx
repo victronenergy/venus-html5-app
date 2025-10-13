@@ -2,6 +2,7 @@ import React from "react"
 import { SwitchableOutputId, SwitchingDeviceInstanceId, useSwitchableOutput } from "@victronenergy/mfd-modules"
 import classnames from "classnames"
 import { observer } from "mobx-react"
+import { translate } from "react-i18nify"
 
 interface SteppedSwitchOutputProps {
   key: string
@@ -53,7 +54,7 @@ const SteppedSwitchOutput = observer((props: SteppedSwitchOutputProps) => {
               )}
               onClick={handleClickOnOff}
             >
-              {variant === "on" ? "On" : "Off"}
+              {variant === "on" ? translate("switches.on") : translate("switches.off")}
             </button>
             {/* Separator */}
             <div className="w-px-2 h-[80%] rounded-sm bg-content-lightGray"></div>

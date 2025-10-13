@@ -2,6 +2,7 @@ import React from "react"
 import { SwitchableOutputId, SwitchingDeviceInstanceId, useSwitchableOutput } from "@victronenergy/mfd-modules"
 import classnames from "classnames"
 import { observer } from "mobx-react"
+import { translate } from "react-i18nify"
 
 interface ToggleOutputProps {
   key: string
@@ -40,7 +41,7 @@ const ToggleOutput = observer((props: ToggleOutputProps) => {
           )}
           onClick={handleClickOff}
         >
-          Off
+          {translate("switches.off")}
         </button>
         <button
           className={classnames(
@@ -56,7 +57,7 @@ const ToggleOutput = observer((props: ToggleOutputProps) => {
           )}
           onClick={handleClickOn}
         >
-          On
+          {translate("switches.on")}
         </button>
       </div>
     </div>

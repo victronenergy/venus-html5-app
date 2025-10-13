@@ -2,6 +2,7 @@ import React from "react"
 import { SwitchableOutputId, SwitchingDeviceInstanceId, useSwitchableOutput } from "@victronenergy/mfd-modules"
 import classnames from "classnames"
 import { observer } from "mobx-react"
+import { translate } from "react-i18nify"
 
 interface ThreeStateSwitchOutputProps {
   key: string
@@ -52,7 +53,7 @@ const ThreeStateSwitchOutput = observer((props: ThreeStateSwitchOutputProps) => 
           )}
           onClick={handleClickOff}
         >
-          Off
+          {translate("switches.off")}
         </button>
         <button
           className={classnames(
@@ -68,7 +69,7 @@ const ThreeStateSwitchOutput = observer((props: ThreeStateSwitchOutputProps) => 
           )}
           onClick={handleClickOn}
         >
-          On
+          {translate("switches.on")}
         </button>
         <button
           className={classnames(
@@ -85,7 +86,7 @@ const ThreeStateSwitchOutput = observer((props: ThreeStateSwitchOutputProps) => 
           )}
           onClick={handleClickAuto}
         >
-          Auto
+          {translate("switches.auto")}
         </button>
       </div>
     </div>

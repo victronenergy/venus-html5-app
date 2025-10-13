@@ -8,6 +8,7 @@ import {
 import classnames from "classnames"
 import { observer } from "mobx-react"
 import { temperatureValueFor } from "app/Marine2/utils/formatters/temperature/temperature-value-for"
+import { translate } from "react-i18nify"
 
 interface TemperatureSetpointOutputProps {
   key: string
@@ -119,7 +120,7 @@ const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProp
       <div className="h-px-44 rounded-md bg-content-victronBlue50 border-2 border-content-victronBlue bg-gradient-to-r from-content-victronBlue to-content-victronRed">
         {/* Container */}
         <div className="h-full rounded-sm flex overflow-visible">
-          <div className="h-full flex items-center px-4 text-content-white">Min</div>
+          <div className="h-full flex items-center pl-2 pr-4 text-content-white">{translate("switches.min")}</div>
           {/* Slider Container */}
           <div
             className="flex-1 relative"
@@ -164,7 +165,7 @@ const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProp
               ))}
             </div>{" "}
           </div>
-          <div className="h-full flex items-center px-4 text-content-white">Max</div>
+          <div className="h-full flex items-center pl-4 pr-2 text-content-white">{translate("switches.max")}</div>
         </div>
       </div>
     </div>

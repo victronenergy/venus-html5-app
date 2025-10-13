@@ -2,6 +2,7 @@ import React, { useCallback, useRef, useState } from "react"
 import { SwitchableOutputId, SwitchingDeviceInstanceId, useSwitchableOutput } from "@victronenergy/mfd-modules"
 import classnames from "classnames"
 import { observer } from "mobx-react"
+import { translate } from "react-i18nify"
 
 interface DimmableOutputProps {
   key: string
@@ -104,7 +105,7 @@ const DimmableOutput = observer((props: DimmableOutputProps) => {
               )}
               onClick={handleClickOnOff}
             >
-              {variant === "on" ? "On" : "Off"}
+              {variant === "on" ? translate("switches.on") : translate("switches.off")}
             </button>
             {/* Separator */}
             <div className="w-px-2 h-[80%] rounded-sm bg-content-lightBlue"></div>

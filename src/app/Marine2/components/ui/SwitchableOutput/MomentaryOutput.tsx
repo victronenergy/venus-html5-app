@@ -2,6 +2,7 @@ import React from "react"
 import { SwitchableOutputId, SwitchingDeviceInstanceId, useSwitchableOutput } from "@victronenergy/mfd-modules"
 import classnames from "classnames"
 import { observer } from "mobx-react"
+import { translate } from "react-i18nify"
 
 interface MomentaryOutputProps {
   key: string
@@ -45,7 +46,7 @@ const MomentaryOutput = observer((props: MomentaryOutputProps) => {
         onTouchEnd={handleRelease}
         onTouchCancel={handleRelease}
       >
-        Press
+        {variant === "on" ? translate("switches.on") : translate("switches.press")}
       </button>
     </div>
   )

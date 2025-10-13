@@ -296,5 +296,16 @@
         "solar": "Solar",
         "status": "Status",
         "unknown": "Unknown"
+    },
+    "switches": {
+        "on": "On",
+        "off": "Off",
+        "auto": "Auto",
+        "press": "Press",
+        "min": "Min",
+        "max": "Max",
+        "notRunning": "Not Running",
+        "running": "Running",
+        "fault": "Fault"
     }
 }

@@ -2,6 +2,7 @@ import React from "react"
 import { SwitchableOutputId, SwitchingDeviceInstanceId, useSwitchableOutput } from "@victronenergy/mfd-modules"
 import classnames from "classnames"
 import { observer } from "mobx-react"
+import { translate } from "react-i18nify"
 
 interface BilgePumpControlOutputProps {
   key: string
@@ -15,7 +16,11 @@ const BilgePumpControlOutput = observer((props: BilgePumpControlOutputProps) => 
 
   const variant = switchableOutput.state === 1 ? "on" : "off"
   const statusLabel =
-    switchableOutput.status === 0 ? "Not Running" : switchableOutput.status === 0x9 ? "Running" : "Fault"
+    switchableOutput.status === 0
+      ? translate("switches.notRunning")
+      : switchableOutput.status === 0x9
+        ? translate("switches.running")
+        : translate("switches.fault")
 
   const handleClickOn = () => {
     switchableOutput.updateState(1)
@@ -56,7 +61,7 @@ const BilgePumpControlOutput = observer((props: BilgePumpControlOutputProps) => 
           )}
           onClick={handleClickAuto}
         >
-          Auto
+          {translate("switches.auto")}
         </button>
         <button
           className={classnames(
@@ -72,7 +77,7 @@ const BilgePumpControlOutput = observer((props: BilgePumpControlOutputProps) => 
           )}
           onClick={handleClickOn}
         >
-          On
+          {translate("switches.on")}
         </button>
       </div>
     </div>
