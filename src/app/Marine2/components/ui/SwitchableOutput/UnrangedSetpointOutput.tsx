@@ -45,11 +45,11 @@ const UnrangedSetpointOutput = observer((props: UnrangedSetpointOutputProps) => 
   )
 
   const minusEnabled = useMemo(() => {
-    return value - step > min
+    return value - step >= min
   }, [value, step, min])
 
   const plusEnabled = useMemo(() => {
-    return value + step < max
+    return value + step <= max
   }, [value, step, max])
 
   const handleClickPlus = () => {
@@ -71,40 +71,42 @@ const UnrangedSetpointOutput = observer((props: UnrangedSetpointOutputProps) => 
   return (
     <div className={classnames("mt-4", props.className)}>
       <div>{switchableOutput.customName || switchableOutput.name}</div>
-      {/* Border */}
-      <div className="h-px-44 rounded-md border-2 border-content-victronBlue">
-        {/* Container */}
-        <div className="flex h-full">
-          <div
-            className={classnames("h-full flex items-center px-4", {
-              "bg-content-victronBlue50": !minusEnabled,
-              "bg-surface-victronBlue": minusEnabled,
-            })}
+      {/* Container */}
+      <div className="relative flex h-px-44">
+        {/* Minus */}
+        <div
+          className={classnames("h-full flex items-center px-4 rounded-l-md", {
+            "bg-content-victronGray": !minusEnabled,
+            "bg-surface-victronBlue": minusEnabled,
+          })}
+        >
+          <button
+            className="h-px-44 px-4 py-1.5 cursor-pointer text-sm min-h-[2.375rem] text-content-primary"
+            onClick={handleClickMinus}
           >
-            <button
-              className="h-px-44 px-4 py-1.5 cursor-pointer text-sm min-h-[2.375rem] text-content-primary"
-              onClick={handleClickMinus}
-            >
-              -
-            </button>
-          </div>
-          <div className="flex-1 h-full flex items-center justify-center text-sm min-h-[2.375rem] whitespace-nowrap">
-            {formattedValueAndUnit(value, unit)}
-          </div>
-          <div
-            className={classnames("h-full flex items-center px-4", {
-              "bg-content-victronBlue50": !plusEnabled,
-              "bg-surface-victronBlue": plusEnabled,
-            })}
-          >
-            <button
-              className="h-px-44 px-4 py-1.5 cursor-pointer text-sm min-h-[2.375rem] text-content-primary"
-              onClick={handleClickPlus}
-            >
-              +
-            </button>
-          </div>
+            -
+          </button>
         </div>
+        {/* Value */}
+        <div className="flex-1 h-full flex items-center justify-center text-sm min-h-[2.375rem] whitespace-nowrap">
+          {formattedValueAndUnit(value, unit)}
+        </div>
+        {/* Plus */}
+        <div
+          className={classnames("h-full flex items-center px-4 rounded-r-md", {
+            "bg-content-victronGray": !plusEnabled,
+            "bg-surface-victronBlue": plusEnabled,
+          })}
+        >
+          <button
+            className="h-px-44 px-4 py-1.5 cursor-pointer text-sm min-h-[2.375rem] text-content-primary"
+            onClick={handleClickPlus}
+          >
+            +
+          </button>
+        </div>
+        {/* Border */}
+        <div className="absolute inset-0 rounded-md border-2 border-content-victronBlue pointer-events-none"></div>
       </div>
     </div>
   )
