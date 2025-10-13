@@ -91,7 +91,7 @@ module.exports = {
           secondary: "var(--c-content-secondary)",
           tertiary: "var(--c-content-tertiary)",
           white: "var(--c-content-white)",
-          lightGray: "var(--c-content-light-gray)",
+          lightBlue: "var(--c-content-light-blue)",
           onVictronBlue: "var(--c-content-on-victron-blue)",
           victronGray: "rgba(var(--c-victron-gray-rgb), 1.0)",
           victronBlue: "rgba(var(--c-victron-blue-rgb), 1.0)",

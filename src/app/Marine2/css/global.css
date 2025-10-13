@@ -162,7 +162,7 @@
     --c-content-secondary: #504F4B;
     --c-content-tertiary: #969591;
     --c-content-white: #ffffff;
-    --c-content-light-gray: #c3d9ee;
+    --c-content-light-blue: #c3d9ee;
     --c-content-on-victron-blue: #ffffff;
 
     --c-victron-gray-rgb: 150, 149, 145;      /* RGB values for #969591 */
@@ -203,7 +203,7 @@
   --c-content-secondary: #B00908;
   --c-content-tertiary: #4D0807;
   --c-content-white: #4D0807;
-  --c-content-light-gray: #7F0908;
+  --c-content-light-blue: #7F0908;
   --c-content-on-victron-blue: #4D0807;
 
   --c-victron-gray-rgb: 176, 9, 8;         /* RGB values for #B00908 */

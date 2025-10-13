@@ -107,7 +107,7 @@ const DimmableOutput = observer((props: DimmableOutputProps) => {
               {variant === "on" ? "On" : "Off"}
             </button>
             {/* Separator */}
-            <div className="w-px-2 h-[80%] rounded-sm bg-content-lightGray"></div>
+            <div className="w-px-2 h-[80%] rounded-sm bg-content-lightBlue"></div>
           </div>
           {/* Slider Container */}
           <div
