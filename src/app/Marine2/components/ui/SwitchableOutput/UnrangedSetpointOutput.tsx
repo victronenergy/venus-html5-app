@@ -72,12 +72,12 @@ const UnrangedSetpointOutput = observer((props: UnrangedSetpointOutputProps) => 
     <div className={classnames("mt-4", props.className)}>
       <div>{switchableOutput.customName || switchableOutput.name}</div>
       {/* Container */}
-      <div className="relative flex h-px-44">
+      <div className="flex h-px-44">
         {/* Minus */}
         <div
-          className={classnames("h-full flex items-center px-4 rounded-l-md", {
-            "bg-content-victronGray": !minusEnabled,
-            "bg-surface-victronBlue": minusEnabled,
+          className={classnames("h-full flex items-center px-4 rounded-l-md border-2", {
+            "bg-surface-victronGray border-content-victronGray": !minusEnabled,
+            "bg-surface-victronBlue border-content-victronBlue ": minusEnabled,
           })}
         >
           <button
@@ -88,14 +88,14 @@ const UnrangedSetpointOutput = observer((props: UnrangedSetpointOutputProps) => 
           </button>
         </div>
         {/* Value */}
-        <div className="flex-1 h-full flex items-center justify-center text-sm min-h-[2.375rem] whitespace-nowrap">
+        <div className="flex-1 h-full flex items-center justify-center text-sm min-h-[2.375rem] whitespace-nowrap border-t-2 border-b-2 border-content-victronBlue">
           {formattedValueAndUnit(value, unit)}
         </div>
         {/* Plus */}
         <div
-          className={classnames("h-full flex items-center px-4 rounded-r-md", {
-            "bg-content-victronGray": !plusEnabled,
-            "bg-surface-victronBlue": plusEnabled,
+          className={classnames("h-full flex items-center px-4 rounded-r-md border-2", {
+            "bg-surface-victronGray border-content-victronGray": !plusEnabled,
+            "bg-surface-victronBlue border-content-victronBlue": plusEnabled,
           })}
         >
           <button
@@ -105,8 +105,6 @@ const UnrangedSetpointOutput = observer((props: UnrangedSetpointOutputProps) => 
             +
           </button>
         </div>
-        {/* Border */}
-        <div className="absolute inset-0 rounded-md border-2 border-content-victronBlue pointer-events-none"></div>
       </div>
     </div>
   )
