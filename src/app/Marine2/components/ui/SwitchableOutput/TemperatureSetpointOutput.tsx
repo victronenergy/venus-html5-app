@@ -117,7 +117,7 @@ const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProp
       {/* Border */}
       <div className="h-px-44 rounded-md bg-content-victronBlue50 border-2 border-content-victronBlue bg-gradient-to-r from-content-victronBlue to-content-victronRed">
         {/* Container */}
-        <div className="h-full rounded-sm flex overflow-hidden">
+        <div className="h-full rounded-sm flex overflow-visible">
           <div className="h-full flex items-center px-4 text-content-white">Min</div>
           {/* Slider Container */}
           <div
@@ -139,12 +139,27 @@ const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProp
             <div className="absolute inset-0 flex justify-between items-center">
               {[...Array(1 + Math.round(max - min) / step)].map((_, i) => (
                 <div
-                  key={i}
-                  className={classnames("w-px-4 rounded-sm bg-content-white", {
+                  key={`mark_${i}`}
+                  className={classnames("relative w-px-4 rounded-sm bg-content-white", {
                     "h-px-4": i !== tick,
                     "h-[70%]": i === tick,
                   })}
-                />
+                >
+                  {i === tick && isDragging && (
+                    <>
+                      <div
+                        key={`arrow`}
+                        className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-0 h-0 border-l-[12px] border-r-[12px] border-t-[12px] border-l-transparent border-r-transparent border-t-content-victronBlue pointer-events-none"
+                      />
+                      <div
+                        key={`popup`}
+                        className="absolute bottom-full left-1/2 -translate-x-1/2 mb-5 px-3 rounded text-xxl bg-content-victronBlue text-content-onVictronBlue pointer-events-none select-none"
+                      >
+                        {formattedValue(measurement, false)}
+                      </div>
+                    </>
+                  )}
+                </div>
               ))}
             </div>{" "}
           </div>
