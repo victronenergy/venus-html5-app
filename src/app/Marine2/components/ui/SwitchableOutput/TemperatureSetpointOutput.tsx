@@ -27,6 +27,7 @@ const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProp
   const min = switchableOutput.dimmingMin || 0
   const max = switchableOutput.dimmingMax || 100
   const step = switchableOutput.stepSize || 1
+  const stepDecimals = (step.toString().split(".")[1] || "").length
   const setpoint = switchableOutput.dimming || 0
   const measurement = switchableOutput.measurement || setpoint
   const ratio = Math.round(((setpoint - min) / (max - min)) * 100)
@@ -37,9 +38,9 @@ const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProp
 
   const formattedValue = useCallback(
     (measurement: number, includeUnit: boolean): string => {
-      return `${temperatureValueFor(measurement, temperatureUnit)}${includeUnit ? temperatureUnitToHumanReadable : "°"}`
+      return `${temperatureValueFor(measurement, temperatureUnit).toFixed(stepDecimals)}${includeUnit ? temperatureUnitToHumanReadable : "°"}`
     },
-    [temperatureUnit, temperatureUnitToHumanReadable],
+    [stepDecimals, temperatureUnit, temperatureUnitToHumanReadable],
   )
 
   const calculateNewValue = (

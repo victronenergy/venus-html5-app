@@ -26,6 +26,7 @@ const SliderOutput = observer((props: SliderOutputProps) => {
   const min = switchableOutput.dimmingMin || 0
   const max = switchableOutput.dimmingMax || 100
   const step = switchableOutput.stepSize || 1
+  const stepDecimals = (step.toString().split(".")[1] || "").length
   const value = switchableOutput.dimming || 0
   const unit = switchableOutput.unit
   const ratio = Math.round(((value - min) / (max - min)) * 100)
@@ -40,11 +41,11 @@ const SliderOutput = observer((props: SliderOutputProps) => {
       } else if (unit === "/V") {
         return `TODO: ${value} in units of volume`
       } else if (unit === "/T") {
-        return `${temperatureValueFor(value, temperatureUnit)} ${temperatureUnitToHumanReadable}`
+        return `${temperatureValueFor(value, temperatureUnit).toFixed(stepDecimals)}${temperatureUnitToHumanReadable}`
       }
-      return `${value}${unit}`
+      return `${value.toFixed(stepDecimals)}${unit}`
     },
-    [temperatureUnit, temperatureUnitToHumanReadable],
+    [stepDecimals, temperatureUnit, temperatureUnitToHumanReadable],
   )
 
   const calculateNewValue = (

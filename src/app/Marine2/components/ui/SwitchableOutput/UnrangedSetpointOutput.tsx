@@ -27,6 +27,7 @@ const UnrangedSetpointOutput = observer((props: UnrangedSetpointOutputProps) => 
   const min = switchableOutput.dimmingMin || 0
   const max = switchableOutput.dimmingMax || 100
   const step = switchableOutput.stepSize || 1
+  const stepDecimals = (step.toString().split(".")[1] || "").length
   const value = switchableOutput.dimming || 1
   const unit = switchableOutput.unit
 
@@ -37,11 +38,11 @@ const UnrangedSetpointOutput = observer((props: UnrangedSetpointOutputProps) => 
       } else if (unit === "/V") {
         return `TODO: ${value} in units of volume`
       } else if (unit === "/T") {
-        return `${temperatureValueFor(value, temperatureUnit)} ${temperatureUnitToHumanReadable}`
+        return `${temperatureValueFor(value, temperatureUnit).toFixed(stepDecimals)}${temperatureUnitToHumanReadable}`
       }
-      return `${value}${unit}`
+      return `${value.toFixed(stepDecimals)}${unit}`
     },
-    [temperatureUnit, temperatureUnitToHumanReadable],
+    [stepDecimals, temperatureUnit, temperatureUnitToHumanReadable],
   )
 
   const minusEnabled = useMemo(() => {
