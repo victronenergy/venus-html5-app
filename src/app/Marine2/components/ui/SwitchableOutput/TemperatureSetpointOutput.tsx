@@ -29,23 +29,15 @@ const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProp
   const step = switchableOutput.stepSize || 1
   const setpoint = switchableOutput.dimming || 0
   const measurement = switchableOutput.measurement || setpoint
-  const unit = "/T"
   const ratio = Math.round(((setpoint - min) / (max - min)) * 100)
   const tick = Math.round((setpoint - min) / step)
 
   const [isDragging, setIsDragging] = useState(false)
   const updateTimeoutRef = useRef<NodeJS.Timeout>()
 
-  const formattedValueAndUnit = useCallback(
-    (value: number, unit: string | "/S" | "/T" | "/V"): string => {
-      if (unit === "/S") {
-        return `TODO: ${value} in units of speed`
-      } else if (unit === "/V") {
-        return `TODO: ${value} in units of volume`
-      } else if (unit === "/T") {
-        return `${temperatureValueFor(value, temperatureUnit)}${temperatureUnitToHumanReadable}`
-      }
-      return `${value}${unit}`
+  const formattedValue = useCallback(
+    (measurement: number, includeUnit: boolean): string => {
+      return `${temperatureValueFor(measurement, temperatureUnit)}${includeUnit ? temperatureUnitToHumanReadable : "°"}`
     },
     [temperatureUnit, temperatureUnitToHumanReadable],
   )
@@ -117,7 +109,10 @@ const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProp
     <div className={classnames("mt-4", props.className)}>
       <div className="flex">
         <div className="flex-1">{switchableOutput.customName || switchableOutput.name}</div>
-        <div className="flex py-1">{formattedValueAndUnit(measurement, unit)}</div>
+        {setpoint !== measurement && (
+          <div className="flex py-1 text-content-victronGray">{formattedValue(setpoint, false)}/</div>
+        )}
+        <div className="flex py-1">{formattedValue(measurement, true)}</div>
       </div>
       {/* Border */}
       <div className="h-px-44 rounded-md bg-content-victronBlue50 border-2 border-content-victronBlue bg-gradient-to-r from-content-victronBlue to-content-victronRed">
