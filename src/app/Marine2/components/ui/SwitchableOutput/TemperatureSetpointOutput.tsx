@@ -60,8 +60,8 @@ const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProp
     const rect = element.getBoundingClientRect()
     const relativeX = clientX - rect.left
     const percentageX = Math.max(0, Math.min(100, (relativeX / rect.width) * 100))
-    const newValue = min + (percentageX / 100) * (max - min)
-    return Math.round(newValue / step) * step
+    const newValue = (percentageX / 100) * (max - min)
+    return min + Math.round(newValue / step) * step
   }
 
   const updateDimmingValueImmediately = useCallback(

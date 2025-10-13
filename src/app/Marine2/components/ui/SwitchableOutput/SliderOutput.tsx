@@ -28,7 +28,7 @@ const SliderOutput = observer((props: SliderOutputProps) => {
   const step = switchableOutput.stepSize || 1
   const value = switchableOutput.dimming || 0
   const unit = switchableOutput.unit
-  const ratio = Math.round((value / (max - min)) * 100)
+  const ratio = Math.round(((value - min) / (max - min)) * 100)
 
   const [isDragging, setIsDragging] = useState(false)
   const updateTimeoutRef = useRef<NodeJS.Timeout>()
@@ -57,8 +57,8 @@ const SliderOutput = observer((props: SliderOutputProps) => {
     const rect = element.getBoundingClientRect()
     const relativeX = clientX - rect.left
     const percentageX = Math.max(0, Math.min(100, (relativeX / rect.width) * 100))
-    const newValue = min + (percentageX / 100) * (max - min)
-    return Math.round(newValue / step) * step
+    const newValue = (percentageX / 100) * (max - min)
+    return min + Math.round(newValue / step) * step
   }
 
   const updateDimmingValueImmediately = useCallback(
