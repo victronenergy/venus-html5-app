@@ -121,10 +121,16 @@
             "status": "Stav"
         },
         "device": {
+            "colorScheme": "Barevné schéma",
             "device": "Zařízení",
             "devicePixelRatio": "Poměr pixelů",
             "isGuiV2Supported": "Podpora GUI v2",
             "missing": "chybí",
+            "prefersDarkMode": "Tmavý režim",
+            "prefersHighContrast": "Vysoký kontrast",
+            "prefersLightMode": "Světlý režim",
+            "prefersLowContrast": "Nízký kontrast",
+            "unspecified": "Nespecifikováno",
             "userAgent": "Agent uživatele",
             "viewportHeight": "Výška panelu zobrazení",
             "viewportWidth": "Šířka panelu zobrazení"
@@ -249,6 +255,7 @@
             "Waste water": "Odpadní voda"
         }
     },
+    "switches": {},
     "tankWidget": {
         "Black water": "Splašky",
         "Diesel": "Nafta",

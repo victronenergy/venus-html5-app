@@ -121,10 +121,16 @@
             "status": "Status"
         },
         "device": {
+            "colorScheme": "Kleurskema",
             "device": "Toestel",
             "devicePixelRatio": "Pikselverhouding",
             "isGuiV2Supported": "GUI v2 ondersteun",
             "missing": "vermissing",
+            "prefersDarkMode": "Donker Modus",
+            "prefersHighContrast": "Hoë Kontras",
+            "prefersLightMode": "Ligte Modus",
+            "prefersLowContrast": "Lae Kontras",
+            "unspecified": "Ongespesifiseerd",
             "userAgent": "Gebruikersagent",
             "viewportHeight": "Vertoonpoorthoogte",
             "viewportWidth": "Vertoonpoortwydte"
@@ -249,6 +255,7 @@
             "Waste water": "Afvalwater"
         }
     },
+    "switches": {},
     "tankWidget": {
         "Black water": "Swartwater",
         "Diesel": "Diesel",

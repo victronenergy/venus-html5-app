@@ -121,10 +121,16 @@
             "status": "Durum"
         },
         "device": {
+            "colorScheme": "Renk Şeması",
             "device": "Cihaz",
             "devicePixelRatio": "Piksel Oranı",
             "isGuiV2Supported": "GUI v2 destekleniyor",
             "missing": "eksik",
+            "prefersDarkMode": "Koyu Mod",
+            "prefersHighContrast": "Yüksek Kontrast",
+            "prefersLightMode": "Açık Mod",
+            "prefersLowContrast": "Düşük Kontrast",
+            "unspecified": "Belirtilmemiş",
             "userAgent": "User agent",
             "viewportHeight": "Viewport height",
             "viewportWidth": "Viewport width"
@@ -249,6 +255,7 @@
             "Waste water": "Atık su"
         }
     },
+    "switches": {},
     "tankWidget": {
         "Black water": "Pis Su",
         "Diesel": "Dizel",

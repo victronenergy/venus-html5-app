@@ -180,6 +180,10 @@ const GroupPaginator = <T extends React.JSX.Element>({
     currentPageSetter(currentPage, pageCount)
   }, [currentPage, currentPageSetter, pageCount])
 
+  useEffect(() => {
+    currentPageSetter(currentPage, pageCount)
+  }, [currentPage, currentPageSetter, pageCount])
+
   return (
     <>
       <div>

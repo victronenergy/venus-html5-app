@@ -121,10 +121,16 @@
             "status": "状态"
         },
         "device": {
+            "colorScheme": "配色方案",
             "device": "设备",
             "devicePixelRatio": "像素比",
             "isGuiV2Supported": "支持GUI v2",
             "missing": "缺失",
+            "prefersDarkMode": "深色模式",
+            "prefersHighContrast": "高对比度",
+            "prefersLightMode": "浅色模式",
+            "prefersLowContrast": "低对比度",
+            "unspecified": "未指定",
             "userAgent": "用户代理",
             "viewportHeight": "视窗高度",
             "viewportWidth": "视窗宽度"
@@ -249,6 +255,7 @@
             "Waste water": "废水"
         }
     },
+    "switches": {},
     "tankWidget": {
         "Black water": "黑水",
         "Diesel": "柴油",
