@@ -1,13 +1,8 @@
-import React, { useCallback, useMemo } from "react"
-import {
-  SwitchableOutputId,
-  SwitchingDeviceInstanceId,
-  useAppStore,
-  useSwitchableOutput,
-} from "@victronenergy/mfd-modules"
+import React, { useMemo } from "react"
+import { SwitchableOutputId, SwitchingDeviceInstanceId, useSwitchableOutput } from "@victronenergy/mfd-modules"
 import classnames from "classnames"
 import { observer } from "mobx-react"
-import { temperatureValueFor } from "app/Marine2/utils/formatters/temperature/temperature-value-for"
+import { getValueOrDefault, useValueFormatter } from "./helpers"
 
 interface UnrangedSetpointOutputProps {
   key: string
@@ -16,34 +11,17 @@ interface UnrangedSetpointOutputProps {
   className?: string
 }
 
-// TODO: add prpoper color for disabled state on left/right
-// TODO: handle special case of Unit to format properly /T /S /V
-
 const UnrangedSetpointOutput = observer((props: UnrangedSetpointOutputProps) => {
   const switchableOutput = useSwitchableOutput(props.deviceId, props.outputId)
 
-  const { temperatureUnitToHumanReadable, temperatureUnit } = useAppStore()
-
-  const min = switchableOutput.dimmingMin || 0
-  const max = switchableOutput.dimmingMax || 100
-  const step = switchableOutput.stepSize || 1
-  const stepDecimals = (step.toString().split(".")[1] || "").length
-  const value = switchableOutput.dimming || 1
+  const min = getValueOrDefault(switchableOutput.dimmingMin, 0)
+  const max = getValueOrDefault(switchableOutput.dimmingMax, 100)
+  const step = getValueOrDefault(switchableOutput.stepSize, 1)
+  const decimals = (step.toString().split(".")[1] || "").length
+  const value = getValueOrDefault(switchableOutput.dimming, 1)
   const unit = switchableOutput.unit
 
-  const formattedValueAndUnit = useCallback(
-    (value: number, unit: string | "/S" | "/T" | "/V"): string => {
-      if (unit === "/S") {
-        return `TODO: ${value} in units of speed`
-      } else if (unit === "/V") {
-        return `TODO: ${value} in units of volume`
-      } else if (unit === "/T") {
-        return `${temperatureValueFor(value, temperatureUnit).toFixed(stepDecimals)}${temperatureUnitToHumanReadable}`
-      }
-      return `${value.toFixed(stepDecimals)}${unit}`
-    },
-    [stepDecimals, temperatureUnit, temperatureUnitToHumanReadable],
-  )
+  const formatValueAndUnit = useValueFormatter({ decimals })
 
   const minusEnabled = useMemo(() => {
     return value - step >= min
@@ -91,7 +69,7 @@ const UnrangedSetpointOutput = observer((props: UnrangedSetpointOutputProps) => 
         </div>
         {/* Value */}
         <div className="flex-1 h-full flex items-center justify-center text-sm min-h-[2.375rem] whitespace-nowrap border-t-2 border-b-2 border-content-victronBlue">
-          {formattedValueAndUnit(value, unit)}
+          {formatValueAndUnit(value, unit)}
         </div>
         {/* Plus */}
         <div

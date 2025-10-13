@@ -10,6 +10,8 @@ interface DropdownOutputProps {
   className?: string
 }
 
+// TODO: this needs work
+
 const DropdownOutput = observer((props: DropdownOutputProps) => {
   const switchableOutput = useSwitchableOutput(props.deviceId, props.outputId)
 

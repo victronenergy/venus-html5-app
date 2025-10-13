@@ -1,14 +1,9 @@
 import React, { useCallback, useRef, useState } from "react"
-import {
-  SwitchableOutputId,
-  SwitchingDeviceInstanceId,
-  useAppStore,
-  useSwitchableOutput,
-} from "@victronenergy/mfd-modules"
+import { SwitchableOutputId, SwitchingDeviceInstanceId, useSwitchableOutput } from "@victronenergy/mfd-modules"
 import classnames from "classnames"
 import { observer } from "mobx-react"
-import { temperatureValueFor } from "app/Marine2/utils/formatters/temperature/temperature-value-for"
 import { translate } from "react-i18nify"
+import { getValueOrDefault, useValueFormatter } from "./helpers"
 
 interface TemperatureSetpointOutputProps {
   key: string
@@ -20,13 +15,11 @@ interface TemperatureSetpointOutputProps {
 const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProps) => {
   const switchableOutput = useSwitchableOutput(props.deviceId, props.outputId)
 
-  const { temperatureUnitToHumanReadable, temperatureUnit } = useAppStore()
-
-  const min = switchableOutput.dimmingMin || 0
-  const max = switchableOutput.dimmingMax || 100
-  const step = switchableOutput.stepSize || 1
-  const stepDecimals = (step.toString().split(".")[1] || "").length
-  const setpoint = switchableOutput.dimming || 0
+  const min = getValueOrDefault(switchableOutput.dimmingMin, 0)
+  const max = getValueOrDefault(switchableOutput.dimmingMax, 100)
+  const step = getValueOrDefault(switchableOutput.stepSize, 1)
+  const decimals = (step.toString().split(".")[1] || "").length
+  const setpoint = getValueOrDefault(switchableOutput.dimming, 1)
   const measurement = switchableOutput.measurement || setpoint
   const ratio = Math.round(((setpoint - min) / (max - min)) * 100)
   const tick = Math.round((setpoint - min) / step)
@@ -34,12 +27,7 @@ const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProp
   const [isDragging, setIsDragging] = useState(false)
   const updateTimeoutRef = useRef<NodeJS.Timeout>()
 
-  const formattedValue = useCallback(
-    (measurement: number, includeUnit: boolean): string => {
-      return `${temperatureValueFor(measurement, temperatureUnit).toFixed(stepDecimals)}${includeUnit ? temperatureUnitToHumanReadable : "°"}`
-    },
-    [stepDecimals, temperatureUnit, temperatureUnitToHumanReadable],
-  )
+  const formatValueAndUnit = useValueFormatter({ decimals })
 
   const calculateNewValue = (
     clientX: number,
@@ -109,9 +97,9 @@ const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProp
       <div className="flex">
         <div className="flex-1">{switchableOutput.customName || switchableOutput.name}</div>
         {setpoint !== measurement && (
-          <div className="flex py-1 text-content-victronGray">{formattedValue(setpoint, false)}/</div>
+          <div className="flex py-1 text-content-victronGray">{formatValueAndUnit(setpoint, "/T", false)}/</div>
         )}
-        <div className="flex py-1">{formattedValue(measurement, true)}</div>
+        <div className="flex py-1">{formatValueAndUnit(measurement, "/T", true)}</div>
       </div>
       {/* Border */}
       <div className="h-px-44 rounded-md bg-content-victronBlue50 border-2 border-content-victronBlue bg-gradient-to-r from-content-victronBlue to-content-victronRed">
@@ -154,7 +142,7 @@ const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProp
                         key={`popup`}
                         className="absolute bottom-full left-1/2 -translate-x-1/2 mb-5 px-3 rounded text-xxl bg-content-victronBlue text-content-onVictronBlue pointer-events-none select-none"
                       >
-                        {formattedValue(measurement, false)}
+                        {formatValueAndUnit(measurement, "/T", false)}
                       </div>
                     </>
                   )}

@@ -3,6 +3,7 @@ import { SwitchableOutputId, SwitchingDeviceInstanceId, useSwitchableOutput } fr
 import classnames from "classnames"
 import { observer } from "mobx-react"
 import { translate } from "react-i18nify"
+import { getValueOrDefault } from "./helpers"
 
 interface DimmableOutputProps {
   key: string
@@ -15,7 +16,7 @@ const DimmableOutput = observer((props: DimmableOutputProps) => {
   const switchableOutput = useSwitchableOutput(props.deviceId, props.outputId)
 
   const variant = switchableOutput.state === 1 ? "on" : "off"
-  const ratio = switchableOutput.dimming || 0
+  const ratio = getValueOrDefault(switchableOutput.dimming, 0)
 
   const handleClickOnOff = () => {
     switchableOutput.updateState(switchableOutput.state === 1 ? 0 : 1)
