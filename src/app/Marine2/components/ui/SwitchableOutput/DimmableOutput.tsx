@@ -99,10 +99,7 @@ const DimmableOutput = observer((props: DimmableOutputProps) => {
             <button
               className={classnames(
                 "h-full px-2 whitespace-nowrap cursor-pointer text-sm min-h-[2.375rem] min-w-[3rem]",
-                {
-                  "text-content-white": variant === "off",
-                  "text-content-onVictronBlue": variant === "on",
-                },
+                "text-content-onVictronBlue",
               )}
               onClick={handleClickOnOff}
             >
@@ -140,12 +137,7 @@ const DimmableOutput = observer((props: DimmableOutputProps) => {
                 })}
               >
                 {/* Handle */}
-                <div
-                  className={classnames("w-px-4 h-[70%] rounded-sm", {
-                    "bg-content-white": variant === "off",
-                    "bg-content-onVictronBlue": variant === "on",
-                  })}
-                ></div>
+                <div className={classnames("w-px-4 h-[70%] rounded-sm", "bg-content-onVictronBlue")}></div>
               </div>
             </div>
           </div>
