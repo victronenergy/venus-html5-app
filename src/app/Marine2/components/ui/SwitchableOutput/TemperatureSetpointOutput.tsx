@@ -117,7 +117,7 @@ const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProp
         )}
       </div>
       {/* Border */}
-      <div className="h-px-44 rounded-md bg-content-victronBlue50 border-2 border-content-victronBlue bg-gradient-to-r from-content-victronBlue to-content-victronRed">
+      <div className="h-px-44 rounded-md bg-content-victronBlue50 border-2 border-content-victronBlue bg-gradient-to-r from-gradient-victronBlue to-gradient-victronRed">
         {/* Container */}
         <div className="h-full rounded-sm flex overflow-visible">
           <div className="h-full flex items-center pl-2 pr-4 text-content-white">{translate("switches.min")}</div>

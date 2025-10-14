@@ -86,6 +86,10 @@ module.exports = {
           primary: "var(--c-outline-primary)",
           secondary: "var(--c-outline-secondary)",
         },
+        gradient: {
+          victronBlue: "rgba(var(--cg-victron-blue-rgb), 1.0)",
+          victronRed: "rgba(var(--cg-victron-red-rgb), 1.0)",
+        },
         content: {
           primary: "var(--c-content-primary)",
           secondary: "var(--c-content-secondary)",
