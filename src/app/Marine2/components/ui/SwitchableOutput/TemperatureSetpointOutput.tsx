@@ -1,5 +1,10 @@
 import React, { useCallback, useRef, useState } from "react"
-import { SwitchableOutputId, SwitchingDeviceInstanceId, useSwitchableOutput } from "@victronenergy/mfd-modules"
+import {
+  SwitchableOutputId,
+  SwitchingDeviceInstanceId,
+  useAppStore,
+  useSwitchableOutput,
+} from "@victronenergy/mfd-modules"
 import classnames from "classnames"
 import { observer } from "mobx-react"
 import { translate } from "react-i18nify"
@@ -14,13 +19,14 @@ interface TemperatureSetpointOutputProps {
 
 const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProps) => {
   const switchableOutput = useSwitchableOutput(props.deviceId, props.outputId)
+  const { temperatureUnitToHumanReadable } = useAppStore()
 
   const min = getValueOrDefault(switchableOutput.dimmingMin, 0)
   const max = getValueOrDefault(switchableOutput.dimmingMax, 100)
   const step = getValueOrDefault(switchableOutput.stepSize, 1)
   const decimals = (step.toString().split(".")[1] || "").length
   const setpoint = getValueOrDefault(switchableOutput.dimming, 1)
-  const measurement = switchableOutput.measurement || setpoint
+  const measurement = switchableOutput.measurement
   const ratio = Math.round(((setpoint - min) / (max - min)) * 100)
   const tick = Math.round((setpoint - min) / step)
 
@@ -96,12 +102,19 @@ const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProp
     <div className={classnames("mt-4", props.className)}>
       <div className="flex">
         <div className="flex-1">{switchableOutput.customName || switchableOutput.name}</div>
-        {setpoint !== measurement && (
-          <div className="flex py-1 text-content-victronGray">
-            {formatValueAndUnit(setpoint, "/Temperature", false)}/
-          </div>
+        <div className="flex py-1">
+          {formatValueAndUnit(setpoint, "/Temperature", measurement === undefined)}
+          {measurement !== undefined && "°"}
+        </div>
+        {measurement !== undefined && (
+          <>
+            <div className="flex py-1">/</div>
+            <div className="flex py-1">
+              <span className="text-content-victronGray">{formatValueAndUnit(measurement, "/Temperature", false)}</span>
+              <span>{temperatureUnitToHumanReadable}</span>
+            </div>
+          </>
         )}
-        <div className="flex py-1">{formatValueAndUnit(measurement, "/Temperature", true)}</div>
       </div>
       {/* Border */}
       <div className="h-px-44 rounded-md bg-content-victronBlue50 border-2 border-content-victronBlue bg-gradient-to-r from-content-victronBlue to-content-victronRed">
@@ -134,17 +147,44 @@ const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProp
                     "h-[70%]": i === tick,
                   })}
                 >
+                  {/* Popover */}
                   {i === tick && isDragging && (
                     <>
+                      {/* Popover Arrow Down */}
                       <div
                         key={`arrow`}
                         className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-0 h-0 border-l-[12px] border-r-[12px] border-t-[12px] border-l-transparent border-r-transparent border-t-content-victronBlue pointer-events-none"
                       />
+                      {/* Popover Container */}
                       <div
                         key={`popup`}
-                        className="absolute bottom-full left-1/2 -translate-x-1/2 mb-5 px-3 rounded text-xxl bg-content-victronBlue text-content-onVictronBlue pointer-events-none select-none"
+                        className="absolute bottom-full left-1/2 -translate-x-1/2 mb-5 rounded bg-content-victronBlue pointer-events-none select-none"
                       >
-                        {formatValueAndUnit(measurement, "/Temperature", false)}
+                        {/* Popover Container HStack */}
+                        <div className="h-px-44 flex items-center">
+                          <div className="pl-3 pr-2 text-xl text-content-onVictronBlue">
+                            {formatValueAndUnit(setpoint, "/Temperature", false)}
+                            {"°"}
+                          </div>
+                          {measurement !== undefined && (
+                            <>
+                              {/* Popover Container Separator */}
+                              <div className="w-px-2 h-[80%] rounded-sm bg-content-lightBlue"></div>
+                              {/* Popover Container VStack */}
+                              <div className="flex flex-col">
+                                <div className="pl-2 pr-3 text-sm">
+                                  <span className="text-content-lightBlue">
+                                    {formatValueAndUnit(measurement, "/Temperature", false)}
+                                    {measurement !== undefined && "°"}
+                                  </span>
+                                </div>
+                                <div className="pl-2 pr-3 text-2xs text-content-lightBlue">
+                                  {translate("switches.current")}
+                                </div>
+                              </div>
+                            </>
+                          )}
+                        </div>
                       </div>
                     </>
                   )}

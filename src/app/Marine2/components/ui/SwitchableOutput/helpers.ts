@@ -30,7 +30,7 @@ export const useValueFormatter = ({ decimals }: UseFormattedValueOptions) => {
       } else if (unit === "/Volume") {
         return `${volumeValueFor(value, volumeUnit).toFixed(decimals)}${includeUnit ? volumeUnitToHumanReadable : ""}`
       } else if (unit === "/Temperature") {
-        return `${temperatureValueFor(value, temperatureUnit, false).toFixed(decimals)}${includeUnit ? temperatureUnitToHumanReadable : "°"}`
+        return `${temperatureValueFor(value, temperatureUnit, false).toFixed(decimals)}${includeUnit ? temperatureUnitToHumanReadable : ""}`
       }
       return `${value.toFixed(decimals)}${unit}`
     },
