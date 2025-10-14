@@ -1,5 +1,6 @@
 import React, { useCallback, useRef, useState } from "react"
 import {
+  getSwitchableOutputNameForDisplay,
   SwitchableOutputId,
   SwitchingDeviceInstanceId,
   useAppStore,
@@ -14,11 +15,13 @@ interface TemperatureSetpointOutputProps {
   key: string
   deviceId: SwitchingDeviceInstanceId
   outputId: SwitchableOutputId
+  parentDeviceName: string
   className?: string
 }
 
 const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProps) => {
   const switchableOutput = useSwitchableOutput(props.deviceId, props.outputId)
+  const outputName = getSwitchableOutputNameForDisplay(switchableOutput, props.parentDeviceName)
   const { temperatureUnitToHumanReadable } = useAppStore()
 
   const min = getValueOrDefault(switchableOutput.dimmingMin, 0)
@@ -101,7 +104,7 @@ const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProp
   return (
     <div className={classnames("mt-4", props.className)}>
       <div className="flex">
-        <div className="flex-1">{switchableOutput.customName || switchableOutput.name}</div>
+        <div className="flex-1">{outputName}</div>
         <div className="flex py-1">
           {formatValueAndUnit(setpoint, "/Temperature", measurement === undefined)}
           {measurement !== undefined && "°"}

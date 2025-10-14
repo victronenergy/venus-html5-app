@@ -1,5 +1,10 @@
 import React from "react"
-import { SwitchableOutputId, SwitchingDeviceInstanceId, useSwitchableOutput } from "@victronenergy/mfd-modules"
+import {
+  getSwitchableOutputNameForDisplay,
+  SwitchableOutputId,
+  SwitchingDeviceInstanceId,
+  useSwitchableOutput,
+} from "@victronenergy/mfd-modules"
 import classnames from "classnames"
 import { observer } from "mobx-react"
 import { translate } from "react-i18nify"
@@ -8,11 +13,13 @@ interface SteppedSwitchOutputProps {
   key: string
   deviceId: SwitchingDeviceInstanceId
   outputId: SwitchableOutputId
+  parentDeviceName: string
   className?: string
 }
 
 const SteppedSwitchOutput = observer((props: SteppedSwitchOutputProps) => {
   const switchableOutput = useSwitchableOutput(props.deviceId, props.outputId)
+  const outputName = getSwitchableOutputNameForDisplay(switchableOutput, props.parentDeviceName)
 
   const variant = switchableOutput.state === 1 ? "on" : "off"
   const buttons = Array.from({ length: switchableOutput.dimmingMax || 1 }, (_, i) => i + 1)
@@ -31,7 +38,7 @@ const SteppedSwitchOutput = observer((props: SteppedSwitchOutputProps) => {
 
   return (
     <div className={classnames("mt-4", props.className)}>
-      <div>{switchableOutput.customName || switchableOutput.name}</div>
+      <div>{outputName}</div>
       {/* Border */}
       <div className="h-px-44 rounded-md bg-surface-victronBlue border-2 border-content-victronBlue">
         {/* Container */}

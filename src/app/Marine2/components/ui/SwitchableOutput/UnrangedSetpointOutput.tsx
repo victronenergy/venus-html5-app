@@ -1,5 +1,10 @@
 import React, { useMemo } from "react"
-import { SwitchableOutputId, SwitchingDeviceInstanceId, useSwitchableOutput } from "@victronenergy/mfd-modules"
+import {
+  getSwitchableOutputNameForDisplay,
+  SwitchableOutputId,
+  SwitchingDeviceInstanceId,
+  useSwitchableOutput,
+} from "@victronenergy/mfd-modules"
 import classnames from "classnames"
 import { observer } from "mobx-react"
 import { getValueOrDefault, useValueFormatter } from "./helpers"
@@ -8,11 +13,13 @@ interface UnrangedSetpointOutputProps {
   key: string
   deviceId: SwitchingDeviceInstanceId
   outputId: SwitchableOutputId
+  parentDeviceName: string
   className?: string
 }
 
 const UnrangedSetpointOutput = observer((props: UnrangedSetpointOutputProps) => {
   const switchableOutput = useSwitchableOutput(props.deviceId, props.outputId)
+  const outputName = getSwitchableOutputNameForDisplay(switchableOutput, props.parentDeviceName)
 
   const min = getValueOrDefault(switchableOutput.dimmingMin, 0)
   const max = getValueOrDefault(switchableOutput.dimmingMax, 100)
@@ -49,7 +56,7 @@ const UnrangedSetpointOutput = observer((props: UnrangedSetpointOutputProps) => 
 
   return (
     <div className={classnames("mt-4", props.className)}>
-      <div>{switchableOutput.customName || switchableOutput.name}</div>
+      <div>{outputName}</div>
       {/* Container */}
       <div className="flex h-px-44">
         {/* Minus */}

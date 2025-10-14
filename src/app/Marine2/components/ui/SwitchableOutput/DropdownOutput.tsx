@@ -1,5 +1,10 @@
 import React from "react"
-import { SwitchableOutputId, SwitchingDeviceInstanceId, useSwitchableOutput } from "@victronenergy/mfd-modules"
+import {
+  getSwitchableOutputNameForDisplay,
+  SwitchableOutputId,
+  SwitchingDeviceInstanceId,
+  useSwitchableOutput,
+} from "@victronenergy/mfd-modules"
 import classnames from "classnames"
 import { observer } from "mobx-react"
 
@@ -7,6 +12,7 @@ interface DropdownOutputProps {
   key: string
   deviceId: SwitchingDeviceInstanceId
   outputId: SwitchableOutputId
+  parentDeviceName: string
   className?: string
 }
 
@@ -14,6 +20,7 @@ interface DropdownOutputProps {
 
 const DropdownOutput = observer((props: DropdownOutputProps) => {
   const switchableOutput = useSwitchableOutput(props.deviceId, props.outputId)
+  const outputName = getSwitchableOutputNameForDisplay(switchableOutput, props.parentDeviceName)
 
   const parsedLabels = switchableOutput.labels ? JSON.parse(switchableOutput.labels) : "[]"
   const labels = Array.isArray(parsedLabels) ? parsedLabels : []
@@ -22,7 +29,7 @@ const DropdownOutput = observer((props: DropdownOutputProps) => {
 
   return (
     <div className={classnames("mt-4", props.className)}>
-      <div>{switchableOutput.customName || switchableOutput.name}</div>
+      <div>{outputName}</div>
       {/* Border */}
       <div className="h-px-44 rounded-md bg-surface-victronBlue border-2 border-content-victronBlue">
         {/* Container */}

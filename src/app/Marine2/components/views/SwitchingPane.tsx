@@ -39,6 +39,7 @@ const SwitchingPane = () => {
               type={switchableOutput.type}
               deviceId={switchableOutput.deviceId}
               outputId={switchableOutput.outputId}
+              parentDeviceName={switchableOutput.parentDeviceName}
             />
           )),
         }

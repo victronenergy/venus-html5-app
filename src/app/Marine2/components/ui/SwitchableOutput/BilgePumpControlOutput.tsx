@@ -1,5 +1,10 @@
 import React from "react"
-import { SwitchableOutputId, SwitchingDeviceInstanceId, useSwitchableOutput } from "@victronenergy/mfd-modules"
+import {
+  getSwitchableOutputNameForDisplay,
+  SwitchableOutputId,
+  SwitchingDeviceInstanceId,
+  useSwitchableOutput,
+} from "@victronenergy/mfd-modules"
 import classnames from "classnames"
 import { observer } from "mobx-react"
 import { translate } from "react-i18nify"
@@ -8,11 +13,13 @@ interface BilgePumpControlOutputProps {
   key: string
   deviceId: SwitchingDeviceInstanceId
   outputId: SwitchableOutputId
+  parentDeviceName: string
   className?: string
 }
 
 const BilgePumpControlOutput = observer((props: BilgePumpControlOutputProps) => {
   const switchableOutput = useSwitchableOutput(props.deviceId, props.outputId)
+  const outputName = getSwitchableOutputNameForDisplay(switchableOutput, props.parentDeviceName)
 
   const variant = switchableOutput.state === 1 ? "on" : "off"
   const statusLabel =
@@ -33,7 +40,7 @@ const BilgePumpControlOutput = observer((props: BilgePumpControlOutputProps) => 
   return (
     <div className={classnames("mt-4", props.className)}>
       <div className="flex">
-        <div className="flex-1">{switchableOutput.customName || switchableOutput.name}</div>
+        <div className="flex-1">{outputName}</div>
         <div className="flex py-1">
           <span
             className={classnames("px-2 text-2xs rounded-md", {

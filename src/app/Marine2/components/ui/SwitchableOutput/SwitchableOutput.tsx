@@ -18,6 +18,7 @@ interface SwitchableOutputProps {
   type: SwitchableOutputType
   deviceId: SwitchingDeviceInstanceId
   outputId: SwitchableOutputId
+  parentDeviceName: string
   className?: string
 }
 
@@ -26,13 +27,33 @@ const SwitchableOutput = observer((props: SwitchableOutputProps) => {
   switch (props.type) {
     case SWITCHABLE_OUTPUT_TYPE.MOMENTARY_SWITCH:
       return (
-        <MomentaryOutput key={key} deviceId={props.deviceId} outputId={props.outputId} className={props.className} />
+        <MomentaryOutput
+          key={key}
+          deviceId={props.deviceId}
+          outputId={props.outputId}
+          parentDeviceName={props.parentDeviceName}
+          className={props.className}
+        />
       )
     case SWITCHABLE_OUTPUT_TYPE.TOGGLE_SWITCH:
-      return <ToggleOutput key={key} deviceId={props.deviceId} outputId={props.outputId} className={props.className} />
+      return (
+        <ToggleOutput
+          key={key}
+          deviceId={props.deviceId}
+          outputId={props.outputId}
+          parentDeviceName={props.parentDeviceName}
+          className={props.className}
+        />
+      )
     case SWITCHABLE_OUTPUT_TYPE.DIMMABLE:
       return (
-        <DimmableOutput key={key} deviceId={props.deviceId} outputId={props.outputId} className={props.className} />
+        <DimmableOutput
+          key={key}
+          deviceId={props.deviceId}
+          outputId={props.outputId}
+          parentDeviceName={props.parentDeviceName}
+          className={props.className}
+        />
       )
     case SWITCHABLE_OUTPUT_TYPE.TEMPERATURE_SETPOINT:
       return (
@@ -40,6 +61,7 @@ const SwitchableOutput = observer((props: SwitchableOutputProps) => {
           key={key}
           deviceId={props.deviceId}
           outputId={props.outputId}
+          parentDeviceName={props.parentDeviceName}
           className={props.className}
         />
       )
@@ -49,21 +71,37 @@ const SwitchableOutput = observer((props: SwitchableOutputProps) => {
           key={key}
           deviceId={props.deviceId}
           outputId={props.outputId}
+          parentDeviceName={props.parentDeviceName}
           className={props.className}
         />
       )
     case SWITCHABLE_OUTPUT_TYPE.DROPDOWN:
       return (
-        <DropdownOutput key={key} deviceId={props.deviceId} outputId={props.outputId} className={props.className} />
+        <DropdownOutput
+          key={key}
+          deviceId={props.deviceId}
+          outputId={props.outputId}
+          parentDeviceName={props.parentDeviceName}
+          className={props.className}
+        />
       )
     case SWITCHABLE_OUTPUT_TYPE.SLIDER:
-      return <SliderOutput key={key} deviceId={props.deviceId} outputId={props.outputId} className={props.className} />
+      return (
+        <SliderOutput
+          key={key}
+          deviceId={props.deviceId}
+          outputId={props.outputId}
+          parentDeviceName={props.parentDeviceName}
+          className={props.className}
+        />
+      )
     case SWITCHABLE_OUTPUT_TYPE.UNRANGED_SETPOINT:
       return (
         <UnrangedSetpointOutput
           key={key}
           deviceId={props.deviceId}
           outputId={props.outputId}
+          parentDeviceName={props.parentDeviceName}
           className={props.className}
         />
       )
@@ -73,6 +111,7 @@ const SwitchableOutput = observer((props: SwitchableOutputProps) => {
           key={key}
           deviceId={props.deviceId}
           outputId={props.outputId}
+          parentDeviceName={props.parentDeviceName}
           className={props.className}
         />
       )
@@ -82,6 +121,7 @@ const SwitchableOutput = observer((props: SwitchableOutputProps) => {
           key={key}
           deviceId={props.deviceId}
           outputId={props.outputId}
+          parentDeviceName={props.parentDeviceName}
           className={props.className}
         />
       )

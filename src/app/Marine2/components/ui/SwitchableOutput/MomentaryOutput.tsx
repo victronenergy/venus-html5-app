@@ -1,5 +1,10 @@
 import React from "react"
-import { SwitchableOutputId, SwitchingDeviceInstanceId, useSwitchableOutput } from "@victronenergy/mfd-modules"
+import {
+  getSwitchableOutputNameForDisplay,
+  SwitchableOutputId,
+  SwitchingDeviceInstanceId,
+  useSwitchableOutput,
+} from "@victronenergy/mfd-modules"
 import classnames from "classnames"
 import { observer } from "mobx-react"
 import { translate } from "react-i18nify"
@@ -8,11 +13,13 @@ interface MomentaryOutputProps {
   key: string
   deviceId: SwitchingDeviceInstanceId
   outputId: SwitchableOutputId
+  parentDeviceName: string
   className?: string
 }
 
 const MomentaryOutput = observer((props: MomentaryOutputProps) => {
   const switchableOutput = useSwitchableOutput(props.deviceId, props.outputId)
+  const outputName = getSwitchableOutputNameForDisplay(switchableOutput, props.parentDeviceName)
 
   const variant = switchableOutput.state === 1 ? "on" : "off"
 
@@ -26,7 +33,7 @@ const MomentaryOutput = observer((props: MomentaryOutputProps) => {
 
   return (
     <div className={classnames("mt-4", props.className)}>
-      <div>{switchableOutput.customName || switchableOutput.name}</div>
+      <div>{outputName}</div>
       <button
         className={classnames(
           "h-px-44 px-4 py-1.5 whitespace-nowrap",

@@ -1,5 +1,10 @@
 import React, { useCallback, useRef, useState } from "react"
-import { SwitchableOutputId, SwitchingDeviceInstanceId, useSwitchableOutput } from "@victronenergy/mfd-modules"
+import {
+  getSwitchableOutputNameForDisplay,
+  SwitchableOutputId,
+  SwitchingDeviceInstanceId,
+  useSwitchableOutput,
+} from "@victronenergy/mfd-modules"
 import classnames from "classnames"
 import { observer } from "mobx-react"
 import { getValueOrDefault, useValueFormatter } from "./helpers"
@@ -8,11 +13,13 @@ interface SliderOutputProps {
   key: string
   deviceId: SwitchingDeviceInstanceId
   outputId: SwitchableOutputId
+  parentDeviceName: string
   className?: string
 }
 
 const SliderOutput = observer((props: SliderOutputProps) => {
   const switchableOutput = useSwitchableOutput(props.deviceId, props.outputId)
+  const outputName = getSwitchableOutputNameForDisplay(switchableOutput, props.parentDeviceName)
 
   const min = getValueOrDefault(switchableOutput.dimmingMin, 0)
   const max = getValueOrDefault(switchableOutput.dimmingMax, 100)
@@ -93,7 +100,7 @@ const SliderOutput = observer((props: SliderOutputProps) => {
   return (
     <div className={classnames("mt-4", props.className)}>
       <div className="flex">
-        <div className="flex-1">{switchableOutput.customName || switchableOutput.name}</div>
+        <div className="flex-1">{outputName}</div>
         <div className="flex py-1">{formatValueAndUnit(value, unit)}</div>
       </div>
       {/* Border */}
