@@ -97,9 +97,11 @@ const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProp
       <div className="flex">
         <div className="flex-1">{switchableOutput.customName || switchableOutput.name}</div>
         {setpoint !== measurement && (
-          <div className="flex py-1 text-content-victronGray">{formatValueAndUnit(setpoint, "/T", false)}/</div>
+          <div className="flex py-1 text-content-victronGray">
+            {formatValueAndUnit(setpoint, "/Temperature", false)}/
+          </div>
         )}
-        <div className="flex py-1">{formatValueAndUnit(measurement, "/T", true)}</div>
+        <div className="flex py-1">{formatValueAndUnit(measurement, "/Temperature", true)}</div>
       </div>
       {/* Border */}
       <div className="h-px-44 rounded-md bg-content-victronBlue50 border-2 border-content-victronBlue bg-gradient-to-r from-content-victronBlue to-content-victronRed">
@@ -142,7 +144,7 @@ const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProp
                         key={`popup`}
                         className="absolute bottom-full left-1/2 -translate-x-1/2 mb-5 px-3 rounded text-xxl bg-content-victronBlue text-content-onVictronBlue pointer-events-none select-none"
                       >
-                        {formatValueAndUnit(measurement, "/T", false)}
+                        {formatValueAndUnit(measurement, "/Temperature", false)}
                       </div>
                     </>
                   )}
