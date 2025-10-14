@@ -19,7 +19,7 @@ const SliderOutput = observer((props: SliderOutputProps) => {
   const step = getValueOrDefault(switchableOutput.stepSize, 1)
   const decimals = (step.toString().split(".")[1] || "").length
   const value = getValueOrDefault(switchableOutput.dimming, 1)
-  const unit = switchableOutput.unit
+  const unit = getValueOrDefault(switchableOutput.unit, "")
   const ratio = Math.round(((value - min) / (max - min)) * 100)
 
   const [isDragging, setIsDragging] = useState(false)
