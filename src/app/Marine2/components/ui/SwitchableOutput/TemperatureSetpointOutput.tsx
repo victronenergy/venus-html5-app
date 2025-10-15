@@ -26,7 +26,7 @@ const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProp
 
   const min = getValueOrDefault(switchableOutput.dimmingMin, 0)
   const max = getValueOrDefault(switchableOutput.dimmingMax, 100)
-  const step = getValueOrDefault(switchableOutput.stepSize, 1)
+  const step = parseFloat(getValueOrDefault(switchableOutput.stepSize, 1).toPrecision(6))
   const decimals = getDecimalPlaces(step)
   const setpoint = getValueOrDefault(switchableOutput.dimming, 1)
   const measurement = switchableOutput.measurement
