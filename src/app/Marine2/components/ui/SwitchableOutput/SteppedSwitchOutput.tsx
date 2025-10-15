@@ -64,7 +64,7 @@ const SteppedSwitchOutput = observer((props: SteppedSwitchOutputProps) => {
               {variant === "on" ? translate("switches.on") : translate("switches.off")}
             </button>
             {/* Separator */}
-            <div className="w-px-2 h-[80%] rounded-sm bg-content-lightGray"></div>
+            <div className="w-px-2 h-[80%] rounded-sm bg-content-lightBlue"></div>
           </div>
           <div className="flex-1 flex h-full w-full">
             {buttons.map((index) => (
