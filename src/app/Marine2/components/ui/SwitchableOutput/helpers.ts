@@ -48,12 +48,15 @@ export const useValueFormatter = ({ decimals }: UseFormattedValueOptions) => {
   return formattedValueAndUnit
 }
 
-export const getDecimalPlaces = (num: number): number => {
+export const getDecimalPlaces = (num: number, maxDecimals: number = 6): number => {
   if (!isFinite(num) || num === 0) return 0
 
-  // Step 1: Clean up floating-point errors by rounding to 15 significant digits
-  // (IEEE 754 double has ~15-17 decimal digits of precision)
-  const cleaned = parseFloat(num.toPrecision(15))
+  // Use maxDecimals = 4 for Float16
+  // Use maxDecimals = 6 for Float32
+  // Use maxDecimals = 8 for Float64
+
+  // Step 1: Clean up floating-point errors by rounding
+  const cleaned = parseFloat(num.toPrecision(maxDecimals))
 
   // Step 2: Convert to string and find decimal places
   const str = Math.abs(cleaned).toString()
@@ -77,8 +80,10 @@ export const getDecimalPlaces = (num: number): number => {
   const decimalIndex = str.indexOf(".")
   if (decimalIndex === -1) return 0
 
+  // Step 4: Find numbers after .
   const afterDecimal = str.slice(decimalIndex + 1)
-  // Remove trailing zeros
+
+  // Step 5: Remove any trailing zeros (if present)
   const withoutTrailingZeros = afterDecimal.replace(/0+$/, "")
 
   return withoutTrailingZeros.length
