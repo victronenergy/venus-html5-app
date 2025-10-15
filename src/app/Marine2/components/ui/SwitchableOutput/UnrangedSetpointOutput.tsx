@@ -7,7 +7,7 @@ import {
 } from "@victronenergy/mfd-modules"
 import classnames from "classnames"
 import { observer } from "mobx-react"
-import { getValueOrDefault, useValueFormatter } from "./helpers"
+import { getDecimalPlaces, getValueOrDefault, useValueFormatter } from "./helpers"
 
 interface UnrangedSetpointOutputProps {
   key: string
@@ -24,7 +24,7 @@ const UnrangedSetpointOutput = observer((props: UnrangedSetpointOutputProps) => 
   const min = getValueOrDefault(switchableOutput.dimmingMin, 0)
   const max = getValueOrDefault(switchableOutput.dimmingMax, 100)
   const step = getValueOrDefault(switchableOutput.stepSize, 1)
-  const decimals = (step.toString().split(".")[1] || "").length
+  const decimals = getDecimalPlaces(step)
   const value = getValueOrDefault(switchableOutput.dimming, 1)
   const unit = getValueOrDefault(switchableOutput.unit, "")
 

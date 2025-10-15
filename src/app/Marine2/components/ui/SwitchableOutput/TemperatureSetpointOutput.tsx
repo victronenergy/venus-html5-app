@@ -9,7 +9,7 @@ import {
 import classnames from "classnames"
 import { observer } from "mobx-react"
 import { translate } from "react-i18nify"
-import { getValueOrDefault, useValueFormatter } from "./helpers"
+import { getDecimalPlaces, getValueOrDefault, useValueFormatter } from "./helpers"
 
 interface TemperatureSetpointOutputProps {
   key: string
@@ -27,7 +27,7 @@ const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProp
   const min = getValueOrDefault(switchableOutput.dimmingMin, 0)
   const max = getValueOrDefault(switchableOutput.dimmingMax, 100)
   const step = getValueOrDefault(switchableOutput.stepSize, 1)
-  const decimals = (step.toString().split(".")[1] || "").length
+  const decimals = getDecimalPlaces(step)
   const setpoint = getValueOrDefault(switchableOutput.dimming, 1)
   const measurement = switchableOutput.measurement
   const ratio = Math.round(((setpoint - min) / (max - min)) * 100)
