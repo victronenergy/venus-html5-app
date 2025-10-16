@@ -105,7 +105,7 @@ const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProp
     <div className={classnames("mt-4", props.className)}>
       <div className="flex">
         <div className="flex-1">{outputName}</div>
-        <div className="flex py-1">
+        <div className="flex">
           {formatValueAndUnit(setpoint, "/Temperature", measurement === undefined)}
           {measurement !== undefined && "°"}
         </div>
