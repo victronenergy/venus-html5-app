@@ -142,7 +142,7 @@ const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProp
             </div>
             {/* Marks */}
             <div className="absolute inset-0 flex justify-between items-center">
-              {[...Array(1 + Math.round(max - min) / step)].map((_, i) => (
+              {[...Array(1 + Math.round((max - min) / step))].map((_, i) => (
                 <div
                   key={`mark_${i}`}
                   className={classnames("relative w-px-4 rounded-sm bg-content-white", {
