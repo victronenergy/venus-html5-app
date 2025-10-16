@@ -131,6 +131,7 @@ const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProp
             onMouseDown={handlePress}
             onMouseMove={handleMove}
             onMouseUp={handleRelease}
+            onMouseLeave={handleRelease}
             onTouchStart={handlePress}
             onTouchMove={handleMove}
             onTouchEnd={handleRelease}
