@@ -1,4 +1,4 @@
-import React, { useMemo } from "react"
+import React, { useCallback, useMemo, useRef } from "react"
 import {
   getSwitchableOutputNameForDisplay,
   SwitchableOutputId,
@@ -30,6 +30,10 @@ const UnrangedSetpointOutput = observer((props: UnrangedSetpointOutputProps) => 
 
   const formatValueAndUnit = useValueFormatter({ decimals })
 
+  const repeatTimerRef = useRef<number | null>(null)
+  const initialDelayTimerRef = useRef<number | null>(null)
+  const updateValueRef = useRef<(delta: number) => void>()
+
   const minusEnabled = useMemo(() => {
     return value - step >= min
   }, [value, step, min])
@@ -38,21 +42,63 @@ const UnrangedSetpointOutput = observer((props: UnrangedSetpointOutputProps) => 
     return value + step <= max
   }, [value, step, max])
 
-  const handleClickPlus = () => {
-    const newValue = value + step
-    if (newValue > max) {
-      return
-    }
-    switchableOutput.updateDimming(newValue)
-  }
+  const updateValue = useCallback(
+    (delta: number) => {
+      const newValue = value + delta
+      if (newValue >= min && newValue <= max) {
+        switchableOutput.updateDimming(newValue)
+      }
+    },
+    [value, min, max, switchableOutput],
+  )
+  updateValueRef.current = updateValue
 
-  const handleClickMinus = () => {
-    const newValue = value - step
-    if (newValue < min) {
-      return
+  const clearTimers = useCallback(() => {
+    if (repeatTimerRef.current) {
+      clearInterval(repeatTimerRef.current)
+      repeatTimerRef.current = null
     }
-    switchableOutput.updateDimming(newValue)
-  }
+    if (initialDelayTimerRef.current) {
+      clearTimeout(initialDelayTimerRef.current)
+      initialDelayTimerRef.current = null
+    }
+  }, [])
+
+  const startAutorepeat = useCallback(
+    (delta: number) => {
+      clearTimers()
+
+      // Immediate update
+      updateValueRef.current!!(delta)
+
+      // Wait 300ms before starting autorepeat
+      initialDelayTimerRef.current = window.setTimeout(() => {
+        // Start 100ms autorepeat
+        repeatTimerRef.current = window.setInterval(() => {
+          updateValueRef.current!!(delta)
+        }, 100)
+      }, 300)
+    },
+    [clearTimers],
+  )
+
+  const handleMouseDown = useCallback(
+    (delta: number) => {
+      startAutorepeat(delta)
+    },
+    [startAutorepeat],
+  )
+
+  const handleMouseUp = useCallback(() => {
+    clearTimers()
+  }, [clearTimers])
+
+  // cleanup
+  React.useEffect(() => {
+    return () => {
+      clearTimers()
+    }
+  }, [clearTimers])
 
   return (
     <div className={classnames("mt-4", props.className)}>
@@ -65,12 +111,13 @@ const UnrangedSetpointOutput = observer((props: UnrangedSetpointOutputProps) => 
             "bg-surface-victronGray border-content-victronGray": !minusEnabled,
             "bg-surface-victronBlue border-content-victronBlue ": minusEnabled,
           })}
-          onClick={handleClickMinus}
+          onMouseDown={() => minusEnabled && handleMouseDown(-step)}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
+          onTouchStart={() => minusEnabled && handleMouseDown(-step)}
+          onTouchEnd={handleMouseUp}
         >
-          <button
-            className="h-px-44 px-4 py-1.5 cursor-pointer text-sm min-h-[2.375rem] text-content-primary select-none"
-            onClick={handleClickMinus}
-          >
+          <button className="h-px-44 px-4 py-1.5 cursor-pointer text-sm min-h-[2.375rem] text-content-primary select-none">
             -
           </button>
         </div>
@@ -84,12 +131,13 @@ const UnrangedSetpointOutput = observer((props: UnrangedSetpointOutputProps) => 
             "bg-surface-victronGray border-content-victronGray": !plusEnabled,
             "bg-surface-victronBlue border-content-victronBlue": plusEnabled,
           })}
-          onClick={handleClickPlus}
+          onMouseDown={() => plusEnabled && handleMouseDown(+step)}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
+          onTouchStart={() => plusEnabled && handleMouseDown(+step)}
+          onTouchEnd={handleMouseUp}
         >
-          <button
-            className="h-px-44 px-4 py-1.5 cursor-pointer text-sm min-h-[2.375rem] text-content-primary select-none"
-            onClick={handleClickPlus}
-          >
+          <button className="h-px-44 px-4 py-1.5 cursor-pointer text-sm min-h-[2.375rem] text-content-primary select-none">
             +
           </button>
         </div>
