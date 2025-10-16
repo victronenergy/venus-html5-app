@@ -34,8 +34,9 @@ const DimmableOutput = observer((props: DimmableOutputProps) => {
 
   const calculateNewValue = (clientX: number, element: HTMLDivElement): number => {
     const rect = element.getBoundingClientRect()
-    const relativeX = clientX - rect.left
-    const percentageX = Math.round(Math.max(0, Math.min(100, (relativeX / rect.width) * 100)))
+    const relativeX = clientX - Math.ceil(rect.left)
+    const width = Math.floor(rect.right) - Math.ceil(rect.left)
+    const percentageX = Math.round(Math.max(0, Math.min(100, (relativeX / width) * 100)))
     return percentageX
   }
 
