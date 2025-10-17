@@ -72,7 +72,7 @@ jobs:
           REACT_APP_ENABLE_LANG_OVERRIDE: false
       - name: Archive bundle
         if: steps.check_tag.outputs.match == 'true'
-        run: tar -zcvf venus-html5-app.tar.gz dist/
+        run: tar -zcvf venus-html5-app-${{ github.ref_name }}.tar.gz dist/
       - name: Create Release
         id: create_release
         if: steps.check_tag.outputs.match == 'true'
@@ -82,6 +82,7 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
+          draft: true
       - name: Upload Release Archive
         if: steps.check_tag.outputs.match == 'true'
         uses: actions/upload-release-asset@v1.0.1
@@ -89,6 +90,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./venus-html5-app.tar.gz
-          asset_name: venus-html5-app.tar.gz
+          asset_path: ./venus-html5-app-${{ github.ref_name }}.tar.gz
+          asset_name: venus-html5-app-${{ github.ref_name }}.tar.gz
           asset_content_type: application/zip
