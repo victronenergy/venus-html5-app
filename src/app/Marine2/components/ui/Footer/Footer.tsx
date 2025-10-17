@@ -4,17 +4,18 @@ import VersionInfo from "../VersionInfo"
 import PageSelector, { PageSelectorProps } from "../PageSelector"
 import BackIcon from "../../../images/icons/back.svg"
 import { AppViews, useAppViewsStore } from "../../../modules/AppViews"
+import SwitchingPane from "../../views/SwitchingPane"
 
 const Footer = ({ pageSelectorProps }: Props) => {
   const appViewsStore = useAppViewsStore()
-  const [isShowBack, setShowBack] = useState(appViewsStore.currentView !== AppViews.ROOT)
+  const [isShowingBackButton, setIsShowingBackButton] = useState(appViewsStore.currentView !== AppViews.ROOT)
 
   const handleBackClick = () => {
     appViewsStore.setView(AppViews.ROOT)
   }
 
   useEffect(() => {
-    setShowBack(appViewsStore.currentView !== AppViews.ROOT)
+    setIsShowingBackButton(appViewsStore.currentView !== AppViews.ROOT)
   }, [appViewsStore.currentView])
 
   return (
@@ -26,12 +27,15 @@ const Footer = ({ pageSelectorProps }: Props) => {
             <PageSelector {...pageSelectorProps} selectorLocation="bottom-center" />
           </div>
         )}
-        {isShowBack && (
-          <div onClick={handleBackClick} className={"w-px-44 h-px-44 p-1 cursor-pointer"}>
-            <BackIcon onClick={handleBackClick} className={"text-content-victronBlue"} alt={"Back"} />
-          </div>
+        {isShowingBackButton && (
+          <>
+            <div onClick={handleBackClick} className={"w-px-44 h-px-44 justify-center p-1 cursor-pointer"}>
+              <BackIcon onClick={handleBackClick} className={"text-content-victronBlue"} alt={"Back"} />
+            </div>
+          </>
         )}
       </div>
+      <SwitchingPane />
       <SettingsMenu />
     </div>
   )

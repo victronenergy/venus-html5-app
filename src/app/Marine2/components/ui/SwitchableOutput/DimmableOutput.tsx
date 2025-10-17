@@ -1,0 +1,158 @@
+import React, { useCallback, useRef, useState } from "react"
+import {
+  getSwitchableOutputNameForDisplay,
+  SwitchableOutputId,
+  SwitchingDeviceInstanceId,
+  useSwitchableOutput,
+} from "@victronenergy/mfd-modules"
+import classnames from "classnames"
+import { observer } from "mobx-react"
+import { translate } from "react-i18nify"
+import { getValueOrDefault } from "./helpers"
+
+interface DimmableOutputProps {
+  key: string
+  deviceId: SwitchingDeviceInstanceId
+  outputId: SwitchableOutputId
+  parentDeviceName: string
+  className?: string
+}
+
+const DimmableOutput = observer((props: DimmableOutputProps) => {
+  const switchableOutput = useSwitchableOutput(props.deviceId, props.outputId)
+  const outputName = getSwitchableOutputNameForDisplay(switchableOutput, props.parentDeviceName)
+
+  const variant = switchableOutput.state === 1 ? "on" : "off"
+  const ratio = getValueOrDefault(switchableOutput.dimming, 0)
+
+  const handleClickOnOff = () => {
+    switchableOutput.updateState(switchableOutput.state === 1 ? 0 : 1)
+  }
+
+  const [isDragging, setIsDragging] = useState(false)
+  const updateTimeoutRef = useRef<NodeJS.Timeout>()
+
+  const calculateNewValue = (clientX: number, element: HTMLDivElement): number => {
+    const rect = element.getBoundingClientRect()
+    const relativeX = clientX - Math.ceil(rect.left)
+    const width = Math.floor(rect.right) - Math.ceil(rect.left)
+    const percentageX = Math.round(Math.max(0, Math.min(100, (relativeX / width) * 100)))
+    return percentageX
+  }
+
+  const updateDimmingValueImmediately = useCallback(
+    (percentage: number) => {
+      switchableOutput.updateDimming(percentage)
+    },
+    [switchableOutput],
+  )
+
+  const updateDimmingValueDebounced = useCallback(
+    (percentage: number) => {
+      if (updateTimeoutRef.current) {
+        clearTimeout(updateTimeoutRef.current)
+        updateTimeoutRef.current = undefined
+      }
+
+      updateTimeoutRef.current = setTimeout(() => {
+        switchableOutput.updateDimming(percentage)
+      }, 10)
+    },
+    [switchableOutput],
+  )
+
+  const handlePress = (e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
+    setIsDragging(true)
+
+    const clientX = "touches" in e ? e.touches[0].clientX : e.clientX
+    const percentageX = calculateNewValue(clientX, e.currentTarget)
+
+    updateDimmingValueImmediately(percentageX)
+  }
+
+  const handleMove = (e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
+    if (!isDragging) {
+      return
+    }
+    const clientX = "touches" in e ? e.touches[0].clientX : e.clientX
+    const newValue = calculateNewValue(clientX, e.currentTarget)
+
+    updateDimmingValueDebounced(newValue)
+  }
+
+  const handleRelease = () => {
+    setIsDragging(false)
+
+    if (updateTimeoutRef.current) {
+      clearTimeout(updateTimeoutRef.current)
+      updateTimeoutRef.current = undefined
+    }
+  }
+
+  return (
+    <div className={classnames("mt-4", props.className)}>
+      <div>{outputName}</div>
+      {/* Border */}
+      <div className="h-px-44 rounded-md bg-surface-victronBlue border-2 border-content-victronBlue">
+        {/* Container */}
+        <div className="h-full rounded-sm flex overflow-hidden">
+          {/* On/Off Background */}
+          <div
+            className={classnames("h-full flex items-center", {
+              "bg-content-victronBlue50": variant === "off",
+              "bg-content-victronBlue": variant === "on",
+            })}
+          >
+            {/* On/Off Button */}
+            <button
+              className={classnames(
+                "h-full px-2 whitespace-nowrap cursor-pointer text-sm min-h-[2.375rem] min-w-[3rem]",
+                "text-content-onVictronBlue",
+              )}
+              onClick={handleClickOnOff}
+            >
+              {variant === "on" ? translate("switches.on") : translate("switches.off")}
+            </button>
+            {/* Separator */}
+            <div className="w-px-2 h-[80%] rounded-sm bg-content-lightBlue"></div>
+          </div>
+          {/* Slider Container */}
+          <div
+            className="flex-1"
+            onMouseDown={handlePress}
+            onMouseMove={handleMove}
+            onMouseUp={handleRelease}
+            onTouchStart={handlePress}
+            onTouchMove={handleMove}
+            onTouchEnd={handleRelease}
+            onTouchCancel={handleRelease}
+          >
+            {/* Slider */}
+            <div className="flex h-full">
+              {/* Percent area */}
+              <div
+                className={classnames("h-full transition-all duration-100 ease-out", {
+                  "bg-content-victronBlue": variant === "on",
+                  "bg-content-victronBlue50": variant === "off",
+                })}
+                style={{ width: `${ratio}%` }}
+              />
+              {/* Handle Background */}
+              <div
+                className={classnames("h-full flex items-center px-1", {
+                  "bg-content-victronBlue": variant === "on",
+                  "bg-content-victronBlue50": variant === "off",
+                })}
+              >
+                {/* Handle */}
+                <div className={classnames("w-px-4 h-[70%] rounded-sm", "bg-content-onVictronBlue")}></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+})
+
+export default DimmableOutput

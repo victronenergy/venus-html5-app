@@ -86,12 +86,20 @@ module.exports = {
           primary: "var(--c-outline-primary)",
           secondary: "var(--c-outline-secondary)",
         },
+        gradient: {
+          victronBlue: "rgba(var(--cg-victron-blue-rgb), 1.0)",
+          victronRed: "rgba(var(--cg-victron-red-rgb), 1.0)",
+        },
         content: {
           primary: "var(--c-content-primary)",
           secondary: "var(--c-content-secondary)",
           tertiary: "var(--c-content-tertiary)",
+          white: "var(--c-content-white)",
+          lightBlue: "var(--c-content-light-blue)",
+          onVictronBlue: "var(--c-content-on-victron-blue)",
           victronGray: "rgba(var(--c-victron-gray-rgb), 1.0)",
           victronBlue: "rgba(var(--c-victron-blue-rgb), 1.0)",
+          victronBlue50: "rgba(var(--c-victron-blue-rgb), 0.5)",
           victronRed: "rgba(var(--c-victron-red-rgb), 1.0)",
           victronYellow: "rgba(var(--c-victron-yellow-rgb), 1.0)",
           victronLime: "rgba(var(--c-victron-lime-rgb), 1.0)",
@@ -107,6 +115,7 @@ module.exports = {
       spacing: {
         "px-1": "var(--px1)",
         "px-2": "var(--px2)",
+        "px-4": "var(--px4)",
         "px-8": "var(--px8)",
         "px-16": "var(--px16)",
         "px-20": "var(--px20)",
