@@ -175,8 +175,8 @@
     --c-victron-green-rgb: 114, 184, 76;      /* RGB values for #72B84C */
     --c-victron-purple-rgb: 107, 74, 179;     /* RGB values for #6B4AB3 */
 
-    --cg-victron-blue-rgb: 56, 125, 197;       /* RGB values for #387DC5 */
-    --cg-victron-red-rgb: 243, 92, 88;         /* RGB values for #F35C58 */
+    --cg-victron-blue-rgb: 56, 125, 197;      /* RGB values for #387DC5 */
+    --cg-victron-red-rgb: 243, 92, 88;        /* RGB values for #F35C58 */
   }
 }
 
