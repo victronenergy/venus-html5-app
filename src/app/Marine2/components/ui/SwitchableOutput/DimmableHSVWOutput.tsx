@@ -9,6 +9,12 @@ import classnames from "classnames"
 import { observer } from "mobx-react"
 import { translate } from "react-i18nify"
 import { getValueOrDefault } from "./helpers"
+import {
+  arrayToHSVW,
+  createPercentage,
+  HSVWColorArray,
+  hsvwToArray,
+} from "@victronenergy/mfd-modules/dist/src/utils/hsvw"
 
 interface DimmableHSVWOutputProps {
   key: string
@@ -29,7 +35,9 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
   const outputName = getSwitchableOutputNameForDisplay(switchableOutput, props.parentDeviceName)
 
   const variant = switchableOutput.state === 1 ? "on" : "off"
-  const ratio = getValueOrDefault(switchableOutput.dimming, 0)
+  const ligtControlsArray = getValueOrDefault(switchableOutput.lightControls, [0, 0, 0, 0, 0]) as HSVWColorArray
+  const lightControls = arrayToHSVW(ligtControlsArray)
+  const ratio = lightControls.brightness
 
   const handleClickOnOff = () => {
     switchableOutput.updateState(switchableOutput.state === 1 ? 0 : 1)
@@ -46,14 +54,14 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
     return percentageX
   }
 
-  const updateDimmingValueImmediately = useCallback(
+  const updateBrightnessValueImmediately = useCallback(
     (percentage: number) => {
-      switchableOutput.updateDimming(percentage)
+      switchableOutput.updateLightControls(hsvwToArray({ ...lightControls, brightness: createPercentage(percentage) }))
     },
-    [switchableOutput],
+    [lightControls, switchableOutput],
   )
 
-  const updateDimmingValueDebounced = useCallback(
+  const updateBrightnessValueDebounced = useCallback(
     (percentage: number) => {
       if (updateTimeoutRef.current) {
         clearTimeout(updateTimeoutRef.current)
@@ -61,10 +69,12 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
       }
 
       updateTimeoutRef.current = setTimeout(() => {
-        switchableOutput.updateDimming(percentage)
+        switchableOutput.updateLightControls(
+          hsvwToArray({ ...lightControls, brightness: createPercentage(percentage) }),
+        )
       }, 10)
     },
-    [switchableOutput],
+    [lightControls, switchableOutput],
   )
 
   const handlePress = (e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
@@ -73,7 +83,7 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
     const clientX = "touches" in e ? e.touches[0].clientX : e.clientX
     const percentageX = calculateNewValue(clientX, e.currentTarget)
 
-    updateDimmingValueImmediately(percentageX)
+    updateBrightnessValueImmediately(percentageX)
   }
 
   const handleMove = (e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
@@ -83,7 +93,7 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
     const clientX = "touches" in e ? e.touches[0].clientX : e.clientX
     const newValue = calculateNewValue(clientX, e.currentTarget)
 
-    updateDimmingValueDebounced(newValue)
+    updateBrightnessValueDebounced(newValue)
   }
 
   const handleRelease = () => {
