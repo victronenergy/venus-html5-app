@@ -112,8 +112,8 @@ const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProp
         </div>
         {measurement !== undefined && (
           <>
-            <div className="flex py-1">/</div>
-            <div className="flex py-1">
+            <div className="flex">/</div>
+            <div className="flex">
               <span className="text-content-victronGray">{formatValueAndUnit(measurement, "/Temperature", false)}</span>
               <span>{temperatureUnitToHumanReadable}</span>
             </div>
