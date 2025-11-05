@@ -66,7 +66,7 @@ const DropdownOutput = observer((props: DropdownOutputProps) => {
         {/* Dropdown */}
         {isOpen && (
           <>
-            <div className="absolute w-full rounded-md bg-surface-secondary overflow-hidden">
+            <div className="absolute z-10 w-full rounded-md bg-surface-secondary overflow-hidden">
               <div className="rounded-md w-full py-px-1 max-h-[calc(5*44px*var(--uix))] bg-surface-victronBlue overflow-y-auto">
                 {options.map((option, index) => (
                   <div
