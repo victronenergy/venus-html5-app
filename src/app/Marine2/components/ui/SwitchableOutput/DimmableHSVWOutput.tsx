@@ -23,6 +23,9 @@ import {
   colorHueToDisplayColor,
 } from "app/Marine2/utils/helpers/color-conversion-routines"
 import { SWITCHABLE_OUTPUT_TYPE } from "@victronenergy/mfd-modules/dist/src/utils/constants"
+import { Modal } from "../Modal"
+import CloseIcon from "../../../images/icons/close.svg"
+import FadedText from "../FadedText"
 
 interface DimmableHSVWOutputProps {
   key: string
@@ -119,6 +122,7 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
   }
 
   const isInCCTMode = switchableOutput.type === SWITCHABLE_OUTPUT_TYPE.CCT_COLOR_WHEEL
+  const [isColorWheelOpen, setIsColorWheelOpen] = useState(false)
 
   return (
     <div className={classnames("mt-4 select-none", props.className)}>
@@ -215,7 +219,37 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
               ? colorTemperatureToDisplayColor(color.colorTemperature)
               : colorHueToDisplayColor(color.hue, color.saturation, 100),
           }}
+          onClick={() => setIsColorWheelOpen(true)}
         />
+      </div>
+      {/* Color Wheel Popup */}
+      <div>
+        <Modal.Frame
+          open={isColorWheelOpen}
+          onClose={() => {
+            setIsColorWheelOpen(false)
+          }}
+          className={classnames("w-4/6 max-w-4/6 h-4/6 max-h-4/6")}
+        >
+          <Modal.Body variant="popUp" className="h-full bg-surface-primary flex flex-col">
+            {/* Title with close button */}
+            <div className="flex">
+              <FadedText text={outputName} className="flex-1" />
+              <CloseIcon
+                className="w-5 text-content-victronBlue cursor-pointer outline-none"
+                alt="Close"
+                onClick={() => setIsColorWheelOpen(false)}
+              />
+            </div>
+            {/* Controls */}
+            <div className="relative flex-1 w-full mt-2 mb-2">
+              <div className="absolute inset-0 border-2 border-blue-500"></div>
+              <div className="absolute inset-0 border-2 border-green-500"></div>
+              <div className="absolute inset-0 border-2 border-yellow-500"></div>
+              <div className="absolute inset-0 border-2 border-red-500"></div>
+            </div>
+          </Modal.Body>
+        </Modal.Frame>
       </div>
     </div>
   )
