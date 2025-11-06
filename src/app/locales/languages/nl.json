@@ -204,6 +204,7 @@
     "pages": {
         "diagnostics": "Diagnose",
         "remoteConsole": "Remote Console",
+        "switchingPane": "Schakelpaneel",
         "systemOverview": "Systeem Overzicht"
     },
     "remoteLogin": {
@@ -255,7 +256,17 @@
             "Waste water": "Vuilwater"
         }
     },
-    "switches": {},
+    "switches": {
+        "auto": "Auto",
+        "fault": "Storing",
+        "max": "Max",
+        "min": "Min",
+        "notRunning": "Niet actief",
+        "off": "Uit",
+        "on": "Aan",
+        "press": "Druk op",
+        "running": "Actief"
+    },
     "tankWidget": {
         "Black water": "Vuilwater",
         "Diesel": "Diesel",

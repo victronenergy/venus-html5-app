@@ -259,15 +259,13 @@
     "switches": {
         "auto": "Auto",
         "fault": "Fault",
-        "gxDeviceRelays": "GX device relays",
         "max": "Max",
         "min": "Min",
         "notRunning": "Not Running",
         "off": "Off",
         "on": "On",
         "press": "Press",
-        "running": "Running",
-        "current": "Current"
+        "running": "Running"
     },
     "tankWidget": {
         "Black water": "Black water",

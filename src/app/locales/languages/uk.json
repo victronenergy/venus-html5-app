@@ -204,6 +204,7 @@
     "pages": {
         "diagnostics": "Діагностика",
         "remoteConsole": "Віддалена консоль",
+        "switchingPane": "Панель перемикання",
         "systemOverview": "Огляд системи"
     },
     "remoteLogin": {
@@ -255,7 +256,17 @@
             "Waste water": "Стічні води"
         }
     },
-    "switches": {},
+    "switches": {
+        "auto": "Авто",
+        "fault": "Помилка",
+        "max": "Макс",
+        "min": "Мін",
+        "notRunning": "Не працює",
+        "off": "Вимкнено",
+        "on": "Увімкнено",
+        "press": "Натисніть",
+        "running": "Працює"
+    },
     "tankWidget": {
         "Black water": "Стічні води з каналізації",
         "Diesel": "Дизель",

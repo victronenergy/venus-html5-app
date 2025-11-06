@@ -204,6 +204,7 @@
     "pages": {
         "diagnostics": "Diagnostiek",
         "remoteConsole": "Afstandbeheer Konsole",
+        "switchingPane": "Skakelbord",
         "systemOverview": "Stelseloorsig"
     },
     "remoteLogin": {
@@ -255,7 +256,17 @@
             "Waste water": "Afvalwater"
         }
     },
-    "switches": {},
+    "switches": {
+        "auto": "Outo",
+        "fault": "Fout",
+        "max": "Maks",
+        "min": "Min",
+        "notRunning": "Nie Besig om te Loop Nie",
+        "off": "Af",
+        "on": "Aan",
+        "press": "Druk",
+        "running": "Besig om te Loop"
+    },
     "tankWidget": {
         "Black water": "Swartwater",
         "Diesel": "Diesel",

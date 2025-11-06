@@ -204,6 +204,7 @@
     "pages": {
         "diagnostics": "Diagnósticos",
         "remoteConsole": "Consola remota",
+        "switchingPane": "Panel de conmutación",
         "systemOverview": "Resumen del sistema"
     },
     "remoteLogin": {
@@ -255,7 +256,17 @@
             "Waste water": "Aguas grises"
         }
     },
-    "switches": {},
+    "switches": {
+        "auto": "Automático",
+        "fault": "Fallo",
+        "max": "Máx",
+        "min": "Mín",
+        "notRunning": "No está en ejecución",
+        "off": "Apagado",
+        "on": "Encendido",
+        "press": "Pulse",
+        "running": "En ejecución"
+    },
     "tankWidget": {
         "Black water": "Aguas negras",
         "Diesel": "Diésel",

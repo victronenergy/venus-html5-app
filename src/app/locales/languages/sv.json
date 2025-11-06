@@ -204,6 +204,7 @@
     "pages": {
         "diagnostics": "Diagnostik",
         "remoteConsole": "Fjärrkonsol",
+        "switchingPane": "Omkopplingspanel",
         "systemOverview": "Systemöversikt"
     },
     "remoteLogin": {
@@ -255,7 +256,17 @@
             "Waste water": "Spillvatten"
         }
     },
-    "switches": {},
+    "switches": {
+        "auto": "Auto",
+        "fault": "Fel",
+        "max": "Max",
+        "min": "Min",
+        "notRunning": "Inte igång",
+        "off": "Av",
+        "on": "På",
+        "press": "Tryck",
+        "running": "Igång"
+    },
     "tankWidget": {
         "Black water": "Svartvatten",
         "Diesel": "Diesel",

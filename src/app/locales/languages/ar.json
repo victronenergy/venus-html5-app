@@ -204,6 +204,7 @@
     "pages": {
         "diagnostics": "تشخيص",
         "remoteConsole": "وحدة التحكم عن بُعد",
+        "switchingPane": "لوحة التحكم",
         "systemOverview": "نظرة عامة على النظام"
     },
     "remoteLogin": {
@@ -255,7 +256,17 @@
             "Waste water": "ماء فاسد"
         }
     },
-    "switches": {},
+    "switches": {
+        "auto": "تلقائي",
+        "fault": "عطل",
+        "max": "أقصى",
+        "min": "أدنى",
+        "notRunning": "غير نشط",
+        "off": "إيقاف",
+        "on": "تشغيل",
+        "press": "اضغط",
+        "running": "نشط"
+    },
     "tankWidget": {
         "Black water": "مياه سوداء",
         "Diesel": "الديزل",

@@ -204,6 +204,7 @@
     "pages": {
         "diagnostics": "Diagnostics",
         "remoteConsole": "Uzak Konsol",
+        "switchingPane": "Anahtarlama Paneli",
         "systemOverview": "Sistem görünümü"
     },
     "remoteLogin": {
@@ -255,7 +256,17 @@
             "Waste water": "Atık su"
         }
     },
-    "switches": {},
+    "switches": {
+        "auto": "Otomatik",
+        "fault": "Hata",
+        "max": "Maks",
+        "min": "Min",
+        "notRunning": "Çalışmıyor",
+        "off": "Kapalı",
+        "on": "Açık",
+        "press": "Basın",
+        "running": "Çalışıyor"
+    },
     "tankWidget": {
         "Black water": "Pis Su",
         "Diesel": "Dizel",

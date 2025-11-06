@@ -98,7 +98,7 @@
         "remainingTime": "Pozostały czas",
         "running": "Działa",
         "set": "Ustaw",
-        "shorePower": "Zasilanie lądowe",
+        "shorePower": "Zasilanie Lądowe",
         "standby": "Czuwanie",
         "starting": "Startuje",
         "stopped": "Zatrzymano",
@@ -121,15 +121,15 @@
             "status": "Status"
         },
         "device": {
-            "colorScheme": "Schemat kolorów",
+            "colorScheme": "Schemat Kolorów",
             "device": "Urządzenie",
-            "devicePixelRatio": "Współczynnik pikseli",
+            "devicePixelRatio": "Współczynnik Pikseli",
             "isGuiV2Supported": "GUI v2 obsługiwane",
             "missing": "brak",
-            "prefersDarkMode": "Tryb ciemny",
-            "prefersHighContrast": "Wysoki kontrast",
-            "prefersLightMode": "Tryb jasny",
-            "prefersLowContrast": "Niski kontrast",
+            "prefersDarkMode": "Tryb Ciemny",
+            "prefersHighContrast": "Wysoki Kontrast",
+            "prefersLightMode": "Tryb Jasny",
+            "prefersLowContrast": "Niski Kontrast",
             "unspecified": "Nieokreślony",
             "userAgent": "Agent użytkownika",
             "viewportHeight": "Wysokość podglądu",
@@ -154,7 +154,7 @@
         },
         "mqttUnavailable1": "Nie można połączyć się z serwerem MQTT.",
         "mqttUnavailable2": "Sprawdź, czy MQTT jest włączone w ustawieniach:",
-        "mqttUnavailable3": "Konsola zdalna > Ustawienia > Usługi > MQTT w sieci LAN (tekst otwarty)",
+        "mqttUnavailable3": "Konsola zdalna > Ustawienia > Usługi > MQTT Dostęp",
         "mqttUnavailable4": "Spróbuj użyć przycisku Konsola Zdalna w górnej części tego ekranu, aby zdalnie zmienić ustawienia.",
         "mqttUnavailable5": "Możesz także spróbować połączyć się z urządzeniem zdalnie, wybierając Zdalnie z menu powyżej.",
         "queryParams": "Parametry zapytania: %{queryParams}",
@@ -165,8 +165,8 @@
         },
         "userAgent": "Agent użytkownika: %{userAgent}",
         "windowSize": "Okno: %{width} x %{height}",
-        "wsMqttUnavailable1": "wsMqttUnavailable1",
-        "wsMqttUnavailable2": "wsMqttUnavailable2"
+        "wsMqttUnavailable1": "Nie udało się połączyć do urządzenia GX.",
+        "wsMqttUnavailable2": "GX Błąd #60."
     },
     "generator": {
         "autoStartDisabledMessage": "Funkcja zdalnego uruchamiania jest wyłączona w agregacie. GX nie będzie mógł teraz uruchomić ani zatrzymać agregatu. Włącz tę opcję na panelu sterowania agregatu.",
@@ -174,7 +174,7 @@
         "temperature": {
             "coolant": "Płyn chłodzący",
             "exhaust": "Wydech",
-            "heatsink": "radiator",
+            "heatsink": "Radiator",
             "winding": "Uzwojenie"
         }
     },
@@ -204,6 +204,7 @@
     "pages": {
         "diagnostics": "Diagnostyka",
         "remoteConsole": "Konsola Zdalna",
+        "switchingPane": "Przełączanie Panelu",
         "systemOverview": "Przegląd Systemu"
     },
     "remoteLogin": {
@@ -255,7 +256,17 @@
             "Waste water": "Ścieki"
         }
     },
-    "switches": {},
+    "switches": {
+        "auto": "Auto",
+        "fault": "Usterka",
+        "max": "Max.",
+        "min": "Min.",
+        "notRunning": "Nie Działa",
+        "off": "Wył.",
+        "on": "Wł.",
+        "press": "Naciśnij",
+        "running": "Działa"
+    },
     "tankWidget": {
         "Black water": "Czarna woda",
         "Diesel": "Diesel",
