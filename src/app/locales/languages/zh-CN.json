@@ -204,6 +204,7 @@
     "pages": {
         "diagnostics": "诊断",
         "remoteConsole": "远程控制台",
+        "switchingPane": "切换面板",
         "systemOverview": "系统总览"
     },
     "remoteLogin": {
@@ -255,7 +256,17 @@
             "Waste water": "废水"
         }
     },
-    "switches": {},
+    "switches": {
+        "auto": "自动",
+        "fault": "故障",
+        "max": "最大值",
+        "min": "最小值",
+        "notRunning": "未运行",
+        "off": "关闭",
+        "on": "开启",
+        "press": "按下",
+        "running": "运行中"
+    },
     "tankWidget": {
         "Black water": "黑水",
         "Diesel": "柴油",

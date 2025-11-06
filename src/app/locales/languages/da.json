@@ -204,6 +204,7 @@
     "pages": {
         "diagnostics": "Diagnosticering",
         "remoteConsole": "Fjernkonsol",
+        "switchingPane": "Omskifterpanel",
         "systemOverview": "Systemoversigt"
     },
     "remoteLogin": {
@@ -255,7 +256,17 @@
             "Waste water": "Spildevand"
         }
     },
-    "switches": {},
+    "switches": {
+        "auto": "Auto",
+        "fault": "Fejl",
+        "max": "Maks.",
+        "min": "Min.",
+        "notRunning": "Ikke aktiv",
+        "off": "Fra",
+        "on": "Til",
+        "press": "Tryk",
+        "running": "Aktiv"
+    },
     "tankWidget": {
         "Black water": "Sortvand",
         "Diesel": "Diesel",

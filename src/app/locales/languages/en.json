@@ -266,8 +266,7 @@
         "off": "Off",
         "on": "On",
         "press": "Press",
-        "running": "Running",
-        "current": "Current"
+        "running": "Running"
     },
     "tankWidget": {
         "Black water": "Black water",

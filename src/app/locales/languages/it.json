@@ -204,6 +204,7 @@
     "pages": {
         "diagnostics": "Diagnostica",
         "remoteConsole": "Consolle Remota",
+        "switchingPane": "Pannello di commutazione",
         "systemOverview": "Panoramica Sistema"
     },
     "remoteLogin": {
@@ -255,7 +256,17 @@
             "Waste water": "Acque reflue"
         }
     },
-    "switches": {},
+    "switches": {
+        "auto": "Auto",
+        "fault": "Guasto",
+        "max": "Max",
+        "min": "Min",
+        "notRunning": "Non in esecuzione",
+        "off": "Spento",
+        "on": "Acceso",
+        "press": "Premi",
+        "running": "In esecuzione"
+    },
     "tankWidget": {
         "Black water": "Acque nere",
         "Diesel": "Diesel",

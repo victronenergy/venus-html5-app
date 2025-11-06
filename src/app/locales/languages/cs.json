@@ -204,6 +204,7 @@
     "pages": {
         "diagnostics": "Diagnostika",
         "remoteConsole": "Vzdálené ovládání",
+        "switchingPane": "Panel přepínání",
         "systemOverview": "Přehled systému"
     },
     "remoteLogin": {
@@ -255,7 +256,17 @@
             "Waste water": "Odpadní voda"
         }
     },
-    "switches": {},
+    "switches": {
+        "auto": "Automaticky",
+        "fault": "Chyba",
+        "max": "Max",
+        "min": "Min",
+        "notRunning": "Neběží",
+        "off": "Vypnuto",
+        "on": "Zapnuto",
+        "press": "Stiskněte",
+        "running": "Běží"
+    },
     "tankWidget": {
         "Black water": "Splašky",
         "Diesel": "Nafta",

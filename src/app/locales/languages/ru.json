@@ -204,6 +204,7 @@
     "pages": {
         "diagnostics": "Диагностика",
         "remoteConsole": "Дистанционная консоль",
+        "switchingPane": "Панель переключения",
         "systemOverview": "Обзор системы"
     },
     "remoteLogin": {
@@ -255,7 +256,17 @@
             "Waste water": "Грязная вода"
         }
     },
-    "switches": {},
+    "switches": {
+        "auto": "Авто",
+        "fault": "Ошибка",
+        "max": "Макс",
+        "min": "Мин",
+        "notRunning": "Не работает",
+        "off": "Выкл",
+        "on": "Вкл",
+        "press": "Нажать",
+        "running": "Работает"
+    },
     "tankWidget": {
         "Black water": "Темная вода",
         "Diesel": "Дизельное топливо",

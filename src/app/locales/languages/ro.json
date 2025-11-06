@@ -204,6 +204,7 @@
     "pages": {
         "diagnostics": "Diagnostic",
         "remoteConsole": "Consola la distanta",
+        "switchingPane": "Panou de comutare",
         "systemOverview": "Prezentare generală sistem"
     },
     "remoteLogin": {
@@ -255,7 +256,17 @@
             "Waste water": "Apa reziduala"
         }
     },
-    "switches": {},
+    "switches": {
+        "auto": "Automat",
+        "fault": "Defecțiune",
+        "max": "Max",
+        "min": "Min",
+        "notRunning": "Nu rulează",
+        "off": "Oprit",
+        "on": "Pornit",
+        "press": "Apăsați",
+        "running": "Rulează"
+    },
     "tankWidget": {
         "Black water": "Apa redizuala",
         "Diesel": "Motorină",

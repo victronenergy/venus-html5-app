@@ -71,8 +71,8 @@
         "hours_short": "h",
         "idle": "Leerlauf",
         "inputCurrentLimit": "Eingangsstrombegrenzung",
-        "inputCurrentLimitWithNumber": "Strombegrenzung Eingang %{inputId}",
-        "inputCurrentLimitWithType": "Strombegrenzung %{inputType}-Eingang",
+        "inputCurrentLimitWithNumber": "Eingang %{inputId} Strombegrenzung",
+        "inputCurrentLimitWithType": "%{inputType}-Eingang Strombegrenzung",
         "inputLimit": "Input Limit",
         "inverterOnly": "Nur Wechselrichter",
         "inverting": "Wechselrichten",
@@ -204,6 +204,7 @@
     "pages": {
         "diagnostics": "Diagnostik",
         "remoteConsole": "Remote-Konsole",
+        "switchingPane": "Switching Pane",
         "systemOverview": "Systemübersicht"
     },
     "remoteLogin": {
@@ -255,7 +256,17 @@
             "Waste water": "Abwasser"
         }
     },
-    "switches": {},
+    "switches": {
+        "auto": "Auto",
+        "fault": "Störung",
+        "max": "Max",
+        "min": "Min",
+        "notRunning": "Läuft nicht",
+        "off": "Aus",
+        "on": "Ein",
+        "press": "Drücken",
+        "running": "Läuft"
+    },
     "tankWidget": {
         "Black water": "Schwarzwasser",
         "Diesel": "Diesel",

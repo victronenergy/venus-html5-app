@@ -204,6 +204,7 @@
     "pages": {
         "diagnostics": "Diagnostics",
         "remoteConsole": "Console à distance",
+        "switchingPane": "Panneau de commutation",
         "systemOverview": "Vue générale du système"
     },
     "remoteLogin": {
@@ -255,7 +256,17 @@
             "Waste water": "Eaux usées"
         }
     },
-    "switches": {},
+    "switches": {
+        "auto": "Auto",
+        "fault": "Défaut",
+        "max": "Max",
+        "min": "Min",
+        "notRunning": "Ne fonctionne pas",
+        "off": "Arrêt",
+        "on": "Marche",
+        "press": "Appuyer",
+        "running": "En fonctionnement"
+    },
     "tankWidget": {
         "Black water": "Eaux Noires",
         "Diesel": "Diesel",
