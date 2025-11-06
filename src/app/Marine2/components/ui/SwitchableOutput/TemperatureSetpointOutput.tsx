@@ -2,6 +2,7 @@ import React, { useCallback, useRef, useState } from "react"
 import {
   getSwitchableOutputNameForDisplay,
   SwitchableOutputId,
+  SwitchableOutputTree,
   SwitchingDeviceInstanceId,
   useAppStore,
   useSwitchableOutput,
@@ -13,6 +14,7 @@ import { getDecimalPlaces, getValueOrDefault, useValueFormatter } from "./helper
 
 interface TemperatureSetpointOutputProps {
   key: string
+  tree: SwitchableOutputTree
   deviceId: SwitchingDeviceInstanceId
   outputId: SwitchableOutputId
   parentDeviceName: string
@@ -20,7 +22,7 @@ interface TemperatureSetpointOutputProps {
 }
 
 const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProps) => {
-  const switchableOutput = useSwitchableOutput(props.deviceId, props.outputId)
+  const switchableOutput = useSwitchableOutput(props.tree, props.deviceId, props.outputId)
   const outputName = getSwitchableOutputNameForDisplay(switchableOutput, props.parentDeviceName)
   const { temperatureUnitToHumanReadable } = useAppStore()
 

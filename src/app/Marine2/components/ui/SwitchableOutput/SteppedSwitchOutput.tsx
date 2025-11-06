@@ -2,6 +2,7 @@ import React from "react"
 import {
   getSwitchableOutputNameForDisplay,
   SwitchableOutputId,
+  SwitchableOutputTree,
   SwitchingDeviceInstanceId,
   useSwitchableOutput,
 } from "@victronenergy/mfd-modules"
@@ -11,6 +12,7 @@ import { translate } from "react-i18nify"
 
 interface SteppedSwitchOutputProps {
   key: string
+  tree: SwitchableOutputTree
   deviceId: SwitchingDeviceInstanceId
   outputId: SwitchableOutputId
   parentDeviceName: string
@@ -18,7 +20,7 @@ interface SteppedSwitchOutputProps {
 }
 
 const SteppedSwitchOutput = observer((props: SteppedSwitchOutputProps) => {
-  const switchableOutput = useSwitchableOutput(props.deviceId, props.outputId)
+  const switchableOutput = useSwitchableOutput(props.tree, props.deviceId, props.outputId)
   const outputName = getSwitchableOutputNameForDisplay(switchableOutput, props.parentDeviceName)
 
   const variant = switchableOutput.state === 1 ? "on" : "off"

@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react"
 import {
   getSwitchableOutputNameForDisplay,
   SwitchableOutputId,
+  SwitchableOutputTree,
   SwitchingDeviceInstanceId,
   useSwitchableOutput,
 } from "@victronenergy/mfd-modules"
@@ -11,6 +12,7 @@ import ArrowRightIcon from "../../../images/icons/arrow-right.svg"
 
 interface DropdownOutputProps {
   key: string
+  tree: SwitchableOutputTree
   deviceId: SwitchingDeviceInstanceId
   outputId: SwitchableOutputId
   parentDeviceName: string
@@ -18,7 +20,7 @@ interface DropdownOutputProps {
 }
 
 const DropdownOutput = observer((props: DropdownOutputProps) => {
-  const switchableOutput = useSwitchableOutput(props.deviceId, props.outputId)
+  const switchableOutput = useSwitchableOutput(props.tree, props.deviceId, props.outputId)
   const outputName = getSwitchableOutputNameForDisplay(switchableOutput, props.parentDeviceName)
 
   const options = Array.isArray(switchableOutput.labels) ? switchableOutput.labels : []

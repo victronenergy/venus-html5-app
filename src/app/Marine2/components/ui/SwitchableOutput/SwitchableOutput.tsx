@@ -1,5 +1,5 @@
 import React from "react"
-import { SwitchableOutputId, SwitchingDeviceInstanceId } from "@victronenergy/mfd-modules"
+import { SwitchableOutputId, SwitchableOutputTree, SwitchingDeviceInstanceId } from "@victronenergy/mfd-modules"
 import { SwitchableOutputType, SWITCHABLE_OUTPUT_TYPE } from "@victronenergy/mfd-modules/dist/src/utils/constants"
 import MomentaryOutput from "./MomentaryOutput"
 import { observer } from "mobx-react"
@@ -16,6 +16,7 @@ import DimmableHSVWOutput from "./DimmableHSVWOutput"
 
 interface SwitchableOutputProps {
   key: string
+  tree: SwitchableOutputTree
   type: SwitchableOutputType
   deviceId: SwitchingDeviceInstanceId
   outputId: SwitchableOutputId
@@ -30,6 +31,7 @@ const SwitchableOutput = observer((props: SwitchableOutputProps) => {
       return (
         <MomentaryOutput
           key={key}
+          tree={props.tree}
           deviceId={props.deviceId}
           outputId={props.outputId}
           parentDeviceName={props.parentDeviceName}
@@ -40,6 +42,7 @@ const SwitchableOutput = observer((props: SwitchableOutputProps) => {
       return (
         <ToggleOutput
           key={key}
+          tree={props.tree}
           deviceId={props.deviceId}
           outputId={props.outputId}
           parentDeviceName={props.parentDeviceName}
@@ -50,6 +53,7 @@ const SwitchableOutput = observer((props: SwitchableOutputProps) => {
       return (
         <DimmableOutput
           key={key}
+          tree={props.tree}
           deviceId={props.deviceId}
           outputId={props.outputId}
           parentDeviceName={props.parentDeviceName}
@@ -60,6 +64,7 @@ const SwitchableOutput = observer((props: SwitchableOutputProps) => {
       return (
         <TemperatureSetpointOutput
           key={key}
+          tree={props.tree}
           deviceId={props.deviceId}
           outputId={props.outputId}
           parentDeviceName={props.parentDeviceName}
@@ -70,6 +75,7 @@ const SwitchableOutput = observer((props: SwitchableOutputProps) => {
       return (
         <SteppedSwitchOutput
           key={key}
+          tree={props.tree}
           deviceId={props.deviceId}
           outputId={props.outputId}
           parentDeviceName={props.parentDeviceName}
@@ -80,6 +86,7 @@ const SwitchableOutput = observer((props: SwitchableOutputProps) => {
       return (
         <DropdownOutput
           key={key}
+          tree={props.tree}
           deviceId={props.deviceId}
           outputId={props.outputId}
           parentDeviceName={props.parentDeviceName}
@@ -90,6 +97,7 @@ const SwitchableOutput = observer((props: SwitchableOutputProps) => {
       return (
         <SliderOutput
           key={key}
+          tree={props.tree}
           deviceId={props.deviceId}
           outputId={props.outputId}
           parentDeviceName={props.parentDeviceName}
@@ -100,6 +108,7 @@ const SwitchableOutput = observer((props: SwitchableOutputProps) => {
       return (
         <UnrangedSetpointOutput
           key={key}
+          tree={props.tree}
           deviceId={props.deviceId}
           outputId={props.outputId}
           parentDeviceName={props.parentDeviceName}
@@ -110,6 +119,7 @@ const SwitchableOutput = observer((props: SwitchableOutputProps) => {
       return (
         <ThreeStateSwitchOutput
           key={key}
+          tree={props.tree}
           deviceId={props.deviceId}
           outputId={props.outputId}
           parentDeviceName={props.parentDeviceName}
@@ -120,6 +130,7 @@ const SwitchableOutput = observer((props: SwitchableOutputProps) => {
       return (
         <BilgePumpControlOutput
           key={key}
+          tree={props.tree}
           deviceId={props.deviceId}
           outputId={props.outputId}
           parentDeviceName={props.parentDeviceName}
@@ -131,6 +142,7 @@ const SwitchableOutput = observer((props: SwitchableOutputProps) => {
       return (
         <DimmableHSVWOutput
           key={key}
+          tree={props.tree}
           deviceId={props.deviceId}
           outputId={props.outputId}
           parentDeviceName={props.parentDeviceName}
@@ -142,6 +154,7 @@ const SwitchableOutput = observer((props: SwitchableOutputProps) => {
       return (
         <DimmableHSVWOutput
           key={key}
+          tree={props.tree}
           deviceId={props.deviceId}
           outputId={props.outputId}
           parentDeviceName={props.parentDeviceName}
@@ -153,6 +166,7 @@ const SwitchableOutput = observer((props: SwitchableOutputProps) => {
       return (
         <DimmableHSVWOutput
           key={key}
+          tree={props.tree}
           deviceId={props.deviceId}
           outputId={props.outputId}
           parentDeviceName={props.parentDeviceName}

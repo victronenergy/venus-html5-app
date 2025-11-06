@@ -2,6 +2,7 @@ import React, { useCallback, useRef, useState } from "react"
 import {
   getSwitchableOutputNameForDisplay,
   SwitchableOutputId,
+  SwitchableOutputTree,
   SwitchingDeviceInstanceId,
   useSwitchableOutput,
 } from "@victronenergy/mfd-modules"
@@ -18,6 +19,7 @@ import {
 
 interface DimmableHSVWOutputProps {
   key: string
+  tree: SwitchableOutputTree
   deviceId: SwitchingDeviceInstanceId
   outputId: SwitchableOutputId
   parentDeviceName: string
@@ -31,7 +33,7 @@ interface DimmableHSVWOutputProps {
 // TODO: Implement popup: center wheel, brightness, saturation, white level
 
 const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
-  const switchableOutput = useSwitchableOutput(props.deviceId, props.outputId)
+  const switchableOutput = useSwitchableOutput(props.tree, props.deviceId, props.outputId)
   const outputName = getSwitchableOutputNameForDisplay(switchableOutput, props.parentDeviceName)
 
   const variant = switchableOutput.state === 1 ? "on" : "off"
