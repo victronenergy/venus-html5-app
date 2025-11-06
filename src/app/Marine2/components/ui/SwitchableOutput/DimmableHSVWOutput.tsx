@@ -16,6 +16,9 @@ import {
   HSVWColorArray,
   hsvwToArray,
 } from "@victronenergy/mfd-modules/dist/src/utils/hsvw"
+import { Modal } from "../Modal"
+import CloseIcon from "../../../images/icons/close.svg"
+import FadedText from "../FadedText"
 
 interface DimmableHSVWOutputProps {
   key: string
@@ -107,6 +110,8 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
     }
   }
 
+  const [isColorWheelOpen, setIsColorWheelOpen] = useState(false)
+
   return (
     <div className={classnames("mt-4", props.className)}>
       <div>{outputName}</div>
@@ -176,7 +181,37 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
           style={{
             backgroundColor: hsvToHsl(lightControls.hue, lightControls.saturation, 100),
           }}
+          onClick={() => setIsColorWheelOpen(true)}
         />
+      </div>
+      {/* Color Wheel Popup */}
+      <div>
+        <Modal.Frame
+          open={isColorWheelOpen}
+          onClose={() => {
+            setIsColorWheelOpen(false)
+          }}
+          className={classnames("w-4/6 max-w-4/6 h-4/6 max-h-4/6")}
+        >
+          <Modal.Body variant="popUp" className="h-full bg-surface-primary flex flex-col">
+            {/* Title with close button */}
+            <div className="flex">
+              <FadedText text={outputName} className="flex-1" />
+              <CloseIcon
+                className="w-5 text-content-victronBlue cursor-pointer outline-none"
+                alt="Close"
+                onClick={() => setIsColorWheelOpen(false)}
+              />
+            </div>
+            {/* Controls */}
+            <div className="relative flex-1 w-full mt-2 mb-2">
+              <div className="absolute inset-0 border-2 border-blue-500"></div>
+              <div className="absolute inset-0 border-2 border-green-500"></div>
+              <div className="absolute inset-0 border-2 border-yellow-500"></div>
+              <div className="absolute inset-0 border-2 border-red-500"></div>
+            </div>
+          </Modal.Body>
+        </Modal.Frame>
       </div>
     </div>
   )
