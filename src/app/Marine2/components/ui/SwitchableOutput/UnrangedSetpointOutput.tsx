@@ -2,6 +2,7 @@ import React, { useCallback, useMemo, useRef } from "react"
 import {
   getSwitchableOutputNameForDisplay,
   SwitchableOutputId,
+  SwitchableOutputTree,
   SwitchingDeviceInstanceId,
   useSwitchableOutput,
 } from "@victronenergy/mfd-modules"
@@ -11,6 +12,7 @@ import { getDecimalPlaces, getValueOrDefault, useValueFormatter } from "./helper
 
 interface UnrangedSetpointOutputProps {
   key: string
+  tree: SwitchableOutputTree
   deviceId: SwitchingDeviceInstanceId
   outputId: SwitchableOutputId
   parentDeviceName: string
@@ -18,7 +20,7 @@ interface UnrangedSetpointOutputProps {
 }
 
 const UnrangedSetpointOutput = observer((props: UnrangedSetpointOutputProps) => {
-  const switchableOutput = useSwitchableOutput(props.deviceId, props.outputId)
+  const switchableOutput = useSwitchableOutput(props.tree, props.deviceId, props.outputId)
   const outputName = getSwitchableOutputNameForDisplay(switchableOutput, props.parentDeviceName)
 
   const min = getValueOrDefault(switchableOutput.dimmingMin, 0)

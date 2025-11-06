@@ -8,10 +8,11 @@ import { Modal } from "../ui/Modal"
 import classNames from "classnames"
 import GroupPaginator from "../ui/GroupPaginator/GroupPaginator"
 import Box from "../ui/Box"
+import { translate } from "react-i18nify"
 
 const SwitchingPane = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const switchableOutputs = useSwitchableOutputs()
+  const switchableOutputs = useSwitchableOutputs(translate("switches.gxDeviceRelays"))
 
   const [groupNames, setGroupNames] = useState<string[]>([])
   const [groupsOfSwitchableOutputs, setGroupsOfSwitchableOutputs] = useState<React.JSX.Element[][]>([])
@@ -36,6 +37,7 @@ const SwitchingPane = () => {
             <SwitchableOutput
               className="w-full pl-2 pr-2"
               key={`${switchableOutput.deviceId}_${switchableOutput.outputId}`}
+              tree={switchableOutput.tree}
               type={switchableOutput.type}
               deviceId={switchableOutput.deviceId}
               outputId={switchableOutput.outputId}

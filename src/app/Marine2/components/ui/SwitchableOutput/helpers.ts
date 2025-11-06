@@ -5,7 +5,10 @@ import { volumeValueFor } from "app/Marine2/utils/formatters/volume/volume-value
 import { useCallback } from "react"
 
 // NOTE: Old MFD devices lack nullish coalescing operator `??` thus this version
-export const getValueOrDefault = <T extends number | string>(value: T | undefined | null, defaultValue: T) => {
+export const getValueOrDefault = <T extends number | string | number[]>(
+  value: T | undefined | null,
+  defaultValue: T,
+) => {
   return value === undefined || value === null ? defaultValue : value
 }
 
