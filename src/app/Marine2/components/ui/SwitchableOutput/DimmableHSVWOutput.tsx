@@ -19,6 +19,8 @@ import {
 import { Modal } from "../Modal"
 import CloseIcon from "../../../images/icons/close.svg"
 import FadedText from "../FadedText"
+import ColorPicker from "../ColorPicker/ColorPicker"
+import { hsvToHsl } from "app/Marine2/utils/helpers/color-conversion-routines"
 
 interface DimmableHSVWOutputProps {
   key: string
@@ -41,8 +43,8 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
 
   const variant = switchableOutput.state === 1 ? "on" : "off"
   const ligtControlsArray = getValueOrDefault(switchableOutput.lightControls, [0, 0, 0, 0, 0]) as HSVWColorArray
-  const lightControls = arrayToHSVW(ligtControlsArray)
-  const ratio = lightControls.brightness
+  const color = arrayToHSVW(ligtControlsArray)
+  const ratio = color.brightness
 
   const handleClickOnOff = () => {
     switchableOutput.updateState(switchableOutput.state === 1 ? 0 : 1)
@@ -61,9 +63,9 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
 
   const updateBrightnessValueImmediately = useCallback(
     (percentage: number) => {
-      switchableOutput.updateLightControls(hsvwToArray({ ...lightControls, brightness: createPercentage(percentage) }))
+      switchableOutput.updateLightControls(hsvwToArray({ ...color, brightness: createPercentage(percentage) }))
     },
-    [lightControls, switchableOutput],
+    [color, switchableOutput],
   )
 
   const updateBrightnessValueDebounced = useCallback(
@@ -74,12 +76,10 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
       }
 
       updateTimeoutRef.current = setTimeout(() => {
-        switchableOutput.updateLightControls(
-          hsvwToArray({ ...lightControls, brightness: createPercentage(percentage) }),
-        )
+        switchableOutput.updateLightControls(hsvwToArray({ ...color, brightness: createPercentage(percentage) }))
       }, 10)
     },
-    [lightControls, switchableOutput],
+    [color, switchableOutput],
   )
 
   const handlePress = (e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
@@ -179,7 +179,7 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
         <div
           className="w-px-44 h-px-44 rounded-md ml-2"
           style={{
-            backgroundColor: hsvToHsl(lightControls.hue, lightControls.saturation, 100),
+            backgroundColor: hsvToHsl(color.hue, color.saturation, 100),
           }}
           onClick={() => setIsColorWheelOpen(true)}
         />
@@ -205,10 +205,13 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
             </div>
             {/* Controls */}
             <div className="relative flex-1 w-full mt-2 mb-2">
-              <div className="absolute inset-0 border-2 border-blue-500"></div>
-              <div className="absolute inset-0 border-2 border-green-500"></div>
-              <div className="absolute inset-0 border-2 border-yellow-500"></div>
-              <div className="absolute inset-0 border-2 border-red-500"></div>
+              <div className="absolute inset-0 border-2 border-blue-500">
+                <ColorPicker
+                  className="h-full w-full"
+                  color={color}
+                  onColorChange={(color) => switchableOutput.updateLightControls(hsvwToArray(color))}
+                />
+              </div>
             </div>
           </Modal.Body>
         </Modal.Frame>
@@ -218,13 +221,3 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
 })
 
 export default DimmableHSVWOutput
-
-function hsvToHsl(h: number, s: number, v: number): string {
-  s = s / 100
-  v = v / 100
-
-  const l = v * (1 - s / 2)
-  const sHsl = l === 0 || l === 1 ? 0 : (v - l) / Math.min(l, 1 - l)
-
-  return `hsl(${h}, ${Math.round(sHsl * 100)}%, ${Math.round(l * 100)}%)`
-}
