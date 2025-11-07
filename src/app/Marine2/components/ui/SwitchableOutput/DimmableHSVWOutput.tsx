@@ -26,6 +26,7 @@ import { SWITCHABLE_OUTPUT_TYPE } from "@victronenergy/mfd-modules/dist/src/util
 import { Modal } from "../Modal"
 import CloseIcon from "../../../images/icons/close.svg"
 import FadedText from "../FadedText"
+import ColorPicker from "../ColorPicker/ColorPicker"
 
 interface DimmableHSVWOutputProps {
   key: string
@@ -243,10 +244,13 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
             </div>
             {/* Controls */}
             <div className="relative flex-1 w-full mt-2 mb-2">
-              <div className="absolute inset-0 border-2 border-blue-500"></div>
-              <div className="absolute inset-0 border-2 border-green-500"></div>
-              <div className="absolute inset-0 border-2 border-yellow-500"></div>
-              <div className="absolute inset-0 border-2 border-red-500"></div>
+              <div className="absolute inset-0 border-2 border-blue-500">
+                <ColorPicker
+                  className="h-full w-full"
+                  color={color}
+                  onColorChange={(color) => switchableOutput.updateLightControls(hsvwToArray(color))}
+                />
+              </div>
             </div>
           </Modal.Body>
         </Modal.Frame>
