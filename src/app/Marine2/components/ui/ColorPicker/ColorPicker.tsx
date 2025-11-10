@@ -1,6 +1,6 @@
 import React, { useCallback, useRef } from "react"
 import { observer } from "mobx-react"
-import { createHue, HSVWColor } from "@victronenergy/mfd-modules/dist/src/utils/hsvw"
+import { createHue, createPercentage, HSVWColor } from "@victronenergy/mfd-modules/dist/src/utils/hsvw"
 import { hsvToHsl } from "app/Marine2/utils/helpers/color-conversion-routines"
 
 function polarToCartesian(cx: number, cy: number, r: number, angleDeg: number) {
@@ -85,8 +85,12 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
 
   const arcInnerR = hueRingOuterRadius + spacing
   const arcOuterR = arcInnerR + arcThickness
+  const angularOffset = Math.atan2(arcThickness / 2, (arcInnerR + arcOuterR) / 2) * (180 / Math.PI)
+
   const bArcStartAngle = 180 + 50
   const bArcEndAngle = 360 - 50
+  const bArcStartAngleHT = bArcStartAngle - angularOffset
+  const bArcEndAngleHT = bArcEndAngle + angularOffset
   const brightnessArcPath = describeRoundedArc(cX, cY, arcInnerR, arcOuterR, bArcStartAngle, bArcEndAngle)
   const brightnessFillArcPath = describeRoundedArc(
     cX,
@@ -96,11 +100,17 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
     bArcStartAngle,
     bArcStartAngle + (color.brightness / 100) * (bArcEndAngle - bArcStartAngle),
   )
+
   const sArcStartAngle = 0 + 50
   const sArcEndAngle = 180 - 50
+  const sArcStartAngleHT = sArcStartAngle - angularOffset
+  const sArcEndAngleHT = sArcEndAngle + angularOffset
   const saturationArcPath = describeRoundedArc(cX, cY, arcInnerR, arcOuterR, sArcStartAngle, sArcEndAngle)
+
   const wArcStartAngle = 180 - 30
   const wArcEndAngle = 180 + 30
+  const wArcStartAngleHT = wArcStartAngle - angularOffset
+  const wArcEndAngleHT = wArcEndAngle + angularOffset
   const whiteLevelArcPath = describeRoundedArc(cX, cY, arcInnerR, arcOuterR, wArcStartAngle, wArcEndAngle)
 
   // Calculate handle position on the hue ring
@@ -131,98 +141,205 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
   const whiteLevelHandleY = cY + (arcInnerR + arcThickness / 2) * Math.sin(whiteLevelHandleAngle)
 
   const svgRef = useRef<SVGSVGElement>(null)
-  const isDraggingRef = useRef(false)
+  const isDraggingHueRef = useRef(false)
+  const isDraggingBrightnessRef = useRef(false)
+  const isDraggingSaturationRef = useRef(false)
+  const isDraggingWhiteLevelRef = useRef(false)
+  const updateTimeoutRef = useRef<NodeJS.Timeout>()
+
+  const updateDimmingValueImmediately = useCallback(
+    (color: HSVWColor) => {
+      onColorChange?.(color)
+    },
+    [onColorChange],
+  )
+
+  const updateDimmingValueDebounced = useCallback(
+    (color: HSVWColor) => {
+      if (updateTimeoutRef.current) {
+        clearTimeout(updateTimeoutRef.current)
+        updateTimeoutRef.current = undefined
+      }
+
+      updateTimeoutRef.current = setTimeout(() => {
+        onColorChange?.(color)
+      }, 10)
+    },
+    [onColorChange],
+  )
 
   // Check if point is within the hue ring
-  const isPointInHueRing = useCallback(
+  const hitTest = useCallback(
     (x: number, y: number) => {
       const dx = x - cX
       const dy = y - cY
+      // Compute distance from the center
       const distance = Math.sqrt(dx * dx + dy * dy)
-      return distance >= hueRingInnerRadius && distance <= hueRingOuterRadius + hueRingHandleSize
+      // Compute angle, 0 degrees on 12 hours, clockwise rotation
+      const angle = (Math.atan2(dx, -dy) * (180 / Math.PI) + 360) % 360
+      const inHueRing = distance >= hueRingInnerRadius && distance <= hueRingOuterRadius + hueRingHandleSize
+      const inArcRange = distance >= arcInnerR && distance <= arcOuterR
+      const inBrightnessArc = inArcRange && angle >= bArcStartAngleHT && angle <= bArcEndAngleHT
+      const inSaturationArc = inArcRange && angle >= sArcStartAngleHT && angle <= sArcEndAngleHT
+      const inWhiteLevelArc = inArcRange && angle >= wArcStartAngleHT && angle <= wArcEndAngleHT
+      return { inHueRing, inBrightnessArc, inSaturationArc, inWhiteLevelArc, angle }
     },
-    [cX, cY, hueRingInnerRadius, hueRingOuterRadius, hueRingHandleSize],
+    [
+      cX,
+      cY,
+      hueRingInnerRadius,
+      hueRingOuterRadius,
+      hueRingHandleSize,
+      arcInnerR,
+      arcOuterR,
+      bArcStartAngleHT,
+      bArcEndAngleHT,
+      sArcStartAngleHT,
+      sArcEndAngleHT,
+      wArcStartAngleHT,
+      wArcEndAngleHT,
+    ],
   )
 
-  // Calculate hue from mouse position
-  const calculateHue = useCallback(
-    (x: number, y: number) => {
-      const dx = x - cX
-      const dy = y - cY
-      let angle = Math.atan2(dy, dx) * (180 / Math.PI)
-      // Convert to hue (0-360), accounting for rotation offset
-      let hue = -angle - 35
-      // Normalize to 0-360
-      hue = ((hue % 360) + 360) % 360
-      return hue
+  const calculateHue = useCallback((angle: number) => {
+    // Convert to hue (0-360), accounting for rotation offset
+    let hue = -angle - 35 + 90
+    // Normalize to 0-360
+    hue = ((hue % 360) + 360) % 360
+    return hue
+  }, [])
+
+  const calculateBrightness = useCallback(
+    (angle: number) => {
+      const result = ((angle - bArcStartAngleHT) / (bArcEndAngleHT - bArcStartAngleHT)) * 100
+      return Math.max(0, Math.min(100, result))
     },
-    [cX, cY],
+    [bArcEndAngleHT, bArcStartAngleHT],
   )
 
-  // Get SVG coordinates from mouse event
-  const getSVGCoordinates = useCallback(
-    (event: React.MouseEvent<SVGElement> | MouseEvent) => {
-      if (!svgRef.current) return null
-      console.log(`DEBUG: getSVGCoordinates`)
-      const svg = svgRef.current
-      const rect = svg.getBoundingClientRect()
-      const scaleX = width / rect.width
-      const scaleY = height / rect.height
-      const x = (event.clientX - rect.left) * scaleX
-      const y = (event.clientY - rect.top) * scaleY
-      return { x, y }
+  const calculateSaturation = useCallback(
+    (angle: number) => {
+      const result = ((angle - sArcStartAngleHT) / (sArcEndAngleHT - sArcStartAngleHT)) * 100
+      return 100 - Math.max(0, Math.min(100, result))
     },
-    [width, height],
+    [sArcEndAngleHT, sArcStartAngleHT],
   )
+
+  const calculateWhiteLevel = useCallback(
+    (angle: number) => {
+      const result = ((angle - wArcStartAngleHT) / (wArcEndAngleHT - wArcStartAngleHT)) * 100
+      return 100 - Math.max(0, Math.min(100, result))
+    },
+    [wArcEndAngleHT, wArcStartAngleHT],
+  )
+
+  // Get mouse event coordinates in the SVG view box coodinate system
+  const getSVGCoordinates = useCallback((event: React.MouseEvent<SVGElement> | MouseEvent) => {
+    if (!svgRef.current) return null
+    const svg = svgRef.current
+
+    const pt = svg.createSVGPoint()
+    pt.x = event.clientX
+    pt.y = event.clientY
+
+    const ctm = svg.getScreenCTM()
+    if (!ctm) return null
+
+    const svgP = pt.matrixTransform(ctm.inverse())
+
+    return { x: svgP.x, y: svgP.y }
+  }, [])
 
   const handleMouseDown = useCallback(
     (event: React.MouseEvent<SVGElement>) => {
-      console.log(`DEBUG: handleMouseDown`)
       const coords = getSVGCoordinates(event)
       if (!coords) return
 
-      if (isPointInHueRing(coords.x, coords.y)) {
-        isDraggingRef.current = true
-        const newHue = calculateHue(coords.x, coords.y)
-        // onHueChange?.(newHue)
-        console.log(`DEBUG: newHue: ${newHue}`)
-        onColorChange?.({ ...color, hue: createHue(newHue) })
+      const { inHueRing, inBrightnessArc, inSaturationArc, inWhiteLevelArc, angle } = hitTest(coords.x, coords.y)
+
+      if (inHueRing) {
+        isDraggingHueRef.current = true
+        const newHue = calculateHue(angle)
+        updateDimmingValueImmediately({ ...color, hue: createHue(newHue) })
+        event.preventDefault()
+      }
+      if (inBrightnessArc) {
+        isDraggingBrightnessRef.current = true
+        const newBrightness = calculateBrightness(angle)
+        updateDimmingValueImmediately({ ...color, brightness: createPercentage(newBrightness) })
+        event.preventDefault()
+      }
+      if (inSaturationArc) {
+        isDraggingSaturationRef.current = true
+        const newSaturation = calculateSaturation(angle)
+        updateDimmingValueImmediately({ ...color, saturation: createPercentage(newSaturation) })
+        event.preventDefault()
+      }
+      if (inWhiteLevelArc) {
+        isDraggingWhiteLevelRef.current = true
+        const newWhiteLevel = calculateWhiteLevel(angle)
+        updateDimmingValueImmediately({ ...color, white: createPercentage(newWhiteLevel) })
         event.preventDefault()
       }
     },
-    [getSVGCoordinates, isPointInHueRing, calculateHue, onColorChange, color],
+    [
+      getSVGCoordinates,
+      hitTest,
+      calculateHue,
+      updateDimmingValueImmediately,
+      color,
+      calculateBrightness,
+      calculateSaturation,
+      calculateWhiteLevel,
+    ],
   )
 
-  // const handleMouseMove = useCallback(
-  //   (event: MouseEvent) => {
-  //     console.log(`DEBUG: handleMouseMove`)
-  //     if (!isDraggingRef.current) return
+  const handleMouseMove = useCallback(
+    (event: React.MouseEvent<SVGElement>) => {
+      const coords = getSVGCoordinates(event)
+      if (!coords) return
 
-  //     const coords = getSVGCoordinates(event)
-  //     if (!coords) return
+      const { angle } = hitTest(coords.x, coords.y)
 
-  //     const newHue = calculateHue(coords.x, coords.y)
-  //     // onHueChange?.(newHue)
-  //     console.log(`DEBUG: newHue: ${newHue}`)
-  //     event.preventDefault()
-  //   },
-  //   [getSVGCoordinates, calculateHue],
-  // )
+      if (isDraggingHueRef.current) {
+        const newHue = calculateHue(angle)
+        updateDimmingValueDebounced({ ...color, hue: createHue(newHue) })
+        event.preventDefault()
+      }
+      if (isDraggingBrightnessRef.current) {
+        const newBrightness = calculateBrightness(angle)
+        updateDimmingValueDebounced({ ...color, brightness: createPercentage(newBrightness) })
+        event.preventDefault()
+      }
+      if (isDraggingSaturationRef.current) {
+        const newSaturation = calculateSaturation(angle)
+        updateDimmingValueDebounced({ ...color, saturation: createPercentage(newSaturation) })
+        event.preventDefault()
+      }
+      if (isDraggingWhiteLevelRef.current) {
+        const newWhiteLevel = calculateWhiteLevel(angle)
+        updateDimmingValueDebounced({ ...color, white: createPercentage(newWhiteLevel) })
+        event.preventDefault()
+      }
+    },
+    [
+      getSVGCoordinates,
+      hitTest,
+      calculateHue,
+      updateDimmingValueDebounced,
+      color,
+      calculateBrightness,
+      calculateSaturation,
+      calculateWhiteLevel,
+    ],
+  )
 
-  // const handleMouseUp = useCallback(() => {
-  //   console.log(`DEBUG: handleMouseUp`)
-  //   isDraggingRef.current = false
-  // }, [])
-
-  // Add/remove global mouse listeners for dragging
-  // React.useEffect(() => {
-  //   window.addEventListener("mousemove", handleMouseMove)
-  //   window.addEventListener("mouseup", handleMouseUp)
-  //   return () => {
-  //     window.removeEventListener("mousemove", handleMouseMove)
-  //     window.removeEventListener("mouseup", handleMouseUp)
-  //   }
-  // }, [handleMouseMove, handleMouseUp])
+  const handleMouseUp = useCallback(() => {
+    isDraggingHueRef.current = false
+    isDraggingBrightnessRef.current = false
+    isDraggingSaturationRef.current = false
+    isDraggingWhiteLevelRef.current = false
+  }, [])
 
   return (
     <div className={className}>
@@ -232,6 +349,9 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
         viewBox={`0 0 ${width} ${height}`}
         preserveAspectRatio="xMidYMid meet"
         ref={svgRef}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
       >
         {/* Selected color circle */}
         <circle cx={cX} cy={cY} r={centerCircleRadius} fill={hsvToHsl(color.hue, color.saturation, 100)} />
@@ -254,6 +374,8 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
           stroke="rgba(var(--c-victron-blue-rgb), 1.0)"
           strokeWidth={arcBorderSize}
           strokeLinejoin="round"
+          onMouseDown={handleMouseDown}
+          pointerEvents="all"
         />
         {/* Left arc - Brightness Fill */}
         <path
@@ -263,11 +385,29 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
           stroke="rgba(var(--c-victron-blue-rgb), 1.0)"
           strokeWidth={arcBorderSize}
           strokeLinejoin="round"
+          onMouseDown={handleMouseDown}
+          pointerEvents="all"
         />
         {/* Right arc - Saturation */}
-        <path d={saturationArcPath} fill="tomato" stroke="black" strokeWidth={0} strokeLinejoin="round" />
+        <path
+          d={saturationArcPath}
+          fill="tomato"
+          stroke="black"
+          strokeWidth={0}
+          strokeLinejoin="round"
+          onMouseDown={handleMouseDown}
+          pointerEvents="all"
+        />
         {/* Bottom arc - White level */}
-        <path d={whiteLevelArcPath} fill="tomato" stroke="black" strokeWidth="black" strokeLinejoin="round" />
+        <path
+          d={whiteLevelArcPath}
+          fill="tomato"
+          stroke="black"
+          strokeWidth={arcBorderSize}
+          strokeLinejoin="round"
+          onMouseDown={handleMouseDown}
+          pointerEvents="all"
+        />
         {/* Hue handle */}
         <circle
           cx={hueHandleX}
