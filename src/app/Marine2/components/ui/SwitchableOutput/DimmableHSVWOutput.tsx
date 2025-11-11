@@ -15,6 +15,7 @@ import { getSwitchableOutputStatusPill, isSwitchableOutputDisabled } from "./sta
 import {
   arrayToHSVW,
   createPercentage,
+  HSVWColor,
   HSVWColorArray,
   hsvwToArray,
 } from "@victronenergy/mfd-modules/dist/src/utils/hsvw"
@@ -50,11 +51,10 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
   const variant = switchableOutput.state === 1 ? "on" : "off"
   const disabled = isSwitchableOutputDisabled(switchableOutput.status)
   const statusPill = getSwitchableOutputStatusPill(switchableOutput.status, switchableOutput.type)
-  const color = useMemo(
-    () => arrayToHSVW(getValueOrDefault(switchableOutput.lightControls, [0, 0, 0, 0, 0]) as HSVWColorArray),
-    [switchableOutput.lightControls],
-  )
-
+  const [color, setColor] = useState<HSVWColor>(() => {
+    const lightControlsArray = getValueOrDefault(switchableOutput.lightControls, [0, 0, 0, 0, 0]) as HSVWColorArray
+    return arrayToHSVW(lightControlsArray)
+  })
   const ratio = color.brightness
   const formatValueAndUnit = useValueFormatter({ decimals: 0 })
 
@@ -248,7 +248,10 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
                 <ColorPicker
                   className="h-full w-full"
                   color={color}
-                  onColorChange={(color) => switchableOutput.updateLightControls(hsvwToArray(color))}
+                  onColorChange={(color) => {
+                    setColor(color)
+                    switchableOutput.updateLightControls(hsvwToArray(color))
+                  }}
                 />
               </div>
             </div>
