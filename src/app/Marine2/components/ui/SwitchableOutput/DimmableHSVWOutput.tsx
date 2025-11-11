@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useRef, useState } from "react"
+import React, { useCallback, useEffect, useRef, useState } from "react"
 import {
   getSwitchingPaneItemNameForDisplay,
   SwitchableOutputId,
@@ -51,10 +51,12 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
   const variant = switchableOutput.state === 1 ? "on" : "off"
   const disabled = isSwitchableOutputDisabled(switchableOutput.status)
   const statusPill = getSwitchableOutputStatusPill(switchableOutput.status, switchableOutput.type)
-  const [color, setColor] = useState<HSVWColor>(() => {
-    const lightControlsArray = getValueOrDefault(switchableOutput.lightControls, [0, 0, 0, 0, 0]) as HSVWColorArray
-    return arrayToHSVW(lightControlsArray)
-  })
+  const [color, setColor] = useState<HSVWColor>(arrayToHSVW([0, 0, 0, 0, 0]))
+
+  useEffect(() => {
+    setColor(arrayToHSVW(getValueOrDefault(switchableOutput.lightControls, [0, 0, 0, 0, 0]) as HSVWColorArray))
+  }, [switchableOutput.lightControls])
+
   const ratio = color.brightness
   const formatValueAndUnit = useValueFormatter({ decimals: 0 })
 
