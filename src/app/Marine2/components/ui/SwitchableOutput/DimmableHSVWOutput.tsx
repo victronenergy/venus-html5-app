@@ -13,6 +13,7 @@ import { getValueOrDefault } from "./helpers"
 import {
   arrayToHSVW,
   createPercentage,
+  HSVWColor,
   HSVWColorArray,
   hsvwToArray,
 } from "@victronenergy/mfd-modules/dist/src/utils/hsvw"
@@ -42,8 +43,10 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
   const outputName = getSwitchableOutputNameForDisplay(switchableOutput, props.parentDeviceName)
 
   const variant = switchableOutput.state === 1 ? "on" : "off"
-  const ligtControlsArray = getValueOrDefault(switchableOutput.lightControls, [0, 0, 0, 0, 0]) as HSVWColorArray
-  const color = arrayToHSVW(ligtControlsArray)
+  const [color, setColor] = useState<HSVWColor>(() => {
+    const ligtControlsArray = getValueOrDefault(switchableOutput.lightControls, [0, 0, 0, 0, 0]) as HSVWColorArray
+    return arrayToHSVW(ligtControlsArray)
+  })
   const ratio = color.brightness
 
   const handleClickOnOff = () => {
@@ -209,7 +212,10 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
                 <ColorPicker
                   className="h-full w-full"
                   color={color}
-                  onColorChange={(color) => switchableOutput.updateLightControls(hsvwToArray(color))}
+                  onColorChange={(color) => {
+                    setColor(color)
+                    switchableOutput.updateLightControls(hsvwToArray(color))
+                  }}
                 />
               </div>
             </div>

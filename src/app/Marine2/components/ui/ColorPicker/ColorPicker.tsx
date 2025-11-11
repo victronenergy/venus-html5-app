@@ -206,13 +206,13 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
     let hue = -angle - 35 + 90
     // Normalize to 0-360
     hue = ((hue % 360) + 360) % 360
-    return hue
+    return Math.round(hue)
   }, [])
 
   const calculateBrightness = useCallback(
     (angle: number) => {
       const result = ((angle - bArcStartAngleHT) / (bArcEndAngleHT - bArcStartAngleHT)) * 100
-      return Math.max(0, Math.min(100, result))
+      return Math.round(Math.max(0, Math.min(100, result)))
     },
     [bArcEndAngleHT, bArcStartAngleHT],
   )
@@ -220,7 +220,7 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
   const calculateSaturation = useCallback(
     (angle: number) => {
       const result = ((angle - sArcStartAngleHT) / (sArcEndAngleHT - sArcStartAngleHT)) * 100
-      return 100 - Math.max(0, Math.min(100, result))
+      return Math.round(100 - Math.max(0, Math.min(100, result)))
     },
     [sArcEndAngleHT, sArcStartAngleHT],
   )
@@ -228,7 +228,7 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
   const calculateWhiteLevel = useCallback(
     (angle: number) => {
       const result = ((angle - wArcStartAngleHT) / (wArcEndAngleHT - wArcStartAngleHT)) * 100
-      return 100 - Math.max(0, Math.min(100, result))
+      return Math.round(100 - Math.max(0, Math.min(100, result)))
     },
     [wArcEndAngleHT, wArcStartAngleHT],
   )
