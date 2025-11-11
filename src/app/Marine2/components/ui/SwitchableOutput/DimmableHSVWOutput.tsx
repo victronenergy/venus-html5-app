@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from "react"
+import React, { useCallback, useEffect, useRef, useState } from "react"
 import {
   getSwitchableOutputNameForDisplay,
   SwitchableOutputId,
@@ -43,10 +43,12 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
   const outputName = getSwitchableOutputNameForDisplay(switchableOutput, props.parentDeviceName)
 
   const variant = switchableOutput.state === 1 ? "on" : "off"
-  const [color, setColor] = useState<HSVWColor>(() => {
-    const ligtControlsArray = getValueOrDefault(switchableOutput.lightControls, [0, 0, 0, 0, 0]) as HSVWColorArray
-    return arrayToHSVW(ligtControlsArray)
-  })
+  const [color, setColor] = useState<HSVWColor>(arrayToHSVW([0, 0, 0, 0, 0]))
+
+  useEffect(() => {
+    setColor(arrayToHSVW(getValueOrDefault(switchableOutput.lightControls, [0, 0, 0, 0, 0]) as HSVWColorArray))
+  }, [switchableOutput.lightControls])
+
   const ratio = color.brightness
 
   const handleClickOnOff = () => {
