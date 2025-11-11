@@ -417,6 +417,7 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
           fill="transparent"
           stroke="white" // TODO: use theme color??
           strokeWidth={handleBorderSize}
+          pointerEvents="none"
         />
         {/* Brightness handle */}
         <circle
@@ -427,6 +428,7 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
           fill="rgba(var(--c-victron-blue-rgb), 1.0)"
           stroke="white" // TODO: use theme color??
           strokeWidth={handleBorderSize}
+          pointerEvents="none"
         />
         {/* Saturation handle */}
         <circle
@@ -437,6 +439,7 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
           fill="transparent" // TODO: or derive color from the bg?
           stroke="white" // TODO: use theme color??
           strokeWidth={handleBorderSize}
+          pointerEvents="none"
         />
         {/* White level handle */}
         <circle
@@ -447,6 +450,7 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
           fill="rgba(var(--c-victron-blue-rgb), 1.0)"
           stroke="white" // TODO: use theme color??
           strokeWidth={handleBorderSize}
+          pointerEvents="none"
         />
       </svg>
     </div>
