@@ -9,21 +9,23 @@ function polarToCartesian(cx: number, cy: number, r: number, angleDeg: number) {
 }
 
 /**
- * Describe a thick ring arc with integrated circular caps as a single closed path.
+ * Describe a thick ring arc with optionally integrated circular caps as a single closed path.
  *
  * - cx, cy          center of circle
  * - innerR, outerR  inner and outer radius (outerR > innerR)
  * - startAngle/endAngle in degrees (0 = top, increases clockwise in this helper)
+ * - includeCaps.    to round the arc with half circles
  *
  * Returns an SVG path "d" string.
  */
-function describeRoundedArc(
+function describeArc(
   cx: number,
   cy: number,
   innerR: number,
   outerR: number,
   startAngle: number,
   endAngle: number,
+  includeCaps: boolean,
 ) {
   // normalize and compute delta in (0, 360]
   let delta = (endAngle - startAngle) % 360
@@ -45,14 +47,25 @@ function describeRoundedArc(
   // 3) End cap: arc of radius capR from endOuter -> endInner (half-circle)
   // 4) Inner arc: endInner -> startInner (sweep = 0, reverse direction)
   // 5) Start cap: arc of radius capR from startInner -> startOuter (half-circle)
-  const d = [
-    `M ${startOuter.x} ${startOuter.y}`,
-    `A ${outerR} ${outerR} 0 ${largeArcFlag} 1 ${endOuter.x} ${endOuter.y}`,
-    `A ${capR} ${capR} 0 0 1 ${endInner.x} ${endInner.y}`,
-    `A ${innerR} ${innerR} 0 ${largeArcFlag} 0 ${startInner.x} ${startInner.y}`,
-    `A ${capR} ${capR} 0 0 1 ${startOuter.x} ${startOuter.y}`,
-    "Z",
-  ].join(" ")
+  let d = undefined
+  if (includeCaps) {
+    d = [
+      `M ${startOuter.x} ${startOuter.y}`,
+      `A ${outerR} ${outerR} 0 ${largeArcFlag} 1 ${endOuter.x} ${endOuter.y}`,
+      `A ${capR} ${capR} 0 0 1 ${endInner.x} ${endInner.y}`,
+      `A ${innerR} ${innerR} 0 ${largeArcFlag} 0 ${startInner.x} ${startInner.y}`,
+      `A ${capR} ${capR} 0 0 1 ${startOuter.x} ${startOuter.y}`,
+      "Z",
+    ].join(" ")
+  } else {
+    d = [
+      `M ${startOuter.x} ${startOuter.y}`,
+      `A ${outerR} ${outerR} 0 ${largeArcFlag} 1 ${endOuter.x} ${endOuter.y}`,
+      `L ${endInner.x} ${endInner.y}`,
+      `A ${innerR} ${innerR} 0 ${largeArcFlag} 0 ${startInner.x} ${startInner.y}`,
+      "Z",
+    ].join(" ")
+  }
 
   return d
 }
@@ -99,27 +112,28 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
   const bArcEndAngle = 360 - 50
   const bArcStartAngleHT = bArcStartAngle - angularOffset
   const bArcEndAngleHT = bArcEndAngle + angularOffset
-  const brightnessArcPath = describeRoundedArc(cX, cY, arcInnerR, arcOuterR, bArcStartAngle, bArcEndAngle)
-  const brightnessFillArcPath = describeRoundedArc(
+  const brightnessArcPath = describeArc(cX, cY, arcInnerR, arcOuterR, bArcStartAngle, bArcEndAngle, true)
+  const brightnessFillArcPath = describeArc(
     cX,
     cY,
     arcInnerR,
     arcOuterR,
     bArcStartAngle,
     bArcStartAngle + (localColor.brightness / 100) * (bArcEndAngle - bArcStartAngle),
+    true,
   )
 
   const sArcStartAngle = 0 + 50
   const sArcEndAngle = 180 - 50
   const sArcStartAngleHT = sArcStartAngle - angularOffset
   const sArcEndAngleHT = sArcEndAngle + angularOffset
-  const saturationArcPath = describeRoundedArc(cX, cY, arcInnerR, arcOuterR, sArcStartAngle, sArcEndAngle)
+  const saturationArcPath = describeArc(cX, cY, arcInnerR, arcOuterR, sArcStartAngle, sArcEndAngle, true)
 
   const wArcStartAngle = 180 - 30
   const wArcEndAngle = 180 + 30
   const wArcStartAngleHT = wArcStartAngle - angularOffset
   const wArcEndAngleHT = wArcEndAngle + angularOffset
-  const whiteLevelArcPath = describeRoundedArc(cX, cY, arcInnerR, arcOuterR, wArcStartAngle, wArcEndAngle)
+  const whiteLevelArcPath = describeArc(cX, cY, arcInnerR, arcOuterR, wArcStartAngle, wArcEndAngle, true)
 
   // Calculate handle position on the hue ring
   const hueRingHandleSize = hueRingThickness / 2
@@ -375,13 +389,24 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
       >
         {/* Selected color circle */}
         <circle cx={cX} cy={cY} r={centerCircleRadius} fill={hsvToHsl(localColor.hue, localColor.saturation, 100)} />
+        {/* Hue ring gradient */}
+        {Array.from({ length: 360 }, (_, i) => {
+          const displayAngle = (-i - 35 + 90 + 360) % 360
+          return (
+            <path
+              key={`hue-${i}`}
+              d={describeArc(cX, cY, hueRingInnerRadius, hueRingOuterRadius, displayAngle, displayAngle + 1, false)}
+              fill={`hsl(${i}, 100%, 50%)`}
+            />
+          )
+        })}
         {/* Hue ring */}
         <circle
           cx={cX}
           cy={cY}
           r={hueRingRadius}
           fill="none"
-          stroke="tomato"
+          stroke="none"
           strokeWidth={hueRingOuterRadius - hueRingInnerRadius}
           onMouseDown={handleMouseDown}
           pointerEvents="all"
@@ -408,11 +433,45 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
           onMouseDown={handleMouseDown}
           pointerEvents="all"
         />
+        {/* Right arc gradient caps */}
+        {(() => {
+          const startCapX = cX + arcR * Math.sin((sArcStartAngle * Math.PI) / 180)
+          const startCapY = cY + arcR * Math.cos((sArcStartAngle * Math.PI) / 180)
+          const endCapX = cX + arcR * Math.sin((sArcEndAngle * Math.PI) / 180)
+          const endCapY = cY + arcR * Math.cos((sArcEndAngle * Math.PI) / 180)
+          const capRadius = (arcOuterR - arcInnerR) / 2
+          return (
+            <>
+              <circle cx={startCapX} cy={startCapY} r={capRadius} fill={hsvToHsl(localColor.hue, 0, 100)} />
+              <circle cx={endCapX} cy={endCapY} r={capRadius} fill={hsvToHsl(localColor.hue, 100, 100)} />
+            </>
+          )
+        })()}
+        {/* Right arc gradient background */}
+        {(() => {
+          const totalAngle = sArcEndAngle - sArcStartAngle
+          const segmentCount = Math.ceil(totalAngle)
+
+          return Array.from({ length: segmentCount }, (_, i) => {
+            const t = i / segmentCount
+            const startAngle = sArcStartAngle + t * totalAngle
+            const endAngle = sArcStartAngle + ((i + 1) / segmentCount) * totalAngle
+            const saturation = 100 - t * 100
+
+            return (
+              <path
+                key={`sat-${i}`}
+                d={describeArc(cX, cY, arcInnerR, arcOuterR, startAngle, endAngle, false)}
+                fill={hsvToHsl(localColor.hue, saturation, 100)}
+              />
+            )
+          })
+        })()}
         {/* Right arc - Saturation */}
         <path
           d={saturationArcPath}
-          fill="tomato"
-          stroke="black"
+          fill="none"
+          stroke="none"
           strokeWidth={0}
           strokeLinejoin="round"
           onMouseDown={handleMouseDown}
