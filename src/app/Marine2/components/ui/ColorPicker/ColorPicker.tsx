@@ -266,13 +266,18 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
   )
 
   // Get mouse event coordinates in the SVG view box coodinate system
-  const getSVGCoordinates = useCallback((event: React.MouseEvent<SVGElement> | MouseEvent) => {
+  const getSVGCoordinates = useCallback((event: React.MouseEvent<SVGElement> | React.TouchEvent<SVGElement>) => {
     if (!svgRef.current) return null
     const svg = svgRef.current
 
     const pt = svg.createSVGPoint()
-    pt.x = event.clientX
-    pt.y = event.clientY
+    if ("touches" in event) {
+      pt.x = event.touches[0].clientX
+      pt.y = event.touches[0].clientY
+    } else {
+      pt.x = event.clientX
+      pt.y = event.clientY
+    }
 
     const ctm = svg.getScreenCTM()
     if (!ctm) return null
@@ -282,8 +287,8 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
     return { x: svgP.x, y: svgP.y }
   }, [])
 
-  const handleMouseDown = useCallback(
-    (event: React.MouseEvent<SVGElement>) => {
+  const handlePress = useCallback(
+    (event: React.MouseEvent<SVGElement> | React.TouchEvent<SVGElement>) => {
       const coords = getSVGCoordinates(event)
       if (!coords) return
 
@@ -326,8 +331,8 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
     ],
   )
 
-  const handleMouseMove = useCallback(
-    (event: React.MouseEvent<SVGElement>) => {
+  const handleMove = useCallback(
+    (event: React.MouseEvent<SVGElement> | React.TouchEvent<SVGElement>) => {
       const coords = getSVGCoordinates(event)
       if (!coords) return
 
@@ -366,7 +371,7 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
     ],
   )
 
-  const handleMouseUp = useCallback(() => {
+  const handleRelease = useCallback(() => {
     isDraggingHueRef.current = false
     isDraggingBrightnessRef.current = false
     isDraggingSaturationRef.current = false
@@ -385,9 +390,12 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
         viewBox={`0 0 ${width} ${height}`}
         preserveAspectRatio="xMidYMid meet"
         ref={svgRef}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp}
+        onMouseMove={handleMove}
+        onMouseUp={handleRelease}
+        onMouseLeave={handleRelease}
+        onTouchMove={handleMove}
+        onTouchEnd={handleRelease}
+        onTouchCancel={handleRelease}
       >
         {/* Selected color circle */}
         <circle cx={cX} cy={cY} r={centerCircleRadius} fill={hsvToHsl(localColor.hue, localColor.saturation, 100)} />
@@ -420,7 +428,8 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
           fill="none"
           stroke="none"
           strokeWidth={hueRingOuterRadius - hueRingInnerRadius}
-          onMouseDown={handleMouseDown}
+          onMouseDown={handlePress}
+          onTouchStart={handlePress}
           pointerEvents="all"
         />
         {/* Left arc - Brightness */}
@@ -431,7 +440,8 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
           stroke="rgba(var(--c-victron-blue-rgb), 1.0)"
           strokeWidth={arcBorderSize}
           strokeLinejoin="round"
-          onMouseDown={handleMouseDown}
+          onMouseDown={handlePress}
+          onTouchStart={handlePress}
           pointerEvents="all"
         />
         {/* Left arc - Brightness Fill */}
@@ -442,7 +452,8 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
           stroke="rgba(var(--c-victron-blue-rgb), 1.0)"
           strokeWidth={arcBorderSize}
           strokeLinejoin="round"
-          onMouseDown={handleMouseDown}
+          onMouseDown={handlePress}
+          onTouchStart={handlePress}
           pointerEvents="all"
         />
         {/* Right arc gradient caps */}
@@ -486,7 +497,8 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
           stroke="none"
           strokeWidth={0}
           strokeLinejoin="round"
-          onMouseDown={handleMouseDown}
+          onMouseDown={handlePress}
+          onTouchStart={handlePress}
           pointerEvents="all"
         />
         {/* Bottom arc - White level */}
@@ -496,7 +508,8 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
           stroke="black"
           strokeWidth={arcBorderSize}
           strokeLinejoin="round"
-          onMouseDown={handleMouseDown}
+          onMouseDown={handlePress}
+          onTouchStart={handlePress}
           pointerEvents="all"
         />
         {/* Hue handle */}
