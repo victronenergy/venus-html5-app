@@ -169,7 +169,7 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
   const isDraggingWhiteLevelRef = useRef(false)
   const updateTimeoutRef = useRef<NodeJS.Timeout>()
 
-  const updateDimmingValueImmediately = useCallback(
+  const updateColorImmediately = useCallback(
     (color: HSVWColor) => {
       setLocalColor(color)
       onColorChange?.(color)
@@ -177,7 +177,7 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
     [onColorChange],
   )
 
-  const updateDimmingValueDebounced = useCallback(
+  const updateColorDebounced = useCallback(
     (color: HSVWColor) => {
       setLocalColor(color)
       if (updateTimeoutRef.current) {
@@ -200,7 +200,7 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
     }
   }, [])
 
-  // Check if point is within the hue ring
+  // Check if point is within the hue ring or one of the arcs
   const hitTest = useCallback(
     (x: number, y: number) => {
       const dx = x - cX
@@ -292,25 +292,25 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
       if (inHueRing) {
         isDraggingHueRef.current = true
         const newHue = calculateHue(angle)
-        updateDimmingValueImmediately({ ...localColor, hue: createHue(newHue) })
+        updateColorImmediately({ ...localColor, hue: createHue(newHue) })
         event.preventDefault()
       }
       if (inBrightnessArc) {
         isDraggingBrightnessRef.current = true
         const newBrightness = calculateBrightness(angle)
-        updateDimmingValueImmediately({ ...localColor, brightness: createPercentage(newBrightness) })
+        updateColorImmediately({ ...localColor, brightness: createPercentage(newBrightness) })
         event.preventDefault()
       }
       if (inSaturationArc) {
         isDraggingSaturationRef.current = true
         const newSaturation = calculateSaturation(angle)
-        updateDimmingValueImmediately({ ...localColor, saturation: createPercentage(newSaturation) })
+        updateColorImmediately({ ...localColor, saturation: createPercentage(newSaturation) })
         event.preventDefault()
       }
       if (inWhiteLevelArc) {
         isDraggingWhiteLevelRef.current = true
         const newWhiteLevel = calculateWhiteLevel(angle)
-        updateDimmingValueImmediately({ ...localColor, white: createPercentage(newWhiteLevel) })
+        updateColorImmediately({ ...localColor, white: createPercentage(newWhiteLevel) })
         event.preventDefault()
       }
     },
@@ -318,7 +318,7 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
       getSVGCoordinates,
       hitTest,
       calculateHue,
-      updateDimmingValueImmediately,
+      updateColorImmediately,
       localColor,
       calculateBrightness,
       calculateSaturation,
@@ -335,22 +335,22 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
 
       if (isDraggingHueRef.current) {
         const newHue = calculateHue(angle)
-        updateDimmingValueDebounced({ ...color, hue: createHue(newHue) })
+        updateColorDebounced({ ...color, hue: createHue(newHue) })
         event.preventDefault()
       }
       if (isDraggingBrightnessRef.current) {
         const newBrightness = calculateBrightness(angle)
-        updateDimmingValueDebounced({ ...color, brightness: createPercentage(newBrightness) })
+        updateColorDebounced({ ...color, brightness: createPercentage(newBrightness) })
         event.preventDefault()
       }
       if (isDraggingSaturationRef.current) {
         const newSaturation = calculateSaturation(angle)
-        updateDimmingValueDebounced({ ...color, saturation: createPercentage(newSaturation) })
+        updateColorDebounced({ ...color, saturation: createPercentage(newSaturation) })
         event.preventDefault()
       }
       if (isDraggingWhiteLevelRef.current) {
         const newWhiteLevel = calculateWhiteLevel(angle)
-        updateDimmingValueDebounced({ ...color, white: createPercentage(newWhiteLevel) })
+        updateColorDebounced({ ...color, white: createPercentage(newWhiteLevel) })
         event.preventDefault()
       }
     },
@@ -358,7 +358,7 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
       getSVGCoordinates,
       hitTest,
       calculateHue,
-      updateDimmingValueDebounced,
+      updateColorDebounced,
       color,
       calculateBrightness,
       calculateSaturation,
