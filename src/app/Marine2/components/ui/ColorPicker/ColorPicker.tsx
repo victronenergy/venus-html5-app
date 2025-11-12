@@ -375,6 +375,8 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
 
   // console.log(`DEBUG: render ${JSON.stringify(localColor.brightness)}`)
 
+  const gradientDegreesPerStep = 6
+
   return (
     <div className={className}>
       <svg
@@ -390,13 +392,23 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
         {/* Selected color circle */}
         <circle cx={cX} cy={cY} r={centerCircleRadius} fill={hsvToHsl(localColor.hue, localColor.saturation, 100)} />
         {/* Hue ring gradient */}
-        {Array.from({ length: 360 }, (_, i) => {
-          const displayAngle = (-i - 35 + 90 + 360) % 360
+        {Array.from({ length: 360 / gradientDegreesPerStep }, (_, i) => {
+          const hue = i * gradientDegreesPerStep
+          const displayAngle = (-hue - 35 + 90 + 360) % 360
+          const arcSpan = gradientDegreesPerStep / 2
           return (
             <path
-              key={`hue-${i}`}
-              d={describeArc(cX, cY, hueRingInnerRadius, hueRingOuterRadius, displayAngle, displayAngle + 1, false)}
-              fill={`hsl(${i}, 100%, 50%)`}
+              key={`hue-${hue}`}
+              d={describeArc(
+                cX,
+                cY,
+                hueRingInnerRadius,
+                hueRingOuterRadius,
+                displayAngle - arcSpan,
+                displayAngle + arcSpan,
+                false,
+              )}
+              fill={`hsl(${hue}, 100%, 50%)`}
             />
           )
         })}
@@ -450,12 +462,12 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
         {/* Right arc gradient background */}
         {(() => {
           const totalAngle = sArcEndAngle - sArcStartAngle
-          const segmentCount = Math.ceil(totalAngle)
+          const segmentCount = Math.ceil(totalAngle / gradientDegreesPerStep)
 
           return Array.from({ length: segmentCount }, (_, i) => {
-            const t = i / segmentCount
-            const startAngle = sArcStartAngle + t * totalAngle
-            const endAngle = sArcStartAngle + ((i + 1) / segmentCount) * totalAngle
+            const startAngle = sArcStartAngle + i * gradientDegreesPerStep
+            const endAngle = Math.min(startAngle + gradientDegreesPerStep, sArcEndAngle)
+            const t = (startAngle - sArcStartAngle) / totalAngle
             const saturation = 100 - t * 100
 
             return (
