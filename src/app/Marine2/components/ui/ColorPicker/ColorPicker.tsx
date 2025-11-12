@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from "react"
+import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react"
 import { observer } from "mobx-react"
 import { createHue, createPercentage, HSVWColor } from "@victronenergy/mfd-modules/dist/src/utils/hsvw"
 import { hsvToHsl } from "app/Marine2/utils/helpers/color-conversion-routines"
@@ -64,6 +64,13 @@ interface ColorPickerProps {
 }
 
 const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPickerProps) => {
+  // Cache color prop for local re-rendering, notify parent only when ready
+  const [localColor, setLocalColor] = useState(color)
+
+  useLayoutEffect(() => {
+    setLocalColor(color)
+  }, [color])
+
   // Prepare canvas
   const width = 200
   const height = 200
@@ -85,6 +92,7 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
 
   const arcInnerR = hueRingOuterRadius + spacing
   const arcOuterR = arcInnerR + arcThickness
+  const arcR = arcInnerR + arcThickness / 2
   const angularOffset = Math.atan2(arcThickness / 2, (arcInnerR + arcOuterR) / 2) * (180 / Math.PI)
 
   const bArcStartAngle = 180 + 50
@@ -98,7 +106,7 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
     arcInnerR,
     arcOuterR,
     bArcStartAngle,
-    bArcStartAngle + (color.brightness / 100) * (bArcEndAngle - bArcStartAngle),
+    bArcStartAngle + (localColor.brightness / 100) * (bArcEndAngle - bArcStartAngle),
   )
 
   const sArcStartAngle = 0 + 50
@@ -115,30 +123,30 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
 
   // Calculate handle position on the hue ring
   const hueRingHandleSize = hueRingThickness / 2
-  const hueRingHandleAngle = -(color.hue + 35) * (Math.PI / 180)
+  const hueRingHandleAngle = -(localColor.hue + 35) * (Math.PI / 180)
   const hueHandleX = cX + hueRingRadius * Math.cos(hueRingHandleAngle)
   const hueHandleY = cY + hueRingRadius * Math.sin(hueRingHandleAngle)
 
   // Calculate handle position on the brightness arc
   const brightnessHandleSize = arcThickness / 2
   const brightnessHandleAngle =
-    (bArcStartAngle - 90 + (color.brightness / 100) * (bArcEndAngle - bArcStartAngle)) * (Math.PI / 180)
-  const brightnessHandleX = cX + (arcInnerR + arcThickness / 2) * Math.cos(brightnessHandleAngle)
-  const brightnessHandleY = cY + (arcInnerR + arcThickness / 2) * Math.sin(brightnessHandleAngle)
+    (bArcStartAngle - 90 + (localColor.brightness / 100) * (bArcEndAngle - bArcStartAngle)) * (Math.PI / 180)
+  const brightnessHandleX = cX + arcR * Math.cos(brightnessHandleAngle)
+  const brightnessHandleY = cY + arcR * Math.sin(brightnessHandleAngle)
 
   // Calculate handle position on the saturation arc
   const saturationHandleSize = arcThickness / 2
   const saturationHandleAngle =
-    (sArcStartAngle - 90 + ((100 - color.saturation) / 100) * (sArcEndAngle - sArcStartAngle)) * (Math.PI / 180)
-  const saturationHandleX = cX + (arcInnerR + arcThickness / 2) * Math.cos(saturationHandleAngle)
-  const saturationHandleY = cY + (arcInnerR + arcThickness / 2) * Math.sin(saturationHandleAngle)
+    (sArcStartAngle - 90 + ((100 - localColor.saturation) / 100) * (sArcEndAngle - sArcStartAngle)) * (Math.PI / 180)
+  const saturationHandleX = cX + arcR * Math.cos(saturationHandleAngle)
+  const saturationHandleY = cY + arcR * Math.sin(saturationHandleAngle)
 
   // Calculate handle position on the white level arc
   const whiteLevelHandleSize = arcThickness / 2
   const whiteLevelHandleAngle =
-    (wArcStartAngle - 90 + ((100 - color.white) / 100) * (wArcEndAngle - wArcStartAngle)) * (Math.PI / 180)
-  const whiteLevelHandleX = cX + (arcInnerR + arcThickness / 2) * Math.cos(whiteLevelHandleAngle)
-  const whiteLevelHandleY = cY + (arcInnerR + arcThickness / 2) * Math.sin(whiteLevelHandleAngle)
+    (wArcStartAngle - 90 + ((100 - localColor.white) / 100) * (wArcEndAngle - wArcStartAngle)) * (Math.PI / 180)
+  const whiteLevelHandleX = cX + arcR * Math.cos(whiteLevelHandleAngle)
+  const whiteLevelHandleY = cY + arcR * Math.sin(whiteLevelHandleAngle)
 
   const svgRef = useRef<SVGSVGElement>(null)
   const isDraggingHueRef = useRef(false)
@@ -149,6 +157,7 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
 
   const updateDimmingValueImmediately = useCallback(
     (color: HSVWColor) => {
+      setLocalColor(color)
       onColorChange?.(color)
     },
     [onColorChange],
@@ -156,6 +165,7 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
 
   const updateDimmingValueDebounced = useCallback(
     (color: HSVWColor) => {
+      setLocalColor(color)
       if (updateTimeoutRef.current) {
         clearTimeout(updateTimeoutRef.current)
         updateTimeoutRef.current = undefined
@@ -163,10 +173,18 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
 
       updateTimeoutRef.current = setTimeout(() => {
         onColorChange?.(color)
-      }, 10)
+      }, 50)
     },
     [onColorChange],
   )
+
+  useEffect(() => {
+    return () => {
+      if (updateTimeoutRef.current) {
+        clearTimeout(updateTimeoutRef.current)
+      }
+    }
+  }, [])
 
   // Check if point is within the hue ring
   const hitTest = useCallback(
@@ -260,25 +278,25 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
       if (inHueRing) {
         isDraggingHueRef.current = true
         const newHue = calculateHue(angle)
-        updateDimmingValueImmediately({ ...color, hue: createHue(newHue) })
+        updateDimmingValueImmediately({ ...localColor, hue: createHue(newHue) })
         event.preventDefault()
       }
       if (inBrightnessArc) {
         isDraggingBrightnessRef.current = true
         const newBrightness = calculateBrightness(angle)
-        updateDimmingValueImmediately({ ...color, brightness: createPercentage(newBrightness) })
+        updateDimmingValueImmediately({ ...localColor, brightness: createPercentage(newBrightness) })
         event.preventDefault()
       }
       if (inSaturationArc) {
         isDraggingSaturationRef.current = true
         const newSaturation = calculateSaturation(angle)
-        updateDimmingValueImmediately({ ...color, saturation: createPercentage(newSaturation) })
+        updateDimmingValueImmediately({ ...localColor, saturation: createPercentage(newSaturation) })
         event.preventDefault()
       }
       if (inWhiteLevelArc) {
         isDraggingWhiteLevelRef.current = true
         const newWhiteLevel = calculateWhiteLevel(angle)
-        updateDimmingValueImmediately({ ...color, white: createPercentage(newWhiteLevel) })
+        updateDimmingValueImmediately({ ...localColor, white: createPercentage(newWhiteLevel) })
         event.preventDefault()
       }
     },
@@ -287,7 +305,7 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
       hitTest,
       calculateHue,
       updateDimmingValueImmediately,
-      color,
+      localColor,
       calculateBrightness,
       calculateSaturation,
       calculateWhiteLevel,
@@ -341,6 +359,8 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
     isDraggingWhiteLevelRef.current = false
   }, [])
 
+  // console.log(`DEBUG: render ${JSON.stringify(localColor.brightness)}`)
+
   return (
     <div className={className}>
       <svg
@@ -354,7 +374,7 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
         onMouseLeave={handleMouseUp}
       >
         {/* Selected color circle */}
-        <circle cx={cX} cy={cY} r={centerCircleRadius} fill={hsvToHsl(color.hue, color.saturation, 100)} />
+        <circle cx={cX} cy={cY} r={centerCircleRadius} fill={hsvToHsl(localColor.hue, localColor.saturation, 100)} />
         {/* Hue ring */}
         <circle
           cx={cX}
@@ -413,7 +433,7 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
           cx={hueHandleX}
           cy={hueHandleY}
           r={hueRingHandleSize - 3}
-          // fill={hsvToHsl(color.hue, 100, 100)} // TODO: show selected color
+          // fill={hsvToHsl(localColor.hue, 100, 100)} // TODO: show selected color
           fill="transparent"
           stroke="white" // TODO: use theme color??
           strokeWidth={handleBorderSize}
@@ -435,7 +455,7 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
           cx={saturationHandleX}
           cy={saturationHandleY}
           r={saturationHandleSize - handleBorderSize}
-          // fill={hsvToHsl(color.hue, color.saturation, 100)} // TODO: show selected color
+          // fill={hsvToHsl(localColor.hue, localColor.saturation, 100)} // TODO: show selected color
           fill="transparent" // TODO: or derive color from the bg?
           stroke="white" // TODO: use theme color??
           strokeWidth={handleBorderSize}

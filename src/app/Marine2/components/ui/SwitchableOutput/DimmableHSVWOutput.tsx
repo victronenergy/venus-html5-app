@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react"
+import React, { useCallback, useMemo, useRef, useState } from "react"
 import {
   getSwitchingPaneItemNameForDisplay,
   SwitchableOutputId,
@@ -51,11 +51,10 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
   const variant = switchableOutput.state === 1 ? "on" : "off"
   const disabled = isSwitchableOutputDisabled(switchableOutput.status)
   const statusPill = getSwitchableOutputStatusPill(switchableOutput.status, switchableOutput.type)
-  const [color, setColor] = useState<HSVWColor>(arrayToHSVW([0, 0, 0, 0, 0]))
-
-  useEffect(() => {
-    setColor(arrayToHSVW(getValueOrDefault(switchableOutput.lightControls, [0, 0, 0, 0, 0]) as HSVWColorArray))
-  }, [switchableOutput.lightControls])
+  const color = useMemo(
+    () => arrayToHSVW(getValueOrDefault(switchableOutput.lightControls, [0, 0, 0, 0, 0]) as HSVWColorArray),
+    [switchableOutput.lightControls],
+  )
 
   const ratio = color.brightness
   const formatValueAndUnit = useValueFormatter({ decimals: 0 })
@@ -123,6 +122,13 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
       updateTimeoutRef.current = null
     }
   }
+
+  const handleColorChange = useCallback(
+    (color: HSVWColor) => {
+      switchableOutput.updateLightControls(hsvwToArray(color))
+    },
+    [switchableOutput],
+  )
 
   const isInCCTMode = switchableOutput.type === SWITCHABLE_OUTPUT_TYPE.CCT_COLOR_WHEEL
   const [isColorWheelOpen, setIsColorWheelOpen] = useState(false)
@@ -247,14 +253,7 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
             {/* Controls */}
             <div className="relative flex-1 w-full mt-2 mb-2">
               <div className="absolute inset-0 border-2 border-blue-500">
-                <ColorPicker
-                  className="h-full w-full"
-                  color={color}
-                  onColorChange={(color) => {
-                    setColor(color)
-                    switchableOutput.updateLightControls(hsvwToArray(color))
-                  }}
-                />
+                <ColorPicker className="h-full w-full" color={color} onColorChange={handleColorChange} />
               </div>
             </div>
           </Modal.Body>
