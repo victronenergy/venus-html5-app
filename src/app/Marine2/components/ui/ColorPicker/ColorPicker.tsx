@@ -501,10 +501,44 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
           onTouchStart={handlePress}
           pointerEvents="all"
         />
+        {/* Bottom arc gradient caps */}
+        {(() => {
+          const startCapX = cX + arcR * Math.sin((wArcStartAngle * Math.PI) / 180)
+          const startCapY = cY - arcR * Math.cos((wArcStartAngle * Math.PI) / 180)
+          const endCapX = cX + arcR * Math.sin((wArcEndAngle * Math.PI) / 180)
+          const endCapY = cY - arcR * Math.cos((wArcEndAngle * Math.PI) / 180)
+          const capRadius = (arcOuterR - arcInnerR) / 2
+          return (
+            <>
+              <circle cx={startCapX} cy={startCapY} r={capRadius} fill={"black"} />
+              <circle cx={endCapX} cy={endCapY} r={capRadius} fill={"white"} />
+            </>
+          )
+        })()}
+        {/* Bottom arc gradient background */}
+        {(() => {
+          const totalAngle = wArcEndAngle - wArcStartAngle
+          const segmentCount = Math.ceil(totalAngle / gradientDegreesPerStep)
+
+          return Array.from({ length: segmentCount }, (_, i) => {
+            const startAngle = wArcStartAngle + i * gradientDegreesPerStep
+            const endAngle = Math.min(startAngle + gradientDegreesPerStep, wArcEndAngle)
+            const t = (startAngle - wArcStartAngle) / totalAngle
+            const white = t * 100
+
+            return (
+              <path
+                key={`white-${i}`}
+                d={describeArc(cX, cY, arcInnerR, arcOuterR, startAngle, endAngle + gradientDegreesPerStep / 2, false)}
+                fill={hsvToHsl(0, 0, white)}
+              />
+            )
+          })
+        })()}
         {/* Bottom arc - White level */}
         <path
           d={whiteLevelArcPath}
-          fill="tomato"
+          fill="none"
           stroke="black"
           strokeWidth={arcBorderSize}
           strokeLinejoin="round"
