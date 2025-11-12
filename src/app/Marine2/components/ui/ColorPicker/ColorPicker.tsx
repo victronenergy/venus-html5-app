@@ -380,7 +380,7 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
 
   // console.log(`DEBUG: render ${JSON.stringify(localColor.brightness)}`)
 
-  const gradientDegreesPerStep = 6
+  const gradientDegreesPerStep = 1
 
   return (
     <div className={className}>
@@ -413,7 +413,7 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
                 hueRingInnerRadius,
                 hueRingOuterRadius,
                 displayAngle - arcSpan,
-                displayAngle + arcSpan,
+                displayAngle + arcSpan + gradientDegreesPerStep / 2,
                 false,
               )}
               fill={`hsl(${hue}, 100%, 50%)`}
@@ -484,7 +484,7 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
             return (
               <path
                 key={`sat-${i}`}
-                d={describeArc(cX, cY, arcInnerR, arcOuterR, startAngle, endAngle, false)}
+                d={describeArc(cX, cY, arcInnerR, arcOuterR, startAngle, endAngle + gradientDegreesPerStep / 2, false)}
                 fill={hsvToHsl(localColor.hue, saturation, 100)}
               />
             )
