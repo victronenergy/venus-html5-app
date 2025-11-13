@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from "react"
+import React, { useCallback, useEffect, useRef, useState } from "react"
 import {
   getSwitchableOutputNameForDisplay,
   SwitchableOutputId,
@@ -71,10 +71,18 @@ const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProp
 
       updateTimeoutRef.current = setTimeout(() => {
         switchableOutput.updateDimming(percentage)
-      }, 10)
+      }, 50)
     },
     [switchableOutput],
   )
+
+  useEffect(() => {
+    return () => {
+      if (updateTimeoutRef.current) {
+        clearTimeout(updateTimeoutRef.current)
+      }
+    }
+  }, [])
 
   const handlePress = (e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
     setIsDragging(true)
