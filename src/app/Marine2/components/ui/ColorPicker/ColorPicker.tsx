@@ -91,8 +91,8 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
   const cY = height / 2
   const maxRadius = Math.min(width, height) / 2
 
-  // Derive sizes from the canvas size
-  const hueRingThickness = maxRadius * 0.28
+  // Derive sizes from the canvas size to fit the whole picker without any padding/margin
+  const hueRingThickness = maxRadius * 0.29
   const spacing = hueRingThickness * 0.5
   const arcThickness = hueRingThickness * 0.7
   const handleBorderSize = spacing * 0.2
@@ -108,8 +108,8 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
   const arcR = arcInnerR + arcThickness / 2
   const angularOffset = Math.atan2(arcThickness / 2, (arcInnerR + arcOuterR) / 2) * (180 / Math.PI)
 
-  const bArcStartAngle = 180 + 50
-  const bArcEndAngle = 360 - 50
+  const bArcStartAngle = 180 + 54
+  const bArcEndAngle = 360 - 54
   const bArcStartAngleHT = bArcStartAngle - angularOffset
   const bArcEndAngleHT = bArcEndAngle + angularOffset
   const brightnessArcPath = describeArc(cX, cY, arcInnerR, arcOuterR, bArcStartAngle, bArcEndAngle, true)
@@ -123,8 +123,8 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
     true,
   )
 
-  const sArcStartAngle = 0 + 50
-  const sArcEndAngle = 180 - 50
+  const sArcStartAngle = 0 + 54
+  const sArcEndAngle = 180 - 54
   const sArcStartAngleHT = sArcStartAngle - angularOffset
   const sArcEndAngleHT = sArcEndAngle + angularOffset
   const saturationArcPath = describeArc(cX, cY, arcInnerR, arcOuterR, sArcStartAngle, sArcEndAngle, true)
