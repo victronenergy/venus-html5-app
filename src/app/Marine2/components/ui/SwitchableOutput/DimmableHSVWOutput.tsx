@@ -20,8 +20,12 @@ import {
 import { Modal } from "../Modal"
 import CloseIcon from "../../../images/icons/close.svg"
 import FadedText from "../FadedText"
-import ColorPicker from "../ColorPicker/ColorPicker"
-import { hsvToHsl } from "app/Marine2/utils/helpers/color-conversion-routines"
+import ColorPicker, { ColorPickerMode, ColorPickerValidModes } from "../ColorPicker/ColorPicker"
+import {
+  colorTemperatureToDisplayColor,
+  colorHueToDisplayColor,
+} from "app/Marine2/utils/helpers/color-conversion-routines"
+import { SWITCHABLE_OUTPUT_TYPE } from "@victronenergy/mfd-modules/dist/src/utils/constants"
 
 interface DimmableHSVWOutputProps {
   key: string
@@ -31,12 +35,6 @@ interface DimmableHSVWOutputProps {
   parentDeviceName: string
   className?: string
 }
-
-// TODO: Add prop for color mode selection
-// TODO: Add conversion to display selected color in color square
-// TODO: Open/Close color selection popup when square is tapped
-// TODO: Send changed values from color selection popup to MQTT
-// TODO: Implement popup: center wheel, brightness, saturation, white level
 
 const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
   const switchableOutput = useSwitchableOutput(props.tree, props.deviceId, props.outputId)
@@ -123,6 +121,8 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
 
   const [isColorWheelOpen, setIsColorWheelOpen] = useState(false)
 
+  const isInCCTMode = switchableOutput.type === SWITCHABLE_OUTPUT_TYPE.CCT_COLOR_WHEEL
+
   return (
     <div className={classnames("mt-4", props.className)}>
       <div>{outputName}</div>
@@ -190,7 +190,9 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
         <div
           className="w-px-44 h-px-44 rounded-md ml-2"
           style={{
-            backgroundColor: hsvToHsl(color.hue, color.saturation, 100),
+            backgroundColor: isInCCTMode
+              ? colorTemperatureToDisplayColor(color.colorTemperature)
+              : colorHueToDisplayColor(color.hue, color.saturation, 100),
           }}
           onClick={() => setIsColorWheelOpen(true)}
         />
@@ -217,7 +219,13 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
             {/* Controls */}
             <div className="relative flex-1 w-full mt-2 mb-2">
               <div className="absolute inset-0 border-2 border-blue-500">
-                <ColorPicker className="h-full w-full" color={color} onColorChange={handleColorChange} />
+                <ColorPicker
+                  className="h-full w-full"
+                  color={color}
+                  mode={switchableOutput.type as ColorPickerMode}
+                  validModes={switchableOutput.validTypes as ColorPickerValidModes}
+                  onColorChange={handleColorChange}
+                />
               </div>
             </div>
           </Modal.Body>

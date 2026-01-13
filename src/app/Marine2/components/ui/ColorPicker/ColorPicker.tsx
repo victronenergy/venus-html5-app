@@ -1,88 +1,68 @@
 import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react"
 import { observer } from "mobx-react"
-import { createHue, createPercentage, HSVWColor } from "@victronenergy/mfd-modules/dist/src/utils/hsvw"
-import { hsvToHsl } from "app/Marine2/utils/helpers/color-conversion-routines"
+import {
+  createColorTemperature,
+  createHue,
+  createPercentage,
+  HSVWColor,
+} from "@victronenergy/mfd-modules/dist/src/utils/hsvw"
+import {
+  angleToColorHue,
+  angleToColorTemperature,
+  cctColorFunction,
+  colorHueToAngle,
+  colorHueToDisplayColor,
+  colorTemperatureToAngle,
+  colorTemperatureToDisplayColor,
+  rgbColorFunction,
+} from "app/Marine2/utils/helpers/color-conversion-routines"
+import { describeArc } from "app/Marine2/utils/helpers/svg-routines"
+import { SWITCHABLE_OUTPUT_TYPE } from "@victronenergy/mfd-modules/dist/src/utils/constants"
 
-function polarToCartesian(cx: number, cy: number, r: number, angleDeg: number) {
-  const a = ((angleDeg - 90) * Math.PI) / 180
-  return { x: cx + r * Math.cos(a), y: cy + r * Math.sin(a) }
+export type ColorPickerMode =
+  | typeof SWITCHABLE_OUTPUT_TYPE.RGB_COLOR_WHEEL
+  | typeof SWITCHABLE_OUTPUT_TYPE.CCT_COLOR_WHEEL
+  | typeof SWITCHABLE_OUTPUT_TYPE.RGBW_COLOR_WHEEL
+
+export const COLOR_PICKER_MODE_BITMASK = {
+  RGB: 1 << SWITCHABLE_OUTPUT_TYPE.RGB_COLOR_WHEEL,
+  CCT: 1 << SWITCHABLE_OUTPUT_TYPE.CCT_COLOR_WHEEL,
+  RGBW: 1 << SWITCHABLE_OUTPUT_TYPE.RGBW_COLOR_WHEEL,
 }
 
-/**
- * Describe a thick ring arc with optionally integrated circular caps as a single closed path.
- *
- * - cx, cy          center of circle
- * - innerR, outerR  inner and outer radius (outerR > innerR)
- * - startAngle/endAngle in degrees (0 = top, increases clockwise in this helper)
- * - includeCaps.    to round the arc with half circles
- *
- * Returns an SVG path "d" string.
- */
-function describeArc(
-  cx: number,
-  cy: number,
-  innerR: number,
-  outerR: number,
-  startAngle: number,
-  endAngle: number,
-  includeCaps: boolean,
-) {
-  // normalize and compute delta in (0, 360]
-  let delta = (endAngle - startAngle) % 360
-  if (delta < 0) delta += 360
-  // degenerate or full circle guard
-  if (delta === 0) delta = 360
-
-  const largeArcFlag = delta > 180 ? 1 : 0
-  const capR = (outerR - innerR) / 2
-
-  const startOuter = polarToCartesian(cx, cy, outerR, startAngle)
-  const endOuter = polarToCartesian(cx, cy, outerR, endAngle)
-  const endInner = polarToCartesian(cx, cy, innerR, endAngle)
-  const startInner = polarToCartesian(cx, cy, innerR, startAngle)
-
-  // Path:
-  // 1) Move to startOuter
-  // 2) Outer arc: startOuter -> endOuter (sweep = 1)
-  // 3) End cap: arc of radius capR from endOuter -> endInner (half-circle)
-  // 4) Inner arc: endInner -> startInner (sweep = 0, reverse direction)
-  // 5) Start cap: arc of radius capR from startInner -> startOuter (half-circle)
-  let d = undefined
-  if (includeCaps) {
-    d = [
-      `M ${startOuter.x} ${startOuter.y}`,
-      `A ${outerR} ${outerR} 0 ${largeArcFlag} 1 ${endOuter.x} ${endOuter.y}`,
-      `A ${capR} ${capR} 0 0 1 ${endInner.x} ${endInner.y}`,
-      `A ${innerR} ${innerR} 0 ${largeArcFlag} 0 ${startInner.x} ${startInner.y}`,
-      `A ${capR} ${capR} 0 0 1 ${startOuter.x} ${startOuter.y}`,
-      "Z",
-    ].join(" ")
-  } else {
-    d = [
-      `M ${startOuter.x} ${startOuter.y}`,
-      `A ${outerR} ${outerR} 0 ${largeArcFlag} 1 ${endOuter.x} ${endOuter.y}`,
-      `L ${endInner.x} ${endInner.y}`,
-      `A ${innerR} ${innerR} 0 ${largeArcFlag} 0 ${startInner.x} ${startInner.y}`,
-      "Z",
-    ].join(" ")
-  }
-
-  return d
-}
+export type ColorPickerValidModes = (typeof COLOR_PICKER_MODE_BITMASK)[keyof typeof COLOR_PICKER_MODE_BITMASK]
 
 interface ColorPickerProps {
   color: HSVWColor
+  mode: ColorPickerMode
+  validModes: ColorPickerValidModes
   onColorChange?: (color: HSVWColor) => void
   className?: string
 }
 
-const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPickerProps) => {
-  // Cache color prop for local re-rendering, notify parent only when ready
+const ColorPicker = observer(({ color, mode, validModes, onColorChange, className = "" }: ColorPickerProps) => {
+  // Cache color prop for local re-rendering
   const [localColor, setLocalColor] = useState(color)
+  // Cache color picker modep prop for local re-rendering
+  const [localMode, setLocalMode] = useState<ColorPickerMode>(mode)
+  // Cache angle on CCT/RGB selection ring when dragging around to know where to place incoming CCT values
+  const [mainHandleAngle, setMainHandleAngle] = useState(0)
 
   useLayoutEffect(() => {
     setLocalColor(color)
   }, [color])
+
+  useLayoutEffect(() => {
+    setLocalMode(mode)
+  }, [mode])
+
+  const showsModeSwitcher =
+    ((validModes & COLOR_PICKER_MODE_BITMASK.RGB) !== 0 || (validModes & COLOR_PICKER_MODE_BITMASK.RGBW) !== 0) &&
+    (validModes & COLOR_PICKER_MODE_BITMASK.CCT) !== 0
+  const showsWhiteLevelSlider = localMode === SWITCHABLE_OUTPUT_TYPE.RGBW_COLOR_WHEEL
+  const isInCCTMode = localMode === SWITCHABLE_OUTPUT_TYPE.CCT_COLOR_WHEEL
+  const isInRGBMode =
+    localMode === SWITCHABLE_OUTPUT_TYPE.RGB_COLOR_WHEEL || localMode === SWITCHABLE_OUTPUT_TYPE.RGBW_COLOR_WHEEL
 
   // Prepare canvas
   const width = 200
@@ -92,18 +72,18 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
   const maxRadius = Math.min(width, height) / 2
 
   // Derive sizes from the canvas size to fit the whole picker without any padding/margin
-  const hueRingThickness = maxRadius * 0.29
-  const spacing = hueRingThickness * 0.5
-  const arcThickness = hueRingThickness * 0.7
+  const mainRingThickness = maxRadius * 0.27
+  const spacing = mainRingThickness * 0.5
+  const arcThickness = mainRingThickness * 0.7
   const handleBorderSize = spacing * 0.2
   const arcBorderSize = handleBorderSize * 0.5
 
-  const centerCircleRadius = maxRadius * 0.2
-  const hueRingInnerRadius = centerCircleRadius + spacing
-  const hueRingRadius = hueRingInnerRadius + hueRingThickness / 2
-  const hueRingOuterRadius = hueRingInnerRadius + hueRingThickness
+  const centerCircleRadius = maxRadius * 0.25
+  const mainRingInnerRadius = centerCircleRadius + spacing
+  const mainRingRadius = mainRingInnerRadius + mainRingThickness / 2
+  const mainRingOuterRadius = mainRingInnerRadius + mainRingThickness
 
-  const arcInnerR = hueRingOuterRadius + spacing
+  const arcInnerR = mainRingOuterRadius + spacing
   const arcOuterR = arcInnerR + arcThickness
   const arcR = arcInnerR + arcThickness / 2
   const angularOffset = Math.atan2(arcThickness / 2, (arcInnerR + arcOuterR) / 2) * (180 / Math.PI)
@@ -135,11 +115,16 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
   const wArcEndAngleHT = wArcEndAngle + angularOffset
   const whiteLevelArcPath = describeArc(cX, cY, arcInnerR, arcOuterR, wArcStartAngle, wArcEndAngle, true)
 
-  // Calculate handle position on the hue ring
-  const hueRingHandleSize = hueRingThickness / 2
-  const hueRingHandleAngle = -(localColor.hue + 35) * (Math.PI / 180)
-  const hueHandleX = cX + hueRingRadius * Math.cos(hueRingHandleAngle)
-  const hueHandleY = cY + hueRingRadius * Math.sin(hueRingHandleAngle)
+  // Calculate handle position on the main ring
+  const mainRingHandleSize = mainRingThickness / 2
+  let mainRingHandleAngle
+  if (isInCCTMode) {
+    mainRingHandleAngle = colorTemperatureToAngle(localColor.colorTemperature, mainHandleAngle) * (Math.PI / 180)
+  } else {
+    mainRingHandleAngle = colorHueToAngle(localColor.hue) * (Math.PI / 180)
+  }
+  const mainHandleX = cX + mainRingRadius * Math.cos(mainRingHandleAngle)
+  const mainHandleY = cY + mainRingRadius * Math.sin(mainRingHandleAngle)
 
   // Calculate handle position on the brightness arc
   const brightnessHandleSize = arcThickness / 2
@@ -162,12 +147,24 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
   const whiteLevelHandleX = cX + arcR * Math.cos(whiteLevelHandleAngle)
   const whiteLevelHandleY = cY + arcR * Math.sin(whiteLevelHandleAngle)
 
+  // Calculate rgb / cct switch position
+  const modeSwitchHandleSize = mainRingHandleSize
+  const modeSwitchRadius = arcOuterR - modeSwitchHandleSize
+  const rgbwModeSwitchAngle = (-90 - 15) * (Math.PI / 180)
+  const cctModeSwitchAngle = (-90 + 15) * (Math.PI / 180)
+  const rgbwModeHandleX = cX + modeSwitchRadius * Math.cos(rgbwModeSwitchAngle)
+  const rgbwModeHandleY = cY + modeSwitchRadius * Math.sin(rgbwModeSwitchAngle)
+  const cctModeHandleX = cX + modeSwitchRadius * Math.cos(cctModeSwitchAngle)
+  const cctModeHandleY = cY + modeSwitchRadius * Math.sin(cctModeSwitchAngle)
+
   const svgRef = useRef<SVGSVGElement>(null)
   const isDraggingHueRef = useRef(false)
   const isDraggingBrightnessRef = useRef(false)
   const isDraggingSaturationRef = useRef(false)
   const isDraggingWhiteLevelRef = useRef(false)
   const updateTimeoutRef = useRef<NodeJS.Timeout>()
+
+  const gradientDegreesPerStep = 1
 
   const updateColorImmediately = useCallback(
     (color: HSVWColor) => {
@@ -209,7 +206,7 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
       const distance = Math.sqrt(dx * dx + dy * dy)
       // Compute angle, 0 degrees on 12 hours, clockwise rotation
       const angle = (Math.atan2(dx, -dy) * (180 / Math.PI) + 360) % 360
-      const inHueRing = distance >= hueRingInnerRadius && distance <= hueRingOuterRadius + hueRingHandleSize
+      const inHueRing = distance >= mainRingInnerRadius && distance <= mainRingOuterRadius + mainRingHandleSize
       const inArcRange = distance >= arcInnerR && distance <= arcOuterR
       const inBrightnessArc = inArcRange && angle >= bArcStartAngleHT && angle <= bArcEndAngleHT
       const inSaturationArc = inArcRange && angle >= sArcStartAngleHT && angle <= sArcEndAngleHT
@@ -219,9 +216,9 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
     [
       cX,
       cY,
-      hueRingInnerRadius,
-      hueRingOuterRadius,
-      hueRingHandleSize,
+      mainRingInnerRadius,
+      mainRingOuterRadius,
+      mainRingHandleSize,
       arcInnerR,
       arcOuterR,
       bArcStartAngleHT,
@@ -234,11 +231,11 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
   )
 
   const calculateHue = useCallback((angle: number) => {
-    // Convert to hue (0-360), accounting for rotation offset
-    let hue = -angle - 35 + 90
-    // Normalize to 0-360
-    hue = ((hue % 360) + 360) % 360
-    return Math.round(hue)
+    return Math.round(angleToColorHue(angle))
+  }, [])
+
+  const calculateColorTemperature = useCallback((angle: number) => {
+    return Math.round(angleToColorTemperature(angle))
   }, [])
 
   const calculateBrightness = useCallback(
@@ -295,10 +292,19 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
       const { inHueRing, inBrightnessArc, inSaturationArc, inWhiteLevelArc, angle } = hitTest(coords.x, coords.y)
 
       if (inHueRing) {
-        isDraggingHueRef.current = true
-        const newHue = calculateHue(angle)
-        updateColorImmediately({ ...localColor, hue: createHue(newHue) })
-        event.preventDefault()
+        setMainHandleAngle(angle)
+        if (isInCCTMode) {
+          isDraggingHueRef.current = true
+          const newTemperature = calculateColorTemperature(angle)
+          updateColorImmediately({ ...localColor, colorTemperature: createColorTemperature(newTemperature) })
+          event.preventDefault()
+        }
+        if (isInRGBMode) {
+          isDraggingHueRef.current = true
+          const newHue = calculateHue(angle)
+          updateColorImmediately({ ...localColor, hue: createHue(newHue) })
+          event.preventDefault()
+        }
       }
       if (inBrightnessArc) {
         isDraggingBrightnessRef.current = true
@@ -322,9 +328,12 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
     [
       getSVGCoordinates,
       hitTest,
-      calculateHue,
+      isInCCTMode,
+      isInRGBMode,
+      calculateColorTemperature,
       updateColorImmediately,
       localColor,
+      calculateHue,
       calculateBrightness,
       calculateSaturation,
       calculateWhiteLevel,
@@ -339,9 +348,17 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
       const { angle } = hitTest(coords.x, coords.y)
 
       if (isDraggingHueRef.current) {
-        const newHue = calculateHue(angle)
-        updateColorDebounced({ ...color, hue: createHue(newHue) })
-        event.preventDefault()
+        setMainHandleAngle(angle)
+        if (isInCCTMode) {
+          const newTemperature = calculateColorTemperature(angle)
+          updateColorDebounced({ ...localColor, colorTemperature: createColorTemperature(newTemperature) })
+          event.preventDefault()
+        }
+        if (isInRGBMode) {
+          const newHue = calculateHue(angle)
+          updateColorDebounced({ ...color, hue: createHue(newHue) })
+          event.preventDefault()
+        }
       }
       if (isDraggingBrightnessRef.current) {
         const newBrightness = calculateBrightness(angle)
@@ -362,8 +379,12 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
     [
       getSVGCoordinates,
       hitTest,
-      calculateHue,
+      isInCCTMode,
+      isInRGBMode,
+      calculateColorTemperature,
       updateColorDebounced,
+      localColor,
+      calculateHue,
       color,
       calculateBrightness,
       calculateSaturation,
@@ -378,9 +399,19 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
     isDraggingWhiteLevelRef.current = false
   }, [])
 
-  // console.log(`DEBUG: render ${JSON.stringify(localColor.brightness)}`)
+  const switchToRGBWMode = useCallback(() => {
+    if (validModes & COLOR_PICKER_MODE_BITMASK.RGBW) {
+      setLocalMode(SWITCHABLE_OUTPUT_TYPE.RGBW_COLOR_WHEEL)
+    } else {
+      setLocalMode(SWITCHABLE_OUTPUT_TYPE.RGB_COLOR_WHEEL)
+    }
+  }, [validModes])
 
-  const gradientDegreesPerStep = 1
+  const switchToCCTMode = useCallback(() => {
+    if (validModes & COLOR_PICKER_MODE_BITMASK.CCT) {
+      setLocalMode(SWITCHABLE_OUTPUT_TYPE.CCT_COLOR_WHEEL)
+    }
+  }, [validModes])
 
   return (
     <div className={className}>
@@ -397,42 +428,87 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
         onTouchEnd={handleRelease}
         onTouchCancel={handleRelease}
       >
-        {/* Selected color circle */}
-        <circle cx={cX} cy={cY} r={centerCircleRadius} fill={hsvToHsl(localColor.hue, localColor.saturation, 100)} />
-        {/* Hue ring gradient */}
-        {Array.from({ length: 360 / gradientDegreesPerStep }, (_, i) => {
-          const hue = i * gradientDegreesPerStep
-          const displayAngle = (-hue - 35 + 90 + 360) % 360
-          const arcSpan = gradientDegreesPerStep / 2
-          return (
-            <path
-              key={`hue-${hue}`}
-              d={describeArc(
-                cX,
-                cY,
-                hueRingInnerRadius,
-                hueRingOuterRadius,
-                displayAngle - arcSpan,
-                displayAngle + arcSpan + gradientDegreesPerStep / 2,
-                false,
-              )}
-              fill={`hsl(${hue}, 100%, 50%)`}
-            />
-          )
-        })}
-        {/* Hue ring */}
+        {/* RGBW Mode Switch Gradient */}
+        {showsModeSwitcher &&
+          generateGradientRing(
+            rgbwModeHandleX,
+            rgbwModeHandleY,
+            modeSwitchHandleSize * 0.5,
+            modeSwitchHandleSize * 0.9,
+            180,
+            rgbColorFunction,
+          )}
+        {/* RGB Mode Switch Selection Ring */}
+        {showsModeSwitcher && (
+          <circle
+            cx={rgbwModeHandleX}
+            cy={rgbwModeHandleY}
+            r={modeSwitchHandleSize}
+            fill="transparent"
+            stroke="rgba(var(--c-victron-blue-rgb), 1.0)"
+            strokeWidth={isInRGBMode ? arcBorderSize : 0}
+            onMouseDown={switchToRGBWMode}
+            onTouchStart={switchToRGBWMode}
+            pointerEvents="all"
+          />
+        )}
+        {/* RGBW Mode Switch Gradient */}
+        {showsModeSwitcher &&
+          generateGradientRing(
+            cctModeHandleX,
+            cctModeHandleY,
+            modeSwitchHandleSize * 0.5,
+            modeSwitchHandleSize * 0.9,
+            180,
+            cctColorFunction,
+          )}
+        {/* CCT Mode Switch Selection Ring */}
+        {showsModeSwitcher && (
+          <circle
+            cx={cctModeHandleX}
+            cy={cctModeHandleY}
+            r={modeSwitchHandleSize}
+            fill="transparent"
+            stroke="rgba(var(--c-victron-blue-rgb), 1.0)"
+            strokeWidth={isInCCTMode ? arcBorderSize : 0}
+            onMouseDown={switchToCCTMode}
+            onTouchStart={switchToCCTMode}
+            pointerEvents="all"
+          />
+        )}
+        {/* Selected Color Circle */}
         <circle
           cx={cX}
           cy={cY}
-          r={hueRingRadius}
+          r={centerCircleRadius}
+          fill={
+            isInCCTMode
+              ? colorTemperatureToDisplayColor(localColor.colorTemperature)
+              : colorHueToDisplayColor(localColor.hue, localColor.saturation, 100)
+          }
+        />
+        {/* Main Ring Gradient */}
+        {generateGradientRing(
+          cX,
+          cY,
+          mainRingInnerRadius,
+          mainRingOuterRadius,
+          360 / gradientDegreesPerStep,
+          isInRGBMode ? rgbColorFunction : cctColorFunction,
+        )}
+        {/* Main Ring Handle */}
+        <circle
+          cx={cX}
+          cy={cY}
+          r={mainRingRadius}
           fill="none"
           stroke="none"
-          strokeWidth={hueRingOuterRadius - hueRingInnerRadius}
+          strokeWidth={mainRingOuterRadius - mainRingInnerRadius}
           onMouseDown={handlePress}
           onTouchStart={handlePress}
           pointerEvents="all"
         />
-        {/* Left arc - Brightness */}
+        {/* Left Arc - Brightness Background with Touch */}
         <path
           d={brightnessArcPath}
           // TODO: this is a super hacky way to directly refer to the theme color, simplify
@@ -444,7 +520,7 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
           onTouchStart={handlePress}
           pointerEvents="all"
         />
-        {/* Left arc - Brightness Fill */}
+        {/* Left Arc - Brightness with Touch */}
         <path
           d={brightnessFillArcPath}
           // TODO: this is a super hacky way to directly refer to the theme color, simplify
@@ -456,143 +532,210 @@ const ColorPicker = observer(({ color, onColorChange, className = "" }: ColorPic
           onTouchStart={handlePress}
           pointerEvents="all"
         />
-        {/* Right arc gradient caps */}
-        {(() => {
-          const startCapX = cX + arcR * Math.sin((sArcStartAngle * Math.PI) / 180)
-          const startCapY = cY + arcR * Math.cos((sArcStartAngle * Math.PI) / 180)
-          const endCapX = cX + arcR * Math.sin((sArcEndAngle * Math.PI) / 180)
-          const endCapY = cY + arcR * Math.cos((sArcEndAngle * Math.PI) / 180)
-          const capRadius = (arcOuterR - arcInnerR) / 2
-          return (
-            <>
-              <circle cx={startCapX} cy={startCapY} r={capRadius} fill={hsvToHsl(localColor.hue, 0, 100)} />
-              <circle cx={endCapX} cy={endCapY} r={capRadius} fill={hsvToHsl(localColor.hue, 100, 100)} />
-            </>
-          )
-        })()}
-        {/* Right arc gradient background */}
-        {(() => {
-          const totalAngle = sArcEndAngle - sArcStartAngle
-          const segmentCount = Math.ceil(totalAngle / gradientDegreesPerStep)
-
-          return Array.from({ length: segmentCount }, (_, i) => {
-            const startAngle = sArcStartAngle + i * gradientDegreesPerStep
-            const endAngle = Math.min(startAngle + gradientDegreesPerStep, sArcEndAngle)
-            const t = (startAngle - sArcStartAngle) / totalAngle
-            const saturation = 100 - t * 100
-
+        {/* Right Arc Gradient Caps */}
+        {isInRGBMode &&
+          (() => {
+            const startCapX = cX + arcR * Math.sin((sArcStartAngle * Math.PI) / 180)
+            const startCapY = cY + arcR * Math.cos((sArcStartAngle * Math.PI) / 180)
+            const endCapX = cX + arcR * Math.sin((sArcEndAngle * Math.PI) / 180)
+            const endCapY = cY + arcR * Math.cos((sArcEndAngle * Math.PI) / 180)
+            const capRadius = (arcOuterR - arcInnerR) / 2
+            return (
+              <>
+                <circle
+                  cx={startCapX}
+                  cy={startCapY}
+                  r={capRadius}
+                  fill={colorHueToDisplayColor(localColor.hue, 0, 100)}
+                />
+                <circle
+                  cx={endCapX}
+                  cy={endCapY}
+                  r={capRadius}
+                  fill={colorHueToDisplayColor(localColor.hue, 100, 100)}
+                />
+              </>
+            )
+          })()}
+        {/* Right Arc Gradient Background */}
+        {isInRGBMode &&
+          generateGradientArc(
+            cX,
+            cY,
+            arcInnerR,
+            arcOuterR,
+            sArcStartAngle,
+            sArcEndAngle,
+            gradientDegreesPerStep,
+            (t: number) => colorHueToDisplayColor(localColor.hue, 100 - t * 100, 100),
+          )}
+        {/* Right Arc - Saturation Touch Area */}
+        {isInRGBMode &&
+          (() => {
             return (
               <path
-                key={`sat-${i}`}
-                d={describeArc(cX, cY, arcInnerR, arcOuterR, startAngle, endAngle + gradientDegreesPerStep / 2, false)}
-                fill={hsvToHsl(localColor.hue, saturation, 100)}
+                d={saturationArcPath}
+                fill="none"
+                stroke="none"
+                strokeWidth={0}
+                strokeLinejoin="round"
+                onMouseDown={handlePress}
+                onTouchStart={handlePress}
+                pointerEvents="all"
               />
             )
-          })
-        })()}
-        {/* Right arc - Saturation */}
-        <path
-          d={saturationArcPath}
-          fill="none"
-          stroke="none"
-          strokeWidth={0}
-          strokeLinejoin="round"
-          onMouseDown={handlePress}
-          onTouchStart={handlePress}
-          pointerEvents="all"
-        />
-        {/* Bottom arc gradient caps */}
-        {(() => {
-          const startCapX = cX + arcR * Math.sin((wArcStartAngle * Math.PI) / 180)
-          const startCapY = cY - arcR * Math.cos((wArcStartAngle * Math.PI) / 180)
-          const endCapX = cX + arcR * Math.sin((wArcEndAngle * Math.PI) / 180)
-          const endCapY = cY - arcR * Math.cos((wArcEndAngle * Math.PI) / 180)
-          const capRadius = (arcOuterR - arcInnerR) / 2
-          return (
-            <>
-              <circle cx={startCapX} cy={startCapY} r={capRadius} fill={"black"} />
-              <circle cx={endCapX} cy={endCapY} r={capRadius} fill={"white"} />
-            </>
-          )
-        })()}
-        {/* Bottom arc gradient background */}
-        {(() => {
-          const totalAngle = wArcEndAngle - wArcStartAngle
-          const segmentCount = Math.ceil(totalAngle / gradientDegreesPerStep)
-
-          return Array.from({ length: segmentCount }, (_, i) => {
-            const startAngle = wArcStartAngle + i * gradientDegreesPerStep
-            const endAngle = Math.min(startAngle + gradientDegreesPerStep, wArcEndAngle)
-            const t = (startAngle - wArcStartAngle) / totalAngle
-            const white = t * 100
-
+          })()}
+        {/* Bottom Arc Gradient Caps */}
+        {showsWhiteLevelSlider &&
+          (() => {
+            const startCapX = cX + arcR * Math.sin((wArcStartAngle * Math.PI) / 180)
+            const startCapY = cY - arcR * Math.cos((wArcStartAngle * Math.PI) / 180)
+            const endCapX = cX + arcR * Math.sin((wArcEndAngle * Math.PI) / 180)
+            const endCapY = cY - arcR * Math.cos((wArcEndAngle * Math.PI) / 180)
+            const capRadius = (arcOuterR - arcInnerR) / 2
             return (
-              <path
-                key={`white-${i}`}
-                d={describeArc(cX, cY, arcInnerR, arcOuterR, startAngle, endAngle + gradientDegreesPerStep / 2, false)}
-                fill={hsvToHsl(0, 0, white)}
-              />
+              <>
+                <circle cx={startCapX} cy={startCapY} r={capRadius} fill={"black"} />
+                <circle cx={endCapX} cy={endCapY} r={capRadius} fill={"white"} />
+              </>
             )
-          })
-        })()}
-        {/* Bottom arc - White level */}
-        <path
-          d={whiteLevelArcPath}
-          fill="none"
-          stroke="black"
-          strokeWidth={arcBorderSize}
-          strokeLinejoin="round"
-          onMouseDown={handlePress}
-          onTouchStart={handlePress}
-          pointerEvents="all"
-        />
-        {/* Hue handle */}
+          })()}
+        {/* Bottom Arc Gradient Background */}
+        {showsWhiteLevelSlider &&
+          generateGradientArc(
+            cX,
+            cY,
+            arcInnerR,
+            arcOuterR,
+            wArcStartAngle,
+            wArcEndAngle,
+            gradientDegreesPerStep,
+            (t: number) => colorHueToDisplayColor(0, 0, t * 100),
+          )}
+        {/* Bottom Arc - White Level */}
+        {showsWhiteLevelSlider &&
+          (() => (
+            <path
+              d={whiteLevelArcPath}
+              fill="none"
+              stroke="black"
+              strokeWidth={arcBorderSize}
+              strokeLinejoin="round"
+              onMouseDown={handlePress}
+              onTouchStart={handlePress}
+              pointerEvents="all"
+            />
+          ))()}
+        {/* Main Handle */}
         <circle
-          cx={hueHandleX}
-          cy={hueHandleY}
-          r={hueRingHandleSize - 3}
-          // fill={hsvToHsl(localColor.hue, 100, 100)} // TODO: show selected color
+          cx={mainHandleX}
+          cy={mainHandleY}
+          r={mainRingHandleSize - 3}
           fill="transparent"
-          stroke="white" // TODO: use theme color??
+          stroke="white"
           strokeWidth={handleBorderSize}
           pointerEvents="none"
         />
-        {/* Brightness handle */}
+        {/* Brightness Handle */}
         <circle
           cx={brightnessHandleX}
           cy={brightnessHandleY}
           r={brightnessHandleSize - handleBorderSize}
           // TODO: this is a super hacky way to directly refer to the theme color, simplify
           fill="rgba(var(--c-victron-blue-rgb), 1.0)"
-          stroke="white" // TODO: use theme color??
+          stroke="white"
           strokeWidth={handleBorderSize}
           pointerEvents="none"
         />
-        {/* Saturation handle */}
-        <circle
-          cx={saturationHandleX}
-          cy={saturationHandleY}
-          r={saturationHandleSize - handleBorderSize}
-          // fill={hsvToHsl(localColor.hue, localColor.saturation, 100)} // TODO: show selected color
-          fill="transparent" // TODO: or derive color from the bg?
-          stroke="white" // TODO: use theme color??
-          strokeWidth={handleBorderSize}
-          pointerEvents="none"
-        />
-        {/* White level handle */}
-        <circle
-          cx={whiteLevelHandleX}
-          cy={whiteLevelHandleY}
-          r={whiteLevelHandleSize - handleBorderSize}
-          // TODO: this is a super hacky way to directly refer to the theme color, simplify
-          fill="rgba(var(--c-victron-blue-rgb), 1.0)"
-          stroke="white" // TODO: use theme color??
-          strokeWidth={handleBorderSize}
-          pointerEvents="none"
-        />
+        {/* Saturation Handle */}
+        {isInRGBMode &&
+          (() => {
+            return (
+              <circle
+                cx={saturationHandleX}
+                cy={saturationHandleY}
+                r={saturationHandleSize - handleBorderSize}
+                fill="transparent"
+                stroke="white"
+                strokeWidth={handleBorderSize}
+                pointerEvents="none"
+              />
+            )
+          })()}
+        {/* White level Handle */}
+        {showsWhiteLevelSlider &&
+          (() => (
+            <circle
+              cx={whiteLevelHandleX}
+              cy={whiteLevelHandleY}
+              r={whiteLevelHandleSize - handleBorderSize}
+              // TODO: this is a super hacky way to directly refer to the theme color, simplify
+              fill="rgba(var(--c-victron-blue-rgb), 1.0)"
+              stroke="white"
+              strokeWidth={handleBorderSize}
+              pointerEvents="none"
+            />
+          ))()}
       </svg>
     </div>
   )
 })
+
+function generateGradientArc(
+  cX: number,
+  cY: number,
+  arcInnerR: number,
+  arcOuterR: number,
+  arcStartAngle: number,
+  arcEndAngle: number,
+  gradientDegreesPerStep: number,
+  colorFunction: (t: number) => string,
+) {
+  const steps = (arcEndAngle - arcStartAngle) / gradientDegreesPerStep
+  return Array.from({ length: steps }, (_, i) => {
+    const startAngle = arcStartAngle + i * gradientDegreesPerStep
+    const endAngle = Math.min(startAngle + gradientDegreesPerStep, arcEndAngle)
+    const t = (startAngle - arcStartAngle) / (arcEndAngle - arcStartAngle)
+
+    return (
+      <path
+        key={`x-${i}`}
+        d={describeArc(cX, cY, arcInnerR, arcOuterR, startAngle, endAngle + gradientDegreesPerStep / 2, false)}
+        fill={colorFunction(t)}
+      />
+    )
+  })
+}
+
+function generateGradientRing(
+  cX: number,
+  cY: number,
+  innerR: number,
+  outerR: number,
+  steps: number,
+  colorFunction: (i: number, steps: number) => string,
+) {
+  const degreesPerStep = 360 / steps
+  return Array.from({ length: steps }, (_, i) => {
+    const stepValue = i * degreesPerStep
+    const displayAngle = (-stepValue - 35 + 90 + 360) % 360
+    const arcSpan = degreesPerStep / 2
+    return (
+      <path
+        key={`x-${stepValue}`}
+        d={describeArc(
+          cX,
+          cY,
+          innerR,
+          outerR,
+          displayAngle - arcSpan,
+          displayAngle + arcSpan + degreesPerStep / 2,
+          false,
+        )}
+        fill={colorFunction(i, steps)}
+      />
+    )
+  })
+}
 
 export default ColorPicker
