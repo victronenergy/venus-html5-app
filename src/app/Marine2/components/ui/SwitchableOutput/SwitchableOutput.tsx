@@ -138,7 +138,6 @@ const SwitchableOutput = observer((props: SwitchableOutputProps) => {
         />
       )
     case SWITCHABLE_OUTPUT_TYPE.RGB_COLOR_WHEEL:
-      // TODO: specify RGB mode for DimmableHSVWOutput
       return (
         <DimmableHSVWOutput
           key={key}
@@ -150,7 +149,6 @@ const SwitchableOutput = observer((props: SwitchableOutputProps) => {
         />
       )
     case SWITCHABLE_OUTPUT_TYPE.CCT_COLOR_WHEEL:
-      // TODO: specify CCT mode for DimmableHSVWOutput
       return (
         <DimmableHSVWOutput
           key={key}
@@ -162,7 +160,6 @@ const SwitchableOutput = observer((props: SwitchableOutputProps) => {
         />
       )
     case SWITCHABLE_OUTPUT_TYPE.RGBW_COLOR_WHEEL:
-      // TODO: specify RGBW mode for DimmableHSVWOutput
       return (
         <DimmableHSVWOutput
           key={key}
