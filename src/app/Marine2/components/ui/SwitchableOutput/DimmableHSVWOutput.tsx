@@ -119,6 +119,13 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
     [switchableOutput],
   )
 
+  const handleModeChange = useCallback(
+    (mode: ColorPickerMode) => {
+      switchableOutput.updateType(mode)
+    },
+    [switchableOutput],
+  )
+
   const [isColorWheelOpen, setIsColorWheelOpen] = useState(false)
 
   const isInCCTMode = switchableOutput.type === SWITCHABLE_OUTPUT_TYPE.CCT_COLOR_WHEEL
@@ -225,6 +232,7 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
                   mode={switchableOutput.type as ColorPickerMode}
                   validModes={switchableOutput.validTypes as ColorPickerValidModes}
                   onColorChange={handleColorChange}
+                  onModeChange={handleModeChange}
                 />
               </div>
             </div>
