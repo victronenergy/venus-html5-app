@@ -258,14 +258,18 @@
     },
     "switches": {
         "auto": "Auto",
+        "color": "Färg",
         "fault": "Fel",
+        "gxDeviceRelays": "GX-enhetsreläer",
         "max": "Max",
         "min": "Min",
         "notRunning": "Inte igång",
         "off": "Av",
         "on": "På",
+        "preset": "Förinställning",
         "press": "Tryck",
-        "running": "Igång"
+        "running": "Igång",
+        "temperature": "Temperatur"
     },
     "tankWidget": {
         "Black water": "Svartvatten",

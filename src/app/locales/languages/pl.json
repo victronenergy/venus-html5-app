@@ -258,14 +258,18 @@
     },
     "switches": {
         "auto": "Auto",
+        "color": "Kolor",
         "fault": "Usterka",
+        "gxDeviceRelays": "Przekaźniki urządzenia GX",
         "max": "Max.",
         "min": "Min.",
         "notRunning": "Nie Działa",
         "off": "Wył.",
         "on": "Wł.",
+        "preset": "Ustawienie",
         "press": "Naciśnij",
-        "running": "Działa"
+        "running": "Działa",
+        "temperature": "Temperatura"
     },
     "tankWidget": {
         "Black water": "Czarna woda",

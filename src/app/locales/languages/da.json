@@ -258,14 +258,18 @@
     },
     "switches": {
         "auto": "Auto",
+        "color": "Farve",
         "fault": "Fejl",
+        "gxDeviceRelays": "GX enhed relæer",
         "max": "Maks.",
         "min": "Min.",
         "notRunning": "Ikke aktiv",
         "off": "Fra",
         "on": "Til",
+        "preset": "Preset",
         "press": "Tryk",
-        "running": "Aktiv"
+        "running": "Aktiv",
+        "temperature": "Temperatur"
     },
     "tankWidget": {
         "Black water": "Sortvand",

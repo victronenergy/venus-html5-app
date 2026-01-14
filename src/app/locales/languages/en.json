@@ -258,6 +258,7 @@
     },
     "switches": {
         "auto": "Auto",
+        "color": "Color",
         "fault": "Fault",
         "gxDeviceRelays": "GX device relays",
         "max": "Max",
@@ -265,8 +266,10 @@
         "notRunning": "Not Running",
         "off": "Off",
         "on": "On",
+        "preset": "Preset",
         "press": "Press",
-        "running": "Running"
+        "running": "Running",
+        "temperature": "Temperature"
     },
     "tankWidget": {
         "Black water": "Black water",
