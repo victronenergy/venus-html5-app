@@ -18,7 +18,7 @@ import {
   hsvwToArray,
 } from "@victronenergy/mfd-modules/dist/src/utils/hsvw"
 import { Modal } from "../Modal"
-import CloseIcon from "../../../images/icons/close.svg"
+// import CloseIcon from "../../../images/icons/close.svg"
 import FadedText from "../FadedText"
 import ColorPicker, { ColorPickerMode, ColorPickerValidModes } from "../ColorPicker/ColorPicker"
 import {
@@ -194,10 +194,10 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
           </div>
         </div>
         {/* Border */}
-        <div className="w-px-44 h-px-44 ml-2 rounded-md border-2 border-content-victronBlue">
+        <div className="w-px-44 h-px-44 ml-2 p-px-2 rounded-md border-2 border-content-victronBlue">
           {/* Color Square */}
           <div
-            className="w-px-36 h-px-36 m-px-2 rounded-sm"
+            className="w-full h-full rounded-sm"
             style={{
               backgroundColor: isInCCTMode
                 ? colorTemperatureToDisplayColor(color.colorTemperature)
@@ -216,25 +216,29 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
           }}
           className={classnames("w-4/6 max-w-4/6 h-4/6 max-h-4/6")}
         >
-          <Modal.Body variant="popUp" className="h-full bg-surface-primary flex flex-col">
-            {/* Title with close button */}
-            <div className="flex">
-              <FadedText text={outputName} className="flex-1" />
-              <CloseIcon
-                className="w-5 text-content-victronBlue cursor-pointer outline-none"
-                alt="Close"
-                onClick={() => setIsColorWheelOpen(false)}
-              />
-            </div>
-            {/* Title with close button */}
-            <div className="flex">
-              <FadedText text={isInCCTMode ? translate("switches.temperature") : translate("switches.color")} />
-            </div>
-            {/* Controls */}
-            <div className="relative flex-1 w-full mt-2 mb-2">
-              <div className="absolute inset-0 border-2 border-blue-500">
+          <Modal.Body variant="popUp" className="h-full bg-surface-primary">
+            <div className="h-full flex flex-col">
+              {/* Title with close button */}
+              <div className="flex shrink-0">
+                <FadedText className="flex-1 border-2 border-red-400" text={outputName} />
+                {/* TODO: CloseIcon breaks layout on Garmin - broken flex-col implementation */}
+                {/* <CloseIcon
+                  className="w-5 text-content-victronBlue cursor-pointer outline-none"
+                  alt="Close"
+                  onClick={() => setIsColorWheelOpen(false)}
+                /> */}
+              </div>
+              {/* Color Mode Label */}
+              <div className="flex shrink-0">
+                <FadedText
+                  className="flex-1 border-2 border-red-400"
+                  text={isInCCTMode ? translate("switches.temperature") : translate("switches.color")}
+                />
+              </div>
+              {/* Controls */}
+              <div className="flex-1 min-h-0 flex items-center justify-center border-2 border-yellow-500">
                 <ColorPicker
-                  className="h-full w-full"
+                  className="border-2 border-green-500 max-w-full max-h-full"
                   color={color}
                   mode={switchableOutput.type as ColorPickerMode}
                   validModes={switchableOutput.validTypes as ColorPickerValidModes}
