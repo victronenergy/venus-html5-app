@@ -226,6 +226,10 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
                 onClick={() => setIsColorWheelOpen(false)}
               />
             </div>
+            {/* Title with close button */}
+            <div className="flex">
+              <FadedText text={isInCCTMode ? translate("switches.temperature") : translate("switches.color")} />
+            </div>
             {/* Controls */}
             <div className="relative flex-1 w-full mt-2 mb-2">
               <div className="absolute inset-0 border-2 border-blue-500">
