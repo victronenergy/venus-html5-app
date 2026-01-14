@@ -236,9 +236,9 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
                 />
               </div>
               {/* Controls */}
-              <div className="flex-1 min-h-0 flex items-center justify-center border-2 border-yellow-500">
+              <div className="flex-1 min-h-0">
                 <ColorPicker
-                  className="border-2 border-green-500 max-w-full max-h-full"
+                  className="w-full h-full max-w-full max-h-full  flex items-center justify-center border-2 border-green-500"
                   color={color}
                   mode={switchableOutput.type as ColorPickerMode}
                   validModes={switchableOutput.validTypes as ColorPickerValidModes}

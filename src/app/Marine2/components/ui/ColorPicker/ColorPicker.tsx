@@ -19,6 +19,7 @@ import {
 import { describeArc } from "app/Marine2/utils/helpers/svg-routines"
 import { SWITCHABLE_OUTPUT_TYPE } from "@victronenergy/mfd-modules/dist/src/utils/constants"
 import { translate } from "react-i18nify"
+import classNames from "classnames"
 
 export type ColorPickerMode =
   | typeof SWITCHABLE_OUTPUT_TYPE.RGB_COLOR_WHEEL
@@ -419,9 +420,45 @@ const ColorPicker = observer(
       }
     }, [onModeChange, validModes])
 
+    const containerRef = useRef<HTMLDivElement>(null)
+    const [useHorizontalLayout, setUseHorizontalLayout] = useState(false)
+    const [useHorizontalFill, setUseHorizontalFill] = useState(false)
+
+    useLayoutEffect(() => {
+      if (!containerRef.current) return
+
+      const resizeObserver = new ResizeObserver(([entry]) => {
+        const { width, height } = entry.contentRect
+        const containerRatio = width / height
+        console.log(`DEBUG: ${containerRatio}`)
+        if (containerRatio >= 1) {
+          setUseHorizontalLayout(true)
+          setUseHorizontalFill(containerRatio < 2 / 1)
+        } else {
+          setUseHorizontalLayout(false)
+          setUseHorizontalFill(containerRatio < 1 / 2)
+        }
+      })
+
+      resizeObserver.observe(containerRef.current)
+
+      return () => resizeObserver.disconnect()
+    }, [])
+
     return (
-      <div className={className}>
-        <div className="grid grid-cols-1 md:grid-cols-2 auto-rows-fr min-w-0 min-h-0 w-full h-full border-2 border-green-500">
+      <div ref={containerRef} className={className}>
+        <div
+          className={classNames(
+            "grid auto-rows-fr min-w-0 min-h-0 border-2 border-yelow-500",
+            // TODO: h-full or w-full depending on what container aspect ratio is so that we can fit
+            {
+              "grid-cols-1 aspect-[1/2]": !useHorizontalLayout,
+              "grid-cols-2 aspect-[2/1]": useHorizontalLayout,
+              "h-full": !useHorizontalFill,
+              "w-full": useHorizontalFill,
+            },
+          )}
+        >
           <div className="aspect-square min-w-0 min-h-0 w-full h-full border-2 border-red-500">
             <svg
               width="100%"
