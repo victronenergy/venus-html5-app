@@ -18,6 +18,7 @@ import {
 } from "app/Marine2/utils/helpers/color-conversion-routines"
 import { describeArc } from "app/Marine2/utils/helpers/svg-routines"
 import { SWITCHABLE_OUTPUT_TYPE } from "@victronenergy/mfd-modules/dist/src/utils/constants"
+import { translate } from "react-i18nify"
 
 export type ColorPickerMode =
   | typeof SWITCHABLE_OUTPUT_TYPE.RGB_COLOR_WHEEL
@@ -67,8 +68,8 @@ const ColorPicker = observer(
       localMode === SWITCHABLE_OUTPUT_TYPE.RGB_COLOR_WHEEL || localMode === SWITCHABLE_OUTPUT_TYPE.RGBW_COLOR_WHEEL
 
     // Prepare canvas
-    const width = 200
-    const height = 200
+    const width = 500
+    const height = 500
     const cX = width / 2
     const cY = height / 2
     const maxRadius = Math.min(width, height) / 2
@@ -420,268 +421,284 @@ const ColorPicker = observer(
 
     return (
       <div className={className}>
-        <svg
-          width="100%"
-          height="100%"
-          viewBox={`0 0 ${width} ${height}`}
-          preserveAspectRatio="xMidYMid meet"
-          ref={svgRef}
-          onMouseMove={handleMove}
-          onMouseUp={handleRelease}
-          onMouseLeave={handleRelease}
-          onTouchMove={handleMove}
-          onTouchEnd={handleRelease}
-          onTouchCancel={handleRelease}
-        >
-          {/* RGBW Mode Switch Gradient */}
-          {showsModeSwitcher &&
-            generateGradientRing(
-              rgbwModeHandleX,
-              rgbwModeHandleY,
-              modeSwitchHandleSize * 0.5,
-              modeSwitchHandleSize * 0.9,
-              180,
-              rgbColorFunction,
-            )}
-          {/* RGB Mode Switch Selection Ring */}
-          {showsModeSwitcher && (
-            <circle
-              cx={rgbwModeHandleX}
-              cy={rgbwModeHandleY}
-              r={modeSwitchHandleSize}
-              fill="transparent"
-              stroke="rgba(var(--c-victron-blue-rgb), 1.0)"
-              strokeWidth={isInRGBMode ? arcBorderSize : 0}
-              onMouseDown={switchToRGBWMode}
-              onTouchStart={switchToRGBWMode}
-              pointerEvents="all"
-            />
-          )}
-          {/* RGBW Mode Switch Gradient */}
-          {showsModeSwitcher &&
-            generateGradientRing(
-              cctModeHandleX,
-              cctModeHandleY,
-              modeSwitchHandleSize * 0.5,
-              modeSwitchHandleSize * 0.9,
-              180,
-              cctColorFunction,
-            )}
-          {/* CCT Mode Switch Selection Ring */}
-          {showsModeSwitcher && (
-            <circle
-              cx={cctModeHandleX}
-              cy={cctModeHandleY}
-              r={modeSwitchHandleSize}
-              fill="transparent"
-              stroke="rgba(var(--c-victron-blue-rgb), 1.0)"
-              strokeWidth={isInCCTMode ? arcBorderSize : 0}
-              onMouseDown={switchToCCTMode}
-              onTouchStart={switchToCCTMode}
-              pointerEvents="all"
-            />
-          )}
-          {/* Selected Color Circle */}
-          <circle
-            cx={cX}
-            cy={cY}
-            r={centerCircleRadius}
-            fill={
-              isInCCTMode
-                ? colorTemperatureToDisplayColor(localColor.colorTemperature)
-                : colorHueToDisplayColor(localColor.hue, localColor.saturation, 100)
-            }
-          />
-          {/* Main Ring Gradient */}
-          {generateGradientRing(
-            cX,
-            cY,
-            mainRingInnerRadius,
-            mainRingOuterRadius,
-            360 / gradientDegreesPerStep,
-            isInRGBMode ? rgbColorFunction : cctColorFunction,
-          )}
-          {/* Main Ring Handle */}
-          <circle
-            cx={cX}
-            cy={cY}
-            r={mainRingRadius}
-            fill="none"
-            stroke="none"
-            strokeWidth={mainRingOuterRadius - mainRingInnerRadius}
-            onMouseDown={handlePress}
-            onTouchStart={handlePress}
-            pointerEvents="all"
-          />
-          {/* Left Arc - Brightness Background with Touch */}
-          <path
-            d={brightnessArcPath}
-            // TODO: this is a super hacky way to directly refer to the theme color, simplify
-            fill="rgba(var(--c-victron-blue-rgb), 0.3)"
-            stroke="rgba(var(--c-victron-blue-rgb), 1.0)"
-            strokeWidth={arcBorderSize}
-            strokeLinejoin="round"
-            onMouseDown={handlePress}
-            onTouchStart={handlePress}
-            pointerEvents="all"
-          />
-          {/* Left Arc - Brightness with Touch */}
-          <path
-            d={brightnessFillArcPath}
-            // TODO: this is a super hacky way to directly refer to the theme color, simplify
-            fill="rgba(var(--c-victron-blue-rgb), 1.0)"
-            stroke="rgba(var(--c-victron-blue-rgb), 1.0)"
-            strokeWidth={arcBorderSize}
-            strokeLinejoin="round"
-            onMouseDown={handlePress}
-            onTouchStart={handlePress}
-            pointerEvents="all"
-          />
-          {/* Right Arc Gradient Caps */}
-          {isInRGBMode &&
-            (() => {
-              const startCapX = cX + arcR * Math.sin((sArcStartAngle * Math.PI) / 180)
-              const startCapY = cY + arcR * Math.cos((sArcStartAngle * Math.PI) / 180)
-              const endCapX = cX + arcR * Math.sin((sArcEndAngle * Math.PI) / 180)
-              const endCapY = cY + arcR * Math.cos((sArcEndAngle * Math.PI) / 180)
-              const capRadius = (arcOuterR - arcInnerR) / 2
-              return (
-                <>
-                  <circle
-                    cx={startCapX}
-                    cy={startCapY}
-                    r={capRadius}
-                    fill={colorHueToDisplayColor(localColor.hue, 0, 100)}
-                  />
-                  <circle
-                    cx={endCapX}
-                    cy={endCapY}
-                    r={capRadius}
-                    fill={colorHueToDisplayColor(localColor.hue, 100, 100)}
-                  />
-                </>
-              )
-            })()}
-          {/* Right Arc Gradient Background */}
-          {isInRGBMode &&
-            generateGradientArc(
-              cX,
-              cY,
-              arcInnerR,
-              arcOuterR,
-              sArcStartAngle,
-              sArcEndAngle,
-              gradientDegreesPerStep,
-              (t: number) => colorHueToDisplayColor(localColor.hue, 100 - t * 100, 100),
-            )}
-          {/* Right Arc - Saturation Touch Area */}
-          {isInRGBMode &&
-            (() => {
-              return (
-                <path
-                  d={saturationArcPath}
-                  fill="none"
-                  stroke="none"
-                  strokeWidth={0}
-                  strokeLinejoin="round"
-                  onMouseDown={handlePress}
-                  onTouchStart={handlePress}
+        <div className="grid grid-cols-1 md:grid-cols-2 auto-rows-fr min-w-0 min-h-0 w-full h-full border-2 border-green-500">
+          <div className="aspect-square min-w-0 min-h-0 w-full h-full border-2 border-red-500">
+            <svg
+              width="100%"
+              height="100%"
+              viewBox={`0 0 ${width} ${height}`}
+              preserveAspectRatio="xMidYMid meet"
+              ref={svgRef}
+              onMouseMove={handleMove}
+              onMouseUp={handleRelease}
+              onMouseLeave={handleRelease}
+              onTouchMove={handleMove}
+              onTouchEnd={handleRelease}
+              onTouchCancel={handleRelease}
+            >
+              {/* RGBW Mode Switch Gradient */}
+              {showsModeSwitcher &&
+                generateGradientRing(
+                  rgbwModeHandleX,
+                  rgbwModeHandleY,
+                  modeSwitchHandleSize * 0.5,
+                  modeSwitchHandleSize * 0.9,
+                  180,
+                  rgbColorFunction,
+                )}
+              {/* RGB Mode Switch Selection Ring */}
+              {showsModeSwitcher && (
+                <circle
+                  cx={rgbwModeHandleX}
+                  cy={rgbwModeHandleY}
+                  r={modeSwitchHandleSize}
+                  fill="transparent"
+                  stroke="rgba(var(--c-victron-blue-rgb), 1.0)"
+                  strokeWidth={isInRGBMode ? arcBorderSize : 0}
+                  onMouseDown={switchToRGBWMode}
+                  onTouchStart={switchToRGBWMode}
                   pointerEvents="all"
                 />
-              )
-            })()}
-          {/* Bottom Arc Gradient Caps */}
-          {showsWhiteLevelSlider &&
-            (() => {
-              const startCapX = cX + arcR * Math.sin((wArcStartAngle * Math.PI) / 180)
-              const startCapY = cY - arcR * Math.cos((wArcStartAngle * Math.PI) / 180)
-              const endCapX = cX + arcR * Math.sin((wArcEndAngle * Math.PI) / 180)
-              const endCapY = cY - arcR * Math.cos((wArcEndAngle * Math.PI) / 180)
-              const capRadius = (arcOuterR - arcInnerR) / 2
-              return (
-                <>
-                  <circle cx={startCapX} cy={startCapY} r={capRadius} fill={"black"} />
-                  <circle cx={endCapX} cy={endCapY} r={capRadius} fill={"white"} />
-                </>
-              )
-            })()}
-          {/* Bottom Arc Gradient Background */}
-          {showsWhiteLevelSlider &&
-            generateGradientArc(
-              cX,
-              cY,
-              arcInnerR,
-              arcOuterR,
-              wArcStartAngle,
-              wArcEndAngle,
-              gradientDegreesPerStep,
-              (t: number) => colorHueToDisplayColor(0, 0, t * 100),
-            )}
-          {/* Bottom Arc - White Level */}
-          {showsWhiteLevelSlider &&
-            (() => (
-              <path
-                d={whiteLevelArcPath}
+              )}
+              {/* RGBW Mode Switch Gradient */}
+              {showsModeSwitcher &&
+                generateGradientRing(
+                  cctModeHandleX,
+                  cctModeHandleY,
+                  modeSwitchHandleSize * 0.5,
+                  modeSwitchHandleSize * 0.9,
+                  180,
+                  cctColorFunction,
+                )}
+              {/* CCT Mode Switch Selection Ring */}
+              {showsModeSwitcher && (
+                <circle
+                  cx={cctModeHandleX}
+                  cy={cctModeHandleY}
+                  r={modeSwitchHandleSize}
+                  fill="transparent"
+                  stroke="rgba(var(--c-victron-blue-rgb), 1.0)"
+                  strokeWidth={isInCCTMode ? arcBorderSize : 0}
+                  onMouseDown={switchToCCTMode}
+                  onTouchStart={switchToCCTMode}
+                  pointerEvents="all"
+                />
+              )}
+              {/* Selected Color Circle */}
+              <circle
+                cx={cX}
+                cy={cY}
+                r={centerCircleRadius}
+                fill={
+                  isInCCTMode
+                    ? colorTemperatureToDisplayColor(localColor.colorTemperature)
+                    : colorHueToDisplayColor(localColor.hue, localColor.saturation, 100)
+                }
+              />
+              {/* Main Ring Gradient */}
+              {generateGradientRing(
+                cX,
+                cY,
+                mainRingInnerRadius,
+                mainRingOuterRadius,
+                360 / gradientDegreesPerStep,
+                isInRGBMode ? rgbColorFunction : cctColorFunction,
+              )}
+              {/* Main Ring Handle */}
+              <circle
+                cx={cX}
+                cy={cY}
+                r={mainRingRadius}
                 fill="none"
-                stroke="black"
+                stroke="none"
+                strokeWidth={mainRingOuterRadius - mainRingInnerRadius}
+                onMouseDown={handlePress}
+                onTouchStart={handlePress}
+                pointerEvents="all"
+              />
+              {/* Left Arc - Brightness Background with Touch */}
+              <path
+                d={brightnessArcPath}
+                // TODO: this is a super hacky way to directly refer to the theme color, simplify
+                fill="rgba(var(--c-victron-blue-rgb), 0.3)"
+                stroke="rgba(var(--c-victron-blue-rgb), 1.0)"
                 strokeWidth={arcBorderSize}
                 strokeLinejoin="round"
                 onMouseDown={handlePress}
                 onTouchStart={handlePress}
                 pointerEvents="all"
               />
-            ))()}
-          {/* Main Handle */}
-          <circle
-            cx={mainHandleX}
-            cy={mainHandleY}
-            r={mainRingHandleSize - 3}
-            fill="transparent"
-            stroke="white"
-            strokeWidth={handleBorderSize}
-            pointerEvents="none"
-          />
-          {/* Brightness Handle */}
-          <circle
-            cx={brightnessHandleX}
-            cy={brightnessHandleY}
-            r={brightnessHandleSize - handleBorderSize}
-            // TODO: this is a super hacky way to directly refer to the theme color, simplify
-            fill="rgba(var(--c-victron-blue-rgb), 1.0)"
-            stroke="white"
-            strokeWidth={handleBorderSize}
-            pointerEvents="none"
-          />
-          {/* Saturation Handle */}
-          {isInRGBMode &&
-            (() => {
-              return (
-                <circle
-                  cx={saturationHandleX}
-                  cy={saturationHandleY}
-                  r={saturationHandleSize - handleBorderSize}
-                  fill="transparent"
-                  stroke="white"
-                  strokeWidth={handleBorderSize}
-                  pointerEvents="none"
-                />
-              )
-            })()}
-          {/* White level Handle */}
-          {showsWhiteLevelSlider &&
-            (() => (
+              {/* Left Arc - Brightness with Touch */}
+              <path
+                d={brightnessFillArcPath}
+                // TODO: this is a super hacky way to directly refer to the theme color, simplify
+                fill="rgba(var(--c-victron-blue-rgb), 1.0)"
+                stroke="rgba(var(--c-victron-blue-rgb), 1.0)"
+                strokeWidth={arcBorderSize}
+                strokeLinejoin="round"
+                onMouseDown={handlePress}
+                onTouchStart={handlePress}
+                pointerEvents="all"
+              />
+              {/* Right Arc Gradient Caps */}
+              {isInRGBMode &&
+                (() => {
+                  const startCapX = cX + arcR * Math.sin((sArcStartAngle * Math.PI) / 180)
+                  const startCapY = cY + arcR * Math.cos((sArcStartAngle * Math.PI) / 180)
+                  const endCapX = cX + arcR * Math.sin((sArcEndAngle * Math.PI) / 180)
+                  const endCapY = cY + arcR * Math.cos((sArcEndAngle * Math.PI) / 180)
+                  const capRadius = (arcOuterR - arcInnerR) / 2
+                  return (
+                    <>
+                      <circle
+                        cx={startCapX}
+                        cy={startCapY}
+                        r={capRadius}
+                        fill={colorHueToDisplayColor(localColor.hue, 0, 100)}
+                      />
+                      <circle
+                        cx={endCapX}
+                        cy={endCapY}
+                        r={capRadius}
+                        fill={colorHueToDisplayColor(localColor.hue, 100, 100)}
+                      />
+                    </>
+                  )
+                })()}
+              {/* Right Arc Gradient Background */}
+              {isInRGBMode &&
+                generateGradientArc(
+                  cX,
+                  cY,
+                  arcInnerR,
+                  arcOuterR,
+                  sArcStartAngle,
+                  sArcEndAngle,
+                  gradientDegreesPerStep,
+                  (t: number) => colorHueToDisplayColor(localColor.hue, 100 - t * 100, 100),
+                )}
+              {/* Right Arc - Saturation Touch Area */}
+              {isInRGBMode &&
+                (() => {
+                  return (
+                    <path
+                      d={saturationArcPath}
+                      fill="none"
+                      stroke="none"
+                      strokeWidth={0}
+                      strokeLinejoin="round"
+                      onMouseDown={handlePress}
+                      onTouchStart={handlePress}
+                      pointerEvents="all"
+                    />
+                  )
+                })()}
+              {/* Bottom Arc Gradient Caps */}
+              {showsWhiteLevelSlider &&
+                (() => {
+                  const startCapX = cX + arcR * Math.sin((wArcStartAngle * Math.PI) / 180)
+                  const startCapY = cY - arcR * Math.cos((wArcStartAngle * Math.PI) / 180)
+                  const endCapX = cX + arcR * Math.sin((wArcEndAngle * Math.PI) / 180)
+                  const endCapY = cY - arcR * Math.cos((wArcEndAngle * Math.PI) / 180)
+                  const capRadius = (arcOuterR - arcInnerR) / 2
+                  return (
+                    <>
+                      <circle cx={startCapX} cy={startCapY} r={capRadius} fill={"black"} />
+                      <circle cx={endCapX} cy={endCapY} r={capRadius} fill={"white"} />
+                    </>
+                  )
+                })()}
+              {/* Bottom Arc Gradient Background */}
+              {showsWhiteLevelSlider &&
+                generateGradientArc(
+                  cX,
+                  cY,
+                  arcInnerR,
+                  arcOuterR,
+                  wArcStartAngle,
+                  wArcEndAngle,
+                  gradientDegreesPerStep,
+                  (t: number) => colorHueToDisplayColor(0, 0, t * 100),
+                )}
+              {/* Bottom Arc - White Level */}
+              {showsWhiteLevelSlider &&
+                (() => (
+                  <path
+                    d={whiteLevelArcPath}
+                    fill="none"
+                    stroke="black"
+                    strokeWidth={arcBorderSize}
+                    strokeLinejoin="round"
+                    onMouseDown={handlePress}
+                    onTouchStart={handlePress}
+                    pointerEvents="all"
+                  />
+                ))()}
+              {/* Main Handle */}
               <circle
-                cx={whiteLevelHandleX}
-                cy={whiteLevelHandleY}
-                r={whiteLevelHandleSize - handleBorderSize}
+                cx={mainHandleX}
+                cy={mainHandleY}
+                r={mainRingHandleSize - 3}
+                fill="transparent"
+                stroke="white"
+                strokeWidth={handleBorderSize}
+                pointerEvents="none"
+              />
+              {/* Brightness Handle */}
+              <circle
+                cx={brightnessHandleX}
+                cy={brightnessHandleY}
+                r={brightnessHandleSize - handleBorderSize}
                 // TODO: this is a super hacky way to directly refer to the theme color, simplify
                 fill="rgba(var(--c-victron-blue-rgb), 1.0)"
                 stroke="white"
                 strokeWidth={handleBorderSize}
                 pointerEvents="none"
               />
-            ))()}
-        </svg>
+              {/* Saturation Handle */}
+              {isInRGBMode &&
+                (() => {
+                  return (
+                    <circle
+                      cx={saturationHandleX}
+                      cy={saturationHandleY}
+                      r={saturationHandleSize - handleBorderSize}
+                      fill="transparent"
+                      stroke="white"
+                      strokeWidth={handleBorderSize}
+                      pointerEvents="none"
+                    />
+                  )
+                })()}
+              {/* White level Handle */}
+              {showsWhiteLevelSlider &&
+                (() => (
+                  <circle
+                    cx={whiteLevelHandleX}
+                    cy={whiteLevelHandleY}
+                    r={whiteLevelHandleSize - handleBorderSize}
+                    // TODO: this is a super hacky way to directly refer to the theme color, simplify
+                    fill="rgba(var(--c-victron-blue-rgb), 1.0)"
+                    stroke="white"
+                    strokeWidth={handleBorderSize}
+                    pointerEvents="none"
+                  />
+                ))()}
+            </svg>
+          </div>
+          <div className="aspect-square min-w-0 min-h-0 w-full h-full border-2 border-red-500 flex flex-col">
+            <div className="shrink-0">{translate("switches.preset")}</div>
+            <div className="flex-1 flex items-center justify-center">
+              <div className="grid grid-cols-3 grid-rows-3 min-w-0 min-h-0 w-full h-full aspect-square border-2 border-blue-500">
+                {Array.from({ length: 12 }, (_, i) => (
+                  <div key={i} className="">
+                    <div className="aspect-square w-full h-full rounded-md border-2 border-blue-500"></div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     )
   },
