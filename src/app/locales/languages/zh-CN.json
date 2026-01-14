@@ -285,7 +285,7 @@
     "versionInfo": {
         "buildDate": "版本日期",
         "identifier": "标示",
-        "venusOs": "VenusOS",
+        "venusOs": "Venus OS",
         "version": "版本 %{version}",
         "vrmPortID": "VRM门户ID"
     },

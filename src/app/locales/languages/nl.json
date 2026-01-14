@@ -285,7 +285,7 @@
     "versionInfo": {
         "buildDate": "Datum",
         "identifier": "ID",
-        "venusOs": "VenusOS",
+        "venusOs": "Venus OS",
         "version": "Versie  %{version}",
         "vrmPortID": "VRM Installatie ID"
     },
