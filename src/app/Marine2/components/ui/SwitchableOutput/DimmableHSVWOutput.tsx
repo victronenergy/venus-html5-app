@@ -222,16 +222,19 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
             </div>
           </div>
         </div>
-        {/* Color Square */}
-        <div
-          className="w-px-44 h-px-44 rounded-md ml-2"
-          style={{
-            backgroundColor: isInCCTMode
-              ? colorTemperatureToDisplayColor(color.colorTemperature)
-              : colorHueToDisplayColor(color.hue, color.saturation, 100),
-          }}
-          onClick={() => setIsColorWheelOpen(true)}
-        />
+        {/* Border */}
+        <div className="w-px-44 h-px-44 ml-2 rounded-md border-2 border-content-victronBlue">
+          {/* Color Square */}
+          <div
+            className="w-px-36 h-px-36 m-px-2 rounded-sm"
+            style={{
+              backgroundColor: isInCCTMode
+                ? colorTemperatureToDisplayColor(color.colorTemperature)
+                : colorHueToDisplayColor(color.hue, color.saturation, 100),
+            }}
+            onClick={() => setIsColorWheelOpen(true)}
+          />
+        </div>
       </div>
       {/* Color Wheel Popup */}
       <div>
