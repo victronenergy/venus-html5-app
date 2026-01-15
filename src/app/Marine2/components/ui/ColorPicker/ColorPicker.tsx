@@ -866,6 +866,7 @@ const ColorPicker = observer(
                           "aspect-square w-[80%] h-[80%] rounded-md flex items-center justify-center text-xl font-bold",
                           {
                             "border-2 border-content-victronBlue": isValidHSVWColorPreset(c) || !isEditingPresets,
+                            "border-2 border-content-tertiary": isEditingPresets && !isValidHSVWColorPreset(c),
                           },
                         )}
                         style={{
