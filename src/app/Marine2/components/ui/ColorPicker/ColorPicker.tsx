@@ -547,7 +547,7 @@ const ColorPicker = observer(
             "w-full": useHorizontalFill,
           })}
         >
-          <div className={`min-w-0 min-h-0 w-full h-full`}>
+          <div className={`min-w-0 min-h-0 w-full h-full ${useHorizontalLayout ? "pl-5" : ""}`}>
             <svg
               width="100%"
               height="100%"
