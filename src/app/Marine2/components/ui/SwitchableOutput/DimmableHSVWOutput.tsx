@@ -4,6 +4,7 @@ import {
   SwitchableOutputId,
   SwitchableOutputTree,
   SwitchingDeviceInstanceId,
+  useAppStore,
   useSwitchableOutput,
 } from "@victronenergy/mfd-modules"
 import classnames from "classnames"
@@ -15,10 +16,11 @@ import {
   createPercentage,
   HSVWColor,
   HSVWColorArray,
+  HSVWColorPresets,
   hsvwToArray,
 } from "@victronenergy/mfd-modules/dist/src/utils/hsvw"
 import { Modal } from "../Modal"
-// import CloseIcon from "../../../images/icons/close.svg"
+import CloseIcon from "../../../images/icons/close.svg"
 import FadedText from "../FadedText"
 import ColorPicker, { ColorPickerMode, ColorPickerValidModes } from "../ColorPicker/ColorPicker"
 import {
@@ -126,6 +128,29 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
     [switchableOutput],
   )
 
+  const app = useAppStore()
+
+  const handleRGBColorPresetsChange = useCallback(
+    (presets: HSVWColorPresets) => {
+      app.updateRGBColorPresets(presets)
+    },
+    [app],
+  )
+
+  const handleRGBWColorPresetsChange = useCallback(
+    (presets: HSVWColorPresets) => {
+      app.updateRGBWColorPresets(presets)
+    },
+    [app],
+  )
+
+  const handleCCTColorPresetsChange = useCallback(
+    (presets: HSVWColorPresets) => {
+      app.updateCCTColorPresets(presets)
+    },
+    [app],
+  )
+
   const [isColorWheelOpen, setIsColorWheelOpen] = useState(false)
 
   const isInCCTMode = switchableOutput.type === SWITCHABLE_OUTPUT_TYPE.CCT_COLOR_WHEEL
@@ -220,30 +245,36 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
             <div className="h-full flex flex-col">
               {/* Title with close button */}
               <div className="flex shrink-0">
-                <FadedText className="flex-1 border-2 border-red-400" text={outputName} />
-                {/* TODO: CloseIcon breaks layout on Garmin - broken flex-col implementation */}
-                {/* <CloseIcon
-                  className="w-5 text-content-victronBlue cursor-pointer outline-none"
+                <FadedText className="flex-1" text={outputName} />
+                {/* CloseIcon */}
+                <CloseIcon
+                  className="w-px-32 h-px-32 text-content-victronBlue cursor-pointer outline-none"
                   alt="Close"
                   onClick={() => setIsColorWheelOpen(false)}
-                /> */}
+                />
               </div>
               {/* Color Mode Label */}
-              <div className="flex shrink-0">
+              <div className="flex shrink-0 mb-2">
                 <FadedText
-                  className="flex-1 border-2 border-red-400"
+                  className="flex-1 text-[1.3em]"
                   text={isInCCTMode ? translate("switches.temperature") : translate("switches.color")}
                 />
               </div>
               {/* Controls */}
               <div className="flex-1 min-h-0">
                 <ColorPicker
-                  className="w-full h-full max-w-full max-h-full  flex items-center justify-center border-2 border-green-500"
+                  className="w-full h-full md:p-4 max-w-full max-h-full flex items-center justify-center"
                   color={color}
                   mode={switchableOutput.type as ColorPickerMode}
                   validModes={switchableOutput.validTypes as ColorPickerValidModes}
                   onColorChange={handleColorChange}
                   onModeChange={handleModeChange}
+                  rgbColorPresets={app.rgbColorPresets}
+                  rgbwColorPresets={app.rgbwColorPresets}
+                  cctColorPresets={app.cctColorPresets}
+                  onRGBColorPresetsChange={handleRGBColorPresetsChange}
+                  onRGBWColorPresetsChange={handleRGBWColorPresetsChange}
+                  onCCTColorPresetsChange={handleCCTColorPresetsChange}
                 />
               </div>
             </div>

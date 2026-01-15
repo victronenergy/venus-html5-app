@@ -4,7 +4,12 @@ import {
   createColorTemperature,
   createHue,
   createPercentage,
+  emptyHSVWColor,
+  emptyHSVWColorPresets,
   HSVWColor,
+  HSVWColorPresets,
+  isValidHSVWColorPreset,
+  setHSVWColorPreset,
 } from "@victronenergy/mfd-modules/dist/src/utils/hsvw"
 import {
   angleToColorHue,
@@ -12,14 +17,18 @@ import {
   cctColorFunction,
   colorHueToAngle,
   colorHueToDisplayColor,
+  colorPresetToDisplayColor,
   colorTemperatureToAngle,
   colorTemperatureToDisplayColor,
   rgbColorFunction,
 } from "app/Marine2/utils/helpers/color-conversion-routines"
-import { describeArc } from "app/Marine2/utils/helpers/svg-routines"
+import { describeArc, polarToCartesian } from "app/Marine2/utils/helpers/svg-routines"
 import { SWITCHABLE_OUTPUT_TYPE } from "@victronenergy/mfd-modules/dist/src/utils/constants"
 import { translate } from "react-i18nify"
 import classNames from "classnames"
+import useSize from "@react-hook/size"
+import TrashIcon from "../../../images/icons/icon_trash_32.svg"
+import FadedText from "../FadedText"
 
 export type ColorPickerMode =
   | typeof SWITCHABLE_OUTPUT_TYPE.RGB_COLOR_WHEEL
@@ -40,17 +49,38 @@ interface ColorPickerProps {
   validModes: ColorPickerValidModes
   onColorChange?: (color: HSVWColor) => void
   onModeChange?: (mode: ColorPickerMode) => void
+  rgbColorPresets: HSVWColorPresets
+  rgbwColorPresets: HSVWColorPresets
+  cctColorPresets: HSVWColorPresets
+  onRGBColorPresetsChange?: (presets: HSVWColorPresets) => void
+  onRGBWColorPresetsChange?: (presets: HSVWColorPresets) => void
+  onCCTColorPresetsChange?: (presets: HSVWColorPresets) => void
   className?: string
 }
 
 const ColorPicker = observer(
-  ({ color, mode, validModes, onColorChange, onModeChange, className = "" }: ColorPickerProps) => {
+  ({
+    color,
+    mode,
+    validModes,
+    onColorChange,
+    onModeChange,
+    rgbColorPresets,
+    rgbwColorPresets,
+    cctColorPresets,
+    onRGBColorPresetsChange,
+    onRGBWColorPresetsChange,
+    onCCTColorPresetsChange,
+    className = "",
+  }: ColorPickerProps) => {
     // Cache color prop for local re-rendering
     const [localColor, setLocalColor] = useState(color)
     // Cache color picker modep prop for local re-rendering
     const [localMode, setLocalMode] = useState<ColorPickerMode>(mode)
     // Cache angle on CCT/RGB selection ring when dragging around to know where to place incoming CCT values
     const [mainHandleAngle, setMainHandleAngle] = useState(0)
+    // Cache presets
+    const [localColorPresets, setLocalColorPresets] = useState<HSVWColorPresets>(emptyHSVWColorPresets)
 
     useLayoutEffect(() => {
       setLocalColor(color)
@@ -58,7 +88,16 @@ const ColorPicker = observer(
 
     useLayoutEffect(() => {
       setLocalMode(mode)
-    }, [mode])
+      if (mode === SWITCHABLE_OUTPUT_TYPE.RGB_COLOR_WHEEL) {
+        setLocalColorPresets(rgbColorPresets)
+      }
+      if (mode === SWITCHABLE_OUTPUT_TYPE.RGBW_COLOR_WHEEL) {
+        setLocalColorPresets(rgbwColorPresets)
+      }
+      if (mode === SWITCHABLE_OUTPUT_TYPE.CCT_COLOR_WHEEL) {
+        setLocalColorPresets(cctColorPresets)
+      }
+    }, [cctColorPresets, mode, rgbColorPresets, rgbwColorPresets])
 
     const showsModeSwitcher =
       ((validModes & COLOR_PICKER_MODE_BITMASK.RGB) !== 0 || (validModes & COLOR_PICKER_MODE_BITMASK.RGBW) !== 0) &&
@@ -106,6 +145,8 @@ const ColorPicker = observer(
       bArcStartAngle + (localColor.brightness / 100) * (bArcEndAngle - bArcStartAngle),
       true,
     )
+    const bIconPosition = polarToCartesian(cX, cY, (arcInnerR + arcOuterR) / 2, bArcEndAngle)
+    const bIconSize = (arcOuterR - arcInnerR) / 1.5
 
     const sArcStartAngle = 0 + 54
     const sArcEndAngle = 180 - 54
@@ -172,6 +213,9 @@ const ColorPicker = observer(
 
     const updateColorImmediately = useCallback(
       (color: HSVWColor) => {
+        if (!isValidHSVWColorPreset(color)) {
+          return
+        }
         setLocalColor(color)
         onColorChange?.(color)
       },
@@ -180,6 +224,9 @@ const ColorPicker = observer(
 
     const updateColorDebounced = useCallback(
       (color: HSVWColor) => {
+        if (!isValidHSVWColorPreset(color)) {
+          return
+        }
         setLocalColor(color)
         if (updateTimeoutRef.current) {
           clearTimeout(updateTimeoutRef.current)
@@ -406,60 +453,101 @@ const ColorPicker = observer(
     const switchToRGBWMode = useCallback(() => {
       if (validModes & COLOR_PICKER_MODE_BITMASK.RGBW) {
         setLocalMode(SWITCHABLE_OUTPUT_TYPE.RGBW_COLOR_WHEEL)
+        setLocalColorPresets(rgbwColorPresets)
         onModeChange?.(SWITCHABLE_OUTPUT_TYPE.RGBW_COLOR_WHEEL)
       } else {
         setLocalMode(SWITCHABLE_OUTPUT_TYPE.RGB_COLOR_WHEEL)
+        setLocalColorPresets(rgbColorPresets)
         onModeChange?.(SWITCHABLE_OUTPUT_TYPE.RGB_COLOR_WHEEL)
       }
-    }, [onModeChange, validModes])
+    }, [onModeChange, rgbColorPresets, rgbwColorPresets, validModes])
 
     const switchToCCTMode = useCallback(() => {
       if (validModes & COLOR_PICKER_MODE_BITMASK.CCT) {
         setLocalMode(SWITCHABLE_OUTPUT_TYPE.CCT_COLOR_WHEEL)
+        setLocalColorPresets(cctColorPresets)
         onModeChange?.(SWITCHABLE_OUTPUT_TYPE.CCT_COLOR_WHEEL)
       }
-    }, [onModeChange, validModes])
+    }, [cctColorPresets, onModeChange, validModes])
 
     const containerRef = useRef<HTMLDivElement>(null)
+    const [containerWidth, containerHeight] = useSize(containerRef)
     const [useHorizontalLayout, setUseHorizontalLayout] = useState(false)
     const [useHorizontalFill, setUseHorizontalFill] = useState(false)
 
     useLayoutEffect(() => {
-      if (!containerRef.current) return
+      const containerRatio = containerWidth / containerHeight
+      if (containerRatio >= 1) {
+        setUseHorizontalLayout(true)
+        setUseHorizontalFill(containerRatio < 2 / 1)
+      } else {
+        setUseHorizontalLayout(false)
+        setUseHorizontalFill(containerRatio < 1 / 2)
+      }
+    }, [width, height, containerWidth, containerHeight])
 
-      const resizeObserver = new ResizeObserver(([entry]) => {
-        const { width, height } = entry.contentRect
-        const containerRatio = width / height
-        console.log(`DEBUG: ${containerRatio}`)
-        if (containerRatio >= 1) {
-          setUseHorizontalLayout(true)
-          setUseHorizontalFill(containerRatio < 2 / 1)
+    const [isEditingPresets, setIsEditingPresets] = useState(false)
+
+    const toggleIsEdittingPresets = useCallback(() => {
+      setIsEditingPresets(!isEditingPresets)
+    }, [isEditingPresets])
+
+    const handleColorPresetClicked = useCallback(
+      (index: number, color: HSVWColor) => {
+        var notifyParent = false
+        var newPresets = [...localColorPresets] as HSVWColorPresets
+        if (isEditingPresets) {
+          if (isValidHSVWColorPreset(color)) {
+            // Remove color
+            setHSVWColorPreset(newPresets, emptyHSVWColor, index)
+            notifyParent = true
+          }
         } else {
-          setUseHorizontalLayout(false)
-          setUseHorizontalFill(containerRatio < 1 / 2)
+          if (isValidHSVWColorPreset(color)) {
+            // Change color
+            updateColorImmediately(color)
+          } else {
+            // Add color
+            newPresets = [...localColorPresets] as HSVWColorPresets
+            setHSVWColorPreset(newPresets, localColor, index)
+            notifyParent = true
+          }
         }
-      })
-
-      resizeObserver.observe(containerRef.current)
-
-      return () => resizeObserver.disconnect()
-    }, [])
+        if (notifyParent) {
+          if (mode === SWITCHABLE_OUTPUT_TYPE.RGB_COLOR_WHEEL) {
+            onRGBColorPresetsChange?.(newPresets)
+          }
+          if (mode === SWITCHABLE_OUTPUT_TYPE.RGBW_COLOR_WHEEL) {
+            onRGBWColorPresetsChange?.(newPresets)
+          }
+          if (mode === SWITCHABLE_OUTPUT_TYPE.CCT_COLOR_WHEEL) {
+            onCCTColorPresetsChange?.(newPresets)
+          }
+        }
+      },
+      [
+        isEditingPresets,
+        localColor,
+        localColorPresets,
+        mode,
+        onCCTColorPresetsChange,
+        onRGBColorPresetsChange,
+        onRGBWColorPresetsChange,
+        updateColorImmediately,
+      ],
+    )
 
     return (
       <div ref={containerRef} className={className}>
         <div
-          className={classNames(
-            "grid auto-rows-fr min-w-0 min-h-0 border-2 border-yelow-500",
-            // TODO: h-full or w-full depending on what container aspect ratio is so that we can fit
-            {
-              "grid-cols-1 aspect-[1/2]": !useHorizontalLayout,
-              "grid-cols-2 aspect-[2/1]": useHorizontalLayout,
-              "h-full": !useHorizontalFill,
-              "w-full": useHorizontalFill,
-            },
-          )}
+          className={classNames("grid auto-rows-fr min-w-0 min-h-0", {
+            "grid-cols-1": !useHorizontalLayout,
+            "grid-cols-2": useHorizontalLayout,
+            "h-full": !useHorizontalFill,
+            "w-full": useHorizontalFill,
+          })}
         >
-          <div className="aspect-square min-w-0 min-h-0 w-full h-full border-2 border-red-500">
+          <div className={`min-w-0 min-h-0 w-full h-full`}>
             <svg
               width="100%"
               height="100%"
@@ -565,6 +653,15 @@ const ColorPicker = observer(
                 onTouchStart={handlePress}
                 pointerEvents="all"
               />
+              {/* Left Arc - Brightness Icon */}
+              {generateBrigthtnessIcon(
+                bIconPosition.x,
+                bIconPosition.y,
+                bIconSize,
+                bIconSize,
+                // TODO: this is a super hacky way to directly refer to the theme color, simplify
+                "var(--c-content-primary)",
+              )}
               {/* Left Arc - Brightness with Touch */}
               <path
                 d={brightnessFillArcPath}
@@ -722,16 +819,66 @@ const ColorPicker = observer(
                   />
                 ))()}
             </svg>
+            {/* This is helping layout SVG next to presets in a way that presets remain square */}
+            <FadedText className="flex-1 text-[1.3em] text-transparent" text={"XXX"} />
           </div>
-          <div className="aspect-square min-w-0 min-h-0 w-full h-full border-2 border-red-500 flex flex-col">
-            <div className="shrink-0">{translate("switches.preset")}</div>
+          <div className={`min-w-0 min-h-0 flex flex-col p-5`}>
+            <div className="flex shrink-0 mb-2">
+              <FadedText className="flex-1 text-[1.3em]" text={translate("switches.preset")} />
+              {/* Trash Icon */}
+              <div
+                className={classNames(
+                  "w-px-32 h-px-32 cursor-pointer outline-none rounded-sm border-2 border-content-victronBlue p-px-2",
+                  {
+                    "bg-surface-victronBlue text-content-primary": !isEditingPresets,
+                    "bg-content-victronBlue text-content-onVictronBlue ": isEditingPresets,
+                  },
+                )}
+                onMouseDown={toggleIsEdittingPresets}
+                onTouchStart={toggleIsEdittingPresets}
+              >
+                <TrashIcon
+                  alt="Edit"
+                  onClick={() => {
+                    /**/
+                  }}
+                />
+              </div>
+            </div>
             <div className="flex-1 flex items-center justify-center">
-              <div className="grid grid-cols-3 grid-rows-3 min-w-0 min-h-0 w-full h-full aspect-square border-2 border-blue-500">
-                {Array.from({ length: 12 }, (_, i) => (
-                  <div key={i} className="">
-                    <div className="aspect-square w-full h-full rounded-md border-2 border-blue-500"></div>
-                  </div>
-                ))}
+              <div className="grid grid-cols-3 grid-rows-3 w-full h-full">
+                {Array.from({ length: 9 }, (_, i) => {
+                  const c = localColorPresets[i]
+                  return (
+                    <div
+                      key={i}
+                      className={classNames("flex w-full h-full", {
+                        "justify-start": (i + 0) % 3 === 0,
+                        "justify-end": (i + 1) % 3 === 0,
+                        "justify-center": (i + 2) % 3 === 0,
+                        "items-start": i < 3,
+                        "items-end": i > 5,
+                        "items-center": i >= 3 && i <= 5,
+                      })}
+                    >
+                      <div
+                        className={classNames(
+                          "aspect-square w-[80%] h-[80%] rounded-md flex items-center justify-center text-xl font-bold",
+                          {
+                            "border-2 border-content-victronBlue": isValidHSVWColorPreset(c) || !isEditingPresets,
+                          },
+                        )}
+                        style={{
+                          backgroundColor: colorPresetToDisplayColor(c, isInCCTMode),
+                        }}
+                        onMouseDown={() => handleColorPresetClicked(i, c)}
+                        onTouchStart={() => handleColorPresetClicked(i, c)}
+                      >
+                        {isValidHSVWColorPreset(c) ? (isEditingPresets ? "-" : "") : isEditingPresets ? "" : "+"}
+                      </div>
+                    </div>
+                  )
+                })}
               </div>
             </div>
           </div>
@@ -796,6 +943,62 @@ function generateGradientRing(
       />
     )
   })
+}
+
+function generateBrigthtnessIcon(cX: number, cY: number, w: number, h: number, fill: string) {
+  // Adopted by copy/pasting sunny.png below
+  // Calculate scale to match requested size from original 17x17
+  const scaleX = w / 17
+  const scaleY = h / 17
+
+  // Center the icon at (cX, cY) accounting for the scaling
+  // Since the original viewBox is 0 0 17 17, we need to offset by half the original size
+  const translateX = cX - (17 * scaleX) / 2
+  const translateY = cY - (17 * scaleY) / 2
+  return (
+    <>
+      {/* <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg"> */}
+      <g transform={`translate(${translateX}, ${translateY}) scale(${scaleX}, ${scaleY})`}>
+        <path
+          d="M8.2205 3.96057C5.8284 3.96057 3.88203 5.94649 3.88203 8.38719C3.88203 10.8279 5.8284 12.8138 8.2205 12.8138C10.6126 12.8138 12.559 10.8279 12.559 8.38719C12.559 5.94649 10.6126 3.96057 8.2205 3.96057ZM8.2205 11.5713C6.49973 11.5713 5.09985 10.1429 5.09985 8.38719C5.09985 6.63208 6.49973 5.20313 8.2205 5.20313C9.94128 5.20313 11.3412 6.63208 11.3412 8.38719C11.3412 10.1429 9.94128 11.5713 8.2205 11.5713Z"
+          fill={`${fill}`}
+        />
+        <path
+          d="M8.22028 3.05453C8.5564 3.05453 8.82919 2.7762 8.82919 2.43325V0.621282C8.82919 0.278335 8.5564 0 8.22028 0C7.88386 0 7.61137 0.278335 7.61137 0.621282V2.43325C7.61137 2.77651 7.88386 3.05453 8.22028 3.05453Z"
+          fill={`${fill}`}
+        />
+        <path
+          d="M8.22028 13.72C7.88386 13.72 7.61137 13.9983 7.61137 14.3413V16.1535C7.61137 16.4965 7.88386 16.7748 8.22028 16.7748C8.5564 16.7748 8.82919 16.4965 8.82919 16.1535V14.3413C8.82919 13.9986 8.5564 13.72 8.22028 13.72Z"
+          fill={`${fill}`}
+        />
+        <path
+          d="M15.8325 7.76611H14.0566C13.7205 7.76611 13.4477 8.04414 13.4477 8.38739C13.4477 8.73034 13.7205 9.00867 14.0566 9.00867H15.8325C16.1686 9.00867 16.4414 8.73034 16.4414 8.38739C16.4414 8.04414 16.1686 7.76611 15.8325 7.76611Z"
+          fill={`${fill}`}
+        />
+        <path
+          d="M2.99401 8.38739C2.99401 8.04414 2.72152 7.76611 2.3851 7.76611H0.60891C0.272792 7.76611 0 8.04414 0 8.38739C0 8.73034 0.272792 9.00867 0.60891 9.00867H2.3851C2.72152 9.00867 2.99401 8.73034 2.99401 8.38739Z"
+          fill={`${fill}`}
+        />
+        <path
+          d="M12.7771 4.61673L14.0327 3.33534C14.2705 3.09273 14.2702 2.69915 14.0327 2.45685C13.7949 2.21393 13.4095 2.21424 13.1717 2.45685L11.9161 3.73793C11.6783 3.98054 11.678 4.37381 11.9161 4.61673C12.1536 4.85934 12.5393 4.85934 12.7771 4.61673Z"
+          fill={`${fill}`}
+        />
+        <path
+          d="M3.6633 12.158L2.40742 13.4394C2.16995 13.682 2.16934 14.0753 2.40742 14.3179C2.6449 14.5605 3.03095 14.5605 3.26842 14.3179L4.5243 13.0371C4.76208 12.7945 4.76178 12.4006 4.5243 12.158C4.28652 11.9151 3.90108 11.9157 3.6633 12.158Z"
+          fill={`${fill}`}
+        />
+        <path
+          d="M12.7779 12.1589C12.5401 11.9163 12.1547 11.9163 11.9166 12.1589C11.6791 12.4009 11.6791 12.7948 11.9166 13.0374L13.1725 14.3181C13.4102 14.5608 13.796 14.5608 14.0335 14.3181C14.2715 14.0755 14.2712 13.6823 14.0335 13.4397L12.7779 12.1589Z"
+          fill={`${fill}`}
+        />
+        <path
+          d="M3.66307 4.61645C3.90085 4.85906 4.2866 4.85875 4.52407 4.61645C4.76216 4.37353 4.76216 3.98057 4.52407 3.73765L3.26819 2.45626C3.03072 2.21396 2.64497 2.21364 2.40719 2.45626C2.16972 2.69856 2.16972 3.09245 2.40719 3.33475L3.66307 4.61645Z"
+          fill={`${fill}`}
+        />
+        {/* </svg> */}
+      </g>
+    </>
+  )
 }
 
 export default ColorPicker

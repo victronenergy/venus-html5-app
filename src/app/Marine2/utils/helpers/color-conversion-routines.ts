@@ -1,3 +1,5 @@
+import { HSVWColor, isValidHSVWColorPreset } from "@victronenergy/mfd-modules/dist/src/utils/hsvw"
+
 export function colorHueToDisplayColor(h: number, s: number, v: number): string {
   s = s / 100
   v = v / 100
@@ -91,4 +93,17 @@ export function cctColorFunction(i: number, steps: number): string {
   const displayAngle = (-angle + 55 + 360) % 360
   const temperature = angleToColorTemperature(displayAngle)
   return colorTemperatureToDisplayColor(temperature)
+}
+
+export function colorPresetToDisplayColor(preset: HSVWColor, isCCT: boolean): string {
+  if (isCCT) {
+    if (preset.colorTemperature !== 0) {
+      return colorTemperatureToDisplayColor(preset.colorTemperature)
+    }
+  } else {
+    if (isValidHSVWColorPreset(preset)) {
+      return colorHueToDisplayColor(preset.hue, preset.saturation, 100)
+    }
+  }
+  return "transparent"
 }
