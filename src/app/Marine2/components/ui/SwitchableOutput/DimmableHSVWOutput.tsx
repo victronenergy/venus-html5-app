@@ -248,7 +248,7 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
                 <FadedText className="flex-1" text={outputName} />
                 {/* CloseIcon */}
                 <CloseIcon
-                  className="w-px-32 h-px-32 text-content-victronBlue cursor-pointer outline-none"
+                  className="w-px-20 h-px-20 text-content-victronBlue cursor-pointer outline-none"
                   alt="Close"
                   onClick={() => setIsColorWheelOpen(false)}
                 />
