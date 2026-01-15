@@ -834,8 +834,7 @@ const ColorPicker = observer(
                     "bg-content-victronBlue text-content-onVictronBlue ": isEditingPresets,
                   },
                 )}
-                onMouseDown={toggleIsEdittingPresets}
-                onTouchStart={toggleIsEdittingPresets}
+                onClick={toggleIsEdittingPresets}
               >
                 <TrashIcon
                   alt="Edit"
