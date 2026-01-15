@@ -107,7 +107,7 @@
     "@types/react-dom": "^18.3.7",
     "@typescript-eslint/eslint-plugin": "^8.45.0",
     "@typescript-eslint/parser": "^8.45.0",
-    "autoprefixer": "^10.4.21",
+    "autoprefixer": "^10.4.23",
     "compression-webpack-plugin": "^11.1.0",
     "confusing-browser-globals": "^1.0.11",
     "css-loader": "^7.1.2",
@@ -163,8 +163,11 @@
   },
   "browserslist": {
     "production": [
-      "chrome >= 45",
-      "last 10 versions"
+      "safari >= 6",
+      "ios_saf >= 6",
+      "chrome >= 28",
+      "not ie 11",
+      "not dead"
     ],
     "development": [
       "chrome >= 45",
