@@ -142,7 +142,7 @@ const ColorPicker = observer(
       arcInnerR,
       arcOuterR,
       bArcStartAngle,
-      bArcStartAngle + (localColor.brightness / 100) * (bArcEndAngle - bArcStartAngle),
+      bArcStartAngle + ((0.01 + localColor.brightness) / 100) * (bArcEndAngle - bArcStartAngle),
       true,
     )
     const bIconPosition = polarToCartesian(cX, cY, (arcInnerR + arcOuterR) / 2, bArcEndAngle)
