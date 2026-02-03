@@ -467,15 +467,18 @@ const ColorPicker = observer(
     const [containerWidth, containerHeight] = useSize(containerRef)
     const [useHorizontalLayout, setUseHorizontalLayout] = useState(false)
     const [useHorizontalFill, setUseHorizontalFill] = useState(false)
+    const [squareSize, setSquareSize] = useState(0)
 
     useLayoutEffect(() => {
       const containerRatio = containerWidth / containerHeight
       if (containerRatio >= 1) {
         setUseHorizontalLayout(true)
         setUseHorizontalFill(containerRatio < 2 / 1)
+        setSquareSize(containerRatio >= 2 ? containerHeight : containerWidth / 2)
       } else {
         setUseHorizontalLayout(false)
         setUseHorizontalFill(containerRatio < 1 / 2)
+        setSquareSize(containerRatio <= 0.5 ? containerWidth : containerHeight / 2)
       }
     }, [containerWidth, containerHeight])
 
@@ -539,31 +542,21 @@ const ColorPicker = observer(
             "h-full": !useHorizontalFill,
             "w-full": useHorizontalFill,
           })}
-          style={{
-            gridTemplateRows: useHorizontalLayout ? "100%" : "1fr 1fr",
-            gridTemplateColumns: useHorizontalLayout ? "1fr 1fr" : "100%",
-          }}
         >
           <div
-            className={classNames("border-2 border-red-500 text-left", { "pl-5": useHorizontalLayout })}
+            className={classNames("border-2 border-red-500 text-left", { "": useHorizontalLayout })}
             style={{
-              aspectRatio: "1 / 1",
-              width: "100%",
-              height: "100%",
-              maxWidth: useHorizontalLayout ? undefined : "100%",
-              maxHeight: useHorizontalLayout ? "100%" : undefined,
+              width: squareSize,
+              height: squareSize,
             }}
           >
             AAA
           </div>
           <div
-            className={classNames("border-2 border-red-500 text-right", { "pr-5": useHorizontalLayout })}
+            className={classNames("border-2 border-red-500 text-right", { "": useHorizontalLayout })}
             style={{
-              aspectRatio: "1 / 1",
-              width: "100%",
-              height: "100%",
-              maxWidth: useHorizontalLayout ? undefined : "100%",
-              maxHeight: useHorizontalLayout ? "100%" : undefined,
+              width: squareSize,
+              height: squareSize,
             }}
           >
             BBB
