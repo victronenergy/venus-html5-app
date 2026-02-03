@@ -537,11 +537,13 @@ const ColorPicker = observer(
       <div ref={containerRef} className={classNames(className, "border-2 border-blue-500")}>
         <div
           className={classNames("grid border-2 border-green-500", {
-            "grid-cols-1": !useHorizontalLayout,
-            "grid-cols-2": useHorizontalLayout,
             "h-full": !useHorizontalFill,
             "w-full": useHorizontalFill,
           })}
+          style={{
+            gridTemplateColumns: useHorizontalLayout ? `${squareSize}px ${squareSize}px` : `${squareSize}px`,
+            gridTemplateRows: useHorizontalLayout ? `${squareSize}px` : `${squareSize}px ${squareSize}px`,
+          }}
         >
           <div
             className={classNames("border-2 border-red-500 text-left", { "": useHorizontalLayout })}
