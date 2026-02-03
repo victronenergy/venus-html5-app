@@ -547,7 +547,7 @@ const ColorPicker = observer(
             "w-full": useHorizontalFill,
           })}
         >
-          <div className={`min-w-0 min-h-0 w-full h-full ${useHorizontalLayout ? "pl-5" : ""}`}>
+          <div className={`min-w-0 min-h-0 w-full h-full border-2 border-red-500 ${useHorizontalLayout ? "pl-5" : ""}`}>
             <svg
               width="100%"
               height="100%"
@@ -822,7 +822,7 @@ const ColorPicker = observer(
             {/* This is helping layout SVG next to presets in a way that presets remain square */}
             <FadedText className="flex-1 text-[1.3em] text-transparent" text={"XXX"} />
           </div>
-          <div className={`min-w-0 min-h-0 flex flex-col p-5`}>
+          <div className={`min-w-0 min-h-0 flex flex-col p-5 border-2 border-red-500`}>
             <div className="flex shrink-0 mb-2">
               <FadedText className="flex-1 text-[1.3em]" text={translate("switches.preset")} />
               {/* Trash Icon */}
