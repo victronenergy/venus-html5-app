@@ -17,7 +17,6 @@ import {
   cctColorFunction,
   colorHueToAngle,
   colorHueToDisplayColor,
-  colorPresetToDisplayColor,
   colorTemperatureToAngle,
   colorTemperatureToDisplayColor,
   rgbColorFunction,
@@ -492,7 +491,7 @@ const ColorPicker = observer(
       setIsEditingPresets(!isEditingPresets)
     }, [isEditingPresets])
 
-    const handleColorPresetClicked = useCallback(
+    const _handleColorPresetClicked = useCallback(
       (index: number, color: HSVWColor) => {
         var notifyParent = false
         var newPresets = [...localColorPresets] as HSVWColorPresets
@@ -844,43 +843,7 @@ const ColorPicker = observer(
                 />
               </div>
             </div>
-            <div className="flex-1 flex items-center justify-center">
-              <div className="grid grid-cols-3 grid-rows-3 w-full h-full">
-                {Array.from({ length: 9 }, (_, i) => {
-                  const c = localColorPresets[i]
-                  return (
-                    <div
-                      key={i}
-                      className={classNames("flex w-full h-full", {
-                        "justify-start": (i + 0) % 3 === 0,
-                        "justify-end": (i + 1) % 3 === 0,
-                        "justify-center": (i + 2) % 3 === 0,
-                        "items-start": i < 3,
-                        "items-end": i > 5,
-                        "items-center": i >= 3 && i <= 5,
-                      })}
-                    >
-                      <div
-                        className={classNames(
-                          "aspect-square w-[80%] h-[80%] rounded-md flex items-center justify-center text-xl font-bold",
-                          {
-                            "border-2 border-content-victronBlue": isValidHSVWColorPreset(c) || !isEditingPresets,
-                            "border-2 border-content-tertiary": isEditingPresets && !isValidHSVWColorPreset(c),
-                          },
-                        )}
-                        style={{
-                          backgroundColor: colorPresetToDisplayColor(c, isInCCTMode),
-                        }}
-                        onMouseDown={() => handleColorPresetClicked(i, c)}
-                        onTouchStart={() => handleColorPresetClicked(i, c)}
-                      >
-                        {isValidHSVWColorPreset(c) ? (isEditingPresets ? "-" : "") : isEditingPresets ? "" : "+"}
-                      </div>
-                    </div>
-                  )
-                })}
-              </div>
-            </div>
+            <div className="flex-1 flex items-center justify-center"></div>
           </div>
         </div>
       </div>
