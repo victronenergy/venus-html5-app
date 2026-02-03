@@ -538,9 +538,9 @@ const ColorPicker = observer(
     )
 
     return (
-      <div ref={containerRef} className={className}>
+      <div ref={containerRef} className={classNames(className, "border-2 border-blue-500")}>
         <div
-          className={classNames("grid auto-rows-fr min-w-0 min-h-0", {
+          className={classNames("grid auto-rows-fr min-w-0 min-h-0 border-2 border-green-500", {
             "grid-cols-1": !useHorizontalLayout,
             "grid-cols-2": useHorizontalLayout,
             "h-full": !useHorizontalFill,

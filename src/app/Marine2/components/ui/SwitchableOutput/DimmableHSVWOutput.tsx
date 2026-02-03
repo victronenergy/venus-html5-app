@@ -242,7 +242,7 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
           className={classnames("w-4/6 max-w-4/6 h-4/6 max-h-4/6")}
         >
           <Modal.Body variant="popUp" className="h-full bg-surface-primary">
-            <div className="h-full flex flex-col border-2 border-blue-500 ">
+            <div className="h-full flex flex-col">
               {/* Title with close button */}
               <div className="flex shrink-0">
                 <FadedText className="flex-1" text={outputName} />
@@ -261,7 +261,7 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
                 />
               </div>
               {/* Controls */}
-              <div className="flex-1 min-h-0 border-2 border-green-500 ">
+              <div className="flex-1 min-h-0">
                 <ColorPicker
                   className="w-full h-full md:p-4 max-w-full max-h-full flex items-center justify-center"
                   color={color}
