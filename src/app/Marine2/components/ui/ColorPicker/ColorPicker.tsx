@@ -554,7 +554,7 @@ const ColorPicker = observer(
         >
           {/* SQUARE 1 */}
           <div
-            className={classNames("", { "pl-4": useHorizontalLayout })}
+            className={classNames("", { "md:p-4": useHorizontalLayout })}
             style={{
               width: squareSize,
               height: squareSize,
@@ -836,7 +836,7 @@ const ColorPicker = observer(
           </div>
           {/* SQUARE 2 */}
           <div
-            className={classNames("flex flex-col", { "pr-4": useHorizontalLayout })}
+            className={classNames("flex flex-col", { "md:p-4": useHorizontalLayout })}
             style={{
               width: squareSize,
               height: squareSize,
