@@ -474,17 +474,20 @@ const ColorPicker = observer(
     const [containerWidth, containerHeight] = useSize(containerRef)
     const [useHorizontalLayout, setUseHorizontalLayout] = useState(false)
     const [useHorizontalFill, setUseHorizontalFill] = useState(false)
+    const [squareSize, setSquareSize] = useState(0)
 
     useLayoutEffect(() => {
       const containerRatio = containerWidth / containerHeight
       if (containerRatio >= 1) {
         setUseHorizontalLayout(true)
         setUseHorizontalFill(containerRatio < 2 / 1)
+        setSquareSize(containerRatio >= 2 ? containerHeight : containerWidth / 2)
       } else {
         setUseHorizontalLayout(false)
         setUseHorizontalFill(containerRatio < 1 / 2)
+        setSquareSize(containerRatio <= 0.5 ? containerWidth : containerHeight / 2)
       }
-    }, [width, height, containerWidth, containerHeight])
+    }, [containerWidth, containerHeight])
 
     const [isEditingPresets, setIsEditingPresets] = useState(false)
 
@@ -540,14 +543,23 @@ const ColorPicker = observer(
     return (
       <div ref={containerRef} className={className}>
         <div
-          className={classNames("grid auto-rows-fr min-w-0 min-h-0", {
-            "grid-cols-1": !useHorizontalLayout,
-            "grid-cols-2": useHorizontalLayout,
+          className={classNames("grid", {
             "h-full": !useHorizontalFill,
             "w-full": useHorizontalFill,
           })}
+          style={{
+            gridTemplateColumns: useHorizontalLayout ? `${squareSize}px ${squareSize}px` : `${squareSize}px`,
+            gridTemplateRows: useHorizontalLayout ? `${squareSize}px` : `${squareSize}px ${squareSize}px`,
+          }}
         >
-          <div className={`min-w-0 min-h-0 w-full h-full ${useHorizontalLayout ? "pl-5" : ""}`}>
+          {/* SQUARE 1 */}
+          <div
+            className={classNames("", { "pl-4": useHorizontalLayout })}
+            style={{
+              width: squareSize,
+              height: squareSize,
+            }}
+          >
             <svg
               width="100%"
               height="100%"
@@ -822,7 +834,14 @@ const ColorPicker = observer(
             {/* This is helping layout SVG next to presets in a way that presets remain square */}
             <FadedText className="flex-1 text-[1.3em] text-transparent" text={"XXX"} />
           </div>
-          <div className={`min-w-0 min-h-0 flex flex-col p-5`}>
+          {/* SQUARE 2 */}
+          <div
+            className={classNames("flex flex-col", { "pr-4": useHorizontalLayout })}
+            style={{
+              width: squareSize,
+              height: squareSize,
+            }}
+          >
             <div className="flex shrink-0 mb-2">
               <FadedText className="flex-1 text-[1.3em]" text={translate("switches.preset")} />
               {/* Trash Icon */}
