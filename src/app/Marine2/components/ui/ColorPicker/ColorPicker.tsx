@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react"
 import { observer } from "mobx-react"
 import {
@@ -14,20 +15,13 @@ import {
 import {
   angleToColorHue,
   angleToColorTemperature,
-  cctColorFunction,
   colorHueToAngle,
-  colorHueToDisplayColor,
   colorTemperatureToAngle,
-  colorTemperatureToDisplayColor,
-  rgbColorFunction,
 } from "app/Marine2/utils/helpers/color-conversion-routines"
 import { describeArc, polarToCartesian } from "app/Marine2/utils/helpers/svg-routines"
 import { SWITCHABLE_OUTPUT_TYPE } from "@victronenergy/mfd-modules/dist/src/utils/constants"
-import { translate } from "react-i18nify"
 import classNames from "classnames"
 import useSize from "@react-hook/size"
-import TrashIcon from "../../../images/icons/icon_trash_32.svg"
-import FadedText from "../FadedText"
 
 export type ColorPickerMode =
   | typeof SWITCHABLE_OUTPUT_TYPE.RGB_COLOR_WHEEL
@@ -107,8 +101,8 @@ const ColorPicker = observer(
       localMode === SWITCHABLE_OUTPUT_TYPE.RGB_COLOR_WHEEL || localMode === SWITCHABLE_OUTPUT_TYPE.RGBW_COLOR_WHEEL
 
     // Prepare canvas
-    const width = 500
-    const height = 500
+    const width = 1500
+    const height = 1500
     const cX = width / 2
     const cY = height / 2
     const maxRadius = Math.min(width, height) / 2
@@ -442,14 +436,14 @@ const ColorPicker = observer(
       ],
     )
 
-    const handleRelease = useCallback(() => {
+    const _handleRelease = useCallback(() => {
       isDraggingHueRef.current = false
       isDraggingBrightnessRef.current = false
       isDraggingSaturationRef.current = false
       isDraggingWhiteLevelRef.current = false
     }, [])
 
-    const switchToRGBWMode = useCallback(() => {
+    const _switchToRGBWMode = useCallback(() => {
       if (validModes & COLOR_PICKER_MODE_BITMASK.RGBW) {
         setLocalMode(SWITCHABLE_OUTPUT_TYPE.RGBW_COLOR_WHEEL)
         setLocalColorPresets(rgbwColorPresets)
@@ -461,7 +455,7 @@ const ColorPicker = observer(
       }
     }, [onModeChange, rgbColorPresets, rgbwColorPresets, validModes])
 
-    const switchToCCTMode = useCallback(() => {
+    const _switchToCCTMode = useCallback(() => {
       if (validModes & COLOR_PICKER_MODE_BITMASK.CCT) {
         setLocalMode(SWITCHABLE_OUTPUT_TYPE.CCT_COLOR_WHEEL)
         setLocalColorPresets(cctColorPresets)
@@ -483,11 +477,11 @@ const ColorPicker = observer(
         setUseHorizontalLayout(false)
         setUseHorizontalFill(containerRatio < 1 / 2)
       }
-    }, [width, height, containerWidth, containerHeight])
+    }, [containerWidth, containerHeight])
 
     const [isEditingPresets, setIsEditingPresets] = useState(false)
 
-    const toggleIsEdittingPresets = useCallback(() => {
+    const _toggleIsEdittingPresets = useCallback(() => {
       setIsEditingPresets(!isEditingPresets)
     }, [isEditingPresets])
 
@@ -539,311 +533,40 @@ const ColorPicker = observer(
     return (
       <div ref={containerRef} className={classNames(className, "border-2 border-blue-500")}>
         <div
-          className={classNames("grid auto-rows-fr min-w-0 min-h-0 border-2 border-green-500", {
+          className={classNames("grid border-2 border-green-500", {
             "grid-cols-1": !useHorizontalLayout,
             "grid-cols-2": useHorizontalLayout,
             "h-full": !useHorizontalFill,
             "w-full": useHorizontalFill,
           })}
+          style={{
+            gridTemplateRows: useHorizontalLayout ? "100%" : "1fr 1fr",
+            gridTemplateColumns: useHorizontalLayout ? "1fr 1fr" : "100%",
+          }}
         >
-          <div className={`min-w-0 min-h-0 w-full h-full border-2 border-red-500 ${useHorizontalLayout ? "pl-5" : ""}`}>
-            <svg
-              width="100%"
-              height="100%"
-              viewBox={`0 0 ${width} ${height}`}
-              preserveAspectRatio="xMidYMid meet"
-              ref={svgRef}
-              onMouseMove={handleMove}
-              onMouseUp={handleRelease}
-              onMouseLeave={handleRelease}
-              onTouchMove={handleMove}
-              onTouchEnd={handleRelease}
-              onTouchCancel={handleRelease}
-            >
-              {/* RGBW Mode Switch Gradient */}
-              {showsModeSwitcher &&
-                generateGradientRing(
-                  rgbwModeHandleX,
-                  rgbwModeHandleY,
-                  modeSwitchHandleSize * 0.5,
-                  modeSwitchHandleSize * 0.9,
-                  180,
-                  rgbColorFunction,
-                )}
-              {/* RGB Mode Switch Selection Ring */}
-              {showsModeSwitcher && (
-                <circle
-                  cx={rgbwModeHandleX}
-                  cy={rgbwModeHandleY}
-                  r={modeSwitchHandleSize}
-                  fill="transparent"
-                  stroke="rgba(var(--c-victron-blue-rgb), 1.0)"
-                  strokeWidth={isInRGBMode ? arcBorderSize : 0}
-                  onMouseDown={switchToRGBWMode}
-                  onTouchStart={switchToRGBWMode}
-                  pointerEvents="all"
-                />
-              )}
-              {/* RGBW Mode Switch Gradient */}
-              {showsModeSwitcher &&
-                generateGradientRing(
-                  cctModeHandleX,
-                  cctModeHandleY,
-                  modeSwitchHandleSize * 0.5,
-                  modeSwitchHandleSize * 0.9,
-                  180,
-                  cctColorFunction,
-                )}
-              {/* CCT Mode Switch Selection Ring */}
-              {showsModeSwitcher && (
-                <circle
-                  cx={cctModeHandleX}
-                  cy={cctModeHandleY}
-                  r={modeSwitchHandleSize}
-                  fill="transparent"
-                  stroke="rgba(var(--c-victron-blue-rgb), 1.0)"
-                  strokeWidth={isInCCTMode ? arcBorderSize : 0}
-                  onMouseDown={switchToCCTMode}
-                  onTouchStart={switchToCCTMode}
-                  pointerEvents="all"
-                />
-              )}
-              {/* Selected Color Circle */}
-              <circle
-                cx={cX}
-                cy={cY}
-                r={centerCircleRadius}
-                fill={
-                  isInCCTMode
-                    ? colorTemperatureToDisplayColor(localColor.colorTemperature)
-                    : colorHueToDisplayColor(localColor.hue, localColor.saturation, 100)
-                }
-              />
-              {/* Main Ring Gradient */}
-              {generateGradientRing(
-                cX,
-                cY,
-                mainRingInnerRadius,
-                mainRingOuterRadius,
-                360 / gradientDegreesPerStep,
-                isInRGBMode ? rgbColorFunction : cctColorFunction,
-              )}
-              {/* Main Ring Handle */}
-              <circle
-                cx={cX}
-                cy={cY}
-                r={mainRingRadius}
-                fill="none"
-                stroke="none"
-                strokeWidth={mainRingOuterRadius - mainRingInnerRadius}
-                onMouseDown={handlePress}
-                onTouchStart={handlePress}
-                pointerEvents="all"
-              />
-              {/* Left Arc - Brightness Background with Touch */}
-              <path
-                d={brightnessArcPath}
-                // TODO: this is a super hacky way to directly refer to the theme color, simplify
-                fill="rgba(var(--c-victron-blue-rgb), 0.3)"
-                stroke="rgba(var(--c-victron-blue-rgb), 1.0)"
-                strokeWidth={arcBorderSize}
-                strokeLinejoin="round"
-                onMouseDown={handlePress}
-                onTouchStart={handlePress}
-                pointerEvents="all"
-              />
-              {/* Left Arc - Brightness Icon */}
-              {generateBrigthtnessIcon(
-                bIconPosition.x,
-                bIconPosition.y,
-                bIconSize,
-                bIconSize,
-                // TODO: this is a super hacky way to directly refer to the theme color, simplify
-                "var(--c-content-primary)",
-              )}
-              {/* Left Arc - Brightness with Touch */}
-              <path
-                d={brightnessFillArcPath}
-                // TODO: this is a super hacky way to directly refer to the theme color, simplify
-                fill="rgba(var(--c-victron-blue-rgb), 1.0)"
-                stroke="rgba(var(--c-victron-blue-rgb), 1.0)"
-                strokeWidth={arcBorderSize}
-                strokeLinejoin="round"
-                onMouseDown={handlePress}
-                onTouchStart={handlePress}
-                pointerEvents="all"
-              />
-              {/* Right Arc Gradient Caps */}
-              {isInRGBMode &&
-                (() => {
-                  const startCapX = cX + arcR * Math.sin((sArcStartAngle * Math.PI) / 180)
-                  const startCapY = cY + arcR * Math.cos((sArcStartAngle * Math.PI) / 180)
-                  const endCapX = cX + arcR * Math.sin((sArcEndAngle * Math.PI) / 180)
-                  const endCapY = cY + arcR * Math.cos((sArcEndAngle * Math.PI) / 180)
-                  const capRadius = (arcOuterR - arcInnerR) / 2
-                  return (
-                    <>
-                      <circle
-                        cx={startCapX}
-                        cy={startCapY}
-                        r={capRadius}
-                        fill={colorHueToDisplayColor(localColor.hue, 0, 100)}
-                      />
-                      <circle
-                        cx={endCapX}
-                        cy={endCapY}
-                        r={capRadius}
-                        fill={colorHueToDisplayColor(localColor.hue, 100, 100)}
-                      />
-                    </>
-                  )
-                })()}
-              {/* Right Arc Gradient Background */}
-              {isInRGBMode &&
-                generateGradientArc(
-                  cX,
-                  cY,
-                  arcInnerR,
-                  arcOuterR,
-                  sArcStartAngle,
-                  sArcEndAngle,
-                  gradientDegreesPerStep,
-                  (t: number) => colorHueToDisplayColor(localColor.hue, 100 - t * 100, 100),
-                )}
-              {/* Right Arc - Saturation Touch Area */}
-              {isInRGBMode &&
-                (() => {
-                  return (
-                    <path
-                      d={saturationArcPath}
-                      fill="none"
-                      stroke="none"
-                      strokeWidth={0}
-                      strokeLinejoin="round"
-                      onMouseDown={handlePress}
-                      onTouchStart={handlePress}
-                      pointerEvents="all"
-                    />
-                  )
-                })()}
-              {/* Bottom Arc Gradient Caps */}
-              {showsWhiteLevelSlider &&
-                (() => {
-                  const startCapX = cX + arcR * Math.sin((wArcStartAngle * Math.PI) / 180)
-                  const startCapY = cY - arcR * Math.cos((wArcStartAngle * Math.PI) / 180)
-                  const endCapX = cX + arcR * Math.sin((wArcEndAngle * Math.PI) / 180)
-                  const endCapY = cY - arcR * Math.cos((wArcEndAngle * Math.PI) / 180)
-                  const capRadius = (arcOuterR - arcInnerR) / 2
-                  return (
-                    <>
-                      <circle cx={startCapX} cy={startCapY} r={capRadius} fill={"black"} />
-                      <circle cx={endCapX} cy={endCapY} r={capRadius} fill={"white"} />
-                    </>
-                  )
-                })()}
-              {/* Bottom Arc Gradient Background */}
-              {showsWhiteLevelSlider &&
-                generateGradientArc(
-                  cX,
-                  cY,
-                  arcInnerR,
-                  arcOuterR,
-                  wArcStartAngle,
-                  wArcEndAngle,
-                  gradientDegreesPerStep,
-                  (t: number) => colorHueToDisplayColor(0, 0, t * 100),
-                )}
-              {/* Bottom Arc - White Level */}
-              {showsWhiteLevelSlider &&
-                (() => (
-                  <path
-                    d={whiteLevelArcPath}
-                    fill="none"
-                    stroke="black"
-                    strokeWidth={arcBorderSize}
-                    strokeLinejoin="round"
-                    onMouseDown={handlePress}
-                    onTouchStart={handlePress}
-                    pointerEvents="all"
-                  />
-                ))()}
-              {/* Main Handle */}
-              <circle
-                cx={mainHandleX}
-                cy={mainHandleY}
-                r={mainRingHandleSize - 3}
-                fill="transparent"
-                stroke="white"
-                strokeWidth={handleBorderSize}
-                pointerEvents="none"
-              />
-              {/* Brightness Handle */}
-              <circle
-                cx={brightnessHandleX}
-                cy={brightnessHandleY}
-                r={brightnessHandleSize - handleBorderSize}
-                // TODO: this is a super hacky way to directly refer to the theme color, simplify
-                fill="rgba(var(--c-victron-blue-rgb), 1.0)"
-                stroke="white"
-                strokeWidth={handleBorderSize}
-                pointerEvents="none"
-              />
-              {/* Saturation Handle */}
-              {isInRGBMode &&
-                (() => {
-                  return (
-                    <circle
-                      cx={saturationHandleX}
-                      cy={saturationHandleY}
-                      r={saturationHandleSize - handleBorderSize}
-                      fill="transparent"
-                      stroke="white"
-                      strokeWidth={handleBorderSize}
-                      pointerEvents="none"
-                    />
-                  )
-                })()}
-              {/* White level Handle */}
-              {showsWhiteLevelSlider &&
-                (() => (
-                  <circle
-                    cx={whiteLevelHandleX}
-                    cy={whiteLevelHandleY}
-                    r={whiteLevelHandleSize - handleBorderSize}
-                    // TODO: this is a super hacky way to directly refer to the theme color, simplify
-                    fill="rgba(var(--c-victron-blue-rgb), 1.0)"
-                    stroke="white"
-                    strokeWidth={handleBorderSize}
-                    pointerEvents="none"
-                  />
-                ))()}
-            </svg>
-            {/* This is helping layout SVG next to presets in a way that presets remain square */}
-            <FadedText className="flex-1 text-[1.3em] text-transparent" text={"XXX"} />
+          <div
+            className={classNames("border-2 border-red-500 text-left", { "pl-5": useHorizontalLayout })}
+            style={{
+              aspectRatio: "1 / 1",
+              width: "100%",
+              height: "100%",
+              maxWidth: useHorizontalLayout ? undefined : "100%",
+              maxHeight: useHorizontalLayout ? "100%" : undefined,
+            }}
+          >
+            AAA
           </div>
-          <div className={`min-w-0 min-h-0 flex flex-col p-5 border-2 border-red-500`}>
-            <div className="flex shrink-0 mb-2">
-              <FadedText className="flex-1 text-[1.3em]" text={translate("switches.preset")} />
-              {/* Trash Icon */}
-              <div
-                className={classNames(
-                  "w-px-32 h-px-32 cursor-pointer outline-none rounded-sm border-2 border-content-victronBlue p-px-2",
-                  {
-                    "bg-surface-victronBlue text-content-primary": !isEditingPresets,
-                    "bg-content-victronBlue text-content-onVictronBlue ": isEditingPresets,
-                  },
-                )}
-                onClick={toggleIsEdittingPresets}
-              >
-                <TrashIcon
-                  alt="Edit"
-                  onClick={() => {
-                    /**/
-                  }}
-                />
-              </div>
-            </div>
-            <div className="flex-1 flex items-center justify-center"></div>
+          <div
+            className={classNames("border-2 border-red-500 text-right", { "pr-5": useHorizontalLayout })}
+            style={{
+              aspectRatio: "1 / 1",
+              width: "100%",
+              height: "100%",
+              maxWidth: useHorizontalLayout ? undefined : "100%",
+              maxHeight: useHorizontalLayout ? "100%" : undefined,
+            }}
+          >
+            BBB
           </div>
         </div>
       </div>
@@ -851,7 +574,7 @@ const ColorPicker = observer(
   },
 )
 
-function generateGradientArc(
+function _generateGradientArc(
   cX: number,
   cY: number,
   arcInnerR: number,
@@ -877,7 +600,7 @@ function generateGradientArc(
   })
 }
 
-function generateGradientRing(
+function _generateGradientRing(
   cX: number,
   cY: number,
   innerR: number,
@@ -908,7 +631,7 @@ function generateGradientRing(
   })
 }
 
-function generateBrigthtnessIcon(cX: number, cY: number, w: number, h: number, fill: string) {
+function _generateBrigthtnessIcon(cX: number, cY: number, w: number, h: number, fill: string) {
   // Adopted by copy/pasting sunny.png below
   // Calculate scale to match requested size from original 17x17
   const scaleX = w / 17
