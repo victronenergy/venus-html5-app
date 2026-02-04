@@ -272,22 +272,30 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
         >
           <Modal.Body variant="popUp" className="h-full bg-surface-primary">
             <div className="h-full flex flex-col">
-              {/* Title with close button */}
-              <div className="flex shrink-0">
-                <FadedText className="flex-1" text={outputName} />
+              <div className="flex">
+                <div className="h-full flex-1 flex flex-col">
+                  {/* Title */}
+                  <div className="flex shrink-0">
+                    <FadedText className="flex-1" text={outputName} />
+                  </div>
+                  {/* Color Mode Label */}
+                  <div className="flex shrink-0 mb-2">
+                    <FadedText
+                      className="flex-1 text-[1.3em]"
+                      text={isInCCTMode ? translate("switches.temperature") : translate("switches.color")}
+                    />
+                  </div>
+                </div>
                 {/* CloseIcon */}
-                <CloseIcon
-                  className="w-px-20 h-px-20 text-content-victronBlue cursor-pointer outline-none"
-                  alt="Close"
+                <div
+                  className="w-px-44 h-px-44 flex justify-center place-items-center -m-px-16"
                   onClick={() => setIsColorWheelOpen(false)}
-                />
-              </div>
-              {/* Color Mode Label */}
-              <div className="flex shrink-0 mb-2">
-                <FadedText
-                  className="flex-1 text-[1.3em]"
-                  text={isInCCTMode ? translate("switches.temperature") : translate("switches.color")}
-                />
+                >
+                  <CloseIcon
+                    className="w-px-20 h-px-20 text-content-victronBlue cursor-pointer outline-none"
+                    alt="Close"
+                  />
+                </div>
               </div>
               {/* Controls */}
               <div className="flex-1 min-h-0">
