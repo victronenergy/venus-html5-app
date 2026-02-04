@@ -475,6 +475,7 @@ const ColorPicker = observer(
     const [useHorizontalLayout, setUseHorizontalLayout] = useState(false)
     const [useHorizontalFill, setUseHorizontalFill] = useState(false)
     const [squareSize, setSquareSize] = useState(0)
+    const [presetSquareSize, setPresetSquareSize] = useState(0)
 
     useLayoutEffect(() => {
       const containerRatio = containerWidth / containerHeight
@@ -488,6 +489,10 @@ const ColorPicker = observer(
         setSquareSize(containerRatio <= 0.5 ? containerWidth : containerHeight / 2)
       }
     }, [containerWidth, containerHeight])
+
+    useLayoutEffect(() => {
+      setPresetSquareSize((squareSize * 0.6) / 3)
+    }, [squareSize])
 
     const [isEditingPresets, setIsEditingPresets] = useState(false)
 
@@ -554,7 +559,7 @@ const ColorPicker = observer(
         >
           {/* SQUARE 1 */}
           <div
-            className={classNames("", { "md:p-4": useHorizontalLayout })}
+            className={classNames("p-4")}
             style={{
               width: squareSize,
               height: squareSize,
@@ -836,7 +841,7 @@ const ColorPicker = observer(
           </div>
           {/* SQUARE 2 */}
           <div
-            className={classNames("flex flex-col", { "md:p-4": useHorizontalLayout })}
+            className={classNames("flex flex-col p-4")}
             style={{
               width: squareSize,
               height: squareSize,
@@ -881,7 +886,7 @@ const ColorPicker = observer(
                     >
                       <div
                         className={classNames(
-                          "aspect-square w-[80%] h-[80%] rounded-md flex items-center justify-center text-xl font-bold",
+                          "aspect-square rounded-md flex items-center justify-center text-xl font-bold",
                           {
                             "border-2 border-content-victronBlue": isValidHSVWColorPreset(c) || !isEditingPresets,
                             "border-2 border-content-tertiary": isEditingPresets && !isValidHSVWColorPreset(c),
@@ -889,6 +894,8 @@ const ColorPicker = observer(
                         )}
                         style={{
                           backgroundColor: colorPresetToDisplayColor(c, isInCCTMode),
+                          width: presetSquareSize,
+                          height: presetSquareSize,
                         }}
                         onMouseDown={() => handleColorPresetClicked(i, c)}
                         onTouchStart={() => handleColorPresetClicked(i, c)}
