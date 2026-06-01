@@ -146,6 +146,7 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --config ./jest.config.js",
     "lint": "eslint src/ --fix",
+    "type-check": "tsc --noEmit",
     "serve": "scripts/serve.sh",
     "test:dev": "npm test -- --watchAll=false && npm run cy:run",
     "test:unit": "npm test",
