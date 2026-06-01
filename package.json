@@ -122,7 +122,7 @@
     "eslint-plugin-prettier": "^5.5.6",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-testing-library": "^7.10.0",
+    "eslint-plugin-testing-library": "^7.16.2",
     "eslint-webpack-plugin": "^5.0.3",
     "globals": "^17.6.0",
     "lint-staged": "^16.3.3",
