@@ -66,7 +66,7 @@
     "semver": "^7.7.4",
     "serve": "^14.2.6",
     "stream-browserify": "^3.0.0",
-    "terser-webpack-plugin": "^5.3.17",
+    "terser-webpack-plugin": "^5.6.1",
     "ts-pnp": "^1.2.0",
     "typescript": "^5.9.3",
     "url-loader": "4.1.1",
