@@ -6,7 +6,7 @@ import CloseIcon from "../../images/IconClose.svg"
 import CloseIconDark from "../../images/IconClose-Dark.svg"
 import { useTheme } from "@victronenergy/mfd-modules"
 import { Translate } from "react-i18nify"
-const STATUS_LEVELS = { WARNING: "warning", ALARM: "alarm" } as const
+const STATUS_LEVELS: Record<string, string> = { WARNING: "warning", ALARM: "alarm" }
 
 export type Footer = {
   status: string

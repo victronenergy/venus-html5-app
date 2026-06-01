@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "experimentalDecorators": true,
-    "target": "es5",
+    "target": "es2015",
     "lib": [
       "dom",
       "dom.iterable",
@@ -14,19 +14,19 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "node",
+    "module": "preserve",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
     "sourceMap": false,
     "jsx": "react-jsx",
-    "baseUrl": "./src",
     "paths": {
       "~/*": [
         "./src/*"
       ],
-      "@m2Types/*": ["app/Marine2/types/*"],
+      "@m2Types/*": ["./src/app/Marine2/types/*"],
+      "app/*": ["./src/app/*"],
     },
     "types": [
       "cypress",

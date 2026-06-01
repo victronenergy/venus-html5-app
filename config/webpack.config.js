@@ -128,7 +128,7 @@ module.exports = function (webpackEnv) {
 
   return {
     mode: isEnvProduction ? "production" : isEnvDevelopment && "development",
-    target: "web",
+    target: ["web", "es2015"],
     // Stop compilation early in production
     bail: isEnvProduction,
     devtool: isEnvProduction
@@ -289,6 +289,7 @@ module.exports = function (webpackEnv) {
           "scheduler/tracing": "scheduler/tracing-profiling",
         }),
         ...(modules.webpackAliases || {}),
+        app: paths.appSrc + "/app",
       },
       plugins: [
         // Adds support for installing with Plug'n'Play, leading to faster installs and adding
