@@ -14,19 +14,12 @@ import "./app/locales"
 import { ScopeContext } from "@sentry/types/types/scope"
 
 // Get app according to whitelabel
-const KvnrvApp = React.lazy(() => import("./app/KVNRV/App"))
 const MarineApp = React.lazy(() => import("./app/MarineApp/App"))
 const Marine2App = React.lazy(() => import("./app/Marine2/App"))
 
 const whitelabel = process.env.REACT_APP_WHITELABEL
 const getApp = () => {
   switch (whitelabel) {
-    case "KVNRV":
-      return (
-        <React.Suspense fallback={<Loading />}>
-          <KvnrvApp protocol={proto} host={host} port={port} path={path} />
-        </React.Suspense>
-      )
     case "Marine":
       return (
         <React.Suspense fallback={<Loading />}>
