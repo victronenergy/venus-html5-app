@@ -113,7 +113,7 @@ const SliderOutput = observer((props: SliderOutputProps) => {
             <StatusPill label={statusPill.label} variant={statusPill.variant} />
           </div>
         ) : (
-          <div className="flex py-1">{formatValueAndUnit(value, unit)}</div>
+          <div className="flex text-content-secondary">{formatValueAndUnit(value, unit)}</div>
         )}
       </div>
       {/* Border */}

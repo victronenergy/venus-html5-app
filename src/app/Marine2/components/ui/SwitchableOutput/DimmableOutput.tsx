@@ -10,7 +10,7 @@ import classnames from "classnames"
 import { observer } from "mobx-react"
 import { translate } from "react-i18nify"
 import StatusPill from "../StatusPill"
-import { getValueOrDefault } from "./helpers"
+import { getValueOrDefault, useValueFormatter } from "./helpers"
 import { getSwitchableOutputStatusPill, isSwitchableOutputDisabled } from "./statusHelper"
 
 interface DimmableOutputProps {
@@ -30,6 +30,7 @@ const DimmableOutput = observer((props: DimmableOutputProps) => {
   const disabled = isSwitchableOutputDisabled(switchableOutput.status)
   const statusPill = getSwitchableOutputStatusPill(switchableOutput.status, switchableOutput.type)
   const ratio = getValueOrDefault(switchableOutput.dimming, 0)
+  const formatValueAndUnit = useValueFormatter({ decimals: 0 })
 
   const handleClickOnOff = () => {
     switchableOutput.updateState(switchableOutput.state === 1 ? 0 : 1)
@@ -99,9 +100,13 @@ const DimmableOutput = observer((props: DimmableOutputProps) => {
     <div className={classnames("mt-4 select-none", props.className)}>
       <div className="flex">
         <div className="flex-1">{outputName}</div>
-        {statusPill && (
+        {statusPill ? (
           <div className="flex py-1">
             <StatusPill label={statusPill.label} variant={statusPill.variant} />
+          </div>
+        ) : (
+          <div className={classnames("flex", variant === "on" ? "text-content-primary" : "text-content-secondary")}>
+            {formatValueAndUnit(ratio, "%")}
           </div>
         )}
       </div>

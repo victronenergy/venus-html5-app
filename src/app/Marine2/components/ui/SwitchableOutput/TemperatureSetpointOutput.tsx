@@ -119,7 +119,7 @@ const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProp
             <StatusPill label={statusPill.label} variant={statusPill.variant} />
           </div>
         ) : (
-          <>
+          <div className="flex text-content-secondary">
             <div className="flex">
               {formatValueAndUnit(setpoint, "/Temperature", measurement === undefined)}
               {measurement !== undefined && "°"}
@@ -135,7 +135,7 @@ const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProp
                 </div>
               </>
             )}
-          </>
+          </div>
         )}
       </div>
       {/* Border */}
