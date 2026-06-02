@@ -1,6 +1,17 @@
 import React from "react"
-import { render, fireEvent } from "@testing-library/react"
+import { render, fireEvent, waitFor } from "@testing-library/react"
 import { Batteries } from "./Battery"
+
+const originalConsoleError = console.error
+beforeAll(() => {
+  console.error = (...args) => {
+    if (typeof args[0] === "string" && args[0].includes("not wrapped in act")) return
+    originalConsoleError(...args)
+  }
+})
+afterAll(() => {
+  console.error = originalConsoleError
+})
 
 const batteries = [
   {
@@ -61,30 +72,32 @@ const batteries = [
 
 describe("Battery element", () => {
   describe("with a few batteries", () => {
-    it("should show batteries", () => {
+    it("should show batteries", async () => {
       const { container } = render(<Batteries batteries={batteries.slice(0, 3)} />)
-      expect(container.querySelectorAll(".battery").length).toBe(3)
+      await waitFor(() => expect(container.querySelectorAll(".battery").length).toBe(3))
     })
 
-    it("should not show pagination", () => {
+    it("should not show pagination", async () => {
       const { container } = render(<Batteries batteries={batteries.slice(0, 3)} />)
-      expect(container.querySelector(".battery__paginator")).toBeNull()
+      await waitFor(() => expect(container.querySelector(".battery__paginator")).toBeNull())
     })
   })
 
   describe("with more than 1 page of batteries", () => {
-    it("page should show one page of batteries", () => {
+    it("page should show one page of batteries", async () => {
       const { container } = render(<Batteries batteries={batteries} />)
-      expect(container.querySelectorAll(".battery").length).toBe(3)
+      await waitFor(() => expect(container.querySelectorAll(".battery").length).toBe(3))
     })
 
-    it("should show pagination", () => {
+    it("should show pagination", async () => {
       const { container } = render(<Batteries batteries={batteries} />)
-      expect(container.querySelector(".battery__paginator")).toBeInTheDocument()
+      await waitFor(() => expect(container.querySelector(".battery__paginator")).toBeInTheDocument())
     })
 
-    it("should have 'filler' elements on the last page", () => {
+    it("should have 'filler' elements on the last page", async () => {
       const { container } = render(<Batteries batteries={batteries} />)
+      await waitFor(() => expect(container.querySelector(".battery__paginator")).toBeInTheDocument())
+
       const paginatorLabel = container.querySelector(".battery__paginator-page")
       const nextButtons = container.querySelectorAll(".selector-button")
       const nextPage = nextButtons[nextButtons.length - 1]

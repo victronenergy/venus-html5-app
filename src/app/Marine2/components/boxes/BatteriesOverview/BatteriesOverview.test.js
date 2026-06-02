@@ -1,29 +1,33 @@
 import React from "react"
-import { render } from "@testing-library/react"
+import { render, waitFor } from "@testing-library/react"
 import BatteriesOverview from "./BatteriesOverview"
 
 describe("BatteriesOverview element", () => {
   describe("compact mode", () => {
-    it("should show content", () => {
+    it("should show content", async () => {
       const { container } = render(<BatteriesOverview componentMode="compact" />)
-      expect(container.firstChild).toBeTruthy()
+      await waitFor(() => expect(container.firstChild).toBeTruthy())
     })
 
-    it("should show expand link", () => {
+    it("should show expand link", async () => {
       const { container } = render(<BatteriesOverview componentMode="compact" />)
-      expect(container.querySelector("[data-testid='expand-icon']")).toBeInTheDocument()
+      await waitFor(() =>
+        expect(container.querySelector("[data-testid='expand-icon']")).toBeInTheDocument(),
+      )
     })
   })
 
   describe("full mode", () => {
-    it("should use full mode by default", () => {
+    it("should use full mode by default", async () => {
       const { container } = render(<BatteriesOverview />)
-      expect(container.querySelector("[data-testid='grid-paginator']")).toBeInTheDocument()
+      await waitFor(() =>
+        expect(container.querySelector("[data-testid='grid-paginator']")).toBeInTheDocument(),
+      )
     })
 
-    it("should show content", () => {
+    it("should show content", async () => {
       const { container } = render(<BatteriesOverview />)
-      expect(container.firstChild).toBeTruthy()
+      await waitFor(() => expect(container.firstChild).toBeTruthy())
     })
   })
 

@@ -1,24 +1,26 @@
 import React from "react"
-import { render } from "@testing-library/react"
+import { render, waitFor } from "@testing-library/react"
 import Tanks from "./Tanks"
 
 describe("Tanks element", () => {
   describe("compact mode", () => {
-    it("should show content", () => {
+    it("should show content", async () => {
       const { container } = render(<Tanks componentMode="compact" />)
-      expect(container.firstChild).toBeTruthy()
+      await waitFor(() => expect(container.firstChild).toBeTruthy())
     })
 
-    it("should show expand link", () => {
+    it("should show expand link", async () => {
       const { container } = render(<Tanks componentMode="compact" />)
-      expect(container.querySelector("[data-testid='expand-icon']")).toBeInTheDocument()
+      await waitFor(() =>
+        expect(container.querySelector("[data-testid='expand-icon']")).toBeInTheDocument(),
+      )
     })
   })
 
   describe("full mode", () => {
-    it("should show content", () => {
+    it("should show content", async () => {
       const { container } = render(<Tanks />)
-      expect(container.firstChild).toBeTruthy()
+      await waitFor(() => expect(container.firstChild).toBeTruthy())
     })
   })
 
