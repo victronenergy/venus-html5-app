@@ -259,16 +259,28 @@
         }
     },
     "switches": {
+        "alarm": "Alarm",
         "auto": "Auto",
+        "closed": "Closed",
         "fault": "Fault",
         "gxDeviceRelays": "GX device relays",
+        "high": "High",
+        "low": "Low",
         "max": "Max",
         "min": "Min",
         "notRunning": "Not Running",
         "off": "Off",
+        "ok": "OK",
         "on": "On",
+        "open": "Open",
         "press": "Press",
-        "running": "Running"
+        "running": "Running",
+        "speed": "Speed",
+        "state": "State",
+        "stopped": "Stopped",
+        "temperature": "Temperature",
+        "value": "Value",
+        "volume": "Volume"
     },
     "tankWidget": {
         "Black water": "Black water",
