@@ -10,7 +10,9 @@ import {
 import classnames from "classnames"
 import { observer } from "mobx-react"
 import { translate } from "react-i18nify"
+import StatusPill from "../StatusPill"
 import { getDecimalPlaces, getValueOrDefault, useValueFormatter } from "./helpers"
+import { getSwitchableOutputStatusPill, isSwitchableOutputDisabled } from "./statusHelper"
 
 interface TemperatureSetpointOutputProps {
   key: string
@@ -33,7 +35,11 @@ const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProp
   const setpoint = getValueOrDefault(switchableOutput.dimming, 1)
   const measurement = switchableOutput.measurement
   const ratio = Math.round(((setpoint - min) / (max - min)) * 100)
-  const tick = Math.round((setpoint - min) / step)
+  const disabled = isSwitchableOutputDisabled(switchableOutput.status)
+  const statusPill = getSwitchableOutputStatusPill(switchableOutput.status, switchableOutput.type)
+  const totalSteps = 1 + Math.round((max - min) / step)
+  const maxVisibleMarks = 40
+  const visibleMarkCount = Math.min(maxVisibleMarks, totalSteps)
 
   const [isDragging, setIsDragging] = useState(false)
   const updateTimeoutRef = useRef<NodeJS.Timeout>()
@@ -105,28 +111,51 @@ const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProp
   }
 
   return (
-    <div className={classnames("mt-4", props.className)}>
+    <div className={classnames("mt-4 select-none", props.className)}>
       <div className="flex">
         <div className="flex-1">{outputName}</div>
-        <div className="flex">
-          {formatValueAndUnit(setpoint, "/Temperature", measurement === undefined)}
-          {measurement !== undefined && "°"}
-        </div>
-        {measurement !== undefined && (
+        {statusPill ? (
+          <div className="flex py-1">
+            <StatusPill label={statusPill.label} variant={statusPill.variant} />
+          </div>
+        ) : (
           <>
-            <div className="flex">/</div>
             <div className="flex">
-              <span className="text-content-victronGray">{formatValueAndUnit(measurement, "/Temperature", false)}</span>
-              <span>{temperatureUnitToHumanReadable}</span>
+              {formatValueAndUnit(setpoint, "/Temperature", measurement === undefined)}
+              {measurement !== undefined && "°"}
             </div>
+            {measurement !== undefined && (
+              <>
+                <div className="flex">/</div>
+                <div className="flex">
+                  <span className="text-content-victronGray">
+                    {formatValueAndUnit(measurement, "/Temperature", false)}
+                  </span>
+                  <span>{temperatureUnitToHumanReadable}</span>
+                </div>
+              </>
+            )}
           </>
         )}
       </div>
       {/* Border */}
-      <div className="h-px-44 rounded-md bg-content-victronBlue50 border-2 border-content-victronBlue bg-gradient-to-r from-gradient-victronBlue to-gradient-victronRed">
+      <div
+        className={classnames("h-px-44 rounded-md border-2", {
+          "bg-content-victronGray50 border-content-victronGray pointer-events-none": disabled,
+          "bg-content-victronBlue50 border-content-victronBlue bg-gradient-to-r from-gradient-victronBlue to-gradient-victronRed":
+            !disabled,
+        })}
+      >
         {/* Container */}
         <div className="h-full rounded-sm flex overflow-visible">
-          <div className="h-full flex items-center pl-2 pr-4 text-content-white">{translate("switches.min")}</div>
+          <div
+            className={classnames(
+              "h-full flex items-center pl-2 pr-4",
+              disabled ? "text-content-victronGray" : "text-content-white",
+            )}
+          >
+            {translate("switches.min")}
+          </div>
           {/* Slider Container */}
           <div
             className="flex-1 relative"
@@ -145,61 +174,73 @@ const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProp
               <div className="h-full transition-all duration-100 ease-out" style={{ width: `${ratio}%` }} />
             </div>
             {/* Marks */}
-            <div className="absolute inset-0 flex justify-between items-center">
-              {[...Array(1 + Math.round((max - min) / step))].map((_, i) => (
+            <div className="absolute inset-0 flex justify-between items-center pointer-events-none">
+              {[...Array(visibleMarkCount)].map((_, i) => (
                 <div
                   key={`mark_${i}`}
-                  className={classnames("relative w-px-4 rounded-sm bg-content-white", {
-                    "h-px-4": i !== tick,
-                    "h-[70%]": i === tick,
-                  })}
-                >
-                  {/* Popover */}
-                  {i === tick && isDragging && (
-                    <>
-                      {/* Popover Arrow Down */}
-                      <div
-                        key={`arrow`}
-                        className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-0 h-0 border-l-[12px] border-r-[12px] border-t-[12px] border-l-transparent border-r-transparent border-t-content-victronBlue pointer-events-none"
-                      />
-                      {/* Popover Container */}
-                      <div
-                        key={`popup`}
-                        className="absolute bottom-full left-1/2 -translate-x-1/2 mb-5 rounded bg-content-victronBlue pointer-events-none select-none"
-                      >
-                        {/* Popover Container HStack */}
-                        <div className="h-px-44 flex items-center">
-                          <div className="pl-3 pr-2 text-xl text-content-onVictronBlue">
-                            {formatValueAndUnit(setpoint, "/Temperature", false)}
-                            {"°"}
-                          </div>
-                          {measurement !== undefined && (
-                            <>
-                              {/* Popover Container Separator */}
-                              <div className="w-px-2 h-[80%] rounded-sm bg-content-lightBlue"></div>
-                              {/* Popover Container VStack */}
-                              <div className="flex flex-col">
-                                <div className="pl-2 pr-3 text-sm">
-                                  <span className="text-content-lightBlue">
-                                    {formatValueAndUnit(measurement, "/Temperature", false)}
-                                    {measurement !== undefined && "°"}
-                                  </span>
-                                </div>
-                                <div className="pl-2 pr-3 text-2xs text-content-lightBlue">
-                                  {translate("switches.current")}
-                                </div>
-                              </div>
-                            </>
-                          )}
-                        </div>
-                      </div>
-                    </>
+                  className={classnames(
+                    "w-px-4 h-px-4 rounded-sm",
+                    disabled ? "bg-content-victronGray" : "bg-content-white",
                   )}
-                </div>
+                />
               ))}
-            </div>{" "}
+            </div>
+            {/* Handle */}
+            <div
+              className="absolute inset-y-0 flex items-center pointer-events-none"
+              style={{ left: `${ratio}%`, transform: "translateX(-50%)" }}
+            >
+              <div
+                className={classnames(
+                  "relative w-px-4 h-[70%] rounded-sm",
+                  disabled ? "bg-content-victronGray" : "bg-content-white",
+                )}
+              >
+                {isDragging && (
+                  <>
+                    {/* Popover Arrow Down */}
+                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-0 h-0 border-l-[12px] border-r-[12px] border-t-[12px] border-l-transparent border-r-transparent border-t-content-victronBlue pointer-events-none" />
+                    {/* Popover Container */}
+                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-5 rounded bg-content-victronBlue pointer-events-none">
+                      {/* Popover Container HStack */}
+                      <div className="h-px-44 flex items-center">
+                        <div className="pl-3 pr-2 text-xl text-content-onVictronBlue">
+                          {formatValueAndUnit(setpoint, "/Temperature", false)}
+                          {"°"}
+                        </div>
+                        {measurement !== undefined && (
+                          <>
+                            {/* Popover Container Separator */}
+                            <div className="w-px-2 h-[80%] rounded-sm bg-content-lightBlue"></div>
+                            {/* Popover Container VStack */}
+                            <div className="flex flex-col">
+                              <div className="pl-2 pr-3 text-sm">
+                                <span className="text-content-lightBlue">
+                                  {formatValueAndUnit(measurement, "/Temperature", false)}
+                                  {measurement !== undefined && "°"}
+                                </span>
+                              </div>
+                              <div className="pl-2 pr-3 text-2xs text-content-lightBlue">
+                                {translate("switches.current")}
+                              </div>
+                            </div>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
           </div>
-          <div className="h-full flex items-center pl-4 pr-2 text-content-white">{translate("switches.max")}</div>
+          <div
+            className={classnames(
+              "h-full flex items-center pl-4 pr-2",
+              disabled ? "text-content-victronGray" : "text-content-white",
+            )}
+          >
+            {translate("switches.max")}
+          </div>
         </div>
       </div>
     </div>

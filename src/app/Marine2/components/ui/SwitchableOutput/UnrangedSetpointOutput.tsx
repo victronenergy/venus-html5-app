@@ -8,7 +8,9 @@ import {
 } from "@victronenergy/mfd-modules"
 import classnames from "classnames"
 import { observer } from "mobx-react"
+import StatusPill from "../StatusPill"
 import { getDecimalPlaces, getValueOrDefault, useValueFormatter } from "./helpers"
+import { getSwitchableOutputStatusPill, isSwitchableOutputDisabled } from "./statusHelper"
 
 interface UnrangedSetpointOutputProps {
   key: string
@@ -30,6 +32,8 @@ const UnrangedSetpointOutput = observer((props: UnrangedSetpointOutputProps) => 
   const value = getValueOrDefault(switchableOutput.dimming, 1)
   const unit = getValueOrDefault(switchableOutput.unit, "")
 
+  const disabled = isSwitchableOutputDisabled(switchableOutput.status)
+  const statusPill = getSwitchableOutputStatusPill(switchableOutput.status, switchableOutput.type)
   const formatValueAndUnit = useValueFormatter({ decimals })
 
   const repeatTimerRef = useRef<number | null>(null)
@@ -103,15 +107,22 @@ const UnrangedSetpointOutput = observer((props: UnrangedSetpointOutputProps) => 
   }, [clearTimers])
 
   return (
-    <div className={classnames("mt-4", props.className)}>
-      <div>{outputName}</div>
+    <div className={classnames("mt-4 select-none", props.className)}>
+      <div className="flex">
+        <div className="flex-1">{outputName}</div>
+        {statusPill && (
+          <div className="flex py-1">
+            <StatusPill label={statusPill.label} variant={statusPill.variant} />
+          </div>
+        )}
+      </div>
       {/* Container */}
-      <div className="flex h-px-44">
+      <div className={classnames("flex h-px-44", { "pointer-events-none": disabled })}>
         {/* Minus */}
         <div
           className={classnames("h-full flex items-center px-4 rounded-l-md border-2", {
-            "bg-surface-victronGray border-content-victronGray": !minusEnabled,
-            "bg-surface-victronBlue border-content-victronBlue ": minusEnabled,
+            "bg-surface-victronGray border-content-victronGray": disabled || !minusEnabled,
+            "bg-surface-victronBlue border-content-victronBlue ": !disabled && minusEnabled,
           })}
           onMouseDown={() => minusEnabled && handleMouseDown(-step)}
           onMouseUp={handleMouseUp}
@@ -119,19 +130,31 @@ const UnrangedSetpointOutput = observer((props: UnrangedSetpointOutputProps) => 
           onTouchStart={() => minusEnabled && handleMouseDown(-step)}
           onTouchEnd={handleMouseUp}
         >
-          <button className="h-px-44 px-4 py-1.5 cursor-pointer text-sm min-h-[2.375rem] text-content-primary select-none">
+          <button
+            className={classnames(
+              "h-px-44 px-4 py-1.5 cursor-pointer text-sm min-h-[2.375rem]",
+              disabled ? "text-content-victronGray" : "text-content-primary",
+            )}
+          >
             -
           </button>
         </div>
         {/* Value */}
-        <div className="flex-1 h-full flex items-center justify-center text-sm min-h-[2.375rem] whitespace-nowrap border-t-2 border-b-2 border-content-victronBlue">
+        <div
+          className={classnames(
+            "flex-1 h-full flex items-center justify-center text-sm min-h-[2.375rem] whitespace-nowrap border-t-2 border-b-2",
+            disabled
+              ? "border-content-victronGray bg-surface-victronGray text-content-victronGray"
+              : "border-content-victronBlue",
+          )}
+        >
           {formatValueAndUnit(value, unit)}
         </div>
         {/* Plus */}
         <div
           className={classnames("h-full flex items-center px-4 rounded-r-md border-2", {
-            "bg-surface-victronGray border-content-victronGray": !plusEnabled,
-            "bg-surface-victronBlue border-content-victronBlue": plusEnabled,
+            "bg-surface-victronGray border-content-victronGray": disabled || !plusEnabled,
+            "bg-surface-victronBlue border-content-victronBlue": !disabled && plusEnabled,
           })}
           onMouseDown={() => plusEnabled && handleMouseDown(+step)}
           onMouseUp={handleMouseUp}
@@ -139,7 +162,12 @@ const UnrangedSetpointOutput = observer((props: UnrangedSetpointOutputProps) => 
           onTouchStart={() => plusEnabled && handleMouseDown(+step)}
           onTouchEnd={handleMouseUp}
         >
-          <button className="h-px-44 px-4 py-1.5 cursor-pointer text-sm min-h-[2.375rem] text-content-primary select-none">
+          <button
+            className={classnames(
+              "h-px-44 px-4 py-1.5 cursor-pointer text-sm min-h-[2.375rem]",
+              disabled ? "text-content-victronGray" : "text-content-primary",
+            )}
+          >
             +
           </button>
         </div>

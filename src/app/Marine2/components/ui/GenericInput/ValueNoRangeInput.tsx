@@ -8,6 +8,7 @@ import {
 } from "@victronenergy/mfd-modules"
 import classnames from "classnames"
 import { observer } from "mobx-react"
+import StatusPill from "../StatusPill"
 import { getValueOrDefault, useValueFormatter } from "../SwitchableOutput/helpers"
 import { defaultLabelForUnit, getStatusLabel } from "./helpers"
 
@@ -41,9 +42,7 @@ const ValueNoRangeInput = observer((props: ValueNoRangeInputProps) => {
         <div className="flex-1">{inputName}</div>
         {statusLabel && (
           <div className="flex py-1">
-            <span className="px-2 text-2xs rounded-md bg-surface-victronRed text-content-victronRed">
-              {statusLabel}
-            </span>
+            <StatusPill label={statusLabel} variant="red" />
           </div>
         )}
       </div>

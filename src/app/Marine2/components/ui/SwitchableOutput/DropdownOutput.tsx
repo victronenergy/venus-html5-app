@@ -9,6 +9,8 @@ import {
 import classnames from "classnames"
 import { observer } from "mobx-react"
 import ArrowRightIcon from "../../../images/icons/arrow-right.svg"
+import StatusPill from "../StatusPill"
+import { getSwitchableOutputStatusPill, isSwitchableOutputDisabled } from "./statusHelper"
 
 interface DropdownOutputProps {
   key: string
@@ -23,6 +25,8 @@ const DropdownOutput = observer((props: DropdownOutputProps) => {
   const switchableOutput = useSwitchableOutput(props.tree, props.deviceId, props.outputId)
   const outputName = getSwitchingPaneItemNameForDisplay(switchableOutput, props.parentDeviceName)
 
+  const disabled = isSwitchableOutputDisabled(switchableOutput.status)
+  const statusPill = getSwitchableOutputStatusPill(switchableOutput.status, switchableOutput.type)
   const options = Array.isArray(switchableOutput.labels) ? switchableOutput.labels : []
   // TODO: this should be a number but as of today we sometimes receive a string
   const selectedOptionIndex = Number(switchableOutput.dimming)
@@ -52,18 +56,39 @@ const DropdownOutput = observer((props: DropdownOutputProps) => {
   }
 
   return (
-    <div className={classnames("mt-4", props.className)}>
-      <div>{outputName}</div>
+    <div className={classnames("mt-4 select-none", props.className)}>
+      <div className="flex">
+        <div className="flex-1">{outputName}</div>
+        {statusPill && (
+          <div className="flex py-1">
+            <StatusPill label={statusPill.label} variant={statusPill.variant} />
+          </div>
+        )}
+      </div>
       {/* Container */}
       <div
-        className="relative h-px-44 rounded-md bg-surface-victronBlue"
+        className={classnames("relative h-px-44 rounded-md", {
+          "bg-surface-victronGray pointer-events-none": disabled,
+          "bg-surface-victronBlue": !disabled,
+        })}
         ref={dropdownRef}
         onClick={() => setIsOpen(!isOpen)}
       >
         {/* Selected Option */}
         <div className="h-full rounded-sm flex overflow-hidden items-center">
-          <div className="px-4 flex-1 whitespace-nowrap cursor-pointer text-sm select-none">{selectedOption}</div>
-          <ArrowRightIcon className="h-full py-3 px-4 text-content-victronBlue cursor-pointer outline-none rotate-90" />
+          <div
+            className={classnames("px-4 flex-1 whitespace-nowrap cursor-pointer text-sm", {
+              "text-content-victronGray": disabled,
+            })}
+          >
+            {selectedOption}
+          </div>
+          <ArrowRightIcon
+            className={classnames(
+              "h-full py-3 px-4 cursor-pointer outline-none rotate-90",
+              disabled ? "text-content-victronGray" : "text-content-victronBlue",
+            )}
+          />
         </div>
         {/* Dropdown */}
         {isOpen && (
@@ -75,7 +100,7 @@ const DropdownOutput = observer((props: DropdownOutputProps) => {
                     key={index}
                     onClick={(event: any) => handleSelect(event, index)}
                     className={classnames(
-                      "px-4 h-px-44 flex items-center cursor-pointer text-sm select-none hover:bg-content-victronBlue hover:text-content-onVictronBlue text-content-primary",
+                      "px-4 h-px-44 flex items-center cursor-pointer text-sm hover:bg-content-victronBlue hover:text-content-onVictronBlue text-content-primary",
                       {
                         "bg-content-victronBlue50 ": index === selectedOptionIndex,
                       },
@@ -91,7 +116,12 @@ const DropdownOutput = observer((props: DropdownOutputProps) => {
           </>
         )}
         {/* Selected Option Border */}
-        <div className="absolute inset-0 h-px-44 rounded-md border-2 border-content-victronBlue pointer-events-none" />
+        <div
+          className={classnames(
+            "absolute inset-0 h-px-44 rounded-md border-2 pointer-events-none",
+            disabled ? "border-content-victronGray" : "border-content-victronBlue",
+          )}
+        />
       </div>
     </div>
   )

@@ -9,6 +9,8 @@ import {
 import classnames from "classnames"
 import { observer } from "mobx-react"
 import { translate } from "react-i18nify"
+import StatusPill from "../StatusPill"
+import { getSwitchableOutputStatusPill, isSwitchableOutputDisabled } from "./statusHelper"
 
 interface MomentaryOutputProps {
   key: string
@@ -24,6 +26,8 @@ const MomentaryOutput = observer((props: MomentaryOutputProps) => {
   const outputName = getSwitchingPaneItemNameForDisplay(switchableOutput, props.parentDeviceName)
 
   const variant = switchableOutput.state === 1 ? "on" : "off"
+  const disabled = isSwitchableOutputDisabled(switchableOutput.status)
+  const statusPill = getSwitchableOutputStatusPill(switchableOutput.status, switchableOutput.type)
 
   const handlePress = () => {
     switchableOutput.updateState(1)
@@ -34,18 +38,29 @@ const MomentaryOutput = observer((props: MomentaryOutputProps) => {
   }
 
   return (
-    <div className={classnames("mt-4", props.className)}>
-      <div>{outputName}</div>
+    <div className={classnames("mt-4 select-none", props.className)}>
+      <div className="flex">
+        <div className="flex-1">{outputName}</div>
+        {statusPill && (
+          <div className="flex py-1">
+            <StatusPill label={statusPill.label} variant={statusPill.variant} />
+          </div>
+        )}
+      </div>
       <button
         className={classnames(
           "h-px-44 px-4 py-1.5 whitespace-nowrap",
-          "border-2 border-content-victronBlue cursor-pointer",
+          "border-2",
+          disabled ? "border-content-victronGray" : "border-content-victronBlue cursor-pointer",
           "text-sm min-h-[2.375rem]",
           "rounded-md",
           {
-            "bg-surface-victronBlue text-content-primary": variant === "off",
-            "bg-content-victronBlue text-content-onVictronBlue": variant === "on",
+            "bg-surface-victronGray text-content-victronGray": disabled && variant === "off",
+            "bg-content-victronGray text-content-victronGray": disabled && variant === "on",
+            "bg-surface-victronBlue text-content-primary": !disabled && variant === "off",
+            "bg-content-victronBlue text-content-onVictronBlue": !disabled && variant === "on",
           },
+          { "pointer-events-none": disabled },
           props.className,
         )}
         onMouseDown={handlePress}
