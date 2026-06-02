@@ -1,6 +1,101 @@
 import { useEffect, useState } from "react"
 import { bigInt, bulkMemory, signExtensions } from "wasm-feature-detect"
 
+export interface WebGLDiagnostics {
+  contextType: "webgl2" | "webgl" | null
+  renderer: string | null
+  vendor: string | null
+  maxTextureSize: number | null
+  maxRenderbufferSize: number | null
+  maxVertexAttribs: number | null
+  maxVaryingVectors: number | null
+  maxTextureImageUnits: number | null
+  missingQtExtensions: string[]
+  supportedExtensions: string[]
+}
+
+const QT_WEBGL1_EXTENSIONS = [
+  "OES_vertex_array_object",
+  "OES_element_index_uint",
+  "OES_standard_derivatives",
+  "ANGLE_instanced_arrays",
+  "OES_texture_float",
+  "WEBGL_depth_texture",
+  "EXT_blend_minmax",
+]
+
+function collectWebGLDiagnostics(): WebGLDiagnostics {
+  const canvas = document.createElement("canvas")
+  let gl: WebGLRenderingContext | WebGL2RenderingContext | null = null
+  let contextType: "webgl2" | "webgl" | null = null
+
+  try {
+    gl = canvas.getContext("webgl2")
+    if (gl) contextType = "webgl2"
+  } catch {
+    /* ignore */
+  }
+
+  if (!gl) {
+    try {
+      gl = canvas.getContext("webgl")
+      if (gl) contextType = "webgl"
+    } catch {
+      /* ignore */
+    }
+  }
+
+  if (!gl) {
+    return {
+      contextType: null,
+      renderer: null,
+      vendor: null,
+      maxTextureSize: null,
+      maxRenderbufferSize: null,
+      maxVertexAttribs: null,
+      maxVaryingVectors: null,
+      maxTextureImageUnits: null,
+      missingQtExtensions: [],
+      supportedExtensions: [],
+    }
+  }
+
+  let renderer: string | null = null
+  let vendor: string | null = null
+  const debugInfo = gl.getExtension("WEBGL_debug_renderer_info")
+  if (debugInfo) {
+    renderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL)
+    vendor = gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL)
+  }
+
+  const maxTextureSize = gl.getParameter(gl.MAX_TEXTURE_SIZE) as number | null
+  const maxRenderbufferSize = gl.getParameter(gl.MAX_RENDERBUFFER_SIZE) as number | null
+  const maxVertexAttribs = gl.getParameter(gl.MAX_VERTEX_ATTRIBS) as number | null
+  const maxVaryingVectors = gl.getParameter(gl.MAX_VARYING_VECTORS) as number | null
+  const maxTextureImageUnits = gl.getParameter(gl.MAX_TEXTURE_IMAGE_UNITS) as number | null
+
+  const supportedExtensions = gl.getSupportedExtensions() ?? []
+
+  const missingQtExtensions =
+    contextType === "webgl" ? QT_WEBGL1_EXTENSIONS.filter((ext) => !supportedExtensions.includes(ext)) : []
+
+  const loseContext = gl.getExtension("WEBGL_lose_context")
+  if (loseContext) loseContext.loseContext()
+
+  return {
+    contextType,
+    renderer,
+    vendor,
+    maxTextureSize,
+    maxRenderbufferSize,
+    maxVertexAttribs,
+    maxVaryingVectors,
+    maxTextureImageUnits,
+    missingQtExtensions,
+    supportedExtensions,
+  }
+}
+
 function checkJSFeature(featureName: string, testCode: string): boolean {
   try {
     eval(testCode)
@@ -75,34 +170,29 @@ function checkWasmMemory() {
   }
 }
 
-function checkWebGL2Support() {
-  try {
-    const canvas = document.createElement("canvas")
-    return Promise.resolve(!!canvas.getContext("webgl2"))
-  } catch {
-    return Promise.resolve(false)
-  }
-}
-
 export const useBrowserFeatures = () => {
   const [browserFeatures, setBrowserFeatures] = useState<{
     isInitialized: boolean
     isGuiV2Supported: boolean
     missingFeatures: string[]
+    webglDiagnostics: WebGLDiagnostics | null
   }>({
     isInitialized: false,
     isGuiV2Supported: false,
     missingFeatures: [],
+    webglDiagnostics: null,
   })
 
   useEffect(() => {
+    const webglDiag = collectWebGLDiagnostics()
+
     const checks = {
       "WASM BigInt (i64)": bigInt(),
       "WASM Bulk Memory": bulkMemory(),
       "WASM Sign Extensions": signExtensions(),
       "WASM Memory (50MB)": checkWasmMemory(),
       // eslint-disable-next-line prettier/prettier
-      "WebGL2": checkWebGL2Support(),
+      "WebGL": Promise.resolve(webglDiag.contextType !== null),
     }
 
     Promise.all(
@@ -119,6 +209,7 @@ export const useBrowserFeatures = () => {
         isInitialized: true,
         isGuiV2Supported: unsupported.length === 0,
         missingFeatures: unsupported,
+        webglDiagnostics: webglDiag,
       })
     })
   }, [])

@@ -133,7 +133,9 @@
             "unspecified": "Unspecified",
             "userAgent": "User agent",
             "viewportHeight": "Viewport height",
-            "viewportWidth": "Viewport width"
+            "viewportWidth": "Viewport width",
+            "webgl": "WebGL",
+            "webglNotSupported": "Not Supported"
         },
         "diagnostics": "Diagnostics"
     },

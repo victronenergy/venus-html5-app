@@ -6,7 +6,7 @@ import { translate } from "react-i18nify"
 import { observer } from "mobx-react"
 import { useWindowSize } from "../../utils/hooks/use-window-size"
 import Paginator from "../ui/Paginator"
-import { useBrowserFeatures } from "../../utils/hooks/use-browser-features"
+import { useBrowserFeatures, WebGLDiagnostics } from "../../utils/hooks/use-browser-features"
 
 const DiagnosticsView = () => {
   const mqtt = useMqtt()
@@ -78,9 +78,33 @@ const getConnectionDiagnostics = (mqtt: MqttStore) => {
   ]
 }
 
+function formatWebGLDiagnostics(webgl: WebGLDiagnostics | null): string {
+  if (!webgl || !webgl.contextType) return translate("diagnostics.device.webglNotSupported")
+
+  const parts: string[] = [webgl.contextType]
+
+  if (webgl.renderer) parts.push(webgl.renderer)
+  if (webgl.maxTextureSize) parts.push(`tex=${webgl.maxTextureSize}`)
+  if (webgl.maxRenderbufferSize) parts.push(`rb=${webgl.maxRenderbufferSize}`)
+  if (webgl.maxVertexAttribs) parts.push(`attribs=${webgl.maxVertexAttribs}`)
+  if (webgl.maxVaryingVectors) parts.push(`varyings=${webgl.maxVaryingVectors}`)
+  if (webgl.maxTextureImageUnits) parts.push(`texUnits=${webgl.maxTextureImageUnits}`)
+  parts.push(`${webgl.supportedExtensions.length} extensions`)
+
+  if (webgl.missingQtExtensions.length > 0) {
+    parts.push(`${translate("diagnostics.device.missing")} ${webgl.missingQtExtensions.join(", ")}`)
+  }
+
+  return parts.join(", ")
+}
+
 const getDeviceDiagnostics = (
   windowSize: { width?: number; height?: number },
-  browserFeatures: { isGuiV2Supported: boolean; missingFeatures: string[] },
+  browserFeatures: {
+    isGuiV2Supported: boolean
+    missingFeatures: string[]
+    webglDiagnostics: WebGLDiagnostics | null
+  },
 ) => {
   return [
     {
@@ -106,6 +130,10 @@ const getDeviceDiagnostics = (
     {
       property: translate("diagnostics.device.isGuiV2Supported"),
       value: `${browserFeatures.isGuiV2Supported ? translate("common.yes") : translate("common.no")}${browserFeatures.isGuiV2Supported === false ? ", " + translate("diagnostics.device.missing") + " " + browserFeatures.missingFeatures.join(", ") : ""}`,
+    },
+    {
+      property: translate("diagnostics.device.webgl"),
+      value: formatWebGLDiagnostics(browserFeatures.webglDiagnostics),
     },
   ]
 }
