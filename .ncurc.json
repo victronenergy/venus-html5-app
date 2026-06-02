@@ -1,8 +1,0 @@
-{
-  "$schema": "https://raw.githubusercontent.com/raineorshine/npm-check-updates/main/src/types/RunOptions.json",
-  "reject": [
-    "@sentry/react",
-    "@sentry/tracing",
-    "react-test-renderer"
-  ]
-}
