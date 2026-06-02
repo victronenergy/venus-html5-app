@@ -16,5 +16,7 @@ module.exports = {
     "webpack-cli",
     // v5 renames https→server, replaces onBefore/AfterSetupMiddleware with setupMiddlewares
     "webpack-dev-server",
+    // v10 blocked by eslint-plugin-import, eslint-plugin-react, eslint-plugin-jsx-a11y (no v10 support yet)
+    "eslint",
   ],
 }
