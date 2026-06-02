@@ -12,5 +12,9 @@ module.exports = {
     "react-test-renderer",
     // v4 is a full rewrite (Rust engine, no config file), requires dedicated migration
     "tailwindcss",
+    // v7 requires webpack-dev-server 5, which needs config migration + react-dev-utils removal
+    "webpack-cli",
+    // v5 renames https→server, replaces onBefore/AfterSetupMiddleware with setupMiddlewares
+    "webpack-dev-server",
   ],
 }
