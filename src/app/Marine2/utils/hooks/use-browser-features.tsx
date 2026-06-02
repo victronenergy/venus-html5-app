@@ -14,15 +14,7 @@ export interface WebGLDiagnostics {
   supportedExtensions: string[]
 }
 
-const QT_WEBGL1_EXTENSIONS = [
-  "OES_vertex_array_object",
-  "OES_element_index_uint",
-  "OES_standard_derivatives",
-  "ANGLE_instanced_arrays",
-  "OES_texture_float",
-  "WEBGL_depth_texture",
-  "EXT_blend_minmax",
-]
+const QT_WEBGL1_EXTENSIONS = ["OES_vertex_array_object", "OES_element_index_uint"]
 
 function collectWebGLDiagnostics(): WebGLDiagnostics {
   const canvas = document.createElement("canvas")
