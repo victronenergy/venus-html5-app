@@ -1,15 +1,13 @@
 const path = require("path")
-const camelcase = require("camelcase")
+
+const toPascalCase = (str) => str.replace(/(^|[-_])(\w)/g, (_, __, c) => c.toUpperCase())
 
 module.exports = {
   process(src, filename) {
     const assetFilename = JSON.stringify(path.basename(filename))
 
     if (filename.match(/\.svg$/)) {
-      const pascalCaseFilename = camelcase(path.parse(filename).name, {
-        pascalCase: true,
-      })
-      const componentName = `Svg${pascalCaseFilename}`
+      const componentName = `Svg${toPascalCase(path.parse(filename).name)}`
       return {
         code: `const React = require('react');
       const ${componentName} = React.forwardRef(function ${componentName}(props, ref) {
