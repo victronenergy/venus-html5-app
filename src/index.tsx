@@ -1,4 +1,4 @@
-import "react-app-polyfill/stable"
+import "core-js/stable"
 import React from "react"
 import { createRoot } from "react-dom/client"
 import { getParameterByName } from "./app/utils/util"

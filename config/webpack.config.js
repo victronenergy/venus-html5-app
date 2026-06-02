@@ -338,7 +338,14 @@ module.exports = function (webpackEnv) {
               // inline SVGs only for Marine2 app
               include: [paths.appSrc + "/app/Marine2"],
               use: [
-                { loader: require.resolve("babel-loader") },
+                {
+                  loader: require.resolve("babel-loader"),
+                  options: {
+                    babelrc: false,
+                    configFile: false,
+                    presets: [require.resolve("@babel/preset-react")],
+                  },
+                },
                 {
                   loader: require.resolve("react-svg-loader"),
                   options: { jsx: true },
@@ -373,23 +380,38 @@ module.exports = function (webpackEnv) {
               },
             },
             // Process application JS with Babel.
-            // The preset includes JSX, Flow, TypeScript, and some ESnext features.
             {
               test: /\.(js|mjs|jsx|ts|tsx)$/,
               include: paths.appSrc,
               loader: require.resolve("babel-loader"),
               options: {
-                customize: require.resolve("babel-preset-react-app/webpack-overrides"),
+                babelrc: false,
+                configFile: false,
                 presets: [
                   [
-                    require.resolve("babel-preset-react-app"),
+                    require.resolve("@babel/preset-env"),
                     {
+                      useBuiltIns: "entry",
+                      corejs: require("core-js/package.json").version,
+                      exclude: ["transform-typeof-symbol"],
+                    },
+                  ],
+                  [
+                    require.resolve("@babel/preset-react"),
+                    {
+                      development: isEnvDevelopment,
                       runtime: hasJsxRuntime ? "automatic" : "classic",
                     },
                   ],
+                  require.resolve("@babel/preset-typescript"),
                 ],
 
                 plugins: [
+                  require.resolve("babel-plugin-macros"),
+                  [
+                    require.resolve("@babel/plugin-proposal-decorators"),
+                    { legacy: true },
+                  ],
                   [
                     require.resolve("babel-plugin-named-asset-import"),
                     {
@@ -400,20 +422,26 @@ module.exports = function (webpackEnv) {
                       },
                     },
                   ],
+                  [
+                    require.resolve("@babel/plugin-transform-runtime"),
+                    {
+                      corejs: false,
+                      helpers: true,
+                      version: require("@babel/runtime/package.json").version,
+                      regenerator: true,
+                      useESModules: isEnvDevelopment || isEnvProduction,
+                      absoluteRuntime: path.dirname(require.resolve("@babel/runtime/package.json")),
+                    },
+                  ],
                   isEnvDevelopment && shouldUseReactRefresh && require.resolve("react-refresh/babel"),
                 ].filter(Boolean),
 
-                // This is a feature of `babel-loader` for webpack (not Babel itself).
-                // It enables caching results in ./node_modules/.cache/babel-loader/
-                // directory for faster rebuilds.
                 cacheDirectory: true,
-                // See #6846 for context on why cacheCompression is disabled
                 cacheCompression: false,
                 compact: isEnvProduction,
               },
             },
             // Process any JS outside of the app with Babel.
-            // Unlike the application JS, we only compile the standard ES features.
             {
               test: /\.(js|mjs)$/,
               exclude: /@babel(?:\/|\\{1,2})runtime/,
@@ -422,14 +450,31 @@ module.exports = function (webpackEnv) {
                 babelrc: false,
                 configFile: false,
                 compact: false,
-                presets: [[require.resolve("babel-preset-react-app/dependencies"), { helpers: true }]],
+                presets: [
+                  [
+                    require.resolve("@babel/preset-env"),
+                    {
+                      useBuiltIns: "entry",
+                      corejs: require("core-js/package.json").version,
+                      exclude: ["transform-typeof-symbol"],
+                    },
+                  ],
+                ],
+                plugins: [
+                  [
+                    require.resolve("@babel/plugin-transform-runtime"),
+                    {
+                      corejs: false,
+                      helpers: true,
+                      version: require("@babel/runtime/package.json").version,
+                      regenerator: true,
+                      useESModules: isEnvDevelopment || isEnvProduction,
+                      absoluteRuntime: path.dirname(require.resolve("@babel/runtime/package.json")),
+                    },
+                  ],
+                ],
                 cacheDirectory: true,
-                // See #6846 for context on why cacheCompression is disabled
                 cacheCompression: false,
-
-                // Babel sourcemaps are needed for debugging into node_modules
-                // code.  Without the options below, debuggers like VSCode
-                // show incorrect code and set breakpoints on the wrong lines.
                 sourceMaps: shouldUseSourceMap,
                 inputSourceMap: shouldUseSourceMap,
               },

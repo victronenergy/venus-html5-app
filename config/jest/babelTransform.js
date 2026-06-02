@@ -16,12 +16,23 @@ const hasJsxRuntime = (() => {
 module.exports = babelJest.createTransformer({
   presets: [
     [
-      require.resolve("babel-preset-react-app"),
+      require.resolve("@babel/preset-env"),
       {
+        useBuiltIns: "entry",
+        corejs: require("core-js/package.json").version,
+        exclude: ["transform-typeof-symbol"],
+      },
+    ],
+    [
+      require.resolve("@babel/preset-react"),
+      {
+        development: true,
         runtime: hasJsxRuntime ? "automatic" : "classic",
       },
     ],
+    require.resolve("@babel/preset-typescript"),
   ],
+  plugins: [require.resolve("babel-plugin-macros")],
   babelrc: false,
   configFile: false,
 })
