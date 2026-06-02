@@ -449,6 +449,7 @@ module.exports = function (webpackEnv) {
                 babelrc: false,
                 configFile: false,
                 compact: false,
+                sourceType: "unambiguous",
                 presets: [
                   [
                     require.resolve("@babel/preset-env"),
