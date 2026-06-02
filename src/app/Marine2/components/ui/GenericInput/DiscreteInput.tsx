@@ -10,7 +10,7 @@ import classnames from "classnames"
 import { observer } from "mobx-react"
 import { translate } from "react-i18nify"
 import { getValueOrDefault } from "../SwitchableOutput/helpers"
-import { getLocalizedOrDefault } from "./helpers"
+import { getLocalizedOrDefault, getStatusLabel } from "./helpers"
 
 interface DiscreteInputProps {
   key: string
@@ -29,10 +29,20 @@ const DiscreteInput = observer((props: DiscreteInputProps) => {
   const options = Array.isArray(genericInput.labels) ? genericInput.labels : []
   const selectedIndex = Number(getValueOrDefault(genericInput.value, 0))
   const selectedLabel = options.length > selectedIndex ? options[selectedIndex] : options.length > 0 ? options[0] : "--"
+  const statusLabel = getStatusLabel(genericInput.status)
 
   return (
     <div className={classnames("mt-4", props.className)}>
-      <div>{inputName}</div>
+      <div className="flex">
+        <div className="flex-1">{inputName}</div>
+        {statusLabel && (
+          <div className="flex py-1">
+            <span className="px-2 text-2xs rounded-md bg-surface-victronRed text-content-victronRed">
+              {statusLabel}
+            </span>
+          </div>
+        )}
+      </div>
       <div className="h-px-44 rounded-md bg-surface-tertiary flex items-center px-4">
         <span className="flex-1 text-base text-content-secondary">{label}</span>
         <span className="text-base text-content-primary">{getLocalizedOrDefault(selectedLabel)}</span>

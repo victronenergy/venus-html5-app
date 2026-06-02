@@ -261,6 +261,7 @@
     "switches": {
         "alarm": "Alarm",
         "auto": "Auto",
+        "batteryLow": "Sensor battery low",
         "closed": "Closed",
         "fault": "Fault",
         "gxDeviceRelays": "GX device relays",
