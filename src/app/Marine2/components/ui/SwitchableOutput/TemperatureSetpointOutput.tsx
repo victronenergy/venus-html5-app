@@ -34,7 +34,6 @@ const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProp
   const decimals = getValueOrDefault(switchableOutput.decimals, getDecimalPlaces(step))
   const setpoint = getValueOrDefault(switchableOutput.dimming, 1)
   const measurement = switchableOutput.measurement
-  const ratio = Math.round(((setpoint - min) / (max - min)) * 100)
   const disabled = isSwitchableOutputDisabled(switchableOutput.status)
   const statusPill = getSwitchableOutputStatusPill(switchableOutput.status, switchableOutput.type)
   const totalSteps = 1 + Math.round((max - min) / step)
@@ -42,7 +41,11 @@ const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProp
   const visibleMarkCount = Math.min(maxVisibleMarks, totalSteps)
 
   const [isDragging, setIsDragging] = useState(false)
+  const [localSetpoint, setLocalSetpoint] = useState<number | null>(null)
   const updateTimeoutRef = useRef<NodeJS.Timeout>()
+
+  const displaySetpoint = localSetpoint !== null ? localSetpoint : setpoint
+  const displayRatio = Math.round(((displaySetpoint - min) / (max - min)) * 100)
 
   const formatValueAndUnit = useValueFormatter({ decimals })
 
@@ -62,33 +65,34 @@ const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProp
   }
 
   const updateDimmingValueImmediately = useCallback(
-    (percentage: number) => {
-      switchableOutput.updateDimming(percentage)
+    (value: number) => {
+      setLocalSetpoint(value)
+      switchableOutput.updateDimming(value)
     },
     [switchableOutput],
   )
 
   const updateDimmingValueDebounced = useCallback(
-    (percentage: number) => {
+    (value: number) => {
+      setLocalSetpoint(value)
       if (updateTimeoutRef.current) {
         clearTimeout(updateTimeoutRef.current)
         updateTimeoutRef.current = undefined
       }
 
       updateTimeoutRef.current = setTimeout(() => {
-        switchableOutput.updateDimming(percentage)
+        switchableOutput.updateDimming(value)
       }, 10)
     },
     [switchableOutput],
   )
 
   const handlePress = (e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
-    setIsDragging(true)
-
     const clientX = "touches" in e ? e.touches[0].clientX : e.clientX
     const newValue = calculateNewValue(clientX, e.currentTarget, min, max, step)
 
     updateDimmingValueImmediately(newValue)
+    setIsDragging(true)
   }
 
   const handleMove = (e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
@@ -103,11 +107,22 @@ const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProp
 
   const handleRelease = () => {
     setIsDragging(false)
+    setLocalSetpoint(null)
 
     if (updateTimeoutRef.current) {
       clearTimeout(updateTimeoutRef.current)
       updateTimeoutRef.current = undefined
     }
+  }
+
+  const handleMinPress = () => {
+    updateDimmingValueImmediately(min)
+    setIsDragging(true)
+  }
+
+  const handleMaxPress = () => {
+    updateDimmingValueImmediately(max)
+    setIsDragging(true)
   }
 
   return (
@@ -150,9 +165,15 @@ const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProp
         <div className="h-full rounded-sm flex overflow-visible">
           <div
             className={classnames(
-              "h-full flex items-center pl-2 pr-4",
+              "h-full flex items-center pl-2 pr-4 cursor-pointer",
               disabled ? "text-content-victronGray" : "text-content-white",
             )}
+            onMouseDown={handleMinPress}
+            onMouseUp={handleRelease}
+            onMouseLeave={handleRelease}
+            onTouchStart={handleMinPress}
+            onTouchEnd={handleRelease}
+            onTouchCancel={handleRelease}
           >
             {translate("switches.min")}
           </div>
@@ -171,7 +192,7 @@ const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProp
             {/* Slider */}
             <div className="absolute inset-0 flex h-full">
               {/* Percent area */}
-              <div className="h-full transition-all duration-100 ease-out" style={{ width: `${ratio}%` }} />
+              <div className="h-full transition-all duration-100 ease-out" style={{ width: `${displayRatio}%` }} />
             </div>
             {/* Marks */}
             <div className="absolute inset-0 flex justify-between items-center pointer-events-none">
@@ -188,7 +209,7 @@ const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProp
             {/* Handle */}
             <div
               className="absolute inset-y-0 flex items-center pointer-events-none"
-              style={{ left: `${ratio}%`, transform: "translateX(-50%)" }}
+              style={{ left: `${displayRatio}%`, transform: "translateX(-50%)" }}
             >
               <div
                 className={classnames(
@@ -205,7 +226,7 @@ const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProp
                       {/* Popover Container HStack */}
                       <div className="h-px-44 flex items-center">
                         <div className="pl-3 pr-2 text-xl text-content-onVictronBlue">
-                          {formatValueAndUnit(setpoint, "/Temperature", false)}
+                          {formatValueAndUnit(displaySetpoint, "/Temperature", false)}
                           {"°"}
                         </div>
                         {measurement !== undefined && (
@@ -235,9 +256,15 @@ const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProp
           </div>
           <div
             className={classnames(
-              "h-full flex items-center pl-4 pr-2",
+              "h-full flex items-center pl-4 pr-2 cursor-pointer",
               disabled ? "text-content-victronGray" : "text-content-white",
             )}
+            onMouseDown={handleMaxPress}
+            onMouseUp={handleRelease}
+            onMouseLeave={handleRelease}
+            onTouchStart={handleMaxPress}
+            onTouchEnd={handleRelease}
+            onTouchCancel={handleRelease}
           >
             {translate("switches.max")}
           </div>
