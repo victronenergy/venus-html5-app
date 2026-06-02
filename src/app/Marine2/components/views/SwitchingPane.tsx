@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useLayoutEffect, useState } from "react"
 import { observer } from "mobx-react"
 import SwitchableOutput from "../ui/SwitchableOutput"
-import { useSwitchableOutputs } from "@victronenergy/mfd-modules"
+import GenericInput from "../ui/GenericInput"
+import { useSwitchingPane, SwitchingPaneItem } from "@victronenergy/mfd-modules"
 import SmartswitchOffIcon from "../../images/icons/smartswitch_off.svg"
 import SmartswitchOnIcon from "../../images/icons/smartswitch_on.svg"
 import { Modal } from "../ui/Modal"
@@ -12,7 +13,7 @@ import { translate } from "react-i18nify"
 
 const SwitchingPane = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const switchableOutputs = useSwitchableOutputs(translate("switches.gxDeviceRelays"))
+  const switchableOutputs = useSwitchingPane(translate("switches.gxDeviceRelays"))
 
   const [groupNames, setGroupNames] = useState<string[]>([])
   const [groupsOfSwitchableOutputs, setGroupsOfSwitchableOutputs] = useState<React.JSX.Element[][]>([])
@@ -33,17 +34,32 @@ const SwitchingPane = () => {
         // Return array of switchable outputs
         return {
           groupName: groupName,
-          outputs: groupSwitchableOutputs.map((switchableOutput) => (
-            <SwitchableOutput
-              className="w-full pl-2 pr-2"
-              key={`${switchableOutput.deviceId}_${switchableOutput.outputId}`}
-              tree={switchableOutput.tree}
-              type={switchableOutput.type}
-              deviceId={switchableOutput.deviceId}
-              outputId={switchableOutput.outputId}
-              parentDeviceName={switchableOutput.parentDeviceName}
-            />
-          )),
+          outputs: groupSwitchableOutputs.map((item: SwitchingPaneItem) => {
+            if (item.kind === "genericInput") {
+              return (
+                <GenericInput
+                  className="w-full pl-2 pr-2"
+                  key={`${item.deviceId}_${item.outputId}`}
+                  tree={item.tree}
+                  type={item.type}
+                  deviceId={item.deviceId}
+                  inputId={item.outputId}
+                  parentDeviceName={item.parentDeviceName}
+                />
+              )
+            }
+            return (
+              <SwitchableOutput
+                className="w-full pl-2 pr-2"
+                key={`${item.deviceId}_${item.outputId}`}
+                tree={item.tree}
+                type={item.type}
+                deviceId={item.deviceId}
+                outputId={item.outputId}
+                parentDeviceName={item.parentDeviceName}
+              />
+            )
+          }),
         }
       })
     // array of groupNames by index

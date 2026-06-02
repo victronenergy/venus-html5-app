@@ -72,6 +72,7 @@ module.exports = {
         surface: {
           primary: "var(--c-surface-primary)",
           secondary: "var(--c-surface-secondary)",
+          tertiary: "var(--c-surface-tertiary)",
           victronGray: "rgba(var(--c-victron-gray-rgb), 0.3)",
           victronBlue: "rgba(var(--c-victron-blue-rgb), 0.3)",
           victronRed: "rgba(var(--c-victron-red-rgb), 0.3)",

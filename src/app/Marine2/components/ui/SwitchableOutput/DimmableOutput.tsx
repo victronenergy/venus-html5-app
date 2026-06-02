@@ -1,6 +1,6 @@
 import React, { useCallback, useRef, useState } from "react"
 import {
-  getSwitchableOutputNameForDisplay,
+  getSwitchingPaneItemNameForDisplay,
   SwitchableOutputId,
   SwitchableOutputTree,
   SwitchingDeviceInstanceId,
@@ -22,7 +22,7 @@ interface DimmableOutputProps {
 
 const DimmableOutput = observer((props: DimmableOutputProps) => {
   const switchableOutput = useSwitchableOutput(props.tree, props.deviceId, props.outputId)
-  const outputName = getSwitchableOutputNameForDisplay(switchableOutput, props.parentDeviceName)
+  const outputName = getSwitchingPaneItemNameForDisplay(switchableOutput, props.parentDeviceName)
 
   const variant = switchableOutput.state === 1 ? "on" : "off"
   const ratio = getValueOrDefault(switchableOutput.dimming, 0)

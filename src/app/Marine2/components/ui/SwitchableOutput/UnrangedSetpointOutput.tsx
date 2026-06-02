@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useRef } from "react"
 import {
-  getSwitchableOutputNameForDisplay,
+  getSwitchingPaneItemNameForDisplay,
   SwitchableOutputId,
   SwitchableOutputTree,
   SwitchingDeviceInstanceId,
@@ -21,7 +21,7 @@ interface UnrangedSetpointOutputProps {
 
 const UnrangedSetpointOutput = observer((props: UnrangedSetpointOutputProps) => {
   const switchableOutput = useSwitchableOutput(props.tree, props.deviceId, props.outputId)
-  const outputName = getSwitchableOutputNameForDisplay(switchableOutput, props.parentDeviceName)
+  const outputName = getSwitchingPaneItemNameForDisplay(switchableOutput, props.parentDeviceName)
 
   const min = getValueOrDefault(switchableOutput.dimmingMin, 0)
   const max = getValueOrDefault(switchableOutput.dimmingMax, 100)

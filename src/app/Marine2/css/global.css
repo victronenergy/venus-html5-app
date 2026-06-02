@@ -154,6 +154,7 @@
   :root {
     --c-surface-primary: #FFFFFF;
     --c-surface-secondary: #F5F5F5;
+    --c-surface-tertiary: #EBEBEB;
 
     --c-outline-primary: #DCDBD7;
     --c-outline-secondary: #F5F5F5;
@@ -184,6 +185,7 @@
 .dark {
   --c-surface-primary: #000000;
   --c-surface-secondary: #141414;
+  --c-surface-tertiary: #1F1F1F;
 
   --c-outline-primary: #272622;
   --c-outline-secondary: #141414;
@@ -198,6 +200,7 @@
 .dark-red {
   --c-surface-primary: #000000;
   --c-surface-secondary: #140000;
+  --c-surface-tertiary: #1F0000;
 
   --c-outline-primary: #4D0807;
   --c-outline-secondary: #4D0807;

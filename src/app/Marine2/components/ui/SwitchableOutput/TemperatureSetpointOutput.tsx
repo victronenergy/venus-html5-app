@@ -1,6 +1,6 @@
 import React, { useCallback, useRef, useState } from "react"
 import {
-  getSwitchableOutputNameForDisplay,
+  getSwitchingPaneItemNameForDisplay,
   SwitchableOutputId,
   SwitchableOutputTree,
   SwitchingDeviceInstanceId,
@@ -23,7 +23,7 @@ interface TemperatureSetpointOutputProps {
 
 const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProps) => {
   const switchableOutput = useSwitchableOutput(props.tree, props.deviceId, props.outputId)
-  const outputName = getSwitchableOutputNameForDisplay(switchableOutput, props.parentDeviceName)
+  const outputName = getSwitchingPaneItemNameForDisplay(switchableOutput, props.parentDeviceName)
   const { temperatureUnitToHumanReadable } = useAppStore()
 
   const min = getValueOrDefault(switchableOutput.dimmingMin, 0)

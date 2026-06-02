@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react"
 import {
-  getSwitchableOutputNameForDisplay,
+  getSwitchingPaneItemNameForDisplay,
   SwitchableOutputId,
   SwitchableOutputTree,
   SwitchingDeviceInstanceId,
@@ -21,7 +21,7 @@ interface DropdownOutputProps {
 
 const DropdownOutput = observer((props: DropdownOutputProps) => {
   const switchableOutput = useSwitchableOutput(props.tree, props.deviceId, props.outputId)
-  const outputName = getSwitchableOutputNameForDisplay(switchableOutput, props.parentDeviceName)
+  const outputName = getSwitchingPaneItemNameForDisplay(switchableOutput, props.parentDeviceName)
 
   const options = Array.isArray(switchableOutput.labels) ? switchableOutput.labels : []
   // TODO: this should be a number but as of today we sometimes receive a string

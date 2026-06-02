@@ -1,6 +1,6 @@
 import React from "react"
 import {
-  getSwitchableOutputNameForDisplay,
+  getSwitchingPaneItemNameForDisplay,
   SwitchableOutputId,
   SwitchableOutputTree,
   SwitchingDeviceInstanceId,
@@ -21,7 +21,7 @@ interface ThreeStateSwitchOutputProps {
 
 const ThreeStateSwitchOutput = observer((props: ThreeStateSwitchOutputProps) => {
   const switchableOutput = useSwitchableOutput(props.tree, props.deviceId, props.outputId)
-  const outputName = getSwitchableOutputNameForDisplay(switchableOutput, props.parentDeviceName)
+  const outputName = getSwitchingPaneItemNameForDisplay(switchableOutput, props.parentDeviceName)
 
   const variant = switchableOutput.state === 1 ? "on" : "off"
   const auto = switchableOutput.auto === 1 ? "on" : "off"
