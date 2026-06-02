@@ -12,20 +12,13 @@ module.exports = {
       const componentName = `Svg${pascalCaseFilename}`
       return {
         code: `const React = require('react');
+      const ${componentName} = React.forwardRef(function ${componentName}(props, ref) {
+        return React.createElement('svg', Object.assign({}, props, { ref }));
+      });
       module.exports = {
         __esModule: true,
-        default: ${assetFilename},
-        ReactComponent: React.forwardRef(function ${componentName}(props, ref) {
-          return {
-            $$typeof: Symbol.for('react.element'),
-            type: 'svg',
-            ref: ref,
-            key: null,
-            props: Object.assign({}, props, {
-              children: ${assetFilename}
-            })
-          };
-        }),
+        default: ${componentName},
+        ReactComponent: ${componentName},
       };`,
       }
     }
