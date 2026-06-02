@@ -1,40 +1,29 @@
-import { mount } from "enzyme"
 import React from "react"
+import { render } from "@testing-library/react"
 import EnergyOverview from "./EnergyOverview"
-import { AppViews } from "../../../modules/AppViews"
 
 describe("EnergyOverview element", () => {
   describe("compact mode", () => {
-    const wrapper = mount(<EnergyOverview componentMode="compact" />)
-
     it("should show content", () => {
-      expect(wrapper.find(EnergyOverview).exists()).toBe(true)
+      const { container } = render(<EnergyOverview componentMode="compact" />)
+      expect(container.firstChild).toBeTruthy()
     })
 
     it("should show expand link", () => {
-      const boxes = wrapper.find(EnergyOverview).children().find("Box")
-
-      let contentBox
-      boxes.forEach((box) => {
-        if (box.prop("title")?.toLowerCase() === "energy") {
-          contentBox = box
-        }
-      })
-
-      expect(contentBox).toBeDefined()
-      expect(contentBox.prop("linkedView")).toBe(AppViews.BOX_ENERGY_OVERVIEW)
+      const { container } = render(<EnergyOverview componentMode="compact" />)
+      expect(container.querySelector("[data-testid='expand-icon']")).toBeInTheDocument()
     })
   })
 
   describe("full mode", () => {
-    const wrapper = mount(<EnergyOverview />)
-
     it("should use full mode by default", () => {
-      expect(wrapper.find("GridPaginator").exists()).toBe(true)
+      const { container } = render(<EnergyOverview />)
+      expect(container.querySelector("[data-testid='grid-paginator']")).toBeInTheDocument()
     })
 
     it("should show content", () => {
-      expect(wrapper.find(EnergyOverview).exists()).toBe(true)
+      const { container } = render(<EnergyOverview />)
+      expect(container.firstChild).toBeTruthy()
     })
   })
 

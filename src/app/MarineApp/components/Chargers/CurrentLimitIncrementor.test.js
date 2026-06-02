@@ -1,14 +1,13 @@
-import CurrentLimitIncrementor from "./CurrentLimitIncrementor"
-import { shallow } from "enzyme"
 import React from "react"
+import { render, screen, fireEvent } from "@testing-library/react"
+import CurrentLimitIncrementor from "./CurrentLimitIncrementor"
 
 describe("Input limit spinner", () => {
   describe("when valid", () => {
     const onCurrentLimitChanged = jest.fn()
-    let wrapper
 
     beforeEach(() => {
-      wrapper = shallow(<CurrentLimitIncrementor currentLimit={10} onInputLimitChanged={onCurrentLimitChanged} />)
+      render(<CurrentLimitIncrementor currentLimit={10} onInputLimitChanged={onCurrentLimitChanged} />)
     })
 
     afterEach(() => {
@@ -16,25 +15,19 @@ describe("Input limit spinner", () => {
     })
 
     it("shows current limit", () => {
-      const limit = wrapper.find(".metric__current-input-limit__limit").text()
-
-      expect(limit).toEqual("10A")
+      expect(screen.getByText("10A")).toBeInTheDocument()
     })
 
     it("should call prop `onCurrentLimitChanged` with limit increased by 1", () => {
-      const plusButton = wrapper.find(".metric__current-input-limit__increment").first()
-      plusButton.simulate("click")
-
-      const invocationArgs = onCurrentLimitChanged.mock.calls[0]
-      expect(invocationArgs).toEqual([11])
+      const plusButton = document.querySelector(".metric__current-input-limit__increment")
+      fireEvent.click(plusButton)
+      expect(onCurrentLimitChanged).toHaveBeenCalledWith(11)
     })
 
     it("should call prop `onCurrentLimitChanged` with limit decreased by 1", () => {
-      const minusButton = wrapper.find(".metric__current-input-limit__decrement").first()
-      minusButton.simulate("click")
-
-      const invocationArgs = onCurrentLimitChanged.mock.calls[0]
-      expect(invocationArgs).toEqual([9])
+      const minusButton = document.querySelector(".metric__current-input-limit__decrement")
+      fireEvent.click(minusButton)
+      expect(onCurrentLimitChanged).toHaveBeenCalledWith(9)
     })
   })
 })

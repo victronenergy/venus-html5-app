@@ -91,7 +91,6 @@
     "workbox-webpack-plugin": "^7.4.1"
   },
   "devDependencies": {
-    "@cfaester/enzyme-adapter-react-18": "^0.8.0",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/line-clamp": "^0.4.4",
     "@testing-library/cypress": "^10.1.0",
@@ -113,7 +112,6 @@
     "css-loader": "^7.1.4",
     "css-minimizer-webpack-plugin": "^8.0.0",
     "cypress": "^15.16.0",
-    "enzyme": "^3.11.0",
     "es-check": "^9.6.4",
     "eslint": "^9.36.0",
     "eslint-config-prettier": "^10.1.8",

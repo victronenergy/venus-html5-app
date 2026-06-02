@@ -1,5 +1,5 @@
-import { mount } from "enzyme"
 import React from "react"
+import { render, fireEvent } from "@testing-library/react"
 import { Batteries } from "./Battery"
 
 const batteries = [
@@ -61,38 +61,40 @@ const batteries = [
 
 describe("Battery element", () => {
   describe("with a few batteries", () => {
-    const wrapper = mount(<Batteries batteries={batteries.slice(0, 3)} />)
-
     it("should show batteries", () => {
-      expect(wrapper.find(".battery").length).toBe(3)
+      const { container } = render(<Batteries batteries={batteries.slice(0, 3)} />)
+      expect(container.querySelectorAll(".battery").length).toBe(3)
     })
 
     it("should not show pagination", () => {
-      expect(wrapper.find(".battery__paginator").exists()).toBe(false)
+      const { container } = render(<Batteries batteries={batteries.slice(0, 3)} />)
+      expect(container.querySelector(".battery__paginator")).toBeNull()
     })
   })
 
   describe("with more than 1 page of batteries", () => {
-    const wrapper = mount(<Batteries batteries={batteries} />)
-
     it("page should show one page of batteries", () => {
-      expect(wrapper.find(".battery").length).toBe(3)
+      const { container } = render(<Batteries batteries={batteries} />)
+      expect(container.querySelectorAll(".battery").length).toBe(3)
     })
 
     it("should show pagination", () => {
-      expect(wrapper.find(".battery__paginator").exists()).toBe(true)
+      const { container } = render(<Batteries batteries={batteries} />)
+      expect(container.querySelector(".battery__paginator")).toBeInTheDocument()
     })
 
     it("should have 'filler' elements on the last page", () => {
-      const paginatorLabel = wrapper.find(".battery__paginator-page")
-      const nextPage = wrapper.find(".selector-button").last()
+      const { container } = render(<Batteries batteries={batteries} />)
+      const paginatorLabel = container.querySelector(".battery__paginator-page")
+      const nextButtons = container.querySelectorAll(".selector-button")
+      const nextPage = nextButtons[nextButtons.length - 1]
 
-      expect(paginatorLabel.text()).toBe("1")
-      nextPage.simulate("click")
-      nextPage.simulate("click")
-      expect(paginatorLabel.text()).toBe("3")
+      expect(paginatorLabel.textContent).toBe("1")
+      fireEvent.click(nextPage)
+      fireEvent.click(nextPage)
+      expect(paginatorLabel.textContent).toBe("3")
 
-      expect(wrapper.find(".battery--dummy").length).toBe(2)
+      expect(container.querySelectorAll(".battery--dummy").length).toBe(2)
     })
   })
 })

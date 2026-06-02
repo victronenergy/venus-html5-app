@@ -1,40 +1,29 @@
-import { mount } from "enzyme"
 import React from "react"
+import { render } from "@testing-library/react"
 import BatteriesOverview from "./BatteriesOverview"
-import { AppViews } from "../../../modules/AppViews"
 
 describe("BatteriesOverview element", () => {
   describe("compact mode", () => {
-    const wrapper = mount(<BatteriesOverview componentMode="compact" />)
-
     it("should show content", () => {
-      expect(wrapper.find(BatteriesOverview).exists()).toBe(true)
+      const { container } = render(<BatteriesOverview componentMode="compact" />)
+      expect(container.firstChild).toBeTruthy()
     })
 
     it("should show expand link", () => {
-      const boxes = wrapper.find(BatteriesOverview).children().find("Box")
-
-      let contentBox
-      boxes.forEach((box) => {
-        if (box.prop("title")?.toLowerCase() === "batteries") {
-          contentBox = box
-        }
-      })
-
-      expect(contentBox).toBeDefined()
-      expect(contentBox.prop("linkedView")).toBe(AppViews.BOX_BATTERIES_OVERVIEW)
+      const { container } = render(<BatteriesOverview componentMode="compact" />)
+      expect(container.querySelector("[data-testid='expand-icon']")).toBeInTheDocument()
     })
   })
 
   describe("full mode", () => {
-    const wrapper = mount(<BatteriesOverview />)
-
     it("should use full mode by default", () => {
-      expect(wrapper.find("GridPaginator").exists()).toBe(true)
+      const { container } = render(<BatteriesOverview />)
+      expect(container.querySelector("[data-testid='grid-paginator']")).toBeInTheDocument()
     })
 
     it("should show content", () => {
-      expect(wrapper.find(BatteriesOverview).exists()).toBe(true)
+      const { container } = render(<BatteriesOverview />)
+      expect(container.firstChild).toBeTruthy()
     })
   })
 

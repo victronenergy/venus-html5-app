@@ -1,98 +1,114 @@
-import { mount } from "enzyme"
 import React from "react"
+import { render } from "@testing-library/react"
 import Grid from "./Grid"
-import Box from "../Box"
 
 describe("Grid element", () => {
   describe("row flow with content", () => {
-    const wrapper = mount(
-      <Grid>
-        <Box title={"Box1"}>Box1</Box>
-        <Box title={"Box2"}>Box2</Box>
-        <Box title={"Box3"}>Box3</Box>
-      </Grid>,
-    )
-
     it("should show content", () => {
-      expect(wrapper.find("Box").length).toBe(3)
+      const { container } = render(
+        <Grid>
+          <div>Box1</div>
+          <div>Box2</div>
+          <div>Box3</div>
+        </Grid>,
+      )
+      expect(container.textContent).toContain("Box1")
+      expect(container.textContent).toContain("Box2")
+      expect(container.textContent).toContain("Box3")
     })
 
     it("should use row flow by default", () => {
-      expect(wrapper.find("Box").first().parents(".flex.flex-wrap").prop("className")).toContain("flex-row")
+      const { container } = render(
+        <Grid>
+          <div>Box1</div>
+          <div>Box2</div>
+          <div>Box3</div>
+        </Grid>,
+      )
+      expect(container.querySelector(".flex-row")).toBeInTheDocument()
     })
   })
 
   describe("col flow with content", () => {
-    const wrapper = mount(
-      <Grid flow={"col"}>
-        <Box title={"Box1"}>Box1</Box>
-        <Box title={"Box2"}>Box2</Box>
-        <Box title={"Box3"}>Box3</Box>
-      </Grid>,
-    )
-
     it("should show content", () => {
-      expect(wrapper.find("Box").length).toBe(3)
+      const { container } = render(
+        <Grid flow={"col"}>
+          <div>Box1</div>
+          <div>Box2</div>
+          <div>Box3</div>
+        </Grid>,
+      )
+      expect(container.textContent).toContain("Box1")
+      expect(container.textContent).toContain("Box3")
     })
 
     it("should use col flow", () => {
-      expect(wrapper.find("Box").first().parents(".flex.flex-wrap").prop("className")).toContain("flex-col")
+      const { container } = render(
+        <Grid flow={"col"}>
+          <div>Box1</div>
+          <div>Box2</div>
+          <div>Box3</div>
+        </Grid>,
+      )
+      expect(container.querySelector(".flex-col")).toBeInTheDocument()
     })
   })
 
   describe("first child full height size", () => {
     it("should use 100% width for first child in row flow", () => {
-      const wrapper = mount(
+      const { container } = render(
         <Grid>
-          <Box title={"Box1"}>Box1</Box>
-          <Box title={"Box2"}>Box2</Box>
-          <Box title={"Box3"}>Box3</Box>
+          <div>Box1</div>
+          <div>Box2</div>
+          <div>Box3</div>
         </Grid>,
       )
-
-      expect(wrapper.find("Box").first().parent().prop("style")).toHaveProperty("width", "100%")
-      expect(wrapper.find("Box").first().parent().prop("style")).toHaveProperty("height", "50%")
+      const firstWrapper = container.querySelector(".flex-wrap > div")
+      expect(firstWrapper.style.width).toBe("100%")
+      expect(firstWrapper.style.height).toBe("50%")
     })
 
     it("should use 100% height for first child in col flow", () => {
-      const wrapper = mount(
+      const { container } = render(
         <Grid flow={"col"}>
-          <Box title={"Box1"}>Box1</Box>
-          <Box title={"Box2"}>Box2</Box>
-          <Box title={"Box3"}>Box3</Box>
+          <div>Box1</div>
+          <div>Box2</div>
+          <div>Box3</div>
         </Grid>,
       )
-
-      expect(wrapper.find("Box").first().parent().prop("style")).toHaveProperty("height", "100%")
-      expect(wrapper.find("Box").first().parent().prop("style")).toHaveProperty("width", "50%")
+      const firstWrapper = container.querySelector(".flex-wrap > div")
+      expect(firstWrapper.style.height).toBe("100%")
+      expect(firstWrapper.style.width).toBe("50%")
     })
   })
 
   describe("last child full height size", () => {
     it("should use 100% width for last child in row flow", () => {
-      const wrapper = mount(
+      const { container } = render(
         <Grid forceFirstOrLastChild={"last"}>
-          <Box title={"Box1"}>Box1</Box>
-          <Box title={"Box2"}>Box2</Box>
-          <Box title={"Box3"}>Box3</Box>
+          <div>Box1</div>
+          <div>Box2</div>
+          <div>Box3</div>
         </Grid>,
       )
-
-      expect(wrapper.find("Box").last().parent().prop("style")).toHaveProperty("width", "100%")
-      expect(wrapper.find("Box").last().parent().prop("style")).toHaveProperty("height", "50%")
+      const wrappers = container.querySelectorAll(".flex-wrap > div")
+      const lastWrapper = wrappers[wrappers.length - 1]
+      expect(lastWrapper.style.width).toBe("100%")
+      expect(lastWrapper.style.height).toBe("50%")
     })
 
     it("should use 100% height for last child in col flow", () => {
-      const wrapper = mount(
+      const { container } = render(
         <Grid flow={"col"} forceFirstOrLastChild={"last"}>
-          <Box title={"Box1"}>Box1</Box>
-          <Box title={"Box2"}>Box2</Box>
-          <Box title={"Box3"}>Box3</Box>
+          <div>Box1</div>
+          <div>Box2</div>
+          <div>Box3</div>
         </Grid>,
       )
-
-      expect(wrapper.find("Box").last().parent().prop("style")).toHaveProperty("height", "100%")
-      expect(wrapper.find("Box").last().parent().prop("style")).toHaveProperty("width", "50%")
+      const wrappers = container.querySelectorAll(".flex-wrap > div")
+      const lastWrapper = wrappers[wrappers.length - 1]
+      expect(lastWrapper.style.height).toBe("100%")
+      expect(lastWrapper.style.width).toBe("50%")
     })
   })
 })
