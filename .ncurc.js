@@ -10,5 +10,7 @@ module.exports = {
     "@types/react",
     "@types/react-dom",
     "react-test-renderer",
+    // v4 is a full rewrite (Rust engine, no config file), requires dedicated migration
+    "tailwindcss",
   ],
 }
