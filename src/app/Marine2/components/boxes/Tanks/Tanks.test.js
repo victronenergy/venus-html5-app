@@ -11,9 +11,7 @@ describe("Tanks element", () => {
 
     it("should show expand link", async () => {
       const { container } = render(<Tanks componentMode="compact" />)
-      await waitFor(() =>
-        expect(container.querySelector("[data-testid='expand-icon']")).toBeInTheDocument(),
-      )
+      await waitFor(() => expect(container.querySelector("[data-testid='expand-icon']")).toBeInTheDocument())
     })
   })
 

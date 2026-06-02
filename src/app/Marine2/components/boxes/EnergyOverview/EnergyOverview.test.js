@@ -11,18 +11,14 @@ describe("EnergyOverview element", () => {
 
     it("should show expand link", async () => {
       const { container } = render(<EnergyOverview componentMode="compact" />)
-      await waitFor(() =>
-        expect(container.querySelector("[data-testid='expand-icon']")).toBeInTheDocument(),
-      )
+      await waitFor(() => expect(container.querySelector("[data-testid='expand-icon']")).toBeInTheDocument())
     })
   })
 
   describe("full mode", () => {
     it("should use full mode by default", async () => {
       const { container } = render(<EnergyOverview />)
-      await waitFor(() =>
-        expect(container.querySelector("[data-testid='grid-paginator']")).toBeInTheDocument(),
-      )
+      await waitFor(() => expect(container.querySelector("[data-testid='grid-paginator']")).toBeInTheDocument())
     })
 
     it("should show content", async () => {

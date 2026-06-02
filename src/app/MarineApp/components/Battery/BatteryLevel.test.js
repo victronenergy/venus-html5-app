@@ -54,9 +54,7 @@ describe("Battery level", () => {
 
   describe("when battery is idle", () => {
     it("should show battery level", async () => {
-      const { container } = render(
-        <BatteryLevel battery={{ state: BATTERY_STATE.IDLE, soc: 95, timetogo: 9000 }} />,
-      )
+      const { container } = render(<BatteryLevel battery={{ state: BATTERY_STATE.IDLE, soc: 95, timetogo: 9000 }} />)
       await waitFor(() => {
         expect(container.textContent).toContain("95")
         expect(container.textContent).toContain("%")
@@ -69,9 +67,7 @@ describe("Battery level", () => {
     })
 
     it("should NOT show time to go", async () => {
-      const { container } = render(
-        <BatteryLevel battery={{ state: BATTERY_STATE.IDLE, soc: 95, timetogo: 9000 }} />,
-      )
+      const { container } = render(<BatteryLevel battery={{ state: BATTERY_STATE.IDLE, soc: 95, timetogo: 9000 }} />)
       await waitFor(() => expect(container.textContent).not.toContain("2h 30m"))
     })
   })
