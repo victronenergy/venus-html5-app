@@ -86,7 +86,7 @@ const ThreeStateSwitchOutput = observer((props: ThreeStateSwitchOutputProps) => 
             "text-sm min-h-[2.375rem]",
             "rounded-r-md",
             {
-              "bg-content-victronGray text-content-victronGray": disabled && variant === "on",
+              "bg-content-victronGray50 text-content-victronGray": disabled && variant === "on",
               "bg-surface-victronGray text-content-victronGray": disabled && variant === "off",
               "bg-content-victronBlue text-content-onVictronBlue": !disabled && variant === "on",
               "bg-surface-victronBlue text-content-primary": !disabled && variant === "off",
@@ -107,7 +107,7 @@ const ThreeStateSwitchOutput = observer((props: ThreeStateSwitchOutputProps) => 
             "rounded-md",
             {
               "bg-surface-victronGray text-content-victronGray": disabled && auto === "off",
-              "bg-content-victronGray text-content-victronGray": disabled && auto === "on",
+              "bg-content-victronGray50 text-content-victronGray": disabled && auto === "on",
               "bg-surface-victronBlue text-content-primary": !disabled && auto === "off",
               "bg-content-victronBlue text-content-onVictronBlue": !disabled && auto === "on",
             },

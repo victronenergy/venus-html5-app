@@ -147,8 +147,7 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
             {/* On/Off Background */}
             <div
               className={classnames("h-full flex items-center", {
-                "bg-content-victronGray50": disabled && variant === "off",
-                "bg-content-victronGray": disabled && variant === "on",
+                "bg-content-victronGray50": disabled,
                 "bg-content-victronBlue50": !disabled && variant === "off",
                 "bg-content-victronBlue": !disabled && variant === "on",
               })}
@@ -187,8 +186,7 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
                 {/* Percent area */}
                 <div
                   className={classnames("h-full transition-all duration-100 ease-out", {
-                    "bg-content-victronGray": disabled && variant === "on",
-                    "bg-content-victronGray50": disabled && variant === "off",
+                    "bg-content-victronGray50": disabled,
                     "bg-content-victronBlue": !disabled && variant === "on",
                     "bg-content-victronBlue50": !disabled && variant === "off",
                   })}
@@ -197,8 +195,7 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
                 {/* Handle Background */}
                 <div
                   className={classnames("h-full flex items-center px-1", {
-                    "bg-content-victronGray": disabled && variant === "on",
-                    "bg-content-victronGray50": disabled && variant === "off",
+                    "bg-content-victronGray50": disabled,
                     "bg-content-victronBlue": !disabled && variant === "on",
                     "bg-content-victronBlue50": !disabled && variant === "off",
                   })}

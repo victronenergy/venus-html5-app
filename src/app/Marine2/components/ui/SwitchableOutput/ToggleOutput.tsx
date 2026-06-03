@@ -75,7 +75,7 @@ const ToggleOutput = observer((props: ToggleOutputProps) => {
             "rounded-r-md",
             {
               "bg-surface-victronGray text-content-victronGray": disabled && variant === "off",
-              "bg-content-victronGray text-content-victronGray": disabled && variant === "on",
+              "bg-content-victronGray50 text-content-victronGray": disabled && variant === "on",
               "bg-surface-victronBlue text-content-primary": !disabled && variant === "off",
               "bg-content-victronBlue text-content-onVictronBlue": !disabled && variant === "on",
             },

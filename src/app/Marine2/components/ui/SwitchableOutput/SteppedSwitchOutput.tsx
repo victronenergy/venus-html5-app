@@ -92,6 +92,7 @@ const SteppedSwitchOutput = observer((props: SteppedSwitchOutputProps) => {
                 key={index}
                 className={classnames("flex-1", {
                   "text-content-victronGray": disabled,
+                  "bg-content-victronGray50": disabled && index === selected,
                   "text-content-onVictronBlue": !disabled && index === selected,
                   "bg-content-victronBlue": !disabled && index === selected && variant === "on",
                   "bg-content-victronBlue50": !disabled && index === selected && variant === "off",
