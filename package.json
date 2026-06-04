@@ -75,7 +75,7 @@
     "url-loader": "4.1.1",
     "wasm-feature-detect": "^1.8.0",
     "webpack": "^5.107.2",
-    "webpack-cli": "^6.0.1",
+    "webpack-cli": "^7.0.3",
     "webpack-dev-server": "^4.11.1",
     "webpack-manifest-plugin": "^6.0.1",
     "workbox-background-sync": "^7.4.1",
