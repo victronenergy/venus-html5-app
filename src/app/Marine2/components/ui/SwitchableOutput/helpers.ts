@@ -26,16 +26,17 @@ export const useValueFormatter = ({ decimals }: UseFormattedValueOptions) => {
     volumeUnit,
   } = useAppStore()
 
+  const nnbsp = "\u202F"
   const formattedValueAndUnit = useCallback(
     (value: number, unit: SwitchableOutputUnit, includeUnit: boolean = true): string => {
       if (unit === "/Speed") {
-        return `${speedValueFor(value, speedUnit).toFixed(decimals)}${includeUnit ? speedUnitToHumanReadable : ""}`
+        return `${speedValueFor(value, speedUnit).toFixed(decimals)}${includeUnit ? nnbsp + speedUnitToHumanReadable : ""}`
       } else if (unit === "/Volume") {
-        return `${volumeValueFor(value, volumeUnit).toFixed(decimals)}${includeUnit ? volumeUnitToHumanReadable : ""}`
+        return `${volumeValueFor(value, volumeUnit).toFixed(decimals)}${includeUnit ? nnbsp + volumeUnitToHumanReadable : ""}`
       } else if (unit === "/Temperature") {
-        return `${temperatureValueFor(value, temperatureUnit, false).toFixed(decimals)}${includeUnit ? temperatureUnitToHumanReadable : ""}`
+        return `${temperatureValueFor(value, temperatureUnit, false).toFixed(decimals)}${includeUnit ? nnbsp + temperatureUnitToHumanReadable : ""}`
       }
-      return `${value.toFixed(decimals)}${unit}`
+      return `${value.toFixed(decimals)}${unit ? nnbsp + unit : ""}`
     },
     [
       speedUnit,
