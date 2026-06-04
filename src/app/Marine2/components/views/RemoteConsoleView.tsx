@@ -1,7 +1,7 @@
 import React, { useRef } from "react"
 import MainLayout from "../ui/MainLayout"
 import RemoteConsole from "../ui/RemoteConsole"
-import useSize from "@react-hook/size"
+import useSize from "app/Marine2/utils/hooks/use-size"
 
 const RemoteConsoleView = ({ host }: Props) => {
   const wrapperRef = useRef<HTMLDivElement>(null)

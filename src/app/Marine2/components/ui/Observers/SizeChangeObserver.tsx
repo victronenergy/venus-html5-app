@@ -1,6 +1,6 @@
 import React, { CSSProperties, useLayoutEffect, useRef, useState } from "react"
 import { observer } from "mobx-react"
-import useSize from "@react-hook/size"
+import useSize from "app/Marine2/utils/hooks/use-size"
 import { ScreenOrientation } from "@m2Types/generic/screen-orientation"
 import { ISize } from "@m2Types/generic/size"
 

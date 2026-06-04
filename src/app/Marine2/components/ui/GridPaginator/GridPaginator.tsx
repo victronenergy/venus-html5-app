@@ -5,7 +5,7 @@ import classnames from "classnames"
 import PageFlipper from "../PageFlipper"
 import { PageSelectorProps } from "../PageSelector"
 import { boxBreakpoints } from "../../../utils/media"
-import useSize from "@react-hook/size"
+import useSize from "app/Marine2/utils/hooks/use-size"
 import { ScreenOrientation } from "@m2Types/generic/screen-orientation"
 
 const GridPaginator = ({

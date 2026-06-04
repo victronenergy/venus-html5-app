@@ -1,7 +1,7 @@
 import PageSelector, { PageSelectorProps, SelectorLocation } from "../PageSelector"
 import classnames from "classnames"
 import React, { useState, useRef, useLayoutEffect } from "react"
-import useSize from "@react-hook/size"
+import useSize from "app/Marine2/utils/hooks/use-size"
 
 /// Takes the horizontal space occupied by `children` and divides it by number of `pages`
 /// and clips to display only one page at a time, starting at `startingPage`.

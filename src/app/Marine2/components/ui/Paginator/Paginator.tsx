@@ -3,7 +3,7 @@ import classnames from "classnames"
 import { SelectorLocation } from "../PageSelector"
 import { observer } from "mobx-react"
 import PageFlipper from "../PageFlipper"
-import useSize from "@react-hook/size"
+import useSize from "app/Marine2/utils/hooks/use-size"
 import { ScreenOrientation } from "@m2Types/generic/screen-orientation"
 import OffscreenPageSplitter, { Children, Pages } from "../OffscreenPageSplitter"
 
