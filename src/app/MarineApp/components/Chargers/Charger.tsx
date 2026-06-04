@@ -9,8 +9,7 @@ import MetricValues from "../MetricValues"
 import NumericValue from "../../../components/NumericValue/NumericValue"
 import SelectorButton from "../SelectorButton/SelectorButton"
 
-import { systemStateFormatter } from "../../../utils/util"
-import { CHARGER_MODE } from "../../../utils/constants"
+import { CHARGER_MODE, CHARGER_STATE } from "@victronenergy/mfd-modules"
 
 import "./Charger.scss"
 
@@ -29,6 +28,35 @@ const chargerModeFormatter = (value: number) => {
   }
 }
 
+const chargerStateFormatter = (value: number | string) => {
+  switch (Number(value)) {
+    case CHARGER_STATE.OFF:
+      return "off"
+    case CHARGER_STATE.FAULT_CONDITION:
+      return "fault"
+    case CHARGER_STATE.BULK_CHARGING:
+      return "bulkCharging"
+    case CHARGER_STATE.ABSORPTION_CHARGING:
+      return "absorptionCharging"
+    case CHARGER_STATE.FLOAT_CHARGING:
+      return "floatCharging"
+    case CHARGER_STATE.STORAGE_MODE:
+      return "storageMode"
+    case CHARGER_STATE.EQUALISATION_CHARGING:
+      return "equalisationCharging"
+    case CHARGER_STATE.POWER_SUPPLY_MODE:
+      return "powerSupplyMode"
+    case CHARGER_STATE.REPEATED_ABSORPTION:
+      return "repeatedAbsorption"
+    case CHARGER_STATE.AUTO_EQUALIZE:
+      return "autoEqualize"
+    case CHARGER_STATE.BATTERY_SAFE:
+      return "batterySafe"
+    default:
+      return "emptyBar"
+  }
+}
+
 const ChargerSubtitle = (current: [number?, number?, number?], state: number, nrOfOutputs: number) => (
   <MetricValues inflate>
     <div className="metrics__left">
@@ -38,7 +66,7 @@ const ChargerSubtitle = (current: [number?, number?, number?], state: number, nr
     </div>
     <div className="metrics__right">
       <span>
-        <Translate value={`common.${systemStateFormatter(state)}`} />
+        <Translate value={`common.${chargerStateFormatter(state)}`} />
       </span>
     </div>
   </MetricValues>

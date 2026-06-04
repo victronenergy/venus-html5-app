@@ -30,7 +30,8 @@ import GeneratorRelay from "../GeneratorRelay/GeneratorRelay"
 import { applyStyles, defaultBoxStyles } from "../../../utils/media"
 import { ComponentMode } from "@m2Types/generic/component-mode"
 import { ISize } from "@m2Types/generic/size"
-import { AC_SOURCE, BOX_TYPES } from "../../../utils/constants/generic"
+import { AC_SOURCE_TYPE } from "@victronenergy/mfd-modules"
+import { BOX_TYPES } from "../../../utils/constants/generic"
 import { RELAY_FUNCTION } from "../../../utils/constants/devices/generators"
 
 interface Props {
@@ -198,14 +199,14 @@ const getAvailableDeviceBoxes = function (
           compactBoxSize={compactBoxSize}
         />,
       )
-    } else if (generatorRelay.settings.includes(AC_SOURCE.GENERATOR)) {
+    } else if (generatorRelay.settings.includes(AC_SOURCE_TYPE.GENERATOR)) {
       // we do not have relay controlled generator configured,
       // but one or more of the AC inputs is set to GENERATOR
       if (generatorConnectedGenset.gensetState.gensetType !== ConnectedGensetType.ACGENSET) {
         // display generator controls for each GENERATOR AC input
         // unless there is a connected genset
         generatorRelay.settings.forEach((source: number, i: number) => {
-          if (source === AC_SOURCE.GENERATOR)
+          if (source === AC_SOURCE_TYPE.GENERATOR)
             devices.push(
               <GeneratorRelay
                 key={"generator_relay" + i}

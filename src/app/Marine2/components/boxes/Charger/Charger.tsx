@@ -22,7 +22,7 @@ import {
 } from "../../../utils/helpers/current-limit-adjuster"
 import { ISize } from "@m2Types/generic/size"
 import { titleFor } from "../../../utils/helpers/devices/title-for"
-import { translatedStateFor } from "../../../utils/helpers/devices/translated-state-for"
+import { formatChargerStateFor } from "../../../utils/formatters/devices/charger/format-state-for"
 import { formatModeFor } from "../../../utils/formatters/devices/charger/format-mode-for"
 import { CHARGER_MODE } from "../../../utils/constants/devices/chargers"
 import { formatValue } from "../../../utils/formatters/generic"
@@ -52,7 +52,7 @@ const Charger = ({ instanceId, componentMode = "compact", compactBoxSize }: Prop
   const currentValue = !!current && (!!current[0] || current[0] === 0) ? current[0] : undefined
 
   const title = titleFor(customName, productName)
-  const subTitle = translatedStateFor(state)
+  const subTitle = state !== undefined ? translate(formatChargerStateFor(Number(state))) : undefined
 
   const [boxSize, setBoxSize] = useState<ISize>({ width: 0, height: 0 })
   const activeStyles = applyStyles(boxSize, defaultBoxStyles)

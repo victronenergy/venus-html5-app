@@ -1,4 +1,4 @@
-import { AC_SOURCE_TYPE } from "app/utils/constants"
+import { AC_SOURCE_TYPE } from "@victronenergy/mfd-modules"
 import { translate } from "react-i18nify"
 
 export const formatInputTypeFor = (value: number) => {
