@@ -46,6 +46,8 @@ const OffscreenPageSplitter = <T extends React.JSX.Element = React.JSX.Element>(
   //   prevProps.current = { children, orientation, availableSpace, onPagesCalculated }
   // })
 
+  const measureChildrenFnRef = useRef<() => void>(null)
+
   const measureChildren = useCallback(() => {
     const childSizes = childRefs.current.map((ref) => {
       if (ref) {
@@ -59,7 +61,7 @@ const OffscreenPageSplitter = <T extends React.JSX.Element = React.JSX.Element>(
     const hasValidMeasurements = childSizes.some((size) => size > 0)
     if (!hasValidMeasurements) {
       // Schedule measurement for next frame when DOM is ready
-      requestAnimationFrame(measureChildren)
+      requestAnimationFrame(() => measureChildrenFnRef.current?.())
       return
     }
 
@@ -130,6 +132,7 @@ const OffscreenPageSplitter = <T extends React.JSX.Element = React.JSX.Element>(
   ])
 
   useLayoutEffect(() => {
+    measureChildrenFnRef.current = measureChildren
     if (children && children.length > 0 && availableSpace > 0) {
       measureChildren()
     }
@@ -159,7 +162,12 @@ const OffscreenPageSplitter = <T extends React.JSX.Element = React.JSX.Element>(
           }}
         >
           {React.Children.map(children, (child, index) => (
-            <div key={`measure-${index}`} ref={(el) => { childRefs.current[index] = el }}>
+            <div
+              key={`measure-${index}`}
+              ref={(el) => {
+                childRefs.current[index] = el
+              }}
+            >
               {child}
             </div>
           ))}

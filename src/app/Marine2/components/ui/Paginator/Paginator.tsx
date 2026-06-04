@@ -1,4 +1,4 @@
-import React, { useRef, useState, useCallback, useMemo, useLayoutEffect, useEffect } from "react"
+import React, { useRef, useState, useCallback, useMemo, useEffect } from "react"
 import classnames from "classnames"
 import { SelectorLocation } from "../PageSelector"
 import { observer } from "mobx-react"
@@ -39,7 +39,6 @@ const Paginator = <T extends React.JSX.Element>({
 
   const wrapperRef = useRef<HTMLDivElement>(null)
   const [width, height] = useSize(wrapperRef)
-  const [availableSpace, setAvailableSpace] = useState(0)
 
   const [pageCount, setPageCount] = useState(0)
   const [currentPage, setCurrentPage] = useState(0)
@@ -89,19 +88,7 @@ const Paginator = <T extends React.JSX.Element>({
     [childrenArray, setStartingPage],
   )
 
-  useLayoutEffect(() => {
-    if (orientation === "horizontal") {
-      setPagesElement(undefined)
-      setAvailableSpace(width)
-    }
-  }, [width, orientation])
-
-  useLayoutEffect(() => {
-    if (orientation === "vertical") {
-      setPagesElement(undefined)
-      setAvailableSpace(height)
-    }
-  }, [height, orientation])
+  const availableSpace = orientation === "horizontal" ? width : height
 
   useEffect(() => {
     currentPageSetter(currentPage, pageCount)

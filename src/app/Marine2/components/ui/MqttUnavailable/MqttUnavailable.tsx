@@ -24,6 +24,7 @@ const MqttUnavailable = ({ host }: Props) => {
 
   useEffect(() => {
     if (!error) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- reacting to external MQTT state
       setIsConnecting(false)
       appViewsStore.setView(AppViews.ROOT)
     }

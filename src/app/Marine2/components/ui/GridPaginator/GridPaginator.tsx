@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef, useState } from "react"
+import React, { useMemo, useRef } from "react"
 import Grid, { GridProps } from "../Grid"
 import range from "lodash-es/range"
 import classnames from "classnames"
@@ -19,22 +19,17 @@ const GridPaginator = ({
   orientation = "horizontal",
   pageSelectorPropsSetter,
 }: Props) => {
-  const [childrenPerPage, setChildrenPerPage] = useState(perPage)
-
   const gridPaginatorRef = useRef<HTMLDivElement>(null)
   const [width, height] = useSize(gridPaginatorRef)
 
   const childrenArray = Array.isArray(children) ? children : [children]
-  const pages = Math.ceil(childrenArray.length / childrenPerPage)
-  const [fixedFlow, setFixedFlow] = useState<"row" | "col">()
 
-  // automatically change perPage if grid size is too small
-  useLayoutEffect(() => {
+  const { childrenPerPage, fixedFlow } = useMemo(() => {
     if (!width || !height) {
-      return
+      return { childrenPerPage: perPage, fixedFlow: undefined as "row" | "col" | undefined }
     }
 
-    setFixedFlow("col")
+    let computedFlow: "row" | "col" = "col"
     let forcePerPage = perPage
 
     if (width / perPage < boxBreakpoints["md-l"].width && height < boxBreakpoints["md-l"].height) {
@@ -57,23 +52,18 @@ const GridPaginator = ({
     }
 
     if (width < 800 && width > boxBreakpoints["md-l"].width && height < boxBreakpoints["lg-l"].height) {
-      setFixedFlow("row")
+      computedFlow = "row"
     }
 
-    if (forcePerPage !== childrenPerPage) {
-      setChildrenPerPage(forcePerPage)
-    }
-
-    // We need to reset pagination if there is only one page
-    // TODO: remake this to use store states instead of props down the tree
+    // Reset pagination if there is only one page
     if (Math.ceil(childrenArray.length / forcePerPage) === 1) {
-      pageSelectorPropsSetter &&
-        pageSelectorPropsSetter({
-          currentPage: 0,
-          maxPages: 0,
-        })
+      pageSelectorPropsSetter?.({ currentPage: 0, maxPages: 0 })
     }
-  }, [width, height, childrenPerPage, perPage, childrenArray.length, pageSelectorPropsSetter])
+
+    return { childrenPerPage: forcePerPage, fixedFlow: computedFlow }
+  }, [width, height, perPage, childrenArray.length, pageSelectorPropsSetter])
+
+  const pages = Math.ceil(childrenArray.length / childrenPerPage)
 
   if (pages === 1) {
     return (

@@ -3,7 +3,7 @@ import DeviceSettingModal from "../DeviceSettingModal/DeviceSettingModal"
 import { translate } from "react-i18nify"
 import RadioButton from "../RadioButton"
 import Button from "../Button"
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useState } from "react"
 import { useAppStore } from "@victronenergy/mfd-modules"
 import { GENERATOR_START_STOP } from "../../../utils/constants/devices/generators"
 
@@ -42,9 +42,10 @@ const AutoStartStopSetter = ({
     }
   }
 
-  useEffect(() => {
+  const openModeModal = () => {
     setModeForSubmission(getStartStopMode())
-  }, [getStartStopMode])
+    setIsModeModalOpen(true)
+  }
 
   const closeModeModal = () => {
     setIsModeModalOpen(false)
@@ -66,16 +67,13 @@ const AutoStartStopSetter = ({
     }
     closeModeModal()
   }
-  useEffect(() => {
-    if (isAutoStartDisabled) setIsModeModalOpen(false)
-  }, [isAutoStartDisabled])
   return (
     <>
       <Button
         size="md"
         className="flex-none mt-3 w-full"
         disabled={isAutoStartDisabled || locked}
-        onClick={() => setIsModeModalOpen(true)}
+        onClick={openModeModal}
       >
         {autoStartFormatter(getStartStopMode())}
       </Button>

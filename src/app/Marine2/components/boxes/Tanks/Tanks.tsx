@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { useRef, useState } from "react"
 import TanksIcon from "../../../images/icons/tanks.svg"
 import { useTanks } from "@victronenergy/mfd-modules"
 import { observer } from "mobx-react"
@@ -34,19 +34,13 @@ const Tanks = ({ componentMode = "full", className }: Props) => {
   useVisibilityNotifier({ widgetName: BOX_TYPES.TANKS, isVisible: hasValidData })
 
   const gridRef = useRef<HTMLDivElement>(null)
-  const [orientation, setOrientation] = useState<ScreenOrientation>("vertical")
 
   const [width, height] = useSize(gridRef)
   const windowSize = useWindowSize()
   const activeStyles = applyStyles(boxSize, defaultBoxStyles)
 
-  useEffect(() => {
-    if (!windowSize.width || !windowSize.height) return
-
-    const orientation = windowSize.width > 3 * windowSize.height ? "horizontal" : "vertical"
-
-    setOrientation(orientation)
-  }, [windowSize])
+  const orientation: ScreenOrientation =
+    windowSize.width && windowSize.height && windowSize.width > 3 * windowSize.height ? "horizontal" : "vertical"
 
   if (componentMode === "compact") {
     return (

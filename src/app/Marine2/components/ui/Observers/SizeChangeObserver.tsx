@@ -1,8 +1,7 @@
-import React, { CSSProperties, useLayoutEffect, useRef, useState } from "react"
+import React, { CSSProperties, useLayoutEffect, useRef } from "react"
 import { observer } from "mobx-react"
 import useSize from "app/Marine2/utils/hooks/use-size"
 import { ScreenOrientation } from "@m2Types/generic/screen-orientation"
-import { ISize } from "@m2Types/generic/size"
 
 interface Props {
   children: (string | React.JSX.Element)[] | React.JSX.Element | string
@@ -19,19 +18,20 @@ const SizeChangeObserver = ({ children, onSizeChange, orientation, className = "
   const containerRef = useRef<HTMLDivElement>(null)
 
   const [width, height] = useSize(containerRef)
-  const [initialSize, setInitialSize] = useState<ISize>({ width: 0, height: 0 })
+  const initialSizeRef = useRef({ width: 0, height: 0 })
 
   useLayoutEffect(() => {
+    const initialSize = initialSizeRef.current
     if (initialSize.width === 0 && initialSize.height === 0 && width !== 0 && height !== 0) {
-      setInitialSize({ width, height })
+      initialSizeRef.current = { width, height }
     } else if (
       (orientation === "vertical" && height !== initialSize.height) ||
       (orientation === "horizontal" && width !== initialSize.width)
     ) {
-      setInitialSize({ width, height })
+      initialSizeRef.current = { width, height }
       onSizeChange()
     }
-  }, [onSizeChange, initialSize, orientation, width, height, className])
+  }, [onSizeChange, orientation, width, height, className])
 
   return (
     <div className={className} ref={containerRef} style={style}>

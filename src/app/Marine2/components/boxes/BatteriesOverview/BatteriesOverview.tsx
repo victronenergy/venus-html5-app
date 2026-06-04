@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useMemo, useState } from "react"
 import classNames from "classnames"
 import { translate } from "react-i18nify"
 import { observer } from "mobx-react-lite"
@@ -37,16 +37,13 @@ const BatteriesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: 
 
   useVisibilityNotifier({ widgetName: BOX_TYPES.BATTERIES, isVisible: hasValidData })
 
-  const sortedBatteries = sortBatteries(batteries ?? [])
-  const overviewBatteries = batteriesForOverview(sortedBatteries)
-
-  const [pages, setPages] = useState(1)
-  const [perPage, setPerPage] = useState(2)
+  const sortedBatteries = useMemo(() => sortBatteries(batteries ?? []), [batteries])
+  const overviewBatteries = useMemo(() => batteriesForOverview(sortedBatteries), [sortedBatteries])
 
   const activeStyles = applyStyles(boxSize, defaultBoxStyles)
 
-  useEffect(() => {
-    if (!overviewBatteries || !overviewBatteries.length) return
+  const { pages, perPage } = useMemo(() => {
+    if (!overviewBatteries || !overviewBatteries.length) return { pages: 1, perPage: 2 }
 
     let batterySummaryWidth = 142 // minimum BatterySummary component width
     // BatterySummary component width is bigger based on these breakpoints (subtract 56 leaving space for page selector)
@@ -60,8 +57,7 @@ const BatteriesOverview = ({ componentMode = "full", pageSelectorPropsSetter }: 
 
     const batteriesPerPage = Math.max(Math.floor((boxSize.width - 32) / batterySummaryWidth), 1) // -32 due to box padding
 
-    setPerPage(batteriesPerPage)
-    setPages(Math.ceil(overviewBatteries.length / batteriesPerPage))
+    return { pages: Math.ceil(overviewBatteries.length / batteriesPerPage), perPage: batteriesPerPage }
   }, [boxSize, overviewBatteries])
 
   if (componentMode === "compact") {

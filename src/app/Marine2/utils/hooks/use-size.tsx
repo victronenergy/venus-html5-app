@@ -1,15 +1,13 @@
-import { RefObject, useEffect, useState } from "react"
+import { RefObject, useLayoutEffect, useState } from "react"
 
 const useSize = (target: RefObject<HTMLElement | null>): [number, number] => {
-  const [size, setSize] = useState<[number, number]>(() => {
-    const el = target.current
-    return el ? [el.offsetWidth, el.offsetHeight] : [0, 0]
-  })
+  const [size, setSize] = useState<[number, number]>([0, 0])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const el = target.current
     if (!el) return
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- measuring DOM requires setState in layout effect
     setSize([el.offsetWidth, el.offsetHeight])
 
     const observer = new ResizeObserver(([entry]) => {

@@ -64,9 +64,9 @@ const PageFlipper = ({
     currentPageSetter(currentPage)
   }, [currentPage, currentPageSetter])
 
-  useLayoutEffect(() => {
-    if (pages && currentPage && currentPage > pages - 1) setCurrentPage(pages - 1)
-  }, [currentPage, pages])
+  if (pages && currentPage && currentPage > pages - 1) {
+    setCurrentPage(pages - 1)
+  }
 
   return (
     <div
