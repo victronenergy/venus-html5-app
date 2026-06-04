@@ -258,14 +258,18 @@
     },
     "switches": {
         "auto": "Outo",
+        "color": "Kleur",
         "fault": "Fout",
+        "gxDeviceRelays": "GX toestel relais",
         "max": "Maks",
         "min": "Min",
         "notRunning": "Nie Besig om te Loop Nie",
         "off": "Af",
         "on": "Aan",
+        "preset": "Voorafinstelling",
         "press": "Druk",
-        "running": "Besig om te Loop"
+        "running": "Besig om te Loop",
+        "temperature": "Temperatuur"
     },
     "tankWidget": {
         "Black water": "Swartwater",
