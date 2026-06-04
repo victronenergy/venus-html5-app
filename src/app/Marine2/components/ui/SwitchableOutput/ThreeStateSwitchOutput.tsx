@@ -9,6 +9,8 @@ import {
 import classnames from "classnames"
 import { observer } from "mobx-react"
 import { translate } from "react-i18nify"
+import StatusPill from "../StatusPill"
+import { getSwitchableOutputStatusPill, isSwitchableOutputDisabled } from "./statusHelper"
 
 interface ThreeStateSwitchOutputProps {
   key: string
@@ -24,6 +26,8 @@ const ThreeStateSwitchOutput = observer((props: ThreeStateSwitchOutputProps) => 
   const outputName = getSwitchingPaneItemNameForDisplay(switchableOutput, props.parentDeviceName)
 
   const variant = switchableOutput.state === 1 ? "on" : "off"
+  const disabled = isSwitchableOutputDisabled(switchableOutput.status)
+  const statusPill = getSwitchableOutputStatusPill(switchableOutput.status, switchableOutput.type)
   const auto = switchableOutput.auto === 1 ? "on" : "off"
 
   const handleClickOn = () => {
@@ -45,18 +49,28 @@ const ThreeStateSwitchOutput = observer((props: ThreeStateSwitchOutputProps) => 
   }
 
   return (
-    <div className={classnames("mt-4", props.className)}>
-      <div>{outputName}</div>
+    <div className={classnames("mt-4 select-none", props.className)}>
       <div className="flex">
+        <div className="flex-1">{outputName}</div>
+        {statusPill && (
+          <div className="flex py-1">
+            <StatusPill label={statusPill.label} variant={statusPill.variant} />
+          </div>
+        )}
+      </div>
+      <div className={classnames("flex", { "pointer-events-none": disabled })}>
         <button
           className={classnames(
             "h-px-44 px-4 py-1.5 whitespace-nowrap",
-            "border-2 border-r-0 border-content-victronBlue cursor-pointer",
+            "border-2 border-r-0",
+            disabled ? "border-content-victronGray" : "border-content-victronBlue cursor-pointer",
             "text-sm min-h-[2.375rem]",
             "rounded-l-md",
             {
-              "bg-content-victronBlue50 text-content-onVictronBlue": variant === "off",
-              "bg-surface-victronBlue text-content-primary": variant === "on",
+              "bg-content-victronGray50 text-content-victronGray": disabled && variant === "off",
+              "bg-surface-victronGray text-content-victronGray": disabled && variant === "on",
+              "bg-content-victronBlue50 text-content-onVictronBlue": !disabled && variant === "off",
+              "bg-surface-victronBlue text-content-primary": !disabled && variant === "on",
             },
             props.className,
           )}
@@ -67,12 +81,15 @@ const ThreeStateSwitchOutput = observer((props: ThreeStateSwitchOutputProps) => 
         <button
           className={classnames(
             "h-px-44 px-4 py-1.5 whitespace-nowrap",
-            "border-2 border-l-0 border-content-victronBlue cursor-pointer",
+            "border-2 border-l-0",
+            disabled ? "border-content-victronGray" : "border-content-victronBlue cursor-pointer",
             "text-sm min-h-[2.375rem]",
             "rounded-r-md",
             {
-              "bg-content-victronBlue text-content-onVictronBlue": variant === "on",
-              "bg-surface-victronBlue text-content-primary": variant === "off",
+              "bg-content-victronGray50 text-content-victronGray": disabled && variant === "on",
+              "bg-surface-victronGray text-content-victronGray": disabled && variant === "off",
+              "bg-content-victronBlue text-content-onVictronBlue": !disabled && variant === "on",
+              "bg-surface-victronBlue text-content-primary": !disabled && variant === "off",
             },
             props.className,
           )}
@@ -84,12 +101,15 @@ const ThreeStateSwitchOutput = observer((props: ThreeStateSwitchOutputProps) => 
           className={classnames(
             "ml-2",
             "h-px-44 px-4 py-1.5 whitespace-nowrap",
-            "border-2 border-content-victronBlue cursor-pointer",
+            "border-2",
+            disabled ? "border-content-victronGray" : "border-content-victronBlue cursor-pointer",
             "text-sm min-h-[2.375rem]",
             "rounded-md",
             {
-              "bg-surface-victronBlue text-content-primary": auto === "off",
-              "bg-content-victronBlue text-content-onVictronBlue": auto === "on",
+              "bg-surface-victronGray text-content-victronGray": disabled && auto === "off",
+              "bg-content-victronGray50 text-content-victronGray": disabled && auto === "on",
+              "bg-surface-victronBlue text-content-primary": !disabled && auto === "off",
+              "bg-content-victronBlue text-content-onVictronBlue": !disabled && auto === "on",
             },
             props.className,
           )}

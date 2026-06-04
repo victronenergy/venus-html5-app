@@ -9,6 +9,7 @@ import {
 import classnames from "classnames"
 import { observer } from "mobx-react"
 import { translate } from "react-i18nify"
+import StatusPill from "../StatusPill"
 import { getValueOrDefault } from "../SwitchableOutput/helpers"
 import { getLocalizedOrDefault, getStatusLabel } from "./helpers"
 
@@ -37,9 +38,7 @@ const DiscreteInput = observer((props: DiscreteInputProps) => {
         <div className="flex-1">{inputName}</div>
         {statusLabel && (
           <div className="flex py-1">
-            <span className="px-2 text-2xs rounded-md bg-surface-victronRed text-content-victronRed">
-              {statusLabel}
-            </span>
+            <StatusPill label={statusLabel} variant="red" />
           </div>
         )}
       </div>

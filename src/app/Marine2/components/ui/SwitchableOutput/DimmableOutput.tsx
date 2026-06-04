@@ -9,7 +9,9 @@ import {
 import classnames from "classnames"
 import { observer } from "mobx-react"
 import { translate } from "react-i18nify"
-import { getValueOrDefault } from "./helpers"
+import StatusPill from "../StatusPill"
+import { getValueOrDefault, useValueFormatter } from "./helpers"
+import { getSwitchableOutputStatusPill, isSwitchableOutputDisabled } from "./statusHelper"
 
 interface DimmableOutputProps {
   key: string
@@ -25,7 +27,10 @@ const DimmableOutput = observer((props: DimmableOutputProps) => {
   const outputName = getSwitchingPaneItemNameForDisplay(switchableOutput, props.parentDeviceName)
 
   const variant = switchableOutput.state === 1 ? "on" : "off"
+  const disabled = isSwitchableOutputDisabled(switchableOutput.status)
+  const statusPill = getSwitchableOutputStatusPill(switchableOutput.status, switchableOutput.type)
   const ratio = getValueOrDefault(switchableOutput.dimming, 0)
+  const formatValueAndUnit = useValueFormatter({ decimals: 0 })
 
   const handleClickOnOff = () => {
     switchableOutput.updateState(switchableOutput.state === 1 ? 0 : 1)
@@ -92,31 +97,53 @@ const DimmableOutput = observer((props: DimmableOutputProps) => {
   }
 
   return (
-    <div className={classnames("mt-4", props.className)}>
-      <div>{outputName}</div>
+    <div className={classnames("mt-4 select-none", props.className)}>
+      <div className="flex">
+        <div className="flex-1">{outputName}</div>
+        {statusPill ? (
+          <div className="flex py-1">
+            <StatusPill label={statusPill.label} variant={statusPill.variant} />
+          </div>
+        ) : (
+          <div className={classnames("flex", variant === "on" ? "text-content-primary" : "text-content-secondary")}>
+            {formatValueAndUnit(ratio, "%")}
+          </div>
+        )}
+      </div>
       {/* Border */}
-      <div className="h-px-44 rounded-md bg-surface-victronBlue border-2 border-content-victronBlue">
+      <div
+        className={classnames("h-px-44 rounded-md border-2", {
+          "bg-surface-victronGray border-content-victronGray pointer-events-none": disabled,
+          "bg-surface-victronBlue border-content-victronBlue": !disabled,
+        })}
+      >
         {/* Container */}
         <div className="h-full rounded-sm flex overflow-hidden">
           {/* On/Off Background */}
           <div
             className={classnames("h-full flex items-center", {
-              "bg-content-victronBlue50": variant === "off",
-              "bg-content-victronBlue": variant === "on",
+              "bg-content-victronGray50": disabled,
+              "bg-content-victronBlue50": !disabled && variant === "off",
+              "bg-content-victronBlue": !disabled && variant === "on",
             })}
           >
             {/* On/Off Button */}
             <button
               className={classnames(
                 "h-full px-2 whitespace-nowrap cursor-pointer text-sm min-h-[2.375rem] min-w-[3rem]",
-                "text-content-onVictronBlue",
+                disabled ? "text-content-victronGray" : "text-content-onVictronBlue",
               )}
               onClick={handleClickOnOff}
             >
               {variant === "on" ? translate("switches.on") : translate("switches.off")}
             </button>
             {/* Separator */}
-            <div className="w-px-2 h-[80%] rounded-sm bg-content-lightBlue"></div>
+            <div
+              className={classnames(
+                "w-px-2 h-[80%] rounded-sm",
+                disabled ? "bg-content-victronGray" : "bg-content-lightBlue",
+              )}
+            ></div>
           </div>
           {/* Slider Container */}
           <div
@@ -134,16 +161,18 @@ const DimmableOutput = observer((props: DimmableOutputProps) => {
               {/* Percent area */}
               <div
                 className={classnames("h-full transition-all duration-100 ease-out", {
-                  "bg-content-victronBlue": variant === "on",
-                  "bg-content-victronBlue50": variant === "off",
+                  "bg-content-victronGray50": disabled,
+                  "bg-content-victronBlue": !disabled && variant === "on",
+                  "bg-content-victronBlue50": !disabled && variant === "off",
                 })}
                 style={{ width: `${ratio}%` }}
               />
               {/* Handle Background */}
               <div
                 className={classnames("h-full flex items-center px-1", {
-                  "bg-content-victronBlue": variant === "on",
-                  "bg-content-victronBlue50": variant === "off",
+                  "bg-content-victronGray50": disabled,
+                  "bg-content-victronBlue": !disabled && variant === "on",
+                  "bg-content-victronBlue50": !disabled && variant === "off",
                 })}
               >
                 {/* Handle */}

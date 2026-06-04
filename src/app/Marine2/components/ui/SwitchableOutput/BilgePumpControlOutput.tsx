@@ -9,6 +9,8 @@ import {
 import classnames from "classnames"
 import { observer } from "mobx-react"
 import { translate } from "react-i18nify"
+import StatusPill from "../StatusPill"
+import { getSwitchableOutputStatusPill, isSwitchableOutputDisabled } from "./statusHelper"
 
 interface BilgePumpControlOutputProps {
   key: string
@@ -24,12 +26,8 @@ const BilgePumpControlOutput = observer((props: BilgePumpControlOutputProps) => 
   const outputName = getSwitchingPaneItemNameForDisplay(switchableOutput, props.parentDeviceName)
 
   const variant = switchableOutput.state === 1 ? "on" : "off"
-  const statusLabel =
-    switchableOutput.status === 0
-      ? translate("switches.notRunning")
-      : switchableOutput.status === 0x9
-        ? translate("switches.running")
-        : translate("switches.fault")
+  const disabled = isSwitchableOutputDisabled(switchableOutput.status)
+  const statusPill = getSwitchableOutputStatusPill(switchableOutput.status, switchableOutput.type)
 
   const handleClickOn = () => {
     switchableOutput.updateState(1)
@@ -40,31 +38,28 @@ const BilgePumpControlOutput = observer((props: BilgePumpControlOutputProps) => 
   }
 
   return (
-    <div className={classnames("mt-4", props.className)}>
+    <div className={classnames("mt-4 select-none", props.className)}>
       <div className="flex">
         <div className="flex-1">{outputName}</div>
-        <div className="flex py-1">
-          <span
-            className={classnames("px-2 text-2xs rounded-md", {
-              "bg-surface-victronGray": switchableOutput.status === 0x0,
-              "bg-surface-victronYello": switchableOutput.status === 0x9,
-              "bg-surface-victronRed": switchableOutput.status !== 0x9 && switchableOutput.status !== 0x0,
-            })}
-          >
-            {statusLabel}
-          </span>
-        </div>
+        {statusPill && (
+          <div className="flex py-1">
+            <StatusPill label={statusPill.label} variant={statusPill.variant} />
+          </div>
+        )}
       </div>
-      <div className="flex">
+      <div className={classnames("flex", { "pointer-events-none": disabled })}>
         <button
           className={classnames(
             "h-px-44 px-4 py-1.5 whitespace-nowrap",
-            "border-2 border-content-victronBlue cursor-pointer",
+            "border-2 border-r-0",
+            disabled ? "border-content-victronGray" : "border-content-victronBlue cursor-pointer",
             "text-sm min-h-[2.375rem]",
             "rounded-l-md",
             {
-              "bg-surface-victronBlue text-content-primary": variant === "on",
-              "bg-content-victronBlue text-content-onVictronBlue": variant === "off",
+              "bg-surface-victronGray text-content-victronGray": disabled && variant === "on",
+              "bg-content-victronGray50 text-content-victronGray": disabled && variant === "off",
+              "bg-surface-victronBlue text-content-primary": !disabled && variant === "on",
+              "bg-content-victronBlue text-content-onVictronBlue": !disabled && variant === "off",
             },
             props.className,
           )}
@@ -75,12 +70,15 @@ const BilgePumpControlOutput = observer((props: BilgePumpControlOutputProps) => 
         <button
           className={classnames(
             "h-px-44 px-4 py-1.5 whitespace-nowrap",
-            "border-2 border-content-victronBlue cursor-pointer",
+            "border-2 border-l-0",
+            disabled ? "border-content-victronGray" : "border-content-victronBlue cursor-pointer",
             "text-sm min-h-[2.375rem]",
             "rounded-r-md",
             {
-              "bg-surface-victronBlue text-content-primary": variant === "off",
-              "bg-content-victronBlue text-content-onVictronBlue": variant === "on",
+              "bg-surface-victronGray text-content-victronGray": disabled && variant === "off",
+              "bg-content-victronGray50 text-content-victronGray": disabled && variant === "on",
+              "bg-surface-victronBlue text-content-primary": !disabled && variant === "off",
+              "bg-content-victronBlue text-content-onVictronBlue": !disabled && variant === "on",
             },
             props.className,
           )}
