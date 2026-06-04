@@ -1,13 +1,47 @@
 import classnames from "classnames"
-import { useShorePowerInput, useInverterCharger, useVebus } from "@victronenergy/mfd-modules"
+import { useShorePowerInput, useInverterCharger, useVebus, VEBUS_STATE } from "@victronenergy/mfd-modules"
 
 import HeaderView from "../HeaderView"
 import InputLimit from "./InputLimit"
 import SelectorButton from "../SelectorButton"
 import ColumnContainer from "../ColumnContainer"
 
-import { systemStateFormatter } from "../../../utils/util"
 import { SYSTEM_MODE } from "../../../utils/constants"
+
+const vebusStateFormatter = (value: number | string) => {
+  switch (Number(value)) {
+    case VEBUS_STATE.OFF:
+      return "off"
+    case VEBUS_STATE.LOW_POWER:
+      return "lowPower"
+    case VEBUS_STATE.FAULT_CONDITION:
+      return "fault"
+    case VEBUS_STATE.BULK_CHARGING:
+      return "bulkCharging"
+    case VEBUS_STATE.ABSORPTION_CHARGING:
+      return "absorptionCharging"
+    case VEBUS_STATE.FLOAT_CHARGING:
+      return "floatCharging"
+    case VEBUS_STATE.STORAGE_MODE:
+      return "storageMode"
+    case VEBUS_STATE.EQUALISATION_CHARGING:
+      return "equalisationCharging"
+    case VEBUS_STATE.PASSTHRU:
+      return "passthru"
+    case VEBUS_STATE.INVERTING:
+      return "inverting"
+    case VEBUS_STATE.ASSISTING:
+      return "assisting"
+    case VEBUS_STATE.POWER_SUPPLY_MODE:
+      return "powerSupplyMode"
+    case VEBUS_STATE.SUSTAIN:
+      return "sustain"
+    case VEBUS_STATE.EXTERNAL_CONTROL:
+      return "externalControl"
+    default:
+      return "emptyBar"
+  }
+}
 
 import "./InverterCharger.scss"
 
@@ -50,8 +84,7 @@ const InverterCharger = observer(({ connected, onChangeInputLimitClicked }: Inve
             icon={MultiplusIcon}
             title={customName || translate("widgets.inverterCharger", { productNameShort })}
             subTitle={
-              (!adjustable ? getModeTitle(currentMode) + " - " : "") +
-              translate("common." + systemStateFormatter(state))
+              (!adjustable ? getModeTitle(currentMode) + " - " : "") + translate("common." + vebusStateFormatter(state))
             }
             child
           />
