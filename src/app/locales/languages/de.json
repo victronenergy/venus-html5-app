@@ -258,18 +258,14 @@
     },
     "switches": {
         "auto": "Auto",
-        "color": "Farbe",
         "fault": "Störung",
-        "gxDeviceRelays": "GX-Geräterelais",
         "max": "Max",
         "min": "Min",
         "notRunning": "Läuft nicht",
         "off": "Aus",
         "on": "Ein",
-        "preset": "Voreinstellung",
         "press": "Drücken",
-        "running": "Läuft",
-        "temperature": "Temperatur"
+        "running": "Läuft"
     },
     "tankWidget": {
         "Black water": "Schwarzwasser",

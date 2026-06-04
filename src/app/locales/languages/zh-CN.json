@@ -258,18 +258,14 @@
     },
     "switches": {
         "auto": "自动",
-        "color": "颜色",
         "fault": "故障",
-        "gxDeviceRelays": "GX设备继电器",
         "max": "最大值",
         "min": "最小值",
         "notRunning": "未运行",
         "off": "关闭",
         "on": "开启",
-        "preset": "预置",
         "press": "按下",
-        "running": "运行中",
-        "temperature": "温度"
+        "running": "运行中"
     },
     "tankWidget": {
         "Black water": "黑水",

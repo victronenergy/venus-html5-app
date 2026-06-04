@@ -258,18 +258,14 @@
     },
     "switches": {
         "auto": "Авто",
-        "color": "Колір",
         "fault": "Помилка",
-        "gxDeviceRelays": "Реле пристрою GX",
         "max": "Макс",
         "min": "Мін",
         "notRunning": "Не працює",
         "off": "Вимкнено",
         "on": "Увімкнено",
-        "preset": "Попередньо встановлені",
         "press": "Натисніть",
-        "running": "Працює",
-        "temperature": "Температура"
+        "running": "Працює"
     },
     "tankWidget": {
         "Black water": "Стічні води з каналізації",

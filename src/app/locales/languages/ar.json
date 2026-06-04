@@ -258,18 +258,14 @@
     },
     "switches": {
         "auto": "تلقائي",
-        "color": "اللون",
         "fault": "عطل",
-        "gxDeviceRelays": "مرحلات جهاز GX",
         "max": "أقصى",
         "min": "أدنى",
         "notRunning": "غير نشط",
         "off": "إيقاف",
         "on": "تشغيل",
-        "preset": "إعداد مسبق",
         "press": "اضغط",
-        "running": "نشط",
-        "temperature": "الحرارة"
+        "running": "نشط"
     },
     "tankWidget": {
         "Black water": "مياه سوداء",

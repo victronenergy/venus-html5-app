@@ -65,7 +65,7 @@
         "error": "Fout",
         "fault": "Fout",
         "floatCharging": "Druppel laden",
-        "generator": "Aggregaat",
+        "generator": "Generator",
         "grid": "Net",
         "hours": "uur",
         "hours_short": "u",
@@ -258,18 +258,14 @@
     },
     "switches": {
         "auto": "Auto",
-        "color": "Kleur",
         "fault": "Storing",
-        "gxDeviceRelays": "GX apparaat relais",
         "max": "Max",
         "min": "Min",
         "notRunning": "Niet actief",
         "off": "Uit",
         "on": "Aan",
-        "preset": "Voorinstelling",
         "press": "Druk op",
-        "running": "Actief",
-        "temperature": "Temperatuur"
+        "running": "Actief"
     },
     "tankWidget": {
         "Black water": "Vuilwater",

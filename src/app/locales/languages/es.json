@@ -258,18 +258,14 @@
     },
     "switches": {
         "auto": "Automático",
-        "color": "Color",
         "fault": "Fallo",
-        "gxDeviceRelays": "Relés del dispositivo GX",
         "max": "Máx",
         "min": "Mín",
         "notRunning": "No está en ejecución",
         "off": "Apagado",
         "on": "Encendido",
-        "preset": "Preajuste",
         "press": "Pulse",
-        "running": "En ejecución",
-        "temperature": "Temperatura"
+        "running": "En ejecución"
     },
     "tankWidget": {
         "Black water": "Aguas negras",

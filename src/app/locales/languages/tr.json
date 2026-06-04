@@ -258,18 +258,14 @@
     },
     "switches": {
         "auto": "Otomatik",
-        "color": "Renk",
         "fault": "Hata",
-        "gxDeviceRelays": "GX cihazı röleleri",
         "max": "Maks",
         "min": "Min",
         "notRunning": "Çalışmıyor",
         "off": "Kapalı",
         "on": "Açık",
-        "preset": "Ön Ayar",
         "press": "Basın",
-        "running": "Çalışıyor",
-        "temperature": "Sıcaklık"
+        "running": "Çalışıyor"
     },
     "tankWidget": {
         "Black water": "Pis Su",
