@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from "react"
+import React, { useEffect, useMemo, useRef } from "react"
 import Grid, { GridProps } from "../Grid"
 import range from "lodash-es/range"
 import classnames from "classnames"
@@ -55,15 +55,16 @@ const GridPaginator = ({
       computedFlow = "row"
     }
 
-    // Reset pagination if there is only one page
-    if (Math.ceil(childrenArray.length / forcePerPage) === 1) {
-      pageSelectorPropsSetter?.({ currentPage: 0, maxPages: 0 })
-    }
-
     return { childrenPerPage: forcePerPage, fixedFlow: computedFlow }
-  }, [width, height, perPage, childrenArray.length, pageSelectorPropsSetter])
+  }, [width, height, perPage])
 
   const pages = Math.ceil(childrenArray.length / childrenPerPage)
+
+  useEffect(() => {
+    if (pages === 1) {
+      pageSelectorPropsSetter?.({ currentPage: 0, maxPages: 0 })
+    }
+  }, [pages, pageSelectorPropsSetter])
 
   if (pages === 1) {
     return (

@@ -1,7 +1,7 @@
 import React, { useRef, useState, useCallback, useMemo, useEffect } from "react"
 import classnames from "classnames"
 import { SelectorLocation } from "../PageSelector"
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 import PageFlipper from "../PageFlipper"
 import useSize from "app/Marine2/utils/hooks/use-size"
 import { ScreenOrientation } from "@m2Types/generic/screen-orientation"
@@ -152,10 +152,6 @@ const GroupPaginator = <T extends React.JSX.Element>({
     setPageCount(computedPageCount)
     setStartingPage(computedPageCount)
   }
-
-  useEffect(() => {
-    currentPageSetter(currentPage, pageCount)
-  }, [currentPage, currentPageSetter, pageCount])
 
   useEffect(() => {
     currentPageSetter(currentPage, pageCount)
