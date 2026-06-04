@@ -258,14 +258,18 @@
     },
     "switches": {
         "auto": "Авто",
+        "color": "Цвет",
         "fault": "Ошибка",
+        "gxDeviceRelays": "Реле GX устройств",
         "max": "Макс",
         "min": "Мин",
         "notRunning": "Не работает",
         "off": "Выкл",
         "on": "Вкл",
+        "preset": "Предустановка",
         "press": "Нажать",
-        "running": "Работает"
+        "running": "Работает",
+        "temperature": "Температура"
     },
     "tankWidget": {
         "Black water": "Темная вода",
