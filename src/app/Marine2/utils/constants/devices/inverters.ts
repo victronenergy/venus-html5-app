@@ -1,4 +1,4 @@
-import { SYSTEM_MODE } from "../generic"
+import { SYSTEM_MODE } from "@victronenergy/mfd-modules"
 
 export const INVERTER_MODE = {
   ON: 2,

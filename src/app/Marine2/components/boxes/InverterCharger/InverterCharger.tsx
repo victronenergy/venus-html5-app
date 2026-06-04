@@ -11,7 +11,8 @@ import { ISize } from "@m2Types/generic/size"
 import { Modal } from "./Modal/Modal"
 import { formatModeFor } from "../../../utils/formatters/devices/inverter-charger/format-mode-for"
 import { titleFor } from "../../../utils/helpers/devices/title-for"
-import { translatedStateFor } from "../../../utils/helpers/devices/translated-state-for"
+import { formatSystemStateFor } from "../../../utils/formatters/devices/inverter-charger/format-system-state-for"
+import { formatVebusStateFor } from "../../../utils/formatters/devices/inverter/format-state-for"
 import { responsiveBoxIcon } from "../../../utils/helpers/classes/responsive-box-icon"
 import { translate } from "react-i18nify"
 import { formatInputTypeFor as formatACInputTypeFor } from "../../../utils/formatters/devices/inverter-charger/format-input-type-for"
@@ -47,7 +48,11 @@ const InverterCharger = ({ instanceId, isMainVEBusDevice, componentMode = "compa
   const [openModal, setOpenModal] = useState(false)
 
   const title = titleFor(customName, productName)
-  const subTitle = translatedStateFor(isMainVEBusDevice ? systemState : state)
+  const subTitle = isMainVEBusDevice
+    ? translate(formatSystemStateFor(Number(systemState)))
+    : state !== undefined
+      ? translate(formatVebusStateFor(Number(state)))
+      : undefined
   const inverterChargerMode = formatModeFor(parseInt(mode))
 
   const getButtons = (numberOfAcInputs: number) => {
