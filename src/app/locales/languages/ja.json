@@ -1,0 +1,32 @@
+{
+    "acMode": {
+        "modal": {}
+    },
+    "boxes": {},
+    "cardFooter": {},
+    "common": {},
+    "diagnostics": {
+        "connection": {},
+        "device": {}
+    },
+    "error": {
+        "marine": {},
+        "remoteConsole": {}
+    },
+    "generator": {
+        "temperature": {}
+    },
+    "header": {},
+    "installations": {},
+    "locker": {},
+    "noWidgets": {},
+    "pages": {},
+    "remoteLogin": {},
+    "statusWidget": {
+        "parts": {}
+    },
+    "switches": {},
+    "tankWidget": {},
+    "versionInfo": {},
+    "widgets": {}
+}
