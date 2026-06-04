@@ -36,7 +36,7 @@ const SliderOutput = observer((props: SliderOutputProps) => {
   const ratio = Math.round(((value - min) / (max - min)) * 100)
 
   const [isDragging, setIsDragging] = useState(false)
-  const updateTimeoutRef = useRef<NodeJS.Timeout>()
+  const updateTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   const formatValueAndUnit = useValueFormatter({ decimals })
 
@@ -66,7 +66,7 @@ const SliderOutput = observer((props: SliderOutputProps) => {
     (percentage: number) => {
       if (updateTimeoutRef.current) {
         clearTimeout(updateTimeoutRef.current)
-        updateTimeoutRef.current = undefined
+        updateTimeoutRef.current = null
       }
 
       updateTimeoutRef.current = setTimeout(() => {
@@ -100,7 +100,7 @@ const SliderOutput = observer((props: SliderOutputProps) => {
 
     if (updateTimeoutRef.current) {
       clearTimeout(updateTimeoutRef.current)
-      updateTimeoutRef.current = undefined
+      updateTimeoutRef.current = null
     }
   }
 

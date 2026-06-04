@@ -38,7 +38,7 @@ const UnrangedSetpointOutput = observer((props: UnrangedSetpointOutputProps) => 
 
   const repeatTimerRef = useRef<number | null>(null)
   const initialDelayTimerRef = useRef<number | null>(null)
-  const updateValueRef = useRef<(delta: number) => void>()
+  const updateValueRef = useRef<(delta: number) => void>(null)
 
   const minusEnabled = useMemo(() => {
     return value - step >= min

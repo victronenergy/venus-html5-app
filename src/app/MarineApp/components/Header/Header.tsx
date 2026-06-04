@@ -35,7 +35,7 @@ export const Header = (props: HeaderProps) => {
     currentPage,
     pages,
   } = props
-  const modalVersionInfoRef = useRef<any>()
+  const modalVersionInfoRef = useRef<any>(null)
 
   return (
     <Fragment>

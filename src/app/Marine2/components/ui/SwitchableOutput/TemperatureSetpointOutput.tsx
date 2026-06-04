@@ -42,7 +42,7 @@ const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProp
 
   const [isDragging, setIsDragging] = useState(false)
   const [localSetpoint, setLocalSetpoint] = useState<number | null>(null)
-  const updateTimeoutRef = useRef<NodeJS.Timeout>()
+  const updateTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   const displaySetpoint = localSetpoint !== null ? localSetpoint : setpoint
   const displayRatio = Math.round(((displaySetpoint - min) / (max - min)) * 100)
@@ -77,7 +77,7 @@ const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProp
       setLocalSetpoint(value)
       if (updateTimeoutRef.current) {
         clearTimeout(updateTimeoutRef.current)
-        updateTimeoutRef.current = undefined
+        updateTimeoutRef.current = null
       }
 
       updateTimeoutRef.current = setTimeout(() => {
@@ -111,7 +111,7 @@ const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProp
 
     if (updateTimeoutRef.current) {
       clearTimeout(updateTimeoutRef.current)
-      updateTimeoutRef.current = undefined
+      updateTimeoutRef.current = null
     }
   }
 

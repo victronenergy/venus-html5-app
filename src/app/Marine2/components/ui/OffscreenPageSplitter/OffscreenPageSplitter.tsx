@@ -159,7 +159,7 @@ const OffscreenPageSplitter = <T extends React.JSX.Element = React.JSX.Element>(
           }}
         >
           {React.Children.map(children, (child, index) => (
-            <div key={`measure-${index}`} ref={(el) => (childRefs.current[index] = el)}>
+            <div key={`measure-${index}`} ref={(el) => { childRefs.current[index] = el }}>
               {child}
             </div>
           ))}
