@@ -16,10 +16,14 @@ const Frame: FC<Props> = ({ children, open = true, onClose, className }) => {
   )
   return (
     <div className={classes} onClick={onClose}>
-      <div className={classNames("absolute", className)} onClick={(e) => e.stopPropagation()}>
-        <div className="h-full overflow-hidden bg-surface-secondary rounded-md shadow-[0_8px_24px_-15px_rgba(0,0,0,0.75)]">
-          {children}
-        </div>
+      <div
+        className={classNames(
+          "absolute overflow-hidden rounded-md bg-surface-secondary shadow-[0_8px_24px_-15px_rgba(0,0,0,0.75)]",
+          className,
+        )}
+        onClick={(e) => e.stopPropagation()}
+      >
+        {children}
       </div>
     </div>
   )

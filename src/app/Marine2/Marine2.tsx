@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useTransition } from "react"
 import { useLanguage, useMqtt, STATUS, useApp } from "@victronenergy/mfd-modules"
 import { AppProps } from "./App"
 import { mfdLanguageOptions } from "app/locales/constants"
@@ -27,10 +27,13 @@ export const Marine2 = observer((props: AppProps) => {
   const { error, status } = mqtt
 
   const appViewsStore = useAppViewsStore()
+  const [, startTransition] = useTransition()
   const [currentView, setCurrentView] = useState(appViewsStore.currentView)
 
   useEffect(() => {
-    setCurrentView(appViewsStore.currentView)
+    startTransition(() => {
+      setCurrentView(appViewsStore.currentView)
+    })
   }, [appViewsStore.currentView])
 
   const renderView = () => {
