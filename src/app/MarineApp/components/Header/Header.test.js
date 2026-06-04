@@ -1,48 +1,66 @@
-import { mount } from "enzyme"
 import React from "react"
+import { render } from "@testing-library/react"
 import { Header } from "./Header"
 import { VIEWS } from "../../../utils/constants"
 
 describe("Header element", () => {
   describe("without pagination", () => {
-    const wrapper = mount(
-      <Header
-        showRemoteConsoleSetting={true}
-        handleRemoteConsoleButtonClicked={() => {}}
-        currentView={VIEWS.METRICS}
-        setPage={() => {}}
-        currentPage={1}
-        pages={1}
-      />,
-    )
-
     it("should show the Victron logo", () => {
-      expect(wrapper.find("img").exists())
+      const { container } = render(
+        <Header
+          showRemoteConsoleSetting={true}
+          handleRemoteConsoleButtonClicked={() => {}}
+          currentView={VIEWS.METRICS}
+          setPage={() => {}}
+          currentPage={1}
+          pages={1}
+        />,
+      )
+      expect(container.querySelector("img")).toBeInTheDocument()
     })
 
     it("should not show pagination", () => {
-      expect(wrapper.find(".header__paginator").exists()).toBe(false)
+      const { container } = render(
+        <Header
+          showRemoteConsoleSetting={true}
+          handleRemoteConsoleButtonClicked={() => {}}
+          currentView={VIEWS.METRICS}
+          setPage={() => {}}
+          currentPage={1}
+          pages={1}
+        />,
+      )
+      expect(container.querySelector(".header__paginator")).toBeNull()
     })
   })
 
   describe("with more than 1 page of metrics", () => {
-    const wrapper = mount(
-      <Header
-        showRemoteConsoleSetting={true}
-        handleRemoteConsoleButtonClicked={() => {}}
-        currentView={VIEWS.METRICS}
-        setPage={() => {}}
-        currentPage={1}
-        pages={3}
-      />,
-    )
-
     it("should show pagination", () => {
-      expect(wrapper.find(".header__paginator").exists()).toBe(true)
+      const { container } = render(
+        <Header
+          showRemoteConsoleSetting={true}
+          handleRemoteConsoleButtonClicked={() => {}}
+          currentView={VIEWS.METRICS}
+          setPage={() => {}}
+          currentPage={1}
+          pages={3}
+        />,
+      )
+      expect(container.querySelector(".header__paginator")).toBeInTheDocument()
     })
 
     it("should show 3 pages", () => {
-      expect(wrapper.find(".header__paginator-page > svg").length).toBe(3)
+      const { container } = render(
+        <Header
+          showRemoteConsoleSetting={true}
+          handleRemoteConsoleButtonClicked={() => {}}
+          currentView={VIEWS.METRICS}
+          setPage={() => {}}
+          currentPage={1}
+          pages={3}
+        />,
+      )
+      expect(container.querySelectorAll(".header__paginator-page > svg").length).toBe(3)
     })
   })
 })

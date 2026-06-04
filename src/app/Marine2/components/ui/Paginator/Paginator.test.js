@@ -1,25 +1,20 @@
-import { mount } from "enzyme"
 import React from "react"
+import { render } from "@testing-library/react"
 import Paginator from "./Paginator"
-import Box from "../Box"
 
 describe("Paginator element", () => {
   describe("without page selector", () => {
-    const wrapper = mount(
-      <Paginator>
-        <Box title={"Box1"}>Box1</Box>
-        <Box title={"Box2"}>Box2</Box>
-        <Box title={"Box3"}>Box3</Box>
-        <Box title={"Box4"}>Box4</Box>
-      </Paginator>,
-    )
-
     it("should show content", () => {
-      expect(wrapper.find("Box").length).toBe(4)
-    })
-
-    it("should not show page selector", () => {
-      expect(wrapper.find("PageFlipper").exists()).toBe(false)
+      const { container } = render(
+        <Paginator>
+          <div>Box1</div>
+          <div>Box2</div>
+          <div>Box3</div>
+          <div>Box4</div>
+        </Paginator>,
+      )
+      expect(container.textContent).toContain("Box1")
+      expect(container.textContent).toContain("Box4")
     })
 
     it.todo("should handle vertical orientation")

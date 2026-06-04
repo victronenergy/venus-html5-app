@@ -68,7 +68,7 @@ const GridPaginator = ({
 
   if (pages === 1) {
     return (
-      <div className={"h-full w-full min-h-0 min-w-0"} ref={gridPaginatorRef}>
+      <div className={"h-full w-full min-h-0 min-w-0"} data-testid="grid-paginator" ref={gridPaginatorRef}>
         <Grid
           childClassName={childClassName}
           flow={flow}
@@ -82,7 +82,7 @@ const GridPaginator = ({
   }
 
   return (
-    <div className={"h-full w-full min-h-0 min-w-0"} ref={gridPaginatorRef}>
+    <div className={"h-full w-full min-h-0 min-w-0"} data-testid="grid-paginator" ref={gridPaginatorRef}>
       <PageFlipper pages={pages} pageSelectorPropsSetter={pageSelectorPropsSetter}>
         <div
           className={classnames(`flex`, {

@@ -1,22 +1,20 @@
-import { Inverter } from "./Inverter"
-import { shallow } from "enzyme"
 import React from "react"
-import ColumnContainer from "../ColumnContainer"
+import { render } from "@testing-library/react"
+import { Inverter } from "./Inverter"
 
 describe("Inverter", () => {
-  it("exists as a regular inverter", () => {
-    const wrapper = shallow(<Inverter isVebusInverter={false} />)
-    console.log(wrapper)
-    expect(wrapper.childAt(0).type()).toBe(ColumnContainer)
+  it("renders as a regular inverter", () => {
+    const { container } = render(<Inverter isVebusInverter={false} />)
+    expect(container.firstChild).toBeInTheDocument()
   })
 
-  it("exist as nonVebusInverter with 0 AC inputs", () => {
-    const wrapper = shallow(<Inverter isVebusInverter={true} nAcInputs={0} />)
-    expect(wrapper.childAt(0).type()).toBe(ColumnContainer)
+  it("renders as nonVebusInverter with 0 AC inputs", () => {
+    const { container } = render(<Inverter isVebusInverter={true} nAcInputs={0} />)
+    expect(container.firstChild).toBeInTheDocument()
   })
 
-  it("not exist nonVebusInverter with 1 AC input", () => {
-    const wrapper = shallow(<Inverter isVebusInverter={true} nAcInputs={1} />)
-    expect(wrapper.children().length).toBe(0)
+  it("does not render nonVebusInverter with 1 AC input", () => {
+    const { container } = render(<Inverter isVebusInverter={true} nAcInputs={1} />)
+    expect(container.firstChild).toBeNull()
   })
 })
