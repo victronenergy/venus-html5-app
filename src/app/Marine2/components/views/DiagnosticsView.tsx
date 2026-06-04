@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import MainLayout from "../ui/MainLayout"
 import DiagnosticsTable from "../ui/DiagnosticsTable"
 import { MqttStore, useMqtt } from "@victronenergy/mfd-modules"
@@ -7,11 +7,26 @@ import { observer } from "mobx-react"
 import { useWindowSize } from "../../utils/hooks/use-window-size"
 import Paginator from "../ui/Paginator"
 import { useBrowserFeatures, WebGLDiagnostics } from "../../utils/hooks/use-browser-features"
+import Button from "../ui/Button"
 
 const DiagnosticsView = () => {
   const mqtt = useMqtt()
   const windowSize = useWindowSize()
   const browserFeatures = useBrowserFeatures()
+  // Re-render to sync button label when diagConsole visibility changes (including [Close])
+  const [, forceUpdate] = useState(0)
+  useEffect(() => {
+    if (window.diagConsole) {
+      window.diagConsole.onVisibilityChange(() => forceUpdate((n) => n + 1))
+      return () => window.diagConsole?.onVisibilityChange(null)
+    }
+  }, [])
+
+  const toggleDiagConsole = () => {
+    if (window.diagConsole) {
+      window.diagConsole.toggle()
+    }
+  }
 
   const connectionDiagnostics = (
     <DiagnosticsTable
@@ -23,7 +38,19 @@ const DiagnosticsView = () => {
   const deviceDiagnostics = (
     <DiagnosticsTable
       title={translate("diagnostics.device.device")}
-      diagnostics={getDeviceDiagnostics(windowSize, browserFeatures)}
+      diagnostics={[
+        ...getDeviceDiagnostics(windowSize, browserFeatures),
+        {
+          property: translate("diagnostics.device.diagConsole"),
+          value: (
+            <Button onClick={toggleDiagConsole} size="md">
+              {window.diagConsole?.isVisible()
+                ? translate("diagnostics.device.hideDiagConsole")
+                : translate("diagnostics.device.showDiagConsole")}
+            </Button>
+          ),
+        },
+      ]}
     />
   )
 
@@ -112,16 +139,8 @@ const getDeviceDiagnostics = (
       value: window.navigator.userAgent,
     },
     {
-      property: translate("diagnostics.device.viewportWidth"),
-      value: (windowSize.width ?? window.innerWidth) + `px (${window.screen.width}px)`,
-    },
-    {
-      property: translate("diagnostics.device.viewportHeight"),
-      value: (windowSize.height ?? window.innerHeight) + `px (${window.screen.height}px)`,
-    },
-    {
-      property: translate("diagnostics.device.devicePixelRatio"),
-      value: (window.devicePixelRatio ?? 1) + "px/pt",
+      property: translate("diagnostics.device.viewport"),
+      value: `${windowSize.width ?? window.innerWidth} x ${windowSize.height ?? window.innerHeight} (${window.screen.width} x ${window.screen.height}) [${window.devicePixelRatio ?? 1}px/pt]`,
     },
     {
       property: translate("diagnostics.device.colorScheme"),

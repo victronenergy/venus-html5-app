@@ -1,4 +1,4 @@
-import React from "react"
+import React, { ReactNode } from "react"
 
 const DiagnosticsTable = ({ title, diagnostics }: Props) => {
   return (
@@ -19,7 +19,7 @@ const DiagnosticsTable = ({ title, diagnostics }: Props) => {
 }
 
 interface Props {
-  diagnostics: { property: string; value: string }[]
+  diagnostics: { property: string; value: string | ReactNode }[]
   title: string
 }
 

@@ -69,3 +69,23 @@ declare module "*.module.sass" {
   const classes: { readonly [key: string]: string }
   export default classes
 }
+
+interface DiagConsoleEntry {
+  time: Date
+  level: string
+  message: string
+}
+
+interface DiagConsole {
+  show(): void
+  hide(): void
+  toggle(): void
+  isVisible(): boolean
+  onVisibilityChange(fn: ((visible: boolean) => void) | null): void
+  clear(): void
+  getLog(): DiagConsoleEntry[]
+}
+
+interface Window {
+  diagConsole?: DiagConsole
+}
