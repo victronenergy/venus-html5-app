@@ -168,10 +168,12 @@
   },
   "browserslist": {
     "production": [
-      "chrome >= 51"
+      "chrome >= 51",
+      "safari >= 8"
     ],
     "development": [
-      "chrome >= 51"
+      "chrome >= 51",
+      "safari >= 8"
     ]
   },
   "babel": {
