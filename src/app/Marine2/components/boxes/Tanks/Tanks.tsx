@@ -1,7 +1,7 @@
 import { useRef, useState } from "react"
 import TanksIcon from "../../../images/icons/tanks.svg"
 import { useTanks } from "@victronenergy/mfd-modules"
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 import { useWindowSize } from "../../../utils/hooks/use-window-size"
 import Box from "../../ui/Box"
 import Tank from "./Tank/Tank"

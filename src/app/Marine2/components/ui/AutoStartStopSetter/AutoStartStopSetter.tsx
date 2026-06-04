@@ -1,4 +1,4 @@
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 import DeviceSettingModal from "../DeviceSettingModal/DeviceSettingModal"
 import { translate } from "react-i18nify"
 import RadioButton from "../RadioButton"

@@ -7,7 +7,7 @@ import {
   useSwitchableOutput,
 } from "@victronenergy/mfd-modules"
 import classnames from "classnames"
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 import { translate } from "react-i18nify"
 import StatusPill from "../StatusPill"
 import { getValueOrDefault, useValueFormatter } from "./helpers"

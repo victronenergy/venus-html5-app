@@ -338,7 +338,17 @@ module.exports = function (webpackEnv) {
               // inline SVGs only for Marine2 app
               include: [paths.appSrc + "/app/Marine2"],
               use: [
-                { loader: require.resolve("babel-loader") },
+                {
+                  loader: require.resolve("babel-loader"),
+                  options: {
+                    presets: [
+                      [
+                        require.resolve("babel-preset-react-app"),
+                        { runtime: hasJsxRuntime ? "automatic" : "classic" },
+                      ],
+                    ],
+                  },
+                },
                 {
                   loader: require.resolve("react-svg-loader"),
                   options: { jsx: true },

@@ -3,7 +3,7 @@ import React from "react"
 import { useInverters, useVebus } from "@victronenergy/mfd-modules"
 
 import Inverter from "./Inverter"
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 import { useVisibilityNotifier } from "app/MarineApp/modules"
 import { WIDGET_TYPES } from "app/MarineApp/utils/constants"
 

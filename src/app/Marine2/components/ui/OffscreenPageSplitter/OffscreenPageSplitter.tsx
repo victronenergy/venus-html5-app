@@ -1,6 +1,6 @@
 import React, { useRef, useCallback, useLayoutEffect } from "react"
 import PageSelector, { SelectorLocation } from "../PageSelector"
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 import { ScreenOrientation } from "@m2Types/generic/screen-orientation"
 
 /// Every Page contains several children referenced by their index in original un-paged array

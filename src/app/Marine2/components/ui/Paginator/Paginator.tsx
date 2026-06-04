@@ -1,7 +1,7 @@
 import React, { useRef, useState, useCallback, useMemo, useEffect } from "react"
 import classnames from "classnames"
 import { SelectorLocation } from "../PageSelector"
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 import PageFlipper from "../PageFlipper"
 import useSize from "app/Marine2/utils/hooks/use-size"
 import { ScreenOrientation } from "@m2Types/generic/screen-orientation"

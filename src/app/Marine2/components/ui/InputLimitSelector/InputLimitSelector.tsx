@@ -1,5 +1,5 @@
 import { FC, useState } from "react"
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 import { useAppStore, useInputLimit, useInputLimitSelector } from "@victronenergy/mfd-modules"
 import DeviceSettingModal from "../DeviceSettingModal"
 

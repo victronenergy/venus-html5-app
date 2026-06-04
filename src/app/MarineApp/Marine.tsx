@@ -12,7 +12,7 @@ import { AppProps } from "./App"
 
 import { LockButton } from "./components/LockButton"
 import { mfdLanguageOptions } from "app/locales/constants"
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 import { isError } from "app/utils/util"
 
 type MainProps = {

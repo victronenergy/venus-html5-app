@@ -12,7 +12,7 @@ import Logo from "../../images/icons/logo.png"
 import LIcon from "../../images/icons/L.svg"
 import RIcon from "../../images/icons/R.svg"
 import { Translate } from "react-i18nify"
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 import { ModalVersionInfo } from "../ModalVersionInfo"
 
 type HeaderProps = {

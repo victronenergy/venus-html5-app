@@ -3,7 +3,7 @@ import { BatteryState, useLanguage } from "@victronenergy/mfd-modules"
 import { formatNumber } from "../../../components/NumericValue"
 import { translate, Translate } from "react-i18nify"
 import { mfdLanguageOptions } from "app/locales/constants"
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 
 const batteryStateFormatter = (value: number) => {
   switch (value) {

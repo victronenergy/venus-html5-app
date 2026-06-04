@@ -4,7 +4,7 @@ import Button from "../Button"
 import { AppViews, useAppViewsStore } from "../../../modules/AppViews"
 import { useMqtt } from "@victronenergy/mfd-modules"
 import Connecting from "../Connecting"
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 import RemoteConsoleView from "./../../views/RemoteConsoleView"
 
 const MqttUnavailable = ({ host }: Props) => {

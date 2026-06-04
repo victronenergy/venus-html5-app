@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useState } from "react"
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 import SwitchableOutput from "../ui/SwitchableOutput"
 import GenericInput from "../ui/GenericInput"
 import { useSwitchingPane, SwitchingPaneItem } from "@victronenergy/mfd-modules"

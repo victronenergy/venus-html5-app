@@ -1,7 +1,7 @@
 import React, { useMemo } from "react"
 import Footer from "../Footer"
 import Header from "../Header"
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 import { useAppViewsStore } from "../../../modules/AppViews"
 import { PageSelectorProps } from "../PageSelector"
 

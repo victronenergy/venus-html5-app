@@ -1,5 +1,5 @@
 import { useAppStore, useMqtt, useVebus, useVrmStore } from "@victronenergy/mfd-modules"
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 import React, { useEffect } from "react"
 import "../../css/index.scss"
 import { getLocale } from "react-i18nify"

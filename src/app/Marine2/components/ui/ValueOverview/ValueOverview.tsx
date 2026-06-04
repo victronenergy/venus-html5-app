@@ -8,7 +8,7 @@ import { valueType } from "@m2Types/data/value-type"
 import { TStatus } from "@m2Types/data/status"
 import { Styles } from "./Styles"
 import { ISize } from "@m2Types/generic/size"
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 
 interface Props {
   Icon: ComponentType<{ className: string }>

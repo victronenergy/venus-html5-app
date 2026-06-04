@@ -2,7 +2,7 @@ import React from "react"
 import classNames from "classnames"
 import "./SelectorButton.scss"
 import { useApp } from "@victronenergy/mfd-modules"
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 
 type SelectorButtonProps = {
   disabled?: boolean

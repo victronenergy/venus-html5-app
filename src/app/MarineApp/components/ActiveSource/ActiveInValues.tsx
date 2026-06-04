@@ -4,7 +4,7 @@ import { useActiveInValues } from "@victronenergy/mfd-modules"
 
 import { ListRow } from "../ListView"
 import NumericValue from "../../../components/NumericValue"
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 
 type ActiveInValuesProps = {
   phases: number

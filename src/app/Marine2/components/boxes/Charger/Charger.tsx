@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 import classNames from "classnames"
 import { translate } from "react-i18nify"
 import { ChargerInstanceId, useCharger } from "@victronenergy/mfd-modules"

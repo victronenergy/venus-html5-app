@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useRef } from "react"
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 import classnames from "classnames"
 import useSize from "app/Marine2/utils/hooks/use-size"
 import { ScreenOrientation } from "@m2Types/generic/screen-orientation"

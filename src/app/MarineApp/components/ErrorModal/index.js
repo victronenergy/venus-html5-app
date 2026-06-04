@@ -1,7 +1,7 @@
 import Modal from "app/components/Modal"
 import { SIZE_EXTRA_WIDE } from "app/components/Card"
 import Error from "../Views/Error"
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 import { toJS } from "mobx"
 import { useErrorHandlerStore } from "app/components/ErrorHandlerModule/ErrorHandler.store"
 import "./ErrorModal.scss"
