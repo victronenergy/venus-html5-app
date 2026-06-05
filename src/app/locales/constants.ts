@@ -17,6 +17,10 @@ export const LANGUAGES = [
   "uk",
   "af",
   "da",
+  "ja",
+  "pl",
+  "pt",
+  "th",
 ]
 export const __LOCAL_STORAGE_LANG_KEY__ = "__LOCAL_STORAGE_LANG_KEY__"
 export const DEFAULT_LANGUAGE = "en"

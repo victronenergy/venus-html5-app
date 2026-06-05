@@ -2,6 +2,7 @@ import { useState } from "react"
 import { observer } from "mobx-react-lite"
 import { ComponentMode } from "@m2Types/generic/component-mode"
 import { ISize } from "@m2Types/generic/size"
+import { translate } from "react-i18nify"
 import { InverterInstanceId, useAppStore, useInverter } from "@victronenergy/mfd-modules"
 import InverterChargerIcon from "../../../images/icons/inverter-charger.svg"
 import GeneratorIcon from "../../../images/icons/generator.svg"
@@ -12,7 +13,7 @@ import Box from "../../ui/Box"
 import { applyStyles, defaultBoxStyles } from "../../../utils/media"
 import ValueOverview from "../../ui/ValueOverview"
 import { formatModeFor } from "../../../utils/formatters/devices/inverter/format-mode-for"
-import { translatedStateFor } from "../../../utils/helpers/devices/translated-state-for"
+import { formatVebusStateFor } from "../../../utils/formatters/devices/inverter/format-state-for"
 import { titleFor } from "../../../utils/helpers/devices/title-for"
 import { Modal } from "./Modal/Modal"
 
@@ -30,7 +31,7 @@ const Inverter = ({ instanceId, isVebusInverter, componentMode = "compact", comp
   const { state, mode, voltage, current, power, customName, productName } = useInverter(instanceId, source)
 
   const title = titleFor(customName, productName)
-  const subTitle = translatedStateFor(state)
+  const subTitle = state !== undefined ? translate(formatVebusStateFor(Number(state))) : undefined
   const inverterMode = formatModeFor(mode)
 
   const currentValue = !!current || current === 0 ? current : undefined

@@ -258,14 +258,18 @@
     },
     "switches": {
         "auto": "Auto",
+        "color": "Kleur",
         "fault": "Storing",
+        "gxDeviceRelays": "GX apparaat relais",
         "max": "Max",
         "min": "Min",
         "notRunning": "Niet actief",
         "off": "Uit",
         "on": "Aan",
+        "preset": "Voorinstelling",
         "press": "Druk op",
-        "running": "Actief"
+        "running": "Actief",
+        "temperature": "Temperatuur"
     },
     "tankWidget": {
         "Black water": "Vuilwater",

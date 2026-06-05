@@ -20,7 +20,7 @@ const DeviceSettingModal: FC<Props> = (props) => {
     <Modal.Frame
       open={open}
       onClose={onClose}
-      className="border-outline-primary border rounded-md w-[95%] md:w-[40rem] scale-[0.7] h-short:scale-[1]"
+      className="border-outline-primary border w-[95%] md:w-[40rem] scale-[0.7] h-short:scale-[1]"
     >
       <Modal.Body>
         <div className="mb-8">

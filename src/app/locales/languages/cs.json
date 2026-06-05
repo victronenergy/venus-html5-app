@@ -258,14 +258,18 @@
     },
     "switches": {
         "auto": "Automaticky",
+        "color": "Barva",
         "fault": "Chyba",
+        "gxDeviceRelays": "Relé zařízení GX",
         "max": "Max",
         "min": "Min",
         "notRunning": "Neběží",
         "off": "Vypnuto",
         "on": "Zapnuto",
+        "preset": "Předvolba",
         "press": "Stiskněte",
-        "running": "Běží"
+        "running": "Běží",
+        "temperature": "Teplota"
     },
     "tankWidget": {
         "Black water": "Splašky",

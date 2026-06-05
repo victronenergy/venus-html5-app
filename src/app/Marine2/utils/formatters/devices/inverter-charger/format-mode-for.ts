@@ -1,4 +1,4 @@
-import { SYSTEM_MODE } from "../../../constants/generic"
+import { SYSTEM_MODE } from "@victronenergy/mfd-modules"
 import { translate } from "react-i18nify"
 
 export const formatModeFor = (value: number) => {

@@ -258,14 +258,18 @@
     },
     "switches": {
         "auto": "Automat",
+        "color": "Culoare",
         "fault": "Defecțiune",
+        "gxDeviceRelays": "Relee dispozitiv GX",
         "max": "Max",
         "min": "Min",
         "notRunning": "Nu rulează",
         "off": "Oprit",
         "on": "Pornit",
+        "preset": "Presetare",
         "press": "Apăsați",
-        "running": "Rulează"
+        "running": "Rulează",
+        "temperature": "Temperatura"
     },
     "tankWidget": {
         "Black water": "Apa redizuala",
