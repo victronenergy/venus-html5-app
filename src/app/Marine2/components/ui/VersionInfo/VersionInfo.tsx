@@ -30,7 +30,7 @@ const VersionInfo = () => {
       onClick={toggleVersionInfo}
     >
       <LogoIcon className="w-32 text-content-victronBlue hidden sm:block" alt="Victron Energy" />
-      <LogoOnlyIcon className="w-10 text-content-primary sm:hidden block" alt="Victron Energy" />
+      <LogoOnlyIcon className="w-10 text-content-victronBlue sm:hidden block" alt="Victron Energy" />
       <Modal.Frame
         open={isModalOpen}
         onClose={() => setIsModalOpen(false)}
@@ -38,7 +38,7 @@ const VersionInfo = () => {
       >
         <Modal.Body variant="popUp">
           <div className="text-sm md-m:text-base lg-s:text-sm lg-l:text-base">
-            <LogoIcon className="w-24 text-content-primary" alt="Victron Energy" />
+            <LogoIcon className="w-32 text-content-primary" alt="Victron Energy" />
             <div className="mt-1 py-2">
               <Translate
                 value="versionInfo.version"
