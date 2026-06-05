@@ -224,6 +224,88 @@
     getLog: function() {
       if (_buffer.length < MAX_ENTRIES) return _buffer.slice();
       return _buffer.slice(_head).concat(_buffer.slice(0, _head));
+    },
+    hookIframe: function(iframe) {
+      if (!iframe || !iframe.tagName || iframe.tagName !== "IFRAME") return function() {};
+
+      var cleanup = function() {};
+
+      function hook() {
+        cleanup();
+
+        var cw;
+        try {
+          cw = iframe.contentWindow;
+          void cw.document;
+        } catch (e) {
+          addEntry("WARN", "[RC] Cannot access iframe: " + String(e.message || e));
+          cleanup = function() {};
+          return;
+        }
+
+        if (!cw) {
+          cleanup = function() {};
+          return;
+        }
+
+        var origLog = cw.console.log;
+        var origWarn = cw.console.warn;
+        var origError = cw.console.error;
+
+        cw.console.log = function() {
+          origLog.apply(cw.console, arguments);
+          addEntry("LOG", "[RC] " + fmtArgs(arguments));
+        };
+        cw.console.warn = function() {
+          origWarn.apply(cw.console, arguments);
+          addEntry("WARN", "[RC] " + fmtArgs(arguments));
+        };
+        cw.console.error = function() {
+          origError.apply(cw.console, arguments);
+          addEntry("ERR", "[RC] " + fmtArgs(arguments));
+        };
+
+        var prevOnError = cw.onerror;
+        cw.onerror = function(msg, url, line, col, err) {
+          var message = "[RC] " + String(msg);
+          if (url) message += " at " + url + ":" + line + ":" + col;
+          if (err && err.stack) message += "\n" + err.stack;
+          addEntry("ERR", message);
+          if (typeof prevOnError === "function") {
+            return prevOnError.call(cw, msg, url, line, col, err);
+          }
+        };
+
+        var prevOnUnhandled = cw.onunhandledrejection;
+        cw.onunhandledrejection = function(event) {
+          var reason = event && event.reason;
+          addEntry("ERR", "[RC] Unhandled rejection: " + safeStr(reason));
+          if (typeof prevOnUnhandled === "function") {
+            return prevOnUnhandled.call(cw, event);
+          }
+        };
+
+        cleanup = function() {
+          try {
+            if (iframe.contentWindow === cw) {
+              cw.console.log = origLog;
+              cw.console.warn = origWarn;
+              cw.console.error = origError;
+              cw.onerror = prevOnError || null;
+              cw.onunhandledrejection = prevOnUnhandled || null;
+            }
+          } catch (e) {}
+          cleanup = function() {};
+        };
+      }
+
+      hook();
+      iframe.addEventListener("load", hook);
+
+      return function() {
+        cleanup();
+        iframe.removeEventListener("load", hook);
+      };
     }
   };
 })();

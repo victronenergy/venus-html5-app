@@ -84,6 +84,7 @@ interface DiagConsole {
   onVisibilityChange(fn: ((visible: boolean) => void) | null): void
   clear(): void
   getLog(): DiagConsoleEntry[]
+  hookIframe(iframe: HTMLIFrameElement): () => void
 }
 
 interface Window {
