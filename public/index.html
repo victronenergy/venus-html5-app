@@ -64,7 +64,7 @@
 
   var titleBar = document.createElement("div");
   var ts = titleBar.style;
-  ts.padding = "4px 8px"; ts.backgroundColor = "rgba(30, 40, 60, 1.0)";
+  ts.padding = "4px 4px 4px 8px"; ts.backgroundColor = "rgba(30, 40, 60, 1.0)";
   ts.color = "rgba(220, 220, 220, 1.0)";
   ts.cursor = "move"; ts.userSelect = "none"; ts.webkitUserSelect = "none";
   ts.borderBottom = "1px solid rgba(80, 80, 80, 1.0)";
@@ -75,7 +75,7 @@
 
   var title = document.createElement("span");
   title.textContent = "Diagnostic Console";
-  title.style.cssText = btnStyle + ";font-weight:bold;cursor:move;background-color:transparent;padding-left:0";
+  title.style.cssText = btnStyle + ";font-weight:bold;cursor:move;background-color:transparent;padding-left:0;margin-left:0";
 
   var spacer = document.createElement("span");
   spacer.style.flex = "1";
@@ -87,7 +87,7 @@
 
   var closeBtn = document.createElement("span");
   closeBtn.textContent = "Close";
-  closeBtn.style.cssText = btnStyle;
+  closeBtn.style.cssText = btnStyle + ";margin-right:0";
   closeBtn.addEventListener("click", function() { window.diagConsole.hide(); });
 
   titleBar.appendChild(title);
@@ -98,10 +98,16 @@
   var logArea = document.createElement("div");
   var ls = logArea.style;
   ls.height = "14em"; ls.overflowY = "auto"; ls.overflowX = "hidden";
-  ls.padding = "4px 8px"; ls.whiteSpace = "pre-wrap"; ls.wordBreak = "break-all";
+  ls.padding = "4px 8px"; ls.paddingBottom = "24px";
+  ls.whiteSpace = "pre-wrap"; ls.wordBreak = "break-all";
+
+  var resizeBtn = document.createElement("span");
+  resizeBtn.textContent = "Resize";
+  resizeBtn.style.cssText = btnStyle + ";position:absolute;bottom:4px;right:4px;cursor:nwse-resize";
 
   overlay.appendChild(titleBar);
   overlay.appendChild(logArea);
+  overlay.appendChild(resizeBtn);
   document.body.appendChild(overlay);
 
   var LEVEL_COLORS = {
@@ -203,6 +209,44 @@
   titleBar.addEventListener("touchstart", onDragStart);
   document.addEventListener("touchmove", onDragMove);
   document.addEventListener("touchend", onDragEnd);
+
+  var _isResizing = false;
+  var _resizeStartX = 0, _resizeStartY = 0;
+  var _resizeStartW = 0, _resizeStartH = 0;
+
+  function onResizeStart(e) {
+    _isResizing = true;
+    var pos = getXY(e);
+    var rect = overlay.getBoundingClientRect();
+    overlay.style.bottom = "auto"; overlay.style.right = "auto";
+    overlay.style.left = rect.left + "px";
+    overlay.style.top = rect.top + "px";
+    _resizeStartX = pos.x;
+    _resizeStartY = pos.y;
+    _resizeStartW = overlay.offsetWidth;
+    _resizeStartH = logArea.offsetHeight;
+    e.preventDefault();
+    e.stopPropagation();
+  }
+
+  function onResizeMove(e) {
+    if (!_isResizing) return;
+    var pos = getXY(e);
+    var newW = Math.max(200, _resizeStartW + (pos.x - _resizeStartX));
+    var newH = Math.max(60, _resizeStartH + (pos.y - _resizeStartY));
+    overlay.style.width = newW + "px";
+    overlay.style.maxWidth = "none";
+    logArea.style.height = newH + "px";
+  }
+
+  function onResizeEnd() { _isResizing = false; }
+
+  resizeBtn.addEventListener("mousedown", onResizeStart);
+  document.addEventListener("mousemove", onResizeMove);
+  document.addEventListener("mouseup", onResizeEnd);
+  resizeBtn.addEventListener("touchstart", onResizeStart);
+  document.addEventListener("touchmove", onResizeMove);
+  document.addEventListener("touchend", onResizeEnd);
 
   var _listener = null;
   function setVisible(v) {
