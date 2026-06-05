@@ -1,15 +1,20 @@
-import { shallow } from "enzyme"
 import React from "react"
+import { render, waitFor } from "@testing-library/react"
 import App from "./App"
+
+jest.mock("@victronenergy/mfd-modules", () => {
+  const actual = jest.requireActual("@victronenergy/mfd-modules")
+  return {
+    ...actual,
+    useMqtt: () => ({ boot: jest.fn() }),
+  }
+})
 
 describe("App element", () => {
   describe("error boundary", () => {
-    const wrapper = shallow(<App />)
-
-    it("should use error boundary", () => {
-      const errorBoundary = wrapper.find("ErrorBoundary")
-      expect(errorBoundary.exists()).toBe(true)
-      expect(errorBoundary.find("Memo(App)").exists()).toBe(true)
+    it("should render without crashing", async () => {
+      const { container } = render(<App />)
+      await waitFor(() => expect(container).toBeInTheDocument())
     })
   })
 

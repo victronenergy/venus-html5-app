@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react"
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 import { translate } from "react-i18nify"
 import { InverterInstanceId, useInverter } from "@victronenergy/mfd-modules"
 import DeviceSettingModal from "../../../ui/DeviceSettingModal/DeviceSettingModal"

@@ -12,7 +12,7 @@ import "./Inverter.scss"
 
 import MultiplusIcon from "../../images/icons/multiplus.svg"
 import { translate, Translate } from "react-i18nify"
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 
 const stateFormatter = (state: number) => {
   switch (state) {

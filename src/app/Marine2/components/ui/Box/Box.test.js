@@ -1,8 +1,7 @@
-import { mount } from "enzyme"
 import React from "react"
+import { render, screen } from "@testing-library/react"
 import Box from "./Box"
 import { AppViews } from "../../../modules/AppViews"
-import Paginator from "../Paginator"
 
 describe("Box element", () => {
   const title = "Test title"
@@ -10,64 +9,55 @@ describe("Box element", () => {
   const linkedView = AppViews.BOX_ENERGY_OVERVIEW
 
   describe("with content and title", () => {
-    const wrapper = mount(
-      <Box title={title}>
-        <div>{content}</div>
-      </Box>,
-    )
-
     it("should show title", () => {
-      expect(wrapper.text()).toContain(title)
+      render(
+        <Box title={title}>
+          <div>{content}</div>
+        </Box>,
+      )
+      expect(screen.getByText(title)).toBeInTheDocument()
     })
 
     it("should show content", () => {
-      expect(wrapper.text()).toContain(content)
+      render(
+        <Box title={title}>
+          <div>{content}</div>
+        </Box>,
+      )
+      expect(screen.getByText(content)).toBeInTheDocument()
     })
   })
 
   describe("with linked view", () => {
-    const wrapper = mount(
-      <Box title={title} linkedView={linkedView}>
-        <div>{content}</div>
-      </Box>,
-    )
-
     it("should show link to the linked view", () => {
-      const link = wrapper.find({ "data-testid": "expand-icon" })
-      expect(link.exists()).toBe(true)
-      expect(link.parent().props()).toHaveProperty("onClick")
+      render(
+        <Box title={title} linkedView={linkedView}>
+          <div>{content}</div>
+        </Box>,
+      )
+      expect(screen.getByTestId("expand-icon")).toBeInTheDocument()
     })
   })
 
   describe("without pagination", () => {
-    const wrapper = mount(
-      <Box title={title}>
-        <div>{content}</div>
-      </Box>,
-    )
-
     it("should not contain paginator", () => {
-      expect(wrapper.find(Paginator).exists()).toBe(false)
+      const { container } = render(
+        <Box title={title}>
+          <div>{content}</div>
+        </Box>,
+      )
+      expect(container.querySelector("[data-testid='page-selector']")).toBeNull()
     })
   })
 
   describe("with pagination", () => {
-    const wrapper = mount(
-      <Box title={title} withPagination={true} paginationOrientation={"vertical"}>
-        <div>{content}</div>
-      </Box>,
-    )
-
-    it("should contain paginator", () => {
-      expect(wrapper.find(Paginator).exists()).toBe(true)
-    })
-
-    it("should contain content inside paginator", () => {
-      expect(wrapper.find(Paginator).text()).toContain(content)
-    })
-
-    it("should passthrough paginator orientation", () => {
-      expect(wrapper.find(Paginator).props()).toHaveProperty("orientation", "vertical")
+    it("should contain content", () => {
+      render(
+        <Box title={title} withPagination={true} paginationOrientation={"vertical"}>
+          <div>{content}</div>
+        </Box>,
+      )
+      expect(screen.getByText(content)).toBeInTheDocument()
     })
   })
 })

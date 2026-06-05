@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useLayoutEffect, useState } from "react"
-import { observer } from "mobx-react"
+import React, { useCallback, useMemo, useState } from "react"
+import { observer } from "mobx-react-lite"
 import SwitchableOutput from "../ui/SwitchableOutput"
 import GenericInput from "../ui/GenericInput"
 import { useSwitchingPane, SwitchingPaneItem } from "@victronenergy/mfd-modules"
@@ -15,9 +15,6 @@ const SwitchingPane = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const switchableOutputs = useSwitchingPane(translate("switches.gxDeviceRelays"))
 
-  const [groupNames, setGroupNames] = useState<string[]>([])
-  const [groupsOfSwitchableOutputs, setGroupsOfSwitchableOutputs] = useState<React.JSX.Element[][]>([])
-
   const [currentPage, setCurrentPage] = useState(0)
   const [pageCount, setPageCount] = useState(0)
 
@@ -26,7 +23,7 @@ const SwitchingPane = () => {
     setCurrentPage(a)
   }, [])
 
-  useLayoutEffect(() => {
+  const { groupNames, groupsOfSwitchableOutputs } = useMemo(() => {
     const x = Object.entries(switchableOutputs.groups)
       // Sort groups by name
       .sort(([a], [b]) => a.localeCompare(b))
@@ -62,17 +59,15 @@ const SwitchingPane = () => {
           }),
         }
       })
-    // array of groupNames by index
-    setGroupNames(x.map((g) => g.groupName))
-    // array of groups by index containing arrays of switchable outputs
-    setGroupsOfSwitchableOutputs(x.map((g) => g.outputs))
+    return {
+      groupNames: x.map((g) => g.groupName),
+      groupsOfSwitchableOutputs: x.map((g) => g.outputs),
+    }
   }, [switchableOutputs.groups])
 
-  useEffect(() => {
-    if (Object.keys(switchableOutputs.groups).length === 0) {
-      setIsModalOpen(false)
-    }
-  }, [groupsOfSwitchableOutputs, switchableOutputs.groups])
+  if (isModalOpen && Object.keys(switchableOutputs.groups).length === 0) {
+    setIsModalOpen(false)
+  }
 
   if (Object.keys(switchableOutputs.groups).length === 0) {
     return <></>

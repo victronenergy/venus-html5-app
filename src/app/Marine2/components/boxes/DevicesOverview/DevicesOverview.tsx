@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 import { translate } from "react-i18nify"
 import classNames from "classnames"
 import Box from "../../ui/Box"

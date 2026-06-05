@@ -7,7 +7,7 @@ import {
   useSwitchableOutput,
 } from "@victronenergy/mfd-modules"
 import classnames from "classnames"
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 import { translate } from "react-i18nify"
 import StatusPill from "../StatusPill"
 import { getValueOrDefault, useValueFormatter } from "./helpers"
@@ -37,7 +37,7 @@ const DimmableOutput = observer((props: DimmableOutputProps) => {
   }
 
   const [isDragging, setIsDragging] = useState(false)
-  const updateTimeoutRef = useRef<NodeJS.Timeout>()
+  const updateTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   const calculateNewValue = (clientX: number, element: HTMLDivElement): number => {
     const rect = element.getBoundingClientRect()
@@ -58,7 +58,7 @@ const DimmableOutput = observer((props: DimmableOutputProps) => {
     (percentage: number) => {
       if (updateTimeoutRef.current) {
         clearTimeout(updateTimeoutRef.current)
-        updateTimeoutRef.current = undefined
+        updateTimeoutRef.current = null
       }
 
       updateTimeoutRef.current = setTimeout(() => {
@@ -92,7 +92,7 @@ const DimmableOutput = observer((props: DimmableOutputProps) => {
 
     if (updateTimeoutRef.current) {
       clearTimeout(updateTimeoutRef.current)
-      updateTimeoutRef.current = undefined
+      updateTimeoutRef.current = null
     }
   }
 

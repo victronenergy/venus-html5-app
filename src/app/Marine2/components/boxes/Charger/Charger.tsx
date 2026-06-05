@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react"
-import { observer } from "mobx-react"
+import { useState } from "react"
+import { observer } from "mobx-react-lite"
 import classNames from "classnames"
 import { translate } from "react-i18nify"
 import { ChargerInstanceId, useCharger } from "@victronenergy/mfd-modules"
@@ -60,13 +60,14 @@ const Charger = ({ instanceId, componentMode = "compact", compactBoxSize }: Prop
   const [isModeModalOpen, setIsModeModalOpen] = useState(false)
   const [modeForSubmission, setModeForSubmission] = useState(Number(mode))
 
-  useEffect(() => {
-    setModeForSubmission(Number(mode))
-  }, [mode])
-
   const closeModeModal = () => {
     setIsModeModalOpen(false)
     setModeForSubmission(Number(mode))
+  }
+
+  const openModeModal = () => {
+    setModeForSubmission(Number(mode))
+    setIsModeModalOpen(true)
   }
 
   const submitMode = () => {
@@ -77,9 +78,10 @@ const Charger = ({ instanceId, componentMode = "compact", compactBoxSize }: Prop
   const [limitForSubmission, setLimitForSubmission] = useState(Number(currentLimit))
   const [isLimitModalOpen, setIsLimitModalOpen] = useState(false)
 
-  useEffect(() => {
+  const openLimitModal = () => {
     setLimitForSubmission(Number(currentLimit))
-  }, [currentLimit])
+    setIsLimitModalOpen(true)
+  }
 
   const increaseLimit = () => {
     if (limitForSubmission < 100) {
@@ -131,12 +133,12 @@ const Charger = ({ instanceId, componentMode = "compact", compactBoxSize }: Prop
             </div>
             <div className="flex mt-3">
               {chargerSupportsInputLimit && (
-                <Button className="w-full mr-4" size="md" onClick={() => setIsLimitModalOpen(!isLimitModalOpen)}>
+                <Button className="w-full mr-4" size="md" onClick={openLimitModal}>
                   {currentLimit ? formatValue(Number(currentLimit)) + "A" : 0 + "A"}
                 </Button>
               )}
               {chargerSupportsMode && (
-                <Button className="w-full" size="md" onClick={() => setIsModeModalOpen(!isModeModalOpen)}>
+                <Button className="w-full" size="md" onClick={openModeModal}>
                   {chargerMode}
                 </Button>
               )}

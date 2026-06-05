@@ -1,5 +1,5 @@
-import { FC, useEffect, useState } from "react"
-import { observer } from "mobx-react"
+import { FC, useState } from "react"
+import { observer } from "mobx-react-lite"
 import { useAppStore, useInputLimit, useInputLimitSelector } from "@victronenergy/mfd-modules"
 import DeviceSettingModal from "../DeviceSettingModal"
 
@@ -28,9 +28,10 @@ const InputLimitSelector: FC<Props> = ({ instanceId, inputId, title, subtitle })
   const [limitForSubmission, setLimitForSubmission] = useState(Number(currentLimit))
   const [isLimitModalOpen, setIsLimitModalOpen] = useState(false)
 
-  useEffect(() => {
+  const openLimitModal = () => {
     setLimitForSubmission(Number(currentLimit))
-  }, [currentLimit])
+    setIsLimitModalOpen(true)
+  }
 
   const increaseLimit = () => {
     if (limitForSubmission < (currentLimitMax ?? 100)) {
@@ -62,12 +63,7 @@ const InputLimitSelector: FC<Props> = ({ instanceId, inputId, title, subtitle })
 
   return (
     <>
-      <Button
-        disabled={locked}
-        className="w-full mr-4"
-        size="md"
-        onClick={() => setIsLimitModalOpen(!isLimitModalOpen)}
-      >
+      <Button disabled={locked} className="w-full mr-4" size="md" onClick={openLimitModal}>
         {currentLimit ? formatValue(Number(currentLimit)) + "A" : 0 + "A"}
       </Button>
       <DeviceSettingModal

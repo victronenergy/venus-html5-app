@@ -6,7 +6,7 @@ import SelectorButton from "../SelectorButton"
 import { formatNumber } from "../../../components/NumericValue"
 import "./InputLimit.scss"
 import { Translate } from "react-i18nify"
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 
 type InputLimitProps = {
   onChangeInputLimitClicked: Function

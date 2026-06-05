@@ -8,7 +8,7 @@ import { responsiveBoxIcon } from "../../../utils/helpers/classes/responsive-box
 import { ISize } from "@m2Types/generic/size"
 import { valueFor } from "app/Marine2/utils/formatters/phase/phase-value-for"
 import { unitFor } from "app/Marine2/utils/formatters/phase/phase-unit-for"
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 
 interface Props {
   gensetType: ConnectedGensetType

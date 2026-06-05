@@ -9,7 +9,7 @@ import { InverterCharger } from "../InverterCharger"
 import Solar from "../Solar"
 import Generators from "../Generators"
 import { useVebus } from "@victronenergy/mfd-modules"
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 import { NoWidgets } from "../NoWidgets"
 import { useVisibleWidgetsStore } from "app/MarineApp/modules"
 

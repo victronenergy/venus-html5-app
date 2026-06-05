@@ -1,6 +1,6 @@
-import React, { useLayoutEffect, useMemo, useRef, useState } from "react"
+import React, { useMemo, useRef } from "react"
 import classnames from "classnames"
-import useSize from "@react-hook/size"
+import useSize from "app/Marine2/utils/hooks/use-size"
 
 const Grid = ({
   children,
@@ -15,8 +15,17 @@ const Grid = ({
   const gridRef = useRef<HTMLDivElement>(null)
   const [width, height] = useSize(gridRef)
 
-  const [gridFlow, setGridFlow] = useState<"row" | "col">(flow)
-  const [forceOneDimension, setForceOneDimension] = useState(false)
+  const { gridFlow, forceOneDimension } = useMemo(() => {
+    if (!width || !height || forceOneDimensionRatio <= 0) {
+      return { gridFlow: flow, forceOneDimension: false }
+    }
+    const ratio = width / height
+    const isOneDimension = ratio >= 1 ? ratio >= forceOneDimensionRatio : ratio <= 1 / forceOneDimensionRatio
+    return {
+      gridFlow: isOneDimension ? (ratio > 1 ? ("row" as const) : ("col" as const)) : flow,
+      forceOneDimension: isOneDimension,
+    }
+  }, [width, height, forceOneDimensionRatio, flow])
 
   const elementsInRow = useMemo(() => {
     return Math.ceil(Math.sqrt(childrenCount))
@@ -46,19 +55,6 @@ const Grid = ({
     }
     return `${100 / elementsInRow}%`
   }
-
-  useLayoutEffect(() => {
-    const gridSize = { width, height }
-    if (!gridSize.width || !gridSize.height || forceOneDimensionRatio <= 0) {
-      return
-    }
-
-    const ratio = gridSize.width / gridSize.height
-    const isOneDimension = ratio >= 1 ? ratio >= forceOneDimensionRatio : ratio <= 1 / forceOneDimensionRatio
-
-    setForceOneDimension(isOneDimension)
-    setGridFlow(isOneDimension ? (ratio > 1 ? "row" : "col") : flow)
-  }, [width, height, forceOneDimensionRatio, flow])
 
   return (
     <div ref={gridRef} className={classnames("w-full h-full min-w-0 min-h-0", className)}>

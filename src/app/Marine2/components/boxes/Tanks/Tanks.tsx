@@ -1,14 +1,14 @@
-import { useEffect, useRef, useState } from "react"
+import { useRef, useState } from "react"
 import TanksIcon from "../../../images/icons/tanks.svg"
 import { useTanks } from "@victronenergy/mfd-modules"
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 import { useWindowSize } from "../../../utils/hooks/use-window-size"
 import Box from "../../ui/Box"
 import Tank from "./Tank/Tank"
 import { AppViews } from "../../../modules/AppViews"
 import { translate } from "react-i18nify"
 import { useVisibilityNotifier } from "../../../modules"
-import useSize from "@react-hook/size"
+import useSize from "app/Marine2/utils/hooks/use-size"
 import { applyStyles, defaultBoxStyles } from "../../../utils/media"
 import classNames from "classnames"
 import { ComponentMode } from "@m2Types/generic/component-mode"
@@ -34,19 +34,13 @@ const Tanks = ({ componentMode = "full", className }: Props) => {
   useVisibilityNotifier({ widgetName: BOX_TYPES.TANKS, isVisible: hasValidData })
 
   const gridRef = useRef<HTMLDivElement>(null)
-  const [orientation, setOrientation] = useState<ScreenOrientation>("vertical")
 
   const [width, height] = useSize(gridRef)
   const windowSize = useWindowSize()
   const activeStyles = applyStyles(boxSize, defaultBoxStyles)
 
-  useEffect(() => {
-    if (!windowSize.width || !windowSize.height) return
-
-    const orientation = windowSize.width > 3 * windowSize.height ? "horizontal" : "vertical"
-
-    setOrientation(orientation)
-  }, [windowSize])
+  const orientation: ScreenOrientation =
+    windowSize.width && windowSize.height && windowSize.width > 3 * windowSize.height ? "horizontal" : "vertical"
 
   if (componentMode === "compact") {
     return (

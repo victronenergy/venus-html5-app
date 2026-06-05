@@ -3,7 +3,7 @@ import { translate } from "react-i18nify"
 import DeviceSettingModal from "../../../ui/DeviceSettingModal/DeviceSettingModal"
 import { useInverterCharger } from "@victronenergy/mfd-modules"
 import { Options } from "./Options/Options"
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 
 interface Props {
   instanceId: number
