@@ -185,6 +185,8 @@
   }
 
   function onDragStart(e) {
+    var t = e.target || e.srcElement;
+    if (t === clearBtn || t === closeBtn) return;
     _isDragging = true;
     var pos = getXY(e);
     var rect = overlay.getBoundingClientRect();
