@@ -1,5 +1,5 @@
 import { useAppStore, useMqtt, useTheme, useVebus, useVrmStore } from "@victronenergy/mfd-modules"
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 import React, { useEffect, useLayoutEffect } from "react"
 import { withErrorBoundary } from "react-error-boundary"
 import { getLocale, setLocale } from "react-i18nify"

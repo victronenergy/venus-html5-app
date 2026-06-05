@@ -9,7 +9,7 @@ import { ComponentMode } from "@m2Types/generic/component-mode"
 import { ISize } from "@m2Types/generic/size"
 import { usePhasesData } from "../../../utils/hooks/use-phases-data"
 import { responsiveBoxIcon } from "../../../utils/helpers/classes/responsive-box-icon"
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 
 interface Props {
   componentMode?: ComponentMode

@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react"
+import React, { useMemo, useState } from "react"
 import MainLayout from "../ui/MainLayout"
 import Tanks from "../boxes/Tanks/Tanks"
 import BatteriesOverview from "../boxes/BatteriesOverview"
 import EnergyOverview from "../boxes/EnergyOverview"
 import GridPaginator from "../ui/GridPaginator"
 import { useVisibleWidgetsStore } from "../../modules"
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 import { PageSelectorProps } from "../ui/PageSelector"
 import DevicesOverview from "../boxes/DevicesOverview"
 import EnvironmentOverview from "../boxes/EnvironmentOverview/EnvironmentOverview"
@@ -13,29 +13,6 @@ import { BOX_TYPES } from "../../utils/constants/generic"
 
 const RootView = () => {
   const visibleWidgetsStore = useVisibleWidgetsStore()
-
-  const [boxes, setBoxes] = React.useState<React.JSX.Element[]>([])
-  const [initialBoxes, setInitialBoxes] = React.useState<React.JSX.Element[]>([])
-
-  useEffect(() => {
-    const visibleBoxes: React.JSX.Element[] = []
-    const hiddenBoxes: React.JSX.Element[] = []
-    for (const type of Object.values(BOX_TYPES)) {
-      const isVisible = visibleWidgetsStore.visibleElements.has(type)
-
-      const elem = getBoxByType(type)
-      if (!elem) continue
-
-      if (isVisible) {
-        visibleBoxes.push(elem)
-      } else {
-        hiddenBoxes.push(elem)
-      }
-    }
-
-    setBoxes(visibleBoxes)
-    setInitialBoxes(hiddenBoxes)
-  }, [visibleWidgetsStore.visibleElements])
 
   const getBoxByType = (type: BOX_TYPES) => {
     switch (type) {
@@ -53,6 +30,22 @@ const RootView = () => {
         return null
     }
   }
+
+  const { boxes, initialBoxes } = useMemo(() => {
+    const visibleBoxes: React.JSX.Element[] = []
+    const hiddenBoxes: React.JSX.Element[] = []
+    for (const type of Object.values(BOX_TYPES)) {
+      const isVisible = visibleWidgetsStore.visibleElements.has(type)
+      const elem = getBoxByType(type)
+      if (!elem) continue
+      if (isVisible) {
+        visibleBoxes.push(elem)
+      } else {
+        hiddenBoxes.push(elem)
+      }
+    }
+    return { boxes: visibleBoxes, initialBoxes: hiddenBoxes }
+  }, [visibleWidgetsStore.visibleElements])
 
   const [pageSelectorProps, setPageSelectorProps] = useState<PageSelectorProps>()
 

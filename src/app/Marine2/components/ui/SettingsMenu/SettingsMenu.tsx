@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 import { useAppStore, useTheme } from "@victronenergy/mfd-modules"
 import { translate } from "react-i18nify"
 import { Modal } from "../Modal"

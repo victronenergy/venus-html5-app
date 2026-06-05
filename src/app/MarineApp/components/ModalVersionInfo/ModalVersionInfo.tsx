@@ -8,7 +8,7 @@ import { SIZE_EXTRA_WIDE } from "app/components/Card"
 import packageInfo from "../../../../../package.json"
 import { BUILD_TIMESTAMP } from "app/utils/constants"
 import { useVrmStore, useAppStore } from "@victronenergy/mfd-modules"
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 
 export const ModalVersionInfo = observer(
   // eslint-disable-next-line react/display-name

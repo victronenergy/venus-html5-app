@@ -4,7 +4,7 @@ import Button from "../Button"
 import { AppViews, useAppViewsStore } from "../../../modules/AppViews"
 import { useMqtt } from "@victronenergy/mfd-modules"
 import Connecting from "../Connecting"
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 import RemoteConsoleView from "./../../views/RemoteConsoleView"
 
 const MqttUnavailable = ({ host }: Props) => {
@@ -24,6 +24,7 @@ const MqttUnavailable = ({ host }: Props) => {
 
   useEffect(() => {
     if (!error) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- reacting to external MQTT state
       setIsConnecting(false)
       appViewsStore.setView(AppViews.ROOT)
     }

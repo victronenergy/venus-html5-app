@@ -7,7 +7,7 @@ import {
   useSwitchableOutput,
 } from "@victronenergy/mfd-modules"
 import classnames from "classnames"
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 import StatusPill from "../StatusPill"
 import { getDecimalPlaces, getValueOrDefault, useValueFormatter } from "./helpers"
 import { getSwitchableOutputStatusPill, isSwitchableOutputDisabled } from "./statusHelper"
@@ -36,7 +36,7 @@ const SliderOutput = observer((props: SliderOutputProps) => {
   const ratio = Math.round(((value - min) / (max - min)) * 100)
 
   const [isDragging, setIsDragging] = useState(false)
-  const updateTimeoutRef = useRef<NodeJS.Timeout>()
+  const updateTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   const formatValueAndUnit = useValueFormatter({ decimals })
 
@@ -66,7 +66,7 @@ const SliderOutput = observer((props: SliderOutputProps) => {
     (percentage: number) => {
       if (updateTimeoutRef.current) {
         clearTimeout(updateTimeoutRef.current)
-        updateTimeoutRef.current = undefined
+        updateTimeoutRef.current = null
       }
 
       updateTimeoutRef.current = setTimeout(() => {
@@ -100,7 +100,7 @@ const SliderOutput = observer((props: SliderOutputProps) => {
 
     if (updateTimeoutRef.current) {
       clearTimeout(updateTimeoutRef.current)
-      updateTimeoutRef.current = undefined
+      updateTimeoutRef.current = null
     }
   }
 

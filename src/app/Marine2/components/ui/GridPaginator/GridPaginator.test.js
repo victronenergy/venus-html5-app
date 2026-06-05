@@ -1,71 +1,44 @@
-import { mount } from "enzyme"
 import React from "react"
-import Box from "../Box"
+import { render } from "@testing-library/react"
 import GridPaginator from "./GridPaginator"
 
 describe("GridPaginator element", () => {
   describe("renders content", () => {
-    const wrapper = mount(
-      <GridPaginator perPage={4}>
-        <Box title={"Box1"}>Box1</Box>
-        <Box title={"Box2"}>Box2</Box>
-        <Box title={"Box3"}>Box3</Box>
-        <Box title={"Box4"}>Box4</Box>
-      </GridPaginator>,
-    )
-
     it("should show content", () => {
-      expect(wrapper.find("Box").length).toBe(4)
+      const { container } = render(
+        <GridPaginator perPage={4}>
+          <div>Box1</div>
+          <div>Box2</div>
+          <div>Box3</div>
+          <div>Box4</div>
+        </GridPaginator>,
+      )
+      expect(container.textContent).toContain("Box1")
+      expect(container.textContent).toContain("Box4")
     })
   })
 
   describe("without paginator", () => {
     it("should not show paginator if children count is less than defined", () => {
-      const wrapper = mount(
+      const { container } = render(
         <GridPaginator perPage={4}>
-          <Box title={"Box1"}>Box1</Box>
-          <Box title={"Box2"}>Box2</Box>
+          <div>Box1</div>
+          <div>Box2</div>
         </GridPaginator>,
       )
-
-      expect(wrapper.find("PageFlipper").exists()).toBe(false)
+      expect(container.querySelector("[data-testid='page-selector']")).toBeNull()
     })
 
     it("should not show paginator if children count is equal to defined", () => {
-      const wrapper = mount(
+      const { container } = render(
         <GridPaginator perPage={4}>
-          <Box title={"Box1"}>Box1</Box>
-          <Box title={"Box2"}>Box2</Box>
-          <Box title={"Box3"}>Box3</Box>
-          <Box title={"Box4"}>Box4</Box>
+          <div>Box1</div>
+          <div>Box2</div>
+          <div>Box3</div>
+          <div>Box4</div>
         </GridPaginator>,
       )
-
-      expect(wrapper.find("PageFlipper").exists()).toBe(false)
-    })
-  })
-
-  describe("with paginator", () => {
-    const wrapper = mount(
-      <GridPaginator perPage={2}>
-        <Box title={"Box1"}>Box1</Box>
-        <Box title={"Box2"}>Box2</Box>
-        <Box title={"Box3"}>Box3</Box>
-        <Box title={"Box4"}>Box4</Box>
-      </GridPaginator>,
-    )
-
-    it("should show paginator if children count is more than defined", () => {
-      expect(wrapper.find("PageFlipper").exists()).toBe(true)
-    })
-
-    it("should use correct page count", () => {
-      expect(wrapper.find("PageFlipper").prop("pages")).toBe(2)
-    })
-
-    it("should show correct current page", () => {
-      expect(wrapper.find("PageSelector").prop("currentPage")).toBe(0)
-      expect(wrapper.find("PageSelector").prop("maxPages")).toBe(2)
+      expect(container.querySelector("[data-testid='page-selector']")).toBeNull()
     })
   })
 

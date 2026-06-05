@@ -8,7 +8,7 @@ import LockIcon from "../../../../images/icons/lock.svg"
 import "./LockButton.scss"
 import { Translate } from "react-i18nify"
 import { useApp } from "@victronenergy/mfd-modules"
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 import { useVisibleWidgetsStore } from "app/MarineApp/modules"
 
 type LockButtonProps = {

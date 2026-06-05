@@ -1,6 +1,6 @@
 import React, { useMemo } from "react"
 import { translate } from "react-i18nify"
-import { FallbackProps } from "react-error-boundary"
+import { FallbackProps, getErrorMessage } from "react-error-boundary"
 import { byteSize, isError } from "../../../../utils/util"
 import * as Sentry from "@sentry/react"
 import { Breadcrumb } from "@sentry/react"
@@ -41,8 +41,9 @@ const ErrorFallback = ({ error, resetErrorBoundary, showReset = false }: Props) 
       Sentry.captureException({ info: JSON.stringify(error) }, captureContext)
     }
 
-    const previousUiBreadcrumbs = event.breadcrumbs
-      ? event.breadcrumbs.filter((b: Breadcrumb) => b.category?.includes("ui"))
+    const eventObj = event as Record<string, unknown>
+    const previousUiBreadcrumbs = Array.isArray(eventObj.breadcrumbs)
+      ? (eventObj.breadcrumbs as Breadcrumb[]).filter((b: Breadcrumb) => b.category?.includes("ui"))
       : []
 
     previousUiBreadcrumbs.forEach((breadCrumb: Breadcrumb) =>
@@ -73,7 +74,7 @@ const ErrorFallback = ({ error, resetErrorBoundary, showReset = false }: Props) 
         </div>
 
         <div className="py-2 text-xs">
-          <p>{translate("error.errorWithMessage", { message: error.message || "Unknown" })}</p>
+          <p>{translate("error.errorWithMessage", { message: getErrorMessage(error) || "Unknown" })}</p>
           <p>{translate("error.userAgent", { userAgent: navigator.userAgent })}</p>
           <p>{translate("error.windowSize", { width: window.innerWidth, height: window.innerHeight })}</p>
           <p>{queryParams ? translate("error.queryParams", { queryParams }) : null}</p>

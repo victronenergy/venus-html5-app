@@ -1,60 +1,74 @@
-import { shallow } from "enzyme"
 import React from "react"
+import { render, screen, waitFor } from "@testing-library/react"
 import { BatteryLevel } from "./BatteryLevel"
 import { BATTERY_STATE } from "../../../utils/constants"
 
 describe("Battery level", () => {
   describe("when battery is charging", () => {
-    const wrapper = shallow(<BatteryLevel battery={{ state: BATTERY_STATE.CHARGING, soc: 95, timetogo: 9000 }} />)
-    const translation = wrapper.find('[data-test-id="batteryStatus"]')
-    const valueTranslation = translation.props().value
-
-    it("should show battery level", () => {
-      expect(wrapper.text()).toContain("95%")
+    it("should show battery level", async () => {
+      const { container } = render(
+        <BatteryLevel battery={{ state: BATTERY_STATE.CHARGING, soc: 95, timetogo: 9000 }} />,
+      )
+      await waitFor(() => {
+        expect(container.textContent).toContain("95")
+        expect(container.textContent).toContain("%")
+      })
     })
 
-    it("should show charging", () => {
-      expect(valueTranslation).toContain("common.charging")
+    it("should show charging", async () => {
+      render(<BatteryLevel battery={{ state: BATTERY_STATE.CHARGING, soc: 95, timetogo: 9000 }} />)
+      await waitFor(() => expect(screen.getByText("charging")).toBeInTheDocument())
     })
 
-    it("should NOT show time to go", () => {
-      expect(wrapper.text()).not.toContain("2h 30m")
+    it("should NOT show time to go", async () => {
+      const { container } = render(
+        <BatteryLevel battery={{ state: BATTERY_STATE.CHARGING, soc: 95, timetogo: 9000 }} />,
+      )
+      await waitFor(() => expect(container.textContent).not.toContain("2h 30m"))
     })
   })
 
   describe("when battery is discharging", () => {
-    const wrapper = shallow(<BatteryLevel battery={{ state: BATTERY_STATE.DISCHARGING, soc: 95, timetogo: 9000 }} />)
-    const translation = wrapper.find('[data-test-id="batteryStatus"]')
-    const valueTranslation = translation.props().value
-
-    it("should show battery level", () => {
-      expect(wrapper.text()).toContain("95%")
+    it("should show battery level", async () => {
+      const { container } = render(
+        <BatteryLevel battery={{ state: BATTERY_STATE.DISCHARGING, soc: 95, timetogo: 9000 }} />,
+      )
+      await waitFor(() => {
+        expect(container.textContent).toContain("95")
+        expect(container.textContent).toContain("%")
+      })
     })
 
-    it("should show discharging", () => {
-      expect(valueTranslation).toContain("common.discharging")
+    it("should show discharging", async () => {
+      render(<BatteryLevel battery={{ state: BATTERY_STATE.DISCHARGING, soc: 95, timetogo: 9000 }} />)
+      await waitFor(() => expect(screen.getByText("discharging")).toBeInTheDocument())
     })
 
-    it("should show time to go", () => {
-      expect(wrapper.text()).toContain("2 hours")
+    it("should show time to go", async () => {
+      const { container } = render(
+        <BatteryLevel battery={{ state: BATTERY_STATE.DISCHARGING, soc: 95, timetogo: 9000 }} />,
+      )
+      await waitFor(() => expect(container.textContent).toContain("2 hours"))
     })
   })
 
   describe("when battery is idle", () => {
-    const wrapper = shallow(<BatteryLevel battery={{ state: BATTERY_STATE.IDLE, soc: 95, timetogo: 9000 }} />)
-    const translation = wrapper.find('[data-test-id="batteryStatus"]')
-    const valueTranslation = translation.props().value
-
-    it("should show battery level", () => {
-      expect(wrapper.text()).toContain("95%")
+    it("should show battery level", async () => {
+      const { container } = render(<BatteryLevel battery={{ state: BATTERY_STATE.IDLE, soc: 95, timetogo: 9000 }} />)
+      await waitFor(() => {
+        expect(container.textContent).toContain("95")
+        expect(container.textContent).toContain("%")
+      })
     })
 
-    it("should show charging", () => {
-      expect(valueTranslation).toContain("common.idle")
+    it("should show idle", async () => {
+      render(<BatteryLevel battery={{ state: BATTERY_STATE.IDLE, soc: 95, timetogo: 9000 }} />)
+      await waitFor(() => expect(screen.getByText("idle")).toBeInTheDocument())
     })
 
-    it("should NOT show time to go", () => {
-      expect(wrapper.text()).not.toContain("2h 30m")
+    it("should NOT show time to go", async () => {
+      const { container } = render(<BatteryLevel battery={{ state: BATTERY_STATE.IDLE, soc: 95, timetogo: 9000 }} />)
+      await waitFor(() => expect(container.textContent).not.toContain("2h 30m"))
     })
   })
 })

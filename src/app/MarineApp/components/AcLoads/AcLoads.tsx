@@ -8,7 +8,7 @@ import { ListView, ListRow } from "../ListView"
 
 import AcIcon from "../../images/icons/ac.svg"
 import { translate, Translate } from "react-i18nify"
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 import { useVisibilityNotifier } from "app/MarineApp/modules"
 import { WIDGET_TYPES } from "app/MarineApp/utils/constants"
 

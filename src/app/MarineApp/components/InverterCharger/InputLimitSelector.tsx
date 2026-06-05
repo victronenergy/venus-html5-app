@@ -8,7 +8,7 @@ import Logger from "../../../utils/logger"
 import Loading from "../Loading"
 
 import "./InputLimitSelector.scss"
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 import { Translate } from "react-i18nify"
 
 const USAmperage = [10, 15, 20, 30, 50, 100]

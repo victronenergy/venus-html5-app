@@ -1,11 +1,11 @@
-import React, { useLayoutEffect, useRef, useState } from "react"
+import React, { useEffect, useMemo, useRef } from "react"
 import Grid, { GridProps } from "../Grid"
 import range from "lodash-es/range"
 import classnames from "classnames"
 import PageFlipper from "../PageFlipper"
 import { PageSelectorProps } from "../PageSelector"
 import { boxBreakpoints } from "../../../utils/media"
-import useSize from "@react-hook/size"
+import useSize from "app/Marine2/utils/hooks/use-size"
 import { ScreenOrientation } from "@m2Types/generic/screen-orientation"
 
 const GridPaginator = ({
@@ -19,22 +19,17 @@ const GridPaginator = ({
   orientation = "horizontal",
   pageSelectorPropsSetter,
 }: Props) => {
-  const [childrenPerPage, setChildrenPerPage] = useState(perPage)
-
   const gridPaginatorRef = useRef<HTMLDivElement>(null)
   const [width, height] = useSize(gridPaginatorRef)
 
   const childrenArray = Array.isArray(children) ? children : [children]
-  const pages = Math.ceil(childrenArray.length / childrenPerPage)
-  const [fixedFlow, setFixedFlow] = useState<"row" | "col">()
 
-  // automatically change perPage if grid size is too small
-  useLayoutEffect(() => {
+  const { childrenPerPage, fixedFlow } = useMemo(() => {
     if (!width || !height) {
-      return
+      return { childrenPerPage: perPage, fixedFlow: undefined as "row" | "col" | undefined }
     }
 
-    setFixedFlow("col")
+    let computedFlow: "row" | "col" = "col"
     let forcePerPage = perPage
 
     if (width / perPage < boxBreakpoints["md-l"].width && height < boxBreakpoints["md-l"].height) {
@@ -57,27 +52,23 @@ const GridPaginator = ({
     }
 
     if (width < 800 && width > boxBreakpoints["md-l"].width && height < boxBreakpoints["lg-l"].height) {
-      setFixedFlow("row")
+      computedFlow = "row"
     }
 
-    if (forcePerPage !== childrenPerPage) {
-      setChildrenPerPage(forcePerPage)
-    }
+    return { childrenPerPage: forcePerPage, fixedFlow: computedFlow }
+  }, [width, height, perPage])
 
-    // We need to reset pagination if there is only one page
-    // TODO: remake this to use store states instead of props down the tree
-    if (Math.ceil(childrenArray.length / forcePerPage) === 1) {
-      pageSelectorPropsSetter &&
-        pageSelectorPropsSetter({
-          currentPage: 0,
-          maxPages: 0,
-        })
+  const pages = Math.ceil(childrenArray.length / childrenPerPage)
+
+  useEffect(() => {
+    if (pages === 1) {
+      pageSelectorPropsSetter?.({ currentPage: 0, maxPages: 0 })
     }
-  }, [width, height, childrenPerPage, perPage, childrenArray.length, pageSelectorPropsSetter])
+  }, [pages, pageSelectorPropsSetter])
 
   if (pages === 1) {
     return (
-      <div className={"h-full w-full min-h-0 min-w-0"} ref={gridPaginatorRef}>
+      <div className={"h-full w-full min-h-0 min-w-0"} data-testid="grid-paginator" ref={gridPaginatorRef}>
         <Grid
           childClassName={childClassName}
           flow={flow}
@@ -91,7 +82,7 @@ const GridPaginator = ({
   }
 
   return (
-    <div className={"h-full w-full min-h-0 min-w-0"} ref={gridPaginatorRef}>
+    <div className={"h-full w-full min-h-0 min-w-0"} data-testid="grid-paginator" ref={gridPaginatorRef}>
       <PageFlipper pages={pages} pageSelectorPropsSetter={pageSelectorPropsSetter}>
         <div
           className={classnames(`flex`, {

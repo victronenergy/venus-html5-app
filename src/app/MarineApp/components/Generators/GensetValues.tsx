@@ -5,7 +5,7 @@ import { ConnectedGensetType, useGeneratorConnectedGenset } from "@victronenergy
 import { ListRow } from "../ListView"
 import NumericValue from "../../../components/NumericValue"
 import { Translate } from "react-i18nify"
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 
 type GensetValuesProps = {
   phases: number

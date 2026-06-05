@@ -7,7 +7,7 @@ import {
   useSwitchableOutput,
 } from "@victronenergy/mfd-modules"
 import classnames from "classnames"
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 import StatusPill from "../StatusPill"
 import { getDecimalPlaces, getValueOrDefault, useValueFormatter } from "./helpers"
 import { getSwitchableOutputStatusPill, isSwitchableOutputDisabled } from "./statusHelper"
@@ -38,7 +38,7 @@ const UnrangedSetpointOutput = observer((props: UnrangedSetpointOutputProps) => 
 
   const repeatTimerRef = useRef<number | null>(null)
   const initialDelayTimerRef = useRef<number | null>(null)
-  const updateValueRef = useRef<(delta: number) => void>()
+  const updateValueRef = useRef<(delta: number) => void>(null)
 
   const minusEnabled = useMemo(() => {
     return value - step >= min

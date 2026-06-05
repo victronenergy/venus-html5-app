@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import SettingsMenu from "../SettingsMenu"
 import VersionInfo from "../VersionInfo"
 import PageSelector, { PageSelectorProps } from "../PageSelector"
@@ -8,15 +8,11 @@ import SwitchingPane from "../../views/SwitchingPane"
 
 const Footer = ({ pageSelectorProps }: Props) => {
   const appViewsStore = useAppViewsStore()
-  const [isShowingBackButton, setIsShowingBackButton] = useState(appViewsStore.currentView !== AppViews.ROOT)
+  const isShowingBackButton = appViewsStore.currentView !== AppViews.ROOT
 
   const handleBackClick = () => {
     appViewsStore.setView(AppViews.ROOT)
   }
-
-  useEffect(() => {
-    setIsShowingBackButton(appViewsStore.currentView !== AppViews.ROOT)
-  }, [appViewsStore.currentView])
 
   return (
     <div className="flex flex-row w-full h-px-44 m-1 items-center justify-between pt-2 pb-3">

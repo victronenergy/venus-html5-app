@@ -7,7 +7,7 @@ import {
   useSwitchableOutput,
 } from "@victronenergy/mfd-modules"
 import classnames from "classnames"
-import { observer } from "mobx-react"
+import { observer } from "mobx-react-lite"
 import ArrowRightIcon from "../../../images/icons/arrow-right.svg"
 import StatusPill from "../StatusPill"
 import { getSwitchableOutputStatusPill, isSwitchableOutputDisabled } from "./statusHelper"
