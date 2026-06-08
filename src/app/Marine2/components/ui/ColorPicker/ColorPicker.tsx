@@ -26,9 +26,7 @@ import { describeArc, polarToCartesian } from "app/Marine2/utils/helpers/svg-rou
 import { SWITCHABLE_OUTPUT_TYPE } from "@victronenergy/mfd-modules/dist/src/utils/constants"
 import { translate } from "react-i18nify"
 import classNames from "classnames"
-import useSize from "@react-hook/size"
-import TrashIcon from "../../../images/icons/icon_trash_32.svg"
-import FadedText from "../FadedText"
+import useSize from "app/Marine2/utils/hooks/use-size"
 
 export type ColorPickerMode =
   | typeof SWITCHABLE_OUTPUT_TYPE.RGB_COLOR_WHEEL
@@ -207,7 +205,7 @@ const ColorPicker = observer(
     const isDraggingBrightnessRef = useRef(false)
     const isDraggingSaturationRef = useRef(false)
     const isDraggingWhiteLevelRef = useRef(false)
-    const updateTimeoutRef = useRef<NodeJS.Timeout>()
+    const updateTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined)
 
     const gradientDegreesPerStep = 1
 
@@ -475,11 +473,12 @@ const ColorPicker = observer(
     const [useHorizontalLayout, setUseHorizontalLayout] = useState(false)
     const [useHorizontalFill, setUseHorizontalFill] = useState(false)
     const [squareSize, setSquareSize] = useState(0)
-    const [presetSquareSize, setPresetSquareSize] = useState(0)
 
     useLayoutEffect(() => {
+      if (containerWidth === 0 || containerHeight === 0) return
+      const isLandscape = window.innerWidth > window.innerHeight
       const containerRatio = containerWidth / containerHeight
-      if (containerRatio >= 1) {
+      if (isLandscape) {
         setUseHorizontalLayout(true)
         setUseHorizontalFill(containerRatio < 2 / 1)
         setSquareSize(containerRatio >= 2 ? containerHeight : containerWidth / 2)
@@ -489,10 +488,6 @@ const ColorPicker = observer(
         setSquareSize(containerRatio <= 0.5 ? containerWidth : containerHeight / 2)
       }
     }, [containerWidth, containerHeight])
-
-    useLayoutEffect(() => {
-      setPresetSquareSize((squareSize * 0.6) / 3)
-    }, [squareSize])
 
     const [isEditingPresets, setIsEditingPresets] = useState(false)
 
@@ -548,14 +543,12 @@ const ColorPicker = observer(
     return (
       <div ref={containerRef} className={className}>
         <div
-          className={classNames("grid", {
+          className={classNames("flex", {
+            "flex-row": useHorizontalLayout,
+            "flex-col": !useHorizontalLayout,
             "h-full": !useHorizontalFill,
             "w-full": useHorizontalFill,
           })}
-          style={{
-            gridTemplateColumns: useHorizontalLayout ? `${squareSize}px ${squareSize}px` : `${squareSize}px`,
-            gridTemplateRows: useHorizontalLayout ? `${squareSize}px` : `${squareSize}px ${squareSize}px`,
-          }}
         >
           {/* SQUARE 1 */}
           <div
@@ -836,77 +829,26 @@ const ColorPicker = observer(
                   />
                 ))()}
             </svg>
-            {/* This is helping layout SVG next to presets in a way that presets remain square */}
-            <FadedText className="flex-1 text-[1.3em] text-transparent" text={"XXX"} />
           </div>
           {/* SQUARE 2 */}
           <div
-            className={classNames("flex flex-col p-4")}
+            className={classNames("p-4")}
             style={{
               width: squareSize,
               height: squareSize,
             }}
           >
-            <div className="flex shrink-0 mb-2">
-              <FadedText className="flex-1 text-[1.3em]" text={translate("switches.preset")} />
-              {/* Trash Icon */}
-              <div
-                className={classNames(
-                  "w-px-32 h-px-32 cursor-pointer outline-none rounded-sm border-2 border-content-victronBlue p-px-2",
-                  {
-                    "bg-surface-victronBlue text-content-primary": !isEditingPresets,
-                    "bg-content-victronBlue text-content-onVictronBlue ": isEditingPresets,
-                  },
-                )}
-                onClick={toggleIsEdittingPresets}
-              >
-                <TrashIcon
-                  alt="Edit"
-                  onClick={() => {
-                    /**/
-                  }}
-                />
-              </div>
-            </div>
-            <div className="flex-1 flex items-center justify-center">
-              <div className="grid grid-cols-3 grid-rows-3 w-full h-full">
-                {Array.from({ length: 9 }, (_, i) => {
-                  const c = localColorPresets[i]
-                  return (
-                    <div
-                      key={i}
-                      className={classNames("flex w-full h-full", {
-                        "justify-start": (i + 0) % 3 === 0,
-                        "justify-end": (i + 1) % 3 === 0,
-                        "justify-center": (i + 2) % 3 === 0,
-                        "items-start": i < 3,
-                        "items-end": i > 5,
-                        "items-center": i >= 3 && i <= 5,
-                      })}
-                    >
-                      <div
-                        className={classNames(
-                          "aspect-square rounded-md flex items-center justify-center text-xl font-bold",
-                          {
-                            "border-2 border-content-victronBlue": isValidHSVWColorPreset(c) || !isEditingPresets,
-                            "border-2 border-content-tertiary": isEditingPresets && !isValidHSVWColorPreset(c),
-                          },
-                        )}
-                        style={{
-                          backgroundColor: colorPresetToDisplayColor(c, isInCCTMode),
-                          width: presetSquareSize,
-                          height: presetSquareSize,
-                        }}
-                        onMouseDown={() => handleColorPresetClicked(i, c)}
-                        onTouchStart={() => handleColorPresetClicked(i, c)}
-                      >
-                        {isValidHSVWColorPreset(c) ? (isEditingPresets ? "-" : "") : isEditingPresets ? "" : "+"}
-                      </div>
-                    </div>
-                  )
-                })}
-              </div>
-            </div>
+            <svg width="100%" height="100%" viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="xMidYMid meet">
+              {generatePresetsPanel(
+                width,
+                localColorPresets,
+                isEditingPresets,
+                isInCCTMode,
+                translate("switches.preset"),
+                handleColorPresetClicked,
+                toggleIsEdittingPresets,
+              )}
+            </svg>
           </div>
         </div>
       </div>
@@ -1023,6 +965,181 @@ function generateBrigthtnessIcon(cX: number, cY: number, w: number, h: number, f
         />
         {/* </svg> */}
       </g>
+    </>
+  )
+}
+
+function generateTrashIcon(cX: number, cY: number, w: number, h: number, fill: string, stroke: string) {
+  const scaleX = w / 32
+  const scaleY = h / 32
+  const translateX = cX - (32 * scaleX) / 2
+  const translateY = cY - (32 * scaleY) / 2
+  return (
+    <g transform={`translate(${translateX}, ${translateY}) scale(${scaleX}, ${scaleY})`}>
+      <path
+        d="M24 11V27C24 28.1046 23.1046 29 22 29H10C8.89543 29 8 28.1046 8 27V11H24Z"
+        fill="none"
+        stroke={stroke}
+        strokeWidth="2"
+      />
+      <rect x="6" y="6" width="20" height="2" rx="1" fill={fill} />
+      <rect x="11" y="14" width="2" height="12" rx="1" fill={fill} />
+      <path
+        d="M20 4L20 7L12 7L12 4C12 3.44771 12.4477 3 13 3L19 3C19.5523 3 20 3.44772 20 4Z"
+        fill="none"
+        stroke={stroke}
+        strokeWidth="2"
+      />
+      <rect x="19" y="14" width="2" height="12" rx="1" fill={fill} />
+      <rect x="15" y="14" width="2" height="12" rx="1" fill={fill} />
+    </g>
+  )
+}
+
+function generatePresetsPanel(
+  viewBoxSize: number,
+  presets: HSVWColorPresets,
+  isEditingPresets: boolean,
+  isInCCTMode: boolean,
+  presetLabel: string,
+  onPresetClicked: (index: number, color: HSVWColor) => void,
+  onToggleEdit: () => void,
+) {
+  const padding = 7
+  const titleHeight = 50
+  const buttonSize = 50
+  const cellSize = viewBoxSize * 0.25 * 0.8
+  const titleAreaWidth = viewBoxSize - 2 * padding - buttonSize - 10
+
+  const gridLeft = padding
+  const gridRight = viewBoxSize - padding
+  const gridWidth = gridRight - gridLeft
+  const hGap = (gridWidth - 3 * cellSize) / 2
+
+  const gridTop = padding + titleHeight + padding * 3
+  const gridBottom = viewBoxSize - padding
+  const gridHeight = gridBottom - gridTop
+  const vGap = (gridHeight - 3 * cellSize) / 2
+
+  const buttonX = viewBoxSize - padding - buttonSize
+  const buttonY = padding
+  const buttonFill = isEditingPresets ? "rgba(var(--c-victron-blue-rgb), 1.0)" : "rgba(var(--c-victron-blue-rgb), 0.3)"
+  const iconColor = isEditingPresets ? "var(--c-content-on-victron-blue)" : "var(--c-content-primary)"
+  const cornerRadius = 10
+
+  return (
+    <>
+      <defs>
+        <clipPath id="presetTitleClip">
+          <rect x={padding} y={padding} width={titleAreaWidth} height={titleHeight} />
+        </clipPath>
+      </defs>
+      {/* Title */}
+      <text
+        x={padding}
+        y={padding + titleHeight / 2}
+        fontSize={40}
+        fontFamily="MuseoSans, 'Noto Sans SC', sans-serif"
+        fill="var(--c-content-primary)"
+        dominantBaseline="central"
+        clipPath="url(#presetTitleClip)"
+      >
+        {presetLabel}
+      </text>
+      {/* Edit Button */}
+      <g>
+        <rect
+          x={buttonX}
+          y={buttonY}
+          width={buttonSize}
+          height={buttonSize}
+          rx={6}
+          ry={6}
+          fill={buttonFill}
+          stroke="rgba(var(--c-victron-blue-rgb), 1.0)"
+          strokeWidth={3}
+        />
+        {generateTrashIcon(
+          buttonX + buttonSize / 2,
+          buttonY + buttonSize / 2,
+          buttonSize * 0.65,
+          buttonSize * 0.65,
+          iconColor,
+          iconColor,
+        )}
+        {/* Touch target */}
+        <rect
+          x={buttonX}
+          y={buttonY}
+          width={buttonSize}
+          height={buttonSize}
+          rx={6}
+          ry={6}
+          fill="transparent"
+          stroke="none"
+          pointerEvents="all"
+          style={{ cursor: "pointer" }}
+          onClick={onToggleEdit}
+        />
+      </g>
+      {/* Preset Grid */}
+      {Array.from({ length: 9 }, (_, i) => {
+        const row = Math.floor(i / 3)
+        const col = i % 3
+        const x = gridLeft + col * (cellSize + hGap)
+        const y = gridTop + row * (cellSize + vGap)
+        const c = presets[i]
+        const isValid = isValidHSVWColorPreset(c)
+        const strokeColor =
+          isValid || !isEditingPresets ? "rgba(var(--c-victron-blue-rgb), 1.0)" : "var(--c-content-tertiary)"
+        const label = isValid ? (isEditingPresets ? "-" : "") : isEditingPresets ? "" : "+"
+
+        return (
+          <g key={i}>
+            <rect
+              x={x}
+              y={y}
+              width={cellSize}
+              height={cellSize}
+              rx={cornerRadius}
+              ry={cornerRadius}
+              fill={colorPresetToDisplayColor(c, isInCCTMode)}
+              stroke={strokeColor}
+              strokeWidth={3}
+            />
+            {label && (
+              <text
+                x={x + cellSize / 2}
+                y={y + cellSize / 2}
+                fontSize={cellSize * 0.4}
+                fontFamily="MuseoSans, 'Noto Sans SC', sans-serif"
+                fontWeight="bold"
+                fill="var(--c-content-primary)"
+                textAnchor="middle"
+                dominantBaseline="central"
+                pointerEvents="none"
+              >
+                {label}
+              </text>
+            )}
+            {/* Touch target */}
+            <rect
+              x={x}
+              y={y}
+              width={cellSize}
+              height={cellSize}
+              rx={cornerRadius}
+              ry={cornerRadius}
+              fill="transparent"
+              stroke="none"
+              pointerEvents="all"
+              style={{ cursor: "pointer" }}
+              onMouseDown={() => onPresetClicked(i, c)}
+              onTouchStart={() => onPresetClicked(i, c)}
+            />
+          </g>
+        )
+      })}
     </>
   )
 }

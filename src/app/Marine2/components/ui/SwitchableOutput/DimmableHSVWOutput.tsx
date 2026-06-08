@@ -248,7 +248,12 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
           </div>
         </div>
         {/* Border */}
-        <div className="w-px-44 h-px-44 ml-2 p-px-2 rounded-md border-2 border-content-victronBlue">
+        <div
+          className={classnames("w-px-44 h-px-44 ml-2 p-px-2 rounded-md border-2", {
+            "border-content-victronGray pointer-events-none": disabled,
+            "border-content-victronBlue": !disabled,
+          })}
+        >
           {/* Color Square */}
           <div
             className="w-full h-full rounded-sm"
@@ -288,7 +293,7 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
                 </div>
                 {/* CloseIcon */}
                 <div
-                  className="w-px-44 h-px-44 flex justify-center place-items-center -m-px-16"
+                  className="w-px-44 h-px-44 flex justify-center items-center -m-px-16"
                   onClick={() => setIsColorWheelOpen(false)}
                 >
                   <CloseIcon
