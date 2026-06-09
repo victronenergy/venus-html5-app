@@ -131,7 +131,7 @@
     "mochawesome-report-generator": "^6.3.2",
     "postcss": "^8.5.15",
     "postcss-loader": "^8.2.1",
-    "prettier": "^3.8.3",
+    "prettier": "^3.8.4",
     "react-test-renderer": "^19.2.7",
     "resize-observer-polyfill": "^1.5.1",
     "style-loader": "^4.0.0",
