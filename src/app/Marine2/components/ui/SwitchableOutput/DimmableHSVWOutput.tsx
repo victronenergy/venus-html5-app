@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useRef, useState } from "react"
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import {
   getSwitchingPaneItemNameForDisplay,
   SwitchableOutputId,
@@ -86,10 +86,18 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
 
       updateTimeoutRef.current = setTimeout(() => {
         switchableOutput.updateLightControls(hsvwToArray({ ...color, brightness: createPercentage(percentage) }))
-      }, 10)
+      }, 50)
     },
     [color, switchableOutput],
   )
+
+  useEffect(() => {
+    return () => {
+      if (updateTimeoutRef.current) {
+        clearTimeout(updateTimeoutRef.current)
+      }
+    }
+  }, [])
 
   const handlePress = (e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
     setIsDragging(true)

@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from "react"
+import React, { useCallback, useEffect, useRef, useState } from "react"
 import {
   getSwitchingPaneItemNameForDisplay,
   SwitchableOutputId,
@@ -82,10 +82,18 @@ const TemperatureSetpointOutput = observer((props: TemperatureSetpointOutputProp
 
       updateTimeoutRef.current = setTimeout(() => {
         switchableOutput.updateDimming(value)
-      }, 10)
+      }, 50)
     },
     [switchableOutput],
   )
+
+  useEffect(() => {
+    return () => {
+      if (updateTimeoutRef.current) {
+        clearTimeout(updateTimeoutRef.current)
+      }
+    }
+  }, [])
 
   const handlePress = (e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
     const clientX = "touches" in e ? e.touches[0].clientX : e.clientX
