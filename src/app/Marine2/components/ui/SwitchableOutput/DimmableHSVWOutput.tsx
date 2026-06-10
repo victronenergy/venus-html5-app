@@ -1,9 +1,10 @@
-import React, { useCallback, useMemo, useRef, useState } from "react"
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import {
   getSwitchingPaneItemNameForDisplay,
   SwitchableOutputId,
   SwitchableOutputTree,
   SwitchingDeviceInstanceId,
+  useAppStore,
   useSwitchableOutput,
 } from "@victronenergy/mfd-modules"
 import classnames from "classnames"
@@ -15,7 +16,9 @@ import { getSwitchableOutputStatusPill, isSwitchableOutputDisabled } from "./sta
 import {
   arrayToHSVW,
   createPercentage,
+  HSVWColor,
   HSVWColorArray,
+  HSVWColorPresets,
   hsvwToArray,
 } from "@victronenergy/mfd-modules/dist/src/utils/hsvw"
 import {
@@ -23,6 +26,10 @@ import {
   colorHueToDisplayColor,
 } from "app/Marine2/utils/helpers/color-conversion-routines"
 import { SWITCHABLE_OUTPUT_TYPE } from "@victronenergy/mfd-modules/dist/src/utils/constants"
+import { Modal } from "../Modal"
+import CloseIcon from "../../../images/icons/close.svg"
+import FadedText from "../FadedText"
+import ColorPicker, { ColorPickerMode, ColorPickerValidModes } from "../ColorPicker/ColorPicker"
 
 interface DimmableHSVWOutputProps {
   key: string
@@ -32,12 +39,6 @@ interface DimmableHSVWOutputProps {
   parentDeviceName: string
   className?: string
 }
-
-// TODO: Add prop for color mode selection
-// TODO: Add conversion to display selected color in color square
-// TODO: Open/Close color selection popup when square is tapped
-// TODO: Send changed values from color selection popup to MQTT
-// TODO: Implement popup: center wheel, brightness, saturation, white level
 
 const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
   const switchableOutput = useSwitchableOutput(props.tree, props.deviceId, props.outputId)
@@ -85,10 +86,18 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
 
       updateTimeoutRef.current = setTimeout(() => {
         switchableOutput.updateLightControls(hsvwToArray({ ...color, brightness: createPercentage(percentage) }))
-      }, 10)
+      }, 50)
     },
     [color, switchableOutput],
   )
+
+  useEffect(() => {
+    return () => {
+      if (updateTimeoutRef.current) {
+        clearTimeout(updateTimeoutRef.current)
+      }
+    }
+  }, [])
 
   const handlePress = (e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
     setIsDragging(true)
@@ -117,6 +126,45 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
       updateTimeoutRef.current = null
     }
   }
+
+  const handleColorChange = useCallback(
+    (color: HSVWColor) => {
+      switchableOutput.updateLightControls(hsvwToArray(color))
+    },
+    [switchableOutput],
+  )
+
+  const handleModeChange = useCallback(
+    (mode: ColorPickerMode) => {
+      switchableOutput.updateType(mode)
+    },
+    [switchableOutput],
+  )
+
+  const app = useAppStore()
+
+  const handleRGBColorPresetsChange = useCallback(
+    (presets: HSVWColorPresets) => {
+      app.updateRGBColorPresets(presets)
+    },
+    [app],
+  )
+
+  const handleRGBWColorPresetsChange = useCallback(
+    (presets: HSVWColorPresets) => {
+      app.updateRGBWColorPresets(presets)
+    },
+    [app],
+  )
+
+  const handleCCTColorPresetsChange = useCallback(
+    (presets: HSVWColorPresets) => {
+      app.updateCCTColorPresets(presets)
+    },
+    [app],
+  )
+
+  const [isColorWheelOpen, setIsColorWheelOpen] = useState(false)
 
   const isInCCTMode = switchableOutput.type === SWITCHABLE_OUTPUT_TYPE.CCT_COLOR_WHEEL
 
@@ -207,15 +255,81 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
             </div>
           </div>
         </div>
-        {/* Color Square */}
+        {/* Border */}
         <div
-          className="w-px-44 h-px-44 rounded-md ml-2"
-          style={{
-            backgroundColor: isInCCTMode
-              ? colorTemperatureToDisplayColor(color.colorTemperature)
-              : colorHueToDisplayColor(color.hue, color.saturation, 100),
+          className={classnames("w-px-44 h-px-44 ml-2 p-px-2 rounded-md border-2", {
+            "border-content-victronGray pointer-events-none": disabled,
+            "border-content-victronBlue": !disabled,
+          })}
+        >
+          {/* Color Square */}
+          <div
+            className="w-full h-full rounded-sm"
+            style={{
+              backgroundColor: isInCCTMode
+                ? colorTemperatureToDisplayColor(color.colorTemperature)
+                : colorHueToDisplayColor(color.hue, color.saturation, 100),
+            }}
+            onClick={() => setIsColorWheelOpen(true)}
+          />
+        </div>
+      </div>
+      {/* Color Wheel Popup */}
+      <div>
+        <Modal.Frame
+          open={isColorWheelOpen}
+          onClose={() => {
+            setIsColorWheelOpen(false)
           }}
-        />
+          className={classnames("w-4/6 max-w-4/6 h-4/6 max-h-4/6")}
+        >
+          <Modal.Body variant="popUp" className="h-full bg-surface-primary">
+            <div className="h-full flex flex-col">
+              <div className="flex">
+                <div className="h-full flex-1 flex flex-col">
+                  {/* Title */}
+                  <div className="flex shrink-0">
+                    <FadedText className="flex-1" text={outputName} />
+                  </div>
+                  {/* Color Mode Label */}
+                  <div className="flex shrink-0 mb-2">
+                    <FadedText
+                      className="flex-1 text-[1.3em]"
+                      text={isInCCTMode ? translate("switches.temperature") : translate("switches.color")}
+                    />
+                  </div>
+                </div>
+                {/* CloseIcon */}
+                <div
+                  className="w-px-44 h-px-44 flex justify-center items-center -m-px-16"
+                  onClick={() => setIsColorWheelOpen(false)}
+                >
+                  <CloseIcon
+                    className="w-px-20 h-px-20 text-content-victronBlue cursor-pointer outline-none"
+                    alt="Close"
+                  />
+                </div>
+              </div>
+              {/* Controls */}
+              <div className="flex-1 min-h-0">
+                <ColorPicker
+                  className="w-full h-full max-w-full max-h-full flex items-center justify-center"
+                  color={color}
+                  mode={switchableOutput.type as ColorPickerMode}
+                  validModes={switchableOutput.validTypes as ColorPickerValidModes}
+                  onColorChange={handleColorChange}
+                  onModeChange={handleModeChange}
+                  rgbColorPresets={app.rgbColorPresets}
+                  rgbwColorPresets={app.rgbwColorPresets}
+                  cctColorPresets={app.cctColorPresets}
+                  onRGBColorPresetsChange={handleRGBColorPresetsChange}
+                  onRGBWColorPresetsChange={handleRGBWColorPresetsChange}
+                  onCCTColorPresetsChange={handleCCTColorPresetsChange}
+                />
+              </div>
+            </div>
+          </Modal.Body>
+        </Modal.Frame>
       </div>
     </div>
   )
