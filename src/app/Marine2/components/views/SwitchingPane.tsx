@@ -94,9 +94,7 @@ const SwitchingPane = () => {
         )}
         <Modal.Frame
           open={isModalOpen}
-          onClose={() => {
-            // setIsModalOpen(false)
-          }}
+          onClose={() => setIsModalOpen(false)}
           className={classNames("w-5/6 max-w-5/6 h-5/6 max-h-5/6")}
           preserveLayout
         >
