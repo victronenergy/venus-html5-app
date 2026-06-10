@@ -914,7 +914,7 @@ function generateGradientRing(
 }
 
 function generateBrigthtnessIcon(cX: number, cY: number, w: number, h: number, fill: string) {
-  // Adopted by copy/pasting sunny.png below
+  // Adopted by copy/pasting src/app/Marine2/images/icons/sunny.svg
   // Calculate scale to match requested size from original 17x17
   const scaleX = w / 17
   const scaleY = h / 17
@@ -970,6 +970,7 @@ function generateBrigthtnessIcon(cX: number, cY: number, w: number, h: number, f
 }
 
 function generateTrashIcon(cX: number, cY: number, w: number, h: number, fill: string, stroke: string) {
+  // Adopted by copy/pasting src/app/Marine2/images/icons/icon_trash_32.svg
   const scaleX = w / 32
   const scaleY = h / 32
   const translateX = cX - (32 * scaleX) / 2
