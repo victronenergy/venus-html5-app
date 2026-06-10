@@ -19,7 +19,11 @@ const PageFlipper = ({
   const pageRef = useRef<HTMLDivElement>(null)
   const [width, height] = useSize(wrapperRef)
   const [currentPage, setCurrentPage] = useState(startingPage ?? 0)
-  const [cachedCurrentPage] = useState(startingPage ?? 0)
+  const currentPageRef = useRef(startingPage ?? 0)
+
+  useLayoutEffect(() => {
+    currentPageRef.current = currentPage
+  }, [currentPage])
 
   useLayoutEffect(() => {
     if (pageSelectorPropsSetter) {
@@ -32,14 +36,14 @@ const PageFlipper = ({
     }
   }, [currentPage, pageSelectorPropsSetter, pages])
 
-  // Restore scroll position to cachedCurrentPage when viewport changes
+  // Restore scroll position when viewport changes (e.g. modal hidden→visible)
   useLayoutEffect(() => {
     if (!pageRef.current) {
       return
     }
-    const offset = cachedCurrentPage * pageRef.current.offsetWidth
+    const offset = currentPageRef.current * pageRef.current.offsetWidth
     pageRef.current.scrollLeft = offset
-  }, [width, height, cachedCurrentPage])
+  }, [width, height])
 
   // Smooth scroll to new position when currentPage changes
   useLayoutEffect(() => {

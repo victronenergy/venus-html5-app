@@ -17,6 +17,7 @@ const GroupPaginator = <T extends React.JSX.Element>({
   childrenGroups,
   orientation = "horizontal",
   selectorLocation = "bottom-center",
+  pageNumber,
   currentPageSetter = (_currentPage, _pageCount) => {},
 }: Props<T>) => {
   const wrapperRef = useRef<HTMLDivElement>(null)
@@ -24,7 +25,7 @@ const GroupPaginator = <T extends React.JSX.Element>({
 
   const [pagingResults, setPagingResults] = useState<Pages<T>[]>([])
   const [pageCount, setPageCount] = useState(0)
-  const [currentPage, setCurrentPage] = useState(0)
+  const [currentPage, setCurrentPage] = useState(pageNumber ?? 0)
 
   const groupsOfChildrenToMeasure = useMemo(() => {
     return childrenGroups.map((group) => {

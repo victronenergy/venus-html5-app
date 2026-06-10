@@ -53,6 +53,7 @@ interface ColorPickerProps {
   onRGBColorPresetsChange?: (presets: HSVWColorPresets) => void
   onRGBWColorPresetsChange?: (presets: HSVWColorPresets) => void
   onCCTColorPresetsChange?: (presets: HSVWColorPresets) => void
+  open?: boolean
   className?: string
 }
 
@@ -69,6 +70,7 @@ const ColorPicker = observer(
     onRGBColorPresetsChange,
     onRGBWColorPresetsChange,
     onCCTColorPresetsChange,
+    open,
     className = "",
   }: ColorPickerProps) => {
     // Cache color prop for local re-rendering
@@ -81,6 +83,14 @@ const ColorPicker = observer(
     const [localColorPresets, setLocalColorPresets] = useState<HSVWColorPresets>(emptyHSVWColorPresets)
 
     useLayoutEffect(() => {
+      if (
+        isDraggingHueRef.current ||
+        isDraggingBrightnessRef.current ||
+        isDraggingSaturationRef.current ||
+        isDraggingWhiteLevelRef.current
+      ) {
+        return
+      }
       setLocalColor(color)
     }, [color])
 
@@ -405,23 +415,23 @@ const ColorPicker = observer(
           }
           if (isInRGBMode) {
             const newHue = calculateHue(angle)
-            updateColorDebounced({ ...color, hue: createHue(newHue) })
+            updateColorDebounced({ ...localColor, hue: createHue(newHue) })
             event.preventDefault()
           }
         }
         if (isDraggingBrightnessRef.current) {
           const newBrightness = calculateBrightness(angle)
-          updateColorDebounced({ ...color, brightness: createPercentage(newBrightness) })
+          updateColorDebounced({ ...localColor, brightness: createPercentage(newBrightness) })
           event.preventDefault()
         }
         if (isDraggingSaturationRef.current) {
           const newSaturation = calculateSaturation(angle)
-          updateColorDebounced({ ...color, saturation: createPercentage(newSaturation) })
+          updateColorDebounced({ ...localColor, saturation: createPercentage(newSaturation) })
           event.preventDefault()
         }
         if (isDraggingWhiteLevelRef.current) {
           const newWhiteLevel = calculateWhiteLevel(angle)
-          updateColorDebounced({ ...color, white: createPercentage(newWhiteLevel) })
+          updateColorDebounced({ ...localColor, white: createPercentage(newWhiteLevel) })
           event.preventDefault()
         }
       },
@@ -434,7 +444,6 @@ const ColorPicker = observer(
         updateColorDebounced,
         localColor,
         calculateHue,
-        color,
         calculateBrightness,
         calculateSaturation,
         calculateWhiteLevel,
@@ -490,6 +499,10 @@ const ColorPicker = observer(
     }, [containerWidth, containerHeight])
 
     const [isEditingPresets, setIsEditingPresets] = useState(false)
+
+    useEffect(() => {
+      if (open === false) setIsEditingPresets(false)
+    }, [open])
 
     const toggleIsEdittingPresets = useCallback(() => {
       setIsEditingPresets(!isEditingPresets)

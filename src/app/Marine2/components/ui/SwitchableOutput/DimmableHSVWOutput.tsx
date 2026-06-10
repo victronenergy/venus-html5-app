@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } from "react"
 import {
   getSwitchingPaneItemNameForDisplay,
   SwitchableOutputId,
@@ -30,6 +30,7 @@ import { Modal } from "../Modal"
 import CloseIcon from "../../../images/icons/close.svg"
 import FadedText from "../FadedText"
 import ColorPicker, { ColorPickerMode, ColorPickerValidModes } from "../ColorPicker/ColorPicker"
+import { SwitchingPaneContext } from "../../views/SwitchingPaneContext"
 
 interface DimmableHSVWOutputProps {
   key: string
@@ -165,6 +166,11 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
   )
 
   const [isColorWheelOpen, setIsColorWheelOpen] = useState(false)
+  const { isOpen: isSwitchingPaneOpen } = useContext(SwitchingPaneContext)
+
+  useEffect(() => {
+    if (!isSwitchingPaneOpen) setIsColorWheelOpen(false)
+  }, [isSwitchingPaneOpen])
 
   const isInCCTMode = switchableOutput.type === SWITCHABLE_OUTPUT_TYPE.CCT_COLOR_WHEEL
 
@@ -314,6 +320,7 @@ const DimmableHSVWOutput = observer((props: DimmableHSVWOutputProps) => {
               <div className="flex-1 min-h-0">
                 <ColorPicker
                   className="w-full h-full max-w-full max-h-full flex items-center justify-center"
+                  open={isColorWheelOpen}
                   color={color}
                   mode={switchableOutput.type as ColorPickerMode}
                   validModes={switchableOutput.validTypes as ColorPickerValidModes}
