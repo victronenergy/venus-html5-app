@@ -9,5 +9,11 @@ module.exports = {
 
     // Sass 1.80+ deprecates @import (40 warnings); migrate to @use/@forward first
     "sass",
+
+    // react-i18nify 6.4+ uses String.matchAll (ES2019). babel-preset-react-app
+    // specifies corejs:3 (major only), which babel resolves to 3.0 — where matchAll
+    // is only esnext, not es/stable. The polyfill is never injected, breaking
+    // Garmin/Furuno MFDs (Chrome <73). Unblock after migrating to Vite.
+    "react-i18nify",
   ],
 };
