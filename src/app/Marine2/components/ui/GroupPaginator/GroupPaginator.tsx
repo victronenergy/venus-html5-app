@@ -81,8 +81,8 @@ const GroupPaginator = <T extends React.JSX.Element>({
   )
 
   const columnsPerPage = useMemo(() => {
-    if (width / 3 >= boxBreakpoints["lg-s"].width) return 3
-    if (width / 2 >= boxBreakpoints["lg-s"].width) return 2
+    if (width / 3 >= boxBreakpoints["md-s"].width) return 3
+    if (width / 2 >= boxBreakpoints["md-s"].width) return 2
     return 1
   }, [width])
 
