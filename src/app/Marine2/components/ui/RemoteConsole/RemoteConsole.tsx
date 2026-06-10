@@ -21,6 +21,15 @@ const RemoteConsole = ({ host, width, height }: Props) => {
     iframeRef.current?.focus()
   }, [iframeLoaded])
 
+  useEffect(() => {
+    const iframe = iframeRef.current
+    if (!iframe || !iframeLoaded) return
+    const unhook = window.diagConsole?.hookIframe(iframe)
+    return () => {
+      unhook?.()
+    }
+  }, [iframeLoaded])
+
   if (!browserFeatures.isInitialized) {
     return null
   }

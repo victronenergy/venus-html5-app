@@ -123,7 +123,7 @@
         "device": {
             "colorScheme": "Color Scheme",
             "device": "Device",
-            "devicePixelRatio": "Pixel Ratio",
+
             "isGuiV2Supported": "GUI v2 supported",
             "missing": "missing",
             "prefersDarkMode": "Dark Mode",
@@ -132,10 +132,12 @@
             "prefersLowContrast": "Low Contrast",
             "unspecified": "Unspecified",
             "userAgent": "User agent",
-            "viewportHeight": "Viewport height",
-            "viewportWidth": "Viewport width",
+            "viewport": "Viewport",
             "webgl": "WebGL",
-            "webglNotSupported": "Not Supported"
+            "webglNotSupported": "Not Supported",
+            "diagConsole": "Diagnostic Console",
+            "showDiagConsole": "Show Diagnostic Console",
+            "hideDiagConsole": "Hide Diagnostic Console"
         },
         "diagnostics": "Diagnostics"
     },
