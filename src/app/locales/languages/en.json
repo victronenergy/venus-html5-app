@@ -123,21 +123,23 @@
         "device": {
             "colorScheme": "Color Scheme",
             "device": "Device",
-
+            "devicePixelRatio": "Pixel Ratio",
+            "diagConsole": "Diagnostic Console",
+            "hideDiagConsole": "Hide Diagnostic Console",
             "isGuiV2Supported": "GUI v2 supported",
             "missing": "missing",
             "prefersDarkMode": "Dark Mode",
             "prefersHighContrast": "High Contrast",
             "prefersLightMode": "Light Mode",
             "prefersLowContrast": "Low Contrast",
+            "showDiagConsole": "Show Diagnostic Console",
             "unspecified": "Unspecified",
             "userAgent": "User agent",
             "viewport": "Viewport",
+            "viewportHeight": "Viewport height",
+            "viewportWidth": "Viewport width",
             "webgl": "WebGL",
-            "webglNotSupported": "Not Supported",
-            "diagConsole": "Diagnostic Console",
-            "showDiagConsole": "Show Diagnostic Console",
-            "hideDiagConsole": "Hide Diagnostic Console"
+            "webglNotSupported": "Not Supported"
         },
         "diagnostics": "Diagnostics"
     },
