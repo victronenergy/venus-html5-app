@@ -41,7 +41,7 @@ const RemoteConsole = ({ host, width, height }: Props) => {
 
   const protocol = (typeof window !== "undefined" && window.location.protocol) || "http:"
   const colorScheme = themeStore.autoMode ? "auto" : themeStore.darkMode ? "dark" : "light"
-  const iframeUrl = `${protocol}//${host}/?fullscreen&colorScheme=${colorScheme}`
+  const iframeUrl = `${protocol}//${host}/?fullscreen&colorScheme=${colorScheme}&animationEnabled=false`
   const qrCodeUrl = `${window.location.protocol}//venus.local/`
 
   if (app.guiVersion !== 1 && browserFeatures.isGuiV2Supported === false) {
