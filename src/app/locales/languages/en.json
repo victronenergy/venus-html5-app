@@ -196,6 +196,7 @@
         "bypassedTripped": "Bypassed, tripped",
         "closed": "Closed",
         "color": "Color",
+        "current": "Current",
         "disabled": "Disabled",
         "disabledOverTemp": "Disabled, over temp",
         "disabledTripped": "Disabled, tripped",
