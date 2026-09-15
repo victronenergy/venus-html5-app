@@ -326,7 +326,7 @@
         "buildDate": "Fecha de creación",
         "identifier": "Identificar",
         "venusOs": "Venus OS",
-        "version": "Versión  %{version}",
+        "version": "Versión %{version}",
         "vrmPortID": "ID portal VRM"
     },
     "widgets": {
