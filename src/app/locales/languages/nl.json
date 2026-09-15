@@ -257,6 +257,7 @@
     "widgets": {
         "acLoads": "AC Belastingen",
         "batteries": "Accu's",
+        "battery": "Accu",
         "batteryWithName": "Accu : %{name}",
         "chargerWithName": "Lader: %{productNameShort}",
         "dcLoads": "DC Belastingen",

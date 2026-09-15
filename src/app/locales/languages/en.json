@@ -257,6 +257,7 @@
     "widgets": {
         "acLoads": "AC Loads",
         "batteries": "Batteries",
+        "battery": "Battery",
         "batteryWithName": "Battery: %{name}",
         "chargerWithName": "Charger: %{productNameShort}",
         "dcLoads": "DC Loads",

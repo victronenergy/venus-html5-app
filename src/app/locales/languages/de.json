@@ -257,6 +257,7 @@
     "widgets": {
         "acLoads": "AC Lasten",
         "batteries": "Batterien",
+        "battery": "Batterie",
         "batteryWithName": "Batterie: %{name}",
         "chargerWithName": "Ladegerät: %{productNameShort}",
         "dcLoads": "DC Lasten",

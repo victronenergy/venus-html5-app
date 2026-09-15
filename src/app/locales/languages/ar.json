@@ -257,6 +257,7 @@
     "widgets": {
         "acLoads": "تحميلات التيار المتردد",
         "batteries": "البطاريات",
+        "battery": "بطارية",
         "batteryWithName": "بطارية: %{name}",
         "chargerWithName": "شاحن: %{productNameShort}",
         "dcLoads": "أحمال التيار المستمر",

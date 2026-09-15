@@ -257,6 +257,7 @@
     "widgets": {
         "acLoads": "WS-ladings",
         "batteries": "Batterye",
+        "battery": "Battery",
         "batteryWithName": "Battery: %{name}",
         "chargerWithName": "Laaier: %{productNameShort}",
         "dcLoads": "GS-ladings",

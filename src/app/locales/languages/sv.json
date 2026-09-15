@@ -257,6 +257,7 @@
     "widgets": {
         "acLoads": "AC belastningar",
         "batteries": "Batterier",
+        "battery": "Batteri",
         "batteryWithName": "Batteri: %{name}",
         "chargerWithName": "Laddare: %{productNameShort}",
         "dcLoads": "DC-belastningar",
