@@ -240,6 +240,7 @@
         "batterySafe": "Batterisikker",
         "bulkCharging": "Bulk-opladning",
         "equalisationCharging": "Udligningsladning",
+        "essSustain": "ESS-vedligehold",
         "externalControl": "Ekstern kontrol",
         "floatCharging": "Vedligeholdelsesladning",
         "inverting": "Invertering",
@@ -258,7 +259,9 @@
             "Waste water": "Spildevand"
         },
         "passthru": "Passthru",
+        "recharge": "Genopladning",
         "repeatedAbsorption": "Gentagen absorption",
+        "scheduledRecharge": "Planlagt genopladning",
         "storageMode": "Lagertilstand",
         "sustain": "Oprethold"
     },

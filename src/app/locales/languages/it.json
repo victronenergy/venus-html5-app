@@ -240,6 +240,7 @@
         "batterySafe": "BatterySafe",
         "bulkCharging": "Carica Bulk",
         "equalisationCharging": "Carica di compensazione",
+        "essSustain": "Mantenimento ESS",
         "externalControl": "Controllo esterno",
         "floatCharging": "Carica Float",
         "inverting": "Inversione in corso",
@@ -258,7 +259,9 @@
             "Waste water": "Acque reflue"
         },
         "passthru": "Accedi",
+        "recharge": "Ricarica",
         "repeatedAbsorption": "Assorbimento ripetuto",
+        "scheduledRecharge": "Ricarica programmata",
         "storageMode": "Modalità conservazione",
         "sustain": "Supporto"
     },

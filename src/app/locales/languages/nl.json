@@ -240,6 +240,7 @@
         "batterySafe": "BatterySafe",
         "bulkCharging": "Bulk laden",
         "equalisationCharging": "Egalisatie laden",
+        "essSustain": "ESS Sustain",
         "externalControl": "Externe regeling",
         "floatCharging": "Druppel laden",
         "inverting": "Omvormen",
@@ -258,7 +259,9 @@
             "Waste water": "Vuilwater"
         },
         "passthru": "Doorvoer",
+        "recharge": "Herladen",
         "repeatedAbsorption": "Herhaalde absorptie",
+        "scheduledRecharge": "Gepland herladen",
         "storageMode": "Opslagmodus",
         "sustain": "Handhaven"
     },

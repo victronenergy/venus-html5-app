@@ -240,6 +240,7 @@
         "batterySafe": "Battery Safe",
         "bulkCharging": "Încărcare „Bulk”",
         "equalisationCharging": "Încărcare de egalizare",
+        "essSustain": "Menținere ESS",
         "externalControl": "Control extern",
         "floatCharging": "Încărcare „Float”",
         "inverting": "Dimensiune invertor",
@@ -258,7 +259,9 @@
             "Waste water": "Apa reziduala"
         },
         "passthru": "Direct",
+        "recharge": "Reîncărcare",
         "repeatedAbsorption": "Absortie repetata",
+        "scheduledRecharge": "Reîncărcare programată",
         "storageMode": "Mod de depozitare",
         "sustain": "Sustine"
     },

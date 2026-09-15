@@ -240,6 +240,7 @@
         "batterySafe": "Battery Safe",
         "bulkCharging": "Обʼємне заряджання",
         "equalisationCharging": "Вирівнювальне заряджання",
+        "essSustain": "Підтримка ESS",
         "externalControl": "Зовнішнє керування",
         "floatCharging": "Плаваюче заряджання",
         "inverting": "Інвертування",
@@ -258,7 +259,9 @@
             "Waste water": "Стічні води"
         },
         "passthru": "Транзит",
+        "recharge": "Підзарядка",
         "repeatedAbsorption": "Повторне поглинання",
+        "scheduledRecharge": "Запланована підзарядка",
         "storageMode": "Режим збереження",
         "sustain": "Підтримувати"
     },

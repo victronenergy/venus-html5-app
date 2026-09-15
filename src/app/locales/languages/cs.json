@@ -240,6 +240,7 @@
         "batterySafe": "Systém Battery Safe",
         "bulkCharging": "Rychlé nabíjení",
         "equalisationCharging": "Vyrovnávací nabíjení",
+        "essSustain": "Udržování ESS",
         "externalControl": "Externí ovládání",
         "floatCharging": "Udržovací nabíjení",
         "inverting": "Měnič",
@@ -258,7 +259,9 @@
             "Waste water": "Odpadní voda"
         },
         "passthru": "Průchozí",
+        "recharge": "Dobíjení",
         "repeatedAbsorption": "Opakovaná absorpce",
+        "scheduledRecharge": "Plánované dobíjení",
         "storageMode": "Režim skladování",
         "sustain": "Udržování"
     },
