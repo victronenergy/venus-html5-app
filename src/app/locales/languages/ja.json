@@ -15,12 +15,25 @@
         "batteryWithName": "バッテリー: %{name}",
         "chargerWithName": "充電器: %{productNameShort}",
         "dcLoads": "DC負荷",
+        "devices": "デバイス一覧",
         "energy": "エネルギー",
+        "environment": "環境",
         "generator": "発電機",
         "generatorInput": "発電機入力",
         "gridInput": "グリッド入力",
+        "humidity": "湿度",
         "invalidConfig": "無効な設定",
-        "inverterCharger": "インバーター / 充電器: %{productNameShort}"
+        "inverterCharger": "インバーター / 充電器: %{productNameShort}",
+        "inverterWithName": "インバーター: %{productNameShort}",
+        "pressure": "気圧",
+        "pvCharger": "PV充電器",
+        "shorePower": "陸電",
+        "solar": "ソーラー",
+        "status": "ステータス",
+        "tanks": "タンク",
+        "temperature": "温度",
+        "unknown": "不明",
+        "windGenerator": "風力発電機"
     },
     "cardFooter": {
         "Charge": "充電",
@@ -36,11 +49,14 @@
         "autoStartStop": "自動起動/停止",
         "bulkCharging": "バルク充電",
         "charge": "充電",
+        "charged": "充電完了",
         "chargerOnly": "充電器のみ",
         "charging": "充電中",
+        "close": "閉じる",
         "current": "電流",
         "dark": "ダーク",
         "days": "日",
+        "days_short": "日",
         "discharge": "放電",
         "discharging": "放電中",
         "eco": "エコ",
@@ -52,7 +68,9 @@
         "generator": "発電機",
         "grid": "グリッド",
         "hours": "時間",
+        "hours_short": "時間",
         "idle": "アイドル",
+        "inputCurrentLimit": "入力電流制限",
         "inputCurrentLimitWithNumber": "入力 %{inputId} 電流制限値",
         "inputCurrentLimitWithType": "%{inputType} 入力電流制限値",
         "inputLimit": "入力制限",
@@ -60,8 +78,11 @@
         "inverting": "インバート中",
         "light": "ライト",
         "limit": "制限値",
+        "loading": "読み込み中",
+        "loads": "負荷",
         "lowPower": "低電力",
         "minutes": "分",
+        "minutes_short": "分",
         "mode": "モード",
         "night": "夜間",
         "no": "いいえ",
@@ -76,6 +97,7 @@
         "powerSupplyMode": "電源モード",
         "remainingTime": "残り時間",
         "running": "運転中",
+        "set": "設定",
         "shorePower": "陸電",
         "standby": "スタンバイ",
         "starting": "起動中",
@@ -83,15 +105,24 @@
         "stopping": "停止中",
         "storageMode": "保存モード",
         "sustain": "サステイン",
+        "timetogo": "残り",
         "unplugged": "未接続",
         "veBusFault": "VE.Busエラー状態",
         "voltage": "電圧",
         "yes": "はい"
     },
     "diagnostics": {
-        "connection": {},
+        "connection": {
+            "connection": "接続",
+            "error": "エラー",
+            "host": "ホスト",
+            "none": "なし",
+            "portalId": "ポータルID",
+            "status": "ステータス"
+        },
         "device": {
             "colorScheme": "カラースキーム",
+            "device": "デバイス",
             "devicePixelRatio": "ピクセル比",
             "diagConsole": "診断コンソール",
             "hideDiagConsole": "診断コンソールを非表示",
@@ -103,10 +134,14 @@
             "prefersLowContrast": "低コントラスト",
             "showDiagConsole": "診断コンソールを表示",
             "unspecified": "未指定",
+            "userAgent": "ユーザーエージェント",
             "viewport": "ビューポート",
+            "viewportHeight": "ビューポートの高さ",
+            "viewportWidth": "ビューポートの幅",
             "webgl": "WebGL",
             "webglNotSupported": "非対応"
-        }
+        },
+        "diagnostics": "診断"
     },
     "error": {
         "errorWithMessage": "エラー: %{message}",
@@ -117,6 +152,9 @@
             "estimate": "推定データ量: %{size} バイト",
             "hint": "ページを再読み込みするか、以下の情報をご用意の上、Victron Energyにお問い合わせください：",
             "ignore": "エラーを無視",
+            "reportSent": "レポートを送信しました",
+            "resetError": "エラーをリセット",
+            "restartApp": "アプリを再起動",
             "sendReport": "エラーレポートを送信",
             "title": "アプリケーションの描画中にエラーが発生しました。"
         },
@@ -170,7 +208,10 @@
         "title": "ダッシュボードは空です"
     },
     "pages": {
-        "switchingPane": "切り替えペイン"
+        "diagnostics": "診断",
+        "remoteConsole": "リモートコンソール",
+        "switchingPane": "切り替えペイン",
+        "systemOverview": "システム概要"
     },
     "remoteLogin": {
         "2fa": "2要素認証トークン",
@@ -192,10 +233,15 @@
         "Discharging": "放電中",
         "Off": "オフ",
         "VE.Bus Fault condition": "VE.Busエラー状態",
+        "Wake-up": "ウェイクアップ",
         "absorptionCharging": "吸収充電",
         "assisting": "アシスト中",
+        "autoEqualizeRecondition": "自動均等化/リフレッシュ",
+        "batterySafe": "バッテリーセーフ",
         "bulkCharging": "バルク充電",
         "equalisationCharging": "均等充電",
+        "essSustain": "ESS維持",
+        "externalControl": "外部制御",
         "floatCharging": "フロート充電",
         "inverting": "インバート中",
         "lowPower": "低電力",
@@ -213,6 +259,9 @@
             "Waste water": "グレーウォーター"
         },
         "passthru": "パススルー",
+        "recharge": "再充電",
+        "repeatedAbsorption": "繰り返し吸収充電",
+        "scheduledRecharge": "スケジュール再充電",
         "storageMode": "保存モード",
         "sustain": "サステイン"
     },
@@ -264,10 +313,16 @@
     "tankWidget": {
         "Tank sensor": "タンクセンサー",
         "blackWater": "汚水",
+        "diesel": "軽油/ディーゼル",
         "freshWater": "清水",
         "fuel": "燃料",
+        "gasoline": "ガソリン",
+        "hydraulicOil": "作動油",
         "liveWell": "ライブウェル",
+        "lng": "液化天然ガス (LNG)",
+        "lpg": "液化石油ガス (LPG)",
         "oil": "オイル",
+        "rawWater": "原水/海水",
         "wasteWater": "排水"
     },
     "versionInfo": {

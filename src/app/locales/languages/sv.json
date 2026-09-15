@@ -240,6 +240,7 @@
         "batterySafe": "Battery Safe",
         "bulkCharging": "Bulkladdning",
         "equalisationCharging": "Utjämningsladdning",
+        "essSustain": "ESS Sustain",
         "externalControl": "Extern kontroll",
         "floatCharging": "Floatladdning.",
         "inverting": "Växelriktning",
@@ -258,7 +259,9 @@
             "Waste water": "Spillvatten"
         },
         "passthru": "Förbikoppling",
+        "recharge": "Återuppladdning",
         "repeatedAbsorption": "Upprepad absorption",
+        "scheduledRecharge": "Schemalagd återuppladdning",
         "storageMode": "Förvaringsläge",
         "sustain": "Upprätthålla"
     },

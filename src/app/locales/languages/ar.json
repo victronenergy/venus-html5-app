@@ -240,6 +240,7 @@
         "batterySafe": "آمان البطارية",
         "bulkCharging": "الشحن المبدئي",
         "equalisationCharging": "الشحن المتوازن",
+        "essSustain": "وضع الحفاظ لنظام ESS",
         "externalControl": "التحكم الخارجي",
         "floatCharging": "الشحن المساند",
         "inverting": "عكس",
@@ -258,7 +259,9 @@
             "Waste water": "ماء فاسد"
         },
         "passthru": "تمرير عبر",
+        "recharge": "إعادة الشحن",
         "repeatedAbsorption": "امتصاص متكرر",
+        "scheduledRecharge": "إعادة شحن مجدولة",
         "storageMode": "وضع التخزين",
         "sustain": "ركيزة"
     },

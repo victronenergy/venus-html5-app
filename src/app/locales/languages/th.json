@@ -240,6 +240,7 @@
         "batterySafe": "Battery Safe",
         "bulkCharging": "การชาร์จแบบ Bulk",
         "equalisationCharging": "การชาร์จแบบปรับสมดุล",
+        "essSustain": "การรักษาระดับพลังงาน ESS",
         "externalControl": "การควบคุมจากภายนอก",
         "floatCharging": "การชาร์จแบบ Float",
         "inverting": "กำลังแปลงไฟ",
@@ -258,7 +259,9 @@
             "Waste water": "น้ำเสีย"
         },
         "passthru": "พาสทรู",
+        "recharge": "ชาร์จใหม่",
         "repeatedAbsorption": "การดูดซับซ้ำ",
+        "scheduledRecharge": "กำหนดเวลาชาร์จใหม่",
         "storageMode": "โหมดจัดเก็บ",
         "sustain": "คงสภาพ"
     },

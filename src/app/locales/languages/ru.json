@@ -240,6 +240,7 @@
         "batterySafe": "Battery Safe",
         "bulkCharging": "Насыпная зарядка",
         "equalisationCharging": "Уравнительная тарификация",
+        "essSustain": "Поддержание ESS",
         "externalControl": "Внешнее управление",
         "floatCharging": "Зарядка поплавка",
         "inverting": "Инвертирование",
@@ -258,7 +259,9 @@
             "Waste water": "Грязная вода"
         },
         "passthru": "Проход",
+        "recharge": "Зарядка",
         "repeatedAbsorption": "Повторная абсорбция",
+        "scheduledRecharge": "Зарядка по расписанию",
         "storageMode": "Режим хранения",
         "sustain": "Удержание"
     },

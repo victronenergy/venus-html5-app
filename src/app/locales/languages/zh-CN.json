@@ -240,6 +240,7 @@
         "batterySafe": "BatterySafe电池保护模式",
         "bulkCharging": "快充",
         "equalisationCharging": "均衡充电",
+        "essSustain": "ESS维持模式",
         "externalControl": "外部控制",
         "floatCharging": "浮充",
         "inverting": "逆变",
@@ -258,7 +259,9 @@
             "Waste water": "废水"
         },
         "passthru": "旁路",
+        "recharge": "再充电",
         "repeatedAbsorption": "重复均充",
+        "scheduledRecharge": "计划充电",
         "storageMode": "存储模式",
         "sustain": "维持"
     },

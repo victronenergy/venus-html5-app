@@ -240,6 +240,7 @@
         "batterySafe": "Batterysafe",
         "bulkCharging": "Grootmaat laai",
         "equalisationCharging": "Egaliseringslaai",
+        "essSustain": "ESS Handhaaf",
         "externalControl": "Eksterne beheer",
         "floatCharging": "Dryflaai",
         "inverting": "Omsetting",
@@ -258,7 +259,9 @@
             "Waste water": "Afvalwater"
         },
         "passthru": "Deurlaat",
+        "recharge": "Herlaai",
         "repeatedAbsorption": "Herhaalde absorpsie",
+        "scheduledRecharge": "Geskeduleerde herlaai",
         "storageMode": "Bergingsmodus",
         "sustain": "Volhou"
     },

@@ -15,12 +15,25 @@
         "batteryWithName": "Bateria: %{name}",
         "chargerWithName": "Carregador: %{productNameShort}",
         "dcLoads": "Cargas CC",
+        "devices": "Dispositivos",
         "energy": "Energia",
+        "environment": "Ambiente",
         "generator": "Gerador",
         "generatorInput": "Entrada do gerador",
         "gridInput": "Entrada da rede",
+        "humidity": "Humidade",
         "invalidConfig": "Configuração inválida",
-        "inverterCharger": "Inversor / Carregador: %{productNameShort}"
+        "inverterCharger": "Inversor / Carregador: %{productNameShort}",
+        "inverterWithName": "Inversor: %{productNameShort}",
+        "pressure": "Pressão",
+        "pvCharger": "Carregador solar",
+        "shorePower": "Energia da rede/cais",
+        "solar": "Solar",
+        "status": "Estado",
+        "tanks": "Tanques",
+        "temperature": "Temperatura",
+        "unknown": "Desconhecido",
+        "windGenerator": "Gerador eólico"
     },
     "cardFooter": {
         "Charge": "Carga",
@@ -36,11 +49,14 @@
         "autoStartStop": "Partida/parada automática",
         "bulkCharging": "Carga inicial",
         "charge": "Carga",
+        "charged": "Carregado",
         "chargerOnly": "Apenas carregador",
         "charging": "A carregar",
+        "close": "Fechar",
         "current": "Corrente",
         "dark": "Escuro",
         "days": "dias",
+        "days_short": "d",
         "discharge": "Descarga",
         "discharging": "A descarregar",
         "eco": "Eco",
@@ -52,7 +68,9 @@
         "generator": "Gerador",
         "grid": "Rede elétrica",
         "hours": "horas",
+        "hours_short": "h",
         "idle": "Inativo",
+        "inputCurrentLimit": "Limite de corrente de entrada",
         "inputCurrentLimitWithNumber": "Limite de corrente da entrada %{inputId}",
         "inputCurrentLimitWithType": "Limite de corrente da entrada %{inputType}",
         "inputLimit": "Limite de entrada",
@@ -60,8 +78,11 @@
         "inverting": "A inverter",
         "light": "Claro",
         "limit": "Limite",
+        "loading": "A carregar",
+        "loads": "Cargas",
         "lowPower": "Baixa potência",
         "minutes": "minutos",
+        "minutes_short": "m",
         "mode": "Modo",
         "night": "Noite",
         "no": "Não",
@@ -76,6 +97,7 @@
         "powerSupplyMode": "Modo de fonte de alimentação",
         "remainingTime": "Tempo restante",
         "running": "Em execução",
+        "set": "Definir",
         "shorePower": "Alimentação do cais",
         "standby": "Em espera",
         "starting": "Iniciando",
@@ -83,15 +105,24 @@
         "stopping": "Parando",
         "storageMode": "Modo de armazenamento",
         "sustain": "Sustentação",
+        "timetogo": "restante",
         "unplugged": "Desconectado",
         "veBusFault": "Condição de falha VE.Bus",
         "voltage": "Tensão",
         "yes": "Sim"
     },
     "diagnostics": {
-        "connection": {},
+        "connection": {
+            "connection": "Ligação",
+            "error": "Erro",
+            "host": "Anfitrião",
+            "none": "nenhum",
+            "portalId": "ID do Portal",
+            "status": "Estado"
+        },
         "device": {
             "colorScheme": "Esquema de cores",
+            "device": "Dispositivo",
             "devicePixelRatio": "Proporção de pixels",
             "diagConsole": "Console de diagnóstico",
             "hideDiagConsole": "Ocultar console de diagnóstico",
@@ -103,10 +134,14 @@
             "prefersLowContrast": "Baixo contraste",
             "showDiagConsole": "Mostrar console de diagnóstico",
             "unspecified": "Não especificado",
+            "userAgent": "Agente do utilizador",
             "viewport": "Viewport",
+            "viewportHeight": "Altura da janela de visualização",
+            "viewportWidth": "Largura da janela de visualização",
             "webgl": "WebGL",
             "webglNotSupported": "Não suportado"
-        }
+        },
+        "diagnostics": "Diagnóstico"
     },
     "error": {
         "errorWithMessage": "Erro: %{message}",
@@ -117,6 +152,9 @@
             "estimate": "Dados estimados: %{size} Bytes.",
             "hint": "Tente recarregar a página ou entre em contato com a Victron Energy com as seguintes informações:",
             "ignore": "Ignorar erro",
+            "reportSent": "O relatório foi enviado",
+            "resetError": "Repor erro",
+            "restartApp": "Reiniciar aplicação",
             "sendReport": "Enviar relatório de erro",
             "title": "Ocorreu um erro ao carregar o aplicativo."
         },
@@ -170,7 +208,10 @@
         "title": "Seu painel está vazio"
     },
     "pages": {
-        "switchingPane": "Painel de comutação"
+        "diagnostics": "Diagnóstico",
+        "remoteConsole": "Remote Console",
+        "switchingPane": "Painel de comutação",
+        "systemOverview": "Visão geral do sistema"
     },
     "remoteLogin": {
         "2fa": "Token de autenticação de dois fatores",
@@ -192,10 +233,15 @@
         "Discharging": "A descarregar",
         "Off": "Desligado",
         "VE.Bus Fault condition": "Condição de falha VE.Bus",
+        "Wake-up": "Reativação",
         "absorptionCharging": "Carga de absorção",
         "assisting": "A assistir",
+        "autoEqualizeRecondition": "Equalização auto/Recondicionamento",
+        "batterySafe": "Battery Safe",
         "bulkCharging": "Carga inicial",
         "equalisationCharging": "Carga de equalização",
+        "essSustain": "Manutenção ESS",
+        "externalControl": "Controlo externo",
         "floatCharging": "Carga de flutuação",
         "inverting": "A inverter",
         "lowPower": "Baixa potência",
@@ -213,6 +259,9 @@
             "Waste water": "Águas residuais"
         },
         "passthru": "Passthru",
+        "recharge": "Recarregar",
+        "repeatedAbsorption": "Absorção repetida",
+        "scheduledRecharge": "Recarga programada",
         "storageMode": "Modo de armazenamento",
         "sustain": "Sustentação"
     },
@@ -264,10 +313,16 @@
     "tankWidget": {
         "Tank sensor": "Sensor do depósito",
         "blackWater": "Águas negras",
+        "diesel": "Gasóleo",
         "freshWater": "Água doce",
         "fuel": "Combustível",
+        "gasoline": "Gasolina",
+        "hydraulicOil": "Óleo hidráulico",
         "liveWell": "Viveiro",
+        "lng": "Gás Natural Liquefeito (GNL)",
+        "lpg": "Gás de Petróleo Liquefeito (GPL)",
         "oil": "Óleo",
+        "rawWater": "Água bruta",
         "wasteWater": "Águas residuais"
     },
     "versionInfo": {

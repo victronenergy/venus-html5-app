@@ -240,6 +240,7 @@
         "batterySafe": "Battery Safe",
         "bulkCharging": "Toplu şarj",
         "equalisationCharging": "Equalization şarjı",
+        "essSustain": "ESS Sürdürme",
         "externalControl": "Extern kontrol",
         "floatCharging": "Float şarjı",
         "inverting": "Çevriliyor",
@@ -258,7 +259,9 @@
             "Waste water": "Atık su"
         },
         "passthru": "Düz geçme",
+        "recharge": "Yeniden Şarj",
         "repeatedAbsorption": "Tekrarlanan Absorption",
+        "scheduledRecharge": "Zamanlanmış yeniden şarj",
         "storageMode": "Depolama modu",
         "sustain": "Sürdür"
     },

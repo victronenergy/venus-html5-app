@@ -240,6 +240,7 @@
         "batterySafe": "BatterySafe",
         "bulkCharging": "Ładowanie Bulk",
         "equalisationCharging": "Ładowanie wyrównawcze",
+        "essSustain": "Utrzymanie ESS (Sustain)",
         "externalControl": "Sterowanie zewnętrzne",
         "floatCharging": "Ładowanie Float",
         "inverting": "Transformuje",
@@ -258,7 +259,9 @@
             "Waste water": "Ścieki"
         },
         "passthru": "Przepuszczanie",
+        "recharge": "Doładuj",
         "repeatedAbsorption": "Powtórzona absorpcja",
+        "scheduledRecharge": "Zaplanowane doładowanie",
         "storageMode": "Tryb Storage",
         "sustain": "Podtrzymanie"
     },
