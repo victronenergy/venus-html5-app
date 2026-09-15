@@ -195,6 +195,7 @@
         "bypassedTripped": "已旁路，已跳闸",
         "closed": "已闭合",
         "color": "颜色",
+        "current": "当前",
         "disabled": "已禁用",
         "disabledOverTemp": "已禁用，过温",
         "disabledTripped": "已禁用，已跳闸",

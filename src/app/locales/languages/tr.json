@@ -195,6 +195,7 @@
         "bypassedTripped": "Baypas edildi, attı",
         "closed": "Kapalı",
         "color": "Renk",
+        "current": "Mevcut",
         "disabled": "Devre dışı",
         "disabledOverTemp": "Devre dışı, aşırı sıcaklık",
         "disabledTripped": "Devre dışı, attı",

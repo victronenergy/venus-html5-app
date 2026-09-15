@@ -195,6 +195,7 @@
         "bypassedTripped": "Přemostěno, vybaveno",
         "closed": "Zavřeno",
         "color": "Barva",
+        "current": "Aktuální",
         "disabled": "Deaktivováno",
         "disabledOverTemp": "Deaktivováno, přehřátí",
         "disabledTripped": "Deaktivováno, vybaveno",

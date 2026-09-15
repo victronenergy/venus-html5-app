@@ -195,6 +195,7 @@
         "bypassedTripped": "Contourné, déclenché",
         "closed": "Fermé",
         "color": "Couleur",
+        "current": "Actuelle",
         "disabled": "Désactivé",
         "disabledOverTemp": "Désactivé, surchauffe",
         "disabledTripped": "Désactivé, déclenché",

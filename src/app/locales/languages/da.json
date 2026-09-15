@@ -195,6 +195,7 @@
         "bypassedTripped": "Bypasset, udløst",
         "closed": "Lukket",
         "color": "Farve",
+        "current": "Aktuel",
         "disabled": "Deaktiveret",
         "disabledOverTemp": "Deaktiveret, overtemperatur",
         "disabledTripped": "Deaktiveret, udløst",
