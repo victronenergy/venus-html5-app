@@ -5,31 +5,31 @@ export const formatVebusStateFor = (state: number) => {
     case VEBUS_STATE.OFF:
       return "common.off"
     case VEBUS_STATE.LOW_POWER:
-      return "statusWidget.Low power"
+      return "statusWidget.lowPower"
     case VEBUS_STATE.FAULT_CONDITION:
       return "common.fault"
     case VEBUS_STATE.BULK_CHARGING:
-      return "statusWidget.Bulk charging"
+      return "statusWidget.bulkCharging"
     case VEBUS_STATE.ABSORPTION_CHARGING:
-      return "statusWidget.Absorption charging"
+      return "statusWidget.absorptionCharging"
     case VEBUS_STATE.FLOAT_CHARGING:
-      return "statusWidget.Float charging"
+      return "statusWidget.floatCharging"
     case VEBUS_STATE.STORAGE_MODE:
-      return "statusWidget.Storage mode"
+      return "statusWidget.storageMode"
     case VEBUS_STATE.EQUALISATION_CHARGING:
-      return "statusWidget.Equalisation charging"
+      return "statusWidget.equalisationCharging"
     case VEBUS_STATE.PASSTHRU:
-      return "statusWidget.Passthru"
+      return "statusWidget.passthru"
     case VEBUS_STATE.INVERTING:
-      return "statusWidget.Inverting"
+      return "statusWidget.inverting"
     case VEBUS_STATE.ASSISTING:
-      return "statusWidget.Assisting"
+      return "statusWidget.assisting"
     case VEBUS_STATE.POWER_SUPPLY_MODE:
       return "common.powerSupplyMode"
     case VEBUS_STATE.SUSTAIN:
-      return "statusWidget.Sustain"
+      return "statusWidget.sustain"
     case VEBUS_STATE.EXTERNAL_CONTROL:
-      return "statusWidget.External control"
+      return "statusWidget.externalControl"
     default:
       return "common.emptyBar"
   }

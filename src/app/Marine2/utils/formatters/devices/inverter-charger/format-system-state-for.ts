@@ -5,37 +5,37 @@ export const formatSystemStateFor = (state: number) => {
     case SYSTEM_STATE.OFF:
       return "common.off"
     case SYSTEM_STATE.LOW_POWER:
-      return "statusWidget.Low power"
+      return "statusWidget.lowPower"
     case SYSTEM_STATE.FAULT_CONDITION:
       return "common.fault"
     case SYSTEM_STATE.BULK_CHARGING:
-      return "statusWidget.Bulk charging"
+      return "statusWidget.bulkCharging"
     case SYSTEM_STATE.ABSORPTION_CHARGING:
-      return "statusWidget.Absorption charging"
+      return "statusWidget.absorptionCharging"
     case SYSTEM_STATE.FLOAT_CHARGING:
-      return "statusWidget.Float charging"
+      return "statusWidget.floatCharging"
     case SYSTEM_STATE.STORAGE_MODE:
-      return "statusWidget.Storage mode"
+      return "statusWidget.storageMode"
     case SYSTEM_STATE.EQUALISATION_CHARGING:
-      return "statusWidget.Equalisation charging"
+      return "statusWidget.equalisationCharging"
     case SYSTEM_STATE.PASSTHRU:
-      return "statusWidget.Passthru"
+      return "statusWidget.passthru"
     case SYSTEM_STATE.INVERTING:
-      return "statusWidget.Inverting"
+      return "statusWidget.inverting"
     case SYSTEM_STATE.ASSISTING:
-      return "statusWidget.Assisting"
+      return "statusWidget.assisting"
     case SYSTEM_STATE.SUSTAIN:
-      return "statusWidget.Sustain"
+      return "statusWidget.sustain"
     case SYSTEM_STATE.EXTERNAL_CONTROL:
-      return "statusWidget.External control"
+      return "statusWidget.externalControl"
     case SYSTEM_STATE.DISCHARGING:
       return "common.discharging"
     case SYSTEM_STATE.ESS_SUSTAIN:
-      return "statusWidget.ESS Sustain"
+      return "statusWidget.essSustain"
     case SYSTEM_STATE.RECHARGE:
-      return "statusWidget.Recharge"
+      return "statusWidget.recharge"
     case SYSTEM_STATE.SCHEDULED_RECHARGE:
-      return "statusWidget.Scheduled recharge"
+      return "statusWidget.scheduledRecharge"
     default:
       return "common.emptyBar"
   }

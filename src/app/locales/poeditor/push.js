@@ -105,11 +105,13 @@ async function addLanguages() {
  * Sync the translations
  * Sync the main language first to prevent marking new translations as fuzzy
  */
-function syncTranslations() {
+async function syncTranslations() {
   const languages = getLanguages().filter((language) => language !== MAIN_LANGUAGE)
   languages.unshift(MAIN_LANGUAGE)
 
-  languages.forEach(async (language) => {
+  // Sequential on purpose: the main language is sent with fuzzy_trigger=1, so it must
+  // land before any other language, otherwise their translations get flagged as fuzzy.
+  for (const language of languages) {
     const translationDict = getDictFromFile(language)
     const translations = buildPOEditorTranslations(translationDict)
 
@@ -123,11 +125,11 @@ function syncTranslations() {
     } catch (e) {
       console.error(`An error occurred while trying to sync the translations from ${language}. Error:`, e)
     }
-  })
+  }
 }
 
 ;(async () => {
   await syncTerms(process.argv.length === 3 && process.argv[2] === "-f")
   await addLanguages()
-  syncTranslations()
+  await syncTranslations()
 })()
