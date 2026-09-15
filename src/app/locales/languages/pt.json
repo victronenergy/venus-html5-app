@@ -1,46 +1,25 @@
 {
     "acMode": {
         "modal": {
-            "name": "Selecionar modo",
             "updateLimit": "Selecionar limite de entrada de terra"
-        },
-        "title": "Modo CA"
+        }
     },
     "boxes": {
-        "EnergyOverview": "Visão geral de energia",
         "acLoads": "Cargas CA",
         "alternator": "Alternador",
         "batteries": "Baterias",
-        "battery": "Bateria",
-        "batteryWithName": "Bateria: %{name}",
-        "chargerWithName": "Carregador: %{productNameShort}",
         "dcLoads": "Cargas CC",
         "devices": "Dispositivos",
         "energy": "Energia",
         "environment": "Ambiente",
         "generator": "Gerador",
-        "generatorInput": "Entrada do gerador",
-        "gridInput": "Entrada da rede",
         "humidity": "Humidade",
-        "invalidConfig": "Configuração inválida",
-        "inverterCharger": "Inversor / Carregador: %{productNameShort}",
-        "inverterWithName": "Inversor: %{productNameShort}",
         "pressure": "Pressão",
-        "pvCharger": "Carregador solar",
         "shorePower": "Energia da rede/cais",
         "solar": "Solar",
-        "status": "Estado",
         "tanks": "Tanques",
         "temperature": "Temperatura",
-        "unknown": "Desconhecido",
         "windGenerator": "Gerador eólico"
-    },
-    "cardFooter": {
-        "Charge": "Carga",
-        "Critical": "Crítico",
-        "Optimal": "Ideal",
-        "Status": "Estado",
-        "Warning": "Aviso"
     },
     "common": {
         "absorptionCharging": "Carga de absorção",
@@ -48,16 +27,11 @@
         "auto": "Automático",
         "autoStartStop": "Partida/parada automática",
         "bulkCharging": "Carga inicial",
-        "charge": "Carga",
-        "charged": "Carregado",
         "chargerOnly": "Apenas carregador",
         "charging": "A carregar",
         "close": "Fechar",
-        "current": "Corrente",
         "dark": "Escuro",
         "days": "dias",
-        "days_short": "d",
-        "discharge": "Descarga",
         "discharging": "A descarregar",
         "eco": "Eco",
         "emptyBar": " - ",
@@ -77,25 +51,20 @@
         "inverterOnly": "Apenas inversor",
         "inverting": "A inverter",
         "light": "Claro",
-        "limit": "Limite",
         "loading": "A carregar",
-        "loads": "Cargas",
         "lowPower": "Baixa potência",
         "minutes": "minutos",
         "minutes_short": "m",
         "mode": "Modo",
         "night": "Noite",
         "no": "Não",
-        "noShorePower": "Sem energia de terra",
         "notAvailable": "Não disponível",
         "nrOfPhases": "%{phases} fases",
-        "null": " ",
         "off": "Desligado",
         "on": "Ligado",
         "passthru": "Passthru",
         "pending": "Pendente",
         "powerSupplyMode": "Modo de fonte de alimentação",
-        "remainingTime": "Tempo restante",
         "running": "Em execução",
         "set": "Definir",
         "shorePower": "Alimentação do cais",
@@ -107,8 +76,6 @@
         "sustain": "Sustentação",
         "timetogo": "restante",
         "unplugged": "Desconectado",
-        "veBusFault": "Condição de falha VE.Bus",
-        "voltage": "Tensão",
         "yes": "Sim"
     },
     "diagnostics": {
@@ -123,7 +90,6 @@
         "device": {
             "colorScheme": "Esquema de cores",
             "device": "Dispositivo",
-            "devicePixelRatio": "Proporção de pixels",
             "diagConsole": "Console de diagnóstico",
             "hideDiagConsole": "Ocultar console de diagnóstico",
             "isGuiV2Supported": "Suporte para GUI v2",
@@ -136,8 +102,6 @@
             "unspecified": "Não especificado",
             "userAgent": "Agente do utilizador",
             "viewport": "Viewport",
-            "viewportHeight": "Altura da janela de visualização",
-            "viewportWidth": "Largura da janela de visualização",
             "webgl": "WebGL",
             "webglNotSupported": "Não suportado"
         },
@@ -162,10 +126,8 @@
         "mqttUnavailable2": "Verifique se o MQTT está ativado nas suas configurações:",
         "mqttUnavailable3": "Console Remoto > Configurações > Serviços > Acesso MQTT",
         "mqttUnavailable4": "Tente usar o botão Console Remoto no topo desta tela para alterar as suas configurações remotamente.",
-        "mqttUnavailable5": "Você também pode tentar se conectar ao seu dispositivo remotamente selecionando Remoto no menu acima.",
         "queryParams": "Parâmetros de consulta: %{queryParams}",
         "remoteConsole": {
-            "connectionFailed": "Não foi possível conectar ao dispositivo GX",
             "qrCodeMessage": "Para acessar o Console Remoto GX, certifique-se de que seu telefone esteja na mesma rede Wi-Fi que o dispositivo GX e, em seguida, escaneie este código QR.",
             "screenTooSmall": "Abra em uma tela maior para visualizar o console remoto"
         },
@@ -187,16 +149,9 @@
     "header": {
         "close": "Fechar",
         "connecting": "A ligar",
-        "local": "Local",
-        "loggedIn": "Sessão iniciada como",
-        "notLoggedIn": "Sessão não iniciada",
-        "remote": "Remoto",
         "remoteConsole": "Consola remota",
         "remoteMessage": "Abra num ecrã maior para ver a consola remota",
         "versionInfo": "Informações da versão"
-    },
-    "installations": {
-        "title": "Escolha uma instalação"
     },
     "locker": {
         "lockDescription": "Para evitar alterações acidentais nas configurações do dispositivo - ativar esta função irá bloquear a possibilidade de interagir com os controles",
@@ -210,30 +165,9 @@
     "pages": {
         "diagnostics": "Diagnóstico",
         "remoteConsole": "Remote Console",
-        "switchingPane": "Painel de comutação",
         "systemOverview": "Visão geral do sistema"
     },
-    "remoteLogin": {
-        "2fa": "Token de autenticação de dois fatores",
-        "email": "E-mail",
-        "forgotPassword": "Esqueceu a senha?",
-        "goBack": "Voltar",
-        "logIn": "Entrar",
-        "logOut": "Sair",
-        "loginFailed": "Falha no login",
-        "mobileVerification": "Token do aplicativo autenticador",
-        "noInstallations": "Esta conta não possui instalações.",
-        "password": "Senha",
-        "registerMessage1": "Ainda não tem uma conta? ",
-        "registerMessage2": "Registre seu veículo recreativo.",
-        "smsVerification": "Token de verificação por SMS",
-        "wrong2fa": "Código de verificação de dois fatores incorreto"
-    },
     "statusWidget": {
-        "Discharging": "A descarregar",
-        "Off": "Desligado",
-        "VE.Bus Fault condition": "Condição de falha VE.Bus",
-        "Wake-up": "Reativação",
         "absorptionCharging": "Carga de absorção",
         "assisting": "A assistir",
         "autoEqualizeRecondition": "Equalização auto/Recondicionamento",
@@ -245,19 +179,6 @@
         "floatCharging": "Carga de flutuação",
         "inverting": "A inverter",
         "lowPower": "Baixa potência",
-        "parts": {
-            "Battery": "Bateria",
-            "Black water": "Água negra",
-            "DC Loads": "Cargas CC",
-            "Fresh water": "Água doce",
-            "Fuel": "Combustível",
-            "Live well": "Viveiro",
-            "Oil": "Óleo",
-            "PV Charger": "Carregador solar",
-            "Shore Power": "Alimentação do cais",
-            "Tank sensor": "Sensor de tanque",
-            "Waste water": "Águas residuais"
-        },
         "passthru": "Passthru",
         "recharge": "Recarregar",
         "repeatedAbsorption": "Absorção repetida",
@@ -311,7 +232,6 @@
         "volume": "Volume"
     },
     "tankWidget": {
-        "Tank sensor": "Sensor do depósito",
         "blackWater": "Águas negras",
         "diesel": "Gasóleo",
         "freshWater": "Água doce",
@@ -335,7 +255,6 @@
     "widgets": {
         "acLoads": "Cargas CA",
         "batteries": "Baterias",
-        "battery": "Bateria",
         "batteryWithName": "Bateria: %{name}",
         "chargerWithName": "Carregador: %{productNameShort}",
         "dcLoads": "Cargas CC",
@@ -345,10 +264,8 @@
         "invalidConfig": "Configuração inválida",
         "inverterCharger": "Inversor / Carregador: %{productNameShort}",
         "inverterWithName": "Inversor: %{productNameShort}",
-        "pvCharger": "Carregador solar",
         "shorePower": "Alimentação do cais",
         "solar": "Solar",
-        "status": "Estado",
         "unknown": "Desconhecido"
     }
 }

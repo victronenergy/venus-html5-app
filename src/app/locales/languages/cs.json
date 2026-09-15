@@ -1,46 +1,25 @@
 {
     "acMode": {
         "modal": {
-            "name": "Název",
             "updateLimit": "Vybrat vstupní limit napájení ze sítě"
-        },
-        "title": "AC režim"
+        }
     },
     "boxes": {
-        "EnergyOverview": "Přehled údajů o energii",
         "acLoads": "AC zátěže",
         "alternator": "Alternátor",
         "batteries": "Baterie",
-        "battery": "Baterie",
-        "batteryWithName": "Baterie: %{name}",
-        "chargerWithName": "Nabíječka: %{productNameShort}",
         "dcLoads": "DC zátěže",
         "devices": "Zařízení",
         "energy": "Energie",
         "environment": "Prostředí",
         "generator": "Generátor",
-        "generatorInput": "Vstup generátoru",
-        "gridInput": "Vstup sítě",
         "humidity": "Vlhkost",
-        "invalidConfig": "Nesprávná konfigurace",
-        "inverterCharger": "Měnič / nabíječka: %{productNameShort}",
-        "inverterWithName": "Střídač: %{productNameShort}",
         "pressure": "Tlak",
-        "pvCharger": "Fotovoltaická nabíječka",
         "shorePower": "Napájení ze sítě",
         "solar": "Solární energie",
-        "status": "Stav",
         "tanks": "Nádrže",
         "temperature": "Teplota",
-        "unknown": "Neznámý",
         "windGenerator": "Větrný generátor"
-    },
-    "cardFooter": {
-        "Charge": "Zátěž",
-        "Critical": "Kritický",
-        "Optimal": "Optimální",
-        "Status": "Stav",
-        "Warning": "Upozornění"
     },
     "common": {
         "absorptionCharging": "Absorpční nabíjení",
@@ -48,16 +27,11 @@
         "auto": "Auto",
         "autoStartStop": "Auto start/stop",
         "bulkCharging": "Rychlé nabíjení",
-        "charge": "Zátěž",
-        "charged": "Nabito",
         "chargerOnly": "Pouze nabíječka",
         "charging": "nabíjení",
         "close": "Zavřít",
-        "current": "Proud",
         "dark": "Tmavý",
         "days": "dnů",
-        "days_short": "d",
-        "discharge": "Vybíjení",
         "discharging": "vybíjení",
         "eco": "Eco",
         "emptyBar": " - ",
@@ -77,25 +51,20 @@
         "inverterOnly": "Pouze měnič",
         "inverting": "Měnič",
         "light": "Světlý",
-        "limit": "Limit",
         "loading": "Načítání",
-        "loads": "Zátěže",
         "lowPower": "Nízký výkon",
         "minutes": "minut",
         "minutes_short": "m",
         "mode": "Režim",
         "night": "Noční",
         "no": "Ne",
-        "noShorePower": "Žádné napájení ze sítě",
         "notAvailable": "Nedostupný",
         "nrOfPhases": "%{phases} fáze",
-        "null": " ",
         "off": "Vypnuto",
         "on": "Zapnuto",
         "passthru": "Průchozí",
         "pending": "Čekající",
         "powerSupplyMode": "Režim dodávky energie",
-        "remainingTime": "Zbývající čas",
         "running": "Chod",
         "set": "Nastavit",
         "shorePower": "Napájení ze sítě",
@@ -107,8 +76,6 @@
         "sustain": "Udržování",
         "timetogo": "zbývá",
         "unplugged": "Odpojeno",
-        "veBusFault": "Chybový stav sběrnice VE.Bus",
-        "voltage": "Napětí",
         "yes": "Ano"
     },
     "diagnostics": {
@@ -123,7 +90,6 @@
         "device": {
             "colorScheme": "Barevné schéma",
             "device": "Zařízení",
-            "devicePixelRatio": "Poměr pixelů",
             "diagConsole": "Diagnostická konzole",
             "hideDiagConsole": "Skrýt diagnostickou konzoli",
             "isGuiV2Supported": "Podpora GUI v2",
@@ -136,8 +102,6 @@
             "unspecified": "Nespecifikováno",
             "userAgent": "Agent uživatele",
             "viewport": "Zobrazovací oblast",
-            "viewportHeight": "Výška panelu zobrazení",
-            "viewportWidth": "Šířka panelu zobrazení",
             "webgl": "WebGL",
             "webglNotSupported": "Nepodporováno"
         },
@@ -162,10 +126,8 @@
         "mqttUnavailable2": "Zkontrolujte, zda je ve vašem nastavení povoleno MQTT:",
         "mqttUnavailable3": "Konzola dálkového ovládání > Nastavení > Služby > MQTT na LAN (Plaintext)",
         "mqttUnavailable4": "Zkuste pomocí tlačítka Konzola dálkového ovládání v horní části této obrazovky změnit nastavení dálkově.",
-        "mqttUnavailable5": "Můžete také zkusit dálkové připojení k zařízení výběrem možnosti Dálkové z nabídky výše",
         "queryParams": "Parametry dotazu: %{queryParams}",
         "remoteConsole": {
-            "connectionFailed": "Nelze se připojit k zařízení GX.",
             "qrCodeMessage": "Chcete-li získat přístup ke vzdálené konzole GX, ujistěte se, že je váš telefon ve stejné síti WiFi jako zařízení GX, a poté naskenujte tento kód QR.",
             "screenTooSmall": "Zobrazit konzolu dálkového ovládání ve větším okně"
         },
@@ -187,16 +149,9 @@
     "header": {
         "close": "Zavřít",
         "connecting": "Připojení",
-        "local": "Místní",
-        "loggedIn": "Jste přihlášen jako",
-        "notLoggedIn": "Nejste přihlášen",
-        "remote": "Dálkový",
         "remoteConsole": "Vzdálené ovládání",
         "remoteMessage": "Zobrazit konzolu dálkového ovládání ve větším okně",
         "versionInfo": "Informace o verzi"
-    },
-    "installations": {
-        "title": "Vybrat si instalaci"
     },
     "locker": {
         "lockDescription": "Náhodným změnám v nastavení zařízení zabráníte zapnutím této funkce, která zablokuje možnost interakce s ovládacími prvky.",
@@ -210,30 +165,9 @@
     "pages": {
         "diagnostics": "Diagnostika",
         "remoteConsole": "Vzdálené ovládání",
-        "switchingPane": "Panel přepínání",
         "systemOverview": "Přehled systému"
     },
-    "remoteLogin": {
-        "2fa": "Token dvoufaktorové autentizace",
-        "email": "E-mail",
-        "forgotPassword": "Zapomněli jste heslo?",
-        "goBack": "Přejít zpět",
-        "logIn": "Přihlásit se",
-        "logOut": "Odhlásit se",
-        "loginFailed": "Přihlášení se nepodařilo",
-        "mobileVerification": "Token autentizační aplikace",
-        "noInstallations": "U tohoto účtu nejsou žádné instalace.",
-        "password": "Heslo",
-        "registerMessage1": "Nemáte účet? ",
-        "registerMessage2": "Zaregistrujte svůj RV.",
-        "smsVerification": "Ověřovací token v SMS zprávě",
-        "wrong2fa": "Špatný dvoufaktorový ověřovací kód"
-    },
     "statusWidget": {
-        "Discharging": "vybíjení",
-        "Off": "Vypnuto",
-        "VE.Bus Fault condition": "Chybový stav sběrnice VE.Bus",
-        "Wake-up": "Probuzení",
         "absorptionCharging": "Absorpční nabíjení",
         "assisting": "Asistence",
         "autoEqualizeRecondition": "Automatické vyrovnání / obnovení",
@@ -245,19 +179,6 @@
         "floatCharging": "Udržovací nabíjení",
         "inverting": "Měnič",
         "lowPower": "Nízký výkon",
-        "parts": {
-            "Battery": "Baterie",
-            "Black water": "Splašky",
-            "DC Loads": "DC zátěže",
-            "Fresh water": "Čistá voda",
-            "Fuel": "Palivo",
-            "Live well": "Nádrž na vodu",
-            "Oil": "Olej",
-            "PV Charger": "FV regulátor",
-            "Shore Power": "Břehový proud",
-            "Tank sensor": "Čidlo nádrže",
-            "Waste water": "Odpadní voda"
-        },
         "passthru": "Průchozí",
         "recharge": "Dobíjení",
         "repeatedAbsorption": "Opakovaná absorpce",
@@ -311,7 +232,6 @@
         "volume": "Objem"
     },
     "tankWidget": {
-        "Tank sensor": "Čidlo nádrže",
         "blackWater": "Splašky",
         "diesel": "Nafta",
         "freshWater": "Čistá voda",
@@ -335,7 +255,6 @@
     "widgets": {
         "acLoads": "AC zátěž",
         "batteries": "Baterie",
-        "battery": "Baterie",
         "batteryWithName": "Baterie: %{name}",
         "chargerWithName": "Nabíječka: %{productNameShort}",
         "dcLoads": "DC zátěže",
@@ -345,10 +264,8 @@
         "invalidConfig": "Nesprávná konfigurace",
         "inverterCharger": "Měnič / nabíječka: %{productNameShort}",
         "inverterWithName": "Střídač: %{productNameShort}",
-        "pvCharger": "FV regulátor",
         "shorePower": "Břehový proud",
         "solar": "Solární energie",
-        "status": "Stav",
         "unknown": "Neznámý"
     }
 }

@@ -1,46 +1,25 @@
 {
     "acMode": {
         "modal": {
-            "name": "Auswahlmodus",
             "updateLimit": "Wählen Sie die Eingabegrenze für Landstrom"
-        },
-        "title": "AC-Modus"
+        }
     },
     "boxes": {
-        "EnergyOverview": "Energieübersicht",
         "acLoads": "AC-Lasten",
         "alternator": "Lichtmaschine",
         "batteries": "Batterien",
-        "battery": "Batterie",
-        "batteryWithName": "Batterie: %{name}",
-        "chargerWithName": "Ladegerät: %{productNameShort}",
         "dcLoads": "DC-Lasten",
         "devices": "Geräte",
         "energy": "Energie",
         "environment": "Umgebung",
         "generator": "Generator",
-        "generatorInput": "Generatoreingang",
-        "gridInput": "Netzeingang",
         "humidity": "Luftfeuchtigkeit",
-        "invalidConfig": "Ungültige Konfiguration",
-        "inverterCharger": "Wechselrichter / Ladegerät: %{productNameShort}",
-        "inverterWithName": "Wechselrichter: %{productNameShort}",
         "pressure": "Luftdruck",
-        "pvCharger": "PV-Ladegerät",
         "shorePower": "Landstrom",
         "solar": "Solar",
-        "status": "Status",
         "tanks": "Tanks",
         "temperature": "Temperatur",
-        "unknown": "Unbekannt",
         "windGenerator": "Windgenerator"
-    },
-    "cardFooter": {
-        "Charge": "Ladung",
-        "Critical": "Kritisch",
-        "Optimal": "Optimal",
-        "Status": "Status",
-        "Warning": "Warnung"
     },
     "common": {
         "absorptionCharging": "Absorptionsladung",
@@ -48,16 +27,11 @@
         "auto": "Auto",
         "autoStartStop": "Auto Start/Stop",
         "bulkCharging": "Bulkladung",
-        "charge": "Ladung",
-        "charged": "Geladen",
         "chargerOnly": "Nur Ladegerät",
         "charging": "Aufladen",
         "close": "Schließen",
-        "current": "Strom",
         "dark": "Dunkel",
         "days": "Tage",
-        "days_short": "d",
-        "discharge": "Entladung",
         "discharging": "Entladen",
         "eco": "Eco",
         "emptyBar": " - ",
@@ -77,25 +51,20 @@
         "inverterOnly": "Nur Wechselrichter",
         "inverting": "Wechselrichten",
         "light": "Hell",
-        "limit": "Limit",
         "loading": "Wird geladen",
-        "loads": "Lasten",
         "lowPower": "Energiesparmodus",
         "minutes": "Minuten",
         "minutes_short": "m",
         "mode": "Modus",
         "night": "Nacht",
         "no": "Nein",
-        "noShorePower": "Kein Landstrom",
         "notAvailable": "Nicht verfügbar",
         "nrOfPhases": "%{phases} Phasen",
-        "null": " ",
         "off": "Aus",
         "on": "Ein",
         "passthru": "Durchleitung",
         "pending": "Ausstehend",
         "powerSupplyMode": "Stromversorgungsmodus",
-        "remainingTime": "Restzeit",
         "running": "In Betrieb",
         "set": "Einstellen",
         "shorePower": "Landstrom",
@@ -107,8 +76,6 @@
         "sustain": "Erhaltung",
         "timetogo": "verbleibend",
         "unplugged": "Nicht angeschlossen",
-        "veBusFault": "VE.Bus-Fehlerzustand",
-        "voltage": "Spannung",
         "yes": "Ja"
     },
     "diagnostics": {
@@ -123,7 +90,6 @@
         "device": {
             "colorScheme": "Farbschema",
             "device": "Gerät",
-            "devicePixelRatio": "Pixelverhältnis",
             "diagConsole": "Diagnosekonsole",
             "hideDiagConsole": "Diagnosekonsole ausblenden",
             "isGuiV2Supported": "GUI v2 unterstützt",
@@ -136,8 +102,6 @@
             "unspecified": "Nicht angegeben",
             "userAgent": "User-Agent",
             "viewport": "Viewport",
-            "viewportHeight": "Sichtfensterhöhe",
-            "viewportWidth": "Scihtfensterbreite",
             "webgl": "WebGL",
             "webglNotSupported": "Nicht unterstützt"
         },
@@ -162,10 +126,8 @@
         "mqttUnavailable2": "Bitte überprüfen Sie, ob MQTT in Ihren Einstellungen aktiviert ist:",
         "mqttUnavailable3": "Remote Console > Einstellungen > Dienste > MQTT-Zugriff",
         "mqttUnavailable4": "Versuchen Sie es mit der Schaltfläche Remote Console oben auf diesem Bildschirm, um Ihre Einstellungen aus der Ferne zu ändern.",
-        "mqttUnavailable5": "Sie können auch versuchen, eine Remote-Verbindung zu Ihrem Gerät herzustellen, indem Sie im Menü oben Remote auswählen.",
         "queryParams": "Abfrageparameter: %{queryParams}",
         "remoteConsole": {
-            "connectionFailed": "Verbindung zum GX-Gerät nicht möglich",
             "qrCodeMessage": "Um auf die GX-Fernbedienungskonsole zuzugreifen, vergewissern Sie sich, dass sich Ihr Telefon im selben WiFi-Netzwerk befindet wie das GX-Gerät, und scannen Sie dann diesen QR-Code.",
             "screenTooSmall": "Auf einem größeren Bildschirm öffnen, um die Remote-Konsole anzuzeigen"
         },
@@ -187,16 +149,9 @@
     "header": {
         "close": "Schließen",
         "connecting": "Es wird verbunden",
-        "local": "Lokal",
-        "loggedIn": "Eingeloggt als",
-        "notLoggedIn": "Nicht eingeloggt",
-        "remote": "Remote",
         "remoteConsole": "Remote-Konsole",
         "remoteMessage": "Auf einem größeren Bildschirm öffnen, um die Remote-Konsole anzuzeigen",
         "versionInfo": "Versionsinformation"
-    },
-    "installations": {
-        "title": "Wählen Sie eine Installation"
     },
     "locker": {
         "lockDescription": "Um versehentliche Änderungen an den Geräteeinstellungen zu verhindern, wird durch die Aktivierung dieser Funktion die Möglichkeit zur Interaktion mit Steuerelementen gesperrt",
@@ -210,30 +165,9 @@
     "pages": {
         "diagnostics": "Diagnostik",
         "remoteConsole": "Remote-Konsole",
-        "switchingPane": "Switching Pane",
         "systemOverview": "Systemübersicht"
     },
-    "remoteLogin": {
-        "2fa": "Zwei-Faktor-Authentifizierungs-Token",
-        "email": "E-Mail",
-        "forgotPassword": "Passwort vergessen?",
-        "goBack": "Zurück",
-        "logIn": "Anmelden",
-        "logOut": "Abmelden",
-        "loginFailed": "Fehler bei der Anmeldung",
-        "mobileVerification": "Authentifizierungs-App-Token",
-        "noInstallations": "Dieses Konto hat keine Installationen. Möchten Sie sich abmelden?",
-        "password": "Passwort",
-        "registerMessage1": "Sie haben noch kein Konto? ",
-        "registerMessage2": "Registrieren Sie Ihr Wohnmobil.",
-        "smsVerification": "SMS-Verifizierungs-Token",
-        "wrong2fa": "Falscher Zwei-Faktor-Authentifizierungscode"
-    },
     "statusWidget": {
-        "Discharging": "Entladen",
-        "Off": "Aus",
-        "VE.Bus Fault condition": "VE.Bus Fehlerzustand",
-        "Wake-up": "Aufwachen",
         "absorptionCharging": "Absorption",
         "assisting": "Unterstützen",
         "autoEqualizeRecondition": "Automatischer Ausgleich/Rekonditionierung",
@@ -245,19 +179,6 @@
         "floatCharging": "Float",
         "inverting": "Inverting",
         "lowPower": "Leist. niedr.",
-        "parts": {
-            "Battery": "Batterie",
-            "Black water": "Schwarzwasser",
-            "DC Loads": "DC Lasten",
-            "Fresh water": "Frischwasser",
-            "Fuel": "Treibstoff",
-            "Live well": "Fischkasten",
-            "Oil": "Öl",
-            "PV Charger": "PV-Ladegerät",
-            "Shore Power": "Landstrom",
-            "Tank sensor": "Tanksensor",
-            "Waste water": "Abwasser"
-        },
         "passthru": "Durchleiten",
         "recharge": "Nachladen",
         "repeatedAbsorption": "Wiederholte Absorption",
@@ -311,7 +232,6 @@
         "volume": "Volumen"
     },
     "tankWidget": {
-        "Tank sensor": "Tanksensor",
         "blackWater": "Schwarzwasser",
         "diesel": "Diesel",
         "freshWater": "Frischwasser",
@@ -335,7 +255,6 @@
     "widgets": {
         "acLoads": "AC Lasten",
         "batteries": "Batterien",
-        "battery": "Batterie",
         "batteryWithName": "Batterie: %{name}",
         "chargerWithName": "Ladegerät: %{productNameShort}",
         "dcLoads": "DC Lasten",
@@ -345,10 +264,8 @@
         "invalidConfig": "Ungültige Konfiguration",
         "inverterCharger": "Wechselrichter / Ladegerät: %{productNameShort}",
         "inverterWithName": "Inverter: %{productNameShort}",
-        "pvCharger": "PV-Ladegerät",
         "shorePower": "Landstrom",
         "solar": "Solar",
-        "status": "Status",
         "unknown": "Unbekannt"
     }
 }

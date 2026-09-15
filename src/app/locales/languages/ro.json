@@ -1,46 +1,25 @@
 {
     "acMode": {
         "modal": {
-            "name": "Nume",
             "updateLimit": "Selectați limita de intrare din rețea"
-        },
-        "title": "Mod AC"
+        }
     },
     "boxes": {
-        "EnergyOverview": "Rezumat energie",
         "acLoads": "Consumatori AC",
         "alternator": "Alternator",
         "batteries": "Baterii",
-        "battery": "Baterie",
-        "batteryWithName": "Baterie: %{name}",
-        "chargerWithName": "Încărcător: %{productNameShort}",
         "dcLoads": "Consumatori DC",
         "devices": "Dispozitiv",
         "energy": "Energie",
         "environment": "Mediu inconjurator",
         "generator": "Generator",
-        "generatorInput": "Intrare generator",
-        "gridInput": "Intrare rețea",
         "humidity": "Umiditate",
-        "invalidConfig": "Configurație nevalidă",
-        "inverterCharger": "Invertor/Încărcător: %{productNameShort}",
-        "inverterWithName": "Invertor: %{productNameShort}",
         "pressure": "Presiune",
-        "pvCharger": "Încărcător PV",
         "shorePower": "Alimentare din rețea",
         "solar": "Solar",
-        "status": "Stare",
         "tanks": "Rezervoare",
         "temperature": "Temperatura",
-        "unknown": "Necunoscut",
         "windGenerator": "Generator eolian"
-    },
-    "cardFooter": {
-        "Charge": "Incarcare",
-        "Critical": "Sever",
-        "Optimal": "Optim",
-        "Status": "Stare",
-        "Warning": "Avertizare"
     },
     "common": {
         "absorptionCharging": "Încărcare „Absorption”",
@@ -48,16 +27,11 @@
         "auto": "Auto",
         "autoStartStop": "Start/Stop automat",
         "bulkCharging": "Încărcare „Bulk”",
-        "charge": "Incarcare",
-        "charged": "Schimbat",
         "chargerOnly": "Doar incarcator",
         "charging": "incarcare",
         "close": "Închidere",
-        "current": "Actual",
         "dark": "Întunecat",
         "days": "zile",
-        "days_short": "z",
-        "discharge": "Descărcare",
         "discharging": "descarcare",
         "eco": "Eco",
         "emptyBar": " - ",
@@ -77,25 +51,20 @@
         "inverterOnly": "Doar invertor",
         "inverting": "Dimensiune invertor",
         "light": "Luminos",
-        "limit": "Limită",
         "loading": "Încărcare",
-        "loads": "Încărcătură",
         "lowPower": "Putere Scazuta",
         "minutes": "minute",
         "minutes_short": "m",
         "mode": "Mod",
         "night": "Noapte",
         "no": "Nu",
-        "noShorePower": "Fără alimentare din rețea",
         "notAvailable": "Indisponibil",
         "nrOfPhases": "%{phases} faze",
-        "null": " ",
         "off": "Oprit",
         "on": "Pornit",
         "passthru": "Direct",
         "pending": "In asteptare",
         "powerSupplyMode": "Mod sursa de alimentare",
-        "remainingTime": "Timp rămas",
         "running": "Functioneaza",
         "set": "Setare",
         "shorePower": "Alimentare de la țărm",
@@ -107,8 +76,6 @@
         "sustain": "Sustine",
         "timetogo": "rămas",
         "unplugged": "Deconectat",
-        "veBusFault": "Eroare convertor VE.Bus",
-        "voltage": "Tensiune",
         "yes": "Da"
     },
     "diagnostics": {
@@ -123,7 +90,6 @@
         "device": {
             "colorScheme": "Schemă de culori",
             "device": "Dispozitiv",
-            "devicePixelRatio": "Raport pixeli",
             "diagConsole": "Consolă de diagnosticare",
             "hideDiagConsole": "Ascunde consola de diagnosticare",
             "isGuiV2Supported": "GUI v2 suportat",
@@ -136,8 +102,6 @@
             "unspecified": "Nespecificat",
             "userAgent": "Agent utilizator",
             "viewport": "Zonă de vizualizare",
-            "viewportHeight": "Înălțime fereastră vizualiare",
-            "viewportWidth": "Lățime fereastră vizualiare",
             "webgl": "WebGL",
             "webglNotSupported": "Nesuportat"
         },
@@ -162,10 +126,8 @@
         "mqttUnavailable2": "Vă rugăm să verificați dacă MQTT este activat în setările dumneavoastră:",
         "mqttUnavailable3": "Consolă la distanţă > Setări > Servicii > MQTT pe LAN (text simplu)",
         "mqttUnavailable4": "Încercați să utilizați butonul Consolă la distanţă situat pe partea de sus a acestui ecran pentru a vă schimba setările de la distanţă.",
-        "mqttUnavailable5": "De asemenea, puteți încerca să vă conectați la dispozitivul dumneavoastră de la distanţă selectând Remote (de la distanţă) din meniul de mai sus.",
         "queryParams": "Parametrii solicitării: %{queryParams}",
         "remoteConsole": {
-            "connectionFailed": "Nu se poate conecta la dispozitivul GX",
             "qrCodeMessage": "Pentru a accesa Consola la distanță GX, asigurați-vă că telefonul dvs. se află în aceeași rețea WiFi cu dispozitivul GX și apoi scanați acest cod QR.",
             "screenTooSmall": "Deschideți pe un ecran mai mare pentru a vizualiza consola la distanţă"
         },
@@ -187,16 +149,9 @@
     "header": {
         "close": "Închide",
         "connecting": "Conectare",
-        "local": "Local",
-        "loggedIn": "Conectat ca",
-        "notLoggedIn": "Neconectat",
-        "remote": "La distanță",
         "remoteConsole": "Consola la distanta",
         "remoteMessage": "Deschideți pe un ecran mai mare pentru a vizualiza consola la distanţă",
         "versionInfo": "Informații despre versiune"
-    },
-    "installations": {
-        "title": "Alegeți o versiune de instalare"
     },
     "locker": {
         "lockDescription": "Pentru a preveni modificările accidentale în setările dispozitivului – activarea acestei funcții va bloca posibila interacțiune cu comenzile",
@@ -210,30 +165,9 @@
     "pages": {
         "diagnostics": "Diagnostic",
         "remoteConsole": "Consola la distanta",
-        "switchingPane": "Panou de comutare",
         "systemOverview": "Prezentare generală sistem"
     },
-    "remoteLogin": {
-        "2fa": "Token de autentificare cu doi factori",
-        "email": "Email",
-        "forgotPassword": "Ați uitat parola?",
-        "goBack": "Înapoi",
-        "logIn": "Autentificare",
-        "logOut": "Deconectare",
-        "loginFailed": "Autentificare eșuată",
-        "mobileVerification": "Token pentru aplicația de autentificare",
-        "noInstallations": "Acest cont nu are instalări.",
-        "password": "Parola",
-        "registerMessage1": "Nu aveți încă un cont? ",
-        "registerMessage2": "Înregistrați-vă RV.",
-        "smsVerification": "Token de verificare prin SMS",
-        "wrong2fa": "Cod de verificare cu doi factori greșit"
-    },
     "statusWidget": {
-        "Discharging": "descarcare",
-        "Off": "Oprit",
-        "VE.Bus Fault condition": "Eroare convertor VE.Bus",
-        "Wake-up": "Trezire",
         "absorptionCharging": "Încărcare „Absorption”",
         "assisting": "Assisting",
         "autoEqualizeRecondition": "Egalizare automată/Recondiționare",
@@ -245,19 +179,6 @@
         "floatCharging": "Încărcare „Float”",
         "inverting": "Dimensiune invertor",
         "lowPower": "Putere Scazuta",
-        "parts": {
-            "Battery": "Baterie",
-            "Black water": "APA REZIDUALA",
-            "DC Loads": "Consumatori DC",
-            "Fresh water": "Apă dulce",
-            "Fuel": "Carburant",
-            "Live well": "Live well",
-            "Oil": "Ulei",
-            "PV Charger": "Incarcator PV",
-            "Shore Power": "Energie solară",
-            "Tank sensor": "Senzor rezervor",
-            "Waste water": "Apa reziduala"
-        },
         "passthru": "Direct",
         "recharge": "Reîncărcare",
         "repeatedAbsorption": "Absortie repetata",
@@ -311,7 +232,6 @@
         "volume": "Volum"
     },
     "tankWidget": {
-        "Tank sensor": "Senzor rezervor",
         "blackWater": "Apa redizuala",
         "diesel": "Motorină",
         "freshWater": "Apă dulce",
@@ -335,7 +255,6 @@
     "widgets": {
         "acLoads": "Consumatori AC",
         "batteries": "Baterii",
-        "battery": "Baterie",
         "batteryWithName": "Baterie: %{name}",
         "chargerWithName": "Încărcător: %{productNameShort}",
         "dcLoads": "Consumatori DC",
@@ -345,10 +264,8 @@
         "invalidConfig": "Configurație nevalidă",
         "inverterCharger": "Invertor/Încărcător: %{productNameShort}",
         "inverterWithName": "Invertor: %{productNameShort}",
-        "pvCharger": "Incarcator PV",
         "shorePower": "Energie solară",
         "solar": "Solar",
-        "status": "Stare",
         "unknown": "Necunoscut"
     }
 }

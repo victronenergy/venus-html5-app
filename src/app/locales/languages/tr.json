@@ -1,46 +1,25 @@
 {
     "acMode": {
         "modal": {
-            "name": "İsim",
             "updateLimit": "updateLimit"
-        },
-        "title": "Başlık"
+        }
     },
     "boxes": {
-        "EnergyOverview": "Enerji Genel Bakış",
         "acLoads": "AC Yükler",
         "alternator": "Alternatör",
         "batteries": "Aküler",
-        "battery": "Akü",
-        "batteryWithName": "Akü: %{name}",
-        "chargerWithName": "Şarjer: %{productNameShort}",
         "dcLoads": "DC Yükler",
         "devices": "Cihazlar",
         "energy": "Enerji",
         "environment": "Çevre",
         "generator": "Jeneratör",
-        "generatorInput": "Jeneratör Girişi",
-        "gridInput": "Ṣebeke Girişi",
         "humidity": "Nem",
-        "invalidConfig": "Geçersiz Yapılandırma",
-        "inverterCharger": "Inverter / Charger: %{productNameShort}",
-        "inverterWithName": "Inverter: %{productNameShort}",
         "pressure": "Basınç",
-        "pvCharger": "PV Şarj cihaz",
         "shorePower": "Sahil Gücü",
         "solar": "Solar",
-        "status": "Durum",
         "tanks": "Tanklar",
         "temperature": "Sıcaklık",
-        "unknown": "Bilinmiyor",
         "windGenerator": "Rüzgar jeneratörü"
-    },
-    "cardFooter": {
-        "Charge": "Yük",
-        "Critical": "Kritik",
-        "Optimal": "En iyi",
-        "Status": "Durum",
-        "Warning": "Uyarı"
     },
     "common": {
         "absorptionCharging": "Absorption Şarjı",
@@ -48,16 +27,11 @@
         "auto": "Otomatik",
         "autoStartStop": "autoStartStop",
         "bulkCharging": "Bulk Şarj",
-        "charge": "ücret",
-        "charged": "Ṣarj edildi",
         "chargerOnly": "şarj cihazıOnly",
         "charging": "Şarj",
         "close": "Kapat",
-        "current": "Akım",
         "dark": "Koyu",
         "days": "Gün",
-        "days_short": "g",
-        "discharge": "Deşarj",
         "discharging": "Deşarj",
         "eco": "Eko",
         "emptyBar": "boş Çubuk",
@@ -77,25 +51,20 @@
         "inverterOnly": "inverterOnly",
         "inverting": "Çevriliyor",
         "light": "Renkli",
-        "limit": "sınırlamak",
         "loading": "Yükleniyor...",
-        "loads": "Yükler",
         "lowPower": "lowPower",
         "minutes": "dakika",
         "minutes_short": "d",
         "mode": "Mod",
         "night": "Gece",
         "no": "Hayır",
-        "noShorePower": "noShorePower",
         "notAvailable": "notAvailable",
         "nrOfPhases": "nrOfPhases",
-        "null": "˽",
         "off": "Kapalı",
         "on": "Açık",
         "passthru": "Düz geçme",
         "pending": "Askıda olması...",
         "powerSupplyMode": "powerSupplyMode",
-        "remainingTime": "kalan Saat",
         "running": "Çalışıyor",
         "set": "Ayarla",
         "shorePower": "Kıyı Elektriği",
@@ -107,8 +76,6 @@
         "sustain": "Sürdür",
         "timetogo": "kaldı",
         "unplugged": "Fiş takılı değil",
-        "veBusFault": "veBusFault",
-        "voltage": "Gerilim",
         "yes": "Evet"
     },
     "diagnostics": {
@@ -123,7 +90,6 @@
         "device": {
             "colorScheme": "Renk Şeması",
             "device": "Cihaz",
-            "devicePixelRatio": "Piksel Oranı",
             "diagConsole": "Tanılama Konsolu",
             "hideDiagConsole": "Tanılama Konsolunu Gizle",
             "isGuiV2Supported": "GUI v2 destekleniyor",
@@ -136,8 +102,6 @@
             "unspecified": "Belirtilmemiş",
             "userAgent": "User agent",
             "viewport": "Görüntü Alanı",
-            "viewportHeight": "Viewport height",
-            "viewportWidth": "Viewport width",
             "webgl": "WebGL",
             "webglNotSupported": "Desteklenmiyor"
         },
@@ -162,10 +126,8 @@
         "mqttUnavailable2": "mqttUnavailable2",
         "mqttUnavailable3": "Uzak Konsol > Ayarlar > Hizmetler > MQTT Erişimi\n",
         "mqttUnavailable4": "mqttUnavailable4",
-        "mqttUnavailable5": "mqttUnavailable5",
         "queryParams": "Query params: %{queryParams}",
         "remoteConsole": {
-            "connectionFailed": "GX cihazına bağlanılamıyor",
             "qrCodeMessage": "GX Remote Console'a erişmek için telefonunuzun GX cihazıyla aynı WiFi ağında olduğundan emin olun ve ardından bu QR kodunu tarayın.",
             "screenTooSmall": "Uzak konsolu görüntülemek için daha büyük bir ekranda açın"
         },
@@ -187,16 +149,9 @@
     "header": {
         "close": "Kapat",
         "connecting": "Bağlanıyor",
-        "local": "Yerel",
-        "loggedIn": "günlüğe kaydedildiIn",
-        "notLoggedIn": "notLoggedIn",
-        "remote": "Uzaktan kumanda",
         "remoteConsole": "remoteConsole",
         "remoteMessage": "remoteMessage",
         "versionInfo": "Version Information\n"
-    },
-    "installations": {
-        "title": "Başlık"
     },
     "locker": {
         "lockDescription": "Cihaz ayarlarında yanlışlıkla değişiklik yapılmasını önlemek için - bu işlevin etkinleştirilmesi, kontrollerle etkileşim olasılığını kilitleyecektir",
@@ -210,30 +165,9 @@
     "pages": {
         "diagnostics": "Diagnostics",
         "remoteConsole": "Uzak Konsol",
-        "switchingPane": "Anahtarlama Paneli",
         "systemOverview": "Sistem görünümü"
     },
-    "remoteLogin": {
-        "2fa": "İki-faktörlü kimlik doğrulama jetonu\n",
-        "email": "E",
-        "forgotPassword": "forgotPassword",
-        "goBack": "Geri",
-        "logIn": "Oturum Aç",
-        "logOut": "Çıkış Yap",
-        "loginFailed": "loginFailed",
-        "mobileVerification": "Authenticator uygulama jetonu",
-        "noInstallations": "Bu hesapta kurulum yok.",
-        "password": "Parola",
-        "registerMessage1": "registerMessage1",
-        "registerMessage2": "registerMessage2",
-        "smsVerification": "SMS doğrulama jetonu",
-        "wrong2fa": "Yanlış iki-faktörlü doğrulama kodu\n"
-    },
     "statusWidget": {
-        "Discharging": "Deşarj",
-        "Off": "Kapalı",
-        "VE.Bus Fault condition": "SEK Veri Yolu Arızası durumu",
-        "Wake-up": "Uyanmak",
         "absorptionCharging": "Absorption şarjı",
         "assisting": "Yardım ediyor",
         "autoEqualizeRecondition": "Auto equalize/Recondition",
@@ -245,19 +179,6 @@
         "floatCharging": "Float şarjı",
         "inverting": "Çevriliyor",
         "lowPower": "Düşük Güç",
-        "parts": {
-            "Battery": "Akü",
-            "Black water": "Pis Su",
-            "DC Loads": "dcLoads",
-            "Fresh water": "Temiz su",
-            "Fuel": "Yakıt",
-            "Live well": "Faal kuyu",
-            "Oil": "Yağ",
-            "PV Charger": "PV Şarj Cihazı",
-            "Shore Power": "Sahil",
-            "Tank sensor": "Tank sensörü",
-            "Waste water": "Atık su"
-        },
         "passthru": "Düz geçme",
         "recharge": "Yeniden Şarj",
         "repeatedAbsorption": "Tekrarlanan Absorption",
@@ -311,7 +232,6 @@
         "volume": "Hacim"
     },
     "tankWidget": {
-        "Tank sensor": "Tank sensörü",
         "blackWater": "Pis Su",
         "diesel": "Dizel",
         "freshWater": "Temiz su",
@@ -335,7 +255,6 @@
     "widgets": {
         "acLoads": "AC Yükler",
         "batteries": "Aküler",
-        "battery": "Akü",
         "batteryWithName": "Battery: %{name}",
         "chargerWithName": "chargerWithName",
         "dcLoads": "dcLoads",
@@ -345,10 +264,8 @@
         "invalidConfig": "invalidConfig",
         "inverterCharger": "Inverter / Charger: %{productNameShort}",
         "inverterWithName": "inverterWithName",
-        "pvCharger": "pvŞarj",
         "shorePower": "shorePower",
         "solar": "Solar",
-        "status": "Durum",
         "unknown": "Bilinmiyor"
     }
 }

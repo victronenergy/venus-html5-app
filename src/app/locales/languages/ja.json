@@ -1,46 +1,25 @@
 {
     "acMode": {
         "modal": {
-            "name": "モード選択",
             "updateLimit": "陸電入力制限の選択"
-        },
-        "title": "ACモード"
+        }
     },
     "boxes": {
-        "EnergyOverview": "エネルギー概要",
         "acLoads": "AC負荷",
         "alternator": "オルタネーター",
         "batteries": "バッテリー",
-        "battery": "バッテリー",
-        "batteryWithName": "バッテリー: %{name}",
-        "chargerWithName": "充電器: %{productNameShort}",
         "dcLoads": "DC負荷",
         "devices": "デバイス一覧",
         "energy": "エネルギー",
         "environment": "環境",
         "generator": "発電機",
-        "generatorInput": "発電機入力",
-        "gridInput": "グリッド入力",
         "humidity": "湿度",
-        "invalidConfig": "無効な設定",
-        "inverterCharger": "インバーター / 充電器: %{productNameShort}",
-        "inverterWithName": "インバーター: %{productNameShort}",
         "pressure": "気圧",
-        "pvCharger": "PV充電器",
         "shorePower": "陸電",
         "solar": "ソーラー",
-        "status": "ステータス",
         "tanks": "タンク",
         "temperature": "温度",
-        "unknown": "不明",
         "windGenerator": "風力発電機"
-    },
-    "cardFooter": {
-        "Charge": "充電",
-        "Critical": "重大",
-        "Optimal": "最適",
-        "Status": "ステータス",
-        "Warning": "警告"
     },
     "common": {
         "absorptionCharging": "吸収充電",
@@ -48,16 +27,11 @@
         "auto": "自動",
         "autoStartStop": "自動起動/停止",
         "bulkCharging": "バルク充電",
-        "charge": "充電",
-        "charged": "充電完了",
         "chargerOnly": "充電器のみ",
         "charging": "充電中",
         "close": "閉じる",
-        "current": "電流",
         "dark": "ダーク",
         "days": "日",
-        "days_short": "日",
-        "discharge": "放電",
         "discharging": "放電中",
         "eco": "エコ",
         "emptyBar": " - ",
@@ -77,25 +51,20 @@
         "inverterOnly": "インバータのみ",
         "inverting": "インバート中",
         "light": "ライト",
-        "limit": "制限値",
         "loading": "読み込み中",
-        "loads": "負荷",
         "lowPower": "低電力",
         "minutes": "分",
         "minutes_short": "分",
         "mode": "モード",
         "night": "夜間",
         "no": "いいえ",
-        "noShorePower": "陸上電源なし",
         "notAvailable": "利用不可",
         "nrOfPhases": "%{phases} 相",
-        "null": " ",
         "off": "オフ",
         "on": "オン",
         "passthru": "パススルー",
         "pending": "保留中",
         "powerSupplyMode": "電源モード",
-        "remainingTime": "残り時間",
         "running": "運転中",
         "set": "設定",
         "shorePower": "陸電",
@@ -107,8 +76,6 @@
         "sustain": "サステイン",
         "timetogo": "残り",
         "unplugged": "未接続",
-        "veBusFault": "VE.Busエラー状態",
-        "voltage": "電圧",
         "yes": "はい"
     },
     "diagnostics": {
@@ -123,7 +90,6 @@
         "device": {
             "colorScheme": "カラースキーム",
             "device": "デバイス",
-            "devicePixelRatio": "ピクセル比",
             "diagConsole": "診断コンソール",
             "hideDiagConsole": "診断コンソールを非表示",
             "isGuiV2Supported": "GUI v2対応",
@@ -136,8 +102,6 @@
             "unspecified": "未指定",
             "userAgent": "ユーザーエージェント",
             "viewport": "ビューポート",
-            "viewportHeight": "ビューポートの高さ",
-            "viewportWidth": "ビューポートの幅",
             "webgl": "WebGL",
             "webglNotSupported": "非対応"
         },
@@ -162,10 +126,8 @@
         "mqttUnavailable2": "設定でMQTTが有効になっているか確認してください：",
         "mqttUnavailable3": "リモートコンソール > 設定 > サービス > MQTTアクセス",
         "mqttUnavailable4": "この画面の上部にある「リモートコンソール」ボタンを使用して、リモートで設定を変更してみてください。",
-        "mqttUnavailable5": "上のメニューから「リモート」を選択して、デバイスにリモート接続することもできます。",
         "queryParams": "クエリパラメータ: %{queryParams}",
         "remoteConsole": {
-            "connectionFailed": "GXデバイスに接続できません",
             "qrCodeMessage": "GX Remote Consoleにアクセスするには、スマートフォンがGXデバイスと同じWi-Fiネットワークに接続されていることを確認し、このQRコードをスキャンしてください。",
             "screenTooSmall": "リモートコンソールを表示するには、より大きな画面で開いてください"
         },
@@ -187,16 +149,9 @@
     "header": {
         "close": "閉じる",
         "connecting": "接続中",
-        "local": "ローカル",
-        "loggedIn": "ログインユーザー:",
-        "notLoggedIn": "未ログイン",
-        "remote": "リモート",
         "remoteConsole": "リモートコンソール",
         "remoteMessage": "リモートコンソールを表示するには、より大きな画面で開いてください",
         "versionInfo": "バージョン情報"
-    },
-    "installations": {
-        "title": "システムを選択"
     },
     "locker": {
         "lockDescription": "デバイス設定の誤変更を防ぐため、この機能を有効にするとコントロールの操作ができなくなります。",
@@ -210,30 +165,9 @@
     "pages": {
         "diagnostics": "診断",
         "remoteConsole": "リモートコンソール",
-        "switchingPane": "切り替えペイン",
         "systemOverview": "システム概要"
     },
-    "remoteLogin": {
-        "2fa": "2要素認証トークン",
-        "email": "メールアドレス",
-        "forgotPassword": "パスワードをお忘れですか？",
-        "goBack": "戻る",
-        "logIn": "ログイン",
-        "logOut": "ログアウト",
-        "loginFailed": "ログイン失敗",
-        "mobileVerification": "認証アプリのトークン",
-        "noInstallations": "このアカウントには登録されたシステムがありません。",
-        "password": "パスワード",
-        "registerMessage1": "まだアカウントをお持ちではありませんか？ ",
-        "registerMessage2": "RVを登録する。",
-        "smsVerification": "SMS認証トークン",
-        "wrong2fa": "2要素認証コードが正しくありません"
-    },
     "statusWidget": {
-        "Discharging": "放電中",
-        "Off": "オフ",
-        "VE.Bus Fault condition": "VE.Busエラー状態",
-        "Wake-up": "ウェイクアップ",
         "absorptionCharging": "吸収充電",
         "assisting": "アシスト中",
         "autoEqualizeRecondition": "自動均等化/リフレッシュ",
@@ -245,19 +179,6 @@
         "floatCharging": "フロート充電",
         "inverting": "インバート中",
         "lowPower": "低電力",
-        "parts": {
-            "Battery": "バッテリー",
-            "Black water": "ブラックウォーター",
-            "DC Loads": "DC負荷",
-            "Fresh water": "清水",
-            "Fuel": "燃料",
-            "Live well": "ライブウェル",
-            "Oil": "オイル",
-            "PV Charger": "PVチャージャー",
-            "Shore Power": "陸電",
-            "Tank sensor": "タンクセンサー",
-            "Waste water": "グレーウォーター"
-        },
         "passthru": "パススルー",
         "recharge": "再充電",
         "repeatedAbsorption": "繰り返し吸収充電",
@@ -311,7 +232,6 @@
         "volume": "容量"
     },
     "tankWidget": {
-        "Tank sensor": "タンクセンサー",
         "blackWater": "汚水",
         "diesel": "軽油/ディーゼル",
         "freshWater": "清水",
@@ -335,7 +255,6 @@
     "widgets": {
         "acLoads": "AC負荷",
         "batteries": "バッテリー",
-        "battery": "バッテリー",
         "batteryWithName": "バッテリー: %{name}",
         "chargerWithName": "充電器: %{productNameShort}",
         "dcLoads": "DC負荷",
@@ -345,10 +264,8 @@
         "invalidConfig": "無効な設定",
         "inverterCharger": "インバーター / チャージャー: %{productNameShort}",
         "inverterWithName": "インバータ: %{productNameShort}",
-        "pvCharger": "PVチャージャー",
         "shorePower": "陸電",
         "solar": "ソーラー",
-        "status": "ステータス",
         "unknown": "不明"
     }
 }

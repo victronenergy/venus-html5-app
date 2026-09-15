@@ -1,46 +1,25 @@
 {
     "acMode": {
         "modal": {
-            "name": "เลือกโหมด",
             "updateLimit": "เลือกขีดจำกัดอินพุตไฟฝั่ง"
-        },
-        "title": "โหมด AC"
+        }
     },
     "boxes": {
-        "EnergyOverview": "ภาพรวมพลังงาน",
         "acLoads": "โหลด AC",
         "alternator": "ไดชาร์จ",
         "batteries": "แบตเตอรี่",
-        "battery": "แบตเตอรี่",
-        "batteryWithName": "แบตเตอรี่: %{name}",
-        "chargerWithName": "เครื่องชาร์จ: %{productNameShort}",
         "dcLoads": "โหลด DC",
         "devices": "อุปกรณ์",
         "energy": "พลังงาน",
         "environment": "สภาพแวดล้อม",
         "generator": "เครื่องกำเนิดไฟฟ้า",
-        "generatorInput": "อินพุตเครื่องกำเนิดไฟฟ้า",
-        "gridInput": "อินพุตโครงข่ายไฟฟ้า",
         "humidity": "ความชื้น",
-        "invalidConfig": "การกำหนดค่าไม่ถูกต้อง",
-        "inverterCharger": "อินเวอร์เตอร์ / เครื่องชาร์จ: %{productNameShort}",
-        "inverterWithName": "อินเวอร์เตอร์: %{productNameShort}",
         "pressure": "ความดัน",
-        "pvCharger": "เครื่องชาร์จ PV",
         "shorePower": "ไฟจากฝั่ง",
         "solar": "โซลาร์",
-        "status": "สถานะ",
         "tanks": "ถัง",
         "temperature": "อุณหภูมิ",
-        "unknown": "ไม่ทราบ",
         "windGenerator": "กังหันลมผลิตไฟฟ้า"
-    },
-    "cardFooter": {
-        "Charge": "ชาร์จ",
-        "Critical": "วิกฤต",
-        "Optimal": "เหมาะสมที่สุด",
-        "Status": "สถานะ",
-        "Warning": "คำเตือน"
     },
     "common": {
         "absorptionCharging": "การชาร์จแบบ Absorption",
@@ -48,16 +27,11 @@
         "auto": "อัตโนมัติ",
         "autoStartStop": "เริ่ม/หยุดอัตโนมัติ",
         "bulkCharging": "การชาร์จแบบ Bulk",
-        "charge": "ชาร์จ",
-        "charged": "ชาร์จเต็ม",
         "chargerOnly": "เครื่องชาร์จเท่านั้น",
         "charging": "กำลังชาร์จ",
         "close": "ปิด",
-        "current": "กระแสไฟฟ้า",
         "dark": "มืด",
         "days": "วัน",
-        "days_short": "วัน",
-        "discharge": "จ่ายไฟ",
         "discharging": "กำลังคายประจุ",
         "eco": "Eco",
         "emptyBar": " - ",
@@ -77,25 +51,20 @@
         "inverterOnly": "อินเวอร์เตอร์เท่านั้น",
         "inverting": "กำลังแปลงไฟ",
         "light": "สว่าง",
-        "limit": "ขีดจำกัด",
         "loading": "กำลังโหลด",
-        "loads": "โหลด",
         "lowPower": "พลังงานต่ำ",
         "minutes": "นาที",
         "minutes_short": "นาที",
         "mode": "โหมด",
         "night": "กลางคืน",
         "no": "ไม่",
-        "noShorePower": "ไม่มีไฟฝั่ง",
         "notAvailable": "ไม่พร้อมใช้งาน",
         "nrOfPhases": "%{phases} เฟส",
-        "null": " ",
         "off": "ปิด",
         "on": "เปิด",
         "passthru": "พาสทรู",
         "pending": "รอดำเนินการ",
         "powerSupplyMode": "โหมดแหล่งจ่ายไฟ",
-        "remainingTime": "เวลาที่เหลืออยู่",
         "running": "กำลังทำงาน",
         "set": "ตั้งค่า",
         "shorePower": "ไฟฝั่ง",
@@ -107,8 +76,6 @@
         "sustain": "คงสภาพ",
         "timetogo": "ที่เหลือ",
         "unplugged": "ถอดปลั๊กออกแล้ว",
-        "veBusFault": "สภาวะข้อผิดพลาด VE.Bus",
-        "voltage": "แรงดันไฟฟ้า",
         "yes": "ใช่"
     },
     "diagnostics": {
@@ -123,7 +90,6 @@
         "device": {
             "colorScheme": "โทนสี",
             "device": "อุปกรณ์",
-            "devicePixelRatio": "อัตราส่วนพิกเซล",
             "diagConsole": "คอนโซลการวินิจฉัย",
             "hideDiagConsole": "ซ่อนคอนโซลการวินิจฉัย",
             "isGuiV2Supported": "รองรับ GUI v2",
@@ -136,8 +102,6 @@
             "unspecified": "ไม่ได้ระบุ",
             "userAgent": "User agent",
             "viewport": "พื้นที่แสดงผล",
-            "viewportHeight": "ความสูง Viewport",
-            "viewportWidth": "ความกว้าง Viewport",
             "webgl": "WebGL",
             "webglNotSupported": "ไม่รองรับ"
         },
@@ -162,10 +126,8 @@
         "mqttUnavailable2": "โปรดตรวจสอบว่าได้เปิดใช้งาน MQTT ในการตั้งค่าของคุณแล้ว:",
         "mqttUnavailable3": "Remote Console > Settings > Services > MQTT Access",
         "mqttUnavailable4": "ลองใช้ปุ่ม Remote Console ที่ด้านบนของหน้าจอนี้เพื่อเปลี่ยนการตั้งค่าของคุณจากระยะไกล",
-        "mqttUnavailable5": "คุณยังสามารถลองเชื่อมต่อกับอุปกรณ์ของคุณจากระยะไกลได้ โดยเลือก Remote จากเมนูด้านบน",
         "queryParams": "Query params: %{queryParams}",
         "remoteConsole": {
-            "connectionFailed": "ไม่สามารถเชื่อมต่อกับอุปกรณ์ GX ได้",
             "qrCodeMessage": "หากต้องการเข้าถึง GX Remote Console โปรดตรวจสอบให้แน่ใจว่าโทรศัพท์ของคุณเชื่อมต่อเครือข่าย WiFi เดียวกันกับอุปกรณ์ GX จากนั้นสแกน QR โค้ดนี้",
             "screenTooSmall": "เปิดบนหน้าจอที่ใหญ่ขึ้นเพื่อดูคอนโซลระยะไกล"
         },
@@ -187,16 +149,9 @@
     "header": {
         "close": "ปิด",
         "connecting": "กำลังเชื่อมต่อ",
-        "local": "โลคอล",
-        "loggedIn": "เข้าสู่ระบบในชื่อ",
-        "notLoggedIn": "ไม่ได้เข้าสู่ระบบ",
-        "remote": "รีโมท",
         "remoteConsole": "รีโมทคอนโซล",
         "remoteMessage": "เปิดในหน้าจอที่ใหญ่ขึ้นเพื่อดูรีโมทคอนโซล",
         "versionInfo": "ข้อมูลเวอร์ชัน"
-    },
-    "installations": {
-        "title": "เลือกการติดตั้ง"
     },
     "locker": {
         "lockDescription": "เพื่อป้องกันการเปลี่ยนการตั้งค่าอุปกรณ์โดยไม่ได้ตั้งใจ - การเปิดใช้งานฟังก์ชันนี้จะล็อกไม่ให้สามารถใช้งานปุ่มควบคุมได้",
@@ -210,30 +165,9 @@
     "pages": {
         "diagnostics": "การวินิจฉัย",
         "remoteConsole": "คอนโซลระยะไกล",
-        "switchingPane": "หน้าต่างสลับ",
         "systemOverview": "ภาพรวมระบบ"
     },
-    "remoteLogin": {
-        "2fa": "โทเค็นการยืนยันตัวตนแบบสองขั้นตอน",
-        "email": "อีเมล",
-        "forgotPassword": "ลืมรหัสผ่าน?",
-        "goBack": "ย้อนกลับ",
-        "logIn": "เข้าสู่ระบบ",
-        "logOut": "ออกจากระบบ",
-        "loginFailed": "การเข้าสู่ระบบล้มเหลว",
-        "mobileVerification": "โทเค็นแอปยืนยันตัวตน",
-        "noInstallations": "บัญชีนี้ไม่มีการติดตั้งระบบใดๆ",
-        "password": "รหัสผ่าน",
-        "registerMessage1": "ยังไม่มีบัญชีผู้ใช้? ",
-        "registerMessage2": "ลงทะเบียนรถ RV ของคุณ",
-        "smsVerification": "โทเค็นการยืนยันทาง SMS",
-        "wrong2fa": "รหัสยืนยันตัวตนแบบสองขั้นตอนไม่ถูกต้อง"
-    },
     "statusWidget": {
-        "Discharging": "กำลังคายประจุ",
-        "Off": "ปิด",
-        "VE.Bus Fault condition": "สภาวะข้อผิดพลาด VE.Bus",
-        "Wake-up": "ปลุก",
         "absorptionCharging": "การชาร์จแบบ Absorption",
         "assisting": "กำลังช่วยจ่ายไฟ",
         "autoEqualizeRecondition": "ปรับสมดุลอัตโนมัติ/ฟื้นฟูสภาพ",
@@ -245,19 +179,6 @@
         "floatCharging": "การชาร์จแบบ Float",
         "inverting": "กำลังแปลงไฟ",
         "lowPower": "พลังงานต่ำ",
-        "parts": {
-            "Battery": "แบตเตอรี่",
-            "Black water": "น้ำปฏิกูล",
-            "DC Loads": "โหลด DC",
-            "Fresh water": "น้ำจืด",
-            "Fuel": "เชื้อเพลิง",
-            "Live well": "ถังเหยื่อเป็น",
-            "Oil": "น้ำมัน",
-            "PV Charger": "เครื่องชาร์จ PV",
-            "Shore Power": "ไฟจากฝั่ง",
-            "Tank sensor": "เซ็นเซอร์ถังน้ำ",
-            "Waste water": "น้ำเสีย"
-        },
         "passthru": "พาสทรู",
         "recharge": "ชาร์จใหม่",
         "repeatedAbsorption": "การดูดซับซ้ำ",
@@ -311,7 +232,6 @@
         "volume": "ปริมาตร"
     },
     "tankWidget": {
-        "Tank sensor": "เซ็นเซอร์ถัง",
         "blackWater": "น้ำปฏิกูล",
         "diesel": "ดีเซล",
         "freshWater": "น้ำจืด",
@@ -335,7 +255,6 @@
     "widgets": {
         "acLoads": "โหลด AC",
         "batteries": "แบตเตอรี่",
-        "battery": "แบตเตอรี่",
         "batteryWithName": "แบตเตอรี่: %{name}",
         "chargerWithName": "เครื่องชาร์จ: %{productNameShort}",
         "dcLoads": "โหลด DC",
@@ -345,10 +264,8 @@
         "invalidConfig": "การกำหนดค่าไม่ถูกต้อง",
         "inverterCharger": "อินเวอร์เตอร์ / เครื่องชาร์จ: %{productNameShort}",
         "inverterWithName": "อินเวอร์เตอร์: %{productNameShort}",
-        "pvCharger": "เครื่องชาร์จ PV",
         "shorePower": "ไฟจากฝั่ง",
         "solar": "โซลาร์",
-        "status": "สถานะ",
         "unknown": "ไม่ทราบ"
     }
 }
