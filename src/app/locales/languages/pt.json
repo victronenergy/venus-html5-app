@@ -189,19 +189,16 @@
         "wrong2fa": "Código de verificação de dois fatores incorreto"
     },
     "statusWidget": {
-        "Absorption charging": "Carga de absorção",
-        "Assisting": "A assistir",
-        "Bulk charging": "Carga inicial",
         "Discharging": "A descarregar",
-        "Equalisation charging": "Carga de equalização",
-        "Float charging": "Carga de flutuação",
-        "Inverting": "A inverter",
-        "Low power": "Baixa potência",
         "Off": "Desligado",
-        "Passthru": "Passthru",
-        "Storage mode": "Modo de armazenamento",
-        "Sustain": "Sustentação",
         "VE.Bus Fault condition": "Condição de falha VE.Bus",
+        "absorptionCharging": "Carga de absorção",
+        "assisting": "A assistir",
+        "bulkCharging": "Carga inicial",
+        "equalisationCharging": "Carga de equalização",
+        "floatCharging": "Carga de flutuação",
+        "inverting": "A inverter",
+        "lowPower": "Baixa potência",
         "parts": {
             "Battery": "Bateria",
             "Black water": "Água negra",
@@ -214,7 +211,10 @@
             "Shore Power": "Alimentação do cais",
             "Tank sensor": "Sensor de tanque",
             "Waste water": "Águas residuais"
-        }
+        },
+        "passthru": "Passthru",
+        "storageMode": "Modo de armazenamento",
+        "sustain": "Sustentação"
     },
     "switches": {
         "alarm": "Alarme",
@@ -262,13 +262,13 @@
         "volume": "Volume"
     },
     "tankWidget": {
-        "Black water": "Águas negras",
-        "Fresh water": "Água doce",
-        "Fuel": "Combustível",
-        "Live well": "Viveiro",
-        "Oil": "Óleo",
         "Tank sensor": "Sensor do depósito",
-        "Waste water": "Águas residuais"
+        "blackWater": "Águas negras",
+        "freshWater": "Água doce",
+        "fuel": "Combustível",
+        "liveWell": "Viveiro",
+        "oil": "Óleo",
+        "wasteWater": "Águas residuais"
     },
     "versionInfo": {
         "buildDate": "Data de compilação",

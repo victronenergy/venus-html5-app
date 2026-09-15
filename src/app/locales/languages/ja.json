@@ -189,19 +189,16 @@
         "wrong2fa": "2要素認証コードが正しくありません"
     },
     "statusWidget": {
-        "Absorption charging": "吸収充電",
-        "Assisting": "アシスト中",
-        "Bulk charging": "バルク充電",
         "Discharging": "放電中",
-        "Equalisation charging": "均等充電",
-        "Float charging": "フロート充電",
-        "Inverting": "インバート中",
-        "Low power": "低電力",
         "Off": "オフ",
-        "Passthru": "パススルー",
-        "Storage mode": "保存モード",
-        "Sustain": "サステイン",
         "VE.Bus Fault condition": "VE.Busエラー状態",
+        "absorptionCharging": "吸収充電",
+        "assisting": "アシスト中",
+        "bulkCharging": "バルク充電",
+        "equalisationCharging": "均等充電",
+        "floatCharging": "フロート充電",
+        "inverting": "インバート中",
+        "lowPower": "低電力",
         "parts": {
             "Battery": "バッテリー",
             "Black water": "ブラックウォーター",
@@ -214,7 +211,10 @@
             "Shore Power": "陸電",
             "Tank sensor": "タンクセンサー",
             "Waste water": "グレーウォーター"
-        }
+        },
+        "passthru": "パススルー",
+        "storageMode": "保存モード",
+        "sustain": "サステイン"
     },
     "switches": {
         "alarm": "アラーム",
@@ -262,13 +262,13 @@
         "volume": "容量"
     },
     "tankWidget": {
-        "Black water": "汚水",
-        "Fresh water": "清水",
-        "Fuel": "燃料",
-        "Live well": "ライブウェル",
-        "Oil": "オイル",
         "Tank sensor": "タンクセンサー",
-        "Waste water": "排水"
+        "blackWater": "汚水",
+        "freshWater": "清水",
+        "fuel": "燃料",
+        "liveWell": "ライブウェル",
+        "oil": "オイル",
+        "wasteWater": "排水"
     },
     "versionInfo": {
         "buildDate": "ビルド日付",
