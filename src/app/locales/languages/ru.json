@@ -257,6 +257,7 @@
     "widgets": {
         "acLoads": "AC нагрузки",
         "batteries": "Батареи",
+        "battery": "Батарея",
         "batteryWithName": "Батарея: %{имя}",
         "chargerWithName": "chargerWithName",
         "dcLoads": "Нагрузки постоянного тока",

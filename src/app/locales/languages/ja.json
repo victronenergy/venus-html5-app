@@ -257,6 +257,7 @@
     "widgets": {
         "acLoads": "AC負荷",
         "batteries": "バッテリー",
+        "battery": "バッテリー",
         "batteryWithName": "バッテリー: %{name}",
         "chargerWithName": "充電器: %{productNameShort}",
         "dcLoads": "DC負荷",

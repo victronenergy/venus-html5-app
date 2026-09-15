@@ -257,6 +257,7 @@
     "widgets": {
         "acLoads": "AC Споживачі",
         "batteries": "Акумулятори",
+        "battery": "Акумуляторна батарея",
         "batteryWithName": "Батарея: %{name}",
         "chargerWithName": "Зарядний: %{productNameShort}",
         "dcLoads": "Споживачі DC",

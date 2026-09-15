@@ -257,6 +257,7 @@
     "widgets": {
         "acLoads": "Carichi CA",
         "batteries": "Batterie",
+        "battery": "Batteria",
         "batteryWithName": "Batteria: %{name}",
         "chargerWithName": "Caricatore: %{productNameShort}",
         "dcLoads": "Carichi CC",

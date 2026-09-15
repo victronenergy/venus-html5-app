@@ -257,6 +257,7 @@
     "widgets": {
         "acLoads": "AC zátěž",
         "batteries": "Baterie",
+        "battery": "Baterie",
         "batteryWithName": "Baterie: %{name}",
         "chargerWithName": "Nabíječka: %{productNameShort}",
         "dcLoads": "DC zátěže",

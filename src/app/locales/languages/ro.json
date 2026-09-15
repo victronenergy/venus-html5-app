@@ -257,6 +257,7 @@
     "widgets": {
         "acLoads": "Consumatori AC",
         "batteries": "Baterii",
+        "battery": "Baterie",
         "batteryWithName": "Baterie: %{name}",
         "chargerWithName": "Încărcător: %{productNameShort}",
         "dcLoads": "Consumatori DC",

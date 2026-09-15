@@ -257,6 +257,7 @@
     "widgets": {
         "acLoads": "AC-belastninger",
         "batteries": "Batterier",
+        "battery": "Batteri",
         "batteryWithName": "Batteri: %{name}",
         "chargerWithName": "Oplader: %{productNameShort}",
         "dcLoads": "DC-belastninger",

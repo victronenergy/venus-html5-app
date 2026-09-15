@@ -257,6 +257,7 @@
     "widgets": {
         "acLoads": "AC Yükler",
         "batteries": "Aküler",
+        "battery": "Akü",
         "batteryWithName": "Battery: %{name}",
         "chargerWithName": "chargerWithName",
         "dcLoads": "dcLoads",

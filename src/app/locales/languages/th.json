@@ -257,6 +257,7 @@
     "widgets": {
         "acLoads": "โหลด AC",
         "batteries": "แบตเตอรี่",
+        "battery": "แบตเตอรี่",
         "batteryWithName": "แบตเตอรี่: %{name}",
         "chargerWithName": "เครื่องชาร์จ: %{productNameShort}",
         "dcLoads": "โหลด DC",

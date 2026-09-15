@@ -257,6 +257,7 @@
     "widgets": {
         "acLoads": "Obciążenia AC",
         "batteries": "Akumulatory",
+        "battery": "Akumulator",
         "batteryWithName": "Akumulator: %{name}",
         "chargerWithName": "Ładowarka: %{productNameShort}",
         "dcLoads": "Obciążenia DC",
