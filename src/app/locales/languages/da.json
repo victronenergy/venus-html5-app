@@ -1,46 +1,25 @@
 {
     "acMode": {
         "modal": {
-            "name": "Vælg tilstand",
             "updateLimit": "Vælg landstrømsbegrænsning"
-        },
-        "title": "AC-tilstand"
+        }
     },
     "boxes": {
-        "EnergyOverview": "Energi overblik",
         "acLoads": "AC-belastninger",
         "alternator": "Generator",
         "batteries": "Batterier",
-        "battery": "Batteri",
-        "batteryWithName": "Batteri: %{name}",
-        "chargerWithName": "Oplader: %{productNameShort}",
         "dcLoads": "DC-belastninger",
         "devices": "Enheder",
         "energy": "Energi",
         "environment": "Miljø",
         "generator": "Generator",
-        "generatorInput": "Generatorindgang",
-        "gridInput": "Netindgang",
         "humidity": "Luftfugtighed",
-        "invalidConfig": "Ugyldig konfiguration",
-        "inverterCharger": "Inverter/oplader: %{productNameShort}",
-        "inverterWithName": "Inverter: %{productNameShort}",
         "pressure": "Tryk",
-        "pvCharger": "PV-oplader",
         "shorePower": "Landstrøm",
         "solar": "Solenergi",
-        "status": "Status",
         "tanks": "Tanke",
         "temperature": "Temperatur",
-        "unknown": "Ukendt",
         "windGenerator": "Vindgenerator"
-    },
-    "cardFooter": {
-        "Charge": "Opladning",
-        "Critical": "Kritisk",
-        "Optimal": "Optimal",
-        "Status": "Status",
-        "Warning": "Advarsel"
     },
     "common": {
         "absorptionCharging": "Absorptionsopladning",
@@ -48,16 +27,11 @@
         "auto": "Auto",
         "autoStartStop": "Automatisk start/stop",
         "bulkCharging": "Bulk-opladning",
-        "charge": "Opladning",
-        "charged": "Opladet",
         "chargerOnly": "Kun oplader",
         "charging": "Oplader",
         "close": "Luk",
-        "current": "Strøm",
         "dark": "Mørk",
         "days": "dage",
-        "days_short": "d",
-        "discharge": "Afladning",
         "discharging": "Aflader",
         "eco": "Eco",
         "emptyBar": " - ",
@@ -77,25 +51,20 @@
         "inverterOnly": "Kun inverter",
         "inverting": "Invertering",
         "light": "Lys",
-        "limit": "Grænse",
         "loading": "Indlæser",
-        "loads": "Forbrug",
         "lowPower": "Lav effekt",
         "minutes": "minutter",
         "minutes_short": "m",
         "mode": "Tilstand",
         "night": "Nat",
         "no": "Nej",
-        "noShorePower": "Ingen landstrøm",
         "notAvailable": "Ikke tilgængelig",
         "nrOfPhases": "%{phases} faser",
-        "null": " ",
         "off": "Fra",
         "on": "Til",
         "passthru": "Gennemgang",
         "pending": "Afventer",
         "powerSupplyMode": "Strømforsyningstilstand",
-        "remainingTime": "Resterende tid",
         "running": "Kører",
         "set": "Indstil",
         "shorePower": "Landstrøm",
@@ -107,8 +76,6 @@
         "sustain": "Vedligehold",
         "timetogo": "at gå til",
         "unplugged": "Frakoblet",
-        "veBusFault": "VE.Bus fejl",
-        "voltage": "Spænding",
         "yes": "Ja"
     },
     "diagnostics": {
@@ -123,7 +90,6 @@
         "device": {
             "colorScheme": "Farveskema",
             "device": "Enhed",
-            "devicePixelRatio": "Pixel Ratio",
             "diagConsole": "Diagnosekonsol",
             "hideDiagConsole": "Skjul diagnosekonsol",
             "isGuiV2Supported": "GUI v2 understøttet",
@@ -136,8 +102,6 @@
             "unspecified": "Uspecificeret",
             "userAgent": "User agent",
             "viewport": "Viewport",
-            "viewportHeight": "Visningsport højde",
-            "viewportWidth": "Visningsport bredde",
             "webgl": "WebGL",
             "webglNotSupported": "Ikke understøttet"
         },
@@ -162,10 +126,8 @@
         "mqttUnavailable2": "Kontroller, at MQTT er aktiveret i dine indstillinger:",
         "mqttUnavailable3": "Fjernkonsol > Indstillinger > Tjenester > MQTT-adgang",
         "mqttUnavailable4": "Prøv at bruge knappen Fjernkonsol øverst på denne skærm for at ændre dine indstillinger via fjernadgang.",
-        "mqttUnavailable5": "Du kan også prøve at oprette forbindelse til din enhed via fjernadgang ved at vælge Fjernadgang i menuen ovenfor.",
         "queryParams": "Forespørgselsparametre: %{queryParams}",
         "remoteConsole": {
-            "connectionFailed": "Kan ikke oprette forbindelse til GX-enheden",
             "qrCodeMessage": "For at få adgang til GX Remote Console skal du sikre dig, at din telefon er på samme WiFi-netværk som GX-enheden, og derefter scanne denne QR-kode.",
             "screenTooSmall": "Åbn i en større skærm for at se fjernkonsollen"
         },
@@ -187,16 +149,9 @@
     "header": {
         "close": "Luk",
         "connecting": "Opretter forbindelse",
-        "local": "Lokal",
-        "loggedIn": "Logget ind som",
-        "notLoggedIn": "Ikke logget ind",
-        "remote": "Fjernbetjening",
         "remoteConsole": "Fjernkonsol",
         "remoteMessage": "Åbn i en større skærm for at se fjernkonsollen",
         "versionInfo": "Versionsoplysninger"
-    },
-    "installations": {
-        "title": "Vælg en installation"
     },
     "locker": {
         "lockDescription": "For at forhindre utilsigtet ændring af enhedsindstillinger – aktivering af denne funktion vil låse muligheden for at interagere med kontrolelementer",
@@ -210,30 +165,9 @@
     "pages": {
         "diagnostics": "Diagnosticering",
         "remoteConsole": "Fjernkonsol",
-        "switchingPane": "Omskifterpanel",
         "systemOverview": "Systemoversigt"
     },
-    "remoteLogin": {
-        "2fa": "Totrinsgodkendelsestoken",
-        "email": "E-mail",
-        "forgotPassword": "Glemt adgangskode?",
-        "goBack": "Gå tilbage",
-        "logIn": "Log ind",
-        "logOut": "Log ud",
-        "loginFailed": "Login mislykkedes",
-        "mobileVerification": "Authenticator-app-token",
-        "noInstallations": "Denne konto har ingen installationer.",
-        "password": "Adgangskode",
-        "registerMessage1": "Har du ikke en konto endnu?",
-        "registerMessage2": "Registrer din autocamper.",
-        "smsVerification": "SMS-bekræftelsestoken",
-        "wrong2fa": "Forkert totrinsbekræftelseskode"
-    },
     "statusWidget": {
-        "Discharging": "Afladning",
-        "Off": "Fra",
-        "VE.Bus Fault condition": "VE.Bus-fejltilstand",
-        "Wake-up": "Vækning",
         "absorptionCharging": "Absorptionsopladning",
         "assisting": "Assistering",
         "autoEqualizeRecondition": "Automatisk udligning/reconditionering",
@@ -245,19 +179,6 @@
         "floatCharging": "Vedligeholdelsesladning",
         "inverting": "Invertering",
         "lowPower": "Lav effekt",
-        "parts": {
-            "Battery": "Batteri",
-            "Black water": "Spildevand fra toilet",
-            "DC Loads": "DC-belastninger",
-            "Fresh water": "Ferskvand",
-            "Fuel": "Brændstof",
-            "Live well": "Fisketank",
-            "Oil": "Olie",
-            "PV Charger": "PV-oplader",
-            "Shore Power": "Landstrøm",
-            "Tank sensor": "Tanksensor",
-            "Waste water": "Spildevand"
-        },
         "passthru": "Passthru",
         "recharge": "Genopladning",
         "repeatedAbsorption": "Gentagen absorption",
@@ -311,7 +232,6 @@
         "volume": "Volumen"
     },
     "tankWidget": {
-        "Tank sensor": "Tanksensor",
         "blackWater": "Sortvand",
         "diesel": "Diesel",
         "freshWater": "Ferskvand",
@@ -335,7 +255,6 @@
     "widgets": {
         "acLoads": "AC-belastninger",
         "batteries": "Batterier",
-        "battery": "Batteri",
         "batteryWithName": "Batteri: %{name}",
         "chargerWithName": "Oplader: %{productNameShort}",
         "dcLoads": "DC-belastninger",
@@ -345,10 +264,8 @@
         "invalidConfig": "Ugyldig konfiguration",
         "inverterCharger": "Inverter/oplader: %{productNameShort}",
         "inverterWithName": "Inverter: %{productNameShort}",
-        "pvCharger": "PV-oplader",
         "shorePower": "Landstrøm",
         "solar": "Solcelle",
-        "status": "Status",
         "unknown": "Ukendt"
     }
 }

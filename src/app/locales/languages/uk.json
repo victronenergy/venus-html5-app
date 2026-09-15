@@ -1,46 +1,25 @@
 {
     "acMode": {
         "modal": {
-            "name": "Оберіть режим",
             "updateLimit": "Оберіть обмеження портового входу"
-        },
-        "title": "Режим AC"
+        }
     },
     "boxes": {
-        "EnergyOverview": "Енергетичний огляд",
         "acLoads": "AC Споживачі",
         "alternator": "Генератор",
         "batteries": "Акумулятори",
-        "battery": "Батарея",
-        "batteryWithName": "Батарея: %{name}",
-        "chargerWithName": "Зарядний: %{productNameShort}",
         "dcLoads": "Споживачі DC",
         "devices": "Пристрої",
         "energy": "Енергія",
         "environment": "Середовище",
         "generator": "Генератор",
-        "generatorInput": "вхід генератора",
-        "gridInput": "Вхід мережі",
         "humidity": "Вологість",
-        "invalidConfig": "Невірна Конфігурація",
-        "inverterCharger": "Інвертор / Зарядний: %{productNameShort}",
-        "inverterWithName": "Інвертор: %{productNameShort}",
         "pressure": "Тиск",
-        "pvCharger": "PV Зарядний",
         "shorePower": "Портове живлення",
         "solar": "Сонце",
-        "status": "Стан",
         "tanks": "Ємності",
         "temperature": "Температура",
-        "unknown": "Невідомий",
         "windGenerator": "Вітрогенератор"
-    },
-    "cardFooter": {
-        "Charge": "Зарядка",
-        "Critical": "Критичний",
-        "Optimal": "Оптимальний",
-        "Status": "Стан",
-        "Warning": "Попередження"
     },
     "common": {
         "absorptionCharging": "Заряджання на стадії поглинання",
@@ -48,16 +27,11 @@
         "auto": "Автоматично",
         "autoStartStop": "Автоматичний старт/стоп",
         "bulkCharging": "Обʼємне заряджання",
-        "charge": "Зарядка",
-        "charged": "Заряджено",
         "chargerOnly": "Тільки зарядний",
         "charging": "Зарядка",
         "close": "Закрити",
-        "current": "Струм",
         "dark": "Темний",
         "days": "днів",
-        "days_short": "дні",
-        "discharge": "Розряд",
         "discharging": "Розрядка",
         "eco": "Еко",
         "emptyBar": " - ",
@@ -77,25 +51,20 @@
         "inverterOnly": "Тільки інвертор",
         "inverting": "Інвертування",
         "light": "Світлий",
-        "limit": "Обмеження",
         "loading": "Завантаження...",
-        "loads": "Споживачі",
         "lowPower": "Низька потужність",
         "minutes": "хвилини",
         "minutes_short": "хв",
         "mode": "Режим",
         "night": "Ніч",
         "no": "Ні",
-        "noShorePower": "Відсутнє Портове живлення",
         "notAvailable": "Недоступний",
         "nrOfPhases": "%{phases} фаз",
-        "null": " ",
         "off": "Вимкнено",
         "on": "Увімкнено",
         "passthru": "Транзит",
         "pending": "Очікується",
         "powerSupplyMode": "Режим живлення",
-        "remainingTime": "Час, що залишився",
         "running": "Працюю",
         "set": "Встановити",
         "shorePower": "Берегове живлення",
@@ -107,8 +76,6 @@
         "sustain": "Підтримувати",
         "timetogo": "час, що залишився",
         "unplugged": "Від’єднано",
-        "veBusFault": "несправність veBus",
-        "voltage": "Напруга",
         "yes": "Так"
     },
     "diagnostics": {
@@ -123,7 +90,6 @@
         "device": {
             "colorScheme": "Колірна схема",
             "device": "Пристрій",
-            "devicePixelRatio": "Pixel Ratio",
             "diagConsole": "Діагностична консоль",
             "hideDiagConsole": "Приховати діагностичну консоль",
             "isGuiV2Supported": "Підтримується GUI v2",
@@ -136,8 +102,6 @@
             "unspecified": "Не вказано",
             "userAgent": "User agent",
             "viewport": "Область перегляду",
-            "viewportHeight": "Висота вікна перегляду",
-            "viewportWidth": "Ширина вікна перегляду",
             "webgl": "WebGL",
             "webglNotSupported": "Не підтримується"
         },
@@ -162,10 +126,8 @@
         "mqttUnavailable2": "Перевірте, щоб MQTT був увімкнений в налаштуваннях:",
         "mqttUnavailable3": "Віддалена консоль > Налаштування > Сервіси > Доступ MQTT",
         "mqttUnavailable4": "Спробуйте використати кнопку Віддалений Доступ вгорі екрану для зміни ваших параметрів віддалено.",
-        "mqttUnavailable5": "Ви можете спробувати звʼязатися із своїм пристроєм віддалено, обравши \"Віддалено/Remote\" в меню вгорі. ",
         "queryParams": "Параметри запиту: %{queryParams}",
         "remoteConsole": {
-            "connectionFailed": "підНеможливо підключитися до пристрою GX",
             "qrCodeMessage": "Щоб отримати доступ до GX Консолі, переконайтеся, що ваш телефон у тій самій мережі Wi-Fi, що й пристрій GX, а потім відскануйте цей QR-код.",
             "screenTooSmall": "Відкрийте на великому екрані, щоб переглянути віддалену консоль"
         },
@@ -187,16 +149,9 @@
     "header": {
         "close": "Закрити",
         "connecting": "Підключення...",
-        "local": "Локальні",
-        "loggedIn": "Увійдено як",
-        "notLoggedIn": "Не зареєстровано",
-        "remote": "Дистанційно",
         "remoteConsole": "Віддалена консоль",
         "remoteMessage": "віддалене повідомлення",
         "versionInfo": "інформація про версію"
-    },
-    "installations": {
-        "title": "Оберіть інсталяцію"
     },
     "locker": {
         "lockDescription": "Для попередження випадкових змін в Налаштуваннях - вмикання цієї функції заблокує можливість змін",
@@ -210,30 +165,9 @@
     "pages": {
         "diagnostics": "Діагностика",
         "remoteConsole": "Віддалена консоль",
-        "switchingPane": "Панель перемикання",
         "systemOverview": "Огляд системи"
     },
-    "remoteLogin": {
-        "2fa": "Токен двофакторного доступу",
-        "email": "Електронна пошта",
-        "forgotPassword": "Забули Пароль?",
-        "goBack": "Повернутись Назад",
-        "logIn": "Увійти",
-        "logOut": "Вихід",
-        "loginFailed": "Помилка Входу",
-        "mobileVerification": "Токен програми Authenticator",
-        "noInstallations": "Цей профіль немає станцій",
-        "password": "Пароль",
-        "registerMessage1": "Ще немаєте профілю? ",
-        "registerMessage2": "Зареєструйте ваш RV",
-        "smsVerification": "Токен SMS-верифікації",
-        "wrong2fa": "Помилка коду двофакторного доступу"
-    },
     "statusWidget": {
-        "Discharging": "Розрядка",
-        "Off": "Вимкнено",
-        "VE.Bus Fault condition": "Стан несправності VE.Bus",
-        "Wake-up": "Запуск",
         "absorptionCharging": "Заряджання на стадії поглинання",
         "assisting": "Підтримка",
         "autoEqualizeRecondition": "Автоматичне вирівнювання/відновлення",
@@ -245,19 +179,6 @@
         "floatCharging": "Плаваюче заряджання",
         "inverting": "Інвертування",
         "lowPower": "Низька потужність",
-        "parts": {
-            "Battery": "Акумуляторна батарея",
-            "Black water": "Стічні води з каналізації",
-            "DC Loads": "Споживачі DC",
-            "Fresh water": "Прісна вода",
-            "Fuel": "Паливо",
-            "Live well": "Активна свердловина",
-            "Oil": "Олива",
-            "PV Charger": "PV Зарядний",
-            "Shore Power": "Портове живлення",
-            "Tank sensor": "Датчик ємності",
-            "Waste water": "Стічні води"
-        },
         "passthru": "Транзит",
         "recharge": "Підзарядка",
         "repeatedAbsorption": "Повторне поглинання",
@@ -311,7 +232,6 @@
         "volume": "Об'єм"
     },
     "tankWidget": {
-        "Tank sensor": "Датчик ємності",
         "blackWater": "Стічні води з каналізації",
         "diesel": "Дизель",
         "freshWater": "Прісна вода",
@@ -335,7 +255,6 @@
     "widgets": {
         "acLoads": "AC Споживачі",
         "batteries": "Акумулятори",
-        "battery": "Акумуляторна батарея",
         "batteryWithName": "Батарея: %{name}",
         "chargerWithName": "Зарядний: %{productNameShort}",
         "dcLoads": "Споживачі DC",
@@ -345,10 +264,8 @@
         "invalidConfig": "Невірна Конфігурація",
         "inverterCharger": "Інвертор / Зарядний: %{productNameShort}",
         "inverterWithName": "Інвертор: %{productNameShort}",
-        "pvCharger": "PV Зарядний",
         "shorePower": "Портове живлення",
         "solar": "Сонце",
-        "status": "Статус",
         "unknown": "Невідомий"
     }
 }

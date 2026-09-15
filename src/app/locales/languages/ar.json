@@ -1,46 +1,25 @@
 {
     "acMode": {
         "modal": {
-            "name": "اسم",
             "updateLimit": "تحديد حد المدخل الشاطئي"
-        },
-        "title": "وضعية التيار المتردد"
+        }
     },
     "boxes": {
-        "EnergyOverview": "نظرة عامة على الطاقة",
         "acLoads": "أحمال التيار المتردد",
         "alternator": "مولّد تيار",
         "batteries": "بطاريات",
-        "battery": "بطارية",
-        "batteryWithName": "بطارية: %{name}",
-        "chargerWithName": "شاحن: %{productNameShort}",
         "dcLoads": "أحمال التيار المستمر",
         "devices": "أجهزة",
         "energy": "طاقة",
         "environment": "بيئة",
         "generator": "مولد كهرباء",
-        "generatorInput": "مدخلات المولد",
-        "gridInput": "مدخلات الشبكة",
         "humidity": "الرطوبة",
-        "invalidConfig": "تكوين غير صحيح",
-        "inverterCharger": "المحوّل/الشاحن: %{productNameShort}",
-        "inverterWithName": "المحوّل: %{productNameShort}",
         "pressure": "الضغط",
-        "pvCharger": "شاحن PV",
         "shorePower": "طاقة شاطئية",
         "solar": "شمسي",
-        "status": "حالة",
         "tanks": "خزانات",
         "temperature": "الحرارة",
-        "unknown": "غير معروف",
         "windGenerator": "مولد الرياح"
-    },
-    "cardFooter": {
-        "Charge": "تحميل",
-        "Critical": "حساس",
-        "Optimal": "نموذجي",
-        "Status": "الحالة",
-        "Warning": "تحذير"
     },
     "common": {
         "absorptionCharging": "شحن الامتصاص",
@@ -48,16 +27,11 @@
         "auto": "آلي",
         "autoStartStop": "بدء/توقف آلي",
         "bulkCharging": "الشحن المبدئي",
-        "charge": "تحميل",
-        "charged": "مشحون",
         "chargerOnly": "الشاحن فقط",
         "charging": "يقوم بالشحن",
         "close": "إغلاق",
-        "current": "التيار",
         "dark": "غامق",
         "days": "أيام",
-        "days_short": "يوم",
-        "discharge": "تفريغ",
         "discharging": "يقوم بتفريغ الشحن",
         "eco": "بيئة",
         "emptyBar": " - ",
@@ -77,25 +51,20 @@
         "inverterOnly": "فقط المعاكس",
         "inverting": "عكس",
         "light": "فاتح",
-        "limit": "حد",
         "loading": "تحميل",
-        "loads": "أحمال",
         "lowPower": "طاقة منخفضة",
         "minutes": "دقائق",
         "minutes_short": "د",
         "mode": "وضعية",
         "night": "ليل",
         "no": "لا",
-        "noShorePower": "لا توجد طاقة شاطئية",
         "notAvailable": "غير متوفر",
         "nrOfPhases": "%{phases} أطوار",
-        "null": " ",
         "off": "مطفأ",
         "on": "مشغل",
         "passthru": "تمرير عبر",
         "pending": "قيد الانتظار",
         "powerSupplyMode": "وضع إمدادات الطاقة",
-        "remainingTime": "الوقت المتبقي",
         "running": "مشغل",
         "set": "تعيين",
         "shorePower": "طاقة الشاطئ",
@@ -107,8 +76,6 @@
         "sustain": "ركيزة",
         "timetogo": "حان الوقت للذهاب",
         "unplugged": "مفصول",
-        "veBusFault": "حالة تعطل VE.Bus",
-        "voltage": "الجهد الكهربائي",
         "yes": "نعم"
     },
     "diagnostics": {
@@ -123,7 +90,6 @@
         "device": {
             "colorScheme": "مخطط الألوان",
             "device": "جهاز",
-            "devicePixelRatio": "نسبة البكسل",
             "diagConsole": "وحدة تحكم التشخيص",
             "hideDiagConsole": "إخفاء وحدة تحكم التشخيص",
             "isGuiV2Supported": "واجهة المستخدم الرسومية v2 مدعومة",
@@ -136,8 +102,6 @@
             "unspecified": "غير محدد",
             "userAgent": "وكيل المستخدم",
             "viewport": "منفذ العرض",
-            "viewportHeight": "ارتفاع منفذ العرض",
-            "viewportWidth": "عرض منفذ العرض",
             "webgl": "WebGL",
             "webglNotSupported": "غير مدعوم"
         },
@@ -162,10 +126,8 @@
         "mqttUnavailable2": "يرجى التحقق من تفعيل MQTT في إعداداتك:",
         "mqttUnavailable3": "وحدة التحكم عن بعد < إعدادات < الخدمات < MQTT أو الشبكة المحلية (نص عادي)",
         "mqttUnavailable4": "حاول استخدام زر \"وحدة التحكم عن بعد\" أعلى هذه الشاشة لتغيير إعداداتك عن بعد.",
-        "mqttUnavailable5": "يمكنك كذلك محاول الاتصال بجهازك عن بعد من خلال تحديد \"عن بعد\" من القائمة أعلاه.",
         "queryParams": "معاملات الاستعلام: %{queryParams}",
         "remoteConsole": {
-            "connectionFailed": "تعذر الاتصال بجهاز GX",
             "qrCodeMessage": "للوصول إلى وحدة التحكم عن بعد GX، تأكد من أن هاتفك متصل بنفس شبكة WiFi مثل جهاز GX، ثم قم بمسح رمز الاستجابة السريعة هذا.",
             "screenTooSmall": "افتح في شاشة أكبر لعرض وحدة التحكم عن بُعد"
         },
@@ -187,16 +149,9 @@
     "header": {
         "close": "إغلاق",
         "connecting": "جاري الاتصال",
-        "local": "محلي",
-        "loggedIn": "تسجيل الدخول كـ",
-        "notLoggedIn": "لم يتم تسجيل الدخول في",
-        "remote": "عن بعد",
         "remoteConsole": "وحدة التحكم عن بعد",
         "remoteMessage": "مفتوح في شاشة أكبر لعرض وحدة التحكم عن بعد",
         "versionInfo": "معلومات النسخة"
-    },
-    "installations": {
-        "title": "اختيار تثبيت"
     },
     "locker": {
         "lockDescription": "لمنع التغييرات غير المقصودة في إعدادات الجهاز - سيؤدي تمكين هذه الوظيفة إلى قفل إمكانية التفاعل مع عناصر التحكم",
@@ -210,30 +165,9 @@
     "pages": {
         "diagnostics": "تشخيص",
         "remoteConsole": "وحدة التحكم عن بُعد",
-        "switchingPane": "لوحة التحكم",
         "systemOverview": "نظرة عامة على النظام"
     },
-    "remoteLogin": {
-        "2fa": "رمز التوثيق ذي معاملين",
-        "email": "بريد إلكتروني",
-        "forgotPassword": "هل نسيت كلمة المرور؟",
-        "goBack": "العودة",
-        "logIn": "تسجيل الدخول",
-        "logOut": "تسجيل الخروج",
-        "loginFailed": "فشل تسجيل الدخول",
-        "mobileVerification": "رمز تطبيق الموثق",
-        "noInstallations": "لا يتضمن هذا الحساب أية أعمال تركيب.",
-        "password": "كلمة السر",
-        "registerMessage1": "أليس لديك حسابًا حتى الآن؟ ",
-        "registerMessage2": "تسجيل المقاوم المتغير الخاص بك.",
-        "smsVerification": "رمز التحقق بالرسائل النصية القصيرة",
-        "wrong2fa": "رمز تحقق عاملين خاطئ"
-    },
     "statusWidget": {
-        "Discharging": "يقوم بتفريغ الشحن",
-        "Off": "مطفأ",
-        "VE.Bus Fault condition": "حالة تعطل VE.Bus",
-        "Wake-up": "تنبيه",
         "absorptionCharging": "شحن الامتصاص",
         "assisting": "مساندة",
         "autoEqualizeRecondition": "معادلة تلقائية/إعادة ضبط",
@@ -245,19 +179,6 @@
         "floatCharging": "الشحن المساند",
         "inverting": "عكس",
         "lowPower": "طاقة منخفضة",
-        "parts": {
-            "Battery": "بطارية",
-            "Black water": "مياه سوداء",
-            "DC Loads": "أحمال التيار المستمر",
-            "Fresh water": "ماء نقي",
-            "Fuel": "وقود",
-            "Live well": "حيوية جيدة",
-            "Oil": "زيت",
-            "PV Charger": "شاحن ضوئي",
-            "Shore Power": "دعم الطاقة",
-            "Tank sensor": "حساس الخزان",
-            "Waste water": "ماء فاسد"
-        },
         "passthru": "تمرير عبر",
         "recharge": "إعادة الشحن",
         "repeatedAbsorption": "امتصاص متكرر",
@@ -311,7 +232,6 @@
         "volume": "الحجم"
     },
     "tankWidget": {
-        "Tank sensor": "حساس الخزان",
         "blackWater": "مياه سوداء",
         "diesel": "الديزل",
         "freshWater": "ماء نقي",
@@ -335,7 +255,6 @@
     "widgets": {
         "acLoads": "تحميلات التيار المتردد",
         "batteries": "البطاريات",
-        "battery": "بطارية",
         "batteryWithName": "بطارية: %{name}",
         "chargerWithName": "شاحن: %{productNameShort}",
         "dcLoads": "أحمال التيار المستمر",
@@ -345,10 +264,8 @@
         "invalidConfig": "إعداد غير صالح",
         "inverterCharger": "محول تردد/ شاحن: %{productNameShort}",
         "inverterWithName": "محول تردد: %{productNameShort}",
-        "pvCharger": "شاحن ضوئي",
         "shorePower": "دعم الطاقة",
         "solar": "شمسي",
-        "status": "الحالة",
         "unknown": "مجهول"
     }
 }

@@ -1,46 +1,25 @@
 {
     "acMode": {
         "modal": {
-            "name": "Kies modus",
             "updateLimit": "Kies waltoevoerbeperking"
-        },
-        "title": "WS Modus"
+        }
     },
     "boxes": {
-        "EnergyOverview": "Energie-oorsig",
         "acLoads": "WS-ladings",
         "alternator": "Alternator",
         "batteries": "Batterye",
-        "battery": "Battery",
-        "batteryWithName": "Battery: %{name}",
-        "chargerWithName": "Laaier: %{productNameShort}",
         "dcLoads": "GS-ladings",
         "devices": "Toestelle",
         "energy": "Energie",
         "environment": "Omgewing",
         "generator": "Kragopwekker",
-        "generatorInput": "Kragopwekker-invoer",
-        "gridInput": "Netwerk-invoer",
         "humidity": "Humiditeit",
-        "invalidConfig": "Ongeldige Konfigurasie",
-        "inverterCharger": "Omsetter / Laaier: %{productNameShort}",
-        "inverterWithName": "Omsetter: %{productNameShort}",
         "pressure": "Druk",
-        "pvCharger": "PV Laaier",
         "shorePower": "Walstroom",
         "solar": "Sonkrag",
-        "status": "Status",
         "tanks": "Tenks",
         "temperature": "Temperatuur",
-        "unknown": "Onbekend",
         "windGenerator": "Windgenerator"
-    },
-    "cardFooter": {
-        "Charge": "Laai",
-        "Critical": "Kritiek",
-        "Optimal": "Optimaal",
-        "Status": "Status",
-        "Warning": "Waarskuwing"
     },
     "common": {
         "absorptionCharging": "Absorpsie laai",
@@ -48,16 +27,11 @@
         "auto": "Outomaties",
         "autoStartStop": "Outomatiese begin/stop",
         "bulkCharging": "Grootmaat laai",
-        "charge": "Laai",
-        "charged": "Gelaai",
         "chargerOnly": "Slegs Laaier",
         "charging": "Besig om te Laai",
         "close": "Sluit",
-        "current": "Stroom",
         "dark": "Donker",
         "days": "dae",
-        "days_short": "d",
-        "discharge": "Ontlading",
         "discharging": "Besig om te Ontlaai",
         "eco": "Ekonomie",
         "emptyBar": " - ",
@@ -77,25 +51,20 @@
         "inverterOnly": "Slegs Omsetter",
         "inverting": "Omsetting",
         "light": "Lig",
-        "limit": "Limiet",
         "loading": "Laai",
-        "loads": "Verbruikers",
         "lowPower": "Lae Krag",
         "minutes": "minute",
         "minutes_short": "m",
         "mode": "Modus",
         "night": "Nag",
         "no": "Nee",
-        "noShorePower": "Geen Wal Krag",
         "notAvailable": "Nie Beskikbaar nie",
         "nrOfPhases": "%{phases} fases",
-        "null": " ",
         "off": "Af",
         "on": "Aan",
         "passthru": "Deurlaat",
         "pending": "Hangende",
         "powerSupplyMode": "Kragtoevoermodus",
-        "remainingTime": "Oorblywende tyd",
         "running": "Aan die gang",
         "set": "Stel",
         "shorePower": "Wal Krag",
@@ -107,8 +76,6 @@
         "sustain": "Onderhou",
         "timetogo": "om te gaan",
         "unplugged": "Ontkoppel",
-        "veBusFault": "VE.Bus Fouttoestand",
-        "voltage": "Spanning",
         "yes": "Ja"
     },
     "diagnostics": {
@@ -123,7 +90,6 @@
         "device": {
             "colorScheme": "Kleurskema",
             "device": "Toestel",
-            "devicePixelRatio": "Pikselverhouding",
             "diagConsole": "Diagnostiese Konsole",
             "hideDiagConsole": "Versteek Diagnostiese Konsole",
             "isGuiV2Supported": "GUI v2 ondersteun",
@@ -136,8 +102,6 @@
             "unspecified": "Ongespesifiseerd",
             "userAgent": "Gebruikersagent",
             "viewport": "Aansigvenster",
-            "viewportHeight": "Vertoonpoorthoogte",
-            "viewportWidth": "Vertoonpoortwydte",
             "webgl": "WebGL",
             "webglNotSupported": "Nie ondersteun nie"
         },
@@ -162,10 +126,8 @@
         "mqttUnavailable2": "Maak asseblief seker dat MQTT in u instellings geaktiveer is:",
         "mqttUnavailable3": "Remote Console > Instellings > Dienste > MQTT Toegang",
         "mqttUnavailable4": "Probeer die Remote Console-knoppie bo-aan hierdie skerm gebruik om jou instellings op afstand te verander.",
-        "mqttUnavailable5": "Jy kan ook probeer om op afstand aan jou toestel te koppel deur Remote van die kieslys hierbo te kies.",
         "queryParams": "Navraagparameters: %{queryParams}",
         "remoteConsole": {
-            "connectionFailed": "Kon nie aan die GX-toestel koppel nie",
             "qrCodeMessage": "Om toegang tot die GX Remote Console te kry, maak seker dat jou foon op dieselfde WiFi-netwerk as die GX-toestel is en skandeer dan hierdie QR-kode.",
             "screenTooSmall": "Maak oop in 'n groter skerm om afstandbeheer te sien"
         },
@@ -187,16 +149,9 @@
     "header": {
         "close": "Sluit",
         "connecting": "Verbinding",
-        "local": "Plaaslik",
-        "loggedIn": "Aangemeld as",
-        "notLoggedIn": "Nie aangemeld nie",
-        "remote": "Afstand",
         "remoteConsole": "Afstandbeheer konsole",
         "remoteMessage": "Maak oop in 'n groter skerm om afstandbeheer konsole te sien",
         "versionInfo": "Weergawe Inligting"
-    },
-    "installations": {
-        "title": "Kies 'n installasie"
     },
     "locker": {
         "lockDescription": "Om toevallige veranderinge aan toestelinstellings te voorkom - die aktivering van hierdie funksie sal die moontlikheid om met kontroles te kommunikeer sluit.",
@@ -210,30 +165,9 @@
     "pages": {
         "diagnostics": "Diagnostiek",
         "remoteConsole": "Afstandbeheer Konsole",
-        "switchingPane": "Skakelbord",
         "systemOverview": "Stelseloorsig"
     },
-    "remoteLogin": {
-        "2fa": "Twee-faktor-verifikasie teken",
-        "email": "E-pos",
-        "forgotPassword": "Wagwoord Vergeet?",
-        "goBack": "Gaan Terug",
-        "logIn": "Teken aan",
-        "logOut": "Meld Af",
-        "loginFailed": "Intekening Misluk",
-        "mobileVerification": "Ouditifikasie app teken",
-        "noInstallations": "Hierdie rekening het geen installasies nie.",
-        "password": "Wagwoord",
-        "registerMessage1": "Het jy nog nie 'n rekening nie? ",
-        "registerMessage2": "Registreer jou RV.",
-        "smsVerification": "SMS Verifikasie teken",
-        "wrong2fa": "Verkeerde twee-faktor verifikasie kode"
-    },
     "statusWidget": {
-        "Discharging": "Ontlading",
-        "Off": "Af",
-        "VE.Bus Fault condition": "VE.Bus Fouttoestand",
-        "Wake-up": "Wakkerword",
         "absorptionCharging": "Absorpsielaai",
         "assisting": "Ondersteuning",
         "autoEqualizeRecondition": "Outo-egaliseer/Herstel",
@@ -245,19 +179,6 @@
         "floatCharging": "Dryflaai",
         "inverting": "Omsetting",
         "lowPower": "Lae krag",
-        "parts": {
-            "Battery": "Battery",
-            "Black water": "Swart water",
-            "DC Loads": "GS Lasse",
-            "Fresh water": "Varswater",
-            "Fuel": "Brandstof",
-            "Live well": "Lewendige put",
-            "Oil": "Olie",
-            "PV Charger": "PV Laaier",
-            "Shore Power": "Walstroom",
-            "Tank sensor": "Tenksensor",
-            "Waste water": "Afvalwater"
-        },
         "passthru": "Deurlaat",
         "recharge": "Herlaai",
         "repeatedAbsorption": "Herhaalde absorpsie",
@@ -311,7 +232,6 @@
         "volume": "Volume"
     },
     "tankWidget": {
-        "Tank sensor": "Tenksensor",
         "blackWater": "Swartwater",
         "diesel": "Diesel",
         "freshWater": "Varswater",
@@ -335,7 +255,6 @@
     "widgets": {
         "acLoads": "WS-ladings",
         "batteries": "Batterye",
-        "battery": "Battery",
         "batteryWithName": "Battery: %{name}",
         "chargerWithName": "Laaier: %{productNameShort}",
         "dcLoads": "GS-ladings",
@@ -345,10 +264,8 @@
         "invalidConfig": "Ongeldige Konfigurasie",
         "inverterCharger": "Omsetter / Laaier: %{productNameShort}",
         "inverterWithName": "Omsetter: %{productNameShort}",
-        "pvCharger": "PV-laaier",
         "shorePower": "Walstroom",
         "solar": "Sonkrag",
-        "status": "Status",
         "unknown": "Onbekend"
     }
 }

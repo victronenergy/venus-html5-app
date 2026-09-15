@@ -1,46 +1,25 @@
 {
     "acMode": {
         "modal": {
-            "name": "Wybierz tryb",
             "updateLimit": "Wybór limitu wejścia brzegowego"
-        },
-        "title": "Tryb AC"
+        }
     },
     "boxes": {
-        "EnergyOverview": "Przegląd Energii",
         "acLoads": "Obciążenia AC",
         "alternator": "Alternator",
         "batteries": "Akumulatory",
-        "battery": "Akumulator",
-        "batteryWithName": "Akumulator: %{name}",
-        "chargerWithName": "Ładowarka: %{productNameShort}",
         "dcLoads": "Obciążenia DC",
         "devices": "Urządzenia",
         "energy": "Energia",
         "environment": "Środowisko",
         "generator": "Generator",
-        "generatorInput": "Wejście Generatora",
-        "gridInput": "Wejście Sieci",
         "humidity": "Wilgotność",
-        "invalidConfig": "Nieprawidłowa Konfiguracja",
-        "inverterCharger": "Inwerter / Ładowarka: %{productNameShort}",
-        "inverterWithName": "Inwerter: %{productNameShort}",
         "pressure": "Ciśnienie",
-        "pvCharger": "Ładowarka PV",
         "shorePower": "Energia z Wybrzeża",
         "solar": "Solar",
-        "status": "Status",
         "tanks": "Zbiorniki",
         "temperature": "Temperatura",
-        "unknown": "Nieznany",
         "windGenerator": "Generator Wiatrowy"
-    },
-    "cardFooter": {
-        "Charge": "Ładuj",
-        "Critical": "Krytyczny",
-        "Optimal": "Optymalny",
-        "Status": "Status",
-        "Warning": "Ostrzeżenie"
     },
     "common": {
         "absorptionCharging": "Ładowanie absorpcyjne",
@@ -48,16 +27,11 @@
         "auto": "Auto",
         "autoStartStop": "Auto start/stop",
         "bulkCharging": "Ładowanie Bulk",
-        "charge": "Ładuj",
-        "charged": "Naładowany",
         "chargerOnly": "Tylko ładowarka",
         "charging": "Ładowanie",
         "close": "Zamknij",
-        "current": "Prąd",
         "dark": "Ciemny",
         "days": "dni",
-        "days_short": "dn.",
-        "discharge": "Rozładowanie",
         "discharging": "Rozładowanie",
         "eco": "Eco",
         "emptyBar": " - ",
@@ -77,25 +51,20 @@
         "inverterOnly": "Tylko inwerter",
         "inverting": "Transformuje",
         "light": "Jasny",
-        "limit": "Limit",
         "loading": "Ładowanie",
-        "loads": "Obciążenia",
         "lowPower": "Niska Moc",
         "minutes": "minuty",
         "minutes_short": "min.",
         "mode": "Tryb",
         "night": "Noc",
         "no": "Nie",
-        "noShorePower": "Brak zasilania z lądu",
         "notAvailable": "Niedostępne",
         "nrOfPhases": "%{phases} faz",
-        "null": " ",
         "off": "Wył.",
         "on": "Wł.",
         "passthru": "Przepuszczanie",
         "pending": "W toku",
         "powerSupplyMode": "Tryb zasilania",
-        "remainingTime": "Pozostały czas",
         "running": "Działa",
         "set": "Ustaw",
         "shorePower": "Zasilanie Lądowe",
@@ -107,8 +76,6 @@
         "sustain": "Podtrzymanie",
         "timetogo": "do końca",
         "unplugged": "Odłączone",
-        "veBusFault": "Usterka VE.Bus",
-        "voltage": "Napięcie",
         "yes": "Tak"
     },
     "diagnostics": {
@@ -123,7 +90,6 @@
         "device": {
             "colorScheme": "Schemat Kolorów",
             "device": "Urządzenie",
-            "devicePixelRatio": "Współczynnik Pikseli",
             "diagConsole": "Konsola diagnostyczna",
             "hideDiagConsole": "Ukryj konsolę diagnostyczną",
             "isGuiV2Supported": "GUI v2 obsługiwane",
@@ -136,8 +102,6 @@
             "unspecified": "Nieokreślony",
             "userAgent": "Agent użytkownika",
             "viewport": "Okno widoku",
-            "viewportHeight": "Wysokość podglądu",
-            "viewportWidth": "Szerokość podglądu",
             "webgl": "WebGL",
             "webglNotSupported": "Nieobsługiwane"
         },
@@ -162,10 +126,8 @@
         "mqttUnavailable2": "Sprawdź, czy MQTT jest włączone w ustawieniach:",
         "mqttUnavailable3": "Konsola zdalna > Ustawienia > Usługi > MQTT Dostęp",
         "mqttUnavailable4": "Spróbuj użyć przycisku Konsola Zdalna w górnej części tego ekranu, aby zdalnie zmienić ustawienia.",
-        "mqttUnavailable5": "Możesz także spróbować połączyć się z urządzeniem zdalnie, wybierając Zdalnie z menu powyżej.",
         "queryParams": "Parametry zapytania: %{queryParams}",
         "remoteConsole": {
-            "connectionFailed": "Nie można połączyć się z urządzeniem GX",
             "qrCodeMessage": "Aby uzyskać dostęp do konsoli GX Remote, upewnij się, że Twój telefon jest w tej samej sieci Wi-Fi, co urządzenie GX, a następnie zeskanuj ten kod QR.",
             "screenTooSmall": "Otwórz na większym ekranie, aby wyświetlić konsolę zdalną"
         },
@@ -187,16 +149,9 @@
     "header": {
         "close": "Zamknij",
         "connecting": "Łączenie",
-        "local": "Lokalnie",
-        "loggedIn": "Zalogowany jako",
-        "notLoggedIn": "Niezalogowany",
-        "remote": "Zdalnie",
         "remoteConsole": "Konsola Zdalna",
         "remoteMessage": "Otwórz na większym ekranie, aby wyświetlić konsolę zdalną",
         "versionInfo": "Informacje o wersji"
-    },
-    "installations": {
-        "title": "Wybierz instalację"
     },
     "locker": {
         "lockDescription": "Aby zapobiec przypadkowym zmianom ustawień urządzenia - włączenie tej funkcji zablokuje możliwość interakcji z elementami sterującymi",
@@ -210,30 +165,9 @@
     "pages": {
         "diagnostics": "Diagnostyka",
         "remoteConsole": "Konsola Zdalna",
-        "switchingPane": "Przełączanie Panelu",
         "systemOverview": "Przegląd Systemu"
     },
-    "remoteLogin": {
-        "2fa": "Token uwierzytelniania dwuskładnikowego",
-        "email": "E-mail",
-        "forgotPassword": "Nie pamiętasz hasła?",
-        "goBack": "Wróć",
-        "logIn": "Zaloguj",
-        "logOut": "Wyloguj",
-        "loginFailed": "Logowanie nie powiodło się",
-        "mobileVerification": "Token aplikacji uwierzytelniającej",
-        "noInstallations": "To konto nie ma żadnych instalacji.",
-        "password": "Hasło",
-        "registerMessage1": "Nie masz jeszcze konta? ",
-        "registerMessage2": "Zarejestruj swój kamper.",
-        "smsVerification": "Token weryfikacji SMS",
-        "wrong2fa": "Nieprawidłowy kod weryfikacji dwuskładnikowej"
-    },
     "statusWidget": {
-        "Discharging": "Rozładowanie",
-        "Off": "Wył.",
-        "VE.Bus Fault condition": "Usterka VE.Bus",
-        "Wake-up": "Pobudka",
         "absorptionCharging": "Ładowanie absorpcyjne",
         "assisting": "Asystuje",
         "autoEqualizeRecondition": "Automatyczne wyrównywanie/kondycjonowanie",
@@ -245,19 +179,6 @@
         "floatCharging": "Ładowanie Float",
         "inverting": "Transformuje",
         "lowPower": "Niska moc",
-        "parts": {
-            "Battery": "Akumulator",
-            "Black water": "Czarna woda",
-            "DC Loads": "Obciążenia DC",
-            "Fresh water": "Woda słodka",
-            "Fuel": "Paliwo",
-            "Live well": "Studnia dla ryb",
-            "Oil": "Olej",
-            "PV Charger": "Ładowarka PV",
-            "Shore Power": "Energia z lądu",
-            "Tank sensor": "Czujnik zbiornika",
-            "Waste water": "Ścieki"
-        },
         "passthru": "Przepuszczanie",
         "recharge": "Doładuj",
         "repeatedAbsorption": "Powtórzona absorpcja",
@@ -311,7 +232,6 @@
         "volume": "Objętość"
     },
     "tankWidget": {
-        "Tank sensor": "Czujnik zbiornika",
         "blackWater": "Czarna woda",
         "diesel": "Diesel",
         "freshWater": "Woda słodka",
@@ -335,7 +255,6 @@
     "widgets": {
         "acLoads": "Obciążenia AC",
         "batteries": "Akumulatory",
-        "battery": "Akumulator",
         "batteryWithName": "Akumulator: %{name}",
         "chargerWithName": "Ładowarka: %{productNameShort}",
         "dcLoads": "Obciążenia DC",
@@ -345,10 +264,8 @@
         "invalidConfig": "Nieprawidłowa konfiguracja",
         "inverterCharger": "Inwerter / Ładowarka: %{productNameShort}",
         "inverterWithName": "Inwerter: %{productNameShort}",
-        "pvCharger": "Ładowarka PV",
         "shorePower": "Zasilanie Brzegowe",
         "solar": "Solar",
-        "status": "Status",
         "unknown": "Nieznany"
     }
 }

@@ -1,46 +1,25 @@
 {
     "acMode": {
         "modal": {
-            "name": "选择模式",
             "updateLimit": "选择岸电限制"
-        },
-        "title": "交流模式"
+        }
     },
     "boxes": {
-        "EnergyOverview": "能源概览",
         "acLoads": "交流负载",
         "alternator": "交流发电机",
         "batteries": "电池",
-        "battery": "电池",
-        "batteryWithName": "电池：%{name}",
-        "chargerWithName": "充电器：%{productNameShort}",
         "dcLoads": "直流负载",
         "devices": "设备",
         "energy": "能源",
         "environment": "环境",
         "generator": "发电机",
-        "generatorInput": "发电机输入",
-        "gridInput": "电网输入",
         "humidity": "湿度",
-        "invalidConfig": "无效配置",
-        "inverterCharger": "逆变器/充电器：%{productNameShort}",
-        "inverterWithName": "逆变器：%{productNameShort}",
         "pressure": "压力",
-        "pvCharger": "光伏充电器",
         "shorePower": "岸电",
         "solar": "太阳能",
-        "status": "状态",
         "tanks": "液位",
         "temperature": "温度",
-        "unknown": "未知",
         "windGenerator": "风力发电机"
-    },
-    "cardFooter": {
-        "Charge": "充电",
-        "Critical": "关键",
-        "Optimal": "最优",
-        "Status": "状态",
-        "Warning": "警告"
     },
     "common": {
         "absorptionCharging": "均充",
@@ -48,16 +27,11 @@
         "auto": "自动",
         "autoStartStop": "自动启动和停止",
         "bulkCharging": "快充",
-        "charge": "充电",
-        "charged": "已充电",
         "chargerOnly": "只充电",
         "charging": "充电",
         "close": "关闭",
-        "current": "电流",
         "dark": "深色",
         "days": "天",
-        "days_short": "天",
-        "discharge": "放电",
         "discharging": "放电",
         "eco": "节能",
         "emptyBar": " - ",
@@ -77,25 +51,20 @@
         "inverterOnly": "仅逆变",
         "inverting": "逆变",
         "light": "浅色",
-        "limit": "限制",
         "loading": "加载中",
-        "loads": "负载",
         "lowPower": "低功率",
         "minutes": "分",
         "minutes_short": "分",
         "mode": "模式",
         "night": "夜晚",
         "no": "否",
-        "noShorePower": "无岸电",
         "notAvailable": "不可用",
         "nrOfPhases": "%{phases}相数",
-        "null": " ",
         "off": "关",
         "on": "开",
         "passthru": "旁路",
         "pending": "等待中",
         "powerSupplyMode": "电源模式",
-        "remainingTime": "剩余时间",
         "running": "正在运行",
         "set": "设置",
         "shorePower": "岸电",
@@ -107,8 +76,6 @@
         "sustain": "维持",
         "timetogo": "备用时间",
         "unplugged": "未插电",
-        "veBusFault": "VE Bus故障",
-        "voltage": "电压",
         "yes": "是"
     },
     "diagnostics": {
@@ -123,7 +90,6 @@
         "device": {
             "colorScheme": "配色方案",
             "device": "设备",
-            "devicePixelRatio": "像素比",
             "diagConsole": "诊断控制台",
             "hideDiagConsole": "隐藏诊断控制台",
             "isGuiV2Supported": "支持GUI v2",
@@ -136,8 +102,6 @@
             "unspecified": "未指定",
             "userAgent": "用户代理",
             "viewport": "视口",
-            "viewportHeight": "视窗高度",
-            "viewportWidth": "视窗宽度",
             "webgl": "WebGL",
             "webglNotSupported": "不支持"
         },
@@ -162,10 +126,8 @@
         "mqttUnavailable2": "请检查您的设置中是否启用了 MQTT：",
         "mqttUnavailable3": "远程终端 > 设置 > 服务 > MQTT访问\n",
         "mqttUnavailable4": "尝试使用此屏幕顶部的远程控制台按钮远程更改设置。",
-        "mqttUnavailable5": "您也可以通过从上面的菜单中选择远程来尝试远程连接到您的设备。",
         "queryParams": "查询参数: %{queryParams}",
         "remoteConsole": {
-            "connectionFailed": "无法连接到 GX 设备",
             "qrCodeMessage": "要访问 GX 远程控制台，请确保您的手机与 GX 设备位于同一 WiFi 网络上，然后扫描此二维码。",
             "screenTooSmall": "在大屏幕中打开以查看远程控制台"
         },
@@ -187,16 +149,9 @@
     "header": {
         "close": "关闭",
         "connecting": "正在连接",
-        "local": "本地",
-        "loggedIn": "已登录",
-        "notLoggedIn": "未登录",
-        "remote": "远程",
         "remoteConsole": "远程控制台",
         "remoteMessage": "大屏幕查看远程终端",
         "versionInfo": "版本信息"
-    },
-    "installations": {
-        "title": "选择安装"
     },
     "locker": {
         "lockDescription": "为了防止意外更改设备设置 - 启用此功能将锁定与控件交互的可能性\n",
@@ -210,30 +165,9 @@
     "pages": {
         "diagnostics": "诊断",
         "remoteConsole": "远程控制台",
-        "switchingPane": "切换面板",
         "systemOverview": "系统总览"
     },
-    "remoteLogin": {
-        "2fa": "两步验证令牌",
-        "email": "邮箱",
-        "forgotPassword": "忘记密码",
-        "goBack": "返回",
-        "logIn": "登录",
-        "logOut": "登出",
-        "loginFailed": "登录失败",
-        "mobileVerification": "身份验证器应用令牌",
-        "noInstallations": "该账户没有安装",
-        "password": "密码",
-        "registerMessage1": "还没有账号？ ",
-        "registerMessage2": "注册您的RV",
-        "smsVerification": "短信确认令牌",
-        "wrong2fa": "错误的两步验证码"
-    },
     "statusWidget": {
-        "Discharging": "放电",
-        "Off": "关",
-        "VE.Bus Fault condition": "VE.BUS故障条件",
-        "Wake-up": "唤醒",
         "absorptionCharging": "均充",
         "assisting": "辅助供电",
         "autoEqualizeRecondition": "自动均衡/修复",
@@ -245,19 +179,6 @@
         "floatCharging": "浮充",
         "inverting": "逆变",
         "lowPower": "低功率",
-        "parts": {
-            "Battery": "电池",
-            "Black water": "黑水",
-            "DC Loads": "直流负载",
-            "Fresh water": "淡水",
-            "Fuel": "燃料",
-            "Live well": "活鱼池",
-            "Oil": "石油",
-            "PV Charger": "太阳能充电器",
-            "Shore Power": "太阳能",
-            "Tank sensor": "水箱传感器",
-            "Waste water": "废水"
-        },
         "passthru": "旁路",
         "recharge": "再充电",
         "repeatedAbsorption": "重复均充",
@@ -311,7 +232,6 @@
         "volume": "容量"
     },
     "tankWidget": {
-        "Tank sensor": "水箱传感器",
         "blackWater": "黑水",
         "diesel": "柴油",
         "freshWater": "淡水",
@@ -335,7 +255,6 @@
     "widgets": {
         "acLoads": "交流负载",
         "batteries": "电池",
-        "battery": "电池",
         "batteryWithName": "电池: %{name}",
         "chargerWithName": "充电器名称: %{productNameShort}",
         "dcLoads": "直流负载",
@@ -345,10 +264,8 @@
         "invalidConfig": "无效的配置",
         "inverterCharger": "逆变充电器：%{productNameShort}",
         "inverterWithName": "逆变器名称: %{productNameShort}",
-        "pvCharger": "太阳能充电器",
         "shorePower": "岸电",
         "solar": "太阳能",
-        "status": "状态",
         "unknown": "未知"
     }
 }

@@ -1,46 +1,25 @@
 {
     "acMode": {
         "modal": {
-            "name": "Имя",
             "updateLimit": "Выберите предел входного сигнала берега"
-        },
-        "title": "Сбросить пароль"
+        }
     },
     "boxes": {
-        "EnergyOverview": "ЭнергетикаОбзор",
         "acLoads": "AC нагрузки",
         "alternator": "Генератор",
         "batteries": "Батареи",
-        "battery": "Батарея",
-        "batteryWithName": "Батарея: %{имя}",
-        "chargerWithName": "Зарядное устройство: %{productNameShort}",
         "dcLoads": "Нагрузки постоянного тока",
         "devices": "Устройства",
         "energy": "Энергия",
         "environment": "Окружающая среда",
         "generator": "Генератор",
-        "generatorInput": "generatorInput",
-        "gridInput": "Входная сетка",
         "humidity": "Влажность",
-        "invalidConfig": "Недопустимая конфигурация",
-        "inverterCharger": "Инвертор / зарядное устройство: %{productNameShort}",
-        "inverterWithName": "Инвертор: %{productNameShort}",
         "pressure": "Давление",
-        "pvCharger": "PV зарядное устройство",
         "shorePower": "Мощность солнечной системы",
         "solar": "Солнечная энергия",
-        "status": "Состояние",
         "tanks": "Резервуары",
         "temperature": "Температура",
-        "unknown": "Неизвестно",
         "windGenerator": "Ветряной генератор"
-    },
-    "cardFooter": {
-        "Charge": "Нагрузка",
-        "Critical": "Критический",
-        "Optimal": "Оптимальный",
-        "Status": "Состояние",
-        "Warning": "Предупреждение"
     },
     "common": {
         "absorptionCharging": "абсорбцияЗарядка",
@@ -48,16 +27,11 @@
         "auto": "Авто",
         "autoStartStop": "Автоматический старт/стоп",
         "bulkCharging": "Насыпная зарядка",
-        "charge": "Нагрузка",
-        "charged": "Заряжено",
         "chargerOnly": "Только зарядное устройство",
         "charging": "заряжается",
         "close": "Закрыть",
-        "current": "Ток",
         "dark": "темный",
         "days": "дней",
-        "days_short": "короткие дни",
-        "discharge": "Разряд",
         "discharging": "разряжается",
         "eco": "Эко",
         "emptyBar": " - ",
@@ -77,25 +51,20 @@
         "inverterOnly": "Только инвертер",
         "inverting": "Инвертирование",
         "light": "свет",
-        "limit": "ограничение",
         "loading": "Загрузка",
-        "loads": "нагрузки",
         "lowPower": "Низкая мощность",
         "minutes": "минут",
         "minutes_short": "минуты_короткие",
         "mode": "Режим",
         "night": "Ночь",
         "no": "Нет",
-        "noShorePower": "Нет берегового питания",
         "notAvailable": "Недоступно",
         "nrOfPhases": "%{фазы} фазы",
-        "null": "Пожалуйста, обратитесь к нашим",
         "off": "Выкл",
         "on": "Вкл",
         "passthru": "Проход",
         "pending": "Ожидание...",
         "powerSupplyMode": "Режим поддержки мощности",
-        "remainingTime": "Оставшееся время",
         "running": "Работает",
         "set": "сентябрь",
         "shorePower": "Береговое питание",
@@ -107,8 +76,6 @@
         "sustain": "Удержание",
         "timetogo": "идти",
         "unplugged": "Отключено",
-        "veBusFault": "VE.Bus Состояние неисправности",
-        "voltage": "Напряжение",
         "yes": "Да"
     },
     "diagnostics": {
@@ -123,7 +90,6 @@
         "device": {
             "colorScheme": "Цветовая схема",
             "device": "Устройство",
-            "devicePixelRatio": "Соотношение пикселей",
             "diagConsole": "Диагностическая консоль",
             "hideDiagConsole": "Скрыть диагностическую консоль",
             "isGuiV2Supported": "Поддержка GUI v2",
@@ -136,8 +102,6 @@
             "unspecified": "Не указано",
             "userAgent": "Пользовательский агент",
             "viewport": "Область просмотра",
-            "viewportHeight": "Высота окна просмотра",
-            "viewportWidth": "Ширина окна просмотра",
             "webgl": "WebGL",
             "webglNotSupported": "Не поддерживается"
         },
@@ -162,10 +126,8 @@
         "mqttUnavailable2": "Убедитесь, что MQTT включен в ваших настройках:",
         "mqttUnavailable3": "Удаленная консоль > Настройки > Службы > Доступ MQTT",
         "mqttUnavailable4": "Попробуйте воспользоваться кнопкой Remote Console в верхней части этого экрана, чтобы изменить настройки удаленно.",
-        "mqttUnavailable5": "Вы также можете попробовать подключиться к устройству удаленно, выбрав пункт Remote в меню выше.",
         "queryParams": "queryParams",
         "remoteConsole": {
-            "connectionFailed": "Невозможно подключиться к устройству GX",
             "qrCodeMessage": "Чтобы получить доступ к удаленной консоли GX, убедитесь, что ваш телефон находится в той же сети WiFi, что и устройство GX, а затем отсканируйте этот QR-код.",
             "screenTooSmall": "Открыть на большом экране для просмотра удаленной консоли"
         },
@@ -187,16 +149,9 @@
     "header": {
         "close": "Закрыть",
         "connecting": "Подключение",
-        "local": "Локальные",
-        "loggedIn": "Вошел в систему как",
-        "notLoggedIn": "Не вошел в систему",
-        "remote": "Удаленный",
         "remoteConsole": "Дистанционная консоль",
         "remoteMessage": "Открыть на большом экране для просмотра удаленной консоли",
         "versionInfo": "Информация о версии"
-    },
-    "installations": {
-        "title": "Сбросить пароль"
     },
     "locker": {
         "lockDescription": "Для предотвращения случайных изменений в настройках устройства - включение этой функции заблокирует возможность взаимодействия с элементами управления",
@@ -210,30 +165,9 @@
     "pages": {
         "diagnostics": "Диагностика",
         "remoteConsole": "Дистанционная консоль",
-        "switchingPane": "Панель переключения",
         "systemOverview": "Обзор системы"
     },
-    "remoteLogin": {
-        "2fa": "Жетон двухфакторной аутентификации",
-        "email": "Эл. почта",
-        "forgotPassword": "Забыли пароль?",
-        "goBack": "Вернуться",
-        "logIn": "Вход",
-        "logOut": "Выйти",
-        "loginFailed": "Ошибка входа",
-        "mobileVerification": "Приложение для проверки подлинности токена",
-        "noInstallations": "У этого аккаунта нет установок.",
-        "password": "Пароль",
-        "registerMessage1": "У вас еще нет аккаунта? ",
-        "registerMessage2": "Зарегистрируйте свой фургон.",
-        "smsVerification": "Токен подтверждения SMS",
-        "wrong2fa": "Неверный код двухфакторной верификации"
-    },
     "statusWidget": {
-        "Discharging": "разряжается",
-        "Off": "Выкл",
-        "VE.Bus Fault condition": "VE.Bus Состояние неисправности",
-        "Wake-up": "Пробуждение",
         "absorptionCharging": "Абсорбционная зарядка",
         "assisting": "Помощь",
         "autoEqualizeRecondition": "Автоуравнивание/Ремонт",
@@ -245,19 +179,6 @@
         "floatCharging": "Зарядка поплавка",
         "inverting": "Инвертирование",
         "lowPower": "Низкая мощность",
-        "parts": {
-            "Battery": "Батарея",
-            "Black water": "Темная вода",
-            "DC Loads": "Нагрузки постоянного тока",
-            "Fresh water": "Свежая вода",
-            "Fuel": "Топливо",
-            "Live well": "Рабочая скважина",
-            "Oil": "Нефть",
-            "PV Charger": "PV зарядное устройство",
-            "Shore Power": "Мощность солнечной системы",
-            "Tank sensor": "Датчик насоса",
-            "Waste water": "Грязная вода"
-        },
         "passthru": "Проход",
         "recharge": "Зарядка",
         "repeatedAbsorption": "Повторная абсорбция",
@@ -311,7 +232,6 @@
         "volume": "Объем"
     },
     "tankWidget": {
-        "Tank sensor": "Датчик насоса",
         "blackWater": "Темная вода",
         "diesel": "Дизельное топливо",
         "freshWater": "Свежая вода",
@@ -335,7 +255,6 @@
     "widgets": {
         "acLoads": "AC нагрузки",
         "batteries": "Батареи",
-        "battery": "Батарея",
         "batteryWithName": "Батарея: %{имя}",
         "chargerWithName": "chargerWithName",
         "dcLoads": "Нагрузки постоянного тока",
@@ -345,10 +264,8 @@
         "invalidConfig": "Недопустимая конфигурация",
         "inverterCharger": "Инвертор / зарядное устройство: %{productNameShort}",
         "inverterWithName": "inverterWithName",
-        "pvCharger": "PV зарядное устройство",
         "shorePower": "Мощность солнечной системы",
         "solar": "Солнечная установка",
-        "status": "Состояние",
         "unknown": "Неизвестно"
     }
 }
