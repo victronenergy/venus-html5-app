@@ -155,18 +155,23 @@ Running the command will trigger the following actions:
 1. Add the local translations for all the languages
 1. Mark translations as fuzzy if there are changes in the translation of the main language
 
+Note that without the `-f` flag the push is **append-only**: new terms are added and existing translations are updated, but terms that were removed from the local `en.json` stay in POEditor. To prune them as well, run:
+
 ```
-npm run poeditor:push -f
+npm run poeditor:push -- -f
 ```
 
-Running the comamnd with the `-f` flag will delete the terms from POEditor that are not present in the local file.
+Running the command with the `-f` flag will delete the terms from POEditor that are not present in the local file.
 Please use with caution. If wrong data is sent, existing terms and their translations might be irreversibly lost.
+Note the `--` separator, without it npm swallows the flag and a plain append-only push is executed.
 
 #### 2.8.3 Pulling the POEditor translations locally
 
 ```
 npm run poeditor:pull
 ```
+
+The pull overwrites the local language files with the POEditor state. Any term that was added locally but not yet pushed will be lost, so always push before pulling.
 
 ## 3. Testing
 
