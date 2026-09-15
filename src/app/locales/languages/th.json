@@ -41,6 +41,7 @@
         "floatCharging": "การชาร์จแบบ Float",
         "generator": "เครื่องกำเนิดไฟฟ้า",
         "grid": "โครงข่ายไฟฟ้า",
+        "high": "สูง",
         "hours": "ชั่วโมง",
         "hours_short": "ชม.",
         "idle": "ว่าง",

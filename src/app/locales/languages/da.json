@@ -41,6 +41,7 @@
         "floatCharging": "Float-opladning",
         "generator": "Generator",
         "grid": "Net",
+        "high": "Høj",
         "hours": "timer",
         "hours_short": "t",
         "idle": "Inaktiv",
