@@ -195,6 +195,7 @@
         "bypassedTripped": "บายพาสแล้ว, ทริป",
         "closed": "ปิด",
         "color": "สี",
+        "current": "ปัจจุบัน",
         "disabled": "ปิดใช้งาน",
         "disabledOverTemp": "ปิดใช้งาน, อุณหภูมิสูงเกิน",
         "disabledTripped": "ปิดใช้งาน, ทริป",

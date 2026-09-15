@@ -195,6 +195,7 @@
         "bypassedTripped": "Байпас, спрацював захист",
         "closed": "Замкнено",
         "color": "Колір",
+        "current": "Поточна",
         "disabled": "Вимкнено",
         "disabledOverTemp": "Вимкнено, перегрів",
         "disabledTripped": "Вимкнено, спрацював захист",

@@ -195,6 +195,7 @@
         "bypassedTripped": "Förbikopplad, utlöst",
         "closed": "Stängd",
         "color": "Färg",
+        "current": "Aktuell",
         "disabled": "Inaktiverad",
         "disabledOverTemp": "Inaktiverad, övertemperatur",
         "disabledTripped": "Inaktiverad, utlöst",
