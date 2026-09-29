@@ -129,7 +129,7 @@
     "mochawesome": "^7.1.4",
     "mochawesome-merge": "^5.1.1",
     "mochawesome-report-generator": "^6.3.2",
-    "postcss": "^8.5.15",
+    "postcss": "^8.5.28",
     "postcss-loader": "^8.2.1",
     "prettier": "^3.9.9",
     "react-test-renderer": "^19.3.0",
