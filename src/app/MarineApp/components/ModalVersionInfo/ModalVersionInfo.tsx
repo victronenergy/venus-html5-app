@@ -5,7 +5,6 @@ import "./ModalVersionInfo.scss"
 import Logo from "../../images/icons/logo.png"
 import { SIZE_EXTRA_WIDE } from "app/components/Card"
 
-import packageInfo from "../../../../../package.json"
 import { BUILD_TIMESTAMP } from "app/utils/constants"
 import { useVrmStore, useAppStore } from "@victronenergy/mfd-modules"
 import { observer } from "mobx-react-lite"
@@ -36,7 +35,7 @@ export const ModalVersionInfo = observer(
                   <div className="version-item">
                     <Translate
                       value="versionInfo.version"
-                      version={`${packageInfo.version} ${process.env.REACT_APP_WHITELABEL}`}
+                      version={`${__APP_VERSION__} ${import.meta.env.REACT_APP_WHITELABEL}`}
                     />
                   </div>
                 </div>

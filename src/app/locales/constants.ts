@@ -37,7 +37,9 @@ export const mfdLanguageOptions = {
     // (which is usually true for debugging and demo versions)
     const overrideLang = (window.location.search.match(/[?&]overrideLang=([a-zA-Z-_]{2,5})/) || [])[1]
     setLocale(
-      process.env.REACT_APP_ENABLE_LANG_OVERRIDE === "true" && LANGUAGES.includes(overrideLang) ? overrideLang : lang,
+      import.meta.env.REACT_APP_ENABLE_LANG_OVERRIDE === "true" && LANGUAGES.includes(overrideLang)
+        ? overrideLang
+        : lang,
     )
   },
 }
