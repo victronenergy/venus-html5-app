@@ -1,6 +1,5 @@
-import preval from "preval.macro"
-
-export const BUILD_TIMESTAMP = preval`module.exports = new Date().toLocaleDateString() + "." + new Date().getUTCHours() + new Date().getUTCMinutes();`
+// NOTE: __BUILD_DATE__ and __BUILD_TIME__ are defined at build time via vite define
+export const BUILD_TIMESTAMP = `${__BUILD_DATE__}.${__BUILD_TIME__}`
 
 export const CURRENT_LIMIT_STEP = 0.5
 

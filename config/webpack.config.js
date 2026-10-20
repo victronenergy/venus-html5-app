@@ -578,6 +578,12 @@ module.exports = function (webpackEnv) {
       // during a production build.
       // Otherwise React will be compiled in the very slow development mode.
       new webpack.DefinePlugin(env.stringified),
+      // build-time constants shared with the vite config (see vitest.config.mts)
+      new webpack.DefinePlugin({
+        __APP_VERSION__: JSON.stringify(appPackageJson.version),
+        __BUILD_DATE__: JSON.stringify(new Date().toLocaleDateString()),
+        __BUILD_TIME__: JSON.stringify(`${new Date().getUTCHours()}${new Date().getUTCMinutes()}`),
+      }),
       // This is necessary to emit hot updates (CSS and Fast Refresh):
       isEnvDevelopment && new webpack.HotModuleReplacementPlugin(),
       // Experimental hot reloading for React .

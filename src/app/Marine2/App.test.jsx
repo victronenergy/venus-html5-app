@@ -2,11 +2,11 @@ import React from "react"
 import { render, waitFor } from "@testing-library/react"
 import App from "./App"
 
-jest.mock("@victronenergy/mfd-modules", () => {
-  const actual = jest.requireActual("@victronenergy/mfd-modules")
+vi.mock("@victronenergy/mfd-modules", async (importOriginal) => {
+  const actual = await importOriginal()
   return {
     ...actual,
-    useMqtt: () => ({ boot: jest.fn() }),
+    useMqtt: () => ({ boot: vi.fn() }),
   }
 })
 

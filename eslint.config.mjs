@@ -8,19 +8,17 @@ import reactHooksPlugin from "eslint-plugin-react-hooks"
 import prettierPluginRecommended from "eslint-plugin-prettier/recommended"
 import globals from "globals"
 import confusingBrowserGlobals from "confusing-browser-globals"
-import jestPlugin from "eslint-plugin-jest"
 
 export default [
   js.configs.recommended,
   prettierPluginRecommended,
   {
-    files: ["**/*.{js,jsx,mjs,cjs,ts,tsx}"],
+    files: ["**/*.{js,jsx,mjs,cjs,ts,mts,tsx}"],
     plugins: {
       react: reactPlugin,
       "react-hooks": reactHooksPlugin,
       typescript: tsPlugin,
       "@typescript-eslint": tsEslintPlugin,
-      jest: jestPlugin,
     },
     rules: {
       ...reactPlugin.configs.recommended.rules,
@@ -37,8 +35,12 @@ export default [
         ...globals.node,
         ...globals.browser,
         ...reactPlugin.configs.recommended.globals,
-        ...globals.jest,
+        ...globals.vitest,
         NodeJS: "readonly",
+        // build-time constants, see vite.config.mts define
+        __APP_VERSION__: "readonly",
+        __BUILD_DATE__: "readonly",
+        __BUILD_TIME__: "readonly",
       },
     },
     settings: {

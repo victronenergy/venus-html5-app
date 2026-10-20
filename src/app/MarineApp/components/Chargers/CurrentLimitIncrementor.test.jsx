@@ -4,7 +4,7 @@ import CurrentLimitIncrementor from "./CurrentLimitIncrementor"
 
 describe("Input limit spinner", () => {
   describe("when valid", () => {
-    const onCurrentLimitChanged = jest.fn()
+    const onCurrentLimitChanged = vi.fn()
 
     beforeEach(() => {
       render(<CurrentLimitIncrementor currentLimit={10} onInputLimitChanged={onCurrentLimitChanged} />)
