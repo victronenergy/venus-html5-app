@@ -104,7 +104,8 @@
     "poeditor:push": "node src/app/locales/poeditor/push.js",
     "poeditor:pull": "node src/app/locales/poeditor/pull.js",
     "test:watch": "vitest",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test:legacy": "tests/legacy/run.sh"
   },
   "browserslist": {
     "production": [

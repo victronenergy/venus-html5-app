@@ -188,7 +188,14 @@ In the Venus OS release test plan there is a tab containing all tests.
 Components and helpers have unit tests written with Vitest and Testing Library. Run all of these tests with `npm test`
 (or `npm run test:watch` during development).
 
-### 3.3 Cypress
+### 3.3 Legacy browser smoke test
+
+The MFD devices run very old web engines which crash on any JavaScript syntax or API they do not know. Besides the
+`es-check` gate that runs after every build, `npm run test:legacy` boots the built `dist/` in historical engines
+(Chrome 49, Chrome 73 and WebKitGTK 2.10, see `tests/legacy/`) against a `venus-docker` simulation using Docker and
+fails on any JavaScript error. Run `npm run build` first; the first run downloads and builds the browser images.
+
+### 3.4 Cypress
 
 Cypress is used to run integration tests on the compiled ui to make sure it opens and operated correctly in different
 display sizes. To run cypress you need to run the live server and an instance of venus docker in the Venus GX demo mode (z):
@@ -201,7 +208,7 @@ Then you can run the cypress UI interactively with `npm run cy:open`.
 
 To run the ui tests in CI-style use `npm run test:e2e`
 
-### 3.4 Simulating/Debugging MFD UI locally
+### 3.5 Simulating/Debugging MFD UI locally
 
 MFDs ship web browsers based on `AppleWebKit/537` or `AppleWebKit/601`.
 

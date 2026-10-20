@@ -31,6 +31,12 @@ jobs:
           /root/run_with_simulation.sh z
       - name: Run unit and E2E tests
         run: npm run test:ci
+      - name: Run legacy browser smoke test
+        # boots the bundle built with PUBLIC_URL=/ above in Chrome 49, Chrome 73 and WebKitGTK 2.10 (see tests/legacy)
+        run: npm run test:legacy
+        if: always()
+        env:
+          APP_PATH: /
       - name: Generate E2E Report
         run: npm run generate-e2e-report
         if: always()
