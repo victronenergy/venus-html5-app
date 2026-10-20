@@ -77,7 +77,7 @@ type ChargerProps = {
 }
 
 const Charger = observer(({ chargerId }: ChargerProps) => {
-  let {
+  const {
     customName,
     nrOfOutputs = 3,
     productName,

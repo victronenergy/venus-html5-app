@@ -52,10 +52,9 @@ type InverterProps = {
 export const Inverter = observer(
   ({ instanceId, isVebusInverter, ...props }: InverterProps & Partial<InverterState>) => {
     const source = isVebusInverter ? "vebus" : "inverter"
-    let { state, mode, voltage, current, power, customName, productName, nAcInputs, updateMode } = useInverter(
-      instanceId,
-      source,
-    )
+    const inverter = useInverter(instanceId, source)
+    const { state, mode, voltage, current, power, customName, productName, updateMode } = inverter
+    let { nAcInputs } = inverter
     nAcInputs = props.nAcInputs ?? nAcInputs
 
     // if nAcInputs === 0 it means it's an inverter, if not it's an inverter/charger => skip

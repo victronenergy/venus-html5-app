@@ -32,7 +32,7 @@ const MqttUnavailable = ({ host }: Props) => {
   }, [error, isConnected])
 
   // const connectTimeout = useRef()
-  let connectTimeout: React.MutableRefObject<NodeJS.Timeout | null> = useRef(null)
+  const connectTimeout: React.MutableRefObject<NodeJS.Timeout | null> = useRef(null)
   useEffect(() => {
     connectTimeout.current = setTimeout(() => {
       clearTimeout((connectTimeout.current as NodeJS.Timeout) || undefined)

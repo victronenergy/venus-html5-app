@@ -114,7 +114,7 @@ const SwitchingPane = () => {
                   isFirstColumnOnPage,
                   isFirstColumnOnLastPage,
                 }) => {
-                  var displayPageTitle = false
+                  let displayPageTitle = false
                   // NOTE: display page title for first page in every group
                   if (groupColumnIndex === 0) {
                     displayPageTitle = true

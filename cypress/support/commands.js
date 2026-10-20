@@ -18,7 +18,6 @@
 
 import "@testing-library/cypress/add-commands"
 
-// eslint-disable-next-line no-undef
 Cypress.Commands.add(`isWithinViewport`, { prevSubject: true }, (subject, width, height) => {
   const bounding = subject[0].getBoundingClientRect()
 
@@ -36,9 +35,7 @@ Cypress.Commands.add(`isWithinViewport`, { prevSubject: true }, (subject, width,
 
 const addContext = require("mochawesome/addContext")
 
-// eslint-disable-next-line no-undef
 Cypress.Commands.add("addContext", (content) => {
-  // eslint-disable-next-line no-undef
   cy.once("test:after:run", (test) => {
     addContext({ test }, content)
   })

@@ -16,4 +16,4 @@ module.exports = {
     // Garmin/Furuno MFDs (Chrome <73). Unblock after migrating to Vite.
     "react-i18nify",
   ],
-};
+}

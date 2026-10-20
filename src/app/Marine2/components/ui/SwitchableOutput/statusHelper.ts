@@ -15,8 +15,8 @@ export const isSwitchableOutputDisabled = (status: number): boolean =>
   (status & SWITCHABLE_OUTPUT_STATUS.STATUS_DISABLED) !== 0
 
 export const getSwitchableOutputStatusPill = (status: number, type: SwitchableOutputType): StatusPillInfo | null => {
-  var isBilgePump = type === SWITCHABLE_OUTPUT_TYPE.BILGE_PUMP_CONTROL
-  var isOn = (status & 0x09) === 0x09
+  const isBilgePump = type === SWITCHABLE_OUTPUT_TYPE.BILGE_PUMP_CONTROL
+  const isOn = (status & 0x09) === 0x09
 
   // Bilge pump: always shows a pill, combined labels, On bits NOT masked
   if (isBilgePump) {
@@ -33,7 +33,7 @@ export const getSwitchableOutputStatusPill = (status: number, type: SwitchableOu
 
   // Common handling for all types (and bilge pump fallthrough)
   // Mask out On bits (0x09) when combined with other flags
-  var effective = status
+  let effective = status
   if ((effective & 0x09) === 0x09 && effective !== 0x09) {
     effective = effective & ~0x09
   }
