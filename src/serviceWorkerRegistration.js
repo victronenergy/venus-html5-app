@@ -21,6 +21,7 @@ export default function registerServiceWorker() {
       }
     })
 
-    wb.register()
+    // registration is rejected on insecure (plain http) origins, which is how the app is served on the devices
+    wb.register().catch((error) => console.warn("Service worker registration failed", error))
   }
 }
