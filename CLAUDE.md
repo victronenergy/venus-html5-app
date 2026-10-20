@@ -1,12 +1,22 @@
-# Project: venus-influx-loader
+# Project: venus-html5-app
 
-TypeScript project using npm for dependency management.
+React + TypeScript single page app built with Vite, using npm for dependency management.
 
-## Build & Lint
+## Build, Test & Lint
 
-- `npm run build` — compile server (tsc) + client (webpack)
+- `npm run build` — vite build into `dist/`, then `postbuild` runs `es-check es2015` on the output and gzips large assets
+- `npm test` — vitest unit tests (`npm run test:watch` for watch mode)
 - `npm run lint` — eslint with autofix
-- `npm run type-check` — typecheck without emitting
+- `npm run type-check` — typecheck without emitting (src, cypress and node config projects)
+- `npm run test:legacy` — boots the built `dist/` in old Chrome / WebKit engines via docker, see `tests/legacy/`
+
+## Constraints
+
+- Target browsers are marine MFD devices (Chrome 49/51, AppleWebKit 537/601). The build emits a single legacy
+  (SystemJS, ES2015, core-js polyfilled) bundle via `@vitejs/plugin-legacy`, never `<script type="module">`.
+  Keep `browserslist` in package.json and the `es-check` postbuild gate intact.
+- Files containing JSX must use the `.jsx`/`.tsx` extension, Vite does not transform JSX in `.js` files.
+- The `build` script forces `NODE_ENV=production`; do not rely on the shell environment.
 
 ## Dependency Update Workflow
 
