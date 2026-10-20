@@ -66,7 +66,7 @@
     "mochawesome-report-generator": "^6.3.2",
     "postcss": "^8.5.31",
     "postcss-flexbugs-fixes": "^5.0.2",
-    "postcss-preset-env": "^11.5.4",
+    "postcss-preset-env": "^11.6.1",
     "prettier": "^3.9.10",
     "sass": "^1.79.6",
     "serve": "^14.2.6",
