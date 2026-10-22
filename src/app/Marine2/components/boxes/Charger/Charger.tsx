@@ -34,7 +34,7 @@ interface Props {
 }
 
 const Charger = ({ instanceId, componentMode = "compact", compactBoxSize }: Props) => {
-  let {
+  const {
     nrOfOutputs = 3,
     productName,
     customName,

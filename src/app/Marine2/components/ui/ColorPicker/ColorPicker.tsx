@@ -510,8 +510,8 @@ const ColorPicker = observer(
 
     const handleColorPresetClicked = useCallback(
       (index: number, color: HSVWColor) => {
-        var notifyParent = false
-        var newPresets = [...localColorPresets] as HSVWColorPresets
+        let notifyParent = false
+        let newPresets = [...localColorPresets] as HSVWColorPresets
         if (isEditingPresets) {
           if (isValidHSVWColorPreset(color)) {
             // Remove color

@@ -75,13 +75,13 @@ const UnrangedSetpointOutput = observer((props: UnrangedSetpointOutputProps) => 
       clearTimers()
 
       // Immediate update
-      updateValueRef.current!!(delta)
+      updateValueRef.current!(delta)
 
       // Wait 300ms before starting autorepeat
       initialDelayTimerRef.current = window.setTimeout(() => {
         // Start 100ms autorepeat
         repeatTimerRef.current = window.setInterval(() => {
-          updateValueRef.current!!(delta)
+          updateValueRef.current!(delta)
         }, 100)
       }, 300)
     },

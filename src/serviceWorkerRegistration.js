@@ -1,13 +1,14 @@
 import { Workbox } from "workbox-window"
 
 export default function registerServiceWorker() {
-  if ("production" !== process.env.NODE_ENV) {
+  if (!import.meta.env.PROD) {
     return
   }
 
   // Check if the serviceWorker Object exists in the navigator object ( means if browser supports SW )
   if ("serviceWorker" in navigator) {
-    const wb = new Workbox(`${process.env.PUBLIC_URL}/service-worker.js`)
+    // BASE_URL always ends with a slash
+    const wb = new Workbox(`${import.meta.env.BASE_URL}service-worker.js`)
 
     wb.addEventListener("installed", (event) => {
       /**
@@ -20,6 +21,7 @@ export default function registerServiceWorker() {
       }
     })
 
-    wb.register()
+    // registration is rejected on insecure (plain http) origins, which is how the app is served on the devices
+    wb.register().catch((error) => console.warn("Service worker registration failed", error))
   }
 }

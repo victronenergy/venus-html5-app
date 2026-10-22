@@ -2,7 +2,6 @@ import { observer } from "mobx-react-lite"
 import { useAppStore, useMqtt } from "@victronenergy/mfd-modules"
 import { Translate, translate } from "react-i18nify"
 import { Modal } from "../Modal"
-import packageInfo from "../../../../../../package.json"
 import React, { useState } from "react"
 import LogoIcon from "../../../images/logo.svg"
 import LogoOnlyIcon from "../../../images/logo-only.svg"
@@ -42,7 +41,7 @@ const VersionInfo = () => {
             <div className="mt-1 py-2">
               <Translate
                 value="versionInfo.version"
-                version={`${packageInfo.version} ${process.env.REACT_APP_WHITELABEL}`}
+                version={`${__APP_VERSION__} ${import.meta.env.REACT_APP_WHITELABEL}`}
               />
             </div>
             <div className="flex flex-row justify-between">

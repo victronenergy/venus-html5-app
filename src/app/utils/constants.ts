@@ -1,6 +1,5 @@
-import preval from "preval.macro"
-
-export const BUILD_TIMESTAMP = preval`module.exports = new Date().toLocaleDateString();`
+// NOTE: __BUILD_DATE__ is defined at build time via vite define
+export const BUILD_TIMESTAMP = __BUILD_DATE__
 
 export const BATTERY_STATE = {
   IDLE: 0,

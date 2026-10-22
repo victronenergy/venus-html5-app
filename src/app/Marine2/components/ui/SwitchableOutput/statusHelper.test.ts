@@ -1,16 +1,12 @@
 import { SWITCHABLE_OUTPUT_TYPE } from "@victronenergy/mfd-modules/dist/src/utils/constants"
 import { getSwitchableOutputStatusPill, isSwitchableOutputDisabled } from "./statusHelper"
 
-jest.mock("react-i18nify", function () {
-  return {
-    translate: function (key) {
-      return key
-    },
-  }
-})
+vi.mock("react-i18nify", () => ({
+  translate: (key: string) => key,
+}))
 
-var GENERIC = SWITCHABLE_OUTPUT_TYPE.TOGGLE_SWITCH
-var BILGE = SWITCHABLE_OUTPUT_TYPE.BILGE_PUMP_CONTROL
+const GENERIC = SWITCHABLE_OUTPUT_TYPE.TOGGLE_SWITCH
+const BILGE = SWITCHABLE_OUTPUT_TYPE.BILGE_PUMP_CONTROL
 
 describe("isSwitchableOutputDisabled", function () {
   test("returns true when DISABLED bit is set", function () {

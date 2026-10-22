@@ -24,7 +24,7 @@ const EnvironmentOverview = ({ componentMode = "full", pageSelectorPropsSetter }
   const { temperatures: sensors } = useTemperatures()
   const [boxSize, setBoxSize] = useState<ISize>({ width: 0, height: 0 })
 
-  let temperatureComponents = (sensors.filter((sensor) => sensor.temperature !== undefined) || []).map(
+  const temperatureComponents = (sensors.filter((sensor) => sensor.temperature !== undefined) || []).map(
     (sensor: TemperatureState) => (
       <TemperatureData
         key={"temperature" + sensor.instance}
@@ -35,7 +35,7 @@ const EnvironmentOverview = ({ componentMode = "full", pageSelectorPropsSetter }
     ),
   )
 
-  let humidityComponents = (sensors.filter((sensor) => sensor.humidity !== undefined) || []).map(
+  const humidityComponents = (sensors.filter((sensor) => sensor.humidity !== undefined) || []).map(
     (sensor: TemperatureState) => (
       <HumidityData
         key={"humidity" + sensor.instance}
@@ -46,7 +46,7 @@ const EnvironmentOverview = ({ componentMode = "full", pageSelectorPropsSetter }
     ),
   )
 
-  let pressureComponents = (sensors.filter((sensor) => sensor.pressure !== undefined) || []).map(
+  const pressureComponents = (sensors.filter((sensor) => sensor.pressure !== undefined) || []).map(
     (sensor: TemperatureState) => (
       <PressureData
         key={"pressure" + sensor.instance}

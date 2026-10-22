@@ -16,9 +16,9 @@ export const InputLimit = observer(({ onChangeInputLimitClicked, shorePowerInput
   const { instanceId } = useVebus()
   const { currentLimit, currentLimitIsAdjustable } = useInputLimit(instanceId, shorePowerInput)
 
-  let isAdjustable = currentLimitIsAdjustable || 0
+  const isAdjustable = currentLimitIsAdjustable || 0
 
-  let formattedLimit = formatNumber({ value: Number(currentLimit), unit: "A", defaultValue: null })
+  const formattedLimit = formatNumber({ value: Number(currentLimit), unit: "A", defaultValue: null })
 
   return (
     <div className="metric__current-input-limit">

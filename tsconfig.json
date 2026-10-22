@@ -1,48 +1,23 @@
 {
   "compilerOptions": {
-    "experimentalDecorators": true,
-    "target": "es2015",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
+    "target": "ES2020",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "preserve",
     "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "allowJs": true,
+    "checkJs": false,
+    "useDefineForClassFields": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "sourceMap": false,
-    "jsx": "react-jsx",
+    "skipLibCheck": true,
+    "noFallthroughCasesInSwitch": true,
+    "types": ["vite/client", "vitest/globals", "node"],
     "paths": {
-      "~/*": [
-        "./src/*"
-      ],
-      "@m2Types/*": ["./src/app/Marine2/types/*"],
       "app/*": ["./src/app/*"],
-    },
-    "types": [
-      "cypress",
-      "@testing-library/cypress"
-    ]
+      "@m2Types/*": ["./src/app/Marine2/types/*"]
+    }
   },
-  "include": [
-    "../node_modules/cypress",
-    "cypress/**/*.ts",
-    "src",
-    "custom.d.ts"
-  ],
-  "exclude": [
-    "src/**/*.test.ts",
-    "src/**/*.test.tsx",
-    "src/**/*.spec.ts",
-    "src/**/*.spec.tsx"
-  ]
+  "include": ["src"]
 }

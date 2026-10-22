@@ -57,7 +57,7 @@ const RemoteConsole = ({ host, width, height }: Props) => {
   }
 
   // Make the GUI v2 full screen with small pading on all sides
-  var iframeClassNames = classnames("w-full h-full p-4 block hide-remote-console:hidden", {
+  let iframeClassNames = classnames("w-full h-full p-4 block hide-remote-console:hidden", {
     hidden: loading,
   })
 

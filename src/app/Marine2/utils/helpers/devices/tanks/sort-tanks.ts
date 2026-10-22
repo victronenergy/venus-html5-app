@@ -5,6 +5,6 @@ import { TankState } from "@victronenergy/mfd-modules"
  */
 export const sortTanks = (tanks: TankState[]) =>
   tanks.slice().sort((a, b) => {
-    let sortOrder = a.fluidType - b.fluidType
+    const sortOrder = a.fluidType - b.fluidType
     return sortOrder === 0 ? a.instance - b.instance : sortOrder
   })

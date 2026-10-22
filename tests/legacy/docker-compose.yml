@@ -1,0 +1,42 @@
+# Legacy browser smoke test, see run.sh. All images are linux/amd64 (historical Chromium builds are x64 only).
+services:
+  app:
+    image: nginx:alpine
+    volumes:
+      - ../../dist:/usr/share/nginx/html:ro
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    ports:
+      - "8099:80"
+
+  venus:
+    image: victronenergy/venus-docker:latest
+    platform: linux/amd64
+    command: /root/run_with_simulation.sh z
+
+  chrome49:
+    build:
+      context: ./chromium
+      args:
+        REVISION: "369908"
+    platform: linux/amd64
+    ports:
+      - "9222:9222"
+
+  chrome73:
+    build:
+      context: ./chromium
+      args:
+        REVISION: "625920"
+    platform: linux/amd64
+    ports:
+      - "9222:9222"
+
+  webkit601:
+    build:
+      context: .
+      dockerfile: webkitgtk/Dockerfile
+    platform: linux/amd64
+    environment:
+      NAME: webkit601
+      APP_URL: ${APP_URL:-http://app/app/?host=venus&port=9001&path=%02%03}
+      TIMEOUT: ${TIMEOUT:-90}

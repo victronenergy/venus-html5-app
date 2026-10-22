@@ -36,6 +36,16 @@ export const Marine2 = observer((props: AppProps) => {
     })
   }, [appViewsStore.currentView])
 
+  // marks the document as connected, used by the legacy browser smoke test (tests/legacy)
+  // NB: Element.toggleAttribute does not exist in the MFD browsers (Chrome < 69)
+  useEffect(() => {
+    if (isConnected && portalId) {
+      document.documentElement.setAttribute("data-app-connected", "")
+    } else {
+      document.documentElement.removeAttribute("data-app-connected")
+    }
+  }, [isConnected, portalId])
+
   const renderView = () => {
     // Boxes
     if (/^box\//i.test(currentView)) {

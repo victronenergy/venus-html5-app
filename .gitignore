@@ -36,3 +36,7 @@ cypress/report
 
 # deploy scripts
 networks.csv
+
+# vitest reports and vite-plugin-pwa dev output
+/.vitest
+/dev-dist

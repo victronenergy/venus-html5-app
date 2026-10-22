@@ -50,8 +50,8 @@ const deviceResolutions = {
   ],
 }
 
-for (let [device, resolutions] of Object.entries(deviceResolutions)) {
-  for (let [width, height] of resolutions) {
+for (const [device, resolutions] of Object.entries(deviceResolutions)) {
+  for (const [width, height] of resolutions) {
     context(`${device} resolution ${width}x${height}`, () => {
       beforeEach(() => {
         cy.viewport(width, height)

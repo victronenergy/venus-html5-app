@@ -14,8 +14,11 @@ const fileNameOverrides: { [language: string]: string } = {
   zh: "zh-CN",
 }
 
+// all language files are bundled eagerly
+const languageFiles = import.meta.glob("./languages/*.json", { eager: true, import: "default" }) as TranslationRecord
+
 const translations: TranslationRecord = Object.fromEntries(
-  LANGUAGES.map((language) => [language, require(`./languages/${fileNameOverrides[language] || language}.json`)]),
+  LANGUAGES.map((language) => [language, languageFiles[`./languages/${fileNameOverrides[language] || language}.json`]]),
 )
 
 // override the language with the value of the lang URL parameter, if present
@@ -41,7 +44,7 @@ setTranslations(translations)
 
 const setupLocale = async () => {
   setLocale(
-    (process.env.REACT_APP_ENABLE_LANG_OVERRIDE === "true" && languageOverride) ||
+    (import.meta.env.REACT_APP_ENABLE_LANG_OVERRIDE === "true" && languageOverride) ||
       (await Storage.getItem(__LOCAL_STORAGE_LANG_KEY__)) ||
       DEFAULT_LANGUAGE,
   )

@@ -108,7 +108,7 @@ const getAvailableDeviceBoxes = function (
   compactBoxSize: ISize,
   componentMode?: ComponentMode,
 ) {
-  let devices = []
+  const devices = []
 
   if (chargers) {
     chargers.forEach((charger) => {

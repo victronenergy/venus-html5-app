@@ -73,7 +73,7 @@ export function colorTemperatureToAngle(colorTemperature: number, handleAngle: n
 
 export function angleToColorHue(angle: number): number {
   // Convert to hue (0-360), accounting for rotation offset
-  let hue = -angle - 35 + 90
+  const hue = -angle - 35 + 90
   // Normalize to 0-360
   return ((hue % 360) + 360) % 360
 }

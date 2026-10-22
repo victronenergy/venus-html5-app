@@ -1,4 +1,3 @@
-import "react-app-polyfill/stable"
 import React from "react"
 import { createRoot } from "react-dom/client"
 import { getParameterByName } from "./app/utils/util"
@@ -7,7 +6,6 @@ import * as Sentry from "@sentry/react"
 import { Integrations } from "@sentry/tracing"
 import { initializeErrorHandlerStore } from "app/components/ErrorHandlerModule/ErrorHandler.store"
 import Loading from "./app/MarineApp/components/Loading"
-import packageInfo from "../package.json"
 
 // load languages
 import "./app/locales"
@@ -17,7 +15,7 @@ import { ScopeContext } from "@sentry/types/types/scope"
 const MarineApp = React.lazy(() => import("./app/MarineApp/App"))
 const Marine2App = React.lazy(() => import("./app/Marine2/App"))
 
-const whitelabel = process.env.REACT_APP_WHITELABEL
+const whitelabel = import.meta.env.REACT_APP_WHITELABEL
 const getApp = () => {
   switch (whitelabel) {
     case "Marine":
@@ -46,9 +44,9 @@ Sentry.init({
   dsn: "https://1582bd830f4349f1889999f8b3466a2e@o81300.ingest.sentry.io/6331073",
   integrations: [new Integrations.BrowserTracing()],
   sampleRate: 1,
-  environment: process.env.NODE_ENV,
-  release: `${packageInfo.version} ${process.env.REACT_APP_WHITELABEL}`,
-  debug: process.env.NODE_ENV === "development",
+  environment: import.meta.env.MODE,
+  release: `${__APP_VERSION__} ${import.meta.env.REACT_APP_WHITELABEL}`,
+  debug: import.meta.env.DEV,
   // Since this app can be used on remote devices such as a boat, we want to
   // capture errors and then allow the user to decide if they want to send them,
   // because they may have only limited or satellite internet access
