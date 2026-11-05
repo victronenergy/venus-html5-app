@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react"
 import {
   getSwitchingPaneItemNameForDisplay,
   SwitchableOutputId,
@@ -9,7 +9,9 @@ import {
 import classnames from "classnames"
 import { observer } from "mobx-react-lite"
 import { translate } from "react-i18nify"
+import useSize from "app/Marine2/utils/hooks/use-size"
 import StatusPill from "../StatusPill"
+import { getLocalizedOrDefault } from "../GenericInput/helpers"
 import { getSwitchableOutputStatusPill, isSwitchableOutputDisabled } from "./statusHelper"
 
 interface SteppedSwitchOutputProps {
@@ -21,6 +23,8 @@ interface SteppedSwitchOutputProps {
   className?: string
 }
 
+const stepButtonClassName = "flex-1 truncate px-1"
+
 const SteppedSwitchOutput = observer((props: SteppedSwitchOutputProps) => {
   const switchableOutput = useSwitchableOutput(props.tree, props.deviceId, props.outputId)
   const outputName = getSwitchingPaneItemNameForDisplay(switchableOutput, props.parentDeviceName)
@@ -29,7 +33,47 @@ const SteppedSwitchOutput = observer((props: SteppedSwitchOutputProps) => {
   const disabled = isSwitchableOutputDisabled(switchableOutput.status)
   const statusPill = getSwitchableOutputStatusPill(switchableOutput.status, switchableOutput.type)
   const buttons = Array.from({ length: switchableOutput.dimmingMax || 1 }, (_, i) => i + 1)
-  const selected = switchableOutput.dimming || 1
+  // TODO: this should be a number but as of today we sometimes receive a string
+  const selected = Number(switchableOutput.dimming) || 1
+
+  // Optional /Settings/Labels, indexed by dimming value (1..dimmingMax) like every other Labels consumer.
+  // labels[0] would describe the off state, which is rendered by the hardcoded On/Off button instead.
+  const labels: unknown[] = Array.isArray(switchableOutput.labels) ? switchableOutput.labels : []
+  const labelFor = (index: number): string | undefined => {
+    const label = labels[index]
+    return typeof label === "string" && label.trim() !== "" ? getLocalizedOrDefault(label) : undefined
+  }
+  const stepLabels = buttons.map((index) => labelFor(index))
+  const hasLabels = stepLabels.some((label) => label !== undefined)
+
+  // Labels are only used when every one of them fits its button, otherwise all steps fall back to numbers.
+  // An invisible copy of the step row carrying the labels is measured whenever the row width or the labels change.
+  const stepAreaRef = useRef<HTMLDivElement>(null)
+  const measureRef = useRef<HTMLDivElement>(null)
+  const [stepAreaWidth] = useSize(stepAreaRef)
+  const [labelsFit, setLabelsFit] = useState(true)
+  const stepLabelsKey = JSON.stringify(stepLabels)
+
+  // Re-measure once web fonts have loaded: a cold start measures with the fallback font metrics
+  const [fontsReady, setFontsReady] = useState(false)
+  useEffect(() => {
+    let cancelled = false
+    document.fonts?.ready.then(() => {
+      if (!cancelled) setFontsReady(true)
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  useLayoutEffect(() => {
+    const el = measureRef.current
+    if (!el) return
+    const overflows = Array.from(el.children).some((child) => child.scrollWidth > child.clientWidth)
+    setLabelsFit(!overflows)
+  }, [stepAreaWidth, stepLabelsKey, fontsReady])
+
+  const useLabels = hasLabels && labelsFit
 
   const handleClickOnOff = () => {
     switchableOutput.updateState(switchableOutput.state === 1 ? 0 : 1)
@@ -86,11 +130,11 @@ const SteppedSwitchOutput = observer((props: SteppedSwitchOutputProps) => {
               )}
             ></div>
           </div>
-          <div className="flex-1 flex h-full w-full">
+          <div ref={stepAreaRef} className="relative flex-1 flex h-full w-full">
             {buttons.map((index) => (
               <button
                 key={index}
-                className={classnames("flex-1", {
+                className={classnames(stepButtonClassName, {
                   "text-content-victronGray": disabled,
                   "bg-content-victronGray50": disabled && index === selected,
                   "text-content-onVictronBlue": !disabled && index === selected,
@@ -99,9 +143,19 @@ const SteppedSwitchOutput = observer((props: SteppedSwitchOutputProps) => {
                 })}
                 onClick={() => handleClickButton(index)}
               >
-                {`${index}`}
+                {useLabels ? (stepLabels[index - 1] ?? `${index}`) : `${index}`}
               </button>
             ))}
+            {/* Measurement row: same layout as the step buttons, always carrying the labels */}
+            {hasLabels && (
+              <div ref={measureRef} className="absolute inset-0 flex invisible pointer-events-none" aria-hidden="true">
+                {buttons.map((index) => (
+                  <span key={index} className={stepButtonClassName} data-testid="stepped-switch-measure">
+                    {stepLabels[index - 1] ?? `${index}`}
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
