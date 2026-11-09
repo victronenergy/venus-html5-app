@@ -190,10 +190,89 @@ describe("SteppedSwitchOutput", () => {
     expect(output.updateDimming).not.toHaveBeenCalled()
   })
 
-  test("keeps the hardcoded On/Off toggle", () => {
-    const { switchableOutput: output } = setup({ labels: ["Custom off", "Low", "Med", "High"] })
+  test("keeps the On/Off toggle when the off state is not named", () => {
+    const { switchableOutput: output } = setup({ labels: ["", "Low", "Med", "High"] })
     expect(screen.getAllByRole("button")[0].textContent).toBe("switches.on")
     fireEvent.click(screen.getAllByRole("button")[0])
     expect(output.updateState).toHaveBeenCalledWith(0)
+  })
+
+  test("keeps the dimmed preselected step while off when the off state is not named", () => {
+    setup({ state: 0, dimming: 2, labels: ["", "Low", "Med", "High"] })
+    expect(screen.getAllByRole("button")[0].textContent).toBe("switches.off")
+    const dimmed = stepButtons().filter((b) => b.className.includes("bg-content-victronBlue50"))
+    expect(dimmed.map((b) => b.textContent)).toEqual(["Med"])
+  })
+
+  describe("exclusive off (labels[0] names the off state)", () => {
+    const offButton = () => screen.getAllByRole("button")[0]
+    const highlighted = () =>
+      screen
+        .getAllByRole("button")
+        .filter((b) => b.className.includes("bg-content-victronBlue"))
+        .map((b) => b.textContent)
+
+    test("shows the translated off label and highlights only it, in the off colour, while off", () => {
+      setup({ state: 0, dimming: 2, labels: ["/off", "Eco", "High", "Boost"] })
+      expect(offButton().textContent).toBe("switches.off")
+      expect(highlighted()).toEqual(["switches.off"])
+      expect(offButton().className).toContain("bg-content-victronBlue50")
+      expect(offButton().className).not.toMatch(/bg-content-victronBlue(?!50)/)
+    })
+
+    test("keeps the off label and highlights only the active step while on", () => {
+      setup({ state: 1, dimming: 2, labels: ["Standby", "Eco", "High", "Boost"] })
+      expect(offButton().textContent).toBe("Standby")
+      expect(highlighted()).toEqual(["High"])
+    })
+
+    test("tapping the off segment switches off, and does nothing when already off", () => {
+      const { switchableOutput: on } = setup({ state: 1, labels: ["/off", "Eco", "High", "Boost"] })
+      fireEvent.click(offButton())
+      expect(on.updateState).toHaveBeenCalledWith(0)
+
+      const { switchableOutput: off } = setup({ state: 0, labels: ["/off", "Eco", "High", "Boost"] })
+      fireEvent.click(screen.getAllByRole("button").filter((b) => b.textContent === "switches.off")[1])
+      expect(off.updateState).not.toHaveBeenCalled()
+    })
+
+    test("tapping a step while off selects it and switches on", () => {
+      const { switchableOutput: output } = setup({ state: 0, labels: ["/off", "Eco", "High", "Boost"] })
+      fireEvent.click(screen.getByRole("button", { name: "High" }))
+      expect(output.updateDimming).toHaveBeenCalledWith(2)
+      expect(output.updateState).toHaveBeenCalledWith(1)
+      expect(output.updateDimming.mock.invocationCallOrder[0]).toBeLessThan(
+        output.updateState.mock.invocationCallOrder[0],
+      )
+    })
+
+    test("tapping a step while on only changes the level", () => {
+      const { switchableOutput: output } = setup({ state: 1, labels: ["/off", "Eco", "High", "Boost"] })
+      fireEvent.click(screen.getByRole("button", { name: "Boost" }))
+      expect(output.updateDimming).toHaveBeenCalledWith(3)
+      expect(output.updateState).not.toHaveBeenCalled()
+    })
+
+    test("lays the off segment out as one equal segment without a separator", () => {
+      setup({ state: 0, labels: ["/off", "Eco", "High", "Boost"] })
+      expect(screen.queryByTestId("stepped-switch-separator")).toBeNull()
+      const offWrapper = offButton().parentElement as HTMLElement
+      const stepArea = stepButtons()[0].parentElement as HTMLElement
+      expect(offWrapper.style.flex).toBe("1 1 0%")
+      expect(stepArea.style.flex).toBe("3 1 0%")
+    })
+
+    test("keeps the separator and the narrow toggle when the off state is not named", () => {
+      setup({ state: 0, labels: ["", "Eco", "High", "Boost"] })
+      expect(screen.getByTestId("stepped-switch-separator")).toBeTruthy()
+      expect((offButton().parentElement as HTMLElement).style.flex).toBe("")
+    })
+
+    test("step labels that do not fit still fall back to numbers, the off label stays", () => {
+      mockTextWidths((text) => (text === "A very long label" ? 200 : 50))
+      setup({ state: 1, labels: ["/off", "Eco", "High", "A very long label"] })
+      expect(offButton().textContent).toBe("switches.off")
+      expect(stepTexts()).toEqual(["1", "2", "3"])
+    })
   })
 })

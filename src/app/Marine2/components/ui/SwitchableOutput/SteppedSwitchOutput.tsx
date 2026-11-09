@@ -29,7 +29,8 @@ const SteppedSwitchOutput = observer((props: SteppedSwitchOutputProps) => {
   const switchableOutput = useSwitchableOutput(props.tree, props.deviceId, props.outputId)
   const outputName = getSwitchingPaneItemNameForDisplay(switchableOutput, props.parentDeviceName)
 
-  const variant = switchableOutput.state === 1 ? "on" : "off"
+  const isOn = switchableOutput.state === 1
+  const variant = isOn ? "on" : "off"
   const disabled = isSwitchableOutputDisabled(switchableOutput.status)
   const statusPill = getSwitchableOutputStatusPill(switchableOutput.status, switchableOutput.type)
   const buttons = Array.from({ length: switchableOutput.dimmingMax || 1 }, (_, i) => i + 1)
@@ -37,7 +38,6 @@ const SteppedSwitchOutput = observer((props: SteppedSwitchOutputProps) => {
   const selected = Number(switchableOutput.dimming) || 1
 
   // Optional /Settings/Labels, indexed by dimming value (1..dimmingMax) like every other Labels consumer.
-  // labels[0] would describe the off state, which is rendered by the hardcoded On/Off button instead.
   const labels: unknown[] = Array.isArray(switchableOutput.labels) ? switchableOutput.labels : []
   const labelFor = (index: number): string | undefined => {
     const label = labels[index]
@@ -45,6 +45,14 @@ const SteppedSwitchOutput = observer((props: SteppedSwitchOutputProps) => {
   }
   const stepLabels = buttons.map((index) => labelFor(index))
   const hasLabels = stepLabels.some((label) => label !== undefined)
+
+  // When the device names the off state (labels[0]) the control becomes a single-choice group: the
+  // highlighted segment is always what is active. The off segment is highlighted while off and only
+  // switches off; tapping a step switches on at that level. Without labels[0] the first segment is
+  // the classic On/Off toggle and the selected step stays (dimmed) while off.
+  const offLabel = labelFor(0)
+  const exclusive = offLabel !== undefined
+  const offSelected = exclusive && !isOn
 
   // Labels are only used when every one of them fits its button, otherwise all steps fall back to numbers.
   // An invisible copy of the step row carrying the labels is measured whenever the row width or the labels change.
@@ -76,11 +84,20 @@ const SteppedSwitchOutput = observer((props: SteppedSwitchOutputProps) => {
   const useLabels = hasLabels && labelsFit
 
   const handleClickOnOff = () => {
-    switchableOutput.updateState(switchableOutput.state === 1 ? 0 : 1)
+    if (exclusive) {
+      if (isOn) switchableOutput.updateState(0)
+      return
+    }
+    switchableOutput.updateState(isOn ? 0 : 1)
   }
 
   const handleClickButton = (index: number) => {
-    if (switchableOutput.state === 0) {
+    if (exclusive) {
+      switchableOutput.updateDimming(index)
+      if (!isOn) switchableOutput.updateState(1)
+      return
+    }
+    if (!isOn) {
       return
     }
     switchableOutput.updateDimming(index)
@@ -105,41 +122,51 @@ const SteppedSwitchOutput = observer((props: SteppedSwitchOutputProps) => {
       >
         {/* Container */}
         <div className="h-full rounded-sm flex overflow-hidden">
-          {/* On/Off Background */}
+          {/* On/Off Background. In single-choice mode the off segment is one of the equal segments. */}
           <div
-            className={classnames("h-full flex items-center", {
-              // "bg-surface-victronBlue": true, // variant === "off",
-              // "bg-content-victronBlue": variant === "on",
-            })}
+            className={classnames("h-full flex items-center", { "min-w-0": exclusive })}
+            style={exclusive ? { flex: "1 1 0%" } : undefined}
           >
             {/* On/Off Button */}
             <button
-              className={classnames(
-                "h-full px-2 whitespace-nowrap cursor-pointer text-sm min-h-[2.375rem] min-w-[3rem]",
-                disabled ? "text-content-victronGray" : "text-content-primary",
-              )}
+              className={classnames("h-full whitespace-nowrap truncate cursor-pointer text-sm min-h-[2.375rem]", {
+                "w-full px-1": exclusive,
+                "px-2 min-w-[3rem]": !exclusive,
+                "text-content-victronGray": disabled,
+                "text-content-primary": !disabled && !offSelected,
+                "bg-content-victronGray50": disabled && offSelected,
+                // the off state uses the same colour as an off toggle / the preselected step of an off switch
+                "bg-content-victronBlue50 text-content-onVictronBlue": !disabled && offSelected,
+              })}
               onClick={handleClickOnOff}
             >
-              {variant === "on" ? translate("switches.on") : translate("switches.off")}
+              {exclusive ? offLabel : variant === "on" ? translate("switches.on") : translate("switches.off")}
             </button>
             {/* Separator */}
-            <div
-              className={classnames(
-                "w-px-2 h-[80%] rounded-sm",
-                disabled ? "bg-content-victronGray" : "bg-content-lightBlue",
-              )}
-            ></div>
+            {!exclusive && (
+              <div
+                className={classnames(
+                  "w-px-2 h-[80%] rounded-sm",
+                  disabled ? "bg-content-victronGray" : "bg-content-lightBlue",
+                )}
+                data-testid="stepped-switch-separator"
+              ></div>
+            )}
           </div>
-          <div ref={stepAreaRef} className="relative flex-1 flex h-full w-full">
+          <div
+            ref={stepAreaRef}
+            className={classnames("relative flex h-full w-full", { "flex-1": !exclusive })}
+            style={exclusive ? { flex: `${buttons.length} 1 0%` } : undefined}
+          >
             {buttons.map((index) => (
               <button
                 key={index}
                 className={classnames(stepButtonClassName, {
                   "text-content-victronGray": disabled,
-                  "bg-content-victronGray50": disabled && index === selected,
-                  "text-content-onVictronBlue": !disabled && index === selected,
-                  "bg-content-victronBlue": !disabled && index === selected && variant === "on",
-                  "bg-content-victronBlue50": !disabled && index === selected && variant === "off",
+                  "bg-content-victronGray50": disabled && index === selected && !offSelected,
+                  "text-content-onVictronBlue": !disabled && index === selected && !offSelected,
+                  "bg-content-victronBlue": !disabled && index === selected && isOn,
+                  "bg-content-victronBlue50": !disabled && index === selected && !isOn && !exclusive,
                 })}
                 onClick={() => handleClickButton(index)}
               >
