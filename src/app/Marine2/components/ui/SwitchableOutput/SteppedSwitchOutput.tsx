@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react"
+import React, { useRef } from "react"
 import {
   getSwitchingPaneItemNameForDisplay,
   SwitchableOutputId,
@@ -9,10 +9,11 @@ import {
 import classnames from "classnames"
 import { observer } from "mobx-react-lite"
 import { translate } from "react-i18nify"
-import useSize from "app/Marine2/utils/hooks/use-size"
 import StatusPill from "../StatusPill"
 import { getLocalizedOrDefault } from "../GenericInput/helpers"
+import SegmentButtons from "./SegmentButtons"
 import { getSwitchableOutputStatusPill, isSwitchableOutputDisabled } from "./statusHelper"
+import useLabelsFit from "./useLabelsFit"
 
 interface SteppedSwitchOutputProps {
   key: string
@@ -22,8 +23,6 @@ interface SteppedSwitchOutputProps {
   parentDeviceName: string
   className?: string
 }
-
-const stepButtonClassName = "flex-1 truncate px-1"
 
 const SteppedSwitchOutput = observer((props: SteppedSwitchOutputProps) => {
   const switchableOutput = useSwitchableOutput(props.tree, props.deviceId, props.outputId)
@@ -55,33 +54,10 @@ const SteppedSwitchOutput = observer((props: SteppedSwitchOutputProps) => {
   const offSelected = exclusive && !isOn
 
   // Labels are only used when every one of them fits its button, otherwise all steps fall back to numbers.
-  // An invisible copy of the step row carrying the labels is measured whenever the row width or the labels change.
   const stepAreaRef = useRef<HTMLDivElement>(null)
-  const measureRef = useRef<HTMLDivElement>(null)
-  const [stepAreaWidth] = useSize(stepAreaRef)
-  const [labelsFit, setLabelsFit] = useState(true)
-  const stepLabelsKey = JSON.stringify(stepLabels)
-
-  // Re-measure once web fonts have loaded: a cold start measures with the fallback font metrics
-  const [fontsReady, setFontsReady] = useState(false)
-  useEffect(() => {
-    let cancelled = false
-    document.fonts?.ready.then(() => {
-      if (!cancelled) setFontsReady(true)
-    })
-    return () => {
-      cancelled = true
-    }
-  }, [])
-
-  useLayoutEffect(() => {
-    const el = measureRef.current
-    if (!el) return
-    const overflows = Array.from(el.children).some((child) => child.scrollWidth > child.clientWidth)
-    setLabelsFit(!overflows)
-  }, [stepAreaWidth, stepLabelsKey, fontsReady])
-
+  const { fits: labelsFit, measureRow } = useLabelsFit(stepAreaRef, stepLabels)
   const useLabels = hasLabels && labelsFit
+  const stepTexts = buttons.map((index) => (useLabels ? (stepLabels[index - 1] ?? `${index}`) : `${index}`))
 
   const handleClickOnOff = () => {
     if (exclusive) {
@@ -158,31 +134,14 @@ const SteppedSwitchOutput = observer((props: SteppedSwitchOutputProps) => {
             className={classnames("relative flex h-full w-full", { "flex-1": !exclusive })}
             style={exclusive ? { flex: `${buttons.length} 1 0%` } : undefined}
           >
-            {buttons.map((index) => (
-              <button
-                key={index}
-                className={classnames(stepButtonClassName, {
-                  "text-content-victronGray": disabled,
-                  "bg-content-victronGray50": disabled && index === selected && !offSelected,
-                  "text-content-onVictronBlue": !disabled && index === selected && !offSelected,
-                  "bg-content-victronBlue": !disabled && index === selected && isOn,
-                  "bg-content-victronBlue50": !disabled && index === selected && !isOn && !exclusive,
-                })}
-                onClick={() => handleClickButton(index)}
-              >
-                {useLabels ? (stepLabels[index - 1] ?? `${index}`) : `${index}`}
-              </button>
-            ))}
-            {/* Measurement row: same layout as the step buttons, always carrying the labels */}
-            {hasLabels && (
-              <div ref={measureRef} className="absolute inset-0 flex invisible pointer-events-none" aria-hidden="true">
-                {buttons.map((index) => (
-                  <span key={index} className={stepButtonClassName} data-testid="stepped-switch-measure">
-                    {stepLabels[index - 1] ?? `${index}`}
-                  </span>
-                ))}
-              </div>
-            )}
+            <SegmentButtons
+              texts={stepTexts}
+              selected={offSelected ? -1 : selected - 1}
+              disabled={disabled}
+              dimmed={!isOn}
+              onSelect={(index) => handleClickButton(index + 1)}
+            />
+            {measureRow}
           </div>
         </div>
       </div>

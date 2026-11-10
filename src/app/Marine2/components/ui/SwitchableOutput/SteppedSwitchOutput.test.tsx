@@ -83,7 +83,7 @@ describe("SteppedSwitchOutput", () => {
   test("renders numeric steps when no labels are provided", () => {
     setup()
     expect(stepButtons().map((b) => b.textContent)).toEqual(["1", "2", "3"])
-    expect(screen.queryAllByTestId("stepped-switch-measure")).toHaveLength(0)
+    expect(screen.queryAllByTestId("segments-measure")).toHaveLength(0)
   })
 
   test("renders numeric steps when labels is not an array", () => {
@@ -106,7 +106,7 @@ describe("SteppedSwitchOutput", () => {
     setup({ labels: ["", "Low", "Medium", "A very long label"] })
     expect(stepButtons().map((b) => b.textContent)).toEqual(["1", "2", "3"])
     // the measurement row keeps carrying the labels so a later resize can re-enable them
-    expect(screen.getAllByTestId("stepped-switch-measure").map((s) => s.textContent)).toEqual([
+    expect(screen.getAllByTestId("segments-measure").map((s) => s.textContent)).toEqual([
       "Low",
       "Medium",
       "A very long label",
